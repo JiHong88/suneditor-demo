@@ -4,7 +4,7 @@ import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
 import { getBootVersion } from "@/lib/git/releaseVersion";
 import { fetchGitHubStars } from "@/lib/git/stars";
-import "./globals.css";
+import "../globals.css";
 
 const navigationItems = [
 	{ label: "Getting Started", href: "/getting-started" },

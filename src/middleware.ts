@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { detectLocaleFromRequest } from "@/lib/locale";
+import { detectLocaleFromRequest } from "@/lib/i18n";
 
 export function middleware(req: NextRequest) {
 	// 이미 lang 쿠키가 있으면 통과

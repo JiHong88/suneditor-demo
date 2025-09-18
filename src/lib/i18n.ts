@@ -2,14 +2,12 @@ import type { NextRequest } from "next/server";
 
 export type Locale = "ko" | "en" | "ar";
 
-// 지원하는 언어 최소 매핑
 const AR_COUNTRIES = new Set(["AE", "SA", "EG", "QA", "KW", "BH", "OM", "IQ", "JO", "PS", "YE", "SD", "DZ", "MA", "TN", "LY", "LB", "SY"]);
 
 export function countryToLocale(country?: string | null): Locale {
 	const c = (country || "").toUpperCase();
-	if (c === "KR") return "ko";
 	if (AR_COUNTRIES.has(c)) return "ar";
-	return "en";
+	return (country || "en") as Locale;
 }
 
 /** 접속 정보로 locale 추론 (쿠키가 없을 때) */
