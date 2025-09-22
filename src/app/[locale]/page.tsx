@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Code2, Rocket, BookOpen, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 // shadcn/ui
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function HomePage() {
 	const [codeTab, setCodeTab] = useState("npm");
+	const t = useTranslations("Home");
 
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-background to-muted/40'>
@@ -23,7 +25,7 @@ export default function HomePage() {
 				<div className='container mx-auto px-6 pt-6 pb-16'>
 					<motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className='mx-auto max-w-4xl text-center'>
 						<Badge variant='secondary' className='px-3 py-1 text-xs'>
-							Open-source • VanillaScript • Plugin-first
+							{t("title")}
 						</Badge>
 						<h1 className='mt-6 text-4xl font-bold tracking-tight md:text-6xl'>
 							<span className='ml-3 bg-gradient-to-l from-primary to-[var(--color-se-active)] bg-clip-text text-transparent'>SunEditor</span>

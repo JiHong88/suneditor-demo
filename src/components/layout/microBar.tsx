@@ -5,7 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
 import { LangSelect } from "./lang-select";
-import { Globe2, Heart, Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 
 type Props = {
 	stars?: number;
@@ -26,7 +26,6 @@ export default function MicroBar({ stars, className }: Props) {
 				{/* 왼쪽: 언어 */}
 				<div className='flex items-center gap-2'>
 					<label className='inline-flex items-center gap-1'>
-						<Globe2 className='size-3.5 opacity-80' />
 						<LangSelect />
 					</label>
 				</div>

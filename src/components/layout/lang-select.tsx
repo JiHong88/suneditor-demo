@@ -1,57 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { readCookie, writeCookie } from "@/lib/cookie";
+import { useEffect, useState, useTransition } from "react";
+import { readCookie } from "@/lib/cookie";
+import { useRouter, usePathname } from "@/i18n/navigation";
+import { Locale, locales, defaultLocale } from "@/i18n/routing";
+import { getDir, buildLanguageOptions } from "@/i18n/lang";
+import { Loader2, Globe2 } from "lucide-react";
 
-type Lang = "ko" | "en" | "ar";
-const DEFAULT_LANG: Lang = "ko";
-
-function getInitialLang(): Lang {
-	if (typeof document === "undefined") return DEFAULT_LANG;
-	const fromCookie = (readCookie("lang") as Lang | null) ?? null;
-	const fromDom = (document.documentElement.getAttribute("data-lang") as Lang) || null;
-	const fromLs = (localStorage.getItem("lang") as Lang) || null;
-	return (fromCookie || fromDom || fromLs || DEFAULT_LANG) as Lang;
+function getInitialLang(): Locale {
+	if (typeof document === "undefined") return defaultLocale;
+	const fromCookie = (readCookie("NEXT_LOCALE") as Locale | null) ?? null;
+	const fromDom = (document.documentElement.getAttribute("data-lang") as Locale) || null;
+	return (fromCookie || fromDom || defaultLocale) as Locale;
 }
 
 export function LangSelect() {
-	const [lang, setLang] = useState<Lang>(getInitialLang);
+	const [lang, setLang] = useState<Locale>(getInitialLang);
+	const router = useRouter();
+	const pathname = usePathname();
+	const [isPending, startTransition] = useTransition();
 
 	useEffect(() => {
 		const root = document.documentElement;
-		const dir = lang === "ar" ? "rtl" : "ltr";
-		root.setAttribute("lang", lang);
-		root.setAttribute("dir", dir);
+		root.setAttribute("dir", getDir(lang));
 		root.setAttribute("data-lang", lang);
-
-		// 쿠키
-		writeCookie("lang", lang, { days: 365 });
-
-		// 탭 동기화용 미러
-		try {
-			localStorage.setItem("lang", lang);
-		} catch {}
-
-		// 앱 내부 이벤트
+		setLang(lang);
 		window.dispatchEvent(new CustomEvent("langchange", { detail: lang } as any));
 	}, [lang]);
 
-	// 다른 탭에서 변경 감지
-	useEffect(() => {
-		const onStorage = (e: StorageEvent) => {
-			if (e.key === "lang" && e.newValue) setLang(e.newValue as Lang);
-		};
-		window.addEventListener("storage", onStorage);
-		return () => window.removeEventListener("storage", onStorage);
-	}, []);
+	const onchange = (next: Locale) => {
+		startTransition(() => {
+			router.replace(pathname, { locale: next });
+		});
+	};
 
 	return (
-		<div className='flex items-center gap-2 rounded-xl border bg-background px-2 py-1 text-xs'>
-			<span className='text-muted-foreground'>Lang</span>
-			<select className='bg-transparent outline-none' value={lang} onChange={(e) => setLang(e.target.value as Lang)} aria-label='Language'>
-				<option value='ko'>한국어</option>
-				<option value='en'>English</option>
-				<option value='ar'>العربية (RTL)</option>
+		<div className='flex items-center gap-2 rounded-xl border border-border bg-muted px-2 py-1 text-xs'>
+			<span className='text-muted-foreground'>{isPending ? <Loader2 className='h-3 w-3 animate-spin' aria-label='Loading' /> : <Globe2 className='h-3 w-3' aria-hidden />}</span>
+			<select className='bg-muted text-muted-foreground outline-none appearance-none' value={lang} onChange={(e) => onchange(e.target.value as Locale)} aria-label='Language'>
+				{buildLanguageOptions(locales).map((l: any) => (
+					<option value={l.value} dir={l.dir} key={l.value}>
+						{l.label}
+					</option>
+				))}
 			</select>
 		</div>
 	);

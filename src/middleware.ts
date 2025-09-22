@@ -1,21 +1,29 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { detectLocaleFromRequest } from "@/lib/i18n";
+import createMiddleware from "next-intl/middleware";
+import { NextRequest } from "next/server";
+import { locales, defaultLocale } from "@/i18n/routing";
 
-export function middleware(req: NextRequest) {
-	// 이미 lang 쿠키가 있으면 통과
-	if (req.cookies.get("lang")) return NextResponse.next();
+const intlWithDetection = createMiddleware({
+	locales,
+	defaultLocale,
+	localePrefix: "as-needed",
+	localeDetection: true,
+});
 
-	const locale = detectLocaleFromRequest(req);
-	const res = NextResponse.next();
+const intlNoDetection = createMiddleware({
+	locales,
+	defaultLocale,
+	localePrefix: "as-needed",
+	localeDetection: false,
+});
 
-	res.cookies.set("lang", locale, {
-		path: "/",
-		httpOnly: false, // 클라에서 읽을 수 있도록
-		sameSite: "lax",
-		maxAge: 60 * 60 * 24 * 365, // 1년
-	});
+export default function middleware(req: NextRequest) {
+	const { pathname } = req.nextUrl;
 
-	return res;
+	if (pathname === "/") {
+		return intlWithDetection(req);
+	}
+
+	return intlNoDetection(req);
 }
 
 export const config = {

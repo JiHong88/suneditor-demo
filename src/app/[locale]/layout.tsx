@@ -1,4 +1,5 @@
 import React from "react";
+import { NextIntlClientProvider } from "next-intl";
 import { SiteNav } from "@/components/layout/navigationMenu";
 import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
@@ -15,28 +16,30 @@ const navigationItems = [
 	{ label: "Docs/API", href: "/docs" },
 ];
 
-export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-	const version = await getBootVersion();
-	const stars = await fetchGitHubStars();
+export default async function RootLayout({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
+	const version = (await getBootVersion().catch(() => null)) || "";
+	const stars = await fetchGitHubStars().catch(() => undefined);
 
 	return (
-		<html suppressHydrationWarning>
+		<html suppressHydrationWarning lang={locale}>
 			<head>
 				<meta name='color-scheme' content='dark light' />
 			</head>
 
 			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-				{/* 네비게이션 */}
-				<SiteNav items={navigationItems} />
+				<NextIntlClientProvider>
+					{/* 네비게이션 */}
+					<SiteNav items={navigationItems} />
 
-				{/* Info bar */}
-				<MicroBar stars={stars} className='sticky top-14' />
+					{/* Info bar */}
+					<MicroBar stars={stars} className='sticky top-14' />
 
-				{/* 메인 */}
-				<main className='min-h-[60vh] bg-gradient-to-br from-slate-50 to-blue-50'>{children}</main>
+					{/* 메인 */}
+					<main className='min-h-[60vh] bg-gradient-to-br from-slate-50 to-blue-50'>{children}</main>
 
-				{/* 푸터 */}
-				<Footer version={`v${version}`} />
+					{/* 푸터 */}
+					<Footer version={`v${version}`} />
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);
