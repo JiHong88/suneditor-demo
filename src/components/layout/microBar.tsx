@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./theme-toggle";
 import { LangSelect } from "./lang-select";
 import { Heart, Star } from "lucide-react";
 
@@ -11,6 +11,8 @@ type Props = {
 	stars?: number;
 	className?: string;
 };
+
+const ThemeToggle = dynamic(() => import("./theme-toggle").then((m) => m.ThemeToggle), { ssr: false });
 
 export default function MicroBar({ stars, className }: Props) {
 	return (

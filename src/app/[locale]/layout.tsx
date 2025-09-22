@@ -24,6 +24,17 @@ export default async function RootLayout({ children, locale }: Readonly<{ childr
 		<html suppressHydrationWarning lang={locale}>
 			<head>
 				<meta name='color-scheme' content='dark light' />
+				<script id='theme-init'>
+					{`(function(){
+					try {
+					var t = localStorage.getItem('theme');
+					if (!t || t === 'system') {
+						t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+					}
+					document.documentElement.classList.toggle('dark', t === 'dark');
+					} catch (_) {}
+				})();`}
+				</script>
 			</head>
 
 			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
