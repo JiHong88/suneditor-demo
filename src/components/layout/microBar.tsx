@@ -16,14 +16,7 @@ const ThemeToggle = dynamic(() => import("./theme-toggle").then((m) => m.ThemeTo
 
 export default function MicroBar({ stars, className }: Props) {
 	return (
-		<div
-			className={cn(
-				"microbar fixed md:sticky left-0 right-0 z-30 py-4",
-				"h-9 border-b bg-slate-50/70 dark:bg-slate-900/40 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-				"text-xs",
-				className,
-			)}
-		>
+		<div className={cn("microbar fixed md:sticky left-0 right-0 z-30 py-4", "h-9 border-b bg-transparent", "text-xs", className)}>
 			<div className='container mx-auto h-full px-3 flex items-center gap-2 justify-between'>
 				{/* 왼쪽: 언어 */}
 				<div className='flex items-center gap-2'>

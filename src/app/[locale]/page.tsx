@@ -25,17 +25,17 @@ export default function HomePage() {
 				<div className='container mx-auto px-6 pt-6 pb-16'>
 					<motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className='mx-auto max-w-4xl text-center'>
 						<Badge variant='secondary' className='px-3 py-1 text-xs'>
-							{t("title")}
+							Open-source • VanillaScript • Plugin-first
 						</Badge>
 						<h1 className='mt-6 text-4xl font-bold tracking-tight md:text-6xl'>
 							<span className='ml-3 bg-gradient-to-l from-primary to-[var(--color-se-active)] bg-clip-text text-transparent'>SunEditor</span>
 							<span className='ml-3 bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent'>Demo & Docs</span>
 						</h1>
-						<p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>에디터 소개 타이틀</p>
+						<p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>{t("title")}</p>
 						<div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
 							<Button asChild className='group'>
 								<a href='/playground'>
-									Playground 열기
+									Playground
 									<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5' />
 								</a>
 							</Button>
@@ -45,7 +45,7 @@ export default function HomePage() {
 							<Button asChild variant='ghost' className='gap-2'>
 								<a href='/feature-demo'>
 									<Sparkles className='h-4 w-4' />
-									Feature 데모
+									Feature
 								</a>
 							</Button>
 						</div>
