@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { LangSelect } from "./lang-select";
-import { Heart, Star } from "lucide-react";
+import { Heart } from "lucide-react";
 
 type Props = {
 	stars?: number;
@@ -14,7 +14,7 @@ type Props = {
 
 const ThemeToggle = dynamic(() => import("./theme-toggle").then((m) => m.ThemeToggle), { ssr: false });
 
-export default function MicroBar({ stars, className }: Props) {
+export default function MicroBar({ className }: Props) {
 	return (
 		<div
 			className={cn(
@@ -32,21 +32,15 @@ export default function MicroBar({ stars, className }: Props) {
 					</label>
 				</div>
 
-				{/* 오른쪽: 테마 · 스타 · (데스크톱) 도네이션 */}
+				{/* 오른쪽: 도네이션 */}
 				<div className='flex items-center gap-2'>
 					<ThemeToggle />
 
-					<Link href='https://github.com/JiHong88/suneditor' className='inline-flex items-center gap-1 rounded border px-2 py-1' target='_blank'>
-						<Star className='size-3.5' aria-hidden style={{ fill: "#daaa3f", stroke: "#daaa3f" }} />
-						<span> {typeof stars === "number" ? stars : "…"}</span>
-					</Link>
-
-					{/* 데스크톱에서만 도네이션 노출 */}
 					<Link
 						href='https://opencollective.com/suneditor'
 						target='_blank'
 						rel='noreferrer'
-						className='hidden md:inline-flex items-center gap-1 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
+						className='inline-flex items-center gap-1 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
 					>
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
 						<span>Sponsor</span>

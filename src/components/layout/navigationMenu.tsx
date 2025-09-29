@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavA } from "@/components/nav/navA";
+import { useTranslations } from "next-intl";
 
 function NavigationMenu({ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }) {
 	return (
@@ -47,7 +48,17 @@ function NavigationMenuViewport({ className, ...props }: React.ComponentProps<ty
 	);
 }
 
-export function SiteNav({ items }: { items: Array<{ label: string; href: string; children?: React.ReactNode }> }) {
+export function SiteNav() {
+	const t = useTranslations("Main.Menus");
+	const items = [
+		{ label: t("getting-started"), href: "/getting-started" },
+		{ label: t("feature-demo"), href: "/feature-demo" },
+		{ label: t("playground"), href: "/playground" },
+		{ label: t("plugin-guide"), href: "/plugin-guide" },
+		{ label: t("deep-dive"), href: "/deep-dive" },
+		{ label: t("docs-api"), href: "/docs-api" },
+	];
+
 	const pathname = usePathname();
 
 	const [mounted, setMounted] = React.useState(false);
