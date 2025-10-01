@@ -5,6 +5,7 @@ import { readCookie } from "@/lib/cookie";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { Locale, locales, defaultLocale } from "@/i18n/routing";
 import { getDir, buildLanguageOptions } from "@/i18n/lang";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Globe2 } from "lucide-react";
 
 function getInitialLang(): Locale {
@@ -35,15 +36,22 @@ export function LangSelect() {
 	};
 
 	return (
-		<div className='flex items-center gap-2 rounded-xl border border-border bg-muted px-2 py-1 text-xs'>
-			<span className='text-muted-foreground'>{isPending ? <Loader2 className='h-3 w-3 animate-spin' aria-label='Loading' /> : <Globe2 className='h-3 w-3' aria-hidden />}</span>
-			<select className='bg-muted text-muted-foreground outline-none appearance-none' value={lang} onChange={(e) => onchange(e.target.value as Locale)} aria-label='Language'>
+		<Select value={lang} onValueChange={onchange}>
+			<SelectTrigger className="gap-2 border-none bg-muted px-2 py-1 text-xs text-muted-foreground shadow-none m-0" size="xs">
+				{isPending ? (
+					<Loader2 className="h-3 w-3 animate-spin" aria-label="Loading" />
+				) : (
+					<Globe2 className="h-3 w-3" aria-hidden />
+				)}
+				<SelectValue placeholder="Language" />
+			</SelectTrigger>
+			<SelectContent>
 				{buildLanguageOptions(locales).map((l: any) => (
-					<option value={l.value} dir={l.dir} key={l.value}>
+					<SelectItem value={l.value} dir={l.dir} key={l.value}>
 						{l.label}
-					</option>
+					</SelectItem>
 				))}
-			</select>
-		</div>
+			</SelectContent>
+		</Select>
 	);
 }

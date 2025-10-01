@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 // shadcn/ui
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -143,7 +144,7 @@ export default function CodeExamples() {
 									}`}
 									onClick={() => setFramework(fw.key)}
 								>
-									<img src={fw.icon} alt={`${fw.name} logo`} className='h-6 w-6' />
+									<Image src={fw.icon} alt={`${fw.name} logo`} className='h-6 w-6' width={24} height={24} />
 									<span>{fw.name}</span>
 								</Button>
 							);

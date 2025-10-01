@@ -40,7 +40,7 @@ export default function MicroBar({ className }: Props) {
 						href='https://opencollective.com/suneditor'
 						target='_blank'
 						rel='noreferrer'
-						className='inline-flex items-center gap-1 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
+						className='inline-flex items-center gap-1 h-7 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
 					>
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
 						<span>Sponsor</span>
