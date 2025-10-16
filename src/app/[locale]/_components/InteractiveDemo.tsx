@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import LiveEditor from "@/components/common/LiveEditor";
 
 export default function InteractiveDemo() {
 	return (
@@ -14,9 +15,8 @@ export default function InteractiveDemo() {
 						<span className='h-3 w-3 rounded-full bg-green-400'></span>
 					</div>
 					<CardContent className='p-2 md:p-4'>
-						<div className='aspect-video w-full rounded-md border bg-background p-4 overflow-hidden'>
-							
-						</div>
+						<LiveEditor />
+						<div className='aspect-video w-full rounded-md border bg-background p-4 overflow-hidden'></div>
 					</CardContent>
 				</Card>
 			</motion.div>

@@ -3,19 +3,19 @@
 import { useEffect, useMemo, useState } from "react";
 import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackPreview, SandpackConsole, SandpackProviderProps } from "@codesandbox/sandpack-react";
 import { githubLight, atomDark } from "@codesandbox/sandpack-themes";
+import dynamic from "next/dynamic";
+import "suneditor/dist/suneditor.min.css";
+
+const SunEditor = dynamic(() => import("@/components/editor/suneditor"), {
+  ssr: false,
+});
 
 type SandpackTemplate = SandpackProviderProps;
 
-/**
- * Drop this file in: app/playground/page.tsx (Next.js App Router)
- * Then install deps:
- *   npm i @codesandbox/sandpack-react
- *
- * If you use Tailwind, this component will pick up base styles.
- */
 export default function PlaygroundPage() {
 	const prefersDark = usePrefersDark();
 	const [framework, setFramework] = useState<"react" | "vanilla" | "vue">("react");
+	const [editorContent] = useState("<p>SunEditor is being tested.</p>");
 
 	const setup = useMemo(() => getTemplate(framework), [framework]);
 
@@ -49,6 +49,15 @@ export default function PlaygroundPage() {
 						</div>
 					</SandpackLayout>
 				</SandpackProvider>
+
+				<div className='my-8'>
+					<h2 className='text-xl font-bold mb-4'>SunEditor Test Area</h2>
+					<SunEditor value={editorContent} />
+					<div className='mt-4 p-4 border rounded bg-gray-100 dark:bg-gray-800 prose dark:prose-invert max-w-none'>
+						<h3 className='font-semibold'>Editor Content (Live):</h3>
+						<div dangerouslySetInnerHTML={{ __html: editorContent }} />
+					</div>
+				</div>
 
 				<section className='mt-6 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300'>
 					<p className='mb-2 font-medium'>Notes</p>
@@ -177,7 +186,7 @@ const count = ref(0);
 <template>
   <main style=\"font-family: system-ui, sans-serif; padding: 1rem">
     <h1>Vue 3 Playground</h1>
-    <button @click=\"count++\">count: {{ count }}</button>
+    <button @click=\"count++">count: {{ count }}</button>
   </main>
 </template>
 

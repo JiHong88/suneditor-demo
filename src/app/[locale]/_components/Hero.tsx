@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 // shadcn/ui
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 export default function Hero() {
 	const t = useTranslations("Home.Hero");
@@ -31,13 +32,13 @@ export default function Hero() {
 							size='lg'
 							className='group bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl'
 						>
-							<a href='/playground'>
+							<Link href='/playground'>
 								{t_menus("playground")}
 								<ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
-							</a>
+							</Link>
 						</Button>
 						<Button asChild size='lg' variant='outline'>
-							<a href='/docs-api'>{t_menus("docs-api")}</a>
+							<Link href='/docs-api'>{t_menus("docs-api")}</Link>
 						</Button>
 					</div>
 				</motion.div>

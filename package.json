@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:prod": "npm unlink suneditor && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -25,7 +26,7 @@
     "next-intl": "^4.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "suneditor": "^3.0.0-beta.22",
+    "suneditor": "^3.0.0-beta.30",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-rtl": "^0.9.0"
   },

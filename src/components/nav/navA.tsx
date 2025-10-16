@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { navLink } from "./nav-cva";
 import { cn } from "@/lib/utils";
 import { Underline } from "./nav-underline";

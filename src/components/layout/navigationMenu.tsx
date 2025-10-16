@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -48,6 +48,12 @@ function NavigationMenuViewport({ className, ...props }: React.ComponentProps<ty
 	);
 }
 
+function getLastPathSegment(url: string) {
+	const clean = url.split("?")[0].split("#")[0];
+	const parts = clean.replace(/\/+$/, "").split("/");
+	return parts.pop() || "";
+}
+
 export function SiteNav() {
 	const t = useTranslations("Main.Menus");
 	const items = [
@@ -67,8 +73,12 @@ export function SiteNav() {
 	const isActive = (href: string) => {
 		if (!mounted || !pathname) return false;
 		if (href === "/") return pathname === "/";
+
 		console.log("isActive", pathname, href);
-		return pathname === href || pathname.startsWith(href + "/");
+
+		const segment = getLastPathSegment(href);
+		if (!segment) return false;
+		return pathname.includes(`/${segment}`);
 	};
 
 	// 모바일 드롭다운 상태

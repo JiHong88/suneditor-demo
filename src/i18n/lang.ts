@@ -142,16 +142,14 @@ function getLanguageLabel(code: string): string {
 	try {
 		const dn = new Intl.DisplayNames([c], { type: "language" });
 		const name = dn.of(lang);
-		if (name) {
-			return isRtlLocale(c) ? `← ${name}` : name;
-		}
+		if (name) return name;
 	} catch {
 		/* ignore */
 	}
 
 	// 2) 폴백 맵
 	const fb = LANGUAGE_FALLBACK[c] || LANGUAGE_FALLBACK[lang];
-	if (fb) return isRtlLocale(c) ? `← ${fb}` : fb;
+	if (fb) return fb;
 
 	// 3) 최종 폴백: 코드
 	return c;
@@ -162,9 +160,11 @@ export function getDir(tag: string): "rtl" | "ltr" {
 }
 
 export function buildLanguageOptions(codes: string[]) {
-	return codes.map((code) => ({
-		value: code,
-		label: getLanguageLabel(code),
-		dir: getDir(code),
-	}));
+	return codes.map((code) => {
+		return {
+			value: code,
+			label: getLanguageLabel(code),
+			dir: getDir(code),
+		};
+	});
 }

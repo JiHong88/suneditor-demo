@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { LangSelect } from "./lang-select";
 import { Heart } from "lucide-react";
@@ -40,7 +40,7 @@ export default function MicroBar({ className }: Props) {
 						href='https://opencollective.com/suneditor'
 						target='_blank'
 						rel='noreferrer'
-						className='inline-flex items-center gap-1 h-7 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
+						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
 					>
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
 						<span>Sponsor</span>

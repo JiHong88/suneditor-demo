@@ -8,7 +8,6 @@ import InteractiveDemo from "./_components/InteractiveDemo";
 import FeatureGrid from "./_components/FeatureGrid";
 import LiveStatsBadges from "./_components/LiveStatsBadges";
 import FinalCTA from "./_components/FinalCTA";
-import LiveEditor from "@/components/common/LiveEditor";
 
 export default function HomePage({ metric }: { metric: SiteMetricType | null }) {
 	return (
@@ -19,7 +18,6 @@ export default function HomePage({ metric }: { metric: SiteMetricType | null }) 
 			{metric && <LiveStatsBadges stats={metric} />}
 			<CodeExamples />
 			<FinalCTA />
-			<LiveEditor />
 		</div>
 	);
 }

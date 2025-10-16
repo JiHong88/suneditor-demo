@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "@/i18n/navigation";
 
 export default function HomePage() {
 	const [codeTab, setCodeTab] = useState("npm");
@@ -49,19 +50,19 @@ function Hero({ t }: { t: any }) {
 					<p className='mx-auto mt-4 max-w-2xl text-muted-foreground'>{t("title")}</p>
 					<div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
 						<Button asChild className='group'>
-							<a href='/playground'>
+							<Link href='/playground'>
 								Playground
 								<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5' />
-							</a>
+							</Link>
 						</Button>
 						<Button asChild variant='outline'>
-							<a href='/docs'>Docs / API</a>
+							<Link href='/docs'>Docs / API</Link>
 						</Button>
 						<Button asChild variant='ghost' className='gap-2'>
-							<a href='/feature-demo'>
+							<Link href='/feature-demo'>
 								<Sparkles className='h-4 w-4' />
 								Feature
-							</a>
+							</Link>
 						</Button>
 					</div>
 					<div className='mt-6 text-sm text-muted-foreground'>SSR‑friendly · A11y · i18n · Custom plugin API</div>
@@ -109,9 +110,9 @@ function QuickStart({ codeTab, setCodeTab }: { codeTab: string; setCodeTab: (v: 
 		<section className='container mx-auto px-6 pb-20'>
 			<div className='mb-4 flex items-center justify-between'>
 				<h2 className='text-xl font-semibold'>Quick Start</h2>
-				<a className='text-sm text-primary hover:underline' href='/docs/installation'>
+				<Link className='text-sm text-primary hover:underline' href='/docs/installation'>
 					Installation docs
-				</a>
+				</Link>
 			</div>
 			<Tabs value={codeTab} onValueChange={setCodeTab}>
 				<TabsList>
@@ -180,9 +181,9 @@ function FeatureHighlights() {
 		<section className='container mx-auto px-6 pb-20'>
 			<div className='mb-4 flex items-center justify-between'>
 				<h2 className='text-xl font-semibold'>Feature Highlights</h2>
-				<a className='text-sm text-primary hover:underline' href='/feature-demo'>
+				<Link className='text-sm text-primary hover:underline' href='/feature-demo'>
 					모두 보기
-				</a>
+				</Link>
 			</div>
 			<div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
 				{items.map((it) => (
@@ -224,7 +225,7 @@ function PluginGalleryTeaser() {
 					</div>
 					<div className='mt-4'>
 						<Button asChild variant='outline'>
-							<a href='/plugins'>모든 플러그인 보기</a>
+							<Link href='/plugins'>모든 플러그인 보기</Link>
 						</Button>
 					</div>
 				</CardContent>
@@ -298,7 +299,7 @@ function SecurityAndI18n() {
 						</ul>
 						<div className='mt-3'>
 							<Button asChild variant='outline'>
-								<a href='/docs/security'>Security guide</a>
+								<Link href='/docs/security'>Security guide</Link>
 							</Button>
 						</div>
 					</CardContent>
@@ -317,7 +318,7 @@ function SecurityAndI18n() {
 						</ul>
 						<div className='mt-3'>
 							<Button asChild variant='outline'>
-								<a href='/docs/i18n'>i18n guide</a>
+								<Link href='/docs/i18n'>i18n guide</Link>
 							</Button>
 						</div>
 					</CardContent>
@@ -338,10 +339,10 @@ function MigrationCTA() {
 				<CardContent>
 					<div className='flex flex-wrap gap-3'>
 						<Button asChild>
-							<a href='/docs/migration-v3'>Migration guide</a>
+							<Link href='/docs/migration-v3'>Migration guide</Link>
 						</Button>
 						<Button asChild variant='outline'>
-							<a href='/docs/changelog'>Changelog</a>
+							<Link href='/docs/changelog'>Changelog</Link>
 						</Button>
 					</div>
 				</CardContent>
@@ -405,13 +406,13 @@ function FinalCTA() {
 					<p className='max-w-2xl text-sm text-muted-foreground'>Playground에서 기능을 시험하고, 설치 가이드를 따라 첫 에디터를 띄워 보세요. 문제가 있다면 GitHub 이슈로 알려주세요.</p>
 					<div className='flex flex-wrap items-center justify-center gap-3'>
 						<Button asChild className='group'>
-							<a href='/playground'>
+							<Link href='/playground'>
 								Start in Playground
 								<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5' />
-							</a>
+							</Link>
 						</Button>
 						<Button asChild variant='outline'>
-							<a href='/docs'>Read the Docs</a>
+							<Link href='/docs'>Read the Docs</Link>
 						</Button>
 					</div>
 				</CardContent>
@@ -422,7 +423,7 @@ function FinalCTA() {
 
 function DeepLinkCard({ href, icon, title, desc }: { href: string; icon: React.ReactNode; title: string; desc: string }) {
 	return (
-		<a href={href} className='group'>
+		<Link href={href} className='group'>
 			<Card className='h-full transition-transform group-hover:-translate-y-0.5'>
 				<CardHeader className='pb-2'>
 					<CardTitle className='flex items-center gap-2 text-base'>
@@ -434,7 +435,7 @@ function DeepLinkCard({ href, icon, title, desc }: { href: string; icon: React.R
 					<p className='text-sm text-muted-foreground'>{desc}</p>
 				</CardContent>
 			</Card>
-		</a>
+		</Link>
 	);
 }
 
