@@ -17,6 +17,13 @@ const eslintConfig = [
 			"@next/next/no-html-link-for-pages": "off",
 		},
 	},
+	{
+		files: ["**/*.cjs"],
+		rules: {
+			"@typescript-eslint/no-require-imports": "off",
+			"@typescript-eslint/no-unused-vars": "off",
+		},
+	},
 ];
 
 export default eslintConfig;

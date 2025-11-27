@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackPreview, SandpackConsole, SandpackProviderProps } from "@codesandbox/sandpack-react";
 import { githubLight, atomDark } from "@codesandbox/sandpack-themes";
 import dynamic from "next/dynamic";
-import "suneditor/dist/suneditor.min.css";
 
 const SunEditor = dynamic(() => import("@/components/editor/suneditor"), {
   ssr: false,

@@ -402,8 +402,8 @@ function FinalCTA() {
 		<section className='container mx-auto px-6 pb-24'>
 			<Card className='bg-gradient-to-r from-muted to-transparent'>
 				<CardContent className='flex flex-col items-center gap-4 py-10 text-center'>
-					<h3 className='text-2xl font-semibold'>지금 바로 프로젝트에 SunEditor v3를 도입하세요</h3>
-					<p className='max-w-2xl text-sm text-muted-foreground'>Playground에서 기능을 시험하고, 설치 가이드를 따라 첫 에디터를 띄워 보세요. 문제가 있다면 GitHub 이슈로 알려주세요.</p>
+					<h3 className='text-2xl font-semibold'>CTA</h3>
+					<p className='max-w-2xl text-sm text-muted-foreground'>CTA content.</p>
 					<div className='flex flex-wrap items-center justify-center gap-3'>
 						<Button asChild className='group'>
 							<Link href='/playground'>
