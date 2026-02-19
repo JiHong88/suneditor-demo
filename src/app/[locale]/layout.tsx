@@ -35,7 +35,7 @@ export default async function RootLayout({ children, locale }: Readonly<{ childr
 					<MicroBar className='sticky top-14' />
 
 					{/* 메인 */}
-					<main className='min-h-[60vh] bg-gradient-to-br from-slate-50 to-blue-50'>{children}</main>
+					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>{children}</main>
 
 					{/* 푸터 */}
 					<Footer version={`v${version}`} />

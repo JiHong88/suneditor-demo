@@ -91,7 +91,7 @@ export function SiteNav() {
 
 	return (
 		<>
-			<header className='fixed md:sticky top-0 left-0 right-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+			<header className='fixed md:sticky top-0 left-0 right-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
 				<div className='container mx-auto flex h-14 items-center justify-center px-4'>
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex'>

@@ -7,56 +7,25 @@ import { useTranslations } from "next-intl";
 export default function LiveStatsBadges({ stats }: { stats: SiteMetricType }) {
 	const t = useTranslations("Home.LiveStatsBadges");
 	const statItems = [
-		{
-			icon: <Github className='h-6 w-6' />,
-			label: t("githubStars"),
-			value: stats.githubStars,
-			iconColor: "text-slate-600 dark:text-slate-400",
-			borderColor: "border-slate-200 dark:border-slate-700",
-		},
-		{
-			icon: <GitFork className='h-6 w-6' />,
-			label: t("gitHubForks"),
-			value: stats.githubForks,
-			iconColor: "text-slate-600 dark:text-slate-400",
-			borderColor: "border-slate-200 dark:border-slate-700",
-		},
-		{
-			icon: <TrendingUp className='h-6 w-6' />,
-			label: t("npmWeeklyDownloads"),
-			value: stats.weeklyNPMDownloads,
-			iconColor: "text-red-500",
-			borderColor: "border-red-200 dark:border-red-500/20",
-		},
-		{
-			icon: <Calendar className='h-6 w-6' />,
-			label: t("npmAnnualDownloads"),
-			value: stats.yearNPMDownloads,
-			iconColor: "text-red-500/80",
-			borderColor: "border-red-200 dark:border-red-500/20",
-		},
-		{
-			icon: <Globe className='h-6 w-6' />,
-			label: t("dailyCDNHits"),
-			value: stats.CDNHitsPerDay,
-			iconColor: "text-sky-500",
-			borderColor: "border-sky-200 dark:border-sky-500/20",
-		},
+		{ icon: <Github className='h-5 w-5' />, label: t("githubStars"), value: stats.githubStars },
+		{ icon: <GitFork className='h-5 w-5' />, label: t("gitHubForks"), value: stats.githubForks },
+		{ icon: <TrendingUp className='h-5 w-5' />, label: t("npmWeeklyDownloads"), value: stats.weeklyNPMDownloads },
+		{ icon: <Calendar className='h-5 w-5' />, label: t("npmAnnualDownloads"), value: stats.yearNPMDownloads },
+		{ icon: <Globe className='h-5 w-5' />, label: t("dailyCDNHits"), value: stats.CDNHitsPerDay },
 	];
 
 	return (
-		<section className='container mx-auto px-6 pb-20'>
-			<div className='text-center mb-12'>
-				<h2 className='text-3xl font-bold tracking-tight text-foreground sm:text-4xl'>{t("title")}</h2>
-			</div>
-			<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
+		<section className='container mx-auto px-4 py-12 md:py-16'>
+			<div className='flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-20'>
 				{statItems.map((item) => (
-					<div key={item.label} className={`flex items-center gap-4 rounded-xl bg-muted/50 p-6 border-2 transition-all hover:-translate-y-1 ${item.borderColor}`}>
-						<span className={item.iconColor}>{item.icon}</span>
-						<div className='flex-1'>
-							<p className='text-2xl font-bold text-foreground'>{item.value}</p>
-							<p className='text-sm text-muted-foreground'>{item.label}</p>
-						</div>
+					<div key={item.label} className='text-center'>
+						<p className='text-3xl font-bold bg-[linear-gradient(90deg,var(--color-se-active)_0%,#e87461_50%,#c084fc_100%)] bg-clip-text text-transparent md:text-4xl'>
+							{item.value}
+						</p>
+						<p className='mt-6 flex items-center justify-center gap-1.5 text-sm font-medium text-foreground'>
+							<span className='text-muted-foreground'>{item.icon}</span>
+							{item.label}
+						</p>
 					</div>
 				))}
 			</div>

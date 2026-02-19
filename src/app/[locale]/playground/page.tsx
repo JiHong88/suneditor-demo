@@ -159,7 +159,7 @@ export default function PlaygroundPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/10">
+    <div className="min-h-screen">
       {/* Header */}
       <section className="container mx-auto px-6 py-8 border-b">
         <motion.div

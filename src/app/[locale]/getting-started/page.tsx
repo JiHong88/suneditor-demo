@@ -16,7 +16,7 @@ export default function HomePage() {
 	const t = useTranslations("Home");
 
 	return (
-		<div className='min-h-screen bg-gradient-to-b from-background to-muted/40'>
+		<div className='min-h-screen'>
 			<Hero t={t} />
 			<QuickLinks />
 			<LiveEditorShowcase />

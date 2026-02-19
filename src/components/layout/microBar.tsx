@@ -19,7 +19,7 @@ export default function MicroBar({ className }: Props) {
 		<div
 			className={cn(
 				"microbar fixed md:sticky left-0 right-0 z-30 py-4",
-				"h-9 border-b bg-slate-50/70 dark:bg-slate-900/40 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+				"h-9 border-b backdrop-blur-md bg-amber-50/40 dark:bg-zinc-900/50",
 				"text-xs",
 				className,
 			)}

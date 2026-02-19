@@ -130,8 +130,8 @@ export default function CodeExamples() {
 				</p>
 			</div>
 
-			<Card className='mx-auto mt-12 max-w-4xl'>
-				<CardContent className='grid gap-6 p-4 md:grid-cols-[200px_1fr]'>
+			<Card className='mx-auto mt-12 max-w-5xl'>
+				<CardContent className='grid gap-6 p-5 md:grid-cols-[220px_1fr]'>
 					{/* Vertical Tabs */}
 					<div className='flex flex-col gap-1'>
 						{frameworkData.map((fw) => {

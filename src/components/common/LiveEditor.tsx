@@ -3,11 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackPreview, SandpackConsole, SandpackProviderProps } from "@codesandbox/sandpack-react";
 import { githubLight, atomDark } from "@codesandbox/sandpack-themes";
-import dynamic from "next/dynamic";
-
-const SunEditor = dynamic(() => import("@/components/editor/suneditor"), {
-  ssr: false,
-});
+import SunEditor from "@/components/editor/suneditor";
 
 type SandpackTemplate = SandpackProviderProps;
 
@@ -50,27 +46,10 @@ export default function PlaygroundPage() {
 				</SandpackProvider>
 
 				<div className='my-8'>
-					<h2 className='text-xl font-bold mb-4'>SunEditor Test Area</h2>
-					<SunEditor value={editorContent} />
-					<div className='mt-4 p-4 border rounded bg-gray-100 dark:bg-gray-800 prose dark:prose-invert max-w-none'>
-						<h3 className='font-semibold'>Editor Content (Live):</h3>
-						<div dangerouslySetInnerHTML={{ __html: editorContent }} />
+					<div className='mt-4 p-0 border rounded prose max-w-none'>
+						<SunEditor value={editorContent} />
 					</div>
 				</div>
-
-				<section className='mt-6 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300'>
-					<p className='mb-2 font-medium'>Notes</p>
-					<ul className='list-disc pl-5 space-y-1'>
-						<li>Code runs inside an isolated iframe sandbox (no server needed).</li>
-						<li>
-							For strict CSP, allow the Sandpack iframe host and enable <code>worker-src</code>, <code>script-src</code> for blobs. If you use a nonce, pass it via <code>meta</code> tag
-							and Next headers.
-						</li>
-						<li>
-							You can pre-load libraries via <code>externalResources</code> or <code>package.json</code> in <code>customSetup</code>.
-						</li>
-					</ul>
-				</section>
 			</div>
 		</div>
 	);
