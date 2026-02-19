@@ -5,16 +5,18 @@ import { motion } from "framer-motion";
 import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
 
+const subButtonList = [["bold", "underline", "italic", "strike", "subscript", "superscript"], "|", ["fontColor", "backgroundColor"]];
+
 const presets: { id: string; label: string; options: SunEditorType.InitOptions }[] = [
 	{
 		id: "classic",
 		label: "Classic",
-		options: {},
+		options: { subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "inline",
 		label: "Inline",
-		options: { mode: "inline", subToolbar: { mode: "balloon" } },
+		options: { mode: "inline" },
 	},
 	{
 		id: "balloon",
@@ -24,7 +26,7 @@ const presets: { id: string; label: string; options: SunEditorType.InitOptions }
 	{
 		id: "document",
 		label: "Document",
-		options: { mode: "classic", type: "document:header,page" },
+		options: { mode: "classic", type: "document:header,page", subToolbar: { mode: "balloon-always", buttonList: subButtonList } },
 	},
 ];
 

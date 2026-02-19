@@ -17,6 +17,7 @@ export function ThemeToggle() {
 		const isDark = theme === "dark";
 		root.classList.toggle("dark", isDark);
 		(root as any).dataset.theme = theme;
+
 		window.dispatchEvent(new CustomEvent("themechange", { detail: theme } as any));
 	}, [theme]);
 

@@ -29,6 +29,7 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp 
 			const detail = (e as CustomEvent).detail;
 			setAutoTheme(detail === "dark" ? "dark" : "default");
 		};
+
 		window.addEventListener("themechange", handler);
 		return () => window.removeEventListener("themechange", handler);
 	}, [themeProp]);
