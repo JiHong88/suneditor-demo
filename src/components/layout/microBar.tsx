@@ -24,7 +24,7 @@ export default function MicroBar({ className }: Props) {
 				className,
 			)}
 		>
-			<div className='container mx-auto h-full px-3 flex items-center gap-2 justify-between'>
+			<div className='mx-auto h-full w-full max-w-5xl px-4 md:px-6 flex items-center gap-2 justify-between'>
 				{/* 왼쪽: 언어 */}
 				<div className='flex items-center gap-2'>
 					<label className='inline-flex items-center gap-1'>

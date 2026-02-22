@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import type { SunEditor } from "suneditor/types";
+import "suneditor/src/themes/dark.css";
+import "suneditor/src/themes/cobalt.css";
 import dynamic from "next/dynamic";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });

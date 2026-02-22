@@ -5,8 +5,6 @@ import suneditor, { plugins, interfaces } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 import "suneditor/css";
 import "suneditor/css/contents";
-import "suneditor/src/themes/dark.css";
-import "suneditor/src/themes/blue.css";
 import { FullButtonList } from "../editor/buttonList";
 
 class A extends interfaces.PluginModal implements interfaces.ModuleModal, interfaces.PluginDropdown, interfaces.EditorComponent {
