@@ -113,16 +113,16 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 
 				{/* Code Display */}
 				<div
-					className='relative rounded-md border bg-muted/50 p-4 font-mono text-sm'
+					className='relative grid rounded-md border bg-muted/50 p-4 font-mono text-sm'
 					style={{
 						borderColor: hexToRgba(selectedFramework.accent, 0.65),
 						boxShadow: `inset 0 0 0 1px ${hexToRgba(selectedFramework.accent, 0.2)}`,
 					}}
 				>
-					<Button size='icon' variant='ghost' className='absolute top-2 right-2 h-8 w-8' onClick={handleCopy}>
+					<Button size='icon' variant='ghost' className='absolute top-4 right-4 h-8 w-8' onClick={handleCopy}>
 						<Copy className='h-4 w-4' />
 					</Button>
-					<div className='mb-3 inline-flex items-center gap-2 rounded-md border bg-background/80 px-2.5 py-1 text-xs text-muted-foreground'>
+					<div className='mb-3 inline-flex items-center gap-2 rounded-md border bg-background/80 px-2.5 py-1.5 text-xs text-muted-foreground'>
 						<Image src={selectedFramework.icon} alt={`${selectedFramework.name} logo`} className='h-3.5 w-3.5' width={14} height={14} />
 						<span className='font-medium'>{selectedFramework.name}</span>
 						<span className='rounded border px-1.5 py-0.5 text-[10px] uppercase'>{selectedFramework.kind}</span>
