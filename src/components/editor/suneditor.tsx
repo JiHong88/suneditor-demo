@@ -15,12 +15,7 @@ interface SunEditorProps {
 }
 
 const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp }) => {
-	const [autoTheme, setAutoTheme] = useState<"dark" | "default">(() => {
-		if (typeof document !== "undefined") {
-			return document.documentElement.classList.contains("dark") ? "dark" : "default";
-		}
-		return "default";
-	});
+	const [autoTheme, setAutoTheme] = useState<"dark" | "default">("default");
 
 	useEffect(() => {
 		if (themeProp !== undefined) return;

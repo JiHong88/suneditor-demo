@@ -11,7 +11,7 @@ type StepOneCodeExamplesProps = {
 export default function StepOneCodeExamples({ framework, onFrameworkChange }: StepOneCodeExamplesProps) {
 	return (
 		<section className='mx-auto w-full max-w-6xl px-6 pb-14 pt-2'>
-			<SectionHeading eyebrow='Step 1' title='Install' />
+			<SectionHeading eyebrow='Step 1' title='Install & Create Editor' />
 			<div className='mt-4'>
 				<FrameworkBadge framework={framework} />
 			</div>

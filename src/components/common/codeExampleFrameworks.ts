@@ -1,6 +1,6 @@
-import rawFrameworks from "@/data/code-examples/frameworks.json";
+import rawFrameworks from "@/data/code-examples/frameworks";
 
-export type FrameworkKey = "javascript-cdn" | "javascript-npm" | "angular" | "jquery" | "react" | "svelte" | "vue" | "webcomponents";
+export type FrameworkKey = "javascript-cdn" | "javascript-npm" | "angular" | "react" | "svelte" | "vue" | "webcomponents";
 
 export type CodeFramework = {
 	key: FrameworkKey;

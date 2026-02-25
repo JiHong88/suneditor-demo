@@ -7,7 +7,7 @@ import { Locale, locales, defaultLocale } from "@/i18n/routing";
 import { getDir, buildLanguageOptions } from "@/i18n/lang";
 import { Loader2, Globe2 } from "lucide-react";
 
-function getInitialLang(): Locale {
+function getClientLang(): Locale {
 	if (typeof document === "undefined") return defaultLocale;
 	const fromCookie = (readCookie("NEXT_LOCALE") as Locale | null) ?? null;
 	const fromDom = (document.documentElement.getAttribute("data-lang") as Locale) || null;
@@ -15,20 +15,24 @@ function getInitialLang(): Locale {
 }
 
 export function LangSelect() {
-	const [lang, setLang] = useState<Locale>(getInitialLang);
+	const [lang, setLang] = useState<Locale>(defaultLocale);
 	const router = useRouter();
 	const pathname = usePathname();
 	const [isPending, startTransition] = useTransition();
 
 	useEffect(() => {
+		setLang(getClientLang());
+	}, []);
+
+	useEffect(() => {
 		const root = document.documentElement;
 		root.setAttribute("dir", getDir(lang));
 		root.setAttribute("data-lang", lang);
-		setLang(lang);
 		window.dispatchEvent(new CustomEvent("langchange", { detail: lang } as any));
 	}, [lang]);
 
 	const onValueChange = (next: Locale) => {
+		setLang(next);
 		startTransition(() => {
 			router.replace(pathname, { locale: next });
 		});

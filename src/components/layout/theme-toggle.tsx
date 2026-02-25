@@ -3,10 +3,30 @@
 import { useState, useEffect } from "react";
 
 export function ThemeToggle() {
-	const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-	const [theme, setTheme] = useState<"light" | "dark">((localStorage.getItem("theme") as any) || (prefersDark ? "dark" : "light"));
+	const [theme, setTheme] = useState<"light" | "dark">("light");
+	const [ready, setReady] = useState(false);
 
 	useEffect(() => {
+		let initialTheme: "light" | "dark" = "light";
+
+		try {
+			const storedTheme = localStorage.getItem("theme");
+			if (storedTheme === "dark" || storedTheme === "light") {
+				initialTheme = storedTheme;
+			} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+				initialTheme = "dark";
+			}
+		} catch {
+			/** ignore */
+		}
+
+		setTheme(initialTheme);
+		setReady(true);
+	}, []);
+
+	useEffect(() => {
+		if (!ready) return;
+
 		try {
 			localStorage.setItem("theme", theme);
 		} catch {
@@ -19,7 +39,7 @@ export function ThemeToggle() {
 		(root as any).dataset.theme = theme;
 
 		window.dispatchEvent(new CustomEvent("themechange", { detail: theme } as any));
-	}, [theme]);
+	}, [ready, theme]);
 
 	return (
 		<div className='flex items-center gap-1 rounded-full bg-muted text-xs border-0'>

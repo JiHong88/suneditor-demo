@@ -1,16 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { SandpackCodeEditor, SandpackProvider, type SandpackProviderProps } from "@codesandbox/sandpack-react";
-import { atomDark, githubLight } from "@codesandbox/sandpack-themes";
 // shadcn/ui
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CODE_FRAMEWORKS, DEFAULT_FRAMEWORK_KEY, getCodeFramework, hexToRgba, type FrameworkKey } from "./codeExampleFrameworks";
+import CodeBlock from "./CodeBlock";
+
+const FRAMEWORK_LANG: Record<FrameworkKey, string> = {
+	"javascript-cdn": "html",
+	"javascript-npm": "javascript",
+	react: "jsx",
+	vue: "vue",
+	angular: "typescript",
+	svelte: "svelte",
+	webcomponents: "javascript",
+};
 
 type CodeExamplesProps = {
 	compact?: boolean;
@@ -18,61 +27,14 @@ type CodeExamplesProps = {
 	onFrameworkChange?: (framework: FrameworkKey) => void;
 };
 
-const FRAMEWORK_META: Record<FrameworkKey, { template: SandpackProviderProps["template"]; filePath: string }> = {
-	"javascript-cdn": { template: "vanilla", filePath: "/index.html" },
-	"javascript-npm": { template: "vanilla", filePath: "/main.js" },
-	react: { template: "react", filePath: "/App.tsx" },
-	vue: { template: "vue", filePath: "/src/App.vue" },
-	angular: { template: "angular", filePath: "/src/app/app.component.ts" },
-	svelte: { template: "svelte", filePath: "/App.svelte" },
-	jquery: { template: "vanilla", filePath: "/main.js" },
-	webcomponents: { template: "vanilla", filePath: "/main.js" },
-};
-
-function usePrefersDark() {
-	const resolveDark = () => {
-		if (typeof document === "undefined") return false;
-		return !!document.documentElement?.classList.contains("dark");
-	};
-
-	const [dark, setDark] = useState(() => resolveDark());
-
-	useEffect(() => {
-		const syncDark = () => setDark(resolveDark());
-		syncDark();
-
-		const onThemeChange = (event: Event) => {
-			const detail = (event as CustomEvent<string>).detail;
-			if (detail === "dark" || detail === "light") {
-				setDark(detail === "dark");
-				return;
-			}
-			syncDark();
-		};
-
-		window.addEventListener("themechange", onThemeChange);
-		return () => window.removeEventListener("themechange", onThemeChange);
-	}, []);
-
-	return dark;
-}
-
 export default function CodeExamples({ compact = false, framework, onFrameworkChange }: CodeExamplesProps) {
 	const t = useTranslations("Main.Common.CodeExamples");
 	const desc = t("desc").split("||");
 
 	const [internalFramework, setInternalFramework] = useState<FrameworkKey>(DEFAULT_FRAMEWORK_KEY);
 	const [copied, setCopied] = useState(false);
-	const prefersDark = usePrefersDark();
 	const selectedFrameworkKey = framework ?? internalFramework;
 	const selectedFramework = getCodeFramework(selectedFrameworkKey);
-	const selectedMeta = FRAMEWORK_META[selectedFrameworkKey];
-	const sandpackFiles = useMemo(
-		() => ({
-			[selectedMeta.filePath]: { code: selectedFramework.snippet },
-		}),
-		[selectedFramework.snippet, selectedMeta.filePath]
-	);
 
 	const selectFramework = (nextFramework: FrameworkKey) => {
 		if (framework === undefined) {
@@ -119,7 +81,7 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 						boxShadow: `inset 0 0 0 1px ${hexToRgba(selectedFramework.accent, 0.2)}`,
 					}}
 				>
-					<Button size='icon' variant='ghost' className='absolute top-4 right-4 h-8 w-8' onClick={handleCopy}>
+					<Button size='icon' variant='ghost' className='absolute top-4 right-4 h-8 w-8 z-10' onClick={handleCopy}>
 						<Copy className='h-4 w-4' />
 					</Button>
 					<div className='mb-3 inline-flex items-center gap-2 rounded-md border bg-background/80 px-2.5 py-1.5 text-xs text-muted-foreground'>
@@ -136,25 +98,10 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 							transition={{ duration: 0.2 }}
 							className='overflow-hidden rounded-md border border-border/60 bg-muted/10'
 						>
-							<SandpackProvider
-								template={selectedMeta.template}
-								files={sandpackFiles}
-								theme={prefersDark ? atomDark : githubLight}
-								options={{
-									activeFile: selectedMeta.filePath,
-									visibleFiles: [selectedMeta.filePath],
-								}}
-							>
-								<SandpackCodeEditor
-									readOnly
-									showReadOnly={false}
-									showTabs={false}
-									showInlineErrors={false}
-									showLineNumbers
-									wrapContent
-									style={{ minHeight: compact ? 260 : 320 }}
-								/>
-							</SandpackProvider>
+							<CodeBlock
+								code={selectedFramework.snippet}
+								lang={FRAMEWORK_LANG[selectedFrameworkKey]}
+							/>
 						</motion.div>
 					</AnimatePresence>
 					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>Copied!</span>}
