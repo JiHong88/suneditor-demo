@@ -8,13 +8,16 @@ import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
 import { generateCode, getCodeLang } from "../_lib/codeGenerator";
 import type { PlaygroundState } from "../_lib/playgroundState";
-
-type CodeFramework = "vanilla" | "react" | "vue";
+import type { CodeFramework } from "../_lib/playgroundState";
 
 const FRAMEWORKS: { key: CodeFramework; name: string; icon: string }[] = [
-	{ key: "vanilla", name: "Vanilla JS", icon: "/logos/js.svg" },
+	{ key: "javascript-cdn", name: "CDN", icon: "/logos/html.svg" },
+	{ key: "javascript-npm", name: "JS", icon: "/logos/js.svg" },
 	{ key: "react", name: "React", icon: "/logos/react.svg" },
-	{ key: "vue", name: "Vue 3", icon: "/logos/vue.svg" },
+	{ key: "vue", name: "Vue", icon: "/logos/vue.svg" },
+	{ key: "angular", name: "Angular", icon: "/logos/angular.svg" },
+	{ key: "svelte", name: "Svelte", icon: "/logos/svelte.svg" },
+	{ key: "webcomponents", name: "WC", icon: "/logos/web-components.svg" },
 ];
 
 type Props = {
@@ -22,7 +25,7 @@ type Props = {
 };
 
 export default function PlaygroundCodePanel({ state }: Props) {
-	const [framework, setFramework] = useState<CodeFramework>("vanilla");
+	const [framework, setFramework] = useState<CodeFramework>("javascript-npm");
 	const [open, setOpen] = useState(true);
 	const [copied, setCopied] = useState(false);
 
@@ -46,18 +49,18 @@ export default function PlaygroundCodePanel({ state }: Props) {
 
 				<div className='flex items-center gap-2'>
 					{/* Framework tabs */}
-					<div className='flex items-center gap-1 rounded-md border bg-muted/50 p-0.5'>
+					<div className='flex items-center gap-0.5 rounded-md border bg-muted/50 p-0.5 overflow-x-auto'>
 						{FRAMEWORKS.map((fw) => (
 							<button
 								key={fw.key}
 								type='button'
 								onClick={() => setFramework(fw.key)}
-								className={`flex items-center gap-1.5 rounded px-2 py-1 text-xs transition-colors ${
+								className={`flex items-center gap-1 rounded px-1.5 py-1 text-xs transition-colors whitespace-nowrap ${
 									framework === fw.key ? "bg-background font-medium shadow-sm" : "text-muted-foreground hover:text-foreground"
 								}`}
 							>
 								<Image src={fw.icon} alt={fw.name} width={14} height={14} className='h-3.5 w-3.5' />
-								{fw.name}
+								<span className='hidden sm:inline'>{fw.name}</span>
 							</button>
 						))}
 					</div>

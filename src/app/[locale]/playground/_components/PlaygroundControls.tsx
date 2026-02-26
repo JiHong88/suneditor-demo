@@ -220,6 +220,9 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							onChange={(v) => set("textDirection")(v as PlaygroundState["textDirection"])}
 						/>
 					</div>
+					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='type' value={state.type} onChange={set("type")} fixed={isFixedOption("type")} placeholder='document:header,page' />
+					</div>
 				</AccordionContent>
 			</AccordionItem>
 
@@ -300,7 +303,14 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						<SwitchField label='iframe' checked={state.iframe} onChange={set("iframe")} fixed={isFixedOption("iframe")} />
 						{state.iframe && <SwitchField label='iframe_fullPage' checked={state.iframe_fullPage} onChange={set("iframe_fullPage")} fixed={isFixedOption("iframe_fullPage")} />}
 					</div>
+					{state.iframe && (
+						<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+							<TextInput label='iframe_cssFileName' value={state.iframe_cssFileName} onChange={set("iframe_cssFileName")} placeholder='suneditor' />
+							<TextInput label='iframe_attributes' value={state.iframe_attributes} onChange={set("iframe_attributes")} placeholder='{"key":"value"}' />
+						</div>
+					)}
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='editableFrameAttributes' value={state.editableFrameAttributes} onChange={set("editableFrameAttributes")} placeholder='{"spellcheck":"false"}' />
 						<TextInput label='defaultLine' value={state.defaultLine} onChange={set("defaultLine")} fixed={isFixedOption("defaultLine")} placeholder='p' />
 						<SelectField
 							label='defaultLineBreakFormat'
@@ -358,6 +368,14 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						<NumberInput label='fullScreenOffset' value={state.fullScreenOffset} onChange={(v) => set("fullScreenOffset")(v ?? 0)} />
 						<TextInput label='defaultUrlProtocol' value={state.defaultUrlProtocol} onChange={set("defaultUrlProtocol")} placeholder='https://' />
 					</div>
+					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='autoStyleify' value={state.autoStyleify} onChange={set("autoStyleify")} placeholder='bold,underline,italic,strike' />
+						<NumberInput label='toastMessageTime' value={state.toastMessageTime} onChange={(v) => set("toastMessageTime")(v ?? 1500)} />
+					</div>
+					<div className='mt-3 grid gap-3'>
+						<TextareaField label='previewTemplate' value={state.previewTemplate} onChange={set("previewTemplate")} placeholder='Custom preview HTML template' />
+						<TextareaField label='printTemplate' value={state.printTemplate} onChange={set("printTemplate")} placeholder='Custom print HTML template' />
+					</div>
 				</AccordionContent>
 			</AccordionItem>
 
@@ -370,6 +388,17 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						<TextInput label='fontSizeUnits' value={state.fontSizeUnits} onChange={set("fontSizeUnits")} fixed={isFixedOption("fontSizeUnits")} placeholder='px,pt,em,rem' />
 						<TextInput label='lineAttrReset' value={state.lineAttrReset} onChange={set("lineAttrReset")} placeholder='id|name' />
 						<TextInput label='printClass' value={state.printClass} onChange={set("printClass")} />
+					</div>
+					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='allowedClassName' value={state.allowedClassName} onChange={set("allowedClassName")} fixed={isFixedOption("allowedClassName")} placeholder='class1|class2' />
+						<TextInput label='allowedEmptyTags' value={state.allowedEmptyTags} onChange={set("allowedEmptyTags")} placeholder='CSS selector' />
+						<TextInput label='allUsedStyles' value={state.allUsedStyles} onChange={set("allUsedStyles")} fixed={isFixedOption("allUsedStyles")} placeholder='color|background-color' />
+						<TextInput label='scopeSelectionTags' value={state.scopeSelectionTags} onChange={set("scopeSelectionTags")} placeholder='td,table,li,...' />
+					</div>
+					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='textStyleTags' value={state.textStyleTags} onChange={set("textStyleTags")} fixed={isFixedOption("textStyleTags")} placeholder='additional tags' />
+						<TextInput label='spanStyles' value={state.spanStyles} onChange={set("spanStyles")} fixed={isFixedOption("spanStyles")} placeholder='font-family|font-size|...' />
+						<TextInput label='lineStyles' value={state.lineStyles} onChange={set("lineStyles")} fixed={isFixedOption("lineStyles")} placeholder='text-align|margin|...' />
 					</div>
 					<div className='mt-3 grid gap-3'>
 						<TextareaField
@@ -400,6 +429,20 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							fixed={isFixedOption("attributeBlacklist")}
 							placeholder='{"*": "onclick"}'
 						/>
+					</div>
+				</AccordionContent>
+			</AccordionItem>
+
+			{/* Format Extensions (Advanced) */}
+			<AccordionItem value='format-extensions'>
+				<AccordionTrigger className='text-sm font-semibold'>Format Extensions</AccordionTrigger>
+				<AccordionContent>
+					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
+						<TextInput label='formatLine' value={state.formatLine} onChange={set("formatLine")} fixed={isFixedOption("formatLine")} placeholder='additional line tags' />
+						<TextInput label='formatBrLine' value={state.formatBrLine} onChange={set("formatBrLine")} fixed={isFixedOption("formatBrLine")} placeholder='additional brLine tags' />
+						<TextInput label='formatClosureBrLine' value={state.formatClosureBrLine} onChange={set("formatClosureBrLine")} fixed={isFixedOption("formatClosureBrLine")} />
+						<TextInput label='formatBlock' value={state.formatBlock} onChange={set("formatBlock")} fixed={isFixedOption("formatBlock")} placeholder='additional block tags' />
+						<TextInput label='formatClosureBlock' value={state.formatClosureBlock} onChange={set("formatClosureBlock")} fixed={isFixedOption("formatClosureBlock")} />
 					</div>
 				</AccordionContent>
 			</AccordionItem>

@@ -2,7 +2,7 @@
 
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Share2, Check, Settings2 } from "lucide-react";
+import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -18,8 +18,10 @@ import {
 	hasFixedChange,
 } from "../_lib/playgroundState";
 import PlaygroundControls from "./PlaygroundControls";
+import PlaygroundPluginSidebar from "./PlaygroundPluginSidebar";
 import PlaygroundEditor from "./PlaygroundEditor";
 import PlaygroundCodePanel from "./PlaygroundCodePanel";
+import PlaygroundStackBlitz from "./PlaygroundStackBlitz";
 
 export default function PlaygroundContent() {
 	// Parse URL params on mount
@@ -40,6 +42,7 @@ export default function PlaygroundContent() {
 		const fixedParts = [
 			state.mode,
 			state.buttonListPreset,
+			state.type,
 			state.shortcutsDisable,
 			state.closeModalOutsideClick,
 			state.defaultLine,
@@ -52,11 +55,55 @@ export default function PlaygroundContent() {
 			state.iframe,
 			state.iframe_fullPage,
 			state.statusbar_resizeEnable,
+			state.formatLine,
+			state.formatBrLine,
+			state.formatClosureBrLine,
+			state.formatBlock,
+			state.formatClosureBlock,
+			state.spanStyles,
+			state.lineStyles,
+			state.textStyleTags,
+			state.allowedClassName,
+			state.allUsedStyles,
+			// Plugin options (all fixed)
+			state.image_canResize,
+			state.image_defaultWidth,
+			state.image_defaultHeight,
+			state.image_createFileInput,
+			state.image_createUrlInput,
+			state.video_canResize,
+			state.video_defaultWidth,
+			state.video_defaultHeight,
+			state.video_createFileInput,
+			state.video_createUrlInput,
+			state.audio_defaultWidth,
+			state.audio_defaultHeight,
+			state.audio_createFileInput,
+			state.audio_createUrlInput,
+			state.table_scrollType,
+			state.table_captionPosition,
+			state.table_cellControllerPosition,
+			state.fontSize_sizeUnit,
+			state.fontSize_showIncDecControls,
+			state.fontColor_disableHEXInput,
+			state.backgroundColor_disableHEXInput,
+			state.embed_canResize,
+			state.embed_defaultWidth,
+			state.embed_defaultHeight,
+			state.drawing_outputFormat,
+			state.drawing_lineWidth,
+			state.drawing_lineCap,
+			state.mention_triggerText,
+			state.mention_limitSize,
+			state.mention_delayTime,
+			state.math_canResize,
+			state.math_autoHeight,
 		];
 		return fixedParts.map(String).join("|");
 	}, [
 		state.mode,
 		state.buttonListPreset,
+		state.type,
 		state.shortcutsDisable,
 		state.closeModalOutsideClick,
 		state.defaultLine,
@@ -69,6 +116,48 @@ export default function PlaygroundContent() {
 		state.iframe,
 		state.iframe_fullPage,
 		state.statusbar_resizeEnable,
+		state.formatLine,
+		state.formatBrLine,
+		state.formatClosureBrLine,
+		state.formatBlock,
+		state.formatClosureBlock,
+		state.spanStyles,
+		state.lineStyles,
+		state.textStyleTags,
+		state.allowedClassName,
+		state.allUsedStyles,
+		state.image_canResize,
+		state.image_defaultWidth,
+		state.image_defaultHeight,
+		state.image_createFileInput,
+		state.image_createUrlInput,
+		state.video_canResize,
+		state.video_defaultWidth,
+		state.video_defaultHeight,
+		state.video_createFileInput,
+		state.video_createUrlInput,
+		state.audio_defaultWidth,
+		state.audio_defaultHeight,
+		state.audio_createFileInput,
+		state.audio_createUrlInput,
+		state.table_scrollType,
+		state.table_captionPosition,
+		state.table_cellControllerPosition,
+		state.fontSize_sizeUnit,
+		state.fontSize_showIncDecControls,
+		state.fontColor_disableHEXInput,
+		state.backgroundColor_disableHEXInput,
+		state.embed_canResize,
+		state.embed_defaultWidth,
+		state.embed_defaultHeight,
+		state.drawing_outputFormat,
+		state.drawing_lineWidth,
+		state.drawing_lineCap,
+		state.mention_triggerText,
+		state.mention_limitSize,
+		state.mention_delayTime,
+		state.math_canResize,
+		state.math_autoHeight,
 	]);
 
 	// Apply resettable option changes via resetOptions
@@ -130,44 +219,80 @@ export default function PlaygroundContent() {
 				</motion.div>
 			</section>
 
-			<div className='container mx-auto px-6 py-6 space-y-6'>
-				{/* Controls — Desktop: inline, Mobile: Sheet */}
-				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
-					{/* Desktop */}
-					<div className='hidden md:block rounded-lg border bg-card/90 p-4'>
-						<PlaygroundControls state={state} dispatch={dispatch} />
+			{/* Main layout: Sidebar + Content */}
+			<div className='container mx-auto px-6 py-6'>
+				<div className='flex gap-6'>
+					{/* Left Sidebar — Desktop only */}
+					<motion.aside initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 }} className='hidden lg:block w-64 shrink-0'>
+						<div className='sticky top-6 rounded-lg border bg-card/90 p-3 max-h-[calc(100vh-8rem)] overflow-y-auto'>
+							<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
+						</div>
+					</motion.aside>
+
+					{/* Right Content */}
+					<div className='flex-1 min-w-0 space-y-6'>
+						{/* Controls — Desktop: inline, Mobile: Sheet */}
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
+							{/* Desktop */}
+							<div className='hidden md:block rounded-lg border bg-card/90 p-4'>
+								<PlaygroundControls state={state} dispatch={dispatch} />
+							</div>
+
+							{/* Mobile */}
+							<div className='md:hidden flex gap-2'>
+								<Sheet>
+									<SheetTrigger asChild>
+										<Button variant='outline' className='flex-1'>
+											<Settings2 className='mr-2 h-4 w-4' />
+											Editor Options
+										</Button>
+									</SheetTrigger>
+									<SheetContent side='right' className='w-[320px] overflow-y-auto'>
+										<SheetHeader>
+											<SheetTitle>Editor Options</SheetTitle>
+										</SheetHeader>
+										<div className='mt-4'>
+											<PlaygroundControls state={state} dispatch={dispatch} />
+										</div>
+									</SheetContent>
+								</Sheet>
+
+								{/* Mobile Plugin Sheet */}
+								<Sheet>
+									<SheetTrigger asChild>
+										<Button variant='outline' className='flex-1 lg:hidden'>
+											<Puzzle className='mr-2 h-4 w-4' />
+											Plugins
+										</Button>
+									</SheetTrigger>
+									<SheetContent side='left' className='w-[300px] overflow-y-auto'>
+										<SheetHeader>
+											<SheetTitle>Plugin Options</SheetTitle>
+										</SheetHeader>
+										<div className='mt-4'>
+											<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
+										</div>
+									</SheetContent>
+								</Sheet>
+							</div>
+						</motion.div>
+
+						{/* Editor */}
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+							<PlaygroundEditor key={editorKey} state={state} editorRef={editorRef} />
+						</motion.div>
+
+						{/* Code Panel */}
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+							<PlaygroundCodePanel state={state} />
+						</motion.div>
+
+						{/* StackBlitz Live Editor */}
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+							<PlaygroundStackBlitz state={state} framework={state.codeFramework} />
+						</motion.div>
 					</div>
-
-					{/* Mobile */}
-					<div className='md:hidden'>
-						<Sheet>
-							<SheetTrigger asChild>
-								<Button variant='outline' className='w-full'>
-									<Settings2 className='mr-2 h-4 w-4' />
-									Editor Options
-								</Button>
-							</SheetTrigger>
-							<SheetContent side='right' className='w-[320px] overflow-y-auto'>
-								<SheetHeader>
-									<SheetTitle>Editor Options</SheetTitle>
-								</SheetHeader>
-								<div className='mt-4'>
-									<PlaygroundControls state={state} dispatch={dispatch} />
-								</div>
-							</SheetContent>
-						</Sheet>
-					</div>
-				</motion.div>
-
-				{/* Editor */}
-				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-					<PlaygroundEditor key={editorKey} state={state} editorRef={editorRef} />
-				</motion.div>
-
-				{/* Code Panel */}
-				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
-					<PlaygroundCodePanel state={state} />
-				</motion.div>
+				</div>
 			</div>
 		</div>
 	);
