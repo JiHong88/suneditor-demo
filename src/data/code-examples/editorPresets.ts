@@ -19,9 +19,9 @@ export const BASIC_BUTTON_LIST = [
 /** Standard — playground default */
 export const STANDARD_BUTTON_LIST = [
 	["undo", "redo"],
-	["font", "fontSize", "formatBlock"],
+	["font", "fontSize", "blockStyle"],
 	["bold", "italic", "underline", "strike"],
-	["fontColor", "hiliteColor"],
+	["fontColor", "backgroundColor"],
 	["outdent", "indent", "align", "list"],
 	["table", "link", "image"],
 	["fullScreen", "codeView"],
@@ -30,10 +30,10 @@ export const STANDARD_BUTTON_LIST = [
 /** Full — playground full features */
 export const FULL_BUTTON_LIST = [
 	["undo", "redo"],
-	["font", "fontSize", "formatBlock"],
+	["font", "fontSize", "blockStyle"],
 	["paragraphStyle", "blockquote"],
 	["bold", "italic", "underline", "strike", "subscript", "superscript"],
-	["fontColor", "hiliteColor", "textStyle"],
+	["fontColor", "backgroundColor", "textStyle"],
 	["removeFormat"],
 	["outdent", "indent", "align", "horizontalRule", "list", "lineHeight"],
 	["table", "link", "image", "video", "audio"],

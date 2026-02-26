@@ -11,11 +11,11 @@ type Props = {
 
 /* ── Reusable field components ─────────────────────────── */
 
-function FieldLabel({ label, fixed }: { label: string; fixed?: boolean }) {
+function FieldLabel({ label, resettable }: { label: string; resettable?: boolean }) {
 	return (
 		<span className='flex items-center gap-1.5 text-xs text-muted-foreground'>
 			{label}
-			{fixed && <span className='rounded bg-destructive/15 px-1 py-0.5 text-[10px] font-medium text-destructive'>remount</span>}
+			{resettable && <span className='rounded bg-green-500/15 px-1 py-0.5 text-[10px] font-medium text-green-600 dark:text-green-400'>live</span>}
 		</span>
 	);
 }
@@ -25,17 +25,17 @@ function SelectField({
 	value,
 	options,
 	onChange,
-	fixed,
+	resettable,
 }: {
 	label: string;
 	value: string;
 	options: { value: string; label: string }[];
 	onChange: (v: string) => void;
-	fixed?: boolean;
+	resettable?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} resettable={resettable} />
 			<select
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
@@ -56,17 +56,17 @@ function TextInput({
 	value,
 	onChange,
 	placeholder,
-	fixed,
+	resettable,
 }: {
 	label: string;
 	value: string;
 	onChange: (v: string) => void;
 	placeholder?: string;
-	fixed?: boolean;
+	resettable?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} resettable={resettable} />
 			<input
 				type='text'
 				value={value}
@@ -82,16 +82,16 @@ function NumberInput({
 	label,
 	value,
 	onChange,
-	fixed,
+	resettable,
 }: {
 	label: string;
 	value: number | null;
 	onChange: (v: number | null) => void;
-	fixed?: boolean;
+	resettable?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} resettable={resettable} />
 			<input
 				type='number'
 				value={value ?? ""}
@@ -106,16 +106,16 @@ function SwitchField({
 	label,
 	checked,
 	onChange,
-	fixed,
+	resettable,
 }: {
 	label: string;
 	checked: boolean;
 	onChange: (v: boolean) => void;
-	fixed?: boolean;
+	resettable?: boolean;
 }) {
 	return (
 		<label className='flex items-center justify-between gap-2 py-0.5'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} resettable={resettable} />
 			<button
 				type='button'
 				role='switch'
@@ -136,17 +136,17 @@ function TextareaField({
 	value,
 	onChange,
 	placeholder,
-	fixed,
+	resettable,
 }: {
 	label: string;
 	value: string;
 	onChange: (v: string) => void;
 	placeholder?: string;
-	fixed?: boolean;
+	resettable?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} resettable={resettable} />
 			<textarea
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
@@ -188,7 +188,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "balloon-always", label: "Balloon Always" },
 							]}
 							onChange={(v) => set("mode")(v as PlaygroundState["mode"])}
-							fixed={isFixedOption("mode")}
+							resettable={!isFixedOption("mode")}
 						/>
 						<SelectField
 							label='buttonList'
@@ -199,7 +199,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "full", label: "Full" },
 							]}
 							onChange={(v) => set("buttonListPreset")(v as PlaygroundState["buttonListPreset"])}
-							fixed={isFixedOption("buttonListPreset")}
+							resettable={!isFixedOption("buttonListPreset")}
 						/>
 						<SelectField
 							label='theme'
@@ -209,6 +209,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "dark", label: "Dark" },
 							]}
 							onChange={set("theme")}
+							resettable={!isFixedOption("theme")}
 						/>
 						<SelectField
 							label='textDirection'
@@ -218,10 +219,11 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "rtl", label: "RTL" },
 							]}
 							onChange={(v) => set("textDirection")(v as PlaygroundState["textDirection"])}
+							resettable={!isFixedOption("textDirection")}
 						/>
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='type' value={state.type} onChange={set("type")} fixed={isFixedOption("type")} placeholder='document:header,page' />
+						<TextInput label='type' value={state.type} onChange={set("type")} resettable={!isFixedOption("type")} placeholder='document:header,page' />
 					</div>
 				</AccordionContent>
 			</AccordionItem>
@@ -231,14 +233,14 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Layout & Sizing</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='width' value={state.width} onChange={set("width")} placeholder='100%' />
-						<TextInput label='height' value={state.height} onChange={set("height")} placeholder='auto' />
-						<TextInput label='minWidth' value={state.minWidth} onChange={set("minWidth")} />
-						<TextInput label='maxWidth' value={state.maxWidth} onChange={set("maxWidth")} />
-						<TextInput label='minHeight' value={state.minHeight} onChange={set("minHeight")} />
-						<TextInput label='maxHeight' value={state.maxHeight} onChange={set("maxHeight")} />
+						<TextInput label='width' value={state.width} onChange={set("width")} placeholder='100%' resettable={!isFixedOption("width")} />
+						<TextInput label='height' value={state.height} onChange={set("height")} placeholder='auto' resettable={!isFixedOption("height")} />
+						<TextInput label='minWidth' value={state.minWidth} onChange={set("minWidth")} resettable={!isFixedOption("minWidth")} />
+						<TextInput label='maxWidth' value={state.maxWidth} onChange={set("maxWidth")} resettable={!isFixedOption("maxWidth")} />
+						<TextInput label='minHeight' value={state.minHeight} onChange={set("minHeight")} resettable={!isFixedOption("minHeight")} />
+						<TextInput label='maxHeight' value={state.maxHeight} onChange={set("maxHeight")} resettable={!isFixedOption("maxHeight")} />
 						<div className='col-span-2'>
-							<TextInput label='editorStyle' value={state.editorStyle} onChange={set("editorStyle")} placeholder='CSS string' />
+							<TextInput label='editorStyle' value={state.editorStyle} onChange={set("editorStyle")} placeholder='CSS string' resettable={!isFixedOption("editorStyle")} />
 						</div>
 					</div>
 				</AccordionContent>
@@ -249,13 +251,13 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Toolbar</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='toolbar_width' value={state.toolbar_width} onChange={set("toolbar_width")} placeholder='auto' />
-						<NumberInput label='toolbar_sticky' value={state.toolbar_sticky} onChange={(v) => set("toolbar_sticky")(v ?? 0)} />
+						<TextInput label='toolbar_width' value={state.toolbar_width} onChange={set("toolbar_width")} placeholder='auto' resettable={!isFixedOption("toolbar_width")} />
+						<NumberInput label='toolbar_sticky' value={state.toolbar_sticky} onChange={(v) => set("toolbar_sticky")(v ?? 0)} resettable={!isFixedOption("toolbar_sticky")} />
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<SwitchField label='toolbar_hide' checked={state.toolbar_hide} onChange={set("toolbar_hide")} />
-						<SwitchField label='shortcutsHint' checked={state.shortcutsHint} onChange={set("shortcutsHint")} />
-						<SwitchField label='shortcutsDisable' checked={state.shortcutsDisable} onChange={set("shortcutsDisable")} fixed={isFixedOption("shortcutsDisable")} />
+						<SwitchField label='toolbar_hide' checked={state.toolbar_hide} onChange={set("toolbar_hide")} resettable={!isFixedOption("toolbar_hide")} />
+						<SwitchField label='shortcutsHint' checked={state.shortcutsHint} onChange={set("shortcutsHint")} resettable={!isFixedOption("shortcutsHint")} />
+						<SwitchField label='shortcutsDisable' checked={state.shortcutsDisable} onChange={set("shortcutsDisable")} resettable={!isFixedOption("shortcutsDisable")} />
 					</div>
 				</AccordionContent>
 			</AccordionItem>
@@ -265,19 +267,19 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Statusbar & Counter</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<SwitchField label='statusbar' checked={state.statusbar} onChange={set("statusbar")} />
-						<SwitchField label='statusbar_showPathLabel' checked={state.statusbar_showPathLabel} onChange={set("statusbar_showPathLabel")} />
+						<SwitchField label='statusbar' checked={state.statusbar} onChange={set("statusbar")} resettable={!isFixedOption("statusbar")} />
+						<SwitchField label='statusbar_showPathLabel' checked={state.statusbar_showPathLabel} onChange={set("statusbar_showPathLabel")} resettable={!isFixedOption("statusbar_showPathLabel")} />
 						<SwitchField
 							label='statusbar_resizeEnable'
 							checked={state.statusbar_resizeEnable}
 							onChange={set("statusbar_resizeEnable")}
-							fixed={isFixedOption("statusbar_resizeEnable")}
+							resettable={!isFixedOption("statusbar_resizeEnable")}
 						/>
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<SwitchField label='charCounter' checked={state.charCounter} onChange={set("charCounter")} />
-						<NumberInput label='charCounter_max' value={state.charCounter_max} onChange={set("charCounter_max")} />
-						<TextInput label='charCounter_label' value={state.charCounter_label} onChange={set("charCounter_label")} />
+						<SwitchField label='charCounter' checked={state.charCounter} onChange={set("charCounter")} resettable={!isFixedOption("charCounter")} />
+						<NumberInput label='charCounter_max' value={state.charCounter_max} onChange={set("charCounter_max")} resettable={!isFixedOption("charCounter_max")} />
+						<TextInput label='charCounter_label' value={state.charCounter_label} onChange={set("charCounter_label")} resettable={!isFixedOption("charCounter_label")} />
 						<SelectField
 							label='charCounter_type'
 							value={state.charCounter_type}
@@ -287,6 +289,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "byte-html", label: "byte-html" },
 							]}
 							onChange={(v) => set("charCounter_type")(v as PlaygroundState["charCounter_type"])}
+							resettable={!isFixedOption("charCounter_type")}
 						/>
 					</div>
 				</AccordionContent>
@@ -298,20 +301,20 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
 						<div className='col-span-2'>
-							<TextInput label='placeholder' value={state.placeholder} onChange={set("placeholder")} />
+							<TextInput label='placeholder' value={state.placeholder} onChange={set("placeholder")} resettable={!isFixedOption("placeholder")} />
 						</div>
-						<SwitchField label='iframe' checked={state.iframe} onChange={set("iframe")} fixed={isFixedOption("iframe")} />
-						{state.iframe && <SwitchField label='iframe_fullPage' checked={state.iframe_fullPage} onChange={set("iframe_fullPage")} fixed={isFixedOption("iframe_fullPage")} />}
+						<SwitchField label='iframe' checked={state.iframe} onChange={set("iframe")} resettable={!isFixedOption("iframe")} />
+						{state.iframe && <SwitchField label='iframe_fullPage' checked={state.iframe_fullPage} onChange={set("iframe_fullPage")} resettable={!isFixedOption("iframe_fullPage")} />}
 					</div>
 					{state.iframe && (
 						<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-							<TextInput label='iframe_cssFileName' value={state.iframe_cssFileName} onChange={set("iframe_cssFileName")} placeholder='suneditor' />
-							<TextInput label='iframe_attributes' value={state.iframe_attributes} onChange={set("iframe_attributes")} placeholder='{"key":"value"}' />
+							<TextInput label='iframe_cssFileName' value={state.iframe_cssFileName} onChange={set("iframe_cssFileName")} placeholder='suneditor' resettable={!isFixedOption("iframe_cssFileName")} />
+							<TextInput label='iframe_attributes' value={state.iframe_attributes} onChange={set("iframe_attributes")} placeholder='{"key":"value"}' resettable={!isFixedOption("iframe_attributes")} />
 						</div>
 					)}
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='editableFrameAttributes' value={state.editableFrameAttributes} onChange={set("editableFrameAttributes")} placeholder='{"spellcheck":"false"}' />
-						<TextInput label='defaultLine' value={state.defaultLine} onChange={set("defaultLine")} fixed={isFixedOption("defaultLine")} placeholder='p' />
+						<TextInput label='editableFrameAttributes' value={state.editableFrameAttributes} onChange={set("editableFrameAttributes")} placeholder='{"spellcheck":"false"}' resettable={!isFixedOption("editableFrameAttributes")} />
+						<TextInput label='defaultLine' value={state.defaultLine} onChange={set("defaultLine")} resettable={!isFixedOption("defaultLine")} placeholder='p' />
 						<SelectField
 							label='defaultLineBreakFormat'
 							value={state.defaultLineBreakFormat}
@@ -320,6 +323,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "br", label: "br" },
 							]}
 							onChange={(v) => set("defaultLineBreakFormat")(v as PlaygroundState["defaultLineBreakFormat"])}
+							resettable={!isFixedOption("defaultLineBreakFormat")}
 						/>
 						<SelectField
 							label='retainStyleMode'
@@ -330,8 +334,9 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "none", label: "none" },
 							]}
 							onChange={(v) => set("retainStyleMode")(v as PlaygroundState["retainStyleMode"])}
+							resettable={!isFixedOption("retainStyleMode")}
 						/>
-						<SwitchField label='freeCodeViewMode' checked={state.freeCodeViewMode} onChange={set("freeCodeViewMode")} />
+						<SwitchField label='freeCodeViewMode' checked={state.freeCodeViewMode} onChange={set("freeCodeViewMode")} resettable={!isFixedOption("freeCodeViewMode")} />
 					</div>
 				</AccordionContent>
 			</AccordionItem>
@@ -341,15 +346,15 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Features</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<SwitchField label='autoLinkify' checked={state.autoLinkify} onChange={set("autoLinkify")} />
-						<SwitchField label='copyFormatKeepOn' checked={state.copyFormatKeepOn} onChange={set("copyFormatKeepOn")} />
-						<SwitchField label='tabDisable' checked={state.tabDisable} onChange={set("tabDisable")} />
-						<SwitchField label='syncTabIndent' checked={state.syncTabIndent} onChange={set("syncTabIndent")} />
+						<SwitchField label='autoLinkify' checked={state.autoLinkify} onChange={set("autoLinkify")} resettable={!isFixedOption("autoLinkify")} />
+						<SwitchField label='copyFormatKeepOn' checked={state.copyFormatKeepOn} onChange={set("copyFormatKeepOn")} resettable={!isFixedOption("copyFormatKeepOn")} />
+						<SwitchField label='tabDisable' checked={state.tabDisable} onChange={set("tabDisable")} resettable={!isFixedOption("tabDisable")} />
+						<SwitchField label='syncTabIndent' checked={state.syncTabIndent} onChange={set("syncTabIndent")} resettable={!isFixedOption("syncTabIndent")} />
 						<SwitchField
 							label='closeModalOutsideClick'
 							checked={state.closeModalOutsideClick}
 							onChange={set("closeModalOutsideClick")}
-							fixed={isFixedOption("closeModalOutsideClick")}
+							resettable={!isFixedOption("closeModalOutsideClick")}
 						/>
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
@@ -363,18 +368,19 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "none", label: "none" },
 							]}
 							onChange={(v) => set("componentInsertBehavior")(v as PlaygroundState["componentInsertBehavior"])}
+							resettable={!isFixedOption("componentInsertBehavior")}
 						/>
-						<NumberInput label='historyStackDelayTime' value={state.historyStackDelayTime} onChange={(v) => set("historyStackDelayTime")(v ?? 400)} />
-						<NumberInput label='fullScreenOffset' value={state.fullScreenOffset} onChange={(v) => set("fullScreenOffset")(v ?? 0)} />
-						<TextInput label='defaultUrlProtocol' value={state.defaultUrlProtocol} onChange={set("defaultUrlProtocol")} placeholder='https://' />
+						<NumberInput label='historyStackDelayTime' value={state.historyStackDelayTime} onChange={(v) => set("historyStackDelayTime")(v ?? 400)} resettable={!isFixedOption("historyStackDelayTime")} />
+						<NumberInput label='fullScreenOffset' value={state.fullScreenOffset} onChange={(v) => set("fullScreenOffset")(v ?? 0)} resettable={!isFixedOption("fullScreenOffset")} />
+						<TextInput label='defaultUrlProtocol' value={state.defaultUrlProtocol} onChange={set("defaultUrlProtocol")} placeholder='https://' resettable={!isFixedOption("defaultUrlProtocol")} />
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='autoStyleify' value={state.autoStyleify} onChange={set("autoStyleify")} placeholder='bold,underline,italic,strike' />
-						<NumberInput label='toastMessageTime' value={state.toastMessageTime} onChange={(v) => set("toastMessageTime")(v ?? 1500)} />
+						<TextInput label='autoStyleify' value={state.autoStyleify} onChange={set("autoStyleify")} placeholder='bold,underline,italic,strike' resettable={!isFixedOption("autoStyleify")} />
+						<NumberInput label='toastMessageTime' value={state.toastMessageTime} onChange={(v) => set("toastMessageTime")(v ?? 1500)} resettable={!isFixedOption("toastMessageTime")} />
 					</div>
 					<div className='mt-3 grid gap-3'>
-						<TextareaField label='previewTemplate' value={state.previewTemplate} onChange={set("previewTemplate")} placeholder='Custom preview HTML template' />
-						<TextareaField label='printTemplate' value={state.printTemplate} onChange={set("printTemplate")} placeholder='Custom print HTML template' />
+						<TextareaField label='previewTemplate' value={state.previewTemplate} onChange={set("previewTemplate")} placeholder='Custom preview HTML template' resettable={!isFixedOption("previewTemplate")} />
+						<TextareaField label='printTemplate' value={state.printTemplate} onChange={set("printTemplate")} placeholder='Custom print HTML template' resettable={!isFixedOption("printTemplate")} />
 					</div>
 				</AccordionContent>
 			</AccordionItem>
@@ -384,49 +390,49 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Filtering (Advanced)</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<SwitchField label='strictMode' checked={state.strictMode} onChange={set("strictMode")} fixed={isFixedOption("strictMode")} />
-						<TextInput label='fontSizeUnits' value={state.fontSizeUnits} onChange={set("fontSizeUnits")} fixed={isFixedOption("fontSizeUnits")} placeholder='px,pt,em,rem' />
-						<TextInput label='lineAttrReset' value={state.lineAttrReset} onChange={set("lineAttrReset")} placeholder='id|name' />
-						<TextInput label='printClass' value={state.printClass} onChange={set("printClass")} />
+						<SwitchField label='strictMode' checked={state.strictMode} onChange={set("strictMode")} resettable={!isFixedOption("strictMode")} />
+						<TextInput label='fontSizeUnits' value={state.fontSizeUnits} onChange={set("fontSizeUnits")} resettable={!isFixedOption("fontSizeUnits")} placeholder='px,pt,em,rem' />
+						<TextInput label='lineAttrReset' value={state.lineAttrReset} onChange={set("lineAttrReset")} placeholder='id|name' resettable={!isFixedOption("lineAttrReset")} />
+						<TextInput label='printClass' value={state.printClass} onChange={set("printClass")} resettable={!isFixedOption("printClass")} />
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='allowedClassName' value={state.allowedClassName} onChange={set("allowedClassName")} fixed={isFixedOption("allowedClassName")} placeholder='class1|class2' />
-						<TextInput label='allowedEmptyTags' value={state.allowedEmptyTags} onChange={set("allowedEmptyTags")} placeholder='CSS selector' />
-						<TextInput label='allUsedStyles' value={state.allUsedStyles} onChange={set("allUsedStyles")} fixed={isFixedOption("allUsedStyles")} placeholder='color|background-color' />
-						<TextInput label='scopeSelectionTags' value={state.scopeSelectionTags} onChange={set("scopeSelectionTags")} placeholder='td,table,li,...' />
+						<TextInput label='allowedClassName' value={state.allowedClassName} onChange={set("allowedClassName")} resettable={!isFixedOption("allowedClassName")} placeholder='class1|class2' />
+						<TextInput label='allowedEmptyTags' value={state.allowedEmptyTags} onChange={set("allowedEmptyTags")} placeholder='CSS selector' resettable={!isFixedOption("allowedEmptyTags")} />
+						<TextInput label='allUsedStyles' value={state.allUsedStyles} onChange={set("allUsedStyles")} resettable={!isFixedOption("allUsedStyles")} placeholder='color|background-color' />
+						<TextInput label='scopeSelectionTags' value={state.scopeSelectionTags} onChange={set("scopeSelectionTags")} placeholder='td,table,li,...' resettable={!isFixedOption("scopeSelectionTags")} />
 					</div>
 					<div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='textStyleTags' value={state.textStyleTags} onChange={set("textStyleTags")} fixed={isFixedOption("textStyleTags")} placeholder='additional tags' />
-						<TextInput label='spanStyles' value={state.spanStyles} onChange={set("spanStyles")} fixed={isFixedOption("spanStyles")} placeholder='font-family|font-size|...' />
-						<TextInput label='lineStyles' value={state.lineStyles} onChange={set("lineStyles")} fixed={isFixedOption("lineStyles")} placeholder='text-align|margin|...' />
+						<TextInput label='textStyleTags' value={state.textStyleTags} onChange={set("textStyleTags")} resettable={!isFixedOption("textStyleTags")} placeholder='additional tags' />
+						<TextInput label='spanStyles' value={state.spanStyles} onChange={set("spanStyles")} resettable={!isFixedOption("spanStyles")} placeholder='font-family|font-size|...' />
+						<TextInput label='lineStyles' value={state.lineStyles} onChange={set("lineStyles")} resettable={!isFixedOption("lineStyles")} placeholder='text-align|margin|...' />
 					</div>
 					<div className='mt-3 grid gap-3'>
 						<TextareaField
 							label='elementWhitelist'
 							value={state.elementWhitelist}
 							onChange={set("elementWhitelist")}
-							fixed={isFixedOption("elementWhitelist")}
+							resettable={!isFixedOption("elementWhitelist")}
 							placeholder='tag1|tag2'
 						/>
 						<TextareaField
 							label='elementBlacklist'
 							value={state.elementBlacklist}
 							onChange={set("elementBlacklist")}
-							fixed={isFixedOption("elementBlacklist")}
+							resettable={!isFixedOption("elementBlacklist")}
 							placeholder='script|style'
 						/>
 						<TextareaField
 							label='attributeWhitelist'
 							value={state.attributeWhitelist}
 							onChange={set("attributeWhitelist")}
-							fixed={isFixedOption("attributeWhitelist")}
+							resettable={!isFixedOption("attributeWhitelist")}
 							placeholder='{"a": "href|target", "*": "id"}'
 						/>
 						<TextareaField
 							label='attributeBlacklist'
 							value={state.attributeBlacklist}
 							onChange={set("attributeBlacklist")}
-							fixed={isFixedOption("attributeBlacklist")}
+							resettable={!isFixedOption("attributeBlacklist")}
 							placeholder='{"*": "onclick"}'
 						/>
 					</div>
@@ -438,11 +444,11 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 				<AccordionTrigger className='text-sm font-semibold'>Format Extensions</AccordionTrigger>
 				<AccordionContent>
 					<div className='grid grid-cols-2 gap-3 sm:grid-cols-4'>
-						<TextInput label='formatLine' value={state.formatLine} onChange={set("formatLine")} fixed={isFixedOption("formatLine")} placeholder='additional line tags' />
-						<TextInput label='formatBrLine' value={state.formatBrLine} onChange={set("formatBrLine")} fixed={isFixedOption("formatBrLine")} placeholder='additional brLine tags' />
-						<TextInput label='formatClosureBrLine' value={state.formatClosureBrLine} onChange={set("formatClosureBrLine")} fixed={isFixedOption("formatClosureBrLine")} />
-						<TextInput label='formatBlock' value={state.formatBlock} onChange={set("formatBlock")} fixed={isFixedOption("formatBlock")} placeholder='additional block tags' />
-						<TextInput label='formatClosureBlock' value={state.formatClosureBlock} onChange={set("formatClosureBlock")} fixed={isFixedOption("formatClosureBlock")} />
+						<TextInput label='formatLine' value={state.formatLine} onChange={set("formatLine")} resettable={!isFixedOption("formatLine")} placeholder='additional line tags' />
+						<TextInput label='formatBrLine' value={state.formatBrLine} onChange={set("formatBrLine")} resettable={!isFixedOption("formatBrLine")} placeholder='additional brLine tags' />
+						<TextInput label='formatClosureBrLine' value={state.formatClosureBrLine} onChange={set("formatClosureBrLine")} resettable={!isFixedOption("formatClosureBrLine")} />
+						<TextInput label='formatBlock' value={state.formatBlock} onChange={set("formatBlock")} resettable={!isFixedOption("formatBlock")} placeholder='additional block tags' />
+						<TextInput label='formatClosureBlock' value={state.formatClosureBlock} onChange={set("formatClosureBlock")} resettable={!isFixedOption("formatClosureBlock")} />
 					</div>
 				</AccordionContent>
 			</AccordionItem>

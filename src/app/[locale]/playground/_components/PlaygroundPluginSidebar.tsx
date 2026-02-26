@@ -2,7 +2,7 @@
 
 import { type Dispatch } from "react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
+import { type PlaygroundState, type PlaygroundAction } from "../_lib/playgroundState";
 
 type Props = {
 	state: PlaygroundState;
@@ -11,11 +11,10 @@ type Props = {
 
 /* ── Reusable field components ─────────────────────────── */
 
-function FieldLabel({ label, fixed }: { label: string; fixed?: boolean }) {
+function FieldLabel({ label }: { label: string }) {
 	return (
-		<span className='flex items-center gap-1.5 text-xs text-muted-foreground'>
+		<span className='text-xs text-muted-foreground'>
 			{label}
-			{fixed && <span className='rounded bg-destructive/15 px-1 py-0.5 text-[10px] font-medium text-destructive'>remount</span>}
 		</span>
 	);
 }
@@ -25,17 +24,15 @@ function SelectField({
 	value,
 	options,
 	onChange,
-	fixed,
 }: {
 	label: string;
 	value: string;
 	options: { value: string; label: string }[];
 	onChange: (v: string) => void;
-	fixed?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} />
 			<select
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
@@ -56,17 +53,15 @@ function TextInput({
 	value,
 	onChange,
 	placeholder,
-	fixed,
 }: {
 	label: string;
 	value: string;
 	onChange: (v: string) => void;
 	placeholder?: string;
-	fixed?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} />
 			<input
 				type='text'
 				value={value}
@@ -82,16 +77,14 @@ function NumberInput({
 	label,
 	value,
 	onChange,
-	fixed,
 }: {
 	label: string;
 	value: number;
 	onChange: (v: number) => void;
-	fixed?: boolean;
 }) {
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} />
 			<input
 				type='number'
 				value={value}
@@ -106,16 +99,14 @@ function SwitchField({
 	label,
 	checked,
 	onChange,
-	fixed,
 }: {
 	label: string;
 	checked: boolean;
 	onChange: (v: boolean) => void;
-	fixed?: boolean;
 }) {
 	return (
 		<label className='flex items-center justify-between gap-2 py-0.5'>
-			<FieldLabel label={label} fixed={fixed} />
+			<FieldLabel label={label} />
 			<button
 				type='button'
 				role='switch'
@@ -143,8 +134,6 @@ function useSet(dispatch: Dispatch<PlaygroundAction>) {
 
 export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 	const set = useSet(dispatch);
-	const fixed = true; // all plugin options are fixed (require remount)
-
 	return (
 		<div className='space-y-1'>
 			<h3 className='text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1 mb-2'>Plugin Options</h3>
@@ -154,11 +143,11 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Image</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='canResize' checked={state.image_canResize} onChange={set("image_canResize")} fixed={fixed} />
-							<TextInput label='defaultWidth' value={state.image_defaultWidth} onChange={set("image_defaultWidth")} fixed={fixed} placeholder='auto' />
-							<TextInput label='defaultHeight' value={state.image_defaultHeight} onChange={set("image_defaultHeight")} fixed={fixed} placeholder='auto' />
-							<SwitchField label='createFileInput' checked={state.image_createFileInput} onChange={set("image_createFileInput")} fixed={fixed} />
-							<SwitchField label='createUrlInput' checked={state.image_createUrlInput} onChange={set("image_createUrlInput")} fixed={fixed} />
+							<SwitchField label='canResize' checked={state.image_canResize} onChange={set("image_canResize")} />
+							<TextInput label='defaultWidth' value={state.image_defaultWidth} onChange={set("image_defaultWidth")} placeholder='auto' />
+							<TextInput label='defaultHeight' value={state.image_defaultHeight} onChange={set("image_defaultHeight")} placeholder='auto' />
+							<SwitchField label='createFileInput' checked={state.image_createFileInput} onChange={set("image_createFileInput")} />
+							<SwitchField label='createUrlInput' checked={state.image_createUrlInput} onChange={set("image_createUrlInput")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -168,11 +157,11 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Video</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='canResize' checked={state.video_canResize} onChange={set("video_canResize")} fixed={fixed} />
-							<TextInput label='defaultWidth' value={state.video_defaultWidth} onChange={set("video_defaultWidth")} fixed={fixed} />
-							<TextInput label='defaultHeight' value={state.video_defaultHeight} onChange={set("video_defaultHeight")} fixed={fixed} />
-							<SwitchField label='createFileInput' checked={state.video_createFileInput} onChange={set("video_createFileInput")} fixed={fixed} />
-							<SwitchField label='createUrlInput' checked={state.video_createUrlInput} onChange={set("video_createUrlInput")} fixed={fixed} />
+							<SwitchField label='canResize' checked={state.video_canResize} onChange={set("video_canResize")} />
+							<TextInput label='defaultWidth' value={state.video_defaultWidth} onChange={set("video_defaultWidth")} />
+							<TextInput label='defaultHeight' value={state.video_defaultHeight} onChange={set("video_defaultHeight")} />
+							<SwitchField label='createFileInput' checked={state.video_createFileInput} onChange={set("video_createFileInput")} />
+							<SwitchField label='createUrlInput' checked={state.video_createUrlInput} onChange={set("video_createUrlInput")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -182,10 +171,10 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Audio</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<TextInput label='defaultWidth' value={state.audio_defaultWidth} onChange={set("audio_defaultWidth")} fixed={fixed} placeholder='300px' />
-							<TextInput label='defaultHeight' value={state.audio_defaultHeight} onChange={set("audio_defaultHeight")} fixed={fixed} placeholder='54px' />
-							<SwitchField label='createFileInput' checked={state.audio_createFileInput} onChange={set("audio_createFileInput")} fixed={fixed} />
-							<SwitchField label='createUrlInput' checked={state.audio_createUrlInput} onChange={set("audio_createUrlInput")} fixed={fixed} />
+							<TextInput label='defaultWidth' value={state.audio_defaultWidth} onChange={set("audio_defaultWidth")} placeholder='300px' />
+							<TextInput label='defaultHeight' value={state.audio_defaultHeight} onChange={set("audio_defaultHeight")} placeholder='54px' />
+							<SwitchField label='createFileInput' checked={state.audio_createFileInput} onChange={set("audio_createFileInput")} />
+							<SwitchField label='createUrlInput' checked={state.audio_createUrlInput} onChange={set("audio_createUrlInput")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -195,9 +184,9 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Embed</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='canResize' checked={state.embed_canResize} onChange={set("embed_canResize")} fixed={fixed} />
-							<TextInput label='defaultWidth' value={state.embed_defaultWidth} onChange={set("embed_defaultWidth")} fixed={fixed} />
-							<TextInput label='defaultHeight' value={state.embed_defaultHeight} onChange={set("embed_defaultHeight")} fixed={fixed} />
+							<SwitchField label='canResize' checked={state.embed_canResize} onChange={set("embed_canResize")} />
+							<TextInput label='defaultWidth' value={state.embed_defaultWidth} onChange={set("embed_defaultWidth")} />
+							<TextInput label='defaultHeight' value={state.embed_defaultHeight} onChange={set("embed_defaultHeight")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -216,7 +205,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "xy", label: "xy" },
 								]}
 								onChange={(v) => set("table_scrollType")(v as PlaygroundState["table_scrollType"])}
-								fixed={fixed}
 							/>
 							<SelectField
 								label='captionPosition'
@@ -226,7 +214,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "top", label: "top" },
 								]}
 								onChange={(v) => set("table_captionPosition")(v as PlaygroundState["table_captionPosition"])}
-								fixed={fixed}
 							/>
 							<SelectField
 								label='cellControllerPosition'
@@ -236,7 +223,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "table", label: "table" },
 								]}
 								onChange={(v) => set("table_cellControllerPosition")(v as PlaygroundState["table_cellControllerPosition"])}
-								fixed={fixed}
 							/>
 						</div>
 					</AccordionContent>
@@ -260,9 +246,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "text", label: "text" },
 								]}
 								onChange={set("fontSize_sizeUnit")}
-								fixed={fixed}
 							/>
-							<SwitchField label='showIncDecControls' checked={state.fontSize_showIncDecControls} onChange={set("fontSize_showIncDecControls")} fixed={fixed} />
+							<SwitchField label='showIncDecControls' checked={state.fontSize_showIncDecControls} onChange={set("fontSize_showIncDecControls")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -272,7 +257,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>FontColor</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='disableHEXInput' checked={state.fontColor_disableHEXInput} onChange={set("fontColor_disableHEXInput")} fixed={fixed} />
+							<SwitchField label='disableHEXInput' checked={state.fontColor_disableHEXInput} onChange={set("fontColor_disableHEXInput")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -282,7 +267,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>BackgroundColor</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='disableHEXInput' checked={state.backgroundColor_disableHEXInput} onChange={set("backgroundColor_disableHEXInput")} fixed={fixed} />
+							<SwitchField label='disableHEXInput' checked={state.backgroundColor_disableHEXInput} onChange={set("backgroundColor_disableHEXInput")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -300,9 +285,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "svg", label: "svg" },
 								]}
 								onChange={(v) => set("drawing_outputFormat")(v as PlaygroundState["drawing_outputFormat"])}
-								fixed={fixed}
 							/>
-							<NumberInput label='lineWidth' value={state.drawing_lineWidth} onChange={set("drawing_lineWidth")} fixed={fixed} />
+							<NumberInput label='lineWidth' value={state.drawing_lineWidth} onChange={set("drawing_lineWidth")} />
 							<SelectField
 								label='lineCap'
 								value={state.drawing_lineCap}
@@ -312,7 +296,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									{ value: "square", label: "square" },
 								]}
 								onChange={(v) => set("drawing_lineCap")(v as PlaygroundState["drawing_lineCap"])}
-								fixed={fixed}
 							/>
 						</div>
 					</AccordionContent>
@@ -323,9 +306,9 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Mention</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<TextInput label='triggerText' value={state.mention_triggerText} onChange={set("mention_triggerText")} fixed={fixed} placeholder='@' />
-							<NumberInput label='limitSize' value={state.mention_limitSize} onChange={set("mention_limitSize")} fixed={fixed} />
-							<NumberInput label='delayTime' value={state.mention_delayTime} onChange={set("mention_delayTime")} fixed={fixed} />
+							<TextInput label='triggerText' value={state.mention_triggerText} onChange={set("mention_triggerText")} placeholder='@' />
+							<NumberInput label='limitSize' value={state.mention_limitSize} onChange={set("mention_limitSize")} />
+							<NumberInput label='delayTime' value={state.mention_delayTime} onChange={set("mention_delayTime")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -335,8 +318,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Math</AccordionTrigger>
 					<AccordionContent>
 						<div className='space-y-2'>
-							<SwitchField label='canResize' checked={state.math_canResize} onChange={set("math_canResize")} fixed={fixed} />
-							<SwitchField label='autoHeight' checked={state.math_autoHeight} onChange={set("math_autoHeight")} fixed={fixed} />
+							<SwitchField label='canResize' checked={state.math_canResize} onChange={set("math_canResize")} />
+							<SwitchField label='autoHeight' checked={state.math_autoHeight} onChange={set("math_autoHeight")} />
 						</div>
 					</AccordionContent>
 				</AccordionItem>

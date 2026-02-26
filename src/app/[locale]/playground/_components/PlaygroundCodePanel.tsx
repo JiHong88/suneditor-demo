@@ -76,7 +76,7 @@ export default function PlaygroundCodePanel({ state }: Props) {
 			<AnimatePresence initial={false}>
 				{open && (
 					<motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className='overflow-hidden'>
-						<div className='max-h-80 overflow-auto'>
+						<div className='max-h-[32rem] overflow-auto [&_pre]:!text-xs [&_code]:!text-xs [&_pre]:!leading-relaxed'>
 							<CodeBlock code={code} lang={lang} />
 						</div>
 					</motion.div>

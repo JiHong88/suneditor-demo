@@ -44,7 +44,7 @@ export default function CodeBlock({ code, lang = "javascript", className }: Code
 
 	if (!html) {
 		return (
-			<pre className={className} style={{ padding: "1rem", fontSize: "0.875rem", lineHeight: 1.7, overflow: "auto" }}>
+			<pre className={className} style={{ padding: "1rem", fontSize: "0.75rem", lineHeight: 1.7, overflow: "auto" }}>
 				<code>{code}</code>
 			</pre>
 		);

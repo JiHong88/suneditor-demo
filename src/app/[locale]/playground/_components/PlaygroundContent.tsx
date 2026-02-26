@@ -24,18 +24,19 @@ import PlaygroundCodePanel from "./PlaygroundCodePanel";
 import PlaygroundStackBlitz from "./PlaygroundStackBlitz";
 
 export default function PlaygroundContent() {
-	// Parse URL params on mount
-	const initialState = useMemo(() => {
-		if (typeof window === "undefined") return DEFAULTS;
+	const [state, dispatch] = useReducer(playgroundReducer, DEFAULTS);
+	const editorRef = useRef<SunEditor.Instance | null>(null);
+	const prevStateRef = useRef<PlaygroundState>(DEFAULTS);
+	const [urlCopied, setUrlCopied] = useState(false);
+
+	// Apply URL params after hydration
+	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
 		const fromUrl = urlToState(params);
-		return { ...DEFAULTS, ...fromUrl };
+		if (Object.keys(fromUrl).length > 0) {
+			dispatch({ type: "LOAD", payload: fromUrl });
+		}
 	}, []);
-
-	const [state, dispatch] = useReducer(playgroundReducer, initialState);
-	const editorRef = useRef<SunEditor.Instance | null>(null);
-	const prevStateRef = useRef<PlaygroundState>(initialState);
-	const [urlCopied, setUrlCopied] = useState(false);
 
 	// Compute editor key from fixed options — changes force remount
 	const editorKey = useMemo(() => {
