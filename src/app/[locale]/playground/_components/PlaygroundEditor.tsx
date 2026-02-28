@@ -1,56 +1,49 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import type { SunEditor } from "suneditor/types";
+import SunEditorComponent from "@/components/editor/suneditor";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import { stateToEditorOptions } from "../_lib/playgroundState";
-import { PLAYGROUND_VALUE } from "@/data/code-examples/editorPresets";
 
 interface Props {
 	state: PlaygroundState;
-	editorRef: React.MutableRefObject<SunEditor.Instance | null>;
+	editorRef: React.RefObject<SunEditor.Instance | null>;
+	contentRef: React.RefObject<string>;
 }
 
-export default function PlaygroundEditor({ state, editorRef }: Props) {
-	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const mountedRef = useRef(true);
-
-	useEffect(() => {
-		mountedRef.current = true;
-		let instance: SunEditor.Instance | null = null;
-
-		(async () => {
-			const suneditor = (await import("suneditor")).default;
-			const { plugins } = await import("suneditor");
-			await import("suneditor/css");
-			await import("suneditor/css/contents");
-
-			if (!mountedRef.current || !textareaRef.current) return;
-
-			const opts = stateToEditorOptions(state);
-			instance = suneditor.create(textareaRef.current, {
-				plugins,
-				value: PLAYGROUND_VALUE,
-				...opts,
-			});
-
-			editorRef.current = instance;
-		})();
-
-		return () => {
-			mountedRef.current = false;
-			const current = instance || editorRef.current;
-			if (current) {
-				current.destroy();
-				editorRef.current = null;
-			}
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- state used only for initial creation; updates via resetOptions
+export default function PlaygroundEditor({ state, editorRef, contentRef }: Props) {
+	const options = useMemo(() => {
+		const opts = stateToEditorOptions(state);
+		return { ...opts } as SunEditor.InitOptions;
 	}, []);
 
+	const handleInstance = useCallback(
+		(instance: SunEditor.Instance) => {
+			editorRef.current = instance;
+			// Restore saved content
+			instance.$.html.set(contentRef.current);
+		},
+		[editorRef, contentRef],
+	);
+
+	// Save content on unmount so it survives remount
+	useEffect(() => {
+		return () => {
+			const instance = editorRef.current;
+			if (instance) {
+				try {
+					contentRef.current = instance.$.html.get() as string;
+				} catch {
+					/* ignore */
+				}
+			}
+		};
+	}, [editorRef, contentRef]);
+
 	return (
-		<div className='rounded-lg border overflow-hidden'>
-			<textarea ref={textareaRef} style={{ visibility: "hidden" }} />
-		</div>
+		<>
+			<SunEditorComponent options={options} theme={(state.theme || undefined) as "dark" | "default" | "cobalt" | undefined} onInstance={handleInstance} />
+		</>
 	);
 }

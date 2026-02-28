@@ -9,15 +9,16 @@ import CodeBlock from "@/components/common/CodeBlock";
 import { generateCode, getCodeLang } from "../_lib/codeGenerator";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import type { CodeFramework } from "../_lib/playgroundState";
+import { OpenInStackBlitzButton } from "./PlaygroundStackBlitz";
 
-const FRAMEWORKS: { key: CodeFramework; name: string; icon: string }[] = [
-	{ key: "javascript-cdn", name: "CDN", icon: "/logos/html.svg" },
-	{ key: "javascript-npm", name: "JS", icon: "/logos/js.svg" },
+const FRAMEWORKS: { key: CodeFramework; name: string; title?: string; icon: string }[] = [
+	{ key: "javascript-cdn", name: "CDN", title: "HTML / CDN", icon: "/logos/html.svg" },
+	{ key: "javascript-npm", name: "JS", title: "Vanilla JavaScript", icon: "/logos/js.svg" },
 	{ key: "react", name: "React", icon: "/logos/react.svg" },
 	{ key: "vue", name: "Vue", icon: "/logos/vue.svg" },
 	{ key: "angular", name: "Angular", icon: "/logos/angular.svg" },
 	{ key: "svelte", name: "Svelte", icon: "/logos/svelte.svg" },
-	{ key: "webcomponents", name: "WC", icon: "/logos/web-components.svg" },
+	{ key: "webcomponents", name: "WC", title: "Web Components", icon: "/logos/web-components.svg" },
 ];
 
 type Props = {
@@ -39,49 +40,74 @@ export default function PlaygroundCodePanel({ state }: Props) {
 	};
 
 	return (
-		<div className='rounded-lg border bg-card/90 overflow-hidden'>
-			{/* Header */}
-			<div className='flex items-center justify-between border-b px-4 py-2'>
-				<button type='button' onClick={() => setOpen(!open)} className='flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors'>
-					<ChevronDown className={`h-4 w-4 transition-transform ${open ? "" : "-rotate-90"}`} />
-					Generated Code
-				</button>
+		<>
+			<div className='rounded-lg border bg-card/90 overflow-hidden'>
+				{/* Header */}
+				<div className='border-b px-4 py-2'>
+					<div className='flex items-center justify-between'>
+						<button type='button' onClick={() => setOpen(!open)} className='flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors'>
+							<ChevronDown className={`h-4 w-4 transition-transform ${open ? "" : "-rotate-90"}`} />
+							Generated Code
+						</button>
 
-				<div className='flex items-center gap-2'>
-					{/* Framework tabs */}
-					<div className='flex items-center gap-0.5 rounded-md border bg-muted/50 p-0.5 overflow-x-auto'>
+						<div className='flex items-center gap-1'>
+							{/* StackBlitz */}
+							<OpenInStackBlitzButton state={state} framework={framework} />
+
+							<div className='mx-1 h-4 w-px bg-border' />
+
+							{/* Copy */}
+							<Button size='icon' variant='ghost' className='h-7 w-7' onClick={handleCopy} title='Copy code'>
+								{copied ? <Check className='h-3.5 w-3.5 text-green-500' /> : <Copy className='h-3.5 w-3.5 text-blue-500' />}
+							</Button>
+						</div>
+					</div>
+
+					{/* Framework tabs — below header */}
+					<div className='flex items-center gap-1 mt-2 overflow-x-auto pb-1'>
 						{FRAMEWORKS.map((fw) => (
 							<button
 								key={fw.key}
 								type='button'
+								title={fw.title ?? fw.name}
 								onClick={() => setFramework(fw.key)}
-								className={`flex items-center gap-1 rounded px-1.5 py-1 text-xs transition-colors whitespace-nowrap ${
-									framework === fw.key ? "bg-background font-medium shadow-sm" : "text-muted-foreground hover:text-foreground"
+								className={`flex items-center gap-1.5 rounded-md px-2.5 py-2 text-xs transition-colors whitespace-nowrap border ${
+									framework === fw.key ? "bg-background font-medium shadow-sm border-border" : "text-muted-foreground hover:text-foreground border-transparent hover:bg-muted/50"
 								}`}
 							>
-								<Image src={fw.icon} alt={fw.name} width={14} height={14} className='h-3.5 w-3.5' />
+								<Image src={fw.icon} alt={fw.title ?? fw.name} width={16} height={16} className='h-4 w-4' />
 								<span className='hidden sm:inline'>{fw.name}</span>
 							</button>
 						))}
 					</div>
-
-					{/* Copy */}
-					<Button size='icon' variant='ghost' className='h-7 w-7' onClick={handleCopy}>
-						{copied ? <Check className='h-3.5 w-3.5 text-green-500' /> : <Copy className='h-3.5 w-3.5' />}
-					</Button>
 				</div>
+
+				{/* Code block */}
+				<AnimatePresence initial={false}>
+					{open && (
+						<motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className='overflow-hidden'>
+							<div className='max-h-[32rem] overflow-auto [&_pre]:!text-xs [&_code]:!text-xs [&_pre]:!leading-relaxed'>
+								<CodeBlock code={code} lang={lang} />
+							</div>
+						</motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 
-			{/* Code block */}
-			<AnimatePresence initial={false}>
-				{open && (
-					<motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className='overflow-hidden'>
-						<div className='max-h-[32rem] overflow-auto [&_pre]:!text-xs [&_code]:!text-xs [&_pre]:!leading-relaxed'>
-							<CodeBlock code={code} lang={lang} />
-						</div>
+			{/* Copy toast */}
+			<AnimatePresence>
+				{copied && (
+					<motion.div
+						initial={{ opacity: 0, y: 8 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 8 }}
+						className='fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-lg bg-foreground text-background px-4 py-2.5 text-sm font-medium shadow-lg'
+					>
+						<Check className='h-4 w-4 text-green-400' />
+						Copied to clipboard!
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</div>
+		</>
 	);
 }

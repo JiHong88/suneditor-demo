@@ -5,7 +5,7 @@ import suneditor, { plugins, interfaces } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 import "suneditor/css";
 import "suneditor/css/contents";
-import { FullButtonList } from "../editor/buttonList";
+import { FullButtonList } from "./buttonList";
 
 class A extends interfaces.PluginModal implements interfaces.ModuleModal, interfaces.PluginDropdown, interfaces.EditorComponent {
 	constructor(kernel: SunEditor.Kernel) {
@@ -42,22 +42,26 @@ export { A };
 
 interface SunEditorProps {
 	value?: SunEditor.InitOptions["value"];
-	theme?: "dark" | "default";
+	theme?: "dark" | "default" | "cobalt";
 	options?: SunEditor.InitOptions;
+	onInstance?: (instance: SunEditor.Instance) => void;
 }
 
-const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {} }) => {
-	const editorRef = useRef<HTMLTextAreaElement>(null);
+const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstance }) => {
+	const containerRef = useRef<HTMLDivElement>(null);
 	const instanceRef = useRef<SunEditor.Instance | null>(null);
 	const mountedRef = useRef(true);
 
-	// Editor
+	// Editor — textarea를 imperative하게 생성해서 React DOM reconciliation 충돌 방지
 	useEffect(() => {
 		mountedRef.current = true;
 
-		if (instanceRef.current) return;
+		if (instanceRef.current || !containerRef.current) return;
 
-		const instance = suneditor.create(editorRef.current!, {
+		const textarea = document.createElement("textarea");
+		containerRef.current.appendChild(textarea);
+
+		const instance = suneditor.create(textarea, {
 			plugins,
 			value: value || options.value || "",
 			theme,
@@ -66,6 +70,7 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {} }) => {
 		});
 
 		instanceRef.current = instance;
+		onInstance?.(instance);
 
 		return () => {
 			mountedRef.current = false;
@@ -73,7 +78,6 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {} }) => {
 
 			requestAnimationFrame(() => {
 				if (!mountedRef.current && currentInstance) {
-					console.log("destroy");
 					currentInstance.destroy();
 					instanceRef.current = null;
 				}
@@ -88,11 +92,7 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {} }) => {
 		}
 	}, [theme]);
 
-	return (
-		<div>
-			<textarea ref={editorRef} style={{ visibility: "hidden" }} />
-		</div>
-	);
+	return <div ref={containerRef} />;
 };
 
 export default Editor;

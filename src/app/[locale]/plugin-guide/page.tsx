@@ -153,9 +153,9 @@ const builtin_plugins = [
 	{ name: "font", description: "Font family and size selection", category: "formatting" },
 	{ name: "fontSize", description: "Font size controls", category: "formatting" },
 	{ name: "fontColor", description: "Text color picker", category: "formatting" },
-	{ name: "hiliteColor", description: "Text highlight colors", category: "formatting" },
-	{ name: "horizontalRule", description: "Insert horizontal dividers", category: "content" },
-	{ name: "formatBlock", description: "Block formatting (h1, p, etc)", category: "formatting" },
+	{ name: "backgroundColor", description: "Text highlight colors", category: "formatting" },
+	{ name: "hr", description: "Insert horizontal dividers", category: "content" },
+	{ name: "blockStyle", description: "Block formatting (h1, p, etc)", category: "formatting" },
 ];
 
 const codeExamples = {

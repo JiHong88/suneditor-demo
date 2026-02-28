@@ -1,19 +1,11 @@
 "use client";
 
-import { useRef, useEffect, useCallback, useState } from "react";
 import sdk from "@stackblitz/sdk";
-import type { VM } from "@stackblitz/sdk";
-import { ChevronDown, ExternalLink } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SUNEDITOR_VERSION } from "@/data/code-examples/editorPresets";
-import { generateCode, getCodeLang } from "../_lib/codeGenerator";
+import { generateCode } from "../_lib/codeGenerator";
 import type { PlaygroundState, CodeFramework } from "../_lib/playgroundState";
-
-type Props = {
-	state: PlaygroundState;
-	framework: CodeFramework;
-};
 
 /* ── Project generators per framework ─────────────────── */
 
@@ -26,7 +18,8 @@ function getVanillaProject(code: string) {
 			"index.html": `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><title>SunEditor</title></head>
-<body>
+<body style="margin:6em 4rem 4rem">
+  <h1>SunEditor Demo</h1>
   <textarea id="editor"></textarea>
   <script type="module" src="./index.js"><\/script>
 </body>
@@ -40,19 +33,9 @@ function getVanillaProject(code: string) {
 					dependencies: { suneditor: SUNEDITOR_VERSION, vite: "^5" },
 				},
 				null,
-				2
+				2,
 			),
 			"vite.config.js": `export default { root: "." };`,
-		},
-	};
-}
-
-function getCDNProject(code: string) {
-	return {
-		title: "SunEditor - CDN",
-		template: "html" as const,
-		files: {
-			"index.html": code,
 		},
 	};
 }
@@ -65,7 +48,12 @@ function getReactProject(code: string) {
 			"src/Editor.jsx": code,
 			"src/App.jsx": `import Editor from "./Editor";
 export default function App() {
-  return <Editor />;
+  return (
+    <div style={{ margin: "300px 4rem 4rem" }}>
+      <h1>SunEditor Demo</h1>
+      <Editor />
+    </div>
+  );
 }`,
 			"src/main.jsx": `import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -93,7 +81,7 @@ export default defineConfig({ plugins: [react()] });`,
 					},
 				},
 				null,
-				2
+				2,
 			),
 		},
 	};
@@ -108,7 +96,12 @@ function getVueProject(code: string) {
 			"src/App.vue": `<script setup>
 import Editor from "./Editor.vue";
 </script>
-<template><Editor /></template>`,
+<template>
+  <div style="margin:6em 4rem 4rem">
+    <h1>SunEditor Demo</h1>
+    <Editor />
+  </div>
+</template>`,
 			"src/main.js": `import { createApp } from "vue";
 import App from "./App.vue";
 createApp(App).mount("#app");`,
@@ -133,7 +126,7 @@ export default defineConfig({ plugins: [vue()] });`,
 					},
 				},
 				null,
-				2
+				2,
 			),
 		},
 	};
@@ -148,7 +141,10 @@ function getSvelteProject(code: string) {
 			"src/App.svelte": `<script>
 import Editor from "./Editor.svelte";
 </script>
-<Editor />`,
+<div style="margin:6em 4rem 4rem">
+  <h1>SunEditor Demo</h1>
+  <Editor />
+</div>`,
 			"src/main.js": `import App from "./App.svelte";
 const app = new App({ target: document.getElementById("app") });
 export default app;`,
@@ -173,14 +169,13 @@ export default defineConfig({ plugins: [svelte()] });`,
 					},
 				},
 				null,
-				2
+				2,
 			),
 		},
 	};
 }
 
 function getAngularProject(code: string) {
-	// Angular requires a full project structure. Use a simplified Vite + Angular setup.
 	return {
 		title: "SunEditor - Angular",
 		template: "node" as const,
@@ -193,31 +188,58 @@ import { EditorComponent } from "./editor.component";
   selector: "app-root",
   standalone: true,
   imports: [EditorComponent],
-  template: \`<app-editor></app-editor>\`
+  template: \`<div style="margin:6em 4rem 4rem"><h1>SunEditor Demo</h1><app-editor></app-editor></div>\`
 })
 export class AppComponent {}`,
-			"src/main.ts": `import { bootstrapApplication } from "@angular/platform-browser";
+			"src/main.ts": `import "zone.js";
+import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from "./app/app.component";
 bootstrapApplication(AppComponent);`,
 			"index.html": `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>SunEditor Angular</title></head>
 <body><app-root></app-root><script type="module" src="/src/main.ts"><\/script></body>
 </html>`,
+			"vite.config.mts": `import { defineConfig } from "vite";
+import angular from "@analogjs/vite-plugin-angular";
+export default defineConfig({ plugins: [angular()] });`,
+			"tsconfig.json": JSON.stringify(
+				{
+					compilerOptions: {
+						target: "ES2022",
+						module: "ES2022",
+						moduleResolution: "bundler",
+						experimentalDecorators: true,
+						skipLibCheck: true,
+						strict: false,
+						esModuleInterop: true,
+						useDefineForClassFields: false,
+					},
+					include: ["src/**/*.ts"],
+				},
+				null,
+				"\t",
+			),
 			"package.json": JSON.stringify(
 				{
 					name: "suneditor-angular-demo",
 					private: true,
-					scripts: { dev: "ng serve", build: "ng build" },
+					type: "module",
+					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
 						"@angular/core": "^17",
-						"@angular/platform-browser": "^17",
+						"@angular/common": "^17",
 						"@angular/compiler": "^17",
+						"@angular/platform-browser": "^17",
+						"@angular/platform-browser-dynamic": "^17",
 						"zone.js": "^0.14",
+						"@analogjs/vite-plugin-angular": "^1",
+						vite: "^5",
+						typescript: "~5.3",
 					},
 				},
 				null,
-				2
+				2,
 			),
 		},
 	};
@@ -231,7 +253,7 @@ function getWebComponentsProject(code: string) {
 			"index.js": code + "\n\n// Use the component\ndocument.body.innerHTML = '<sun-editor></sun-editor>';",
 			"index.html": `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>SunEditor WC</title></head>
-<body><script type="module" src="./index.js"><\/script></body>
+<body style="margin:6em 4rem 4rem"><h1>SunEditor Demo</h1><script type="module" src="./index.js"><\/script></body>
 </html>`,
 			"package.json": JSON.stringify(
 				{
@@ -242,7 +264,7 @@ function getWebComponentsProject(code: string) {
 					dependencies: { suneditor: SUNEDITOR_VERSION, vite: "^5" },
 				},
 				null,
-				2
+				2,
 			),
 			"vite.config.js": `export default { root: "." };`,
 		},
@@ -251,8 +273,6 @@ function getWebComponentsProject(code: string) {
 
 function getProject(framework: CodeFramework, code: string) {
 	switch (framework) {
-		case "javascript-cdn":
-			return getCDNProject(code);
 		case "react":
 			return getReactProject(code);
 		case "vue":
@@ -268,85 +288,25 @@ function getProject(framework: CodeFramework, code: string) {
 	}
 }
 
-/* ── Component ────────────────────────────────────────── */
+/* ── Public: "Open in StackBlitz" button ──────────────── */
 
-export default function PlaygroundStackBlitz({ state, framework }: Props) {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const vmRef = useRef<VM | null>(null);
-	const [open, setOpen] = useState(false);
-	const [loading, setLoading] = useState(false);
-
-	const code = generateCode(state, framework);
-
-	const embed = useCallback(async () => {
-		if (!containerRef.current) return;
-		setLoading(true);
-
-		const project = getProject(framework, code);
-		try {
-			const vm = await sdk.embedProject(containerRef.current, project, {
-				height: 500,
-				openFile: framework === "javascript-cdn" ? "index.html" : undefined,
-				view: "default",
-				hideNavigation: true,
-				clickToLoad: false,
-			});
-			vmRef.current = vm;
-		} catch {
-			/* StackBlitz may fail in unsupported browsers */
-		}
-		setLoading(false);
-	}, [framework, code]);
-
-	// Re-embed when opened
-	useEffect(() => {
-		if (open) {
-			embed();
-		}
-	}, [open, embed]);
-
-	// Cleanup
-	useEffect(() => {
-		return () => {
-			vmRef.current = null;
-		};
-	}, []);
-
+export function OpenInStackBlitzButton({ state, framework }: { state: PlaygroundState; framework: CodeFramework }) {
 	return (
-		<div className='rounded-lg border bg-card/90 overflow-hidden'>
-			{/* Header */}
-			<div className='flex items-center justify-between border-b px-4 py-2'>
-				<button type='button' onClick={() => setOpen(!open)} className='flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors'>
-					<ChevronDown className={`h-4 w-4 transition-transform ${open ? "" : "-rotate-90"}`} />
-					Live Editor (StackBlitz)
-				</button>
-				{open && (
-					<Button
-						size='sm'
-						variant='ghost'
-						className='h-7 text-xs'
-						onClick={() => {
-							const project = getProject(framework, code);
-							sdk.openProject(project);
-						}}
-					>
-						<ExternalLink className='mr-1 h-3 w-3' />
-						Open in new tab
-					</Button>
-				)}
-			</div>
-
-			{/* StackBlitz embed */}
-			<AnimatePresence initial={false}>
-				{open && (
-					<motion.div initial={{ height: 0 }} animate={{ height: 500 }} exit={{ height: 0 }} transition={{ duration: 0.3 }} className='overflow-hidden'>
-						{loading && (
-							<div className='flex items-center justify-center h-full text-muted-foreground text-sm'>Loading StackBlitz...</div>
-						)}
-						<div ref={containerRef} className='w-full h-[500px]' />
-					</motion.div>
-				)}
-			</AnimatePresence>
-		</div>
+		<Button
+			size='sm'
+			variant='ghost'
+			className='h-7 text-xs text-blue-500 hover:text-blue-600'
+			title='Open a live code editor powered by StackBlitz'
+			onClick={() => {
+				// CDN scripts can't load in StackBlitz WebContainers — use npm version instead
+				const sbFramework = framework === "javascript-cdn" ? "javascript-npm" : framework;
+				const code = generateCode(state, sbFramework);
+				const project = getProject(sbFramework, code);
+				sdk.openProject(project);
+			}}
+		>
+			<ExternalLink className='mr-1.5 h-3 w-3' />
+			Run Code (StackBlitz)
+		</Button>
 	);
 }

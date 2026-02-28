@@ -25,6 +25,22 @@ function pluginLines(
 	return [`${prefix}: {`, ...inner, "},"];
 }
 
+/** Returns an ESM import line for theme CSS, or empty string. */
+function themeImport(theme: string): string {
+	if (theme === "dark" || theme === "cobalt") {
+		return `\nimport "suneditor/src/themes/${theme}.css";`;
+	}
+	return "";
+}
+
+/** Returns a CDN `<link>` tag for theme CSS, or empty string. */
+function themeCDNLink(theme: string): string {
+	if (theme === "dark" || theme === "cobalt") {
+		return `\n  <link href="https://cdn.jsdelivr.net/npm/suneditor@${SUNEDITOR_VERSION}/src/themes/${theme}.css" rel="stylesheet">`;
+	}
+	return "";
+}
+
 /** Build an options object string from current state, omitting defaults. */
 function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 	const lines: string[] = [];
@@ -149,6 +165,12 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["defaultHeight", state.image_defaultHeight, DEFAULTS.image_defaultHeight],
 			["createFileInput", state.image_createFileInput, DEFAULTS.image_createFileInput],
 			["createUrlInput", state.image_createUrlInput, DEFAULTS.image_createUrlInput],
+			["uploadUrl", state.image_uploadUrl, DEFAULTS.image_uploadUrl],
+			["uploadSizeLimit", state.image_uploadSizeLimit, DEFAULTS.image_uploadSizeLimit],
+			["allowMultiple", state.image_allowMultiple, DEFAULTS.image_allowMultiple],
+			["acceptedFormats", state.image_acceptedFormats, DEFAULTS.image_acceptedFormats],
+			["percentageOnlySize", state.image_percentageOnlySize, DEFAULTS.image_percentageOnlySize],
+			["showHeightInput", state.image_showHeightInput, DEFAULTS.image_showHeightInput],
 		])
 	);
 	pLines.push(
@@ -158,6 +180,14 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["defaultHeight", state.video_defaultHeight, DEFAULTS.video_defaultHeight],
 			["createFileInput", state.video_createFileInput, DEFAULTS.video_createFileInput],
 			["createUrlInput", state.video_createUrlInput, DEFAULTS.video_createUrlInput],
+			["uploadUrl", state.video_uploadUrl, DEFAULTS.video_uploadUrl],
+			["uploadSizeLimit", state.video_uploadSizeLimit, DEFAULTS.video_uploadSizeLimit],
+			["allowMultiple", state.video_allowMultiple, DEFAULTS.video_allowMultiple],
+			["acceptedFormats", state.video_acceptedFormats, DEFAULTS.video_acceptedFormats],
+			["percentageOnlySize", state.video_percentageOnlySize, DEFAULTS.video_percentageOnlySize],
+			["showHeightInput", state.video_showHeightInput, DEFAULTS.video_showHeightInput],
+			["showRatioOption", state.video_showRatioOption, DEFAULTS.video_showRatioOption],
+			["defaultRatio", state.video_defaultRatio, DEFAULTS.video_defaultRatio],
 		])
 	);
 	pLines.push(
@@ -166,6 +196,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["defaultHeight", state.audio_defaultHeight, DEFAULTS.audio_defaultHeight],
 			["createFileInput", state.audio_createFileInput, DEFAULTS.audio_createFileInput],
 			["createUrlInput", state.audio_createUrlInput, DEFAULTS.audio_createUrlInput],
+			["uploadUrl", state.audio_uploadUrl, DEFAULTS.audio_uploadUrl],
+			["uploadSizeLimit", state.audio_uploadSizeLimit, DEFAULTS.audio_uploadSizeLimit],
+			["allowMultiple", state.audio_allowMultiple, DEFAULTS.audio_allowMultiple],
+			["acceptedFormats", state.audio_acceptedFormats, DEFAULTS.audio_acceptedFormats],
 		])
 	);
 	pLines.push(
@@ -179,6 +213,8 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 		pluginLines("fontSize", [
 			["sizeUnit", state.fontSize_sizeUnit, DEFAULTS.fontSize_sizeUnit],
 			["showIncDecControls", state.fontSize_showIncDecControls, DEFAULTS.fontSize_showIncDecControls],
+			["showDefaultSizeLabel", state.fontSize_showDefaultSizeLabel, DEFAULTS.fontSize_showDefaultSizeLabel],
+			["disableInput", state.fontSize_disableInput, DEFAULTS.fontSize_disableInput],
 		])
 	);
 	pLines.push(
@@ -194,6 +230,8 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["canResize", state.embed_canResize, DEFAULTS.embed_canResize],
 			["defaultWidth", state.embed_defaultWidth, DEFAULTS.embed_defaultWidth],
 			["defaultHeight", state.embed_defaultHeight, DEFAULTS.embed_defaultHeight],
+			["showHeightInput", state.embed_showHeightInput, DEFAULTS.embed_showHeightInput],
+			["percentageOnlySize", state.embed_percentageOnlySize, DEFAULTS.embed_percentageOnlySize],
 		])
 	);
 	pLines.push(
@@ -201,6 +239,9 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["outputFormat", state.drawing_outputFormat, DEFAULTS.drawing_outputFormat],
 			["lineWidth", state.drawing_lineWidth, DEFAULTS.drawing_lineWidth],
 			["lineCap", state.drawing_lineCap, DEFAULTS.drawing_lineCap],
+			["canResize", state.drawing_canResize, DEFAULTS.drawing_canResize],
+			["lineColor", state.drawing_lineColor, DEFAULTS.drawing_lineColor],
+			["lineReconnect", state.drawing_lineReconnect, DEFAULTS.drawing_lineReconnect],
 		])
 	);
 	pLines.push(
@@ -208,6 +249,9 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["triggerText", state.mention_triggerText, DEFAULTS.mention_triggerText],
 			["limitSize", state.mention_limitSize, DEFAULTS.mention_limitSize],
 			["delayTime", state.mention_delayTime, DEFAULTS.mention_delayTime],
+			["searchStartLength", state.mention_searchStartLength, DEFAULTS.mention_searchStartLength],
+			["apiUrl", state.mention_apiUrl, DEFAULTS.mention_apiUrl],
+			["useCachingData", state.mention_useCachingData, DEFAULTS.mention_useCachingData],
 		])
 	);
 	pLines.push(
@@ -230,20 +274,24 @@ function generateCDN(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4);
 	const bodyIndented = indent(body, 6);
 
-	return `<!-- 1. Include CSS -->
-<link href="${CDN_CSS}" rel="stylesheet">
-<!-- 2. Include JS -->
-<script src="${CDN_JS}"><\/script>
-
-<!-- 3. Create Textarea -->
-<textarea id="editor"></textarea>
-
-<!-- 4. Create Editor -->
-<script>
-  const editor = SUNEDITOR.create("editor", {
+	return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SunEditor</title>
+  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}
+  <script src="${CDN_JS}"><\/script>
+</head>
+<body style="margin:6em 4rem 4rem">
+  <h1>SunEditor Demo</h1>
+  <textarea id="editor"></textarea>
+  <script>
+    const editor = SUNEDITOR.create(document.getElementById("editor"), {
 ${bodyIndented}
-  });
-<\/script>`;
+    });
+  <\/script>
+</body>
+</html>`;
 }
 
 function generateVanilla(state: PlaygroundState): string {
@@ -253,9 +301,9 @@ function generateVanilla(state: PlaygroundState): string {
 	return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";
+import "suneditor/css/contents";${themeImport(state.theme)}
 
-const editor = suneditor.create("editor", {
+const editor = suneditor.create(document.getElementById("editor"), {
   plugins,
 ${bodyIndented}
 });`;
@@ -268,7 +316,7 @@ function generateReact(state: PlaygroundState): string {
 	return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";
+import "suneditor/css/contents";${themeImport(state.theme)}
 
 export default function Editor() {
   const ref = useRef(null);
@@ -294,7 +342,7 @@ function generateVue(state: PlaygroundState): string {
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";
+import "suneditor/css/contents";${themeImport(state.theme)}
 
 const el = ref(null);
 let instance = null;
@@ -324,7 +372,7 @@ function generateAngular(state: PlaygroundState): string {
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 import "suneditor/css";
-import "suneditor/css/contents";
+import "suneditor/css/contents";${themeImport(state.theme)}
 
 @Component({
   selector: "app-editor",
@@ -355,7 +403,7 @@ function generateSvelte(state: PlaygroundState): string {
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
   import "suneditor/css";
-  import "suneditor/css/contents";
+  import "suneditor/css/contents";${themeImport(state.theme)}
 
   let editorEl;
   let instance;
@@ -379,7 +427,7 @@ function generateWebComponents(state: PlaygroundState): string {
 
 	return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";
+import "suneditor/css/contents";${themeImport(state.theme)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {

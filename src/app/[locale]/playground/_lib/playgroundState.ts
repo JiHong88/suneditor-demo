@@ -93,6 +93,12 @@ export interface PlaygroundState {
 	image_defaultHeight: string;
 	image_createFileInput: boolean;
 	image_createUrlInput: boolean;
+	image_uploadUrl: string;
+	image_uploadSizeLimit: number;
+	image_allowMultiple: boolean;
+	image_acceptedFormats: string;
+	image_percentageOnlySize: boolean;
+	image_showHeightInput: boolean;
 
 	// — Plugin: Video —
 	video_canResize: boolean;
@@ -100,12 +106,24 @@ export interface PlaygroundState {
 	video_defaultHeight: string;
 	video_createFileInput: boolean;
 	video_createUrlInput: boolean;
+	video_uploadUrl: string;
+	video_uploadSizeLimit: number;
+	video_allowMultiple: boolean;
+	video_acceptedFormats: string;
+	video_percentageOnlySize: boolean;
+	video_showHeightInput: boolean;
+	video_showRatioOption: boolean;
+	video_defaultRatio: number;
 
 	// — Plugin: Audio —
 	audio_defaultWidth: string;
 	audio_defaultHeight: string;
 	audio_createFileInput: boolean;
 	audio_createUrlInput: boolean;
+	audio_uploadUrl: string;
+	audio_uploadSizeLimit: number;
+	audio_allowMultiple: boolean;
+	audio_acceptedFormats: string;
 
 	// — Plugin: Table —
 	table_scrollType: "x" | "y" | "xy";
@@ -115,6 +133,8 @@ export interface PlaygroundState {
 	// — Plugin: FontSize —
 	fontSize_sizeUnit: string;
 	fontSize_showIncDecControls: boolean;
+	fontSize_showDefaultSizeLabel: boolean;
+	fontSize_disableInput: boolean;
 
 	// — Plugin: FontColor —
 	fontColor_disableHEXInput: boolean;
@@ -126,16 +146,24 @@ export interface PlaygroundState {
 	embed_canResize: boolean;
 	embed_defaultWidth: string;
 	embed_defaultHeight: string;
+	embed_showHeightInput: boolean;
+	embed_percentageOnlySize: boolean;
 
 	// — Plugin: Drawing —
 	drawing_outputFormat: "dataurl" | "svg";
 	drawing_lineWidth: number;
 	drawing_lineCap: "butt" | "round" | "square";
+	drawing_canResize: boolean;
+	drawing_lineColor: string;
+	drawing_lineReconnect: boolean;
 
 	// — Plugin: Mention —
 	mention_triggerText: string;
 	mention_limitSize: number;
 	mention_delayTime: number;
+	mention_searchStartLength: number;
+	mention_apiUrl: string;
+	mention_useCachingData: boolean;
 
 	// — Plugin: Math —
 	math_canResize: boolean;
@@ -229,6 +257,12 @@ export const DEFAULTS: PlaygroundState = {
 	image_defaultHeight: "auto",
 	image_createFileInput: true,
 	image_createUrlInput: true,
+	image_uploadUrl: "",
+	image_uploadSizeLimit: 0,
+	image_allowMultiple: false,
+	image_acceptedFormats: "image/*",
+	image_percentageOnlySize: false,
+	image_showHeightInput: true,
 
 	// Plugin: Video
 	video_canResize: true,
@@ -236,12 +270,24 @@ export const DEFAULTS: PlaygroundState = {
 	video_defaultHeight: "",
 	video_createFileInput: false,
 	video_createUrlInput: true,
+	video_uploadUrl: "",
+	video_uploadSizeLimit: 0,
+	video_allowMultiple: false,
+	video_acceptedFormats: "video/*",
+	video_percentageOnlySize: false,
+	video_showHeightInput: true,
+	video_showRatioOption: true,
+	video_defaultRatio: 0.5625,
 
 	// Plugin: Audio
 	audio_defaultWidth: "300px",
 	audio_defaultHeight: "54px",
 	audio_createFileInput: true,
 	audio_createUrlInput: true,
+	audio_uploadUrl: "",
+	audio_uploadSizeLimit: 0,
+	audio_allowMultiple: false,
+	audio_acceptedFormats: "audio/*",
 
 	// Plugin: Table
 	table_scrollType: "x",
@@ -251,6 +297,8 @@ export const DEFAULTS: PlaygroundState = {
 	// Plugin: FontSize
 	fontSize_sizeUnit: "px",
 	fontSize_showIncDecControls: false,
+	fontSize_showDefaultSizeLabel: true,
+	fontSize_disableInput: true,
 
 	// Plugin: FontColor
 	fontColor_disableHEXInput: false,
@@ -262,16 +310,24 @@ export const DEFAULTS: PlaygroundState = {
 	embed_canResize: true,
 	embed_defaultWidth: "",
 	embed_defaultHeight: "",
+	embed_showHeightInput: true,
+	embed_percentageOnlySize: false,
 
 	// Plugin: Drawing
 	drawing_outputFormat: "dataurl",
 	drawing_lineWidth: 5,
 	drawing_lineCap: "round",
+	drawing_canResize: true,
+	drawing_lineColor: "",
+	drawing_lineReconnect: false,
 
 	// Plugin: Mention
 	mention_triggerText: "@",
 	mention_limitSize: 5,
 	mention_delayTime: 200,
+	mention_searchStartLength: 0,
+	mention_apiUrl: "",
+	mention_useCachingData: true,
 
 	// Plugin: Math
 	math_canResize: true,
@@ -319,31 +375,59 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"image_defaultHeight",
 	"image_createFileInput",
 	"image_createUrlInput",
+	"image_uploadUrl",
+	"image_uploadSizeLimit",
+	"image_allowMultiple",
+	"image_acceptedFormats",
+	"image_percentageOnlySize",
+	"image_showHeightInput",
 	"video_canResize",
 	"video_defaultWidth",
 	"video_defaultHeight",
 	"video_createFileInput",
 	"video_createUrlInput",
+	"video_uploadUrl",
+	"video_uploadSizeLimit",
+	"video_allowMultiple",
+	"video_acceptedFormats",
+	"video_percentageOnlySize",
+	"video_showHeightInput",
+	"video_showRatioOption",
+	"video_defaultRatio",
 	"audio_defaultWidth",
 	"audio_defaultHeight",
 	"audio_createFileInput",
 	"audio_createUrlInput",
+	"audio_uploadUrl",
+	"audio_uploadSizeLimit",
+	"audio_allowMultiple",
+	"audio_acceptedFormats",
 	"table_scrollType",
 	"table_captionPosition",
 	"table_cellControllerPosition",
 	"fontSize_sizeUnit",
 	"fontSize_showIncDecControls",
+	"fontSize_showDefaultSizeLabel",
+	"fontSize_disableInput",
 	"fontColor_disableHEXInput",
 	"backgroundColor_disableHEXInput",
 	"embed_canResize",
 	"embed_defaultWidth",
 	"embed_defaultHeight",
+	"embed_showHeightInput",
+	"embed_percentageOnlySize",
 	"drawing_outputFormat",
 	"drawing_lineWidth",
 	"drawing_lineCap",
+	"drawing_canResize",
+	"drawing_lineColor",
+	"drawing_lineReconnect",
 	"mention_triggerText",
 	"mention_limitSize",
 	"mention_delayTime",
+	"mention_searchStartLength",
+	"mention_apiUrl",
+	"mention_useCachingData",
 	"math_canResize",
 	"math_autoHeight",
 ];
@@ -377,7 +461,7 @@ export function playgroundReducer(state: PlaygroundState, action: PlaygroundActi
 
 /* ── Button list mapping ───────────────────────────────── */
 
-export function getButtonList(preset: ButtonListPreset): string[][] {
+export function getButtonList(preset: ButtonListPreset): unknown[] {
 	switch (preset) {
 		case "basic":
 			return BASIC_BUTTON_LIST;
@@ -524,6 +608,12 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.image_defaultHeight !== "auto") img.defaultHeight = state.image_defaultHeight;
 	if (!state.image_createFileInput) img.createFileInput = false;
 	if (!state.image_createUrlInput) img.createUrlInput = false;
+	if (state.image_uploadUrl) img.uploadUrl = state.image_uploadUrl;
+	if (state.image_uploadSizeLimit) img.uploadSizeLimit = state.image_uploadSizeLimit;
+	if (state.image_allowMultiple) img.allowMultiple = true;
+	if (state.image_acceptedFormats !== "image/*") img.acceptedFormats = state.image_acceptedFormats;
+	if (state.image_percentageOnlySize) img.percentageOnlySize = true;
+	if (!state.image_showHeightInput) img.showHeightInput = false;
 	if (Object.keys(img).length) opts.image = img;
 
 	const vid: Record<string, unknown> = {};
@@ -532,6 +622,14 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.video_defaultHeight) vid.defaultHeight = state.video_defaultHeight;
 	if (state.video_createFileInput) vid.createFileInput = true;
 	if (!state.video_createUrlInput) vid.createUrlInput = false;
+	if (state.video_uploadUrl) vid.uploadUrl = state.video_uploadUrl;
+	if (state.video_uploadSizeLimit) vid.uploadSizeLimit = state.video_uploadSizeLimit;
+	if (state.video_allowMultiple) vid.allowMultiple = true;
+	if (state.video_acceptedFormats !== "video/*") vid.acceptedFormats = state.video_acceptedFormats;
+	if (state.video_percentageOnlySize) vid.percentageOnlySize = true;
+	if (!state.video_showHeightInput) vid.showHeightInput = false;
+	if (!state.video_showRatioOption) vid.showRatioOption = false;
+	if (state.video_defaultRatio !== 0.5625) vid.defaultRatio = state.video_defaultRatio;
 	if (Object.keys(vid).length) opts.video = vid;
 
 	const aud: Record<string, unknown> = {};
@@ -539,6 +637,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.audio_defaultHeight !== "54px") aud.defaultHeight = state.audio_defaultHeight;
 	if (!state.audio_createFileInput) aud.createFileInput = false;
 	if (!state.audio_createUrlInput) aud.createUrlInput = false;
+	if (state.audio_uploadUrl) aud.uploadUrl = state.audio_uploadUrl;
+	if (state.audio_uploadSizeLimit) aud.uploadSizeLimit = state.audio_uploadSizeLimit;
+	if (state.audio_allowMultiple) aud.allowMultiple = true;
+	if (state.audio_acceptedFormats !== "audio/*") aud.acceptedFormats = state.audio_acceptedFormats;
 	if (Object.keys(aud).length) opts.audio = aud;
 
 	const tbl: Record<string, unknown> = {};
@@ -550,6 +652,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const fs: Record<string, unknown> = {};
 	if (state.fontSize_sizeUnit !== "px") fs.sizeUnit = state.fontSize_sizeUnit;
 	if (state.fontSize_showIncDecControls) fs.showIncDecControls = true;
+	if (!state.fontSize_showDefaultSizeLabel) fs.showDefaultSizeLabel = false;
+	if (!state.fontSize_disableInput) fs.disableInput = false;
 	if (Object.keys(fs).length) opts.fontSize = fs;
 
 	if (state.fontColor_disableHEXInput) opts.fontColor = { disableHEXInput: true };
@@ -559,18 +663,26 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (!state.embed_canResize) emb.canResize = false;
 	if (state.embed_defaultWidth) emb.defaultWidth = state.embed_defaultWidth;
 	if (state.embed_defaultHeight) emb.defaultHeight = state.embed_defaultHeight;
+	if (!state.embed_showHeightInput) emb.showHeightInput = false;
+	if (state.embed_percentageOnlySize) emb.percentageOnlySize = true;
 	if (Object.keys(emb).length) opts.embed = emb;
 
 	const drw: Record<string, unknown> = {};
 	if (state.drawing_outputFormat !== "dataurl") drw.outputFormat = state.drawing_outputFormat;
 	if (state.drawing_lineWidth !== 5) drw.lineWidth = state.drawing_lineWidth;
 	if (state.drawing_lineCap !== "round") drw.lineCap = state.drawing_lineCap;
+	if (!state.drawing_canResize) drw.canResize = false;
+	if (state.drawing_lineColor) drw.lineColor = state.drawing_lineColor;
+	if (state.drawing_lineReconnect) drw.lineReconnect = true;
 	if (Object.keys(drw).length) opts.drawing = drw;
 
 	const mnt: Record<string, unknown> = {};
 	if (state.mention_triggerText !== "@") mnt.triggerText = state.mention_triggerText;
 	if (state.mention_limitSize !== 5) mnt.limitSize = state.mention_limitSize;
 	if (state.mention_delayTime !== 200) mnt.delayTime = state.mention_delayTime;
+	if (state.mention_searchStartLength) mnt.searchStartLength = state.mention_searchStartLength;
+	if (state.mention_apiUrl) mnt.apiUrl = state.mention_apiUrl;
+	if (!state.mention_useCachingData) mnt.useCachingData = false;
 	if (Object.keys(mnt).length) opts.mention = mnt;
 
 	const mth: Record<string, unknown> = {};
@@ -664,17 +776,35 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"i.h": "image_defaultHeight",
 	"i.fi": "image_createFileInput",
 	"i.ui": "image_createUrlInput",
+	"i.uu": "image_uploadUrl",
+	"i.sl": "image_uploadSizeLimit",
+	"i.am": "image_allowMultiple",
+	"i.af": "image_acceptedFormats",
+	"i.po": "image_percentageOnlySize",
+	"i.shi": "image_showHeightInput",
 	// Plugin: Video
 	"v.r": "video_canResize",
 	"v.w": "video_defaultWidth",
 	"v.h": "video_defaultHeight",
 	"v.fi": "video_createFileInput",
 	"v.ui": "video_createUrlInput",
+	"v.uu": "video_uploadUrl",
+	"v.sl": "video_uploadSizeLimit",
+	"v.am": "video_allowMultiple",
+	"v.af": "video_acceptedFormats",
+	"v.po": "video_percentageOnlySize",
+	"v.shi": "video_showHeightInput",
+	"v.sro": "video_showRatioOption",
+	"v.dr": "video_defaultRatio",
 	// Plugin: Audio
 	"a.w": "audio_defaultWidth",
 	"a.h": "audio_defaultHeight",
 	"a.fi": "audio_createFileInput",
 	"a.ui": "audio_createUrlInput",
+	"a.uu": "audio_uploadUrl",
+	"a.sl": "audio_uploadSizeLimit",
+	"a.am": "audio_allowMultiple",
+	"a.af": "audio_acceptedFormats",
 	// Plugin: Table
 	"tb.s": "table_scrollType",
 	"tb.cp": "table_captionPosition",
@@ -682,6 +812,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	// Plugin: FontSize
 	"fs.u": "fontSize_sizeUnit",
 	"fs.ic": "fontSize_showIncDecControls",
+	"fs.sdl": "fontSize_showDefaultSizeLabel",
+	"fs.di": "fontSize_disableInput",
 	// Plugin: FontColor
 	"fc.dh": "fontColor_disableHEXInput",
 	// Plugin: BackgroundColor
@@ -690,14 +822,22 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"em.r": "embed_canResize",
 	"em.w": "embed_defaultWidth",
 	"em.h": "embed_defaultHeight",
+	"em.shi": "embed_showHeightInput",
+	"em.po": "embed_percentageOnlySize",
 	// Plugin: Drawing
 	"dr.of": "drawing_outputFormat",
 	"dr.lw": "drawing_lineWidth",
 	"dr.lc": "drawing_lineCap",
+	"dr.r": "drawing_canResize",
+	"dr.clr": "drawing_lineColor",
+	"dr.rc": "drawing_lineReconnect",
 	// Plugin: Mention
 	"mn.t": "mention_triggerText",
 	"mn.l": "mention_limitSize",
 	"mn.d": "mention_delayTime",
+	"mn.ssl": "mention_searchStartLength",
+	"mn.au": "mention_apiUrl",
+	"mn.uc": "mention_useCachingData",
 	// Plugin: Math
 	"mt.r": "math_canResize",
 	"mt.ah": "math_autoHeight",
