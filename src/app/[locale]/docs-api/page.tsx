@@ -89,7 +89,10 @@ export default function DocsApiPage() {
     requestAnimationFrame(() => {
       setTimeout(() => {
         document.getElementById(itemId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+        // Scroll sidebar to show the selected section
+        const sidebarEl = sidebarRef.current?.querySelector(`[data-sidebar-id="${sectionId}"]`);
+        sidebarEl?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 150);
     });
   }, []);
 

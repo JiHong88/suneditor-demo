@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { SidebarItem } from "../_lib/types";
@@ -23,6 +23,12 @@ const groupAccents = [
   { border: "border-teal-400", bg: "bg-teal-500/10", text: "text-teal-600 dark:text-teal-400", dot: "bg-teal-400" },
 ];
 
+/** Check if item or any descendant has the given id */
+function containsId(item: SidebarItem, targetId: string): boolean {
+  if (item.id === targetId) return true;
+  return item.children?.some((child) => containsId(child, targetId)) ?? false;
+}
+
 function SidebarItemComponent({
   item,
   selectedId,
@@ -39,6 +45,13 @@ function SidebarItemComponent({
   const hasChildren = item.children && item.children.length > 0;
   const [isExpanded, setIsExpanded] = useState(depth === 0);
   const isSelected = selectedId === item.id;
+
+  // Auto-expand when selectedId is a descendant (e.g. from search)
+  useEffect(() => {
+    if (hasChildren && !isExpanded && containsId(item, selectedId)) {
+      setIsExpanded(true);
+    }
+  }, [selectedId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleClick = () => {
     if (hasChildren) {
@@ -63,6 +76,7 @@ function SidebarItemComponent({
       <div
         role="button"
         tabIndex={0}
+        data-sidebar-id={item.id}
         onClick={handleClick}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(); } }}
         className={cn(

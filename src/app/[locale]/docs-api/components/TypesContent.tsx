@@ -64,7 +64,9 @@ function TypeCard({ type }: { type: TypeDefinition }) {
           )}
         </button>
       </div>
-      <CodeBlock code={code} lang="typescript" />
+      <div className="text-xs [&_pre]:!p-3">
+        <CodeBlock code={code} lang="typescript" />
+      </div>
       {type.memberDescriptions && Object.keys(type.memberDescriptions).length > 0 && (
         <div className="px-5 py-3 border-t bg-muted/10">
           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t("members")}</span>
