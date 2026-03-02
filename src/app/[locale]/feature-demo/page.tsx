@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Play, Sparkles, Table, ImageIcon, Code2, Type, FileText, Languages, Accessibility } from "lucide-react";
-import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -104,8 +104,6 @@ const featureCategories = {
 export default function FeatureDemoPage() {
 	const [selectedCategory, setSelectedCategory] = useState("formatting");
 	const [selectedDemo, setSelectedDemo] = useState<string | null>(null);
-	const t = useTranslations("FeatureDemo");
-
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}
@@ -174,7 +172,7 @@ export default function FeatureDemoPage() {
 							<div className='aspect-video bg-muted rounded-lg flex items-center justify-center'>
 								<div className='text-center text-muted-foreground'>
 									<Play className='h-16 w-16 mx-auto mb-4' />
-									<p>Interactive demo for "{selectedDemo}" would load here</p>
+									<p>Interactive demo for &ldquo;{selectedDemo}&rdquo; would load here</p>
 									<p className='text-sm mt-2'>This would contain a live SunEditor instance showcasing the specific feature</p>
 								</div>
 							</div>

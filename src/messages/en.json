@@ -1,64 +1,191 @@
 {
-    "Main": {
-        "starOnGitHub": "Star on GitHub",
-        "Menus": {
-            "getting-started": "Getting Started",
-            "feature-demo": "Feature Demo",
-            "playground": "Playground",
-            "plugin-guide": "Plugin Guide",
-            "deep-dive": "Deep Dive",
-            "docs-api": "Docs/API"
-        },
-        "Common": {
-            "CodeExamples": {
-                "title": "Installation / Get Started",
-                "desc": "Install via NPM or use the CDN. || SunEditor integrates seamlessly with your favorite framework."
-            }
-        }
-    },
-    "Home": {
-        "Hero": {
-            "title": "A lightweight and powerful WYSIWYG editor in vanilla JavaScript."
-        },
-        "FeatureGrid": {
-            "title": "Everything you need, and more.",
-            "desc": "SunEditor is designed for flexibility and power, right out of the box.",
-            "Architecture": {
-                "title": "Plugin-Based, Multi-Instance Architecture",
-                "desc": "Each editor instance runs independently with its own plugin configuration."
-            },
-            "Table": {
-                "title": "Advanced Table Editing",
-                "desc": "Insert, merge, split, and style tables with granular control over rows and cells."
-            },
-            "DocumentLayout": {
-                "title": "Document Layout System",
-                "desc": "Supports A4 page breaks, headers, footers, and print-friendly formatting."
-            },
-            "PDF": {
-                "title": "PDF-Ready HTML Output",
-                "desc": "Generates structured HTML output suitable for server-side PDF rendering."
-            },
-            "RTL": {
-                "title": "Right-to-Left (RTL) Support",
-                "desc": "Full RTL layout including toolbar alignment, indentation, and text flow."
-            },
-            "Math": {
-                "title": "Math Formula Rendering",
-                "desc": "Supports LaTeX expressions via KaTeX or MathJax for academic content."
-            }
-        },
-        "LiveStatsBadges": {
-            "title": "SunEditor in Numbers",
-            "githubStars": "GitHub Stars",
-            "gitHubForks": "GitHub Forks",
-            "npmWeeklyDownloads": "NPM Weekly Downloads",
-            "npmAnnualDownloads": "NPM Annual Downloads",
-            "dailyCDNHits": "Daily CDN Hits"
-        },
-        "FinalCTA": {
-            "title": "Try it now",
-            "desc": "Free and open source. Explore the docs or contribute on GitHub."
-        }
-    }
+	"Common": {
+		"copied": "Copied!",
+		"copiedToClipboard": "Copied to clipboard!",
+		"copyPermalink": "Copy permalink",
+		"copySignature": "Copy signature",
+		"copyCode": "Copy code",
+		"sponsor": "Sponsor"
+	},
+	"Main": {
+		"starOnGitHub": "Star on GitHub",
+		"Menus": {
+			"getting-started": "Getting Started",
+			"feature-demo": "Feature Demo",
+			"playground": "Playground",
+			"plugin-guide": "Plugin Guide",
+			"deep-dive": "Deep Dive",
+			"docs-api": "Docs/API"
+		},
+		"Common": {
+			"CodeExamples": {
+				"title": "Installation / Get Started",
+				"desc": "Install via NPM or use the CDN. || SunEditor integrates seamlessly with your favorite framework."
+			}
+		},
+		"Footer": {
+			"viewSource": "View Source",
+			"reportIssue": "Report an Issue",
+			"resources": "Resources",
+			"docs": "Docs",
+			"featureDemo": "Feature demo",
+			"playground": "Playground",
+			"about": "About",
+			"license": "Licensed under MIT.",
+			"copyright": "© Copyright {year} SunEditor Contributors"
+		}
+	},
+	"Home": {
+		"Hero": {
+			"title": "A lightweight and powerful WYSIWYG editor in vanilla JavaScript."
+		},
+		"FeatureHighlights": {
+			"zeroDependencies": "Zero Dependencies",
+			"plugins": "30+ Plugins",
+			"languages": "25+ Languages · RTL",
+			"pluginAPI": "Custom Plugin API",
+			"typescript": "TypeScript Support"
+		},
+		"InteractiveDemo": {
+			"classic": "Classic",
+			"inline": "Inline",
+			"balloon": "Balloon",
+			"document": "Document"
+		},
+		"FeatureGrid": {
+			"title": "Everything you need, and more.",
+			"desc": "SunEditor is designed for flexibility and power, right out of the box.",
+			"Architecture": {
+				"title": "Plugin-Based, Multi-Instance Architecture",
+				"desc": "Each editor instance runs independently with its own plugin configuration."
+			},
+			"Table": {
+				"title": "Advanced Table Editing",
+				"desc": "Insert, merge, split, and style tables with granular control over rows and cells."
+			},
+			"DocumentLayout": {
+				"title": "Document Layout System",
+				"desc": "Supports A4 page breaks, headers, footers, and print-friendly formatting."
+			},
+			"PDF": {
+				"title": "PDF-Ready HTML Output",
+				"desc": "Generates structured HTML output suitable for server-side PDF rendering."
+			},
+			"RTL": {
+				"title": "Right-to-Left (RTL) Support",
+				"desc": "Full RTL layout including toolbar alignment, indentation, and text flow."
+			},
+			"Math": {
+				"title": "Math Formula Rendering",
+				"desc": "Supports LaTeX expressions via KaTeX or MathJax for academic content."
+			}
+		},
+		"LiveStatsBadges": {
+			"title": "SunEditor in Numbers",
+			"githubStars": "GitHub Stars",
+			"gitHubForks": "GitHub Forks",
+			"npmWeeklyDownloads": "NPM Weekly Downloads",
+			"npmAnnualDownloads": "NPM Annual Downloads",
+			"dailyCDNHits": "Daily CDN Hits"
+		},
+		"FinalCTA": {
+			"title": "Try it now",
+			"desc": "Free and open source. Explore the docs or contribute on GitHub."
+		}
+	},
+	"GettingStarted": {
+		"title": "Getting Started",
+		"desc": "Install, create the editor, and display saved content.",
+		"step1": {
+			"eyebrow": "Step 1",
+			"title": "Install & Create Editor"
+		},
+		"step2": {
+			"eyebrow": "Step 2",
+			"title": "Content Rendering",
+			"desc": "When displaying HTML generated by the editor, CSS and class names are required."
+		},
+		"cta": {
+			"title": "Try it live",
+			"desc": "Real npm imports, full bundler — edit code and see the result instantly."
+		}
+	},
+	"Playground": {
+		"badge": "Playground",
+		"title": "SunEditor Playground",
+		"desc": "Configure options, test the editor, and share your setup via URL.",
+		"reset": "Reset",
+		"shareURL": "Share URL",
+		"editorOptions": "Editor Options",
+		"pluginOptions": "Plugin Options",
+		"generatedCode": "Generated Code",
+		"sections": {
+			"modeTheme": "Mode & Theme",
+			"layoutSizing": "Layout & Sizing",
+			"toolbar": "Toolbar",
+			"statusbarCounter": "Statusbar & Counter",
+			"contentBehavior": "Content & Behavior",
+			"features": "Features",
+			"filtering": "Filtering (Advanced)",
+			"formatExtensions": "Format Extensions"
+		},
+		"options": {
+			"classic": "Classic",
+			"inline": "Inline",
+			"balloon": "Balloon",
+			"balloonAlways": "Balloon Always",
+			"basic": "Basic",
+			"standard": "Standard",
+			"full": "Full",
+			"autoSync": "Auto (sync)",
+			"default": "Default",
+			"dark": "Dark",
+			"cobalt": "Cobalt",
+			"ltr": "LTR",
+			"rtl": "RTL",
+			"line": "line",
+			"br": "br",
+			"repeat": "repeat",
+			"always": "always",
+			"none": "none",
+			"auto": "auto",
+			"select": "select",
+			"char": "char",
+			"byte": "byte",
+			"byteHtml": "byte-html"
+		},
+		"live": "live",
+		"filtering": {
+			"tagFilter": "Filters disallowed HTML tags (elementWhitelist/Blacklist)",
+			"formatFilter": "Filters format elements (formatLine/Block)",
+			"classFilter": "Filters disallowed CSS class names (allowedClassName)",
+			"textStyleTagFilter": "Filters text style tags (b, i, u, span, etc.)",
+			"attrFilter": "Filters disallowed HTML attributes (attributeWhitelist/Blacklist)",
+			"styleFilter": "Filters disallowed inline styles (spanStyles/lineStyles/allUsedStyles)"
+		},
+		"formatExtDesc": "Adds additional format tags beyond the built-in defaults. Delimiter: |. Supports regex (e.g. H[1-6]).",
+		"builtIn": "Built-in:"
+	},
+	"DocsApi": {
+		"title": "API Reference",
+		"searchPlaceholder": "Search all APIs...",
+		"resultsFound": "results found",
+		"parameters": "Parameters",
+		"returns": "Returns",
+		"example": "Example",
+		"noDescription": "No description available",
+		"noMethods": "No methods found.",
+		"method": "method",
+		"methods": "methods",
+		"prefix": "Prefix:",
+		"noResults": "No results found",
+		"noMatchesFor": "No matches for",
+		"resultsIn": "results in",
+		"sections": "sections",
+		"members": "Members",
+		"source": "Source:",
+		"types": "types",
+		"filterTypes": "Filter types...",
+		"noTypes": "No types found."
+	}
 }

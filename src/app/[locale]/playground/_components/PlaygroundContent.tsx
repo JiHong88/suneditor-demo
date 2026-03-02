@@ -3,6 +3,7 @@
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -20,8 +21,11 @@ import {
 } from "../_lib/playgroundState";
 import PlaygroundControls from "./PlaygroundControls";
 import PlaygroundPluginSidebar from "./PlaygroundPluginSidebar";
+import dynamic from "next/dynamic";
 import PlaygroundEditor from "./PlaygroundEditor";
 import PlaygroundCodePanel from "./PlaygroundCodePanel";
+
+const PlaygroundMultiRootEditor = dynamic(() => import("./PlaygroundMultiRootEditor"), { ssr: false });
 
 /** Editor option keys that are fixed after creation — must be stripped before resetOptions */
 const FIXED_RESET_KEYS = new Set([
@@ -35,9 +39,12 @@ const FIXED_RESET_KEYS = new Set([
 ]);
 
 export default function PlaygroundContent() {
+	const t = useTranslations("Playground");
+	const tc = useTranslations("Common");
 	const [state, dispatch] = useReducer(playgroundReducer, DEFAULTS);
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
+	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });
 	const prevStateRef = useRef<PlaygroundState>(DEFAULTS);
 	const [urlCopied, setUrlCopied] = useState(false);
 	const [ready, setReady] = useState(false);
@@ -55,6 +62,7 @@ export default function PlaygroundContent() {
 	// Compute editor key from fixed options — changes force remount
 	const editorKey = useMemo(() => {
 		const fixedParts = [
+			state.multiroot,
 			state.mode,
 			state.buttonListPreset,
 			state.type,
@@ -62,6 +70,12 @@ export default function PlaygroundContent() {
 			state.closeModalOutsideClick,
 			state.defaultLine,
 			state.strictMode,
+			state.strictMode_tagFilter,
+			state.strictMode_formatFilter,
+			state.strictMode_classFilter,
+			state.strictMode_textStyleTagFilter,
+			state.strictMode_attrFilter,
+			state.strictMode_styleFilter,
 			state.elementWhitelist,
 			state.elementBlacklist,
 			state.attributeWhitelist,
@@ -144,6 +158,7 @@ export default function PlaygroundContent() {
 		];
 		return fixedParts.map(String).join("|");
 	}, [
+		state.multiroot,
 		state.mode,
 		state.buttonListPreset,
 		state.type,
@@ -151,6 +166,12 @@ export default function PlaygroundContent() {
 		state.closeModalOutsideClick,
 		state.defaultLine,
 		state.strictMode,
+		state.strictMode_tagFilter,
+		state.strictMode_formatFilter,
+		state.strictMode_classFilter,
+		state.strictMode_textStyleTagFilter,
+		state.strictMode_attrFilter,
+		state.strictMode_styleFilter,
 		state.elementWhitelist,
 		state.elementBlacklist,
 		state.attributeWhitelist,
@@ -267,7 +288,7 @@ export default function PlaygroundContent() {
 	}, [state]);
 
 	return (
-		<div className='min-h-screen pb-20'>
+		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col'>
 			{/* Header */}
 			<section className='container mx-auto px-6 py-6 border-b'>
 				<motion.div
@@ -278,17 +299,17 @@ export default function PlaygroundContent() {
 					<div>
 						<Badge variant='secondary' className='mb-2'>
 							<Settings2 className='mr-1.5 h-3.5 w-3.5' />
-							Playground
+							{t("badge")}
 						</Badge>
-						<h1 className='text-2xl font-bold tracking-tight'>SunEditor Playground</h1>
+						<h1 className='text-2xl font-bold tracking-tight'>{t("title")}</h1>
 						<p className='text-sm text-muted-foreground mt-1'>
-							Configure options, test the editor, and share your setup via URL.
+							{t("desc")}
 						</p>
 					</div>
 					<div className='flex items-center gap-2'>
 						<Button variant='outline' size='sm' onClick={handleReset}>
 							<RotateCcw className='mr-1.5 h-3.5 w-3.5' />
-							Reset
+							{t("reset")}
 						</Button>
 						<Button variant='outline' size='sm' onClick={handleShare}>
 							{urlCopied ? (
@@ -296,29 +317,51 @@ export default function PlaygroundContent() {
 							) : (
 								<Share2 className='mr-1.5 h-3.5 w-3.5' />
 							)}
-							{urlCopied ? "Copied!" : "Share URL"}
+							{urlCopied ? tc("copied") : t("shareURL")}
 						</Button>
 					</div>
 				</motion.div>
 			</section>
 
 			{/* Main layout: Sidebar + Content */}
-			<div className='container mx-auto px-6 py-6'>
+			<div className='container mx-auto px-6 pt-6 flex-1'>
 				<div className='flex gap-6'>
 					{/* Left Sidebar — Desktop only */}
 					<motion.aside
 						initial={{ opacity: 0, x: -16 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ delay: 0.05 }}
-						className='hidden lg:block w-64 shrink-0'
+						className='hidden lg:block w-64 shrink-0 sticky top-[93px] self-start'
 					>
-						<div className='sticky top-[93px] rounded-lg border bg-card/90 p-3 pb-8 max-h-[calc(100vh-8rem)] overflow-y-auto'>
-							<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
+						<div className='rounded-lg border bg-card/90 max-h-[calc(100vh-93px-1rem)] flex flex-col'>
+							<div className='shrink-0 px-3 py-2.5 border-b'>
+								<span className='text-[11px] font-bold text-orange-600 dark:text-amber-400 uppercase tracking-wider'>Plugin Options</span>
+							</div>
+							<div className='p-3 pb-32 overflow-y-auto'>
+								<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
+							</div>
 						</div>
 					</motion.aside>
 
 					{/* Right Content */}
-					<div className='flex-1 min-w-0 space-y-6'>
+					<div className='flex-1 min-w-0 space-y-6 pb-6'>
+						{/* Multiroot Toggle */}
+						<div className='flex items-center justify-between rounded-lg border bg-card/90 px-4 py-3'>
+							<div>
+								<span className='text-sm font-semibold'>Multi-root Editor</span>
+								<p className='text-[11px] text-muted-foreground mt-0.5'>Enable multiple editable regions</p>
+							</div>
+							<button
+								type='button'
+								role='switch'
+								aria-checked={state.multiroot}
+								onClick={() => dispatch({ type: "SET", key: "multiroot", value: !state.multiroot })}
+								className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors ${state.multiroot ? "bg-orange-500" : "bg-muted"}`}
+							>
+								<span className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${state.multiroot ? "translate-x-4" : "translate-x-0"}`} />
+							</button>
+						</div>
+
 						{/* Controls — Desktop: inline, Mobile: Sheet */}
 						<motion.div
 							initial={{ opacity: 0, y: 16 }}
@@ -336,12 +379,12 @@ export default function PlaygroundContent() {
 									<SheetTrigger asChild>
 										<Button variant='outline' className='w-full'>
 											<Settings2 className='mr-2 h-4 w-4' />
-											Editor Options
+											{t("editorOptions")}
 										</Button>
 									</SheetTrigger>
 									<SheetContent side='right' className='w-[320px] overflow-y-auto'>
 										<SheetHeader>
-											<SheetTitle>Editor Options</SheetTitle>
+											<SheetTitle>{t("editorOptions")}</SheetTitle>
 										</SheetHeader>
 										<div className='mt-4 pb-8'>
 											<PlaygroundControls state={state} dispatch={dispatch} />
@@ -356,12 +399,12 @@ export default function PlaygroundContent() {
 									<SheetTrigger asChild>
 										<Button variant='outline' className='w-full'>
 											<Puzzle className='mr-2 h-4 w-4' />
-											Plugin Options
+											{t("pluginOptions")}
 										</Button>
 									</SheetTrigger>
 									<SheetContent side='left' className='w-[300px] overflow-y-auto'>
 										<SheetHeader>
-											<SheetTitle>Plugin Options</SheetTitle>
+											<SheetTitle>{t("pluginOptions")}</SheetTitle>
 										</SheetHeader>
 										<div className='mt-4 px-3 pb-8'>
 											<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
@@ -377,7 +420,10 @@ export default function PlaygroundContent() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 }}
 						>
-							{ready && <PlaygroundEditor key={editorKey} state={state} editorRef={editorRef} contentRef={contentRef} />}
+							{ready && (state.multiroot
+							? <PlaygroundMultiRootEditor key={editorKey} state={state} editorRef={editorRef} contentRef={multiRootContentRef} />
+							: <PlaygroundEditor key={editorKey} state={state} editorRef={editorRef} contentRef={contentRef} />
+						)}
 						</motion.div>
 
 						{/* Code Panel */}

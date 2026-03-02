@@ -7,6 +7,7 @@ export type CodeFramework = "javascript-cdn" | "javascript-npm" | "react" | "vue
 
 export interface PlaygroundState {
 	// — Mode & Theme —
+	multiroot: boolean;
 	mode: "classic" | "inline" | "balloon" | "balloon-always";
 	buttonListPreset: ButtonListPreset;
 	type: string;
@@ -67,6 +68,12 @@ export interface PlaygroundState {
 
 	// — Filtering (Advanced) —
 	strictMode: boolean;
+	strictMode_tagFilter: boolean;
+	strictMode_formatFilter: boolean;
+	strictMode_classFilter: boolean;
+	strictMode_textStyleTagFilter: boolean;
+	strictMode_attrFilter: boolean;
+	strictMode_styleFilter: boolean;
 	elementWhitelist: string;
 	elementBlacklist: string;
 	attributeWhitelist: string;
@@ -177,6 +184,7 @@ export interface PlaygroundState {
 /* ── Defaults ──────────────────────────────────────────── */
 
 export const DEFAULTS: PlaygroundState = {
+	multiroot: false,
 	mode: "classic",
 	buttonListPreset: "standard",
 	type: "",
@@ -231,6 +239,12 @@ export const DEFAULTS: PlaygroundState = {
 	toastMessageTime: 1500,
 
 	strictMode: true,
+	strictMode_tagFilter: true,
+	strictMode_formatFilter: true,
+	strictMode_classFilter: true,
+	strictMode_textStyleTagFilter: true,
+	strictMode_attrFilter: true,
+	strictMode_styleFilter: true,
 	elementWhitelist: "",
 	elementBlacklist: "",
 	attributeWhitelist: "",
@@ -243,8 +257,8 @@ export const DEFAULTS: PlaygroundState = {
 	formatClosureBrLine: "",
 	formatBlock: "",
 	formatClosureBlock: "",
-	spanStyles: "",
-	lineStyles: "",
+	spanStyles: "font-family|font-size|color|background-color|width|height",
+	lineStyles: "text-align|margin|margin-left|margin-right|line-height",
 	textStyleTags: "",
 	allowedEmptyTags: "",
 	allowedClassName: "",
@@ -341,6 +355,7 @@ export const DEFAULTS: PlaygroundState = {
 
 /** Base options flagged as 'fixed' in OPTION_FIXED_FLAG */
 const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
+	"multiroot",
 	"mode",
 	"buttonListPreset",
 	"type",
@@ -348,6 +363,12 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"closeModalOutsideClick",
 	"defaultLine",
 	"strictMode",
+	"strictMode_tagFilter",
+	"strictMode_formatFilter",
+	"strictMode_classFilter",
+	"strictMode_textStyleTagFilter",
+	"strictMode_attrFilter",
+	"strictMode_styleFilter",
 	"elementWhitelist",
 	"elementBlacklist",
 	"attributeWhitelist",
@@ -513,7 +534,16 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		closeModalOutsideClick: state.closeModalOutsideClick,
 
 		// filtering
-		strictMode: state.strictMode,
+		strictMode: state.strictMode
+			? true
+			: {
+					tagFilter: state.strictMode_tagFilter,
+					formatFilter: state.strictMode_formatFilter,
+					classFilter: state.strictMode_classFilter,
+					textStyleTagFilter: state.strictMode_textStyleTagFilter,
+					attrFilter: state.strictMode_attrFilter,
+					styleFilter: state.strictMode_styleFilter,
+				},
 	};
 
 	// theme
@@ -575,8 +605,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.formatClosureBrLine) opts.formatClosureBrLine = state.formatClosureBrLine;
 	if (state.formatBlock) opts.formatBlock = state.formatBlock;
 	if (state.formatClosureBlock) opts.formatClosureBlock = state.formatClosureBlock;
-	if (state.spanStyles) opts.spanStyles = state.spanStyles;
-	if (state.lineStyles) opts.lineStyles = state.lineStyles;
+	if (state.spanStyles && state.spanStyles !== DEFAULTS.spanStyles) opts.spanStyles = state.spanStyles;
+	if (state.lineStyles && state.lineStyles !== DEFAULTS.lineStyles) opts.lineStyles = state.lineStyles;
 	if (state.textStyleTags) opts.textStyleTags = state.textStyleTags;
 	if (state.allowedEmptyTags) opts.allowedEmptyTags = state.allowedEmptyTags;
 	if (state.allowedClassName) opts.allowedClassName = state.allowedClassName;
@@ -697,6 +727,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 
 const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	// Mode & Theme
+	mr: "multiroot",
 	m: "mode",
 	p: "buttonListPreset",
 	tp: "type",
@@ -751,6 +782,12 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tmt: "toastMessageTime",
 	// Filtering
 	sm: "strictMode",
+	"sm.tf": "strictMode_tagFilter",
+	"sm.ff": "strictMode_formatFilter",
+	"sm.cf": "strictMode_classFilter",
+	"sm.tsf": "strictMode_textStyleTagFilter",
+	"sm.af": "strictMode_attrFilter",
+	"sm.sf": "strictMode_styleFilter",
 	ew: "elementWhitelist",
 	eb: "elementBlacklist",
 	aw: "attributeWhitelist",

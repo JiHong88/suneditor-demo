@@ -23,11 +23,26 @@ function createProgramForFile(filePath) {
 	return { program, sourceFile: program.getSourceFile(fullPath), fullPath };
 }
 
+/**
+ * Clean up description artifacts from JSDoc comments
+ */
+function cleanDescription(desc) {
+	if (!desc) return "";
+	let cleaned = desc.trim();
+	// Remove lone "/" or "*" artifacts
+	if (cleaned === "/" || cleaned === "*" || cleaned === "*/") return "";
+	// Remove trailing "/" artifacts
+	cleaned = cleaned.replace(/\s*\/\s*$/, "").trim();
+	// Remove leading "- " if it's the only content
+	if (cleaned === "-") return "";
+	return cleaned;
+}
+
 function makeJSDocExtractor(sourceFile) {
 	return function extractJSDoc(node) {
 		const fullText = sourceFile.getFullText();
 		const ranges = ts.getLeadingCommentRanges(fullText, node.getFullStart());
-		if (!ranges || ranges.length === 0) return { description: "", example: "" };
+		if (!ranges || ranges.length === 0) return { description: "", example: "", paramDescriptions: {}, returnsDescription: "" };
 
 		const comment = fullText.substring(ranges[ranges.length - 1].pos, ranges[ranges.length - 1].end);
 
@@ -42,11 +57,15 @@ function makeJSDocExtractor(sourceFile) {
 				.join(" ")
 				.trim();
 		} else {
+			// Fallback: get lines before any @tag (except @callback, @class, @interface, @abstract, @optional)
 			const lines = comment
 				.split("\n")
 				.map((l) => l.replace(/^\s*\*\s*/, "").trim())
 				.filter((l) => l && !l.startsWith("@") && l !== "/**" && l !== "*/");
-			description = lines.join(" ").trim();
+			description = lines.reduce((acc, l) => {
+				if (!acc) return l;
+				return acc + (l.startsWith("- ") || l.startsWith("– ") ? "\n" : " ") + l;
+			}, "").trim();
 		}
 
 		// Extract @example
@@ -64,7 +83,106 @@ function makeJSDocExtractor(sourceFile) {
 				.trim();
 		}
 
-		return { description, example };
+		// Extract @param descriptions (line-by-line parsing for robustness with nested braces)
+		const paramDescriptions = {};
+		const commentLines = comment.split("\n").map((l) => l.replace(/^\s*\*\s?/, "").trimEnd());
+		for (let li = 0; li < commentLines.length; li++) {
+			const line = commentLines[li].trim();
+			if (!line.startsWith("@param")) continue;
+
+			// Skip type annotation: find matching closing brace
+			let rest = line.slice(6).trim(); // after "@param"
+			if (rest.startsWith("{")) {
+				let depth = 0;
+				let ci = 0;
+				for (; ci < rest.length; ci++) {
+					if (rest[ci] === "{") depth++;
+					if (rest[ci] === "}") { depth--; if (depth === 0) break; }
+				}
+				rest = rest.slice(ci + 1).trim();
+			}
+
+			// Extract param name (possibly [name] or [name=default])
+			const nameMatch = rest.match(/^(\[?\w+(?:\.\w+)*(?:=[^\]]*?)?\]?)\s*(.*)/);
+			if (!nameMatch) continue;
+
+			let paramName = nameMatch[1].replace(/[\[\]]/g, "").split("=")[0].trim();
+			let descPart = nameMatch[2].trim();
+
+			// Skip dotted sub-params (params.$ etc.) but collect them as sub-descriptions
+			if (paramName.includes(".")) {
+				const parts = paramName.split(".");
+				const parentName = parts[0];
+				const subName = parts.slice(1).join(".");
+				// Remove leading "- " or "– " from description
+				descPart = descPart.replace(/^[-–]\s*/, "").trim();
+				if (descPart && subName !== "$" && subName !== "frameContext" && subName !== "event") {
+					// Store as "parentName.subName" for rich display
+					paramDescriptions[`${parentName}.${subName}`] = descPart;
+				}
+				continue;
+			}
+
+			// Remove leading "- " or "– " from description
+			descPart = descPart.replace(/^[-–]\s*/, "").trim();
+
+			// Collect continuation lines (lines starting with "- " that follow)
+			for (let lj = li + 1; lj < commentLines.length; lj++) {
+				const nextLine = commentLines[lj].trim();
+				if (!nextLine || nextLine.startsWith("@")) break;
+				if (nextLine.startsWith("- ") || nextLine.startsWith("– ")) {
+					descPart += "\n" + nextLine;
+				} else {
+					break;
+				}
+			}
+
+			if (descPart) {
+				paramDescriptions[paramName] = descPart;
+			}
+		}
+
+		// Extract @returns/@return description (line-by-line)
+		let returnsDescription = "";
+		for (let li = 0; li < commentLines.length; li++) {
+			const line = commentLines[li].trim();
+			if (!line.startsWith("@return")) continue;
+
+			let rest = line.replace(/^@returns?\s*/, "").trim();
+			// Skip type annotation
+			if (rest.startsWith("{")) {
+				let depth = 0;
+				let ci = 0;
+				for (; ci < rest.length; ci++) {
+					if (rest[ci] === "{") depth++;
+					if (rest[ci] === "}") { depth--; if (depth === 0) break; }
+				}
+				rest = rest.slice(ci + 1).trim();
+			}
+			// Remove leading "- "
+			rest = rest.replace(/^[-–]\s*/, "").trim();
+
+			// Collect continuation lines
+			for (let lj = li + 1; lj < commentLines.length; lj++) {
+				const nextLine = commentLines[lj].trim();
+				if (!nextLine || nextLine.startsWith("@")) break;
+				if (nextLine.startsWith("- ") || nextLine.startsWith("– ")) {
+					rest += "\n" + nextLine;
+				} else {
+					break;
+				}
+			}
+
+			returnsDescription = rest;
+			break;
+		}
+
+		return {
+			description: cleanDescription(description),
+			example,
+			paramDescriptions,
+			returnsDescription: cleanDescription(returnsDescription),
+		};
 	};
 }
 
@@ -91,6 +209,31 @@ function extractParamsFromList(parameters, sourceFile, getType) {
 			return `${pName}${opt}: ${pType}`;
 		})
 		.filter((p) => p !== null);
+}
+
+/**
+ * Build a method object with JSDoc data
+ */
+function buildMethodObject(name, params, returns, jsDoc) {
+	const method = {
+		name,
+		params: params.join(", "),
+		returns,
+		description: jsDoc.description,
+		example: jsDoc.example,
+	};
+
+	// Add param descriptions if any exist
+	if (Object.keys(jsDoc.paramDescriptions).length > 0) {
+		method.paramDescriptions = jsDoc.paramDescriptions;
+	}
+
+	// Add returns description if exists
+	if (jsDoc.returnsDescription) {
+		method.returnsDescription = jsDoc.returnsDescription;
+	}
+
+	return method;
 }
 
 /* ── Extract export list from index.d.ts ────────────────── */
@@ -134,23 +277,11 @@ function extractMethodsFromClass(filePath) {
 						if (ts.isMethodSignature(member) || ts.isMethodDeclaration(member)) {
 							const params = extractParamsFromList(member.parameters, sourceFile, getType);
 							const jsDoc = extractJSDoc(member);
-							methods.push({
-								name,
-								params: params.join(", "),
-								returns: member.type ? getType(member.type) : "void",
-								description: jsDoc.description,
-								example: jsDoc.example,
-							});
+							methods.push(buildMethodObject(name, params, member.type ? getType(member.type) : "void", jsDoc));
 						} else if (ts.isPropertySignature(member) && member.type && ts.isFunctionTypeNode(member.type)) {
 							const params = extractParamsFromList(member.type.parameters, sourceFile, getType);
 							const jsDoc = extractJSDoc(member);
-							methods.push({
-								name,
-								params: params.join(", "),
-								returns: member.type.type ? getType(member.type.type) : "void",
-								description: jsDoc.description,
-								example: jsDoc.example,
-							});
+							methods.push(buildMethodObject(name, params, member.type.type ? getType(member.type.type) : "void", jsDoc));
 						}
 					} catch (e) {
 						console.error("Error parsing method:", e.message);
@@ -194,7 +325,7 @@ function extractMethodsFromFunctionReturnType(filePath) {
 						}
 
 						const jsDoc = extractJSDoc(member);
-						methods.push({ name, params: params.join(", "), returns, description: jsDoc.description, example: jsDoc.example });
+						methods.push(buildMethodObject(name, params, returns, jsDoc));
 					} catch (e) {
 						console.error("Error parsing return type method:", e.message);
 					}
@@ -234,7 +365,7 @@ function extractExportedFunctions(filePath) {
 					});
 
 					const jsDoc = extractJSDoc(node);
-					functions.push({ name, params: params.join(", "), returns: node.type ? getType(node.type) : "void", description: jsDoc.description, example: jsDoc.example });
+					functions.push(buildMethodObject(name, params, node.type ? getType(node.type) : "void", jsDoc));
 				} catch (e) {
 					console.error("Error parsing function:", e.message);
 				}
@@ -247,20 +378,42 @@ function extractExportedFunctions(filePath) {
 	return functions;
 }
 
-/* ── Extract type definitions ───────────────────────────── */
+/* ── Extract type definitions with member JSDoc ─────────── */
 
 function extractTypeDefinitions(filePath) {
 	const ctx = createProgramForFile(filePath);
 	if (!ctx || !ctx.sourceFile) return [];
 
 	const { sourceFile } = ctx;
+	const extractJSDoc = makeJSDocExtractor(sourceFile);
 	const types = [];
 
 	function visit(node) {
 		if (ts.isTypeAliasDeclaration(node)) {
 			const name = node.name.getText(sourceFile);
 			const typeText = node.type.getText(sourceFile);
-			types.push({ name, definition: typeText, kind: "type" });
+
+			// Extract member descriptions for type literal members
+			const memberDescriptions = {};
+			if (ts.isTypeLiteralNode(node.type)) {
+				node.type.members.forEach((member) => {
+					if (ts.isPropertySignature(member) && member.name) {
+						try {
+							const propName = member.name.getText(sourceFile);
+							const jsDoc = extractJSDoc(member);
+							if (jsDoc.description) {
+								memberDescriptions[propName] = jsDoc.description;
+							}
+						} catch { /* skip */ }
+					}
+				});
+			}
+
+			const typeObj = { name, definition: typeText, kind: "type" };
+			if (Object.keys(memberDescriptions).length > 0) {
+				typeObj.memberDescriptions = memberDescriptions;
+			}
+			types.push(typeObj);
 		} else if (ts.isInterfaceDeclaration(node)) {
 			const name = node.name.getText(sourceFile);
 			const members = node.members
@@ -273,7 +426,26 @@ function extractTypeDefinitions(filePath) {
 				})
 				.filter((m) => m !== null)
 				.join("\n");
-			types.push({ name, definition: members, kind: "interface" });
+
+			// Extract member descriptions for interface members
+			const memberDescriptions = {};
+			node.members.forEach((member) => {
+				if (member.name) {
+					try {
+						const propName = member.name.getText(sourceFile);
+						const jsDoc = extractJSDoc(member);
+						if (jsDoc.description) {
+							memberDescriptions[propName] = jsDoc.description;
+						}
+					} catch { /* skip */ }
+				}
+			});
+
+			const typeObj = { name, definition: members, kind: "interface" };
+			if (Object.keys(memberDescriptions).length > 0) {
+				typeObj.memberDescriptions = memberDescriptions;
+			}
+			types.push(typeObj);
 		}
 		ts.forEachChild(node, visit);
 	}
@@ -313,13 +485,7 @@ function extractEventHandlers(filePath) {
 				});
 
 				const jsDoc = extractJSDoc(node);
-				events.push({
-					name,
-					params: params.join(", "),
-					returns: node.type ? getType(node.type) : "void",
-					description: jsDoc.description,
-					example: jsDoc.example,
-				});
+				events.push(buildMethodObject(name, params, node.type ? getType(node.type) : "void", jsDoc));
 			} catch (e) {
 				console.error("Error parsing event:", e.message);
 			}
@@ -329,6 +495,155 @@ function extractEventHandlers(filePath) {
 
 	visit(sourceFile);
 	return events;
+}
+
+/* ── Extract functions from namespace declarations (hooks/base.d.ts) ── */
+
+function extractNamespaceFunctions(filePath) {
+	const ctx = createProgramForFile(filePath);
+	if (!ctx || !ctx.sourceFile) return {};
+
+	const { sourceFile } = ctx;
+	const extractJSDoc = makeJSDocExtractor(sourceFile);
+	const getType = makeTypeGetter(sourceFile);
+	const namespaces = {};
+
+	function visitNamespace(node, parentName) {
+		if (ts.isModuleDeclaration(node) && node.name) {
+			const nsName = parentName ? `${parentName}.${node.name.text}` : node.name.text;
+			if (node.body && ts.isModuleBlock(node.body)) {
+				const methods = [];
+				node.body.statements.forEach((stmt) => {
+					if (ts.isFunctionDeclaration(stmt) && stmt.name) {
+						try {
+							const name = stmt.name.getText(sourceFile);
+							const params = (stmt.parameters || []).map((p) => {
+								const pName = p.name.getText(sourceFile);
+								const pType = p.type ? getType(p.type) : "any";
+								const opt = p.questionToken ? "?" : "";
+								return `${pName}${opt}: ${pType}`;
+							});
+
+							const jsDoc = extractJSDoc(stmt);
+							methods.push(buildMethodObject(name, params, stmt.type ? getType(stmt.type) : "void", jsDoc));
+						} catch (e) {
+							console.error(`Error parsing namespace function ${nsName}:`, e.message);
+						}
+					}
+					// Recurse into nested namespaces
+					if (ts.isModuleDeclaration(stmt)) {
+						visitNamespace(stmt, nsName);
+					}
+				});
+				if (methods.length > 0) {
+					namespaces[nsName] = methods;
+				}
+			}
+		}
+	}
+
+	ts.forEachChild(sourceFile, (node) => visitNamespace(node, ""));
+
+	return namespaces;
+}
+
+/* ── Extract methods from interface declarations ────────── */
+
+function extractInterfaceMethods(filePath) {
+	const ctx = createProgramForFile(filePath);
+	if (!ctx || !ctx.sourceFile) return {};
+
+	const { sourceFile } = ctx;
+	const extractJSDoc = makeJSDocExtractor(sourceFile);
+	const getType = makeTypeGetter(sourceFile);
+	const interfaces = {};
+
+	function visit(node) {
+		if (ts.isInterfaceDeclaration(node) && node.name) {
+			const ifaceName = node.name.getText(sourceFile);
+			const methods = [];
+
+			// Get interface-level JSDoc
+			const ifaceJSDoc = extractJSDoc(node);
+
+			node.members.forEach((member) => {
+				if ((ts.isMethodSignature(member) || ts.isPropertySignature(member)) && member.name) {
+					try {
+						const name = member.name.getText(sourceFile);
+						let params = [];
+						let returns = "void";
+
+						if (ts.isMethodSignature(member)) {
+							params = extractParamsFromList(member.parameters, sourceFile, getType);
+							returns = member.type ? getType(member.type) : "void";
+						} else if (ts.isPropertySignature(member) && member.type && ts.isFunctionTypeNode(member.type)) {
+							params = extractParamsFromList(member.type.parameters, sourceFile, getType);
+							returns = member.type.type ? getType(member.type.type) : "void";
+						} else {
+							return; // Skip non-method properties
+						}
+
+						const jsDoc = extractJSDoc(member);
+						methods.push(buildMethodObject(name, params, returns, jsDoc));
+					} catch (e) {
+						console.error(`Error parsing interface method ${ifaceName}.${member.name}:`, e.message);
+					}
+				}
+			});
+
+			if (methods.length > 0) {
+				interfaces[ifaceName] = {
+					description: ifaceJSDoc.description,
+					methods,
+				};
+			}
+		}
+		ts.forEachChild(node, visit);
+	}
+
+	visit(sourceFile);
+	return interfaces;
+}
+
+/* ── Extract type alias members as property-like methods ─── */
+
+function extractTypeMembersAsProperties(filePath, typeName) {
+	const ctx = createProgramForFile(filePath);
+	if (!ctx || !ctx.sourceFile) return [];
+
+	const { sourceFile } = ctx;
+	const extractJSDoc = makeJSDocExtractor(sourceFile);
+	const getType = makeTypeGetter(sourceFile);
+	const properties = [];
+
+	function visit(node) {
+		if (ts.isTypeAliasDeclaration(node) && node.name.getText(sourceFile) === typeName) {
+			if (ts.isTypeLiteralNode(node.type)) {
+				node.type.members.forEach((member) => {
+					if (ts.isPropertySignature(member) && member.name) {
+						try {
+							const name = member.name.getText(sourceFile);
+							if (name.startsWith("_")) return;
+							const typeStr = member.type ? getType(member.type) : "any";
+							const jsDoc = extractJSDoc(member);
+							properties.push({
+								name,
+								params: "",
+								returns: typeStr,
+								description: jsDoc.description,
+							});
+						} catch (e) {
+							console.error(`Error parsing type member ${typeName}.${member.name}:`, e.message);
+						}
+					}
+				});
+			}
+		}
+		ts.forEachChild(node, visit);
+	}
+
+	visit(sourceFile);
+	return properties;
 }
 
 /* ── Extract option descriptions from JSDoc @property in @typedef blocks ── */
@@ -367,8 +682,9 @@ function extractOptionDescriptions(filePath) {
 		let j = i;
 		while (!foundClose && j < lines.length - 1) {
 			j++;
+			const prevLen = fullLine.length;
 			fullLine += " " + lines[j].replace(/^\s*\*\s*/, "").trim();
-			for (let c = fullLine.lastIndexOf(lines[j].trim().charAt(0)); c < fullLine.length; c++) {
+			for (let c = prevLen; c < fullLine.length; c++) {
 				if (fullLine[c] === "{") braceCount++;
 				if (fullLine[c] === "}") {
 					braceCount--;
@@ -380,28 +696,33 @@ function extractOptionDescriptions(filePath) {
 			}
 		}
 
-		// Extract name and description after the type
+		// Extract name, default value, and description after the type
 		const afterType = fullLine.replace(/^.*?@property\s+\{[^]*?\}\s*/, "");
-		const nameMatch = afterType.match(/\[?(\w+)(?:=[^\]]*)?\]?\s+-\s+(.+)/);
+		const nameMatch = afterType.match(/\[?(\w+)(?:=([^\]]*))?\]?\s+-\s+(.+)/);
 		if (!nameMatch) continue;
 
 		const name = nameMatch[1];
 		if (name.startsWith("_")) continue;
 
+		const defaultValue = nameMatch[2] !== undefined ? nameMatch[2].trim() : undefined;
+
 		// Collect multi-line description (following lines starting with " * - ")
-		let desc = nameMatch[2].trim();
+		let desc = nameMatch[3].trim();
 		for (let k = (j > i ? j : i) + 1; k < lines.length; k++) {
 			const nextLine = lines[k].replace(/^\s*\*\s*/, "").trim();
 			if (!nextLine || nextLine.startsWith("@") || nextLine === "*/" || nextLine.startsWith("===") || nextLine.startsWith("---") || nextLine === "///") break;
 			if (nextLine.startsWith("- ")) {
-				desc += " " + nextLine;
+				desc += "\n" + nextLine;
 			} else {
 				break;
 			}
 		}
 
 		if (!options[name]) {
-			options[name] = desc;
+			options[name] = { description: desc };
+			if (defaultValue !== undefined) {
+				options[name].default = defaultValue;
+			}
 		}
 	}
 
@@ -458,8 +779,19 @@ function extractPluginOptionDescriptions(filePath) {
 									}
 								}
 
+								// Collect continuation lines
+								let collecting = false;
+								for (const line of lines) {
+									if (collecting && line.startsWith("- ")) {
+										desc += "\n" + line;
+									}
+									if (line === desc || line === `- ${desc}`) {
+										collecting = true;
+									}
+								}
+
 								if (desc) {
-									options[`${pluginName}_${propName}`] = desc;
+									options[`${pluginName}_${propName}`] = { description: desc };
 								}
 							}
 						} catch {
@@ -567,6 +899,28 @@ coreClasses.forEach(({ key, file }) => {
 	}
 });
 
+// ── 2.5. Store State & Mode properties ──
+console.log("\n📦 Store Properties:");
+const storeStateProps = extractTypeMembersAsProperties("core/kernel/store.d.ts", "StoreState");
+if (storeStateProps.length > 0) {
+	apiDocs.structure.editor.subgroups["store.state"] = {
+		title: "$.store — State",
+		description: "Runtime state properties accessible via $.store.get(key) / $.store.set(key, value)",
+		methods: storeStateProps,
+	};
+	console.log(`  ✓ StoreState (${storeStateProps.length} properties)`);
+}
+
+const storeModeProps = extractTypeMembersAsProperties("core/kernel/store.d.ts", "StoreMode");
+if (storeModeProps.length > 0) {
+	apiDocs.structure.editor.subgroups["store.mode"] = {
+		title: "$.store.mode",
+		description: "Toolbar display mode flags (immutable after init)",
+		methods: storeModeProps,
+	};
+	console.log(`  ✓ StoreMode (${storeModeProps.length} properties)`);
+}
+
 // ── 3. Plugins ──
 console.log("\n📦 Plugins:");
 const pluginExports = extractExportsFromIndex("plugins/index.d.ts");
@@ -647,7 +1001,54 @@ apiDocs.structure.events = {
 };
 console.log(`  ✓ Event Callbacks (${eventHandlers.length} events)`);
 
-// ── 7. Type Definitions ──
+// ── 7. Plugin Hooks (hooks/base.d.ts) ──
+console.log("\n📦 Plugin Hooks:");
+apiDocs.structure.hooks = { title: "Plugin Hooks", description: "Hook functions that plugins can implement for lifecycle and event handling", methods: [], subgroups: {} };
+
+const hookNamespaces = extractNamespaceFunctions("hooks/base.d.ts");
+let totalHooks = 0;
+Object.entries(hookNamespaces).forEach(([nsName, methods]) => {
+	const key = nsName.replace(/^\./, "");
+	apiDocs.structure.hooks.subgroups[key] = {
+		title: `Hook.${key}`,
+		description: `${key} hook functions for plugins`,
+		methods,
+	};
+	totalHooks += methods.length;
+	console.log(`  ✓ Hook.${key} (${methods.length} hooks)`);
+});
+
+// ── 8. Interfaces (interfaces/contracts.d.ts) ──
+console.log("\n📦 Plugin Interfaces:");
+apiDocs.structure.interfaces = { title: "Plugin Interfaces", description: "Contract interfaces that plugins implement", methods: [], subgroups: {} };
+
+const contractInterfaces = extractInterfaceMethods("interfaces/contracts.d.ts");
+let totalIfaceMethods = 0;
+Object.entries(contractInterfaces).forEach(([ifaceName, { description, methods }]) => {
+	apiDocs.structure.interfaces.subgroups[ifaceName] = {
+		title: ifaceName,
+		description: description || `${ifaceName} interface methods`,
+		methods,
+	};
+	totalIfaceMethods += methods.length;
+	console.log(`  ✓ ${ifaceName} (${methods.length} methods)`);
+});
+
+// Also extract from interfaces/plugins.d.ts
+const pluginInterfaces = extractInterfaceMethods("interfaces/plugins.d.ts");
+Object.entries(pluginInterfaces).forEach(([ifaceName, { description, methods }]) => {
+	if (!apiDocs.structure.interfaces.subgroups[ifaceName]) {
+		apiDocs.structure.interfaces.subgroups[ifaceName] = {
+			title: ifaceName,
+			description: description || `${ifaceName} interface methods`,
+			methods,
+		};
+		totalIfaceMethods += methods.length;
+		console.log(`  ✓ ${ifaceName} (${methods.length} methods)`);
+	}
+});
+
+// ── 9. Type Definitions ──
 console.log("\n📦 Type Definitions:");
 apiDocs.structure.types = { title: "Type Definitions", description: "TypeScript type and interface definitions", items: [] };
 
@@ -705,10 +1106,28 @@ pluginExports.forEach(({ path: relativePath }) => {
 	}
 });
 
+// Interface types
+["interfaces/contracts.d.ts", "interfaces/plugins.d.ts"].forEach((file) => {
+	if (fs.existsSync(path.join(TYPES_DIR, file))) {
+		const types = extractTypeDefinitions(file);
+		types.forEach((type) => {
+			if (!typeMap.has(type.name)) typeMap.set(type.name, { ...type, source: file });
+		});
+	}
+});
+
+// Hooks types
+if (fs.existsSync(path.join(TYPES_DIR, "hooks/base.d.ts"))) {
+	const types = extractTypeDefinitions("hooks/base.d.ts");
+	types.forEach((type) => {
+		if (!typeMap.has(type.name)) typeMap.set(type.name, { ...type, source: "hooks/base.d.ts" });
+	});
+}
+
 apiDocs.structure.types.items = Array.from(typeMap.values());
 console.log(`  ✓ Type Definitions (${apiDocs.structure.types.items.length} types)`);
 
-// ── 8. Option Descriptions (for playground tooltips) ──
+// ── 10. Option Descriptions (for playground tooltips) ──
 console.log("\n📦 Option Descriptions:");
 const optionDescriptions = {};
 
@@ -750,9 +1169,15 @@ fs.writeFileSync(OPTIONS_OUTPUT_FILE, JSON.stringify(optionDescriptions, null, 2
 const totalMethods =
 	apiDocs.structure.editor.methods.length +
 	Object.values(apiDocs.structure.editor.subgroups).reduce((sum, g) => sum + g.methods.length, 0) +
-	apiDocs.structure.events.methods.length;
+	Object.values(apiDocs.structure.plugins.subgroups).reduce((sum, g) => sum + g.methods.length, 0) +
+	Object.values(apiDocs.structure.modules.subgroups).reduce((sum, g) => sum + g.methods.length, 0) +
+	Object.values(apiDocs.structure.helpers.subgroups).reduce((sum, g) => sum + g.methods.length, 0) +
+	apiDocs.structure.events.methods.length +
+	totalHooks +
+	totalIfaceMethods;
 
 console.log(`\n✅ Generated!`);
 console.log(`📝 ${OUTPUT_FILE}`);
 console.log(`📝 ${OPTIONS_OUTPUT_FILE}`);
-console.log(`📊 ${totalMethods} total methods/events\n`);
+console.log(`📊 ${totalMethods} total methods/events/hooks`);
+console.log(`📊 ${apiDocs.structure.types.items.length} type definitions\n`);

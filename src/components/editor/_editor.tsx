@@ -26,7 +26,7 @@ class A extends interfaces.PluginModal implements interfaces.ModuleModal, interf
 	}
 
 	open(target?: HTMLElement): void {
-		console.log("PluginModal A opened", target);
+		void target;
 	}
 
 	async modalAction() {

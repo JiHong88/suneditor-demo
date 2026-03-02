@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { LangSelect } from "./lang-select";
 import { Heart } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
 	stars?: number;
@@ -15,6 +16,7 @@ type Props = {
 const ThemeToggle = dynamic(() => import("./theme-toggle").then((m) => m.ThemeToggle), { ssr: false });
 
 export default function MicroBar({ className }: Props) {
+	const tc = useTranslations("Common");
 	return (
 		<div
 			className={cn(
@@ -43,7 +45,7 @@ export default function MicroBar({ className }: Props) {
 						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
 					>
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
-						<span>Sponsor</span>
+						<span>{tc("sponsor")}</span>
 					</Link>
 				</div>
 			</div>

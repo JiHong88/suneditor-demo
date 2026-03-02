@@ -74,8 +74,6 @@ export function SiteNav() {
 		if (!mounted || !pathname) return false;
 		if (href === "/") return pathname === "/";
 
-		console.log("isActive", pathname, href);
-
 		const segment = getLastPathSegment(href);
 		if (!segment) return false;
 		return pathname.includes(`/${segment}`);
@@ -96,7 +94,8 @@ export function SiteNav() {
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex'>
 						<Link href='/' className='flex items-center space-x-3 shrink-0 mx-6' aria-label='Home'>
-							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority />
+							<Image src='/se3_logo_title.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='dark:hidden' />
+							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='hidden dark:block' />
 						</Link>
 						<NavigationMenu className='mx-6'>
 							<NavigationMenuList>
@@ -116,7 +115,8 @@ export function SiteNav() {
 					{/* Mobile nav */}
 					<div className='md:hidden w-full flex justify-between items-center'>
 						<Link href='/' className='flex space-x-3 shrink-0' aria-label='Home'>
-							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority />
+							<Image src='/se3_logo_title.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='dark:hidden' />
+							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='hidden dark:block' />
 						</Link>
 
 						<Button variant='outline' size='icon' aria-label='Toggle menu' aria-expanded={openMobile} aria-controls='mobile-nav' onClick={() => setOpenMobile((v) => !v)}>

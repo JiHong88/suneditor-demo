@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import CodeExamples from "@/components/common/CodeExamples";
 import { type FrameworkKey } from "@/components/common/codeExampleFrameworks";
 import SectionHeading from "./SectionHeading";
@@ -9,9 +10,11 @@ type StepOneCodeExamplesProps = {
 };
 
 export default function StepOneCodeExamples({ framework, onFrameworkChange }: StepOneCodeExamplesProps) {
+	const t = useTranslations("GettingStarted.step1");
+
 	return (
 		<section className='mx-auto w-full max-w-6xl px-6 pb-14 pt-2'>
-			<SectionHeading eyebrow='Step 1' title='Install & Create Editor' />
+			<SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
 			<div className='mt-4'>
 				<FrameworkBadge framework={framework} />
 			</div>

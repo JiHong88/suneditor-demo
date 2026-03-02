@@ -10,12 +10,12 @@ export type StepSnippet = {
 const RENDER_SNIPPETS: Record<FrameworkKey, StepSnippet> = {
 	"javascript-cdn": {
 		lang: "html",
-		code: `<!-- 1. SunEditor contents CSS 필요 -->
+		code: `<!-- 1. SunEditor contents CSS required -->
 <link href="${CDN_CONTENTS_CSS}" rel="stylesheet">
 
-<!-- 2. sun-editor, sun-editor-editable 클래스로 감싸기 -->
+<!-- 2. sun-editor-editable Wrap with class -->
 <div class="sun-editor-editable">
-  <!-- editor.getContents() 로 가져온 HTML -->
+  <!-- HTML from editor.getContents() -->
 </div>`,
 	},
 	"javascript-npm": {
@@ -23,7 +23,7 @@ const RENDER_SNIPPETS: Record<FrameworkKey, StepSnippet> = {
 		code: `// 1. CSS import
 import "suneditor/css/contents";
 
-// 2. sun-editor, sun-editor-editable 클래스로 감싸기
+// 2. sun-editor-editable Wrap with class
 const container = document.getElementById("content");
 container.innerHTML = \`
   <div class="sun-editor-editable">
@@ -36,7 +36,7 @@ container.innerHTML = \`
 		code: `// 1. CSS import
 import "suneditor/css/contents";
 
-// 2. sun-editor, sun-editor-editable 클래스로 감싸기
+// 2. sun-editor-editable Wrap with class
 export default function ContentViewer({ html }) {
   return (
     <div className="sun-editor">
@@ -57,7 +57,7 @@ import "suneditor/css/contents";
 defineProps({ html: String });
 </script>
 
-<!-- 2. sun-editor, sun-editor-editable 클래스로 감싸기 -->
+<!-- 2. sun-editor-editable Wrap with class -->
 <template>
   <div class="sun-editor-editable" v-html="html" />
 </template>`,
@@ -65,11 +65,11 @@ defineProps({ html: String });
 	angular: {
 		lang: "typescript",
 		code: `import { Component, Input } from "@angular/core";
-// 1. CSS import (angular.json에 styles 추가)
+// 1. CSS import (add to angular.json styles)
 // "styles": ["node_modules/suneditor/dist/css/suneditor.min.css",
 //             "node_modules/suneditor/dist/css/suneditor-contents.min.css"]
 
-// 2. sun-editor, sun-editor-editable 클래스로 감싸기
+// 2. sun-editor-editable Wrap with class
 @Component({
   selector: "app-content-viewer",
   template: \`
@@ -89,7 +89,7 @@ export class ContentViewerComponent {
   export let html = "";
 </script>
 
-<!-- 2. sun-editor, sun-editor-editable 클래스로 감싸기 -->
+<!-- 2. sun-editor-editable Wrap with class -->
 <div class="sun-editor-editable">
   {@html html}
 </div>`,
@@ -98,7 +98,7 @@ export class ContentViewerComponent {
 		lang: "javascript",
 		code: `import "suneditor/css/contents";
 
-// sun-editor, sun-editor-editable 클래스로 감싸기
+// sun-editor-editable Wrap with class
 class ContentViewer extends HTMLElement {
   set content(html) {
     this.innerHTML = \`

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Cpu, Zap, Network, Eye, Code2, Database, ArrowDown, ArrowRight, Activity, Layers, GitBranch } from "lucide-react";
-import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -332,8 +332,6 @@ const codeFlow = [
 export default function DeepDivePage() {
 	const [selectedTopic, setSelectedTopic] = useState("core");
 	const [selectedSection, setSelectedSection] = useState(0);
-	const t = useTranslations("DeepDive");
-
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}

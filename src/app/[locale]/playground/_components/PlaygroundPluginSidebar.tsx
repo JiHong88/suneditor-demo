@@ -13,11 +13,11 @@ type Props = {
 
 /* ── Reusable field components ─────────────────────────── */
 
-const optDesc = optionDescriptions as Record<string, string>;
+const optDesc = optionDescriptions as Record<string, { description: string; default?: string }>;
 
 function FieldLabel({ label, optionKey }: { label: string; optionKey?: string }) {
 	const key = optionKey ?? label;
-	const desc = optDesc[key];
+	const desc = optDesc[key]?.description;
 	return (
 		<span className='flex items-center gap-1.5 text-xs text-muted-foreground'>
 			<span>{label}</span>
@@ -152,9 +152,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 	const set = useSet(dispatch);
 	return (
 		<div className='space-y-1'>
-			<h3 className='text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1 mb-2'>
-				Plugin Options
-			</h3>
 			<Accordion type='multiple' className='w-full'>
 				{/* Image */}
 				<AccordionItem value='image'>

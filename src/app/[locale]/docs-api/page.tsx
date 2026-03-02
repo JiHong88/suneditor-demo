@@ -1,366 +1,181 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Search } from "lucide-react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { Search, X, Command } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import ApiSidebar from "./components/ApiSidebar";
 import ApiContent from "./components/ApiContent";
 import TypesContent from "./components/TypesContent";
+import GlobalSearchResults from "./components/GlobalSearchResults";
+import MobileSidebar from "./components/MobileSidebar";
 import apiDocsData from "@/data/api/api-docs.json";
+import type { ApiDocs } from "./_lib/types";
+import { buildSidebarItems, resolveContentData } from "./_lib/sidebarData";
+import { buildSearchIndex, searchApi } from "./_lib/apiSearchIndex";
 
-type Method = {
-  name: string;
-  params: string;
-  returns: string;
-  description: string;
-  example?: string;
-};
-
-type Subgroup = {
-  title: string;
-  description?: string;
-  methods: Method[];
-  type?: string;
-};
-
-type Group = {
-  title: string;
-  description: string;
-  methods: Method[];
-  subgroups?: { [key: string]: Subgroup };
-};
-
-type TypeDefinition = {
-  name: string;
-  definition: string;
-  kind: "type" | "interface";
-  source: string;
-};
-
-type TypesGroup = {
-  title: string;
-  description: string;
-  items: TypeDefinition[];
-};
-
-type ApiDocs = {
-  version: string;
-  generatedAt: string;
-  structure: {
-    [key: string]: Group | TypesGroup;
-  };
-};
-
-const apiDocs = apiDocsData as ApiDocs;
-
-type SidebarItem = {
-  id: string;
-  title: string;
-  count: number;
-  type?: "group" | "subgroup";
-  children?: SidebarItem[];
-};
-
-type ContentData = {
-  title: string;
-  description?: string;
-  methods: Method[];
-  prefix: string;
-};
+const apiDocs = apiDocsData as unknown as ApiDocs;
+const sidebarItems = buildSidebarItems(apiDocs);
+const searchIndex = buildSearchIndex(apiDocs);
 
 export default function DocsApiPage() {
+  const t = useTranslations("DocsApi");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState("editor");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
-  // Build sidebar items from API docs structure
-  const sidebarItems: SidebarItem[] = useMemo(() => {
-    const items: SidebarItem[] = [];
+  // URL hash sync on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
 
-    // Editor Instance
-    if (apiDocs.structure.editor) {
-      const editorChildren: SidebarItem[] = [];
-
-      // Main editor methods
-      if (apiDocs.structure.editor.methods.length > 0) {
-        editorChildren.push({
-          id: "editor",
-          title: "Main Methods",
-          count: apiDocs.structure.editor.methods.length,
-          type: "subgroup",
-        });
-      }
-
-      // Editor subgroups
-      if (apiDocs.structure.editor.subgroups) {
-        Object.entries(apiDocs.structure.editor.subgroups).forEach(([key, subgroup]) => {
-          editorChildren.push({
-            id: `editor.${key}`,
-            title: subgroup.title,
-            count: subgroup.methods.length,
-            type: "subgroup",
-          });
-        });
-      }
-
-      items.push({
-        id: "editor-group",
-        title: "Editor Instance",
-        count: editorChildren.reduce((sum, child) => sum + child.count, 0),
-        type: "group",
-        children: editorChildren,
+    // Find which section contains this item
+    const item = searchIndex.find((i) => i.id === hash);
+    if (item) {
+      setSelectedId(item.sectionId);
+      // Scroll to the element after render
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
       });
     }
-
-    // Plugins
-    if (apiDocs.structure.plugins?.subgroups) {
-      const pluginChildren: SidebarItem[] = [];
-
-      // Group plugins by type
-      const pluginsByType: { [type: string]: Array<[string, Subgroup]> } = {};
-      Object.entries(apiDocs.structure.plugins.subgroups).forEach(([key, plugin]) => {
-        const type = plugin.type || "other";
-        if (!pluginsByType[type]) pluginsByType[type] = [];
-        pluginsByType[type].push([key, plugin]);
-      });
-
-      // Create sidebar items for each plugin type
-      Object.entries(pluginsByType).forEach(([type, plugins]) => {
-        const typeChildren: SidebarItem[] = plugins.map(([key, plugin]) => ({
-          id: `plugins.${key}`,
-          title: plugin.title,
-          count: plugin.methods.length,
-          type: "subgroup",
-        }));
-
-        const typeLabels: { [key: string]: string } = {
-          command: "Command",
-          dropdown: "Dropdown",
-          modal: "Modal",
-          browser: "Browser",
-          field: "Field",
-          input: "Input",
-          popup: "Popup",
-        };
-
-        pluginChildren.push({
-          id: `plugins-type-${type}`,
-          title: typeLabels[type] || type,
-          count: typeChildren.reduce((sum, child) => sum + child.count, 0),
-          type: "group",
-          children: typeChildren,
-        });
-      });
-
-      items.push({
-        id: "plugins-group",
-        title: "Plugins",
-        count: pluginChildren.reduce((sum, child) => sum + child.count, 0),
-        type: "group",
-        children: pluginChildren,
-      });
-    }
-
-    // Modules
-    if (apiDocs.structure.modules?.subgroups) {
-      const moduleChildren: SidebarItem[] = Object.entries(
-        apiDocs.structure.modules.subgroups
-      ).map(([key, module]) => ({
-        id: `modules.${key}`,
-        title: module.title,
-        count: module.methods.length,
-        type: "subgroup",
-      }));
-
-      items.push({
-        id: "modules-group",
-        title: "Modules",
-        count: moduleChildren.reduce((sum, child) => sum + child.count, 0),
-        type: "group",
-        children: moduleChildren,
-      });
-    }
-
-    // Helpers
-    if (apiDocs.structure.helpers?.subgroups) {
-      const helperChildren: SidebarItem[] = Object.entries(
-        apiDocs.structure.helpers.subgroups
-      ).map(([key, helper]) => ({
-        id: `helpers.${key}`,
-        title: helper.title,
-        count: helper.methods.length,
-        type: "subgroup",
-      }));
-
-      items.push({
-        id: "helpers-group",
-        title: "Helper Utilities",
-        count: helperChildren.reduce((sum, child) => sum + child.count, 0),
-        type: "group",
-        children: helperChildren,
-      });
-    }
-
-    // Events
-    if (apiDocs.structure.events) {
-      items.push({
-        id: "events",
-        title: "Event Callbacks",
-        count: apiDocs.structure.events.methods.length,
-        type: "group",
-      });
-    }
-
-    // Types
-    if (apiDocs.structure.types && 'items' in apiDocs.structure.types) {
-      items.push({
-        id: "types",
-        title: "Type Definitions",
-        count: apiDocs.structure.types.items.length,
-        type: "group",
-      });
-    }
-
-    return items;
   }, []);
 
-  // Get content data for selected item
-  const contentData: ContentData | null = useMemo(() => {
-    // Editor main methods
-    if (selectedId === "editor") {
-      return {
-        title: "Editor Instance - Main Methods",
-        description: apiDocs.structure.editor.description,
-        methods: apiDocs.structure.editor.methods,
-        prefix: "editor.",
-      };
-    }
-
-    // Editor subgroups
-    if (selectedId.startsWith("editor.")) {
-      const key = selectedId.replace("editor.", "");
-      const subgroup = apiDocs.structure.editor.subgroups?.[key];
-      if (subgroup) {
-        return {
-          title: subgroup.title,
-          description: subgroup.description,
-          methods: subgroup.methods,
-          prefix: `${subgroup.title}.`,
-        };
+  // Cmd+K shortcut
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
       }
-    }
-
-    // Plugins
-    if (selectedId.startsWith("plugins.")) {
-      const key = selectedId.replace("plugins.", "");
-      const plugin = apiDocs.structure.plugins?.subgroups?.[key];
-      if (plugin) {
-        return {
-          title: plugin.title,
-          description: `Plugin: ${plugin.title}`,
-          methods: plugin.methods,
-          prefix: `${key}.`,
-        };
+      if (e.key === "Escape" && searchQuery) {
+        setSearchQuery("");
+        searchInputRef.current?.blur();
       }
-    }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [searchQuery]);
 
-    // Modules
-    if (selectedId.startsWith("modules.")) {
-      const key = selectedId.replace("modules.", "");
-      const module = apiDocs.structure.modules?.subgroups?.[key];
-      if (module) {
-        return {
-          title: module.title,
-          description: module.description,
-          methods: module.methods,
-          prefix: `${key}.`,
-        };
-      }
-    }
+  // Search results
+  const searchResults = useMemo(() => {
+    return searchApi(searchQuery, searchIndex);
+  }, [searchQuery]);
 
-    // Helpers
-    if (selectedId.startsWith("helpers.")) {
-      const key = selectedId.replace("helpers.", "");
-      const helper = apiDocs.structure.helpers?.subgroups?.[key];
-      if (helper) {
-        return {
-          title: helper.title,
-          description: helper.description,
-          methods: helper.methods,
-          prefix: `helper.${key}.`,
-        };
-      }
-    }
-
-    // Events
-    if (selectedId === "events") {
-      return {
-        title: apiDocs.structure.events.title,
-        description: apiDocs.structure.events.description,
-        methods: apiDocs.structure.events.methods,
-        prefix: "options.events.",
-      };
-    }
-
-    return null;
+  // Content data for selected section
+  const contentData = useMemo(() => {
+    return resolveContentData(selectedId, apiDocs);
   }, [selectedId]);
 
-  // Filter methods based on search query
-  const filteredMethods = useMemo(() => {
-    if (!contentData) return [];
-    if (!searchQuery.trim()) return contentData.methods;
+  // Handle sidebar selection — scroll content to top, preserve sidebar scroll
+  const handleSidebarSelect = useCallback((id: string) => {
+    const scrollTop = sidebarRef.current?.scrollTop ?? 0;
+    setSelectedId(id);
+    window.scrollTo({ top: 0 });
+    requestAnimationFrame(() => {
+      if (sidebarRef.current) {
+        sidebarRef.current.scrollTop = scrollTop;
+      }
+    });
+  }, []);
 
-    return contentData.methods.filter(
-      (m) =>
-        m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        m.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [contentData, searchQuery]);
+  // Handle search result selection
+  const handleSearchSelect = useCallback((sectionId: string, itemId: string) => {
+    setSelectedId(sectionId);
+    setSearchQuery("");
+    window.history.replaceState(null, "", `#${itemId}`);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.getElementById(itemId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    });
+  }, []);
+
+  const isSearching = searchQuery.trim().length > 0;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <div className="border-b bg-background/95 backdrop-blur sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="secondary">v{apiDocs.version}</Badge>
-                  <span className="text-xs text-muted-foreground">SunEditor API</span>
-                </div>
-                <h1 className="text-2xl font-bold">API Reference</h1>
+        <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* Mobile sidebar trigger */}
+            <MobileSidebar
+              items={sidebarItems}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+            />
+
+            {/* Title */}
+            <div className="shrink-0">
+              <div className="flex items-center gap-2">
+                <h1 className="text-lg md:text-2xl font-bold">{t("title")}</h1>
+                <Badge variant="secondary" className="text-[10px] md:text-xs">
+                  v{apiDocs.version}
+                </Badge>
               </div>
             </div>
-            <div className="relative w-64">
+
+            {/* Search */}
+            <div className="relative flex-1 max-w-md ml-auto">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
+                ref={searchInputRef}
                 type="text"
-                placeholder="Search methods..."
-                className="w-full pl-9 pr-4 py-2 text-sm border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                placeholder={t("searchPlaceholder")}
+                className="w-full pl-9 pr-20 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                >
-                  ✕
-                </button>
-              )}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                {searchQuery ? (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                ) : (
+                  <kbd className="hidden md:flex items-center gap-0.5 text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded border">
+                    <Command className="h-2.5 w-2.5" />K
+                  </kbd>
+                )}
+              </div>
             </div>
           </div>
+
+          {/* Search result count */}
+          {isSearching && (
+            <div className="mt-2 text-xs text-muted-foreground">
+              {searchResults.length} {t("resultsFound")}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex h-[calc(100vh-120px)]">
-        <ApiSidebar
-          items={sidebarItems}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-        />
-        {selectedId === "types" && apiDocs.structure.types && 'items' in apiDocs.structure.types ? (
+      <div className="flex flex-1 min-h-0">
+        {/* Desktop sidebar */}
+        <div ref={sidebarRef} className="hidden md:block w-60 lg:w-64 shrink-0 border-r bg-background sticky top-[91px] self-start max-h-[calc(100vh-91px)] overflow-y-auto">
+          <ApiSidebar
+            items={sidebarItems}
+            selectedId={selectedId}
+            onSelect={handleSidebarSelect}
+          />
+        </div>
+
+        {/* Content area */}
+        {isSearching ? (
+          <GlobalSearchResults
+            results={searchResults}
+            query={searchQuery}
+            onSelect={handleSearchSelect}
+          />
+        ) : selectedId === "types" &&
+          apiDocs.structure.types &&
+          "items" in apiDocs.structure.types ? (
           <TypesContent
             title={apiDocs.structure.types.title}
             description={apiDocs.structure.types.description}
@@ -370,7 +185,7 @@ export default function DocsApiPage() {
           <ApiContent
             title={contentData.title}
             description={contentData.description}
-            methods={filteredMethods}
+            methods={contentData.methods}
             prefix={contentData.prefix}
           />
         ) : null}

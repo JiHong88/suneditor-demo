@@ -116,7 +116,17 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 	if (state.toastMessageTime !== 1500) add("toastMessageTime", `{ copy: ${state.toastMessageTime} }`);
 
 	// filtering
-	if (!state.strictMode) add("strictMode", "false");
+	if (!state.strictMode) {
+		const sm = {
+			tagFilter: state.strictMode_tagFilter,
+			formatFilter: state.strictMode_formatFilter,
+			classFilter: state.strictMode_classFilter,
+			textStyleTagFilter: state.strictMode_textStyleTagFilter,
+			attrFilter: state.strictMode_attrFilter,
+			styleFilter: state.strictMode_styleFilter,
+		};
+		add("strictMode", JSON.stringify(sm));
+	}
 	if (state.elementWhitelist) add("elementWhitelist", `"${state.elementWhitelist}"`);
 	if (state.elementBlacklist) add("elementBlacklist", `"${state.elementBlacklist}"`);
 	if (state.attributeWhitelist) {
@@ -144,8 +154,8 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 	if (state.formatClosureBrLine) add("formatClosureBrLine", `"${state.formatClosureBrLine}"`);
 	if (state.formatBlock) add("formatBlock", `"${state.formatBlock}"`);
 	if (state.formatClosureBlock) add("formatClosureBlock", `"${state.formatClosureBlock}"`);
-	if (state.spanStyles) add("spanStyles", `"${state.spanStyles}"`);
-	if (state.lineStyles) add("lineStyles", `"${state.lineStyles}"`);
+	if (state.spanStyles && state.spanStyles !== DEFAULTS.spanStyles) add("spanStyles", `"${state.spanStyles}"`);
+	if (state.lineStyles && state.lineStyles !== DEFAULTS.lineStyles) add("lineStyles", `"${state.lineStyles}"`);
 	if (state.textStyleTags) add("textStyleTags", `"${state.textStyleTags}"`);
 	if (state.allowedEmptyTags) add("allowedEmptyTags", `"${state.allowedEmptyTags}"`);
 	if (state.allowedClassName) add("allowedClassName", `"${state.allowedClassName}"`);
@@ -274,6 +284,31 @@ function generateCDN(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4);
 	const bodyIndented = indent(body, 6);
 
+	if (state.multiroot) {
+		return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SunEditor Multi-Root</title>
+  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}
+  <script src="${CDN_JS}"><\/script>
+</head>
+<body style="margin:6em 4rem 4rem">
+  <h1>SunEditor Multi-Root Demo</h1>
+  <textarea id="header"></textarea>
+  <textarea id="body"></textarea>
+  <script>
+    const editor = SUNEDITOR.create({
+      header: { target: document.getElementById("header") },
+      body: { target: document.getElementById("body"), options: { height: "400px" } },
+    }, {
+${bodyIndented}
+    });
+  <\/script>
+</body>
+</html>`;
+	}
+
 	return `<!DOCTYPE html>
 <html>
 <head>
@@ -298,6 +333,21 @@ function generateVanilla(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 2);
 	const bodyIndented = indent(body, 4);
 
+	if (state.multiroot) {
+		return `// npm i suneditor@${SUNEDITOR_VERSION}
+import suneditor, { plugins } from "suneditor";
+import "suneditor/css";
+import "suneditor/css/contents";${themeImport(state.theme)}
+
+const editor = suneditor.create({
+  header: { target: document.getElementById("header") },
+  body: { target: document.getElementById("body"), options: { height: "400px" } },
+}, {
+  plugins,
+${bodyIndented}
+});`;
+	}
+
 	return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
@@ -312,6 +362,37 @@ ${bodyIndented}
 function generateReact(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 6);
 	const bodyIndented = indent(body, 8);
+
+	if (state.multiroot) {
+		return `import { useEffect, useRef } from "react";
+import suneditor, { plugins } from "suneditor";
+import "suneditor/css";
+import "suneditor/css/contents";${themeImport(state.theme)}
+
+export default function Editor() {
+  const headerRef = useRef(null);
+  const bodyRef = useRef(null);
+
+  useEffect(() => {
+    const instance = suneditor.create({
+      header: { target: headerRef.current },
+      body: { target: bodyRef.current, options: { height: "400px" } },
+    }, {
+      plugins,
+${bodyIndented}
+    });
+
+    return () => instance.destroy();
+  }, []);
+
+  return (
+    <div>
+      <textarea ref={headerRef} />
+      <textarea ref={bodyRef} />
+    </div>
+  );
+}`;
+	}
 
 	return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
@@ -337,6 +418,40 @@ ${bodyIndented}
 function generateVue(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4);
 	const bodyIndented = indent(body, 6);
+
+	if (state.multiroot) {
+		return `<script setup>
+import { onMounted, onBeforeUnmount, ref } from "vue";
+import suneditor, { plugins } from "suneditor";
+import "suneditor/css";
+import "suneditor/css/contents";${themeImport(state.theme)}
+
+const headerEl = ref(null);
+const bodyEl = ref(null);
+let instance = null;
+
+onMounted(() => {
+  instance = suneditor.create({
+    header: { target: headerEl.value },
+    body: { target: bodyEl.value, options: { height: "400px" } },
+  }, {
+    plugins,
+${bodyIndented}
+  });
+});
+
+onBeforeUnmount(() => {
+  instance?.destroy();
+});
+</script>
+
+<template>
+  <div>
+    <textarea ref="headerEl" />
+    <textarea ref="bodyEl" />
+  </div>
+</template>`;
+	}
 
 	return `<script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
@@ -367,6 +482,41 @@ onBeforeUnmount(() => {
 function generateAngular(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 6);
 	const bodyIndented = indent(body, 8);
+
+	if (state.multiroot) {
+		return `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
+import suneditor, { plugins } from "suneditor";
+import type { SunEditor } from "suneditor/types";
+import "suneditor/css";
+import "suneditor/css/contents";${themeImport(state.theme)}
+
+@Component({
+  selector: "app-editor",
+  template: \`
+    <textarea #headerEl></textarea>
+    <textarea #bodyEl></textarea>
+  \`
+})
+export class EditorComponent implements AfterViewInit, OnDestroy {
+  @ViewChild("headerEl", { static: true }) headerEl!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild("bodyEl", { static: true }) bodyEl!: ElementRef<HTMLTextAreaElement>;
+  private instance: SunEditor.Instance | null = null;
+
+  ngAfterViewInit() {
+    this.instance = suneditor.create({
+      header: { target: this.headerEl.nativeElement },
+      body: { target: this.bodyEl.nativeElement, options: { height: "400px" } },
+    }, {
+      plugins,
+${bodyIndented}
+    });
+  }
+
+  ngOnDestroy() {
+    this.instance?.destroy();
+  }
+}`;
+	}
 
 	return `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
 import suneditor, { plugins } from "suneditor";
@@ -399,6 +549,34 @@ function generateSvelte(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4);
 	const bodyIndented = indent(body, 6);
 
+	if (state.multiroot) {
+		return `<script>
+  import { onMount } from "svelte";
+  import suneditor, { plugins } from "suneditor";
+  import "suneditor/css";
+  import "suneditor/css/contents";${themeImport(state.theme)}
+
+  let headerEl;
+  let bodyEl;
+  let instance;
+
+  onMount(() => {
+    instance = suneditor.create({
+      header: { target: headerEl },
+      body: { target: bodyEl, options: { height: "400px" } },
+    }, {
+      plugins,
+${bodyIndented}
+    });
+
+    return () => instance?.destroy();
+  });
+</script>
+
+<textarea bind:this={headerEl}></textarea>
+<textarea bind:this={bodyEl}></textarea>`;
+	}
+
 	return `<script>
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
@@ -424,6 +602,32 @@ ${bodyIndented}
 function generateWebComponents(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 6);
 	const bodyIndented = indent(body, 8);
+
+	if (state.multiroot) {
+		return `import suneditor, { plugins } from "suneditor";
+import "suneditor/css";
+import "suneditor/css/contents";${themeImport(state.theme)}
+
+class SunEditorElement extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = \`<textarea id="header"></textarea><textarea id="body"></textarea>\`;
+
+    this.editor = suneditor.create({
+      header: { target: this.querySelector("#header") },
+      body: { target: this.querySelector("#body"), options: { height: "400px" } },
+    }, {
+      plugins,
+${bodyIndented}
+    });
+  }
+
+  disconnectedCallback() {
+    this.editor?.destroy();
+  }
+}
+
+customElements.define("sun-editor", SunEditorElement);`;
+	}
 
 	return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css";

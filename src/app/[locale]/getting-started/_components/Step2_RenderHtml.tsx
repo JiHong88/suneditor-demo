@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { getCodeFramework, hexToRgba, type FrameworkKey } from "@/components/common/codeExampleFrameworks";
 import CodeBlock from "@/components/common/CodeBlock";
@@ -15,6 +16,8 @@ type StepTwoProps = {
 };
 
 export default function StepTwoContentRendering({ framework }: StepTwoProps) {
+	const t = useTranslations("GettingStarted.step2");
+	const tc = useTranslations("Common");
 	const [copied, setCopied] = useState(false);
 	const item = getCodeFramework(framework);
 	const snippet = getRenderSnippet(framework);
@@ -27,7 +30,7 @@ export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 
 	return (
 		<section className='mx-auto w-full max-w-6xl px-6 pb-8'>
-			<SectionHeading eyebrow='Step 2' title='Content Rendering' description='getContents()로 가져온 HTML을 화면에 표시할 때, CSS와 클래스명이 필요합니다.' />
+			<SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} />
 			<div className='mt-4'>
 				<FrameworkBadge framework={framework} />
 			</div>
@@ -53,7 +56,7 @@ export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 							<CodeBlock code={snippet.code} lang={snippet.lang} />
 						</motion.div>
 					</AnimatePresence>
-					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>Copied!</span>}
+					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>{tc("copied")}</span>}
 				</div>
 			</div>
 		</section>

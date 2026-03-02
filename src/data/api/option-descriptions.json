@@ -1,244 +1,798 @@
 {
-  "value": "Initial value for the editor.",
-  "placeholder": "Placeholder text.",
-  "editableFrameAttributes": "Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value)",
-  "width": "Width for the editor.",
-  "minWidth": "Min width for the editor.",
-  "maxWidth": "Max width for the editor.",
-  "height": "Height for the editor.",
-  "minHeight": "Min height for the editor.",
-  "maxHeight": "Max height for the editor.",
-  "editorStyle": "Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\").",
-  "iframe": "Content will be placed in an iframe and isolated from the rest of the page.",
-  "iframe_fullPage": "Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the \"iframe\".",
-  "iframe_attributes": "Attributes of the \"iframe\". (e.g. {'allow-scripts': 'true'})",
-  "statusbar": "Enables the status bar.",
-  "statusbar_showPathLabel": "Displays the current node structure to status bar.",
-  "statusbar_resizeEnable": "Enables resize function of bottom status bar",
-  "charCounter": "Shows the number of characters in the editor. - If the maxCharCount option has a value, it becomes true.",
-  "charCounter_max": "The maximum number of characters allowed to be inserted into the editor.",
-  "charCounter_label": "Text to be displayed in the \"charCounter\" area of the bottom bar. (e.g. \"Characters : 20/200\")",
-  "charCounter_type": "Defines the calculation method of the \"charCounter\" option. - 'char': Characters length. - 'byte': Binary data size of characters. - 'byte-html': Binary data size of the full HTML string.",
-  "top": "Styles applied to the top container (e.g. width, z-index, etc).",
-  "frame": "Styles applied to the iframe container (e.g. height, min-height).",
-  "editor": "Styles applied to the editable content area.",
-  "codeMirror5Editor": "CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization.",
-  "codeMirror6Editor": "CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization.",
-  "plugins": "Plugin configuration.",
-  "buttonList": "List of toolbar buttons, grouped by sub-arrays. - The default follows {@link DEFAULTS.BUTTON_LIST}",
-  "v2Migration": "Enables migration mode for SunEditor v2.",
-  "mode": "Toolbar mode: \"classic\", \"inline\", \"balloon\", \"balloon-always\".",
-  "type": "Editor type: \"document:header,page\".",
-  "theme": "Editor theme.",
-  "lang": "Language configuration. default : EN",
-  "icons": "Overrides the default icons.",
-  "textDirection": "Text direction: \"ltr\" or \"rtl\".",
-  "strictMode": "Enables strict filtering of tags, attributes, and styles. - Use `true` to enable all filters (default), or an object to control individual filters. - Setting `false` is not supported; use the object form to disable specific filters instead. @property {Array<string>} [scopeSelectionTags=CONSTANTS.SCOPE_SELECTION_TAGS] - Tags treated as whole units when selecting all content. - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS} ///  === Content Filtering & Formatting === == #### 1) Tag & Element Control @property {string} [elementWhitelist=\"\"] - Specifies HTML elements to additionally allow beyond the 'default' allow list. Delimiter: \"|\" (e.g. \"p|div\", \"*\"). - The value entered here will be added to the end of the default list determined by the {@link PrivateBaseOptions.__defaultElementWhitelist} logic above. @property {string} [elementBlacklist=\"\"] - Filters by specifying HTML elements that should not be used. Delimiter: \"|\" (e.g. \"script|style\"). - Tags specified here will eventually be removed, even if they are included in other whitelists. @property {string} [allowedEmptyTags=CONSTANTS.ALLOWED_EMPTY_NODE_LIST] - A list of tags that are allowed to be kept even if their values are empty. - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} - It is concatenated with the value of \"ALLOWED_EMPTY_NODE_LIST\" to form the final 'allowedEmptyTags' list. @property {string} [allowedClassName=\"\"] - Allowed class names. - Added the default value {@link DEFAULTS.CLASS_NAME} ///  #### 2) Attribute Control @property {{[key: string]: string|undefined}} [attributeWhitelist=null] - Specifies additional attributes to allow for each tag. (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"}). - Rules for objects specified here will be merged into the {@link PrivateBaseOptions.__defaultAttributeWhitelist}. @property {{[key: string]: string|undefined}} [attributeBlacklist=null] - Filter by specifying attributes to disallow by tag. (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"}). - Attributes specified here will eventually be removed even if they are allowed by other settings. - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. ///  #### 3) Text & Inline Style Control @property {string} [textStyleTags=__textStyleTags] - Additional text style tags. - The default follows {@link PrivateBaseOptions.__textStyleTags} @property {Object<string, string>} [convertTextTags={bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}] - Maps text styles to specific HTML tags. @property {string} [allUsedStyles] - Specifies additional styles to the list of allowed styles. Delimiter: \"|\" (e.g. \"color|background-color\"). @property {Object<string, string>} [tagStyles={}] - Specifies allowed styles for HTML tags. @property {string} [spanStyles=CONSTANTS.SPAN_STYLES] - Specifies allowed styles for the \"span\" tag. - The default follows {@link DEFAULTS.SPAN_STYLES}",
-  "scopeSelectionTags": "Tags treated as whole units when selecting all content. - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
-  "elementWhitelist": "Specifies HTML elements to additionally allow beyond the 'default' allow list. Delimiter: \"|\" (e.g. \"p|div\", \"*\"). - The value entered here will be added to the end of the default list determined by the {@link PrivateBaseOptions.__defaultElementWhitelist} logic above.",
-  "elementBlacklist": "Filters by specifying HTML elements that should not be used. Delimiter: \"|\" (e.g. \"script|style\"). - Tags specified here will eventually be removed, even if they are included in other whitelists.",
-  "allowedEmptyTags": "A list of tags that are allowed to be kept even if their values are empty. - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} - It is concatenated with the value of \"ALLOWED_EMPTY_NODE_LIST\" to form the final 'allowedEmptyTags' list.",
-  "allowedClassName": "Allowed class names. - Added the default value {@link DEFAULTS.CLASS_NAME}",
-  "attributeWhitelist": "Specifies additional attributes to allow for each tag. (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"}). - Rules for objects specified here will be merged into the {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
-  "attributeBlacklist": "Filter by specifying attributes to disallow by tag. (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"}). - Attributes specified here will eventually be removed even if they are allowed by other settings. - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.",
-  "textStyleTags": "Additional text style tags. - The default follows {@link PrivateBaseOptions.__textStyleTags}",
-  "convertTextTags": "Maps text styles to specific HTML tags.",
-  "allUsedStyles": "Specifies additional styles to the list of allowed styles. Delimiter: \"|\" (e.g. \"color|background-color\").",
-  "tagStyles": "Specifies allowed styles for HTML tags.",
-  "spanStyles": "Specifies allowed styles for the \"span\" tag. - The default follows {@link DEFAULTS.SPAN_STYLES}",
-  "lineStyles": "Specifies allowed styles for the \"line\" element (p..). - The default follows {@link DEFAULTS.LINE_STYLES}",
-  "fontSizeUnits": "Allowed font size units. - The default follows {@link DEFAULTS.SIZE_UNITS}",
-  "retainStyleMode": "This option determines how inline elements (such as <span>, <strong>, etc.) are handled when deleting text. - \"repeat\": Inline styles are retained unless the backspace key is repeatedly pressed. If the user continuously presses backspace, the styles will eventually be removed. - \"none\": Inline styles are not retained at all. When deleting text, the associated inline elements are immediately removed along with it. - \"always\": Inline styles persist indefinitely unless explicitly removed. Even if all text inside an inline element is deleted, the element itself remains until manually removed.",
-  "defaultLine": "Default line element when inserting new lines.",
-  "defaultLineBreakFormat": "Specifies the default line break format. - [Recommended] \"line\" :  is a line break that is divided into general tags. - [Not recommended] \"br\" : Line breaks are treated as <br> on the same line. (like shift+enter) - Line breaks are handled as <br> within \"line\". - You can create a new \"line\" by entering a line break twice in a row. - Formats that include \"line\", such as \"Quote\", still operate on a \"line\" basis. - ● suneditor processes work in \"line\" units. - ● When set to \"br\", performance may decrease when editing a lot of data.",
-  "lineAttrReset": "Line properties that should be reset when changing lines (e.g. \"id|name\").",
-  "formatLine": "Additionally allowed \"line\" elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").",
-  "formatBrLine": "Additionally allowed \"brLine\" elements beyond the default. (e.g. \"PRE\"). - It is concatenated with the value of {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final 'brLine' element list. - \"brLine\" elements is included in the \"line\" element. - \"brLine\" elements's line break is \"BR\" tag.",
-  "formatClosureBrLine": "Additionally allowed \"closureBrLine\" elements beyond the default. - It is concatenated with the value of {@link PrivateBaseOptions.__defaultFormatClosureBrLine} to form the final 'closureBrLine' element list. - \"closureBrLine\" elements is included in the \"brLine\". - \"closureBrLine\" elements's line break is \"BR\" tag. - ※ You cannot exit this format with the Enter key or Backspace key. - ※ Use it only in special cases. ([ex] format of table cells)",
-  "formatBlock": "Additionally allowed \"block\" elements beyond the default. - It is concatenated with the value of {@link PrivateBaseOptions.__defaultFormatBlock} to form the final 'block' element list. - \"block\" is wrap the \"line\" and \"component\"",
-  "formatClosureBlock": "Additionally allowed \"closureBlock\" elements beyond the default. - It is concatenated with the value of {@link PrivateBaseOptions.__defaultFormatClosureBlock} to form the final 'closureBlock' element list. - \"closureBlock\" elements is included in the \"block\". - \"closureBlock\" element is wrap the \"line\" and \"component\" - ※ You cannot exit this format with the Enter key or Backspace key. - ※ Use it only in special cases. (e.g. format of table cells)",
-  "closeModalOutsideClick": "Closes modals when clicking outside.",
-  "syncTabIndent": "Synchronizes tab indent with spaces.",
-  "tabDisable": "Disables tab key input.",
-  "toolbar_width": "Toolbar width.",
-  "toolbar_container": "Container element for the toolbar.",
-  "toolbar_sticky": "Enables sticky toolbar with optional offset.",
-  "toolbar_hide": "Hides toolbar initially.",
-  "subToolbar": "Sub-toolbar configuration.",
-  "statusbar_container": "Container element for the status bar.",
-  "shortcutsHint": "Displays shortcut hints in tooltips.",
-  "shortcutsDisable": "Disables keyboard shortcuts.",
-  "shortcuts": "Custom keyboard shortcuts.",
-  "copyFormatKeepOn": "Keeps the format of the copied content.",
-  "autoLinkify": "Automatically converts URLs into hyperlinks. (\"Link\" plugin required) - Default value is determined dynamically based on whether the 'link' plugin is enabled. (default : Boolean(plugins.link))",
-  "historyStackDelayTime": "Delay time for history stack updates (ms).",
-  "printClass": "Class name for printing.",
-  "fullScreenOffset": "Offset applied when entering fullscreen mode.",
-  "previewTemplate": "Custom template for preview mode.",
-  "printTemplate": "Custom template for print mode.",
-  "componentInsertBehavior": "Enables automatic selection of inserted components. - For inline components: places the cursor near the inserted component or selects it if no nearby range is available. - For block components: executes behavior based on `selectMode`: - `auto`: Move cursor to the next line if possible, otherwise select the component. - `select`: Always select the inserted component. - `line`: Move cursor to the next line if possible, or create a new line and move there. - `none`: Do nothing.",
-  "defaultUrlProtocol": "Default URL protocol for links.",
-  "toastMessageTime": "{\"copy\": 1500} - Duration for displaying toast messages.",
-  "freeCodeViewMode": "Enables free code view mode.",
-  "externalLibs": "External libraries like CodeMirror or MathJax. See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}",
-  "allowedExtraTags": "Specifies extra allowed or disallowed tags. - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}",
-  "events": "User event handlers configuration",
-  "buttons": "List of currently used toolbar buttons",
-  "buttons_sub": "List of currently used sub-toolbar buttons",
-  "toolbar_sub_width": "Sub-toolbar width.",
-  "reverseCommands": "Merged reverse command pairs array (includes default 'indent-outdent' + user's reverseButtons).",
-  "codeMirror": "CodeMirror configuration object from `externalLibs.codeMirror`.",
-  "hasCodeMirror": "Uses CodeMirror for code view.",
-  "audioGallery_data": "Direct data without server calls",
-  "audioGallery_url": "Server request URL",
-  "audioGallery_headers": "Server request headers",
-  "audioGallery_thumbnail": "Default thumbnail",
-  "fileBrowser_data": "Direct data without server calls",
-  "fileBrowser_url": "Server request URL",
-  "fileBrowser_headers": "Server request headers",
-  "fileBrowser_thumbnail": "Default thumbnail",
-  "fileBrowser_props": "Additional tag names",
-  "fileGallery_data": "Direct data without server calls",
-  "fileGallery_url": "Server request URL",
-  "fileGallery_headers": "Server request headers",
-  "fileGallery_thumbnail": "Default thumbnail",
-  "imageGallery_data": "Direct data without server calls",
-  "imageGallery_url": "Server request URL",
-  "imageGallery_headers": "Server request headers",
-  "videoGallery_data": "Direct data without server calls",
-  "videoGallery_url": "Server request URL",
-  "videoGallery_headers": "Server request headers",
-  "videoGallery_thumbnail": "Default thumbnail",
-  "exportPDF_apiUrl": "Server request URL for PDF generation",
-  "exportPDF_fileName": "Name of the generated PDF file",
-  "fileUpload_uploadUrl": "Server request URL for file upload",
-  "fileUpload_uploadHeaders": "Server request headers",
-  "fileUpload_uploadSizeLimit": "Total upload size limit in bytes",
-  "fileUpload_uploadSingleSizeLimit": "Single file size limit in bytes",
-  "fileUpload_allowMultiple": "Allow multiple file uploads",
-  "fileUpload_acceptedFormats": "Accepted file formats (e.g., 'image/*, .pdf')",
-  "fileUpload_as": "Specify the default form of the file component as 'box' or 'link'",
-  "fileUpload_controls": "Additional controls to be added to the figure",
-  "fileUpload_insertBehavior": "Component insertion behavior for selection and cursor placement. [default: options.get('componentInsertBehavior')]",
-  "align_items": "Align items",
-  "backgroundColor_items": "Color list",
-  "backgroundColor_splitNum": "Number of colors per line",
-  "backgroundColor_disableHEXInput": "Disable HEX input",
-  "blockStyle_items": "Format list",
-  "font_items": "Font list",
-  "fontColor_items": "Color list",
-  "fontColor_splitNum": "Number of colors per line",
-  "fontColor_disableHEXInput": "Disable HEX input",
-  "hR_items": "HR list",
-  "layout_items": "Layout list",
-  "lineHeight_items": "Line height list",
-  "paragraphStyle_items": "Paragraph item list",
-  "table_scrollType": "Scroll type ('x', 'y', 'xy')",
-  "table_captionPosition": "Caption position ('top', 'bottom')",
-  "table_cellControllerPosition": "Cell controller position ('cell', 'table')",
-  "table_colorList": "Color list, used in cell color picker",
-  "template_items": "Template list",
-  "textStyle_items": "Text style item list",
-  "mention_triggerText": "The character that triggers the mention list",
-  "mention_limitSize": "The number of items to display in the mention list",
-  "mention_searchStartLength": "The number of characters to start searching for the mention list",
-  "mention_delayTime": "The time to wait before displaying the mention list",
-  "mention_data": "Use data without using API",
-  "mention_apiUrl": "The URL to call the mention list",
-  "mention_apiHeaders": "The headers to send with the API call",
-  "mention_useCachingData": "Whether to cache the mention list data",
-  "mention_useCachingFieldData": "Whether to cache the mention list data in the field",
-  "fontSize_sizeUnit": "The unit for the font size.",
-  "fontSize_showDefaultSizeLabel": "Determines whether the default size label is displayed in the dropdown menu.",
-  "fontSize_showIncDecControls": "When true, displays increase and decrease buttons for font size adjustments.",
-  "fontSize_disableInput": "When true, disables the direct font size input box.",
-  "fontSize_unitMap": "Optional object to override or extend the default unit mapping for font sizes.",
-  "audio_defaultWidth": "The default width of the audio tag (e.g., \"300px\").",
-  "audio_defaultHeight": "The default height of the audio tag (e.g., \"150px\").",
-  "audio_createFileInput": "Whether to create a file input element.",
-  "audio_createUrlInput": "Whether to create a URL input element (default is true if file input is not created).",
-  "audio_uploadUrl": "The URL to which files will be uploaded.",
-  "audio_uploadHeaders": "Headers to include in the file upload request.",
-  "audio_uploadSizeLimit": "The total upload size limit in bytes.",
-  "audio_uploadSingleSizeLimit": "The single file size limit in bytes.",
-  "audio_allowMultiple": "Whether to allow multiple file uploads.",
-  "audio_acceptedFormats": "Accepted file formats (default is \"audio/*\").",
-  "audio_audioTagAttributes": "Additional attributes to set on the audio tag.",
-  "audio_insertBehavior": "Component insertion behavior for selection and cursor placement. [default: options.get('componentInsertBehavior')]",
-  "drawing_outputFormat": "The output format of the drawing. Options: \"dataurl\", \"svg\".",
-  "drawing_useFormatType": "Whether to enable format type selection (block vs inline).",
-  "drawing_defaultFormatType": "The default format type, either \"block\" or \"inline\".",
-  "drawing_keepFormatType": "Whether to maintain the chosen format type after drawing.",
-  "drawing_lineWidth": "The width of the drawing line.",
-  "drawing_lineReconnect": "Whether to reconnect lines when drawing.",
-  "drawing_lineCap": "The style of the line cap (\"butt\", \"round\", or \"square\").",
-  "drawing_lineColor": "The color of the drawing line.",
-  "drawing_canResize": "Whether the modal form can be resized.",
-  "drawing_maintainRatio": "Whether to maintain the aspect ratio when resizing.",
-  "drawing_formSize": "The size configuration for the drawing modal form.",
-  "embed_canResize": "Whether the embed element can be resized.",
-  "embed_showHeightInput": "Whether to display the height input field.",
-  "embed_defaultWidth": "The default width of the embed element (numeric value or with unit).",
-  "embed_defaultHeight": "The default height of the embed element (numeric value or with unit).",
-  "embed_percentageOnlySize": "Whether to allow only percentage-based sizing.",
-  "embed_uploadUrl": "The URL for file uploads.",
-  "embed_uploadHeaders": "Headers to include in file upload requests.",
-  "embed_uploadSizeLimit": "The total file upload size limit in bytes.",
-  "embed_uploadSingleSizeLimit": "The single file upload size limit in bytes.",
-  "embed_iframeTagAttributes": "Additional attributes to set on the iframe tag.",
-  "embed_query_youtube": "YouTube query parameter.",
-  "embed_query_vimeo": "Vimeo query parameter.",
-  "embed_urlPatterns": "Additional URL patterns for embed.",
-  "embed_embedQuery": "Custom query objects for additional embedding services.",
-  "embed_controls": "Figure controls.",
-  "embed_insertBehavior": "Component insertion behavior for selection and cursor placement. [default: options.get('componentInsertBehavior')]",
-  "image_canResize": "Whether the image element can be resized.",
-  "image_showHeightInput": "Whether to display the height input field.",
-  "image_defaultWidth": "The default width of the image. If a number is provided, \"px\" will be appended.",
-  "image_defaultHeight": "The default height of the image. If a number is provided, \"px\" will be appended.",
-  "image_percentageOnlySize": "Whether to allow only percentage-based sizing.",
-  "image_createFileInput": "Whether to create a file input element for image uploads.",
-  "image_createUrlInput": "Whether to create a URL input element for image insertion.",
-  "image_uploadUrl": "The URL endpoint for image file uploads.",
-  "image_uploadHeaders": "Additional headers to include in the file upload request.",
-  "image_uploadSizeLimit": "The total upload size limit in bytes.",
-  "image_uploadSingleSizeLimit": "The single file upload size limit in bytes.",
-  "image_allowMultiple": "Whether multiple image uploads are allowed.",
-  "image_acceptedFormats": "The accepted file formats for image uploads.",
-  "image_useFormatType": "Whether to enable format type selection (block or inline).",
-  "image_defaultFormatType": "The default image format type (\"block\" or \"inline\").",
-  "image_keepFormatType": "Whether to retain the chosen format type after image insertion.",
-  "image_linkEnableFileUpload": "Whether to enable file uploads for linked images.",
-  "image_controls": "Figure controls.",
-  "image_insertBehavior": "Component insertion behavior for selection and cursor placement. [default: options.get('componentInsertBehavior')]",
-  "math_canResize": "Whether the math modal can be resized.",
-  "math_autoHeight": "Whether to automatically adjust the height of the modal.",
-  "math_fontSizeList": "A list of font size options for rendering math expressions.",
-  "math_onPaste": "A callback function to handle paste events in the math input area.",
-  "math_formSize": "An object specifying the dimensions for the math modal.",
-  "video_canResize": "Whether the video element can be resized.",
-  "video_showHeightInput": "Whether to display the height input field.",
-  "video_defaultWidth": "The default width of the video element. If a number is provided, \"px\" will be appended.",
-  "video_defaultHeight": "The default height of the video element. If a number is provided, \"px\" will be appended.",
-  "video_percentageOnlySize": "Whether to allow only percentage-based sizing.",
-  "video_createFileInput": "Whether to create a file input element for video uploads.",
-  "video_createUrlInput": "Whether to create a URL input element for video embedding.",
-  "video_uploadUrl": "The URL endpoint for video file uploads.",
-  "video_uploadHeaders": "Additional headers to include in the video upload request.",
-  "video_uploadSizeLimit": "The total upload size limit for videos in bytes.",
-  "video_uploadSingleSizeLimit": "The single file upload size limit for videos in bytes.",
-  "video_allowMultiple": "Whether multiple video uploads are allowed.",
-  "video_acceptedFormats": "Accepted file formats for video uploads.",
-  "video_defaultRatio": "The default aspect ratio for the video (e.g., 16:9 is 0.5625).",
-  "video_showRatioOption": "Whether to display the ratio option in the modal.",
-  "video_ratioOptions": "Custom ratio options for video resizing.",
-  "video_videoTagAttributes": "Additional attributes to set on the video tag.",
-  "video_iframeTagAttributes": "Additional attributes to set on the iframe tag.",
-  "video_query_youtube": "Additional query parameters for YouTube embedding.",
-  "video_query_vimeo": "Additional query parameters for Vimeo embedding.",
-  "video_embedQuery": "Custom query objects for additional embedding services.",
-  "video_urlPatterns": "Additional URL patterns for video embedding.",
-  "video_extensions": "Additional file extensions to be recognized for video uploads.",
-  "video_controls": "Figure controls.",
-  "video_insertBehavior": "Component insertion behavior for selection and cursor placement. [default: options.get('componentInsertBehavior')]"
+  "value": {
+    "description": "Initial value for the editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Placeholder text.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value)",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Width for the editor.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Min width for the editor.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Max width for the editor.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Height for the editor.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Min height for the editor.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Max height for the editor.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\").",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Content will be placed in an iframe and isolated from the rest of the page.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Attributes of the `iframe`. (e.g. {'allow-scripts': 'true'})",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Enables the status bar.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Displays the current node structure in the status bar.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Enables resize function of the bottom status bar.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Shows the number of characters in the editor.\n- If the `maxCharCount` option has a value, it becomes `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "The maximum number of characters allowed to be inserted into the editor.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Text to be displayed in the `charCounter` area of the bottom bar. (e.g. \"Characters : 20/200\")",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Defines the calculation method of the `charCounter` option.\n- `char`: Characters length.\n- `byte`: Binary data size of characters.\n- `byte-html`: Binary data size of the full HTML string.",
+    "default": "\"char\""
+  },
+  "top": {
+    "description": "Styles applied to the top container (e.g. width, z-index, etc)."
+  },
+  "frame": {
+    "description": "Styles applied to the iframe container (e.g. height, min-height)."
+  },
+  "editor": {
+    "description": "Styles applied to the editable content area."
+  },
+  "codeMirror5Editor": {
+    "description": "CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization."
+  },
+  "codeMirror6Editor": {
+    "description": "CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization."
+  },
+  "plugins": {
+    "description": "Plugin configuration."
+  },
+  "buttonList": {
+    "description": "List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Enables migration mode for SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Editor type: `document:header,page`.",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Editor theme.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Language configuration. default : EN"
+  },
+  "icons": {
+    "description": "Overrides the default icons."
+  },
+  "textDirection": {
+    "description": "Text direction: `ltr` or `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Tags treated as whole units when selecting all content.\n- The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Specifies HTML elements to additionally allow beyond the default allow list.\n- Delimiter: \"|\" (e.g. \"p|div\", \"*\").\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Specifies HTML elements that should not be used.\n- Delimiter: \"|\" (e.g. \"script|style\").\n- Tags specified here will eventually be removed, even if they are included in other whitelists.",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "A list of tags that are allowed to be kept even if their values are empty.\n- The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Allowed class names.\n- Added the default value {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Specifies additional attributes to allow for each tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"})\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Specifies attributes to disallow by tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"})\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Additional text style tags.\n- The default follows {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Maps text styles to specific HTML tags.",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Specifies additional styles to the list of allowed styles.\n- Delimiter: \"|\" (e.g. \"color|background-color\")."
+  },
+  "tagStyles": {
+    "description": "Specifies allowed styles for HTML tags.",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Specifies allowed styles for the `span` tag.\n- The default follows {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Specifies allowed styles for the `line` element (p..).\n- The default follows {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Allowed font size units.\n- The default follows {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n- `repeat`: Styles are retained unless backspace is repeatedly pressed.\n- Continuous pressing will eventually remove the styles.\n- `none`: Styles are not retained. Inline elements are immediately removed with the text.\n- `always`: Styles persist indefinitely unless explicitly removed.\n- Even if all text inside an inline element is deleted, the element itself remains.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Default `line` element when inserting new lines.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Specifies the default line break format.\n- [Recommended] `line` : Line break is divided into general tags.\n- [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n- Line breaks are handled as <br> within `line`.\n- You can create a new `line` by entering a line break twice in a row.\n- Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n- suneditor processes work in `line` units.\n- When set to `br`, performance may decrease when editing a lot of data.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Line properties that should be reset when changing lines (e.g. \"id|name\").",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Additionally allowed `line` elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Additionally allowed `brLine` elements beyond the default. (e.g. \"PRE\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Additionally allowed `closureBrLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n- `closureBrLine` elements are included in the `brLine`.\n- `closureBrLine` elements' line break is `BR` tag.\n- ※ You cannot exit this format with the Enter key or Backspace key.\n- ※ Use it only in special cases. ([ex] format of table cells)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Additionally allowed `block` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n- `block` wraps the `line` and `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Additionally allowed `closureBlock` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n- `closureBlock` elements are included in the `block`.\n- `closureBlock` element wraps the `line` and `component`.\n- ※ You cannot exit this format with the Enter key or Backspace key.\n- ※ Use it only in special cases. (e.g. format of table cells)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Closes modals when clicking outside.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synchronizes tab indent with spaces.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Disables tab key input.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Toolbar width.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Container element for the toolbar."
+  },
+  "toolbar_sticky": {
+    "description": "Enables sticky toolbar with optional offset.",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Hides toolbar initially.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Sub-toolbar configuration.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Container element for the status bar."
+  },
+  "shortcutsHint": {
+    "description": "Displays shortcut hints in tooltips.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Disables keyboard shortcuts.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Custom keyboard shortcuts.",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Keeps the format of the copied content.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Automatically converts URLs into hyperlinks. (`Link` plugin required)\n- Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled."
+  },
+  "historyStackDelayTime": {
+    "description": "Delay time for history stack updates (ms).",
+    "default": "400"
+  },
+  "printClass": {
+    "description": "Class name for printing.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Offset applied when entering fullscreen mode.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Custom template for preview mode.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Custom template for print mode.",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Enables automatic selection of inserted components.\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Default URL protocol for links.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "{\"copy\": 1500} - Duration for displaying toast messages.",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Enables free code view mode.",
+    "default": "false"
+  },
+  "externalLibs": {
+    "description": "External libraries like CodeMirror or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}"
+  },
+  "allowedExtraTags": {
+    "description": "Specifies extra allowed or disallowed tags.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "User event handlers configuration"
+  },
+  "buttons": {
+    "description": "List of currently used toolbar buttons"
+  },
+  "buttons_sub": {
+    "description": "List of currently used sub-toolbar buttons"
+  },
+  "toolbar_sub_width": {
+    "description": "Sub-toolbar width."
+  },
+  "reverseCommands": {
+    "description": "Merged reverse command pairs array.\n- Includes default `indent-outdent` + user's `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "CodeMirror configuration object from `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Uses CodeMirror for code view."
+  },
+  "audioGallery_data": {
+    "description": "Direct data without server calls"
+  },
+  "audioGallery_url": {
+    "description": "Server request URL"
+  },
+  "audioGallery_headers": {
+    "description": "Server request headers"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Default thumbnail"
+  },
+  "fileBrowser_data": {
+    "description": "Direct data without server calls"
+  },
+  "fileBrowser_url": {
+    "description": "Server request URL"
+  },
+  "fileBrowser_headers": {
+    "description": "Server request headers"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Default thumbnail"
+  },
+  "fileBrowser_props": {
+    "description": "Additional tag names"
+  },
+  "fileGallery_data": {
+    "description": "Direct data without server calls"
+  },
+  "fileGallery_url": {
+    "description": "Server request URL"
+  },
+  "fileGallery_headers": {
+    "description": "Server request headers"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Default thumbnail"
+  },
+  "imageGallery_data": {
+    "description": "Direct data without server calls"
+  },
+  "imageGallery_url": {
+    "description": "Server request URL"
+  },
+  "imageGallery_headers": {
+    "description": "Server request headers"
+  },
+  "videoGallery_data": {
+    "description": "Direct data without server calls"
+  },
+  "videoGallery_url": {
+    "description": "Server request URL"
+  },
+  "videoGallery_headers": {
+    "description": "Server request headers"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Default thumbnail"
+  },
+  "exportPDF_apiUrl": {
+    "description": "Server request URL for PDF generation"
+  },
+  "exportPDF_fileName": {
+    "description": "Name of the generated PDF file"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Server request URL for file upload"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Server request headers"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Total upload size limit in bytes"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Single file size limit in bytes"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Allow multiple file uploads"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Accepted file formats (e.g., 'image/*, .pdf')"
+  },
+  "fileUpload_as": {
+    "description": "Specify the default form of the file component as `box` or `link`"
+  },
+  "fileUpload_controls": {
+    "description": "Additional controls to be added to the figure"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
+  },
+  "align_items": {
+    "description": "Align items"
+  },
+  "backgroundColor_items": {
+    "description": "Color list"
+  },
+  "backgroundColor_splitNum": {
+    "description": "Number of colors per line"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Disable HEX input"
+  },
+  "blockStyle_items": {
+    "description": "Format list"
+  },
+  "font_items": {
+    "description": "Font list"
+  },
+  "fontColor_items": {
+    "description": "Color list"
+  },
+  "fontColor_splitNum": {
+    "description": "Number of colors per line"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Disable HEX input"
+  },
+  "hR_items": {
+    "description": "HR list"
+  },
+  "layout_items": {
+    "description": "Layout list"
+  },
+  "lineHeight_items": {
+    "description": "Line height list"
+  },
+  "paragraphStyle_items": {
+    "description": "Paragraph item list"
+  },
+  "table_scrollType": {
+    "description": "Scroll type (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Caption position (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Cell controller position (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Color list, used in cell color picker"
+  },
+  "template_items": {
+    "description": "Template list"
+  },
+  "textStyle_items": {
+    "description": "Text style item list"
+  },
+  "mention_triggerText": {
+    "description": "The character that triggers the mention list."
+  },
+  "mention_limitSize": {
+    "description": "The number of items to display in the mention list"
+  },
+  "mention_searchStartLength": {
+    "description": "The number of characters to start searching for the mention list"
+  },
+  "mention_delayTime": {
+    "description": "The time to wait before displaying the mention list"
+  },
+  "mention_data": {
+    "description": "Use data without using API"
+  },
+  "mention_apiUrl": {
+    "description": "The URL to call the mention list"
+  },
+  "mention_apiHeaders": {
+    "description": "The headers to send with the API call"
+  },
+  "mention_useCachingData": {
+    "description": "Whether to cache the mention list data"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Whether to cache the mention list data in the field"
+  },
+  "fontSize_sizeUnit": {
+    "description": "The unit for the font size.\n- Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n- If `'text'` is used, a text-based font size list is applied."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Determines whether the default size label is displayed in the dropdown menu."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "When `true`, displays increase and decrease buttons for font size adjustments."
+  },
+  "fontSize_disableInput": {
+    "description": "When `true`, disables the direct font size input box."
+  },
+  "fontSize_unitMap": {
+    "description": "Optional object to override or extend the default unit mapping for font sizes."
+  },
+  "audio_defaultWidth": {
+    "description": "The default width of the `AUDIO` tag (e.g., `\"300px\"`)."
+  },
+  "audio_defaultHeight": {
+    "description": "The default height of the `AUDIO` tag (e.g., `\"150px\"`)."
+  },
+  "audio_createFileInput": {
+    "description": "Whether to create a file input element."
+  },
+  "audio_createUrlInput": {
+    "description": "Whether to create a URL input element (default is `true` if file input is not created)."
+  },
+  "audio_uploadUrl": {
+    "description": "The URL to which files will be uploaded."
+  },
+  "audio_uploadHeaders": {
+    "description": "Headers to include in the file upload request."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "The total upload size limit in bytes."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "The single file size limit in bytes."
+  },
+  "audio_allowMultiple": {
+    "description": "Whether to allow multiple file uploads."
+  },
+  "audio_acceptedFormats": {
+    "description": "Accepted file formats (default is `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Additional attributes to set on the `AUDIO` tag."
+  },
+  "audio_insertBehavior": {
+    "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
+  },
+  "drawing_outputFormat": {
+    "description": "The output format of the drawing. Options: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Whether to enable format type selection (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "The default format type, either `\"block\"` or `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Whether to maintain the chosen format type after drawing."
+  },
+  "drawing_lineWidth": {
+    "description": "The width of the drawing line."
+  },
+  "drawing_lineReconnect": {
+    "description": "Whether to reconnect lines when drawing."
+  },
+  "drawing_lineCap": {
+    "description": "The style of the line cap (`\"butt\"`, `\"round\"`, or `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "The color of the drawing line."
+  },
+  "drawing_canResize": {
+    "description": "Whether the modal form can be resized."
+  },
+  "drawing_maintainRatio": {
+    "description": "Whether to maintain the aspect ratio when resizing."
+  },
+  "drawing_formSize": {
+    "description": "The size configuration for the drawing modal form."
+  },
+  "embed_canResize": {
+    "description": "Whether the embed element can be resized."
+  },
+  "embed_showHeightInput": {
+    "description": "Whether to display the height input field."
+  },
+  "embed_defaultWidth": {
+    "description": "The default width of the embed element (numeric value or with unit)."
+  },
+  "embed_defaultHeight": {
+    "description": "The default height of the embed element (numeric value or with unit)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Whether to allow only percentage-based sizing."
+  },
+  "embed_uploadUrl": {
+    "description": "The URL for file uploads."
+  },
+  "embed_uploadHeaders": {
+    "description": "Headers to include in file upload requests."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "The total file upload size limit in bytes."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "The single file upload size limit in bytes."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Additional attributes to set on the `IFRAME` tag."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube query parameter."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo query parameter."
+  },
+  "embed_urlPatterns": {
+    "description": "Additional URL patterns for embed."
+  },
+  "embed_embedQuery": {
+    "description": "Custom query objects for additional embedding services."
+  },
+  "embed_controls": {
+    "description": "Figure controls."
+  },
+  "embed_insertBehavior": {
+    "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
+  },
+  "image_canResize": {
+    "description": "Whether the image element can be resized."
+  },
+  "image_showHeightInput": {
+    "description": "Whether to display the height input field."
+  },
+  "image_defaultWidth": {
+    "description": "The default width of the image. If a number is provided, `\"px\"` will be appended."
+  },
+  "image_defaultHeight": {
+    "description": "The default height of the image. If a number is provided, `\"px\"` will be appended."
+  },
+  "image_percentageOnlySize": {
+    "description": "Whether to allow only percentage-based sizing."
+  },
+  "image_createFileInput": {
+    "description": "Whether to create a file input element for image uploads."
+  },
+  "image_createUrlInput": {
+    "description": "Whether to create a URL input element for image insertion."
+  },
+  "image_uploadUrl": {
+    "description": "The URL endpoint for image file uploads."
+  },
+  "image_uploadHeaders": {
+    "description": "Additional headers to include in the file upload request."
+  },
+  "image_uploadSizeLimit": {
+    "description": "The total upload size limit in bytes."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "The single file upload size limit in bytes."
+  },
+  "image_allowMultiple": {
+    "description": "Whether multiple image uploads are allowed."
+  },
+  "image_acceptedFormats": {
+    "description": "The accepted file formats for image uploads."
+  },
+  "image_useFormatType": {
+    "description": "Whether to enable format type selection (`block` or `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "The default image format type (`\"block\"` or `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Whether to retain the chosen format type after image insertion."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Whether to enable file uploads for linked images."
+  },
+  "image_controls": {
+    "description": "Figure controls."
+  },
+  "image_insertBehavior": {
+    "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
+  },
+  "math_canResize": {
+    "description": "Whether the math modal can be resized."
+  },
+  "math_autoHeight": {
+    "description": "Whether to automatically adjust the height of the modal."
+  },
+  "math_fontSizeList": {
+    "description": "A list of font size options for rendering math expressions."
+  },
+  "math_onPaste": {
+    "description": "A callback function to handle paste events in the math input area."
+  },
+  "math_formSize": {
+    "description": "An object specifying the dimensions for the math modal."
+  },
+  "video_canResize": {
+    "description": "Whether the video element can be resized."
+  },
+  "video_showHeightInput": {
+    "description": "Whether to display the height input field."
+  },
+  "video_defaultWidth": {
+    "description": "The default width of the video element. If a number is provided, `\"px\"` will be appended."
+  },
+  "video_defaultHeight": {
+    "description": "The default height of the video element. If a number is provided, `\"px\"` will be appended."
+  },
+  "video_percentageOnlySize": {
+    "description": "Whether to allow only percentage-based sizing."
+  },
+  "video_createFileInput": {
+    "description": "Whether to create a file input element for video uploads."
+  },
+  "video_createUrlInput": {
+    "description": "Whether to create a URL input element for video embedding."
+  },
+  "video_uploadUrl": {
+    "description": "The URL endpoint for video file uploads."
+  },
+  "video_uploadHeaders": {
+    "description": "Additional headers to include in the video upload request."
+  },
+  "video_uploadSizeLimit": {
+    "description": "The total upload size limit for videos in bytes."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "The single file upload size limit for videos in bytes."
+  },
+  "video_allowMultiple": {
+    "description": "Whether multiple video uploads are allowed."
+  },
+  "video_acceptedFormats": {
+    "description": "Accepted file formats for video uploads (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "The default aspect ratio for the video (e.g., 16:9 is 0.5625)."
+  },
+  "video_showRatioOption": {
+    "description": "Whether to display the ratio option in the modal."
+  },
+  "video_ratioOptions": {
+    "description": "Custom ratio options for video resizing."
+  },
+  "video_videoTagAttributes": {
+    "description": "Additional attributes to set on the `VIDEO` tag."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Additional attributes to set on the `IFRAME` tag."
+  },
+  "video_query_youtube": {
+    "description": "Additional query parameters for YouTube embedding."
+  },
+  "video_query_vimeo": {
+    "description": "Additional query parameters for Vimeo embedding."
+  },
+  "video_embedQuery": {
+    "description": "Custom query objects for additional embedding services."
+  },
+  "video_urlPatterns": {
+    "description": "Additional URL patterns for video embedding."
+  },
+  "video_extensions": {
+    "description": "Additional file extensions to be recognized for video uploads."
+  },
+  "video_controls": {
+    "description": "Figure controls."
+  },
+  "video_insertBehavior": {
+    "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
+  }
 }

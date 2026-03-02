@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Code2, Puzzle, Play, BookOpen, Download, Github, Package, Settings, Wrench, Lightbulb, ArrowRight, ExternalLink } from "lucide-react";
-import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -293,8 +293,6 @@ const submenuPlugin = {
 export default function PluginGuidePage() {
 	const [selectedType, setSelectedType] = useState("toolbar");
 	const [selectedExample, setSelectedExample] = useState("basic");
-	const t = useTranslations("PluginGuide");
-
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}

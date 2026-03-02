@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
+import { highlightInline } from "@/lib/highlightInline";
 
 type Props = {
 	optionKey: string;
@@ -25,6 +26,18 @@ export function OptionInfo({ optionKey, description }: Props) {
 		setTooltip(null);
 		setDialog(true);
 	}, []);
+
+	const contentSize = useMemo(() => {
+		const lines = description.split("\n").length;
+		const len = description.length;
+		if (lines >= 6 || len > 400) return "xl";
+		if (lines >= 4 || len > 200) return "lg";
+		if (lines >= 2 || len > 100) return "md";
+		return "sm";
+	}, [description]);
+
+	const tooltipMaxW = { xl: "max-w-md", lg: "max-w-sm", md: "max-w-80", sm: "max-w-64" }[contentSize];
+	const dialogMaxW = { xl: "max-w-xl", lg: "max-w-lg", md: "max-w-md", sm: "max-w-sm" }[contentSize];
 
 	// close dialog on Escape
 	useEffect(() => {
@@ -59,8 +72,8 @@ export function OptionInfo({ optionKey, description }: Props) {
 						style={{ position: "fixed", left: tooltip.x, top: tooltip.y }}
 						className='pointer-events-none z-[200] -translate-x-1/2 -translate-y-full pb-1.5'
 					>
-						<div className='max-w-64 rounded-md bg-popover px-2.5 py-1.5 text-[11px] leading-relaxed text-popover-foreground shadow-lg ring-1 ring-border'>
-							{description}
+						<div className={`${tooltipMaxW} rounded-md bg-popover px-2.5 py-1.5 text-[11px] leading-relaxed text-popover-foreground shadow-lg ring-1 ring-border`}>
+							{highlightInline(description)}
 						</div>
 					</div>,
 					document.body,
@@ -71,7 +84,7 @@ export function OptionInfo({ optionKey, description }: Props) {
 				createPortal(
 					<div className='fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-[2px]' onClick={() => setDialog(false)}>
 						<div
-							className='mx-4 w-full max-w-sm rounded-lg bg-popover p-4 shadow-xl ring-1 ring-border dark:shadow-[0_0_40px_rgba(255,240,170,0.1)] dark:ring-amber-300/25'
+							className={`mx-4 w-full ${dialogMaxW} rounded-lg bg-popover p-4 shadow-xl ring-1 ring-border dark:shadow-[0_0_40px_rgba(255,240,170,0.1)] dark:ring-amber-300/25`}
 							onClick={(e) => e.stopPropagation()}
 						>
 							<div className='mb-2 flex items-center justify-between'>
@@ -86,7 +99,7 @@ export function OptionInfo({ optionKey, description }: Props) {
 									</svg>
 								</button>
 							</div>
-							<p className='text-xs leading-relaxed text-muted-foreground'>{description}</p>
+							<p className='text-xs leading-relaxed text-muted-foreground'>{highlightInline(description)}</p>
 						</div>
 					</div>,
 					document.body,
