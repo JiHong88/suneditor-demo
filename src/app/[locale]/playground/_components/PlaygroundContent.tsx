@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { SunEditor } from "suneditor/types";
 import { PLAYGROUND_VALUE } from "@/data/code-examples/editorPresets";
@@ -29,13 +28,41 @@ const PlaygroundMultiRootEditor = dynamic(() => import("./PlaygroundMultiRootEdi
 
 /** Editor option keys that are fixed after creation — must be stripped before resetOptions */
 const FIXED_RESET_KEYS = new Set([
-	"mode", "buttonList", "shortcutsDisable", "closeModalOutsideClick", "strictMode",
-	"statusbar_resizeEnable", "defaultLine", "iframe", "iframe_fullPage",
-	"fontSizeUnits", "formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock",
-	"spanStyles", "lineStyles", "textStyleTags", "allowedClassName", "allUsedStyles",
-	"elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist",
-	"image", "video", "audio", "table", "fontSize", "fontColor", "backgroundColor",
-	"embed", "drawing", "mention", "math",
+	"mode",
+	"buttonList",
+	"shortcutsDisable",
+	"closeModalOutsideClick",
+	"strictMode",
+	"statusbar_resizeEnable",
+	"defaultLine",
+	"iframe",
+	"iframe_fullPage",
+	"fontSizeUnits",
+	"formatLine",
+	"formatBrLine",
+	"formatClosureBrLine",
+	"formatBlock",
+	"formatClosureBlock",
+	"spanStyles",
+	"lineStyles",
+	"textStyleTags",
+	"allowedClassName",
+	"allUsedStyles",
+	"elementWhitelist",
+	"elementBlacklist",
+	"attributeWhitelist",
+	"attributeBlacklist",
+	"image",
+	"video",
+	"audio",
+	"table",
+	"fontSize",
+	"fontColor",
+	"backgroundColor",
+	"embed",
+	"drawing",
+	"mention",
+	"math",
 ]);
 
 export default function PlaygroundContent() {
@@ -297,14 +324,8 @@ export default function PlaygroundContent() {
 					className='flex items-center justify-between'
 				>
 					<div>
-						<Badge variant='secondary' className='mb-2'>
-							<Settings2 className='mr-1.5 h-3.5 w-3.5' />
-							{t("badge")}
-						</Badge>
 						<h1 className='text-2xl font-bold tracking-tight'>{t("title")}</h1>
-						<p className='text-sm text-muted-foreground mt-1'>
-							{t("desc")}
-						</p>
+						<p className='text-sm text-muted-foreground mt-1'>{t("desc")}</p>
 					</div>
 					<div className='flex items-center gap-2'>
 						<Button variant='outline' size='sm' onClick={handleReset}>
@@ -335,7 +356,9 @@ export default function PlaygroundContent() {
 					>
 						<div className='rounded-lg border bg-card/90 max-h-[calc(100vh-93px-1rem)] flex flex-col'>
 							<div className='shrink-0 px-3 py-2.5 border-b'>
-								<span className='text-[11px] font-bold text-orange-600 dark:text-amber-400 uppercase tracking-wider'>Plugin Options</span>
+								<span className='text-[11px] font-bold text-orange-600 dark:text-amber-400 uppercase tracking-wider'>
+									{t("pluginOptions")}
+								</span>
 							</div>
 							<div className='p-3 pb-32 overflow-y-auto'>
 								<PlaygroundPluginSidebar state={state} dispatch={dispatch} />
@@ -348,8 +371,8 @@ export default function PlaygroundContent() {
 						{/* Multiroot Toggle */}
 						<div className='flex items-center justify-between rounded-lg border bg-card/90 px-4 py-3'>
 							<div>
-								<span className='text-sm font-semibold'>Multi-root Editor</span>
-								<p className='text-[11px] text-muted-foreground mt-0.5'>Enable multiple editable regions</p>
+								<span className='text-sm font-semibold'>{t("multiroot")}</span>
+								<p className='text-[11px] text-muted-foreground mt-0.5'>{t("multirootDesc")}</p>
 							</div>
 							<button
 								type='button'
@@ -358,7 +381,9 @@ export default function PlaygroundContent() {
 								onClick={() => dispatch({ type: "SET", key: "multiroot", value: !state.multiroot })}
 								className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors ${state.multiroot ? "bg-orange-500" : "bg-muted"}`}
 							>
-								<span className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${state.multiroot ? "translate-x-4" : "translate-x-0"}`} />
+								<span
+									className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${state.multiroot ? "translate-x-4" : "translate-x-0"}`}
+								/>
 							</button>
 						</div>
 
@@ -420,10 +445,22 @@ export default function PlaygroundContent() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 }}
 						>
-							{ready && (state.multiroot
-							? <PlaygroundMultiRootEditor key={editorKey} state={state} editorRef={editorRef} contentRef={multiRootContentRef} />
-							: <PlaygroundEditor key={editorKey} state={state} editorRef={editorRef} contentRef={contentRef} />
-						)}
+							{ready &&
+								(state.multiroot ? (
+									<PlaygroundMultiRootEditor
+										key={editorKey}
+										state={state}
+										editorRef={editorRef}
+										contentRef={multiRootContentRef}
+									/>
+								) : (
+									<PlaygroundEditor
+										key={editorKey}
+										state={state}
+										editorRef={editorRef}
+										contentRef={contentRef}
+									/>
+								))}
 						</motion.div>
 
 						{/* Code Panel */}

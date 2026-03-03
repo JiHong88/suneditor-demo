@@ -482,15 +482,66 @@ export function playgroundReducer(state: PlaygroundState, action: PlaygroundActi
 
 /* ── Button list mapping ───────────────────────────────── */
 
-export function getButtonList(preset: ButtonListPreset): unknown[] {
+const PAGE_BUTTONS = new Set(["pageBreak", "pageNavigator", "pageUp", "pageDown"]);
+
+/** Remove page-related buttons from a button list (deep recursive). */
+function filterPageButtons(list: unknown[]): unknown[] {
+	const result: unknown[] = [];
+	for (const item of list) {
+		if (typeof item === "string") {
+			if (PAGE_BUTTONS.has(item)) continue;
+			// Remove responsive group labels that reference "page" with no remaining buttons
+			result.push(item);
+		} else if (Array.isArray(item)) {
+			// Responsive entry: ["%xxx", [...]]
+			if (
+				item.length === 2 &&
+				typeof item[0] === "string" &&
+				(item[0] as string).startsWith("%") &&
+				Array.isArray(item[1])
+			) {
+				const filtered = filterPageButtons(item[1] as unknown[]);
+				if (filtered.length > 0) result.push([item[0], filtered]);
+			} else {
+				// Button group: ["undo", "redo", ...]
+				const filtered = (item as unknown[]).filter((b) => typeof b !== "string" || !PAGE_BUTTONS.has(b));
+				// Remove group labels referencing "Pages" if no page buttons remain
+				const cleaned = filtered.filter((b) => typeof b !== "string" || !b.toString().includes(":Pages"));
+				// Also clean up groups like ":View & Pages-..." to ":View-..."
+				const final = cleaned.map((b) => {
+					if (typeof b === "string" && b.includes(" & Pages")) {
+						return b.replace(" & Pages", "");
+					}
+					return b;
+				});
+				if (final.length > 0) result.push(final);
+			}
+		}
+	}
+	return result;
+}
+
+export function getButtonList(preset: ButtonListPreset, type?: string): unknown[] {
+	let list: unknown[];
 	switch (preset) {
 		case "basic":
-			return BASIC_BUTTON_LIST;
+			list = BASIC_BUTTON_LIST;
+			break;
 		case "full":
-			return FULL_BUTTON_LIST;
+			list = FULL_BUTTON_LIST;
+			break;
 		default:
-			return STANDARD_BUTTON_LIST;
+			list = STANDARD_BUTTON_LIST;
+			break;
 	}
+
+	// Remove page buttons when not in document mode
+	const isDocumentMode = type ? type.toLowerCase().includes("document") : false;
+	if (!isDocumentMode) {
+		list = filterPageButtons(list);
+	}
+
+	return list;
 }
 
 /* ── State → SunEditor options ─────────────────────────── */
@@ -498,7 +549,7 @@ export function getButtonList(preset: ButtonListPreset): unknown[] {
 export function stateToEditorOptions(state: PlaygroundState) {
 	const opts: Record<string, unknown> = {
 		mode: state.mode,
-		buttonList: getButtonList(state.buttonListPreset),
+		buttonList: getButtonList(state.buttonListPreset, state.type),
 		textDirection: state.textDirection,
 
 		// layout (frame)

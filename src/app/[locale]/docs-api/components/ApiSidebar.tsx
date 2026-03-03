@@ -68,7 +68,7 @@ function SidebarItemComponent({
 
   const isGroupHeader = depth === 0;
   const isSubgroup = depth >= 1 && hasChildren;
-  const isInfoLabel = item.id === "kernel-info";
+  const isInfoLabel = item.id === "kernel-info" || item.id.startsWith("layer-");
   const isTypeish = item.variant === "typeish";
 
   return (
@@ -95,8 +95,11 @@ function SidebarItemComponent({
           isSubgroup && isTypeish && item.id === "interfaces-sub" && "py-1.5 px-2 font-medium italic text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200",
           // Typeish subgroup — Hooks (lighter)
           isSubgroup && isTypeish && item.id !== "interfaces-sub" && "py-1.5 px-2 font-medium italic text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300",
-          // Info label (non-interactive reference)
-          isInfoLabel && "py-1.5 px-2 cursor-default",
+          // Info label (subtle but clickable)
+          isInfoLabel && cn(
+            "py-1.5 px-2",
+            isSelected ? "bg-muted/40" : "hover:bg-muted/30"
+          ),
           // Leaf item
           !isGroupHeader && !isSubgroup && !isInfoLabel && cn(
             "py-1 px-2",
@@ -129,7 +132,7 @@ function SidebarItemComponent({
           )}
           <span className="truncate text-left">
             {isInfoLabel ? (
-              <span className="text-xs italic text-muted-foreground/50">Kernel ($) ↓</span>
+              <span className="text-xs italic text-muted-foreground/50">{item.title}</span>
             ) : item.id === "kernel-group" ? (
               <>$<span className="text-[11px] ml-0.5 font-normal opacity-50"> (Kernel)</span></>
             ) : item.title}
@@ -145,12 +148,14 @@ function SidebarItemComponent({
             </span>
           )}
         </div>
-        <span className={cn(
-          "ml-1.5 text-[10px] tabular-nums flex-shrink-0",
-          isGroupHeader ? accent.text : "text-foreground/30"
-        )}>
-          {item.count}
-        </span>
+        {!isInfoLabel && (
+          <span className={cn(
+            "ml-1.5 text-[10px] tabular-nums flex-shrink-0",
+            isGroupHeader ? accent.text : "text-foreground/30"
+          )}>
+            {item.count}
+          </span>
+        )}
       </div>
 
       {hasChildren && isExpanded && (

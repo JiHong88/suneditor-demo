@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Hash, Braces } from "lucide-react";
+import { FileText, Hash, Braces, Eye } from "lucide-react";
 import type { SearchableItem } from "../_lib/apiSearchIndex";
 
 type GlobalSearchResultsProps = {
@@ -29,12 +29,14 @@ const kindIcons = {
   method: FileText,
   type: Braces,
   event: Hash,
+  getter: Eye,
 };
 
 const kindColors = {
   method: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800",
   type: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800",
   event: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+  getter: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-200 dark:border-violet-800",
 };
 
 export default function GlobalSearchResults({ results, query, onSelect }: GlobalSearchResultsProps) {

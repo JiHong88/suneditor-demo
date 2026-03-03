@@ -3,7 +3,11 @@ import { getSunEditorVersion } from "./version";
 const g = globalThis as unknown as { __releaseVersionPromise?: Promise<string> };
 
 async function init() {
-	return getSunEditorVersion();
+	try {
+		return await getSunEditorVersion();
+	} catch {
+		return "";
+	}
 }
 
 g.__releaseVersionPromise ??= init();

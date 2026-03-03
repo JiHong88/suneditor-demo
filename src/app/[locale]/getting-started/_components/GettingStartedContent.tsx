@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { DEFAULT_FRAMEWORK_KEY, type FrameworkKey } from "@/components/common/codeExampleFrameworks";
 import Step1_CodeExamples from "./Step1_CodeExamples";
 import Step2_RenderHtml from "./Step2_RenderHtml";
+import Step3_KernelApi from "./Step3_KernelApi";
 
 const pageVariants = {
 	hidden: {},
@@ -47,6 +48,9 @@ export default function GettingStartedContent() {
 			</motion.div>
 			<motion.div variants={sectionVariants}>
 				<Step2_RenderHtml framework={framework} />
+			</motion.div>
+			<motion.div variants={sectionVariants}>
+				<Step3_KernelApi />
 			</motion.div>
 
 			{/* Playground CTA */}

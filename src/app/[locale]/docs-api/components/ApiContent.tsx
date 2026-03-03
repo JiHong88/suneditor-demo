@@ -6,16 +6,18 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import CodeBlock from "@/components/common/CodeBlock";
 import { highlightInline } from "@/lib/highlightInline";
-import type { Method } from "../_lib/types";
+import type { Method, Getter } from "../_lib/types";
 
 type ApiContentProps = {
   title: string;
   description?: string;
   methods: Method[];
+  getters?: Getter[];
   prefix: string;
+  onNavigate?: (sectionId: string) => void;
 };
 
-function MethodCard({ method, prefix }: { method: Method; prefix: string }) {
+function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: string; onNavigate?: (id: string) => void }) {
   const t = useTranslations("DocsApi");
   const tc = useTranslations("Common");
   const [copied, setCopied] = useState<"sig" | "link" | null>(null);
@@ -69,7 +71,7 @@ function MethodCard({ method, prefix }: { method: Method; prefix: string }) {
     const renderParam = (param: string, idx: number, isLast: boolean) => {
       const colonIndex = param.indexOf(":");
       if (colonIndex <= 0) {
-        return <span className="text-blue-600 dark:text-blue-400">{param}</span>;
+        return <span key={idx} className="text-blue-600 dark:text-blue-400">{param}</span>;
       }
 
       const paramName = param.substring(0, colonIndex).trim();
@@ -208,6 +210,20 @@ function MethodCard({ method, prefix }: { method: Method; prefix: string }) {
         </div>
       </div>
 
+      {/* LinkedAs */}
+      {method.linkedAs && (
+        <button
+          className="mb-3 text-[11px] flex items-center gap-1 hover:underline cursor-pointer"
+          onClick={() => {
+            const key = method.linkedAs!.replace(/^\$\./, "");
+            onNavigate?.(`editor.${key}`);
+          }}
+        >
+          <span className="text-primary">→</span>
+          <code className="font-mono text-primary font-medium">{method.linkedAs}</code>
+        </button>
+      )}
+
       {/* Description */}
       {method.description && method.description !== "/"
         ? formatDescription(method.description)
@@ -230,7 +246,7 @@ function MethodCard({ method, prefix }: { method: Method; prefix: string }) {
   );
 }
 
-export default function ApiContent({ title, description, methods, prefix }: ApiContentProps) {
+export default function ApiContent({ title, description, methods, getters, prefix, onNavigate }: ApiContentProps) {
   const t = useTranslations("DocsApi");
   return (
     <div className="flex-1 overflow-y-auto bg-background">
@@ -249,20 +265,68 @@ export default function ApiContent({ title, description, methods, prefix }: ApiC
             <Badge variant="secondary">
               {methods.length} {methods.length === 1 ? t("method") : t("methods")}
             </Badge>
+            {getters && getters.length > 0 && (
+              <Badge variant="outline" className="text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-700">
+                {getters.length} getter{getters.length > 1 ? "s" : ""}
+              </Badge>
+            )}
             <span className="text-xs text-muted-foreground">
               {t("prefix")} <code className="font-mono bg-muted px-1.5 py-0.5 rounded">{prefix}</code>
             </span>
           </div>
         </div>
 
+        {/* Getters */}
+        {getters && getters.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+              Getters
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0 text-violet-600 dark:text-violet-400">get</Badge>
+            </h2>
+            <div className="rounded-xl border overflow-hidden divide-y">
+              {getters.map((g) => (
+                <div
+                  key={g.name}
+                  id={`${prefix}${g.name}`.replace(/\.$/, "")}
+                  className="flex items-start gap-3 px-4 py-3 hover:bg-muted/20 transition-colors scroll-mt-24"
+                >
+                  <code className="font-mono font-semibold text-sm text-green-600 dark:text-green-400 shrink-0 min-w-[140px]">
+                    .{g.name}
+                  </code>
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <code className="text-xs font-mono px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
+                      {g.returns}
+                    </code>
+                    {g.description && (
+                      <p className="text-xs text-muted-foreground">{g.description}</p>
+                    )}
+                  </div>
+                  {g.linkedAs && (
+                    <button
+                      className="shrink-0 text-[11px] flex items-center gap-1 hover:underline cursor-pointer"
+                      onClick={() => {
+                        const key = g.linkedAs!.replace(/^\$\./, "");
+                        onNavigate?.(`editor.${key}`);
+                      }}
+                    >
+                      <span className="text-primary">→</span>
+                      <code className="font-mono text-primary font-medium">{g.linkedAs}</code>
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Methods */}
         <div className="space-y-3">
           {methods.map((method, idx) => (
-            <MethodCard key={idx} method={method} prefix={prefix} />
+            <MethodCard key={idx} method={method} prefix={prefix} onNavigate={onNavigate} />
           ))}
         </div>
 
-        {methods.length === 0 && (
+        {methods.length === 0 && !getters?.length && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-3 opacity-20">{ }</div>
             <p>{t("noMethods")}</p>

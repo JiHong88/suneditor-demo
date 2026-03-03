@@ -1,5 +1,332 @@
 {
-    "test": {
-        "test": "en {{name}}"
-    }
+	"Common": {
+		"copied": "تم النسخ!",
+		"copiedToClipboard": "تم النسخ إلى الحافظة!",
+		"copyPermalink": "نسخ الرابط الدائم",
+		"copySignature": "نسخ التوقيع",
+		"copyCode": "نسخ الكود",
+		"sponsor": "رعاية"
+	},
+	"Main": {
+		"starOnGitHub": "Star على GitHub",
+		"Menus": {
+			"getting-started": "البدء",
+			"feature-demo": "عرض الميزات",
+			"playground": "ساحة التجربة",
+			"plugin-guide": "دليل الإضافات",
+			"deep-dive": "تعمق",
+			"docs-api": "المستندات/API"
+		},
+		"Common": {
+			"CodeExamples": {
+				"title": "التثبيت / البدء",
+				"desc": "قم بالتثبيت عبر NPM أو استخدم CDN. || يتكامل SunEditor بسلاسة مع إطار العمل المفضل لديك."
+			}
+		},
+		"Footer": {
+			"viewSource": "عرض المصدر",
+			"reportIssue": "الإبلاغ عن مشكلة",
+			"resources": "الموارد",
+			"docs": "المستندات",
+			"featureDemo": "عرض الميزات",
+			"playground": "ساحة التجربة",
+			"about": "حول",
+			"license": "مرخص بموجب MIT.",
+			"copyright": "© حقوق النشر {year} مساهمو SunEditor"
+		}
+	},
+	"Home": {
+		"Hero": {
+			"title": "محرر WYSIWYG خفيف وقوي بلغة JavaScript الأصلية."
+		},
+		"FeatureHighlights": {
+			"zeroDependencies": "Zero Dependencies",
+			"plugins": "أكثر من 30 إضافة",
+			"languages": "أكثر من 25 لغة · RTL",
+			"pluginAPI": "API إضافات مخصصة",
+			"typescript": "دعم TypeScript"
+		},
+		"InteractiveDemo": {
+			"classic": "كلاسيكي",
+			"inline": "مضمّن",
+			"balloon": "بالون",
+			"document": "مستند"
+		},
+		"FeatureGrid": {
+			"title": "كل ما تحتاجه، وأكثر.",
+			"desc": "صُمم SunEditor للمرونة والقوة، جاهز للاستخدام فوراً.",
+			"Architecture": {
+				"title": "بنية متعددة المثيلات قائمة على الإضافات",
+				"desc": "يعمل كل مثيل محرر بشكل مستقل مع تكوين الإضافات الخاص به."
+			},
+			"Table": {
+				"title": "تحرير جداول متقدم",
+				"desc": "إدراج ودمج وتقسيم وتنسيق الجداول مع تحكم دقيق بالصفوف والخلايا."
+			},
+			"DocumentLayout": {
+				"title": "نظام تخطيط المستندات",
+				"desc": "يدعم فواصل صفحات A4 والرؤوس والتذييلات والتنسيق المناسب للطباعة."
+			},
+			"PDF": {
+				"title": "مخرجات HTML جاهزة لـ PDF",
+				"desc": "ينتج مخرجات HTML منظمة مناسبة لتحويل PDF من جانب الخادم."
+			},
+			"RTL": {
+				"title": "دعم من اليمين إلى اليسار (RTL)",
+				"desc": "تخطيط RTL كامل يشمل محاذاة شريط الأدوات والمسافات البادئة وتدفق النص."
+			},
+			"Math": {
+				"title": "عرض الصيغ الرياضية",
+				"desc": "يدعم تعبيرات LaTeX عبر KaTeX أو MathJax للمحتوى الأكاديمي."
+			}
+		},
+		"LiveStatsBadges": {
+			"title": "SunEditor بالأرقام",
+			"githubStars": "نجوم GitHub",
+			"gitHubForks": "تفريعات GitHub",
+			"npmWeeklyDownloads": "تنزيلات NPM الأسبوعية",
+			"npmAnnualDownloads": "تنزيلات NPM السنوية",
+			"dailyCDNHits": "زيارات CDN اليومية"
+		},
+		"FinalCTA": {
+			"title": "جرّبه الآن",
+			"desc": "مجاني ومفتوح المصدر. استكشف المستندات أو ساهم على GitHub."
+		}
+	},
+	"GettingStarted": {
+		"title": "البدء",
+		"desc": "قم بتثبيت المحرر وإنشائه وعرض المحتوى المحفوظ.",
+		"step1": {
+			"eyebrow": "الخطوة 1",
+			"title": "التثبيت وإنشاء المحرر"
+		},
+		"step2": {
+			"eyebrow": "الخطوة 2",
+			"title": "عرض المحتوى",
+			"desc": "عند عرض HTML الذي أنشأه المحرر، يلزم وجود CSS وأسماء الفئات."
+		},
+		"cta": {
+			"title": "جرّبه مباشرة",
+			"desc": "استيراد npm حقيقي، مُجمّع كامل — حرّر الكود وشاهد النتيجة فوراً."
+		}
+	},
+	"Playground": {
+		"badge": "ساحة التجربة",
+		"title": "ساحة تجربة SunEditor",
+		"desc": "قم بتكوين الخيارات واختبار المحرر ومشاركة إعداداتك عبر URL.",
+		"reset": "إعادة تعيين",
+		"shareURL": "مشاركة URL",
+		"editorOptions": "خيارات المحرر",
+		"pluginOptions": "خيارات الإضافات",
+		"generatedCode": "الكود المُنشأ",
+		"sections": {
+			"modeTheme": "الوضع والسمة",
+			"layoutSizing": "التخطيط والأحجام",
+			"toolbar": "شريط الأدوات",
+			"statusbarCounter": "شريط الحالة والعداد",
+			"contentBehavior": "المحتوى والسلوك",
+			"features": "الميزات",
+			"filtering": "التصفية (متقدم)",
+			"formatExtensions": "امتدادات التنسيق"
+		},
+		"options": {
+			"classic": "كلاسيكي",
+			"inline": "مضمّن",
+			"balloon": "بالون",
+			"balloonAlways": "بالون دائم",
+			"basic": "أساسي",
+			"standard": "قياسي",
+			"full": "كامل",
+			"autoSync": "تلقائي (مزامنة)",
+			"default": "افتراضي",
+			"dark": "داكن",
+			"cobalt": "كوبالت",
+			"ltr": "LTR",
+			"rtl": "RTL",
+			"line": "line",
+			"br": "br",
+			"repeat": "تكرار",
+			"always": "دائماً",
+			"none": "بلا",
+			"auto": "تلقائي",
+			"select": "تحديد",
+			"char": "حرف",
+			"byte": "بايت",
+			"byteHtml": "بايت-html"
+		},
+		"live": "live",
+		"filtering": {
+			"tagFilter": "تصفية علامات HTML غير المسموح بها (elementWhitelist/Blacklist)",
+			"formatFilter": "تصفية عناصر التنسيق (formatLine/Block)",
+			"classFilter": "تصفية أسماء فئات CSS غير المسموح بها (allowedClassName)",
+			"textStyleTagFilter": "تصفية علامات نمط النص (b, i, u, span, إلخ.)",
+			"attrFilter": "تصفية سمات HTML غير المسموح بها (attributeWhitelist/Blacklist)",
+			"styleFilter": "تصفية الأنماط المضمنة غير المسموح بها (spanStyles/lineStyles/allUsedStyles)"
+		},
+		"formatExtDesc": "يضيف علامات تنسيق إضافية تتجاوز الإعدادات الافتراضية المضمنة. الفاصل: |. يدعم التعبيرات النمطية (مثل H[1-6]).",
+		"builtIn": "مضمّن:",
+		"advanced": "متقدم",
+		"multiroot": "محرر متعدد الجذور",
+		"multirootDesc": "تفعيل مناطق تحرير متعددة"
+	},
+	"PluginGuide": {
+		"title": "إضافات SunEditor",
+		"subtitle1": "يأتي SunEditor مع 24 إضافة مدمجة تغطي الوسائط والتنسيق والميزات المتقدمة.",
+		"subtitle2": "كل إضافة تنتمي إلى <strong>نوع عرض</strong> يحدد كيفية ظهورها في شريط الأدوات.",
+		"builtInTitle": "الإضافات المدمجة حسب نوع العرض",
+		"builtInDesc": "خاصية <code>display</code> تحدد كيفية تفاعل الإضافة مع المستخدم.",
+		"configurable": "قابل للتكوين",
+		"displayTypes": {
+			"modal": "Modal",
+			"modalDesc": "يفتح نافذة حوار للإدخال المعقد مثل رفع الملفات أو تحرير الروابط أو التضمين.",
+			"dropdown": "Dropdown",
+			"dropdownDesc": "يعرض لوحة منسدلة أسفل زر شريط الأدوات مع خيارات قابلة للتحديد.",
+			"command": "Command",
+			"commandDesc": "ينفذ إجراءً فوراً عند النقر دون فتح أي واجهة.",
+			"input": "Input",
+			"inputDesc": "يعرض عنصر إدخال مضمن مباشرة في شريط الأدوات.",
+			"field": "Field",
+			"fieldDesc": "يعرض تراكب إكمال تلقائي يتم تشغيله عند كتابة حرف خاص."
+		},
+		"plugins": {
+			"image": "رفع الصور وتغيير حجمها ومحاذاتها",
+			"video": "إدراج وإدارة محتوى الفيديو",
+			"audio": "إدراج ملفات صوتية مع مشغل",
+			"link": "إنشاء وتحرير الروابط التشعبية",
+			"embed": "تضمين محتوى خارجي (YouTube, iframe)",
+			"drawing": "أداة رسم قائمة على Canvas",
+			"math": "محرر معادلات رياضية (KaTeX)",
+			"font": "محدد عائلة الخط",
+			"blockStyle": "تنسيق على مستوى الكتلة (H1-H6, P, إلخ.)",
+			"align": "خيارات محاذاة النص",
+			"fontColor": "محدد لون النص مع لوحة ألوان",
+			"backgroundColor": "محدد لون تمييز النص",
+			"lineHeight": "التحكم في تباعد الأسطر",
+			"table": "شبكة إنشاء الجداول وأدوات التحرير",
+			"hr": "أنماط الخط الأفقي",
+			"list": "خيارات تنسيق القوائم",
+			"blockquote": "تبديل تنسيق الاقتباس",
+			"list_bulleted": "تبديل القائمة النقطية",
+			"list_numbered": "تبديل القائمة المرقمة",
+			"fileUpload": "مدير مكون رفع الملفات",
+			"fontSize": "حجم الخط مع عناصر تحكم رقمية",
+			"pageNavigator": "عرض التنقل بين الصفحات",
+			"mention": "نظام إشارة/وسم المستخدم مع إكمال تلقائي (@)"
+		},
+		"tryOptionsTitle": "جرّب خيارات الإضافات",
+		"tryOptionsDesc": "الإضافات المعلّمة بـ <badge>قابل للتكوين</badge> لديها خيارات يمكنك تعديلها في ساحة التجربة.",
+		"playgroundSidebarTitle": "ساحة التجربة — الشريط الجانبي لخيارات الإضافات",
+		"playgroundSidebarDesc": "اضبط حدود رفع الصور ووحدات حجم الخط وأنواع تمرير الجداول ومحفزات الإشارة والمزيد. تُطبق التغييرات فوراً على المحرر المباشر.",
+		"openPlayground": "فتح ساحة التجربة",
+		"custom": {
+			"title": "أنشئ إضافتك الخاصة",
+			"desc": "مرجع تقني لبناء إضافات مخصصة — من أزرار الأوامر البسيطة إلى الميزات الكاملة القائمة على الحوار.",
+			"inheritanceChain": "سلسلة الوراثة",
+			"keyPrinciples": "المبادئ الأساسية",
+			"classRefs": "مراجع الفئات",
+			"classRefsDesc": "سجّل فئات الإضافات في options.plugins. النواة تقوم بإنشاء المثيلات.",
+			"depInjection": "حقن التبعيات",
+			"depInjectionDesc": "يتم الوصول إلى جميع خدمات المحرر عبر this.$ — لا تقم باستيراد الوحدات الأساسية مباشرة.",
+			"contracts": "العقود عبر الواجهات",
+			"contractsDesc": "قم بتنفيذ عقود متعددة (ModuleModal, EditorComponent) للربط بدورات الحياة.",
+			"quickStart": "بداية سريعة",
+			"register": "تسجيل",
+			"tabs": {
+				"types": "أنواع الإضافات",
+				"anatomy": "التشريح",
+				"hooks": "الخطافات",
+				"modules": "الوحدات",
+				"examples": "أمثلة"
+			},
+			"typesDesc": "اختر فئة أساسية بناءً على كيفية تفاعل إضافتك مع المستخدم.",
+			"required": "مطلوب",
+			"uiBehavior": "سلوك الواجهة",
+			"builtInExamples": "أمثلة مدمجة",
+			"viewCode": "عرض الكود",
+			"hideCode": "إخفاء الكود",
+			"staticProps": "الخصائص الثابتة",
+			"constructor": "نمط المُنشئ",
+			"depsBag": "حقيبة التبعيات (this.$)",
+			"depsBagDesc": "تصل جميع الإضافات إلى خدمات المحرر عبر this.$. تُبنى مرة واحدة بواسطة CoreKernel وتُشارك.",
+			"config": "التكوين",
+			"domLogic": "منطق DOM",
+			"shellLogic": "منطق Shell",
+			"panelLogic": "منطق Panel",
+			"services": "الخدمات",
+			"jsdocPatterns": "أنماط تعليقات JSDoc",
+			"jsdocPatternsDesc": "ثلاثة أنماط تعليقات للخطافات الآمنة النوع في JavaScript. يجب أن تستخدم جميع الخطافات @hook أو @override أو @imple مع @type.",
+			"commonHooks": "الخطافات المشتركة",
+			"commonHooksDesc": "يمكن تنفيذها بواسطة أي نوع إضافة.",
+			"eventHooks": "خطافات الأحداث",
+			"eventHooksDesc": "إرجاع false يوقف الإضافات المتبقية ويمنع السلوك الافتراضي. إرجاع true يوقف الإضافات لكن يسمح بالسلوك الافتراضي.",
+			"moduleHooks": "خطافات الوحدات",
+			"moduleHooksDesc": "عندما تستخدم إضافة وحدة، فإنها تنفذ واجهة العقد المقابلة.",
+			"componentHooks": "خطافات المكونات",
+			"componentHooksDesc": "للإضافات التي تنشئ مكونات ثابتة في المحرر (صور، فيديوهات، جداول).",
+			"extendsVsImplements": "extends مقابل implements",
+			"extendsVsImplementsDesc": "تستخدم الإضافة extends لنوعها الأساسي و implements لتكوين قدرات إضافية.",
+			"extendsExplain": "يرث من فئة إضافة أساسية واحدة بالضبط. هذا يحدد نوع الإضافة وسلوكها الأساسي (أمر، نافذة منبثقة، قائمة منسدلة، إلخ.).",
+			"implementsExplain": "يؤلف عقود الوحدات (ModuleModal, EditorComponent) أو واجهات إضافات أخرى (fontSize, anchor) لإضافة قدرات.",
+			"modulesRef": "الوحدات المتاحة",
+			"modulesRefDesc": "الوحدات هي مكونات واجهة المستخدم التي تنشئها الإضافات يدوياً في المُنشئ.",
+			"multiInterface": "نمط الواجهات المتعددة",
+			"multiInterfaceDesc": "يمكن لإضافة واحدة دمج نوع أساسي مع واجهات عقود متعددة.",
+			"crossPlugin": "التكوين عبر الإضافات",
+			"crossPluginDesc": "يمكن للإضافة أيضاً تنفيذ واجهات أنواع إضافات أخرى لتوفير أوضاع تفاعل متعددة.",
+			"crossPluginNote": "استخدم implements عبر الإضافات عندما توفر إضافة واحدة أوضاع تفاعل متعددة (مثل input + dropdown + command تتحكم جميعها في نفس الميزة).",
+			"examplesDesc": "أمثلة كاملة جاهزة للنسخ من البسيط إلى المعقد.",
+			"example1Title": "أمر عدد الكلمات",
+			"example1Desc": "إضافة أمر تعرض عدد الكلمات الحالي.",
+			"example2Title": "قائمة منسدلة للأنماط السريعة",
+			"example2Desc": "إضافة قائمة منسدلة تطبق أنماط كتل محددة مسبقاً.",
+			"example3Title": "تضمين مخصص (Modal + Controller + Component)",
+			"example3Desc": "إضافة نافذة منبثقة مع دورة حياة المتحكم والمكون لإطارات iframe المضمنة.",
+			"registration": "تسجيل الإضافات",
+			"registrationDesc": "يتم تسجيل الإضافات كمراجع فئات في options.plugins.",
+			"pluginOptions": "خيارات الإضافة",
+			"pluginOptionsDesc": "مرّر خيارات خاصة بالإضافة عبر options[pluginKey]. يتم تلقيها كمعامل المُنشئ الثاني.",
+			"registrationRules": "قواعد التسجيل",
+			"rule1": "مرّر دائماً مراجع الفئات — النواة تدير إنشاء المثيلات ودورة الحياة.",
+			"rule2": "يجب أن يتطابق static key مع الاسم المستخدم في buttonList.",
+			"rule3": "إضافات PluginField لا تحتاج إلى buttonList — تستجيب لأحداث المحرر تلقائياً.",
+			"builtInRef": "تطبيقات مرجعية مدمجة",
+			"builtInRefDesc": "ادرس هذه الإضافات المدمجة لمعرفة أنماط التطبيق الواقعية."
+		},
+		"resourcesTitle": "الموارد",
+		"apiReference": "مرجع API",
+		"apiReferenceDesc": "توثيق كامل للطرق والخيارات",
+		"pluginSource": "الكود المصدري للإضافات",
+		"pluginSourceDesc": "اقرأ تطبيقات الإضافات المدمجة",
+		"community": "المجتمع",
+		"communityDesc": "GitHub Discussions للأسئلة والأجوبة"
+	},
+	"DocsApi": {
+		"title": "API Reference",
+		"searchPlaceholder": "...Search all APIs",
+		"resultsFound": "results found",
+		"parameters": "Parameters",
+		"returns": "Returns",
+		"example": "Example",
+		"noDescription": "No description available",
+		"noMethods": "No methods found.",
+		"method": "method",
+		"methods": "methods",
+		"prefix": "Prefix:",
+		"noResults": "لم يتم العثور على نتائج",
+		"noMatchesFor": "لا تطابق لـ",
+		"resultsIn": "results in",
+		"sections": "sections",
+		"members": "Members",
+		"source": "Source:",
+		"types": "types",
+		"filterTypes": "Filter types...",
+		"noTypes": "No types found.",
+		"editorInstanceDesc": "يحتوي مثيل المحرر على النواة ($)، المحرك الداخلي الذي يشغل جميع الأنظمة الفرعية. الوصول إليه عبر editor.$ — مثال: editor.$.store، editor.$.selection، editor.$.format، إلخ.",
+		"kernelInfoDesc": "النواة ($) هي المحرك الداخلي لـ SunEditor. تم تنظيمها في طبقات: مزودات تكوين L2 تُهيَّأ أولاً، ثم تُنشأ أنظمة منطق L3 الفرعية مع حقن تلك المزودات. جميع الأنظمة الفرعية متاحة عبر editor.$.",
+		"layerL2Desc": "مزودات التكوين المُهيَّأة في المرحلة الأولى. يدير contextProvider وoptionProvider السياقات والخيارات العامة/الإطارية، ويوفر instanceCheck فحوصات أنواع آمنة في iframe، ويوفر eventManager واجهة الأحداث العامة.",
+		"layerL2AccDesc": "خصائص getter مريحة على $ توفر وصولاً مباشراً لبيانات التكوين المستخدمة بشكل متكرر من contextProvider وoptionProvider — مثل مراجع DOM (context, frameContext)، وإعدادات المحرر (options, frameOptions)، وموارد واجهة المستخدم (icons, lang).",
+		"layerL3DomDesc": "أنظمة معالجة DOM وتحليل المحتوى الفرعية. توفر تجريداً موحداً فوق contentEditable: offset يحسب المواقع، selection يدير النطاقات، format يعالج البنية على مستوى الكتل، inline يطبق التنسيق على مستوى الأحرف، html ينقي المحتوى، وchar يفرض حدود الأحرف.",
+		"layerL3ShellDesc": "تنسيق عمليات المحرر والتفاعل. يدير component دورات حياة الوسائط الغنية، pluginManager يتعامل مع تسجيل الإضافات، commandDispatcher يوجه نقرات الأزرار إلى الإضافات، history يدير التراجع/الإعادة، وshortcuts يربط أوامر لوحة المفاتيح.",
+		"layerL3PanelDesc": "طبقة عرض واجهة المستخدم. toolbar يعرض شريط الأدوات الرئيسي، subToolbar هو شريط أدوات ثانوي اختياري، menu يعالج القوائم المنسدلة وتأثيرات التحديد، وviewer يتحكم في أوضاع العرض (عرض الكود، ملء الشاشة، المعاينة)."
+	}
 }

@@ -4,7 +4,7 @@ export type SearchableItem = {
   id: string;
   sectionId: string;
   name: string;
-  kind: "method" | "type" | "event";
+  kind: "method" | "type" | "event" | "getter";
   params?: string;
   returns?: string;
   description: string;
@@ -88,6 +88,22 @@ export function buildSearchIndex(apiDocs: ApiDocs): SearchableItem[] {
             groupTitle: `${isInternal ? "Internals" : "Editor"} > ${displayKey}`,
             prefix: `${prefixBase}.${displayKey}.`,
           });
+        }
+
+        // Getters
+        if (subgroup.getters) {
+          for (const g of subgroup.getters) {
+            items.push({
+              id: `${prefixBase}.${displayKey}.${g.name}`,
+              sectionId: `editor.${key}`,
+              name: g.name,
+              kind: "getter",
+              returns: g.returns,
+              description: g.description,
+              groupTitle: `${isInternal ? "Internals" : "Editor"} > ${displayKey}`,
+              prefix: `${prefixBase}.${displayKey}.`,
+            });
+          }
         }
       }
     }

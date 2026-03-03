@@ -1,11 +1,20 @@
 "use client";
 
 import { type Dispatch, useState, useEffect, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
-import optionDescriptions from "@/data/api/option-descriptions.json";
+import optDescEn from "@/data/api/option-descriptions.en.json";
+import optDescKo from "@/data/api/option-descriptions.ko.json";
+import optDescAr from "@/data/api/option-descriptions.ar.json";
+
+type OptDesc = Record<string, { description: string; default?: string }>;
+const optDescMap: Record<string, OptDesc> = {
+	en: optDescEn as OptDesc,
+	ko: optDescKo as OptDesc,
+	ar: optDescAr as OptDesc,
+};
 
 type Props = {
 	state: PlaygroundState;
@@ -14,9 +23,9 @@ type Props = {
 
 /* ── Reusable field components ─────────────────────────── */
 
-const optDesc = optionDescriptions as Record<string, { description: string; default?: string }>;
-
 function FieldLabel({ label, resettable, description }: { label: string; resettable?: boolean; description?: string }) {
+	const locale = useLocale();
+	const optDesc = optDescMap[locale] ?? optDescMap.en;
 	const entry = optDesc[label];
 	const desc = description ?? entry?.description;
 	return (

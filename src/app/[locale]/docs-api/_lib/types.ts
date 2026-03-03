@@ -6,12 +6,21 @@ export type Method = {
   example?: string;
   paramDescriptions?: Record<string, string>;
   returnsDescription?: string;
+  linkedAs?: string;
+};
+
+export type Getter = {
+  name: string;
+  returns: string;
+  description: string;
+  linkedAs?: string;
 };
 
 export type Subgroup = {
   title: string;
   description?: string;
   methods: Method[];
+  getters?: Getter[];
   type?: string;
 };
 
@@ -65,5 +74,6 @@ export type ContentData = {
   title: string;
   description?: string;
   methods: Method[];
+  getters?: Getter[];
   prefix: string;
 };

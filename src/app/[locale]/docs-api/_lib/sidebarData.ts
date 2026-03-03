@@ -55,25 +55,51 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
   }
 
   // ── 3. $ (Kernel subsystems — without store) ──
+  // Layer ordering (matching Step3_KernelApi KERNEL_DEPS)
   if (apiDocs.structure.editor?.subgroups) {
-    const kernelChildren: SidebarItem[] = [];
+    const LAYER_SECTIONS = [
+      { id: "layer-l2", label: "Config (L2)", keys: ["contextProvider", "optionProvider", "instanceCheck", "eventManager"] },
+      { id: "layer-l2-acc", label: "Accessors (L2)", keys: ["frameRoots", "context", "frameContext", "options", "frameOptions", "icons", "lang"] },
+      { id: "layer-l3-dom", label: "DOM (L3)", keys: ["offset", "selection", "format", "inline", "listFormat", "html", "nodeTransform", "char"] },
+      { id: "layer-l3-shell", label: "Shell (L3)", keys: ["component", "focusManager", "pluginManager", "ui", "commandDispatcher", "history", "shortcuts"] },
+      { id: "layer-l3-panel", label: "Panel (L3)", keys: ["toolbar", "subToolbar", "menu", "viewer"] },
+    ];
 
-    // Kernel subsystems (excluding store, internal, excluded)
+    const kernelChildren: SidebarItem[] = [];
+    const usedKeys = new Set<string>();
+
+    for (const section of LAYER_SECTIONS) {
+      kernelChildren.push({ id: section.id, title: section.label, count: 0, type: "subgroup" });
+      for (const key of section.keys) {
+        const subgroup = apiDocs.structure.editor.subgroups[key];
+        if (!subgroup) continue;
+        usedKeys.add(key);
+        kernelChildren.push({
+          id: `editor.${key}`,
+          title: key,
+          count: subgroup.methods.length + (subgroup.getters?.length || 0),
+          type: "subgroup",
+        });
+      }
+    }
+
+    // Remaining items not in any layer
     Object.entries(apiDocs.structure.editor.subgroups).forEach(([key, subgroup]) => {
-      if (key === STORE_KEY || key.startsWith("store.") || key === INTERNAL_KEY || EXCLUDED_KEYS.has(key)) return;
+      if (usedKeys.has(key) || key === STORE_KEY || key.startsWith("store.") || key === INTERNAL_KEY || EXCLUDED_KEYS.has(key)) return;
       kernelChildren.push({
         id: `editor.${key}`,
         title: key,
-        count: subgroup.methods.length,
+        count: subgroup.methods.length + (subgroup.getters?.length || 0),
         type: "subgroup",
       });
     });
 
     if (kernelChildren.length > 0) {
+      const countableChildren = kernelChildren.filter(c => !c.id.startsWith("layer-"));
       items.push({
         id: "kernel-group",
         title: "$ (Kernel)",
-        count: kernelChildren.reduce((sum, child) => sum + child.count, 0),
+        count: countableChildren.reduce((sum, child) => sum + child.count, 0),
         type: "group",
         children: kernelChildren,
       });
@@ -275,16 +301,37 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
   return items;
 }
 
-export function resolveContentData(selectedId: string, apiDocs: ApiDocs): ContentData | null {
+/** Map layer-* / kernel-info IDs → translation keys */
+const LAYER_DESC_KEYS: Record<string, { titleLabel: string; tKey: string }> = {
+  "kernel-info": { titleLabel: "Kernel ($)", tKey: "kernelInfoDesc" },
+  "layer-l2": { titleLabel: "Config (L2)", tKey: "layerL2Desc" },
+  "layer-l2-acc": { titleLabel: "Accessors (L2)", tKey: "layerL2AccDesc" },
+  "layer-l3-dom": { titleLabel: "DOM (L3)", tKey: "layerL3DomDesc" },
+  "layer-l3-shell": { titleLabel: "Shell (L3)", tKey: "layerL3ShellDesc" },
+  "layer-l3-panel": { titleLabel: "Panel (L3)", tKey: "layerL3PanelDesc" },
+};
+
+export function resolveContentData(selectedId: string, apiDocs: ApiDocs, t?: (key: string) => string): ContentData | null {
   // Excluded keys — no content
   if (selectedId === "editor.executor" || selectedId === "editor.ports") {
     return null;
   }
 
+  // Layer labels & kernel-info → show description
+  const layerInfo = LAYER_DESC_KEYS[selectedId];
+  if (layerInfo) {
+    return {
+      title: layerInfo.titleLabel,
+      description: t?.(layerInfo.tKey) ?? "",
+      methods: [],
+      prefix: "$.",
+    };
+  }
+
   if (selectedId === "editor") {
     return {
       title: "Editor Instance - Main Methods",
-      description: `${apiDocs.structure.editor.description}\n\nThe editor instance contains the Kernel ($), the internal engine that powers all subsystems. Access it via editor.$ — e.g. editor.$.store, editor.$.selection, editor.$.format, etc.`,
+      description: `${apiDocs.structure.editor.description}\n\n${t?.("editorInstanceDesc") ?? ""}`,
       methods: apiDocs.structure.editor.methods,
       prefix: "editor.",
     };
@@ -325,6 +372,7 @@ export function resolveContentData(selectedId: string, apiDocs: ApiDocs): Conten
         title: `${prefixBase}.${displayKey}`,
         description: subgroup.description,
         methods: subgroup.methods,
+        getters: subgroup.getters,
         prefix: `${prefixBase}.${displayKey}.`,
       };
     }

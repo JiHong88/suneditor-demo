@@ -1,10 +1,20 @@
 "use client";
 
 import { type Dispatch } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
-import optionDescriptions from "@/data/api/option-descriptions.json";
+import optDescEn from "@/data/api/option-descriptions.en.json";
+import optDescKo from "@/data/api/option-descriptions.ko.json";
+import optDescAr from "@/data/api/option-descriptions.ar.json";
+
+type OptDesc = Record<string, { description: string; default?: string }>;
+const optDescMap: Record<string, OptDesc> = {
+	en: optDescEn as OptDesc,
+	ko: optDescKo as OptDesc,
+	ar: optDescAr as OptDesc,
+};
 
 type Props = {
 	state: PlaygroundState;
@@ -13,9 +23,9 @@ type Props = {
 
 /* ── Reusable field components ─────────────────────────── */
 
-const optDesc = optionDescriptions as Record<string, { description: string; default?: string }>;
-
 function FieldLabel({ label, optionKey }: { label: string; optionKey?: string }) {
+	const locale = useLocale();
+	const optDesc = optDescMap[locale] ?? optDescMap.en;
 	const key = optionKey ?? label;
 	const desc = optDesc[key]?.description;
 	return (
@@ -127,11 +137,11 @@ function SwitchField({
 	);
 }
 
-function AdvancedSection({ children }: { children: React.ReactNode }) {
+function AdvancedSection({ children, label }: { children: React.ReactNode; label: string }) {
 	return (
 		<details className='mt-2 border-t pt-2'>
 			<summary className='cursor-pointer text-[11px] font-medium text-muted-foreground hover:text-foreground select-none'>
-				Advanced
+				{label}
 			</summary>
 			<div className='mt-2 space-y-3'>{children}</div>
 		</details>
@@ -149,7 +159,9 @@ function useSet(dispatch: Dispatch<PlaygroundAction>) {
 /* ── Main component ────────────────────────────────────── */
 
 export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
+	const t = useTranslations("Playground");
 	const set = useSet(dispatch);
+	const advLabel = t("advanced");
 	return (
 		<div className='space-y-1'>
 			<Accordion type='multiple' className='w-full'>
@@ -163,7 +175,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<TextInput label='defaultHeight' value={state.image_defaultHeight} onChange={set("image_defaultHeight")} placeholder='auto' optionKey='image_defaultHeight' />
 							<SwitchField label='createFileInput' checked={state.image_createFileInput} onChange={set("image_createFileInput")} optionKey='image_createFileInput' />
 							<SwitchField label='createUrlInput' checked={state.image_createUrlInput} onChange={set("image_createUrlInput")} optionKey='image_createUrlInput' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<TextInput label='uploadUrl' value={state.image_uploadUrl} onChange={set("image_uploadUrl")} placeholder='/upload/image' optionKey='image_uploadUrl' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.image_uploadSizeLimit} onChange={set("image_uploadSizeLimit")} optionKey='image_uploadSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.image_allowMultiple} onChange={set("image_allowMultiple")} optionKey='image_allowMultiple' />
@@ -185,7 +197,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<TextInput label='defaultHeight' value={state.video_defaultHeight} onChange={set("video_defaultHeight")} placeholder='auto' optionKey='video_defaultHeight' />
 							<SwitchField label='createFileInput' checked={state.video_createFileInput} onChange={set("video_createFileInput")} optionKey='video_createFileInput' />
 							<SwitchField label='createUrlInput' checked={state.video_createUrlInput} onChange={set("video_createUrlInput")} optionKey='video_createUrlInput' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<TextInput label='uploadUrl' value={state.video_uploadUrl} onChange={set("video_uploadUrl")} placeholder='/upload/video' optionKey='video_uploadUrl' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.video_uploadSizeLimit} onChange={set("video_uploadSizeLimit")} optionKey='video_uploadSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.video_allowMultiple} onChange={set("video_allowMultiple")} optionKey='video_allowMultiple' />
@@ -208,7 +220,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<TextInput label='defaultHeight' value={state.audio_defaultHeight} onChange={set("audio_defaultHeight")} placeholder='54px' optionKey='audio_defaultHeight' />
 							<SwitchField label='createFileInput' checked={state.audio_createFileInput} onChange={set("audio_createFileInput")} optionKey='audio_createFileInput' />
 							<SwitchField label='createUrlInput' checked={state.audio_createUrlInput} onChange={set("audio_createUrlInput")} optionKey='audio_createUrlInput' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<TextInput label='uploadUrl' value={state.audio_uploadUrl} onChange={set("audio_uploadUrl")} placeholder='/upload/audio' optionKey='audio_uploadUrl' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.audio_uploadSizeLimit} onChange={set("audio_uploadSizeLimit")} optionKey='audio_uploadSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.audio_allowMultiple} onChange={set("audio_allowMultiple")} optionKey='audio_allowMultiple' />
@@ -226,7 +238,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SwitchField label='canResize' checked={state.embed_canResize} onChange={set("embed_canResize")} optionKey='embed_canResize' />
 							<TextInput label='defaultWidth' value={state.embed_defaultWidth} onChange={set("embed_defaultWidth")} placeholder='100%' optionKey='embed_defaultWidth' />
 							<TextInput label='defaultHeight' value={state.embed_defaultHeight} onChange={set("embed_defaultHeight")} placeholder='auto' optionKey='embed_defaultHeight' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<SwitchField label='showHeightInput' checked={state.embed_showHeightInput} onChange={set("embed_showHeightInput")} optionKey='embed_showHeightInput' />
 								<SwitchField label='percentageOnlySize' checked={state.embed_percentageOnlySize} onChange={set("embed_percentageOnlySize")} optionKey='embed_percentageOnlySize' />
 							</AdvancedSection>
@@ -253,7 +265,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						<div className='space-y-3'>
 							<SelectField label='sizeUnit' value={state.fontSize_sizeUnit} options={[{ value: "px", label: "px" }, { value: "pt", label: "pt" }, { value: "em", label: "em" }, { value: "rem", label: "rem" }, { value: "vw", label: "vw" }, { value: "%", label: "%" }, { value: "text", label: "text" }]} onChange={set("fontSize_sizeUnit")} optionKey='fontSize_sizeUnit' />
 							<SwitchField label='showIncDecControls' checked={state.fontSize_showIncDecControls} onChange={set("fontSize_showIncDecControls")} optionKey='fontSize_showIncDecControls' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<SwitchField label='showDefaultSizeLabel' checked={state.fontSize_showDefaultSizeLabel} onChange={set("fontSize_showDefaultSizeLabel")} optionKey='fontSize_showDefaultSizeLabel' />
 								<SwitchField label='disableInput' checked={state.fontSize_disableInput} onChange={set("fontSize_disableInput")} optionKey='fontSize_disableInput' />
 							</AdvancedSection>
@@ -289,7 +301,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SelectField label='outputFormat' value={state.drawing_outputFormat} options={[{ value: "dataurl", label: "dataurl" }, { value: "svg", label: "svg" }]} onChange={(v) => set("drawing_outputFormat")(v as PlaygroundState["drawing_outputFormat"])} optionKey='drawing_outputFormat' />
 							<NumberInput label='lineWidth' value={state.drawing_lineWidth} onChange={set("drawing_lineWidth")} optionKey='drawing_lineWidth' />
 							<SelectField label='lineCap' value={state.drawing_lineCap} options={[{ value: "round", label: "round" }, { value: "butt", label: "butt" }, { value: "square", label: "square" }]} onChange={(v) => set("drawing_lineCap")(v as PlaygroundState["drawing_lineCap"])} optionKey='drawing_lineCap' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<SwitchField label='canResize' checked={state.drawing_canResize} onChange={set("drawing_canResize")} optionKey='drawing_canResize' />
 								<TextInput label='lineColor' value={state.drawing_lineColor} onChange={set("drawing_lineColor")} placeholder='#000000' optionKey='drawing_lineColor' />
 								<SwitchField label='lineReconnect' checked={state.drawing_lineReconnect} onChange={set("drawing_lineReconnect")} optionKey='drawing_lineReconnect' />
@@ -306,7 +318,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<TextInput label='triggerText' value={state.mention_triggerText} onChange={set("mention_triggerText")} placeholder='@' optionKey='mention_triggerText' />
 							<NumberInput label='limitSize' value={state.mention_limitSize} onChange={set("mention_limitSize")} optionKey='mention_limitSize' />
 							<NumberInput label='delayTime' value={state.mention_delayTime} onChange={set("mention_delayTime")} optionKey='mention_delayTime' />
-							<AdvancedSection>
+							<AdvancedSection label={advLabel}>
 								<NumberInput label='searchStartLength' value={state.mention_searchStartLength} onChange={set("mention_searchStartLength")} optionKey='mention_searchStartLength' />
 								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder='/api/mention' optionKey='mention_apiUrl' />
 								<SwitchField label='useCachingData' checked={state.mention_useCachingData} onChange={set("mention_useCachingData")} optionKey='mention_useCachingData' />

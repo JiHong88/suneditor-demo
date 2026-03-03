@@ -53,7 +53,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 	if (state.type) add("type", `"${state.type}"`);
 
 	// buttonList
-	add("buttonList", fmtButtonList(getButtonList(state.buttonListPreset), indentBase + 2));
+	add("buttonList", fmtButtonList(getButtonList(state.buttonListPreset, state.type), indentBase + 2));
 
 	// theme
 	if (state.theme) add("theme", `"${state.theme}"`);

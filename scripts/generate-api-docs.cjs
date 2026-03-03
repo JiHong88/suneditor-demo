@@ -6,8 +6,8 @@ const path = require("path");
 
 const TYPES_DIR = path.join(__dirname, "../node_modules/suneditor/types");
 const OUTPUT_DIR = path.join(__dirname, "../src/data/api");
-const OUTPUT_FILE = path.join(OUTPUT_DIR, "api-docs.json");
-const OPTIONS_OUTPUT_FILE = path.join(OUTPUT_DIR, "option-descriptions.json");
+const OUTPUT_FILE = path.join(OUTPUT_DIR, "api-docs.en.json");
+const OPTIONS_OUTPUT_FILE = path.join(OUTPUT_DIR, "option-descriptions.en.json");
 
 /* ── Shared helpers ─────────────────────────────────────── */
 

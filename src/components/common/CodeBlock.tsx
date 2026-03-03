@@ -75,7 +75,7 @@ export default function CodeBlock({ code, lang = "javascript", className }: Code
 			ref={ref as React.RefObject<HTMLDivElement>}
 			tabIndex={0}
 			onKeyDown={handleKeyDown}
-			className={className}
+			className={`[&_pre]:overflow-x-auto [&_pre]:p-4 [&_pre]:text-xs [&_pre]:leading-[1.7] ${className ?? ""}`}
 			dangerouslySetInnerHTML={{ __html: html }}
 		/>
 	);
