@@ -1,5 +1,1 @@
-import GettingStartedContent from "./_components/GettingStartedContent";
-
-export default function GettingStartedPage() {
-	return <GettingStartedContent />;
-}
+export { default } from "./_components/GettingStartedContent";

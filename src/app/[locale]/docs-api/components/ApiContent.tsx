@@ -8,6 +8,13 @@ import CodeBlock from "@/components/common/CodeBlock";
 import { highlightInline } from "@/lib/highlightInline";
 import type { Method, Getter } from "../_lib/types";
 
+/** Convert linkedAs display text → sidebar section ID */
+function linkedAsToSectionId(linkedAs: string): string {
+  if (linkedAs.startsWith("$.")) return `editor.${linkedAs.slice(2)}`;
+  const DIRECT: Record<string, string> = { "Editor Instance": "editor" };
+  return DIRECT[linkedAs] ?? linkedAs;
+}
+
 type ApiContentProps = {
   title: string;
   description?: string;
@@ -215,8 +222,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
         <button
           className="mb-3 text-[11px] flex items-center gap-1 hover:underline cursor-pointer"
           onClick={() => {
-            const key = method.linkedAs!.replace(/^\$\./, "");
-            onNavigate?.(`editor.${key}`);
+            onNavigate?.(linkedAsToSectionId(method.linkedAs!));
           }}
         >
           <span className="text-primary">→</span>
@@ -305,8 +311,7 @@ export default function ApiContent({ title, description, methods, getters, prefi
                     <button
                       className="shrink-0 text-[11px] flex items-center gap-1 hover:underline cursor-pointer"
                       onClick={() => {
-                        const key = g.linkedAs!.replace(/^\$\./, "");
-                        onNavigate?.(`editor.${key}`);
+                        onNavigate?.(linkedAsToSectionId(g.linkedAs!));
                       }}
                     >
                       <span className="text-primary">→</span>

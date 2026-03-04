@@ -58,6 +58,7 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
   // Layer ordering (matching Step3_KernelApi KERNEL_DEPS)
   if (apiDocs.structure.editor?.subgroups) {
     const LAYER_SECTIONS = [
+      { id: "layer-l1", label: "Kernel (L1)", keys: ["facade"] },
       { id: "layer-l2", label: "Config (L2)", keys: ["contextProvider", "optionProvider", "instanceCheck", "eventManager"] },
       { id: "layer-l2-acc", label: "Accessors (L2)", keys: ["frameRoots", "context", "frameContext", "options", "frameOptions", "icons", "lang"] },
       { id: "layer-l3-dom", label: "DOM (L3)", keys: ["offset", "selection", "format", "inline", "listFormat", "html", "nodeTransform", "char"] },
@@ -304,6 +305,7 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
 /** Map layer-* / kernel-info IDs → translation keys */
 const LAYER_DESC_KEYS: Record<string, { titleLabel: string; tKey: string }> = {
   "kernel-info": { titleLabel: "Kernel ($)", tKey: "kernelInfoDesc" },
+  "layer-l1": { titleLabel: "Kernel (L1)", tKey: "layerL1Desc" },
   "layer-l2": { titleLabel: "Config (L2)", tKey: "layerL2Desc" },
   "layer-l2-acc": { titleLabel: "Accessors (L2)", tKey: "layerL2AccDesc" },
   "layer-l3-dom": { titleLabel: "DOM (L3)", tKey: "layerL3DomDesc" },
@@ -327,6 +329,7 @@ export function resolveContentData(selectedId: string, apiDocs: ApiDocs, t?: (ke
       prefix: "$.",
     };
   }
+
 
   if (selectedId === "editor") {
     return {

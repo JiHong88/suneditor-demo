@@ -1,5 +1,5 @@
 import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/code-examples/editorPresets";
-import { type PlaygroundState, type CodeFramework, DEFAULTS, getButtonList } from "./playgroundState";
+import { type PlaygroundState, type CodeFramework, DEFAULTS, getButtonList, getRootConfigs } from "./playgroundState";
 
 /* ── Helpers ───────────────────────────────────────────── */
 
@@ -76,6 +76,15 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 	if (state.toolbar_hide) add("toolbar_hide", "true");
 	if (!state.shortcutsHint) add("shortcutsHint", "false");
 	if (state.shortcutsDisable) add("shortcutsDisable", "true");
+
+	// subToolbar
+	if (state.subToolbar_enabled) {
+		const stLines: string[] = [];
+		stLines.push(`  buttonList: ${fmtButtonList(getButtonList(state.subToolbar_buttonListPreset, state.type), indentBase + 4)},`);
+		if (state.subToolbar_mode !== "balloon") stLines.push(`  mode: "${state.subToolbar_mode}",`);
+		if (state.subToolbar_width !== "auto") stLines.push(`  width: "${state.subToolbar_width}",`);
+		lines.push(`subToolbar: {\n${stLines.join("\n")}\n},`);
+	}
 
 	// statusbar
 	if (!state.statusbar) add("statusbar", "false");
@@ -177,10 +186,16 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["createUrlInput", state.image_createUrlInput, DEFAULTS.image_createUrlInput],
 			["uploadUrl", state.image_uploadUrl, DEFAULTS.image_uploadUrl],
 			["uploadSizeLimit", state.image_uploadSizeLimit, DEFAULTS.image_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.image_uploadSingleSizeLimit, DEFAULTS.image_uploadSingleSizeLimit],
 			["allowMultiple", state.image_allowMultiple, DEFAULTS.image_allowMultiple],
 			["acceptedFormats", state.image_acceptedFormats, DEFAULTS.image_acceptedFormats],
 			["percentageOnlySize", state.image_percentageOnlySize, DEFAULTS.image_percentageOnlySize],
 			["showHeightInput", state.image_showHeightInput, DEFAULTS.image_showHeightInput],
+			["useFormatType", state.image_useFormatType, DEFAULTS.image_useFormatType],
+			["defaultFormatType", state.image_defaultFormatType, DEFAULTS.image_defaultFormatType],
+			["keepFormatType", state.image_keepFormatType, DEFAULTS.image_keepFormatType],
+			["linkEnableFileUpload", state.image_linkEnableFileUpload, DEFAULTS.image_linkEnableFileUpload],
+			["insertBehavior", state.image_insertBehavior, DEFAULTS.image_insertBehavior],
 		])
 	);
 	pLines.push(
@@ -192,12 +207,17 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["createUrlInput", state.video_createUrlInput, DEFAULTS.video_createUrlInput],
 			["uploadUrl", state.video_uploadUrl, DEFAULTS.video_uploadUrl],
 			["uploadSizeLimit", state.video_uploadSizeLimit, DEFAULTS.video_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.video_uploadSingleSizeLimit, DEFAULTS.video_uploadSingleSizeLimit],
 			["allowMultiple", state.video_allowMultiple, DEFAULTS.video_allowMultiple],
 			["acceptedFormats", state.video_acceptedFormats, DEFAULTS.video_acceptedFormats],
 			["percentageOnlySize", state.video_percentageOnlySize, DEFAULTS.video_percentageOnlySize],
 			["showHeightInput", state.video_showHeightInput, DEFAULTS.video_showHeightInput],
 			["showRatioOption", state.video_showRatioOption, DEFAULTS.video_showRatioOption],
 			["defaultRatio", state.video_defaultRatio, DEFAULTS.video_defaultRatio],
+			["query_youtube", state.video_query_youtube, DEFAULTS.video_query_youtube],
+			["query_vimeo", state.video_query_vimeo, DEFAULTS.video_query_vimeo],
+			["extensions", state.video_extensions, DEFAULTS.video_extensions],
+			["insertBehavior", state.video_insertBehavior, DEFAULTS.video_insertBehavior],
 		])
 	);
 	pLines.push(
@@ -208,8 +228,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["createUrlInput", state.audio_createUrlInput, DEFAULTS.audio_createUrlInput],
 			["uploadUrl", state.audio_uploadUrl, DEFAULTS.audio_uploadUrl],
 			["uploadSizeLimit", state.audio_uploadSizeLimit, DEFAULTS.audio_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.audio_uploadSingleSizeLimit, DEFAULTS.audio_uploadSingleSizeLimit],
 			["allowMultiple", state.audio_allowMultiple, DEFAULTS.audio_allowMultiple],
 			["acceptedFormats", state.audio_acceptedFormats, DEFAULTS.audio_acceptedFormats],
+			["insertBehavior", state.audio_insertBehavior, DEFAULTS.audio_insertBehavior],
 		])
 	);
 	pLines.push(
@@ -228,11 +250,15 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 		])
 	);
 	pLines.push(
-		pluginLines("fontColor", [["disableHEXInput", state.fontColor_disableHEXInput, DEFAULTS.fontColor_disableHEXInput]])
+		pluginLines("fontColor", [
+			["disableHEXInput", state.fontColor_disableHEXInput, DEFAULTS.fontColor_disableHEXInput],
+			["splitNum", state.fontColor_splitNum, DEFAULTS.fontColor_splitNum],
+		])
 	);
 	pLines.push(
 		pluginLines("backgroundColor", [
 			["disableHEXInput", state.backgroundColor_disableHEXInput, DEFAULTS.backgroundColor_disableHEXInput],
+			["splitNum", state.backgroundColor_splitNum, DEFAULTS.backgroundColor_splitNum],
 		])
 	);
 	pLines.push(
@@ -242,6 +268,12 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["defaultHeight", state.embed_defaultHeight, DEFAULTS.embed_defaultHeight],
 			["showHeightInput", state.embed_showHeightInput, DEFAULTS.embed_showHeightInput],
 			["percentageOnlySize", state.embed_percentageOnlySize, DEFAULTS.embed_percentageOnlySize],
+			["uploadUrl", state.embed_uploadUrl, DEFAULTS.embed_uploadUrl],
+			["uploadSizeLimit", state.embed_uploadSizeLimit, DEFAULTS.embed_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.embed_uploadSingleSizeLimit, DEFAULTS.embed_uploadSingleSizeLimit],
+			["query_youtube", state.embed_query_youtube, DEFAULTS.embed_query_youtube],
+			["query_vimeo", state.embed_query_vimeo, DEFAULTS.embed_query_vimeo],
+			["insertBehavior", state.embed_insertBehavior, DEFAULTS.embed_insertBehavior],
 		])
 	);
 	pLines.push(
@@ -252,6 +284,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["canResize", state.drawing_canResize, DEFAULTS.drawing_canResize],
 			["lineColor", state.drawing_lineColor, DEFAULTS.drawing_lineColor],
 			["lineReconnect", state.drawing_lineReconnect, DEFAULTS.drawing_lineReconnect],
+			["useFormatType", state.drawing_useFormatType, DEFAULTS.drawing_useFormatType],
+			["defaultFormatType", state.drawing_defaultFormatType, DEFAULTS.drawing_defaultFormatType],
+			["keepFormatType", state.drawing_keepFormatType, DEFAULTS.drawing_keepFormatType],
+			["maintainRatio", state.drawing_maintainRatio, DEFAULTS.drawing_maintainRatio],
 		])
 	);
 	pLines.push(
@@ -262,6 +298,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["searchStartLength", state.mention_searchStartLength, DEFAULTS.mention_searchStartLength],
 			["apiUrl", state.mention_apiUrl, DEFAULTS.mention_apiUrl],
 			["useCachingData", state.mention_useCachingData, DEFAULTS.mention_useCachingData],
+			["useCachingFieldData", state.mention_useCachingFieldData, DEFAULTS.mention_useCachingFieldData],
 		])
 	);
 	pLines.push(
@@ -270,11 +307,163 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
 			["autoHeight", state.math_autoHeight, DEFAULTS.math_autoHeight],
 		])
 	);
+	pLines.push(
+		pluginLines("link", [
+			["title", state.link_title, DEFAULTS.link_title],
+			["textToDisplay", state.link_textToDisplay, DEFAULTS.link_textToDisplay],
+			["openNewWindow", state.link_openNewWindow, DEFAULTS.link_openNewWindow],
+			["noAutoPrefix", state.link_noAutoPrefix, DEFAULTS.link_noAutoPrefix],
+			["uploadUrl", state.link_uploadUrl, DEFAULTS.link_uploadUrl],
+			["uploadSizeLimit", state.link_uploadSizeLimit, DEFAULTS.link_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.link_uploadSingleSizeLimit, DEFAULTS.link_uploadSingleSizeLimit],
+			["acceptedFormats", state.link_acceptedFormats, DEFAULTS.link_acceptedFormats],
+		])
+	);
+	pLines.push(
+		pluginLines("exportPDF", [
+			["apiUrl", state.exportPDF_apiUrl, DEFAULTS.exportPDF_apiUrl],
+			["fileName", state.exportPDF_fileName, DEFAULTS.exportPDF_fileName],
+		])
+	);
+	pLines.push(
+		pluginLines("fileUpload", [
+			["uploadUrl", state.fileUpload_uploadUrl, DEFAULTS.fileUpload_uploadUrl],
+			["uploadSizeLimit", state.fileUpload_uploadSizeLimit, DEFAULTS.fileUpload_uploadSizeLimit],
+			["uploadSingleSizeLimit", state.fileUpload_uploadSingleSizeLimit, DEFAULTS.fileUpload_uploadSingleSizeLimit],
+			["allowMultiple", state.fileUpload_allowMultiple, DEFAULTS.fileUpload_allowMultiple],
+			["acceptedFormats", state.fileUpload_acceptedFormats, DEFAULTS.fileUpload_acceptedFormats],
+			["as", state.fileUpload_as, DEFAULTS.fileUpload_as],
+		])
+	);
+
+	// Items-based plugins
+	if (state.align_items) {
+		const items = state.align_items.split(",").map((s) => `"${s.trim()}"`);
+		lines.push(`align: {\n  items: [${items.join(", ")}],\n},`);
+	}
+	if (state.font_items) {
+		const items = state.font_items.split(",").map((s) => `"${s.trim()}"`);
+		lines.push(`font: {\n  items: [${items.join(", ")}],\n},`);
+	}
+	if (state.blockStyle_items) {
+		const items = state.blockStyle_items.split(",").map((s) => `"${s.trim()}"`);
+		lines.push(`blockStyle: {\n  items: [${items.join(", ")}],\n},`);
+	}
+	if (state.lineHeight_items) {
+		lines.push(`lineHeight: {\n  items: ${state.lineHeight_items},\n},`);
+	}
+	if (state.paragraphStyle_items) {
+		const items = state.paragraphStyle_items.split(",").map((s) => `"${s.trim()}"`);
+		lines.push(`paragraphStyle: {\n  items: [${items.join(", ")}],\n},`);
+	}
+	if (state.textStyle_items) {
+		const items = state.textStyle_items.split(",").map((s) => `"${s.trim()}"`);
+		lines.push(`textStyle: {\n  items: [${items.join(", ")}],\n},`);
+	}
+	if (state.template_items) {
+		lines.push(`template: {\n  items: ${state.template_items},\n},`);
+	}
+	if (state.layout_items) {
+		lines.push(`layout: {\n  items: ${state.layout_items},\n},`);
+	}
+
+	// Gallery plugins — url/thumbnail via pluginLines, data/props as raw JSON
+	const galPlugins: { prefix: string; entries: [string, unknown, unknown][]; jsonFields: { key: string; value: string }[] }[] = [
+		{
+			prefix: "imageGallery",
+			entries: [["url", state.imageGallery_url, DEFAULTS.imageGallery_url]],
+			jsonFields: state.imageGallery_data ? [{ key: "data", value: state.imageGallery_data }] : [],
+		},
+		{
+			prefix: "videoGallery",
+			entries: [
+				["url", state.videoGallery_url, DEFAULTS.videoGallery_url],
+				["thumbnail", state.videoGallery_thumbnail, DEFAULTS.videoGallery_thumbnail],
+			],
+			jsonFields: state.videoGallery_data ? [{ key: "data", value: state.videoGallery_data }] : [],
+		},
+		{
+			prefix: "audioGallery",
+			entries: [
+				["url", state.audioGallery_url, DEFAULTS.audioGallery_url],
+				["thumbnail", state.audioGallery_thumbnail, DEFAULTS.audioGallery_thumbnail],
+			],
+			jsonFields: state.audioGallery_data ? [{ key: "data", value: state.audioGallery_data }] : [],
+		},
+		{
+			prefix: "fileGallery",
+			entries: [
+				["url", state.fileGallery_url, DEFAULTS.fileGallery_url],
+				["thumbnail", state.fileGallery_thumbnail, DEFAULTS.fileGallery_thumbnail],
+			],
+			jsonFields: state.fileGallery_data ? [{ key: "data", value: state.fileGallery_data }] : [],
+		},
+		{
+			prefix: "fileBrowser",
+			entries: [
+				["url", state.fileBrowser_url, DEFAULTS.fileBrowser_url],
+				["thumbnail", state.fileBrowser_thumbnail, DEFAULTS.fileBrowser_thumbnail],
+			],
+			jsonFields: [
+				...(state.fileBrowser_data ? [{ key: "data", value: state.fileBrowser_data }] : []),
+				...(state.fileBrowser_props ? [{ key: "props", value: state.fileBrowser_props }] : []),
+			],
+		},
+	];
+	for (const gal of galPlugins) {
+		const changed = gal.entries.filter(([, cur, def]) => cur !== def);
+		if (!changed.length && !gal.jsonFields.length) continue;
+		const inner: string[] = [];
+		for (const [k, v] of changed) {
+			inner.push(`  ${k}: "${v}",`);
+		}
+		for (const jf of gal.jsonFields) {
+			inner.push(`  ${jf.key}: ${jf.value},`);
+		}
+		lines.push(`${gal.prefix}: {\n${inner.join("\n")}\n},`);
+	}
 
 	for (const pl of pLines) {
 		if (pl.length) lines.push(...pl);
 	}
 
+	return lines.join("\n");
+}
+
+/** Format a value for code output */
+function fmtVal(v: unknown): string {
+	if (typeof v === "string") return `"${v}"`;
+	if (typeof v === "boolean" || typeof v === "number") return String(v);
+	if (v === null) return "null";
+	if (Array.isArray(v)) return `[${v.map(fmtVal).join(", ")}]`;
+	if (typeof v === "object") return JSON.stringify(v);
+	return String(v);
+}
+
+/** Build per-root target entries for multiroot create() calls */
+function buildMultiRootTargets(state: PlaygroundState, targetExpr: (key: string) => string, pad: number): string {
+	const roots = getRootConfigs(state);
+	const lines: string[] = [];
+	const p = " ".repeat(pad);
+	for (const root of roots) {
+		const optEntries = Object.entries(root.options).filter(([, v]) => v !== undefined && v !== "");
+		if (optEntries.length === 0) {
+			lines.push(`${p}${root.key}: { target: ${targetExpr(root.key)} },`);
+		} else if (optEntries.length <= 3) {
+			const optStr = optEntries.map(([k, v]) => `${k}: ${fmtVal(v)}`).join(", ");
+			lines.push(`${p}${root.key}: { target: ${targetExpr(root.key)}, options: { ${optStr} } },`);
+		} else {
+			// Multi-line for readability when many options
+			lines.push(`${p}${root.key}: {`);
+			lines.push(`${p}  target: ${targetExpr(root.key)},`);
+			lines.push(`${p}  options: {`);
+			for (const [k, v] of optEntries) {
+				lines.push(`${p}    ${k}: ${fmtVal(v)},`);
+			}
+			lines.push(`${p}  },`);
+			lines.push(`${p}},`);
+		}
+	}
 	return lines.join("\n");
 }
 
@@ -285,6 +474,8 @@ function generateCDN(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 6);
 
 	if (state.multiroot) {
+		const toolbarHtml = state.mode === "classic" ? '\n  <div id="toolbar"></div>' : '';
+		const toolbarOpt = state.mode === "classic" ? '\n      toolbar_container: document.getElementById("toolbar"),' : '';
 		return `<!DOCTYPE html>
 <html>
 <head>
@@ -294,14 +485,13 @@ function generateCDN(state: PlaygroundState): string {
   <script src="${CDN_JS}"><\/script>
 </head>
 <body style="margin:6em 4rem 4rem">
-  <h1>SunEditor Multi-Root Demo</h1>
+  <h1>SunEditor Multi-Root Demo</h1>${toolbarHtml}
   <textarea id="header"></textarea>
   <textarea id="body"></textarea>
   <script>
     const editor = SUNEDITOR.create({
-      header: { target: document.getElementById("header") },
-      body: { target: document.getElementById("body"), options: { height: "400px" } },
-    }, {
+${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 6)}
+    }, {${toolbarOpt}
 ${bodyIndented}
     });
   <\/script>
@@ -334,16 +524,16 @@ function generateVanilla(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 4);
 
 	if (state.multiroot) {
+		const toolbarOpt = state.mode === "classic" ? '\n  toolbar_container: document.getElementById("toolbar"),' : '';
 		return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
 import "suneditor/css/contents";${themeImport(state.theme)}
 
 const editor = suneditor.create({
-  header: { target: document.getElementById("header") },
-  body: { target: document.getElementById("body"), options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 2)}
 }, {
-  plugins,
+  plugins,${toolbarOpt}
 ${bodyIndented}
 });`;
 	}
@@ -364,6 +554,10 @@ function generateReact(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 8);
 
 	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const toolbarRef = isClassic ? '\n  const toolbarRef = useRef(null);' : '';
+		const toolbarOpt = isClassic ? '\n      toolbar_container: toolbarRef.current,' : '';
+		const toolbarJsx = isClassic ? '\n      <div ref={toolbarRef} />' : '';
 		return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
@@ -371,14 +565,13 @@ import "suneditor/css/contents";${themeImport(state.theme)}
 
 export default function Editor() {
   const headerRef = useRef(null);
-  const bodyRef = useRef(null);
+  const bodyRef = useRef(null);${toolbarRef}
 
   useEffect(() => {
     const instance = suneditor.create({
-      header: { target: headerRef.current },
-      body: { target: bodyRef.current, options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `${k}Ref.current`, 6)}
     }, {
-      plugins,
+      plugins,${toolbarOpt}
 ${bodyIndented}
     });
 
@@ -386,7 +579,7 @@ ${bodyIndented}
   }, []);
 
   return (
-    <div>
+    <div>${toolbarJsx}
       <textarea ref={headerRef} />
       <textarea ref={bodyRef} />
     </div>
@@ -420,6 +613,10 @@ function generateVue(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 6);
 
 	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const toolbarRefDecl = isClassic ? '\nconst toolbarEl = ref(null);' : '';
+		const toolbarOpt = isClassic ? '\n    toolbar_container: toolbarEl.value,' : '';
+		const toolbarTmpl = isClassic ? '\n    <div ref="toolbarEl" />' : '';
 		return `<script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
@@ -427,15 +624,14 @@ import "suneditor/css";
 import "suneditor/css/contents";${themeImport(state.theme)}
 
 const headerEl = ref(null);
-const bodyEl = ref(null);
+const bodyEl = ref(null);${toolbarRefDecl}
 let instance = null;
 
 onMounted(() => {
   instance = suneditor.create({
-    header: { target: headerEl.value },
-    body: { target: bodyEl.value, options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `${k}El.value`, 4)}
   }, {
-    plugins,
+    plugins,${toolbarOpt}
 ${bodyIndented}
   });
 });
@@ -446,7 +642,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
+  <div>${toolbarTmpl}
     <textarea ref="headerEl" />
     <textarea ref="bodyEl" />
   </div>
@@ -484,6 +680,10 @@ function generateAngular(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 8);
 
 	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const toolbarTmpl = isClassic ? '\n    <div #toolbarEl></div>' : '';
+		const toolbarViewChild = isClassic ? '\n  @ViewChild("toolbarEl", { static: true }) toolbarEl!: ElementRef<HTMLDivElement>;' : '';
+		const toolbarOpt = isClassic ? '\n      toolbar_container: this.toolbarEl.nativeElement,' : '';
 		return `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
@@ -492,22 +692,21 @@ import "suneditor/css/contents";${themeImport(state.theme)}
 
 @Component({
   selector: "app-editor",
-  template: \`
+  template: \`${toolbarTmpl}
     <textarea #headerEl></textarea>
     <textarea #bodyEl></textarea>
   \`
 })
 export class EditorComponent implements AfterViewInit, OnDestroy {
   @ViewChild("headerEl", { static: true }) headerEl!: ElementRef<HTMLTextAreaElement>;
-  @ViewChild("bodyEl", { static: true }) bodyEl!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild("bodyEl", { static: true }) bodyEl!: ElementRef<HTMLTextAreaElement>;${toolbarViewChild}
   private instance: SunEditor.Instance | null = null;
 
   ngAfterViewInit() {
     this.instance = suneditor.create({
-      header: { target: this.headerEl.nativeElement },
-      body: { target: this.bodyEl.nativeElement, options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `this.${k}El.nativeElement`, 6)}
     }, {
-      plugins,
+      plugins,${toolbarOpt}
 ${bodyIndented}
     });
   }
@@ -550,6 +749,10 @@ function generateSvelte(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 6);
 
 	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const toolbarVar = isClassic ? '\n  let toolbarEl;' : '';
+		const toolbarOpt = isClassic ? '\n      toolbar_container: toolbarEl,' : '';
+		const toolbarHtml = isClassic ? '\n<div bind:this={toolbarEl}></div>' : '';
 		return `<script>
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
@@ -557,21 +760,20 @@ function generateSvelte(state: PlaygroundState): string {
   import "suneditor/css/contents";${themeImport(state.theme)}
 
   let headerEl;
-  let bodyEl;
+  let bodyEl;${toolbarVar}
   let instance;
 
   onMount(() => {
     instance = suneditor.create({
-      header: { target: headerEl },
-      body: { target: bodyEl, options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `${k}El`, 6)}
     }, {
-      plugins,
+      plugins,${toolbarOpt}
 ${bodyIndented}
     });
 
     return () => instance?.destroy();
   });
-</script>
+</script>${toolbarHtml}
 
 <textarea bind:this={headerEl}></textarea>
 <textarea bind:this={bodyEl}></textarea>`;
@@ -604,19 +806,21 @@ function generateWebComponents(state: PlaygroundState): string {
 	const bodyIndented = indent(body, 8);
 
 	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const toolbarInner = isClassic ? '<div id="toolbar"></div>' : '';
+		const toolbarOpt = isClassic ? '\n      toolbar_container: this.querySelector("#toolbar"),' : '';
 		return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
 import "suneditor/css/contents";${themeImport(state.theme)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = \`<textarea id="header"></textarea><textarea id="body"></textarea>\`;
+    this.innerHTML = \`${toolbarInner}<textarea id="header"></textarea><textarea id="body"></textarea>\`;
 
     this.editor = suneditor.create({
-      header: { target: this.querySelector("#header") },
-      body: { target: this.querySelector("#body"), options: { height: "400px" } },
+${buildMultiRootTargets(state, (k) => `this.querySelector("#${k}")`, 6)}
     }, {
-      plugins,
+      plugins,${toolbarOpt}
 ${bodyIndented}
     });
   }

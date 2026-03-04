@@ -108,9 +108,9 @@
 		"step3": {
 			"eyebrow": "Step 3",
 			"title": "$ Kernel API",
-			"desc": "All editor internals are accessible through the $ dependency bag — a single object shared across the entire system.",
-			"providerDetails": "Provider Details",
-			"deepDiveLink": "Learn more in the Architecture Deep Dive"
+			"desc": "The editor instance exposes a $ object — a dependency bag containing all internal subsystems (L1→L2→L3).",
+			"apiDocsLink": "Full $ Kernel API Reference",
+			"deepDiveLink": "Architecture Deep Dive"
 		},
 		"cta": {
 			"title": "Try it live",
@@ -133,7 +133,9 @@
 			"contentBehavior": "Content & Behavior",
 			"features": "Features",
 			"filtering": "Filtering (Advanced)",
-			"formatExtensions": "Format Extensions"
+			"formatExtensions": "Format Extensions",
+			"multirootRoots": "Per-Root Options",
+			"inheritDesc": "uses the value from main options above"
 		},
 		"options": {
 			"classic": "Classic",
@@ -476,6 +478,7 @@
 		"filterTypes": "Filter types...",
 		"noTypes": "No types found.",
 		"editorInstanceDesc": "The editor instance contains the Kernel ($), the internal engine that powers all subsystems. Access it via editor.$ — e.g. editor.$.store, editor.$.selection, editor.$.format, etc.",
+		"layerL1Desc": "The foundational layer of the kernel. facade is a back-reference to the public Editor instance (the object returned by SunEditor.create()), and store is the central state management system with subscription support.",
 		"kernelInfoDesc": "The Kernel ($) is the internal engine of SunEditor. It is structured in layers: L2 Config providers initialize first, then L3 Logic subsystems are constructed with those providers injected. All subsystems are accessible via editor.$ (e.g. editor.$.selection, editor.$.format).",
 		"layerL2Desc": "Configuration providers initialized in Phase 1. contextProvider and optionProvider manage global/frame contexts and options, instanceCheck enables iframe-safe type checks, and eventManager provides the public event API.",
 		"layerL2AccDesc": "Convenience getter properties on $ that provide direct access to frequently-used configuration data from contextProvider and optionProvider — such as DOM references (context, frameContext), editor settings (options, frameOptions), and UI resources (icons, lang).",

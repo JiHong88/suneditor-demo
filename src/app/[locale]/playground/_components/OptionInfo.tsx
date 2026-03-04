@@ -60,7 +60,7 @@ export function OptionInfo({ optionKey, description }: Props) {
 				onMouseLeave={hideTooltip}
 				onClick={(e) => { e.preventDefault(); openDialog(); }}
 				onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") openDialog(); }}
-				className='ml-auto flex h-3.5 w-3.5 shrink-0 cursor-pointer items-center justify-center rounded-full bg-blue-500/20 text-[9px] font-bold leading-none text-blue-600 transition-colors hover:bg-blue-500/30 hover:text-blue-700 dark:bg-amber-300/20 dark:text-amber-300 dark:hover:bg-amber-300/30 dark:hover:text-amber-200'
+				className='flex h-3.5 w-3.5 shrink-0 cursor-pointer items-center justify-center rounded-full bg-blue-500/20 text-[9px] font-bold leading-none text-blue-600 transition-colors hover:bg-blue-500/30 hover:text-blue-700 dark:bg-amber-300/20 dark:text-amber-300 dark:hover:bg-amber-300/30 dark:hover:text-amber-200'
 			>
 				?
 			</span>

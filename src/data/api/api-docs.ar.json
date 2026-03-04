@@ -2549,67 +2549,61 @@
 							"name": "menuTray",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Top menu tray holding buttons, dropdowns, or custom menus."
+							"description": "- The **top menu tray** that holds buttons, dropdowns, or custom menus."
 						},
 						{
 							"name": "toolbar_main",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Main toolbar element containing editor actions."
+							"description": "- The **main toolbar** element containing editor actions."
 						},
 						{
 							"name": "toolbar_buttonTray",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Container for main toolbar buttons."
+							"description": "- The **container for main toolbar buttons**."
 						},
 						{
 							"name": "toolbar_arrow",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Arrow indicator in toolbar (dropdown navigation)."
+							"description": "- The **arrow indicator** in the toolbar (used for dropdown/tool menu navigation)."
 						},
 						{
 							"name": "toolbar_wrapper",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Wrapper for main toolbar and editor frame."
+							"returns": "HTMLElement",
+							"description": "- The **wrapper for the main toolbar and editor frame** (groups UI together). === Sub-Toolbar (Contextual/Balloon) ==="
 						},
 						{
 							"name": "toolbar_sub_main",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Sub-toolbar element (contextual/balloon)."
+							"returns": "HTMLElement",
+							"description": "- The **sub-toolbar** element (used for contextual or balloon toolbars)."
 						},
 						{
 							"name": "toolbar_sub_buttonTray",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Container for sub-toolbar buttons."
+							"returns": "HTMLElement",
+							"description": "- The **container for sub-toolbar buttons**."
 						},
 						{
 							"name": "toolbar_sub_arrow",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Arrow indicator in sub-toolbar."
+							"returns": "HTMLElement",
+							"description": "- The **arrow indicator** in the sub-toolbar."
 						},
 						{
 							"name": "toolbar_sub_wrapper",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Wrapper for sub-toolbar."
+							"returns": "HTMLElement",
+							"description": "- The **wrapper for the sub-toolbar**, containing its structure. === Status Bar ==="
 						},
 						{
 							"name": "statusbar_wrapper",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Wrapper for status bar (footer area)."
-						},
-						{
-							"name": "_stickyDummy",
-							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Dummy placeholder for sticky toolbar mode."
+							"returns": "HTMLElement",
+							"description": "- The **wrapper for the status bar** (footer area for resize handles, info, etc.). === Sticky Mode Helpers ==="
 						}
 					]
 				},
@@ -2620,189 +2614,207 @@
 						{
 							"name": "key",
 							"params": "",
-							"returns": "string | null",
-							"description": "Unique key for the editor frame (multi-root editors)."
+							"returns": "any",
+							"description": "- Unique key identifying this editor instance (useful for multi-root editors)."
 						},
 						{
 							"name": "options",
 							"params": "",
 							"returns": "SunEditor.FrameOptions",
-							"description": "Frame-specific options (see $.frameOptions).",
+							"description": "- Frame-specific options (toolbar, plugins, behaviors, etc.). === Core DOM References ===",
 							"linkedAs": "$.frameOptions"
 						},
 						{
 							"name": "originElement",
 							"params": "",
-							"returns": "HTMLElement",
-							"description": "Original source element (textarea or target)."
+							"returns": "HTMLElement & HTMLTextAreaElement",
+							"description": "- The original source element (usually a <textarea> or target element)."
 						},
 						{
 							"name": "topArea",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Outermost container (toolbar + editor + statusbar)."
+							"description": "- The outermost container wrapping the entire editor (toolbar + editor + status bar)."
 						},
 						{
 							"name": "container",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": ".se-container element."
+							"description": "- The `.se-container` element that holds the editor's UI."
 						},
 						{
 							"name": "wrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": ".se-wrapper element (editable area + components)."
+							"description": "- The `.se-wrapper` element containing the editable area and internal components."
 						},
 						{
 							"name": "wysiwygFrame",
 							"params": "",
 							"returns": "SunEditor.WysiwygFrame",
-							"description": "WYSIWYG frame element (iframe or div)."
+							"description": "- The WYSIWYG frame element (either an <iframe> or a div in inline mode)."
 						},
 						{
 							"name": "wysiwyg",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Actual editable content area (iframe body or contentEditable div)."
+							"description": "- The actual editable content area (usually the iframe’s <body> or a contentEditable div)."
+						},
+						{
+							"name": "eventWysiwyg",
+							"params": "",
+							"returns": "SunEditor.EventWysiwyg",
+							"description": "- Internal reference for wysiwyg events (set on initialization)."
 						},
 						{
 							"name": "codeWrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Wrapper for code-view mode."
+							"description": "- Wrapper element for the code-view mode."
 						},
 						{
 							"name": "code",
 							"params": "",
-							"returns": "HTMLTextAreaElement",
-							"description": "Code view editing element (textarea or pre)."
+							"returns": "HTMLElement & HTMLTextAreaElement",
+							"description": "- Code view editing element (a <textarea> or <pre>)."
 						},
 						{
 							"name": "codeNumbers",
 							"params": "",
 							"returns": "HTMLTextAreaElement",
-							"description": "Line numbers element in code view."
+							"description": "- Element displaying line numbers in code view mode."
 						},
 						{
 							"name": "placeholder",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Placeholder element (shown when editor is empty)."
+							"description": "- Placeholder element shown when the editor is empty."
 						},
 						{
 							"name": "statusbar",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Status bar element (resizing, info)."
+							"description": "- Editor status bar element (for resizing, info, etc.)."
 						},
 						{
 							"name": "navigation",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Navigation element (node path display)."
+							"description": "- Navigation element (e.g., for outline or bookmarks)."
 						},
 						{
 							"name": "charWrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Wrapper for character counter."
+							"description": "- Wrapper for the character counter element."
 						},
 						{
 							"name": "charCounter",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Character counter display element."
+							"description": "- Element showing the character counter."
 						},
 						{
 							"name": "lineBreaker_t",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Top floating line-breaker UI element."
+							"description": "- Top floating line-breaker UI element (for line insertion)."
 						},
 						{
 							"name": "lineBreaker_b",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "Bottom floating line-breaker UI element."
+							"description": "- Bottom floating line-breaker UI element (for line insertion)."
 						},
 						{
 							"name": "isCodeView",
 							"params": "",
 							"returns": "boolean",
-							"description": "Whether in code view mode."
+							"description": "- Whether the editor is currently in code view mode."
 						},
 						{
 							"name": "isFullScreen",
 							"params": "",
 							"returns": "boolean",
-							"description": "Whether in fullscreen mode."
+							"description": "- Whether the editor is currently in fullscreen mode."
 						},
 						{
 							"name": "isReadOnly",
 							"params": "",
 							"returns": "boolean",
-							"description": "Whether set to readonly."
+							"description": "- Whether the editor is set to readonly mode."
 						},
 						{
 							"name": "isDisabled",
 							"params": "",
 							"returns": "boolean",
-							"description": "Whether currently disabled."
+							"description": "- Whether the editor is currently disabled."
 						},
 						{
 							"name": "isShowBlocks",
 							"params": "",
-							"returns": "boolean?",
-							"description": "Block visualization enabled."
+							"returns": "boolean",
+							"description": "- Whether block structure visualization is enabled."
 						},
 						{
 							"name": "isChanged",
 							"params": "",
 							"returns": "boolean",
-							"description": "Content changed since last save."
+							"description": "- Whether the content has been changed (-1 means initial state). === History Tracking ==="
 						},
 						{
 							"name": "historyIndex",
 							"params": "",
 							"returns": "number",
-							"description": "Current index in history stack (undo/redo)."
+							"description": "- Current index in the history stack (undo/redo)."
 						},
 						{
 							"name": "savedIndex",
 							"params": "",
 							"returns": "number",
-							"description": "Last saved index in history stack."
+							"description": "- Last saved index in the history stack. === DocumentType Editing (Optional) ==="
 						},
 						{
 							"name": "documentType",
 							"params": "",
-							"returns": "Object?",
-							"description": "Document-type specific configuration."
+							"returns": "any",
+							"description": "- Document-type specific configuration or module reference."
+						},
+						{
+							"name": "documentTypeInner",
+							"params": "",
+							"returns": "HTMLElement",
+							"description": "- Inner container for document-type editors."
 						},
 						{
 							"name": "documentTypePage",
 							"params": "",
-							"returns": "HTMLElement?",
-							"description": "Page wrapper for paginated mode."
+							"returns": "HTMLElement",
+							"description": "- Page wrapper for paginated editing mode."
 						},
 						{
-							"name": "_minHeight",
+							"name": "documentTypePageMirror",
 							"params": "",
-							"returns": "number",
-							"description": "Minimum height of wysiwyg area."
+							"returns": "HTMLElement",
+							"description": "- Mirror page element used for selection/layout adjustments."
 						},
 						{
-							"name": "_ww",
+							"name": "documentType_use_header",
 							"params": "",
-							"returns": "Window?",
-							"description": "Window object of WYSIWYG iframe."
+							"returns": "boolean",
+							"description": "- Whether headers are used in document-type mode."
 						},
 						{
-							"name": "_wd",
+							"name": "documentType_use_page",
 							"params": "",
-							"returns": "Document?",
-							"description": "Document object of WYSIWYG iframe."
+							"returns": "boolean",
+							"description": "- Whether page layout is enabled in document-type mode. === Runtime / Computed Values ==="
+						},
+						{
+							"name": "wwComputedStyle",
+							"params": "",
+							"returns": "CSSStyleDeclaration",
+							"description": "- Cached computed styles for the wysiwyg element.\n- Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n- Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n- Improves performance by avoiding repeated `getComputedStyle()` calls."
 						}
 					]
 				},
@@ -2880,19 +2892,19 @@
 				},
 				"options": {
 					"title": "$.options",
-					"description": "BaseOptionsMap — خيارات التكوين المطبقة على المحرر بأكمله. تتحكم في الإضافات وشريط الأدوات والسمات وتصفية المحتوى وسلوك واجهة المستخدم. مخزنة كـ Map.",
+					"description": "BaseOptionsMap — Configuration options applied to the entire editor. Controls plugins, toolbar, themes, content filtering, and UI behavior. Stored as a Map<string, *>.",
 					"methods": [
 						{
 							"name": "plugins",
 							"params": "",
-							"returns": "Object | Array",
+							"returns": "| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>",
 							"description": "تكوين البرنامج المساعد."
 						},
 						{
 							"name": "excludedPlugins",
 							"params": "",
 							"returns": "Array<string>",
-							"description": ""
+							"description": "- Plugin configuration."
 						},
 						{
 							"name": "buttonList",
@@ -2909,7 +2921,7 @@
 						{
 							"name": "mode",
 							"params": "",
-							"returns": "\"classic\" | \"inline\" | \"balloon\" | \"balloon-always\"",
+							"returns": "'classic' | 'inline' | 'balloon' | 'balloon-always'",
 							"description": "وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`."
 						},
 						{
@@ -2927,31 +2939,31 @@
 						{
 							"name": "lang",
 							"params": "",
-							"returns": "Object<string, string>",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "تكوين اللغة. الافتراضي: إن"
 						},
 						{
 							"name": "icons",
 							"params": "",
-							"returns": "Object<string, string>",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "يتجاوز الرموز الافتراضية."
 						},
 						{
 							"name": "textDirection",
 							"params": "",
-							"returns": "\"ltr\" | \"rtl\"",
+							"returns": "'ltr' | 'rtl'",
 							"description": "اتجاه النص: `ltr` أو `rtl`."
 						},
 						{
 							"name": "reverseButtons",
 							"params": "",
 							"returns": "Array<string>",
-							"description": ""
+							"description": "- An array of command pairs whose shortcut icons should be opposite each other.\n- Depends on the `textDirection` mode. /// === Strict & Advanced Filtering ==="
 						},
 						{
 							"name": "strictMode",
 							"params": "",
-							"returns": "true | Object",
+							"returns": "| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  }",
 							"description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`)"
 						},
 						{
@@ -2987,13 +2999,13 @@
 						{
 							"name": "attributeWhitelist",
 							"params": "",
-							"returns": "Object | null",
+							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
 							"description": "يحدد سمات إضافية للسماح بكل علامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"id\"}) \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}."
 						},
 						{
 							"name": "attributeBlacklist",
 							"params": "",
-							"returns": "Object | null",
+							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
 							"description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"name\"}) \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا."
 						},
 						{
@@ -3005,7 +3017,7 @@
 						{
 							"name": "convertTextTags",
 							"params": "",
-							"returns": "Object",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "تعيين أنماط النص إلى علامات HTML محددة."
 						},
 						{
@@ -3017,7 +3029,7 @@
 						{
 							"name": "tagStyles",
 							"params": "",
-							"returns": "Object<string, string>",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "يحدد الأنماط المسموح بها لعلامات HTML."
 						},
 						{
@@ -3041,7 +3053,7 @@
 						{
 							"name": "retainStyleMode",
 							"params": "",
-							"returns": "\"repeat\" | \"always\" | \"none\"",
+							"returns": "'repeat' | 'always' | 'none'",
 							"description": "يحدد كيفية التعامل مع العناصر المضمنة (مثل `<span>`، `<strong>`) عند حذف النص. \n- `repeat`: يتم الاحتفاظ بالأنماط ما لم يتم الضغط على مسافة للخلف بشكل متكرر. \n- سيؤدي الضغط المستمر إلى إزالة الأنماط في النهاية. \n- `none`: لا يتم الاحتفاظ بالأنماط. تتم إزالة العناصر المضمنة على الفور مع النص. \n- `always`: تستمر الأنماط إلى أجل غير مسمى ما لم تتم إزالتها بشكل صريح. \n- حتى إذا تم حذف كل النص الموجود داخل عنصر مضمّن، فسيظل العنصر نفسه قائمًا."
 						},
 						{
@@ -3053,7 +3065,7 @@
 						{
 							"name": "defaultLineBreakFormat",
 							"params": "",
-							"returns": "\"line\" | \"br\"",
+							"returns": "'line' | 'br'",
 							"description": "يحدد التنسيق الافتراضي لفاصل الأسطر. \n- [مستحسن] `line` : يتم تقسيم فاصل الأسطر إلى علامات عامة. \n- [غير مستحسن] `br` ​​: تتم معاملة فواصل الأسطر على أنها <br> على نفس السطر. (مثل التحول + أدخل) \n- تتم معالجة فواصل الأسطر كـ <br> داخل `line`. \n- يمكنك إنشاء `line` جديد عن طريق إدخال فاصل أسطر مرتين على التوالي. \n- التنسيقات التي تتضمن `line`، مثل \"اقتباس\"، لا تزال تعمل على أساس `line`. \n- تعمل عمليات محرر الشمس في وحدات `line`. \n- عند الضبط على `br`، قد ينخفض ​​الأداء عند تحرير الكثير من البيانات."
 						},
 						{
@@ -3137,7 +3149,7 @@
 						{
 							"name": "subToolbar",
 							"params": "",
-							"returns": "Object",
+							"returns": "{\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t}",
 							"description": "تكوين شريط الأدوات الفرعي"
 						},
 						{
@@ -3161,7 +3173,7 @@
 						{
 							"name": "shortcuts",
 							"params": "",
-							"returns": "Object<string, Array<string>>",
+							"returns": "{\n\t\t[key: string]: Array<string> | undefined;\n\t}",
 							"description": "اختصارات لوحة المفاتيح المخصصة."
 						},
 						{
@@ -3180,7 +3192,7 @@
 							"name": "autoStyleify",
 							"params": "",
 							"returns": "Array<string>",
-							"description": ""
+							"description": "- Styles applied automatically on text input."
 						},
 						{
 							"name": "historyStackDelayTime",
@@ -3227,7 +3239,7 @@
 						{
 							"name": "toastMessageTime",
 							"params": "",
-							"returns": "Object",
+							"returns": "any",
 							"description": "{\"نسخة\": 1500} - مدة عرض رسائل التوست."
 						},
 						{
@@ -3239,13 +3251,13 @@
 						{
 							"name": "externalLibs",
 							"params": "",
-							"returns": "Object<string, *>",
+							"returns": "{\n\t\t[x: string]: any;\n\t}",
 							"description": "المكتبات الخارجية مثل CodeMirror أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
 						},
 						{
 							"name": "allowedExtraTags",
 							"params": "",
-							"returns": "Object<string, boolean>",
+							"returns": "{\n\t\t[x: string]: boolean;\n\t}",
 							"description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}"
 						},
 						{
@@ -3253,12 +3265,180 @@
 							"params": "",
 							"returns": "SunEditor.Event.Handlers",
 							"description": "تكوين معالجات أحداث المستخدم"
+						},
+						{
+							"name": "align",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/align.js').AlignPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "audio",
+							"params": "",
+							"returns": "import('../../plugins/modal/audio.js').AudioPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "audioGallery",
+							"params": "",
+							"returns": "import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "backgroundColor",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "blockStyle",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "drawing",
+							"params": "",
+							"returns": "import('../../plugins/modal/drawing.js').DrawingPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "embed",
+							"params": "",
+							"returns": "import('../../plugins/modal/embed.js').EmbedPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "exportPDF",
+							"params": "",
+							"returns": "import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "fileBrowser",
+							"params": "",
+							"returns": "import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "fileGallery",
+							"params": "",
+							"returns": "import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "fileUpload",
+							"params": "",
+							"returns": "import('../../plugins/command/fileUpload.js').FileUploadPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "font",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/font.js').FontPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "fontColor",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "fontSize",
+							"params": "",
+							"returns": "import('../../plugins/input/fontSize.js').FontSizePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "hr",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/hr.js').HRPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "image",
+							"params": "",
+							"returns": "import('../../plugins/modal/image/index.js').ImagePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "imageGallery",
+							"params": "",
+							"returns": "import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "layout",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/layout.js').LayoutPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "lineHeight",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "link",
+							"params": "",
+							"returns": "import('../../plugins/modal/link.js').LinkPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "math",
+							"params": "",
+							"returns": "import('../../plugins/modal/math.js').MathPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "mention",
+							"params": "",
+							"returns": "import('../../plugins/field/mention.js').MentionPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "paragraphStyle",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "table",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/table/index.js').TablePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "template",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/template.js').TemplatePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "textStyle",
+							"params": "",
+							"returns": "import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "video",
+							"params": "",
+							"returns": "import('../../plugins/modal/video/index.js').VideoPluginOptions",
+							"description": ""
+						},
+						{
+							"name": "videoGallery",
+							"params": "",
+							"returns": "import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions",
+							"description": "/// ---[ End of auto-generated plugin options ]--- ================================================================================================================================"
 						}
 					]
 				},
 				"frameOptions": {
 					"title": "$.frameOptions",
-					"description": "FrameOptionsMap — خيارات التكوين المطبقة على الإطار الفردي. تتحكم في المحتوى والحجم وiframe وشريط الحالة وعداد الأحرف.",
+					"description": "FrameOptionsMap — Configuration options for individual frames. Controls content, sizing, iframe mode, statusbar, and character counter.",
 					"methods": [
 						{
 							"name": "value",
@@ -3275,7 +3455,7 @@
 						{
 							"name": "editableFrameAttributes",
 							"params": "",
-							"returns": "Object<string, string>",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "سمات الإطار القابل للتحرير[.sun-editor-editable]. (على سبيل المثال، [المفتاح]: القيمة)"
 						},
 						{
@@ -3335,14 +3515,14 @@
 						{
 							"name": "iframe_attributes",
 							"params": "",
-							"returns": "Object<string, string>",
+							"returns": "{\n\t\t[x: string]: string;\n\t}",
 							"description": "سمات `iframe`. (على سبيل المثال، {'allow-scripts': 'true'})"
 						},
 						{
 							"name": "iframe_cssFileName",
 							"params": "",
 							"returns": "Array<string>",
-							"description": ""
+							"description": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- (e.g. \"suneditor\" or \"suneditor.[a-z0-9]+\" matches \"suneditor.abc123.css\")\n- \"*\": Wildcard to include ALL stylesheets from the page.\n- Array: Multiple patterns (e.g. [\"suneditor\", \"custom\", \"*\"]).\n- Absolute URLs and data URLs (data:text/css,) are also supported. /// === Statusbar & Character Counter ==="
 						},
 						{
 							"name": "statusbar",
@@ -3383,8 +3563,21 @@
 						{
 							"name": "charCounter_type",
 							"params": "",
-							"returns": "\"char\" | \"byte\" | \"byte-html\"",
+							"returns": "'char' | 'byte' | 'byte-html'",
 							"description": "يحدد طريقة الحساب للخيار `charCounter`. \n- `char`: طول الأحرف. \n- `byte`: حجم البيانات الثنائية للأحرف. \n- `byte-html`: حجم البيانات الثنائية لسلسلة HTML الكاملة."
+						}
+					]
+				},
+				"facade": {
+					"title": "$.facade",
+					"description": "Reference to the Editor Instance (public API). All methods on the editor object are accessible through $.facade.",
+					"methods": [
+						{
+							"name": "(Editor Instance)",
+							"params": "",
+							"returns": "SunEditor.Instance",
+							"description": "The public editor API. See Editor Instance section for all available methods.",
+							"linkedAs": "Editor Instance"
 						}
 					]
 				}

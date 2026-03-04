@@ -127,7 +127,9 @@
 			"contentBehavior": "المحتوى والسلوك",
 			"features": "الميزات",
 			"filtering": "التصفية (متقدم)",
-			"formatExtensions": "امتدادات التنسيق"
+			"formatExtensions": "امتدادات التنسيق",
+			"multirootRoots": "خيارات لكل جذر",
+			"inheritDesc": "يستخدم القيمة من الخيارات الرئيسية أعلاه"
 		},
 		"options": {
 			"classic": "كلاسيكي",
@@ -322,6 +324,7 @@
 		"filterTypes": "Filter types...",
 		"noTypes": "No types found.",
 		"editorInstanceDesc": "يحتوي مثيل المحرر على النواة ($)، المحرك الداخلي الذي يشغل جميع الأنظمة الفرعية. الوصول إليه عبر editor.$ — مثال: editor.$.store، editor.$.selection، editor.$.format، إلخ.",
+		"layerL1Desc": "الطبقة الأساسية للنواة. facade هو مرجع عكسي لمثيل المحرر العام (الكائن المُرجَع من SunEditor.create())، وstore هو نظام إدارة الحالة المركزي مع دعم الاشتراكات.",
 		"kernelInfoDesc": "النواة ($) هي المحرك الداخلي لـ SunEditor. تم تنظيمها في طبقات: مزودات تكوين L2 تُهيَّأ أولاً، ثم تُنشأ أنظمة منطق L3 الفرعية مع حقن تلك المزودات. جميع الأنظمة الفرعية متاحة عبر editor.$.",
 		"layerL2Desc": "مزودات التكوين المُهيَّأة في المرحلة الأولى. يدير contextProvider وoptionProvider السياقات والخيارات العامة/الإطارية، ويوفر instanceCheck فحوصات أنواع آمنة في iframe، ويوفر eventManager واجهة الأحداث العامة.",
 		"layerL2AccDesc": "خصائص getter مريحة على $ توفر وصولاً مباشراً لبيانات التكوين المستخدمة بشكل متكرر من contextProvider وoptionProvider — مثل مراجع DOM (context, frameContext)، وإعدادات المحرر (options, frameOptions)، وموارد واجهة المستخدم (icons, lang).",

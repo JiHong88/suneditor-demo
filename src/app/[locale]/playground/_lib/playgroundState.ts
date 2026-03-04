@@ -13,6 +13,8 @@ export interface PlaygroundState {
 	type: string;
 	theme: string;
 	textDirection: "ltr" | "rtl";
+	reverseButtons: string;
+	v2Migration: boolean;
 
 	// — Layout & Sizing (frame) —
 	width: string;
@@ -29,6 +31,12 @@ export interface PlaygroundState {
 	toolbar_hide: boolean;
 	shortcutsHint: boolean;
 	shortcutsDisable: boolean;
+
+	// — Sub-Toolbar —
+	subToolbar_enabled: boolean;
+	subToolbar_buttonListPreset: ButtonListPreset;
+	subToolbar_mode: "balloon" | "balloon-always";
+	subToolbar_width: string;
 
 	// — Statusbar & Counter (frame) —
 	statusbar: boolean;
@@ -93,6 +101,8 @@ export interface PlaygroundState {
 	allowedClassName: string;
 	allUsedStyles: string;
 	scopeSelectionTags: string;
+	convertTextTags: string;
+	tagStyles: string;
 
 	// — Plugin: Image —
 	image_canResize: boolean;
@@ -176,6 +186,173 @@ export interface PlaygroundState {
 	math_canResize: boolean;
 	math_autoHeight: boolean;
 
+	// — Plugin: Image (extended) —
+	image_uploadHeaders: string;
+	image_uploadSingleSizeLimit: number;
+	image_useFormatType: boolean;
+	image_defaultFormatType: string;
+	image_keepFormatType: boolean;
+	image_linkEnableFileUpload: boolean;
+	image_insertBehavior: string;
+
+	// — Plugin: Video (extended) —
+	video_uploadHeaders: string;
+	video_uploadSingleSizeLimit: number;
+	video_videoTagAttributes: string;
+	video_iframeTagAttributes: string;
+	video_query_youtube: string;
+	video_query_vimeo: string;
+	video_extensions: string;
+	video_insertBehavior: string;
+
+	// — Plugin: Audio (extended) —
+	audio_uploadHeaders: string;
+	audio_uploadSingleSizeLimit: number;
+	audio_audioTagAttributes: string;
+	audio_insertBehavior: string;
+
+	// — Plugin: Embed (extended) —
+	embed_uploadUrl: string;
+	embed_uploadHeaders: string;
+	embed_uploadSizeLimit: number;
+	embed_uploadSingleSizeLimit: number;
+	embed_iframeTagAttributes: string;
+	embed_query_youtube: string;
+	embed_query_vimeo: string;
+	embed_insertBehavior: string;
+
+	// — Plugin: Drawing (extended) —
+	drawing_useFormatType: boolean;
+	drawing_defaultFormatType: string;
+	drawing_keepFormatType: boolean;
+	drawing_maintainRatio: boolean;
+
+	// — Plugin: Mention (extended) —
+	mention_apiHeaders: string;
+	mention_useCachingFieldData: boolean;
+
+	// — Plugin: FontColor (extended) —
+	fontColor_splitNum: number;
+
+	// — Plugin: BackgroundColor (extended) —
+	backgroundColor_splitNum: number;
+
+	// — Plugin: Link —
+	link_title: boolean;
+	link_textToDisplay: boolean;
+	link_openNewWindow: boolean;
+	link_noAutoPrefix: boolean;
+	link_uploadUrl: string;
+	link_uploadHeaders: string;
+	link_uploadSizeLimit: number;
+	link_uploadSingleSizeLimit: number;
+	link_acceptedFormats: string;
+
+	// — Plugin: ExportPDF —
+	exportPDF_apiUrl: string;
+	exportPDF_fileName: string;
+
+	// — Plugin: FileUpload —
+	fileUpload_uploadUrl: string;
+	fileUpload_uploadHeaders: string;
+	fileUpload_uploadSizeLimit: number;
+	fileUpload_uploadSingleSizeLimit: number;
+	fileUpload_allowMultiple: boolean;
+	fileUpload_acceptedFormats: string;
+	fileUpload_as: string;
+
+	// — Plugin: Align —
+	align_items: string;
+	// — Plugin: Font —
+	font_items: string;
+	// — Plugin: BlockStyle —
+	blockStyle_items: string;
+	// — Plugin: LineHeight —
+	lineHeight_items: string;
+	// — Plugin: ParagraphStyle —
+	paragraphStyle_items: string;
+	// — Plugin: TextStyle —
+	textStyle_items: string;
+	// — Plugin: Template —
+	template_items: string;
+	// — Plugin: Layout —
+	layout_items: string;
+
+	// — Plugin: ImageGallery —
+	imageGallery_url: string;
+	imageGallery_headers: string;
+	imageGallery_data: string;
+	// — Plugin: VideoGallery —
+	videoGallery_url: string;
+	videoGallery_headers: string;
+	videoGallery_thumbnail: string;
+	videoGallery_data: string;
+	// — Plugin: AudioGallery —
+	audioGallery_url: string;
+	audioGallery_headers: string;
+	audioGallery_thumbnail: string;
+	audioGallery_data: string;
+	// — Plugin: FileGallery —
+	fileGallery_url: string;
+	fileGallery_headers: string;
+	fileGallery_thumbnail: string;
+	fileGallery_data: string;
+	// — Plugin: FileBrowser —
+	fileBrowser_url: string;
+	fileBrowser_headers: string;
+	fileBrowser_thumbnail: string;
+	fileBrowser_data: string;
+	fileBrowser_props: string;
+
+	// — Multi-Root per-root overrides —
+	// Layout
+	root_header_height: string;
+	root_header_width: string;
+	root_header_minWidth: string;
+	root_header_maxWidth: string;
+	root_header_minHeight: string;
+	root_header_maxHeight: string;
+	root_header_editorStyle: string;
+	root_body_height: string;
+	root_body_width: string;
+	root_body_minWidth: string;
+	root_body_maxWidth: string;
+	root_body_minHeight: string;
+	root_body_maxHeight: string;
+	root_body_editorStyle: string;
+	// Content
+	root_header_placeholder: string;
+	root_header_value: string;
+	root_header_editableFrameAttributes: string;
+	root_body_placeholder: string;
+	root_body_value: string;
+	root_body_editableFrameAttributes: string;
+	// Iframe (tri-state: "" | "true" | "false")
+	root_header_iframe: string;
+	root_header_iframe_fullPage: string;
+	root_header_iframe_attributes: string;
+	root_header_iframe_cssFileName: string;
+	root_body_iframe: string;
+	root_body_iframe_fullPage: string;
+	root_body_iframe_attributes: string;
+	root_body_iframe_cssFileName: string;
+	// Statusbar (tri-state: "" | "true" | "false")
+	root_header_statusbar: string;
+	root_header_statusbar_showPathLabel: string;
+	root_header_statusbar_resizeEnable: string;
+	root_body_statusbar: string;
+	root_body_statusbar_showPathLabel: string;
+	root_body_statusbar_resizeEnable: string;
+	// CharCounter
+	root_header_charCounter: string;
+	root_header_charCounter_max: string;
+	root_header_charCounter_label: string;
+	root_header_charCounter_type: string;
+	root_body_charCounter: string;
+	root_body_charCounter_max: string;
+	root_body_charCounter_label: string;
+	root_body_charCounter_type: string;
+
 	// — UI state (not serialized) —
 	codeFramework: CodeFramework;
 	codePanelOpen: boolean;
@@ -190,6 +367,8 @@ export const DEFAULTS: PlaygroundState = {
 	type: "",
 	theme: "",
 	textDirection: "ltr",
+	reverseButtons: "indent-outdent",
+	v2Migration: false,
 
 	width: "100%",
 	minWidth: "",
@@ -204,6 +383,11 @@ export const DEFAULTS: PlaygroundState = {
 	toolbar_hide: false,
 	shortcutsHint: true,
 	shortcutsDisable: false,
+
+	subToolbar_enabled: false,
+	subToolbar_buttonListPreset: "basic",
+	subToolbar_mode: "balloon",
+	subToolbar_width: "auto",
 
 	statusbar: true,
 	statusbar_showPathLabel: true,
@@ -264,6 +448,8 @@ export const DEFAULTS: PlaygroundState = {
 	allowedClassName: "",
 	allUsedStyles: "",
 	scopeSelectionTags: "",
+	convertTextTags: "",
+	tagStyles: "",
 
 	// Plugin: Image
 	image_canResize: true,
@@ -347,8 +533,192 @@ export const DEFAULTS: PlaygroundState = {
 	math_canResize: true,
 	math_autoHeight: false,
 
+	// Plugin: Image (extended)
+	image_uploadHeaders: "",
+	image_uploadSingleSizeLimit: 0,
+	image_useFormatType: true,
+	image_defaultFormatType: "block",
+	image_keepFormatType: false,
+	image_linkEnableFileUpload: false,
+	image_insertBehavior: "auto",
+
+	// Plugin: Video (extended)
+	video_uploadHeaders: "",
+	video_uploadSingleSizeLimit: 0,
+	video_videoTagAttributes: "",
+	video_iframeTagAttributes: "",
+	video_query_youtube: "",
+	video_query_vimeo: "",
+	video_extensions: "",
+	video_insertBehavior: "auto",
+
+	// Plugin: Audio (extended)
+	audio_uploadHeaders: "",
+	audio_uploadSingleSizeLimit: 0,
+	audio_audioTagAttributes: "",
+	audio_insertBehavior: "auto",
+
+	// Plugin: Embed (extended)
+	embed_uploadUrl: "",
+	embed_uploadHeaders: "",
+	embed_uploadSizeLimit: 0,
+	embed_uploadSingleSizeLimit: 0,
+	embed_iframeTagAttributes: "",
+	embed_query_youtube: "",
+	embed_query_vimeo: "",
+	embed_insertBehavior: "auto",
+
+	// Plugin: Drawing (extended)
+	drawing_useFormatType: false,
+	drawing_defaultFormatType: "block",
+	drawing_keepFormatType: false,
+	drawing_maintainRatio: true,
+
+	// Plugin: Mention (extended)
+	mention_apiHeaders: "",
+	mention_useCachingFieldData: true,
+
+	// Plugin: FontColor (extended)
+	fontColor_splitNum: 7,
+
+	// Plugin: BackgroundColor (extended)
+	backgroundColor_splitNum: 7,
+
+	// Plugin: Link
+	link_title: true,
+	link_textToDisplay: true,
+	link_openNewWindow: true,
+	link_noAutoPrefix: false,
+	link_uploadUrl: "",
+	link_uploadHeaders: "",
+	link_uploadSizeLimit: 0,
+	link_uploadSingleSizeLimit: 0,
+	link_acceptedFormats: "",
+
+	// Plugin: ExportPDF
+	exportPDF_apiUrl: "",
+	exportPDF_fileName: "suneditor-pdf",
+
+	// Plugin: FileUpload
+	fileUpload_uploadUrl: "",
+	fileUpload_uploadHeaders: "",
+	fileUpload_uploadSizeLimit: 0,
+	fileUpload_uploadSingleSizeLimit: 0,
+	fileUpload_allowMultiple: false,
+	fileUpload_acceptedFormats: "*",
+	fileUpload_as: "box",
+
+	// Plugin: Align
+	align_items: "",
+	// Plugin: Font
+	font_items: "",
+	// Plugin: BlockStyle
+	blockStyle_items: "",
+	// Plugin: LineHeight
+	lineHeight_items: "",
+	// Plugin: ParagraphStyle
+	paragraphStyle_items: "",
+	// Plugin: TextStyle
+	textStyle_items: "",
+	// Plugin: Template
+	template_items: "",
+	// Plugin: Layout
+	layout_items: "",
+
+	// Plugin: ImageGallery
+	imageGallery_url: "",
+	imageGallery_headers: "",
+	imageGallery_data: "",
+	// Plugin: VideoGallery
+	videoGallery_url: "",
+	videoGallery_headers: "",
+	videoGallery_thumbnail: "",
+	videoGallery_data: "",
+	// Plugin: AudioGallery
+	audioGallery_url: "",
+	audioGallery_headers: "",
+	audioGallery_thumbnail: "",
+	audioGallery_data: "",
+	// Plugin: FileGallery
+	fileGallery_url: "",
+	fileGallery_headers: "",
+	fileGallery_thumbnail: "",
+	fileGallery_data: "",
+	// Plugin: FileBrowser
+	fileBrowser_url: "",
+	fileBrowser_headers: "",
+	fileBrowser_thumbnail: "",
+	fileBrowser_data: "",
+	fileBrowser_props: "",
+
+	// Multi-Root per-root overrides
+	root_header_height: "150px",
+	root_header_width: "",
+	root_header_minWidth: "",
+	root_header_maxWidth: "",
+	root_header_minHeight: "",
+	root_header_maxHeight: "",
+	root_header_editorStyle: "",
+	root_body_height: "400px",
+	root_body_width: "",
+	root_body_minWidth: "",
+	root_body_maxWidth: "",
+	root_body_minHeight: "",
+	root_body_maxHeight: "",
+	root_body_editorStyle: "",
+	root_header_placeholder: "",
+	root_header_value: "",
+	root_header_editableFrameAttributes: "",
+	root_body_placeholder: "",
+	root_body_value: "",
+	root_body_editableFrameAttributes: "",
+	root_header_iframe: "",
+	root_header_iframe_fullPage: "",
+	root_header_iframe_attributes: "",
+	root_header_iframe_cssFileName: "",
+	root_body_iframe: "",
+	root_body_iframe_fullPage: "",
+	root_body_iframe_attributes: "",
+	root_body_iframe_cssFileName: "",
+	root_header_statusbar: "",
+	root_header_statusbar_showPathLabel: "",
+	root_header_statusbar_resizeEnable: "",
+	root_body_statusbar: "",
+	root_body_statusbar_showPathLabel: "",
+	root_body_statusbar_resizeEnable: "",
+	root_header_charCounter: "",
+	root_header_charCounter_max: "",
+	root_header_charCounter_label: "",
+	root_header_charCounter_type: "",
+	root_body_charCounter: "",
+	root_body_charCounter_max: "",
+	root_body_charCounter_label: "",
+	root_body_charCounter_type: "",
+
 	codeFramework: "javascript-npm",
 	codePanelOpen: true,
+};
+
+/* ── Preset values for toggleable plugin options ───────── */
+
+export const ITEM_PRESETS: Record<string, string> = {
+	align_items: "left,center,right,justify",
+	font_items: "Arial,Comic Sans MS,Courier New,Impact,Georgia,tahoma,Trebuchet MS,Verdana",
+	blockStyle_items: "p,blockquote,pre,h1,h2,h3,h4,h5,h6",
+	lineHeight_items: '[{"text":"1","value":"1em"},{"text":"1.5","value":"1.5em"},{"text":"2","value":"2em"}]',
+	paragraphStyle_items: "spaced,bordered,neon",
+	textStyle_items: "code,shadow",
+	template_items: '[{"name":"Greeting","html":"<p>Hello!</p>"}]',
+	layout_items: '[{"name":"Two Column","html":"<div style=\\"display:flex;gap:1em\\"><div style=\\"flex:1\\">Left</div><div style=\\"flex:1\\">Right</div></div>"}]',
+};
+
+export const GALLERY_DATA_PRESETS: Record<string, string> = {
+	imageGallery_data: '[\n  {"src": "{{imageGallery-source}}/1.jpg", "thumbnail": "{{imageGallery-source}}/thumb/1.jpg", "name": "Image 1"},\n  {"src": "{{imageGallery-source}}/2.jpg", "thumbnail": "{{imageGallery-source}}/thumb/2.jpg", "name": "Image 2"}\n]',
+	videoGallery_data: '[\n  {"src": "{{videoGallery-source}}/1.mp4", "thumbnail": "{{videoGallery-source}}/thumb/1.jpg", "name": "Video 1"}\n]',
+	audioGallery_data: '[\n  {"src": "{{audioGallery-source}}/1.mp3", "name": "Audio 1"}\n]',
+	fileGallery_data: '[\n  {"src": "{{fileGallery-source}}/doc.pdf", "name": "Document.pdf", "size": "2.5MB"}\n]',
+	fileBrowser_data: '{\n  "root": [{"src": "{{fileBrowser-source}}/file1.pdf", "name": "file1.pdf"}]\n}',
+	fileBrowser_props: '["href", "data-size", "data-name"]',
 };
 
 /* ── Fixed option keys (require remount) ───────────────── */
@@ -360,6 +730,10 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"buttonListPreset",
 	"type",
 	"shortcutsDisable",
+	"subToolbar_enabled",
+	"subToolbar_buttonListPreset",
+	"subToolbar_mode",
+	"subToolbar_width",
 	"closeModalOutsideClick",
 	"defaultLine",
 	"strictMode",
@@ -384,10 +758,29 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"textStyleTags",
 	"allowedClassName",
 	"allUsedStyles",
+	"reverseButtons",
+	"v2Migration",
+	"convertTextTags",
+	"tagStyles",
 ];
 
 /** Frame options flagged as 'fixed' in OPTION_FRAME_FIXED_FLAG */
-const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = ["iframe", "iframe_fullPage", "statusbar_resizeEnable"];
+const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = [
+	"iframe", "iframe_fullPage", "statusbar_resizeEnable",
+	// per-root: all frame options require remount
+	"root_header_height", "root_header_width", "root_header_minWidth", "root_header_maxWidth",
+	"root_header_minHeight", "root_header_maxHeight", "root_header_editorStyle",
+	"root_header_placeholder", "root_header_value", "root_header_editableFrameAttributes",
+	"root_header_iframe", "root_header_iframe_fullPage", "root_header_iframe_attributes", "root_header_iframe_cssFileName",
+	"root_header_statusbar", "root_header_statusbar_showPathLabel", "root_header_statusbar_resizeEnable",
+	"root_header_charCounter", "root_header_charCounter_max", "root_header_charCounter_label", "root_header_charCounter_type",
+	"root_body_height", "root_body_width", "root_body_minWidth", "root_body_maxWidth",
+	"root_body_minHeight", "root_body_maxHeight", "root_body_editorStyle",
+	"root_body_placeholder", "root_body_value", "root_body_editableFrameAttributes",
+	"root_body_iframe", "root_body_iframe_fullPage", "root_body_iframe_attributes", "root_body_iframe_cssFileName",
+	"root_body_statusbar", "root_body_statusbar_showPathLabel", "root_body_statusbar_resizeEnable",
+	"root_body_charCounter", "root_body_charCounter_max", "root_body_charCounter_label", "root_body_charCounter_type",
+];
 
 /** Plugin options are effectively fixed (plugins themselves are fixed) */
 const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
@@ -451,6 +844,111 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"mention_useCachingData",
 	"math_canResize",
 	"math_autoHeight",
+	// Image (extended)
+	"image_uploadHeaders",
+	"image_uploadSingleSizeLimit",
+	"image_useFormatType",
+	"image_defaultFormatType",
+	"image_keepFormatType",
+	"image_linkEnableFileUpload",
+	"image_insertBehavior",
+	// Video (extended)
+	"video_uploadHeaders",
+	"video_uploadSingleSizeLimit",
+	"video_videoTagAttributes",
+	"video_iframeTagAttributes",
+	"video_query_youtube",
+	"video_query_vimeo",
+	"video_extensions",
+	"video_insertBehavior",
+	// Audio (extended)
+	"audio_uploadHeaders",
+	"audio_uploadSingleSizeLimit",
+	"audio_audioTagAttributes",
+	"audio_insertBehavior",
+	// Embed (extended)
+	"embed_uploadUrl",
+	"embed_uploadHeaders",
+	"embed_uploadSizeLimit",
+	"embed_uploadSingleSizeLimit",
+	"embed_iframeTagAttributes",
+	"embed_query_youtube",
+	"embed_query_vimeo",
+	"embed_insertBehavior",
+	// Drawing (extended)
+	"drawing_useFormatType",
+	"drawing_defaultFormatType",
+	"drawing_keepFormatType",
+	"drawing_maintainRatio",
+	// Mention (extended)
+	"mention_apiHeaders",
+	"mention_useCachingFieldData",
+	// FontColor (extended)
+	"fontColor_splitNum",
+	// BackgroundColor (extended)
+	"backgroundColor_splitNum",
+	// Link
+	"link_title",
+	"link_textToDisplay",
+	"link_openNewWindow",
+	"link_noAutoPrefix",
+	"link_uploadUrl",
+	"link_uploadHeaders",
+	"link_uploadSizeLimit",
+	"link_uploadSingleSizeLimit",
+	"link_acceptedFormats",
+	// ExportPDF
+	"exportPDF_apiUrl",
+	"exportPDF_fileName",
+	// FileUpload
+	"fileUpload_uploadUrl",
+	"fileUpload_uploadHeaders",
+	"fileUpload_uploadSizeLimit",
+	"fileUpload_uploadSingleSizeLimit",
+	"fileUpload_allowMultiple",
+	"fileUpload_acceptedFormats",
+	"fileUpload_as",
+	// Align
+	"align_items",
+	// Font
+	"font_items",
+	// BlockStyle
+	"blockStyle_items",
+	// LineHeight
+	"lineHeight_items",
+	// ParagraphStyle
+	"paragraphStyle_items",
+	// TextStyle
+	"textStyle_items",
+	// Template
+	"template_items",
+	// Layout
+	"layout_items",
+	// ImageGallery
+	"imageGallery_url",
+	"imageGallery_headers",
+	"imageGallery_data",
+	// VideoGallery
+	"videoGallery_url",
+	"videoGallery_headers",
+	"videoGallery_thumbnail",
+	"videoGallery_data",
+	// AudioGallery
+	"audioGallery_url",
+	"audioGallery_headers",
+	"audioGallery_thumbnail",
+	"audioGallery_data",
+	// FileGallery
+	"fileGallery_url",
+	"fileGallery_headers",
+	"fileGallery_thumbnail",
+	"fileGallery_data",
+	// FileBrowser
+	"fileBrowser_url",
+	"fileBrowser_headers",
+	"fileBrowser_thumbnail",
+	"fileBrowser_data",
+	"fileBrowser_props",
 ];
 
 const FIXED_KEYS = new Set<string>([...FIXED_BASE_KEYS, ...FIXED_FRAME_KEYS, ...FIXED_PLUGIN_KEYS]);
@@ -561,47 +1059,65 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		toolbar_hide: state.toolbar_hide,
 		shortcutsHint: state.shortcutsHint,
 		shortcutsDisable: state.shortcutsDisable,
-
-		// statusbar (frame)
-		statusbar: state.statusbar,
-		statusbar_showPathLabel: state.statusbar_showPathLabel,
-		statusbar_resizeEnable: state.statusbar_resizeEnable,
-		charCounter: state.charCounter,
-		charCounter_type: state.charCounter_type,
-
-		// content
-		defaultLineBreakFormat: state.defaultLineBreakFormat,
-		retainStyleMode: state.retainStyleMode,
-		freeCodeViewMode: state.freeCodeViewMode,
-
-		// features
-		autoLinkify: state.autoLinkify,
-		copyFormatKeepOn: state.copyFormatKeepOn,
-		tabDisable: state.tabDisable,
-		syncTabIndent: state.syncTabIndent,
-		componentInsertBehavior: state.componentInsertBehavior,
-		historyStackDelayTime: state.historyStackDelayTime,
-		fullScreenOffset: state.fullScreenOffset,
-		closeModalOutsideClick: state.closeModalOutsideClick,
-
-		// filtering
-		strictMode: state.strictMode
-			? true
-			: {
-					tagFilter: state.strictMode_tagFilter,
-					formatFilter: state.strictMode_formatFilter,
-					classFilter: state.strictMode_classFilter,
-					textStyleTagFilter: state.strictMode_textStyleTagFilter,
-					attrFilter: state.strictMode_attrFilter,
-					styleFilter: state.strictMode_styleFilter,
-				},
 	};
+
+	// subToolbar
+	if (state.subToolbar_enabled) {
+		const st: Record<string, unknown> = {
+			buttonList: getButtonList(state.subToolbar_buttonListPreset, state.type),
+			mode: state.subToolbar_mode,
+		};
+		if (state.subToolbar_width !== "auto") st.width = state.subToolbar_width;
+		opts.subToolbar = st;
+	}
+
+	// statusbar (frame)
+	opts.statusbar = state.statusbar;
+	opts.statusbar_showPathLabel = state.statusbar_showPathLabel;
+	opts.statusbar_resizeEnable = state.statusbar_resizeEnable;
+	opts.charCounter = state.charCounter;
+	opts.charCounter_type = state.charCounter_type;
+
+	// content
+	opts.defaultLineBreakFormat = state.defaultLineBreakFormat;
+	opts.retainStyleMode = state.retainStyleMode;
+	opts.freeCodeViewMode = state.freeCodeViewMode;
+
+	// features
+	opts.autoLinkify = state.autoLinkify;
+	opts.copyFormatKeepOn = state.copyFormatKeepOn;
+	opts.tabDisable = state.tabDisable;
+	opts.syncTabIndent = state.syncTabIndent;
+	opts.componentInsertBehavior = state.componentInsertBehavior;
+	opts.historyStackDelayTime = state.historyStackDelayTime;
+	opts.fullScreenOffset = state.fullScreenOffset;
+	opts.closeModalOutsideClick = state.closeModalOutsideClick;
+
+	// filtering
+	opts.strictMode = state.strictMode
+		? true
+		: {
+				tagFilter: state.strictMode_tagFilter,
+				formatFilter: state.strictMode_formatFilter,
+				classFilter: state.strictMode_classFilter,
+				textStyleTagFilter: state.strictMode_textStyleTagFilter,
+				attrFilter: state.strictMode_attrFilter,
+				styleFilter: state.strictMode_styleFilter,
+			};
 
 	// theme
 	if (state.theme) opts.theme = state.theme;
 
 	// type
 	if (state.type) opts.type = state.type;
+
+	// reverseButtons
+	if (state.reverseButtons !== DEFAULTS.reverseButtons) {
+		opts.reverseButtons = state.reverseButtons.split(",").map((s) => s.trim());
+	}
+
+	// v2Migration
+	if (state.v2Migration) opts.v2Migration = true;
 
 	// optional strings (only set if non-empty / non-default)
 	if (state.minWidth) opts.minWidth = state.minWidth;
@@ -664,6 +1180,15 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.allUsedStyles) opts.allUsedStyles = state.allUsedStyles;
 	if (state.scopeSelectionTags) opts.scopeSelectionTags = state.scopeSelectionTags.split(",").map((s) => s.trim());
 
+	// convertTextTags
+	if (state.convertTextTags) {
+		try { opts.convertTextTags = JSON.parse(state.convertTextTags); } catch { /* skip */ }
+	}
+	// tagStyles
+	if (state.tagStyles) {
+		try { opts.tagStyles = JSON.parse(state.tagStyles); } catch { /* skip */ }
+	}
+
 	// element/attribute filtering
 	if (state.elementWhitelist) opts.elementWhitelist = state.elementWhitelist;
 	if (state.elementBlacklist) opts.elementBlacklist = state.elementBlacklist;
@@ -695,6 +1220,13 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.image_acceptedFormats !== "image/*") img.acceptedFormats = state.image_acceptedFormats;
 	if (state.image_percentageOnlySize) img.percentageOnlySize = true;
 	if (!state.image_showHeightInput) img.showHeightInput = false;
+	if (state.image_uploadHeaders) { try { img.uploadHeaders = JSON.parse(state.image_uploadHeaders); } catch { /* skip */ } }
+	if (state.image_uploadSingleSizeLimit) img.uploadSingleSizeLimit = state.image_uploadSingleSizeLimit;
+	if (!state.image_useFormatType) img.useFormatType = false;
+	if (state.image_defaultFormatType !== "block") img.defaultFormatType = state.image_defaultFormatType;
+	if (state.image_keepFormatType) img.keepFormatType = true;
+	if (state.image_linkEnableFileUpload) img.linkEnableFileUpload = true;
+	if (state.image_insertBehavior !== "auto") img.insertBehavior = state.image_insertBehavior;
 	if (Object.keys(img).length) opts.image = img;
 
 	const vid: Record<string, unknown> = {};
@@ -711,6 +1243,14 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (!state.video_showHeightInput) vid.showHeightInput = false;
 	if (!state.video_showRatioOption) vid.showRatioOption = false;
 	if (state.video_defaultRatio !== 0.5625) vid.defaultRatio = state.video_defaultRatio;
+	if (state.video_uploadHeaders) { try { vid.uploadHeaders = JSON.parse(state.video_uploadHeaders); } catch { /* skip */ } }
+	if (state.video_uploadSingleSizeLimit) vid.uploadSingleSizeLimit = state.video_uploadSingleSizeLimit;
+	if (state.video_videoTagAttributes) { try { vid.videoTagAttributes = JSON.parse(state.video_videoTagAttributes); } catch { /* skip */ } }
+	if (state.video_iframeTagAttributes) { try { vid.iframeTagAttributes = JSON.parse(state.video_iframeTagAttributes); } catch { /* skip */ } }
+	if (state.video_query_youtube) vid.query_youtube = state.video_query_youtube;
+	if (state.video_query_vimeo) vid.query_vimeo = state.video_query_vimeo;
+	if (state.video_extensions) vid.extensions = state.video_extensions.split(",").map((s) => s.trim());
+	if (state.video_insertBehavior !== "auto") vid.insertBehavior = state.video_insertBehavior;
 	if (Object.keys(vid).length) opts.video = vid;
 
 	const aud: Record<string, unknown> = {};
@@ -722,6 +1262,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.audio_uploadSizeLimit) aud.uploadSizeLimit = state.audio_uploadSizeLimit;
 	if (state.audio_allowMultiple) aud.allowMultiple = true;
 	if (state.audio_acceptedFormats !== "audio/*") aud.acceptedFormats = state.audio_acceptedFormats;
+	if (state.audio_uploadHeaders) { try { aud.uploadHeaders = JSON.parse(state.audio_uploadHeaders); } catch { /* skip */ } }
+	if (state.audio_uploadSingleSizeLimit) aud.uploadSingleSizeLimit = state.audio_uploadSingleSizeLimit;
+	if (state.audio_audioTagAttributes) { try { aud.audioTagAttributes = JSON.parse(state.audio_audioTagAttributes); } catch { /* skip */ } }
+	if (state.audio_insertBehavior !== "auto") aud.insertBehavior = state.audio_insertBehavior;
 	if (Object.keys(aud).length) opts.audio = aud;
 
 	const tbl: Record<string, unknown> = {};
@@ -737,8 +1281,15 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (!state.fontSize_disableInput) fs.disableInput = false;
 	if (Object.keys(fs).length) opts.fontSize = fs;
 
-	if (state.fontColor_disableHEXInput) opts.fontColor = { disableHEXInput: true };
-	if (state.backgroundColor_disableHEXInput) opts.backgroundColor = { disableHEXInput: true };
+	const fc: Record<string, unknown> = {};
+	if (state.fontColor_disableHEXInput) fc.disableHEXInput = true;
+	if (state.fontColor_splitNum !== 7) fc.splitNum = state.fontColor_splitNum;
+	if (Object.keys(fc).length) opts.fontColor = fc;
+
+	const bc: Record<string, unknown> = {};
+	if (state.backgroundColor_disableHEXInput) bc.disableHEXInput = true;
+	if (state.backgroundColor_splitNum !== 7) bc.splitNum = state.backgroundColor_splitNum;
+	if (Object.keys(bc).length) opts.backgroundColor = bc;
 
 	const emb: Record<string, unknown> = {};
 	if (!state.embed_canResize) emb.canResize = false;
@@ -746,6 +1297,14 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.embed_defaultHeight) emb.defaultHeight = state.embed_defaultHeight;
 	if (!state.embed_showHeightInput) emb.showHeightInput = false;
 	if (state.embed_percentageOnlySize) emb.percentageOnlySize = true;
+	if (state.embed_uploadUrl) emb.uploadUrl = state.embed_uploadUrl;
+	if (state.embed_uploadHeaders) { try { emb.uploadHeaders = JSON.parse(state.embed_uploadHeaders); } catch { /* skip */ } }
+	if (state.embed_uploadSizeLimit) emb.uploadSizeLimit = state.embed_uploadSizeLimit;
+	if (state.embed_uploadSingleSizeLimit) emb.uploadSingleSizeLimit = state.embed_uploadSingleSizeLimit;
+	if (state.embed_iframeTagAttributes) { try { emb.iframeTagAttributes = JSON.parse(state.embed_iframeTagAttributes); } catch { /* skip */ } }
+	if (state.embed_query_youtube) emb.query_youtube = state.embed_query_youtube;
+	if (state.embed_query_vimeo) emb.query_vimeo = state.embed_query_vimeo;
+	if (state.embed_insertBehavior !== "auto") emb.insertBehavior = state.embed_insertBehavior;
 	if (Object.keys(emb).length) opts.embed = emb;
 
 	const drw: Record<string, unknown> = {};
@@ -755,6 +1314,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (!state.drawing_canResize) drw.canResize = false;
 	if (state.drawing_lineColor) drw.lineColor = state.drawing_lineColor;
 	if (state.drawing_lineReconnect) drw.lineReconnect = true;
+	if (state.drawing_useFormatType) drw.useFormatType = true;
+	if (state.drawing_defaultFormatType !== "block") drw.defaultFormatType = state.drawing_defaultFormatType;
+	if (state.drawing_keepFormatType) drw.keepFormatType = true;
+	if (!state.drawing_maintainRatio) drw.maintainRatio = false;
 	if (Object.keys(drw).length) opts.drawing = drw;
 
 	const mnt: Record<string, unknown> = {};
@@ -764,6 +1327,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.mention_searchStartLength) mnt.searchStartLength = state.mention_searchStartLength;
 	if (state.mention_apiUrl) mnt.apiUrl = state.mention_apiUrl;
 	if (!state.mention_useCachingData) mnt.useCachingData = false;
+	if (state.mention_apiHeaders) { try { mnt.apiHeaders = JSON.parse(state.mention_apiHeaders); } catch { /* skip */ } }
+	if (!state.mention_useCachingFieldData) mnt.useCachingFieldData = false;
 	if (Object.keys(mnt).length) opts.mention = mnt;
 
 	const mth: Record<string, unknown> = {};
@@ -771,7 +1336,170 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.math_autoHeight) mth.autoHeight = true;
 	if (Object.keys(mth).length) opts.math = mth;
 
+	// Link
+	const lnk: Record<string, unknown> = {};
+	if (!state.link_title) lnk.title = false;
+	if (!state.link_textToDisplay) lnk.textToDisplay = false;
+	if (!state.link_openNewWindow) lnk.openNewWindow = false;
+	if (state.link_noAutoPrefix) lnk.noAutoPrefix = true;
+	if (state.link_uploadUrl) lnk.uploadUrl = state.link_uploadUrl;
+	if (state.link_uploadHeaders) { try { lnk.uploadHeaders = JSON.parse(state.link_uploadHeaders); } catch { /* skip */ } }
+	if (state.link_uploadSizeLimit) lnk.uploadSizeLimit = state.link_uploadSizeLimit;
+	if (state.link_uploadSingleSizeLimit) lnk.uploadSingleSizeLimit = state.link_uploadSingleSizeLimit;
+	if (state.link_acceptedFormats) lnk.acceptedFormats = state.link_acceptedFormats;
+	if (Object.keys(lnk).length) opts.link = lnk;
+
+	// ExportPDF
+	const epdf: Record<string, unknown> = {};
+	if (state.exportPDF_apiUrl) epdf.apiUrl = state.exportPDF_apiUrl;
+	if (state.exportPDF_fileName !== "suneditor-pdf") epdf.fileName = state.exportPDF_fileName;
+	if (Object.keys(epdf).length) opts.exportPDF = epdf;
+
+	// FileUpload
+	const fu: Record<string, unknown> = {};
+	if (state.fileUpload_uploadUrl) fu.uploadUrl = state.fileUpload_uploadUrl;
+	if (state.fileUpload_uploadHeaders) { try { fu.uploadHeaders = JSON.parse(state.fileUpload_uploadHeaders); } catch { /* skip */ } }
+	if (state.fileUpload_uploadSizeLimit) fu.uploadSizeLimit = state.fileUpload_uploadSizeLimit;
+	if (state.fileUpload_uploadSingleSizeLimit) fu.uploadSingleSizeLimit = state.fileUpload_uploadSingleSizeLimit;
+	if (state.fileUpload_allowMultiple) fu.allowMultiple = true;
+	if (state.fileUpload_acceptedFormats !== "*") fu.acceptedFormats = state.fileUpload_acceptedFormats;
+	if (state.fileUpload_as !== "box") fu.as = state.fileUpload_as;
+	if (Object.keys(fu).length) opts.fileUpload = fu;
+
+	// Align
+	if (state.align_items) {
+		opts.align = { items: state.align_items.split(",").map((s) => s.trim()) };
+	}
+	// Font
+	if (state.font_items) {
+		opts.font = { items: state.font_items.split(",").map((s) => s.trim()) };
+	}
+	// BlockStyle
+	if (state.blockStyle_items) {
+		opts.blockStyle = { items: state.blockStyle_items.split(",").map((s) => s.trim()) };
+	}
+	// LineHeight
+	if (state.lineHeight_items) {
+		try { opts.lineHeight = { items: JSON.parse(state.lineHeight_items) }; } catch { /* skip */ }
+	}
+	// ParagraphStyle
+	if (state.paragraphStyle_items) {
+		opts.paragraphStyle = { items: state.paragraphStyle_items.split(",").map((s) => s.trim()) };
+	}
+	// TextStyle
+	if (state.textStyle_items) {
+		opts.textStyle = { items: state.textStyle_items.split(",").map((s) => s.trim()) };
+	}
+	// Template
+	if (state.template_items) {
+		try { opts.template = { items: JSON.parse(state.template_items) }; } catch { /* skip */ }
+	}
+	// Layout
+	if (state.layout_items) {
+		try { opts.layout = { items: JSON.parse(state.layout_items) }; } catch { /* skip */ }
+	}
+
+	// ImageGallery
+	const ig: Record<string, unknown> = {};
+	if (state.imageGallery_url) ig.url = state.imageGallery_url;
+	if (state.imageGallery_headers) { try { ig.headers = JSON.parse(state.imageGallery_headers); } catch { /* skip */ } }
+	if (state.imageGallery_data) { try { ig.data = JSON.parse(state.imageGallery_data); } catch { /* skip */ } }
+	if (Object.keys(ig).length) opts.imageGallery = ig;
+
+	// VideoGallery
+	const vg: Record<string, unknown> = {};
+	if (state.videoGallery_url) vg.url = state.videoGallery_url;
+	if (state.videoGallery_headers) { try { vg.headers = JSON.parse(state.videoGallery_headers); } catch { /* skip */ } }
+	if (state.videoGallery_thumbnail) vg.thumbnail = state.videoGallery_thumbnail;
+	if (state.videoGallery_data) { try { vg.data = JSON.parse(state.videoGallery_data); } catch { /* skip */ } }
+	if (Object.keys(vg).length) opts.videoGallery = vg;
+
+	// AudioGallery
+	const ag: Record<string, unknown> = {};
+	if (state.audioGallery_url) ag.url = state.audioGallery_url;
+	if (state.audioGallery_headers) { try { ag.headers = JSON.parse(state.audioGallery_headers); } catch { /* skip */ } }
+	if (state.audioGallery_thumbnail) ag.thumbnail = state.audioGallery_thumbnail;
+	if (state.audioGallery_data) { try { ag.data = JSON.parse(state.audioGallery_data); } catch { /* skip */ } }
+	if (Object.keys(ag).length) opts.audioGallery = ag;
+
+	// FileGallery
+	const fg: Record<string, unknown> = {};
+	if (state.fileGallery_url) fg.url = state.fileGallery_url;
+	if (state.fileGallery_headers) { try { fg.headers = JSON.parse(state.fileGallery_headers); } catch { /* skip */ } }
+	if (state.fileGallery_thumbnail) fg.thumbnail = state.fileGallery_thumbnail;
+	if (state.fileGallery_data) { try { fg.data = JSON.parse(state.fileGallery_data); } catch { /* skip */ } }
+	if (Object.keys(fg).length) opts.fileGallery = fg;
+
+	// FileBrowser
+	const fbr: Record<string, unknown> = {};
+	if (state.fileBrowser_url) fbr.url = state.fileBrowser_url;
+	if (state.fileBrowser_headers) { try { fbr.headers = JSON.parse(state.fileBrowser_headers); } catch { /* skip */ } }
+	if (state.fileBrowser_thumbnail) fbr.thumbnail = state.fileBrowser_thumbnail;
+	if (state.fileBrowser_data) { try { fbr.data = JSON.parse(state.fileBrowser_data); } catch { /* skip */ } }
+	if (state.fileBrowser_props) { try { fbr.props = JSON.parse(state.fileBrowser_props); } catch { /* skip */ } }
+	if (Object.keys(fbr).length) opts.fileBrowser = fbr;
+
 	return opts;
+}
+
+/* ── Per-root frame options for multiroot ──────────────── */
+
+export type RootConfig = { key: string; label: string; options: Record<string, unknown> };
+
+/** Build per-root frame options from flat state. Empty string = inherit global. */
+function buildRootOptions(state: PlaygroundState, prefix: "root_header" | "root_body"): Record<string, unknown> {
+	const opts: Record<string, unknown> = {};
+	const s = (key: string) => state[`${prefix}_${key}` as keyof PlaygroundState] as string;
+
+	// String options: emit if non-empty
+	const strKeys = [
+		"height", "width", "minWidth", "maxWidth", "minHeight", "maxHeight",
+		"editorStyle", "placeholder", "value", "charCounter_label",
+	];
+	for (const k of strKeys) {
+		const v = s(k);
+		if (v) opts[k === "charCounter_label" ? "charCounter_label" : k] = v;
+	}
+
+	// charCounter_type
+	if (s("charCounter_type")) opts.charCounter_type = s("charCounter_type");
+
+	// charCounter_max (number)
+	if (s("charCounter_max")) opts.charCounter_max = Number(s("charCounter_max"));
+
+	// JSON objects
+	if (s("editableFrameAttributes")) {
+		try { opts.editableFrameAttributes = JSON.parse(s("editableFrameAttributes")); } catch { /* skip */ }
+	}
+	if (s("iframe_attributes")) {
+		try { opts.iframe_attributes = JSON.parse(s("iframe_attributes")); } catch { /* skip */ }
+	}
+
+	// CSV to array
+	if (s("iframe_cssFileName")) {
+		opts.iframe_cssFileName = s("iframe_cssFileName").split(",").map((x) => x.trim());
+	}
+
+	// Tri-state booleans ("" = inherit, "true"/"false" = explicit)
+	const boolKeys = [
+		"iframe", "iframe_fullPage",
+		"statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable",
+		"charCounter",
+	];
+	for (const k of boolKeys) {
+		const v = s(k);
+		if (v === "true") opts[k] = true;
+		else if (v === "false") opts[k] = false;
+	}
+
+	return opts;
+}
+
+export function getRootConfigs(state: PlaygroundState): RootConfig[] {
+	return [
+		{ key: "header", label: "Header", options: buildRootOptions(state, "root_header") },
+		{ key: "body", label: "Body", options: buildRootOptions(state, "root_body") },
+	];
 }
 
 /* ── URL serialization ─────────────────────────────────── */
@@ -784,6 +1512,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tp: "type",
 	t: "theme",
 	dir: "textDirection",
+	rb: "reverseButtons",
+	v2m: "v2Migration",
 	// Layout
 	w: "width",
 	minw: "minWidth",
@@ -798,6 +1528,58 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	th: "toolbar_hide",
 	sh: "shortcutsHint",
 	sd: "shortcutsDisable",
+	// Sub-Toolbar
+	ste: "subToolbar_enabled",
+	stp: "subToolbar_buttonListPreset",
+	stm: "subToolbar_mode",
+	stw: "subToolbar_width",
+	// Multi-Root per-root: layout
+	rhh: "root_header_height",
+	rhw: "root_header_width",
+	rhinw: "root_header_minWidth",
+	rhaxw: "root_header_maxWidth",
+	rhinh: "root_header_minHeight",
+	rhaxh: "root_header_maxHeight",
+	rhes: "root_header_editorStyle",
+	rbh: "root_body_height",
+	rbw: "root_body_width",
+	rbinw: "root_body_minWidth",
+	rbaxw: "root_body_maxWidth",
+	rbinh: "root_body_minHeight",
+	rbaxh: "root_body_maxHeight",
+	rbes: "root_body_editorStyle",
+	// Multi-Root per-root: content
+	rhp: "root_header_placeholder",
+	rhv: "root_header_value",
+	rhefa: "root_header_editableFrameAttributes",
+	rbp: "root_body_placeholder",
+	rbv: "root_body_value",
+	rbefa: "root_body_editableFrameAttributes",
+	// Multi-Root per-root: iframe
+	rhif: "root_header_iframe",
+	rhifp: "root_header_iframe_fullPage",
+	rhifa: "root_header_iframe_attributes",
+	rhicf: "root_header_iframe_cssFileName",
+	rbif: "root_body_iframe",
+	rbifp: "root_body_iframe_fullPage",
+	rbifa: "root_body_iframe_attributes",
+	rbicf: "root_body_iframe_cssFileName",
+	// Multi-Root per-root: statusbar
+	rhsb: "root_header_statusbar",
+	rhsp: "root_header_statusbar_showPathLabel",
+	rhsr: "root_header_statusbar_resizeEnable",
+	rbsb: "root_body_statusbar",
+	rbsp: "root_body_statusbar_showPathLabel",
+	rbsr: "root_body_statusbar_resizeEnable",
+	// Multi-Root per-root: charCounter
+	rhcc: "root_header_charCounter",
+	rhccm: "root_header_charCounter_max",
+	rhccl: "root_header_charCounter_label",
+	rhcct: "root_header_charCounter_type",
+	rbcc: "root_body_charCounter",
+	rbccm: "root_body_charCounter_max",
+	rbccl: "root_body_charCounter_label",
+	rbcct: "root_body_charCounter_type",
 	// Statusbar
 	sb: "statusbar",
 	sp: "statusbar_showPathLabel",
@@ -858,6 +1640,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	acn: "allowedClassName",
 	aus: "allUsedStyles",
 	sst: "scopeSelectionTags",
+	ctt: "convertTextTags",
+	tgs: "tagStyles",
 	// Plugin: Image
 	"i.r": "image_canResize",
 	"i.w": "image_defaultWidth",
@@ -929,6 +1713,111 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	// Plugin: Math
 	"mt.r": "math_canResize",
 	"mt.ah": "math_autoHeight",
+	// Plugin: Image (extended)
+	"i.uh": "image_uploadHeaders",
+	"i.ssl": "image_uploadSingleSizeLimit",
+	"i.uft": "image_useFormatType",
+	"i.dft": "image_defaultFormatType",
+	"i.kft": "image_keepFormatType",
+	"i.lfu": "image_linkEnableFileUpload",
+	"i.ib": "image_insertBehavior",
+	// Plugin: Video (extended)
+	"v.uh": "video_uploadHeaders",
+	"v.ssl": "video_uploadSingleSizeLimit",
+	"v.vta": "video_videoTagAttributes",
+	"v.ita": "video_iframeTagAttributes",
+	"v.qy": "video_query_youtube",
+	"v.qv": "video_query_vimeo",
+	"v.ext": "video_extensions",
+	"v.ib": "video_insertBehavior",
+	// Plugin: Audio (extended)
+	"a.uh": "audio_uploadHeaders",
+	"a.ssl": "audio_uploadSingleSizeLimit",
+	"a.ata": "audio_audioTagAttributes",
+	"a.ib": "audio_insertBehavior",
+	// Plugin: Embed (extended)
+	"em.uu": "embed_uploadUrl",
+	"em.uh": "embed_uploadHeaders",
+	"em.usl": "embed_uploadSizeLimit",
+	"em.ssl": "embed_uploadSingleSizeLimit",
+	"em.ita": "embed_iframeTagAttributes",
+	"em.qy": "embed_query_youtube",
+	"em.qv": "embed_query_vimeo",
+	"em.ib": "embed_insertBehavior",
+	// Plugin: Drawing (extended)
+	"dr.uft": "drawing_useFormatType",
+	"dr.dft": "drawing_defaultFormatType",
+	"dr.kft": "drawing_keepFormatType",
+	"dr.mr": "drawing_maintainRatio",
+	// Plugin: Mention (extended)
+	"mn.ah": "mention_apiHeaders",
+	"mn.ucfd": "mention_useCachingFieldData",
+	// Plugin: FontColor (extended)
+	"fc.sn": "fontColor_splitNum",
+	// Plugin: BackgroundColor (extended)
+	"bc.sn": "backgroundColor_splitNum",
+	// Plugin: Link
+	"lk.t": "link_title",
+	"lk.td": "link_textToDisplay",
+	"lk.onw": "link_openNewWindow",
+	"lk.nap": "link_noAutoPrefix",
+	"lk.uu": "link_uploadUrl",
+	"lk.uh": "link_uploadHeaders",
+	"lk.sl": "link_uploadSizeLimit",
+	"lk.ssl": "link_uploadSingleSizeLimit",
+	"lk.af": "link_acceptedFormats",
+	// Plugin: ExportPDF
+	"ep.au": "exportPDF_apiUrl",
+	"ep.fn": "exportPDF_fileName",
+	// Plugin: FileUpload
+	"fu.uu": "fileUpload_uploadUrl",
+	"fu.uh": "fileUpload_uploadHeaders",
+	"fu.sl": "fileUpload_uploadSizeLimit",
+	"fu.ssl": "fileUpload_uploadSingleSizeLimit",
+	"fu.am": "fileUpload_allowMultiple",
+	"fu.af": "fileUpload_acceptedFormats",
+	"fu.as": "fileUpload_as",
+	// Plugin: Align
+	"al.i": "align_items",
+	// Plugin: Font
+	"fn.i": "font_items",
+	// Plugin: BlockStyle
+	"bs.i": "blockStyle_items",
+	// Plugin: LineHeight
+	"lh.i": "lineHeight_items",
+	// Plugin: ParagraphStyle
+	"ps.i": "paragraphStyle_items",
+	// Plugin: TextStyle
+	"ts.i": "textStyle_items",
+	// Plugin: Template
+	"tp.i": "template_items",
+	// Plugin: Layout
+	"ly.i": "layout_items",
+	// Plugin: ImageGallery
+	"ig.u": "imageGallery_url",
+	"ig.h": "imageGallery_headers",
+	"ig.d": "imageGallery_data",
+	// Plugin: VideoGallery
+	"vg.u": "videoGallery_url",
+	"vg.h": "videoGallery_headers",
+	"vg.th": "videoGallery_thumbnail",
+	"vg.d": "videoGallery_data",
+	// Plugin: AudioGallery
+	"ag.u": "audioGallery_url",
+	"ag.h": "audioGallery_headers",
+	"ag.th": "audioGallery_thumbnail",
+	"ag.d": "audioGallery_data",
+	// Plugin: FileGallery
+	"fg.u": "fileGallery_url",
+	"fg.h": "fileGallery_headers",
+	"fg.th": "fileGallery_thumbnail",
+	"fg.d": "fileGallery_data",
+	// Plugin: FileBrowser
+	"fb.u": "fileBrowser_url",
+	"fb.h": "fileBrowser_headers",
+	"fb.th": "fileBrowser_thumbnail",
+	"fb.d": "fileBrowser_data",
+	"fb.p": "fileBrowser_props",
 };
 
 const REVERSE_PARAM_MAP: Record<string, string> = Object.fromEntries(Object.entries(PARAM_MAP).map(([k, v]) => [v, k]));

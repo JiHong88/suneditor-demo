@@ -108,9 +108,9 @@
 		"step3": {
 			"eyebrow": "Step 3",
 			"title": "$ 커널 API",
-			"desc": "모든 에디터 내부 기능은 $ 의존성 백을 통해 접근할 수 있습니다 — 전체 시스템에서 공유되는 단일 객체입니다.",
-			"providerDetails": "프로바이더 상세",
-			"deepDiveLink": "아키텍처 상세 페이지에서 더 알아보기"
+			"desc": "에디터 인스턴스는 $ 객체를 제공합니다 — 모든 내부 서브시스템(L1→L2→L3)을 담고 있는 의존성 백입니다.",
+			"apiDocsLink": "$ 커널 API 전체 레퍼런스",
+			"deepDiveLink": "아키텍처 상세"
 		},
 		"cta": {
 			"title": "라이브로 체험하기",
@@ -134,7 +134,9 @@
 			"contentBehavior": "콘텐츠 & 동작",
 			"features": "기능",
 			"filtering": "필터링 (고급)",
-			"formatExtensions": "포맷 확장"
+			"formatExtensions": "포맷 확장",
+			"multirootRoots": "루트별 옵션",
+			"inheritDesc": "상위 메인 옵션의 값을 상속받습니다"
 		},
 		"options": {
 			"classic": "클래식",
@@ -477,6 +479,7 @@
 		"filterTypes": "Filter types...",
 		"noTypes": "No types found.",
 		"editorInstanceDesc": "에디터 인스턴스는 모든 하위 시스템을 구동하는 내부 엔진인 Kernel ($)을 포함합니다. editor.$ 를 통해 접근할 수 있습니다 — 예: editor.$.store, editor.$.selection, editor.$.format 등.",
+		"layerL1Desc": "커널의 기반 레이어입니다. facade는 공개 Editor 인스턴스(SunEditor.create()의 반환값)에 대한 역참조이고, store는 구독 기능을 지원하는 중앙 상태 관리 시스템입니다.",
 		"kernelInfoDesc": "Kernel ($)은 SunEditor의 내부 엔진입니다. 레이어 구조로 되어 있으며: L2 Config 프로바이더가 먼저 초기화되고, 이후 L3 Logic 서브시스템이 해당 프로바이더를 주입받아 생성됩니다. 모든 서브시스템은 editor.$를 통해 접근 가능합니다.",
 		"layerL2Desc": "Phase 1에서 초기화되는 설정 프로바이더. contextProvider와 optionProvider는 전역/프레임 컨텍스트와 옵션을 관리하고, instanceCheck는 iframe에서도 안전한 타입 검사를 제공하며, eventManager는 공개 이벤트 API를 담당합니다.",
 		"layerL2AccDesc": "contextProvider와 optionProvider에서 자주 사용되는 설정 데이터에 직접 접근할 수 있는 $ 편의 getter 속성입니다 — DOM 참조(context, frameContext), 에디터 설정(options, frameOptions), UI 리소스(icons, lang) 등.",

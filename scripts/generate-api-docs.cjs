@@ -921,6 +921,108 @@ if (storeModeProps.length > 0) {
 	console.log(`  ✓ StoreMode (${storeModeProps.length} properties)`);
 }
 
+// ── 2.6. Kernel Accessor Subgroups (auto-extracted from type files) ──
+console.log("\n📦 Kernel Accessor Subgroups:");
+
+// --- context: from ContextStore type ---
+const contextProps = extractTypeMembersAsProperties("core/schema/context.d.ts", "ContextStore");
+if (contextProps.length > 0) {
+	apiDocs.structure.editor.subgroups["context"] = {
+		title: "$.context",
+		description: "ContextMap — Global DOM element references shared across all frames. Contains toolbar, statusbar, and other editor-level UI elements. Stored as a Map<string, HTMLElement>.",
+		methods: contextProps,
+	};
+	console.log(`  ✓ $.context (${contextProps.length} properties)`);
+}
+
+// --- frameContext: from FrameContextStore type ---
+const frameContextProps = extractTypeMembersAsProperties("core/schema/frameContext.d.ts", "FrameContextStore");
+if (frameContextProps.length > 0) {
+	// Add linkedAs for options → $.frameOptions
+	const optEntry = frameContextProps.find((p) => p.name === "options");
+	if (optEntry) optEntry.linkedAs = "$.frameOptions";
+
+	apiDocs.structure.editor.subgroups["frameContext"] = {
+		title: "$.frameContext",
+		description: "FrameContextMap — Per-frame DOM references and state flags for the currently active frame. Contains wysiwyg area, code view, placeholder, and runtime state. Stored as a Map.",
+		methods: frameContextProps,
+	};
+	console.log(`  ✓ $.frameContext (${frameContextProps.length} properties)`);
+}
+
+// --- options: from EditorBaseOptions type (keys + types auto-extracted, descriptions from option-descriptions) ---
+const baseOptionProps = extractTypeMembersAsProperties("core/schema/options.d.ts", "EditorBaseOptions");
+if (baseOptionProps.length > 0) {
+	// Filter out private (__) and plugin-specific options
+	const publicBaseOptions = baseOptionProps.filter((p) => !p.name.startsWith("__") && !p.name.startsWith("_"));
+	apiDocs.structure.editor.subgroups["options"] = {
+		title: "$.options",
+		description: "BaseOptionsMap — Configuration options applied to the entire editor. Controls plugins, toolbar, themes, content filtering, and UI behavior. Stored as a Map<string, *>.",
+		methods: publicBaseOptions,
+	};
+	console.log(`  ✓ $.options (${publicBaseOptions.length} properties)`);
+}
+
+// --- frameOptions: from EditorFrameOptions type ---
+const frameOptionProps = extractTypeMembersAsProperties("core/schema/options.d.ts", "EditorFrameOptions");
+if (frameOptionProps.length > 0) {
+	apiDocs.structure.editor.subgroups["frameOptions"] = {
+		title: "$.frameOptions",
+		description: "FrameOptionsMap — Configuration options for individual frames. Controls content, sizing, iframe mode, statusbar, and character counter.",
+		methods: frameOptionProps,
+	};
+	console.log(`  ✓ $.frameOptions (${frameOptionProps.length} properties)`);
+}
+
+// --- Static accessor subgroups (not extractable from types) ---
+apiDocs.structure.editor.subgroups["frameRoots"] = {
+	title: "$.frameRoots",
+	description: "Map of all frame contexts keyed by root key. In single-root mode, contains one entry with key `null`. In multi-root mode, each root has its own key and FrameContext.",
+	methods: [
+		{ name: "get", params: "(rootKey: string | null)", returns: "SunEditor.FrameContext", description: "Returns the FrameContext for the given root key." },
+		{ name: "set", params: "(rootKey: string | null, frameContext: FrameContext)", returns: "void", description: "Sets the FrameContext for the given root key." },
+		{ name: "has", params: "(rootKey: string | null)", returns: "boolean", description: "Checks if a root key exists." },
+		{ name: "keys", params: "()", returns: "Iterator<string | null>", description: "Returns an iterator of all root keys." },
+		{ name: "values", params: "()", returns: "Iterator<FrameContext>", description: "Returns an iterator of all FrameContext objects." },
+	],
+};
+console.log(`  ✓ $.frameRoots (5 methods — static)`);
+
+apiDocs.structure.editor.subgroups["icons"] = {
+	title: "$.icons",
+	description: "Icon set object containing SVG strings for all editor UI icons. 156+ icon keys mapped to SVG markup. Customizable via the `icons` option.",
+	methods: [
+		{ name: "bold", params: "", returns: "string", description: "SVG string for the bold icon." },
+		{ name: "italic", params: "", returns: "string", description: "SVG string for the italic icon." },
+		{ name: "underline", params: "", returns: "string", description: "SVG string for the underline icon." },
+		{ name: "strike", params: "", returns: "string", description: "SVG string for the strikethrough icon." },
+		{ name: "...", params: "", returns: "string", description: "156+ icon keys total. Pass custom icons via the `icons` editor option." },
+	],
+};
+console.log(`  ✓ $.icons (5 methods — static)`);
+
+apiDocs.structure.editor.subgroups["lang"] = {
+	title: "$.lang",
+	description: "Language strings object containing all UI text for the editor. 89+ keys for toolbar tooltips, dialog labels, and status messages. Customizable via the `lang` option.",
+	methods: [
+		{ name: "bold", params: "", returns: "string", description: "Tooltip text for bold button." },
+		{ name: "font", params: "", returns: "string", description: "Label for font selector." },
+		{ name: "fontSize", params: "", returns: "string", description: "Label for font size selector." },
+		{ name: "formats", params: "", returns: "string", description: "Label for format selector." },
+		{ name: "...", params: "", returns: "string", description: "89+ language keys total. Pass custom language via the `lang` editor option." },
+	],
+};
+console.log(`  ✓ $.lang (5 methods — static)`);
+
+apiDocs.structure.editor.subgroups["facade"] = {
+	title: "$.facade",
+	description: "Reference to the Editor Instance (public API). All methods on the editor object are accessible through $.facade.",
+	methods: [
+		{ name: "(Editor Instance)", params: "", returns: "SunEditor.Instance", description: "The public editor API. See Editor Instance section for all available methods.", linkedAs: "Editor Instance" },
+	],
+};
+console.log(`  ✓ $.facade (1 method — static)`);
+
 // ── 3. Plugins ──
 console.log("\n📦 Plugins:");
 const pluginExports = extractExportsFromIndex("plugins/index.d.ts");

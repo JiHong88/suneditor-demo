@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "node scripts/generate-api-docs.cjs",
     "build": "next build",
-    "build:prod": "npm unlink suneditor && node scripts/generate-api-docs.cjs && next build",
+    "build:prod": "npm unlink suneditor && npm run docs:generate && next build",
     "start": "next start",
     "lint": "next lint",
     "docs:generate": "node scripts/generate-api-docs.cjs"

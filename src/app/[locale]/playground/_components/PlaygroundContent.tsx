@@ -17,8 +17,9 @@ import {
 	stateToEditorOptions,
 	getChangedKeys,
 	hasFixedChange,
+	isFixedOption,
 } from "../_lib/playgroundState";
-import PlaygroundControls from "./PlaygroundControls";
+import PlaygroundControls, { PlaygroundPerRootPanel } from "./PlaygroundControls";
 import PlaygroundPluginSidebar from "./PlaygroundPluginSidebar";
 import dynamic from "next/dynamic";
 import PlaygroundEditor from "./PlaygroundEditor";
@@ -63,6 +64,22 @@ const FIXED_RESET_KEYS = new Set([
 	"drawing",
 	"mention",
 	"math",
+	"link",
+	"exportPDF",
+	"fileUpload",
+	"align",
+	"font",
+	"blockStyle",
+	"lineHeight",
+	"paragraphStyle",
+	"textStyle",
+	"template",
+	"layout",
+	"imageGallery",
+	"videoGallery",
+	"audioGallery",
+	"fileGallery",
+	"fileBrowser",
 ]);
 
 export default function PlaygroundContent() {
@@ -87,197 +104,13 @@ export default function PlaygroundContent() {
 	}, []);
 
 	// Compute editor key from fixed options — changes force remount
+	// Uses isFixedOption to automatically include all fixed keys (base, frame, plugin, per-root)
 	const editorKey = useMemo(() => {
-		const fixedParts = [
-			state.multiroot,
-			state.mode,
-			state.buttonListPreset,
-			state.type,
-			state.shortcutsDisable,
-			state.closeModalOutsideClick,
-			state.defaultLine,
-			state.strictMode,
-			state.strictMode_tagFilter,
-			state.strictMode_formatFilter,
-			state.strictMode_classFilter,
-			state.strictMode_textStyleTagFilter,
-			state.strictMode_attrFilter,
-			state.strictMode_styleFilter,
-			state.elementWhitelist,
-			state.elementBlacklist,
-			state.attributeWhitelist,
-			state.attributeBlacklist,
-			state.fontSizeUnits,
-			state.iframe,
-			state.iframe_fullPage,
-			state.statusbar_resizeEnable,
-			state.formatLine,
-			state.formatBrLine,
-			state.formatClosureBrLine,
-			state.formatBlock,
-			state.formatClosureBlock,
-			state.spanStyles,
-			state.lineStyles,
-			state.textStyleTags,
-			state.allowedClassName,
-			state.allUsedStyles,
-			// Plugin options (all fixed)
-			state.image_canResize,
-			state.image_defaultWidth,
-			state.image_defaultHeight,
-			state.image_createFileInput,
-			state.image_createUrlInput,
-			state.image_uploadUrl,
-			state.image_uploadSizeLimit,
-			state.image_allowMultiple,
-			state.image_acceptedFormats,
-			state.image_percentageOnlySize,
-			state.image_showHeightInput,
-			state.video_canResize,
-			state.video_defaultWidth,
-			state.video_defaultHeight,
-			state.video_createFileInput,
-			state.video_createUrlInput,
-			state.video_uploadUrl,
-			state.video_uploadSizeLimit,
-			state.video_allowMultiple,
-			state.video_acceptedFormats,
-			state.video_percentageOnlySize,
-			state.video_showHeightInput,
-			state.video_showRatioOption,
-			state.video_defaultRatio,
-			state.audio_defaultWidth,
-			state.audio_defaultHeight,
-			state.audio_createFileInput,
-			state.audio_createUrlInput,
-			state.audio_uploadUrl,
-			state.audio_uploadSizeLimit,
-			state.audio_allowMultiple,
-			state.audio_acceptedFormats,
-			state.table_scrollType,
-			state.table_captionPosition,
-			state.table_cellControllerPosition,
-			state.fontSize_sizeUnit,
-			state.fontSize_showIncDecControls,
-			state.fontSize_showDefaultSizeLabel,
-			state.fontSize_disableInput,
-			state.fontColor_disableHEXInput,
-			state.backgroundColor_disableHEXInput,
-			state.embed_canResize,
-			state.embed_defaultWidth,
-			state.embed_defaultHeight,
-			state.embed_showHeightInput,
-			state.embed_percentageOnlySize,
-			state.drawing_outputFormat,
-			state.drawing_lineWidth,
-			state.drawing_lineCap,
-			state.drawing_canResize,
-			state.drawing_lineColor,
-			state.drawing_lineReconnect,
-			state.mention_triggerText,
-			state.mention_limitSize,
-			state.mention_delayTime,
-			state.mention_searchStartLength,
-			state.mention_apiUrl,
-			state.mention_useCachingData,
-			state.math_canResize,
-			state.math_autoHeight,
-		];
-		return fixedParts.map(String).join("|");
-	}, [
-		state.multiroot,
-		state.mode,
-		state.buttonListPreset,
-		state.type,
-		state.shortcutsDisable,
-		state.closeModalOutsideClick,
-		state.defaultLine,
-		state.strictMode,
-		state.strictMode_tagFilter,
-		state.strictMode_formatFilter,
-		state.strictMode_classFilter,
-		state.strictMode_textStyleTagFilter,
-		state.strictMode_attrFilter,
-		state.strictMode_styleFilter,
-		state.elementWhitelist,
-		state.elementBlacklist,
-		state.attributeWhitelist,
-		state.attributeBlacklist,
-		state.fontSizeUnits,
-		state.iframe,
-		state.iframe_fullPage,
-		state.statusbar_resizeEnable,
-		state.formatLine,
-		state.formatBrLine,
-		state.formatClosureBrLine,
-		state.formatBlock,
-		state.formatClosureBlock,
-		state.spanStyles,
-		state.lineStyles,
-		state.textStyleTags,
-		state.allowedClassName,
-		state.allUsedStyles,
-		state.image_canResize,
-		state.image_defaultWidth,
-		state.image_defaultHeight,
-		state.image_createFileInput,
-		state.image_createUrlInput,
-		state.image_uploadUrl,
-		state.image_uploadSizeLimit,
-		state.image_allowMultiple,
-		state.image_acceptedFormats,
-		state.image_percentageOnlySize,
-		state.image_showHeightInput,
-		state.video_canResize,
-		state.video_defaultWidth,
-		state.video_defaultHeight,
-		state.video_createFileInput,
-		state.video_createUrlInput,
-		state.video_uploadUrl,
-		state.video_uploadSizeLimit,
-		state.video_allowMultiple,
-		state.video_acceptedFormats,
-		state.video_percentageOnlySize,
-		state.video_showHeightInput,
-		state.video_showRatioOption,
-		state.video_defaultRatio,
-		state.audio_defaultWidth,
-		state.audio_defaultHeight,
-		state.audio_createFileInput,
-		state.audio_createUrlInput,
-		state.audio_uploadUrl,
-		state.audio_uploadSizeLimit,
-		state.audio_allowMultiple,
-		state.audio_acceptedFormats,
-		state.table_scrollType,
-		state.table_captionPosition,
-		state.table_cellControllerPosition,
-		state.fontSize_sizeUnit,
-		state.fontSize_showIncDecControls,
-		state.fontSize_showDefaultSizeLabel,
-		state.fontSize_disableInput,
-		state.fontColor_disableHEXInput,
-		state.backgroundColor_disableHEXInput,
-		state.embed_canResize,
-		state.embed_defaultWidth,
-		state.embed_defaultHeight,
-		state.embed_showHeightInput,
-		state.embed_percentageOnlySize,
-		state.drawing_outputFormat,
-		state.drawing_lineWidth,
-		state.drawing_lineCap,
-		state.drawing_canResize,
-		state.drawing_lineColor,
-		state.drawing_lineReconnect,
-		state.mention_triggerText,
-		state.mention_limitSize,
-		state.mention_delayTime,
-		state.mention_searchStartLength,
-		state.mention_apiUrl,
-		state.mention_useCachingData,
-		state.math_canResize,
-		state.math_autoHeight,
-	]);
+		return Object.entries(state)
+			.filter(([k]) => isFixedOption(k))
+			.map(([, v]) => String(v))
+			.join("|");
+	}, [state]);
 
 	// Apply resettable option changes via resetOptions
 	useEffect(() => {
@@ -387,6 +220,11 @@ export default function PlaygroundContent() {
 							</button>
 						</div>
 
+						{/* Per-Root Frame Options — right below multiroot toggle */}
+						{state.multiroot && (
+							<PlaygroundPerRootPanel state={state} dispatch={dispatch} />
+						)}
+
 						{/* Controls — Desktop: inline, Mobile: Sheet */}
 						<motion.div
 							initial={{ opacity: 0, y: 16 }}
@@ -402,7 +240,7 @@ export default function PlaygroundContent() {
 							<div className='md:hidden'>
 								<Sheet>
 									<SheetTrigger asChild>
-										<Button variant='outline' className='w-full'>
+										<Button variant='outline' className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950/60 dark:text-blue-300 dark:hover:bg-blue-900/60'>
 											<Settings2 className='mr-2 h-4 w-4' />
 											{t("editorOptions")}
 										</Button>
@@ -422,7 +260,7 @@ export default function PlaygroundContent() {
 							<div className='lg:hidden mt-5'>
 								<Sheet>
 									<SheetTrigger asChild>
-										<Button variant='outline' className='w-full'>
+										<Button variant='outline' className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-950/60 dark:text-orange-300 dark:hover:bg-orange-900/60'>
 											<Puzzle className='mr-2 h-4 w-4' />
 											{t("pluginOptions")}
 										</Button>
