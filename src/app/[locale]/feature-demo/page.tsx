@@ -57,6 +57,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
+import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
 
 /* ── Feature data (non-translatable: icons only) ──────── */
 
@@ -253,22 +254,29 @@ export default function FeatureDemoPage() {
 								</Card>
 
 								<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
-									{cat.features.map((feature) => (
-										<div
-											key={feature.key}
-											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors'
-										>
-											<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
-											<div className='min-w-0 flex-1'>
-												<span className='text-sm font-medium'>
-													{t(`features.${feature.key}`)}
-												</span>
-												<p className='text-xs text-muted-foreground mt-0.5'>
-													{t(`features.${feature.key}Desc`)}
-												</p>
-											</div>
-										</div>
-									))}
+									{cat.features.map((feature) => {
+										const link = FEATURE_PLAYGROUND_LINKS[feature.key];
+										const href = link ? `/playground?${link.query}#editor` : "/playground#editor";
+
+										return (
+											<Link
+												key={feature.key}
+												href={href}
+												className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group'
+											>
+												<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
+												<div className='min-w-0 flex-1'>
+													<span className='text-sm font-medium'>
+														{t(`features.${feature.key}`)}
+													</span>
+													<p className='text-xs text-muted-foreground mt-0.5'>
+														{t(`features.${feature.key}Desc`)}
+													</p>
+												</div>
+												<ArrowRight className='mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity' />
+											</Link>
+										);
+									})}
 								</div>
 							</TabsContent>
 						))}

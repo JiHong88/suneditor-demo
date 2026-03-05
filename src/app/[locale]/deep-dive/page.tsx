@@ -2,20 +2,20 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Cpu, BookOpen, ArrowRight, ExternalLink, Github } from "lucide-react";
+import { Upload, Palette, Zap, ArrowRight, ExternalLink, Github } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 
-import ArchitectureContent from "./_components/ArchitectureContent";
-import GuideContent from "./_components/GuideContent";
+import ThemeGuideContent from "./_components/ThemeGuideContent";
+import EventsContent from "./_components/EventsContent";
+import UploadGuideContent from "./_components/UploadGuideContent";
 
 export default function DeepDivePage() {
 	const t = useTranslations("DeepDive");
-	const [activeTab, setActiveTab] = useState("architecture");
+	const [activeTab, setActiveTab] = useState("theme");
 
 	return (
 		<div className='min-h-screen'>
@@ -32,22 +32,30 @@ export default function DeepDivePage() {
 				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
 					<Tabs value={activeTab} onValueChange={setActiveTab}>
 						<TabsList className='mb-6'>
-							<TabsTrigger value='architecture' className='gap-2'>
-								<Cpu className='size-4' />
-								{t("tabs.architecture")}
+							<TabsTrigger value='theme' className='gap-2'>
+								<Palette className='size-4' />
+								{t("tabs.theme")}
 							</TabsTrigger>
-							<TabsTrigger value='guide' className='gap-2'>
-								<BookOpen className='size-4' />
-								{t("tabs.guide")}
+							<TabsTrigger value='upload' className='gap-2'>
+								<Upload className='size-4' />
+								{t("tabs.upload")}
+							</TabsTrigger>
+							<TabsTrigger value='events' className='gap-2'>
+								<Zap className='size-4' />
+								{t("tabs.events")}
 							</TabsTrigger>
 						</TabsList>
 
-						<TabsContent value='architecture'>
-							<ArchitectureContent />
+						<TabsContent value='theme'>
+							<ThemeGuideContent />
 						</TabsContent>
 
-						<TabsContent value='guide'>
-							<GuideContent />
+						<TabsContent value='upload'>
+							<UploadGuideContent />
+						</TabsContent>
+
+						<TabsContent value='events'>
+							<EventsContent />
 						</TabsContent>
 					</Tabs>
 				</motion.section>

@@ -100,6 +100,11 @@ export default function PlaygroundPage() {
 		if (Object.keys(fromUrl).length > 0) {
 			dispatch({ type: "LOAD", payload: fromUrl });
 		}
+		// Apply initial content from URL (val param)
+		const val = params.get("val");
+		if (val) {
+			contentRef.current = val;
+		}
 		setReady(true);
 	}, []);
 
@@ -279,6 +284,7 @@ export default function PlaygroundPage() {
 
 						{/* Editor — wait until URL params are applied to avoid double creation */}
 						<motion.div
+							id='editor'
 							initial={{ opacity: 0, y: 16 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 }}
