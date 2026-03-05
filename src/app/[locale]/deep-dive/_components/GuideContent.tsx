@@ -169,7 +169,7 @@ export default function GuideContent() {
 									<li>Register events without EventManager</li>
 									<li>Use document.execCommand</li>
 									<li>Create plugin without extending base class</li>
-									<li>Access deps directly from kernel</li>
+									<li>Access deps directly from core</li>
 								</ul>
 							</div>
 							<div className='rounded-lg border border-green-200 dark:border-green-900/50 p-4'>

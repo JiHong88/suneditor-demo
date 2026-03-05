@@ -12,7 +12,7 @@ editor.$.format     // Block formatting
 editor.$.history    // Undo/Redo stack
 // ... and more`;
 
-export default function Step3KernelApi() {
+export default function Step3CoreApi() {
 	const t = useTranslations("GettingStarted.step3");
 
 	return (

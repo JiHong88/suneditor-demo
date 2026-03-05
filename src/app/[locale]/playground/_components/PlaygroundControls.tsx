@@ -513,10 +513,12 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							label='theme'
 							value={state.theme}
 							options={[
-								{ value: "", label: "(auto)" },
-								{ value: "default", label: "default" },
+								{ value: "", label: "auto (sync)" },
+								{ value: "default", label: "(default)" },
 								{ value: "dark", label: "dark" },
+								{ value: "midnight", label: "midnight" },
 								{ value: "cobalt", label: "cobalt" },
+								{ value: "cream", label: "cream" },
 							]}
 							onChange={set("theme")}
 							resettable={!isFixedOption("theme")}

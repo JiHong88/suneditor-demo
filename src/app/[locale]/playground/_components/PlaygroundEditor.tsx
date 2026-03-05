@@ -43,7 +43,7 @@ export default function PlaygroundEditor({ state, editorRef, contentRef }: Props
 
 	return (
 		<>
-			<SunEditorComponent options={options} theme={(state.theme || undefined) as "dark" | "default" | "cobalt" | undefined} onInstance={handleInstance} />
+			<SunEditorComponent options={options} theme={(state.theme || undefined) as "default" | "dark" | "midnight" | "cobalt" | "cream" | undefined} onInstance={handleInstance} />
 		</>
 	);
 }

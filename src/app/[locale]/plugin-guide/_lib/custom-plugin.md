@@ -36,13 +36,13 @@ All plugins extend a base class from `src/interfaces/plugins.js`. The inheritanc
 KernelInjector → Base → PluginCommand / PluginModal / PluginDropdown / ...
 ```
 
-- **`KernelInjector`** — Receives the kernel and exposes `this.$` (the dependency bag).
+- **`KernelInjector`** — Receives the core and exposes `this.$` (the dependency bag).
 - **`Base`** — Adds common static properties (`key`, `type`, `className`, `options`) and instance properties (`title`, `icon`).
 - **Plugin type class** — Defines required abstract methods per plugin type.
 
 ### Key Principles
 
-1. **Class references, not instances** — Register plugin classes in `options.plugins`. The kernel instantiates them.
+1. **Class references, not instances** — Register plugin classes in `options.plugins`. The core instantiates them.
 2. **Dependency injection** — All editor services are accessed via `this.$` (never import core modules directly).
 3. **Contracts via interfaces** — Plugins can implement multiple contracts (e.g., `ModuleModal`, `EditorComponent`) to hook into module lifecycles.
 
@@ -77,7 +77,7 @@ class HelloWorld extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -165,7 +165,7 @@ class ToggleStrikethrough extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -215,7 +215,7 @@ class CustomAlign extends PluginDropdown {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 * @param {CustomAlignPluginOptions} pluginOptions
 	 */
 	constructor(kernel, pluginOptions) {
@@ -280,7 +280,7 @@ class CustomPicker extends PluginDropdownFree {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -323,7 +323,7 @@ class InsertCode extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -409,7 +409,7 @@ class MyGallery extends PluginBrowser {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -443,7 +443,7 @@ class HashtagDetector extends PluginField {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -480,7 +480,7 @@ class CustomInput extends PluginInput {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -521,7 +521,7 @@ class InfoPopup extends PluginPopup {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -596,7 +596,7 @@ class MyPlugin extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 * @param {MyPluginOptions} pluginOptions
 	 */
 	constructor(kernel, pluginOptions) {
@@ -623,7 +623,7 @@ class MyPlugin extends PluginModal {
 
 **Parameters:**
 
-- `kernel` (`SunEditor.Kernel`) — The core kernel instance. Pass to `super()`.
+- `kernel` (`SunEditor.Kernel`) — The core instance. Pass to `super()`.
 - `pluginOptions` (`object`) — Plugin-specific options from `options[pluginKey]`. Define a `@typedef` for type checking.
 
 ---
@@ -1093,7 +1093,7 @@ class CustomEmbed extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1304,7 +1304,7 @@ class WordCount extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1345,7 +1345,7 @@ class QuickStyle extends PluginDropdown {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core kernel
+	 * @param {SunEditor.Kernel} kernel - The core instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1575,13 +1575,13 @@ These options are passed as the second argument to the constructor: `constructor
 
 ### Registration Rules
 
-1. **Always pass class references** — The kernel manages instantiation and lifecycle.
+1. **Always pass class references** — The core manages instantiation and lifecycle.
 
     ```javascript
     // Correct
     plugins: [MyPlugin];
 
-    // Wrong — kernel cannot manage lifecycle
+    // Wrong — core cannot manage lifecycle
     plugins: [new MyPlugin()];
     ```
 

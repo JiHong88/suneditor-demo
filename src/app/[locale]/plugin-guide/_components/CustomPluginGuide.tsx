@@ -20,7 +20,7 @@ class HelloWorld extends PluginCommand {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -77,7 +77,7 @@ class ToggleStrikethrough extends PluginCommand {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -121,7 +121,7 @@ class CustomAlign extends PluginDropdown {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    * @param {CustomAlignPluginOptions} pluginOptions
    */
   constructor(kernel, pluginOptions) {
@@ -174,7 +174,7 @@ class InsertCode extends PluginModal {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -249,7 +249,7 @@ class HashtagDetector extends PluginField {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -279,7 +279,7 @@ class CustomPicker extends PluginDropdownFree {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -315,7 +315,7 @@ class MyGallery extends PluginBrowser {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -341,7 +341,7 @@ class CustomInput extends PluginInput {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -376,7 +376,7 @@ class InfoPopup extends PluginPopup {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -404,7 +404,7 @@ class MyPlugin extends PluginModal {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    * @param {MyPluginOptions} pluginOptions
    */
   constructor(kernel, pluginOptions) {
@@ -573,7 +573,7 @@ class WordCount extends PluginCommand {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);
@@ -719,7 +719,7 @@ class QuickStyle extends PluginDropdown {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core kernel
+   * @param {SunEditor.Kernel} kernel - The core instance
    */
   constructor(kernel) {
     super(kernel);

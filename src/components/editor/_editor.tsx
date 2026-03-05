@@ -42,7 +42,7 @@ export { A };
 
 interface SunEditorProps {
 	value?: SunEditor.InitOptions["value"];
-	theme?: "dark" | "default" | "cobalt";
+	theme?: string;
 	options?: SunEditor.InitOptions;
 	onInstance?: (instance: SunEditor.Instance) => void;
 }

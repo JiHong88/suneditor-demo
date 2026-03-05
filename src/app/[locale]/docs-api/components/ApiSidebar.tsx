@@ -172,7 +172,7 @@ function SidebarItemComponent({
 							<span className='text-xs italic text-muted-foreground/50'>{item.title}</span>
 						) : item.id === "kernel-group" ? (
 							<>
-								$<span className='text-[11px] ml-0.5 font-normal opacity-50'> (Kernel)</span>
+								$<span className='text-[11px] ml-0.5 font-normal opacity-50'> (Core)</span>
 							</>
 						) : (
 							item.title

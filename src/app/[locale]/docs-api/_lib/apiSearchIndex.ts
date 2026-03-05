@@ -75,7 +75,7 @@ export function buildSearchIndex(apiDocs: ApiDocs): SearchableItem[] {
 
         const isInternal = key === "eventOrchestrator";
         const displayKey = isInternal ? `_${key}` : key;
-        const prefixBase = isInternal ? "kernel" : "$";
+        const prefixBase = isInternal ? "core" : "$";
         for (const m of subgroup.methods) {
           items.push({
             id: `editor.${key}.${m.name}`,

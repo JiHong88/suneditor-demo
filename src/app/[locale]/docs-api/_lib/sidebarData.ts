@@ -29,7 +29,7 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
     });
   }
 
-  // ── 2. Editor Instance (Main Methods + Kernel($) info) ──
+  // ── 2. Editor Instance (Main Methods + Core($) info) ──
   if (apiDocs.structure.editor) {
     const editorCount = apiDocs.structure.editor.methods.length;
     items.push({
@@ -46,7 +46,7 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
         },
         {
           id: "kernel-info",
-          title: "Kernel ($) ↓",
+          title: "Core ($) ↓",
           count: 0,
           type: "subgroup",
         },
@@ -54,11 +54,11 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
     });
   }
 
-  // ── 3. $ (Kernel subsystems — without store) ──
+  // ── 3. $ (Core subsystems — without store) ──
   // Layer ordering (matching Step3_KernelApi KERNEL_DEPS)
   if (apiDocs.structure.editor?.subgroups) {
     const LAYER_SECTIONS = [
-      { id: "layer-l1", label: "Kernel (L1)", keys: ["facade"] },
+      { id: "layer-l1", label: "Core (L1)", keys: ["facade"] },
       { id: "layer-l2", label: "Config (L2)", keys: ["contextProvider", "optionProvider", "instanceCheck", "eventManager"] },
       { id: "layer-l2-acc", label: "Accessors (L2)", keys: ["frameRoots", "context", "frameContext", "options", "frameOptions", "icons", "lang"] },
       { id: "layer-l3-dom", label: "DOM (L3)", keys: ["offset", "selection", "format", "inline", "listFormat", "html", "nodeTransform", "char"] },
@@ -99,7 +99,7 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
       const countableChildren = kernelChildren.filter(c => !c.id.startsWith("layer-"));
       items.push({
         id: "kernel-group",
-        title: "$ (Kernel)",
+        title: "$ (Core)",
         count: countableChildren.reduce((sum, child) => sum + child.count, 0),
         type: "group",
         children: kernelChildren,
@@ -302,10 +302,10 @@ export function buildSidebarItems(apiDocs: ApiDocs): SidebarItem[] {
   return items;
 }
 
-/** Map layer-* / kernel-info IDs → translation keys */
+/** Map layer-* / core-info IDs → translation keys */
 const LAYER_DESC_KEYS: Record<string, { titleLabel: string; tKey: string }> = {
-  "kernel-info": { titleLabel: "Kernel ($)", tKey: "kernelInfoDesc" },
-  "layer-l1": { titleLabel: "Kernel (L1)", tKey: "layerL1Desc" },
+  "kernel-info": { titleLabel: "Core ($)", tKey: "kernelInfoDesc" },
+  "layer-l1": { titleLabel: "Core (L1)", tKey: "layerL1Desc" },
   "layer-l2": { titleLabel: "Config (L2)", tKey: "layerL2Desc" },
   "layer-l2-acc": { titleLabel: "Accessors (L2)", tKey: "layerL2AccDesc" },
   "layer-l3-dom": { titleLabel: "DOM (L3)", tKey: "layerL3DomDesc" },
@@ -319,7 +319,7 @@ export function resolveContentData(selectedId: string, apiDocs: ApiDocs, t?: (ke
     return null;
   }
 
-  // Layer labels & kernel-info → show description
+  // Layer labels & core-info → show description
   const layerInfo = LAYER_DESC_KEYS[selectedId];
   if (layerInfo) {
     return {
@@ -370,7 +370,7 @@ export function resolveContentData(selectedId: string, apiDocs: ApiDocs, t?: (ke
     if (subgroup) {
       const isInternal = key === INTERNAL_KEY;
       const displayKey = isInternal ? `_${key}` : key;
-      const prefixBase = isInternal ? "kernel" : "$";
+      const prefixBase = isInternal ? "core" : "$";
       return {
         title: `${prefixBase}.${displayKey}`,
         description: subgroup.description,

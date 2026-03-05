@@ -7050,7 +7050,7 @@
 					"description": "편집기가 전체 초기화를 완료하면 시작됩니다. 이 이벤트는 모든 DOM 레이아웃 계산이 완료되고, 도구 모음이 표시되고, `ResizeObserver`이 등록되고, 기록 스택이 초기화되도록 `setTimeout`을 통해 연기됩니다. 이 이벤트를 사용하면 생성 직후 편집기 메서드를 안전하게 호출할 수 있습니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성"
+						"params": ".$ - 의존성 백(deps)"
 					}
 				},
 				{
@@ -7151,7 +7151,7 @@
 					"description": "사용자가 편집기에서 콘텐츠를 복사하려고 하면 시작됩니다. 클립보드에 복사하기 전에 트리거되었습니다. 복사 작업을 방지하려면 `false`을 반환합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.clipboardData": "`clipboardData`"
 					}
 				},
@@ -7162,7 +7162,7 @@
 					"description": "사용자가 편집기에서 콘텐츠를 잘라내려고 하면 시작됩니다. 클립보드로 자르기 전에 트리거됩니다. 잘라내기 작업과 기록 푸시를 방지하려면 `false`을 반환합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.clipboardData": "`clipboardData`"
 					}
 				},
@@ -7173,7 +7173,7 @@
 					"description": "편집기 내용이 변경되면 시작됩니다. 기록 스택 업데이트, 실행 취소/다시 실행 작업, 사용자 편집 후에 트리거됩니다. 이를 사용하여 외부 상태를 동기화하거나 콘텐츠의 유효성을 검사합니다. `data` 매개변수에는 현재 HTML 콘텐츠가 포함됩니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.data": "편집기 HTML 콘텐츠"
 					}
 				},
@@ -7184,7 +7184,7 @@
 					"description": "도구 모음이 표시되면 시작됩니다. 풍선 모드 및 인라인 모드 도구 모음에 대해 트리거됩니다. `mode` 매개변수는 도구 모음 유형(`balloon` ​​또는 `inline`)을 나타냅니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.toolbar": "툴바 요소",
 						"params.mode": "툴바 모드"
 					}
@@ -7196,7 +7196,7 @@
 					"description": "구성요소 컨트롤러(부동 도구 모음)가 표시된 후에 실행됩니다. 구성요소(이미지, 동영상, 표)가 선택되면 트리거됩니다. `caller` 매개변수는 컨트롤러를 트리거한 플러그인을 나타냅니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.caller": "호출자 플러그인 이름",
 						"params.info": "정보 객체"
 					}
@@ -7208,7 +7208,7 @@
 					"description": "구성 요소 컨트롤러(부동 도구 모음)가 표시되기 전에 실행됩니다. 구성요소(이미지, 비디오, 테이블)가 선택되려고 할 때 트리거됩니다. 컨트롤러가 표시되지 않도록 하려면 `false`을 반환합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.caller": "호출자 플러그인 이름",
 						"params.info": "정보 객체"
 					}
@@ -7220,7 +7220,7 @@
 					"description": "편집기가 WYSIWYG 보기와 코드 보기 사이를 전환할 때 발생합니다. `is` 매개변수는 코드 보기가 현재 활성화되었는지(`true`) 또는 WYSIWYG 보기가 활성화되었는지(`false`) 여부를 나타냅니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.is": "코드 보기 상태"
 					}
 				},
@@ -7231,7 +7231,7 @@
 					"description": "편집기가 전체 화면 모드에 들어가거나 나갈 때 발생합니다. `is` 매개변수는 현재 전체 화면 모드가 활성화되었는지(`true`) 또는 일반 모드가 활성화되었는지(`false`) 여부를 나타냅니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.is": "전체 화면 상태"
 					}
 				},
@@ -7242,7 +7242,7 @@
 					"description": "편집기의 wysiwyg 영역 높이가 변경되면 시작됩니다. `ResizeObserver`에 의해 트리거되었습니다. 이를 사용하여 외부 UI 요소를 동기화하거나 사용자 정의 크기 조정 동작을 구현합니다. 매개변수에는 현재 높이, 이전 높이 및 `ResizeObserverEntry`이 포함됩니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.height": "Wysiwyg 영역 프레임 높이",
 						"params.prevHeight": "Wysiwyg 영역 이전 높이",
 						"params.observerEntry": "관찰자 항목 크기 조정"
@@ -7255,7 +7255,7 @@
 					"description": "도구 모음 버튼이 생성되고 렌더링된 후에 실행됩니다. 도구 모음 초기화 및 `resetToolbarButtons()` 중에 트리거됩니다. 이를 사용하여 도구 모음 DOM을 사용자 정의하거나 `buttonTray`에 사용자 정의 요소를 추가합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.buttonTray": "버튼 트레이 요소"
 					}
 				},
@@ -7266,7 +7266,7 @@
 					"description": "저장 명령이 실행될 때 시작됩니다(Ctrl+S 또는 저장 버튼). 이를 사용하여 편집기 콘텐츠를 서버로 보내거나 사용자 정의 저장 논리를 수행합니다. 저장 작업이 완료되는 것을 방지하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.data": "편집자 데이터"
 					}
 				},
@@ -7277,7 +7277,7 @@
 					"description": "도구 모음 버튼 상태가 재설정되면 시작됩니다. 실행 취소/다시 실행 작업 및 기록 탐색 중에 트리거됩니다. 이를 사용하여 사용자 정의 도구 모음 버튼이나 외부 UI 상태를 업데이트합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.rootKey": "프레임 키"
 					}
 				},
@@ -7288,7 +7288,7 @@
 					"description": "글꼴 모음 변경 사항이 선택 항목에 적용되기 전에 실행됩니다. 글꼴 드롭다운 선택에 의해 트리거됩니다. 글꼴 변경 작업을 취소하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.value": "글꼴 값"
 					}
 				},
@@ -7313,7 +7313,7 @@
 					"description": "이미지 업로드 요청을 위한 사용자 정의 핸들러입니다. `XMLHttpRequest`이 전송된 후 기본 응답 처리 전에 실행됩니다. 업로드 응답을 직접 처리하는 경우 `true`로 확인되는 Promise를 반환하고, 기본 처리를 사용하려면 `false`로 반환합니다. `xmlHttp` 매개변수는 `XMLHttpRequest` 개체에 대한 액세스를 제공합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.xmlHttp": "XMLHttp요청",
 						"params.info": "정보 객체"
 					}
@@ -7325,7 +7325,7 @@
 					"description": "이미지가 서버에 업로드되기 전에 실행됩니다. 업로드하기 전에 이미지 데이터를 확인, 크기 조정 또는 수정하려면 이 기능을 사용하세요. 업로드를 취소하려면 `false`을 반환하고, 업로드 데이터를 수정하려면 `ImageInfo` ​​객체를 반환하고, 데이터 수정을 진행하려면 `handler` 매개변수를 호출하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.handler": "핸들러 함수"
 					}
@@ -7337,7 +7337,7 @@
 					"description": "이미지가 편집기에 성공적으로 로드된 후 실행됩니다. 업로드 완료 또는 URL 기반 이미지 삽입 후 트리거됩니다. `infoList` 매개변수에는 로드된 모든 이미지에 대한 `FileManagementInfo` ​​개체 배열이 포함되어 있습니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.infoList": "정보 목록"
 					}
 				},
@@ -7348,7 +7348,7 @@
 					"description": "편집기에서 이미지가 생성, 업데이트 또는 삭제되면 시작됩니다. `state` 매개변수는 작업 유형(`create`, `update` 또는 `delete`)을 나타냅니다. 이를 사용하여 이미지 상태를 외부 시스템과 동기화하거나 이미지 수정을 추적합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.element": "대상 요소",
 						"params.state": "상태",
@@ -7364,7 +7364,7 @@
 					"description": "크기 제한, 서버 오류 또는 기타 문제로 인해 이미지 업로드에 실패하면 시작됩니다. 기본 오류 메시지를 재정의하려면 사용자 정의 오류 메시지 문자열로 해석되는 Promise를 반환하고, 기본 메시지를 사용하려면 `undefined`을 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.error": "오류 메시지",
 						"params.limitSize": "크기 제한",
 						"params.uploadSize": "업로드 크기",
@@ -7379,7 +7379,7 @@
 					"description": "편집기에서 이미지가 삭제되기 전에 실행됩니다. 삭제를 확인하거나, 서버에 알리거나, 정리를 수행하는 데 사용합니다. 이미지가 삭제되는 것을 방지하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.element": "대상 요소",
 						"params.container": "대상의 컨테이너 요소(div)",
 						"params.align": "값 정렬",
@@ -7394,7 +7394,7 @@
 					"description": "비디오 업로드 요청을 위한 사용자 정의 핸들러. `XMLHttpRequest`이 전송된 후 기본 응답 처리 전에 실행됩니다. 업로드 응답을 직접 처리하는 경우 `true`로 확인되는 Promise를 반환하고, 기본 처리를 사용하려면 `false`로 반환합니다. `xmlHttp` 매개변수는 `XMLHttpRequest` 개체에 대한 액세스를 제공합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.xmlHttp": "XMLHttp요청",
 						"params.info": "정보 객체"
 					}
@@ -7406,7 +7406,7 @@
 					"description": "동영상이 서버에 업로드되기 전에 실행됩니다. 이를 사용하여 업로드하기 전에 비디오 데이터를 검증, 트랜스코딩 또는 수정합니다. 업로드를 취소하려면 `false`을 반환하고, 업로드 데이터를 수정하려면 `VideoInfo` ​​객체를 반환하고, 데이터 수정을 진행하려면 `handler` 매개변수를 호출하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.handler": "핸들러 함수"
 					}
@@ -7418,7 +7418,7 @@
 					"description": "비디오가 편집기에 성공적으로 로드된 후 실행됩니다. 업로드 완료 또는 URL 기반 동영상 삽입(iframe/video 태그) 후에 실행됩니다. `infoList` 매개변수에는 로드된 모든 비디오에 대한 `FileManagementInfo` ​​개체 배열이 포함됩니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.infoList": "정보 목록"
 					}
 				},
@@ -7429,7 +7429,7 @@
 					"description": "편집기에서 동영상이 생성, 업데이트 또는 삭제되면 시작됩니다. `state` 매개변수는 작업 유형(`create`, `update` 또는 `delete`)을 나타냅니다. 이를 사용하여 비디오 상태를 외부 시스템과 동기화하거나 비디오 수정 사항을 추적합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.element": "대상 요소",
 						"params.state": "상태",
@@ -7445,7 +7445,7 @@
 					"description": "크기 제한, 서버 오류 또는 기타 문제로 인해 동영상 업로드에 실패하면 시작됩니다. 기본 오류 메시지를 재정의하려면 사용자 정의 오류 메시지 문자열로 해석되는 Promise를 반환하고, 기본 메시지를 사용하려면 `undefined`을 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.error": "오류 메시지",
 						"params.limitSize": "크기 제한",
 						"params.uploadSize": "업로드 크기",
@@ -7460,7 +7460,7 @@
 					"description": "편집기에서 동영상이 삭제되기 전에 실행됩니다. 삭제를 확인하거나, 서버에 알리거나, 정리를 수행하는 데 사용합니다. 동영상이 삭제되는 것을 방지하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.element": "대상 요소",
 						"params.container": "대상의 컨테이너 요소(div)",
 						"params.align": "값 정렬",
@@ -7474,7 +7474,7 @@
 					"description": "오디오 업로드 요청을 위한 사용자 정의 핸들러입니다. `XMLHttpRequest`이 전송된 후 기본 응답 처리 전에 실행됩니다. 업로드 응답을 직접 처리하는 경우 `true`로 확인되는 Promise를 반환하고, 기본 처리를 사용하려면 `false`로 반환합니다. `xmlHttp` 매개변수는 `XMLHttpRequest` 개체에 대한 액세스를 제공합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.xmlHttp": "XMLHttp요청",
 						"params.info": "정보 객체"
 					}
@@ -7486,7 +7486,7 @@
 					"description": "오디오 파일이 서버에 업로드되기 전에 실행됩니다. 이를 사용하여 업로드하기 전에 오디오 데이터를 검증, 트랜스코딩 또는 수정합니다. 업로드를 취소하려면 `false`을 반환하고, 업로드 데이터를 수정하려면 `AudioInfo` ​​객체를 반환하고, 데이터 수정을 진행하려면 `handler` 매개변수를 호출하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.handler": "핸들러 함수"
 					}
@@ -7498,7 +7498,7 @@
 					"description": "크기 제한, 서버 오류 또는 기타 문제로 인해 오디오 업로드에 실패하면 시작됩니다. 기본 오류 메시지를 재정의하려면 사용자 정의 오류 메시지 문자열로 해석되는 Promise를 반환하고, 기본 메시지를 사용하려면 `undefined`을 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.error": "오류 메시지",
 						"params.limitSize": "크기 제한",
 						"params.uploadSize": "업로드 크기",
@@ -7513,7 +7513,7 @@
 					"description": "오디오 파일이 편집기에 성공적으로 로드된 후 실행됩니다. 업로드 완료 또는 URL 기반 오디오 삽입 후 트리거됩니다. `infoList` 매개변수에는 로드된 모든 오디오 파일에 대한 `FileManagementInfo` ​​개체 배열이 포함되어 있습니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.infoList": "정보 목록"
 					}
 				},
@@ -7524,7 +7524,7 @@
 					"description": "편집기에서 오디오 요소가 생성, 업데이트 또는 삭제되면 시작됩니다. `state` 매개변수는 작업 유형(`create`, `update` 또는 `delete`)을 나타냅니다. 이를 사용하여 오디오 상태를 외부 시스템과 동기화하거나 오디오 수정 사항을 추적합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.element": "대상 요소",
 						"params.state": "상태",
@@ -7540,7 +7540,7 @@
 					"description": "오디오 요소가 편집기에서 삭제되기 전에 실행됩니다. 삭제를 확인하거나, 서버에 알리거나, 정리를 수행하는 데 사용합니다. 오디오가 삭제되는 것을 방지하려면 `false`으로 해석되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.element": "대상 요소",
 						"params.container": "대상의 컨테이너 요소(div)",
 						"params.url": "오디오 URL"
@@ -7553,7 +7553,7 @@
 					"description": "파일이 서버에 업로드되기 전에 실행됩니다(`fileUpload` 플러그인을 통해). 업로드하기 전에 파일 데이터를 확인하거나 수정하려면 이를 사용합니다. 업로드를 취소하려면 `false`을 반환하고, 업로드 데이터를 수정하려면 `FileInfo` 객체를 반환하고, 데이터 수정을 진행하려면 `handler` 매개변수를 호출하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.handler": "핸들러 함수"
 					}
@@ -7565,7 +7565,7 @@
 					"description": "파일이 성공적으로 업로드되어 편집기에 로드된 후에 실행됩니다. 업로드 완료 후 `fileUpload` 플러그인에 의해 트리거됩니다. `infoList` ​​매개변수에는 로드된 모든 파일에 대한 `FileManagementInfo` 개체 배열이 포함되어 있습니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.infoList": "정보 목록"
 					}
 				},
@@ -7576,7 +7576,7 @@
 					"description": "편집기에서 파일 링크가 생성, 업데이트 또는 삭제되면 시작됩니다. `state` 매개변수는 작업 유형(`create`, `update` 또는 `delete`)을 나타냅니다. 이를 사용하여 파일 상태를 외부 시스템과 동기화하거나 파일 수정 사항을 추적합니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.element": "대상 요소",
 						"params.state": "상태",
@@ -7592,7 +7592,7 @@
 					"description": "크기 제한, 서버 오류 또는 기타 문제로 인해 파일 업로드가 실패하면 시작됩니다. 기본 오류 메시지를 재정의하려면 사용자 정의 오류 메시지 문자열로 해석되는 Promise를 반환하고, 기본 메시지를 사용하려면 `undefined`을 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.error": "오류 메시지",
 						"params.limitSize": "크기 제한",
 						"params.uploadSize": "업로드 크기",
@@ -7607,7 +7607,7 @@
 					"description": "편집기에서 파일 링크가 삭제되기 전에 실행됩니다. 삭제를 확인하거나, 서버에 알리거나, 정리를 수행하는 데 사용합니다. 파일 링크가 삭제되는 것을 방지하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.element": "대상 요소",
 						"params.container": "대상의 컨테이너 요소(div)",
 						"params.url": "파일 URL"
@@ -7620,7 +7620,7 @@
 					"description": "편집기 콘텐츠를 PDF로 내보내기 전에 실행됩니다. 이를 사용하여 콘텐츠를 수정하거나 메타데이터를 추가하거나 내보내기를 취소할 수 있습니다. PDF 내보내기를 방지하려면 `false`로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.target": "wysiwyg 편집 가능한 요소"
 					}
 				},
@@ -7631,7 +7631,7 @@
 					"description": "미디어 요소(이미지, 비디오, 오디오, 파일)가 생성, 업데이트 또는 삭제되면 시작됩니다. 이는 모든 미디어 유형에 대해 트리거되는 통합 이벤트입니다. `pluginName` 매개변수는 작업을 트리거한 플러그인(`image`, `video`, `audio` 또는 `file`)을 나타냅니다.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.info": "정보 객체",
 						"params.element": "대상 요소",
 						"params.state": "상태",
@@ -7654,7 +7654,7 @@
 					"description": "삽입된 요소(iframe, 맞춤 삽입)가 편집기에서 삭제되기 전에 실행됩니다. 이를 사용하여 삭제를 확인하거나 정리를 수행합니다. 삽입이 삭제되는 것을 방지하려면 `false`으로 확인되는 Promise를 반환하세요.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - 커널 종속성",
+						"params": ".$ - 의존성 백(deps)",
 						"params.element": "대상 요소",
 						"params.container": "대상의 컨테이너 요소(div)",
 						"params.align": "값 정렬",

@@ -702,10 +702,10 @@ export const DEFAULTS: PlaygroundState = {
 /* ── Preset values for toggleable plugin options ───────── */
 
 export const ITEM_PRESETS: Record<string, string> = {
-	align_items: "left,center,right,justify",
-	font_items: "Arial,Comic Sans MS,Courier New,Impact,Georgia,tahoma,Trebuchet MS,Verdana",
-	blockStyle_items: "p,blockquote,pre,h1,h2,h3,h4,h5,h6",
-	lineHeight_items: '[{"text":"1","value":"1em"},{"text":"1.5","value":"1.5em"},{"text":"2","value":"2em"}]',
+	align_items: "left,center,right",
+	font_items: "Roboto,Open Sans,Lato,Montserrat,Playfair Display,Noto Sans KR",
+	blockStyle_items: "p,blockquote,h1,h2,h3",
+	lineHeight_items: '[{"text":"1","value":"1em"},{"text":"1.15","value":"1.15em"},{"text":"1.5","value":"1.5em"},{"text":"1.75","value":"1.75em"},{"text":"2","value":"2em"},{"text":"3","value":"3em"}]',
 	paragraphStyle_items: "spaced,bordered,neon",
 	textStyle_items: "code,shadow",
 	template_items: '[{"name":"Greeting","html":"<p>Hello!</p>"}]',

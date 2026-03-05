@@ -74,7 +74,7 @@ const ARCH_DIAGRAM = `┌──────────────────�
 
 const DEP_RULES = `Allowed dependency direction:
 
-  L1 (Kernel) ─── orchestrates all layers
+  L1 (Core) ─── orchestrates all layers
        ↓
   L2 (Config) ─── available to L3/L4 via $
        ↓
@@ -127,7 +127,7 @@ export default function ArchitectureContent() {
 						<Table
 							headers={["Layer", "Directory", "Responsibility", "Components"]}
 							rows={[
-								["L1: Kernel", "kernel/", "Dependency container & state", "CoreKernel, Store, KernelInjector"],
+								["L1: Core", "kernel/", "Dependency container & state", "CoreKernel, Store, KernelInjector"],
 								["L2: Config", "config/", "Environment & options", "ContextProvider, OptionProvider, InstanceCheck, EventManager"],
 								["L3: Logic", "logic/", "Core editing logic", "Selection, Format, History, PluginManager, Toolbar, Component"],
 								["L4: Event", "event/", "Input orchestration", "EventOrchestrator (Redux-style event pipeline)"],

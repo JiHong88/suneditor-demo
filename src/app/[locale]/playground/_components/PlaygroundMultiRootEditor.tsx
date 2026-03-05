@@ -48,10 +48,12 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		}
 
 		// Classic mode in multiroot requires toolbar_container
+		const resolvedTheme = state.theme || (document.documentElement.classList.contains("dark") ? "midnight" : "default");
 		const initOptions: Record<string, unknown> = {
 			plugins,
 			buttonList: FullButtonList,
 			...options,
+			theme: resolvedTheme,
 		};
 		if (isClassic && toolbarRef.current) {
 			initOptions.toolbar_container = toolbarRef.current;
@@ -96,7 +98,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		if (!instance) return;
 
 		const applyTheme = (theme: string) => {
-			instance.$.ui.setTheme(theme as "dark" | "default" | "cobalt");
+			instance.$.ui.setTheme(theme);
 		};
 
 		if (state.theme) {
@@ -107,7 +109,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 
 		// Auto theme: sync with page theme
 		const getPageTheme = () =>
-			document.documentElement.classList.contains("dark") ? "dark" : "default";
+			document.documentElement.classList.contains("dark") ? "midnight" : "default";
 
 		applyTheme(getPageTheme());
 
