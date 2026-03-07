@@ -3,7 +3,7 @@
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { SunEditor } from "suneditor/types";
@@ -19,6 +19,7 @@ import {
 	hasFixedChange,
 	isFixedOption,
 } from "./_lib/playgroundState";
+import { editorLangCodes } from "@/i18n/languages";
 import PlaygroundControls, { PlaygroundPerRootPanel } from "./_components/PlaygroundControls";
 import PlaygroundPluginSidebar from "./_components/PlaygroundPluginSidebar";
 import dynamic from "next/dynamic";
@@ -85,7 +86,9 @@ const FIXED_RESET_KEYS = new Set([
 export default function PlaygroundPage() {
 	const t = useTranslations("Playground");
 	const tc = useTranslations("Common");
-	const [state, dispatch] = useReducer(playgroundReducer, DEFAULTS);
+	const locale = useLocale();
+	const initialLang = locale !== "en" && editorLangCodes.includes(locale) ? locale : "";
+	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, toolbar_sticky: 92, lang: initialLang });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });
@@ -129,9 +132,17 @@ export default function PlaygroundPage() {
 		const instance = editorRef.current;
 		if (!instance) return;
 
-		const opts = stateToEditorOptions(state);
-		// Strip fixed keys that cannot be changed after creation
-		for (const k of FIXED_RESET_KEYS) delete opts[k];
+		// Build opts from current & previous state, then only send changed keys
+		// to avoid triggering #RestoreFrameOptions for unchanged frame options
+		const opts = stateToEditorOptions(state) as Record<string, unknown>;
+		const prevOpts = stateToEditorOptions(prev) as Record<string, unknown>;
+		for (const k of FIXED_RESET_KEYS) { delete opts[k]; delete prevOpts[k]; }
+		for (const k of Object.keys(opts)) {
+			if (JSON.stringify(opts[k]) === JSON.stringify(prevOpts[k])) {
+				delete opts[k];
+			}
+		}
+		if (Object.keys(opts).length === 0) return;
 		instance.resetOptions(opts);
 	}, [state]);
 
@@ -167,14 +178,14 @@ export default function PlaygroundPage() {
 					</div>
 					<div className='flex items-center gap-2'>
 						<Button variant='outline' size='sm' onClick={handleReset}>
-							<RotateCcw className='mr-1.5 h-3.5 w-3.5' />
+							<RotateCcw className='me-1.5 h-3.5 w-3.5' />
 							{t("reset")}
 						</Button>
 						<Button variant='outline' size='sm' onClick={handleShare}>
 							{urlCopied ? (
-								<Check className='mr-1.5 h-3.5 w-3.5 text-green-500' />
+								<Check className='me-1.5 h-3.5 w-3.5 text-green-500' />
 							) : (
-								<Share2 className='mr-1.5 h-3.5 w-3.5' />
+								<Share2 className='me-1.5 h-3.5 w-3.5' />
 							)}
 							{urlCopied ? tc("copied") : t("shareURL")}
 						</Button>
@@ -246,7 +257,7 @@ export default function PlaygroundPage() {
 								<Sheet>
 									<SheetTrigger asChild>
 										<Button variant='outline' className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950/60 dark:text-blue-300 dark:hover:bg-blue-900/60'>
-											<Settings2 className='mr-2 h-4 w-4' />
+											<Settings2 className='me-2 h-4 w-4' />
 											{t("editorOptions")}
 										</Button>
 									</SheetTrigger>
@@ -266,7 +277,7 @@ export default function PlaygroundPage() {
 								<Sheet>
 									<SheetTrigger asChild>
 										<Button variant='outline' className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-950/60 dark:text-orange-300 dark:hover:bg-orange-900/60'>
-											<Puzzle className='mr-2 h-4 w-4' />
+											<Puzzle className='me-2 h-4 w-4' />
 											{t("pluginOptions")}
 										</Button>
 									</SheetTrigger>

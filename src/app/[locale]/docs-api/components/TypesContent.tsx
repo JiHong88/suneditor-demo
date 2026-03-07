@@ -72,7 +72,7 @@ function TypeCard({ type }: { type: TypeDefinition }) {
           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t("members")}</span>
           <div className="mt-1.5 space-y-1">
             {Object.entries(type.memberDescriptions).map(([name, desc]) => (
-              <div key={name} className="flex gap-2 pl-2">
+              <div key={name} className="flex gap-2 ps-2">
                 <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
                   {name}
                 </code>
@@ -106,7 +106,7 @@ export default function TypesContent({ title, description, types }: TypesContent
         <div className="mb-8 pb-6 border-b">
           <h1 className="text-2xl md:text-3xl font-bold mb-3">{title}</h1>
           {description && (
-            <div className="bg-muted/50 rounded-lg p-4 mb-4 border-l-4 border-primary">
+            <div className="bg-muted/50 rounded-lg p-4 mb-4 border-s-4 border-primary">
               <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
             </div>
           )}
@@ -115,11 +115,11 @@ export default function TypesContent({ title, description, types }: TypesContent
 
         {/* Search */}
         <div className="mb-6 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
             placeholder={t("filterTypes")}
-            className="w-full pl-9 pr-4 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full ps-9 pe-4 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

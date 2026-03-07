@@ -105,7 +105,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
     return (
       <div className="font-mono text-sm">
         <span className="text-muted-foreground">(</span>
-        <div className="pl-4">
+        <div className="ps-4">
           {parameters.map((param, idx) => (
             <div key={idx}>
               {renderParam(param, idx, idx === parameters.length - 1)}
@@ -193,7 +193,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t("parameters")}</span>
           <div className="mt-1.5 space-y-1">
             {Object.entries(method.paramDescriptions).map(([name, desc]) => (
-              <div key={name} className="flex gap-2 pl-2">
+              <div key={name} className="flex gap-2 ps-2">
                 <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
                   {name}
                 </code>
@@ -261,7 +261,7 @@ export default function ApiContent({ title, description, methods, getters, prefi
         <div className="mb-8 pb-6 border-b">
           <h1 className="text-2xl md:text-3xl font-bold mb-3">{title}</h1>
           {description && (
-            <div className="bg-muted/50 rounded-lg p-4 mb-4 border-l-4 border-primary space-y-2">
+            <div className="bg-muted/50 rounded-lg p-4 mb-4 border-s-4 border-primary space-y-2">
               {description.split("\n\n").map((para, i) => (
                 <p key={i} className="text-sm text-muted-foreground leading-relaxed">{highlightInline(para)}</p>
               ))}
@@ -337,6 +337,9 @@ export default function ApiContent({ title, description, methods, getters, prefi
             <p>{t("noMethods")}</p>
           </div>
         )}
+
+        {/* Bottom padding for comfortable scrolling */}
+        <div className="h-[30vh]" />
       </div>
     </div>
   );

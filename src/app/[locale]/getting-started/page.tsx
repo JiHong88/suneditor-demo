@@ -64,7 +64,7 @@ export default function GettingStartedPage() {
 					<Button asChild size='lg' className='mt-2 group'>
 						<Link href='/playground'>
 							{t_menus("playground")}
-							<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+							<ArrowRight className='ms-2 h-4 w-4 transition-transform group-hover:ltr:translate-x-1 group-hover:rtl:-translate-x-1' />
 						</Link>
 					</Button>
 				</div>

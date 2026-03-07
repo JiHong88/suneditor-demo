@@ -159,11 +159,16 @@ export function getDir(tag: string): "rtl" | "ltr" {
 	return isRtlLocale(tag) ? "rtl" : "ltr";
 }
 
+import { getLang } from "@/i18n/languages";
+
 export function buildLanguageOptions(codes: string[]) {
 	return codes.map((code) => {
+		const entry = getLang(code);
+		const nativeName = getLanguageLabel(code);
+		const icon = entry?.icon ?? "";
 		return {
 			value: code,
-			label: getLanguageLabel(code),
+			label: `${icon} ${code} [${nativeName}]`.trim(),
 			dir: getDir(code),
 		};
 	});

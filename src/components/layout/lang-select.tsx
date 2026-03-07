@@ -1,28 +1,19 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { readCookie } from "@/lib/cookie";
 import { useRouter, usePathname } from "@/i18n/navigation";
-import { Locale, locales, defaultLocale } from "@/i18n/routing";
+import { Locale } from "@/i18n/routing";
+import { localeCodes } from "@/i18n/languages";
 import { getDir, buildLanguageOptions } from "@/i18n/lang";
 import { Loader2, Globe2 } from "lucide-react";
-
-function getClientLang(): Locale {
-	if (typeof document === "undefined") return defaultLocale;
-	const fromCookie = (readCookie("NEXT_LOCALE") as Locale | null) ?? null;
-	const fromDom = (document.documentElement.getAttribute("data-lang") as Locale) || null;
-	return (fromCookie || fromDom || defaultLocale) as Locale;
-}
+import { useLocale } from "next-intl";
 
 export function LangSelect() {
-	const [lang, setLang] = useState<Locale>(defaultLocale);
+	const currentLocale = useLocale() as Locale;
+	const [lang, setLang] = useState<Locale>(currentLocale);
 	const router = useRouter();
 	const pathname = usePathname();
 	const [isPending, startTransition] = useTransition();
-
-	useEffect(() => {
-		setLang(getClientLang());
-	}, []);
 
 	useEffect(() => {
 		const root = document.documentElement;
@@ -47,7 +38,7 @@ export function LangSelect() {
 				disabled={isPending}
 				className='cursor-pointer gap-2 border-none px-2 py-1 text-xs text-muted-foreground shadow-none m-0 appearance-none'
 			>
-				{buildLanguageOptions(locales).map((l: any) => (
+				{buildLanguageOptions(localeCodes).map((l: any) => (
 					<option value={l.value} key={l.value} dir={l.dir}>
 						{l.dir === "rtl" ? `${l.label} ←` : l.label}
 					</option>

@@ -9,6 +9,7 @@ import ApiContent from "./components/ApiContent";
 import TypesContent from "./components/TypesContent";
 import GlobalSearchResults from "./components/GlobalSearchResults";
 import MobileSidebar from "./components/MobileSidebar";
+import PageToc from "./components/PageToc";
 import apiDocsDataEn from "@/data/api/api-docs.en.json";
 import type { ApiDocs } from "./_lib/types";
 import { buildSidebarItems, resolveContentData } from "./_lib/sidebarData";
@@ -86,6 +87,21 @@ export default function DocsApiPage() {
 		return resolveContentData(selectedId, apiDocs, t);
 	}, [selectedId, apiDocs, t]);
 
+	// TOC items for current section
+	const tocItems = useMemo(() => {
+		if (!contentData) return [];
+		const items: { id: string; label: string }[] = [];
+		if (contentData.getters) {
+			for (const g of contentData.getters) {
+				items.push({ id: `${contentData.prefix}${g.name}`.replace(/\.$/, ""), label: g.name });
+			}
+		}
+		for (const m of contentData.methods) {
+			items.push({ id: `${contentData.prefix}${m.name}`.replace(/\.$/, ""), label: m.name });
+		}
+		return items;
+	}, [contentData]);
+
 	// Handle sidebar selection — scroll content to top, preserve sidebar scroll
 	const handleSidebarSelect = useCallback((id: string) => {
 		const scrollTop = sidebarRef.current?.scrollTop ?? 0;
@@ -135,17 +151,17 @@ export default function DocsApiPage() {
 						</div>
 
 						{/* Search */}
-						<div className='relative flex-1 max-w-md ml-auto'>
-							<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
+						<div className='relative flex-1 max-w-md ms-auto'>
+							<Search className='absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
 							<input
 								ref={searchInputRef}
 								type='text'
 								placeholder={t("searchPlaceholder")}
-								className='w-full pl-9 pr-20 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring'
+								className='w-full ps-9 pe-20 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring'
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
 							/>
-							<div className='absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5'>
+							<div className='absolute end-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5'>
 								{searchQuery ? (
 									<button
 										onClick={() => setSearchQuery("")}
@@ -176,7 +192,7 @@ export default function DocsApiPage() {
 				{/* Desktop sidebar */}
 				<div
 					ref={sidebarRef}
-					className='hidden md:block w-60 lg:w-64 shrink-0 border-r bg-background sticky top-[91px] self-start max-h-[calc(100vh-91px)] overflow-y-auto'
+					className='hidden md:block w-60 lg:w-64 shrink-0 border-e bg-background sticky top-[91px] self-start max-h-[calc(100vh-91px)] overflow-y-auto'
 				>
 					<ApiSidebar items={sidebarItems} selectedId={selectedId} onSelect={handleSidebarSelect} />
 				</div>
@@ -191,14 +207,17 @@ export default function DocsApiPage() {
 						types={apiDocs.structure.types.items}
 					/>
 				) : contentData ? (
-					<ApiContent
-						title={contentData.title}
-						description={contentData.description}
-						methods={contentData.methods}
-						getters={contentData.getters}
-						prefix={contentData.prefix}
-						onNavigate={handleSidebarSelect}
-					/>
+					<>
+						<ApiContent
+							title={contentData.title}
+							description={contentData.description}
+							methods={contentData.methods}
+							getters={contentData.getters}
+							prefix={contentData.prefix}
+							onNavigate={handleSidebarSelect}
+						/>
+						<PageToc items={tocItems} />
+					</>
 				) : null}
 			</div>
 		</div>

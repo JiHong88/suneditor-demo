@@ -15,6 +15,8 @@ export interface PlaygroundState {
 	textDirection: "ltr" | "rtl";
 	reverseButtons: string;
 	v2Migration: boolean;
+	lang: string;
+	icons: string;
 
 	// — Layout & Sizing (frame) —
 	width: string;
@@ -183,6 +185,7 @@ export interface PlaygroundState {
 	mention_useCachingData: boolean;
 
 	// — Plugin: Math —
+	math_mathLib: "katex" | "mathjax";
 	math_canResize: boolean;
 	math_autoHeight: boolean;
 
@@ -369,6 +372,8 @@ export const DEFAULTS: PlaygroundState = {
 	textDirection: "ltr",
 	reverseButtons: "indent-outdent",
 	v2Migration: false,
+	lang: "",
+	icons: "",
 
 	width: "100%",
 	minWidth: "",
@@ -530,6 +535,7 @@ export const DEFAULTS: PlaygroundState = {
 	mention_useCachingData: true,
 
 	// Plugin: Math
+	math_mathLib: "katex" as const,
 	math_canResize: true,
 	math_autoHeight: false,
 
@@ -760,6 +766,8 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"allUsedStyles",
 	"reverseButtons",
 	"v2Migration",
+	"lang",
+	"icons",
 	"convertTextTags",
 	"tagStyles",
 ];
@@ -842,6 +850,7 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"mention_searchStartLength",
 	"mention_apiUrl",
 	"mention_useCachingData",
+	"math_mathLib",
 	"math_canResize",
 	"math_autoHeight",
 	// Image (extended)
@@ -1042,6 +1051,14 @@ export function getButtonList(preset: ButtonListPreset, type?: string): unknown[
 	return list;
 }
 
+/** Check if a specific button name exists in the resolved button list (deep search) */
+export function hasButton(preset: ButtonListPreset, type: string | undefined, name: string): boolean {
+	const list = getButtonList(preset, type);
+	const search = (arr: unknown[]): boolean =>
+		arr.some((item) => (Array.isArray(item) ? search(item) : item === name));
+	return search(list);
+}
+
 /* ── State → SunEditor options ─────────────────────────── */
 
 export function stateToEditorOptions(state: PlaygroundState) {
@@ -1118,6 +1135,9 @@ export function stateToEditorOptions(state: PlaygroundState) {
 
 	// v2Migration
 	if (state.v2Migration) opts.v2Migration = true;
+
+	// lang — dynamic import handled externally; value stored as lang code string
+	// icons — JSON string parsed and merged at runtime
 
 	// optional strings (only set if non-empty / non-default)
 	if (state.minWidth) opts.minWidth = state.minWidth;
@@ -1514,6 +1534,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	dir: "textDirection",
 	rb: "reverseButtons",
 	v2m: "v2Migration",
+	ln: "lang",
+	ic: "icons",
 	// Layout
 	w: "width",
 	minw: "minWidth",
@@ -1711,6 +1733,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"mn.au": "mention_apiUrl",
 	"mn.uc": "mention_useCachingData",
 	// Plugin: Math
+	"mt.ml": "math_mathLib",
 	"mt.r": "math_canResize",
 	"mt.ah": "math_autoHeight",
 	// Plugin: Image (extended)

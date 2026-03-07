@@ -305,7 +305,7 @@ export function OpenInStackBlitzButton({ state, framework }: { state: Playground
 				sdk.openProject(project);
 			}}
 		>
-			<ExternalLink className='mr-1.5 h-3 w-3' />
+			<ExternalLink className='me-1.5 h-3 w-3' />
 			Run Code (StackBlitz)
 		</Button>
 	);

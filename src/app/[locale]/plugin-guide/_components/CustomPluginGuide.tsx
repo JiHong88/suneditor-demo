@@ -932,13 +932,13 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; dot:
    ══════════════════════════════════════════════════════ */
 
 const ACCENT_BORDER: Record<string, string> = {
-	slate: "border-l-2 border-l-slate-400/50",
-	sky: "border-l-2 border-l-sky-500/50",
-	violet: "border-l-2 border-l-violet-500/50",
-	amber: "border-l-2 border-l-amber-500/50",
-	emerald: "border-l-2 border-l-emerald-500/50",
-	rose: "border-l-2 border-l-rose-500/50",
-	teal: "border-l-2 border-l-teal-500/50",
+	slate: "border-s-2 border-s-slate-400/50",
+	sky: "border-s-2 border-s-sky-500/50",
+	violet: "border-s-2 border-s-violet-500/50",
+	amber: "border-s-2 border-s-amber-500/50",
+	emerald: "border-s-2 border-s-emerald-500/50",
+	rose: "border-s-2 border-s-rose-500/50",
+	teal: "border-s-2 border-s-teal-500/50",
 };
 
 function RefTable({ headers, rows, accent }: { headers: ReactNode[]; rows: ReactNode[][]; accent?: string }) {
@@ -950,7 +950,7 @@ function RefTable({ headers, rows, accent }: { headers: ReactNode[]; rows: React
 						{headers.map((h, i) => (
 							<th
 								key={i}
-								className='px-3 py-2.5 text-left font-semibold text-muted-foreground text-[11px] uppercase tracking-wider'
+								className='px-3 py-2.5 text-start font-semibold text-muted-foreground text-[11px] uppercase tracking-wider'
 							>
 								{h}
 							</th>
@@ -1447,9 +1447,9 @@ function HooksTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 					<table className='w-full text-xs'>
 						<thead>
 							<tr className='border-b bg-muted/50'>
-								<th className='text-left p-2 font-medium'>Pattern</th>
-								<th className='text-left p-2 font-medium'>@hook / @override / @imple</th>
-								<th className='text-left p-2 font-medium'>@type Namespace</th>
+								<th className='text-start p-2 font-medium'>Pattern</th>
+								<th className='text-start p-2 font-medium'>@hook / @override / @imple</th>
+								<th className='text-start p-2 font-medium'>@type Namespace</th>
 							</tr>
 						</thead>
 						<tbody className='divide-y'>
@@ -1757,7 +1757,7 @@ function HooksTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 					<div>
 						<h5 className='text-xs font-semibold mb-2'>
 							<code className='text-violet-600 dark:text-violet-400'>ModuleModal</code>
-							<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ml-2'>
+							<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ms-2'>
 								@implements SunEditor.Hook.Modal
 							</code>
 						</h5>
@@ -1813,7 +1813,7 @@ function HooksTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 					<div>
 						<h5 className='text-xs font-semibold mb-2'>
 							<code className='text-sky-600 dark:text-sky-400'>ModuleController</code>
-							<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ml-2'>
+							<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ms-2'>
 								@implements SunEditor.Hook.Controller
 							</code>
 						</h5>
@@ -1854,7 +1854,7 @@ function HooksTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 						<div>
 							<h5 className='text-xs font-semibold mb-2'>
 								<code className='text-teal-600 dark:text-teal-400'>ModuleColorPicker</code>
-								<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ml-1'>
+								<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ms-1'>
 									Hook.ColorPicker
 								</code>
 							</h5>
@@ -1885,7 +1885,7 @@ function HooksTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 						<div>
 							<h5 className='text-xs font-semibold mb-2'>
 								<code className='text-amber-600 dark:text-amber-400'>ModuleHueSlider</code>
-								<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ml-1'>
+								<code className='text-[10px] text-emerald-600 dark:text-emerald-400 ms-1'>
 									Hook.HueSlider
 								</code>
 							</h5>

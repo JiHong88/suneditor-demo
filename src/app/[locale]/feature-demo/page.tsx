@@ -58,6 +58,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
+import QuickTryModal from "./_components/QuickTryModal";
 
 /* ── Feature data (non-translatable: icons only) ──────── */
 
@@ -192,6 +193,22 @@ export default function FeatureDemoPage() {
 	const t = useTranslations("FeatureDemo");
 	const [activeTab, setActiveTab] = useState(categories[0].key);
 
+	// Quick Try modal state
+	const [modalOpen, setModalOpen] = useState(false);
+	const [selectedFeature, setSelectedFeature] = useState<{
+		key: string;
+		catColor: string;
+		icon: React.ReactNode;
+	} | null>(null);
+
+	const openQuickTry = (featureKey: string, catColor: string, icon: React.ReactNode) => {
+		setSelectedFeature({ key: featureKey, catColor, icon });
+		setModalOpen(true);
+	};
+
+	const link = selectedFeature ? FEATURE_PLAYGROUND_LINKS[selectedFeature.key] : null;
+	const playgroundHref = link ? `/playground?${link.query}#editor` : "/playground#editor";
+
 	return (
 		<div className='min-h-screen'>
 			{/* Hero */}
@@ -235,7 +252,7 @@ export default function FeatureDemoPage() {
 							{categories.map((cat) => (
 								<TabsTrigger key={cat.key} value={cat.key} className='text-xs'>
 									<span className={cat.color}>{t(`categories.${cat.key}`)}</span>
-									<Badge variant='outline' className='ml-1.5 text-[10px] px-1.5 py-0'>
+									<Badge variant='outline' className='ms-1.5 text-[10px] px-1.5 py-0'>
 										{cat.features.length}
 									</Badge>
 								</TabsTrigger>
@@ -254,29 +271,27 @@ export default function FeatureDemoPage() {
 								</Card>
 
 								<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
-									{cat.features.map((feature) => {
-										const link = FEATURE_PLAYGROUND_LINKS[feature.key];
-										const href = link ? `/playground?${link.query}#editor` : "/playground#editor";
-
-										return (
-											<Link
-												key={feature.key}
-												href={href}
-												className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group'
-											>
-												<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
-												<div className='min-w-0 flex-1'>
-													<span className='text-sm font-medium'>
-														{t(`features.${feature.key}`)}
-													</span>
-													<p className='text-xs text-muted-foreground mt-0.5'>
-														{t(`features.${feature.key}Desc`)}
-													</p>
-												</div>
-												<ArrowRight className='mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity' />
-											</Link>
-										);
-									})}
+									{cat.features.map((feature) => (
+										<button
+											key={feature.key}
+											type='button'
+											onClick={() => openQuickTry(feature.key, cat.color, feature.icon)}
+											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start'
+										>
+											<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
+											<div className='min-w-0 flex-1'>
+												<span className='text-sm font-medium'>
+													{t(`features.${feature.key}`)}
+												</span>
+												<p className='text-xs text-muted-foreground mt-0.5'>
+													{t(`features.${feature.key}Desc`)}
+												</p>
+											</div>
+											<Badge variant='secondary' className='mt-0.5 text-[10px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity'>
+												{t("quickTry")}
+											</Badge>
+										</button>
+									))}
 								</div>
 							</TabsContent>
 						))}
@@ -298,7 +313,7 @@ export default function FeatureDemoPage() {
 							<Button asChild className='shrink-0 group'>
 								<Link href='/playground'>
 									{t("ctaButton")}
-									<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+									<ArrowRight className='ms-2 h-4 w-4 transition-transform group-hover:ltr:translate-x-1 group-hover:rtl:-translate-x-1' />
 								</Link>
 							</Button>
 						</CardContent>
@@ -315,7 +330,7 @@ export default function FeatureDemoPage() {
 					<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/getting-started'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("gettingStarted")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("gettingStartedDesc")}</p>
 								</div>
@@ -324,7 +339,7 @@ export default function FeatureDemoPage() {
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/plugin-guide'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("pluginGuide")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("pluginGuideDesc")}</p>
 								</div>
@@ -333,7 +348,7 @@ export default function FeatureDemoPage() {
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/docs-api'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("apiReference")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("apiReferenceDesc")}</p>
 								</div>
@@ -343,6 +358,20 @@ export default function FeatureDemoPage() {
 					</div>
 				</motion.section>
 			</div>
+
+			{/* Quick Try Modal */}
+			{selectedFeature && link && (
+				<QuickTryModal
+					open={modalOpen}
+					onClose={() => setModalOpen(false)}
+					featureLabel={t(`features.${selectedFeature.key}`)}
+					featureDesc={t(`features.${selectedFeature.key}Desc`)}
+					featureLink={link}
+					playgroundHref={playgroundHref}
+					color={selectedFeature.catColor}
+					icon={selectedFeature.icon}
+				/>
+			)}
 		</div>
 	);
 }

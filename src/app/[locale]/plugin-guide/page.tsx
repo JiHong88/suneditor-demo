@@ -143,7 +143,7 @@ export default function PluginGuidePage() {
 							{Object.entries(displayGroupDefs).map(([key, group]) => (
 								<TabsTrigger key={key} value={key} className='text-xs'>
 									<span className={group.color}>{t(`displayTypes.${key}`)}</span>
-									<Badge variant='outline' className='ml-1.5 text-[10px] px-1.5 py-0'>
+									<Badge variant='outline' className='ms-1.5 text-[10px] px-1.5 py-0'>
 										{group.plugins.length}
 									</Badge>
 								</TabsTrigger>
@@ -217,7 +217,7 @@ export default function PluginGuidePage() {
 							<Button asChild className='shrink-0 group'>
 								<Link href='/playground'>
 									{t("openPlayground")}
-									<ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+									<ArrowRight className='ms-2 h-4 w-4 transition-transform group-hover:ltr:translate-x-1 group-hover:rtl:-translate-x-1' />
 								</Link>
 							</Button>
 						</CardContent>
@@ -244,30 +244,30 @@ export default function PluginGuidePage() {
 					<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/docs-api'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("apiReference")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("apiReferenceDesc")}</p>
 								</div>
-								<ArrowRight className='ml-auto h-4 w-4 shrink-0' />
+								<ArrowRight className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='https://github.com/JiHong88/SunEditor/tree/master/src/plugins' target='_blank'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<Github className='h-4 w-4 mb-1' />
 									<span className='font-medium'>{t("pluginSource")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("pluginSourceDesc")}</p>
 								</div>
-								<ExternalLink className='ml-auto h-4 w-4 shrink-0' />
+								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='https://github.com/JiHong88/SunEditor/discussions' target='_blank'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("community")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("communityDesc")}</p>
 								</div>
-								<ExternalLink className='ml-auto h-4 w-4 shrink-0' />
+								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 					</div>

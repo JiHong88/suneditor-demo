@@ -1,30 +1,72 @@
 /**
- * Translates api-docs.en.json → api-docs.{locale}.json
+ * Translates api-docs.en.json → api-docs.{locale}.json (incremental, hash-based)
+ * Reads site locales from src/i18n/languages.ts (siteLocale: true, excluding "en").
+ *
+ * - Computes a hash for each English source string
+ * - Only translates items whose hash changed (or are new)
+ * - Preserves existing translations for unchanged items
+ * - Stores hashes in .api-docs-hashes.json
  *
  * Usage:
- *   npm i -D google-translate-api-x    (one-time)
- *   node scripts/translate-api-docs.cjs ko
- *   node scripts/translate-api-docs.cjs ar
+ *   npm run docs:translate              # translate all site locales (incremental)
+ *   npm run docs:translate -- ko        # translate specific locale only
+ *   npm run docs:translate -- --force   # force re-translate everything
  */
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { translate } = require("google-translate-api-x");
 
-const LOCALE = process.argv[2];
-if (!LOCALE) {
-	console.error("Usage: node scripts/translate-api-docs.cjs <locale>");
-	process.exit(1);
+// ── Read site locales from languages.ts ───────────────────
+function getSiteLocales() {
+	const langFile = path.join(__dirname, "..", "src", "i18n", "languages.ts");
+	const src = fs.readFileSync(langFile, "utf-8");
+
+	const locales = [];
+	const re = /code:\s*"([^"]+)"[^}]*siteLocale:\s*true/g;
+	let m;
+	while ((m = re.exec(src)) !== null) {
+		if (m[1] !== "en") locales.push(m[1]);
+	}
+	return locales;
 }
 
-const LANG_MAP = { ko: "ko", ar: "ar", ja: "ja", zh: "zh-CN" };
-const targetLang = LANG_MAP[LOCALE] || LOCALE;
+// Google Translate language code mapping
+// Only codes that differ from the locale code
+const LANG_MAP = { zh_cn: "zh-CN", pt_br: "pt" };
 
-const SRC = path.join(__dirname, "..", "src", "data", "api", "api-docs.en.json");
-const OUT = path.join(__dirname, "..", "src", "data", "api", `api-docs.${LOCALE}.json`);
-
+const API_DIR = path.join(__dirname, "..", "src", "data", "api");
+const SRC = path.join(API_DIR, "api-docs.en.json");
+const HASH_FILE = path.join(API_DIR, ".api-docs-hashes.json");
 const BATCH_SIZE = 20;
 const DELAY_MS = 800;
+
+// ── Hashing ───────────────────────────────────────────────
+function hash(text) {
+	return crypto.createHash("md5").update(text).digest("hex").slice(0, 12);
+}
+
+function loadHashes() {
+	try {
+		return JSON.parse(fs.readFileSync(HASH_FILE, "utf-8"));
+	} catch {
+		return {};
+	}
+}
+
+function saveHashes(hashes) {
+	// Sort keys for stable output
+	const sorted = {};
+	for (const locale of Object.keys(hashes).sort()) {
+		const inner = {};
+		for (const key of Object.keys(hashes[locale]).sort()) {
+			inner[key] = hashes[locale][key];
+		}
+		sorted[locale] = inner;
+	}
+	fs.writeFileSync(HASH_FILE, JSON.stringify(sorted, null, "\t") + "\n", "utf-8");
+}
 
 // ── Backtick protection ───────────────────────────────────
 function protectBackticks(text) {
@@ -41,7 +83,6 @@ function restoreBackticks(text, tokens) {
 }
 
 // ── Collect translatable strings with array-based paths ───
-// Each entry: { pathSegments: [...], text: string }
 function collectStrings(obj, result, segments) {
 	if (!obj || typeof obj !== "object") return;
 
@@ -70,6 +111,16 @@ function collectStrings(obj, result, segments) {
 		if (key === "description" || key === "paramDescriptions" || key === "returnsDescription") continue;
 		collectStrings(val, result, [...segments, key]);
 	}
+}
+
+// ── Get value by path segments ────────────────────────────
+function getBySegments(obj, segments) {
+	let current = obj;
+	for (const seg of segments) {
+		if (current == null || typeof current !== "object") return undefined;
+		current = current[seg];
+	}
+	return current;
 }
 
 // ── Set value by path segments ────────────────────────────
@@ -103,41 +154,89 @@ function sleep(ms) {
 	return new Promise((r) => setTimeout(r, ms));
 }
 
-// ── Main ──────────────────────────────────────────────────
-async function main() {
-	console.log(`Translating api-docs to "${LOCALE}" (${targetLang})...`);
+// ── Segment key for hash map ──────────────────────────────
+function segKey(segments) {
+	return segments.join(".");
+}
 
-	const data = JSON.parse(fs.readFileSync(SRC, "utf-8"));
-	const strings = [];
-	collectStrings(data.structure, strings, ["structure"]);
-	console.log(`Found ${strings.length} translatable strings.`);
+// ── Translate a single locale (incremental) ───────────────
+async function translateLocale(locale, data, strings, localeHashes, force) {
+	const targetLang = LANG_MAP[locale] || locale;
+	const OUT = path.join(API_DIR, `api-docs.${locale}.json`);
 
-	// Protect backticks
-	const items = strings.map((s) => {
+	// Load existing translated file (if any) to preserve unchanged translations
+	let existingData = null;
+	try {
+		existingData = JSON.parse(fs.readFileSync(OUT, "utf-8"));
+	} catch {
+		// No existing file — translate everything
+	}
+
+	const prevHashes = localeHashes[locale] || {};
+	const newHashes = {};
+
+	// Determine which items need translation
+	const toTranslate = []; // { index, item }
+	const results = new Array(strings.length); // final translated text per item
+
+	for (let i = 0; i < strings.length; i++) {
+		const s = strings[i];
+		const key = segKey(s.segments);
+		const h = hash(s.text);
+		newHashes[key] = h;
+
+		if (!force && prevHashes[key] === h && existingData) {
+			// Hash matches — reuse existing translation
+			const existing = getBySegments(existingData, s.segments);
+			if (typeof existing === "string" && existing.trim()) {
+				results[i] = existing;
+				continue;
+			}
+		}
+		// Needs translation
 		const { protected: p, tokens } = protectBackticks(s.text);
-		return { ...s, protectedText: p, tokens };
-	});
+		toTranslate.push({ index: i, protectedText: p, tokens });
+	}
+
+	console.log(`\n[${"=".repeat(50)}]`);
+	console.log(`Translating → "${locale}" (${targetLang})`);
+	console.log(
+		`  Total: ${strings.length}, Changed: ${toTranslate.length}, Cached: ${strings.length - toTranslate.length}`,
+	);
+
+	if (toTranslate.length === 0) {
+		console.log("  Nothing to translate — all up to date.");
+		localeHashes[locale] = newHashes;
+
+		// Still rewrite file to sync structure changes (new/removed items)
+		const output = JSON.parse(JSON.stringify(data));
+		for (let i = 0; i < strings.length; i++) {
+			setBySegments(output, strings[i].segments, results[i]);
+		}
+		fs.writeFileSync(OUT, JSON.stringify(output, null, "\t") + "\n", "utf-8");
+		return;
+	}
 
 	// Translate in batches
-	const translated = new Array(items.length);
-	const totalBatches = Math.ceil(items.length / BATCH_SIZE);
+	const totalBatches = Math.ceil(toTranslate.length / BATCH_SIZE);
 	let failCount = 0;
 
-	for (let i = 0; i < items.length; i += BATCH_SIZE) {
-		const batch = items.slice(i, i + BATCH_SIZE);
+	for (let i = 0; i < toTranslate.length; i += BATCH_SIZE) {
+		const batch = toTranslate.slice(i, i + BATCH_SIZE);
 		const batchNum = Math.floor(i / BATCH_SIZE) + 1;
 
 		process.stdout.write(`  Batch ${batchNum}/${totalBatches} (${batch.length})...`);
 
 		try {
 			const texts = batch.map((b) => b.protectedText);
-			const results = await translateBatch(texts, targetLang);
+			const batchResults = await translateBatch(texts, targetLang);
 
 			for (let j = 0; j < batch.length; j++) {
-				if (results[j]) {
-					translated[i + j] = restoreBackticks(results[j], batch[j].tokens);
+				const item = batch[j];
+				if (batchResults[j]) {
+					results[item.index] = restoreBackticks(batchResults[j], item.tokens);
 				} else {
-					translated[i + j] = batch[j].text; // fallback to English
+					results[item.index] = strings[item.index].text; // fallback to English
 					failCount++;
 				}
 			}
@@ -145,12 +244,12 @@ async function main() {
 		} catch (err) {
 			console.log(` ERROR (fallback to en): ${err.message.slice(0, 80)}`);
 			for (let j = 0; j < batch.length; j++) {
-				translated[i + j] = batch[j].text;
+				results[batch[j].index] = strings[batch[j].index].text;
 				failCount++;
 			}
 		}
 
-		if (i + BATCH_SIZE < items.length) {
+		if (i + BATCH_SIZE < toTranslate.length) {
 			await sleep(DELAY_MS);
 		}
 	}
@@ -159,16 +258,52 @@ async function main() {
 	const output = JSON.parse(JSON.stringify(data));
 	let setFails = 0;
 	for (let i = 0; i < strings.length; i++) {
-		if (!setBySegments(output, strings[i].segments, translated[i])) {
+		if (!setBySegments(output, strings[i].segments, results[i])) {
 			setFails++;
 		}
 	}
 
-	fs.writeFileSync(OUT, JSON.stringify(output, null, 2) + "\n", "utf-8");
+	fs.writeFileSync(OUT, JSON.stringify(output, null, "\t") + "\n", "utf-8");
+	localeHashes[locale] = newHashes;
 
-	const translatedCount = translated.filter((t, i) => t !== strings[i].text).length;
-	console.log(`\nDone! ${translatedCount}/${strings.length} translated, ${failCount} fallbacks, ${setFails} path errors.`);
-	console.log(`Output: ${OUT}`);
+	const translatedCount = toTranslate.length - failCount;
+	console.log(`  Done! ${translatedCount} translated, ${failCount} fallbacks, ${setFails} path errors.`);
+	console.log(`  Output: ${OUT}`);
+}
+
+// ── Main ──────────────────────────────────────────────────
+async function main() {
+	const args = process.argv.slice(2);
+	const force = args.includes("--force");
+	const argLocale = args.find((a) => !a.startsWith("--"));
+	const locales = argLocale ? [argLocale] : getSiteLocales();
+
+	if (locales.length === 0) {
+		console.log("No site locales found (excluding en). Nothing to translate.");
+		return;
+	}
+
+	console.log(`Target locales: ${locales.join(", ")}${force ? " (force)" : ""}`);
+
+	// Load source and collect strings once
+	const data = JSON.parse(fs.readFileSync(SRC, "utf-8"));
+	const strings = [];
+	collectStrings(data.structure, strings, ["structure"]);
+	console.log(`Found ${strings.length} translatable strings.`);
+
+	// Load hash map
+	const hashes = loadHashes();
+
+	// Translate each locale sequentially
+	for (const locale of locales) {
+		await translateLocale(locale, data, strings, hashes, force);
+	}
+
+	// Save updated hashes
+	saveHashes(hashes);
+
+	console.log(`\nAll done! Processed ${locales.length} locale(s).`);
+	console.log(`Hashes: ${HASH_FILE}`);
 }
 
 main().catch((err) => {

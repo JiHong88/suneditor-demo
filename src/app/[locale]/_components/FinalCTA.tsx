@@ -23,7 +23,7 @@ export default function FinalCTA() {
 					>
 						<Link href='/getting-started'>
 							{t_menus("getting-started")}
-							<ArrowRight className='ml-2 h-5 w-5 transition-transform group-hover:translate-x-1' />
+							<ArrowRight className='ms-2 h-5 w-5 transition-transform group-hover:ltr:translate-x-1 group-hover:rtl:-translate-x-1' />
 						</Link>
 					</Button>
 					<Button asChild size='lg' variant='outline' className='gap-2'>

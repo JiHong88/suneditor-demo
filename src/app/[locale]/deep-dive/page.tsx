@@ -66,30 +66,30 @@ export default function DeepDivePage() {
 					<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/plugin-guide'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("pluginGuide")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("pluginGuideDesc")}</p>
 								</div>
-								<ArrowRight className='ml-auto h-4 w-4 shrink-0' />
+								<ArrowRight className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='/docs-api'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<span className='font-medium'>{t("apiReference")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("apiReferenceDesc")}</p>
 								</div>
-								<ArrowRight className='ml-auto h-4 w-4 shrink-0' />
+								<ArrowRight className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
 							<Link href='https://github.com/JiHong88/SunEditor' target='_blank'>
-								<div className='text-left'>
+								<div className='text-start'>
 									<Github className='h-4 w-4 mb-1' />
 									<span className='font-medium'>{t("sourceCode")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("sourceCodeDesc")}</p>
 								</div>
-								<ExternalLink className='ml-auto h-4 w-4 shrink-0' />
+								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
 					</div>

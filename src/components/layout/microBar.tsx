@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { LangSelect } from "./lang-select";
-import { Heart } from "lucide-react";
+import { Heart, History } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -34,9 +34,17 @@ export default function MicroBar({ className }: Props) {
 					</label>
 				</div>
 
-				{/* 오른쪽: 도네이션 */}
+				{/* 오른쪽 */}
 				<div className='flex items-center gap-2'>
 					<ThemeToggle />
+
+					<a
+						href='/v2/'
+						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground text-muted-foreground'
+					>
+						<History className='size-3' aria-hidden />
+						<span>v2</span>
+					</a>
 
 					<Link
 						href='https://opencollective.com/suneditor'

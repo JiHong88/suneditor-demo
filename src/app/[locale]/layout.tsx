@@ -4,13 +4,16 @@ import { SiteNav } from "@/components/layout/navigationMenu";
 import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
 import { getBootVersion } from "@/lib/git/releaseVersion";
+import { getDir } from "@/i18n/lang";
+import { getLocale } from "next-intl/server";
 import "../globals.css";
 
 export default async function RootLayout({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
 	const version = (await getBootVersion().catch(() => null)) || "";
+	const resolvedLocale = locale || (await getLocale());
 
 	return (
-		<html suppressHydrationWarning lang={locale}>
+		<html suppressHydrationWarning lang={resolvedLocale} dir={getDir(resolvedLocale)} data-lang={resolvedLocale}>
 			<head>
 				<meta name='color-scheme' content='dark light' />
 				<script id='theme-init'>

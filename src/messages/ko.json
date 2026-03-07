@@ -20,12 +20,13 @@
 		"Common": {
 			"CodeExamples": {
 				"title": "설치 / 시작하기",
-				"desc": "NPM으로 설치하거나 CDN을 사용하세요. || SunEditor는 선호하는 프레임워크와 원활하게 통합됩니다."
+				"desc": "NPM으로 설치하거나 CDN을 사용할 수 있습니다. || SunEditor는 주요 프레임워크와 통합됩니다."
 			}
 		},
 		"Footer": {
 			"viewSource": "소스 보기",
 			"reportIssue": "이슈 보고",
+			"v2Legacy": "v2 레거시 데모",
 			"resources": "리소스",
 			"docs": "문서",
 			"featureDemo": "기능 데모",
@@ -90,7 +91,7 @@
 		},
 		"FinalCTA": {
 			"title": "지금 사용해 보세요",
-			"desc": "무료 오픈소스입니다. 문서를 살펴보거나 GitHub에서 기여하세요."
+			"desc": "무료 오픈소스입니다. 문서와 GitHub에서 확인할 수 있습니다."
 		}
 	},
 	"GettingStarted": {
@@ -113,14 +114,14 @@
 			"deepDiveLink": "아키텍처 상세"
 		},
 		"cta": {
-			"title": "라이브로 체험하기",
-			"desc": "실제 npm 임포트, 완전한 번들러 — 코드를 편집하고 결과를 즉시 확인하세요."
+			"title": "라이브로 사용해보기",
+			"desc": "실제 npm 임포트, 완전한 번들러 — 코드를 편집하고 결과를 즉시 확인할 수 있습니다."
 		}
 	},
 	"Playground": {
 		"badge": "플레이그라운드",
 		"title": "SunEditor 플레이그라운드",
-		"desc": "옵션을 설정하고, 에디터를 테스트하고, URL로 설정을 공유하세요.",
+		"desc": "옵션을 설정하고, 에디터를 테스트하고, URL로 설정을 공유할 수 있습니다.",
 		"reset": "초기화",
 		"shareURL": "URL 공유",
 		"editorOptions": "에디터 옵션",
@@ -172,6 +173,7 @@
 			"attrFilter": "허용되지 않는 HTML 속성 필터링 (attributeWhitelist/Blacklist)",
 			"styleFilter": "허용되지 않는 인라인 스타일 필터링 (spanStyles/lineStyles/allUsedStyles)"
 		},
+		"iconsDesc": "커스텀 아이콘 설정. 값은 SVG, HTML 문자열, 일반 텍스트 등 string이면 가능합니다. 기본 아이콘에 병합되며, 지정한 키만 교체됩니다.",
 		"formatExtDesc": "기본 내장 포맷 태그 외에 추가 포맷 태그를 등록합니다. 구분자: |. 정규식 지원 (예: H[1-6]).",
 		"builtIn": "내장:",
 		"advanced": "고급",
@@ -222,10 +224,10 @@
 			"pageNavigator": "페이지 네비게이션 표시",
 			"mention": "자동완성(@)이 있는 사용자 멘션/태그 시스템"
 		},
-		"tryOptionsTitle": "플러그인 옵션 체험하기",
+		"tryOptionsTitle": "플러그인 옵션 사용해보기",
 		"tryOptionsDesc": "<badge>설정 가능</badge>으로 표시된 플러그인은 플레이그라운드에서 옵션을 조정할 수 있습니다.",
 		"playgroundSidebarTitle": "플레이그라운드 — 플러그인 옵션 사이드바",
-		"playgroundSidebarDesc": "이미지 업로드 제한, 글꼴 크기 단위, 테이블 스크롤 타입, 멘션 트리거 등을 조정하세요. 변경사항이 라이브 에디터에 즉시 적용됩니다.",
+		"playgroundSidebarDesc": "이미지 업로드 제한, 글꼴 크기 단위, 테이블 스크롤 타입, 멘션 트리거 등을 조정할 수 있습니다. 변경사항이 라이브 에디터에 즉시 적용됩니다.",
 		"openPlayground": "플레이그라운드 열기",
 		"custom": {
 			"title": "나만의 플러그인 만들기",
@@ -247,7 +249,7 @@
 				"modules": "모듈",
 				"examples": "예제"
 			},
-			"typesDesc": "플러그인이 사용자와 상호작용하는 방식에 따라 기본 클래스를 선택하세요.",
+			"typesDesc": "플러그인이 사용자와 상호작용하는 방식에 따라 기본 클래스를 선택합니다.",
 			"required": "필수",
 			"uiBehavior": "UI 동작",
 			"builtInExamples": "내장 예제",
@@ -282,7 +284,7 @@
 			"multiInterfaceDesc": "하나의 플러그인이 기본 타입과 여러 계약 인터페이스를 결합할 수 있습니다.",
 			"crossPlugin": "크로스 플러그인 합성",
 			"crossPluginDesc": "플러그인은 다른 플러그인 타입 인터페이스도 implements하여 여러 상호작용 모드를 제공할 수 있습니다.",
-			"crossPluginNote": "단일 플러그인이 여러 상호작용 모드를 제공할 때 크로스 플러그인 implements를 사용하세요 (예: input + dropdown + command가 모두 같은 기능을 제어).",
+			"crossPluginNote": "단일 플러그인이 여러 상호작용 모드를 제공할 때 크로스 플러그인 implements를 사용합니다 (예: input + dropdown + command가 모두 같은 기능을 제어).",
 			"examplesDesc": "간단한 것부터 복잡한 것까지, 복사하여 바로 사용할 수 있는 완전한 예제.",
 			"example1Title": "단어 수 커맨드",
 			"example1Desc": "현재 단어 수를 표시하는 커맨드 플러그인.",
@@ -295,11 +297,11 @@
 			"pluginOptions": "플러그인 옵션",
 			"pluginOptionsDesc": "options[pluginKey]를 통해 플러그인별 옵션을 전달합니다. 두 번째 생성자 인수로 전달됩니다.",
 			"registrationRules": "등록 규칙",
-			"rule1": "항상 클래스 참조를 전달하세요 — 코어가 인스턴스화 및 생명주기를 관리합니다.",
+			"rule1": "항상 클래스 참조를 전달합니다 — 코어가 인스턴스화 및 생명주기를 관리합니다.",
 			"rule2": "static key는 buttonList에서 사용하는 이름과 일치해야 합니다.",
 			"rule3": "PluginField 플러그인은 buttonList가 필요하지 않습니다 — 에디터 이벤트에 자동으로 응답합니다.",
 			"builtInRef": "내장 참조 구현",
-			"builtInRefDesc": "실제 구현 패턴을 위해 이 내장 플러그인들을 참고하세요."
+			"builtInRefDesc": "실제 구현 패턴은 이 내장 플러그인들을 참고할 수 있습니다."
 		},
 		"resourcesTitle": "리소스",
 		"apiReference": "API 레퍼런스",
@@ -311,7 +313,7 @@
 	},
 	"FeatureDemo": {
 		"title": "기능 카탈로그",
-		"subtitle": "기본 텍스트 서식부터 고급 문서 레이아웃까지 — SunEditor v3의 모든 기능을 살펴보세요.",
+		"subtitle": "기본 텍스트 서식부터 고급 문서 레이아웃까지, SunEditor v3가 제공하는 기능 목록입니다.",
 		"stats": {
 			"modes": "4가지 에디터 모드",
 			"plugins": "24+ 플러그인",
@@ -421,16 +423,20 @@
 			"keyboard": "키보드 단축키",
 			"keyboardDesc": "완전한 키보드 내비게이션과 커스터마이즈 가능한 단축키."
 		},
-		"ctaTitle": "라이브로 체험하기",
-		"ctaDesc": "플레이그라운드에서 옵션을 설정하고, 플러그인을 테스트하고, 결과를 즉시 확인하세요.",
+		"ctaTitle": "라이브로 사용해보기",
+		"ctaDesc": "플레이그라운드에서 옵션을 설정하고, 플러그인을 테스트하고, 결과를 즉시 확인할 수 있습니다.",
 		"ctaButton": "플레이그라운드 열기",
 		"resourcesTitle": "더 알아보기",
 		"gettingStarted": "시작하기",
 		"gettingStartedDesc": "설치, 설정, 첫 에디터 만들기",
 		"pluginGuide": "플러그인 가이드",
-		"pluginGuideDesc": "24+ 내장 플러그인 살펴보기 및 직접 만들기",
+		"pluginGuideDesc": "24+ 내장 플러그인과 커스텀 플러그인 가이드",
 		"apiReference": "API 레퍼런스",
-		"apiReferenceDesc": "전체 메서드 및 옵션 문서"
+		"apiReferenceDesc": "전체 메서드 및 옵션 문서",
+		"quickTry": "바로 사용해보기",
+		"preview": "미리보기",
+		"close": "닫기",
+		"openInPlayground": "플레이그라운드에서 열기"
 	},
 	"DeepDive": {
 		"title": "심화 가이드",
@@ -442,7 +448,7 @@
 		},
 		"theme": {
 			"builtInThemes": "기본 제공 테마",
-			"builtInThemesDesc": "SunEditor는 4개의 기본 테마를 제공합니다. CSS 파일을 import하고 옵션에 테마 이름을 전달하세요.",
+			"builtInThemesDesc": "SunEditor는 4개의 기본 테마를 제공합니다. CSS 파일을 import하고 옵션에 테마 이름을 전달합니다.",
 			"cssVariables": "CSS 변수 레퍼런스",
 			"cssVariablesDesc": "각 테마는 ~130개의 CSS 커스텀 속성을 카테고리별로 정의합니다. 원하는 변수를 오버라이드하여 에디터를 커스터마이징할 수 있습니다.",
 			"varDesc": {
@@ -469,15 +475,15 @@
 				"errorLevels": "9단계 오류 색상 팔레트 (어두움 → 밝음)",
 				"loadingColor": "로딩 스피너 색상"
 			},
-			"totalVars": "총 ~130개의 CSS 변수가 테마별로 정의됩니다. 기본 제공 테마를 복사하여 시작점으로 사용하세요.",
+			"totalVars": "총 ~130개의 CSS 변수가 테마별로 정의됩니다. 기본 제공 테마를 복사하여 시작점으로 사용할 수 있습니다.",
 			"customTheme": "커스텀 테마 만들기",
 			"customThemeDesc": "테마 셀렉터 아래에 모든 변수를 정의하는 CSS 파일을 만드세요. 클래스명은 se-theme-{이름} 패턴을 따라야 합니다.",
 			"step1": "1단계: 테마 CSS 파일 생성",
-			"step1Desc": ".sun-editor.se-theme-{이름}과 .sun-editor-editable.se-theme-{이름} 셀렉터 아래에 모든 CSS 변수를 정의하세요.",
+			"step1Desc": ".sun-editor.se-theme-{이름}과 .sun-editor-editable.se-theme-{이름} 셀렉터 아래에 모든 CSS 변수를 정의합니다.",
 			"step2": "2단계: Import 및 적용",
-			"step2Desc": "앱에서 CSS 파일을 import하고 theme 옵션에 테마 이름을 설정하세요.",
+			"step2Desc": "앱에서 CSS 파일을 import하고 theme 옵션에 테마 이름을 설정합니다.",
 			"tips": "팁",
-			"tip1": "기존 테마(예: dark.css)를 복사하여 기반으로 사용하세요 — 필요한 모든 변수가 포함되어 있습니다.",
+			"tip1": "기존 테마(예: dark.css)를 복사하여 기반으로 사용할 수 있습니다 — 필요한 모든 변수가 포함되어 있습니다.",
 			"tip2": "셀렉터는 .sun-editor.se-theme-{이름} (UI)과 .sun-editor-editable.se-theme-{이름} (콘텐츠) 모두 포함해야 합니다.",
 			"tip3": "setTheme()으로 에디터를 다시 생성하지 않고 런타임에 테마를 전환할 수 있습니다.",
 			"tip4": "테마 CSS는 추가적(additive)입니다 — 미정의 변수는 기본 테마로 폴백됩니다."
@@ -506,9 +512,9 @@
 			"imageEvents": "이미지 업로드",
 			"imageEventsDesc": "이미지 업로드 라이프사이클 전체를 제어 — 업로드 전 검증, 로드된 이미지 추적, 오류 처리. 비디오/오디오/파일도 동일한 패턴입니다.",
 			"focusEvents": "포커스 관리",
-			"focusEventsDesc": "SunEditor는 관리 포커스(onFocus/onBlur)와 네이티브 DOM 포커스 이벤트 모두를 제공합니다. 대부분의 경우 관리 이벤트를 사용하세요.",
+			"focusEventsDesc": "SunEditor는 관리 포커스(onFocus/onBlur)와 네이티브 DOM 포커스 이벤트 모두를 제공합니다. 대부분의 경우 관리 이벤트를 사용합니다.",
 			"focusTip": "관리 포커스 vs 네이티브 포커스",
-			"focusTipDesc": "대부분 onFocus/onBlur를 사용하세요 — 툴바 업데이트와 상태 플래그 설정 후에 실행됩니다. onNativeFocus/onNativeBlur는 SunEditor가 처리하기 전의 원시 브라우저 이벤트가 필요할 때만 사용하세요.",
+			"focusTipDesc": "대부분 onFocus/onBlur를 사용합니다 — 툴바 업데이트와 상태 플래그 설정 후에 실행됩니다. onNativeFocus/onNativeBlur는 SunEditor가 처리하기 전의 원시 브라우저 이벤트가 필요할 때만 사용합니다.",
 			"uiEvents": "UI 이벤트",
 			"uiEventsDesc": "툴바 표시, 코드 뷰 전환, 전체 화면, 에디터 리사이즈에 응답합니다."
 		},
@@ -535,11 +541,11 @@
 		},
 		"resourcesTitle": "리소스",
 		"pluginGuide": "플러그인 가이드",
-		"pluginGuideDesc": "24+ 내장 플러그인 살펴보기 및 직접 만들기",
+		"pluginGuideDesc": "24+ 내장 플러그인과 커스텀 플러그인 가이드",
 		"apiReference": "API 레퍼런스",
 		"apiReferenceDesc": "전체 메서드 및 옵션 문서",
 		"sourceCode": "소스 코드",
-		"sourceCodeDesc": "SunEditor GitHub 저장소 둘러보기"
+		"sourceCodeDesc": "SunEditor GitHub 저장소"
 	},
 	"DocsApi": {
 		"title": "API Reference",

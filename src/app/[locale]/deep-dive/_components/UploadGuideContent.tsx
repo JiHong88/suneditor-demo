@@ -180,10 +180,10 @@ export default function UploadGuideContent() {
 							<table className='w-full text-xs border-collapse'>
 								<thead>
 									<tr>
-										<th className='border border-border bg-muted/50 px-3 py-2 text-left font-semibold'>{t("mediaType")}</th>
-										<th className='border border-border bg-muted/50 px-3 py-2 text-left font-semibold'>{t("optionKey")}</th>
-										<th className='border border-border bg-muted/50 px-3 py-2 text-left font-semibold'>{t("events")}</th>
-										<th className='border border-border bg-muted/50 px-3 py-2 text-left font-semibold'>{t("customHandler")}</th>
+										<th className='border border-border bg-muted/50 px-3 py-2 text-start font-semibold'>{t("mediaType")}</th>
+										<th className='border border-border bg-muted/50 px-3 py-2 text-start font-semibold'>{t("optionKey")}</th>
+										<th className='border border-border bg-muted/50 px-3 py-2 text-start font-semibold'>{t("events")}</th>
+										<th className='border border-border bg-muted/50 px-3 py-2 text-start font-semibold'>{t("customHandler")}</th>
 									</tr>
 								</thead>
 								<tbody>

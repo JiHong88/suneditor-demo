@@ -5,9 +5,15 @@
  * - Upload URLs use "xxx" as placeholder for the user to replace later.
  */
 
-type FeatureLink = {
+export type FeatureLink = {
 	/** URL query string (without leading ?) */
 	query: string;
+	/** Raw demo HTML for Quick Try preview */
+	demoHtml: string;
+	/** Toolbar buttons shown in the Quick Try editor */
+	buttonList: (string | string[])[];
+	/** Extra SunEditor options for the Quick Try editor */
+	editorOptions?: Record<string, unknown>;
 };
 
 /** Build a query string from key-value pairs, encoding values */
@@ -15,13 +21,27 @@ function qs(params: Record<string, string>): string {
 	return new URLSearchParams(params).toString();
 }
 
+/** Build a FeatureLink */
+function fl(
+	params: Record<string, string>,
+	buttonList: (string | string[])[],
+	editorOptions?: Record<string, unknown>,
+): FeatureLink {
+	return {
+		query: qs(params),
+		demoHtml: params.val || "",
+		buttonList,
+		editorOptions,
+	};
+}
+
 /* ── Demo HTML content per feature ─────────────────────── */
 
 const DEMO_BOLD_ITALIC = `<p><strong>Bold text</strong>, <em>Italic text</em>, <u>Underline</u>, <del>Strikethrough</del></p><p><strong><em>Bold + Italic combined</em></strong></p><p>Select text and try the formatting buttons in the toolbar.</p>`;
 
-const DEMO_FONT_FAMILY = `<p style="font-family: Arial;">This is Arial font.</p><p style="font-family: Georgia;">This is Georgia font.</p><p style="font-family: 'Courier New';">This is Courier New font.</p><p>Select text and change the font family from the toolbar.</p>`;
+const DEMO_FONT_FAMILY = `<p><span style="font-family: Arial;">This is Arial font.</span></p><p><span style="font-family: Georgia;">This is Georgia font.</span></p><p><span style="font-family: &quot;Courier New&quot;;">This is Courier New font.</span></p><p>Select text and change the font family from the toolbar.</p>`;
 
-const DEMO_FONT_SIZE = `<p style="font-size: 12px;">Small text (12px)</p><p style="font-size: 16px;">Normal text (16px)</p><p style="font-size: 24px;">Large text (24px)</p><p style="font-size: 36px;">Extra Large (36px)</p>`;
+const DEMO_FONT_SIZE = `<p><span style="font-size: 12px;">Small text (12px)</span></p><p><span style="font-size: 16px;">Normal text (16px)</span></p><p><span style="font-size: 24px;">Large text (24px)</span></p><p><span style="font-size: 36px;">Extra Large (36px)</span></p>`;
 
 const DEMO_FONT_COLOR = `<p><span style="color: #e74c3c;">Red text</span>, <span style="color: #3498db;">Blue text</span>, <span style="color: #2ecc71;">Green text</span></p><p>Select text and pick a color from the toolbar.</p>`;
 
@@ -101,143 +121,195 @@ const DEMO_KEYBOARD = `<p><strong>Keyboard shortcuts:</strong></p><ul><li><code>
 
 export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 	// ── Text Formatting ──
-	boldItalic: {
-		query: qs({ p: "standard", val: DEMO_BOLD_ITALIC }),
-	},
-	fontFamily: {
-		query: qs({ p: "full", val: DEMO_FONT_FAMILY }),
-	},
-	fontSize: {
-		query: qs({ p: "full", val: DEMO_FONT_SIZE }),
-	},
-	fontColor: {
-		query: qs({ p: "standard", val: DEMO_FONT_COLOR }),
-	},
-	bgColor: {
-		query: qs({ p: "standard", val: DEMO_BG_COLOR }),
-	},
-	alignment: {
-		query: qs({ p: "standard", val: DEMO_ALIGNMENT }),
-	},
-	blockStyles: {
-		query: qs({ p: "full", val: DEMO_BLOCK_STYLES }),
-	},
-	lineHeight: {
-		query: qs({ p: "full", val: DEMO_LINE_HEIGHT }),
-	},
-	copyFormat: {
-		query: qs({ p: "full", val: DEMO_COPY_FORMAT }),
-	},
+	boldItalic: fl(
+		{ p: "standard", val: DEMO_BOLD_ITALIC },
+		[["bold", "italic", "underline", "strike", "subscript", "superscript"]],
+	),
+	fontFamily: fl(
+		{ p: "full", val: DEMO_FONT_FAMILY },
+		[["font"], "|", ["bold", "italic", "underline"]],
+	),
+	fontSize: fl(
+		{ p: "full", val: DEMO_FONT_SIZE },
+		[["fontSize"], "|", ["bold", "italic", "underline"]],
+	),
+	fontColor: fl(
+		{ p: "standard", val: DEMO_FONT_COLOR },
+		[["fontColor"], "|", ["bold", "italic"]],
+	),
+	bgColor: fl(
+		{ p: "standard", val: DEMO_BG_COLOR },
+		[["backgroundColor"], "|", ["bold", "italic"]],
+	),
+	alignment: fl(
+		{ p: "standard", val: DEMO_ALIGNMENT },
+		[["align"], "|", ["bold", "italic"]],
+	),
+	blockStyles: fl(
+		{ p: "full", val: DEMO_BLOCK_STYLES },
+		[["blockStyle"], "|", ["bold", "italic", "underline"]],
+	),
+	lineHeight: fl(
+		{ p: "full", val: DEMO_LINE_HEIGHT },
+		[["lineHeight"], "|", ["bold", "italic"]],
+	),
+	copyFormat: fl(
+		{ p: "full", val: DEMO_COPY_FORMAT },
+		[["copyFormat", "removeFormat"], "|", ["bold", "italic", "fontColor", "fontSize"]],
+	),
 
 	// ── Media ──
-	imageUpload: {
-		query: qs({ p: "full", "i.uu": "xxx://image-upload-server", val: DEMO_IMAGE }),
-	},
-	imageResize: {
-		query: qs({ p: "full", val: DEMO_IMAGE_RESIZE }),
-	},
-	video: {
-		query: qs({ p: "full", val: DEMO_VIDEO }),
-	},
-	audio: {
-		query: qs({ p: "full", val: DEMO_AUDIO }),
-	},
-	embed: {
-		query: qs({ p: "full", val: DEMO_EMBED }),
-	},
-	drawing: {
-		query: qs({ p: "full", val: DEMO_DRAWING }),
-	},
-	fileUpload: {
-		query: qs({ p: "full", "fu.uu": "xxx://file-upload-server", val: DEMO_FILE_UPLOAD }),
-	},
+	imageUpload: fl(
+		{ p: "full", "i.uu": "xxx://image-upload-server", val: DEMO_IMAGE },
+		[["image"]],
+	),
+	imageResize: fl(
+		{ p: "full", val: DEMO_IMAGE_RESIZE },
+		[["image"]],
+	),
+	video: fl(
+		{ p: "full", val: DEMO_VIDEO },
+		[["video"]],
+	),
+	audio: fl(
+		{ p: "full", val: DEMO_AUDIO },
+		[["audio"]],
+	),
+	embed: fl(
+		{ p: "full", val: DEMO_EMBED },
+		[["embed"]],
+	),
+	drawing: fl(
+		{ p: "full", val: DEMO_DRAWING },
+		[["drawing"]],
+	),
+	fileUpload: fl(
+		{ p: "full", "fu.uu": "xxx://file-upload-server", val: DEMO_FILE_UPLOAD },
+		[["fileUpload"]],
+	),
 
 	// ── Table & Structure ──
-	tableInsert: {
-		query: qs({ p: "standard", val: DEMO_TABLE }),
-	},
-	cellMerge: {
-		query: qs({ p: "standard", val: DEMO_CELL_MERGE }),
-	},
-	rowColOps: {
-		query: qs({ p: "standard", val: DEMO_ROW_COL }),
-	},
-	lists: {
-		query: qs({ p: "standard", val: DEMO_LISTS }),
-	},
-	blockquote: {
-		query: qs({ p: "full", val: DEMO_BLOCKQUOTE }),
-	},
-	hr: {
-		query: qs({ p: "full", val: DEMO_HR }),
-	},
-	pageBreak: {
-		query: qs({ p: "full", val: DEMO_PAGE_BREAK }),
-	},
+	tableInsert: fl(
+		{ p: "standard", val: DEMO_TABLE },
+		[["table"], "|", ["bold", "italic"]],
+	),
+	cellMerge: fl(
+		{ p: "standard", val: DEMO_CELL_MERGE },
+		[["table"], "|", ["bold", "italic"]],
+	),
+	rowColOps: fl(
+		{ p: "standard", val: DEMO_ROW_COL },
+		[["table"], "|", ["bold", "italic"]],
+	),
+	lists: fl(
+		{ p: "standard", val: DEMO_LISTS },
+		[["list_numbered", "list_bulleted"], "|", ["outdent", "indent"]],
+	),
+	blockquote: fl(
+		{ p: "full", val: DEMO_BLOCKQUOTE },
+		[["blockquote"], "|", ["bold", "italic"]],
+	),
+	hr: fl(
+		{ p: "full", val: DEMO_HR },
+		[["hr"], "|", ["bold", "italic"]],
+	),
+	pageBreak: fl(
+		{ p: "full", val: DEMO_PAGE_BREAK },
+		[["pageBreak"], "|", ["bold", "italic"]],
+	),
 
 	// ── Advanced ──
-	math: {
-		query: qs({ p: "full", val: DEMO_MATH }),
-	},
-	mention: {
-		query: qs({ p: "full", "mn.au": "xxx://mention-api", val: DEMO_MENTION }),
-	},
-	links: {
-		query: qs({ p: "standard", val: DEMO_LINKS }),
-	},
-	codeView: {
-		query: qs({ p: "standard", val: DEMO_CODE_VIEW }),
-	},
-	charCounter: {
-		query: qs({ cc: "1", ccm: "500", val: DEMO_CHAR_COUNTER }),
-	},
-	undoRedo: {
-		query: qs({ p: "standard", val: DEMO_UNDO_REDO }),
-	},
+	math: fl(
+		{ p: "full", val: DEMO_MATH },
+		[["math"], "|", ["bold", "italic"]],
+	),
+	mention: fl(
+		{ p: "full", "mn.au": "xxx://mention-api", val: DEMO_MENTION },
+		[["bold", "italic"]],
+	),
+	links: fl(
+		{ p: "standard", val: DEMO_LINKS },
+		[["link", "anchor"], "|", ["bold", "italic"]],
+	),
+	codeView: fl(
+		{ p: "standard", val: DEMO_CODE_VIEW },
+		[["codeView"], "|", ["bold", "italic", "underline"]],
+	),
+	charCounter: fl(
+		{ cc: "1", ccm: "500", val: DEMO_CHAR_COUNTER },
+		[["bold", "italic", "underline"]],
+		{ charCounter: true, charCounter_max: 500 },
+	),
+	undoRedo: fl(
+		{ p: "standard", val: DEMO_UNDO_REDO },
+		[["undo", "redo"], "|", ["bold", "italic", "underline"]],
+	),
 
 	// ── Modes & Layout ──
-	classicMode: {
-		query: qs({ m: "classic", val: DEMO_CLASSIC }),
-	},
-	inlineMode: {
-		query: qs({ m: "inline", val: DEMO_INLINE }),
-	},
-	balloonMode: {
-		query: qs({ m: "balloon", val: DEMO_BALLOON }),
-	},
-	balloonAlways: {
-		query: qs({ m: "balloon-always", val: DEMO_BALLOON_ALWAYS }),
-	},
-	documentLayout: {
-		query: qs({ p: "full", val: DEMO_DOCUMENT }),
-	},
-	multiRoot: {
-		query: qs({ mr: "1", val: DEMO_MULTIROOT }),
-	},
-	fullScreen: {
-		query: qs({ p: "standard", val: DEMO_FULLSCREEN }),
-	},
+	classicMode: fl(
+		{ m: "classic", val: DEMO_CLASSIC },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["link", "image"]],
+		{ mode: "classic" },
+	),
+	inlineMode: fl(
+		{ m: "inline", val: DEMO_INLINE },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["link", "image"]],
+		{ mode: "inline" },
+	),
+	balloonMode: fl(
+		{ m: "balloon", val: DEMO_BALLOON },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["link"]],
+		{ mode: "balloon" },
+	),
+	balloonAlways: fl(
+		{ m: "balloon-always", val: DEMO_BALLOON_ALWAYS },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["link"]],
+		{ mode: "balloon-always" },
+	),
+	documentLayout: fl(
+		{ p: "full", val: DEMO_DOCUMENT },
+		[["bold", "italic", "underline"], "|", ["blockStyle"], "|", ["align"]],
+	),
+	multiRoot: fl(
+		{ mr: "1", val: DEMO_MULTIROOT },
+		[["bold", "italic", "underline"], "|", ["link", "image"]],
+	),
+	fullScreen: fl(
+		{ p: "standard", val: DEMO_FULLSCREEN },
+		[["fullScreen"], "|", ["bold", "italic", "underline"]],
+	),
 
 	// ── Platform ──
-	zeroDeps: {
-		query: qs({ val: "<p>SunEditor has <strong>zero dependencies</strong> — no jQuery, no Bootstrap, nothing else required.</p>" }),
-	},
-	tsSupport: {
-		query: qs({ val: "<p>SunEditor ships with full <strong>TypeScript</strong> type definitions out of the box.</p>" }),
-	},
-	i18nRtl: {
-		query: qs({ dir: "rtl", rb: "all", val: DEMO_RTL }),
-	},
-	strictMode: {
-		query: qs({ sm: "1", val: DEMO_STRICT_MODE }),
-	},
-	pluginAPI: {
-		query: qs({ p: "full", val: "<p>SunEditor provides a powerful <strong>Plugin API</strong> for creating custom plugins.</p><p>Check the Plugin Guide for details.</p>" }),
-	},
-	exportPdf: {
-		query: qs({ p: "full", "ep.au": "xxx://pdf-export-api", val: DEMO_EXPORT_PDF }),
-	},
-	keyboard: {
-		query: qs({ p: "standard", val: DEMO_KEYBOARD }),
-	},
+	zeroDeps: fl(
+		{ val: "<p>SunEditor has <strong>zero dependencies</strong> — no jQuery, no Bootstrap, nothing else required.</p>" },
+		[["bold", "italic", "underline"]],
+	),
+	tsSupport: fl(
+		{ val: "<p>SunEditor ships with full <strong>TypeScript</strong> type definitions out of the box.</p>" },
+		[["bold", "italic", "underline"]],
+	),
+	i18nRtl: fl(
+		{ dir: "rtl", rb: "all", val: DEMO_RTL },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["dir"]],
+		{ textDirection: "rtl" },
+	),
+	strictMode: fl(
+		{ sm: "1", val: DEMO_STRICT_MODE },
+		[["bold", "italic", "underline"], "|", ["link"]],
+	),
+	pluginAPI: fl(
+		{
+			p: "full",
+			val: "<p>SunEditor provides a powerful <strong>Plugin API</strong> for creating custom plugins.</p><p>Check the Plugin Guide for details.</p>",
+		},
+		[["bold", "italic", "underline"], "|", ["link", "image"]],
+	),
+	exportPdf: fl(
+		{ p: "full", "ep.au": "xxx://pdf-export-api", val: DEMO_EXPORT_PDF },
+		[["exportPDF", "print", "preview"], "|", ["bold", "italic"]],
+	),
+	keyboard: fl(
+		{ p: "standard", val: DEMO_KEYBOARD },
+		[["undo", "redo"], "|", ["bold", "italic", "underline"], "|", ["link"]],
+	),
 };

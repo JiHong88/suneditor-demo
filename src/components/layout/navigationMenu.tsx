@@ -9,14 +9,23 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavA } from "@/components/nav/navA";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { getDir } from "@/i18n/lang";
 
-function NavigationMenu({ className, children, viewport = true, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }) {
+function NavigationMenu({
+	className,
+	children,
+	viewport = true,
+	...props
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }) {
 	return (
 		<NavigationMenuPrimitive.Root
 			data-slot='navigation-menu'
 			data-viewport={viewport}
-			className={cn("group/navigation-menu relative flex max-w-max flex-1 items-center justify-center", className)}
+			className={cn(
+				"group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+				className,
+			)}
 			{...props}
 		>
 			{children}
@@ -26,16 +35,31 @@ function NavigationMenu({ className, children, viewport = true, ...props }: Reac
 }
 
 function NavigationMenuList({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {
-	return <NavigationMenuPrimitive.List data-slot='navigation-menu-list' className={cn("group flex flex-1 list-none items-center justify-center gap-4", className)} {...props} />;
+	return (
+		<NavigationMenuPrimitive.List
+			data-slot='navigation-menu-list'
+			className={cn("group flex flex-1 list-none items-center justify-center gap-4", className)}
+			{...props}
+		/>
+	);
 }
 
 function NavigationMenuItem({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
-	return <NavigationMenuPrimitive.Item data-slot='navigation-menu-item' className={cn("relative group", className)} {...props} />;
+	return (
+		<NavigationMenuPrimitive.Item
+			data-slot='navigation-menu-item'
+			className={cn("relative group", className)}
+			{...props}
+		/>
+	);
 }
 
-function NavigationMenuViewport({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
+function NavigationMenuViewport({
+	className,
+	...props
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
 	return (
-		<div className={cn("absolute top-full left-0 isolate z-50 flex justify-center")}>
+		<div className={cn("absolute top-full start-0 isolate z-50 flex justify-center")}>
 			<NavigationMenuPrimitive.Viewport
 				data-slot='navigation-menu-viewport'
 				className={cn(
@@ -56,6 +80,8 @@ function getLastPathSegment(url: string) {
 
 export function SiteNav() {
 	const t = useTranslations("Main.Menus");
+	const locale = useLocale();
+	const dir = getDir(locale);
 	const items = [
 		{ label: t("getting-started"), href: "/getting-started" },
 		{ label: t("feature-demo"), href: "/feature-demo" },
@@ -89,15 +115,29 @@ export function SiteNav() {
 
 	return (
 		<>
-			<header className='fixed md:sticky top-0 left-0 right-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
+			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
 				<div className='container mx-auto flex h-14 items-center justify-center px-4'>
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex'>
-						<Link href='/' className='flex items-center space-x-3 shrink-0 mx-6' aria-label='Home'>
-							<Image src='/se3_logo_title.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='dark:hidden' />
-							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='hidden dark:block' />
+						<Link href='/' className='flex items-center gap-3 shrink-0 mx-6' aria-label='Home'>
+							<Image
+								src='/se3_logo_title.svg'
+								alt='SunEditor Logo'
+								width={148 * 1.12}
+								height={44 * 1.12}
+								priority
+								className='dark:hidden'
+							/>
+							<Image
+								src='/se3_logo_title_flat.svg'
+								alt='SunEditor Logo'
+								width={148 * 1.12}
+								height={44 * 1.12}
+								priority
+								className='hidden dark:block'
+							/>
 						</Link>
-						<NavigationMenu className='mx-6'>
+						<NavigationMenu className='mx-6' dir={dir}>
 							<NavigationMenuList>
 								{items.map((it) => (
 									<NavigationMenuItem key={it.label} className='group'>
@@ -114,12 +154,33 @@ export function SiteNav() {
 
 					{/* Mobile nav */}
 					<div className='md:hidden w-full flex justify-between items-center'>
-						<Link href='/' className='flex space-x-3 shrink-0' aria-label='Home'>
-							<Image src='/se3_logo_title.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='dark:hidden' />
-							<Image src='/se3_logo_title_flat.svg' alt='SunEditor Logo' width={148 * 1.12} height={44 * 1.12} priority className='hidden dark:block' />
+						<Link href='/' className='flex gap-3 shrink-0' aria-label='Home'>
+							<Image
+								src='/se3_logo_title.svg'
+								alt='SunEditor Logo'
+								width={148 * 1.12}
+								height={44 * 1.12}
+								priority
+								className='dark:hidden'
+							/>
+							<Image
+								src='/se3_logo_title_flat.svg'
+								alt='SunEditor Logo'
+								width={148 * 1.12}
+								height={44 * 1.12}
+								priority
+								className='hidden dark:block'
+							/>
 						</Link>
 
-						<Button variant='outline' size='icon' aria-label='Toggle menu' aria-expanded={openMobile} aria-controls='mobile-nav' onClick={() => setOpenMobile((v) => !v)}>
+						<Button
+							variant='outline'
+							size='icon'
+							aria-label='Toggle menu'
+							aria-expanded={openMobile}
+							aria-controls='mobile-nav'
+							onClick={() => setOpenMobile((v) => !v)}
+						>
 							<Menu className='size-4' />
 						</Button>
 					</div>

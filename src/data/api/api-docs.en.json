@@ -1,6 +1,6 @@
 {
-  "version": "3.0.0-rc.3",
-  "generatedAt": "2026-03-05T14:36:28.078Z",
+  "version": "3.0.0-rc.4",
+  "generatedAt": "2026-03-07T13:56:38.568Z",
   "structure": {
     "editor": {
       "title": "Editor Instance",
@@ -278,7 +278,7 @@
               "paramDescriptions": {
                 "params": "event info = this.addEvent()"
               },
-              "returnsDescription": "Success: null, Not found: undefined"
+              "returnsDescription": "Success: `null`, Not found: `undefined`"
             },
             {
               "name": "addGlobalEvent",
@@ -304,7 +304,7 @@
                 "listener": "Event listener",
                 "useCapture": "Use event capture"
               },
-              "returnsDescription": "Success: null, Not found: undefined"
+              "returnsDescription": "Success: `null`, Not found: `undefined`"
             }
           ]
         },
@@ -410,7 +410,7 @@
               "name": "check",
               "params": "html: Node | string",
               "returns": "boolean",
-              "description": "Returns false if char count is greater than \"frameOptions.get('charCounter_max')\" when \"html\" is added to the current editor.",
+              "description": "Returns `false` if char count is greater than \"frameOptions.get('charCounter_max')\" when \"html\" is added to the current editor.",
               "example": "",
               "paramDescriptions": {
                 "html": "Element node or String."
@@ -420,7 +420,7 @@
               "name": "getLength",
               "params": "content?: string",
               "returns": "number",
-              "description": "Get the [content]'s number of characters or binary data size. (frameOptions.get('charCounter_type')) - If [content] is undefined, get the current editor's number of characters or binary data size.",
+              "description": "Get the [content]'s number of characters or binary data size. (frameOptions.get('charCounter_type')) - If [content] is `undefined`, get the current editor's number of characters or binary data size.",
               "example": "",
               "paramDescriptions": {
                 "content": "Content to count. (defalut: this.#frameContext.get('wysiwyg'))"
@@ -450,7 +450,7 @@
               "name": "test",
               "params": "inputText: string, _fromInputEvent: boolean",
               "returns": "boolean",
-              "description": "Returns false if char count is greater than \"frameOptions.get('charCounter_max')\" when \"inputText\" is added to the current editor. - If the current number of characters is greater than \"charCounter_max\", the excess characters are removed. And call the char.display()",
+              "description": "Returns `false` if char count is greater than \"frameOptions.get('charCounter_max')\" when \"inputText\" is added to the current editor. - If the current number of characters is greater than \"charCounter_max\", the excess characters are removed. And call the char.display()",
               "example": "",
               "paramDescriptions": {
                 "inputText": "Text added.",
@@ -1097,7 +1097,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Element to position",
-                "range": "Range to position against.\n- if null, the current selection range is used",
+                "range": "Range to position against.\n- if `null`, the current selection range is used",
                 "options": "{}] Position options",
                 "options.position": "\"bottom\"] Position ('bottom'|'top')",
                 "options.addTop": "0] Additional top offset"
@@ -1493,7 +1493,7 @@
               "name": "get",
               "params": "element: Node",
               "returns": "SunEditor.ComponentInfo | null",
-              "description": "Gets the file component and that plugin name - return: {target, component, pluginName} | null",
+              "description": "Gets the file component and that plugin name - return: {target, component, pluginName} | `null`",
               "example": "",
               "paramDescriptions": {
                 "element": "Target element (figure tag, component div, file tag)"
@@ -1528,7 +1528,7 @@
               "paramDescriptions": {
                 "element": "The DOM node to check."
               },
-              "returnsDescription": "True if the node is a block component or part of it, otherwise false."
+              "returnsDescription": "`true` if the node is a block component or part of it, otherwise `false`."
             },
             {
               "name": "isInline",
@@ -1539,7 +1539,7 @@
               "paramDescriptions": {
                 "element": "The DOM node to check."
               },
-              "returnsDescription": "True if the node is an inline component or part of it, otherwise false."
+              "returnsDescription": "`true` if the node is an inline component or part of it, otherwise `false`."
             },
             {
               "name": "isBasic",
@@ -1550,7 +1550,7 @@
               "paramDescriptions": {
                 "element": "The DOM node to check."
               },
-              "returnsDescription": "True if the node is a basic (non-inline) component, otherwise false."
+              "returnsDescription": "`true` if the node is a basic (non-inline) component, otherwise `false`."
             },
             {
               "name": "copy",
@@ -1754,7 +1754,7 @@
                 "name": "The event name (e.g., 'onMouseMove', 'onFocus')",
                 "e": "The event payload"
               },
-              "returnsDescription": "Returns false if any handler cancels the event"
+              "returnsDescription": "Returns `false` if any handler cancels the event"
             },
             {
               "name": "emitEventAsync",
@@ -1766,7 +1766,7 @@
                 "name": "The event name (e.g., 'onKeyDown', 'onPaste')",
                 "e": "The event payload"
               },
-              "returnsDescription": "Returns false if any handler cancels the event"
+              "returnsDescription": "Returns `false` if any handler cancels the event"
             },
             {
               "name": "checkFileInfo",
@@ -2056,7 +2056,7 @@
               "returns": "HTMLElement | null",
               "description": "Get the current figure container only if it is visible (active).",
               "example": "",
-              "returnsDescription": "The active figure element or null."
+              "returnsDescription": "The active figure element or `null`."
             },
             {
               "name": "setFigureContainer",
@@ -3529,7 +3529,7 @@
               "paramDescriptions": {
                 "fileList": "File object list"
               },
-              "returnsDescription": "If return false, the file upload will be canceled"
+              "returnsDescription": "If return `false`, the file upload will be canceled"
             },
             {
               "name": "convertFormat",
@@ -4675,7 +4675,7 @@
                 "width": "The desired width for the video element.",
                 "height": "The desired height for the video element.",
                 "align": "The alignment to apply to the video element (e.g., 'left', 'center', 'right').",
-                "isUpdate": "Indicates whether this is an update to an existing component (true) or a new creation (false).",
+                "isUpdate": "Indicates whether this is an update to an existing component (`true`) or a new creation (`false`).",
                 "file": "File metadata associated with the video",
                 "isLast": "Indicates whether this is the last file in the batch (used for scroll and insert actions)."
               }
@@ -6278,7 +6278,7 @@
                 "a": "Node to compare",
                 "b": "Node to compare"
               },
-              "returnsDescription": "Returns true if both are text nodes."
+              "returnsDescription": "Returns `true` if both are text nodes."
             },
             {
               "name": "isExcludeFormat",
@@ -8753,14 +8753,13 @@
         },
         {
           "name": "InternalFrameOptions",
-          "definition": "{\n\t/**\n\t * - Status bar event configuration.\n\t */\n\t__statusbarEvent?: any;\n\t/**\n\t * - origin frame options\n\t */\n\t_origin: SunEditor.InitFrameOptions;\n\t/**\n\t * - Enables fixed positioning for the editor frame.\n\t */\n\t_defaultStyles?: OptionStyleResult;\n\t/**\n\t * - CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirror5Editor?: any;\n\t/**\n\t * - CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirror6Editor?: any;\n}",
+          "definition": "{\n\t/**\n\t * - Status bar event configuration.\n\t */\n\t__statusbarEvent?: any;\n\t/**\n\t * - origin frame options\n\t */\n\t_origin: SunEditor.InitFrameOptions;\n\t/**\n\t * - Enables fixed positioning for the editor frame.\n\t */\n\t_defaultStyles?: OptionStyleResult;\n\t/**\n\t * - CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirrorEditor?: any;\n}",
           "kind": "type",
           "memberDescriptions": {
             "__statusbarEvent": "- Status bar event configuration.",
             "_origin": "- origin frame options",
             "_defaultStyles": "- Enables fixed positioning for the editor frame.",
-            "codeMirror5Editor": "- CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization.",
-            "codeMirror6Editor": "- CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization."
+            "codeMirrorEditor": "- CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization."
           },
           "source": "core/schema/options.d.ts"
         },
@@ -8881,7 +8880,7 @@
         },
         {
           "name": "InternalBaseOptions",
-          "definition": "{\n\t/**\n\t * - Computed className for the selected theme (e.g., `se-theme-default`).\n\t */\n\t_themeClass?: string;\n\t/**\n\t * - Additional sub-type string from the `type` option (after `:`).\n\t */\n\t_type_options?: string;\n\t/**\n\t * - Preprocessed allowed tag string for RegExp (e.g., \"mark|figure\").\n\t */\n\t_allowedExtraTag?: string;\n\t/**\n\t * - Preprocessed disallowed tag string.\n\t */\n\t_disallowedExtraTag?: string;\n\t/**\n\t * - Final computed editable class (used in editor wrapper).\n\t */\n\t_editableClass?: string;\n\t/**\n\t * - Whether text direction is RTL.\n\t */\n\t_rtl?: boolean;\n\t/**\n\t * - Internal key shortcut matcher for reverse commands.\n\t */\n\t_reverseCommandArray?: string[];\n\t/**\n\t * - Sub toolbar mode (e.g., `balloon`).\n\t */\n\t_subMode?: string;\n\t/**\n\t * - Tag names used for text styling, plus span/li.\n\t */\n\t_textStyleTags?: string[];\n\t/**\n\t * - Regex to match inline styles (e.g., fontSize, color).\n\t */\n\t_textStylesRegExp?: RegExp;\n\t/**\n\t * - Regex to match line styles (e.g., text-align, padding).\n\t */\n\t_lineStylesRegExp?: RegExp;\n\t/**\n\t * - Mapping HTML tag => standard tag.\n\t */\n\t_defaultStyleTagMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping HTML tag => command (e.g., bold, underline).\n\t */\n\t_styleCommandMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping command => preferred tag.\n\t */\n\t_defaultTagCommand?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Element whitelist regex pattern for the editor.\n\t */\n\t_editorElementWhitelist?: string;\n\t/**\n\t * - List of currently used toolbar buttons\n\t */\n\tbuttons?: Set<any>;\n\t/**\n\t * - List of currently used sub-toolbar buttons\n\t */\n\tbuttons_sub?: Set<any>;\n\t/**\n\t * - Sub-toolbar width.\n\t */\n\ttoolbar_sub_width?: string;\n\t/**\n\t * - Merged reverse command pairs array.\n\t * - Includes default `indent-outdent` + user's `reverseButtons`.\n\t */\n\treverseCommands?: string[];\n\t/**\n\t * - CodeMirror configuration object from `externalLibs.codeMirror`.\n\t */\n\tcodeMirror?: any;\n\t/**\n\t * - Whether CodeMirror 6 is available (base-level flag).\n\t * - Frame-level stores the actual EditorView instance.\n\t */\n\tcodeMirror6Editor?: boolean;\n\t/**\n\t * - Whether CodeMirror 5 is available (base-level flag). Frame-level stores the actual CM5 instance.\n\t */\n\tcodeMirror5Editor?: boolean;\n\t/**\n\t * - Uses CodeMirror for code view.\n\t */\n\thasCodeMirror?: boolean;\n\t/**\n\t * - Processed set of all allowed CSS styles.\n\t * - Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor.\n\t */\n\tallUsedStyles?: Set<string>;\n}",
+          "definition": "{\n\t/**\n\t * - Computed className for the selected theme (e.g., `se-theme-default`).\n\t */\n\t_themeClass?: string;\n\t/**\n\t * - Additional sub-type string from the `type` option (after `:`).\n\t */\n\t_type_options?: string;\n\t/**\n\t * - Preprocessed allowed tag string for RegExp (e.g., \"mark|figure\").\n\t */\n\t_allowedExtraTag?: string;\n\t/**\n\t * - Preprocessed disallowed tag string.\n\t */\n\t_disallowedExtraTag?: string;\n\t/**\n\t * - Final computed editable class (used in editor wrapper).\n\t */\n\t_editableClass?: string;\n\t/**\n\t * - Whether text direction is RTL.\n\t */\n\t_rtl?: boolean;\n\t/**\n\t * - Internal key shortcut matcher for reverse commands.\n\t */\n\t_reverseCommandArray?: string[];\n\t/**\n\t * - Sub toolbar mode (e.g., `balloon`).\n\t */\n\t_subMode?: string;\n\t/**\n\t * - Tag names used for text styling, plus span/li.\n\t */\n\t_textStyleTags?: string[];\n\t/**\n\t * - Regex to match inline styles (e.g., fontSize, color).\n\t */\n\t_textStylesRegExp?: RegExp;\n\t/**\n\t * - Regex to match line styles (e.g., text-align, padding).\n\t */\n\t_lineStylesRegExp?: RegExp;\n\t/**\n\t * - Mapping HTML tag => standard tag.\n\t */\n\t_defaultStyleTagMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping HTML tag => command (e.g., bold, underline).\n\t */\n\t_styleCommandMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping command => preferred tag.\n\t */\n\t_defaultTagCommand?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Element whitelist regex pattern for the editor.\n\t */\n\t_editorElementWhitelist?: string;\n\t/**\n\t * - List of currently used toolbar buttons\n\t */\n\tbuttons?: Set<any>;\n\t/**\n\t * - List of currently used sub-toolbar buttons\n\t */\n\tbuttons_sub?: Set<any>;\n\t/**\n\t * - Sub-toolbar width.\n\t */\n\ttoolbar_sub_width?: string;\n\t/**\n\t * - Merged reverse command pairs array.\n\t * - Includes default `indent-outdent` + user's `reverseButtons`.\n\t */\n\treverseCommands?: string[];\n\t/**\n\t * - CodeMirror configuration object from `externalLibs.codeMirror`.\n\t */\n\tcodeMirror?: any;\n\t/**\n\t * - Whether CodeMirror is available (base-level flag). Frame-level stores the actual CM instance.\n\t */\n\tcodeMirrorEditor?: boolean;\n\t/**\n\t * - Uses CodeMirror for code view.\n\t */\n\thasCodeMirror?: boolean;\n\t/**\n\t * - Processed set of all allowed CSS styles.\n\t * - Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor.\n\t */\n\tallUsedStyles?: Set<string>;\n}",
           "kind": "type",
           "memberDescriptions": {
             "_themeClass": "- Computed className for the selected theme (e.g., `se-theme-default`).",
@@ -8904,8 +8903,7 @@
             "toolbar_sub_width": "- Sub-toolbar width.",
             "reverseCommands": "- Merged reverse command pairs array.\n- Includes default `indent-outdent` + user's `reverseButtons`.",
             "codeMirror": "- CodeMirror configuration object from `externalLibs.codeMirror`.",
-            "codeMirror6Editor": "- Whether CodeMirror 6 is available (base-level flag).\n- Frame-level stores the actual EditorView instance.",
-            "codeMirror5Editor": "- Whether CodeMirror 5 is available (base-level flag). Frame-level stores the actual CM5 instance.",
+            "codeMirrorEditor": "- Whether CodeMirror is available (base-level flag). Frame-level stores the actual CM instance.",
             "hasCodeMirror": "- Uses CodeMirror for code view.",
             "allUsedStyles": "- Processed set of all allowed CSS styles.\n- Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor."
           },

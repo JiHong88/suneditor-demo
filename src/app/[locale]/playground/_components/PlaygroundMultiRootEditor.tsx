@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { SunEditor } from "suneditor/types";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
 import "suneditor/css/contents";
 import { FullButtonList } from "@/components/editor/buttonList";
 import type { PlaygroundState } from "../_lib/playgroundState";
-import { stateToEditorOptions, getRootConfigs } from "../_lib/playgroundState";
+import { stateToEditorOptions, getRootConfigs, hasButton } from "../_lib/playgroundState";
+import { loadExternalLibs } from "./externalLibsLoader";
 
 interface Props {
 	state: PlaygroundState;
@@ -18,8 +19,10 @@ interface Props {
 export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef }: Props) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const toolbarRef = useRef<HTMLDivElement>(null);
+	const [extLibs, setExtLibs] = useState<Record<string, unknown> | null>(null);
 
 	const isClassic = state.mode === "classic" || !state.mode;
+	const needMath = hasButton(state.buttonListPreset, state.type, "math");
 
 	const roots = useMemo(() => getRootConfigs(state), [state]);
 
@@ -31,8 +34,13 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		return opts;
 	}, []);
 
+	// Load external libraries
 	useEffect(() => {
-		if (!containerRef.current) return;
+		loadExternalLibs(needMath, state.math_mathLib).then(setExtLibs);
+	}, [needMath, state.math_mathLib]);
+
+	useEffect(() => {
+		if (!containerRef.current || extLibs === null) return;
 
 		// Create textarea elements for each root
 		const targets: Record<string, { target: HTMLTextAreaElement; options: SunEditor.InitFrameOptions }> = {};
@@ -57,6 +65,10 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		};
 		if (isClassic && toolbarRef.current) {
 			initOptions.toolbar_container = toolbarRef.current;
+		}
+		// External libraries
+		if (Object.keys(extLibs).length > 0) {
+			initOptions.externalLibs = extLibs;
 		}
 
 		const instance = suneditor.create(targets, initOptions as SunEditor.InitOptions);
@@ -90,7 +102,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 			instance.destroy();
 			editorRef.current = null;
 		};
-	}, []);
+	}, [extLibs]);
 
 	// Theme sync
 	useEffect(() => {
@@ -117,6 +129,8 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		window.addEventListener("themechange", onThemeChange);
 		return () => window.removeEventListener("themechange", onThemeChange);
 	}, [state.theme, editorRef]);
+
+	if (extLibs === null) return null;
 
 	return (
 		<div ref={containerRef} className="space-y-0">

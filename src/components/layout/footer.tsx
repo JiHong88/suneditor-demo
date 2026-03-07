@@ -52,6 +52,14 @@ export default function Footer({ version = "" }: FooterProps) {
 								{t("reportIssue")}
 							</a>
 						</li>
+						<li className='my-4'>
+							<a
+								href='/v2/'
+								className='hover:text-slate-900 dark:hover:text-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-slate-400/50 dark:focus-visible:ring-slate-500/50 rounded'
+							>
+								{t("v2Legacy")}
+							</a>
+						</li>
 					</ul>
 				</div>
 
@@ -92,7 +100,7 @@ export default function Footer({ version = "" }: FooterProps) {
 							width='16'
 							height='16'
 							aria-hidden='true'
-							className='opacity-80 inline-block align-text-bottom mr-1'
+							className='opacity-80 inline-block align-text-bottom me-1'
 						>
 							<path
 								fill='currentColor'

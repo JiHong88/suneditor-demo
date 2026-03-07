@@ -193,12 +193,14 @@ function TextareaField({
 	onChange,
 	placeholder,
 	resettable,
+	description,
 }: {
 	label: string;
 	value: string;
 	onChange: (v: string) => void;
 	placeholder?: string;
 	resettable?: boolean;
+	description?: string;
 }) {
 	const [local, setLocal] = useState(value);
 	const focusedRef = useRef(false);
@@ -207,7 +209,7 @@ function TextareaField({
 	}, [value]);
 	return (
 		<label className='flex flex-col gap-1'>
-			<FieldLabel label={label} resettable={resettable} />
+			<FieldLabel label={label} resettable={resettable} description={description} />
 			<textarea
 				value={local}
 				onChange={(e) => setLocal(e.target.value)}
@@ -228,11 +230,59 @@ function TextareaField({
 
 /** Disabled option indicator — shown for options that can't be configured in playground */
 function DisabledField({ label, reason }: { label: string; reason?: string }) {
+	const locale = useLocale();
+	const optDesc = optDescMap[locale] ?? optDescMap.en;
+	const desc = optDesc[label]?.description;
 	return (
 		<div className='flex items-center justify-between gap-2 py-0.5 opacity-40'>
-			<span className='text-[11px] text-muted-foreground'>{label}</span>
+			<span className='flex items-center gap-1.5 text-[11px] text-muted-foreground'>
+				<span>{label}</span>
+				{desc && <OptionInfo optionKey={label} description={desc} />}
+			</span>
 			<span className='text-[10px] text-muted-foreground/70 italic shrink-0'>{reason ?? "complex type"}</span>
 		</div>
+	);
+}
+
+/* ── Lang options from shared language list ────────────── */
+/**
+ * icon can be any ReactNode: string emoji, SVG component, <img>, etc.
+ * Languages are managed in @/i18n/languages.ts (single source of truth).
+ */
+
+import { languages } from "@/i18n/languages";
+
+const LANG_OPTIONS: { value: string; label: string }[] = languages
+	.filter((l) => l.editorLang)
+	.map((l) => ({
+		value: l.code === "en" ? "" : l.code,
+		label: `${l.icon ?? ""} ${l.code} [${l.nativeName}]${l.code === "en" ? " (default)" : ""}`.trim(),
+	}));
+
+function LangSelectField({
+	value,
+	onChange,
+	resettable,
+}: {
+	value: string;
+	onChange: (v: string) => void;
+	resettable?: boolean;
+}) {
+	return (
+		<label className='flex flex-col gap-1'>
+			<FieldLabel label='lang' resettable={resettable} />
+			<select
+				value={value}
+				onChange={(e) => onChange(e.target.value)}
+				className='rounded-md border border-input bg-background px-2 py-1.5 text-xs outline-none focus:ring-2 focus:ring-ring'
+			>
+				{LANG_OPTIONS.map((opt) => (
+					<option key={opt.value} value={opt.value}>
+						{opt.label}
+					</option>
+				))}
+			</select>
+		</label>
 	);
 }
 
@@ -260,6 +310,73 @@ function TriStateField({
 			onChange={onChange}
 			resettable={resettable}
 		/>
+	);
+}
+
+/** Toggle-based type selector: document + sub-types (page, header) */
+function TypeToggleField({
+	value,
+	onChange,
+	resettable,
+}: {
+	value: string;
+	onChange: (v: string) => void;
+	resettable?: boolean;
+}) {
+	// parse current value
+	const lower = value.toLowerCase();
+	const isDocument = lower.startsWith("document");
+	const subTypes = lower.includes(":")
+		? lower
+				.split(":")[1]
+				.split(",")
+				.map((s) => s.trim())
+		: [];
+	const hasPage = subTypes.includes("page");
+	const hasHeader = subTypes.includes("header");
+
+	const buildValue = (doc: boolean, page: boolean, header: boolean) => {
+		if (!doc) return "";
+		const subs: string[] = [];
+		if (page) subs.push("page");
+		if (header) subs.push("header");
+		return subs.length ? `document:${subs.join(",")}` : "document";
+	};
+
+	const pill = (label: string, active: boolean, onClick: () => void) => (
+		<button
+			type='button'
+			onClick={onClick}
+			className={`h-6 rounded px-2 text-[11px] font-medium transition-colors ${
+				active ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"
+			}`}
+		>
+			{label}
+		</button>
+	);
+
+	return (
+		<div className='flex flex-col gap-1.5'>
+			<FieldLabel label='type' resettable={resettable} />
+			<div className='flex items-center gap-1.5'>
+				{pill("document", isDocument, () => onChange(buildValue(!isDocument, false, false)))}
+				{isDocument && (
+					<>
+						<ChevronRight className='size-3 text-muted-foreground shrink-0' />
+						{pill("page", hasPage, () => onChange(buildValue(true, !hasPage, hasHeader)))}
+						{pill("header", hasHeader, () => onChange(buildValue(true, hasPage, !hasHeader)))}
+					</>
+				)}
+			</div>
+			{value && (
+				<input
+					type='text'
+					readOnly
+					value={value}
+					className='h-7 mt-2 rounded-md border border-input bg-muted/50 px-2 text-xs text-muted-foreground outline-none cursor-default'
+				/>
+			)}
+		</div>
 	);
 }
 
@@ -535,12 +652,10 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						/>
 					</div>
 					<div className='mt-3'>
-						<TextInput
-							label='type'
+						<TypeToggleField
 							value={state.type}
 							onChange={set("type")}
 							resettable={!isFixedOption("type")}
-							placeholder='document:header,page'
 						/>
 					</div>
 					<div className='mt-3'>
@@ -561,8 +676,21 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						/>
 					</div>
 					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
-						<DisabledField label='lang' reason='Object' />
-						<DisabledField label='icons' reason='Object' />
+						<LangSelectField
+							value={state.lang}
+							onChange={set("lang")}
+							resettable={!isFixedOption("lang")}
+						/>
+					</div>
+					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
+						<TextareaField
+							label='icons'
+							value={state.icons}
+							onChange={set("icons")}
+							placeholder='{"bold": "<svg>...</svg>", "undo": "↩"}'
+							resettable={!isFixedOption("icons")}
+							description={t("iconsDesc")}
+						/>
 					</div>
 					{/* Sub-Toolbar */}
 					<div className='mt-4 pt-3 border-t'>
@@ -574,7 +702,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						/>
 					</div>
 					{state.subToolbar_enabled && (
-						<div className='mt-3 ml-2 border-l-2 border-muted pl-3 grid gap-3'>
+						<div className='mt-3 ms-2 border-s-2 border-muted ps-3 grid gap-3'>
 							<SelectField
 								label='subToolbar.buttonList'
 								value={state.subToolbar_buttonListPreset}
@@ -1027,7 +1155,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						/>
 					</div>
 					{!state.strictMode && (
-						<div className='mt-2 ml-2 grid gap-1.5 border-l-2 border-muted pl-3'>
+						<div className='mt-2 ms-2 grid gap-1.5 border-s-2 border-muted ps-3'>
 							<SwitchField
 								label='tagFilter'
 								checked={state.strictMode_tagFilter}
@@ -1206,7 +1334,13 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						<DisabledField label='plugins' reason='Object' />
 						<DisabledField label='excludedPlugins' reason='Array' />
 						<DisabledField label='events' reason='handlers' />
-						<DisabledField label='externalLibs' reason='Object' />
+						<div className='flex items-center justify-between gap-2 py-0.5'>
+							<span className='flex items-center gap-1.5 text-[11px] text-green-600 dark:text-green-400'>
+								<span>externalLibs</span>
+								<span className='shrink-0 rounded bg-green-500/15 px-1 py-0.5 text-[10px] font-medium'>auto</span>
+							</span>
+							<span className='text-[10px] text-muted-foreground/70 italic shrink-0'>CodeMirror + KaTeX/MathJax</span>
+						</div>
 						<DisabledField label='allowedExtraTags' reason='Object' />
 					</div>
 				</AccordionContent>

@@ -95,7 +95,7 @@ export default function GlobalSearchResults({ results, query, onSelect }: Global
                     <button
                       key={item.id}
                       onClick={() => onSelect(item.sectionId, item.id)}
-                      className="w-full text-left px-4 py-3 rounded-lg hover:bg-muted/50 transition-colors group flex items-start gap-3"
+                      className="w-full text-start px-4 py-3 rounded-lg hover:bg-muted/50 transition-colors group flex items-start gap-3"
                     >
                       <div className={`mt-0.5 p-1.5 rounded-md border ${kindColors[item.kind]}`}>
                         <Icon className="h-3.5 w-3.5" />

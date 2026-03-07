@@ -105,7 +105,7 @@ function SidebarItemComponent({
 					isGroupHeader &&
 						cn(
 							"sticky top-0 z-10 backdrop-blur-sm font-semibold py-2 px-3 mt-3 first:mt-0",
-							"border-l-[3px]",
+							"border-s-[3px]",
 							accent.border,
 							accent.bg,
 							accent.text,
@@ -162,29 +162,29 @@ function SidebarItemComponent({
 					) : (
 						<span
 							className={cn(
-								"w-1.5 h-1.5 rounded-full flex-shrink-0 ml-0.5 mr-1",
+								"w-1.5 h-1.5 rounded-full flex-shrink-0 ms-0.5 me-1",
 								isSelected ? accent.dot : "bg-foreground/15",
 							)}
 						/>
 					)}
-					<span className='truncate text-left'>
+					<span className='truncate text-start'>
 						{isInfoLabel ? (
 							<span className='text-xs italic text-muted-foreground/50'>{item.title}</span>
 						) : item.id === "kernel-group" ? (
 							<>
-								$<span className='text-[11px] ml-0.5 font-normal opacity-50'> (Core)</span>
+								$<span className='text-[11px] ms-0.5 font-normal opacity-50'> (Core)</span>
 							</>
 						) : (
 							item.title
 						)}
 					</span>
 					{item.id === "interfaces-sub" && (
-						<span className='ml-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
+						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
 							extends
 						</span>
 					)}
 					{item.id === "hooks-sub" && (
-						<span className='ml-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
+						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
 							implements
 						</span>
 					)}
@@ -192,7 +192,7 @@ function SidebarItemComponent({
 				{!isInfoLabel && (
 					<span
 						className={cn(
-							"ml-1.5 text-[10px] tabular-nums flex-shrink-0",
+							"ms-1.5 text-[10px] tabular-nums flex-shrink-0",
 							isGroupHeader ? accent.text : "text-foreground/30",
 						)}
 					>

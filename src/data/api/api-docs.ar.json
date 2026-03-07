@@ -1,6 +1,6 @@
 {
-	"version": "3.0.0-rc.2",
-	"generatedAt": "2026-03-02T09:21:27.960Z",
+	"version": "3.0.0-rc.4",
+	"generatedAt": "2026-03-07T13:56:38.568Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -220,7 +220,7 @@
 				},
 				"contextProvider": {
 					"title": "editor.contextProvider",
-					"description": "إدارة السياق العام (شريط الأدوات، شريط الحالة) وسياق كل إطار (المحرر المرئي، عرض الكود).",
+					"description": "أساليب مزود السياق",
 					"methods": [
 						{
 							"name": "init",
@@ -249,58 +249,11 @@
 								"f": "وظيفة رد الاتصال"
 							}
 						}
-					],
-					"getters": [
-						{
-							"name": "frameRoots",
-							"returns": "Map<string | null, SunEditor.FrameContext>",
-							"description": "خريطة لجميع سياقات الإطارات حسب مفتاح الجذر.",
-							"linkedAs": "$.frameRoots"
-						},
-						{
-							"name": "context",
-							"returns": "SunEditor.ContextMap",
-							"description": "سياق DOM العام (شريط الأدوات، شريط الحالة، إلخ.).",
-							"linkedAs": "$.context"
-						},
-						{
-							"name": "frameContext",
-							"returns": "SunEditor.FrameContextMap",
-							"description": "سياق DOM لكل إطار (محرر WYSIWYG، عرض الكود، إلخ.).",
-							"linkedAs": "$.frameContext"
-						},
-						{
-							"name": "icons",
-							"returns": "Object<string, string>",
-							"description": "كائن الأيقونات الافتراضي.",
-							"linkedAs": "$.icons"
-						},
-						{
-							"name": "lang",
-							"returns": "Object<string, *>",
-							"description": "كائن سلاسل اللغة المحملة.",
-							"linkedAs": "$.lang"
-						},
-						{
-							"name": "rootKeys",
-							"returns": "Array",
-							"description": "مصفوفة مفاتيح جذر الإطار."
-						},
-						{
-							"name": "carrierWrapper",
-							"returns": "HTMLElement",
-							"description": "عنصر غلاف حامل وحدات التحكم."
-						},
-						{
-							"name": "shadowRoot",
-							"returns": "ShadowRoot | null",
-							"description": "أقرب ShadowRoot للمحرر، إن وجد."
-						}
 					]
 				},
 				"eventManager": {
 					"title": "editor.eventManager",
-					"description": "واجهة برمجة تسجيل الأحداث العامة والإرسال.",
+					"description": "أساليب مدير الأحداث",
 					"methods": [
 						{
 							"name": "addEvent",
@@ -325,7 +278,7 @@
 							"paramDescriptions": {
 								"params": "معلومات الحدث = this.addEvent()"
 							},
-							"returnsDescription": "النجاح: فارغ، لم يتم العثور عليه: غير محدد"
+							"returnsDescription": "النجاح: `null`، لم يتم العثور على: `undefined`"
 						},
 						{
 							"name": "addGlobalEvent",
@@ -351,32 +304,13 @@
 								"listener": "مستمع الحدث",
 								"useCapture": "استخدام التقاط الحدث"
 							},
-							"returnsDescription": "النجاح: فارغ، لم يتم العثور عليه: غير محدد"
-						},
-						{
-							"name": "triggerEvent",
-							"params": "eventName: string, eventData: Object",
-							"returns": "Promise<*>",
-							"description": "استدعاء دالة الحدث. - إذا كان المحرر المرئي معطلاً (غير قابل للتحرير)، لا يتم استدعاء الحدث.",
-							"example": "",
-							"paramDescriptions": {
-								"eventName": "اسم الحدث المراد تشغيله",
-								"eventData": "بيانات الحدث المرسلة إلى المعالج"
-							},
-							"returnsDescription": "نتيجة معالج الحدث أو false عند الخطأ"
-						}
-					],
-					"getters": [
-						{
-							"name": "events",
-							"returns": "SunEditor.Event.Handlers",
-							"description": "كائن الأحداث الذي يحتوي على استدعاءات الأحداث المسجلة."
+							"returnsDescription": "النجاح: `null`، لم يتم العثور على: `undefined`"
 						}
 					]
 				},
 				"instanceCheck": {
 					"title": "editor.instanceCheck",
-					"description": "أدوات التحقق من النوع الآمنة لـ Iframe.",
+					"description": "طرق التحقق من المثيل",
 					"methods": [
 						{
 							"name": "isNode",
@@ -410,7 +344,7 @@
 				},
 				"optionProvider": {
 					"title": "editor.optionProvider",
-					"description": "إدارة الخيارات الأساسية (المشتركة) وخيارات الإطار (لكل إطار).",
+					"description": "أساليب مزود الخيار",
 					"methods": [
 						{
 							"name": "reset",
@@ -432,25 +366,11 @@
 								"newOptions": "خيارات"
 							}
 						}
-					],
-					"getters": [
-						{
-							"name": "options",
-							"returns": "SunEditor.BaseOptionsMap",
-							"description": "خيارات المحرر الأساسية (مشتركة عبر جميع الإطارات).",
-							"linkedAs": "$.options"
-						},
-						{
-							"name": "frameOptions",
-							"returns": "SunEditor.FrameOptionsMap",
-							"description": "خيارات كل إطار للإطار الحالي.",
-							"linkedAs": "$.frameOptions"
-						}
 					]
 				},
 				"store": {
 					"title": "editor.store",
-					"description": "مخزن الحالة المركزي مع دعم الاشتراك.",
+					"description": "طرق المتجر",
 					"methods": [
 						{
 							"name": "get",
@@ -484,13 +404,13 @@
 				},
 				"char": {
 					"title": "editor.char",
-					"description": "أدوات حساب الأحرف والمحتوى.",
+					"description": "طرق شار",
 					"methods": [
 						{
 							"name": "check",
 							"params": "html: Node | string",
 							"returns": "boolean",
-							"description": "إرجاع خطأ إذا كان عدد الأحرف أكبر من \"frameOptions.get('charCounter_max')\" عند إضافة \"html\" إلى المحرر الحالي.",
+							"description": "يتم إرجاع `false` إذا كان عدد الأحرف أكبر من \"frameOptions.get('charCounter_max')\" عند إضافة \"html\" إلى المحرر الحالي.",
 							"example": "",
 							"paramDescriptions": {
 								"html": "عقدة العنصر أو السلسلة."
@@ -500,7 +420,7 @@
 							"name": "getLength",
 							"params": "content?: string",
 							"returns": "number",
-							"description": "احصل على عدد أحرف [المحتوى] أو حجم البيانات الثنائية. (frameOptions.get('charCounter_type')) - إذا كان [المحتوى] غير محدد، فاحصل على عدد أحرف المحرر الحالي أو حجم البيانات الثنائية.",
+							"description": "احصل على عدد أحرف [المحتوى] أو حجم البيانات الثنائية. (frameOptions.get('charCounter_type')) - إذا كان [content] هو `undefined`، فاحصل على عدد أحرف المحرر الحالي أو حجم البيانات الثنائية.",
 							"example": "",
 							"paramDescriptions": {
 								"content": "المحتوى لحساب. (الافتراضي: this.#frameContext.get('wysiwyg'))"
@@ -530,7 +450,7 @@
 							"name": "test",
 							"params": "inputText: string, _fromInputEvent: boolean",
 							"returns": "boolean",
-							"description": "إرجاع خطأ إذا كان عدد الأحرف أكبر من \"frameOptions.get('charCounter_max')\" عند إضافة \"inputText\" إلى المحرر الحالي. - إذا كان عدد الأحرف الحالي أكبر من \"charCounter_max\"، فستتم إزالة الأحرف الزائدة. واتصل بـ char.display()",
+							"description": "يتم إرجاع `false` إذا كان عدد الأحرف أكبر من \"frameOptions.get('charCounter_max')\" عند إضافة \"inputText\" إلى المحرر الحالي. - إذا كان عدد الأحرف الحالي أكبر من \"charCounter_max\"، فستتم إزالة الأحرف الزائدة. واتصل بـ char.display()",
 							"example": "",
 							"paramDescriptions": {
 								"inputText": "تمت إضافة النص.",
@@ -541,7 +461,7 @@
 				},
 				"format": {
 					"title": "editor.format",
-					"description": "عمليات التنسيق على مستوى الكتلة (السطور، الكتل، المسافات البادئة).",
+					"description": "طرق التنسيق",
 					"methods": [
 						{
 							"name": "setLine",
@@ -626,7 +546,7 @@
 							"paramDescriptions": {
 								"blockElement": "عنصر `block` (PRE، BLOCKQUOTE، OL، UL...)",
 								"options": "خيارات",
-								"options.selectedFormats": "null] مجموعة من عناصر `line` (P، DIV، LI...) المطلوب إزالتها.",
+								"options.selectedFormats": "null] مجموعة من عناصر `line` (P، DIV، LI...) المراد إزالتها.",
 								"options.newBlockElement": "خالية] العقدة (`blockElement`) لاستبدال العقدة الملتفة حاليًا.",
 								"options.shouldDelete": "خطأ] إذا كان `true`، يتم حذفه دون فصله.",
 								"options.skipHistory": "خطأ] عندما `true`، لا يتم تحديث مكدس المحفوظات وكائن التحديد وإرجاع `EdgeNodes` ​​(dom-query-GetEdgeChildNodes)"
@@ -753,7 +673,7 @@
 				},
 				"html": {
 					"title": "editor.html",
-					"description": "معالجة وتحويل HTML.",
+					"description": "طرق أتش تي أم أل",
 					"methods": [
 						{
 							"name": "filter",
@@ -767,7 +687,7 @@
 								"params.tagWhitelist": "العلامات المسموح بها، المحددة كسلسلة مع علامات مفصولة بـ `'|'`. (على سبيل المثال `\"div|p|span\"`).",
 								"params.tagBlacklist": "العلامات غير المسموح بها، المحددة كسلسلة ذات علامات مفصولة بـ `'|'`. (على سبيل المثال `\"script|iframe\"`).",
 								"params.validate": "وظيفة للتحقق من صحة وتعديل العقد الفردية.",
-								"params.validateAll": "ما إذا كان سيتم تطبيق التحقق من الصحة على جميع العقد."
+								"params.validateAll": "ما إذا كان سيتم تطبيق التحقق من الصحة على كافة العقد."
 							},
 							"returnsDescription": "سلسلة HTML التي تمت تصفيتها."
 						},
@@ -798,7 +718,7 @@
 								"options": "خيارات",
 								"options.selectInserted": "خطأ] إذا كان `true`، يحدد نطاق العقدة المدرجة.",
 								"options.skipCharCount": "خطأ] إذا كان `true`، يتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`.",
-								"options.skipCleaning": "خطأ] إذا كان `true`، يُدرج سلسلة HTML دون تحسينها باستخدام `html.clean`."
+								"options.skipCleaning": "false] إذا كان `true`، يُدرج سلسلة HTML دون تحسينها باستخدام `html.clean`."
 							},
 							"returnsDescription": "العنصر المدرج أو `null` إذا فشل الإدراج"
 						},
@@ -923,7 +843,7 @@
 				},
 				"inline": {
 					"title": "editor.inline",
-					"description": "التنسيق والأنماط المضمنة.",
+					"description": "الأساليب المضمنة",
 					"methods": [
 						{
 							"name": "apply",
@@ -951,7 +871,7 @@
 				},
 				"listFormat": {
 					"title": "editor.listFormat",
-					"description": "عمليات القوائم (مرتبة، غير مرتبة، متداخلة).",
+					"description": "أساليب تنسيق القائمة",
 					"methods": [
 						{
 							"name": "apply",
@@ -1004,7 +924,7 @@
 				},
 				"nodeTransform": {
 					"title": "editor.nodeTransform",
-					"description": "أدوات تحويل وإعادة هيكلة العقد.",
+					"description": "طرق تحويل العقدة",
 					"methods": [
 						{
 							"name": "split",
@@ -1084,7 +1004,7 @@
 				},
 				"offset": {
 					"title": "editor.offset",
-					"description": "أدوات حساب الإزاحة والموضع.",
+					"description": "طرق الإزاحة",
 					"methods": [
 						{
 							"name": "get",
@@ -1177,7 +1097,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "عنصر للموقف",
-								"range": "نطاق للموقف ضد. \n- إذا كان خاليًا، فسيتم استخدام نطاق التحديد الحالي",
+								"range": "نطاق للموقف ضد. \n- إذا كان `null`، فسيتم استخدام نطاق التحديد الحالي",
 								"options": "{}] خيارات الموضع",
 								"options.position": "\"أسفل\"] الموضع (\"أسفل\"|\"أعلى\")",
 								"options.addTop": "0] إزاحة علوية إضافية"
@@ -1188,7 +1108,7 @@
 				},
 				"selection": {
 					"title": "editor.selection",
-					"description": "معالجة التحديد وإدارة النطاق وتحديد موضع المؤشر.",
+					"description": "طرق الاختيار",
 					"methods": [
 						{
 							"name": "get",
@@ -1316,7 +1236,7 @@
 				},
 				"menu": {
 					"title": "editor.menu",
-					"description": "عرض القوائم وإدارة القوائم المنسدلة.",
+					"description": "طرق القائمة",
 					"methods": [
 						{
 							"name": "initDropdownTarget",
@@ -1357,7 +1277,7 @@
 							"name": "dropdownHide",
 							"params": "",
 							"returns": "void",
-							"description": "يخفي القائمة المنسدلة النشطة حاليًا مؤقتًا دون إغلاقها. - على عكس `dropdownOff()`، لا يؤدي هذا إلى مسح حالة القائمة المنسدلة أو مستمعي الأحداث - تظل القائمة المنسدلة `on` ​​ولكنها مخفية بصريًا - استخدم `dropdownShow()` لجعلها مرئية مرة أخرى",
+							"description": "إخفاء القائمة المنسدلة النشطة حاليًا مؤقتًا دون إغلاقها. - على عكس `dropdownOff()`، لا يؤدي هذا إلى مسح حالة القائمة المنسدلة أو مستمعي الأحداث - تظل القائمة المنسدلة `on` ​​ولكنها مخفية بصريًا - استخدم `dropdownShow()` لجعلها مرئية مرة أخرى",
 							"example": ""
 						},
 						{
@@ -1381,7 +1301,7 @@
 				},
 				"toolbar": {
 					"title": "editor.toolbar",
-					"description": "عرض شريط الأدوات وإدارة حالة الأزرار.",
+					"description": "طرق شريط الأدوات",
 					"methods": [
 						{
 							"name": "disable",
@@ -1430,60 +1350,9 @@
 						}
 					]
 				},
-				"subToolbar": {
-					"title": "editor.subToolbar",
-					"description": "عرض شريط الأدوات الفرعي (شرطي، يتم إنشاؤه عند تعيين خيار `_subMode`). نفس واجهة برمجة التطبيقات مثل toolbar.",
-					"methods": [
-						{
-							"name": "disable",
-							"params": "",
-							"returns": "void",
-							"description": "تعطيل جميع أزرار شريط الأدوات الفرعي.",
-							"example": ""
-						},
-						{
-							"name": "enable",
-							"params": "",
-							"returns": "void",
-							"description": "تفعيل جميع أزرار شريط الأدوات الفرعي.",
-							"example": ""
-						},
-						{
-							"name": "show",
-							"params": "",
-							"returns": "void",
-							"description": "إظهار شريط الأدوات الفرعي.",
-							"example": ""
-						},
-						{
-							"name": "hide",
-							"params": "",
-							"returns": "void",
-							"description": "إخفاء شريط الأدوات الفرعي.",
-							"example": ""
-						},
-						{
-							"name": "resetResponsiveToolbar",
-							"params": "",
-							"returns": "void",
-							"description": "إعادة تعيين أزرار شريط الأدوات الفرعي المتجاوب.",
-							"example": ""
-						},
-						{
-							"name": "setButtons",
-							"params": "buttonList: any[]",
-							"returns": "void",
-							"description": "إعادة تعيين الأزرار على شريط الأدوات الفرعي. (لم يتم إعادة تحميل المحرر.) - لا يمكنك تعيين مكون إضافي جديد للزر.",
-							"example": "",
-							"paramDescriptions": {
-								"buttonList": "قائمة الأزرار"
-							}
-						}
-					]
-				},
 				"viewer": {
 					"title": "editor.viewer",
-					"description": "معالجة وضع العرض (معاينة، طباعة، شاشة كاملة، عرض الكود).",
+					"description": "أساليب المشاهد",
 					"methods": [
 						{
 							"name": "codeView",
@@ -1533,7 +1402,7 @@
 				},
 				"commandDispatcher": {
 					"title": "editor.commandDispatcher",
-					"description": "توجيه الأوامر وتنفيذ الإضافات.",
+					"description": "أساليب مرسل الأوامر",
 					"methods": [
 						{
 							"name": "run",
@@ -1590,7 +1459,7 @@
 				},
 				"component": {
 					"title": "editor.component",
-					"description": "إدارة دورة حياة المكونات (الجداول، الصور، مقاطع الفيديو، إلخ).",
+					"description": "طرق المكونات",
 					"methods": [
 						{
 							"name": "insert",
@@ -1612,7 +1481,7 @@
 							"name": "applyInsertBehavior",
 							"params": "container: Node, oNode?: Node | null, insertBehavior?: SunEditor.ComponentInsertType",
 							"returns": "void",
-							"description": "يتعامل مع سلوك ما بعد الإدراج للمكون الذي تم إنشاؤه حديثًا بناءً على الوضع المحدد.",
+							"description": "يتعامل مع سلوك ما بعد الإدراج للمكون الذي تم إنشاؤه حديثًا استنادًا إلى الوضع المحدد.",
 							"example": "",
 							"paramDescriptions": {
 								"container": "العنصر المكون المدرج.",
@@ -1624,7 +1493,7 @@
 							"name": "get",
 							"params": "element: Node",
 							"returns": "SunEditor.ComponentInfo | null",
-							"description": "يحصل على مكون الملف واسم البرنامج المساعد هذا - return: {target, Component, pluginName} | باطل",
+							"description": "يحصل على مكون الملف واسم البرنامج المساعد هذا - return: {target, Component, pluginName} | `null`",
 							"example": "",
 							"paramDescriptions": {
 								"element": "العنصر الهدف (علامة الشكل، قسم المكون، علامة الملف)"
@@ -1659,7 +1528,7 @@
 							"paramDescriptions": {
 								"element": "عقدة DOM المطلوب التحقق منها."
 							},
-							"returnsDescription": "صحيح إذا كانت العقدة عبارة عن مكون كتلة أو جزء منها، وإلا فسيكون خطأ."
+							"returnsDescription": "`true` إذا كانت العقدة عبارة عن مكون كتلة أو جزء منها، وإلا `false`."
 						},
 						{
 							"name": "isInline",
@@ -1670,18 +1539,18 @@
 							"paramDescriptions": {
 								"element": "عقدة DOM المطلوب التحقق منها."
 							},
-							"returnsDescription": "صحيح إذا كانت العقدة مكونًا مضمّنًا أو جزءًا منه، وإلا فسيكون خطأ."
+							"returnsDescription": "`true` إذا كانت العقدة مكونًا مضمّنًا أو جزءًا منه، وإلا `false`."
 						},
 						{
 							"name": "isBasic",
 							"params": "element: Node",
 							"returns": "boolean",
-							"description": "يتحقق مما إذا كانت العقدة المحددة مؤهلة كمكون أساسي داخل المحرر. - تتحقق هذه الوظيفة مما إذا تم التعرف على العقدة كمكون بواسطة الدالة `is`، مع التأكد أيضًا من أنها ليست مكونًا مضمّنًا كما هو محدد بواسطة الدالة `isInline`. - يُستخدم هذا لتحديد العناصر على مستوى الكتلة أو المكونات المستقلة التي لا تشكل جزءًا من تصنيف المكونات المضمنة.",
+							"description": "يتحقق مما إذا كانت العقدة المحددة مؤهلة كمكون أساسي داخل المحرر. - تتحقق هذه الوظيفة مما إذا تم التعرف على العقدة كمكون بواسطة الدالة `is`، مع التأكد أيضًا من أنها ليست مكونًا مضمّنًا كما هو محدد بواسطة الدالة `isInline`. - يُستخدم هذا لتحديد العناصر على مستوى الكتلة أو المكونات المستقلة التي لا تشكل جزءًا من تصنيف المكونات المضمّنة.",
 							"example": "",
 							"paramDescriptions": {
 								"element": "عقدة DOM المطلوب التحقق منها."
 							},
-							"returnsDescription": "صحيح إذا كانت العقدة مكونًا أساسيًا (غير مضمن)، وإلا فسيكون خطأ."
+							"returnsDescription": "`true` إذا كانت العقدة مكونًا أساسيًا (غير مضمّن)، وإلا `false`."
 						},
 						{
 							"name": "copy",
@@ -1707,7 +1576,7 @@
 				},
 				"focusManager": {
 					"title": "editor.focusManager",
-					"description": "إدارة التركيز لمناطق المحرر.",
+					"description": "أساليب مدير التركيز",
 					"methods": [
 						{
 							"name": "focus",
@@ -1747,7 +1616,7 @@
 				},
 				"history": {
 					"title": "editor.history",
-					"description": "إدارة مكدس التراجع / الإعادة.",
+					"description": "أساليب التاريخ",
 					"methods": [
 						{
 							"name": "push",
@@ -1856,7 +1725,7 @@
 				},
 				"pluginManager": {
 					"title": "editor.pluginManager",
-					"description": "تسجيل الإضافات وتهيئتها وإرسال الأحداث.",
+					"description": "أساليب مدير البرنامج المساعد",
 					"methods": [
 						{
 							"name": "findComponentInfo",
@@ -1885,7 +1754,7 @@
 								"name": "اسم الحدث (على سبيل المثال، \"onMouseMove\"، \"onFocus\")",
 								"e": "حمولة الحدث"
 							},
-							"returnsDescription": "يُرجع خطأ إذا قام أي معالج بإلغاء الحدث"
+							"returnsDescription": "يُرجع `false` إذا قام أي معالج بإلغاء الحدث"
 						},
 						{
 							"name": "emitEventAsync",
@@ -1897,7 +1766,7 @@
 								"name": "اسم الحدث (على سبيل المثال، \"onKeyDown\"، \"onPaste\")",
 								"e": "حمولة الحدث"
 							},
-							"returnsDescription": "يُرجع خطأ إذا قام أي معالج بإلغاء الحدث"
+							"returnsDescription": "يُرجع `false` إذا قام أي معالج بإلغاء الحدث"
 						},
 						{
 							"name": "checkFileInfo",
@@ -1946,7 +1815,7 @@
 				},
 				"shortcuts": {
 					"title": "editor.shortcuts",
-					"description": "ربط اختصارات لوحة المفاتيح وتنفيذها.",
+					"description": "طرق الاختصارات",
 					"methods": [
 						{
 							"name": "command",
@@ -1984,7 +1853,7 @@
 				},
 				"ui": {
 					"title": "editor.ui",
-					"description": "إدارة حالة واجهة المستخدم (السمات، الاتجاه، وضع القراءة فقط، أنماط المحرر).",
+					"description": "أساليب واجهة المستخدم",
 					"methods": [
 						{
 							"name": "setEditorStyle",
@@ -2187,7 +2056,7 @@
 							"returns": "HTMLElement | null",
 							"description": "احصل على حاوية الشكل الحالية فقط إذا كانت مرئية (نشطة).",
 							"example": "",
-							"returnsDescription": "عنصر الشكل النشط أو فارغ."
+							"returnsDescription": "عنصر الشكل النشط أو `null`."
 						},
 						{
 							"name": "setFigureContainer",
@@ -2505,766 +2374,658 @@
 						}
 					]
 				},
-				"frameRoots": {
-					"title": "$.frameRoots",
-					"description": "Map of all frame contexts keyed by root key. In single-root mode, contains one entry with key `null`. In multi-root mode, each root has its own key and FrameContext.",
-					"methods": [
-						{
-							"name": "get",
-							"params": "(rootKey: string | null)",
-							"returns": "SunEditor.FrameContext",
-							"description": "Returns the FrameContext for the given root key."
-						},
-						{
-							"name": "set",
-							"params": "(rootKey: string | null, frameContext: FrameContext)",
-							"returns": "void",
-							"description": "Sets the FrameContext for the given root key."
-						},
-						{
-							"name": "has",
-							"params": "(rootKey: string | null)",
-							"returns": "boolean",
-							"description": "Checks if a root key exists."
-						},
-						{
-							"name": "keys",
-							"params": "()",
-							"returns": "Iterator<string | null>",
-							"description": "Returns an iterator of all root keys."
-						},
-						{
-							"name": "values",
-							"params": "()",
-							"returns": "Iterator<FrameContext>",
-							"description": "Returns an iterator of all FrameContext objects."
-						}
-					]
-				},
 				"context": {
 					"title": "$.context",
-					"description": "ContextMap — Global DOM element references shared across all frames. Contains toolbar, statusbar, and other editor-level UI elements. Stored as a Map<string, HTMLElement>.",
+					"description": "contextMap — تتم مشاركة مراجع عناصر DOM العامة عبر جميع الإطارات. يحتوي على شريط الأدوات وشريط الحالة وعناصر واجهة المستخدم الأخرى على مستوى المحرر. تم تخزينها كخريطة<string, HTMLElement>.",
 					"methods": [
 						{
 							"name": "menuTray",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **top menu tray** that holds buttons, dropdowns, or custom menus."
+							"description": "- **علبة القائمة العلوية** التي تحتوي على الأزرار أو القوائم المنسدلة أو القوائم المخصصة."
 						},
 						{
 							"name": "toolbar_main",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **main toolbar** element containing editor actions."
+							"description": "- عنصر **شريط الأدوات الرئيسي** الذي يحتوي على إجراءات المحرر."
 						},
 						{
 							"name": "toolbar_buttonTray",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **container for main toolbar buttons**."
+							"description": "- **حاوية أزرار شريط الأدوات الرئيسية**."
 						},
 						{
 							"name": "toolbar_arrow",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **arrow indicator** in the toolbar (used for dropdown/tool menu navigation)."
+							"description": "- **مؤشر السهم** في شريط الأدوات (يستخدم للتنقل بين القائمة المنسدلة/قائمة الأدوات)."
 						},
 						{
 							"name": "toolbar_wrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **wrapper for the main toolbar and editor frame** (groups UI together). === Sub-Toolbar (Contextual/Balloon) ==="
+							"description": "- ** غلاف شريط الأدوات الرئيسي وإطار المحرر ** (يجمع واجهة المستخدم معًا). === شريط الأدوات الفرعي (سياق/بالون) ==="
 						},
 						{
 							"name": "toolbar_sub_main",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **sub-toolbar** element (used for contextual or balloon toolbars)."
+							"description": "- عنصر **شريط الأدوات الفرعي** (يستخدم لأشرطة الأدوات السياقية أو البالونية)."
 						},
 						{
 							"name": "toolbar_sub_buttonTray",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **container for sub-toolbar buttons**."
+							"description": "- **حاوية أزرار شريط الأدوات الفرعي**."
 						},
 						{
 							"name": "toolbar_sub_arrow",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **arrow indicator** in the sub-toolbar."
+							"description": "- **مؤشر السهم** في شريط الأدوات الفرعي."
 						},
 						{
 							"name": "toolbar_sub_wrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **wrapper for the sub-toolbar**, containing its structure. === Status Bar ==="
+							"description": "- **غلاف شريط الأدوات الفرعي**، الذي يحتوي على بنيته. === شريط الحالة ==="
 						},
 						{
 							"name": "statusbar_wrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The **wrapper for the status bar** (footer area for resize handles, info, etc.). === Sticky Mode Helpers ==="
+							"description": "- ** غلاف شريط الحالة ** (منطقة التذييل لمقابض تغيير الحجم، والمعلومات، وما إلى ذلك). === مساعدو الوضع الثابت ==="
 						}
 					]
 				},
 				"frameContext": {
 					"title": "$.frameContext",
-					"description": "FrameContextMap — Per-frame DOM references and state flags for the currently active frame. Contains wysiwyg area, code view, placeholder, and runtime state. Stored as a Map.",
+					"description": "FrameContextMap — مراجع DOM لكل إطار وأعلام الحالة للإطار النشط حاليًا. يحتوي على منطقة wysiwyg وعرض التعليمات البرمجية والعنصر النائب وحالة وقت التشغيل. مخزنة كخريطة.",
 					"methods": [
 						{
 							"name": "key",
 							"params": "",
 							"returns": "any",
-							"description": "- Unique key identifying this editor instance (useful for multi-root editors)."
+							"description": "- مفتاح فريد يحدد نسخة المحرر هذه (مفيد للمحررين متعددي الجذور)."
 						},
 						{
 							"name": "options",
 							"params": "",
 							"returns": "SunEditor.FrameOptions",
-							"description": "- Frame-specific options (toolbar, plugins, behaviors, etc.). === Core DOM References ===",
+							"description": "- خيارات خاصة بالإطار (شريط الأدوات، والمكونات الإضافية، والسلوكيات، وما إلى ذلك). === مراجع DOM الأساسية ===",
 							"linkedAs": "$.frameOptions"
 						},
 						{
 							"name": "originElement",
 							"params": "",
 							"returns": "HTMLElement & HTMLTextAreaElement",
-							"description": "- The original source element (usually a <textarea> or target element)."
+							"description": "- العنصر المصدر الأصلي (عادةً ما يكون عنصرًا <textarea> أو عنصرًا مستهدفًا)."
 						},
 						{
 							"name": "topArea",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The outermost container wrapping the entire editor (toolbar + editor + status bar)."
+							"description": "- الحاوية الخارجية التي تغطي المحرر بأكمله (شريط الأدوات + المحرر + شريط الحالة)."
 						},
 						{
 							"name": "container",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The `.se-container` element that holds the editor's UI."
+							"description": "- العنصر `.se-container` الذي يحمل واجهة المستخدم الخاصة بالمحرر."
 						},
 						{
 							"name": "wrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The `.se-wrapper` element containing the editable area and internal components."
+							"description": "- العنصر `.se-wrapper` الذي يحتوي على المساحة القابلة للتحرير والمكونات الداخلية."
 						},
 						{
 							"name": "wysiwygFrame",
 							"params": "",
 							"returns": "SunEditor.WysiwygFrame",
-							"description": "- The WYSIWYG frame element (either an <iframe> or a div in inline mode)."
+							"description": "- عنصر إطار WYSIWYG (إما <iframe> أو div في الوضع المضمّن)."
 						},
 						{
 							"name": "wysiwyg",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- The actual editable content area (usually the iframe’s <body> or a contentEditable div)."
+							"description": "- منطقة المحتوى الفعلية القابلة للتحرير (عادةً ما تكون <body> الخاصة بـ iframe أو div contentEditable)."
 						},
 						{
 							"name": "eventWysiwyg",
 							"params": "",
 							"returns": "SunEditor.EventWysiwyg",
-							"description": "- Internal reference for wysiwyg events (set on initialization)."
+							"description": "- مرجع داخلي لأحداث wysiwyg (تم ضبطه عند التهيئة)."
 						},
 						{
 							"name": "codeWrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Wrapper element for the code-view mode."
+							"description": "- عنصر الغلاف لوضع عرض الكود."
 						},
 						{
 							"name": "code",
 							"params": "",
 							"returns": "HTMLElement & HTMLTextAreaElement",
-							"description": "- Code view editing element (a <textarea> or <pre>)."
+							"description": "- عنصر تحرير عرض التعليمات البرمجية (<textarea> أو <pre>)."
 						},
 						{
 							"name": "codeNumbers",
 							"params": "",
 							"returns": "HTMLTextAreaElement",
-							"description": "- Element displaying line numbers in code view mode."
+							"description": "- عنصر يعرض أرقام الأسطر في وضع عرض الكود."
 						},
 						{
 							"name": "placeholder",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Placeholder element shown when the editor is empty."
+							"description": "- عنصر نائب يظهر عندما يكون المحرر فارغًا."
 						},
 						{
 							"name": "statusbar",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Editor status bar element (for resizing, info, etc.)."
+							"description": "- عنصر شريط الحالة للمحرر (لتغيير الحجم والمعلومات وما إلى ذلك)."
 						},
 						{
 							"name": "navigation",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Navigation element (e.g., for outline or bookmarks)."
+							"description": "- عنصر التنقل (على سبيل المثال، للمخطط التفصيلي أو الإشارات المرجعية)."
 						},
 						{
 							"name": "charWrapper",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Wrapper for the character counter element."
+							"description": "- غلاف لعنصر عداد الأحرف."
 						},
 						{
 							"name": "charCounter",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Element showing the character counter."
+							"description": "- عنصر يظهر عداد الأحرف."
 						},
 						{
 							"name": "lineBreaker_t",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Top floating line-breaker UI element (for line insertion)."
+							"description": "- أعلى عنصر واجهة مستخدم لفاصل الأسطر العائمة (لإدراج السطر)."
 						},
 						{
 							"name": "lineBreaker_b",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Bottom floating line-breaker UI element (for line insertion)."
+							"description": "- عنصر واجهة المستخدم لفاصل الأسطر العائمة السفلية (لإدراج السطر)."
 						},
 						{
 							"name": "isCodeView",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether the editor is currently in code view mode."
+							"description": "- ما إذا كان المحرر حاليًا في وضع عرض التعليمات البرمجية."
 						},
 						{
 							"name": "isFullScreen",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether the editor is currently in fullscreen mode."
+							"description": "- ما إذا كان المحرر في وضع ملء الشاشة حاليًا."
 						},
 						{
 							"name": "isReadOnly",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether the editor is set to readonly mode."
+							"description": "- ما إذا كان المحرر مضبوطًا على وضع القراءة فقط."
 						},
 						{
 							"name": "isDisabled",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether the editor is currently disabled."
+							"description": "- ما إذا كان المحرر معطلاً حاليًا."
 						},
 						{
 							"name": "isShowBlocks",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether block structure visualization is enabled."
+							"description": "- ما إذا كان تم تمكين تصور بنية الكتلة."
 						},
 						{
 							"name": "isChanged",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether the content has been changed (-1 means initial state). === History Tracking ==="
+							"description": "- ما إذا كان المحتوى قد تم تغييره (-1 يعني الحالة الأولية). === تتبع التاريخ ==="
 						},
 						{
 							"name": "historyIndex",
 							"params": "",
 							"returns": "number",
-							"description": "- Current index in the history stack (undo/redo)."
+							"description": "- الفهرس الحالي في مكدس المحفوظات (تراجع/إعادة)."
 						},
 						{
 							"name": "savedIndex",
 							"params": "",
 							"returns": "number",
-							"description": "- Last saved index in the history stack. === DocumentType Editing (Optional) ==="
+							"description": "- آخر فهرس محفوظ في مكدس المحفوظات. === تحرير نوع المستند (اختياري) ==="
 						},
 						{
 							"name": "documentType",
 							"params": "",
 							"returns": "any",
-							"description": "- Document-type specific configuration or module reference."
+							"description": "- تكوين محدد لنوع المستند أو مرجع الوحدة النمطية."
 						},
 						{
 							"name": "documentTypeInner",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Inner container for document-type editors."
+							"description": "- حاوية داخلية لمحرري المستندات."
 						},
 						{
 							"name": "documentTypePage",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Page wrapper for paginated editing mode."
+							"description": "- غلاف الصفحة لوضع التحرير المرقّم."
 						},
 						{
 							"name": "documentTypePageMirror",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- Mirror page element used for selection/layout adjustments."
+							"description": "- عنصر صفحة المرآة المستخدم لتعديلات التحديد/التخطيط."
 						},
 						{
 							"name": "documentType_use_header",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether headers are used in document-type mode."
+							"description": "- ما إذا كانت الرؤوس مستخدمة في وضع نوع المستند."
 						},
 						{
 							"name": "documentType_use_page",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Whether page layout is enabled in document-type mode. === Runtime / Computed Values ==="
+							"description": "- ما إذا كان تخطيط الصفحة ممكّنًا في وضع نوع المستند. === وقت التشغيل / القيم المحسوبة ==="
 						},
 						{
 							"name": "wwComputedStyle",
 							"params": "",
 							"returns": "CSSStyleDeclaration",
-							"description": "- Cached computed styles for the wysiwyg element.\n- Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n- Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n- Improves performance by avoiding repeated `getComputedStyle()` calls."
-						}
-					]
-				},
-				"icons": {
-					"title": "$.icons",
-					"description": "Icon set object containing SVG strings for all editor UI icons. 156+ icon keys mapped to SVG markup. Customizable via the `icons` option.",
-					"methods": [
-						{
-							"name": "bold",
-							"params": "",
-							"returns": "string",
-							"description": "SVG string for the bold icon."
-						},
-						{
-							"name": "italic",
-							"params": "",
-							"returns": "string",
-							"description": "SVG string for the italic icon."
-						},
-						{
-							"name": "underline",
-							"params": "",
-							"returns": "string",
-							"description": "SVG string for the underline icon."
-						},
-						{
-							"name": "strike",
-							"params": "",
-							"returns": "string",
-							"description": "SVG string for the strikethrough icon."
-						},
-						{
-							"name": "...",
-							"params": "",
-							"returns": "string",
-							"description": "156+ icon keys total. Pass custom icons via the `icons` editor option."
-						}
-					]
-				},
-				"lang": {
-					"title": "$.lang",
-					"description": "Language strings object containing all UI text for the editor. 89+ keys for toolbar tooltips, dialog labels, and status messages. Customizable via the `lang` option.",
-					"methods": [
-						{
-							"name": "bold",
-							"params": "",
-							"returns": "string",
-							"description": "Tooltip text for bold button."
-						},
-						{
-							"name": "font",
-							"params": "",
-							"returns": "string",
-							"description": "Label for font selector."
-						},
-						{
-							"name": "fontSize",
-							"params": "",
-							"returns": "string",
-							"description": "Label for font size selector."
-						},
-						{
-							"name": "formats",
-							"params": "",
-							"returns": "string",
-							"description": "Label for format selector."
-						},
-						{
-							"name": "...",
-							"params": "",
-							"returns": "string",
-							"description": "89+ language keys total. Pass custom language via the `lang` editor option."
+							"description": "- الأنماط المحسوبة المخزنة مؤقتًا لعنصر wysiwyg. \n- يتم التعيين أثناء تهيئة المحرر عبر `window.getComputedStyle(wysiwyg)`. \n- يستخدم لاسترداد قيم CSS في وقت التشغيل (الحشوة، الهوامش، عائلة الخطوط، وما إلى ذلك). \n- يعمل على تحسين الأداء من خلال تجنب مكالمات `getComputedStyle()` ​​المتكررة."
 						}
 					]
 				},
 				"options": {
 					"title": "$.options",
-					"description": "BaseOptionsMap — Configuration options applied to the entire editor. Controls plugins, toolbar, themes, content filtering, and UI behavior. Stored as a Map<string, *>.",
+					"description": "BaseOptionsMap — يتم تطبيق خيارات التكوين على المحرر بأكمله. يتحكم في المكونات الإضافية وشريط الأدوات والموضوعات وتصفية المحتوى وسلوك واجهة المستخدم. مخزنة كخريطة <سلسلة، *>.",
 					"methods": [
 						{
 							"name": "plugins",
 							"params": "",
 							"returns": "| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>",
-							"description": "تكوين البرنامج المساعد."
+							"description": "- تكوين البرنامج المساعد."
 						},
 						{
 							"name": "excludedPlugins",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- Plugin configuration."
+							"description": "- تكوين البرنامج المساعد."
 						},
 						{
 							"name": "buttonList",
 							"params": "",
 							"returns": "SunEditor.UI.ButtonList",
-							"description": "قائمة أزرار شريط الأدوات، مجمعة حسب المصفوفات الفرعية. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.BUTTON_LIST}"
+							"description": "- قائمة أزرار شريط الأدوات، مجمعة حسب المصفوفات الفرعية. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.BUTTON_LIST}/// === الأوضاع والسمات ==="
 						},
 						{
 							"name": "v2Migration",
 							"params": "",
 							"returns": "boolean",
-							"description": "تمكين وضع الترحيل لـ SunEditor v2."
+							"description": "- تمكين وضع الترحيل لـ SunEditor v2."
 						},
 						{
 							"name": "mode",
 							"params": "",
 							"returns": "'classic' | 'inline' | 'balloon' | 'balloon-always'",
-							"description": "وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`."
+							"description": "- وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`."
 						},
 						{
 							"name": "type",
 							"params": "",
 							"returns": "string",
-							"description": "نوع المحرر: `document:header,page`."
+							"description": "- نوع المحرر: `document:header,page`."
 						},
 						{
 							"name": "theme",
 							"params": "",
 							"returns": "string",
-							"description": "موضوع المحرر."
+							"description": "- موضوع المحرر."
 						},
 						{
 							"name": "lang",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "تكوين اللغة. الافتراضي: إن"
+							"description": "- تكوين اللغة. الافتراضي: إن"
 						},
 						{
 							"name": "icons",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "يتجاوز الرموز الافتراضية."
+							"description": "- يتجاوز الرموز الافتراضية."
 						},
 						{
 							"name": "textDirection",
 							"params": "",
 							"returns": "'ltr' | 'rtl'",
-							"description": "اتجاه النص: `ltr` أو `rtl`."
+							"description": "- اتجاه النص: `ltr` أو `rtl`."
 						},
 						{
 							"name": "reverseButtons",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- An array of command pairs whose shortcut icons should be opposite each other.\n- Depends on the `textDirection` mode. /// === Strict & Advanced Filtering ==="
+							"description": "- مجموعة من أزواج الأوامر التي يجب أن تكون أيقونات الاختصارات الخاصة بها متقابلة. \n- يعتمد على وضع `textDirection`. /// === تصفية صارمة ومتقدمة ==="
 						},
 						{
 							"name": "strictMode",
 							"params": "",
 							"returns": "| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  }",
-							"description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`)"
+							"description": "- تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`)"
 						},
 						{
 							"name": "scopeSelectionTags",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "يتم التعامل مع العلامات كوحدات كاملة عند تحديد كل المحتوى. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SCOPE_SELECTION_TAGS}"
+							"description": "- يتم التعامل مع العلامات كوحدات كاملة عند تحديد كل المحتوى. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SCOPE_SELECTION_TAGS}/// === تصفية المحتوى وتنسيقه === == #### 1) التحكم في العلامات والعناصر"
 						},
 						{
 							"name": "elementWhitelist",
 							"params": "",
 							"returns": "string",
-							"description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. \n- المحدد: \"|\" (على سبيل المثال، \"p|div\"، \"*\"). \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}."
+							"description": "- يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. \n- المحدد: \"|\" (على سبيل المثال، \"p|div\"، \"*\"). \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}."
 						},
 						{
 							"name": "elementBlacklist",
 							"params": "",
 							"returns": "string",
-							"description": "يحدد عناصر HTML التي لا ينبغي استخدامها. \n- المحدد: \"|\" (على سبيل المثال، \"النص|النمط\"). \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى."
+							"description": "- تحديد عناصر HTML التي لا ينبغي استخدامها. \n- المحدد: \"|\" (على سبيل المثال، \"النص|النمط\"). \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى."
 						},
 						{
 							"name": "allowedEmptyTags",
 							"params": "",
 							"returns": "string",
-							"description": "قائمة العلامات المسموح بالاحتفاظ بها حتى لو كانت قيمها فارغة. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} \n- متسلسلة مع `ALLOWED_EMPTY_NODE_LIST` لتكوين قائمة `allowedEmptyTags` النهائية."
+							"description": "- قائمة العلامات المسموح بالاحتفاظ بها حتى لو كانت قيمها فارغة. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} - متسلسل مع `ALLOWED_EMPTY_NODE_LIST` لتكوين قائمة `allowedEmptyTags` ​​النهائية."
 						},
 						{
 							"name": "allowedClassName",
 							"params": "",
 							"returns": "string",
-							"description": "أسماء الفئات المسموح بها \n- تمت إضافة القيمة الافتراضية {@link DEFAULTS.CLASS_NAME}"
+							"description": "- أسماء الفئات المسموح بها. \n- تمت إضافة القيمة الافتراضية {@link DEFAULTS.CLASS_NAME}/// #### 2) التحكم في السمات"
 						},
 						{
 							"name": "attributeWhitelist",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-							"description": "يحدد سمات إضافية للسماح بكل علامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"id\"}) \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}."
+							"description": "- يحدد سمات إضافية للسماح لكل علامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"id\"}) \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}."
 						},
 						{
 							"name": "attributeBlacklist",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-							"description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"name\"}) \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا."
+							"description": "- يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"name\"}) \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا. /// #### 3) التحكم في النص والنمط المضمّن"
 						},
 						{
 							"name": "textStyleTags",
 							"params": "",
 							"returns": "string",
-							"description": "علامات نمط النص الإضافية. \n- يتبع الإعداد الافتراضي {@link PrivateBaseOptions.__textStyleTags}"
+							"description": "- علامات نمط النص الإضافية. \n- يتبع الإعداد الافتراضي {@link PrivateBaseOptions.__textStyleTags}"
 						},
 						{
 							"name": "convertTextTags",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "تعيين أنماط النص إلى علامات HTML محددة."
+							"description": "- تعيين أنماط النص إلى علامات HTML محددة."
 						},
 						{
 							"name": "allUsedStyles",
 							"params": "",
 							"returns": "string",
-							"description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. \n- المحدد: \"|\" (على سبيل المثال، \"اللون|لون الخلفية\")."
+							"description": "- تحديد أنماط إضافية لقائمة الأنماط المسموح بها. \n- المحدد: \"|\" (على سبيل المثال، \"اللون|لون الخلفية\")."
 						},
 						{
 							"name": "tagStyles",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "يحدد الأنماط المسموح بها لعلامات HTML."
+							"description": "- تحديد الأنماط المسموح بها لعلامات HTML."
 						},
 						{
 							"name": "spanStyles",
 							"params": "",
 							"returns": "string",
-							"description": "يحدد الأنماط المسموح بها للعلامة `span`. \n- الافتراضي يتبع {@link DEFAULTS.SPAN_STYLES}"
+							"description": "- تحديد الأنماط المسموح بها للعلامة `span`. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SPAN_STYLES}"
 						},
 						{
 							"name": "lineStyles",
 							"params": "",
 							"returns": "string",
-							"description": "يحدد الأنماط المسموح بها للعنصر `line` (ص.). \n- يتبع الإعداد الافتراضي {@link DEFAULTS.LINE_STYLES}"
+							"description": "- تحديد الأنماط المسموح بها للعنصر `line` (ص..). \n- يتبع الإعداد الافتراضي {@link DEFAULTS.LINE_STYLES}"
 						},
 						{
 							"name": "fontSizeUnits",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "وحدات حجم الخط المسموح بها. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SIZE_UNITS}"
+							"description": "- وحدات حجم الخط المسموح بها. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SIZE_UNITS}"
 						},
 						{
 							"name": "retainStyleMode",
 							"params": "",
 							"returns": "'repeat' | 'always' | 'none'",
-							"description": "يحدد كيفية التعامل مع العناصر المضمنة (مثل `<span>`، `<strong>`) عند حذف النص. \n- `repeat`: يتم الاحتفاظ بالأنماط ما لم يتم الضغط على مسافة للخلف بشكل متكرر. \n- سيؤدي الضغط المستمر إلى إزالة الأنماط في النهاية. \n- `none`: لا يتم الاحتفاظ بالأنماط. تتم إزالة العناصر المضمنة على الفور مع النص. \n- `always`: تستمر الأنماط إلى أجل غير مسمى ما لم تتم إزالتها بشكل صريح. \n- حتى إذا تم حذف كل النص الموجود داخل عنصر مضمّن، فسيظل العنصر نفسه قائمًا."
+							"description": "- يحدد كيفية التعامل مع العناصر المضمنة (مثل `<span>`، `<strong>`) عند حذف النص. \n- `repeat`: يتم الاحتفاظ بالأنماط ما لم يتم الضغط على مسافة للخلف بشكل متكرر. \n- سيؤدي الضغط المستمر إلى إزالة الأنماط في النهاية. \n- `none`: لا يتم الاحتفاظ بالأنماط. تتم إزالة العناصر المضمنة على الفور مع النص. \n- `always`: تستمر الأنماط إلى أجل غير مسمى ما لم تتم إزالتها بشكل صريح. \n- حتى إذا تم حذف كل النص الموجود داخل عنصر مضمّن، فسيظل العنصر نفسه قائمًا. /// #### 4) تنسيق الخط والكتل"
 						},
 						{
 							"name": "defaultLine",
 							"params": "",
 							"returns": "string",
-							"description": "العنصر الافتراضي `line` عند إدراج أسطر جديدة."
+							"description": "- العنصر `line` الافتراضي عند إدراج أسطر جديدة."
 						},
 						{
 							"name": "defaultLineBreakFormat",
 							"params": "",
 							"returns": "'line' | 'br'",
-							"description": "يحدد التنسيق الافتراضي لفاصل الأسطر. \n- [مستحسن] `line` : يتم تقسيم فاصل الأسطر إلى علامات عامة. \n- [غير مستحسن] `br` ​​: تتم معاملة فواصل الأسطر على أنها <br> على نفس السطر. (مثل التحول + أدخل) \n- تتم معالجة فواصل الأسطر كـ <br> داخل `line`. \n- يمكنك إنشاء `line` جديد عن طريق إدخال فاصل أسطر مرتين على التوالي. \n- التنسيقات التي تتضمن `line`، مثل \"اقتباس\"، لا تزال تعمل على أساس `line`. \n- تعمل عمليات محرر الشمس في وحدات `line`. \n- عند الضبط على `br`، قد ينخفض ​​الأداء عند تحرير الكثير من البيانات."
+							"description": "- تحديد التنسيق الافتراضي لفاصل الأسطر. \n- [مستحسن] `line` : يتم تقسيم فاصل الأسطر إلى علامات عامة. \n- [غير مستحسن] `br` ​​: تتم معاملة فواصل الأسطر على أنها <br> على نفس السطر. (مثل التحول + أدخل) \n- تتم معالجة فواصل الأسطر كـ <br> داخل `line`. \n- يمكنك إنشاء `line` جديد عن طريق إدخال فاصل أسطر مرتين على التوالي. \n- التنسيقات التي تتضمن `line`، مثل \"اقتباس\"، لا تزال تعمل على أساس `line`. \n- تعمل عمليات محرر الشمس في وحدات `line`. \n- عند الضبط على `br`، قد ينخفض ​​الأداء عند تحرير الكثير من البيانات."
 						},
 						{
 							"name": "lineAttrReset",
 							"params": "",
 							"returns": "string",
-							"description": "خصائص الخط التي يجب إعادة تعيينها عند تغيير الخطوط (مثل \"id|name\")."
+							"description": "- خصائص الخط التي يجب إعادة ضبطها عند تغيير الخطوط (مثل \"id|name\")."
 						},
 						{
 							"name": "formatLine",
 							"params": "",
 							"returns": "string",
-							"description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. الفاصل: \"|\" (على سبيل المثال، \"p|div\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` ​​النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`."
+							"description": "- بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. الفاصل: \"|\" (على سبيل المثال، \"p|div\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` ​​النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`."
 						},
 						{
 							"name": "formatBrLine",
 							"params": "",
 							"returns": "string",
-							"description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. (على سبيل المثال \"قبل\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`. \n- ※ يؤدي إدخال مفتاح Enter في السطر الأخير إلى إنهاء `brLine` وإلحاق `line`."
+							"description": "- بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. (على سبيل المثال \"قبل\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`. \n- ※ يؤدي إدخال مفتاح Enter في السطر الأخير إلى إنهاء `brLine` وإلحاق `line`."
 						},
 						{
 							"name": "formatClosureBrLine",
 							"params": "",
 							"returns": "string",
-							"description": "بالإضافة إلى ذلك، تم السماح بعناصر `closureBrLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBrLine} لقائمة `closureBrLine` ​​النهائية. \n- تم تضمين عناصر `closureBrLine` في `brLine`. \n- فاصل أسطر عناصر `closureBrLine` هو علامة `BR`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. ([على سبيل المثال] تنسيق خلايا الجدول)"
+							"description": "- بالإضافة إلى ذلك، تم السماح بعناصر `closureBrLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBrLine} لقائمة `closureBrLine` ​​النهائية. \n- تم تضمين عناصر `closureBrLine` في `brLine`. \n- فاصل أسطر عناصر `closureBrLine` هو علامة `BR`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. ([على سبيل المثال] تنسيق خلايا الجدول)"
 						},
 						{
 							"name": "formatBlock",
 							"params": "",
 							"returns": "string",
-							"description": "بالإضافة إلى ذلك، تم السماح بعناصر `block` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBlock} لتكوين قائمة `block` ​​النهائية. \n- `block` يغلف `line` و`component`."
+							"description": "- بالإضافة إلى ذلك، تم السماح بعناصر `block` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBlock} لتكوين قائمة `block` ​​النهائية. \n- `block` يغلف `line` و`component`."
 						},
 						{
 							"name": "formatClosureBlock",
 							"params": "",
 							"returns": "string",
-							"description": "بالإضافة إلى ذلك، تم السماح بعناصر `closureBlock` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBlock} لقائمة `closureBlock` ​​النهائية. \n- تم تضمين عناصر `closureBlock` في `block`. \n- عنصر `closureBlock` يغطي `line` و`component`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. (على سبيل المثال، تنسيق خلايا الجدول)"
+							"description": "- بالإضافة إلى ذلك، تم السماح بعناصر `closureBlock` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBlock} لقائمة `closureBlock` ​​النهائية. \n- تم تضمين عناصر `closureBlock` في `block`. \n- عنصر `closureBlock` يغطي `line` و`component`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. (على سبيل المثال، تنسيق خلايا الجدول) /// === واجهة المستخدم والتفاعل ==="
 						},
 						{
 							"name": "closeModalOutsideClick",
 							"params": "",
 							"returns": "boolean",
-							"description": "يغلق الوسائط عند النقر بالخارج."
+							"description": "- يغلق الوسائط عند النقر بالخارج."
 						},
 						{
 							"name": "syncTabIndent",
 							"params": "",
 							"returns": "boolean",
-							"description": "مزامنة المسافة البادئة لعلامة التبويب مع المسافات."
+							"description": "- مزامنة المسافة البادئة لعلامة التبويب مع المسافات."
 						},
 						{
 							"name": "tabDisable",
 							"params": "",
 							"returns": "boolean",
-							"description": "تعطيل إدخال مفتاح علامة التبويب."
+							"description": "- تعطيل إدخال مفتاح علامة التبويب."
 						},
 						{
 							"name": "toolbar_width",
 							"params": "",
 							"returns": "string",
-							"description": "عرض شريط الأدوات."
+							"description": "- عرض شريط الأدوات."
 						},
 						{
 							"name": "toolbar_container",
 							"params": "",
 							"returns": "HTMLElement | null",
-							"description": "عنصر الحاوية لشريط الأدوات."
+							"description": "- عنصر الحاوية لشريط الأدوات."
 						},
 						{
 							"name": "toolbar_sticky",
 							"params": "",
 							"returns": "number",
-							"description": "لتمكين شريط الأدوات الثابت مع الإزاحة الاختيارية."
+							"description": "- تمكين شريط الأدوات اللاصق مع الإزاحة الاختيارية."
 						},
 						{
 							"name": "toolbar_hide",
 							"params": "",
 							"returns": "boolean",
-							"description": "إخفاء شريط الأدوات في البداية."
+							"description": "- إخفاء شريط الأدوات في البداية."
 						},
 						{
 							"name": "subToolbar",
 							"params": "",
 							"returns": "{\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t}",
-							"description": "تكوين شريط الأدوات الفرعي"
+							"description": "- تكوين شريط الأدوات الفرعي."
 						},
 						{
 							"name": "statusbar_container",
 							"params": "",
 							"returns": "HTMLElement | null",
-							"description": "عنصر الحاوية لشريط الحالة."
+							"description": "- عنصر الحاوية لشريط الحالة."
 						},
 						{
 							"name": "shortcutsHint",
 							"params": "",
 							"returns": "boolean",
-							"description": "يعرض تلميحات الاختصارات في تلميحات الأدوات."
+							"description": "- يعرض تلميحات الاختصارات في تلميحات الأدوات."
 						},
 						{
 							"name": "shortcutsDisable",
 							"params": "",
 							"returns": "boolean",
-							"description": "تعطيل اختصارات لوحة المفاتيح."
+							"description": "- تعطيل اختصارات لوحة المفاتيح."
 						},
 						{
 							"name": "shortcuts",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: Array<string> | undefined;\n\t}",
-							"description": "اختصارات لوحة المفاتيح المخصصة."
+							"description": "- اختصارات لوحة المفاتيح المخصصة. /// === الميزات المتقدمة ==="
 						},
 						{
 							"name": "copyFormatKeepOn",
 							"params": "",
 							"returns": "boolean",
-							"description": "يحافظ على تنسيق المحتوى المنسوخ."
+							"description": "- يحافظ على تنسيق المحتوى المنسوخ."
 						},
 						{
 							"name": "autoLinkify",
 							"params": "",
 							"returns": "boolean",
-							"description": "يقوم تلقائيًا بتحويل عناوين URL إلى ارتباطات تشعبية. (`Link` مطلوب البرنامج المساعد) \n- الافتراضي: `Boolean(plugins.link)` — يتم تحديده بناءً على ما إذا كان المكوّن الإضافي `link` ممكّنًا أم لا."
+							"description": "- تحويل عناوين URL تلقائيًا إلى ارتباطات تشعبية. (`Link` مطلوب البرنامج المساعد) \n- الافتراضي: `Boolean(plugins.link)` — يتم تحديده بناءً على ما إذا كان المكوّن الإضافي `link` ممكّنًا أم لا."
 						},
 						{
 							"name": "autoStyleify",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- Styles applied automatically on text input."
+							"description": "- الأنماط المطبقة تلقائيًا على إدخال النص."
 						},
 						{
 							"name": "historyStackDelayTime",
 							"params": "",
 							"returns": "number",
-							"description": "وقت التأخير لتحديثات مكدس المحفوظات (مللي ثانية)."
+							"description": "- وقت التأخير لتحديثات مكدس المحفوظات (مللي ثانية)."
 						},
 						{
 							"name": "printClass",
 							"params": "",
 							"returns": "string",
-							"description": "اسم الفئة للطباعة."
+							"description": "- اسم الفئة للطباعة."
 						},
 						{
 							"name": "fullScreenOffset",
 							"params": "",
 							"returns": "number",
-							"description": "يتم تطبيق الإزاحة عند الدخول في وضع ملء الشاشة."
+							"description": "- يتم تطبيق الإزاحة عند الدخول في وضع ملء الشاشة."
 						},
 						{
 							"name": "previewTemplate",
 							"params": "",
 							"returns": "string | null",
-							"description": "قالب مخصص لوضع المعاينة."
+							"description": "- قالب مخصص لوضع المعاينة."
 						},
 						{
 							"name": "printTemplate",
 							"params": "",
 							"returns": "string | null",
-							"description": "قالب مخصص لوضع الطباعة."
+							"description": "- قالب مخصص لوضع الطباعة."
 						},
 						{
 							"name": "componentInsertBehavior",
 							"params": "",
 							"returns": "SunEditor.ComponentInsertType",
-							"description": "تمكين التحديد التلقائي للمكونات المدرجة. \n- بالنسبة للمكونات المضمنة: ضع المؤشر بالقرب من المكون، أو حدد إذا لم يكن هناك نطاق قريب. \n- بالنسبة لمكونات الكتلة: يتم تنفيذ السلوك بناءً على `selectMode`: \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+							"description": "- تمكين الاختيار التلقائي للمكونات المدرجة. \n- بالنسبة للمكونات المضمنة: ضع المؤشر بالقرب من المكون، أو حدد إذا لم يكن هناك نطاق قريب. \n- بالنسبة لمكونات الكتلة: يتم تنفيذ السلوك بناءً على `selectMode`: \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
 						},
 						{
 							"name": "defaultUrlProtocol",
 							"params": "",
 							"returns": "string | null",
-							"description": "بروتوكول URL الافتراضي للروابط."
+							"description": "- بروتوكول URL الافتراضي للروابط."
 						},
 						{
 							"name": "toastMessageTime",
 							"params": "",
 							"returns": "any",
-							"description": "{\"نسخة\": 1500} - مدة عرض رسائل التوست."
+							"description": "- {\"نسخة\": 1500} - مدة عرض رسائل التوست."
 						},
 						{
 							"name": "freeCodeViewMode",
 							"params": "",
 							"returns": "boolean",
-							"description": "تمكين وضع عرض التعليمات البرمجية المجاني."
+							"description": "- تمكين وضع عرض التعليمات البرمجية المجاني. === الخيارات الديناميكية ==="
 						},
 						{
 							"name": "externalLibs",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: any;\n\t}",
-							"description": "المكتبات الخارجية مثل CodeMirror أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
+							"description": "- المكتبات الخارجية مثل CodeMirror أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
 						},
 						{
 							"name": "allowedExtraTags",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: boolean;\n\t}",
-							"description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}"
+							"description": "- يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}/// === أحداث المستخدم ==="
 						},
 						{
 							"name": "events",
 							"params": "",
 							"returns": "SunEditor.Event.Handlers",
-							"description": "تكوين معالجات أحداث المستخدم"
+							"description": "- تكوين معالجات أحداث المستخدم /// === [ خيارات البرنامج الإضافي ] === ---[ يتم إنشاؤها تلقائيًا بواسطة البرامج النصية/check/inject-plugin-jsdoc.cjs - لا تقم بالتحرير يدويًا ]---"
 						},
 						{
 							"name": "align",
@@ -3432,151 +3193,259 @@
 							"name": "videoGallery",
 							"params": "",
 							"returns": "import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions",
-							"description": "/// ---[ End of auto-generated plugin options ]--- ================================================================================================================================"
+							"description": "/// ---[ نهاية خيارات المكونات الإضافية التي تم إنشاؤها تلقائيًا ] --- ====================================================================================================================== ======================================================================================================================"
 						}
 					]
 				},
 				"frameOptions": {
 					"title": "$.frameOptions",
-					"description": "FrameOptionsMap — Configuration options for individual frames. Controls content, sizing, iframe mode, statusbar, and character counter.",
+					"description": "FrameOptionsMap — خيارات التكوين للإطارات الفردية. يتحكم في المحتوى، والتحجيم، ووضع iframe، وشريط الحالة، وعداد الأحرف.",
 					"methods": [
 						{
 							"name": "value",
 							"params": "",
 							"returns": "string",
-							"description": "القيمة الأولية للمحرر."
+							"description": "- القيمة الأولية للمحرر."
 						},
 						{
 							"name": "placeholder",
 							"params": "",
 							"returns": "string",
-							"description": "نص العنصر النائب."
+							"description": "- نص العنصر النائب."
 						},
 						{
 							"name": "editableFrameAttributes",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "سمات الإطار القابل للتحرير[.sun-editor-editable]. (على سبيل المثال، [المفتاح]: القيمة)"
+							"description": "- سمات الإطار القابل للتحرير[.sun-editor-editable]. (على سبيل المثال، [المفتاح]: القيمة) /// === التخطيط والتحجيم ==="
 						},
 						{
 							"name": "width",
 							"params": "",
 							"returns": "string | number",
-							"description": "العرض للمحرر."
+							"description": "- العرض للمحرر."
 						},
 						{
 							"name": "minWidth",
 							"params": "",
 							"returns": "string | number",
-							"description": "الحد الأدنى للعرض للمحرر."
+							"description": "- الحد الأدنى للعرض للمحرر."
 						},
 						{
 							"name": "maxWidth",
 							"params": "",
 							"returns": "string | number",
-							"description": "أقصى عرض للمحرر."
+							"description": "- أقصى عرض للمحرر."
 						},
 						{
 							"name": "height",
 							"params": "",
 							"returns": "string | number",
-							"description": "الارتفاع للمحرر."
+							"description": "- الارتفاع للمحرر."
 						},
 						{
 							"name": "minHeight",
 							"params": "",
 							"returns": "string | number",
-							"description": "الحد الأدنى للارتفاع للمحرر."
+							"description": "- الحد الأدنى لارتفاع المحرر."
 						},
 						{
 							"name": "maxHeight",
 							"params": "",
 							"returns": "string | number",
-							"description": "أقصى ارتفاع للمحرر."
+							"description": "- أقصى ارتفاع للمحرر."
 						},
 						{
 							"name": "editorStyle",
 							"params": "",
 							"returns": "string",
-							"description": "سلسلة نمط الإطار العلوي للمحرر. (على سبيل المثال، \"border: 1px Solid #ccc;\")."
+							"description": "- سلسلة نمط الإطار العلوي للمحرر. (على سبيل المثال، \"border: 1px Solid #ccc;\"). /// === وضع Iframe ==="
 						},
 						{
 							"name": "iframe",
 							"params": "",
 							"returns": "boolean",
-							"description": "سيتم وضع المحتوى في إطار iframe وعزله عن بقية الصفحة."
+							"description": "- سيتم وضع المحتوى في إطار iframe وعزله عن بقية الصفحة."
 						},
 						{
 							"name": "iframe_fullPage",
 							"params": "",
 							"returns": "boolean",
-							"description": "يسمح باستخدام علامات HTML وHEAD وBODY وإعلان DOCTYPE على `iframe`."
+							"description": "- يسمح باستخدام علامات HTML وHEAD وBODY وإعلان DOCTYPE على `iframe`."
 						},
 						{
 							"name": "iframe_attributes",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "سمات `iframe`. (على سبيل المثال، {'allow-scripts': 'true'})"
+							"description": "- سمات `iframe`. (على سبيل المثال، {'allow-scripts': 'true'})"
 						},
 						{
 							"name": "iframe_cssFileName",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- (e.g. \"suneditor\" or \"suneditor.[a-z0-9]+\" matches \"suneditor.abc123.css\")\n- \"*\": Wildcard to include ALL stylesheets from the page.\n- Array: Multiple patterns (e.g. [\"suneditor\", \"custom\", \"*\"]).\n- Absolute URLs and data URLs (data:text/css,) are also supported. /// === Statusbar & Character Counter ==="
+							"description": "- ملفات CSS لتطبيقها داخل iframe. \n- السلسلة: نمط اسم الملف للبحث في علامات المستند `<link>`. \n- (على سبيل المثال، \"suneeditor\" أو \"suneeditor.[a-z0-9]+\" يتطابق مع \"suneeditor.abc123.css\") \n- \"*\": حرف البدل لتضمين جميع أوراق الأنماط من الصفحة. \n- المصفوفة: أنماط متعددة (مثل [\"suneeditor\"، \"custom\"، \"*\"]). \n- يتم أيضًا دعم عناوين URL المطلقة وعناوين URL للبيانات (البيانات: text/css). /// === شريط الحالة وعداد الأحرف ==="
 						},
 						{
 							"name": "statusbar",
 							"params": "",
 							"returns": "boolean",
-							"description": "تمكين شريط الحالة."
+							"description": "- تمكين شريط الحالة."
 						},
 						{
 							"name": "statusbar_showPathLabel",
 							"params": "",
 							"returns": "boolean",
-							"description": "يعرض بنية العقدة الحالية في شريط الحالة."
+							"description": "- يعرض بنية العقدة الحالية في شريط الحالة."
 						},
 						{
 							"name": "statusbar_resizeEnable",
 							"params": "",
 							"returns": "boolean",
-							"description": "لتمكين وظيفة تغيير الحجم لشريط الحالة السفلي."
+							"description": "- تمكين وظيفة تغيير الحجم لشريط الحالة السفلي."
 						},
 						{
 							"name": "charCounter",
 							"params": "",
 							"returns": "boolean",
-							"description": "يظهر عدد الأحرف في المحرر. \n- إذا كان للخيار `maxCharCount` قيمة، تصبح `true`."
+							"description": "- يظهر عدد الأحرف في المحرر. \n- إذا كان للخيار `maxCharCount` قيمة، تصبح `true`."
 						},
 						{
 							"name": "charCounter_max",
 							"params": "",
 							"returns": "number | null",
-							"description": "الحد الأقصى لعدد الأحرف المسموح بإدراجها في المحرر."
+							"description": "- الحد الأقصى لعدد الأحرف المسموح بإدراجها في المحرر."
 						},
 						{
 							"name": "charCounter_label",
 							"params": "",
 							"returns": "string | null",
-							"description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي. (على سبيل المثال، \"الأحرف: 20/200\")"
+							"description": "- النص الذي سيتم عرضه في منطقة `charCounter` في الشريط السفلي. (على سبيل المثال، \"الأحرف: 20/200\")"
 						},
 						{
 							"name": "charCounter_type",
 							"params": "",
 							"returns": "'char' | 'byte' | 'byte-html'",
-							"description": "يحدد طريقة الحساب للخيار `charCounter`. \n- `char`: طول الأحرف. \n- `byte`: حجم البيانات الثنائية للأحرف. \n- `byte-html`: حجم البيانات الثنائية لسلسلة HTML الكاملة."
+							"description": "- تحديد طريقة حساب الخيار `charCounter`. \n- `char`: طول الأحرف. \n- `byte`: حجم البيانات الثنائية للأحرف. \n- `byte-html`: حجم البيانات الثنائية لسلسلة HTML الكاملة."
+						}
+					]
+				},
+				"frameRoots": {
+					"title": "$.frameRoots",
+					"description": "خريطة لجميع سياقات الإطار المرتبطة بمفتاح الجذر. في وضع الجذر الفردي، يحتوي على إدخال واحد بالمفتاح `null`. في الوضع متعدد الجذور، يكون لكل جذر مفتاح خاص به وFrameContext.",
+					"methods": [
+						{
+							"name": "get",
+							"params": "(rootKey: string | null)",
+							"returns": "SunEditor.FrameContext",
+							"description": "إرجاع FrameContext لمفتاح الجذر المحدد."
+						},
+						{
+							"name": "set",
+							"params": "(rootKey: string | null, frameContext: FrameContext)",
+							"returns": "void",
+							"description": "يضبط FrameContext لمفتاح الجذر المحدد."
+						},
+						{
+							"name": "has",
+							"params": "(rootKey: string | null)",
+							"returns": "boolean",
+							"description": "يتحقق من وجود مفتاح الجذر."
+						},
+						{
+							"name": "keys",
+							"params": "()",
+							"returns": "Iterator<string | null>",
+							"description": "إرجاع مكرر لجميع مفاتيح الجذر."
+						},
+						{
+							"name": "values",
+							"params": "()",
+							"returns": "Iterator<FrameContext>",
+							"description": "إرجاع مكرر لجميع كائنات FrameContext."
+						}
+					]
+				},
+				"icons": {
+					"title": "$.icons",
+					"description": "كائن مجموعة الأيقونات الذي يحتوي على سلاسل SVG لجميع أيقونات واجهة مستخدم المحرر. تم تعيين أكثر من 156 مفتاح رمز لترميز SVG. قابل للتخصيص عبر خيار `icons`.",
+					"methods": [
+						{
+							"name": "bold",
+							"params": "",
+							"returns": "string",
+							"description": "سلسلة SVG للرمز الغامق."
+						},
+						{
+							"name": "italic",
+							"params": "",
+							"returns": "string",
+							"description": "سلسلة SVG للأيقونة المائلة."
+						},
+						{
+							"name": "underline",
+							"params": "",
+							"returns": "string",
+							"description": "سلسلة SVG لرمز التسطير."
+						},
+						{
+							"name": "strike",
+							"params": "",
+							"returns": "string",
+							"description": "سلسلة SVG لرمز يتوسطه خط."
+						},
+						{
+							"name": "...",
+							"params": "",
+							"returns": "string",
+							"description": "إجمالي 156+ مفاتيح أيقونة. قم بتمرير الرموز المخصصة عبر خيار محرر `icons`."
+						}
+					]
+				},
+				"lang": {
+					"title": "$.lang",
+					"description": "كائن سلاسل اللغة يحتوي على كل نص واجهة المستخدم للمحرر. أكثر من 89 مفتاحًا لتلميحات شريط الأدوات وتسميات الحوار ورسائل الحالة. قابل للتخصيص عبر خيار `lang`.",
+					"methods": [
+						{
+							"name": "bold",
+							"params": "",
+							"returns": "string",
+							"description": "نص تلميح الأداة للزر الغامق."
+						},
+						{
+							"name": "font",
+							"params": "",
+							"returns": "string",
+							"description": "تسمية لمحدد الخط."
+						},
+						{
+							"name": "fontSize",
+							"params": "",
+							"returns": "string",
+							"description": "تسمية لمحدد حجم الخط."
+						},
+						{
+							"name": "formats",
+							"params": "",
+							"returns": "string",
+							"description": "تسمية لمحدد التنسيق."
+						},
+						{
+							"name": "...",
+							"params": "",
+							"returns": "string",
+							"description": "إجمالي 89+ مفاتيح لغة. قم بتمرير لغة مخصصة عبر خيار محرر `lang`."
 						}
 					]
 				},
 				"facade": {
 					"title": "$.facade",
-					"description": "Reference to the Editor Instance (public API). All methods on the editor object are accessible through $.facade.",
+					"description": "مرجع إلى مثيل المحرر (واجهة برمجة التطبيقات العامة). يمكن الوصول إلى كافة الأساليب الموجودة في كائن المحرر من خلال $.facade.",
 					"methods": [
 						{
 							"name": "(Editor Instance)",
 							"params": "",
 							"returns": "SunEditor.Instance",
-							"description": "The public editor API. See Editor Instance section for all available methods.",
+							"description": "واجهة برمجة تطبيقات المحرر العام. راجع قسم مثيلات المحرر للتعرف على جميع الطرق المتاحة.",
 							"linkedAs": "Editor Instance"
 						}
 					]
@@ -3660,7 +3529,7 @@
 							"paramDescriptions": {
 								"fileList": "قائمة كائنات الملف"
 							},
-							"returnsDescription": "إذا كانت النتيجة خاطئة، فسيتم إلغاء تحميل الملف"
+							"returnsDescription": "إذا تم إرجاع `false`، فسيتم إلغاء تحميل الملف"
 						},
 						{
 							"name": "convertFormat",
@@ -4525,7 +4394,7 @@
 							"name": "createInline",
 							"params": "src: string, anchor: Node | null, width: string, height: string, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, alt: string, isLast: boolean",
 							"returns": "void",
-							"description": "ينشئ مكونًا جديدًا للصورة المضمنة، ويغلفه في حاوية الشكل المضمنة باستخدام أداة ربط اختيارية، - ويطبق إعدادات الحجم، ويدرجها في المحرر.",
+							"description": "ينشئ مكونًا جديدًا للصورة المضمنة، ويغلفه في حاوية الشكل المضمنة مع مرساة اختيارية، - يطبق إعدادات الحجم، ويدرجها في المحرر.",
 							"example": "",
 							"paramDescriptions": {
 								"src": "عنوان URL للصورة التي سيتم إدراجها.",
@@ -4806,7 +4675,7 @@
 								"width": "العرض المطلوب لعنصر الفيديو.",
 								"height": "الارتفاع المطلوب لعنصر الفيديو.",
 								"align": "المحاذاة التي سيتم تطبيقها على عنصر الفيديو (على سبيل المثال، \"يسار\"، \"وسط\"، \"يمين\").",
-								"isUpdate": "يشير إلى ما إذا كان هذا تحديثًا لمكون موجود (صحيح) أو إنشاء جديد (خطأ).",
+								"isUpdate": "يشير إلى ما إذا كان هذا تحديثًا لمكون موجود (`true`) أو إنشاء جديد (`false`).",
 								"file": "البيانات الوصفية للملف المرتبطة بالفيديو",
 								"isLast": "يشير إلى ما إذا كان هذا هو الملف الأخير في الدفعة (يستخدم لإجراءات التمرير والإدراج)."
 							}
@@ -5085,7 +4954,7 @@
 								"element": "العنصر المستهدف",
 								"className": "اسم فئة الحاوية (ثابت: `se-component`)"
 							},
-							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}"
+							"returnsDescription": "{الهدف، الحاوية، الغلاف، الغلاف المضمن، التسمية التوضيحية}"
 						},
 						{
 							"name": "CreateInlineContainer",
@@ -5338,7 +5207,7 @@
 							"name": "open",
 							"params": "target: Node",
 							"returns": "void",
-							"description": "افتح شريط تمرير التدرج اللوني.",
+							"description": "افتح شريط تمرير اللون.",
 							"example": "",
 							"paramDescriptions": {
 								"target": "العنصر الذي سيتم إرفاق شريط تمرير الصبغة به."
@@ -5708,7 +5577,7 @@
 							"name": "getValues",
 							"params": "obj: any",
 							"returns": "Array<any>",
-							"description": "كائن. القيم",
+							"description": "Object.values",
 							"example": "",
 							"paramDescriptions": {
 								"obj": "معلمة الكائن."
@@ -6409,7 +6278,7 @@
 								"a": "عقدة للمقارنة",
 								"b": "عقدة للمقارنة"
 							},
-							"returnsDescription": "يُرجع صحيحًا إذا كان كلاهما عقدًا نصية."
+							"returnsDescription": "يُرجع `true` إذا كان كلاهما عبارة عن عقد نصية."
 						},
 						{
 							"name": "isExcludeFormat",
@@ -6913,7 +6782,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "عناصر للبحث عن اسم الفصل",
-								"className": "اسم الفصل المراد البحث عنه"
+								"className": "اسم الفئة للبحث عنها"
 							}
 						},
 						{
@@ -7050,7 +6919,7 @@
 					"description": "يتم التشغيل عند انتهاء المحرر من التهيئة الكاملة. تم تأجيل هذا الحدث عبر `setTimeout` للتأكد من اكتمال جميع حسابات تخطيط DOM، وأن شريط الأدوات مرئي، وتسجيل `ResizeObserver`، وتهيئة مكدس المحفوظات. استخدم هذا الحدث لاستدعاء أساليب المحرر بأمان فورًا بعد الإنشاء.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)"
+						"params": ".$ - تبعيات النواة"
 					}
 				},
 				{
@@ -7148,10 +7017,10 @@
 					"name": "onCopy",
 					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; event: Event; clipboardData: Event }",
 					"returns": "void",
-					"description": "يتم إطلاقه عندما يحاول المستخدم نسخ محتوى من المحرر. يتم تشغيله قبل النسخ إلى الحافظة. قم بإرجاع `false` لمنع عملية النسخ.",
+					"description": "يتم إطلاقه عندما يحاول المستخدم نسخ المحتوى من المحرر. يتم تشغيله قبل النسخ إلى الحافظة. قم بإرجاع `false` لمنع عملية النسخ.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.clipboardData": "`clipboardData`"
 					}
 				},
@@ -7162,7 +7031,7 @@
 					"description": "يتم إطلاقه عندما يحاول المستخدم قطع المحتوى من المحرر. يتم تشغيله قبل القطع إلى الحافظة. قم بإرجاع `false` لمنع عملية القطع ودفع التاريخ.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.clipboardData": "`clipboardData`"
 					}
 				},
@@ -7173,7 +7042,7 @@
 					"description": "يتم تشغيله عندما يتغير محتوى المحرر. يتم تشغيله بعد تحديثات مكدس المحفوظات وعمليات التراجع/الإعادة وتحرير المستخدم. استخدم هذا لمزامنة الحالة الخارجية أو التحقق من صحة المحتوى. تحتوي المعلمة `data` على محتوى HTML الحالي.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.data": "محرر محتوى HTML"
 					}
 				},
@@ -7184,7 +7053,7 @@
 					"description": "يتم تشغيله عندما يصبح شريط الأدوات مرئيًا. يتم تشغيله لوضع البالون وأشرطة أدوات الوضع المضمن. تشير المعلمة `mode` إلى نوع شريط الأدوات (`balloon` ​​أو `inline`).",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.toolbar": "عنصر شريط الأدوات",
 						"params.mode": "وضع شريط الأدوات"
 					}
@@ -7196,7 +7065,7 @@
 					"description": "يتم تشغيله بعد عرض وحدة تحكم المكون (شريط الأدوات العائم). يتم تشغيله عند تحديد المكونات (الصور ومقاطع الفيديو والجداول). تشير المعلمة `caller` إلى البرنامج المساعد الذي قام بتشغيل وحدة التحكم.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.caller": "اسم البرنامج المساعد للمتصل",
 						"params.info": "كائن المعلومات"
 					}
@@ -7208,7 +7077,7 @@
 					"description": "يتم تشغيله قبل عرض وحدة تحكم المكون (شريط الأدوات العائم). يتم تشغيله عندما تكون المكونات (الصور ومقاطع الفيديو والجداول) على وشك التحديد. قم بإرجاع `false` لمنع ظهور وحدة التحكم.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.caller": "اسم البرنامج المساعد للمتصل",
 						"params.info": "كائن المعلومات"
 					}
@@ -7220,7 +7089,7 @@
 					"description": "يتم تشغيله عندما يقوم المحرر بالتبديل بين عرض WYSIWYG وعرض التعليمات البرمجية. تشير المعلمة `is` إلى ما إذا كان عرض التعليمات البرمجية نشطًا الآن (`true`) أو عرض WYSIWYG نشطًا (`false`).",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.is": "حالة عرض الكود"
 					}
 				},
@@ -7231,7 +7100,7 @@
 					"description": "يتم تشغيله عندما يدخل المحرر في وضع ملء الشاشة أو يخرج منه. تشير المعلمة `is` إلى ما إذا كان وضع ملء الشاشة نشطًا الآن (`true`) أو الوضع العادي نشطًا (`false`).",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.is": "حالة ملء الشاشة"
 					}
 				},
@@ -7242,7 +7111,7 @@
 					"description": "يتم إطلاقه عندما يتغير ارتفاع منطقة wysiwyg الخاصة بالمحرر. تم تشغيله بواسطة `ResizeObserver`. استخدم هذا لمزامنة عناصر واجهة المستخدم الخارجية أو تنفيذ سلوكيات تغيير الحجم المخصصة. تتضمن المعلمات الارتفاع الحالي والارتفاع السابق و`ResizeObserverEntry`.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.height": "ارتفاع إطار منطقة wysiwyg",
 						"params.prevHeight": "منطقة wysiwyg الارتفاع السابق",
 						"params.observerEntry": "ResizeObserverEntry"
@@ -7255,7 +7124,7 @@
 					"description": "يتم تشغيله بعد إنشاء أزرار شريط الأدوات وعرضها. يتم تشغيله أثناء تهيئة شريط الأدوات و`resetToolbarButtons()`. استخدم هذا لتخصيص DOM لشريط الأدوات أو إضافة عناصر مخصصة إلى `buttonTray`.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.buttonTray": "عنصر علبة الزر"
 					}
 				},
@@ -7266,7 +7135,7 @@
 					"description": "يتم إطلاقه عند تنفيذ أمر الحفظ (Ctrl+S أو زر الحفظ). استخدم هذا لإرسال محتوى المحرر إلى الخادم أو تنفيذ منطق الحفظ المخصص. قم بإرجاع حل الوعد إلى `false` لمنع اكتمال عملية الحفظ.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.data": "بيانات المحرر"
 					}
 				},
@@ -7277,7 +7146,7 @@
 					"description": "يتم تشغيله عند إعادة ضبط حالات زر شريط الأدوات. يتم تشغيله أثناء عمليات التراجع/الإعادة والتنقل في السجل. استخدم هذا لتحديث أزرار شريط الأدوات المخصصة أو حالة واجهة المستخدم الخارجية.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.rootKey": "مفتاح الإطار"
 					}
 				},
@@ -7288,7 +7157,7 @@
 					"description": "يتم تشغيله قبل تطبيق تغيير عائلة الخط على التحديد. يتم تشغيله عن طريق اختيار القائمة المنسدلة للخط. أعد حل الوعد إلى `false` لإلغاء عملية تغيير الخط.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.value": "قيمة الخط"
 					}
 				},
@@ -7313,7 +7182,7 @@
 					"description": "معالج مخصص لطلبات تحميل الصور. يتم تشغيله بعد إرسال `XMLHttpRequest` ولكن قبل معالجة الاستجابة الافتراضية. قم بإرجاع حل الوعد إلى `true` ​​إذا كنت تتعامل مع استجابة التحميل بنفسك، أو `false` لاستخدام المعالجة الافتراضية. توفر المعلمة `xmlHttp` الوصول إلى الكائن `XMLHttpRequest`.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.xmlHttp": "XMLHttpRequest",
 						"params.info": "كائن المعلومات"
 					}
@@ -7325,7 +7194,7 @@
 					"description": "يتم تشغيله قبل تحميل الصورة إلى الخادم. استخدم هذا للتحقق من صحة بيانات الصورة أو تغيير حجمها أو تعديلها قبل التحميل. قم بإرجاع `false` لإلغاء التحميل، أو قم بإرجاع كائن `ImageInfo` ​​لتعديل بيانات التحميل، أو قم باستدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.handler": "وظيفة المعالج"
 					}
@@ -7337,7 +7206,7 @@
 					"description": "يتم إطلاقه بعد تحميل الصور بنجاح في المحرر. يتم تشغيله بعد اكتمال التحميل أو إدراج صورة مستندة إلى عنوان URL. تحتوي المعلمة `infoList` على مصفوفة من كائنات `FileManagementInfo` ​​لجميع الصور المحملة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.infoList": "قائمة المعلومات"
 					}
 				},
@@ -7348,7 +7217,7 @@
 					"description": "يتم تشغيله عند إنشاء صورة أو تحديثها أو حذفها في المحرر. تشير المعلمة `state` إلى نوع الإجراء (`create`، `update`، أو `delete`). استخدم هذا لمزامنة حالة الصورة مع الأنظمة الخارجية أو لتتبع تعديلات الصورة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.element": "عنصر الهدف",
 						"params.state": "ولاية",
@@ -7364,7 +7233,7 @@
 					"description": "يتم تشغيله عند فشل تحميل الصورة بسبب حدود الحجم أو أخطاء الخادم أو مشكلات أخرى. قم بإرجاع حل الوعد إلى سلسلة رسائل خطأ مخصصة لتجاوز رسالة الخطأ الافتراضية، أو `undefined` لاستخدام الرسالة الافتراضية.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
 						"params.limitSize": "حجم الحد",
 						"params.uploadSize": "حجم التحميل",
@@ -7379,7 +7248,7 @@
 					"description": "يتم تشغيله قبل حذف الصورة من المحرر. استخدم هذا لتأكيد الحذف أو إعلام الخادم أو إجراء التنظيف. أعد حل الوعد إلى `false` لمنع حذف الصورة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.element": "عنصر الهدف",
 						"params.container": "عنصر حاوية الهدف (div)",
 						"params.align": "محاذاة القيمة",
@@ -7394,7 +7263,7 @@
 					"description": "معالج مخصص لطلبات تحميل الفيديو. يتم تشغيله بعد إرسال `XMLHttpRequest` ولكن قبل معالجة الاستجابة الافتراضية. قم بإرجاع حل الوعد إلى `true` ​​إذا كنت تتعامل مع استجابة التحميل بنفسك، أو `false` لاستخدام المعالجة الافتراضية. توفر المعلمة `xmlHttp` الوصول إلى الكائن `XMLHttpRequest`.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.xmlHttp": "XMLHttpRequest",
 						"params.info": "كائن المعلومات"
 					}
@@ -7406,7 +7275,7 @@
 					"description": "يتم تشغيله قبل تحميل الفيديو إلى الخادم. استخدم هذا للتحقق من صحة بيانات الفيديو أو تحويلها أو تعديلها قبل التحميل. قم بإرجاع `false` لإلغاء التحميل، أو إرجاع كائن `VideoInfo` ​​لتعديل بيانات التحميل، أو استدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.handler": "وظيفة المعالج"
 					}
@@ -7418,7 +7287,7 @@
 					"description": "يتم إطلاقه بعد تحميل مقاطع الفيديو بنجاح في المحرر. يتم تشغيله بعد اكتمال التحميل أو إدراج الفيديو المستند إلى عنوان URL (علامة iframe/الفيديو). تحتوي المعلمة `infoList` على مصفوفة من كائنات `FileManagementInfo` ​​لجميع مقاطع الفيديو المحملة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.infoList": "قائمة المعلومات"
 					}
 				},
@@ -7429,7 +7298,7 @@
 					"description": "يتم تشغيله عند إنشاء مقطع فيديو أو تحديثه أو حذفه في المحرر. تشير المعلمة `state` إلى نوع الإجراء (`create`، `update`، أو `delete`). استخدم هذا لمزامنة حالة الفيديو مع الأنظمة الخارجية أو لتتبع تعديلات الفيديو.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.element": "عنصر الهدف",
 						"params.state": "ولاية",
@@ -7445,7 +7314,7 @@
 					"description": "يتم تشغيله عند فشل تحميل الفيديو بسبب حدود الحجم أو أخطاء الخادم أو مشكلات أخرى. قم بإرجاع حل الوعد إلى سلسلة رسائل خطأ مخصصة لتجاوز رسالة الخطأ الافتراضية، أو `undefined` لاستخدام الرسالة الافتراضية.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
 						"params.limitSize": "حجم الحد",
 						"params.uploadSize": "حجم التحميل",
@@ -7460,7 +7329,7 @@
 					"description": "يتم تشغيله قبل حذف الفيديو من المحرر. استخدم هذا لتأكيد الحذف أو إعلام الخادم أو إجراء التنظيف. أعد حل الوعد إلى `false` لمنع حذف الفيديو.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.element": "عنصر الهدف",
 						"params.container": "عنصر حاوية الهدف (div)",
 						"params.align": "محاذاة القيمة",
@@ -7474,7 +7343,7 @@
 					"description": "معالج مخصص لطلبات تحميل الصوت. يتم تشغيله بعد إرسال `XMLHttpRequest` ولكن قبل معالجة الاستجابة الافتراضية. قم بإرجاع حل الوعد إلى `true` ​​إذا كنت تتعامل مع استجابة التحميل بنفسك، أو `false` لاستخدام المعالجة الافتراضية. توفر المعلمة `xmlHttp` الوصول إلى الكائن `XMLHttpRequest`.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.xmlHttp": "XMLHttpRequest",
 						"params.info": "كائن المعلومات"
 					}
@@ -7486,7 +7355,7 @@
 					"description": "يتم تشغيله قبل تحميل الملف الصوتي إلى الخادم. استخدم هذا للتحقق من صحة البيانات الصوتية أو تحويلها أو تعديلها قبل التحميل. قم بإرجاع `false` لإلغاء التحميل، أو قم بإرجاع كائن `AudioInfo` ​​لتعديل بيانات التحميل، أو قم باستدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.handler": "وظيفة المعالج"
 					}
@@ -7498,7 +7367,7 @@
 					"description": "يتم تشغيله عند فشل تحميل الصوت بسبب حدود الحجم أو أخطاء الخادم أو مشكلات أخرى. قم بإرجاع حل الوعد إلى سلسلة رسائل خطأ مخصصة لتجاوز رسالة الخطأ الافتراضية، أو `undefined` لاستخدام الرسالة الافتراضية.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
 						"params.limitSize": "حجم الحد",
 						"params.uploadSize": "حجم التحميل",
@@ -7513,7 +7382,7 @@
 					"description": "يتم إطلاقه بعد تحميل الملفات الصوتية بنجاح في المحرر. يتم تشغيله بعد اكتمال التحميل أو إدراج الصوت المستند إلى عنوان URL. تحتوي المعلمة `infoList` على مصفوفة من كائنات `FileManagementInfo` ​​لجميع الملفات الصوتية المحملة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.infoList": "قائمة المعلومات"
 					}
 				},
@@ -7524,7 +7393,7 @@
 					"description": "يتم إطلاقه عند إنشاء عنصر صوتي أو تحديثه أو حذفه في المحرر. تشير المعلمة `state` إلى نوع الإجراء (`create`، `update`، أو `delete`). استخدم هذا لمزامنة حالة الصوت مع الأنظمة الخارجية أو لتتبع تعديلات الصوت.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.element": "عنصر الهدف",
 						"params.state": "ولاية",
@@ -7540,7 +7409,7 @@
 					"description": "يتم تشغيله قبل حذف عنصر الصوت من المحرر. استخدم هذا لتأكيد الحذف أو إعلام الخادم أو إجراء التنظيف. أعد حل الوعد إلى `false` لمنع حذف الصوت.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.element": "عنصر الهدف",
 						"params.container": "عنصر حاوية الهدف (div)",
 						"params.url": "عنوان URL الصوتي"
@@ -7553,7 +7422,7 @@
 					"description": "يتم تشغيله قبل تحميل الملف إلى الخادم (عبر البرنامج المساعد `fileUpload`). استخدم هذا للتحقق من صحة بيانات الملف أو تعديلها قبل التحميل. قم بإرجاع `false` ​​لإلغاء التحميل، أو قم بإرجاع كائن `FileInfo` لتعديل بيانات التحميل، أو قم باستدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.handler": "وظيفة المعالج"
 					}
@@ -7565,7 +7434,7 @@
 					"description": "يتم إطلاقه بعد أن يتم تحميل الملفات وتحميلها بنجاح في المحرر. يتم تشغيله بواسطة المكوّن الإضافي `fileUpload` بعد اكتمال التحميل. تحتوي المعلمة `infoList` ​​على مصفوفة من كائنات `FileManagementInfo` لكافة الملفات المحملة.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.infoList": "قائمة المعلومات"
 					}
 				},
@@ -7576,7 +7445,7 @@
 					"description": "يتم إطلاقه عند إنشاء رابط ملف أو تحديثه أو حذفه في المحرر. تشير المعلمة `state` إلى نوع الإجراء (`create`، `update`، أو `delete`). استخدم هذا لمزامنة حالة الملف مع الأنظمة الخارجية أو لتتبع تعديلات الملف.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.element": "عنصر الهدف",
 						"params.state": "ولاية",
@@ -7592,7 +7461,7 @@
 					"description": "يتم تشغيله عند فشل تحميل الملف بسبب حدود الحجم أو أخطاء الخادم أو مشكلات أخرى. قم بإرجاع حل الوعد إلى سلسلة رسائل خطأ مخصصة لتجاوز رسالة الخطأ الافتراضية، أو `undefined` لاستخدام الرسالة الافتراضية.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
 						"params.limitSize": "حجم الحد",
 						"params.uploadSize": "حجم التحميل",
@@ -7607,7 +7476,7 @@
 					"description": "يتم التشغيل قبل حذف رابط الملف من المحرر. استخدم هذا لتأكيد الحذف أو إعلام الخادم أو إجراء التنظيف. أعد حل الوعد إلى `false` لمنع حذف رابط الملف.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.element": "عنصر الهدف",
 						"params.container": "عنصر حاوية الهدف (div)",
 						"params.url": "رابط الملف"
@@ -7620,7 +7489,7 @@
 					"description": "يتم التشغيل قبل تصدير محتوى المحرر إلى PDF. استخدم هذا لتعديل المحتوى أو إضافة بيانات التعريف أو إلغاء التصدير. قم بإرجاع حل الوعد إلى `false` لمنع تصدير PDF.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.target": "wysiwyg عنصر قابل للتحرير"
 					}
 				},
@@ -7631,7 +7500,7 @@
 					"description": "يتم تشغيله عند إنشاء أي عنصر وسائط (صورة أو فيديو أو صوت أو ملف) أو تحديثه أو حذفه. هذا حدث موحد يتم تشغيله لجميع أنواع الوسائط. تشير المعلمة `pluginName` إلى البرنامج المساعد الذي قام بتشغيل الإجراء (`image`، `video`، `audio`، أو `file`).",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.info": "كائن المعلومات",
 						"params.element": "عنصر الهدف",
 						"params.state": "ولاية",
@@ -7644,7 +7513,7 @@
 					"name": "onEmbedInputBefore",
 					"params": "params: EmbedInfo & {\n\t\t$: SunEditor.Deps;\n\t\thandler: (newInfo?: EmbedInfo | null) => void;\n\t}",
 					"returns": "PromiseLike<boolean | EmbedInfo | void>",
-					"description": "Fired before an embed URL is processed and inserted into the editor. استخدم هذا للتحقق من صحة عناوين URL، أو إضافة معالجات تضمين مخصصة، أو تعديل معلمات التضمين. قم بإرجاع `false` لإلغاء الإدراج، أو إرجاع كائن `EmbedInfo` ​​لتعديل بيانات التضمين، أو استدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
+					"description": "يتم تشغيله قبل معالجة عنوان URL المضمن وإدراجه في المحرر. استخدم هذا للتحقق من صحة عناوين URL، أو إضافة معالجات تضمين مخصصة، أو تعديل معلمات التضمين. قم بإرجاع `false` لإلغاء الإدراج، أو إرجاع كائن `EmbedInfo` ​​لتعديل بيانات التضمين، أو استدعاء المعلمة `handler` لمتابعة البيانات المعدلة.",
 					"example": ""
 				},
 				{
@@ -7654,7 +7523,7 @@
 					"description": "يتم تشغيله قبل حذف عنصر مضمن (iframe، تضمين مخصص) من المحرر. استخدم هذا لتأكيد الحذف أو إجراء التنظيف. قم بإرجاع حل الوعد إلى `false` لمنع حذف التضمين.",
 					"example": "",
 					"paramDescriptions": {
-						"params": ".$ - حقيبة التبعيات (Deps bag)",
+						"params": ".$ - تبعيات النواة",
 						"params.element": "عنصر الهدف",
 						"params.container": "عنصر حاوية الهدف (div)",
 						"params.align": "محاذاة القيمة",
@@ -7945,7 +7814,7 @@
 							"description": "ينفذ الطريقة التي يتم استدعاؤها عند تحديد أحد مكونات البرنامج المساعد.",
 							"example": "",
 							"paramDescriptions": {
-								"target": "عنصر المكون المستهدف"
+								"target": "عنصر مكون الهدف"
 							},
 							"returnsDescription": "إذا تم إرجاع `true`، فإن المكونات الخاصة التي لم يتم تغليفها كـ `figure`"
 						},
@@ -8196,7 +8065,7 @@
 							"description": "ينفذ الطريقة التي يتم استدعاؤها عند تحديد أحد مكونات البرنامج المساعد.",
 							"example": "",
 							"paramDescriptions": {
-								"target": "عنصر المكون المستهدف"
+								"target": "عنصر مكون الهدف"
 							},
 							"returnsDescription": "إذا تم إرجاع `true`، فإن المكونات الخاصة التي لم يتم تغليفها كـ `figure`"
 						},
@@ -8884,14 +8753,13 @@
 				},
 				{
 					"name": "InternalFrameOptions",
-					"definition": "{\n\t/**\n\t * - Status bar event configuration.\n\t */\n\t__statusbarEvent?: any;\n\t/**\n\t * - origin frame options\n\t */\n\t_origin: SunEditor.InitFrameOptions;\n\t/**\n\t * - Enables fixed positioning for the editor frame.\n\t */\n\t_defaultStyles?: OptionStyleResult;\n\t/**\n\t * - CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirror5Editor?: any;\n\t/**\n\t * - CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirror6Editor?: any;\n}",
+					"definition": "{\n\t/**\n\t * - Status bar event configuration.\n\t */\n\t__statusbarEvent?: any;\n\t/**\n\t * - origin frame options\n\t */\n\t_origin: SunEditor.InitFrameOptions;\n\t/**\n\t * - Enables fixed positioning for the editor frame.\n\t */\n\t_defaultStyles?: OptionStyleResult;\n\t/**\n\t * - CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization.\n\t */\n\tcodeMirrorEditor?: any;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"__statusbarEvent": "- Status bar event configuration.",
 						"_origin": "- origin frame options",
 						"_defaultStyles": "- Enables fixed positioning for the editor frame.",
-						"codeMirror5Editor": "- CodeMirror5 editor instance (frame-level). Set by `_checkCodeMirror` after initialization.",
-						"codeMirror6Editor": "- CodeMirror6 EditorView instance (frame-level). Set by `_checkCodeMirror` after initialization."
+						"codeMirrorEditor": "- CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization."
 					},
 					"source": "core/schema/options.d.ts"
 				},
@@ -9012,7 +8880,7 @@
 				},
 				{
 					"name": "InternalBaseOptions",
-					"definition": "{\n\t/**\n\t * - Computed className for the selected theme (e.g., `se-theme-default`).\n\t */\n\t_themeClass?: string;\n\t/**\n\t * - Additional sub-type string from the `type` option (after `:`).\n\t */\n\t_type_options?: string;\n\t/**\n\t * - Preprocessed allowed tag string for RegExp (e.g., \"mark|figure\").\n\t */\n\t_allowedExtraTag?: string;\n\t/**\n\t * - Preprocessed disallowed tag string.\n\t */\n\t_disallowedExtraTag?: string;\n\t/**\n\t * - Final computed editable class (used in editor wrapper).\n\t */\n\t_editableClass?: string;\n\t/**\n\t * - Whether text direction is RTL.\n\t */\n\t_rtl?: boolean;\n\t/**\n\t * - Internal key shortcut matcher for reverse commands.\n\t */\n\t_reverseCommandArray?: string[];\n\t/**\n\t * - Sub toolbar mode (e.g., `balloon`).\n\t */\n\t_subMode?: string;\n\t/**\n\t * - Tag names used for text styling, plus span/li.\n\t */\n\t_textStyleTags?: string[];\n\t/**\n\t * - Regex to match inline styles (e.g., fontSize, color).\n\t */\n\t_textStylesRegExp?: RegExp;\n\t/**\n\t * - Regex to match line styles (e.g., text-align, padding).\n\t */\n\t_lineStylesRegExp?: RegExp;\n\t/**\n\t * - Mapping HTML tag => standard tag.\n\t */\n\t_defaultStyleTagMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping HTML tag => command (e.g., bold, underline).\n\t */\n\t_styleCommandMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping command => preferred tag.\n\t */\n\t_defaultTagCommand?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Element whitelist regex pattern for the editor.\n\t */\n\t_editorElementWhitelist?: string;\n\t/**\n\t * - List of currently used toolbar buttons\n\t */\n\tbuttons?: Set<any>;\n\t/**\n\t * - List of currently used sub-toolbar buttons\n\t */\n\tbuttons_sub?: Set<any>;\n\t/**\n\t * - Sub-toolbar width.\n\t */\n\ttoolbar_sub_width?: string;\n\t/**\n\t * - Merged reverse command pairs array.\n\t * - Includes default `indent-outdent` + user's `reverseButtons`.\n\t */\n\treverseCommands?: string[];\n\t/**\n\t * - CodeMirror configuration object from `externalLibs.codeMirror`.\n\t */\n\tcodeMirror?: any;\n\t/**\n\t * - Whether CodeMirror 6 is available (base-level flag).\n\t * - Frame-level stores the actual EditorView instance.\n\t */\n\tcodeMirror6Editor?: boolean;\n\t/**\n\t * - Whether CodeMirror 5 is available (base-level flag). Frame-level stores the actual CM5 instance.\n\t */\n\tcodeMirror5Editor?: boolean;\n\t/**\n\t * - Uses CodeMirror for code view.\n\t */\n\thasCodeMirror?: boolean;\n\t/**\n\t * - Processed set of all allowed CSS styles.\n\t * - Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor.\n\t */\n\tallUsedStyles?: Set<string>;\n}",
+					"definition": "{\n\t/**\n\t * - Computed className for the selected theme (e.g., `se-theme-default`).\n\t */\n\t_themeClass?: string;\n\t/**\n\t * - Additional sub-type string from the `type` option (after `:`).\n\t */\n\t_type_options?: string;\n\t/**\n\t * - Preprocessed allowed tag string for RegExp (e.g., \"mark|figure\").\n\t */\n\t_allowedExtraTag?: string;\n\t/**\n\t * - Preprocessed disallowed tag string.\n\t */\n\t_disallowedExtraTag?: string;\n\t/**\n\t * - Final computed editable class (used in editor wrapper).\n\t */\n\t_editableClass?: string;\n\t/**\n\t * - Whether text direction is RTL.\n\t */\n\t_rtl?: boolean;\n\t/**\n\t * - Internal key shortcut matcher for reverse commands.\n\t */\n\t_reverseCommandArray?: string[];\n\t/**\n\t * - Sub toolbar mode (e.g., `balloon`).\n\t */\n\t_subMode?: string;\n\t/**\n\t * - Tag names used for text styling, plus span/li.\n\t */\n\t_textStyleTags?: string[];\n\t/**\n\t * - Regex to match inline styles (e.g., fontSize, color).\n\t */\n\t_textStylesRegExp?: RegExp;\n\t/**\n\t * - Regex to match line styles (e.g., text-align, padding).\n\t */\n\t_lineStylesRegExp?: RegExp;\n\t/**\n\t * - Mapping HTML tag => standard tag.\n\t */\n\t_defaultStyleTagMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping HTML tag => command (e.g., bold, underline).\n\t */\n\t_styleCommandMap?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Mapping command => preferred tag.\n\t */\n\t_defaultTagCommand?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Element whitelist regex pattern for the editor.\n\t */\n\t_editorElementWhitelist?: string;\n\t/**\n\t * - List of currently used toolbar buttons\n\t */\n\tbuttons?: Set<any>;\n\t/**\n\t * - List of currently used sub-toolbar buttons\n\t */\n\tbuttons_sub?: Set<any>;\n\t/**\n\t * - Sub-toolbar width.\n\t */\n\ttoolbar_sub_width?: string;\n\t/**\n\t * - Merged reverse command pairs array.\n\t * - Includes default `indent-outdent` + user's `reverseButtons`.\n\t */\n\treverseCommands?: string[];\n\t/**\n\t * - CodeMirror configuration object from `externalLibs.codeMirror`.\n\t */\n\tcodeMirror?: any;\n\t/**\n\t * - Whether CodeMirror is available (base-level flag). Frame-level stores the actual CM instance.\n\t */\n\tcodeMirrorEditor?: boolean;\n\t/**\n\t * - Uses CodeMirror for code view.\n\t */\n\thasCodeMirror?: boolean;\n\t/**\n\t * - Processed set of all allowed CSS styles.\n\t * - Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor.\n\t */\n\tallUsedStyles?: Set<string>;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"_themeClass": "- Computed className for the selected theme (e.g., `se-theme-default`).",
@@ -9035,8 +8903,7 @@
 						"toolbar_sub_width": "- Sub-toolbar width.",
 						"reverseCommands": "- Merged reverse command pairs array.\n- Includes default `indent-outdent` + user's `reverseButtons`.",
 						"codeMirror": "- CodeMirror configuration object from `externalLibs.codeMirror`.",
-						"codeMirror6Editor": "- Whether CodeMirror 6 is available (base-level flag).\n- Frame-level stores the actual EditorView instance.",
-						"codeMirror5Editor": "- Whether CodeMirror 5 is available (base-level flag). Frame-level stores the actual CM5 instance.",
+						"codeMirrorEditor": "- Whether CodeMirror is available (base-level flag). Frame-level stores the actual CM instance.",
 						"hasCodeMirror": "- Uses CodeMirror for code view.",
 						"allUsedStyles": "- Processed set of all allowed CSS styles.\n- Converted from user's `string` input (\"|\" delimited) to `Set<string>` in constructor."
 					},

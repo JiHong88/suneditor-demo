@@ -1,5 +1,5 @@
 import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/code-examples/editorPresets";
-import { type PlaygroundState, type CodeFramework, DEFAULTS, getButtonList, getRootConfigs } from "./playgroundState";
+import { type PlaygroundState, type CodeFramework, DEFAULTS, getButtonList, getRootConfigs, hasButton } from "./playgroundState";
 
 /* ── Helpers ───────────────────────────────────────────── */
 
@@ -25,6 +25,12 @@ function pluginLines(
 	return [`${prefix}: {`, ...inner, "},"];
 }
 
+/** Returns an ESM import line for lang pack, or empty string. */
+function langImport(lang: string): string {
+	if (!lang) return "";
+	return `\nimport { ${lang} } from "suneditor/src/langs";`;
+}
+
 /** Returns an ESM import line for theme CSS, or empty string. */
 function themeImport(theme: string): string {
 	if (theme === "dark" || theme === "cobalt") {
@@ -41,13 +47,105 @@ function themeCDNLink(theme: string): string {
 	return "";
 }
 
+/* ── External library helpers ──────────────────────────── */
+
+const CM_VERSION = "6.65.7";
+const KATEX_VERSION = "0.16.11";
+
+/** CDN tags for external libraries (CodeMirror + KaTeX/MathJax) */
+function extLibsCDNTags(state: PlaygroundState): string {
+	const needMath = hasButton(state.buttonListPreset, state.type, "math");
+	const lines: string[] = [];
+
+	// CodeMirror
+	lines.push(`  <link href="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/lib/codemirror.min.css" rel="stylesheet">`);
+	lines.push(`  <script src="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/lib/codemirror.min.js"><\/script>`);
+	lines.push(`  <script src="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/mode/xml/xml.min.js"><\/script>`);
+	lines.push(`  <script src="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/mode/css/css.min.js"><\/script>`);
+	lines.push(`  <script src="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/mode/javascript/javascript.min.js"><\/script>`);
+	lines.push(`  <script src="https://cdn.jsdelivr.net/npm/codemirror@${CM_VERSION}/mode/htmlmixed/htmlmixed.min.js"><\/script>`);
+
+	// KaTeX
+	if (needMath && state.math_mathLib === "katex") {
+		lines.push(`  <link href="https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/katex.min.css" rel="stylesheet">`);
+		lines.push(`  <script src="https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/katex.min.js"><\/script>`);
+	}
+
+	return lines.length > 0 ? "\n" + lines.join("\n") : "";
+}
+
+/** CDN externalLibs option body */
+function extLibsCDNOption(state: PlaygroundState): string {
+	const needMath = hasButton(state.buttonListPreset, state.type, "math");
+	const lines: string[] = [];
+	lines.push("externalLibs: {");
+	lines.push("  codeMirror: { src: CodeMirror },");
+	if (needMath && state.math_mathLib === "katex") {
+		lines.push("  katex: { src: katex },");
+	}
+	lines.push("},");
+	return lines.join("\n");
+}
+
+/** NPM imports for external libraries */
+function extLibsNpmImports(state: PlaygroundState): string {
+	const needMath = hasButton(state.buttonListPreset, state.type, "math");
+	const lines: string[] = [];
+
+	lines.push(`import CodeMirror from "codemirror";`);
+	lines.push(`import "codemirror/lib/codemirror.css";`);
+	lines.push(`import "codemirror/mode/htmlmixed/htmlmixed";`);
+
+	if (needMath && state.math_mathLib === "katex") {
+		lines.push(`import katex from "katex";`);
+		lines.push(`import "katex/dist/katex.min.css";`);
+	} else if (needMath && state.math_mathLib === "mathjax") {
+		lines.push(`import { mathjax } from "mathjax-full/js/mathjax";`);
+		lines.push(`import { TeX } from "mathjax-full/js/input/tex";`);
+		lines.push(`import { CHTML } from "mathjax-full/js/output/chtml";`);
+		lines.push(`import { browserAdaptor } from "mathjax-full/js/adaptors/browserAdaptor";`);
+		lines.push(`import { RegisterHTMLHandler } from "mathjax-full/js/handlers/html";`);
+	}
+
+	return "\n" + lines.join("\n");
+}
+
+/** NPM externalLibs option body */
+function extLibsNpmOption(state: PlaygroundState): string {
+	const needMath = hasButton(state.buttonListPreset, state.type, "math");
+	const lines: string[] = [];
+	lines.push("externalLibs: {");
+	lines.push("  codeMirror: { src: CodeMirror },");
+	if (needMath && state.math_mathLib === "katex") {
+		lines.push("  katex: { src: katex },");
+	} else if (needMath && state.math_mathLib === "mathjax") {
+		lines.push("  mathjax: { src: mathjax, TeX, CHTML, browserAdaptor, RegisterHTMLHandler },");
+	}
+	lines.push("},");
+	return lines.join("\n");
+}
+
 /** Build an options object string from current state, omitting defaults. */
-function buildOptionsBody(state: PlaygroundState, indentBase: number): string {
+function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = false): string {
 	const lines: string[] = [];
 	const add = (key: string, value: string) => lines.push(`${key}: ${value},`);
 
 	// mode
 	if (state.mode !== "classic") add("mode", `"${state.mode}"`);
+
+	// lang
+	if (state.lang) add("lang", state.lang);
+
+	// icons
+	if (state.icons) {
+		try {
+			JSON.parse(state.icons);
+			add("icons", state.icons);
+		} catch { /* skip invalid JSON */ }
+	}
+
+	// externalLibs
+	lines.push(isCDN ? extLibsCDNOption(state) : extLibsNpmOption(state));
 
 	// type
 	if (state.type) add("type", `"${state.type}"`);
@@ -470,8 +568,9 @@ function buildMultiRootTargets(state: PlaygroundState, targetExpr: (key: string)
 /* ── Code generators ───────────────────────────────────── */
 
 function generateCDN(state: PlaygroundState): string {
-	const body = buildOptionsBody(state, 4);
+	const body = buildOptionsBody(state, 4, true);
 	const bodyIndented = indent(body, 6);
+	const extTags = extLibsCDNTags(state);
 
 	if (state.multiroot) {
 		const toolbarHtml = state.mode === "classic" ? '\n  <div id="toolbar"></div>' : '';
@@ -481,7 +580,7 @@ function generateCDN(state: PlaygroundState): string {
 <head>
   <meta charset="utf-8">
   <title>SunEditor Multi-Root</title>
-  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}
+  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}${extTags}
   <script src="${CDN_JS}"><\/script>
 </head>
 <body style="margin:6em 4rem 4rem">
@@ -504,7 +603,7 @@ ${bodyIndented}
 <head>
   <meta charset="utf-8">
   <title>SunEditor</title>
-  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}
+  <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}${extTags}
   <script src="${CDN_JS}"><\/script>
 </head>
 <body style="margin:6em 4rem 4rem">
@@ -528,7 +627,7 @@ function generateVanilla(state: PlaygroundState): string {
 		return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const editor = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 2)}
@@ -541,7 +640,7 @@ ${bodyIndented}
 	return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const editor = suneditor.create(document.getElementById("editor"), {
   plugins,
@@ -561,7 +660,7 @@ function generateReact(state: PlaygroundState): string {
 		return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 export default function Editor() {
   const headerRef = useRef(null);
@@ -590,7 +689,7 @@ ${bodyIndented}
 	return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 export default function Editor() {
   const ref = useRef(null);
@@ -621,7 +720,7 @@ function generateVue(state: PlaygroundState): string {
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const headerEl = ref(null);
 const bodyEl = ref(null);${toolbarRefDecl}
@@ -653,7 +752,7 @@ onBeforeUnmount(() => {
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const el = ref(null);
 let instance = null;
@@ -688,7 +787,7 @@ function generateAngular(state: PlaygroundState): string {
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 @Component({
   selector: "app-editor",
@@ -721,7 +820,7 @@ ${bodyIndented}
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 @Component({
   selector: "app-editor",
@@ -757,7 +856,7 @@ function generateSvelte(state: PlaygroundState): string {
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
   import "suneditor/css";
-  import "suneditor/css/contents";${themeImport(state.theme)}
+  import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
   let headerEl;
   let bodyEl;${toolbarVar}
@@ -783,7 +882,7 @@ ${bodyIndented}
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
   import "suneditor/css";
-  import "suneditor/css/contents";${themeImport(state.theme)}
+  import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
   let editorEl;
   let instance;
@@ -811,7 +910,7 @@ function generateWebComponents(state: PlaygroundState): string {
 		const toolbarOpt = isClassic ? '\n      toolbar_container: this.querySelector("#toolbar"),' : '';
 		return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {
@@ -835,7 +934,7 @@ customElements.define("sun-editor", SunEditorElement);`;
 
 	return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css";
-import "suneditor/css/contents";${themeImport(state.theme)}
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {

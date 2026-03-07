@@ -540,6 +540,21 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>Math</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<div className='space-y-3'>
+							<SelectField
+								label='mathLib'
+								value={state.math_mathLib}
+								options={[
+									{ value: "katex", label: "KaTeX (recommended)" },
+									{ value: "mathjax", label: "MathJax" },
+								]}
+								onChange={(v) => set("math_mathLib")(v as "katex" | "mathjax")}
+								optionKey='math_mathLib'
+							/>
+							{state.math_mathLib === "mathjax" && (
+								<p className='text-[10px] text-amber-600 dark:text-amber-400'>
+									MathJax requires mathjax-full npm package. CDN preview uses KaTeX fallback.
+								</p>
+							)}
 							<SwitchField label='canResize' checked={state.math_canResize} onChange={set("math_canResize")} optionKey='math_canResize' />
 							<SwitchField label='autoHeight' checked={state.math_autoHeight} onChange={set("math_autoHeight")} optionKey='math_autoHeight' />
 							<DisabledField label='fontSizeList' reason='Array<object>' />

@@ -268,9 +268,9 @@ export default function EventsContent() {
 							<table className='w-full text-xs'>
 								<thead className='sticky top-0 bg-muted/90 backdrop-blur-sm'>
 									<tr>
-										<th className='text-left px-3 py-2 font-semibold'>Event</th>
-										<th className='text-left px-3 py-2 font-semibold'>{t("category")}</th>
-										<th className='text-left px-3 py-2 font-semibold'>{t("returnType")}</th>
+										<th className='text-start px-3 py-2 font-semibold'>Event</th>
+										<th className='text-start px-3 py-2 font-semibold'>{t("category")}</th>
+										<th className='text-start px-3 py-2 font-semibold'>{t("returnType")}</th>
 									</tr>
 								</thead>
 								<tbody>
