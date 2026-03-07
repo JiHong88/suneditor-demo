@@ -192,14 +192,28 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
         <div className="mb-3 text-sm">
           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t("parameters")}</span>
           <div className="mt-1.5 space-y-1">
-            {Object.entries(method.paramDescriptions).map(([name, desc]) => (
-              <div key={name} className="flex gap-2 ps-2">
-                <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
-                  {name}
-                </code>
-                <span className="text-muted-foreground text-xs leading-relaxed">{highlightInline(desc.replace(/^-\s*/, ""))}</span>
-              </div>
-            ))}
+            {Object.entries(method.paramDescriptions).map(([rawName, desc]) => {
+              const optMatch = rawName.match(/^(.+?)\?(?:=(.+))?$/);
+              const displayName = optMatch ? optMatch[1] : rawName;
+              const defaultVal = optMatch?.[2];
+              const isOptional = !!optMatch;
+
+              return (
+                <div key={rawName} className="flex gap-2 ps-2 items-start">
+                  <span className="shrink-0 flex items-center gap-1">
+                    <code className="text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
+                      {displayName}
+                    </code>
+                    {isOptional && (
+                      <span className="text-[10px] px-1 py-px rounded bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 leading-tight">
+                        {defaultVal !== undefined ? `=${defaultVal}` : "optional"}
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-muted-foreground text-xs leading-relaxed">{highlightInline(desc.replace(/^-\s*/, ""))}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

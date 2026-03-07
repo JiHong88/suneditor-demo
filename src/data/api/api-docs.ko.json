@@ -1,6 +1,6 @@
 {
 	"version": "3.0.0-rc.4",
-	"generatedAt": "2026-03-07T13:56:38.568Z",
+	"generatedAt": "2026-03-07T16:35:47.604Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -13,7 +13,7 @@
 					"description": "편집기의 내용이 비어 있는지 확인합니다. - \"자리 표시자\"에 대한 표시 기준.",
 					"example": "",
 					"paramDescriptions": {
-						"fc": "프레임 컨텍스트가 없으면 현재 선택된 프레임 컨텍스트입니다."
+						"fc?": "프레임 컨텍스트가 없으면 현재 선택된 프레임 컨텍스트입니다."
 					}
 				},
 				{
@@ -56,7 +56,7 @@
 							"description": "`bold`, `underline` ​​등 현재 커서 위치의 태그 정보로 해당 버튼을 활성화하고 플러그인의 `active` 메서드를 실행합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"selectionNode": "선택노드"
+								"selectionNode?": "선택노드"
 							},
 							"returnsDescription": "선택노드"
 						}
@@ -265,7 +265,7 @@
 								"target": "대상 요소",
 								"type": "이벤트 유형",
 								"listener": "이벤트 핸들러",
-								"useCapture": "이벤트 사용Capture 옵션"
+								"useCapture?": "이벤트 사용Capture 옵션"
 							},
 							"returnsDescription": "등록된 이벤트 정보"
 						},
@@ -289,7 +289,7 @@
 							"paramDescriptions": {
 								"type": "이벤트 유형",
 								"listener": "이벤트 리스너",
-								"useCapture": "이벤트 캡처 사용"
+								"useCapture?": "이벤트 캡처 사용"
 							},
 							"returnsDescription": "등록된 이벤트 정보"
 						},
@@ -301,8 +301,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"type": "이벤트 유형 또는 (이벤트 정보 = this.addGlobalEvent())",
-								"listener": "이벤트 리스너",
-								"useCapture": "이벤트 캡처 사용"
+								"listener?": "이벤트 리스너",
+								"useCapture?": "이벤트 캡처 사용"
 							},
 							"returnsDescription": "성공: `null`, 찾을 수 없음: `undefined`"
 						}
@@ -423,7 +423,7 @@
 							"description": "[콘텐츠]의 문자 수 또는 이진 데이터 크기를 가져옵니다. (frameOptions.get('charCounter_type')) - [content]가 `undefined`인 경우 현재 편집기의 문자 수 또는 이진 데이터 크기를 가져옵니다.",
 							"example": "",
 							"paramDescriptions": {
-								"content": "셀 수 있는 콘텐츠입니다. (기본값: this.#frameContext.get('wysiwyg'))"
+								"content?": "셀 수 있는 콘텐츠입니다. (기본값: this.#frameContext.get('wysiwyg'))"
 							}
 						},
 						{
@@ -443,7 +443,7 @@
 							"description": "문자 수를 charCounter 요소 textContent로 설정합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"fc": "프레임 컨텍스트"
+								"fc?": "프레임 컨텍스트"
 							}
 						},
 						{
@@ -481,7 +481,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "참조 노드.",
-								"validation": "추가 검증 기능."
+								"validation?": "추가 검증 기능."
 							}
 						},
 						{
@@ -502,7 +502,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "참조 노드.",
-								"validation": "추가 검증 기능."
+								"validation?": "추가 검증 기능."
 							}
 						},
 						{
@@ -513,7 +513,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "해당 요소의 형제로 삽입",
-								"lineNode": "삽입할 노드 이름 또는 노드 객체"
+								"lineNode?": "삽입할 노드 이름 또는 노드 개체"
 							}
 						},
 						{
@@ -524,7 +524,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "참조 노드.",
-								"validation": "추가 검증 기능."
+								"validation?": "추가 검증 기능."
 							}
 						},
 						{
@@ -545,11 +545,11 @@
 							"example": "// Remove all list items from a list\nconst listElement = editor.selection.getNode().closest('ul');\neditor.format.removeBlock(listElement);\n// Remove specific list items only\nconst selectedItems = [liElement1, liElement2];\neditor.format.removeBlock(listElement, { selectedFormats: selectedItems });\n// Replace blockquote with div\nconst blockquote = editor.selection.getNode().closest('blockquote');\nconst newDiv = document.createElement('div');\neditor.format.removeBlock(blockquote, { newBlockElement: newDiv });",
 							"paramDescriptions": {
 								"blockElement": "`block` 요소(PRE, BLOCKQUOTE, OL, UL...)",
-								"options": "옵션",
-								"options.selectedFormats": "null] 제거할 `line` 요소(P, DIV, LI...)의 배열입니다.",
-								"options.newBlockElement": "null] 현재 래핑된 노드를 대체할 노드(`blockElement`)입니다.",
-								"options.shouldDelete": "false] `true`인 경우 분리되지 않고 삭제됩니다.",
-								"options.skipHistory": "false] `true`인 경우 기록 스택과 선택 개체를 업데이트하지 않고 `EdgeNodes`(dom-query-GetEdgeChildNodes)을 반환합니다."
+								"options?": "옵션",
+								"options.selectedFormats?=null": "제거할 `line` 요소(P, DIV, LI...)의 배열입니다.",
+								"options.newBlockElement?=null": "현재 래핑된 노드를 대체할 노드(`blockElement`)입니다.",
+								"options.shouldDelete?=false": "`true`인 경우 분리되지 않고 삭제됩니다.",
+								"options.skipHistory?=false": "`true`인 경우 기록 스택과 선택 개체를 업데이트하지 않고 `EdgeNodes`(dom-query-GetEdgeChildNodes)을 반환합니다."
 							},
 							"returnsDescription": "삭제 후 노드 정보 \n- cc: 공통 상위 컨테이너 노드 \n- sc: 컨테이너 노드 시작 \n- so: 시작 오프셋 \n- ec: 끝 컨테이너 노드 \n- eo: 끝 오프셋 \n-removeArray: 제거된 요소의 배열"
 						},
@@ -656,7 +656,7 @@
 							"description": "선택한 범위에서 `line` 배열을 반환합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"validation": "유효성 검사 기능. (기본 유효성 검사 `format.isLine(current)`을 대체합니다)"
+								"validation?": "유효성 검사 기능. (기본 유효성 검사 `format.isLine(current)`을 대체합니다)"
 							}
 						},
 						{
@@ -684,10 +684,10 @@
 							"paramDescriptions": {
 								"html": "필터링할 HTML 문자열입니다.",
 								"params": "필터링 매개변수.",
-								"params.tagWhitelist": "허용되는 태그로, 태그가 `'|'`로 구분된 문자열로 지정됩니다. (예: `\"div|p|span\"`).",
-								"params.tagBlacklist": "허용되지 않는 태그는 `'|'`로 구분된 태그가 포함된 문자열로 지정됩니다. (예: `\"script|iframe\"`).",
-								"params.validate": "개별 노드를 검증하고 수정하는 기능입니다.",
-								"params.validateAll": "모든 노드에 유효성 검사를 적용할지 여부입니다."
+								"params.tagWhitelist?": "허용되는 태그로, 태그가 `'|'`로 구분된 문자열로 지정됩니다. (예: `\"div|p|span\"`).",
+								"params.tagBlacklist?": "허용되지 않는 태그는 `'|'`로 구분된 태그가 포함된 문자열로 지정됩니다. (예: `\"script|iframe\"`).",
+								"params.validate?": "개별 노드를 검증하고 수정하는 기능입니다.",
+								"params.validateAll?": "모든 노드에 유효성 검사를 적용할지 여부입니다."
 							},
 							"returnsDescription": "필터링된 HTML 문자열입니다."
 						},
@@ -699,11 +699,11 @@
 							"example": "// Basic cleaning\nconst cleaned = editor.html.clean('<div>  <p>Hello</p>  </div>');\n// Clean with format wrapping\nconst cleaned = editor.html.clean('Plain text content', { forceFormat: true });\n// Clean with blacklist to remove specific tags\nconst cleaned = editor.html.clean('<div><script>alert(1)</script>Content</div>', {\nblacklist: 'script|style'\n});",
 							"paramDescriptions": {
 								"html": "정리하고 압축할 HTML 문자열",
-								"options": "청소 옵션",
-								"options.forceFormat": "false] `true`인 경우 형식 태그에서 형식 노드 없이 텍스트 노드를 래핑합니다.",
-								"options.whitelist": "허용된 태그의 정규식입니다.",
-								"options.blacklist": "허용되지 않는 태그의 정규 표현식입니다.",
-								"options._freeCodeViewMode": "false] `true`인 경우 무료 코드 보기 모드가 활성화됩니다."
+								"options?": "청소 옵션",
+								"options.forceFormat?=false": "`true`인 경우 형식 태그에서 형식 노드 없이 텍스트 노드를 래핑합니다.",
+								"options.whitelist?": "허용된 태그의 정규식입니다.",
+								"options.blacklist?": "허용되지 않는 태그의 정규 표현식입니다.",
+								"options._freeCodeViewMode?=false": "`true`인 경우 무료 코드 보기 모드가 활성화됩니다."
 							},
 							"returnsDescription": "정리되고 압축된 HTML 문자열"
 						},
@@ -715,10 +715,10 @@
 							"example": "// Insert HTML string at cursor\neditor.html.insert('<strong>Bold text</strong>');\n// Insert and select the inserted content\neditor.html.insert('<p>New paragraph</p>', { selectInserted: true });\n// Insert raw HTML without cleaning\neditor.html.insert('<div class=\"custom\">Content</div>', { skipCleaning: true });",
 							"paramDescriptions": {
 								"html": "HTML 요소, HTML 문자열 또는 일반 문자열",
-								"options": "옵션",
-								"options.selectInserted": "false] `true`인 경우 삽입된 노드의 범위를 선택합니다.",
-								"options.skipCharCount": "false] `true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입합니다.",
-								"options.skipCleaning": "false] `true`인 경우 `html.clean`로 정제하지 않고 HTML 문자열을 삽입합니다."
+								"options?": "옵션",
+								"options.selectInserted?=false": "`true`인 경우 삽입된 노드의 범위를 선택합니다.",
+								"options.skipCharCount?=false": "`true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입합니다.",
+								"options.skipCleaning?=false": "`true`인 경우 `html.clean`로 구체화하지 않고 HTML 문자열을 삽입합니다."
 							},
 							"returnsDescription": "삽입된 요소 또는 삽입이 실패한 경우 `null`"
 						},
@@ -730,9 +730,9 @@
 							"example": "// Insert node at current selection\nconst strongNode = document.createElement('strong');\nstrongNode.textContent = 'Bold';\neditor.html.insertNode(strongNode);\n// Insert node after a specific element\nconst paragraph = editor.html.getNode();\nconst newSpan = document.createElement('span');\neditor.html.insertNode(newSpan, { afterNode: paragraph });\n// Insert bypassing character count limit\neditor.html.insertNode(largeContentNode, { skipCharCount: true });",
 							"paramDescriptions": {
 								"oNode": "삽입할 노드",
-								"options": "옵션",
-								"options.afterNode": "null] 노드가 존재하는 경우 노드 뒤에 삽입됩니다.",
-								"options.skipCharCount": "null] `true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입됩니다."
+								"options?": "옵션",
+								"options.afterNode?=null": "노드가 존재하는 경우 노드 뒤에 삽입됩니다.",
+								"options.skipCharCount?=null": "`true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입됩니다."
 							}
 						},
 						{
@@ -750,10 +750,10 @@
 							"description": "현재 콘텐츠를 가져옵니다.",
 							"example": "",
 							"paramDescriptions": {
-								"options": "옵션",
-								"options.withFrame": "false] 상위 `div.sun-editor-editable`(`<div class=\"sun-editor-editable\">{content}</div>`)을 포함하는 현재 콘텐츠를 가져옵니다.",
-								"options.includeFullPage": "false] `iframe_fullPage` 옵션이 `true`인 경우 헤더 없이 본문 내용만 반환합니다.",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.withFrame?=false": "상위 `div.sun-editor-editable`(`<div class=\"sun-editor-editable\">{content}</div>`)을 포함하는 현재 콘텐츠를 가져옵니다.",
+								"options.includeFullPage?=false": "`iframe_fullPage` 옵션이 `true`인 경우 헤더 없이 본문의 내용만 반환합니다.",
+								"options.rootKey?=null": "루트 인덱스"
 							}
 						},
 						{
@@ -764,8 +764,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"html": "HTML 문자열",
-								"options": "옵션",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.rootKey?=null": "루트 인덱스"
 							}
 						},
 						{
@@ -776,8 +776,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"html": "입력할 내용",
-								"options": "옵션",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.rootKey?=null": "루트 인덱스"
 							}
 						},
 						{
@@ -787,9 +787,9 @@
 							"description": "현재 콘텐츠를 JSON 데이터로 가져옵니다.",
 							"example": "",
 							"paramDescriptions": {
-								"options": "옵션",
-								"options.withFrame": "false] 상위 `div.sun-editor-editable`(`<div class=\"sun-editor-editable\">{content}</div>`)을 포함하는 현재 콘텐츠를 가져옵니다.",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.withFrame?=false": "상위 `div.sun-editor-editable`(`<div class=\"sun-editor-editable\">{content}</div>`)을 포함하는 현재 콘텐츠를 가져옵니다.",
+								"options.rootKey?=null": "루트 인덱스"
 							},
 							"returnsDescription": "JSON 데이터"
 						},
@@ -801,8 +801,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"jsdonData": "HTML 문자열",
-								"options": "옵션",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.rootKey?=null": "루트 인덱스"
 							}
 						},
 						{
@@ -824,8 +824,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"ctx": "{ 머리: HTML 문자열, 본문: HTML 문자열}",
-								"options": "옵션",
-								"options.rootKey": "null] 루트 인덱스"
+								"options?": "옵션",
+								"options.rootKey?=null": "루트 인덱스"
 							}
 						},
 						{
@@ -853,10 +853,10 @@
 							"example": "// Apply bold formatting\nconst bold = dom.utils.createElement('STRONG');\neditor.inline.apply(bold);\n// Remove specific styles\neditor.inline.apply(null, { stylesToModify: ['font-size'] });\n// Remove specific tags\neditor.inline.apply(null, { nodesToRemove: ['span'] });",
 							"paramDescriptions": {
 								"styleNode": "선택 항목에 추가할 요소입니다. `null`인 경우 기존 노드만 수정되거나 제거됩니다.",
-								"options": "옵션",
-								"options.stylesToModify": "null] 확인하고 수정할 스타일 또는 클래스 이름의 배열입니다.",
-								"options.nodesToRemove": "null] 제거할 노드 이름의 배열입니다.",
-								"options.strictRemove": "false] `true`인 경우 모든 스타일과 클래스가 제거된 경우에만 `nodesToRemove`에서 노드를 제거합니다."
+								"options?": "옵션",
+								"options.stylesToModify?=null": "확인하고 수정할 스타일 또는 클래스 이름의 배열입니다.",
+								"options.nodesToRemove?=null": "제거할 노드 이름의 배열입니다.",
+								"options.strictRemove?=false": "`true`인 경우 모든 스타일과 클래스가 제거된 경우에만 `nodesToRemove`에서 노드를 제거합니다."
 							},
 							"returnsDescription": "선택 항목에 추가되거나 수정된 ​​요소입니다."
 						},
@@ -935,7 +935,7 @@
 							"paramDescriptions": {
 								"baseNode": "기반으로 삼을 요소 또는 텍스트 노드",
 								"offset": "`baseNode`의 텍스트 오프셋(`baseNode`이 텍스트 노드인 경우에만 유효함)",
-								"depth": "0] 분할되는 요소의 중첩 깊이입니다. (기본값: 0)"
+								"depth?=0": "분할되는 요소의 중첩 깊이입니다. (기본값: 0)"
 							},
 							"returnsDescription": "분할된 태그의 마지막 요소입니다."
 						},
@@ -947,8 +947,8 @@
 							"example": "// Merge adjacent tags with same attributes\nconst container = editor.selection.getNode().closest('div');\neditor.nodeTransform.mergeSameTags(container, null, false);\n// Merge with path tracking\nconst startPath = [0, 1, 2];\nconst endPath = [0, 2, 1];\nconst offsets = editor.nodeTransform.mergeSameTags(element, [startPath, endPath], false);\n// Merge only text nodes\neditor.nodeTransform.mergeSameTags(paragraph, null, true);",
 							"paramDescriptions": {
 								"element": "요소",
-								"nodePathArray": "`NodePath` 객체 배열([dom-query-GetNodePath(), ..])",
-								"onlyText": "`true`인 경우 `span`, `strong`..와 같은 텍스트가 아닌 노드는 무시됩니다."
+								"nodePathArray?": "`NodePath` 객체 배열([dom-query-GetNodePath(), ..])",
+								"onlyText?": "`true`인 경우 `span`, `strong`..와 같은 텍스트가 아닌 노드는 무시됩니다."
 							},
 							"returnsDescription": "[오프셋, ..]"
 						},
@@ -960,7 +960,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "요소 객체",
-								"validation": "검증 함수 / 문자열(`tag1|tag2..`) / `null`인 경우 모든 태그를 적용할 수 있습니다."
+								"validation?": "검증 함수 / 문자열(`tag1|tag2..`) / `null`인 경우 모든 태그를 적용할 수 있습니다."
 							}
 						},
 						{
@@ -971,8 +971,8 @@
 							"example": "// Remove empty parent elements recursively\nconst emptySpan = document.querySelector('span:empty');\nconst result = editor.nodeTransform.removeAllParents(emptySpan, null, null);\n// Remove with custom validation\neditor.nodeTransform.removeAllParents(node, (current) => {\nreturn current.textContent.trim().length === 0;\n}, null);\n// Remove up to specific parent\nconst stopAt = editor.selection.getNode().closest('.container');\neditor.nodeTransform.removeAllParents(childNode, null, stopAt);",
 							"paramDescriptions": {
 								"item": "제거할 노드",
-								"validation": "검증 기능. 기본값(`breakLine` 및 공백만 있는 경우 삭제됨)",
-								"stopParent": "상위 노드가 `stopParent`에 도달하면 중지"
+								"validation?": "검증 기능. 기본값(`breakLine` 및 공백만 있는 경우 삭제됨)",
+								"stopParent?": "상위 노드가 `stopParent`에 도달하면 중지"
 							},
 							"returnsDescription": "{sc: PreviousSibling, ec: nextSibling}(삭제된 노드 참조) 또는 `null`."
 						},
@@ -996,7 +996,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"nodeArray": "복제할 노드 배열입니다. 배열의 첫 번째 노드는 최상위 상위 노드가 됩니다.",
-								"validate": "유효성 검사 기능."
+								"validate?": "유효성 검사 기능."
 							},
 							"returnsDescription": "최상위 상위 노드와 가장 안쪽 하위 노드를 포함하는 객체입니다."
 						}
@@ -1035,7 +1035,7 @@
 							"description": "전역 문서를 기준으로 인수의 위치를 ​​반환합니다. 이는 더 나은 성능과 정확성을 위해 getBoundingClientRect를 사용하는 리팩터링 버전입니다.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "대상 요소."
+								"node?": "대상 요소."
 							},
 							"returnsDescription": "전역 위치 및 스크롤 값."
 						},
@@ -1046,7 +1046,7 @@
 							"description": "현재 편집기 기준 스크롤 오프셋을 가져옵니다.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "대상 요소."
+								"node?": "대상 요소."
 							},
 							"returnsDescription": "글로벌 스크롤 정보."
 						},
@@ -1081,11 +1081,11 @@
 								"element": "위치에 대한 요소",
 								"target": "대상 요소",
 								"params": "위치 매개변수",
-								"params.isWWTarget": "false] 대상이 편집기의 WYSIWYG 영역 내에 있는지 여부",
-								"params.addOffset": "{왼쪽:0, 위쪽:0}] 추가 오프셋",
-								"params.position": "\"하단\"] 위치('하단'|'상단')",
+								"params.isWWTarget?=false": "대상이 편집기의 WYSIWYG 영역 내에 있는지 여부",
+								"params.addOffset?={left:0, top:0}": "추가 오프셋",
+								"params.position?=\"bottom\"": "위치('하단'|'상단')",
 								"params.inst": "호출자의 인스턴스 객체",
-								"params.sibling": "null] 형제 컨트롤러 요소"
+								"params.sibling?=null": "형제 컨트롤러 요소"
 							},
 							"returnsDescription": "성공 -> {위치: 현재 위치}"
 						},
@@ -1098,9 +1098,9 @@
 							"paramDescriptions": {
 								"element": "위치에 대한 요소",
 								"range": "반대 위치에 있는 범위. \n- `null`인 경우 현재 선택 범위가 사용됩니다.",
-								"options": "{}] 위치 옵션",
-								"options.position": "\"하단\"] 위치('하단'|'상단')",
-								"options.addTop": "0] 추가 상단 오프셋"
+								"options?={}": "위치 옵션",
+								"options.position?=\"bottom\"": "위치('하단'|'상단')",
+								"options.addTop?=0": "추가 상단 오프셋"
 							},
 							"returnsDescription": "성공/실패"
 						}
@@ -1142,9 +1142,9 @@
 							"example": "// Set range using container and offset\nconst textNode = editor.selection.getNode();\neditor.selection.setRange(textNode, 0, textNode, 5);\n// Set range using Range object\nconst range = document.createRange();\nrange.selectNodeContents(someElement);\neditor.selection.setRange(range);\n// Collapse cursor to start of element\neditor.selection.setRange(element, 0, element, 0);",
 							"paramDescriptions": {
 								"startCon": "범위 개체 또는 선택 개체의 `startContainer` 속성",
-								"startOff": "선택 개체의 `startOffset` 속성입니다.",
-								"endCon": "선택 개체의 `endContainer` 속성입니다.",
-								"endOff": "선택 개체의 `endOffset` 속성입니다."
+								"startOff?": "선택 개체의 `startOffset` 속성입니다.",
+								"endCon?": "선택 개체의 `endContainer` 속성입니다.",
+								"endOff?": "선택 개체의 `endOffset` 속성입니다."
 							}
 						},
 						{
@@ -1173,7 +1173,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"range": "core.getRange()",
-								"container": "`container` 인수가 있으면 컨테이너 앞에 줄을 만듭니다."
+								"container?": "`container` 인수가 있으면 컨테이너 앞에 줄을 만듭니다."
 							},
 							"returnsDescription": "새로운 `range` 또는 인수 `range`."
 						},
@@ -1214,7 +1214,7 @@
 							"example": "// Scroll to current selection smoothly\neditor.selection.scrollTo(editor.selection.get());\n// Scroll to specific node\nconst targetNode = document.querySelector('.target-element');\neditor.selection.scrollTo(targetNode);\n// Scroll with custom options\neditor.selection.scrollTo(editor.selection.getRange(), {\nbehavior: 'auto',\nblock: 'center'\n});",
 							"paramDescriptions": {
 								"ref": "선택 또는 범위 개체",
-								"scrollOption": "scrollTo 옵션"
+								"scrollOption?": "scrollTo 옵션"
 							}
 						},
 						{
@@ -1361,7 +1361,7 @@
 							"description": "코드 보기 또는 wysiwyg 보기 변경",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`, `undefined`인 경우 `codeView` 모드를 전환합니다."
+								"value?": "`true`/`false`, `undefined`인 경우 `codeView` 모드를 전환합니다."
 							}
 						},
 						{
@@ -1371,7 +1371,7 @@
 							"description": "전체 화면 또는 기본 화면으로 변경",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`, `undefined`인 경우 `fullScreen` 모드를 전환합니다."
+								"value?": "`true`/`false`, `undefined`인 경우 `fullScreen` 모드를 전환합니다."
 							}
 						},
 						{
@@ -1381,7 +1381,7 @@
 							"description": "코드 블록이 표시되도록 `body` 클래스 이름을 추가하거나 제거합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`, `undefined`인 경우 `showBlocks` 모드를 전환합니다."
+								"value?": "`true`/`false`, `undefined`인 경우 `showBlocks` 모드를 전환합니다."
 							}
 						},
 						{
@@ -1413,7 +1413,7 @@
 							"paramDescriptions": {
 								"command": "명령 문자열",
 								"type": "표시 유형 문자열(`command`, `dropdown`, `modal`, `container`)",
-								"button": "명령 버튼의 요소"
+								"button?": "명령 버튼의 요소"
 							}
 						},
 						{
@@ -1469,11 +1469,11 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "삽입할 요소",
-								"options": "옵션",
-								"options.skipCharCount": "false] `true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입됩니다.",
-								"options.skipHistory": "false] `true`인 경우 기록에 푸시하지 않습니다.",
-								"options.scrollTo": "true] `true` : 삽입된 요소로 스크롤하고, `false` ​​: 스크롤하지 않습니다.",
-								"options.insertBehavior": "`true`인 경우 삽입된 구성요소를 자동으로 선택하지 않습니다. [기본값: `options.get('componentInsertBehavior')`]"
+								"options?": "옵션",
+								"options.skipCharCount?=false": "`true`인 경우 `frameOptions.get('charCounter_max')`을 초과하더라도 삽입됩니다.",
+								"options.skipHistory?=false": "`true`인 경우 기록에 푸시하지 마세요.",
+								"options.scrollTo?=true": "`true` : 삽입된 요소로 스크롤하고, `false` ​​: 스크롤하지 않습니다.",
+								"options.insertBehavior?": "`true`인 경우 삽입된 구성요소를 자동으로 선택하지 않습니다. [기본값: `options.get('componentInsertBehavior')`]"
 							},
 							"returnsDescription": "삽입된 요소 또는 새 줄(HR의 경우)"
 						},
@@ -1485,8 +1485,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"container": "삽입된 구성 요소입니다.",
-								"oNode": "구성 요소를 선택할 수 없는 경우 선택에 사용할 선택적 노드입니다.",
-								"insertBehavior": "구성요소 삽입 후 동작 모드."
+								"oNode?": "구성 요소를 선택할 수 없는 경우 선택에 사용할 선택적 노드입니다.",
+								"insertBehavior?": "구성요소 삽입 후 동작 모드."
 							}
 						},
 						{
@@ -1508,8 +1508,8 @@
 							"paramDescriptions": {
 								"element": "대상 요소",
 								"pluginName": "선택한 대상의 플러그인 이름입니다.",
-								"options": "옵션",
-								"options.isInput": "false] 대상이 입력 구성 요소(테이블)인지 여부입니다."
+								"options?": "옵션",
+								"options.isInput?=false": "대상이 입력 구성 요소(테이블)인지 여부입니다."
 							}
 						},
 						{
@@ -1585,7 +1585,7 @@
 							"description": "Wysiwyg 영역에 집중",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 프레임 키."
+								"rootKey?": "루트 프레임 키."
 							}
 						},
 						{
@@ -1595,7 +1595,7 @@
 							"description": "`focusEl`이 구성 요소인 경우 해당 구성 요소가 선택됩니다. 형식 요소인 경우 마지막 텍스트가 선택됩니다. - `focusEl`이 `null`인 경우 마지막 요소가 선택됩니다.",
 							"example": "",
 							"paramDescriptions": {
-								"focusEl": "초점 요소"
+								"focusEl?": "초점 요소"
 							}
 						},
 						{
@@ -1626,7 +1626,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"delay": "`true`인 경우 지연 시간 없이 스택을 추가합니다.",
-								"rootKey": "기록을 저장할 루트 프레임의 키입니다."
+								"rootKey?": "기록을 저장할 루트 프레임의 키입니다."
 							}
 						},
 						{
@@ -1661,7 +1661,7 @@
 							"description": "기록 스택의 현재 상태를 최신 콘텐츠로 덮어씁니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "덮어쓸 루트 프레임의 키입니다."
+								"rootKey?": "덮어쓸 루트 프레임의 키입니다."
 							}
 						},
 						{
@@ -1693,7 +1693,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"rootKey": "루트 프레임의 키입니다.",
-								"index": "현재 기록 상태의 인덱스입니다."
+								"index?": "현재 기록 상태의 인덱스입니다."
 							}
 						},
 						{
@@ -1863,7 +1863,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"style": "스타일 문자열",
-								"fc": "프레임 컨텍스트"
+								"fc?": "프레임 컨텍스트"
 							}
 						},
 						{
@@ -1894,7 +1894,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"value": "`readOnly` 부울 값.",
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1904,7 +1904,7 @@
 							"description": "편집기를 비활성화합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1914,7 +1914,7 @@
 							"description": "편집기를 활성화합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1924,7 +1924,7 @@
 							"description": "편집기 인터페이스를 표시합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1934,7 +1934,7 @@
 							"description": "편집기 인터페이스를 숨깁니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1944,7 +1944,7 @@
 							"description": "로딩 스피너를 표시합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1954,7 +1954,7 @@
 							"description": "로딩 스피너를 숨깁니다.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "루트 키"
+								"rootKey?": "루트 키"
 							}
 						},
 						{
@@ -1983,8 +1983,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"message": "토스트 메시지",
-								"duration": "1000] 지속시간(ms)",
-								"type": "\"\"] 지속시간(ms)"
+								"duration?=1000": "지속시간(ms)",
+								"type?=\"\"": "지속시간(ms)"
 							}
 						},
 						{
@@ -3588,7 +3588,7 @@
 							"description": "글머리 기호 목록 추가",
 							"example": "",
 							"paramDescriptions": {
-								"type": "\"\"] 목록 유형"
+								"type?=\"\"": "목록 유형"
 							}
 						}
 					]
@@ -3625,7 +3625,7 @@
 							"description": "번호 매기기 목록 추가",
 							"example": "",
 							"paramDescriptions": {
-								"type": "\"\"] 목록 유형"
+								"type?=\"\"": "목록 유형"
 							}
 						}
 					]
@@ -4267,7 +4267,7 @@
 							"description": "제공된 소스(URL 또는 삽입 코드)를 처리하고 삽입을 위해 제출합니다. - 입력을 구문 분석하고 필요한 이벤트를 트리거하며 포함 구성 요소를 생성하거나 업데이트합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"src": "삽입 소스입니다. 제공되지 않으면 내부에 저장된 링크 값을 사용합니다."
+								"src?": "삽입 소스입니다. 제공되지 않으면 내부에 저장된 링크 값을 사용합니다."
 							},
 							"returnsDescription": "성공 시 `true`로, 실패 시 `false`로 해결되는 약속입니다."
 						}
@@ -4687,7 +4687,7 @@
 							"description": "비디오 임베딩을 위한 새로운 `IFRAME` 요소를 생성합니다. - 제공된 추가 속성을 적용하고 포함에 필요한 속성을 설정합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"props": "`IFRAME`에 할당할 속성이 포함된 선택적 개체입니다."
+								"props?": "`IFRAME`에 할당할 속성이 포함된 선택적 개체입니다."
 							},
 							"returnsDescription": "새로 생성된 `IFRAME` 요소."
 						},
@@ -4698,7 +4698,7 @@
 							"description": "비디오 임베딩을 위한 새로운 `VIDEO` 요소를 생성합니다. - 제공된 추가 속성을 적용하고 필요한 속성을 설정합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"props": "`VIDEO` 요소에 할당할 속성이 포함된 선택적 개체입니다."
+								"props?": "`VIDEO` 요소에 할당할 속성이 포함된 선택적 개체입니다."
 							},
 							"returnsDescription": "새로 생성된 `VIDEO` 요소."
 						},
@@ -4781,11 +4781,10 @@
 							"description": "파일 브라우저 플러그인 열기",
 							"example": "",
 							"paramDescriptions": {
-								"params": "{}]",
-								"params.listClass": "목록 div의 클래스 이름입니다. 그렇지 않은 경우 `this.listClass`을 사용하십시오.",
-								"params.title": "파일 브라우저 창 제목. 그렇지 않은 경우 `this.title`을 사용하십시오.",
-								"params.url": "파일 서버 URL. 그렇지 않은 경우 `this.url`을 사용하십시오.",
-								"params.urlHeader": "파일 서버 http 헤더. 그렇지 않은 경우 `this.urlHeader`을 사용하십시오."
+								"params.listClass?": "목록 div의 클래스 이름입니다. 그렇지 않은 경우 `this.listClass`을 사용하십시오.",
+								"params.title?": "파일 브라우저 창 제목. 그렇지 않은 경우 `this.title`을 사용하십시오.",
+								"params.url?": "파일 서버 URL. 그렇지 않은 경우 `this.url`을 사용하십시오.",
+								"params.urlHeader?": "파일 서버 http 헤더. 그렇지 않은 경우 `this.urlHeader`을 사용하십시오."
 							}
 						},
 						{
@@ -4843,7 +4842,7 @@
 							"paramDescriptions": {
 								"nodeOrColor": "현재 선택된 노드",
 								"target": "목표",
-								"stopCondition": "색상을 찾는 동안 상위 노드 순회를 중지하는 데 사용되는 함수입니다. \n- 이 함수가 `true`을 반환하면 해당 노드에서 순회가 종료됩니다. \n- 예를 들어 `(node) => this.format.isLine(node)`은 <p>, <div>와 같은 줄 수준 요소에서 중지됩니다."
+								"stopCondition?": "색상을 찾는 동안 상위 노드 순회를 중지하는 데 사용되는 함수입니다. \n- 이 함수가 `true`을 반환하면 해당 노드에서 순회가 종료됩니다. \n- 예를 들어 `(node) => this.format.isLine(node)`은 <p>, <div>와 같은 줄 수준 요소에서 중지됩니다."
 							}
 						},
 						{
@@ -4890,12 +4889,12 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "대상 요소",
-								"positionTarget": "위치 대상 요소",
-								"params": "{}] 매개변수",
-								"params.isWWTarget": "컨트롤러가 WYSIWYG 영역에 있는 경우 `true`으로 설정합니다.",
-								"params.initMethod": "컨트롤러가 닫힐 때 호출되는 메서드입니다.",
-								"params.disabled": "`true`인 경우 `controller`이 열리면 `se-component-enabled` 클래스가 없는 버튼이 비활성화됩니다. (기본값: `this.disabled`)",
-								"params.addOffset": "추가 오프셋 값"
+								"positionTarget?": "위치 대상 요소",
+								"params?={}": "매개변수",
+								"params.isWWTarget?": "컨트롤러가 WYSIWYG 영역에 있는 경우 `true`으로 설정합니다.",
+								"params.initMethod?": "컨트롤러가 닫힐 때 호출되는 메서드입니다.",
+								"params.disabled?": "`true`인 경우 `controller`이 열리면 `se-component-enabled` 클래스가 없는 버튼이 비활성화됩니다. (기본값: `this.disabled`)",
+								"params.addOffset?": "추가 오프셋 값"
 							}
 						},
 						{
@@ -4905,7 +4904,7 @@
 							"description": "모달 플러그인 닫기 - 플러그인의 `init` 메서드가 호출됩니다.",
 							"example": "",
 							"paramDescriptions": {
-								"force": "`true`인 경우 상위 컨트롤러가 강제로 닫힙니다."
+								"force?": "`true`인 경우 상위 컨트롤러가 강제로 닫힙니다."
 							}
 						},
 						{
@@ -4952,7 +4951,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "대상 요소",
-								"className": "컨테이너의 클래스 이름(고정: `se-component`)"
+								"className?": "컨테이너의 클래스 이름(고정: `se-component`)"
 							},
 							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}"
 						},
@@ -4964,7 +4963,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "대상 요소",
-								"className": "컨테이너의 클래스 이름(고정: `se-component` `se-inline-component`)"
+								"className?": "컨테이너의 클래스 이름(고정: `se-component` `se-inline-component`)"
 							},
 							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}"
 						},
@@ -4999,7 +4998,7 @@
 							"paramDescriptions": {
 								"w": "폭 크기",
 								"h": "신장 사이즈",
-								"defaultSizeUnit": "\"px\"] 기본 크기 단위(기본값: `\"px\"`)"
+								"defaultSizeUnit?=\"px\"": "기본 크기 단위(기본값: `\"px\"`)"
 							}
 						},
 						{
@@ -5012,7 +5011,7 @@
 								"w": "폭 크기",
 								"h": "신장 사이즈",
 								"defaultSizeUnit": "기본 크기 단위(기본값: `\"px\"`)",
-								"ratio": "비율 크기(Figure.GetRatio)"
+								"ratio?": "비율 크기(Figure.GetRatio)"
 							}
 						},
 						{
@@ -5041,11 +5040,11 @@
 							"paramDescriptions": {
 								"targetNode": "대상 요소",
 								"params": "매개변수",
-								"params.nonResizing": "false] 크기 조정 버튼을 표시하지 않습니다.",
-								"params.nonSizeInfo": "false] 사이즈 정보를 표시하지 않습니다.",
-								"params.nonBorder": "false] 선택한 스타일 라인을 표시하지 않습니다.",
-								"params.figureTarget": "false] `true`인 경우 대상은 그림 요소입니다.",
-								"params.infoOnly": "false] `true`인 경우 컨트롤러를 열지 않고 Figure 대상 정보만 반환합니다."
+								"params.nonResizing?=false": "크기 조정 버튼을 표시하지 않음",
+								"params.nonSizeInfo?=false": "크기 정보를 표시하지 마십시오.",
+								"params.nonBorder?=false": "선택한 스타일 선을 표시하지 않음",
+								"params.figureTarget?=false": "`true`인 경우 대상은 그림 요소입니다.",
+								"params.infoOnly?=false": "`true`인 경우 컨트롤러를 열지 않고 Figure 대상 정보만 반환합니다."
 							},
 							"returnsDescription": "그림 대상 정보"
 						},
@@ -5071,11 +5070,11 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "대상 요소",
-								"params": "{}] 매개변수",
-								"params.isWWTarget": "컨트롤러가 WYSIWYG 영역에 있는 경우 `true`으로 설정합니다.",
-								"params.initMethod": "컨트롤러가 닫힐 때 호출되는 메서드입니다.",
-								"params.disabled": "`true`인 경우 컨트롤러가 비활성화됩니다.",
-								"params.addOffset": "추가 오프셋 값"
+								"params?={}": "매개변수",
+								"params.isWWTarget?": "컨트롤러가 WYSIWYG 영역에 있는 경우 `true`으로 설정합니다.",
+								"params.initMethod?": "컨트롤러가 닫힐 때 호출되는 메서드입니다.",
+								"params.disabled?": "`true`인 경우 컨트롤러가 비활성화됩니다.",
+								"params.addOffset?": "추가 오프셋 값"
 							}
 						},
 						{
@@ -5107,7 +5106,7 @@
 							"description": "Figure 크기를 가져옵니다.",
 							"example": "",
 							"paramDescriptions": {
-								"targetNode": "대상 요소, 기본값은 현재 요소입니다."
+								"targetNode?": "대상 요소, 기본값은 현재 요소입니다."
 							}
 						},
 						{
@@ -5150,7 +5149,7 @@
 								"container": "그림 구성 요소의 컨테이너 요소입니다.",
 								"originEl": "그림 구성 요소의 원래 요소입니다.",
 								"anchorCover": "그림 구성요소의 앵커 커버 요소입니다.",
-								"fileManagerInst": "null] - FileManager 모듈 인스턴스(사용된 경우)."
+								"fileManagerInst?=null": "FileManager 모듈 인스턴스(사용된 경우)"
 							}
 						},
 						{
@@ -5160,7 +5159,7 @@
 							"description": "요소의 변환 스타일(회전)을 초기화합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "대상 요소, 기본값은 현재 요소입니다."
+								"node?": "대상 요소, 기본값은 현재 요소입니다."
 							}
 						},
 						{
@@ -5227,7 +5226,7 @@
 							"description": "색조 슬라이더를 양식 요소에 연결합니다.",
 							"example": "",
 							"paramDescriptions": {
-								"form": "색조 슬라이더를 연결하는 요소입니다."
+								"form?": "색조 슬라이더를 연결하는 요소입니다."
 							}
 						},
 						{
@@ -5298,11 +5297,11 @@
 							"description": "비동기 API 호출",
 							"example": "",
 							"paramDescriptions": {
-								"params.method": "HTTP 메서드(GET, POST, PUT, DELETE...)",
-								"params.url": "API의 URL",
-								"params.headers": "HTTP 헤더",
-								"params.data": "데이터 API",
-								"params.responseType": "XMLHttpRequest.responseType"
+								"params.method?": "HTTP 메서드(GET, POST, PUT, DELETE...)",
+								"params.url?": "API의 URL",
+								"params.headers?": "HTTP 헤더",
+								"params.data?": "데이터 API",
+								"params.responseType?": "XMLHttpRequest.responseType"
 							}
 						},
 						{
@@ -5327,8 +5326,8 @@
 								"uploadUrl": "서버 URL 업로드",
 								"uploadHeader": "요청 헤더",
 								"data": "본문 또는 파일 배열의 FormData",
-								"callBack": "성공 콜백 기능",
-								"errorCallBack": "오류 콜백 기능"
+								"callBack?": "성공 콜백 기능",
+								"errorCallBack?": "오류 콜백 기능"
 							}
 						},
 						{
@@ -5419,7 +5418,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"items": "선택 가능한 항목의 명령 목록입니다.",
-								"menus": "메뉴 표시 요소의 선택적 목록입니다. 기본값은 `items`입니다."
+								"menus?": "메뉴 표시 요소의 선택적 목록입니다. 기본값은 `items`입니다."
 							}
 						},
 						{
@@ -5431,7 +5430,7 @@
 							"paramDescriptions": {
 								"referElement": "선택 메뉴를 실행하는 요소입니다.",
 								"selectMethod": "항목이 선택되었을 때 실행되는 함수입니다.",
-								"attr": "{}] - 선택 메뉴 컨테이너에 대한 추가 특성입니다."
+								"attr?={}": "선택 메뉴 컨테이너에 대한 추가 속성입니다."
 							}
 						},
 						{
@@ -5441,8 +5440,8 @@
 							"description": "메뉴 선택 열기",
 							"example": "",
 							"paramDescriptions": {
-								"position": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
-								"onItemQuerySelector": "활성화할 메뉴의 querySelector 문자열"
+								"position?": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
+								"onItemQuerySelector?": "활성화할 메뉴의 querySelector 문자열"
 							}
 						},
 						{
@@ -5694,7 +5693,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "너비 백분율을 계산할 대상 요소입니다.",
-								"parentTarget": "너비 계산을 위한 참조로 사용할 상위 요소입니다. 제공되지 않으면 대상의 상위 요소가 사용됩니다."
+								"parentTarget?": "너비 계산을 위한 참조로 사용할 상위 요소입니다. 제공되지 않으면 대상의 상위 요소가 사용됩니다."
 							}
 						},
 						{
@@ -5980,7 +5979,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"value": "텍스트 문자열 또는 숫자",
-								"maxDec": "0] 최대 소수 자릿수 (`-1` : `Infinity`)"
+								"maxDec?=0": "최대 소수 자릿수(`-1` : `Infinity`)"
 							}
 						},
 						{
@@ -6057,7 +6056,7 @@
 							"paramDescriptions": {
 								"container": "선택 개체의 노드입니다. (range.startContainer..)",
 								"offset": "선택 개체의 오프셋입니다. (core.getRange().startOffset...)",
-								"dir": "체크포인트를 선택하세요. \n- `\"front\"`: 앞 가장자리, `\"end\"`: 끝 가장자리, `undefined`: 양쪽 가장자리."
+								"dir?": "체크포인트를 선택하세요. \n- `\"front\"`: 앞 가장자리, `\"end\"`: 끝 가장자리, `undefined`: 양쪽 가장자리."
 							}
 						},
 						{
@@ -6335,7 +6334,7 @@
 							"paramDescriptions": {
 								"node": "위치 경로를 찾는 노드",
 								"parentNode": "상위 노드. `null`인 경우, `div` ​​영역을 wysiwyg",
-								"_newOffsets": "`{s: 0, e: 0}` 형식의 개체를 보내면 함께 연결된 텍스트 노드가 `node` ​​인수를 중심으로 하나로 병합됩니다."
+								"_newOffsets?": "`{s: 0, e: 0}` 형식의 개체를 보내면 함께 연결된 텍스트 노드가 `node` ​​인수를 중심으로 하나로 병합됩니다."
 							}
 						},
 						{
@@ -6426,7 +6425,7 @@
 							"paramDescriptions": {
 								"element": "참조 요소",
 								"query": "쿼리 문자열(`nodeName`, `.className`, `#ID`, `:name`) 또는 유효성 검사 함수. \n- Jquery처럼 사용하지 마세요. \n- 한 번에 하나의 조건만 입력할 수 있습니다.",
-								"depth": "깊이에 대한 상위 수준의 수입니다."
+								"depth?": "깊이에 대한 상위 수준의 수입니다."
 							},
 							"returnsDescription": "찾을 수 없음: `null`"
 						},
@@ -6439,7 +6438,7 @@
 							"paramDescriptions": {
 								"element": "참조 요소",
 								"query": "쿼리 문자열(`nodeName`, `.className`, `#ID`, `:name`) 또는 유효성 검사 함수.",
-								"depth": "깊이에 대한 상위 수준의 수입니다."
+								"depth?": "깊이에 대한 상위 수준의 수입니다."
 							},
 							"returnsDescription": "순서대로 배열로 반환됩니다."
 						},
@@ -6496,7 +6495,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "참조 요소",
-								"ceiling": "허용되는 최고 경계"
+								"ceiling?": "허용되는 최고 경계"
 							},
 							"returnsDescription": "찾을 수 없음: `null`"
 						},
@@ -6508,7 +6507,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "참조 요소",
-								"ceiling": "허용되는 최고 경계"
+								"ceiling?": "허용되는 최고 경계"
 							},
 							"returnsDescription": "찾을 수 없음: `null`"
 						},
@@ -6522,7 +6521,7 @@
 								"line": "`line` 요소(p, div 등)",
 								"offsetContainer": "검색을 시작할 기본 노드",
 								"offset": "검색을 시작하기 위한 베이스 오프셋",
-								"validate": "검증 기능"
+								"validate?": "검증 기능"
 							}
 						},
 						{
@@ -6580,7 +6579,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "복제할 노드입니다.",
-								"deep": "false] - 딥 클론을 수행할지 여부입니다."
+								"deep?=false": "딥 클론을 수행할지 여부입니다."
 							},
 							"returnsDescription": "복제된 노드입니다."
 						},
@@ -6592,8 +6591,8 @@
 							"example": "// Create with attributes\nconst span = dom.utils.createElement('SPAN', { style: 'color:red;', class: 'highlight' });\n// Create with HTML string content\nconst div = dom.utils.createElement('DIV', null, '<p>Hello</p>');\n// Create with a child node\nconst br = dom.utils.createElement('BR');\nconst p = dom.utils.createElement('P', null, br);",
 							"paramDescriptions": {
 								"elementName": "요소 이름",
-								"attributes": "태그의 속성입니다. {스타일: '글꼴 크기:12px;..', 클래스: 'el_class',..}",
-								"inner": "innerHTML 문자열 또는 내부 노드입니다."
+								"attributes?": "태그의 속성입니다. {스타일: '글꼴 크기:12px;..', 클래스: 'el_class',..}",
+								"inner?": "innerHTML 문자열 또는 내부 노드입니다."
 							}
 						},
 						{
@@ -6692,7 +6691,7 @@
 							"paramDescriptions": {
 								"originEl": "원점 요소",
 								"copyEl": "복사할 요소",
-								"blacklist": "블랙리스트 배열(소문자)"
+								"blacklist?": "블랙리스트 배열(소문자)"
 							}
 						},
 						{
@@ -6771,7 +6770,7 @@
 							"paramDescriptions": {
 								"buttonList": "(버튼 | 입력) 요소 배열",
 								"disabled": "비활성화된 값",
-								"important": "false] 특권 모드를 사용해야 하는 경우(중요한 비활성화된 버튼을 전환하는 데 필요함)"
+								"important?=false": "권한 모드를 사용해야 하는 경우(중요한 비활성화된 버튼을 전환해야 함)"
 							}
 						},
 						{
@@ -6827,7 +6826,7 @@
 							"paramDescriptions": {
 								"element": "클래스 이름을 플래시하는 요소",
 								"className": "수업 이름",
-								"duration": "120] 기간 밀리초"
+								"duration?=120": "기간(밀리초)"
 							}
 						},
 						{
@@ -7235,10 +7234,10 @@
 					"paramDescriptions": {
 						"params": ".$ - 커널 종속성",
 						"params.error": "오류 메시지",
-						"params.limitSize": "크기 제한",
-						"params.uploadSize": "업로드 크기",
-						"params.currentSize": "현재 크기",
-						"params.file": "파일 객체"
+						"params.limitSize?": "크기 제한",
+						"params.uploadSize?": "업로드 크기",
+						"params.currentSize?": "현재 크기",
+						"params.file?": "파일 객체"
 					}
 				},
 				{
@@ -7316,10 +7315,10 @@
 					"paramDescriptions": {
 						"params": ".$ - 커널 종속성",
 						"params.error": "오류 메시지",
-						"params.limitSize": "크기 제한",
-						"params.uploadSize": "업로드 크기",
-						"params.currentSize": "현재 크기",
-						"params.file": "파일 객체"
+						"params.limitSize?": "크기 제한",
+						"params.uploadSize?": "업로드 크기",
+						"params.currentSize?": "현재 크기",
+						"params.file?": "파일 객체"
 					}
 				},
 				{
@@ -7369,10 +7368,10 @@
 					"paramDescriptions": {
 						"params": ".$ - 커널 종속성",
 						"params.error": "오류 메시지",
-						"params.limitSize": "크기 제한",
-						"params.uploadSize": "업로드 크기",
-						"params.currentSize": "현재 크기",
-						"params.file": "파일 객체"
+						"params.limitSize?": "크기 제한",
+						"params.uploadSize?": "업로드 크기",
+						"params.currentSize?": "현재 크기",
+						"params.file?": "파일 객체"
 					}
 				},
 				{
@@ -7463,10 +7462,10 @@
 					"paramDescriptions": {
 						"params": ".$ - 커널 종속성",
 						"params.error": "오류 메시지",
-						"params.limitSize": "크기 제한",
-						"params.uploadSize": "업로드 크기",
-						"params.currentSize": "현재 크기",
-						"params.file": "파일 객체"
+						"params.limitSize?": "크기 제한",
+						"params.uploadSize?": "업로드 크기",
+						"params.currentSize?": "현재 크기",
+						"params.file?": "파일 객체"
 					}
 				},
 				{

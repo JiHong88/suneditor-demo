@@ -1,6 +1,6 @@
 {
 	"version": "3.0.0-rc.4",
-	"generatedAt": "2026-03-07T13:56:38.568Z",
+	"generatedAt": "2026-03-07T16:35:47.604Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -13,7 +13,7 @@
 					"description": "يتحقق مما إذا كان محتوى المحرر فارغًا. - عرض معايير \"العنصر النائب\".",
 					"example": "",
 					"paramDescriptions": {
-						"fc": "سياق الإطار، إن لم يكن موجودًا، سياق الإطار المحدد حاليًا."
+						"fc?": "سياق الإطار، إن لم يكن موجودًا، سياق الإطار المحدد حاليًا."
 					}
 				},
 				{
@@ -56,7 +56,7 @@
 							"description": "ينشط الزر المقابل بمعلومات العلامات الخاصة بموضع المؤشر الحالي، - مثل `bold`، `underline`، وما إلى ذلك، وينفذ طريقة `active` للمكونات الإضافية.",
 							"example": "",
 							"paramDescriptions": {
-								"selectionNode": "SelectionNode"
+								"selectionNode?": "SelectionNode"
 							},
 							"returnsDescription": "SelectionNode"
 						}
@@ -265,7 +265,7 @@
 								"target": "العنصر المستهدف",
 								"type": "نوع الحدث",
 								"listener": "معالج الحدث",
-								"useCapture": "خيار استخدام الحدث"
+								"useCapture?": "خيار استخدام الحدث"
 							},
 							"returnsDescription": "معلومات الحدث المسجلة"
 						},
@@ -289,7 +289,7 @@
 							"paramDescriptions": {
 								"type": "نوع الحدث",
 								"listener": "مستمع الحدث",
-								"useCapture": "استخدام التقاط الحدث"
+								"useCapture?": "استخدام التقاط الحدث"
 							},
 							"returnsDescription": "معلومات الحدث المسجلة"
 						},
@@ -301,8 +301,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"type": "نوع الحدث أو (معلومات الحدث = this.addGlobalEvent())",
-								"listener": "مستمع الحدث",
-								"useCapture": "استخدام التقاط الحدث"
+								"listener?": "مستمع الحدث",
+								"useCapture?": "استخدام التقاط الحدث"
 							},
 							"returnsDescription": "النجاح: `null`، لم يتم العثور على: `undefined`"
 						}
@@ -423,7 +423,7 @@
 							"description": "احصل على عدد أحرف [المحتوى] أو حجم البيانات الثنائية. (frameOptions.get('charCounter_type')) - إذا كان [content] هو `undefined`، فاحصل على عدد أحرف المحرر الحالي أو حجم البيانات الثنائية.",
 							"example": "",
 							"paramDescriptions": {
-								"content": "المحتوى لحساب. (الافتراضي: this.#frameContext.get('wysiwyg'))"
+								"content?": "المحتوى لحساب. (الافتراضي: this.#frameContext.get('wysiwyg'))"
 							}
 						},
 						{
@@ -443,7 +443,7 @@
 							"description": "قم بتعيين عدد الأحرف على textContent لعنصر charCounter.",
 							"example": "",
 							"paramDescriptions": {
-								"fc": "سياق الإطار"
+								"fc?": "سياق الإطار"
 							}
 						},
 						{
@@ -481,7 +481,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "العقدة المرجعية.",
-								"validation": "وظيفة التحقق الإضافية."
+								"validation?": "وظيفة التحقق الإضافية."
 							}
 						},
 						{
@@ -502,7 +502,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العقدة المرجعية.",
-								"validation": "وظيفة التحقق الإضافية."
+								"validation?": "وظيفة التحقق الإضافية."
 							}
 						},
 						{
@@ -513,7 +513,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "إدراج كأخوة لهذا العنصر",
-								"lineNode": "اسم العقدة أو كائن العقدة المراد إدراجه"
+								"lineNode?": "اسم العقدة أو العقدة المراد إدراجها"
 							}
 						},
 						{
@@ -524,7 +524,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العقدة المرجعية.",
-								"validation": "وظيفة التحقق الإضافية."
+								"validation?": "وظيفة التحقق الإضافية."
 							}
 						},
 						{
@@ -545,11 +545,11 @@
 							"example": "// Remove all list items from a list\nconst listElement = editor.selection.getNode().closest('ul');\neditor.format.removeBlock(listElement);\n// Remove specific list items only\nconst selectedItems = [liElement1, liElement2];\neditor.format.removeBlock(listElement, { selectedFormats: selectedItems });\n// Replace blockquote with div\nconst blockquote = editor.selection.getNode().closest('blockquote');\nconst newDiv = document.createElement('div');\neditor.format.removeBlock(blockquote, { newBlockElement: newDiv });",
 							"paramDescriptions": {
 								"blockElement": "عنصر `block` (PRE، BLOCKQUOTE، OL، UL...)",
-								"options": "خيارات",
-								"options.selectedFormats": "null] مجموعة من عناصر `line` (P، DIV، LI...) المراد إزالتها.",
-								"options.newBlockElement": "خالية] العقدة (`blockElement`) لاستبدال العقدة الملتفة حاليًا.",
-								"options.shouldDelete": "خطأ] إذا كان `true`، يتم حذفه دون فصله.",
-								"options.skipHistory": "خطأ] عندما `true`، لا يتم تحديث مكدس المحفوظات وكائن التحديد وإرجاع `EdgeNodes` ​​(dom-query-GetEdgeChildNodes)"
+								"options?": "خيارات",
+								"options.selectedFormats?=null": "مصفوفة من عناصر `line` (P، DIV، LI...) المراد إزالتها.",
+								"options.newBlockElement?=null": "العقدة (`blockElement`) لاستبدال العقدة الملتفة حاليًا.",
+								"options.shouldDelete?=false": "إذا كان `true`، فسيتم حذفه بدون فصله.",
+								"options.skipHistory?=false": "عند `true`، لا يتم تحديث مكدس المحفوظات وكائن التحديد وإرجاع `EdgeNodes` ​​(dom-query-GetEdgeChildNodes)"
 							},
 							"returnsDescription": "معلومات العقدة بعد الحذف \n- cc: عقدة الحاوية الأصلية المشتركة \n- sc: بدء عقدة الحاوية \n- إذن: بدء الإزاحة \n- ec: عقدة نهاية الحاوية \n- eo: نهاية الإزاحة \n-removeArray: مجموعة من العناصر التي تمت إزالتها"
 						},
@@ -656,7 +656,7 @@
 							"description": "إرجاع مصفوفة `line` من النطاق المحدد.",
 							"example": "",
 							"paramDescriptions": {
-								"validation": "وظيفة التحقق من الصحة. (يستبدل التحقق الافتراضي `format.isLine(current)`)"
+								"validation?": "وظيفة التحقق من الصحة. (يستبدل التحقق الافتراضي `format.isLine(current)`)"
 							}
 						},
 						{
@@ -684,10 +684,10 @@
 							"paramDescriptions": {
 								"html": "سلسلة HTML المراد تصفيتها.",
 								"params": "تصفية المعلمات.",
-								"params.tagWhitelist": "العلامات المسموح بها، المحددة كسلسلة مع علامات مفصولة بـ `'|'`. (على سبيل المثال `\"div|p|span\"`).",
-								"params.tagBlacklist": "العلامات غير المسموح بها، المحددة كسلسلة ذات علامات مفصولة بـ `'|'`. (على سبيل المثال `\"script|iframe\"`).",
-								"params.validate": "وظيفة للتحقق من صحة وتعديل العقد الفردية.",
-								"params.validateAll": "ما إذا كان سيتم تطبيق التحقق من الصحة على كافة العقد."
+								"params.tagWhitelist?": "العلامات المسموح بها، المحددة كسلسلة مع علامات مفصولة بـ `'|'`. (على سبيل المثال `\"div|p|span\"`).",
+								"params.tagBlacklist?": "العلامات غير المسموح بها، المحددة كسلسلة ذات علامات مفصولة بـ `'|'`. (على سبيل المثال `\"script|iframe\"`).",
+								"params.validate?": "وظيفة للتحقق من صحة وتعديل العقد الفردية.",
+								"params.validateAll?": "ما إذا كان سيتم تطبيق التحقق من الصحة على كافة العقد."
 							},
 							"returnsDescription": "سلسلة HTML التي تمت تصفيتها."
 						},
@@ -699,11 +699,11 @@
 							"example": "// Basic cleaning\nconst cleaned = editor.html.clean('<div>  <p>Hello</p>  </div>');\n// Clean with format wrapping\nconst cleaned = editor.html.clean('Plain text content', { forceFormat: true });\n// Clean with blacklist to remove specific tags\nconst cleaned = editor.html.clean('<div><script>alert(1)</script>Content</div>', {\nblacklist: 'script|style'\n});",
 							"paramDescriptions": {
 								"html": "سلسلة HTML للتنظيف والضغط",
-								"options": "خيارات التنظيف",
-								"options.forceFormat": "خطأ] إذا كان `true`، يتم تغليف العقد النصية بدون عقدة تنسيق في علامة التنسيق.",
-								"options.whitelist": "التعبير العادي عن العلامات المسموح بها.",
-								"options.blacklist": "التعبير العادي عن العلامات غير المسموح بها.",
-								"options._freeCodeViewMode": "خطأ] إذا كان `true`، فسيتم تمكين وضع عرض التعليمات البرمجية المجاني."
+								"options?": "خيارات التنظيف",
+								"options.forceFormat?=false": "إذا كان `true`، فسيتم تغليف العقد النصية بدون عقدة تنسيق في علامة التنسيق.",
+								"options.whitelist?": "التعبير العادي عن العلامات المسموح بها.",
+								"options.blacklist?": "التعبير العادي عن العلامات غير المسموح بها.",
+								"options._freeCodeViewMode?=false": "إذا كان `true`، فسيتم تمكين وضع عرض التعليمات البرمجية المجاني."
 							},
 							"returnsDescription": "سلسلة HTML نظيفة ومضغوطة"
 						},
@@ -715,10 +715,10 @@
 							"example": "// Insert HTML string at cursor\neditor.html.insert('<strong>Bold text</strong>');\n// Insert and select the inserted content\neditor.html.insert('<p>New paragraph</p>', { selectInserted: true });\n// Insert raw HTML without cleaning\neditor.html.insert('<div class=\"custom\">Content</div>', { skipCleaning: true });",
 							"paramDescriptions": {
 								"html": "عنصر HTML أو سلسلة HTML أو سلسلة عادية",
-								"options": "خيارات",
-								"options.selectInserted": "خطأ] إذا كان `true`، يحدد نطاق العقدة المدرجة.",
-								"options.skipCharCount": "خطأ] إذا كان `true`، يتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`.",
-								"options.skipCleaning": "false] إذا كان `true`، يُدرج سلسلة HTML دون تحسينها باستخدام `html.clean`."
+								"options?": "خيارات",
+								"options.selectInserted?=false": "إذا كان `true`، يحدد نطاق العقدة المدرجة.",
+								"options.skipCharCount?=false": "إذا كان `true`، يتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`.",
+								"options.skipCleaning?=false": "إذا كان `true`، فسيتم إدراج سلسلة HTML دون تحسينها باستخدام `html.clean`."
 							},
 							"returnsDescription": "العنصر المدرج أو `null` إذا فشل الإدراج"
 						},
@@ -730,9 +730,9 @@
 							"example": "// Insert node at current selection\nconst strongNode = document.createElement('strong');\nstrongNode.textContent = 'Bold';\neditor.html.insertNode(strongNode);\n// Insert node after a specific element\nconst paragraph = editor.html.getNode();\nconst newSpan = document.createElement('span');\neditor.html.insertNode(newSpan, { afterNode: paragraph });\n// Insert bypassing character count limit\neditor.html.insertNode(largeContentNode, { skipCharCount: true });",
 							"paramDescriptions": {
 								"oNode": "العقدة المراد إدراجها",
-								"options": "خيارات",
-								"options.afterNode": "null] إذا كانت العقدة موجودة، فسيتم إدراجها بعد العقدة",
-								"options.skipCharCount": "null] إذا كان `true`، فسيتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`."
+								"options?": "خيارات",
+								"options.afterNode?=null": "إذا كانت العقدة موجودة، فسيتم إدراجها بعد العقدة",
+								"options.skipCharCount?=null": "إذا كان `true`، فسيتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`."
 							}
 						},
 						{
@@ -750,10 +750,10 @@
 							"description": "يحصل على المحتوى الحالي",
 							"example": "",
 							"paramDescriptions": {
-								"options": "خيارات",
-								"options.withFrame": "خطأ] يحصل على المحتوى الحالي الذي يحتوي على الأصل `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
-								"options.includeFullPage": "خطأ] قم بإرجاع محتوى النص بدون رؤوس فقط عندما يكون خيار `iframe_fullPage` هو `true`",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.withFrame?=false": "الحصول على المحتوى الحالي الذي يحتوي على الأصل `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
+								"options.includeFullPage?=false": "إرجاع محتوى النص بدون رؤوس فقط عندما يكون خيار `iframe_fullPage` هو `true`",
+								"options.rootKey?=null": "مؤشر الجذر"
 							}
 						},
 						{
@@ -764,8 +764,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"html": "سلسلة HTML",
-								"options": "خيارات",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.rootKey?=null": "مؤشر الجذر"
 							}
 						},
 						{
@@ -776,8 +776,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"html": "المحتوى للإدخال",
-								"options": "خيارات",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.rootKey?=null": "مؤشر الجذر"
 							}
 						},
 						{
@@ -787,9 +787,9 @@
 							"description": "يحصل على المحتوى الحالي لبيانات JSON",
 							"example": "",
 							"paramDescriptions": {
-								"options": "خيارات",
-								"options.withFrame": "خطأ] يحصل على المحتوى الحالي الذي يحتوي على الأصل `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.withFrame?=false": "الحصول على المحتوى الحالي الذي يحتوي على الأصل `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
+								"options.rootKey?=null": "مؤشر الجذر"
 							},
 							"returnsDescription": "بيانات جيسون"
 						},
@@ -801,8 +801,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"jsdonData": "سلسلة HTML",
-								"options": "خيارات",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.rootKey?=null": "مؤشر الجذر"
 							}
 						},
 						{
@@ -824,8 +824,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"ctx": "{الرأس: سلسلة HTML، النص: سلسلة HTML}",
-								"options": "خيارات",
-								"options.rootKey": "خالية] فهرس الجذر"
+								"options?": "خيارات",
+								"options.rootKey?=null": "مؤشر الجذر"
 							}
 						},
 						{
@@ -853,10 +853,10 @@
 							"example": "// Apply bold formatting\nconst bold = dom.utils.createElement('STRONG');\neditor.inline.apply(bold);\n// Remove specific styles\neditor.inline.apply(null, { stylesToModify: ['font-size'] });\n// Remove specific tags\neditor.inline.apply(null, { nodesToRemove: ['span'] });",
 							"paramDescriptions": {
 								"styleNode": "العنصر المراد إضافته إلى التحديد. إذا كان `null`، فسيتم تعديل أو إزالة العقد الموجودة فقط.",
-								"options": "خيارات",
-								"options.stylesToModify": "null] مجموعة من أسماء الأنماط أو الفئات المطلوب فحصها وتعديلها.",
-								"options.nodesToRemove": "خالية] مجموعة من أسماء العقد المراد إزالتها.",
-								"options.strictRemove": "خطأ] إذا كان `true`، فسيتم إزالة العقد من `nodesToRemove` ​​فقط إذا تمت إزالة جميع الأنماط والفئات."
+								"options?": "خيارات",
+								"options.stylesToModify?=null": "مجموعة من أسماء الأنماط أو الفئات للتحقق منها وتعديلها.",
+								"options.nodesToRemove?=null": "مجموعة من أسماء العقد المراد إزالتها.",
+								"options.strictRemove?=false": "إذا كان `true`، فسيتم إزالة العقد من `nodesToRemove` ​​فقط إذا تمت إزالة جميع الأنماط والفئات."
 							},
 							"returnsDescription": "العنصر الذي تمت إضافته أو تعديله في التحديد."
 						},
@@ -935,7 +935,7 @@
 							"paramDescriptions": {
 								"baseNode": "العنصر أو عقدة النص التي يمكن الاعتماد عليها",
 								"offset": "إزاحة النص لـ `baseNode` (صالحة فقط عندما تكون `baseNode` ​​عقدة نصية)",
-								"depth": "0] عمق تداخل العنصر الذي يتم تقسيمه. (الافتراضي: 0)"
+								"depth?=0": "عمق التداخل للعنصر الذي يتم تقسيمه. (الافتراضي: 0)"
 							},
 							"returnsDescription": "العنصر الأخير من العلامة المقسمة."
 						},
@@ -947,8 +947,8 @@
 							"example": "// Merge adjacent tags with same attributes\nconst container = editor.selection.getNode().closest('div');\neditor.nodeTransform.mergeSameTags(container, null, false);\n// Merge with path tracking\nconst startPath = [0, 1, 2];\nconst endPath = [0, 2, 1];\nconst offsets = editor.nodeTransform.mergeSameTags(element, [startPath, endPath], false);\n// Merge only text nodes\neditor.nodeTransform.mergeSameTags(paragraph, null, true);",
 							"paramDescriptions": {
 								"element": "عنصر",
-								"nodePathArray": "صفيف كائن `NodePath` ([dom-query-GetNodePath(), ..])",
-								"onlyText": "إذا كان `true`، فسيتم تجاهل العقد غير النصية مثل `span`، `strong`..."
+								"nodePathArray?": "صفيف كائن `NodePath` ([dom-query-GetNodePath(), ..])",
+								"onlyText?": "إذا كان `true`، فسيتم تجاهل العقد غير النصية مثل `span`، `strong`..."
 							},
 							"returnsDescription": "[الإزاحة،..]"
 						},
@@ -960,7 +960,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "كائن العنصر",
-								"validation": "وظيفة التحقق من الصحة / السلسلة (`tag1|tag2..`) / إذا كان `null`، فإن جميع العلامات قابلة للتطبيق."
+								"validation?": "وظيفة التحقق من الصحة / السلسلة (`tag1|tag2..`) / إذا كان `null`، فإن جميع العلامات قابلة للتطبيق."
 							}
 						},
 						{
@@ -971,8 +971,8 @@
 							"example": "// Remove empty parent elements recursively\nconst emptySpan = document.querySelector('span:empty');\nconst result = editor.nodeTransform.removeAllParents(emptySpan, null, null);\n// Remove with custom validation\neditor.nodeTransform.removeAllParents(node, (current) => {\nreturn current.textContent.trim().length === 0;\n}, null);\n// Remove up to specific parent\nconst stopAt = editor.selection.getNode().closest('.container');\neditor.nodeTransform.removeAllParents(childNode, null, stopAt);",
 							"paramDescriptions": {
 								"item": "العقدة المراد إزالتها",
-								"validation": "وظيفة التحقق من الصحة. الافتراضي (يتم الحذف إذا كان يحتوي فقط على `breakLine` وفراغات)",
-								"stopParent": "توقف عندما تصل العقدة الأصلية إلى `stopParent`"
+								"validation?": "وظيفة التحقق من الصحة. الافتراضي (يتم الحذف إذا كان يحتوي فقط على `breakLine` وفراغات)",
+								"stopParent?": "توقف عندما تصل العقدة الأصلية إلى `stopParent`"
 							},
 							"returnsDescription": "{sc: PrevSibling, ec: nextSibling} (مرجع العقدة المحذوفة) أو `null`."
 						},
@@ -996,7 +996,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"nodeArray": "مجموعة من العقد للاستنساخ. ستكون العقدة الأولى في المصفوفة هي العقدة الرئيسية ذات المستوى الأعلى.",
-								"validate": "وظيفة التحقق من صحة."
+								"validate?": "وظيفة التحقق من صحة."
 							},
 							"returnsDescription": "كائن يحتوي على العقدة الأصلية ذات المستوى الأعلى والعقدة التابعة الأعمق."
 						}
@@ -1035,7 +1035,7 @@
 							"description": "إرجاع موضع الوسيطة بالنسبة للمستند العام. هذه نسخة مُعاد تشكيلها باستخدام getBoundingClientRect لتحسين الأداء والدقة.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "العنصر المستهدف"
+								"node?": "العنصر المستهدف"
 							},
 							"returnsDescription": "الموضع العالمي وقيم التمرير."
 						},
@@ -1046,7 +1046,7 @@
 							"description": "يحصل على إزاحة التمرير الحالية المتعلقة بالمحرر.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "العنصر المستهدف"
+								"node?": "العنصر المستهدف"
 							},
 							"returnsDescription": "معلومات التمرير العالمية."
 						},
@@ -1081,11 +1081,11 @@
 								"element": "عنصر للموقف",
 								"target": "العنصر المستهدف",
 								"params": "معلمات الموقف",
-								"params.isWWTarget": "خطأ] ما إذا كان الهدف موجودًا ضمن منطقة WYSIWYG الخاصة بالمحرر",
-								"params.addOffset": "{left:0, top:0}] إزاحة إضافية",
-								"params.position": "\"أسفل\"] الموضع (\"أسفل\"|\"أعلى\")",
+								"params.isWWTarget?=false": "ما إذا كان الهدف موجودًا ضمن منطقة WYSIWYG الخاصة بالمحرر",
+								"params.addOffset?={left:0, top:0}": "إزاحة إضافية",
+								"params.position?=\"bottom\"": "الموضع ('أسفل'|'أعلى')",
 								"params.inst": "كائن مثيل المتصل",
-								"params.sibling": "null] عنصر التحكم الشقيق"
+								"params.sibling?=null": "عنصر تحكم الأخوة"
 							},
 							"returnsDescription": "النجاح -> {الموضع: الموضع الحالي}"
 						},
@@ -1098,9 +1098,9 @@
 							"paramDescriptions": {
 								"element": "عنصر للموقف",
 								"range": "نطاق للموقف ضد. \n- إذا كان `null`، فسيتم استخدام نطاق التحديد الحالي",
-								"options": "{}] خيارات الموضع",
-								"options.position": "\"أسفل\"] الموضع (\"أسفل\"|\"أعلى\")",
-								"options.addTop": "0] إزاحة علوية إضافية"
+								"options?={}": "خيارات الموقف",
+								"options.position?=\"bottom\"": "الموضع ('أسفل'|'أعلى')",
+								"options.addTop?=0": "إزاحة علوية إضافية"
 							},
 							"returnsDescription": "النجاح / الفشل"
 						}
@@ -1142,9 +1142,9 @@
 							"example": "// Set range using container and offset\nconst textNode = editor.selection.getNode();\neditor.selection.setRange(textNode, 0, textNode, 5);\n// Set range using Range object\nconst range = document.createRange();\nrange.selectNodeContents(someElement);\neditor.selection.setRange(range);\n// Collapse cursor to start of element\neditor.selection.setRange(element, 0, element, 0);",
 							"paramDescriptions": {
 								"startCon": "كائن النطاق أو الخاصية `startContainer` لكائن التحديد",
-								"startOff": "الخاصية `startOffset` لكائن التحديد.",
-								"endCon": "الخاصية `endContainer` لكائن التحديد.",
-								"endOff": "الخاصية `endOffset` لكائن التحديد."
+								"startOff?": "الخاصية `startOffset` لكائن التحديد.",
+								"endCon?": "الخاصية `endContainer` لكائن التحديد.",
+								"endOff?": "الخاصية `endOffset` لكائن التحديد."
 							}
 						},
 						{
@@ -1173,7 +1173,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"range": "core.getRange()",
-								"container": "إذا كانت هناك وسيطة `container`، فسيتم إنشاء خط أمام الحاوية."
+								"container?": "إذا كانت هناك وسيطة `container`، فسيتم إنشاء خط أمام الحاوية."
 							},
 							"returnsDescription": "`range` جديدة أو وسيطة `range`."
 						},
@@ -1214,7 +1214,7 @@
 							"example": "// Scroll to current selection smoothly\neditor.selection.scrollTo(editor.selection.get());\n// Scroll to specific node\nconst targetNode = document.querySelector('.target-element');\neditor.selection.scrollTo(targetNode);\n// Scroll with custom options\neditor.selection.scrollTo(editor.selection.getRange(), {\nbehavior: 'auto',\nblock: 'center'\n});",
 							"paramDescriptions": {
 								"ref": "كائن التحديد أو النطاق",
-								"scrollOption": "خيار التمرير إلى"
+								"scrollOption?": "خيار التمرير إلى"
 							}
 						},
 						{
@@ -1361,7 +1361,7 @@
 							"description": "تغييرات على طريقة عرض التعليمات البرمجية أو طريقة عرض wysiwyg",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `codeView`."
+								"value?": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `codeView`."
 							}
 						},
 						{
@@ -1371,7 +1371,7 @@
 							"description": "التغييرات إلى ملء الشاشة أو الشاشة الافتراضية",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `fullScreen`."
+								"value?": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `fullScreen`."
 							}
 						},
 						{
@@ -1381,7 +1381,7 @@
 							"description": "قم بإضافة أو إزالة اسم الفئة `body` حتى يصبح مقطع التعليمات البرمجية مرئيًا",
 							"example": "",
 							"paramDescriptions": {
-								"value": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `showBlocks`."
+								"value?": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `showBlocks`."
 							}
 						},
 						{
@@ -1413,7 +1413,7 @@
 							"paramDescriptions": {
 								"command": "سلسلة الأوامر",
 								"type": "سلسلة نوع العرض (`command`، `dropdown`، `modal`، `container`)",
-								"button": "عنصر زر الأمر"
+								"button?": "عنصر زر الأمر"
 							}
 						},
 						{
@@ -1469,11 +1469,11 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العنصر المراد إدراجه",
-								"options": "خيارات",
-								"options.skipCharCount": "خطأ] إذا كان `true`، فسيتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`.",
-								"options.skipHistory": "خطأ] إذا `true`، لا تدفع إلى التاريخ.",
-								"options.scrollTo": "صحيح] `true` : قم بالتمرير إلى العنصر المدرج، `false` ​​: لا تقم بالتمرير.",
-								"options.insertBehavior": "إذا كان `true`، فلا تحدد المكون المدرج تلقائيًا. [الافتراضي: `options.get('componentInsertBehavior')`]"
+								"options?": "خيارات",
+								"options.skipCharCount?=false": "إذا كان `true`، فسيتم إدراجه حتى إذا تم تجاوز `frameOptions.get('charCounter_max')`.",
+								"options.skipHistory?=false": "إذا `true`، لا تدفع إلى التاريخ.",
+								"options.scrollTo?=true": "`true` : قم بالتمرير إلى العنصر المدرج، `false` ​​: لا تقم بالتمرير.",
+								"options.insertBehavior?": "إذا كان `true`، فلا تحدد المكون المدرج تلقائيًا. [الافتراضي: `options.get('componentInsertBehavior')`]"
 							},
 							"returnsDescription": "العنصر المدرج أو السطر الجديد (للموارد البشرية)"
 						},
@@ -1485,8 +1485,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"container": "العنصر المكون المدرج.",
-								"oNode": "عقدة اختيارية لاستخدامها في التحديد إذا تعذر تحديد المكون.",
-								"insertBehavior": "وضع السلوك بعد إدراج المكون."
+								"oNode?": "عقدة اختيارية لاستخدامها في التحديد إذا تعذر تحديد المكون.",
+								"insertBehavior?": "وضع السلوك بعد إدراج المكون."
 							}
 						},
 						{
@@ -1508,8 +1508,8 @@
 							"paramDescriptions": {
 								"element": "العنصر المستهدف",
 								"pluginName": "اسم البرنامج المساعد للهدف المحدد.",
-								"options": "خيارات",
-								"options.isInput": "خطأ] ما إذا كان الهدف مكون إدخال (جدول)."
+								"options?": "خيارات",
+								"options.isInput?=false": "ما إذا كان الهدف مكون إدخال (جدول)."
 							}
 						},
 						{
@@ -1585,7 +1585,7 @@
 							"description": "التركيز على منطقة wysiwyg",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح إطار الجذر."
+								"rootKey?": "مفتاح إطار الجذر."
 							}
 						},
 						{
@@ -1595,7 +1595,7 @@
 							"description": "إذا كان `focusEl` مكونًا، فسيتم تحديد هذا المكون؛ إذا كان عنصر تنسيق، فسيتم تحديد النص الأخير - إذا كان `focusEl` ​​هو `null`، فسيتم تحديد العنصر الأخير",
 							"example": "",
 							"paramDescriptions": {
-								"focusEl": "عنصر التركيز"
+								"focusEl?": "عنصر التركيز"
 							}
 						},
 						{
@@ -1626,7 +1626,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"delay": "إذا كان `true`، قم بإضافة المكدس دون وقت تأخير.",
-								"rootKey": "مفتاح الإطار الجذري لحفظ التاريخ له."
+								"rootKey?": "مفتاح الإطار الجذري لحفظ التاريخ له."
 							}
 						},
 						{
@@ -1661,7 +1661,7 @@
 							"description": "استبدال الحالة الحالية في مكدس المحفوظات بأحدث محتوى.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الإطار الجذر للكتابة."
+								"rootKey?": "مفتاح الإطار الجذر للكتابة."
 							}
 						},
 						{
@@ -1693,7 +1693,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"rootKey": "مفتاح الإطار الجذر.",
-								"index": "مؤشر حالة التاريخ الحالي."
+								"index?": "مؤشر حالة التاريخ الحالي."
 							}
 						},
 						{
@@ -1863,7 +1863,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"style": "سلسلة النمط",
-								"fc": "سياق الإطار"
+								"fc?": "سياق الإطار"
 							}
 						},
 						{
@@ -1894,7 +1894,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"value": "`readOnly` قيمة منطقية.",
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1904,7 +1904,7 @@
 							"description": "تعطيل المحرر.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1914,7 +1914,7 @@
 							"description": "تمكين المحرر.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1924,7 +1924,7 @@
 							"description": "يظهر واجهة المحرر.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1934,7 +1934,7 @@
 							"description": "إخفاء واجهة المحرر.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1944,7 +1944,7 @@
 							"description": "يظهر الدوار التحميل.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1954,7 +1954,7 @@
 							"description": "يخفي زر التحميل.",
 							"example": "",
 							"paramDescriptions": {
-								"rootKey": "مفتاح الجذر"
+								"rootKey?": "مفتاح الجذر"
 							}
 						},
 						{
@@ -1983,8 +1983,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"message": "رسالة نخب",
-								"duration": "1000] المدة الزمنية (مللي ثانية)",
-								"type": "\"\"] المدة الزمنية (مللي ثانية)"
+								"duration?=1000": "المدة الزمنية (مللي ثانية)",
+								"type?=\"\"": "المدة الزمنية (مللي ثانية)"
 							}
 						},
 						{
@@ -3588,7 +3588,7 @@
 							"description": "إضافة قائمة ذات تعداد نقطي",
 							"example": "",
 							"paramDescriptions": {
-								"type": "\"\"] نوع القائمة"
+								"type?=\"\"": "نوع القائمة"
 							}
 						}
 					]
@@ -3625,7 +3625,7 @@
 							"description": "إضافة قائمة مرقمة",
 							"example": "",
 							"paramDescriptions": {
-								"type": "\"\"] نوع القائمة"
+								"type?=\"\"": "نوع القائمة"
 							}
 						}
 					]
@@ -4267,7 +4267,7 @@
 							"description": "يعالج المصدر المقدم (عنوان URL أو كود التضمين) ويرسله للتضمين. - يقوم بتحليل الإدخال، وتشغيل أي أحداث ضرورية، وإنشاء مكون التضمين أو تحديثه.",
 							"example": "",
 							"paramDescriptions": {
-								"src": "مصدر التضمين. إذا لم يتم توفيره، يستخدم قيمة الارتباط المخزنة داخليًا."
+								"src?": "مصدر التضمين. إذا لم يتم توفيره، يستخدم قيمة الارتباط المخزنة داخليًا."
 							},
 							"returnsDescription": "الوعد الذي يتحول إلى `true` عند النجاح أو `false` ​​عند الفشل."
 						}
@@ -4687,7 +4687,7 @@
 							"description": "ينشئ عنصر `IFRAME` جديد لتضمين الفيديو. - تطبيق أي خصائص إضافية مقدمة وتعيين السمات اللازمة للتضمين.",
 							"example": "",
 							"paramDescriptions": {
-								"props": "كائن اختياري يحتوي على خصائص لتعيينها إلى `IFRAME`."
+								"props?": "كائن اختياري يحتوي على خصائص لتعيينها إلى `IFRAME`."
 							},
 							"returnsDescription": "العنصر `IFRAME` الذي تم إنشاؤه حديثًا."
 						},
@@ -4698,7 +4698,7 @@
 							"description": "ينشئ عنصر `VIDEO` جديد لتضمين الفيديو. - تطبيق أي خصائص إضافية مقدمة وتعيين السمات الضرورية.",
 							"example": "",
 							"paramDescriptions": {
-								"props": "كائن اختياري يحتوي على خصائص لتعيينها للعنصر `VIDEO`."
+								"props?": "كائن اختياري يحتوي على خصائص لتعيينها للعنصر `VIDEO`."
 							},
 							"returnsDescription": "العنصر `VIDEO` الذي تم إنشاؤه حديثًا."
 						},
@@ -4781,11 +4781,10 @@
 							"description": "افتح البرنامج المساعد لمتصفح الملفات",
 							"example": "",
 							"paramDescriptions": {
-								"params": "{}]",
-								"params.listClass": "اسم فئة القائمة div. إذا لم يكن الأمر كذلك، استخدم `this.listClass`.",
-								"params.title": "عنوان نافذة متصفح الملفات. إذا لم يكن الأمر كذلك، استخدم `this.title`.",
-								"params.url": "عنوان URL لخادم الملفات. إذا لم يكن الأمر كذلك، استخدم `this.url`.",
-								"params.urlHeader": "رأس خادم الملفات http. إذا لم يكن الأمر كذلك، استخدم `this.urlHeader`."
+								"params.listClass?": "اسم فئة القائمة div. إذا لم يكن الأمر كذلك، استخدم `this.listClass`.",
+								"params.title?": "عنوان نافذة متصفح الملفات. إذا لم يكن الأمر كذلك، استخدم `this.title`.",
+								"params.url?": "عنوان URL لخادم الملفات. إذا لم يكن الأمر كذلك، استخدم `this.url`.",
+								"params.urlHeader?": "رأس خادم الملفات http. إذا لم يكن الأمر كذلك، استخدم `this.urlHeader`."
 							}
 						},
 						{
@@ -4843,7 +4842,7 @@
 							"paramDescriptions": {
 								"nodeOrColor": "العقدة المحددة الحالية",
 								"target": "هدف",
-								"stopCondition": "دالة تُستخدم لإيقاف اجتياز العقد الأصلية أثناء العثور على اللون. \n- عندما ترجع هذه الدالة `true`، ينتهي الاجتياز عند تلك العقدة. \n- على سبيل المثال، `(node) => this.format.isLine(node)` ​​يتوقف عند عناصر مستوى السطر مثل <p>، <div>."
+								"stopCondition?": "دالة تُستخدم لإيقاف اجتياز العقد الأصلية أثناء العثور على اللون. \n- عندما ترجع هذه الدالة `true`، ينتهي الاجتياز عند تلك العقدة. \n- على سبيل المثال، `(node) => this.format.isLine(node)` ​​يتوقف عند عناصر مستوى السطر مثل <p>، <div>."
 							}
 						},
 						{
@@ -4890,12 +4889,12 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "العنصر المستهدف",
-								"positionTarget": "موضع العنصر المستهدف",
-								"params": "{}] المعلمات",
-								"params.isWWTarget": "إذا كانت وحدة التحكم في منطقة WYSIWYG، فاضبطها على `true`.",
-								"params.initMethod": "الطريقة التي يتم استدعاؤها عند إغلاق وحدة التحكم.",
-								"params.disabled": "إذا كان `true`، عند فتح `controller`، يتم تعطيل الأزرار التي لا تحتوي على فئة `se-component-enabled`. (الافتراضي: `this.disabled`)",
-								"params.addOffset": "قيم الإزاحة الإضافية"
+								"positionTarget?": "موضع العنصر المستهدف",
+								"params?={}": "المعلمات",
+								"params.isWWTarget?": "إذا كانت وحدة التحكم في منطقة WYSIWYG، فاضبطها على `true`.",
+								"params.initMethod?": "الطريقة التي يتم استدعاؤها عند إغلاق وحدة التحكم.",
+								"params.disabled?": "إذا كان `true`، عند فتح `controller`، يتم تعطيل الأزرار التي لا تحتوي على فئة `se-component-enabled`. (الافتراضي: `this.disabled`)",
+								"params.addOffset?": "قيم الإزاحة الإضافية"
 							}
 						},
 						{
@@ -4905,7 +4904,7 @@
 							"description": "إغلاق مكون إضافي مشروط - يتم استدعاء أسلوب المكون الإضافي `init`.",
 							"example": "",
 							"paramDescriptions": {
-								"force": "إذا كان `true`، فسيتم إغلاق وحدات التحكم الرئيسية بالقوة."
+								"force?": "إذا كان `true`، فسيتم إغلاق وحدات التحكم الرئيسية بالقوة."
 							}
 						},
 						{
@@ -4952,7 +4951,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العنصر المستهدف",
-								"className": "اسم فئة الحاوية (ثابت: `se-component`)"
+								"className?": "اسم فئة الحاوية (ثابت: `se-component`)"
 							},
 							"returnsDescription": "{الهدف، الحاوية، الغلاف، الغلاف المضمن، التسمية التوضيحية}"
 						},
@@ -4964,7 +4963,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العنصر المستهدف",
-								"className": "اسم فئة الحاوية (ثابت: `se-component` `se-inline-component`)"
+								"className?": "اسم فئة الحاوية (ثابت: `se-component` `se-inline-component`)"
 							},
 							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}"
 						},
@@ -4999,7 +4998,7 @@
 							"paramDescriptions": {
 								"w": "حجم العرض",
 								"h": "حجم الارتفاع",
-								"defaultSizeUnit": "\"px\"] وحدة الحجم الافتراضية (الافتراضي: `\"px\"`)"
+								"defaultSizeUnit?=\"px\"": "وحدة الحجم الافتراضية (الافتراضي: `\"px\"`)"
 							}
 						},
 						{
@@ -5012,7 +5011,7 @@
 								"w": "حجم العرض",
 								"h": "حجم الارتفاع",
 								"defaultSizeUnit": "وحدة الحجم الافتراضية (الافتراضي: `\"px\"`)",
-								"ratio": "حجم النسبة (الشكل.GetRatio)"
+								"ratio?": "حجم النسبة (الشكل.GetRatio)"
 							}
 						},
 						{
@@ -5041,11 +5040,11 @@
 							"paramDescriptions": {
 								"targetNode": "العنصر المستهدف",
 								"params": "المعلمات",
-								"params.nonResizing": "خطأ] لا تعرض زر تغيير الحجم",
-								"params.nonSizeInfo": "خطأ] لا تعرض معلومات الحجم",
-								"params.nonBorder": "خطأ] لا تعرض خط النمط المحدد",
-								"params.figureTarget": "خطأ] إذا كان `true`، فإن الهدف هو عنصر الشكل",
-								"params.infoOnly": "false] إذا كان `true`، فسيتم إرجاع معلومات هدف الشكل فقط دون فتح وحدة التحكم"
+								"params.nonResizing?=false": "لا تعرض زر تغيير الحجم",
+								"params.nonSizeInfo?=false": "لا تعرض معلومات الحجم",
+								"params.nonBorder?=false": "لا تعرض خط النمط المحدد",
+								"params.figureTarget?=false": "إذا كان `true`، فإن الهدف هو عنصر شكلي",
+								"params.infoOnly?=false": "إذا كان `true`، فسيتم إرجاع معلومات هدف الشكل فقط دون فتح وحدة التحكم"
 							},
 							"returnsDescription": "معلومات الهدف الرقم"
 						},
@@ -5071,11 +5070,11 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "العنصر المستهدف",
-								"params": "{}] المعلمات",
-								"params.isWWTarget": "إذا كانت وحدة التحكم في منطقة WYSIWYG، فاضبطها على `true`.",
-								"params.initMethod": "الطريقة التي يتم استدعاؤها عند إغلاق وحدة التحكم.",
-								"params.disabled": "إذا كان `true`، فسيتم تعطيل وحدة التحكم.",
-								"params.addOffset": "قيم الإزاحة الإضافية"
+								"params?={}": "المعلمات",
+								"params.isWWTarget?": "إذا كانت وحدة التحكم في منطقة WYSIWYG، فاضبطها على `true`.",
+								"params.initMethod?": "الطريقة التي يتم استدعاؤها عند إغلاق وحدة التحكم.",
+								"params.disabled?": "إذا كان `true`، فسيتم تعطيل وحدة التحكم.",
+								"params.addOffset?": "قيم الإزاحة الإضافية"
 							}
 						},
 						{
@@ -5107,7 +5106,7 @@
 							"description": "يحصل على حجم الشكل",
 							"example": "",
 							"paramDescriptions": {
-								"targetNode": "العنصر المستهدف، الافتراضي هو العنصر الحالي"
+								"targetNode?": "العنصر المستهدف، الافتراضي هو العنصر الحالي"
 							}
 						},
 						{
@@ -5150,7 +5149,7 @@
 								"container": "عنصر الحاوية لمكون الشكل.",
 								"originEl": "العنصر الأصلي لعنصر الشكل.",
 								"anchorCover": "عنصر غطاء المرساة لمكون الشكل.",
-								"fileManagerInst": "null] - مثيل وحدة FileManager، إذا تم استخدامه."
+								"fileManagerInst?=null": "مثيل وحدة FileManager، إذا تم استخدامه."
 							}
 						},
 						{
@@ -5160,7 +5159,7 @@
 							"description": "تهيئة نمط التحويل (التدوير) للعنصر.",
 							"example": "",
 							"paramDescriptions": {
-								"node": "العنصر المستهدف، الافتراضي هو العنصر الحالي"
+								"node?": "العنصر المستهدف، الافتراضي هو العنصر الحالي"
 							}
 						},
 						{
@@ -5227,7 +5226,7 @@
 							"description": "قم بإرفاق شريط تمرير الصبغة بعنصر النموذج.",
 							"example": "",
 							"paramDescriptions": {
-								"form": "العنصر الذي سيتم إرفاق شريط تمرير الصبغة به."
+								"form?": "العنصر الذي سيتم إرفاق شريط تمرير الصبغة به."
 							}
 						},
 						{
@@ -5298,11 +5297,11 @@
 							"description": "استدعاء Async API",
 							"example": "",
 							"paramDescriptions": {
-								"params.method": "طريقة HTTP (الحصول على، نشر، وضع، حذف...)",
-								"params.url": "عنوان URL لواجهة برمجة التطبيقات",
-								"params.headers": "رؤوس HTTP",
-								"params.data": "واجهات برمجة تطبيقات البيانات",
-								"params.responseType": "XMLHttpRequest.responseType"
+								"params.method?": "طريقة HTTP (الحصول على، نشر، وضع، حذف...)",
+								"params.url?": "عنوان URL لواجهة برمجة التطبيقات",
+								"params.headers?": "رؤوس HTTP",
+								"params.data?": "واجهات برمجة تطبيقات البيانات",
+								"params.responseType?": "XMLHttpRequest.responseType"
 							}
 						},
 						{
@@ -5327,8 +5326,8 @@
 								"uploadUrl": "تحميل عنوان URL للخادم",
 								"uploadHeader": "رأس الطلب",
 								"data": "FormData في النص أو مجموعة الملفات",
-								"callBack": "وظيفة معاودة الاتصال بنجاح",
-								"errorCallBack": "وظيفة معاودة الاتصال بالخطأ"
+								"callBack?": "وظيفة معاودة الاتصال بنجاح",
+								"errorCallBack?": "وظيفة معاودة الاتصال بالخطأ"
 							}
 						},
 						{
@@ -5419,7 +5418,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"items": "قائمة الأوامر للعناصر القابلة للتحديد.",
-								"menus": "قائمة اختيارية لعناصر عرض القائمة؛ الإعدادات الافتراضية هي `items`."
+								"menus?": "قائمة اختيارية لعناصر عرض القائمة؛ الإعدادات الافتراضية هي `items`."
 							}
 						},
 						{
@@ -5431,7 +5430,7 @@
 							"paramDescriptions": {
 								"referElement": "العنصر الذي يطلق قائمة التحديد.",
 								"selectMethod": "الوظيفة التي يتم تنفيذها عند تحديد عنصر.",
-								"attr": "{}] - سمات إضافية لحاوية القائمة المحددة."
+								"attr?={}": "سمات إضافية لحاوية القائمة المحددة."
 							}
 						},
 						{
@@ -5441,8 +5440,8 @@
 							"description": "اختر القائمة مفتوحة",
 							"example": "",
 							"paramDescriptions": {
-								"position": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
-								"onItemQuerySelector": "سلسلة querySelector في القائمة المراد تنشيطها"
+								"position?": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
+								"onItemQuerySelector?": "سلسلة querySelector في القائمة المراد تنشيطها"
 							}
 						},
 						{
@@ -5694,7 +5693,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"target": "العنصر الهدف الذي سيتم حساب نسبة العرض له.",
-								"parentTarget": "العنصر الأصلي المطلوب استخدامه كمرجع لحساب العرض. إذا لم يتم توفيره، فسيتم استخدام العنصر الأصلي للهدف."
+								"parentTarget?": "العنصر الأصلي المطلوب استخدامه كمرجع لحساب العرض. إذا لم يتم توفيره، فسيتم استخدام العنصر الأصلي للهدف."
 							}
 						},
 						{
@@ -5980,7 +5979,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"value": "سلسلة نصية أو رقم",
-								"maxDec": "0] الحد الأقصى لعدد المنازل العشرية (`-1` : `Infinity`)"
+								"maxDec?=0": "الحد الأقصى لعدد المنازل العشرية (`-1` : `Infinity`)"
 							}
 						},
 						{
@@ -6057,7 +6056,7 @@
 							"paramDescriptions": {
 								"container": "عقدة كائن التحديد. (النطاق.بدء الحاوية..)",
 								"offset": "إزاحة كائن التحديد. (core.getRange().startOffset...)",
-								"dir": "حدد نقطة التفتيش. \n- `\"front\"`: الحافة الأمامية، `\"end\"`: الحافة النهائية، `undefined`: كلا الحافتين."
+								"dir?": "حدد نقطة التفتيش. \n- `\"front\"`: الحافة الأمامية، `\"end\"`: الحافة النهائية، `undefined`: كلا الحافتين."
 							}
 						},
 						{
@@ -6335,7 +6334,7 @@
 							"paramDescriptions": {
 								"node": "العقدة للعثور على مسار الموقف",
 								"parentNode": "العقدة الأم. إذا كانت `null`، فمنطقة `div` ​​wysiwyg",
-								"_newOffsets": "إذا قمت بإرسال كائن بالنموذج `{s: 0, e: 0}`، فسيتم دمج العقد النصية المرفقة معًا في عقدة واحدة، يتم توسيطها في الوسيطة `node`."
+								"_newOffsets?": "إذا قمت بإرسال كائن بالنموذج `{s: 0, e: 0}`، فسيتم دمج العقد النصية المرفقة معًا في عقدة واحدة، يتم توسيطها في الوسيطة `node`."
 							}
 						},
 						{
@@ -6426,7 +6425,7 @@
 							"paramDescriptions": {
 								"element": "العنصر المرجعي",
 								"query": "سلسلة الاستعلام (`nodeName`، `.className`، `#ID`، `:name`) أو وظيفة التحقق من الصحة. \n- عدم استخدامه مثل jquery. \n- يمكن إدخال شرط واحد فقط في كل مرة.",
-								"depth": "عدد مستويات الوالدين إلى العمق."
+								"depth?": "عدد مستويات الوالدين إلى العمق."
 							},
 							"returnsDescription": "لم يتم العثور على: `null`"
 						},
@@ -6439,7 +6438,7 @@
 							"paramDescriptions": {
 								"element": "العنصر المرجعي",
 								"query": "سلسلة الاستعلام (`nodeName`، `.className`، `#ID`، `:name`) أو وظيفة التحقق من الصحة.",
-								"depth": "عدد مستويات الوالدين إلى العمق."
+								"depth?": "عدد مستويات الوالدين إلى العمق."
 							},
 							"returnsDescription": "عاد في مجموعة بالترتيب."
 						},
@@ -6496,7 +6495,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "العنصر المرجعي",
-								"ceiling": "أعلى حد مسموح به"
+								"ceiling?": "أعلى حد مسموح به"
 							},
 							"returnsDescription": "لم يتم العثور على: `null`"
 						},
@@ -6508,7 +6507,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "العنصر المرجعي",
-								"ceiling": "أعلى حد مسموح به"
+								"ceiling?": "أعلى حد مسموح به"
 							},
 							"returnsDescription": "لم يتم العثور على: `null`"
 						},
@@ -6522,7 +6521,7 @@
 								"line": "عنصر `line` (p، div، إلخ.)",
 								"offsetContainer": "العقدة الأساسية لبدء البحث",
 								"offset": "إزاحة القاعدة لبدء البحث",
-								"validate": "وظيفة التحقق من الصحة"
+								"validate?": "وظيفة التحقق من الصحة"
 							}
 						},
 						{
@@ -6580,7 +6579,7 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "العقدة للاستنساخ.",
-								"deep": "خطأ] - ما إذا كان سيتم إجراء استنساخ عميق."
+								"deep?=false": "ما إذا كان سيتم إجراء استنساخ عميق."
 							},
 							"returnsDescription": "العقدة المستنسخة."
 						},
@@ -6592,8 +6591,8 @@
 							"example": "// Create with attributes\nconst span = dom.utils.createElement('SPAN', { style: 'color:red;', class: 'highlight' });\n// Create with HTML string content\nconst div = dom.utils.createElement('DIV', null, '<p>Hello</p>');\n// Create with a child node\nconst br = dom.utils.createElement('BR');\nconst p = dom.utils.createElement('P', null, br);",
 							"paramDescriptions": {
 								"elementName": "اسم العنصر",
-								"attributes": "سمات العلامة. {نمط: 'font-size:12px;..'، الفئة: 'el_class'،..}",
-								"inner": "سلسلة HTML داخلية أو عقدة داخلية."
+								"attributes?": "سمات العلامة. {نمط: 'font-size:12px;..'، الفئة: 'el_class'،..}",
+								"inner?": "سلسلة HTML داخلية أو عقدة داخلية."
 							}
 						},
 						{
@@ -6692,7 +6691,7 @@
 							"paramDescriptions": {
 								"originEl": "عنصر الأصل",
 								"copyEl": "عنصر للنسخ",
-								"blacklist": "مصفوفة القائمة السوداء (أحرف صغيرة)"
+								"blacklist?": "مصفوفة القائمة السوداء (أحرف صغيرة)"
 							}
 						},
 						{
@@ -6771,7 +6770,7 @@
 							"paramDescriptions": {
 								"buttonList": "(زر | إدخال) مجموعة العناصر",
 								"disabled": "قيمة معطلة",
-								"important": "خطأ] إذا كان يجب استخدام الوضع المميز (ضروري لتبديل الأزرار المهمة المعطلة)"
+								"important?=false": "إذا كان يجب استخدام الوضع المميز (ضروري لتبديل الأزرار المهمة المعطلة)"
 							}
 						},
 						{
@@ -6827,7 +6826,7 @@
 							"paramDescriptions": {
 								"element": "عنصر لفلاش اسم الفئة",
 								"className": "اسم الفصل",
-								"duration": "120] المدة ميلي ثانية"
+								"duration?=120": "المدة ميلي ثانية"
 							}
 						},
 						{
@@ -7235,10 +7234,10 @@
 					"paramDescriptions": {
 						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
-						"params.limitSize": "حجم الحد",
-						"params.uploadSize": "حجم التحميل",
-						"params.currentSize": "الحجم الحالي",
-						"params.file": "كائن الملف"
+						"params.limitSize?": "حجم الحد",
+						"params.uploadSize?": "حجم التحميل",
+						"params.currentSize?": "الحجم الحالي",
+						"params.file?": "كائن الملف"
 					}
 				},
 				{
@@ -7316,10 +7315,10 @@
 					"paramDescriptions": {
 						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
-						"params.limitSize": "حجم الحد",
-						"params.uploadSize": "حجم التحميل",
-						"params.currentSize": "الحجم الحالي",
-						"params.file": "كائن الملف"
+						"params.limitSize?": "حجم الحد",
+						"params.uploadSize?": "حجم التحميل",
+						"params.currentSize?": "الحجم الحالي",
+						"params.file?": "كائن الملف"
 					}
 				},
 				{
@@ -7369,10 +7368,10 @@
 					"paramDescriptions": {
 						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
-						"params.limitSize": "حجم الحد",
-						"params.uploadSize": "حجم التحميل",
-						"params.currentSize": "الحجم الحالي",
-						"params.file": "كائن الملف"
+						"params.limitSize?": "حجم الحد",
+						"params.uploadSize?": "حجم التحميل",
+						"params.currentSize?": "الحجم الحالي",
+						"params.file?": "كائن الملف"
 					}
 				},
 				{
@@ -7463,10 +7462,10 @@
 					"paramDescriptions": {
 						"params": ".$ - تبعيات النواة",
 						"params.error": "رسالة خطأ",
-						"params.limitSize": "حجم الحد",
-						"params.uploadSize": "حجم التحميل",
-						"params.currentSize": "الحجم الحالي",
-						"params.file": "كائن الملف"
+						"params.limitSize?": "حجم الحد",
+						"params.uploadSize?": "حجم التحميل",
+						"params.currentSize?": "الحجم الحالي",
+						"params.file?": "كائن الملف"
 					}
 				},
 				{

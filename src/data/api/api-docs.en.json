@@ -1,6 +1,6 @@
 {
   "version": "3.0.0-rc.4",
-  "generatedAt": "2026-03-07T13:56:38.568Z",
+  "generatedAt": "2026-03-07T16:35:47.604Z",
   "structure": {
     "editor": {
       "title": "Editor Instance",
@@ -13,7 +13,7 @@
           "description": "Checks if the content of the editor is empty. - Display criteria for \"placeholder\".",
           "example": "",
           "paramDescriptions": {
-            "fc": "Frame context, if not present, currently selected frame context."
+            "fc?": "Frame context, if not present, currently selected frame context."
           }
         },
         {
@@ -56,7 +56,7 @@
               "description": "Activates the corresponding button with the tags information of the current cursor position, - such as `bold`, `underline`, etc., and executes the `active` method of the plugins.",
               "example": "",
               "paramDescriptions": {
-                "selectionNode": "selectionNode"
+                "selectionNode?": "selectionNode"
               },
               "returnsDescription": "selectionNode"
             }
@@ -265,7 +265,7 @@
                 "target": "Target element",
                 "type": "Event type",
                 "listener": "Event handler",
-                "useCapture": "Event useCapture option"
+                "useCapture?": "Event useCapture option"
               },
               "returnsDescription": "Registered event information"
             },
@@ -289,7 +289,7 @@
               "paramDescriptions": {
                 "type": "Event type",
                 "listener": "Event listener",
-                "useCapture": "Use event capture"
+                "useCapture?": "Use event capture"
               },
               "returnsDescription": "Registered event information"
             },
@@ -301,8 +301,8 @@
               "example": "",
               "paramDescriptions": {
                 "type": "Event type or (Event info = this.addGlobalEvent())",
-                "listener": "Event listener",
-                "useCapture": "Use event capture"
+                "listener?": "Event listener",
+                "useCapture?": "Use event capture"
               },
               "returnsDescription": "Success: `null`, Not found: `undefined`"
             }
@@ -423,7 +423,7 @@
               "description": "Get the [content]'s number of characters or binary data size. (frameOptions.get('charCounter_type')) - If [content] is `undefined`, get the current editor's number of characters or binary data size.",
               "example": "",
               "paramDescriptions": {
-                "content": "Content to count. (defalut: this.#frameContext.get('wysiwyg'))"
+                "content?": "Content to count. (defalut: this.#frameContext.get('wysiwyg'))"
               }
             },
             {
@@ -443,7 +443,7 @@
               "description": "Set the char count to charCounter element textContent.",
               "example": "",
               "paramDescriptions": {
-                "fc": "Frame context"
+                "fc?": "Frame context"
               }
             },
             {
@@ -481,7 +481,7 @@
               "example": "",
               "paramDescriptions": {
                 "node": "Reference node.",
-                "validation": "Additional validation function."
+                "validation?": "Additional validation function."
               }
             },
             {
@@ -502,7 +502,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Reference node.",
-                "validation": "Additional validation function."
+                "validation?": "Additional validation function."
               }
             },
             {
@@ -513,7 +513,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Insert as siblings of that element",
-                "lineNode": "Node name or node obejct to be inserted"
+                "lineNode?": "Node name or node obejct to be inserted"
               }
             },
             {
@@ -524,7 +524,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Reference node.",
-                "validation": "Additional validation function."
+                "validation?": "Additional validation function."
               }
             },
             {
@@ -545,11 +545,11 @@
               "example": "// Remove all list items from a list\nconst listElement = editor.selection.getNode().closest('ul');\neditor.format.removeBlock(listElement);\n// Remove specific list items only\nconst selectedItems = [liElement1, liElement2];\neditor.format.removeBlock(listElement, { selectedFormats: selectedItems });\n// Replace blockquote with div\nconst blockquote = editor.selection.getNode().closest('blockquote');\nconst newDiv = document.createElement('div');\neditor.format.removeBlock(blockquote, { newBlockElement: newDiv });",
               "paramDescriptions": {
                 "blockElement": "`block` element (PRE, BLOCKQUOTE, OL, UL...)",
-                "options": "Options",
-                "options.selectedFormats": "null] Array of `line` elements (P, DIV, LI...) to remove.",
-                "options.newBlockElement": "null] The node(`blockElement`) to replace the currently wrapped node.",
-                "options.shouldDelete": "false] If `true`, deleted without detached.",
-                "options.skipHistory": "false] When `true`, it does not update the history stack and the selection object and return `EdgeNodes` (dom-query-GetEdgeChildNodes)"
+                "options?": "Options",
+                "options.selectedFormats?=null": "Array of `line` elements (P, DIV, LI...) to remove.",
+                "options.newBlockElement?=null": "The node(`blockElement`) to replace the currently wrapped node.",
+                "options.shouldDelete?=false": "If `true`, deleted without detached.",
+                "options.skipHistory?=false": "When `true`, it does not update the history stack and the selection object and return `EdgeNodes` (dom-query-GetEdgeChildNodes)"
               },
               "returnsDescription": "Node information after deletion\n- cc: Common parent container node\n- sc: Start container node\n- so: Start offset\n- ec: End container node\n- eo: End offset\n- removeArray: Array of removed elements"
             },
@@ -656,7 +656,7 @@
               "description": "Returns a `line` array from selected range.",
               "example": "",
               "paramDescriptions": {
-                "validation": "The validation function. (Replaces the default validation `format.isLine(current)`)"
+                "validation?": "The validation function. (Replaces the default validation `format.isLine(current)`)"
               }
             },
             {
@@ -684,10 +684,10 @@
               "paramDescriptions": {
                 "html": "The HTML string to be filtered.",
                 "params": "Filtering parameters.",
-                "params.tagWhitelist": "Allowed tags, specified as a string with tags separated by `'|'`. (e.g. `\"div|p|span\"`).",
-                "params.tagBlacklist": "Disallowed tags, specified as a string with tags separated by `'|'`. (e.g. `\"script|iframe\"`).",
-                "params.validate": "Function to validate and modify individual nodes.",
-                "params.validateAll": "Whether to apply validation to all nodes."
+                "params.tagWhitelist?": "Allowed tags, specified as a string with tags separated by `'|'`. (e.g. `\"div|p|span\"`).",
+                "params.tagBlacklist?": "Disallowed tags, specified as a string with tags separated by `'|'`. (e.g. `\"script|iframe\"`).",
+                "params.validate?": "Function to validate and modify individual nodes.",
+                "params.validateAll?": "Whether to apply validation to all nodes."
               },
               "returnsDescription": "The filtered HTML string."
             },
@@ -699,11 +699,11 @@
               "example": "// Basic cleaning\nconst cleaned = editor.html.clean('<div>  <p>Hello</p>  </div>');\n// Clean with format wrapping\nconst cleaned = editor.html.clean('Plain text content', { forceFormat: true });\n// Clean with blacklist to remove specific tags\nconst cleaned = editor.html.clean('<div><script>alert(1)</script>Content</div>', {\nblacklist: 'script|style'\n});",
               "paramDescriptions": {
                 "html": "HTML string to clean and compress",
-                "options": "Cleaning options",
-                "options.forceFormat": "false] If `true`, wraps text nodes without a format node in the format tag.",
-                "options.whitelist": "Regular expression of allowed tags.",
-                "options.blacklist": "Regular expression of disallowed tags.",
-                "options._freeCodeViewMode": "false] If `true`, the free code view mode is enabled."
+                "options?": "Cleaning options",
+                "options.forceFormat?=false": "If `true`, wraps text nodes without a format node in the format tag.",
+                "options.whitelist?": "Regular expression of allowed tags.",
+                "options.blacklist?": "Regular expression of disallowed tags.",
+                "options._freeCodeViewMode?=false": "If `true`, the free code view mode is enabled."
               },
               "returnsDescription": "Cleaned and compressed HTML string"
             },
@@ -715,10 +715,10 @@
               "example": "// Insert HTML string at cursor\neditor.html.insert('<strong>Bold text</strong>');\n// Insert and select the inserted content\neditor.html.insert('<p>New paragraph</p>', { selectInserted: true });\n// Insert raw HTML without cleaning\neditor.html.insert('<div class=\"custom\">Content</div>', { skipCleaning: true });",
               "paramDescriptions": {
                 "html": "HTML Element or HTML string or plain string",
-                "options": "Options",
-                "options.selectInserted": "false] If `true`, selects the range of the inserted node.",
-                "options.skipCharCount": "false] If `true`, inserts even if `frameOptions.get('charCounter_max')` is exceeded.",
-                "options.skipCleaning": "false] If `true`, inserts the HTML string without refining it with `html.clean`."
+                "options?": "Options",
+                "options.selectInserted?=false": "If `true`, selects the range of the inserted node.",
+                "options.skipCharCount?=false": "If `true`, inserts even if `frameOptions.get('charCounter_max')` is exceeded.",
+                "options.skipCleaning?=false": "If `true`, inserts the HTML string without refining it with `html.clean`."
               },
               "returnsDescription": "The inserted element or `null` if insertion failed"
             },
@@ -730,9 +730,9 @@
               "example": "// Insert node at current selection\nconst strongNode = document.createElement('strong');\nstrongNode.textContent = 'Bold';\neditor.html.insertNode(strongNode);\n// Insert node after a specific element\nconst paragraph = editor.html.getNode();\nconst newSpan = document.createElement('span');\neditor.html.insertNode(newSpan, { afterNode: paragraph });\n// Insert bypassing character count limit\neditor.html.insertNode(largeContentNode, { skipCharCount: true });",
               "paramDescriptions": {
                 "oNode": "Node to be inserted",
-                "options": "Options",
-                "options.afterNode": "null] If the node exists, it is inserted after the node",
-                "options.skipCharCount": "null] If `true`, it will be inserted even if `frameOptions.get('charCounter_max')` is exceeded."
+                "options?": "Options",
+                "options.afterNode?=null": "If the node exists, it is inserted after the node",
+                "options.skipCharCount?=null": "If `true`, it will be inserted even if `frameOptions.get('charCounter_max')` is exceeded."
               }
             },
             {
@@ -750,10 +750,10 @@
               "description": "Gets the current content",
               "example": "",
               "paramDescriptions": {
-                "options": "Options",
-                "options.withFrame": "false] Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
-                "options.includeFullPage": "false] Return only the content of the body without headers when the `iframe_fullPage` option is `true`",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.withFrame?=false": "Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
+                "options.includeFullPage?=false": "Return only the content of the body without headers when the `iframe_fullPage` option is `true`",
+                "options.rootKey?=null": "Root index"
               }
             },
             {
@@ -764,8 +764,8 @@
               "example": "",
               "paramDescriptions": {
                 "html": "HTML string",
-                "options": "Options",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.rootKey?=null": "Root index"
               }
             },
             {
@@ -776,8 +776,8 @@
               "example": "",
               "paramDescriptions": {
                 "html": "Content to Input",
-                "options": "Options",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.rootKey?=null": "Root index"
               }
             },
             {
@@ -787,9 +787,9 @@
               "description": "Gets the current content to JSON data",
               "example": "",
               "paramDescriptions": {
-                "options": "Options",
-                "options.withFrame": "false] Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.withFrame?=false": "Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
+                "options.rootKey?=null": "Root index"
               },
               "returnsDescription": "JSON data"
             },
@@ -801,8 +801,8 @@
               "example": "",
               "paramDescriptions": {
                 "jsdonData": "HTML string",
-                "options": "Options",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.rootKey?=null": "Root index"
               }
             },
             {
@@ -824,8 +824,8 @@
               "example": "",
               "paramDescriptions": {
                 "ctx": "{ head: HTML string, body: HTML string}",
-                "options": "Options",
-                "options.rootKey": "null] Root index"
+                "options?": "Options",
+                "options.rootKey?=null": "Root index"
               }
             },
             {
@@ -853,10 +853,10 @@
               "example": "// Apply bold formatting\nconst bold = dom.utils.createElement('STRONG');\neditor.inline.apply(bold);\n// Remove specific styles\neditor.inline.apply(null, { stylesToModify: ['font-size'] });\n// Remove specific tags\neditor.inline.apply(null, { nodesToRemove: ['span'] });",
               "paramDescriptions": {
                 "styleNode": "The element to be added to the selection. If `null`, only existing nodes are modified or removed.",
-                "options": "Options",
-                "options.stylesToModify": "null] Array of style or class names to check and modify.",
-                "options.nodesToRemove": "null] Array of node names to remove.",
-                "options.strictRemove": "false] If `true`, only removes nodes from `nodesToRemove` if all styles and classes are removed."
+                "options?": "Options",
+                "options.stylesToModify?=null": "Array of style or class names to check and modify.",
+                "options.nodesToRemove?=null": "Array of node names to remove.",
+                "options.strictRemove?=false": "If `true`, only removes nodes from `nodesToRemove` if all styles and classes are removed."
               },
               "returnsDescription": "The element that was added to or modified in the selection."
             },
@@ -935,7 +935,7 @@
               "paramDescriptions": {
                 "baseNode": "Element or text node on which to base",
                 "offset": "Text offset of `baseNode` (Only valid when `baseNode` is a text node)",
-                "depth": "0] The nesting depth of the element being split. (default: 0)"
+                "depth?=0": "The nesting depth of the element being split. (default: 0)"
               },
               "returnsDescription": "The last element of the splited tag."
             },
@@ -947,8 +947,8 @@
               "example": "// Merge adjacent tags with same attributes\nconst container = editor.selection.getNode().closest('div');\neditor.nodeTransform.mergeSameTags(container, null, false);\n// Merge with path tracking\nconst startPath = [0, 1, 2];\nconst endPath = [0, 2, 1];\nconst offsets = editor.nodeTransform.mergeSameTags(element, [startPath, endPath], false);\n// Merge only text nodes\neditor.nodeTransform.mergeSameTags(paragraph, null, true);",
               "paramDescriptions": {
                 "element": "Element",
-                "nodePathArray": "Array of `NodePath` object ([dom-query-GetNodePath(), ..])",
-                "onlyText": "If `true`, non-text nodes like `span`, `strong`.. are ignored."
+                "nodePathArray?": "Array of `NodePath` object ([dom-query-GetNodePath(), ..])",
+                "onlyText?": "If `true`, non-text nodes like `span`, `strong`.. are ignored."
               },
               "returnsDescription": "[offset, ..]"
             },
@@ -960,7 +960,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Element object",
-                "validation": "Validation function / String(`tag1|tag2..`) / If `null`, all tags are applicable."
+                "validation?": "Validation function / String(`tag1|tag2..`) / If `null`, all tags are applicable."
               }
             },
             {
@@ -971,8 +971,8 @@
               "example": "// Remove empty parent elements recursively\nconst emptySpan = document.querySelector('span:empty');\nconst result = editor.nodeTransform.removeAllParents(emptySpan, null, null);\n// Remove with custom validation\neditor.nodeTransform.removeAllParents(node, (current) => {\nreturn current.textContent.trim().length === 0;\n}, null);\n// Remove up to specific parent\nconst stopAt = editor.selection.getNode().closest('.container');\neditor.nodeTransform.removeAllParents(childNode, null, stopAt);",
               "paramDescriptions": {
                 "item": "Node to be remove",
-                "validation": "Validation function. default(Deleted if it only have `breakLine` and blanks)",
-                "stopParent": "Stop when the parent node reaches `stopParent`"
+                "validation?": "Validation function. default(Deleted if it only have `breakLine` and blanks)",
+                "stopParent?": "Stop when the parent node reaches `stopParent`"
               },
               "returnsDescription": "{sc: previousSibling, ec: nextSibling} (the deleted node reference) or `null`."
             },
@@ -996,7 +996,7 @@
               "example": "",
               "paramDescriptions": {
                 "nodeArray": "An array of nodes to clone. The first node in the array will be the top-level parent.",
-                "validate": "A validate function."
+                "validate?": "A validate function."
               },
               "returnsDescription": "An object containing the top-level parent node and the innermost child node."
             }
@@ -1035,7 +1035,7 @@
               "description": "Returns the position of the argument relative to the global document. This is a refactored version using getBoundingClientRect for better performance and accuracy.",
               "example": "",
               "paramDescriptions": {
-                "node": "Target element."
+                "node?": "Target element."
               },
               "returnsDescription": "Global position and scroll values."
             },
@@ -1046,7 +1046,7 @@
               "description": "Gets the current editor-relative scroll offset.",
               "example": "",
               "paramDescriptions": {
-                "node": "Target element."
+                "node?": "Target element."
               },
               "returnsDescription": "Global scroll information."
             },
@@ -1081,11 +1081,11 @@
                 "element": "Element to position",
                 "target": "Target element",
                 "params": "Position parameters",
-                "params.isWWTarget": "false] Whether the target is within the editor's WYSIWYG area",
-                "params.addOffset": "{left:0, top:0}] Additional offset",
-                "params.position": "\"bottom\"] Position ('bottom'|'top')",
+                "params.isWWTarget?=false": "Whether the target is within the editor's WYSIWYG area",
+                "params.addOffset?={left:0, top:0}": "Additional offset",
+                "params.position?=\"bottom\"": "Position ('bottom'|'top')",
                 "params.inst": "Instance object of caller",
-                "params.sibling": "null] The sibling controller element"
+                "params.sibling?=null": "The sibling controller element"
               },
               "returnsDescription": "Success -> {position: current position}"
             },
@@ -1098,9 +1098,9 @@
               "paramDescriptions": {
                 "element": "Element to position",
                 "range": "Range to position against.\n- if `null`, the current selection range is used",
-                "options": "{}] Position options",
-                "options.position": "\"bottom\"] Position ('bottom'|'top')",
-                "options.addTop": "0] Additional top offset"
+                "options?={}": "Position options",
+                "options.position?=\"bottom\"": "Position ('bottom'|'top')",
+                "options.addTop?=0": "Additional top offset"
               },
               "returnsDescription": "Success / Failure"
             }
@@ -1142,9 +1142,9 @@
               "example": "// Set range using container and offset\nconst textNode = editor.selection.getNode();\neditor.selection.setRange(textNode, 0, textNode, 5);\n// Set range using Range object\nconst range = document.createRange();\nrange.selectNodeContents(someElement);\neditor.selection.setRange(range);\n// Collapse cursor to start of element\neditor.selection.setRange(element, 0, element, 0);",
               "paramDescriptions": {
                 "startCon": "Range object or The `startContainer` property of the selection object",
-                "startOff": "The `startOffset` property of the selection object.",
-                "endCon": "The `endContainer` property of the selection object.",
-                "endOff": "The `endOffset` property of the selection object."
+                "startOff?": "The `startOffset` property of the selection object.",
+                "endCon?": "The `endContainer` property of the selection object.",
+                "endOff?": "The `endOffset` property of the selection object."
               }
             },
             {
@@ -1173,7 +1173,7 @@
               "example": "",
               "paramDescriptions": {
                 "range": "core.getRange()",
-                "container": "If there is `container` argument, it creates a line in front of the container."
+                "container?": "If there is `container` argument, it creates a line in front of the container."
               },
               "returnsDescription": "a new `range` or argument `range`."
             },
@@ -1214,7 +1214,7 @@
               "example": "// Scroll to current selection smoothly\neditor.selection.scrollTo(editor.selection.get());\n// Scroll to specific node\nconst targetNode = document.querySelector('.target-element');\neditor.selection.scrollTo(targetNode);\n// Scroll with custom options\neditor.selection.scrollTo(editor.selection.getRange(), {\nbehavior: 'auto',\nblock: 'center'\n});",
               "paramDescriptions": {
                 "ref": "selection or range object",
-                "scrollOption": "option of scrollTo"
+                "scrollOption?": "option of scrollTo"
               }
             },
             {
@@ -1361,7 +1361,7 @@
               "description": "Changes to code view or wysiwyg view",
               "example": "",
               "paramDescriptions": {
-                "value": "`true`/`false`, If `undefined` toggle the `codeView` mode."
+                "value?": "`true`/`false`, If `undefined` toggle the `codeView` mode."
               }
             },
             {
@@ -1371,7 +1371,7 @@
               "description": "Changes to full screen or default screen",
               "example": "",
               "paramDescriptions": {
-                "value": "`true`/`false`, If `undefined` toggle the `fullScreen` mode."
+                "value?": "`true`/`false`, If `undefined` toggle the `fullScreen` mode."
               }
             },
             {
@@ -1381,7 +1381,7 @@
               "description": "Add or remove the class name of `body` so that the code block is visible",
               "example": "",
               "paramDescriptions": {
-                "value": "`true`/`false`, If `undefined` toggle the `showBlocks` mode."
+                "value?": "`true`/`false`, If `undefined` toggle the `showBlocks` mode."
               }
             },
             {
@@ -1413,7 +1413,7 @@
               "paramDescriptions": {
                 "command": "Command string",
                 "type": "Display type string (`command`, `dropdown`, `modal`, `container`)",
-                "button": "The element of command button"
+                "button?": "The element of command button"
               }
             },
             {
@@ -1469,11 +1469,11 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Element to be inserted",
-                "options": "Options",
-                "options.skipCharCount": "false] If `true`, it will be inserted even if `frameOptions.get('charCounter_max')` is exceeded.",
-                "options.skipHistory": "false] If `true`, do not push to history.",
-                "options.scrollTo": "true] `true` : Scroll to the inserted element, `false` : Do not scroll.",
-                "options.insertBehavior": "If `true`, do not automatically select the inserted component. [default: `options.get('componentInsertBehavior')`]"
+                "options?": "Options",
+                "options.skipCharCount?=false": "If `true`, it will be inserted even if `frameOptions.get('charCounter_max')` is exceeded.",
+                "options.skipHistory?=false": "If `true`, do not push to history.",
+                "options.scrollTo?=true": "`true` : Scroll to the inserted element, `false` : Do not scroll.",
+                "options.insertBehavior?": "If `true`, do not automatically select the inserted component. [default: `options.get('componentInsertBehavior')`]"
               },
               "returnsDescription": "The inserted element or new line (for HR)"
             },
@@ -1485,8 +1485,8 @@
               "example": "",
               "paramDescriptions": {
                 "container": "The inserted component element.",
-                "oNode": "Optional node to use for selection if the component cannot be selected.",
-                "insertBehavior": "Behavior mode after component insertion."
+                "oNode?": "Optional node to use for selection if the component cannot be selected.",
+                "insertBehavior?": "Behavior mode after component insertion."
               }
             },
             {
@@ -1508,8 +1508,8 @@
               "paramDescriptions": {
                 "element": "Target element",
                 "pluginName": "The plugin name for the selected target.",
-                "options": "Options",
-                "options.isInput": "false] Whether the target is an input component (table)."
+                "options?": "Options",
+                "options.isInput?=false": "Whether the target is an input component (table)."
               }
             },
             {
@@ -1585,7 +1585,7 @@
               "description": "Focus to wysiwyg area",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root frame key."
+                "rootKey?": "Root frame key."
               }
             },
             {
@@ -1595,7 +1595,7 @@
               "description": "If `focusEl` is a component, then that component is selected; if it is a format element, the last text is selected - If `focusEl` is `null`, then selected last element",
               "example": "",
               "paramDescriptions": {
-                "focusEl": "Focus element"
+                "focusEl?": "Focus element"
               }
             },
             {
@@ -1626,7 +1626,7 @@
               "example": "",
               "paramDescriptions": {
                 "delay": "If `true`, add stack without delay time.",
-                "rootKey": "The key of the root frame to save history for."
+                "rootKey?": "The key of the root frame to save history for."
               }
             },
             {
@@ -1661,7 +1661,7 @@
               "description": "Overwrites the current state in the history stack with the latest content.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "The key of the root frame to overwrite."
+                "rootKey?": "The key of the root frame to overwrite."
               }
             },
             {
@@ -1693,7 +1693,7 @@
               "example": "",
               "paramDescriptions": {
                 "rootKey": "The key of the root frame.",
-                "index": "The index of the current history state."
+                "index?": "The index of the current history state."
               }
             },
             {
@@ -1863,7 +1863,7 @@
               "example": "",
               "paramDescriptions": {
                 "style": "Style string",
-                "fc": "Frame context"
+                "fc?": "Frame context"
               }
             },
             {
@@ -1894,7 +1894,7 @@
               "example": "",
               "paramDescriptions": {
                 "value": "`readOnly` boolean value.",
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1904,7 +1904,7 @@
               "description": "Disables the editor.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1914,7 +1914,7 @@
               "description": "Enables the editor.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1924,7 +1924,7 @@
               "description": "Shows the editor interface.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1934,7 +1934,7 @@
               "description": "Hides the editor interface.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1944,7 +1944,7 @@
               "description": "Shows the loading spinner.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1954,7 +1954,7 @@
               "description": "Hides the loading spinner.",
               "example": "",
               "paramDescriptions": {
-                "rootKey": "Root key"
+                "rootKey?": "Root key"
               }
             },
             {
@@ -1983,8 +1983,8 @@
               "example": "",
               "paramDescriptions": {
                 "message": "toast message",
-                "duration": "1000] duration time(ms)",
-                "type": "\"\"] duration time(ms)"
+                "duration?=1000": "duration time(ms)",
+                "type?=\"\"": "duration time(ms)"
               }
             },
             {
@@ -3588,7 +3588,7 @@
               "description": "Add a bulleted list",
               "example": "",
               "paramDescriptions": {
-                "type": "\"\"] List type"
+                "type?=\"\"": "List type"
               }
             }
           ]
@@ -3625,7 +3625,7 @@
               "description": "Add a numbered list",
               "example": "",
               "paramDescriptions": {
-                "type": "\"\"] List type"
+                "type?=\"\"": "List type"
               }
             }
           ]
@@ -4267,7 +4267,7 @@
               "description": "Processes the provided source (URL or embed code) and submits it for embedding. - It parses the input, triggers any necessary events, and creates or updates the embed component.",
               "example": "",
               "paramDescriptions": {
-                "src": "The embed source. If not provided, uses the internally stored link value."
+                "src?": "The embed source. If not provided, uses the internally stored link value."
               },
               "returnsDescription": "A promise that resolves to `true` on success or `false` on failure."
             }
@@ -4687,7 +4687,7 @@
               "description": "Creates a new `IFRAME` element for video embedding. - Applies any additional properties provided and sets the necessary attributes for embedding.",
               "example": "",
               "paramDescriptions": {
-                "props": "An optional object containing properties to assign to the `IFRAME`."
+                "props?": "An optional object containing properties to assign to the `IFRAME`."
               },
               "returnsDescription": "The newly created `IFRAME` element."
             },
@@ -4698,7 +4698,7 @@
               "description": "Creates a new `VIDEO` element for video embedding. - Applies any additional properties provided and sets the necessary attributes.",
               "example": "",
               "paramDescriptions": {
-                "props": "An optional object containing properties to assign to the `VIDEO` element."
+                "props?": "An optional object containing properties to assign to the `VIDEO` element."
               },
               "returnsDescription": "The newly created `VIDEO` element."
             },
@@ -4781,11 +4781,10 @@
               "description": "Open a file browser plugin",
               "example": "",
               "paramDescriptions": {
-                "params": "{}]",
-                "params.listClass": "Class name of list div. If not, use `this.listClass`.",
-                "params.title": "File browser window title. If not, use `this.title`.",
-                "params.url": "File server url. If not, use `this.url`.",
-                "params.urlHeader": "File server http header. If not, use `this.urlHeader`."
+                "params.listClass?": "Class name of list div. If not, use `this.listClass`.",
+                "params.title?": "File browser window title. If not, use `this.title`.",
+                "params.url?": "File server url. If not, use `this.url`.",
+                "params.urlHeader?": "File server http header. If not, use `this.urlHeader`."
               }
             },
             {
@@ -4843,7 +4842,7 @@
               "paramDescriptions": {
                 "nodeOrColor": "Current Selected node",
                 "target": "target",
-                "stopCondition": "A function used to stop traversing parent nodes while finding the color.\n- When this function returns `true`, the traversal ends at that node.\n- e.g., `(node) => this.format.isLine(node)` stops at line-level elements like <p>, <div>."
+                "stopCondition?": "A function used to stop traversing parent nodes while finding the color.\n- When this function returns `true`, the traversal ends at that node.\n- e.g., `(node) => this.format.isLine(node)` stops at line-level elements like <p>, <div>."
               }
             },
             {
@@ -4890,12 +4889,12 @@
               "example": "",
               "paramDescriptions": {
                 "target": "Target element",
-                "positionTarget": "Position target element",
-                "params": "{}] params",
-                "params.isWWTarget": "If the controller is in the WYSIWYG area, set it to `true`.",
-                "params.initMethod": "Method to be called when the controller is closed.",
-                "params.disabled": "If `true`, When the `controller` is opened, buttons without the `se-component-enabled` class are disabled. (default: `this.disabled`)",
-                "params.addOffset": "Additional offset values"
+                "positionTarget?": "Position target element",
+                "params?={}": "params",
+                "params.isWWTarget?": "If the controller is in the WYSIWYG area, set it to `true`.",
+                "params.initMethod?": "Method to be called when the controller is closed.",
+                "params.disabled?": "If `true`, When the `controller` is opened, buttons without the `se-component-enabled` class are disabled. (default: `this.disabled`)",
+                "params.addOffset?": "Additional offset values"
               }
             },
             {
@@ -4905,7 +4904,7 @@
               "description": "Close a modal plugin - The plugin's `init` method is called.",
               "example": "",
               "paramDescriptions": {
-                "force": "If `true`, parent controllers are forcibly closed."
+                "force?": "If `true`, parent controllers are forcibly closed."
               }
             },
             {
@@ -4952,7 +4951,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Target element",
-                "className": "Class name of container (fixed: `se-component`)"
+                "className?": "Class name of container (fixed: `se-component`)"
               },
               "returnsDescription": "{target, container, cover, inlineCover, caption}"
             },
@@ -4964,7 +4963,7 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Target element",
-                "className": "Class name of container (fixed: `se-component` `se-inline-component`)"
+                "className?": "Class name of container (fixed: `se-component` `se-inline-component`)"
               },
               "returnsDescription": "{target, container, cover, inlineCover, caption}"
             },
@@ -4999,7 +4998,7 @@
               "paramDescriptions": {
                 "w": "Width size",
                 "h": "Height size",
-                "defaultSizeUnit": "\"px\"] Default size unit (default: `\"px\"`)"
+                "defaultSizeUnit?=\"px\"": "Default size unit (default: `\"px\"`)"
               }
             },
             {
@@ -5012,7 +5011,7 @@
                 "w": "Width size",
                 "h": "Height size",
                 "defaultSizeUnit": "Default size unit (default: `\"px\"`)",
-                "ratio": "Ratio size (Figure.GetRatio)"
+                "ratio?": "Ratio size (Figure.GetRatio)"
               }
             },
             {
@@ -5041,11 +5040,11 @@
               "paramDescriptions": {
                 "targetNode": "Target element",
                 "params": "params",
-                "params.nonResizing": "false] Do not display the resizing button",
-                "params.nonSizeInfo": "false] Do not display the size information",
-                "params.nonBorder": "false] Do not display the selected style line",
-                "params.figureTarget": "false] If `true`, the target is a figure element",
-                "params.infoOnly": "false] If `true`, returns only the figure target info without opening the controller"
+                "params.nonResizing?=false": "Do not display the resizing button",
+                "params.nonSizeInfo?=false": "Do not display the size information",
+                "params.nonBorder?=false": "Do not display the selected style line",
+                "params.figureTarget?=false": "If `true`, the target is a figure element",
+                "params.infoOnly?=false": "If `true`, returns only the figure target info without opening the controller"
               },
               "returnsDescription": "figure target info"
             },
@@ -5071,11 +5070,11 @@
               "example": "",
               "paramDescriptions": {
                 "target": "Target element",
-                "params": "{}] params",
-                "params.isWWTarget": "If the controller is in the WYSIWYG area, set it to `true`.",
-                "params.initMethod": "Method to be called when the controller is closed.",
-                "params.disabled": "If `true`, the controller is disabled.",
-                "params.addOffset": "Additional offset values"
+                "params?={}": "params",
+                "params.isWWTarget?": "If the controller is in the WYSIWYG area, set it to `true`.",
+                "params.initMethod?": "Method to be called when the controller is closed.",
+                "params.disabled?": "If `true`, the controller is disabled.",
+                "params.addOffset?": "Additional offset values"
               }
             },
             {
@@ -5107,7 +5106,7 @@
               "description": "Gets the Figure size",
               "example": "",
               "paramDescriptions": {
-                "targetNode": "Target element, default is the current element"
+                "targetNode?": "Target element, default is the current element"
               }
             },
             {
@@ -5150,7 +5149,7 @@
                 "container": "The container element of the figure component.",
                 "originEl": "The original element of the figure component.",
                 "anchorCover": "The anchor cover element of the figure component.",
-                "fileManagerInst": "null] - FileManager module instance, if used."
+                "fileManagerInst?=null": "FileManager module instance, if used."
               }
             },
             {
@@ -5160,7 +5159,7 @@
               "description": "Initialize the transform style (rotation) of the element.",
               "example": "",
               "paramDescriptions": {
-                "node": "Target element, default is the current element"
+                "node?": "Target element, default is the current element"
               }
             },
             {
@@ -5227,7 +5226,7 @@
               "description": "Attach the hue slider to the form element.",
               "example": "",
               "paramDescriptions": {
-                "form": "The element to attach the hue slider."
+                "form?": "The element to attach the hue slider."
               }
             },
             {
@@ -5298,11 +5297,11 @@
               "description": "Call Async API",
               "example": "",
               "paramDescriptions": {
-                "params.method": "HTTP method (GET, POST, PUT, DELETE...)",
-                "params.url": "API's URL",
-                "params.headers": "HTTP headers",
-                "params.data": "API data",
-                "params.responseType": "XMLHttpRequest.responseType"
+                "params.method?": "HTTP method (GET, POST, PUT, DELETE...)",
+                "params.url?": "API's URL",
+                "params.headers?": "HTTP headers",
+                "params.data?": "API data",
+                "params.responseType?": "XMLHttpRequest.responseType"
               }
             },
             {
@@ -5327,8 +5326,8 @@
                 "uploadUrl": "Upload server url",
                 "uploadHeader": "Request header",
                 "data": "FormData in body or Files array",
-                "callBack": "Success call back function",
-                "errorCallBack": "Error call back function"
+                "callBack?": "Success call back function",
+                "errorCallBack?": "Error call back function"
               }
             },
             {
@@ -5419,7 +5418,7 @@
               "example": "",
               "paramDescriptions": {
                 "items": "Command list of selectable items.",
-                "menus": "Optional list of menu display elements; defaults to `items`."
+                "menus?": "Optional list of menu display elements; defaults to `items`."
               }
             },
             {
@@ -5431,7 +5430,7 @@
               "paramDescriptions": {
                 "referElement": "The element that triggers the select menu.",
                 "selectMethod": "The function to execute when an item is selected.",
-                "attr": "{}] - Additional attributes for the select menu container."
+                "attr?={}": "Additional attributes for the select menu container."
               }
             },
             {
@@ -5441,8 +5440,8 @@
               "description": "Select menu open",
               "example": "",
               "paramDescriptions": {
-                "position": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
-                "onItemQuerySelector": "The querySelector string of the menu to be activated"
+                "position?": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
+                "onItemQuerySelector?": "The querySelector string of the menu to be activated"
               }
             },
             {
@@ -5694,7 +5693,7 @@
               "example": "",
               "paramDescriptions": {
                 "target": "The target element for which to calculate the width percentage.",
-                "parentTarget": "The parent element to use as the reference for the width calculation. If not provided, the target's parent element is used."
+                "parentTarget?": "The parent element to use as the reference for the width calculation. If not provided, the target's parent element is used."
               }
             },
             {
@@ -5980,7 +5979,7 @@
               "example": "",
               "paramDescriptions": {
                 "value": "Text string or number",
-                "maxDec": "0] Maximum number of decimal places (`-1` : `Infinity`)"
+                "maxDec?=0": "Maximum number of decimal places (`-1` : `Infinity`)"
               }
             },
             {
@@ -6057,7 +6056,7 @@
               "paramDescriptions": {
                 "container": "The node of the selection object. (range.startContainer..)",
                 "offset": "The offset of the selection object. (core.getRange().startOffset...)",
-                "dir": "Select check point.\n- `\"front\"`: Front edge, `\"end\"`: End edge, `undefined`: Both edge."
+                "dir?": "Select check point.\n- `\"front\"`: Front edge, `\"end\"`: End edge, `undefined`: Both edge."
               }
             },
             {
@@ -6335,7 +6334,7 @@
               "paramDescriptions": {
                 "node": "The Node to find position path",
                 "parentNode": "Parent node. If `null`, wysiwyg `div` area",
-                "_newOffsets": "If you send an object of the form `{s: 0, e: 0}`, the text nodes that are attached together are merged into one, centered on the `node` argument."
+                "_newOffsets?": "If you send an object of the form `{s: 0, e: 0}`, the text nodes that are attached together are merged into one, centered on the `node` argument."
               }
             },
             {
@@ -6426,7 +6425,7 @@
               "paramDescriptions": {
                 "element": "Reference element",
                 "query": "Query String (`nodeName`, `.className`, `#ID`, `:name`) or validation function.\n- Not use it like jquery.\n- Only one condition can be entered at a time.",
-                "depth": "Number of parent levels to depth."
+                "depth?": "Number of parent levels to depth."
               },
               "returnsDescription": "Not found: `null`"
             },
@@ -6439,7 +6438,7 @@
               "paramDescriptions": {
                 "element": "Reference element",
                 "query": "Query String (`nodeName`, `.className`, `#ID`, `:name`) or validation function.",
-                "depth": "Number of parent levels to depth."
+                "depth?": "Number of parent levels to depth."
               },
               "returnsDescription": "Returned in an array in order."
             },
@@ -6496,7 +6495,7 @@
               "example": "",
               "paramDescriptions": {
                 "node": "Reference element",
-                "ceiling": "Highest boundary allowed"
+                "ceiling?": "Highest boundary allowed"
               },
               "returnsDescription": "Not found: `null`"
             },
@@ -6508,7 +6507,7 @@
               "example": "",
               "paramDescriptions": {
                 "node": "Reference element",
-                "ceiling": "Highest boundary allowed"
+                "ceiling?": "Highest boundary allowed"
               },
               "returnsDescription": "Not found: `null`"
             },
@@ -6522,7 +6521,7 @@
                 "line": "`line` element (p, div, etc.)",
                 "offsetContainer": "Base node to start searching",
                 "offset": "Base offset to start searching",
-                "validate": "Validation function"
+                "validate?": "Validation function"
               }
             },
             {
@@ -6580,7 +6579,7 @@
               "example": "",
               "paramDescriptions": {
                 "node": "The node to clone.",
-                "deep": "false] - Whether to perform a deep clone."
+                "deep?=false": "Whether to perform a deep clone."
               },
               "returnsDescription": "The cloned node."
             },
@@ -6592,8 +6591,8 @@
               "example": "// Create with attributes\nconst span = dom.utils.createElement('SPAN', { style: 'color:red;', class: 'highlight' });\n// Create with HTML string content\nconst div = dom.utils.createElement('DIV', null, '<p>Hello</p>');\n// Create with a child node\nconst br = dom.utils.createElement('BR');\nconst p = dom.utils.createElement('P', null, br);",
               "paramDescriptions": {
                 "elementName": "Element name",
-                "attributes": "The attributes of the tag. {style: 'font-size:12px;..', class: 'el_class',..}",
-                "inner": "A innerHTML string or inner node."
+                "attributes?": "The attributes of the tag. {style: 'font-size:12px;..', class: 'el_class',..}",
+                "inner?": "A innerHTML string or inner node."
               }
             },
             {
@@ -6692,7 +6691,7 @@
               "paramDescriptions": {
                 "originEl": "Origin element",
                 "copyEl": "Element to copy",
-                "blacklist": "Blacklist array(LowerCase)"
+                "blacklist?": "Blacklist array(LowerCase)"
               }
             },
             {
@@ -6771,7 +6770,7 @@
               "paramDescriptions": {
                 "buttonList": "(Button | Input) Element array",
                 "disabled": "Disabled value",
-                "important": "false] If priveleged mode should be used (Necessary to switch importantDisabled buttons)"
+                "important?=false": "If priveleged mode should be used (Necessary to switch importantDisabled buttons)"
               }
             },
             {
@@ -6827,7 +6826,7 @@
               "paramDescriptions": {
                 "element": "Element to flash class name",
                 "className": "class name",
-                "duration": "120] duration milliseconds"
+                "duration?=120": "duration milliseconds"
               }
             },
             {
@@ -7235,10 +7234,10 @@
           "paramDescriptions": {
             "params": ".$ - Kernel dependencies",
             "params.error": "error message",
-            "params.limitSize": "limit size",
-            "params.uploadSize": "upload size",
-            "params.currentSize": "current size",
-            "params.file": "File object"
+            "params.limitSize?": "limit size",
+            "params.uploadSize?": "upload size",
+            "params.currentSize?": "current size",
+            "params.file?": "File object"
           }
         },
         {
@@ -7316,10 +7315,10 @@
           "paramDescriptions": {
             "params": ".$ - Kernel dependencies",
             "params.error": "error message",
-            "params.limitSize": "limit size",
-            "params.uploadSize": "upload size",
-            "params.currentSize": "current size",
-            "params.file": "File object"
+            "params.limitSize?": "limit size",
+            "params.uploadSize?": "upload size",
+            "params.currentSize?": "current size",
+            "params.file?": "File object"
           }
         },
         {
@@ -7369,10 +7368,10 @@
           "paramDescriptions": {
             "params": ".$ - Kernel dependencies",
             "params.error": "error message",
-            "params.limitSize": "limit size",
-            "params.uploadSize": "upload size",
-            "params.currentSize": "current size",
-            "params.file": "File object"
+            "params.limitSize?": "limit size",
+            "params.uploadSize?": "upload size",
+            "params.currentSize?": "current size",
+            "params.file?": "File object"
           }
         },
         {
@@ -7463,10 +7462,10 @@
           "paramDescriptions": {
             "params": ".$ - Kernel dependencies",
             "params.error": "error message",
-            "params.limitSize": "limit size",
-            "params.uploadSize": "upload size",
-            "params.currentSize": "current size",
-            "params.file": "File object"
+            "params.limitSize?": "limit size",
+            "params.uploadSize?": "upload size",
+            "params.currentSize?": "current size",
+            "params.file?": "File object"
           }
         },
         {

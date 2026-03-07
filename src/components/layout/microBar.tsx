@@ -39,11 +39,11 @@ export default function MicroBar({ className }: Props) {
 					<ThemeToggle />
 
 					<a
-						href='/v2/'
+						href='/v2-legacy/sample/index.html'
 						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground text-muted-foreground'
 					>
 						<History className='size-3' aria-hidden />
-						<span>v2</span>
+						<span>v2 Legacy</span>
 					</a>
 
 					<Link

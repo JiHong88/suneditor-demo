@@ -103,11 +103,34 @@ function makeJSDocExtractor(sourceFile) {
 			}
 
 			// Extract param name (possibly [name] or [name=default])
-			const nameMatch = rest.match(/^(\[?\w+(?:\.\w+)*(?:=[^\]]*?)?\]?)\s*(.*)/);
-			if (!nameMatch) continue;
+			let paramName;
+			let descPart;
+			let isOptional = false;
+			let defaultValue;
 
-			let paramName = nameMatch[1].replace(/[\[\]]/g, "").split("=")[0].trim();
-			let descPart = nameMatch[2].trim();
+			if (rest.startsWith("[")) {
+				// Optional param: [name] or [name=default]
+				const bracketMatch = rest.match(/^\[([^\]]*)\]\s*(.*)/);
+				if (!bracketMatch) continue;
+				isOptional = true;
+				const inner = bracketMatch[1]; // e.g. "options.strictRemove=false"
+				const eqIdx = inner.indexOf("=");
+				if (eqIdx !== -1) {
+					paramName = inner.slice(0, eqIdx).trim();
+					defaultValue = inner.slice(eqIdx + 1).trim();
+				} else {
+					paramName = inner.trim();
+				}
+				descPart = bracketMatch[2].trim();
+			} else {
+				const nameMatch = rest.match(/^(\w+(?:\.\w+)*)\s*(.*)/);
+				if (!nameMatch) continue;
+				paramName = nameMatch[1];
+				descPart = nameMatch[2].trim();
+			}
+
+			// Build display key with optional/default info
+			const optionalSuffix = isOptional ? (defaultValue !== undefined ? `?=${defaultValue}` : "?") : "";
 
 			// Skip dotted sub-params (params.$ etc.) but collect them as sub-descriptions
 			if (paramName.includes(".")) {
@@ -117,8 +140,9 @@ function makeJSDocExtractor(sourceFile) {
 				// Remove leading "- " or "– " from description
 				descPart = descPart.replace(/^[-–]\s*/, "").trim();
 				if (descPart && subName !== "$" && subName !== "frameContext" && subName !== "event") {
-					// Store as "parentName.subName" for rich display
-					paramDescriptions[`${parentName}.${subName}`] = descPart;
+					// Store as "parentName.subName" with optional marker for rich display
+					const displayKey = `${parentName}.${subName}${optionalSuffix}`;
+					paramDescriptions[displayKey] = descPart;
 				}
 				continue;
 			}
@@ -138,7 +162,8 @@ function makeJSDocExtractor(sourceFile) {
 			}
 
 			if (descPart) {
-				paramDescriptions[paramName] = descPart;
+				const displayKey = `${paramName}${optionalSuffix}`;
+				paramDescriptions[displayKey] = descPart;
 			}
 		}
 
