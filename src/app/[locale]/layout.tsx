@@ -3,13 +3,16 @@ import { NextIntlClientProvider } from "next-intl";
 import { SiteNav } from "@/components/layout/navigationMenu";
 import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
-import { getBootVersion } from "@/lib/git/releaseVersion";
+import { SUNEDITOR_VERSION } from "@/store/version";
 import { getDir } from "@/i18n/lang";
 import { getLocale } from "next-intl/server";
 import "../globals.css";
 
-export default async function RootLayout({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
-	const version = (await getBootVersion().catch(() => null)) || "";
+export default async function RootLayout({
+	children,
+	locale,
+}: Readonly<{ children: React.ReactNode; locale: string }>) {
+	const version = SUNEDITOR_VERSION;
 	const resolvedLocale = locale || (await getLocale());
 
 	return (
@@ -29,7 +32,9 @@ export default async function RootLayout({ children, locale }: Readonly<{ childr
 				</script>
 			</head>
 
-			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+			<body
+				style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+			>
 				<NextIntlClientProvider>
 					{/* 네비게이션 */}
 					<SiteNav />
@@ -38,7 +43,9 @@ export default async function RootLayout({ children, locale }: Readonly<{ childr
 					<MicroBar className='sticky top-14' />
 
 					{/* 메인 */}
-					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>{children}</main>
+					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>
+						{children}
+					</main>
 
 					{/* 푸터 */}
 					<Footer version={`v${version}`} />

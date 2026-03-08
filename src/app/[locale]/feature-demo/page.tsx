@@ -58,7 +58,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
-import QuickTryModal from "./_components/QuickTryModal";
+import QuickTryModal from "@/components/common/QuickTryModal";
 
 /* ── Feature data (non-translatable: icons only) ──────── */
 
@@ -276,7 +276,7 @@ export default function FeatureDemoPage() {
 											key={feature.key}
 											type='button'
 											onClick={() => openQuickTry(feature.key, cat.color, feature.icon)}
-											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start'
+											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start cursor-pointer'
 										>
 											<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
 											<div className='min-w-0 flex-1'>
@@ -364,12 +364,17 @@ export default function FeatureDemoPage() {
 				<QuickTryModal
 					open={modalOpen}
 					onClose={() => setModalOpen(false)}
-					featureLabel={t(`features.${selectedFeature.key}`)}
-					featureDesc={t(`features.${selectedFeature.key}Desc`)}
-					featureLink={link}
+					label={t(`features.${selectedFeature.key}`)}
+					desc={t(`features.${selectedFeature.key}Desc`)}
+					config={{
+						demoHtml: link.demoHtml,
+						buttonList: link.buttonList,
+						editorOptions: link.editorOptions,
+					}}
 					playgroundHref={playgroundHref}
 					color={selectedFeature.catColor}
 					icon={selectedFeature.icon}
+					badgeText={t("quickTry")}
 				/>
 			)}
 		</div>

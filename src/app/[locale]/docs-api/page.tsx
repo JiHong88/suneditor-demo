@@ -33,6 +33,23 @@ export default function DocsApiPage() {
 	const searchInputRef = useRef<HTMLInputElement>(null);
 	const sidebarRef = useRef<HTMLDivElement>(null);
 
+	// Sync selectedId to URL query param
+	const updateUrl = useCallback((sectionId: string, hash?: string) => {
+		const url = new URL(window.location.href);
+		if (sectionId && sectionId !== "editor") {
+			url.searchParams.set("s", sectionId);
+		} else {
+			url.searchParams.delete("s");
+		}
+		if (hash) {
+			url.hash = hash;
+		} else {
+			// Remove hash without scrolling
+			url.hash = "";
+		}
+		window.history.replaceState(null, "", url.pathname + url.search + (hash ? `#${hash}` : ""));
+	}, []);
+
 	// Load locale-specific API docs
 	useEffect(() => {
 		const loader = localeDataLoaders[locale];
@@ -43,21 +60,28 @@ export default function DocsApiPage() {
 		}
 	}, [locale]);
 
-	// URL hash sync on mount
+	// Restore selection from URL on mount
 	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		const sParam = params.get("s");
 		const hash = window.location.hash.slice(1);
-		if (!hash) return;
 
-		// Find which section contains this item
-		const item = searchIndex.find((i) => i.id === hash);
-		if (item) {
-			setSelectedId(item.sectionId);
-			// Scroll to the element after render
-			requestAnimationFrame(() => {
-				setTimeout(() => {
-					document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
-				}, 100);
-			});
+		if (hash) {
+			// Find which section contains this item
+			const item = searchIndex.find((i) => i.id === hash);
+			if (item) {
+				setSelectedId(item.sectionId);
+				requestAnimationFrame(() => {
+					setTimeout(() => {
+						document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+					}, 100);
+				});
+				return;
+			}
+		}
+
+		if (sParam) {
+			setSelectedId(sParam);
 		}
 	}, []);
 
@@ -106,19 +130,20 @@ export default function DocsApiPage() {
 	const handleSidebarSelect = useCallback((id: string) => {
 		const scrollTop = sidebarRef.current?.scrollTop ?? 0;
 		setSelectedId(id);
+		updateUrl(id);
 		window.scrollTo({ top: 0 });
 		requestAnimationFrame(() => {
 			if (sidebarRef.current) {
 				sidebarRef.current.scrollTop = scrollTop;
 			}
 		});
-	}, []);
+	}, [updateUrl]);
 
 	// Handle search result selection
 	const handleSearchSelect = useCallback((sectionId: string, itemId: string) => {
 		setSelectedId(sectionId);
 		setSearchQuery("");
-		window.history.replaceState(null, "", `#${itemId}`);
+		updateUrl(sectionId, itemId);
 		requestAnimationFrame(() => {
 			setTimeout(() => {
 				document.getElementById(itemId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -127,7 +152,7 @@ export default function DocsApiPage() {
 				sidebarEl?.scrollIntoView({ behavior: "smooth", block: "nearest" });
 			}, 150);
 		});
-	}, []);
+	}, [updateUrl]);
 
 	const isSearching = searchQuery.trim().length > 0;
 
@@ -216,7 +241,7 @@ export default function DocsApiPage() {
 							prefix={contentData.prefix}
 							onNavigate={handleSidebarSelect}
 						/>
-						<PageToc items={tocItems} />
+						<PageToc items={tocItems} onItemClick={(id) => updateUrl(selectedId, id)} />
 					</>
 				) : null}
 			</div>

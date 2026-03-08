@@ -247,6 +247,7 @@
 				"anatomy": "구조",
 				"hooks": "훅",
 				"modules": "모듈",
+				"htmlStructure": "HTML 구조",
 				"examples": "예제"
 			},
 			"typesDesc": "플러그인이 사용자와 상호작용하는 방식에 따라 기본 클래스를 선택합니다.",
@@ -285,6 +286,31 @@
 			"crossPlugin": "크로스 플러그인 합성",
 			"crossPluginDesc": "플러그인은 다른 플러그인 타입 인터페이스도 implements하여 여러 상호작용 모드를 제공할 수 있습니다.",
 			"crossPluginNote": "단일 플러그인이 여러 상호작용 모드를 제공할 때 크로스 플러그인 implements를 사용합니다 (예: input + dropdown + command가 모두 같은 기능을 제어).",
+			"htmlStructureDesc": "suneditor UI 모듈이 사용하는 표준 HTML 구조와 CSS 클래스입니다. 커스텀 플러그인 제작 시 이 패턴을 따르세요.",
+			"htmlStructure": {
+				"cssClasses": "CSS 클래스",
+				"dataAttrs": "Data 속성",
+				"modal": {
+					"title": "Modal",
+					"desc": "다이얼로그 창 — PluginModal에서 사용 (link, image, video, audio)"
+				},
+				"dropdown": {
+					"title": "Dropdown",
+					"desc": "메뉴 패널 — PluginDropdown, PluginDropdownFree에서 사용 (align, font, table, fontColor)"
+				},
+				"controller": {
+					"title": "Controller",
+					"desc": "플로팅 툴팁 — ModuleController에서 사용 (링크 팝업, 테이블 셀 제어)"
+				},
+				"browser": {
+					"title": "Browser",
+					"desc": "갤러리/파일 브라우저 — PluginBrowser에서 사용 (imageGallery, fileBrowser)"
+				},
+				"popup": {
+					"title": "Popup (Controller)",
+					"desc": "커서 위치에 플로팅 패널 표시 — PluginPopup에서 사용 (anchor)"
+				}
+			},
 			"examplesDesc": "간단한 것부터 복잡한 것까지, 복사하여 바로 사용할 수 있는 완전한 예제.",
 			"example1Title": "단어 수 커맨드",
 			"example1Desc": "현재 단어 수를 표시하는 커맨드 플러그인.",
@@ -292,6 +318,19 @@
 			"example2Desc": "미리 정의된 블록 스타일을 적용하는 드롭다운 플러그인.",
 			"example3Title": "커스텀 임베드 (Modal + Controller + Component)",
 			"example3Desc": "임베디드 iframe을 위한 컨트롤러 및 컴포넌트 생명주기가 있는 모달 플러그인.",
+			"example4Title": "색상 팔레트 (DropdownFree)",
+			"example4Desc": "색상 스와치 그리드를 가진 드롭다운 프리 플러그인. 자체 클릭 이벤트를 처리합니다.",
+			"example5Title": "해시태그 감지 (Field)",
+			"example5Desc": "#해시태그 패턴을 감지하는 필드 플러그인. 툴바 버튼 없이 이벤트 기반으로 동작합니다.",
+			"example6Title": "줌 레벨 (Input)",
+			"example6Desc": "툴바에 줌 퍼센트 입력 필드를 렌더링하는 인풋 플러그인.",
+			"example7Title": "이모지 선택기 (Browser)",
+			"example7Desc": "정적 데이터를 사용하여 이모지 갤러리를 여는 브라우저 플러그인. 서버 불필요.",
+			"example8Title": "정보 팝업 (Popup)",
+			"example8Desc": "현재 선택 영역의 서식 정보를 표시하는 팝업 플러그인.",
+			"example9Title": "텍스트 스케일 (합성: Input + Command + Dropdown)",
+			"example9Desc": "인풋, 드롭다운, 커맨드를 결합한 크로스 플러그인 합성으로 폰트 크기를 조절합니다.",
+			"tryIt": "바로해보기",
 			"registration": "플러그인 등록",
 			"registrationDesc": "플러그인은 options.plugins에 클래스 참조로 등록됩니다.",
 			"pluginOptions": "플러그인 옵션",

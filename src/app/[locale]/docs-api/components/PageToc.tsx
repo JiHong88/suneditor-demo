@@ -10,9 +10,10 @@ type TocItem = {
 
 interface PageTocProps {
 	items: TocItem[];
+	onItemClick?: (id: string) => void;
 }
 
-export default function PageToc({ items }: PageTocProps) {
+export default function PageToc({ items, onItemClick }: PageTocProps) {
 	const [activeId, setActiveId] = useState<string>("");
 
 	useEffect(() => {
@@ -43,33 +44,35 @@ export default function PageToc({ items }: PageTocProps) {
 		const el = document.getElementById(id);
 		if (el) {
 			el.scrollIntoView({ behavior: "smooth", block: "start" });
-			window.history.replaceState(null, "", `#${id}`);
+			onItemClick?.(id);
 		}
 	};
 
 	return (
 		<nav className='hidden xl:block w-48 shrink-0 sticky top-[100px] self-start max-h-[calc(100vh-120px)] overflow-y-auto'>
-			<div className='text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2'>
-				On this page
+			<div className='px-3 pt-3 pb-2'>
+				<div className='text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.12em] mb-3'>
+					On this page
+				</div>
+				<ul className='space-y-px border-s border-border/40'>
+					{items.map((item) => (
+						<li key={item.id}>
+							<button
+								onClick={() => handleClick(item.id)}
+								className={cn(
+									"block w-full text-start ps-3 pe-2 py-1 text-[11px] font-mono transition-colors truncate -ms-px border-s-2",
+									activeId === item.id
+										? "text-primary border-primary font-medium"
+										: "text-muted-foreground/70 border-transparent hover:text-foreground hover:border-border",
+								)}
+								title={item.label}
+							>
+								{item.label}
+							</button>
+						</li>
+					))}
+				</ul>
 			</div>
-			<ul className='space-y-0.5'>
-				{items.map((item) => (
-					<li key={item.id}>
-						<button
-							onClick={() => handleClick(item.id)}
-							className={cn(
-								"block w-full text-start px-2 py-0.5 text-[11px] font-mono rounded transition-colors truncate",
-								activeId === item.id
-									? "text-primary bg-primary/5 font-medium"
-									: "text-muted-foreground hover:text-foreground hover:bg-muted/50",
-							)}
-							title={item.label}
-						>
-							{item.label}
-						</button>
-					</li>
-				))}
-			</ul>
 		</nav>
 	);
 }

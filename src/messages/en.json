@@ -246,6 +246,7 @@
 				"anatomy": "Anatomy",
 				"hooks": "Hooks",
 				"modules": "Modules",
+				"htmlStructure": "HTML Structure",
 				"examples": "Examples"
 			},
 			"typesDesc": "Choose a base class based on how your plugin interacts with the user.",
@@ -284,6 +285,31 @@
 			"crossPlugin": "Cross-Plugin Composition",
 			"crossPluginDesc": "A plugin can also implements other plugin type interfaces to provide multiple interaction modes.",
 			"crossPluginNote": "Use cross-plugin implements when a single plugin provides multiple interaction modes (e.g., input + dropdown + command all controlling the same feature).",
+			"htmlStructureDesc": "Standard HTML structures and CSS classes used by suneditor's UI modules. Follow these patterns when building custom plugins.",
+			"htmlStructure": {
+				"cssClasses": "CSS Classes",
+				"dataAttrs": "Data Attributes",
+				"modal": {
+					"title": "Modal",
+					"desc": "Dialog window — used by PluginModal (link, image, video, audio)"
+				},
+				"dropdown": {
+					"title": "Dropdown",
+					"desc": "Menu panel — used by PluginDropdown and PluginDropdownFree (align, font, table, fontColor)"
+				},
+				"controller": {
+					"title": "Controller",
+					"desc": "Floating tooltip — used by ModuleController (link popup, table cell controls)"
+				},
+				"browser": {
+					"title": "Browser",
+					"desc": "Gallery/file browser — used by PluginBrowser (imageGallery, fileBrowser)"
+				},
+				"popup": {
+					"title": "Popup (Controller)",
+					"desc": "Floating panel at cursor position — used by PluginPopup (anchor)"
+				}
+			},
 			"examplesDesc": "Complete, copy-ready examples from simple to complex.",
 			"example1Title": "Word Count Command",
 			"example1Desc": "A command plugin that shows the current word count.",
@@ -291,6 +317,19 @@
 			"example2Desc": "A dropdown plugin that applies predefined block styles.",
 			"example3Title": "Custom Embed (Modal + Controller + Component)",
 			"example3Desc": "A modal plugin with controller and component lifecycle for embedded iframes.",
+			"example4Title": "Color Palette (DropdownFree)",
+			"example4Desc": "A dropdown-free plugin with a color swatch grid. Handles its own click events.",
+			"example5Title": "Hashtag Highlight (Field)",
+			"example5Desc": "A field plugin that detects #hashtag patterns on input. No toolbar button — event-driven.",
+			"example6Title": "Zoom Level (Input)",
+			"example6Desc": "An input plugin that renders a zoom percentage field in the toolbar.",
+			"example7Title": "Emoji Picker (Browser)",
+			"example7Desc": "A browser plugin that opens an emoji gallery using static data. No server required.",
+			"example8Title": "Info Popup (Popup)",
+			"example8Desc": "A popup plugin that shows formatting info about the current selection.",
+			"example9Title": "Text Scale (Composite: Input + Command + Dropdown)",
+			"example9Desc": "Cross-plugin composition combining input, dropdown, and command for font sizing.",
+			"tryIt": "Try it",
 			"registration": "Plugin Registration",
 			"registrationDesc": "Plugins are registered as class references in options.plugins.",
 			"pluginOptions": "Plugin Options",

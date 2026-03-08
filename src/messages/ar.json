@@ -240,6 +240,7 @@
 				"anatomy": "التشريح",
 				"hooks": "الخطافات",
 				"modules": "الوحدات",
+				"htmlStructure": "بنية HTML",
 				"examples": "أمثلة"
 			},
 			"typesDesc": "اختر فئة أساسية بناءً على كيفية تفاعل إضافتك مع المستخدم.",
@@ -278,6 +279,31 @@
 			"crossPlugin": "التكوين عبر الإضافات",
 			"crossPluginDesc": "يمكن للإضافة أيضاً تنفيذ واجهات أنواع إضافات أخرى لتوفير أوضاع تفاعل متعددة.",
 			"crossPluginNote": "استخدم implements عبر الإضافات عندما توفر إضافة واحدة أوضاع تفاعل متعددة (مثل input + dropdown + command تتحكم جميعها في نفس الميزة).",
+			"htmlStructureDesc": "بنية HTML القياسية وفئات CSS المستخدمة في وحدات واجهة suneditor. اتبع هذه الأنماط عند بناء إضافات مخصصة.",
+			"htmlStructure": {
+				"cssClasses": "فئات CSS",
+				"dataAttrs": "سمات البيانات",
+				"modal": {
+					"title": "Modal",
+					"desc": "نافذة حوار — تُستخدم بواسطة PluginModal (رابط، صورة، فيديو، صوت)"
+				},
+				"dropdown": {
+					"title": "Dropdown",
+					"desc": "لوحة قائمة — تُستخدم بواسطة PluginDropdown و PluginDropdownFree (محاذاة، خط، جدول، لون الخط)"
+				},
+				"controller": {
+					"title": "Controller",
+					"desc": "تلميح عائم — تُستخدم بواسطة ModuleController (نافذة الرابط، عناصر تحكم خلايا الجدول)"
+				},
+				"browser": {
+					"title": "Browser",
+					"desc": "معرض/متصفح ملفات — تُستخدم بواسطة PluginBrowser (معرض الصور، متصفح الملفات)"
+				},
+				"popup": {
+					"title": "Popup (Controller)",
+					"desc": "لوحة عائمة عند موضع المؤشر — تُستخدم بواسطة PluginPopup (anchor)"
+				}
+			},
 			"examplesDesc": "أمثلة كاملة جاهزة للنسخ من البسيط إلى المعقد.",
 			"example1Title": "أمر عدد الكلمات",
 			"example1Desc": "إضافة أمر تعرض عدد الكلمات الحالي.",
@@ -285,6 +311,19 @@
 			"example2Desc": "إضافة قائمة منسدلة تطبق أنماط كتل محددة مسبقاً.",
 			"example3Title": "تضمين مخصص (Modal + Controller + Component)",
 			"example3Desc": "إضافة نافذة منبثقة مع دورة حياة المتحكم والمكون لإطارات iframe المضمنة.",
+			"example4Title": "لوحة الألوان (DropdownFree)",
+			"example4Desc": "إضافة قائمة منسدلة حرة مع شبكة ألوان. تتعامل مع أحداث النقر الخاصة بها.",
+			"example5Title": "كشف الهاشتاغ (Field)",
+			"example5Desc": "إضافة حقل تكشف أنماط #هاشتاغ عند الإدخال. بدون زر شريط أدوات — مدفوعة بالأحداث.",
+			"example6Title": "مستوى التكبير (Input)",
+			"example6Desc": "إضافة إدخال تعرض حقل نسبة التكبير في شريط الأدوات.",
+			"example7Title": "منتقي الرموز التعبيرية (Browser)",
+			"example7Desc": "إضافة متصفح تفتح معرض رموز تعبيرية باستخدام بيانات ثابتة. لا يتطلب خادماً.",
+			"example8Title": "نافذة المعلومات المنبثقة (Popup)",
+			"example8Desc": "إضافة منبثقة تعرض معلومات التنسيق حول التحديد الحالي.",
+			"example9Title": "مقياس النص (مركب: Input + Command + Dropdown)",
+			"example9Desc": "تركيب عبر الإضافات يجمع بين الإدخال والقائمة المنسدلة والأمر لتحجيم الخط.",
+			"tryIt": "جرّبه",
 			"registration": "تسجيل الإضافات",
 			"registrationDesc": "يتم تسجيل الإضافات كمراجع فئات في options.plugins.",
 			"pluginOptions": "خيارات الإضافة",

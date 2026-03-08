@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
 
-const subButtonList = [["bold", "underline", "italic", "strike", "subscript", "superscript"], "|", ["fontColor", "backgroundColor"]];
+const subButtonList = [
+	["bold", "underline", "italic", "strike", "subscript", "superscript"],
+	"|",
+	["fontColor", "backgroundColor"],
+];
 
 const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions }[] = [
 	{
@@ -27,7 +31,11 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	{
 		id: "document",
 		tKey: "document",
-		options: { mode: "classic", type: "document:header,page", subToolbar: { mode: "balloon-always", buttonList: subButtonList } },
+		options: {
+			mode: "classic",
+			type: "document:header,page",
+			subToolbar: { mode: "balloon-always", buttonList: subButtonList },
+		},
 	},
 ];
 
@@ -36,18 +44,31 @@ const sampleValue = `<h2>SunEditor v3</h2><p>A lightweight, flexible WYSIWYG edi
 export default function InteractiveDemo() {
 	const t = useTranslations("Home.InteractiveDemo");
 	const [activePreset, setActivePreset] = useState("classic");
+	const [em, setEm] = useState<any>(null);
 	const preset = presetDefs.find((p) => p.id === activePreset)!;
+
+	useEffect(() => {
+		import("../plugin-guide/_examples/embed").then((mod) => setEm(() => mod.default));
+	}, []);
 
 	return (
 		<section className='container mx-auto px-6 pb-10'>
-			<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className='mx-auto max-w-5xl'>
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, amount: 0.3 }}
+				transition={{ duration: 0.6 }}
+				className='mx-auto max-w-5xl'
+			>
 				<div className='mb-4 flex items-center gap-1 rounded-lg bg-muted/60 p-1 w-fit'>
 					{presetDefs.map((p) => (
 						<button
 							key={p.id}
 							onClick={() => setActivePreset(p.id)}
 							className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
-								activePreset === p.id ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+								activePreset === p.id
+									? "bg-background text-foreground shadow-sm"
+									: "text-muted-foreground hover:text-foreground"
 							}`}
 						>
 							{t(p.tKey)}

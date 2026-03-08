@@ -7,30 +7,40 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
-import type { FeatureLink } from "../_lib/featurePlaygroundLinks";
 
 const SunEditorComponent = dynamic(() => import("@/components/editor/suneditor"), { ssr: false });
+
+export type QuickTryEditorConfig = {
+	/** Raw demo HTML for preview */
+	demoHtml: string;
+	/** Toolbar buttons shown in the editor */
+	buttonList: (string | string[])[];
+	/** Extra SunEditor options */
+	editorOptions?: Record<string, unknown>;
+};
 
 type QuickTryModalProps = {
 	open: boolean;
 	onClose: () => void;
-	featureLabel: string;
-	featureDesc: string;
-	featureLink: FeatureLink;
-	playgroundHref: string;
-	color: string;
-	icon: React.ReactNode;
+	label: string;
+	desc: string;
+	config: QuickTryEditorConfig;
+	playgroundHref?: string;
+	color?: string;
+	icon?: React.ReactNode;
+	badgeText?: string;
 };
 
 export default function QuickTryModal({
 	open,
 	onClose,
-	featureLabel,
-	featureDesc,
-	featureLink,
+	label,
+	desc,
+	config,
 	playgroundHref,
 	color,
 	icon,
+	badgeText,
 }: QuickTryModalProps) {
 	const t = useTranslations("FeatureDemo");
 	const backdropRef = useRef<HTMLDivElement>(null);
@@ -58,9 +68,9 @@ export default function QuickTryModal({
 	if (!open) return null;
 
 	const editorOptions = {
-		buttonList: featureLink.buttonList,
+		buttonList: config.buttonList,
 		height: "200",
-		...(featureLink.editorOptions || {}),
+		...(config.editorOptions || {}),
 	};
 
 	return (
@@ -74,14 +84,16 @@ export default function QuickTryModal({
 			<div className='bg-card border rounded-xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200'>
 				{/* Header */}
 				<div className='flex items-center gap-3 px-5 py-4 border-b shrink-0'>
-					<span className={color}>{icon}</span>
+					{icon && <span className={color}>{icon}</span>}
 					<div className='flex-1 min-w-0'>
-						<h3 className='font-semibold text-base truncate'>{featureLabel}</h3>
-						<p className='text-xs text-muted-foreground truncate'>{featureDesc}</p>
+						<h3 className='font-semibold text-base truncate'>{label}</h3>
+						<p className='text-xs text-muted-foreground truncate'>{desc}</p>
 					</div>
-					<Badge variant='outline' className='text-[10px] shrink-0'>
-						{t("quickTry")}
-					</Badge>
+					{badgeText && (
+						<Badge variant='outline' className='text-[10px] shrink-0'>
+							{badgeText}
+						</Badge>
+					)}
 					<button onClick={onClose} className='p-1.5 rounded-md hover:bg-muted transition-colors shrink-0' aria-label='Close'>
 						<X className='size-4' />
 					</button>
@@ -91,7 +103,7 @@ export default function QuickTryModal({
 				<div className='flex-1 overflow-y-auto px-5 py-4'>
 					<SunEditorComponent
 						key={editorKey}
-						value={featureLink.demoHtml}
+						value={config.demoHtml}
 						options={editorOptions}
 					/>
 				</div>
@@ -101,12 +113,14 @@ export default function QuickTryModal({
 					<Button variant='ghost' size='sm' onClick={onClose}>
 						{t("close")}
 					</Button>
-					<Button asChild size='sm' className='group'>
-						<Link href={playgroundHref} target='_blank'>
-							{t("openInPlayground")}
-							<ExternalLink className='ms-1.5 size-3.5 transition-transform group-hover:ltr:translate-x-0.5 group-hover:rtl:-translate-x-0.5' />
-						</Link>
-					</Button>
+					{playgroundHref && (
+						<Button asChild size='sm' className='group'>
+							<Link href={playgroundHref} target='_blank'>
+								{t("openInPlayground")}
+								<ExternalLink className='ms-1.5 size-3.5 transition-transform group-hover:ltr:translate-x-0.5 group-hover:rtl:-translate-x-0.5' />
+							</Link>
+						</Button>
+					)}
 				</div>
 			</div>
 		</div>

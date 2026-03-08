@@ -19,12 +19,12 @@ export type LanguageEntry = {
  * Filter by tag to get the subset you need.
  */
 export const languages: LanguageEntry[] = [
-	{ code: "ar", nativeName: "العربية", icon: "🇸🇦", siteLocale: true },
+	{ code: "ar", nativeName: "العربية", icon: "🇸🇦", editorLang: true, siteLocale: true },
 	{ code: "ckb", nativeName: "کوردیی سۆرانی", icon: "🇮🇶", editorLang: true },
 	{ code: "cs", nativeName: "Čeština", icon: "🇨🇿", editorLang: true },
 	{ code: "da", nativeName: "Dansk", icon: "🇩🇰", editorLang: true },
 	{ code: "de", nativeName: "Deutsch", icon: "🇩🇪", editorLang: true },
-	{ code: "en", nativeName: "English", icon: "🇺🇸", siteLocale: true, editorLang: true },
+	{ code: "en", nativeName: "English", icon: "🇺🇸", editorLang: true, siteLocale: true },
 	{ code: "es", nativeName: "Español", icon: "🇪🇸", editorLang: true },
 	{ code: "fa", nativeName: "فارسی", icon: "🇮🇷", editorLang: true },
 	{ code: "fr", nativeName: "Français", icon: "🇫🇷", editorLang: true },
@@ -33,7 +33,7 @@ export const languages: LanguageEntry[] = [
 	{ code: "it", nativeName: "Italiano", icon: "🇮🇹", editorLang: true },
 	{ code: "ja", nativeName: "日本語", icon: "🇯🇵", editorLang: true },
 	{ code: "km", nativeName: "ខ្មែរ", icon: "🇰🇭", editorLang: true },
-	{ code: "ko", nativeName: "한국어", icon: "🇰🇷", siteLocale: true, editorLang: true },
+	{ code: "ko", nativeName: "한국어", icon: "🇰🇷", editorLang: true, siteLocale: true },
 	{ code: "lv", nativeName: "Latviešu", icon: "🇱🇻", editorLang: true },
 	{ code: "nl", nativeName: "Nederlands", icon: "🇳🇱", editorLang: true },
 	{ code: "pl", nativeName: "Polski", icon: "🇵🇱", editorLang: true },

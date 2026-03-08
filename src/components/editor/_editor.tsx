@@ -61,12 +61,18 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 		const textarea = document.createElement("textarea");
 		containerRef.current.appendChild(textarea);
 
+		// Merge custom plugins with built-in plugins instead of replacing
+		const mergedPlugins = options.plugins
+			? { ...(plugins as Record<string, unknown>), ...(options.plugins as Record<string, unknown>) }
+			: plugins;
+		const { plugins: _omit, ...restOptions } = options;
+
 		const instance = suneditor.create(textarea, {
-			plugins,
+			plugins: mergedPlugins,
 			value: value || options.value || "",
 			theme,
 			buttonList: FullButtonList,
-			...options,
+			...restOptions,
 		});
 
 		instanceRef.current = instance;

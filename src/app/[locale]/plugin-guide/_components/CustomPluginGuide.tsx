@@ -2,12 +2,14 @@
 
 import { useCallback, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { Check, ChevronDown, ChevronRight, Copy, Blocks, Cable, Zap, BookOpen, Layers, Workflow } from "lucide-react";
+import { Check, ChevronDown, ChevronRight, Copy, Blocks, Cable, Zap, BookOpen, Layers, Workflow, Code2 } from "lucide-react";
 
 import CodeBlock from "@/components/common/CodeBlock";
+import QuickTryModal from "@/components/common/QuickTryModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { PLUGIN_EXAMPLES, type PluginExample } from "../_examples";
 
 /* ══════════════════════════════════════════════════════
    Code Examples
@@ -20,7 +22,7 @@ class HelloWorld extends PluginCommand {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -77,7 +79,7 @@ class ToggleStrikethrough extends PluginCommand {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -121,7 +123,7 @@ class CustomAlign extends PluginDropdown {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    * @param {CustomAlignPluginOptions} pluginOptions
    */
   constructor(kernel, pluginOptions) {
@@ -174,21 +176,24 @@ class InsertCode extends PluginModal {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
     this.title = 'Insert Code';
     this.icon = 'code';
 
-    const modalEl = dom.utils.createElement('div', null,
+    // Root must be "se-modal-content"
+    const modalEl = dom.utils.createElement('div', { class: 'se-modal-content' },
       \`<form>
         <div class="se-modal-header">
-          <button type="button" data-command="close" class="se-btn se-modal-close"></button>
+          <button type="button" data-command="close" class="se-btn se-close-btn" aria-label="Close">\${this.$.icons.cancel}</button>
           <span class="se-modal-title">Insert Code</span>
         </div>
         <div class="se-modal-body">
-          <textarea class="se-input-form" style="height:200px"></textarea>
+          <div class="se-modal-form">
+            <textarea class="se-input-form" style="height:200px" data-focus></textarea>
+          </div>
         </div>
         <div class="se-modal-footer">
           <button type="submit" class="se-btn-primary"><span>Insert</span></button>
@@ -249,7 +254,7 @@ class HashtagDetector extends PluginField {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -279,7 +284,7 @@ class CustomPicker extends PluginDropdownFree {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -315,7 +320,7 @@ class MyGallery extends PluginBrowser {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -338,14 +343,16 @@ const CODE_INPUT = `import { PluginInput } from 'suneditor/src/interfaces';
 
 class CustomInput extends PluginInput {
   static key = 'customInput';
+  static className = 'se-btn-input se-btn-tool-custom';
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
     this.title = 'Custom Input';
+    this.inner = '<input type="text" class="se-not-arrow-text" placeholder="Value" />';
   }
 
   /**
@@ -369,22 +376,47 @@ class CustomInput extends PluginInput {
   }
 }`;
 
-const CODE_POPUP = `import { PluginPopup } from 'suneditor/src/interfaces';
+const CODE_POPUP = `import { PluginPopup, ModuleController } from 'suneditor/src/interfaces';
+import Controller from 'suneditor/src/modules/contract/Controller';
+import { dom } from 'suneditor/src/helper';
 
-class InfoPopup extends PluginPopup {
-  static key = 'infoPopup';
+class MyPopup extends PluginPopup {
+  static key = 'myPopup';
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
-    this.title = 'Info';
+    this.title = 'My Popup';
+
+    // Controller panel — same pattern as anchor plugin
+    const el = dom.utils.createElement('DIV',
+      { class: 'se-controller se-controller-mypopup' },
+      \`<div class="se-arrow se-arrow-up"></div>
+      <div class="link-content">
+        <div class="se-controller-display"></div>
+        <div class="se-btn-group">
+          <button type="button" data-command="close"
+            tabindex="-1" class="se-btn se-tooltip">
+            \${this.$.icons.cancel}
+          </button>
+        </div>
+      </div>\`
+    );
+    this.controller = new Controller(this, this.$, el,
+      { position: 'bottom', disabled: true }, MyPopup.key);
   }
 
   show() {
-    // Display popup UI
+    // Open controller at cursor position
+    this.controller.open(this.$.selection.getRange());
+  }
+
+  controllerAction(target) {
+    const cmd = target.getAttribute('data-command');
+    if (cmd === 'close') this.controller.close();
   }
 }`;
 
@@ -404,20 +436,21 @@ class MyPlugin extends PluginModal {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    * @param {MyPluginOptions} pluginOptions
    */
   constructor(kernel, pluginOptions) {
-    super(kernel); // Required: sets this.$ = kernel.$
+    super(kernel); // KernelInjector → this.$ = kernel.$ (Deps bag)
 
     // Plugin metadata (used by toolbar button)
     this.title = this.$.lang.myPlugin || 'My Plugin';
     this.icon = 'myPlugin'; // icon key from this.$.icons, or raw HTML/SVG
 
-    // Optional: toolbar button positioning
-    this.beforeItem = null;  // HTMLElement to insert before
-    this.afterItem = null;   // HTMLElement to insert after
-    this.replaceButton = null; // HTMLElement to replace the default button
+    // Optional: toolbar button content and layout
+    this.inner = null; // string (HTML) | HTMLElement | false (hide) | null (use icon)
+    this.beforeItem = null; // HTMLElement to insert before the button
+    this.afterItem = null; // HTMLElement to insert after the button
+    this.replaceButton = null; // HTMLElement to replace the entire default button
 
     // Plugin members
     this.myState = {};
@@ -565,201 +598,6 @@ class CustomEmbed extends interfaces.PluginModal
     this.$.history.push(false);
   }
 }`;
-
-const CODE_EXAMPLE_WORDCOUNT = `import { PluginCommand } from 'suneditor/src/interfaces';
-
-class WordCount extends PluginCommand {
-  static key = 'wordCount';
-
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
-   */
-  constructor(kernel) {
-    super(kernel);
-    this.title = 'Word Count';
-    this.icon = '<span style="font-size:12px;font-weight:bold">WC</span>';
-  }
-
-  /**
-   * @override
-   * @type {PluginCommand['action']}
-   */
-  action() {
-    const text = this.$.html.get({ format: 'text' });
-    const words = text.trim().split(/\\s+/).filter(Boolean).length;
-    this.$.ui.showToast(\`Words: \${words}\`, 2000);
-  }
-}
-
-export default WordCount;`;
-
-const CODE_EXAMPLE_EMBED = `import { interfaces } from 'suneditor';
-import type { SunEditor } from 'suneditor/types';
-import Modal from 'suneditor/src/modules/contract/Modal';
-import Controller from 'suneditor/src/modules/contract/Controller';
-import { dom } from 'suneditor/src/helper';
-
-class Embed extends interfaces.PluginModal
-  implements interfaces.ModuleModal, interfaces.ModuleController, interfaces.EditorComponent
-{
-  static key = 'embed';
-  _element: HTMLIFrameElement | null = null;
-  #isUpdate = false;
-  modal: InstanceType<typeof Modal>;
-  controller: InstanceType<typeof Controller>;
-  urlInput: HTMLInputElement;
-
-  static component(node: Node): Node | null {
-    const el = dom.check.isFigure(node) ? (node as HTMLElement).firstElementChild : node;
-    return /^IFRAME$/i.test(el?.nodeName ?? '') ? el : null;
-  }
-
-  constructor(kernel: SunEditor.Kernel) {
-    super(kernel);
-    this.title = 'Embed';
-    this.icon = 'embed';
-
-    const modalEl = dom.utils.createElement('div', null,
-      \`<form>
-        <div class="se-modal-header">
-          <button type="button" data-command="close" class="se-btn se-modal-close"></button>
-          <span class="se-modal-title">Embed URL</span>
-        </div>
-        <div class="se-modal-body">
-          <label>URL</label>
-          <input class="se-input-form" type="url" placeholder="https://..." />
-        </div>
-        <div class="se-modal-footer">
-          <button type="submit" class="se-btn-primary"><span>Insert</span></button>
-        </div>
-      </form>\`
-    );
-
-    const controllerEl = dom.utils.createElement('div', { class: 'se-controller' },
-      \`<div>
-        <button type="button" data-command="edit" class="se-btn" title="Edit">Edit</button>
-        <button type="button" data-command="delete" class="se-btn" title="Delete">Delete</button>
-      </div>\`
-    );
-
-    this.modal = new Modal(this, this.$, modalEl);
-    this.controller = new Controller(this, this.$, controllerEl);
-    this.urlInput = modalEl.querySelector('input')!;
-  }
-
-  // ── PluginModal (base) ──
-  open(): void { this.modal.open(); }
-
-  // ── implements ModuleModal ──
-  async modalAction(): Promise<boolean> {  // Hook.Modal.Action
-    const url = this.urlInput.value.trim();
-    if (!url) return false;
-
-    if (this.#isUpdate && this._element) {
-      this._element.src = url;
-    } else {
-      const iframe = dom.utils.createElement('IFRAME', {
-        src: url, width: '560', height: '315',
-        frameborder: '0', allowfullscreen: 'true',
-      }) as HTMLIFrameElement;
-      this.$.html.insert(iframe.outerHTML);
-    }
-
-    this.$.history.push(false);
-    return true;
-  }
-
-  modalOn(isUpdate: boolean): void {  // Hook.Modal.On
-    this.#isUpdate = isUpdate;
-    this.urlInput.value = isUpdate && this._element ? this._element.src : '';
-    this.urlInput.focus();
-  }
-
-  modalInit(): void { this.controller.close(); }  // Hook.Modal.Init
-  modalOff(): void { this.urlInput.value = ''; }   // Hook.Modal.Off
-
-  // ── implements ModuleController ──
-  controllerAction(target: HTMLElement): void {  // Hook.Controller.Action
-    const command = target.getAttribute('data-command');
-    if (command === 'edit') this.modal.open();
-    else if (command === 'delete') this.componentDestroy(this._element!);
-  }
-
-  // ── implements EditorComponent ──
-  componentSelect(target: HTMLElement): void {  // Hook.Component.Select
-    this._element = target as HTMLIFrameElement;
-    this.controller.open(target, null, { isWWTarget: false });
-  }
-
-  componentDeselect(): void { this._element = null; }  // Hook.Component.Deselect
-
-  async componentDestroy(target: HTMLElement): Promise<void> {  // Hook.Component.Destroy
-    const container = dom.query.getParentElement(target, dom.check.isFigure) || target;
-    dom.utils.removeItem(container);
-    this._element = null;
-    this.$.focusManager.focusEdge(container.previousElementSibling);
-    this.$.history.push(false);
-  }
-}
-
-export default Embed;`;
-
-const CODE_EXAMPLE_QUICKSTYLE = `import { PluginDropdown } from 'suneditor/src/interfaces';
-import { dom } from 'suneditor/src/helper';
-
-class QuickStyle extends PluginDropdown {
-  static key = 'quickStyle';
-
-  #styles = [
-    { name: 'Note', class: 'note-block', bg: '#e8f5e9' },
-    { name: 'Warning', class: 'warning-block', bg: '#fff3e0' },
-    { name: 'Info', class: 'info-block', bg: '#e3f2fd' },
-  ];
-
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
-   */
-  constructor(kernel) {
-    super(kernel);
-    this.title = 'Quick Style';
-    this.icon = 'blockStyle';
-
-    let html = '';
-    for (const style of this.#styles) {
-      html += \`<li><button type="button" class="se-btn se-btn-list" data-command="\${style.class}"
-        style="background:\${style.bg};padding:4px 8px">\${style.name}</button></li>\`;
-    }
-
-    const menu = dom.utils.createElement('div',
-      { class: 'se-dropdown se-list-layer' },
-      \`<div class="se-list-inner"><ul class="se-list-basic">\${html}</ul></div>\`
-    );
-    this.$.menu.initDropdownTarget(QuickStyle, menu);
-  }
-
-  /**
-   * @override
-   * @type {PluginDropdown['action']}
-   */
-  action(target) {
-    const className = target.getAttribute('data-command');
-    if (!className) return;
-
-    const lines = this.$.format.getLines();
-    for (const line of lines) {
-      dom.utils.toggleClass(line, className);
-    }
-
-    this.$.menu.dropdownOff();
-    this.$.focusManager.focus();
-    this.$.history.push(false);
-  }
-}
-
-export default QuickStyle;`;
-
 const CODE_REGISTRATION = `import SUNEDITOR from 'suneditor';
 import plugins from 'suneditor/src/plugins';
 import MyPlugin from './plugins/myPlugin';
@@ -799,6 +637,10 @@ type PluginTypeInfo = {
 	uiBehavior: string;
 	examples: string;
 	code?: string;
+	/** Buttons to show in the quick-try editor */
+	demoButtons?: string[];
+	/** Demo HTML for quick-try */
+	demoHtml?: string;
 };
 
 const PLUGIN_TYPES: PluginTypeInfo[] = [
@@ -808,8 +650,10 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		color: "amber",
 		required: ["action()"],
 		uiBehavior: "Button click executes action immediately",
-		examples: "blockquote, list_bulleted",
+		examples: "blockquote, hr, strike",
 		code: CODE_COMMAND,
+		demoButtons: ["blockquote", "hr", "strike", "subscript", "superscript"],
+		demoHtml: "<p>Select text and click a command button.</p><p>These are pure command-type plugins that execute immediately on click.</p>",
 	},
 	{
 		className: "PluginDropdown",
@@ -819,6 +663,8 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Button opens menu, item click calls action()",
 		examples: "align, font, blockStyle",
 		code: CODE_DROPDOWN,
+		demoButtons: ["align", "font", "blockStyle"],
+		demoHtml: "<p>Click a dropdown button to see the menu open. Select an item to apply.</p>",
 	},
 	{
 		className: "PluginDropdownFree",
@@ -828,6 +674,8 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Button opens menu, plugin handles own events",
 		examples: "table, fontColor",
 		code: CODE_DROPDOWN_FREE,
+		demoButtons: ["table", "fontColor", "backgroundColor"],
+		demoHtml: "<p>These plugins manage their own event handling within the dropdown panel.</p>",
 	},
 	{
 		className: "PluginModal",
@@ -837,6 +685,8 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Button opens modal dialog",
 		examples: "link, image, video",
 		code: CODE_MODAL,
+		demoButtons: ["link", "image", "video"],
+		demoHtml: "<p>Click a modal-type button to open a dialog for inserting content.</p>",
 	},
 	{
 		className: "PluginBrowser",
@@ -846,6 +696,8 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Button opens gallery/browser interface",
 		examples: "imageGallery",
 		code: CODE_BROWSER,
+		demoButtons: ["imageGallery"],
+		demoHtml: "<p>Browser plugins open a gallery or file browser interface.</p>",
 	},
 	{
 		className: "PluginField",
@@ -855,6 +707,8 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Responds to editor input events",
 		examples: "mention",
 		code: CODE_FIELD,
+		demoButtons: ["bold", "italic"],
+		demoHtml: "<p>Field plugins respond to editor input events. Type <strong>@</strong> to trigger mention detection (mention plugin example).</p>",
 	},
 	{
 		className: "PluginInput",
@@ -862,8 +716,10 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		color: "teal",
 		required: [],
 		uiBehavior: "Toolbar input element (not a button)",
-		examples: "fontSize",
+		examples: "pageNavigator",
 		code: CODE_INPUT,
+		demoButtons: ["pageNavigator", "pageUp", "pageDown", "pageBreak"],
+		demoHtml: "<p>Input plugins render directly in the toolbar as input elements rather than buttons.</p><p>The pageNavigator shows a page navigation input.</p>",
 	},
 	{
 		className: "PluginPopup",
@@ -873,8 +729,160 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		uiBehavior: "Inline popup context menu",
 		examples: "anchor",
 		code: CODE_POPUP,
+		demoButtons: ["link", "anchor"],
+		demoHtml: '<p>Popup plugins show inline context menus. Try inserting a <a href="https://example.com">link</a> and clicking on it to see the anchor popup.</p>',
 	},
 ];
+
+/* ── Cross-Plugin Composite Types ─────────────────── */
+
+type CompositePluginInfo = {
+	name: string;
+	baseType: string;
+	implements: string[];
+	color: string;
+	desc: string;
+	code?: string;
+	demoButtons?: string[];
+	demoHtml?: string;
+};
+
+const CODE_COMPOSITE_FONTSIZE = `class FontSize extends PluginInput
+  implements PluginCommand, PluginDropdown
+{
+  static key = 'fontSize';
+  static className = 'se-btn-select se-btn-input se-btn-tool-font-size';
+
+  constructor(kernel) {
+    super(kernel);
+    // ... title, icon, inner (input or label)
+
+    // afterItem: dropdown arrow or inc/dec buttons
+    this.afterItem = dom.utils.createElement('button',
+      { class: 'se-btn se-sub-arrow-btn', 'data-command': FontSize.key, 'data-type': 'dropdown' },
+      this.$.icons.arrow_down
+    );
+    this.$.menu.initDropdownTarget({ key: FontSize.key, type: 'dropdown' }, menu);
+  }
+
+  /** @hook — Update input with current cursor's font-size */
+  active(element, target) {
+    const fontSize = dom.utils.getStyle(element, 'fontSize');
+    if (fontSize) {
+      this.#setSize(target, fontSize); // set input value
+      return true;
+    }
+    return false;
+  }
+
+  /** @override — Input keydown: ArrowUp/Down to inc/dec, Enter to apply */
+  toolbarInputKeyDown({ target, event }) { /* ... */ }
+
+  /** @override — Input blur/change: apply size */
+  toolbarInputChange({ target, value }) { /* ... */ }
+
+  /** @imple Dropdown — Highlight active size in dropdown */
+  on(target) {
+    const { value, unit } = this.#getSize(target);
+    const currentSize = value + unit;
+    for (const btn of this.sizeList) {
+      if (currentSize === btn.getAttribute('data-value')) {
+        dom.utils.addClass(btn, 'active');
+      } else {
+        dom.utils.removeClass(btn, 'active');
+      }
+    }
+  }
+
+  /** @imple Command — Handle dropdown item click or inc/dec */
+  action(target) {
+    const commandValue = target.getAttribute('data-command');
+    // inc/dec or apply selected size via inline.apply
+  }
+}`;
+
+const CODE_COMPOSITE_LIST = `class List_bulleted extends PluginCommand
+  implements PluginDropdown
+{
+  static key = 'list_bulleted';
+
+  constructor(kernel) {
+    super(kernel);
+    // ... title, icon
+
+    // afterItem: dropdown arrow for list style selection
+    this.afterItem = dom.utils.createElement('button',
+      { class: 'se-btn se-sub-arrow-btn', 'data-command': List_bulleted.key, 'data-type': 'dropdown' },
+      this.$.icons.arrow_down
+    );
+    this.$.menu.initDropdownTarget({ key: List_bulleted.key, type: 'dropdown' }, menu);
+  }
+
+  /** @hook — Highlight button when cursor is inside UL */
+  active(element, target) {
+    if (dom.check.isListCell(element) && /^UL$/i.test(element.parentElement.nodeName)) {
+      dom.utils.addClass(target, 'active');
+      return true;
+    }
+    dom.utils.removeClass(target, 'active');
+    return false;
+  }
+
+  /** @override Command — Toggle list or change list style */
+  action(target) {
+    const type = target?.querySelector('ul')?.style.listStyleType;
+    // toggle list on/off or change style
+    this.$.menu.dropdownOff();
+  }
+
+  /** @imple Dropdown — Highlight current list style in dropdown */
+  on() {
+    const el = this.$.format.getBlock(this.$.selection.getNode());
+    const currentType = el?.style.listStyleType || 'disc';
+    for (const item of this.#listItems) {
+      if (item.style.listStyleType === currentType) {
+        dom.utils.addClass(item.parentElement, 'active');
+      } else {
+        dom.utils.removeClass(item.parentElement, 'active');
+      }
+    }
+  }
+}`;
+
+const COMPOSITE_PLUGINS: CompositePluginInfo[] = [
+	{
+		name: "fontSize",
+		baseType: "PluginInput",
+		implements: ["PluginCommand", "PluginDropdown"],
+		color: "orange",
+		desc: "Input field + dropdown list + command (inc/dec) all controlling font size.",
+		code: CODE_COMPOSITE_FONTSIZE,
+		demoButtons: ["fontSize"],
+		demoHtml: "<p style='font-size: 16px'>fontSize combines Input, Dropdown, and Command types. Try the input field, dropdown, and increment/decrement buttons.</p>",
+	},
+	{
+		name: "list_bulleted / list_numbered",
+		baseType: "PluginCommand",
+		implements: ["PluginDropdown"],
+		color: "orange",
+		desc: "Command button for toggling list + dropdown for selecting list style.",
+		code: CODE_COMPOSITE_LIST,
+		demoButtons: ["list_bulleted", "list_numbered"],
+		demoHtml: "<p>List plugins combine Command (toggle list on/off) and Dropdown (select list style) types.</p><p>Click the button to toggle, or the arrow to see style options.</p>",
+	},
+];
+
+const PLUGIN_TYPE_COLOR: Record<string, string> = {
+	PluginCommand: "amber",
+	PluginDropdown: "sky",
+	PluginDropdownFree: "indigo",
+	PluginModal: "violet",
+	PluginBrowser: "purple",
+	PluginField: "rose",
+	PluginInput: "teal",
+	PluginPopup: "emerald",
+	Composite: "orange",
+};
 
 const COLOR_MAP: Record<string, { bg: string; text: string; border: string; dot: string }> = {
 	amber: {
@@ -918,6 +926,12 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; dot:
 		text: "text-teal-600 dark:text-teal-400",
 		border: "border-teal-300 dark:border-teal-700",
 		dot: "bg-teal-500",
+	},
+	orange: {
+		bg: "bg-orange-500/10",
+		text: "text-orange-600 dark:text-orange-400",
+		border: "border-orange-300 dark:border-orange-700",
+		dot: "bg-orange-500",
 	},
 	emerald: {
 		bg: "bg-emerald-500/10",
@@ -1008,7 +1022,7 @@ function CodePanel({ code, lang = "javascript" }: { code: string; lang?: string 
 	);
 }
 
-function PluginTypeCard({ info, t }: { info: PluginTypeInfo; t: ReturnType<typeof useTranslations> }) {
+function PluginTypeCard({ info, t, onTry }: { info: PluginTypeInfo; t: ReturnType<typeof useTranslations>; onTry?: (info: PluginTypeInfo) => void }) {
 	const [open, setOpen] = useState(false);
 	const c = COLOR_MAP[info.color];
 
@@ -1033,15 +1047,26 @@ function PluginTypeCard({ info, t }: { info: PluginTypeInfo; t: ReturnType<typeo
 						{t("builtInExamples")}: <span className='font-mono'>{info.examples}</span>
 					</p>
 				</div>
-				{info.code && (
-					<button
-						onClick={() => setOpen(!open)}
-						className='shrink-0 flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted'
-					>
-						{open ? <ChevronDown className='h-3 w-3' /> : <ChevronRight className='h-3 w-3' />}
-						{open ? t("hideCode") : t("viewCode")}
-					</button>
-				)}
+				<div className='flex items-center gap-1 shrink-0'>
+					{info.demoButtons && onTry && (
+						<button
+							onClick={() => onTry(info)}
+							className='flex items-center gap-1 text-[11px] text-primary hover:text-primary/80 font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/5 cursor-pointer'
+						>
+							<Zap className='h-3 w-3' />
+							{t("tryIt")}
+						</button>
+					)}
+					{info.code && (
+						<button
+							onClick={() => setOpen(!open)}
+							className='flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted cursor-pointer'
+						>
+							{open ? <ChevronDown className='h-3 w-3' /> : <ChevronRight className='h-3 w-3' />}
+							{open ? t("hideCode") : t("viewCode")}
+						</button>
+					)}
+				</div>
 			</div>
 			{info.code && open && (
 				<div className={`border-t ${c.bg} px-4 py-3`}>
@@ -1056,13 +1081,78 @@ function PluginTypeCard({ info, t }: { info: PluginTypeInfo; t: ReturnType<typeo
    Tab Contents
    ══════════════════════════════════════════════════════ */
 
-function TypesTab({ t }: { t: ReturnType<typeof useTranslations> }) {
+function CompositePluginCard({ info, t, onTry }: { info: CompositePluginInfo; t: ReturnType<typeof useTranslations>; onTry?: (info: CompositePluginInfo) => void }) {
+	const [open, setOpen] = useState(false);
+	const c = COLOR_MAP[info.color];
+	return (
+		<div className={`rounded-lg border ${c.border} overflow-hidden`}>
+			<div className='flex items-start gap-3 p-4'>
+				<span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${c.dot}`} />
+				<div className='flex-1 min-w-0'>
+					<div className='flex items-center gap-2 flex-wrap'>
+						<code className={`text-sm font-bold ${c.text}`}>{info.name}</code>
+						<Badge variant='outline' className='text-[10px] px-1.5 py-0 font-mono'>
+							extends {info.baseType}
+						</Badge>
+						{info.implements.map((impl) => (
+							<Badge key={impl} variant='secondary' className='text-[10px] px-1.5 py-0 font-mono'>
+								+ {impl}
+							</Badge>
+						))}
+					</div>
+					<p className='text-xs text-muted-foreground mt-1'>{info.desc}</p>
+				</div>
+				<div className='flex items-center gap-1 shrink-0'>
+					{info.demoButtons && onTry && (
+						<button
+							onClick={() => onTry(info)}
+							className='flex items-center gap-1 text-[11px] text-primary hover:text-primary/80 font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/5 cursor-pointer'
+						>
+							<Zap className='h-3 w-3' />
+							{t("tryIt")}
+						</button>
+					)}
+					{info.code && (
+						<button
+							onClick={() => setOpen(!open)}
+							className='flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted cursor-pointer'
+						>
+							{open ? <ChevronDown className='h-3 w-3' /> : <ChevronRight className='h-3 w-3' />}
+							{open ? t("hideCode") : t("viewCode")}
+						</button>
+					)}
+				</div>
+			</div>
+			{open && info.code && (
+				<div className='border-t bg-muted/30 px-4 py-3'>
+					<CodePanel code={info.code} />
+				</div>
+			)}
+		</div>
+	);
+}
+
+function TypesTab({ t, onTryType, onTryComposite }: { t: ReturnType<typeof useTranslations>; onTryType: (info: PluginTypeInfo) => void; onTryComposite: (info: CompositePluginInfo) => void }) {
 	return (
 		<div className='space-y-3'>
 			<p className='text-sm text-muted-foreground mb-4'>{t("typesDesc")}</p>
 			{PLUGIN_TYPES.map((info) => (
-				<PluginTypeCard key={info.className} info={info} t={t} />
+				<PluginTypeCard key={info.className} info={info} t={t} onTry={onTryType} />
 			))}
+
+			{/* Cross-Plugin Composite */}
+			<div className='mt-8'>
+				<SectionLabel>
+					<Workflow className='h-4 w-4' />
+					{t("crossPlugin")}
+				</SectionLabel>
+				<p className='text-xs text-muted-foreground mb-3'>{t("crossPluginDesc")}</p>
+				<div className='space-y-3'>
+					{COMPOSITE_PLUGINS.map((info) => (
+						<CompositePluginCard key={info.name} info={info} t={t} onTry={onTryComposite} />
+					))}
+				</div>
+			</div>
 		</div>
 	);
 }
@@ -2165,55 +2255,425 @@ function ModulesTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 	);
 }
 
-function ExamplesTab({ t }: { t: ReturnType<typeof useTranslations> }) {
+/* ── HTML Structure Reference ─────────────────────── */
+
+const HTML_MODAL = `<!-- Modal Standard Structure -->
+<div class="se-modal-content">
+  <form>
+    <div class="se-modal-header">
+      <button type="button" data-command="close"
+        class="se-btn se-close-btn" aria-label="Close">
+        \${icons.cancel}
+      </button>
+      <span class="se-modal-title">Title</span>
+    </div>
+
+    <div class="se-modal-body">
+      <div class="se-modal-form">
+        <label>Label</label>
+        <input class="se-input-form" type="text" data-focus />
+      </div>
+      <div class="se-modal-form">
+        <label>Select</label>
+        <select class="se-input-select">...</select>
+      </div>
+    </div>
+
+    <div class="se-modal-footer">
+      <button type="submit" class="se-btn-primary">
+        <span>Submit</span>
+      </button>
+    </div>
+  </form>
+</div>`;
+
+const HTML_DROPDOWN = `<!-- Dropdown Standard Structure -->
+<div class="se-dropdown se-list-layer">
+  <div class="se-list-inner">
+    <ul class="se-list-basic">
+      <li>
+        <button type="button"
+          class="se-btn se-btn-list"
+          data-command="value">
+          <span class="se-list-icon">\${icons.icon_key}</span>
+          Label
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>`;
+
+const HTML_CONTROLLER = `<!-- Controller Standard Structure -->
+<div class="se-controller se-controller-\${kind}">
+  <div class="se-arrow se-arrow-up"></div>
+  <div class="se-btn-group">
+    <button type="button" data-command="edit"
+      tabindex="-1" class="se-btn se-tooltip">
+      \${icons.edit}
+      <span class="se-tooltip-inner">
+        <span class="se-tooltip-text">Edit</span>
+      </span>
+    </button>
+    <button type="button" data-command="delete"
+      tabindex="-1" class="se-btn se-tooltip">
+      \${icons.delete}
+      <span class="se-tooltip-inner">
+        <span class="se-tooltip-text">Delete</span>
+      </span>
+    </button>
+  </div>
+</div>`;
+
+const HTML_BROWSER = `<!-- Browser Standard Structure -->
+<div class="se-browser sun-editor-common">
+  <div class="se-browser-back"></div>
+  <div class="se-browser-inner">
+    <div class="se-browser-content">
+
+      <div class="se-browser-header">
+        <button type="button" data-command="close"
+          class="se-btn se-browser-close">
+          \${icons.cancel}
+        </button>
+        <span class="se-browser-title">Title</span>
+      </div>
+
+      <div class="se-browser-wrapper">
+        <div class="se-browser-side"><!-- Folder tree --></div>
+        <div class="se-browser-main">
+          <div class="se-browser-bar">
+            <div class="se-browser-search">
+              <form class="se-browser-search-form">
+                <input type="text" class="se-input-form"
+                  placeholder="Search" />
+                <button type="submit" class="se-btn">
+                  \${icons.search}
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="se-browser-body">
+            <div class="se-browser-list">
+              <div class="se-file-item-column">
+                <div class="se-file-item-img">
+                  <img src="..." alt="..."
+                    data-command="src_url"
+                    data-name="name" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>`;
+
+const HTML_POPUP = `<!-- Popup (Controller-based) Structure — Pattern: anchor -->
+<div class="se-controller se-controller-\${kind}">
+  <div class="se-arrow se-arrow-up"></div>
+  <div class="link-content">
+    <div class="se-controller-display">
+      <!-- Display content (e.g., id, label) -->
+    </div>
+    <div class="se-btn-group">
+      <button type="button" data-command="edit"
+        tabindex="-1" class="se-btn se-tooltip">
+        \${icons.edit}
+        <span class="se-tooltip-inner">
+          <span class="se-tooltip-text">Edit</span>
+        </span>
+      </button>
+      <button type="button" data-command="delete"
+        tabindex="-1" class="se-btn se-tooltip">
+        \${icons.delete}
+        <span class="se-tooltip-inner">
+          <span class="se-tooltip-text">Delete</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Input Form variant (anchor plugin) -->
+<div class="se-controller se-controller-simple-input">
+  <div class="se-arrow se-arrow-up"></div>
+  <form>
+    <div class="se-controller-display">Label</div>
+    <div class="se-btn-group se-form-group">
+      <input type="text" required />
+      <button type="submit" data-command="submit"
+        class="se-btn se-btn-success">
+        \${icons.checked}
+      </button>
+      <button type="button" data-command="cancel"
+        class="se-btn se-btn-danger">
+        \${icons.cancel}
+      </button>
+    </div>
+  </form>
+</div>`;
+
+type HtmlStructureInfo = {
+	key: string;
+	color: string;
+	code: string;
+	classes: { cls: string; desc: string }[];
+	dataAttrs?: { attr: string; desc: string }[];
+	notes?: string;
+};
+
+const HTML_STRUCTURES: HtmlStructureInfo[] = [
+	{
+		key: "modal",
+		color: "violet",
+		code: HTML_MODAL,
+		classes: [
+			{ cls: "se-modal-content", desc: "Root wrapper — required on the element passed to new Modal()" },
+			{ cls: "se-modal-header", desc: "Header section" },
+			{ cls: "se-close-btn", desc: "Close button (not se-modal-close)" },
+			{ cls: "se-modal-title", desc: "Title text" },
+			{ cls: "se-modal-body", desc: "Main content area" },
+			{ cls: "se-modal-form", desc: "Form group wrapper" },
+			{ cls: "se-input-form", desc: "Standard text input" },
+			{ cls: "se-input-select", desc: "Standard select dropdown" },
+			{ cls: "se-input-control", desc: "Size/position input (small)" },
+			{ cls: "se-modal-footer", desc: "Footer with submit button" },
+			{ cls: "se-btn-primary", desc: "Submit button" },
+			{ cls: "se-modal-hr", desc: "Horizontal divider line" },
+		],
+		dataAttrs: [
+			{ attr: 'data-command="close"', desc: "Triggers modal close" },
+			{ attr: "data-focus", desc: "Auto-focused when modal opens" },
+		],
+		notes: "The Modal module auto-wraps in se-modal-area > se-modal-inner. You only build the se-modal-content element.",
+	},
+	{
+		key: "dropdown",
+		color: "sky",
+		code: HTML_DROPDOWN,
+		classes: [
+			{ cls: "se-dropdown", desc: "Root dropdown wrapper" },
+			{ cls: "se-list-layer", desc: "Layer class (always paired with se-dropdown)" },
+			{ cls: "se-list-inner", desc: "Inner scroll wrapper" },
+			{ cls: "se-list-basic", desc: "Standard list (ul)" },
+			{ cls: "se-btn-list", desc: "List item button" },
+			{ cls: "se-list-icon", desc: "Icon in list item (span)" },
+			{ cls: "se-sub-list", desc: "Submenu/sub-list item" },
+		],
+		dataAttrs: [
+			{ attr: "data-command", desc: "Value passed to action(target)" },
+			{ attr: "data-txt", desc: "Text representation of item" },
+		],
+		notes: "Register via this.$.menu.initDropdownTarget(PluginClass, menuElement). PluginDropdown routes clicks to action(), PluginDropdownFree requires manual event binding.",
+	},
+	{
+		key: "controller",
+		color: "amber",
+		code: HTML_CONTROLLER,
+		classes: [
+			{ cls: "se-controller", desc: "Root controller wrapper" },
+			{ cls: "se-controller-${kind}", desc: "Variant (e.g., se-controller-link)" },
+			{ cls: "se-arrow", desc: "Arrow pointing to element" },
+			{ cls: "se-arrow-up / se-arrow-down", desc: "Arrow direction" },
+			{ cls: "se-btn-group", desc: "Button group container" },
+			{ cls: "se-tooltip", desc: "Tooltip wrapper on buttons" },
+			{ cls: "se-tooltip-inner > se-tooltip-text", desc: "Tooltip content" },
+		],
+		dataAttrs: [
+			{ attr: "data-command", desc: "Dispatched to controllerAction(target)" },
+			{ attr: 'tabindex="-1"', desc: "Keep out of tab order" },
+		],
+		notes: "Figure module builds its own controller with resize/align buttons. Use standalone Controller for simpler cases (e.g., link popup).",
+	},
+	{
+		key: "browser",
+		color: "purple",
+		code: HTML_BROWSER,
+		classes: [
+			{ cls: "se-browser", desc: "Root browser wrapper" },
+			{ cls: "se-browser-back", desc: "Backdrop overlay" },
+			{ cls: "se-browser-content", desc: "Content section" },
+			{ cls: "se-browser-header", desc: "Header with close button" },
+			{ cls: "se-browser-close", desc: "Close button" },
+			{ cls: "se-browser-wrapper", desc: "Main wrapper (side + main)" },
+			{ cls: "se-browser-side", desc: "Sidebar/folder tree" },
+			{ cls: "se-browser-main", desc: "Main content area" },
+			{ cls: "se-browser-search-form", desc: "Search input form" },
+			{ cls: "se-browser-list", desc: "File/item list grid" },
+			{ cls: "se-file-item-column", desc: "Column item container" },
+			{ cls: "se-file-item-img", desc: "Item image wrapper" },
+		],
+		dataAttrs: [
+			{ attr: "data-command", desc: "Source URL or folder path on items" },
+			{ attr: "data-name", desc: "Display name" },
+			{ attr: "data-type", desc: "File type (image, video, etc.)" },
+		],
+		notes: "Browser module handles layout, search, and folder tree automatically. Provide data, drawItemHandler, and selectorHandler in config.",
+	},
+	{
+		key: "popup",
+		color: "teal",
+		code: HTML_POPUP,
+		classes: [
+			{ cls: "se-controller", desc: "Root controller wrapper" },
+			{ cls: "se-controller-${kind}", desc: "Variant class (e.g., se-controller-link)" },
+			{ cls: "se-controller-simple-input", desc: "Input form variant" },
+			{ cls: "se-arrow", desc: "Arrow pointing to target element" },
+			{ cls: "se-arrow-up / se-arrow-down", desc: "Arrow direction" },
+			{ cls: "link-content", desc: "Content wrapper" },
+			{ cls: "se-controller-display", desc: "Display area (label, id, etc.)" },
+			{ cls: "se-btn-group", desc: "Button group container" },
+			{ cls: "se-form-group", desc: "Form group (input variant)" },
+			{ cls: "se-btn-success / se-btn-danger", desc: "Submit / cancel button styles" },
+		],
+		dataAttrs: [
+			{ attr: "data-command", desc: "Dispatched to controllerAction(target)" },
+			{ attr: 'tabindex="-1"', desc: "Keep buttons out of tab order" },
+		],
+		notes: "PluginPopup uses Controller module to show floating panels at cursor position. Create via new Controller(this, this.$, element, options, key). Open with controller.open(range) or controller.open(targetElement).",
+	},
+];
+
+function HtmlStructureTab({ t }: { t: ReturnType<typeof useTranslations> }) {
+	const [openIdx, setOpenIdx] = useState<number | null>(null);
+
 	return (
-		<div className='space-y-8'>
+		<div className='space-y-6'>
+			<p className='text-sm text-muted-foreground'>{t("htmlStructureDesc")}</p>
+
+			<div className='space-y-3'>
+				{HTML_STRUCTURES.map((info, idx) => {
+					const c = COLOR_MAP[info.color];
+					const isOpen = openIdx === idx;
+
+					return (
+						<div key={info.key} className={`rounded-lg border ${c.border} overflow-hidden`}>
+							<button
+								type='button'
+								onClick={() => setOpenIdx(isOpen ? null : idx)}
+								className='w-full flex items-center gap-3 p-4 text-start hover:bg-muted/30 transition-colors cursor-pointer'
+							>
+								<span className={`w-2.5 h-2.5 rounded-full shrink-0 ${c.dot}`} />
+								<div className='flex-1 min-w-0'>
+									<div className='flex items-center gap-2'>
+										<span className={`text-sm font-bold ${c.text}`}>
+											{t(`htmlStructure.${info.key}.title`)}
+										</span>
+										<Badge variant='outline' className='text-[10px] px-1.5 py-0 font-mono'>
+											{info.key}
+										</Badge>
+									</div>
+									<p className='text-xs text-muted-foreground mt-0.5'>
+										{t(`htmlStructure.${info.key}.desc`)}
+									</p>
+								</div>
+								{isOpen ? <ChevronDown className='h-4 w-4 text-muted-foreground shrink-0' /> : <ChevronRight className='h-4 w-4 text-muted-foreground shrink-0' />}
+							</button>
+
+							{isOpen && (
+								<div className={`border-t ${c.bg} p-4 space-y-4`}>
+									{/* HTML Code */}
+									<CodePanel code={info.code} lang='html' />
+
+									{/* CSS Classes Table */}
+									<div>
+										<h5 className='text-xs font-semibold mb-2'>{t("htmlStructure.cssClasses")}</h5>
+										<RefTable
+											headers={["Class", "Description"]}
+											rows={info.classes.map((cls) => [
+												<code key='c' className='text-[11px] whitespace-nowrap'>{cls.cls}</code>,
+												<span key='d' className='text-xs'>{cls.desc}</span>,
+											])}
+										/>
+									</div>
+
+									{/* Data Attributes */}
+									{info.dataAttrs && (
+										<div>
+											<h5 className='text-xs font-semibold mb-2'>{t("htmlStructure.dataAttrs")}</h5>
+											<RefTable
+												headers={["Attribute", "Description"]}
+												rows={info.dataAttrs.map((da) => [
+													<code key='a' className='text-[11px] whitespace-nowrap'>{da.attr}</code>,
+													<span key='d' className='text-xs'>{da.desc}</span>,
+												])}
+											/>
+										</div>
+									)}
+
+									{/* Notes */}
+									{info.notes && (
+										<div className='p-3 rounded-lg bg-muted/30 border text-xs text-muted-foreground'>
+											<strong className='text-foreground'>Note: </strong>
+											{info.notes}
+										</div>
+									)}
+								</div>
+							)}
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
+}
+
+function ExampleCard({ example, idx, t, onTry }: { example: PluginExample; idx: number; t: ReturnType<typeof useTranslations>; onTry: (key: string) => void }) {
+	const [open, setOpen] = useState(false);
+	const isComposite = example.pluginType.includes("Composite") || example.pluginType.includes("+");
+	const colorKey = isComposite ? "orange" : PLUGIN_TYPE_COLOR[example.pluginType] || "slate";
+	const c = COLOR_MAP[colorKey];
+
+	return (
+		<div className={`rounded-lg border ${c.border} overflow-hidden`}>
+			<div className='flex items-start gap-3 p-4'>
+				<span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${c.dot}`} />
+				<div className='flex-1 min-w-0'>
+					<div className='flex items-center gap-2 flex-wrap'>
+						<h4 className='text-sm font-semibold'>{t(`example${idx + 1}Title`)}</h4>
+						<Badge variant='outline' className={`text-[9px] px-1.5 py-0 ${c.text} ${c.border}`}>
+							{example.pluginType}
+						</Badge>
+					</div>
+					<p className='text-xs text-muted-foreground mt-1'>{t(`example${idx + 1}Desc`)}</p>
+				</div>
+				<div className='flex items-center gap-1 shrink-0'>
+					<button
+						type='button'
+						onClick={() => onTry(example.key)}
+						className='flex items-center gap-1 text-[11px] text-primary hover:text-primary/80 font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/5 cursor-pointer'
+					>
+						<Zap className='h-3 w-3' />
+						{t("tryIt")}
+					</button>
+					<button
+						onClick={() => setOpen(!open)}
+						className='flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted cursor-pointer'
+					>
+						{open ? <ChevronDown className='h-3 w-3' /> : <ChevronRight className='h-3 w-3' />}
+						{open ? t("hideCode") : t("viewCode")}
+					</button>
+				</div>
+			</div>
+			{open && (
+				<div className='border-t bg-muted/30 px-4 py-3'>
+					<CodePanel code={example.code} lang='typescript' />
+				</div>
+			)}
+		</div>
+	);
+}
+
+function ExamplesTab({ t, onTryExample }: { t: ReturnType<typeof useTranslations>; onTryExample: (key: string) => void }) {
+	return (
+		<div className='space-y-3'>
 			<p className='text-sm text-muted-foreground'>{t("examplesDesc")}</p>
 
-			{/* Example 1: Word Count */}
-			<div>
-				<div className='flex items-center gap-2 mb-2'>
-					<h4 className='text-sm font-semibold'>{t("example1Title")}</h4>
-					<Badge
-						variant='outline'
-						className='text-[9px] px-1.5 py-0 text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-700'
-					>
-						Command
-					</Badge>
-				</div>
-				<p className='text-xs text-muted-foreground mb-3'>{t("example1Desc")}</p>
-				<CodePanel code={CODE_EXAMPLE_WORDCOUNT} />
-			</div>
-
-			{/* Example 2: Quick Style Dropdown */}
-			<div>
-				<div className='flex items-center gap-2 mb-2'>
-					<h4 className='text-sm font-semibold'>{t("example2Title")}</h4>
-					<Badge
-						variant='outline'
-						className='text-[9px] px-1.5 py-0 text-sky-600 dark:text-sky-400 border-sky-300 dark:border-sky-700'
-					>
-						Dropdown
-					</Badge>
-				</div>
-				<p className='text-xs text-muted-foreground mb-3'>{t("example2Desc")}</p>
-				<CodePanel code={CODE_EXAMPLE_QUICKSTYLE} />
-			</div>
-
-			{/* Example 3: Custom Embed */}
-			<div>
-				<div className='flex items-center gap-2 mb-2'>
-					<h4 className='text-sm font-semibold'>{t("example3Title")}</h4>
-					<Badge
-						variant='outline'
-						className='text-[9px] px-1.5 py-0 text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-700'
-					>
-						Modal + Controller + Component
-					</Badge>
-				</div>
-				<p className='text-xs text-muted-foreground mb-3'>{t("example3Desc")}</p>
-				<CodePanel code={CODE_EXAMPLE_EMBED} lang='typescript' />
-			</div>
+			{PLUGIN_EXAMPLES.map((example, idx) => (
+				<ExampleCard key={example.key} example={example} idx={idx} t={t} onTry={onTryExample} />
+			))}
 
 			{/* Registration */}
 			<div>
@@ -2374,6 +2834,7 @@ const TAB_ICONS: Record<string, ReactNode> = {
 	anatomy: <Layers className='h-3.5 w-3.5' />,
 	hooks: <Cable className='h-3.5 w-3.5' />,
 	modules: <Workflow className='h-3.5 w-3.5' />,
+	htmlStructure: <Code2 className='h-3.5 w-3.5' />,
 	examples: <BookOpen className='h-3.5 w-3.5' />,
 };
 
@@ -2381,6 +2842,40 @@ export default function CustomPluginGuide() {
 	const t = useTranslations("PluginGuide.custom");
 	const [refTab, setRefTab] = useState("types");
 	const [qsLang, setQsLang] = useState("js");
+
+	// Quick Try modal state for plugin examples
+	const [tryModalOpen, setTryModalOpen] = useState(false);
+	const [tryExample, setTryExample] = useState<PluginExample | null>(null);
+	const [loadedPlugin, setLoadedPlugin] = useState<unknown>(null);
+
+	// Quick Try for plugin type cards (built-in plugins)
+	const [tryTypeInfo, setTryTypeInfo] = useState<PluginTypeInfo | null>(null);
+	const [tryTypeModalOpen, setTryTypeModalOpen] = useState(false);
+
+	const handleTryType = useCallback((info: PluginTypeInfo) => {
+		setTryTypeInfo(info);
+		setTryTypeModalOpen(true);
+	}, []);
+
+	// Quick Try for composite plugin cards
+	const [tryComposite, setTryComposite] = useState<CompositePluginInfo | null>(null);
+	const [tryCompositeModalOpen, setTryCompositeModalOpen] = useState(false);
+
+	const handleTryComposite = useCallback((info: CompositePluginInfo) => {
+		setTryComposite(info);
+		setTryCompositeModalOpen(true);
+	}, []);
+
+	const handleTryExample = useCallback((key: string) => {
+		const example = PLUGIN_EXAMPLES.find((e) => e.key === key);
+		if (!example) return;
+		setTryExample(example);
+		setLoadedPlugin(null);
+		example.load().then((mod) => {
+			setLoadedPlugin(() => mod.default);
+			setTryModalOpen(true);
+		});
+	}, []);
 
 	return (
 		<div className='space-y-10'>
@@ -2465,7 +2960,7 @@ export default function CustomPluginGuide() {
 			<div>
 				<Tabs value={refTab} onValueChange={setRefTab}>
 					<TabsList className='flex flex-wrap h-auto gap-1 mb-4'>
-						{(["types", "anatomy", "hooks", "modules", "examples"] as const).map((key) => (
+						{(["types", "anatomy", "hooks", "modules", "htmlStructure", "examples"] as const).map((key) => (
 							<TabsTrigger key={key} value={key} className='text-xs gap-1.5'>
 								{TAB_ICONS[key]}
 								{t(`tabs.${key}`)}
@@ -2474,7 +2969,7 @@ export default function CustomPluginGuide() {
 					</TabsList>
 
 					<TabsContent value='types'>
-						<TypesTab t={t} />
+						<TypesTab t={t} onTryType={handleTryType} onTryComposite={handleTryComposite} />
 					</TabsContent>
 					<TabsContent value='anatomy'>
 						<AnatomyTab t={t} />
@@ -2485,11 +2980,62 @@ export default function CustomPluginGuide() {
 					<TabsContent value='modules'>
 						<ModulesTab t={t} />
 					</TabsContent>
+					<TabsContent value='htmlStructure'>
+						<HtmlStructureTab t={t} />
+					</TabsContent>
 					<TabsContent value='examples'>
-						<ExamplesTab t={t} />
+						<ExamplesTab t={t} onTryExample={handleTryExample} />
 					</TabsContent>
 				</Tabs>
 			</div>
+
+			{/* Quick Try Modal for plugin examples */}
+			{tryExample && (
+				<QuickTryModal
+					open={tryModalOpen}
+					onClose={() => setTryModalOpen(false)}
+					label={tryExample.key}
+					desc={tryExample.desc}
+					config={{
+						...tryExample.editorConfig,
+						editorOptions: {
+							...tryExample.editorConfig.editorOptions,
+							...(loadedPlugin ? { plugins: { [tryExample.key.toLowerCase()]: loadedPlugin } } : {}),
+						},
+					}}
+					badgeText={tryExample.pluginType}
+				/>
+			)}
+
+			{/* Quick Try Modal for plugin type cards */}
+			{tryTypeInfo && tryTypeInfo.demoButtons && (
+				<QuickTryModal
+					open={tryTypeModalOpen}
+					onClose={() => setTryTypeModalOpen(false)}
+					label={tryTypeInfo.className}
+					desc={tryTypeInfo.uiBehavior}
+					config={{
+						demoHtml: tryTypeInfo.demoHtml || "<p>Try the built-in plugins.</p>",
+						buttonList: [tryTypeInfo.demoButtons],
+					}}
+					badgeText={tryTypeInfo.type}
+				/>
+			)}
+
+			{/* Quick Try Modal for composite plugin cards */}
+			{tryComposite && tryComposite.demoButtons && (
+				<QuickTryModal
+					open={tryCompositeModalOpen}
+					onClose={() => setTryCompositeModalOpen(false)}
+					label={tryComposite.name}
+					desc={tryComposite.desc}
+					config={{
+						demoHtml: tryComposite.demoHtml || "<p>Try the composite plugin.</p>",
+						buttonList: [tryComposite.demoButtons],
+					}}
+					badgeText={`${tryComposite.baseType} + ${tryComposite.implements.join(" + ")}`}
+				/>
+			)}
 		</div>
 	);
 }

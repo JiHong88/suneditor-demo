@@ -1,10 +1,6 @@
-/** Shared editor presets — single source of truth for version, CDN URLs, button lists, and default content. */
+/** Shared editor presets — button lists, default content, and helpers. Version/CDN URLs live in @/store/version. */
 
-export const SUNEDITOR_VERSION = "3.0.0-beta.35";
-
-export const CDN_CSS = `https://cdn.jsdelivr.net/npm/suneditor@${SUNEDITOR_VERSION}/dist/suneditor.min.css`;
-export const CDN_CONTENTS_CSS = `https://cdn.jsdelivr.net/npm/suneditor@${SUNEDITOR_VERSION}/dist/suneditor-contents.min.css`;
-export const CDN_JS = `https://cdn.jsdelivr.net/npm/suneditor@${SUNEDITOR_VERSION}/dist/suneditor.min.js`;
+export { SUNEDITOR_VERSION, CDN_CSS, CDN_CONTENTS_CSS, CDN_JS } from "@/store/version";
 
 export const DEFAULT_VALUE = "<p>Hello SunEditor</p>";
 export const PLAYGROUND_VALUE = "<p>Hello <strong>SunEditor</strong>!</p><p>Try editing this content.</p>";

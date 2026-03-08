@@ -36,14 +36,14 @@ All plugins extend a base class from `src/interfaces/plugins.js`. The inheritanc
 KernelInjector → Base → PluginCommand / PluginModal / PluginDropdown / ...
 ```
 
-- **`KernelInjector`** — Receives the core and exposes `this.$` (the dependency bag).
-- **`Base`** — Adds common static properties (`key`, `type`, `className`, `options`) and instance properties (`title`, `icon`).
+- **`KernelInjector`** — Receives the Kernel and exposes `this.$` (Deps bag — the shared dependency object, not the Kernel itself).
+- **`Base`** — Adds common static properties (`key`, `type`, `className`, `options`) and instance properties (`title`, `icon`, `inner`, `beforeItem`, `afterItem`, `replaceButton`).
 - **Plugin type class** — Defines required abstract methods per plugin type.
 
 ### Key Principles
 
-1. **Class references, not instances** — Register plugin classes in `options.plugins`. The core instantiates them.
-2. **Dependency injection** — All editor services are accessed via `this.$` (never import core modules directly).
+1. **Class references, not instances** — Register plugin classes in `options.plugins`. The Kernel instantiates them.
+2. **Dependency injection** — All editor services are accessed via `this.$` (the Deps bag), never import core modules directly.
 3. **Contracts via interfaces** — Plugins can implement multiple contracts (e.g., `ModuleModal`, `EditorComponent`) to hook into module lifecycles.
 
 ### Registration Flow
@@ -53,7 +53,7 @@ options.plugins: [MyPlugin]
        ↓
 PluginManager.init()
        ↓
-new MyPlugin(kernel, pluginOptions)  →  super(kernel)  →  this.$ = kernel.$
+new MyPlugin(kernel, pluginOptions)  →  super(kernel)  →  this.$ = kernel.$ (Deps bag)
        ↓
 Toolbar buttons updated (title, icon)
        ↓
@@ -77,7 +77,7 @@ class HelloWorld extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -165,7 +165,7 @@ class ToggleStrikethrough extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -215,7 +215,7 @@ class CustomAlign extends PluginDropdown {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 * @param {CustomAlignPluginOptions} pluginOptions
 	 */
 	constructor(kernel, pluginOptions) {
@@ -280,7 +280,7 @@ class CustomPicker extends PluginDropdownFree {
 
   /**
    * @constructor
-   * @param {SunEditor.Kernel} kernel - The core instance
+   * @param {SunEditor.Kernel} kernel - The Kernel instance
    */
   constructor(kernel) {
     super(kernel);
@@ -323,23 +323,26 @@ class InsertCode extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
 		this.title = 'Insert Code';
 		this.icon = 'code';
 
-		// Build modal HTML
+		// Build modal HTML — root must be "se-modal-content"
 		const modalEl = dom.utils.createElement(
 			'div',
-			null,
+			{ class: 'se-modal-content' },
 			`<form>
-        <div class="se-modal-header"><button type="button" data-command="close" class="se-btn se-modal-close"></button>
+        <div class="se-modal-header">
+          <button type="button" data-command="close" class="se-btn se-close-btn" aria-label="Close">${this.$.icons.cancel}</button>
           <span class="se-modal-title">Insert Code</span>
         </div>
         <div class="se-modal-body">
-          <textarea class="se-input-form" style="height:200px"></textarea>
+          <div class="se-modal-form">
+            <textarea class="se-input-form" style="height:200px" data-focus></textarea>
+          </div>
         </div>
         <div class="se-modal-footer">
           <button type="submit" class="se-btn-primary"><span>Insert</span></button>
@@ -409,7 +412,7 @@ class MyGallery extends PluginBrowser {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -443,7 +446,7 @@ class HashtagDetector extends PluginField {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -477,14 +480,16 @@ import { PluginInput } from 'suneditor/src/interfaces';
 
 class CustomInput extends PluginInput {
 	static key = 'customInput';
+	static className = 'se-btn-input se-btn-tool-custom';
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
 		this.title = 'Custom Input';
+		this.inner = '<input type="text" class="se-not-arrow-text" placeholder="Value" />';
 	}
 
 	/**
@@ -521,7 +526,7 @@ class InfoPopup extends PluginPopup {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -577,7 +582,7 @@ class MyImagePlugin extends PluginModal {
 
 ## Constructor Pattern
 
-Plugin options are defined as a `@typedef` above the class, and the constructor receives `kernel` + `pluginOptions`:
+Plugin options are defined as a `@typedef` above the class, and the constructor receives `kernel` (Kernel instance) + `pluginOptions`:
 
 ```javascript
 /**
@@ -596,20 +601,21 @@ class MyPlugin extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 * @param {MyPluginOptions} pluginOptions
 	 */
 	constructor(kernel, pluginOptions) {
-		super(kernel); // Required: sets this.$ = kernel.$
+		super(kernel); // KernelInjector → this.$ = kernel.$ (Deps bag)
 
 		// Plugin metadata (used by toolbar button)
 		this.title = this.$.lang.myPlugin || 'My Plugin';
 		this.icon = 'myPlugin'; // icon key from this.$.icons, or raw HTML/SVG
 
-		// Optional: toolbar button positioning
-		this.beforeItem = null; // HTMLElement to insert before
-		this.afterItem = null; // HTMLElement to insert after
-		this.replaceButton = null; // HTMLElement to replace the default button
+		// Optional: toolbar button content and layout
+		this.inner = null; // string (HTML) | HTMLElement | false (hide) | null (use icon)
+		this.beforeItem = null; // HTMLElement to insert before the button
+		this.afterItem = null; // HTMLElement to insert after the button
+		this.replaceButton = null; // HTMLElement to replace the entire default button
 
 		// Plugin members
 		this.myState = {};
@@ -623,14 +629,14 @@ class MyPlugin extends PluginModal {
 
 **Parameters:**
 
-- `kernel` (`SunEditor.Kernel`) — The core instance. Pass to `super()`.
+- `kernel` (`SunEditor.Kernel`) — The Kernel instance (runtime container). Pass to `super()` to inject `this.$` (Deps bag).
 - `pluginOptions` (`object`) — Plugin-specific options from `options[pluginKey]`. Define a `@typedef` for type checking.
 
 ---
 
 ## Dependency Bag (`this.$`)
 
-All plugins access editor services through `this.$`. This object is built once by `CoreKernel` and shared across all consumers.
+All plugins access editor services through `this.$` (the Deps bag). This shared dependency object is built once by the Kernel (`CoreKernel`) and provided to all consumers. **`$` is not the Kernel itself** — it is the dependency context that the Kernel provides.
 
 Source: [`src/core/kernel/kernelInjector.js`](../src/core/kernel/kernelInjector.js)
 
@@ -1093,7 +1099,7 @@ class CustomEmbed extends PluginModal {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1179,7 +1185,7 @@ Every plugin `extends` exactly **one** base class. This determines its primary t
 ```
 extends PluginModal    → type: 'modal'    (required: open())
 extends PluginCommand  → type: 'command'  (required: action())
-extends PluginInput    → type: 'input'    (required: toolbarInputKeyDown/Change)
+extends PluginInput    → type: 'input'    (optional: toolbarInputKeyDown/Change)
 extends PluginDropdown → type: 'dropdown' (required: action())
 ```
 
@@ -1304,7 +1310,7 @@ class WordCount extends PluginCommand {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1345,7 +1351,7 @@ class QuickStyle extends PluginDropdown {
 
 	/**
 	 * @constructor
-	 * @param {SunEditor.Kernel} kernel - The core instance
+	 * @param {SunEditor.Kernel} kernel - The Kernel instance
 	 */
 	constructor(kernel) {
 		super(kernel);
@@ -1416,18 +1422,20 @@ class Embed extends interfaces.PluginModal implements interfaces.ModuleModal, in
 		this.title = 'Embed';
 		this.icon = 'embed';
 
-		// Modal HTML
+		// Modal HTML — root must be "se-modal-content"
 		const modalEl = dom.utils.createElement(
 			'div',
-			null,
+			{ class: 'se-modal-content' },
 			`<form>
         <div class="se-modal-header">
-          <button type="button" data-command="close" class="se-btn se-modal-close"></button>
+          <button type="button" data-command="close" class="se-btn se-close-btn" aria-label="Close">${this.$.icons.cancel}</button>
           <span class="se-modal-title">Embed URL</span>
         </div>
         <div class="se-modal-body">
-          <label>URL</label>
-          <input class="se-input-form" type="url" placeholder="https://..." />
+          <div class="se-modal-form">
+            <label>URL</label>
+            <input class="se-input-form" type="url" placeholder="https://..." data-focus />
+          </div>
         </div>
         <div class="se-modal-footer">
           <button type="submit" class="se-btn-primary"><span>Insert</span></button>
@@ -1575,13 +1583,13 @@ These options are passed as the second argument to the constructor: `constructor
 
 ### Registration Rules
 
-1. **Always pass class references** — The core manages instantiation and lifecycle.
+1. **Always pass class references** — The kernel manages instantiation and lifecycle.
 
     ```javascript
     // Correct
     plugins: [MyPlugin];
 
-    // Wrong — core cannot manage lifecycle
+    // Wrong — kernel cannot manage lifecycle
     plugins: [new MyPlugin()];
     ```
 
