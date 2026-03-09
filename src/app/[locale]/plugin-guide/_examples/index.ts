@@ -44,7 +44,7 @@ class WordCount extends interfaces.PluginCommand {
 
 export default WordCount;`;
 
-const CODE_QUICKSTYLE = `import { interfaces, helper } from "suneditor";
+const CODE_CALLOUTBLOCK = `import { interfaces, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { dom } = helper;
@@ -60,12 +60,12 @@ const STYLES = [
  * @description PluginDropdown — Button opens a menu, item click calls action().
  * Pattern: align, font, blockStyle, lineHeight
  */
-class QuickStyle extends interfaces.PluginDropdown {
-  static key = "quickStyle";
+class CalloutBlock extends interfaces.PluginDropdown {
+  static key = "calloutBlock";
 
   constructor(kernel: SunEditor.Kernel) {
     super(kernel);
-    this.title = "Quick Style";
+    this.title = "Callout Block";
     this.icon = "blockquote";
 
     // se-dropdown > se-list-inner > se-list-basic > se-btn-list (suneditor standard)
@@ -79,14 +79,14 @@ class QuickStyle extends interfaces.PluginDropdown {
       { class: "se-dropdown se-list-layer" },
       \`<div class="se-list-inner"><ul class="se-list-basic">\${html}</ul></div>\`
     );
-    this.$.menu.initDropdownTarget(QuickStyle, menu);
+    this.$.menu.initDropdownTarget(CalloutBlock, menu);
   }
 
   /** @override — Highlight current style in dropdown when opened */
   on(): void {
     const bq = dom.query.getParentElement(this.$.selection.getNode(), "BLOCKQUOTE") as HTMLElement | null;
     const current = bq?.getAttribute("data-style") || "";
-    const buttons = (this.$.menu.targetMap as Record<string, HTMLElement>)[QuickStyle.key]?.querySelectorAll(".se-btn-list");
+    const buttons = (this.$.menu.targetMap as Record<string, HTMLElement>)[CalloutBlock.key]?.querySelectorAll(".se-btn-list");
     buttons?.forEach((btn) => {
       const name = btn.getAttribute("data-command") || "";
       if (name === current) {
@@ -135,7 +135,7 @@ class QuickStyle extends interfaces.PluginDropdown {
   }
 }
 
-export default QuickStyle;`;
+export default CalloutBlock;`;
 
 const CODE_EMBED = `import { interfaces, modules, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
@@ -683,14 +683,14 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		},
 	},
 	{
-		key: "QuickStyle",
+		key: "CalloutBlock",
 		pluginType: "PluginDropdown",
-		desc: "Apply preset block styles via a dropdown menu.",
-		code: CODE_QUICKSTYLE,
-		load: () => import("./quickStyle"),
+		desc: "Apply Note / Warning / Info callout blocks.",
+		code: CODE_CALLOUTBLOCK,
+		load: () => import("./calloutBlock"),
 		editorConfig: {
-			demoHtml: "<p>Select text and apply a quick style from the dropdown.</p>",
-			buttonList: [["quickStyle"]],
+			demoHtml: "<p>Select text and apply a callout block style from the dropdown.</p>",
+			buttonList: [["calloutBlock"]],
 		},
 	},
 	{
@@ -709,7 +709,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "PluginDropdownFree",
 		desc: "Color swatch grid with custom event handling.",
 		code: CODE_COLORPALETTE,
-		load: () => import("./dropdownFree"),
+		load: () => import("./colorPalette"),
 		editorConfig: {
 			demoHtml: "<p>Select some text, then pick a color from the palette to apply.</p>",
 			buttonList: [["colorPalette"]],
@@ -720,7 +720,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "PluginField",
 		desc: "Detects #hashtag patterns on input. No toolbar button.",
 		code: CODE_HASHTAG,
-		load: () => import("./field"),
+		load: () => import("./hashtagHighlight"),
 		editorConfig: {
 			demoHtml: "<p>Type #hello or #suneditor to see hashtag detection in action.</p>",
 			buttonList: [["bold", "italic"]],
@@ -731,7 +731,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "PluginInput",
 		desc: "Zoom input field in toolbar. Type 50-200 to scale.",
 		code: CODE_ZOOMLEVEL,
-		load: () => import("./input"),
+		load: () => import("./zoomLevel"),
 		editorConfig: {
 			demoHtml: "<p>Use the zoom input in the toolbar. Type a value (50-200) and press Enter.</p>",
 			buttonList: [["zoomLevel"]],
@@ -742,7 +742,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "PluginBrowser",
 		desc: "Emoji gallery browser using static data.",
 		code: CODE_EMOJI,
-		load: () => import("./browser"),
+		load: () => import("./emojiPicker"),
 		editorConfig: {
 			demoHtml: "<p>Click the emoji button to open the gallery and pick an emoji to insert.</p>",
 			buttonList: [["emojiPicker"]],
@@ -753,7 +753,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "PluginPopup",
 		desc: "Shows formatting info about current selection.",
 		code: CODE_INFOPOPUP,
-		load: () => import("./popup"),
+		load: () => import("./infoPopup"),
 		editorConfig: {
 			demoHtml: "<p>Place your cursor on <strong>bold</strong> or <em>italic</em> text, then click the info button.</p>",
 			buttonList: [["bold", "italic", "underline", "infoPopup"]],
@@ -764,7 +764,7 @@ export const PLUGIN_EXAMPLES: PluginExample[] = [
 		pluginType: "Composite (Input + Command + Dropdown)",
 		desc: "Cross-plugin composition: Input + Command + Dropdown.",
 		code: CODE_TEXTSCALE,
-		load: () => import("./composite"),
+		load: () => import("./textScale"),
 		editorConfig: {
 			demoHtml: "<p>Try the text scale plugin: type a size in the input, pick from the dropdown, or use the toolbar.</p>",
 			buttonList: [["textScale"]],

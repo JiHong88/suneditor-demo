@@ -72,336 +72,326 @@ SUNEDITOR.create('editor', {
 });`;
 
 const CODE_COMMAND = `import { PluginCommand } from 'suneditor/src/interfaces';
-import { dom } from 'suneditor/src/helper';
 
-class ToggleStrikethrough extends PluginCommand {
-  static key = 'toggleStrikethrough';
+class MyCommand extends PluginCommand {
+  static key = 'myCommand';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.title = 'Strikethrough';
-    this.icon = 'strikethrough'; // built-in icon key, or raw SVG/HTML
+    this.title = 'My Command';
+    this.icon = 'bold'; // built-in icon key, or raw SVG/HTML string
   }
 
-  /**
-   * @hook Editor.EventManager
-   * @type {SunEditor.Hook.Event.Active}
-   */
-  active(element, target) {
-    if (/^S$/i.test(element?.nodeName)) {
-      dom.utils.addClass(target, 'active');
-      return true;
-    }
-    dom.utils.removeClass(target, 'active');
-    return false;
-  }
-
-  /**
-   * @override
-   * @type {PluginCommand['action']}
-   */
+  // ── [Required] ──────────────────────────────────────
+  /** Executes when the toolbar button is clicked. */
   action() {
-    const node = dom.utils.createElement('S');
-    this.$.inline.apply(node, { stylesToModify: null, nodesToRemove: null });
+    // Insert content, toggle formatting, etc.
+    // this.$.html.insert('<p>...</p>');
+    // this.$.history.push(false);
   }
+
+  // ── [Optional] Event Hooks ──────────────────────────
+  /** Cursor position changed — update toolbar button active state.
+   *  Return true if element matches this plugin's target. */
+  // active(element, target) {
+  //   if (/* element matches */) {
+  //     dom.utils.addClass(target, 'active');
+  //     return true;
+  //   }
+  //   dom.utils.removeClass(target, 'active');
+  //   return false;
+  // }
 }`;
 
 const CODE_DROPDOWN = `import { PluginDropdown } from 'suneditor/src/interfaces';
 import { dom } from 'suneditor/src/helper';
 
-/**
- * @typedef {Object} CustomAlignPluginOptions
- * @property {Array.<"right"|"center"|"left"|"justify">} [items] - Align items
- */
+class MyDropdown extends PluginDropdown {
+  static key = 'myDropdown';
 
-class CustomAlign extends PluginDropdown {
-  static key = 'customAlign';
-
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   * @param {CustomAlignPluginOptions} pluginOptions
-   */
-  constructor(kernel, pluginOptions) {
+  /** @param {SunEditor.Kernel} kernel */
+  constructor(kernel) {
     super(kernel);
-    this.title = this.$.lang.align;
+    this.title = 'My Dropdown';
     this.icon = 'align_left';
 
+    // Build dropdown menu — must follow se-dropdown > se-list-inner > se-list-basic structure
     const menu = dom.utils.createElement('div',
       { class: 'se-dropdown se-list-layer' },
       \`<div class="se-list-inner">
         <ul class="se-list-basic">
-          <li><button type="button" class="se-btn se-btn-list" data-command="left">Left</button></li>
-          <li><button type="button" class="se-btn se-btn-list" data-command="center">Center</button></li>
-          <li><button type="button" class="se-btn se-btn-list" data-command="right">Right</button></li>
+          <li><button type="button" class="se-btn se-btn-list" data-command="optionA">Option A</button></li>
+          <li><button type="button" class="se-btn se-btn-list" data-command="optionB">Option B</button></li>
         </ul>
       </div>\`
     );
-    this.$.menu.initDropdownTarget(CustomAlign, menu);
+    this.$.menu.initDropdownTarget(MyDropdown, menu);
   }
 
-  /**
-   * @override
-   * @type {PluginDropdown['on']}
-   */
-  on(target) { /* Called when dropdown opens */ }
-
-  /**
-   * @override
-   * @type {PluginDropdown['action']}
-   */
+  // ── [Required] ──────────────────────────────────────
+  /** Called when a dropdown menu item is clicked. */
   action(target) {
-    const value = target.getAttribute('data-command');
-    if (!value) return;
-    const lines = this.$.format.getLines();
-    for (const line of lines) {
-      dom.utils.setStyle(line, 'textAlign', value);
-    }
-    this.$.menu.dropdownOff();
-    this.$.focusManager.focus();
-    this.$.history.push(false);
+    // const value = target.getAttribute('data-command');
+    // Apply the selected option...
+    // this.$.menu.dropdownOff();
+    // this.$.focusManager.focus();
+    // this.$.history.push(false);
   }
+
+  // ── [Optional] ──────────────────────────────────────
+  /** Called when the dropdown menu opens. Use to highlight active item. */
+  // on(target) {}
+
+  /** Called when the dropdown menu closes. */
+  // off() {}
 }`;
 
 const CODE_MODAL = `import { PluginModal } from 'suneditor/src/interfaces';
 import Modal from 'suneditor/src/modules/contract/Modal';
 import { dom } from 'suneditor/src/helper';
 
-class InsertCode extends PluginModal {
-  static key = 'insertCode';
+class MyModal extends PluginModal {
+  static key = 'myModal';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.title = 'Insert Code';
-    this.icon = 'code';
+    this.title = 'My Modal';
+    this.icon = 'image';
 
-    // Root must be "se-modal-content"
+    // Root element must have class "se-modal-content"
+    // Structure: se-modal-content > form > header / body / footer
     const modalEl = dom.utils.createElement('div', { class: 'se-modal-content' },
       \`<form>
         <div class="se-modal-header">
-          <button type="button" data-command="close" class="se-btn se-close-btn" aria-label="Close">\${this.$.icons.cancel}</button>
-          <span class="se-modal-title">Insert Code</span>
+          <button type="button" data-command="close" class="se-btn se-close-btn"
+            aria-label="Close">\${this.$.icons.cancel}</button>
+          <span class="se-modal-title">My Modal</span>
         </div>
         <div class="se-modal-body">
           <div class="se-modal-form">
-            <textarea class="se-input-form" style="height:200px" data-focus></textarea>
+            <label>Input</label>
+            <input class="se-input-form" type="text" data-focus />
           </div>
         </div>
         <div class="se-modal-footer">
-          <button type="submit" class="se-btn-primary"><span>Insert</span></button>
+          <button type="submit" class="se-btn-primary"><span>Submit</span></button>
         </div>
       </form>\`
     );
 
     this.modal = new Modal(this, this.$, modalEl);
-    this.textarea = modalEl.querySelector('textarea');
   }
 
-  /**
-   * @override
-   * @type {PluginModal['open']}
-   */
-  open() { this.modal.open(); }
+  // ── [Required] ──────────────────────────────────────
+  /** Opens the modal dialog. */
+  open() {
+    this.modal.open();
+  }
 
-  /**
-   * @hook Modules.Modal
-   * @type {SunEditor.Hook.Modal.Action}
-   */
+  // ── [Required] implements ModuleModal ───────────────
+  /** Form submit handler.
+   *  Return true → close modal + loading
+   *  Return false → close loading only (validation failed)
+   *  Return undefined → close modal only */
   async modalAction() {
-    const code = this.textarea.value;
-    if (!code) return false;
-
-    const pre = dom.utils.createElement('PRE');
-    const codeEl = dom.utils.createElement('CODE');
-    codeEl.textContent = code;
-    pre.appendChild(codeEl);
-
-    this.$.html.insert(pre.outerHTML);
-    this.$.history.push(false);
-    return true;
+    // Validate input, insert content, etc.
+    // this.$.html.insert('...');
+    // this.$.history.push(false);
+    // return true;
   }
 
-  /**
-   * @hook Modules.Modal
-   * @type {SunEditor.Hook.Modal.On}
-   */
-  modalOn(isUpdate) {
-    if (!isUpdate) this.textarea.value = '';
-    this.textarea.focus();
-  }
+  // ── [Optional] Modal Lifecycle ──────────────────────
+  /** Called after the modal opens. isUpdate = true when editing existing content. */
+  // modalOn(isUpdate) {}
 
-  /**
-   * @hook Modules.Modal
-   * @type {SunEditor.Hook.Modal.Off}
-   */
-  modalOff() { this.textarea.value = ''; }
+  /** Called before modal opens or closes. Good for resetting controller state. */
+  // modalInit() {}
+
+  /** Called after the modal closes. Good for clearing input fields. */
+  // modalOff() {}
 }`;
 
 const CODE_FIELD = `import { PluginField } from 'suneditor/src/interfaces';
-import { converter } from 'suneditor/src/helper';
 
-class HashtagDetector extends PluginField {
-  static key = 'hashtagDetector';
-  static className = '';
+class MyField extends PluginField {
+  static key = 'myField';
+  static className = ''; // No toolbar button — event-driven only
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.onInput = converter.debounce(this.onInput.bind(this), 200);
+    // No this.title or this.icon needed — PluginField has no toolbar button.
+    // Tip: use converter.debounce() for high-frequency hooks like onInput.
   }
 
-  /**
-   * @hook Editor.EventManager
-   * @type {SunEditor.Hook.Event.OnInput}
-   */
-  onInput({ frameContext }) {
-    const sel = this.$.selection.get();
-    const text = sel.anchorNode?.textContent || '';
-    const before = text.substring(0, sel.anchorOffset);
-    const match = before.match(/#(\\w+)$/);
+  // ── [Optional] Event Hooks (pick what you need) ─────
+  /** Fires on every text input in the editor. */
+  // onInput({ frameContext, event }) {}
 
-    if (match) {
-      console.log('Detected hashtag:', match[1]);
-    }
-  }
+  /** Fires on keydown inside the editor. Return false to stop event propagation. */
+  // onKeyDown({ frameContext, event, range }) {}
+
+  /** Fires on mouse click inside the editor. */
+  // onClick({ frameContext, event, range }) {}
+
+  /** Fires on paste event. */
+  // onPaste({ frameContext, event, cleanData }) {}
 }`;
 
 const CODE_DROPDOWN_FREE = `import { PluginDropdownFree } from 'suneditor/src/interfaces';
+import { dom } from 'suneditor/src/helper';
 
-class CustomPicker extends PluginDropdownFree {
-  static key = 'customPicker';
+class MyDropdownFree extends PluginDropdownFree {
+  static key = 'myDropdownFree';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.title = 'Custom Picker';
+    this.title = 'My DropdownFree';
     this.icon = 'color';
 
-    const menu = /* build your custom UI */;
-    this.$.menu.initDropdownTarget(CustomPicker, menu);
+    // Build your custom dropdown UI (no se-list-basic structure required)
+    const menu = dom.utils.createElement('div',
+      { class: 'se-dropdown se-list-layer' },
+      '<div class="se-list-inner"><!-- your custom UI here --></div>'
+    );
 
-    // Attach your own event listeners
+    // Unlike PluginDropdown, you handle your own events — no automatic action() routing
     menu.addEventListener('click', this.#handleClick.bind(this));
+    this.$.menu.initDropdownTarget(MyDropdownFree, menu);
   }
 
-  on(target) {
-    // Called when dropdown opens
-  }
+  // ── No required methods ─────────────────────────────
 
-  off() {
-    // Called when dropdown closes — cleanup state
-  }
+  // ── [Optional] ──────────────────────────────────────
+  /** Called when the dropdown menu opens. */
+  // on(target) {}
 
+  /** Called when the dropdown menu closes. */
+  // off() {}
+
+  /** Your own event handler. */
   #handleClick(e) {
-    // Your own event handling logic
-    this.$.menu.dropdownOff();
+    // Handle click on your custom UI elements
+    // this.$.menu.dropdownOff();
+    // this.$.focusManager.focus();
+    // this.$.history.push(false);
   }
 }`;
 
 const CODE_BROWSER = `import { PluginBrowser } from 'suneditor/src/interfaces';
 import Browser from 'suneditor/src/modules/contract/Browser';
 
-class MyGallery extends PluginBrowser {
-  static key = 'myGallery';
+class MyBrowser extends PluginBrowser {
+  static key = 'myBrowser';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.title = 'My Gallery';
+    this.title = 'My Browser';
     this.icon = 'image';
 
-    this.browser = new Browser(this, this.$ /* browser config */);
+    this.browser = new Browser(this, this.$, {
+      title: 'Browse Items',
+      data: [],                // Static data array, or use url: '...' for server fetch
+      columnSize: 4,           // Items per row
+      useSearch: true,         // Enable search bar
+      selectorHandler: this.#onSelect.bind(this), // Item click handler
+      drawItemHandler: (item) => {
+        // Return HTML string for each item cell
+        // data-command attribute is required for Browser's click handler
+        return '<div class="se-file-item-img" data-command="...">...</div>';
+      },
+    });
   }
 
-  open(onSelectFunction) {
-    this.browser.open(onSelectFunction);
+  // ── [Required] ──────────────────────────────────────
+  /** Opens the browser/gallery panel. */
+  open() {
+    this.browser.open();
   }
 
+  /** Closes the browser/gallery panel. */
   close() {
     this.browser.close();
+  }
+
+  // ── [Optional] ──────────────────────────────────────
+  /** Called when the browser initializes or closes. */
+  // browserInit() {}
+
+  #onSelect(target) {
+    // Handle the selected item
+    // this.$.html.insert('...');
+    // this.$.history.push(false);
   }
 }`;
 
 const CODE_INPUT = `import { PluginInput } from 'suneditor/src/interfaces';
 
-class CustomInput extends PluginInput {
-  static key = 'customInput';
-  static className = 'se-btn-input se-btn-tool-custom';
+class MyInput extends PluginInput {
+  static key = 'myInput';
+  static className = 'se-btn-input se-btn-tool-my-input';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
-    this.title = 'Custom Input';
+    this.title = 'My Input';
+    // this.inner renders as an input element in the toolbar (instead of a button)
     this.inner = '<input type="text" class="se-not-arrow-text" placeholder="Value" />';
   }
 
-  /**
-   * @override
-   * @type {PluginInput['toolbarInputKeyDown']}
-   */
-  toolbarInputKeyDown({ target, event }) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      const value = target.value;
-      // Handle the input value
-    }
-  }
+  // ── No required methods (all are optional hooks) ────
 
-  /**
-   * @override
-   * @type {PluginInput['toolbarInputChange']}
-   */
-  toolbarInputChange({ target, value }) {
-    // Handle input blur/change
-  }
+  // ── [Optional] Toolbar Input Hooks ──────────────────
+  /** Fires on keydown inside the toolbar input. */
+  // toolbarInputKeyDown({ target, event }) {
+  //   if (event.key === 'Enter') {
+  //     event.preventDefault();
+  //     // Apply the input value...
+  //   }
+  // }
+
+  /** Fires when the toolbar input value changes (blur/change). */
+  // toolbarInputChange({ target, value }) {
+  //   // Apply the changed value...
+  // }
+
+  /** Cursor position changed — update the input value to reflect current state. */
+  // active(element, target) {
+  //   const input = target?.parentElement?.querySelector('input');
+  //   if (!element) { input.value = ''; return false; }
+  //   // Read current value from element and set input.value
+  //   return false;
+  // }
 }`;
 
-const CODE_POPUP = `import { PluginPopup, ModuleController } from 'suneditor/src/interfaces';
+const CODE_POPUP = `import { PluginPopup } from 'suneditor/src/interfaces';
 import Controller from 'suneditor/src/modules/contract/Controller';
 import { dom } from 'suneditor/src/helper';
 
 class MyPopup extends PluginPopup {
   static key = 'myPopup';
 
-  /**
-   * @constructor
-   * @param {SunEditor.Kernel} kernel - The Kernel instance
-   */
+  /** @param {SunEditor.Kernel} kernel */
   constructor(kernel) {
     super(kernel);
     this.title = 'My Popup';
+    this.icon = 'link';
 
-    // Controller panel — same pattern as anchor plugin
+    // Build a floating controller panel (se-controller > se-arrow + content)
     const el = dom.utils.createElement('DIV',
-      { class: 'se-controller se-controller-mypopup' },
+      { class: 'se-controller se-controller-my-popup' },
       \`<div class="se-arrow se-arrow-up"></div>
       <div class="link-content">
         <div class="se-controller-display"></div>
         <div class="se-btn-group">
-          <button type="button" data-command="close"
-            tabindex="-1" class="se-btn se-tooltip">
-            \${this.$.icons.cancel}
-          </button>
+          <button type="button" data-command="edit" tabindex="-1"
+            class="se-btn se-tooltip">\${this.$.icons.edit}</button>
+          <button type="button" data-command="close" tabindex="-1"
+            class="se-btn se-tooltip">\${this.$.icons.cancel}</button>
         </div>
       </div>\`
     );
@@ -409,15 +399,27 @@ class MyPopup extends PluginPopup {
       { position: 'bottom', disabled: true }, MyPopup.key);
   }
 
+  // ── [Required] ──────────────────────────────────────
+  /** Shows the popup at the current cursor/selection position. */
   show() {
-    // Open controller at cursor position
-    this.controller.open(this.$.selection.getRange());
+    // const node = this.$.selection.getNode();
+    // this.controller.open(node);
   }
 
+  // ── [Required] implements ModuleController ──────────
+  /** Handles clicks on controller buttons (data-command). */
   controllerAction(target) {
-    const cmd = target.getAttribute('data-command');
-    if (cmd === 'close') this.controller.close();
+    // const cmd = target.getAttribute('data-command');
+    // if (cmd === 'edit') { /* open edit mode */ }
+    // if (cmd === 'close') this.controller.close();
   }
+
+  // ── [Optional] Controller Lifecycle ─────────────────
+  /** Called after the controller opens. */
+  // controllerOn(form, target) {}
+
+  /** Called before the controller closes. */
+  // controllerClose() {}
 }`;
 
 const CODE_CONSTRUCTOR = `/**
@@ -641,6 +643,8 @@ type PluginTypeInfo = {
 	demoButtons?: string[];
 	/** Demo HTML for quick-try */
 	demoHtml?: string;
+	/** Extra editor options for quick-try */
+	editorOptions?: Record<string, unknown>;
 };
 
 const PLUGIN_TYPES: PluginTypeInfo[] = [
@@ -681,7 +685,7 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		className: "PluginModal",
 		type: "modal",
 		color: "violet",
-		required: ["open()"],
+		required: ["open()", "modalAction()"],
 		uiBehavior: "Button opens modal dialog",
 		examples: "link, image, video",
 		code: CODE_MODAL,
@@ -720,12 +724,13 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		code: CODE_INPUT,
 		demoButtons: ["pageNavigator", "pageUp", "pageDown", "pageBreak"],
 		demoHtml: "<p>Input plugins render directly in the toolbar as input elements rather than buttons.</p><p>The pageNavigator shows a page navigation input.</p>",
+		editorOptions: { type: "document:page" },
 	},
 	{
 		className: "PluginPopup",
 		type: "popup",
 		color: "emerald",
-		required: ["show()"],
+		required: ["show()", "controllerAction()"],
 		uiBehavior: "Inline popup context menu",
 		examples: "anchor",
 		code: CODE_POPUP,
@@ -3017,6 +3022,7 @@ export default function CustomPluginGuide() {
 					config={{
 						demoHtml: tryTypeInfo.demoHtml || "<p>Try the built-in plugins.</p>",
 						buttonList: [tryTypeInfo.demoButtons],
+						editorOptions: tryTypeInfo.editorOptions,
 					}}
 					badgeText={tryTypeInfo.type}
 				/>

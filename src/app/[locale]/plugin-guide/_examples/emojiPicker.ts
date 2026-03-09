@@ -53,6 +53,12 @@ class EmojiPicker extends interfaces.PluginBrowser {
 				return `<div class="se-file-item-img" data-command="${(item as any).src}" data-name="${(item as any).name}" style="font-size:28px;text-align:center;cursor:pointer;padding:8px" title="${(item as any).name}">${(item as any).src}</div>`;
 			},
 		});
+
+		// Move tags into .se-browser-search and remove hamburger button
+		const searchArea = this.browser.area.querySelector('.se-browser-search');
+		const hamburger = searchArea?.querySelector('.se-side-open-btn');
+		if (hamburger) hamburger.remove();
+		if (searchArea) searchArea.appendChild(this.browser.tagArea);
 	}
 
 	/** @override — Required: open the browser */

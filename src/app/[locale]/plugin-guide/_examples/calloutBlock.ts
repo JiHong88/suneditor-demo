@@ -16,12 +16,12 @@ const STYLES = [
  * @description PluginDropdown — Button opens a menu, item click calls action().
  * Pattern: align, font, blockStyle, lineHeight
  */
-class QuickStyle extends interfaces.PluginDropdown {
-	static key = "quickStyle";
+class CalloutBlock extends interfaces.PluginDropdown {
+	static key = "calloutBlock";
 
 	constructor(kernel: SunEditor.Kernel) {
 		super(kernel);
-		this.title = "Quick Style";
+		this.title = "Callout Block";
 		this.icon = "blockquote";
 
 		// se-dropdown > se-list-inner > se-list-basic > se-btn-list (suneditor standard)
@@ -36,14 +36,14 @@ class QuickStyle extends interfaces.PluginDropdown {
 			{ class: "se-dropdown se-list-layer" },
 			`<div class="se-list-inner"><ul class="se-list-basic">${html}</ul></div>`,
 		);
-		this.$.menu.initDropdownTarget(QuickStyle, menu);
+		this.$.menu.initDropdownTarget(CalloutBlock, menu);
 	}
 
 	/** @override — Highlight current style in dropdown when opened */
 	on(): void {
 		const bq = dom.query.getParentElement(this.$.selection.getNode(), "BLOCKQUOTE") as HTMLElement | null;
 		const current = bq?.getAttribute("data-style") || "";
-		const buttons = (this.$.menu.targetMap as Record<string, HTMLElement>)[QuickStyle.key]?.querySelectorAll(".se-btn-list");
+		const buttons = (this.$.menu.targetMap as Record<string, HTMLElement>)[CalloutBlock.key]?.querySelectorAll(".se-btn-list");
 		buttons?.forEach((btn) => {
 			const name = btn.getAttribute("data-command") || "";
 			if (name === current) {
@@ -94,4 +94,4 @@ class QuickStyle extends interfaces.PluginDropdown {
 	}
 }
 
-export default QuickStyle;
+export default CalloutBlock;
