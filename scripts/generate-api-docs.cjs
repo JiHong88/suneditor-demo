@@ -238,8 +238,9 @@ function extractParamsFromList(parameters, sourceFile, getType) {
 
 /**
  * Build a method object with JSDoc data
+ * @param {string} [memberKind] - "static" | "getter" | "setter" | undefined
  */
-function buildMethodObject(name, params, returns, jsDoc) {
+function buildMethodObject(name, params, returns, jsDoc, memberKind) {
 	const method = {
 		name,
 		params: params.join(", "),
@@ -256,6 +257,11 @@ function buildMethodObject(name, params, returns, jsDoc) {
 	// Add returns description if exists
 	if (jsDoc.returnsDescription) {
 		method.returnsDescription = jsDoc.returnsDescription;
+	}
+
+	// Add member kind (static, getter, setter)
+	if (memberKind) {
+		method.memberKind = memberKind;
 	}
 
 	return method;
@@ -294,6 +300,31 @@ function extractMethodsFromClass(filePath) {
 	function visit(node) {
 		if (ts.isClassDeclaration(node)) {
 			node.members.forEach((member) => {
+				// Detect member kind: static, getter, setter
+				const isStatic = member.modifiers && member.modifiers.some((m) => m.kind === ts.SyntaxKind.StaticKeyword);
+				const isGetter = ts.isGetAccessor(member) || ts.isGetAccessorDeclaration(member);
+				const isSetter = ts.isSetAccessor(member) || ts.isSetAccessorDeclaration(member);
+				const memberKind = isStatic ? "static" : isGetter ? "getter" : isSetter ? "setter" : undefined;
+
+				// Handle getter/setter accessors
+				if ((isGetter || isSetter) && member.name) {
+					try {
+						const name = member.name.getText(sourceFile);
+						if (name.startsWith("_")) return;
+						const jsDoc = extractJSDoc(member);
+						if (isGetter) {
+							const returns = member.type ? getType(member.type) : "any";
+							methods.push(buildMethodObject(name, [], returns, jsDoc, memberKind));
+						} else {
+							const params = extractParamsFromList(member.parameters, sourceFile, getType);
+							methods.push(buildMethodObject(name, params, "void", jsDoc, memberKind));
+						}
+					} catch (e) {
+						console.error("Error parsing accessor:", e.message);
+					}
+					return;
+				}
+
 				if ((ts.isMethodDeclaration(member) || ts.isMethodSignature(member) || ts.isPropertySignature(member)) && member.name) {
 					try {
 						const name = member.name.getText(sourceFile);
@@ -302,11 +333,11 @@ function extractMethodsFromClass(filePath) {
 						if (ts.isMethodSignature(member) || ts.isMethodDeclaration(member)) {
 							const params = extractParamsFromList(member.parameters, sourceFile, getType);
 							const jsDoc = extractJSDoc(member);
-							methods.push(buildMethodObject(name, params, member.type ? getType(member.type) : "void", jsDoc));
+							methods.push(buildMethodObject(name, params, member.type ? getType(member.type) : "void", jsDoc, memberKind));
 						} else if (ts.isPropertySignature(member) && member.type && ts.isFunctionTypeNode(member.type)) {
 							const params = extractParamsFromList(member.type.parameters, sourceFile, getType);
 							const jsDoc = extractJSDoc(member);
-							methods.push(buildMethodObject(name, params, member.type.type ? getType(member.type.type) : "void", jsDoc));
+							methods.push(buildMethodObject(name, params, member.type.type ? getType(member.type.type) : "void", jsDoc, memberKind));
 						}
 					} catch (e) {
 						console.error("Error parsing method:", e.message);

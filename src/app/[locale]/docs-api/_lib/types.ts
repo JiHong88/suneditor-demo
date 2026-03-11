@@ -7,6 +7,8 @@ export type Method = {
   paramDescriptions?: Record<string, string>;
   returnsDescription?: string;
   linkedAs?: string;
+  deprecated?: boolean;
+  memberKind?: "static" | "getter" | "setter";
 };
 
 export type Getter = {

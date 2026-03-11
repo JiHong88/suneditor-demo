@@ -147,13 +147,31 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
   return (
     <div
       id={methodId}
-      className="group/row border rounded-lg p-5 hover:border-primary/30 hover:shadow-sm transition-all scroll-mt-24"
+      className={`group/row border rounded-lg p-5 hover:border-primary/30 hover:shadow-sm transition-all scroll-mt-24${method.deprecated ? " opacity-60" : ""}`}
     >
       {/* Method name + actions */}
       <div className="flex items-center justify-between mb-3">
-        <code className="text-base font-bold text-green-600 dark:text-green-400 font-mono">
-          {method.name}
-        </code>
+        <div className="flex items-center gap-2">
+          <code className={`text-base font-bold font-mono ${method.deprecated ? "line-through text-muted-foreground" : "text-green-600 dark:text-green-400"}`}>
+            {method.name}
+          </code>
+          {method.memberKind && (
+            <Badge variant="outline" className={`text-[9px] px-1.5 py-0 ${
+              method.memberKind === "static"
+                ? "text-sky-600 dark:text-sky-400 border-sky-300 dark:border-sky-800"
+                : method.memberKind === "getter"
+                ? "text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-800"
+                : "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-800"
+            }`}>
+              {method.memberKind}
+            </Badge>
+          )}
+          {method.deprecated && (
+            <Badge variant="outline" className="text-[9px] px-1.5 py-0 text-red-600 dark:text-red-400 border-red-300 dark:border-red-800">
+              Deprecated
+            </Badge>
+          )}
+        </div>
         <div className="flex items-center gap-1 opacity-0 group-hover/row:opacity-100 transition-opacity">
           <button
             onClick={handlePermalink}

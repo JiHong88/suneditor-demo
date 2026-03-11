@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import suneditor, { plugins, interfaces } from "suneditor";
 import type { SunEditor } from "suneditor/types";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 import { FullButtonList } from "./buttonList";
 

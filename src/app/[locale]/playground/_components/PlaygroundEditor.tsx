@@ -17,7 +17,7 @@ interface Props {
 async function loadLang(code: string): Promise<Record<string, unknown> | undefined> {
 	if (!code) return undefined;
 	try {
-		const mod = await import(`suneditor/src/langs/${code}`);
+		const mod = await import(`suneditor/langs/${code}`);
 		return mod.default ?? mod;
 	} catch {
 		return undefined;

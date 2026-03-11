@@ -1,6 +1,6 @@
 {
 	"version": "3.0.0-rc.4",
-	"generatedAt": "2026-03-07T16:35:47.604Z",
+	"generatedAt": "2026-03-09T14:56:49.125Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -223,6 +223,30 @@
 					"description": "أساليب مزود السياق",
 					"methods": [
 						{
+							"name": "frameRoots",
+							"params": "",
+							"returns": "Map<string, import('../schema/frameContext').FrameContexType>",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "context",
+							"params": "",
+							"returns": "ContextMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "frameContext",
+							"params": "",
+							"returns": "FrameContextMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "init",
 							"params": "",
 							"returns": "void",
@@ -346,6 +370,22 @@
 					"title": "editor.optionProvider",
 					"description": "أساليب مزود الخيار",
 					"methods": [
+						{
+							"name": "options",
+							"params": "",
+							"returns": "BaseOptionsMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "frameOptions",
+							"params": "",
+							"returns": "FrameOptionsMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
 						{
 							"name": "reset",
 							"params": "newOptions: SunEditor.InitOptions",
@@ -1405,6 +1445,22 @@
 					"description": "أساليب مرسل الأوامر",
 					"methods": [
 						{
+							"name": "targets",
+							"params": "",
+							"returns": "Map<string, HTMLButtonElement[]>",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "activeCommands",
+							"params": "",
+							"returns": "Array<string>",
+							"description": "إرجاع مجموعة الأوامر النشطة.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "run",
 							"params": "command: string, type: string, button?: Node | null",
 							"returns": "void",
@@ -1728,6 +1784,22 @@
 					"description": "أساليب مدير البرنامج المساعد",
 					"methods": [
 						{
+							"name": "plugins",
+							"params": "",
+							"returns": "{\n\t\t[x: string]: any;\n\t}",
+							"description": "إرجاع كائن الإضافات.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "fileInfo",
+							"params": "",
+							"returns": "{\n\t\t[x: string]: any;\n\t}",
+							"description": "إرجاع كائن إدارة مكون الملف.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "findComponentInfo",
 							"params": "element: Node",
 							"returns": "SunEditor.ComponentInfo | null",
@@ -1772,7 +1844,7 @@
 							"name": "checkFileInfo",
 							"params": "loaded: boolean",
 							"returns": "void",
-							"description": "التحقق من المكونات مثل الصورة والفيديو وتعديلها حسب التنسيق.",
+							"description": "التحقق من المكونات مثل الصورة والفيديو وتعديلها وفقًا للتنسيق.",
 							"example": "",
 							"paramDescriptions": {
 								"loaded": "إذا كان `true`، فسيتم تحميل المكون."
@@ -2071,6 +2143,14 @@
 							"returns": "void",
 							"description": "",
 							"example": ""
+						},
+						{
+							"name": "isPreventToolbarHide",
+							"params": "",
+							"returns": "boolean",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
 						},
 						{
 							"name": "reset",
@@ -3483,7 +3563,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "onFilePasteAndDrop",
@@ -3746,7 +3827,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "componentSelect",
@@ -3827,7 +3909,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4059,7 +4142,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4187,7 +4271,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "#checkContentType",
@@ -4198,7 +4283,8 @@
 							"paramDescriptions": {
 								"url": "عنوان URL المطلوب التحقق منه."
 							},
-							"returnsDescription": "`true` إذا كان عنوان URL يتطابق مع نمط معروف؛ خلاف ذلك، `false`."
+							"returnsDescription": "`true` إذا كان عنوان URL يتطابق مع نمط معروف؛ خلاف ذلك، `false`.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4286,7 +4372,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4469,7 +4556,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4542,7 +4630,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "#checkContentType",
@@ -4553,7 +4642,8 @@
 							"paramDescriptions": {
 								"url": "عنوان URL المطلوب التحقق منه."
 							},
-							"returnsDescription": "`true` إذا كان عنوان URL يتطابق مع نمط معروف؛ خلاف ذلك، `false`."
+							"returnsDescription": "`true` إذا كان عنوان URL يتطابق مع نمط معروف؛ خلاف ذلك، `false`.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4739,7 +4829,8 @@
 							"paramDescriptions": {
 								"node": "العقدة للتحقق."
 							},
-							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا."
+							"returnsDescription": "إرجاع عقدة إذا كانت العقدة مكونًا صالحًا.",
+							"memberKind": "static"
 						},
 						{
 							"name": "componentSelect",
@@ -4953,7 +5044,8 @@
 								"element": "العنصر المستهدف",
 								"className?": "اسم فئة الحاوية (ثابت: `se-component`)"
 							},
-							"returnsDescription": "{الهدف، الحاوية، الغلاف، الغلاف المضمن، التسمية التوضيحية}"
+							"returnsDescription": "{الهدف، الحاوية، الغلاف، الغلاف المضمن، التسمية التوضيحية}",
+							"memberKind": "static"
 						},
 						{
 							"name": "CreateInlineContainer",
@@ -4965,7 +5057,8 @@
 								"element": "العنصر المستهدف",
 								"className?": "اسم فئة الحاوية (ثابت: `se-component` `se-inline-component`)"
 							},
-							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}"
+							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}",
+							"memberKind": "static"
 						},
 						{
 							"name": "CreateCaption",
@@ -4976,7 +5069,8 @@
 							"paramDescriptions": {
 								"cover": "عنصر الغلاف (`FIGURE`). `CreateContainer().cover`"
 							},
-							"returnsDescription": "عنصر التسمية التوضيحية"
+							"returnsDescription": "عنصر التسمية التوضيحية",
+							"memberKind": "static"
 						},
 						{
 							"name": "GetContainer",
@@ -4987,7 +5081,8 @@
 							"paramDescriptions": {
 								"element": "العنصر المستهدف"
 							},
-							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}"
+							"returnsDescription": "{الهدف، الحاوية، الغلاف، inlineCover، التسمية التوضيحية}",
+							"memberKind": "static"
 						},
 						{
 							"name": "GetRatio",
@@ -4999,7 +5094,8 @@
 								"w": "حجم العرض",
 								"h": "حجم الارتفاع",
 								"defaultSizeUnit?=\"px\"": "وحدة الحجم الافتراضية (الافتراضي: `\"px\"`)"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "CalcRatio",
@@ -5012,7 +5108,8 @@
 								"h": "حجم الارتفاع",
 								"defaultSizeUnit": "وحدة الحجم الافتراضية (الافتراضي: `\"px\"`)",
 								"ratio?": "حجم النسبة (الشكل.GetRatio)"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "is",
@@ -5022,7 +5119,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "العنصر المستهدف"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "close",
@@ -5251,7 +5349,8 @@
 								"param0": "الرموز وكائن اللغة",
 								"param1": "خيارات \n- التنسيقات المقبولة: `\"image/*, video/*, audio/*\"`، إلخ. \n- السماح المتعدد: `true` أو `false`"
 							},
-							"returnsDescription": "سلسلة HTML"
+							"returnsDescription": "سلسلة HTML",
+							"memberKind": "static"
 						},
 						{
 							"name": "OnChangeFile",
@@ -5262,7 +5361,8 @@
 							"paramDescriptions": {
 								"wrapper": "غلاف إدخال الملف المشروط (`.se-flex-input-wrapper`)",
 								"files": "كائن قائمة الملفات"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "open",

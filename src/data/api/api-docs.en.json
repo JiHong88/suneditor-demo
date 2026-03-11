@@ -1,6 +1,6 @@
 {
   "version": "3.0.0-rc.4",
-  "generatedAt": "2026-03-07T16:35:47.604Z",
+  "generatedAt": "2026-03-09T14:56:49.125Z",
   "structure": {
     "editor": {
       "title": "Editor Instance",
@@ -223,6 +223,30 @@
           "description": "contextProvider methods",
           "methods": [
             {
+              "name": "frameRoots",
+              "params": "",
+              "returns": "Map<string, import('../schema/frameContext').FrameContexType>",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
+              "name": "context",
+              "params": "",
+              "returns": "ContextMap",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
+              "name": "frameContext",
+              "params": "",
+              "returns": "FrameContextMap",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
               "name": "init",
               "params": "",
               "returns": "void",
@@ -346,6 +370,22 @@
           "title": "editor.optionProvider",
           "description": "optionProvider methods",
           "methods": [
+            {
+              "name": "options",
+              "params": "",
+              "returns": "BaseOptionsMap",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
+              "name": "frameOptions",
+              "params": "",
+              "returns": "FrameOptionsMap",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
             {
               "name": "reset",
               "params": "newOptions: SunEditor.InitOptions",
@@ -1405,6 +1445,22 @@
           "description": "commandDispatcher methods",
           "methods": [
             {
+              "name": "targets",
+              "params": "",
+              "returns": "Map<string, HTMLButtonElement[]>",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
+              "name": "activeCommands",
+              "params": "",
+              "returns": "Array<string>",
+              "description": "Returns the active commands array.",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
               "name": "run",
               "params": "command: string, type: string, button?: Node | null",
               "returns": "void",
@@ -1727,6 +1783,22 @@
           "title": "editor.pluginManager",
           "description": "pluginManager methods",
           "methods": [
+            {
+              "name": "plugins",
+              "params": "",
+              "returns": "{\n\t\t[x: string]: any;\n\t}",
+              "description": "Returns the plugins object.",
+              "example": "",
+              "memberKind": "getter"
+            },
+            {
+              "name": "fileInfo",
+              "params": "",
+              "returns": "{\n\t\t[x: string]: any;\n\t}",
+              "description": "Returns the file component management object.",
+              "example": "",
+              "memberKind": "getter"
+            },
             {
               "name": "findComponentInfo",
               "params": "element: Node",
@@ -2071,6 +2143,14 @@
               "returns": "void",
               "description": "",
               "example": ""
+            },
+            {
+              "name": "isPreventToolbarHide",
+              "params": "",
+              "returns": "boolean",
+              "description": "",
+              "example": "",
+              "memberKind": "getter"
             },
             {
               "name": "reset",
@@ -3483,7 +3563,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "onFilePasteAndDrop",
@@ -3746,7 +3827,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "componentSelect",
@@ -3827,7 +3909,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "setState",
@@ -4059,7 +4142,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "retainFormat",
@@ -4187,7 +4271,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "#checkContentType",
@@ -4198,7 +4283,8 @@
               "paramDescriptions": {
                 "url": "The URL to check."
               },
-              "returnsDescription": "`true` if the URL matches a known pattern; otherwise, `false`."
+              "returnsDescription": "`true` if the URL matches a known pattern; otherwise, `false`.",
+              "memberKind": "static"
             },
             {
               "name": "retainFormat",
@@ -4286,7 +4372,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "setState",
@@ -4469,7 +4556,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "retainFormat",
@@ -4542,7 +4630,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "#checkContentType",
@@ -4553,7 +4642,8 @@
               "paramDescriptions": {
                 "url": "The URL to check."
               },
-              "returnsDescription": "`true` if the URL matches a known pattern; otherwise, `false`."
+              "returnsDescription": "`true` if the URL matches a known pattern; otherwise, `false`.",
+              "memberKind": "static"
             },
             {
               "name": "setState",
@@ -4739,7 +4829,8 @@
               "paramDescriptions": {
                 "node": "The node to check."
               },
-              "returnsDescription": "Returns a node if the node is a valid component."
+              "returnsDescription": "Returns a node if the node is a valid component.",
+              "memberKind": "static"
             },
             {
               "name": "componentSelect",
@@ -4953,7 +5044,8 @@
                 "element": "Target element",
                 "className?": "Class name of container (fixed: `se-component`)"
               },
-              "returnsDescription": "{target, container, cover, inlineCover, caption}"
+              "returnsDescription": "{target, container, cover, inlineCover, caption}",
+              "memberKind": "static"
             },
             {
               "name": "CreateInlineContainer",
@@ -4965,7 +5057,8 @@
                 "element": "Target element",
                 "className?": "Class name of container (fixed: `se-component` `se-inline-component`)"
               },
-              "returnsDescription": "{target, container, cover, inlineCover, caption}"
+              "returnsDescription": "{target, container, cover, inlineCover, caption}",
+              "memberKind": "static"
             },
             {
               "name": "CreateCaption",
@@ -4976,7 +5069,8 @@
               "paramDescriptions": {
                 "cover": "Cover element(`FIGURE`). `CreateContainer().cover`"
               },
-              "returnsDescription": "caption element"
+              "returnsDescription": "caption element",
+              "memberKind": "static"
             },
             {
               "name": "GetContainer",
@@ -4987,7 +5081,8 @@
               "paramDescriptions": {
                 "element": "Target element"
               },
-              "returnsDescription": "{target, container, cover, inlineCover, caption}"
+              "returnsDescription": "{target, container, cover, inlineCover, caption}",
+              "memberKind": "static"
             },
             {
               "name": "GetRatio",
@@ -4999,7 +5094,8 @@
                 "w": "Width size",
                 "h": "Height size",
                 "defaultSizeUnit?=\"px\"": "Default size unit (default: `\"px\"`)"
-              }
+              },
+              "memberKind": "static"
             },
             {
               "name": "CalcRatio",
@@ -5012,7 +5108,8 @@
                 "h": "Height size",
                 "defaultSizeUnit": "Default size unit (default: `\"px\"`)",
                 "ratio?": "Ratio size (Figure.GetRatio)"
-              }
+              },
+              "memberKind": "static"
             },
             {
               "name": "is",
@@ -5022,7 +5119,8 @@
               "example": "",
               "paramDescriptions": {
                 "element": "Target element"
-              }
+              },
+              "memberKind": "static"
             },
             {
               "name": "close",
@@ -5251,7 +5349,8 @@
                 "param0": "icons and language object",
                 "param1": "options\n- acceptedFormats: `\"image/*, video/*, audio/*\"`, etc.\n- allowMultiple: `true` or `false`"
               },
-              "returnsDescription": "HTML string"
+              "returnsDescription": "HTML string",
+              "memberKind": "static"
             },
             {
               "name": "OnChangeFile",
@@ -5262,7 +5361,8 @@
               "paramDescriptions": {
                 "wrapper": "Modal file input wrapper(`.se-flex-input-wrapper`)",
                 "files": "FileList object"
-              }
+              },
+              "memberKind": "static"
             },
             {
               "name": "open",

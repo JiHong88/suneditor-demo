@@ -1,11 +1,4 @@
-import {
-	SUNEDITOR_VERSION,
-	CDN_CSS,
-	CDN_JS,
-	DEFAULT_VALUE,
-	BASIC_BUTTON_LIST,
-	fmtButtonList,
-} from "./editorPresets";
+import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, DEFAULT_VALUE, BASIC_BUTTON_LIST, fmtButtonList } from "./editorPresets";
 
 export type FrameworkEntry = {
 	key: string;
@@ -50,7 +43,7 @@ const frameworks: FrameworkEntry[] = [
 		kind: "language",
 		snippet: `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 
 const editor = suneditor.create("my-editor", {
@@ -67,7 +60,7 @@ const editor = suneditor.create("my-editor", {
 		kind: "framework",
 		snippet: `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 
 export default function Editor() {
@@ -95,7 +88,7 @@ export default function Editor() {
 		snippet: `<script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 
 const editorEl = ref(null);
@@ -127,7 +120,7 @@ onBeforeUnmount(() => {
 		snippet: `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 
 @Component({
@@ -160,7 +153,7 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
 		snippet: `<script>
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
-  import "suneditor/css";
+  import "suneditor/css/editor";
   import "suneditor/css/contents";
 
   let editorEl;
@@ -186,7 +179,7 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
 		accent: "#1f7ae0",
 		kind: "framework",
 		snippet: `import suneditor, { plugins } from "suneditor";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 
 class SunEditorElement extends HTMLElement {

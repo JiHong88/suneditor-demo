@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SunEditor } from "suneditor/types";
 import suneditor, { plugins } from "suneditor";
-import "suneditor/css";
+import "suneditor/css/editor";
 import "suneditor/css/contents";
 import { FullButtonList } from "@/components/editor/buttonList";
 import type { PlaygroundState } from "../_lib/playgroundState";
@@ -43,10 +43,12 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		if (!containerRef.current || extLibs === null) return;
 
 		// Create textarea elements for each root
+		// Clear previous DOM to handle React Strict Mode double-mount
 		const targets: Record<string, { target: HTMLTextAreaElement; options: SunEditor.InitFrameOptions }> = {};
 		for (const root of roots) {
 			const wrapper = containerRef.current.querySelector(`[data-root="${root.key}"]`);
 			if (!wrapper) continue;
+			wrapper.innerHTML = "";
 			const textarea = document.createElement("textarea");
 			wrapper.appendChild(textarea);
 			targets[root.key] = {
@@ -64,6 +66,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 			theme: resolvedTheme,
 		};
 		if (isClassic && toolbarRef.current) {
+			toolbarRef.current.innerHTML = "";
 			initOptions.toolbar_container = toolbarRef.current;
 		}
 		// External libraries
@@ -99,7 +102,11 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 					/* ignore */
 				}
 			}
-			instance.destroy();
+			try {
+				instance.destroy();
+			} catch {
+				/* ignore — may throw if DOM was already cleaned up (e.g. Strict Mode) */
+			}
 			editorRef.current = null;
 		};
 	}, [extLibs]);

@@ -1,6 +1,6 @@
 {
 	"version": "3.0.0-rc.4",
-	"generatedAt": "2026-03-07T16:35:47.604Z",
+	"generatedAt": "2026-03-09T14:56:49.125Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -223,6 +223,30 @@
 					"description": "contextProvider 메소드",
 					"methods": [
 						{
+							"name": "frameRoots",
+							"params": "",
+							"returns": "Map<string, import('../schema/frameContext').FrameContexType>",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "context",
+							"params": "",
+							"returns": "ContextMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "frameContext",
+							"params": "",
+							"returns": "FrameContextMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "init",
 							"params": "",
 							"returns": "void",
@@ -346,6 +370,22 @@
 					"title": "editor.optionProvider",
 					"description": "optionProvider 메소드",
 					"methods": [
+						{
+							"name": "options",
+							"params": "",
+							"returns": "BaseOptionsMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "frameOptions",
+							"params": "",
+							"returns": "FrameOptionsMap",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
 						{
 							"name": "reset",
 							"params": "newOptions: SunEditor.InitOptions",
@@ -1405,6 +1445,22 @@
 					"description": "commandDispatcher 메소드",
 					"methods": [
 						{
+							"name": "targets",
+							"params": "",
+							"returns": "Map<string, HTMLButtonElement[]>",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "activeCommands",
+							"params": "",
+							"returns": "Array<string>",
+							"description": "활성 명령 배열을 반환합니다.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "run",
 							"params": "command: string, type: string, button?: Node | null",
 							"returns": "void",
@@ -1728,10 +1784,26 @@
 					"description": "플러그인매니저 메소드",
 					"methods": [
 						{
+							"name": "plugins",
+							"params": "",
+							"returns": "{\n\t\t[x: string]: any;\n\t}",
+							"description": "플러그인 객체를 반환합니다.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "fileInfo",
+							"params": "",
+							"returns": "{\n\t\t[x: string]: any;\n\t}",
+							"description": "파일 구성 요소 관리 개체를 반환합니다.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "findComponentInfo",
 							"params": "element: Node",
 							"returns": "SunEditor.ComponentInfo | null",
-							"description": "해당 요소에 대한 구성요소 정보를 찾습니다.",
+							"description": "해당 요소에 대한 구성 요소 정보를 찾습니다.",
 							"example": "",
 							"paramDescriptions": {
 								"element": "확인할 DOM 요소입니다."
@@ -2073,6 +2145,14 @@
 							"example": ""
 						},
 						{
+							"name": "isPreventToolbarHide",
+							"params": "",
+							"returns": "boolean",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "reset",
 							"params": "rt: SunEditor.FrameContext",
 							"returns": "void",
@@ -2086,7 +2166,7 @@
 							"name": "isButtonDisabled",
 							"params": "button: Node",
 							"returns": "boolean",
-							"description": "현재 상태(ReadOnly 등)에서 버튼이 실행 가능한지 확인합니다.",
+							"description": "Check if the button can be executed in the current state (ReadOnly, etc.)",
 							"example": ""
 						},
 						{
@@ -3483,7 +3563,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "onFilePasteAndDrop",
@@ -3746,7 +3827,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "componentSelect",
@@ -3827,7 +3909,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4059,7 +4142,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4187,7 +4271,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "#checkContentType",
@@ -4198,7 +4283,8 @@
 							"paramDescriptions": {
 								"url": "확인할 URL입니다."
 							},
-							"returnsDescription": "`true` URL이 알려진 패턴과 일치하는 경우; 그렇지 않으면 `false`입니다."
+							"returnsDescription": "`true` URL이 알려진 패턴과 일치하는 경우; 그렇지 않으면 `false`입니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4286,7 +4372,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4469,7 +4556,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "retainFormat",
@@ -4542,7 +4630,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "#checkContentType",
@@ -4553,7 +4642,8 @@
 							"paramDescriptions": {
 								"url": "확인할 URL입니다."
 							},
-							"returnsDescription": "`true` URL이 알려진 패턴과 일치하는 경우; 그렇지 않으면 `false`입니다."
+							"returnsDescription": "`true` URL이 알려진 패턴과 일치하는 경우; 그렇지 않으면 `false`입니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "setState",
@@ -4739,7 +4829,8 @@
 							"paramDescriptions": {
 								"node": "확인할 노드입니다."
 							},
-							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다."
+							"returnsDescription": "노드가 유효한 구성요소인 경우 노드를 반환합니다.",
+							"memberKind": "static"
 						},
 						{
 							"name": "componentSelect",
@@ -4953,7 +5044,8 @@
 								"element": "대상 요소",
 								"className?": "컨테이너의 클래스 이름(고정: `se-component`)"
 							},
-							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}"
+							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}",
+							"memberKind": "static"
 						},
 						{
 							"name": "CreateInlineContainer",
@@ -4965,7 +5057,8 @@
 								"element": "대상 요소",
 								"className?": "컨테이너의 클래스 이름(고정: `se-component` `se-inline-component`)"
 							},
-							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}"
+							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}",
+							"memberKind": "static"
 						},
 						{
 							"name": "CreateCaption",
@@ -4976,7 +5069,8 @@
 							"paramDescriptions": {
 								"cover": "표지 요소(`FIGURE`). `CreateContainer().cover`"
 							},
-							"returnsDescription": "캡션 요소"
+							"returnsDescription": "캡션 요소",
+							"memberKind": "static"
 						},
 						{
 							"name": "GetContainer",
@@ -4987,7 +5081,8 @@
 							"paramDescriptions": {
 								"element": "대상 요소"
 							},
-							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}"
+							"returnsDescription": "{대상, 컨테이너, 표지, inlineCover, 캡션}",
+							"memberKind": "static"
 						},
 						{
 							"name": "GetRatio",
@@ -4999,7 +5094,8 @@
 								"w": "폭 크기",
 								"h": "신장 사이즈",
 								"defaultSizeUnit?=\"px\"": "기본 크기 단위(기본값: `\"px\"`)"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "CalcRatio",
@@ -5012,7 +5108,8 @@
 								"h": "신장 사이즈",
 								"defaultSizeUnit": "기본 크기 단위(기본값: `\"px\"`)",
 								"ratio?": "비율 크기(Figure.GetRatio)"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "is",
@@ -5022,7 +5119,8 @@
 							"example": "",
 							"paramDescriptions": {
 								"element": "대상 요소"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "close",
@@ -5251,7 +5349,8 @@
 								"param0": "아이콘과 언어 객체",
 								"param1": "옵션 \n- 허용형식: `\"image/*, video/*, audio/*\"` 등 \n- 다중 허용: `true` 또는 `false`"
 							},
-							"returnsDescription": "HTML 문자열"
+							"returnsDescription": "HTML 문자열",
+							"memberKind": "static"
 						},
 						{
 							"name": "OnChangeFile",
@@ -5262,7 +5361,8 @@
 							"paramDescriptions": {
 								"wrapper": "모달 파일 입력 래퍼(`.se-flex-input-wrapper`)",
 								"files": "FileList 객체"
-							}
+							},
+							"memberKind": "static"
 						},
 						{
 							"name": "open",

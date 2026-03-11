@@ -622,6 +622,7 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 								{ value: "basic", label: "basic" },
 								{ value: "standard", label: "standard" },
 								{ value: "full", label: "full" },
+								{ value: "custom", label: "custom" },
 							]}
 							onChange={(v) => set("buttonListPreset")(v as PlaygroundState["buttonListPreset"])}
 							resettable={!isFixedOption("buttonListPreset")}

@@ -2,7 +2,7 @@
 
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
+import { RotateCcw, Share2, Check, Settings2, Puzzle, SlidersHorizontal } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -18,6 +18,7 @@ import {
 	getChangedKeys,
 	hasFixedChange,
 	isFixedOption,
+	getButtonList,
 } from "./_lib/playgroundState";
 import { editorLangCodes } from "@/i18n/languages";
 import PlaygroundControls, { PlaygroundPerRootPanel } from "./_components/PlaygroundControls";
@@ -27,6 +28,7 @@ import PlaygroundEditor from "./_components/PlaygroundEditor";
 import PlaygroundCodePanel from "./_components/PlaygroundCodePanel";
 
 const PlaygroundMultiRootEditor = dynamic(() => import("./_components/PlaygroundMultiRootEditor"), { ssr: false });
+const ButtonListBuilder = dynamic(() => import("./_components/button-list-builder/ButtonListBuilder"), { ssr: false });
 
 /** Editor option keys that are fixed after creation — must be stripped before resetOptions */
 const FIXED_RESET_KEYS = new Set([
@@ -95,6 +97,22 @@ export default function PlaygroundPage() {
 	const prevStateRef = useRef<PlaygroundState>(DEFAULTS);
 	const [urlCopied, setUrlCopied] = useState(false);
 	const [ready, setReady] = useState(false);
+	const [builderOpen, setBuilderOpen] = useState(false);
+	const [editorRenderedWidth, setEditorRenderedWidth] = useState(0);
+
+	const handleBuilderOpen = useCallback((open: boolean) => {
+		if (open) {
+			const el = document.getElementById("editor");
+			if (el) setEditorRenderedWidth(el.clientWidth);
+		}
+		setBuilderOpen(open);
+	}, []);
+
+	const handleBuilderApply = useCallback((buttonList: unknown[]) => {
+		const json = JSON.stringify(buttonList);
+		dispatch({ type: "SET", key: "customButtonList", value: json });
+		dispatch({ type: "SET", key: "buttonListPreset", value: "custom" });
+	}, []);
 
 	// Apply URL params after hydration, then mark ready
 	useEffect(() => {
@@ -216,7 +234,7 @@ export default function PlaygroundPage() {
 					</motion.aside>
 
 					{/* Right Content */}
-					<div className='flex-1 min-w-0 space-y-6 pb-6'>
+					<div className='flex-1 min-w-0 space-y-6 pb-24'>
 						{/* Multiroot Toggle */}
 						<div className='flex items-center justify-between rounded-lg border bg-card/90 px-4 py-3'>
 							<div>
@@ -292,6 +310,28 @@ export default function PlaygroundPage() {
 								</Sheet>
 							</div>
 						</motion.div>
+
+						{/* Customize ButtonList */}
+						{state.buttonListPreset === "custom" && (
+							<Button
+								variant='outline'
+								className='w-full border-2 border-violet-300 bg-violet-50 text-violet-700 hover:bg-violet-100 dark:border-violet-700 dark:bg-violet-950/60 dark:text-violet-300 dark:hover:bg-violet-900/60'
+								onClick={() => handleBuilderOpen(true)}
+							>
+								<SlidersHorizontal className='me-2 h-4 w-4' />
+								Customize ButtonList
+							</Button>
+						)}
+
+						{/* ButtonList Builder */}
+						<ButtonListBuilder
+							open={builderOpen}
+							onOpenChange={handleBuilderOpen}
+							initialButtonList={getButtonList(state.buttonListPreset, state.type, state.customButtonList)}
+							onApply={handleBuilderApply}
+							editorRenderedWidth={editorRenderedWidth}
+							editorTheme={state.theme}
+						/>
 
 						{/* Editor — wait until URL params are applied to avoid double creation */}
 						<motion.div

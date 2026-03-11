@@ -2,7 +2,7 @@ import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/dat
 
 /* ── Types ─────────────────────────────────────────────── */
 
-export type ButtonListPreset = "basic" | "standard" | "full";
+export type ButtonListPreset = "basic" | "standard" | "full" | "custom";
 export type CodeFramework = "javascript-cdn" | "javascript-npm" | "react" | "vue" | "angular" | "svelte" | "webcomponents";
 
 export interface PlaygroundState {
@@ -10,6 +10,7 @@ export interface PlaygroundState {
 	multiroot: boolean;
 	mode: "classic" | "inline" | "balloon" | "balloon-always";
 	buttonListPreset: ButtonListPreset;
+	customButtonList: string; // JSON-serialized custom buttonList array
 	type: string;
 	theme: string;
 	textDirection: "ltr" | "rtl";
@@ -367,6 +368,7 @@ export const DEFAULTS: PlaygroundState = {
 	multiroot: false,
 	mode: "classic",
 	buttonListPreset: "standard",
+	customButtonList: "",
 	type: "",
 	theme: "",
 	textDirection: "ltr",
@@ -734,6 +736,7 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"multiroot",
 	"mode",
 	"buttonListPreset",
+	"customButtonList",
 	"type",
 	"shortcutsDisable",
 	"subToolbar_enabled",
@@ -975,9 +978,19 @@ export type PlaygroundAction =
 
 export function playgroundReducer(state: PlaygroundState, action: PlaygroundAction): PlaygroundState {
 	switch (action.type) {
-		case "SET":
+		case "SET": {
 			if (state[action.key] === action.value) return state;
+			// When switching to "custom" preset, seed customButtonList from current resolved list
+			if (action.key === "buttonListPreset" && action.value === "custom" && !state.customButtonList) {
+				const currentList = getButtonList(state.buttonListPreset, state.type, state.customButtonList);
+				return {
+					...state,
+					buttonListPreset: "custom",
+					customButtonList: JSON.stringify(currentList),
+				};
+			}
 			return { ...state, [action.key]: action.value };
+		}
 		case "RESET":
 			return { ...DEFAULTS };
 		case "LOAD":
@@ -1028,7 +1041,7 @@ function filterPageButtons(list: unknown[]): unknown[] {
 	return result;
 }
 
-export function getButtonList(preset: ButtonListPreset, type?: string): unknown[] {
+export function getButtonList(preset: ButtonListPreset, type?: string, customButtonList?: string): unknown[] {
 	let list: unknown[];
 	switch (preset) {
 		case "basic":
@@ -1036,6 +1049,13 @@ export function getButtonList(preset: ButtonListPreset, type?: string): unknown[
 			break;
 		case "full":
 			list = FULL_BUTTON_LIST;
+			break;
+		case "custom":
+			try {
+				list = customButtonList ? JSON.parse(customButtonList) : STANDARD_BUTTON_LIST;
+			} catch {
+				list = STANDARD_BUTTON_LIST;
+			}
 			break;
 		default:
 			list = STANDARD_BUTTON_LIST;
@@ -1052,8 +1072,8 @@ export function getButtonList(preset: ButtonListPreset, type?: string): unknown[
 }
 
 /** Check if a specific button name exists in the resolved button list (deep search) */
-export function hasButton(preset: ButtonListPreset, type: string | undefined, name: string): boolean {
-	const list = getButtonList(preset, type);
+export function hasButton(preset: ButtonListPreset, type: string | undefined, name: string, customButtonList?: string): boolean {
+	const list = getButtonList(preset, type, customButtonList);
 	const search = (arr: unknown[]): boolean =>
 		arr.some((item) => (Array.isArray(item) ? search(item) : item === name));
 	return search(list);
@@ -1064,7 +1084,7 @@ export function hasButton(preset: ButtonListPreset, type: string | undefined, na
 export function stateToEditorOptions(state: PlaygroundState) {
 	const opts: Record<string, unknown> = {
 		mode: state.mode,
-		buttonList: getButtonList(state.buttonListPreset, state.type),
+		buttonList: getButtonList(state.buttonListPreset, state.type, state.customButtonList),
 		textDirection: state.textDirection,
 
 		// layout (frame)
@@ -1529,6 +1549,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	mr: "multiroot",
 	m: "mode",
 	p: "buttonListPreset",
+	cbl: "customButtonList",
 	tp: "type",
 	t: "theme",
 	dir: "textDirection",
