@@ -11,9 +11,12 @@ interface BuilderCanvasProps {
 	dragPreview?: { groupId: string; index: number } | null;
 	isDragging?: boolean;
 	isDraggingGroup?: boolean;
+	onButtonHover?: (info: { name: string; groupId: string; index: number } | null) => void;
+	onMoreGroupHover?: (groupId: string | null) => void;
+	onGroupActionHover?: (info: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null) => void;
 }
 
-export default function BuilderCanvas({ rows, dispatch, breakpointId, dragPreview, isDragging, isDraggingGroup }: BuilderCanvasProps) {
+export default function BuilderCanvas({ rows, dispatch, breakpointId, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover }: BuilderCanvasProps) {
 	return (
 		<div className='space-y-4'>
 			{rows.map((row, ri) => (
@@ -27,6 +30,9 @@ export default function BuilderCanvas({ rows, dispatch, breakpointId, dragPrevie
 					dragPreview={dragPreview}
 					isDragging={isDragging}
 					isDraggingGroup={isDraggingGroup}
+					onButtonHover={onButtonHover}
+					onMoreGroupHover={onMoreGroupHover}
+					onGroupActionHover={onGroupActionHover}
 				/>
 			))}
 

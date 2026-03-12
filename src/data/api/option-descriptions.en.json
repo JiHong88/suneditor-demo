@@ -8,7 +8,7 @@
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value)",
+    "description": "Attributes for the editable frame[.sun-editor-editable].",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
@@ -36,7 +36,7 @@
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\").",
+    "description": "Style string of the top frame of the editor.",
     "default": "\"\""
   },
   "iframe": {
@@ -48,7 +48,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributes of the `iframe`. (e.g. {'allow-scripts': 'true'})",
+    "description": "Attributes of the `iframe`.",
     "default": "{}"
   },
   "statusbar": {
@@ -72,7 +72,7 @@
     "default": "null"
   },
   "charCounter_label": {
-    "description": "Text to be displayed in the `charCounter` area of the bottom bar. (e.g. \"Characters : 20/200\")",
+    "description": "Text to be displayed in the `charCounter` area of the bottom bar.",
     "default": "null"
   },
   "charCounter_type": {
@@ -92,7 +92,7 @@
     "description": "CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization."
   },
   "plugins": {
-    "description": "Plugin configuration."
+    "description": "Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name."
   },
   "buttonList": {
     "description": "List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}",
@@ -107,7 +107,7 @@
     "default": "\"classic\""
   },
   "type": {
-    "description": "Editor type: `document:header,page`.",
+    "description": "Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.",
     "default": "\"\""
   },
   "theme": {
@@ -133,11 +133,11 @@
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "Specifies HTML elements to additionally allow beyond the default allow list.\n- Delimiter: \"|\" (e.g. \"p|div\", \"*\").\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.",
+    "description": "Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "Specifies HTML elements that should not be used.\n- Delimiter: \"|\" (e.g. \"script|style\").\n- Tags specified here will eventually be removed, even if they are included in other whitelists.",
+    "description": "Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n- Tags specified here will eventually be removed, even if they are included in other whitelists.",
     "default": "\"\""
   },
   "allowedEmptyTags": {
@@ -149,11 +149,11 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Specifies additional attributes to allow for each tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"})\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
+    "description": "Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "Specifies attributes to disallow by tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"})\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.",
+    "description": "Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.",
     "default": "null"
   },
   "textStyleTags": {
@@ -165,10 +165,10 @@
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "Specifies additional styles to the list of allowed styles.\n- Delimiter: \"|\" (e.g. \"color|background-color\")."
+    "description": "Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`."
   },
   "tagStyles": {
-    "description": "Specifies allowed styles for HTML tags.",
+    "description": "Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.",
     "default": "{}"
   },
   "spanStyles": {
@@ -196,15 +196,15 @@
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "Line properties that should be reset when changing lines (e.g. \"id|name\").",
+    "description": "Line properties that should be reset when changing lines. Delimiter: `\"|\"`.",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "Additionally allowed `line` elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.",
+    "description": "Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "Additionally allowed `brLine` elements beyond the default. (e.g. \"PRE\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "description": "Additionally allowed `brLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
@@ -247,7 +247,7 @@
     "default": "false"
   },
   "subToolbar": {
-    "description": "Sub-toolbar configuration.",
+    "description": "Sub-toolbar configuration. A secondary toolbar that appears on text selection.",
     "default": "{}"
   },
   "statusbar_container": {
@@ -285,11 +285,11 @@
     "default": "0"
   },
   "previewTemplate": {
-    "description": "Custom template for preview mode.",
+    "description": "Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.",
     "default": "null"
   },
   "printTemplate": {
-    "description": "Custom template for print mode.",
+    "description": "Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.",
     "default": "null"
   },
   "componentInsertBehavior": {
@@ -301,7 +301,7 @@
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "{\"copy\": 1500} - Duration for displaying toast messages.",
+    "description": "Duration for displaying toast messages (ms).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
@@ -309,14 +309,14 @@
     "default": "false"
   },
   "externalLibs": {
-    "description": "External libraries like CodeMirror or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}"
+    "description": "External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}"
   },
   "allowedExtraTags": {
-    "description": "Specifies extra allowed or disallowed tags.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}",
+    "description": "Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "User event handlers configuration"
+    "description": "User event handlers configuration."
   },
   "buttons": {
     "description": "List of currently used toolbar buttons"
@@ -349,7 +349,7 @@
     "description": "Default thumbnail"
   },
   "fileBrowser_data": {
-    "description": "Direct data without server calls"
+    "description": "Direct data without server calls (bypasses URL fetch)."
   },
   "fileBrowser_url": {
     "description": "Server request URL"
@@ -358,7 +358,7 @@
     "description": "Server request headers"
   },
   "fileBrowser_thumbnail": {
-    "description": "Default thumbnail"
+    "description": "Default thumbnail URL or a function that returns a thumbnail URL per item."
   },
   "fileBrowser_props": {
     "description": "Additional tag names"
@@ -418,7 +418,7 @@
     "description": "Allow multiple file uploads"
   },
   "fileUpload_acceptedFormats": {
-    "description": "Accepted file formats (e.g., 'image/*, .pdf')"
+    "description": "Accepted file formats."
   },
   "fileUpload_as": {
     "description": "Specify the default form of the file component as `box` or `link`"
@@ -433,7 +433,7 @@
     "description": "Align items"
   },
   "backgroundColor_items": {
-    "description": "Color list"
+    "description": "Color list."
   },
   "backgroundColor_splitNum": {
     "description": "Number of colors per line"
@@ -442,13 +442,13 @@
     "description": "Disable HEX input"
   },
   "blockStyle_items": {
-    "description": "Format list"
+    "description": "Format list.\n- `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block."
   },
   "font_items": {
     "description": "Font list"
   },
   "fontColor_items": {
-    "description": "Color list"
+    "description": "Color list."
   },
   "fontColor_splitNum": {
     "description": "Number of colors per line"
@@ -460,7 +460,7 @@
     "description": "HR list"
   },
   "layout_items": {
-    "description": "Layout list"
+    "description": "Layout list. Each item defines a named layout template with raw HTML."
   },
   "lineHeight_items": {
     "description": "Line height list"
@@ -478,13 +478,13 @@
     "description": "Cell controller position (`cell`, `table`)"
   },
   "table_colorList": {
-    "description": "Color list, used in cell color picker"
+    "description": "HEX color list for the cell background color picker."
   },
   "template_items": {
     "description": "Template list"
   },
   "textStyle_items": {
-    "description": "Text style item list"
+    "description": "Text style item list."
   },
   "mention_triggerText": {
     "description": "The character that triggers the mention list."
@@ -499,7 +499,7 @@
     "description": "The time to wait before displaying the mention list"
   },
   "mention_data": {
-    "description": "Use data without using API"
+    "description": "Static mention data (used instead of API)."
   },
   "mention_apiUrl": {
     "description": "The URL to call the mention list"
@@ -526,13 +526,13 @@
     "description": "When `true`, disables the direct font size input box."
   },
   "fontSize_unitMap": {
-    "description": "Optional object to override or extend the default unit mapping for font sizes."
+    "description": "Override or extend the default unit mapping for font sizes."
   },
   "audio_defaultWidth": {
-    "description": "The default width of the `AUDIO` tag (e.g., `\"300px\"`)."
+    "description": "The default width of the `AUDIO` tag."
   },
   "audio_defaultHeight": {
-    "description": "The default height of the `AUDIO` tag (e.g., `\"150px\"`)."
+    "description": "The default height of the `AUDIO` tag."
   },
   "audio_createFileInput": {
     "description": "Whether to create a file input element."
@@ -628,16 +628,16 @@
     "description": "Additional attributes to set on the `IFRAME` tag."
   },
   "embed_query_youtube": {
-    "description": "YouTube query parameter."
+    "description": "YouTube query parameter appended to the embed URL."
   },
   "embed_query_vimeo": {
-    "description": "Vimeo query parameter."
+    "description": "Vimeo query parameter appended to the embed URL."
   },
   "embed_urlPatterns": {
-    "description": "Additional URL patterns for embed."
+    "description": "Additional URL patterns to recognize as embeddable content."
   },
   "embed_embedQuery": {
-    "description": "Custom query objects for additional embedding services."
+    "description": "Custom embed service definitions."
   },
   "embed_controls": {
     "description": "Figure controls."
@@ -702,6 +702,42 @@
   "image_insertBehavior": {
     "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
   },
+  "link_uploadUrl": {
+    "description": "The URL endpoint for file uploads."
+  },
+  "link_uploadHeaders": {
+    "description": "Additional headers for file upload requests."
+  },
+  "link_uploadSizeLimit": {
+    "description": "The total file upload size limit in bytes."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "The single file upload size limit in bytes."
+  },
+  "link_acceptedFormats": {
+    "description": "Accepted file formats for link uploads."
+  },
+  "link_title": {
+    "description": "Modal title display."
+  },
+  "link_textToDisplay": {
+    "description": "Create Text to display input."
+  },
+  "link_openNewWindow": {
+    "description": "Default checked value of the \"Open in new window\" checkbox."
+  },
+  "link_noAutoPrefix": {
+    "description": "If `true`, disables the automatic prefixing of the host URL to the value of the link."
+  },
+  "link_relList": {
+    "description": "Available `rel` attribute values shown as checkboxes in the link modal."
+  },
+  "link_defaultRel": {
+    "description": "Default `rel` values auto-applied by condition."
+  },
+  "link_enableFileUpload": {
+    "description": "If `true`, enables file upload."
+  },
   "math_canResize": {
     "description": "Whether the math modal can be resized."
   },
@@ -709,7 +745,7 @@
     "description": "Whether to automatically adjust the height of the modal."
   },
   "math_fontSizeList": {
-    "description": "A list of font size options for rendering math expressions."
+    "description": "A list of font size options for the math expression size selector."
   },
   "math_onPaste": {
     "description": "A callback function to handle paste events in the math input area."
@@ -757,13 +793,13 @@
     "description": "Accepted file formats for video uploads (`\"video/*\"`)."
   },
   "video_defaultRatio": {
-    "description": "The default aspect ratio for the video (e.g., 16:9 is 0.5625)."
+    "description": "The default aspect ratio for the video (height/width, e.g. 16:9 → `9/16 = 0.5625`)."
   },
   "video_showRatioOption": {
     "description": "Whether to display the ratio option in the modal."
   },
   "video_ratioOptions": {
-    "description": "Custom ratio options for video resizing."
+    "description": "Custom ratio options for video resizing (value = height/width)."
   },
   "video_videoTagAttributes": {
     "description": "Additional attributes to set on the `VIDEO` tag."
@@ -778,7 +814,7 @@
     "description": "Additional query parameters for Vimeo embedding."
   },
   "video_embedQuery": {
-    "description": "Custom query objects for additional embedding services."
+    "description": "Custom embed service definitions (see `EmbedPluginOptions.embedQuery`)."
   },
   "video_urlPatterns": {
     "description": "Additional URL patterns for video embedding."

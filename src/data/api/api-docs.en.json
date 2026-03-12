@@ -1,6 +1,6 @@
 {
-  "version": "3.0.0-rc.4",
-  "generatedAt": "2026-03-09T14:56:49.125Z",
+  "version": "3.0.0-rc.5",
+  "generatedAt": "2026-03-12T16:06:24.652Z",
   "structure": {
     "editor": {
       "title": "Editor Instance",
@@ -451,7 +451,7 @@
               "params": "html: Node | string",
               "returns": "boolean",
               "description": "Returns `false` if char count is greater than \"frameOptions.get('charCounter_max')\" when \"html\" is added to the current editor.",
-              "example": "",
+              "example": "const canInsert = editor.$.char.check('<strong>new text</strong>');",
               "paramDescriptions": {
                 "html": "Element node or String."
               }
@@ -461,7 +461,7 @@
               "params": "content?: string",
               "returns": "number",
               "description": "Get the [content]'s number of characters or binary data size. (frameOptions.get('charCounter_type')) - If [content] is `undefined`, get the current editor's number of characters or binary data size.",
-              "example": "",
+              "example": "const currentLength = editor.$.char.getLength();\nconst textLength = editor.$.char.getLength('Hello World');",
               "paramDescriptions": {
                 "content?": "Content to count. (defalut: this.#frameContext.get('wysiwyg'))"
               }
@@ -470,8 +470,8 @@
               "name": "getByteLength",
               "params": "text: string",
               "returns": "number",
-              "description": "",
-              "example": "",
+              "description": "const bytes = editor.$.char.getByteLength('Hello 世界'); // 12",
+              "example": "const bytes = editor.$.char.getByteLength('Hello 世界'); // 12",
               "paramDescriptions": {
                 "text": "String text"
               }
@@ -491,7 +491,7 @@
               "params": "inputText: string, _fromInputEvent: boolean",
               "returns": "boolean",
               "description": "Returns `false` if char count is greater than \"frameOptions.get('charCounter_max')\" when \"inputText\" is added to the current editor. - If the current number of characters is greater than \"charCounter_max\", the excess characters are removed. And call the char.display()",
-              "example": "",
+              "example": "if (!editor.$.char.test(inputData, true)) {\ne.preventDefault();\n}",
               "paramDescriptions": {
                 "inputText": "Text added.",
                 "_fromInputEvent": "Whether the test is triggered from an input event."
@@ -518,7 +518,7 @@
               "params": "node: Node, validation?: ((current: Node) => boolean) | null",
               "returns": "HTMLElement | null",
               "description": "If a parent node that contains an argument node finds a format node (`format.isLine`), it returns that node.",
-              "example": "",
+              "example": "const line = editor.$.format.getLine(editor.$.selection.getNode());\nconst lineWithFilter = editor.$.format.getLine(node, (el) => el.nodeName !== 'LI');",
               "paramDescriptions": {
                 "node": "Reference node.",
                 "validation?": "Additional validation function."
@@ -529,7 +529,7 @@
               "params": "element: Node",
               "returns": "void",
               "description": "Replace the br-line tag of the current selection.",
-              "example": "",
+              "example": "editor.$.format.setBrLine(document.createElement('pre'));",
               "paramDescriptions": {
                 "element": "BR-Line element (PRE..)"
               }
@@ -539,7 +539,7 @@
               "params": "element: Node, validation?: ((current: Node) => boolean) | null",
               "returns": "HTMLBRElement | null",
               "description": "If a parent node that contains an argument node finds a `brLine` (`format.isBrLine`), it returns that node.",
-              "example": "",
+              "example": "const brLine = editor.$.format.getBrLine(editor.$.selection.getNode());",
               "paramDescriptions": {
                 "element": "Reference node.",
                 "validation?": "Additional validation function."
@@ -561,7 +561,7 @@
               "params": "element: Node, validation?: ((current: Node) => boolean) | null",
               "returns": "HTMLElement | null",
               "description": "If a parent node that contains an argument node finds a format node (`format.isBlock`), it returns that node.",
-              "example": "",
+              "example": "const block = editor.$.format.getBlock(editor.$.selection.getNode());",
               "paramDescriptions": {
                 "element": "Reference node.",
                 "validation?": "Additional validation function."
@@ -624,7 +624,7 @@
               "params": "element: Node | string",
               "returns": "element is HTMLElement",
               "description": "It is judged whether it is a node related to the text style.",
-              "example": "",
+              "example": "editor.$.format.isTextStyleNode('STRONG'); // true\neditor.$.format.isTextStyleNode('P'); // false",
               "paramDescriptions": {
                 "element": "The node to check"
               }
@@ -634,7 +634,7 @@
               "params": "element: Node | string",
               "returns": "element is HTMLElement",
               "description": "It is judged whether it is the `line` element. - (P, DIV, H[1-6], PRE, LI | class=`__se__format__line_xxx`) - `line` element also contain `brLine` element",
-              "example": "",
+              "example": "editor.$.format.isLine(document.createElement('p')); // true\neditor.$.format.isLine('SPAN'); // false",
               "paramDescriptions": {
                 "element": "The node to check"
               }
@@ -654,7 +654,7 @@
               "params": "element: Node | string",
               "returns": "element is HTMLElement",
               "description": "It is judged whether it is the `brLine` element. - (PRE | class=`__se__format__br_line_xxx`) - `brLine` elements is included in the `line` element. - `brLine` elements's line break is `BR` tag. ※ Entering the Enter key in the space on the last line ends `brLine` and appends `line`.",
-              "example": "",
+              "example": "editor.$.format.isBrLine(document.createElement('pre')); // true",
               "paramDescriptions": {
                 "element": "The node to check"
               }
@@ -664,7 +664,7 @@
               "params": "element: Node | string",
               "returns": "element is HTMLElement",
               "description": "It is judged whether it is the `block` element. - (BLOCKQUOTE, OL, UL, FIGCAPTION, TABLE, THEAD, TBODY, TR, TH, TD | class=`__se__format__block_xxx`) - `block` is wrap the `line` and `component`",
-              "example": "",
+              "example": "editor.$.format.isBlock(document.createElement('blockquote')); // true\neditor.$.format.isBlock(document.createElement('ul')); // true",
               "paramDescriptions": {
                 "element": "The node to check"
               }
@@ -694,7 +694,7 @@
               "params": "validation?: ((current: Node) => boolean) | null",
               "returns": "Array<HTMLElement>",
               "description": "Returns a `line` array from selected range.",
-              "example": "",
+              "example": "const selectedLines = editor.$.format.getLines();",
               "paramDescriptions": {
                 "validation?": "The validation function. (Replaces the default validation `format.isLine(current)`)"
               }
@@ -788,7 +788,7 @@
               "params": "{ withFrame, includeFullPage, rootKey }?: { withFrame?: boolean; includeFullPage?: boolean; rootKey?: number | Array<number> }",
               "returns": "string | any",
               "description": "Gets the current content",
-              "example": "",
+              "example": "const html = editor.$.html.get();\nconst htmlWithFrame = editor.$.html.get({ withFrame: true });",
               "paramDescriptions": {
                 "options?": "Options",
                 "options.withFrame?=false": "Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
@@ -801,7 +801,7 @@
               "params": "html: string, {\n\t\t\trootKey,\n\t\t}?: {\n\t\t\trootKey?: number | Array<number>;\n\t\t}",
               "returns": "void",
               "description": "Sets the HTML string to the editor content",
-              "example": "",
+              "example": "editor.$.html.set('<p>New content</p>');\neditor.$.html.set(html, { rootKey: 'header' });",
               "paramDescriptions": {
                 "html": "HTML string",
                 "options?": "Options",
@@ -825,7 +825,7 @@
               "params": "{ withFrame, rootKey }?: { withFrame?: boolean; rootKey?: number | Array<number> }",
               "returns": "{\n\t\t[x: string]: any;\n\t}",
               "description": "Gets the current content to JSON data",
-              "example": "",
+              "example": "const json = editor.$.html.getJson();\nconst jsonWithFrame = editor.$.html.getJson({ withFrame: true });",
               "paramDescriptions": {
                 "options?": "Options",
                 "options.withFrame?=false": "Gets the current content with containing parent `div.sun-editor-editable` (`<div class=\"sun-editor-editable\">{content}</div>`).",
@@ -837,8 +837,8 @@
               "name": "setJson",
               "params": "jsdonData: {\n\t\t\t[x: string]: any;\n\t\t}, {\n\t\t\trootKey,\n\t\t}?: {\n\t\t\trootKey?: number | Array<number>;\n\t\t}",
               "returns": "void",
-              "description": "Sets the JSON data to the editor content",
-              "example": "",
+              "description": "Sets the JSON data to the editor content (see",
+              "example": "const html = editor.$.html.setJson({\ntype: 'element', tag: 'p', attributes: { class: 'txt' },\nchildren: [{ type: 'text', content: 'Hello' }],\n});\n// '<p class=\"txt\">Hello</p>'",
               "paramDescriptions": {
                 "jsdonData": "HTML string",
                 "options?": "Options",
@@ -997,7 +997,7 @@
               "params": "element: Node, validation?: (((current: Node) => boolean) | string) | null",
               "returns": "void",
               "description": "Remove nested tags without other child nodes.",
-              "example": "",
+              "example": "editor.$.nodeTransform.mergeNestedTags(parentElement, (current) => current.nodeName === 'SPAN');",
               "paramDescriptions": {
                 "element": "Element object",
                 "validation?": "Validation function / String(`tag1|tag2..`) / If `null`, all tags are applicable."
@@ -1033,7 +1033,7 @@
               "params": "nodeArray: SunEditor.NodeCollection, validate?: ((current: Node) => boolean) | null",
               "returns": "{\n\t\tparent: Node;\n\t\tinner: Node;\n\t}",
               "description": "Creates a nested node structure from the given array of nodes.",
-              "example": "",
+              "example": "// [div, span, em] → <div><span><em></em></span></div> (cloned)\nconst { parent, inner } = editor.$.nodeTransform.createNestedNode([div, span, em]);\n// parent = div (top), inner = em (innermost)\n// validate: skip nodes that fail the condition\nconst { parent, inner } = editor.$.nodeTransform.createNestedNode(\n[div, span, em],\n(node) => node.nodeName !== 'SPAN'\n);\n// Result: <div><em></em></div> (SPAN excluded)",
               "paramDescriptions": {
                 "nodeArray": "An array of nodes to clone. The first node in the array will be the top-level parent.",
                 "validate?": "A validate function."
@@ -1116,7 +1116,7 @@
               "params": "element: HTMLElement, target: HTMLElement, params: {\n\t\t\tisWWTarget?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft: number;\n\t\t\t\ttop: number;\n\t\t\t};\n\t\t\tposition?: 'bottom' | 'top';\n\t\t\tinst: any;\n\t\t\tsibling?: HTMLElement;\n\t\t}",
               "returns": "| {\n\t\t\t\tposition: 'top' | 'bottom';\n\t\t  }\n\t\t| undefined",
               "description": "Sets the absolute position of an element",
-              "example": "",
+              "example": "const result = editor.$.offset.setAbsPosition(controller, targetElement, {\nposition: 'bottom', inst: this, addOffset: { left: 0, top: 0 }\n});",
               "paramDescriptions": {
                 "element": "Element to position",
                 "target": "Target element",
@@ -1134,7 +1134,7 @@
               "params": "element: HTMLElement, range: Range | null, {\n\t\t\tposition,\n\t\t\taddTop,\n\t\t}?: {\n\t\t\tposition?: 'bottom' | 'top';\n\t\t\taddTop?: number;\n\t\t}",
               "returns": "boolean",
               "description": "Sets the position of an element relative to a range",
-              "example": "",
+              "example": "const success = editor.$.offset.setRangePosition(toolbar, null, { position: 'bottom', addTop: 0 });\nif (!success) toolbar.style.display = 'none';",
               "paramDescriptions": {
                 "element": "Element to position",
                 "range": "Range to position against.\n- if `null`, the current selection range is used",
@@ -1199,7 +1199,7 @@
               "params": "target: Node",
               "returns": "{\n\t\tcontainer: Node;\n\t\toffset: number;\n\t} | null",
               "description": "Returns the range (container and offset) near the given target node. - If the target node has a next sibling, it returns the next sibling with an offset of 0. - If there is no next sibling but a previous sibling exists, it returns the previous sibling with an offset of 1.",
-              "example": "",
+              "example": "const nearRange = editor.$.selection.getNearRange(targetNode);\nif (nearRange) editor.$.selection.setRange(nearRange.container, nearRange.offset, nearRange.container, nearRange.offset);",
               "paramDescriptions": {
                 "target": "Target node whose neighboring range is to be determined."
               },
@@ -1222,7 +1222,7 @@
               "params": "",
               "returns": "HTMLElement | Text",
               "description": "Get current select node",
-              "example": ""
+              "example": "const node = editor.$.selection.getNode();\nconst line = editor.$.format.getLine(node);"
             },
             {
               "name": "getRects",
@@ -2739,13 +2739,13 @@
               "name": "plugins",
               "params": "",
               "returns": "| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>",
-              "description": "- Plugin configuration."
+              "description": "- Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name. ```js import plugins, { image, link, table } from 'suneditor/src/plugins'; { plugins: plugins, plugins: [image, link, table], plugins: { image, link, table } } ```"
             },
             {
               "name": "excludedPlugins",
               "params": "",
               "returns": "Array<string>",
-              "description": "- Plugin configuration."
+              "description": "- List of plugin names to exclude. ```js { excludedPlugins: ['image', 'video'] } ```"
             },
             {
               "name": "buttonList",
@@ -2769,7 +2769,7 @@
               "name": "type",
               "params": "",
               "returns": "string",
-              "description": "- Editor type: `document:header,page`."
+              "description": "- Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`. ```js // type 'document:header,page' ```"
             },
             {
               "name": "theme",
@@ -2805,7 +2805,7 @@
               "name": "strictMode",
               "params": "",
               "returns": "| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  }",
-              "description": "- Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)"
+              "description": "- Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`) ```js // disable only attribute and style filters { strictMode: { tagFilter: true, formatFilter: true, classFilter: true, textStyleTagFilter: true, attrFilter: false, styleFilter: false } } ```"
             },
             {
               "name": "scopeSelectionTags",
@@ -2817,13 +2817,13 @@
               "name": "elementWhitelist",
               "params": "",
               "returns": "string",
-              "description": "- Specifies HTML elements to additionally allow beyond the default allow list.\n- Delimiter: \"|\" (e.g. \"p|div\", \"*\").\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}."
+              "description": "- Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}. ```js { elementWhitelist: 'mark|details|summary' } ```"
             },
             {
               "name": "elementBlacklist",
               "params": "",
               "returns": "string",
-              "description": "- Specifies HTML elements that should not be used.\n- Delimiter: \"|\" (e.g. \"script|style\").\n- Tags specified here will eventually be removed, even if they are included in other whitelists."
+              "description": "- Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n- Tags specified here will eventually be removed, even if they are included in other whitelists. ```js { elementBlacklist: 'script|style|iframe' } ```"
             },
             {
               "name": "allowedEmptyTags",
@@ -2841,13 +2841,13 @@
               "name": "attributeWhitelist",
               "params": "",
               "returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-              "description": "- Specifies additional attributes to allow for each tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"})\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}."
+              "description": "- Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}. ```js { attributeWhitelist: { a: 'href|target', img: 'src|alt', '*': 'id|data-*' } } ```"
             },
             {
               "name": "attributeBlacklist",
               "params": "",
               "returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-              "description": "- Specifies attributes to disallow by tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"})\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. /// #### 3) Text & Inline Style Control"
+              "description": "- Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) Text & Inline Style Control"
             },
             {
               "name": "textStyleTags",
@@ -2859,19 +2859,19 @@
               "name": "convertTextTags",
               "params": "",
               "returns": "{\n\t\t[x: string]: string;\n\t}",
-              "description": "- Maps text styles to specific HTML tags."
+              "description": "- Maps text styles to specific HTML tags. ```js { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } } ```"
             },
             {
               "name": "allUsedStyles",
               "params": "",
               "returns": "string",
-              "description": "- Specifies additional styles to the list of allowed styles.\n- Delimiter: \"|\" (e.g. \"color|background-color\")."
+              "description": "- Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`. ```js { allUsedStyles: 'color|background-color|text-shadow' } ```"
             },
             {
               "name": "tagStyles",
               "params": "",
               "returns": "{\n\t\t[x: string]: string;\n\t}",
-              "description": "- Specifies allowed styles for HTML tags."
+              "description": "- Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles. ```js { tagStyles: { 'table|td': 'border|color|background-color', hr: 'border-top' } } ```"
             },
             {
               "name": "spanStyles",
@@ -2913,19 +2913,19 @@
               "name": "lineAttrReset",
               "params": "",
               "returns": "string",
-              "description": "- Line properties that should be reset when changing lines (e.g. \"id|name\")."
+              "description": "- Line properties that should be reset when changing lines. Delimiter: `\"|\"`. ```js { lineAttrReset: 'id|name' } ```"
             },
             {
               "name": "formatLine",
               "params": "",
               "returns": "string",
-              "description": "- Additionally allowed `line` elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element."
+              "description": "- Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element. ```js { formatLine: 'ARTICLE|SECTION' } ```"
             },
             {
               "name": "formatBrLine",
               "params": "",
               "returns": "string",
-              "description": "- Additionally allowed `brLine` elements beyond the default. (e.g. \"PRE\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`."
+              "description": "- Additionally allowed `brLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag. ```js { formatBrLine: 'CODE' } ```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`."
             },
             {
               "name": "formatClosureBrLine",
@@ -2991,7 +2991,7 @@
               "name": "subToolbar",
               "params": "",
               "returns": "{\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t}",
-              "description": "- Sub-toolbar configuration."
+              "description": "- Sub-toolbar configuration. A secondary toolbar that appears on text selection."
             },
             {
               "name": "statusbar_container",
@@ -3015,7 +3015,7 @@
               "name": "shortcuts",
               "params": "",
               "returns": "{\n\t\t[key: string]: Array<string> | undefined;\n\t}",
-              "description": "- Custom keyboard shortcuts. /// === Advanced Features ==="
+              "description": "- Custom keyboard shortcuts. Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs. Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`. Use `$~pluginName.method` to call a specific plugin method. ```js { shortcuts: { bold: ['c+KeyB', 'B'], _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', ''] } } ``` /// === Advanced Features ==="
             },
             {
               "name": "copyFormatKeepOn",
@@ -3057,13 +3057,13 @@
               "name": "previewTemplate",
               "params": "",
               "returns": "string | null",
-              "description": "- Custom template for preview mode."
+              "description": "- Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content."
             },
             {
               "name": "printTemplate",
               "params": "",
               "returns": "string | null",
-              "description": "- Custom template for print mode."
+              "description": "- Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content. ```js { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' } ```"
             },
             {
               "name": "componentInsertBehavior",
@@ -3081,7 +3081,7 @@
               "name": "toastMessageTime",
               "params": "",
               "returns": "any",
-              "description": "- {\"copy\": 1500} - Duration for displaying toast messages."
+              "description": "- Duration for displaying toast messages (ms)."
             },
             {
               "name": "freeCodeViewMode",
@@ -3093,19 +3093,19 @@
               "name": "externalLibs",
               "params": "",
               "returns": "{\n\t\t[x: string]: any;\n\t}",
-              "description": "- External libraries like CodeMirror or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}"
+              "description": "- External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js { externalLibs: { katex: window.katex, codeMirror: { src: CodeMirror } } } ```"
             },
             {
               "name": "allowedExtraTags",
               "params": "",
               "returns": "{\n\t\t[x: string]: boolean;\n\t}",
-              "description": "- Specifies extra allowed or disallowed tags.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}/// === User Events ==="
+              "description": "- Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js { allowedExtraTags: { script: false, style: false, mark: true } } ``` /// === User Events ==="
             },
             {
               "name": "events",
               "params": "",
               "returns": "SunEditor.Event.Handlers",
-              "description": "- User event handlers configuration /// === [ Plugin-Specific Options ] === ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---"
+              "description": "- User event handlers configuration. ```js { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } } ``` /// === [ Plugin-Specific Options ] === ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---"
             },
             {
               "name": "align",
@@ -3297,7 +3297,7 @@
               "name": "editableFrameAttributes",
               "params": "",
               "returns": "{\n\t\t[x: string]: string;\n\t}",
-              "description": "- Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value) /// === Layout & Sizing ==="
+              "description": "- Attributes for the editable frame[.sun-editor-editable]. ```js { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } } ``` /// === Layout & Sizing ==="
             },
             {
               "name": "width",
@@ -3339,7 +3339,7 @@
               "name": "editorStyle",
               "params": "",
               "returns": "string",
-              "description": "- Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\"). /// === Iframe Mode ==="
+              "description": "- Style string of the top frame of the editor. ```js { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' } ``` /// === Iframe Mode ==="
             },
             {
               "name": "iframe",
@@ -3357,13 +3357,13 @@
               "name": "iframe_attributes",
               "params": "",
               "returns": "{\n\t\t[x: string]: string;\n\t}",
-              "description": "- Attributes of the `iframe`. (e.g. {'allow-scripts': 'true'})"
+              "description": "- Attributes of the `iframe`. ```js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```"
             },
             {
               "name": "iframe_cssFileName",
               "params": "",
               "returns": "Array<string>",
-              "description": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- (e.g. \"suneditor\" or \"suneditor.[a-z0-9]+\" matches \"suneditor.abc123.css\")\n- \"*\": Wildcard to include ALL stylesheets from the page.\n- Array: Multiple patterns (e.g. [\"suneditor\", \"custom\", \"*\"]).\n- Absolute URLs and data URLs (data:text/css,) are also supported. /// === Statusbar & Character Counter ==="
+              "description": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- `\"*\"`: Wildcard to include ALL stylesheets from the page.\n- Absolute URLs and data URLs (`data:text/css,`) are also supported. ```js { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] } ``` /// === Statusbar & Character Counter ==="
             },
             {
               "name": "statusbar",
@@ -3399,7 +3399,7 @@
               "name": "charCounter_label",
               "params": "",
               "returns": "string | null",
-              "description": "- Text to be displayed in the `charCounter` area of the bottom bar. (e.g. \"Characters : 20/200\")"
+              "description": "- Text to be displayed in the `charCounter` area of the bottom bar. ```js { charCounter_label: 'Characters :' } ```"
             },
             {
               "name": "charCounter_type",
@@ -4870,7 +4870,7 @@
               "params": "params?: {\n\t\tlistClass?: string;\n\t\ttitle?: string;\n\t\turl?: string;\n\t\turlHeader?: {\n\t\t\t[x: string]: string;\n\t\t};\n\t}",
               "returns": "void",
               "description": "Open a file browser plugin",
-              "example": "",
+              "example": "// Open with default settings (configured at construction):\nthis.browser.open();\n// Open with runtime overrides:\nthis.browser.open({\ntitle: 'Select a video',\nurl: '/api/videos',\nurlHeader: { Authorization: 'Bearer token' },\n});",
               "paramDescriptions": {
                 "params.listClass?": "Class name of list div. If not, use `this.listClass`.",
                 "params.title?": "File browser window title. If not, use `this.title`.",
@@ -4900,7 +4900,7 @@
               "params": "items: Array<BrowserFile>",
               "returns": "Array<BrowserFile>",
               "description": "Filter items by tag",
-              "example": "",
+              "example": "// Filter items by currently selected tags:\nbrowser.selectedTags = ['photo', 'landscape'];\nconst filtered = browser.tagfilter(items);\n// Returns only items whose `tag` array includes 'photo' or 'landscape'",
               "paramDescriptions": {
                 "items": "Items to filter"
               }
@@ -4929,7 +4929,7 @@
               "params": "nodeOrColor: Node | string, target: Node, stopCondition?: ((current: Node) => boolean) | null",
               "returns": "void",
               "description": "Displays or resets the currently selected color at color list.",
-              "example": "",
+              "example": "// Initialize with a selected node and stop traversal at line-level elements\nthis.colorPicker.init(this.$.selection.getNode(), target, (current) => this.$.format.isLine(current));\n// Initialize with a color string directly (e.g., from a table cell style)\nthis.colorPicker.init(color?.value || '', button);",
               "paramDescriptions": {
                 "nodeOrColor": "Current Selected node",
                 "target": "target",
@@ -4977,7 +4977,7 @@
               "params": "target: Node | Range, positionTarget?: Node, {\n\t\t\tisWWTarget,\n\t\t\tinitMethod,\n\t\t\tdisabled,\n\t\t\taddOffset,\n\t\t}?: {\n\t\t\tisWWTarget?: boolean;\n\t\t\tinitMethod?: () => void;\n\t\t\tdisabled?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft?: number;\n\t\t\t\ttop?: number;\n\t\t\t};\n\t\t}",
               "returns": "void",
               "description": "Open a modal plugin",
-              "example": "",
+              "example": "// Open controller on a target element with default options\nthis.controller.open(target);\n// Open with explicit options and additional offset\nthis.controller.open(target, null, { isWWTarget: false, initMethod: null, addOffset: null });\n// Open on a Range target (e.g., text selection)\nthis.controller.open(this.$.selection.getRange());",
               "paramDescriptions": {
                 "target": "Target element",
                 "positionTarget?": "Position target element",
@@ -4993,7 +4993,7 @@
               "params": "force?: boolean",
               "returns": "void",
               "description": "Close a modal plugin - The plugin's `init` method is called.",
-              "example": "",
+              "example": "// Close the controller (skips if not open or preventClose is set)\nthis.controller.close();\n// Force close, also closing parent controllers in the hierarchy\nthis.controller.close(true);",
               "paramDescriptions": {
                 "force?": "If `true`, parent controllers are forcibly closed."
               }
@@ -5017,7 +5017,7 @@
               "params": "value: boolean",
               "returns": "void",
               "description": "Sets whether the element (form) should be brought to the top based on `z-index`.",
-              "example": "",
+              "example": "// Bring controller to the highest z-index layer (2147483646)\nthis.controller_cell.bringToTop(true);\n// Restore to the default top z-index (2147483645)\nthis.controller_cell.bringToTop(false);",
               "paramDescriptions": {
                 "value": "`true`: `'2147483646'`, `false`: `'2147483645'`."
               }
@@ -5027,7 +5027,7 @@
               "params": "target?: Node",
               "returns": "void",
               "description": "Reset controller position",
-              "example": ""
+              "example": "// Reposition using a new target element\nthis.controller_cell.resetPosition(tdElement);\n// Reposition using the previously set target\nthis.controller.resetPosition();"
             }
           ]
         },
@@ -5039,7 +5039,7 @@
               "params": "element: Node, className?: string",
               "returns": "FigureInfo",
               "description": "Create a container for the resizing component and insert the element.",
-              "example": "",
+              "example": "const imgEl = document.createElement('IMG');\nimgEl.src = imageUrl;\nconst figureInfo = Figure.CreateContainer(imgEl, 'se-image-container');\n// figureInfo.container → <div class=\"se-component se-image-container\">\n// figureInfo.cover     → <figure> wrapping the imgEl",
               "paramDescriptions": {
                 "element": "Target element",
                 "className?": "Class name of container (fixed: `se-component`)"
@@ -5052,7 +5052,7 @@
               "params": "element: Node, className?: string",
               "returns": "FigureInfo",
               "description": "Create a container for the inline resizing component and insert the element.",
-              "example": "",
+              "example": "const imgEl = document.createElement('IMG');\nimgEl.src = imageUrl;\nconst figureInfo = Figure.CreateInlineContainer(imgEl, 'se-image-container');\n// figureInfo.container    → <span class=\"se-component se-inline-component se-image-container\">\n// figureInfo.inlineCover  → same as container (inline mode)",
               "paramDescriptions": {
                 "element": "Target element",
                 "className?": "Class name of container (fixed: `se-component` `se-inline-component`)"
@@ -5089,7 +5089,7 @@
               "params": "w: string | number, h: string | number, defaultSizeUnit?: string | null",
               "returns": "{\n\t\tw: number;\n\t\th: number;\n\t}",
               "description": "Ratio calculation",
-              "example": "",
+              "example": "const ratio = Figure.GetRatio(200, 100, 'px');\n// ratio → { w: 2, h: 0.5 }\n// Used with proportion-locked resizing\nconst ratio = Figure.GetRatio(inputX.value, inputY.value, sizeUnit);\nconst adjusted = Figure.CalcRatio(newWidth, newHeight, sizeUnit, ratio);",
               "paramDescriptions": {
                 "w": "Width size",
                 "h": "Height size",
@@ -5102,7 +5102,7 @@
               "params": "w: string | number, h: string | number, defaultSizeUnit: string, ratio?: {\n\t\t\tw: number;\n\t\t\th: number;\n\t\t} | null",
               "returns": "{\n\t\tw: string | number;\n\t\th: string | number;\n\t}",
               "description": "Ratio calculation",
-              "example": "",
+              "example": "const ratio = Figure.GetRatio(200, 100, 'px');\n// When width changes, recalculate height to maintain aspect ratio\nconst result = Figure.CalcRatio(inputX.value, inputY.value, 'px', ratio);\ninputY.value = result.h; // adjusted height preserving ratio",
               "paramDescriptions": {
                 "w": "Width size",
                 "h": "Height size",
@@ -5134,7 +5134,7 @@
               "params": "targetNode: Node, {\n\t\t\tnonResizing,\n\t\t\tnonSizeInfo,\n\t\t\tnonBorder,\n\t\t\tfigureTarget,\n\t\t\tinfoOnly,\n\t\t}: {\n\t\t\tnonResizing?: boolean;\n\t\t\tnonSizeInfo?: boolean;\n\t\t\tnonBorder?: boolean;\n\t\t\tfigureTarget?: boolean;\n\t\t\tinfoOnly?: boolean;\n\t\t}",
               "returns": "FigureTargetInfo | undefined",
               "description": "Open the figure's controller",
-              "example": "",
+              "example": "// Open controller with full UI (resize handles, size info, border)\nconst info = this.figure.open(imgElement, {\nnonResizing: false, nonSizeInfo: false, nonBorder: false,\nfigureTarget: false, infoOnly: false\n});\n// Get figure info without opening the controller UI\nconst info = this.figure.open(oFrame, {\nnonResizing: false, nonSizeInfo: false, nonBorder: false,\nfigureTarget: false, infoOnly: true\n});\n// info.width, info.height, info.ratio are available",
               "paramDescriptions": {
                 "targetNode": "Target element",
                 "params": "params",
@@ -5223,7 +5223,7 @@
               "params": "targetNode: Node | null, formatStyle: 'block' | 'inline'",
               "returns": "HTMLElement",
               "description": "As style[block, inline] the component",
-              "example": "",
+              "example": "// Convert a block image to inline format\nconst newImgEl = this.figure.convertAsFormat(imgElement, 'inline');\n// newImgEl is a cloned element inside a new inline container\n// Convert an inline image back to block format\nconst newImgEl = this.figure.convertAsFormat(imgElement, 'block');",
               "paramDescriptions": {
                 "targetNode": "Target element",
                 "formatStyle": "Format style"
@@ -5242,7 +5242,7 @@
               "params": "container: Node, originEl: Node, anchorCover: Node, fileManagerInst?: import('../manager/FileManager').default",
               "returns": "void",
               "description": "Inspect the figure component format and change it to the correct format.",
-              "example": "",
+              "example": "// Insert a new image figure, replacing the original element in the DOM\nconst figureInfo = Figure.CreateContainer(imgElement, 'se-image-container');\nthis.figure.retainFigureFormat(figureInfo.container, this.#element, null, this.fileManager);\n// Replace with anchor cover (e.g., image wrapped in a link)\nthis.figure.retainFigureFormat(container, this.#element, anchorEl, this.fileManager);",
               "paramDescriptions": {
                 "container": "The container element of the figure component.",
                 "originEl": "The original element of the figure component.",
@@ -5265,7 +5265,7 @@
               "params": "node: Node, width: (string | number) | null, height: (string | number) | null, deg: number | null",
               "returns": "void",
               "description": "Set the transform style (rotation) of the element.",
-              "example": "",
+              "example": "// Rotate element 90 degrees clockwise\nthis.figure.setTransform(imgElement, 100, 50, 90);\n// Apply size without additional rotation (deg=0 preserves current rotation)\nthis.figure.setTransform(oFrame, width, height, 0);",
               "paramDescriptions": {
                 "node": "Target element",
                 "width": "Element's width size",
@@ -5344,7 +5344,7 @@
               "params": "{\n\t\t\ticons,\n\t\t\tlang,\n\t\t}: {\n\t\t\ticons: SunEditor.Deps['icons'];\n\t\t\tlang: SunEditor.Deps['lang'];\n\t\t}, {\n\t\t\tacceptedFormats,\n\t\t\tallowMultiple,\n\t\t}: {\n\t\t\tacceptedFormats?: string;\n\t\t\tallowMultiple?: boolean;\n\t\t}",
               "returns": "string",
               "description": "Create a file input tag in the modal window.",
-              "example": "",
+              "example": "// Inside a plugin's modal HTML template:\nconst html = Modal.CreateFileInput(\n{ icons, lang },\n{ acceptedFormats: 'image/*', allowMultiple: true }\n);",
               "paramDescriptions": {
                 "param0": "icons and language object",
                 "param1": "options\n- acceptedFormats: `\"image/*, video/*, audio/*\"`, etc.\n- allowMultiple: `true` or `false`"
@@ -5388,14 +5388,14 @@
               "params": "{ method, url, headers, data, callBack, errorCallBack, responseType }: ApiManagerParams",
               "returns": "void",
               "description": "Call API",
-              "example": ""
+              "example": "// POST with FormData and callbacks\napiManager.call({\nmethod: 'POST', url: '/upload', headers: { 'x-custom': 'value' },\ndata: formData,\ncallBack: (xhr) => console.log(xhr.responseText),\nerrorCallBack: (res, xhr) => res.errorMessage || 'Upload failed'\n});\n// GET request with minimal params (uses constructor defaults for omitted options)\napiManager.call({\nmethod: 'GET', url: '/api/files',\ncallBack: (xhr) => JSON.parse(xhr.responseText)\n});"
             },
             {
               "name": "asyncCall",
               "params": "{\n\t\tmethod,\n\t\turl,\n\t\theaders,\n\t\tdata,\n\t\tresponseType,\n\t}: {\n\t\tmethod?: string;\n\t\turl?: string;\n\t\theaders?: {\n\t\t\t[x: string]: string;\n\t\t};\n\t\tdata?: any;\n\t\tresponseType?: XMLHttpRequestResponseType;\n\t}",
               "returns": "Promise<XMLHttpRequest>",
               "description": "Call Async API",
-              "example": "",
+              "example": "// POST FormData and await the response\nconst xhr = await apiManager.asyncCall({\nmethod: 'POST', url: '/upload',\nheaders: { 'x-api-key': 'key' }, data: formData\n});\nconst result = JSON.parse(xhr.responseText);\n// Send JSON data (uses constructor defaults for method/url)\nconst xhr = await apiManager.asyncCall({\ndata: JSON.stringify({ fileName: 'doc.pdf', htmlContent })\n});",
               "paramDescriptions": {
                 "params.method?": "HTTP method (GET, POST, PUT, DELETE...)",
                 "params.url?": "API's URL",
@@ -5421,7 +5421,7 @@
               "params": "uploadUrl: string, uploadHeader: {\n\t\t\t[x: string]: string;\n\t\t} | null, data: | FileList\n\t\t\t| File[]\n\t\t\t| {\n\t\t\t\t\tformData: FormData;\n\t\t\t\t\tsize: number;\n\t\t\t  }, callBack?: ((xmlHttp: XMLHttpRequest) => boolean) | null, errorCallBack?: ((res: any, xmlHttp: XMLHttpRequest) => string) | null",
               "returns": "void",
               "description": "Upload the file to the server.",
-              "example": "",
+              "example": "// Upload with a File array\nconst files = [new File(['content'], 'photo.jpg', { type: 'image/jpeg' })];\nfileManager.upload('/api/upload', { Authorization: 'Bearer token' }, files, onSuccess, onError);\n// Upload with a pre-built FormData\nconst formData = new FormData();\nformData.append('file-0', myFile);\nfileManager.upload('/api/upload', null, { formData, size: 1 }, onSuccess, onError);",
               "paramDescriptions": {
                 "uploadUrl": "Upload server url",
                 "uploadHeader": "Request header",
@@ -5435,7 +5435,7 @@
               "params": "uploadUrl: string, uploadHeader: {\n\t\t\t[x: string]: string;\n\t\t} | null, data: | FileList\n\t\t\t| File[]\n\t\t\t| {\n\t\t\t\t\tformData: FormData;\n\t\t\t\t\tsize: number;\n\t\t\t  }",
               "returns": "Promise<XMLHttpRequest>",
               "description": "Upload the file to the server.",
-              "example": "",
+              "example": "const files = [new File(['content'], 'photo.jpg')];\nconst xmlHttp = await fileManager.asyncUpload('/api/upload', { Authorization: 'Bearer token' }, files);\nconst response = JSON.parse(xmlHttp.responseText);",
               "paramDescriptions": {
                 "uploadUrl": "Upload server url",
                 "uploadHeader": "Request header",
@@ -5447,7 +5447,7 @@
               "params": "element: Node, {\n\t\t\tname,\n\t\t\tsize,\n\t\t}: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}",
               "returns": "void",
               "description": "Set the file information to the element.",
-              "example": "",
+              "example": "const imgElement = document.createElement('img');\nimgElement.src = 'https://example.com/photo.jpg';\nfileManager.setFileData(imgElement, { name: 'photo.jpg', size: 2048 });",
               "paramDescriptions": {
                 "element": "File information element",
                 "params.name": "File name",
@@ -5482,7 +5482,7 @@
               "params": "isUpdate: boolean",
               "returns": "void",
               "description": "Opens the anchor editor modal and populates it with data.",
-              "example": "",
+              "example": "// Called from modalOn() — populate form for a new link:\nthis.anchor.on(false);\n// Populate form to edit an existing link (call set() first):\nthis.anchor.set(existingAnchorElement);\nthis.anchor.on(true);",
               "paramDescriptions": {
                 "isUpdate": "Indicates whether an existing anchor is being updated (`true`) or a new one is being created (`false`)."
               }
@@ -5492,7 +5492,7 @@
               "params": "notText: boolean",
               "returns": "HTMLElement | null",
               "description": "Creates an anchor (`<a>`) element with the specified attributes.",
-              "example": "",
+              "example": "// In a link plugin — create anchor with text content:\nconst oA = this.anchor.create(false);\nif (oA === null) return false;\nthis.$.html.insertNode(oA);\n// In an image plugin — create anchor without text (wraps an image):\nconst anchor = this.anchor.create(true);\nif (anchor) {\nanchor.appendChild(imgElement);\n}",
               "paramDescriptions": {
                 "notText": "If `true`, the anchor will not contain text content."
               },
@@ -5526,7 +5526,7 @@
               "params": "referElement: Node, selectMethod: (command: string) => void, attr?: {\n\t\t\tclass?: string;\n\t\t\tstyle?: string;\n\t\t}",
               "returns": "void",
               "description": "Initializes the select menu and attaches it to a reference element.",
-              "example": "",
+              "example": "// Basic: attach menu to a button with a selection callback\nselectMenu.on(this.alignButton, this.onAlignSelect.bind(this));\n// With custom attributes for styling\nselectMenu.on(this.alignButton, this.onAlignSelect.bind(this), { class: 'se-figure-select-list' });",
               "paramDescriptions": {
                 "referElement": "The element that triggers the select menu.",
                 "selectMethod": "The function to execute when an item is selected.",
@@ -5538,7 +5538,7 @@
               "params": "position?: string | null, onItemQuerySelector?: string | null",
               "returns": "void",
               "description": "Select menu open",
-              "example": "",
+              "example": "// Open with default position (uses constructor's position param)\nselectMenu.open();\n// Open at a specific position (always use LTR basis; RTL is auto-mirrored)\nselectMenu.open('bottom-left');\n// Open with an active item highlighted via querySelector\nselectMenu.open('', '[data-command=\"' + this.align + '\"]');",
               "paramDescriptions": {
                 "position?": "`\"[left|right]-[middle|top|bottom] | [top|bottom]-[center|left|right]\"`",
                 "onItemQuerySelector?": "The querySelector string of the menu to be activated"
@@ -5625,7 +5625,7 @@
               "params": "content: string",
               "returns": "string",
               "description": "Convert HTML string to HTML Entity",
-              "example": "",
+              "example": "converter.htmlToEntity('<div>'); // '&lt;div&gt;'",
               "returnsDescription": "Content string"
             },
             {
@@ -5633,7 +5633,7 @@
               "params": "content: string",
               "returns": "string",
               "description": "Convert HTML Entity to HTML string",
-              "example": "",
+              "example": "converter.entityToHTML('&lt;div&gt;'); // '<div>'",
               "paramDescriptions": {
                 "content": "Content string"
               }
@@ -5643,7 +5643,7 @@
               "params": "func: (...args: any) => void, wait: number",
               "returns": "any",
               "description": "Debounce function",
-              "example": "",
+              "example": "const debouncedSave = converter.debounce(() => save(), 300);\ninput.addEventListener('input', debouncedSave);",
               "paramDescriptions": {
                 "func": "function",
                 "wait": "delay ms"
@@ -5687,7 +5687,7 @@
               "params": "param: string | Array<string>",
               "returns": "any",
               "description": "Convert the `CamelCase` To the `KebabCase`.",
-              "example": "",
+              "example": "converter.camelToKebabCase('fontSize'); // 'font-size'\nconverter.camelToKebabCase(['fontSize', 'fontFamily']); // ['font-size', 'font-family']",
               "paramDescriptions": {
                 "param": "[Camel string]"
               }
@@ -5707,8 +5707,8 @@
               "name": "kebabToCamelCase",
               "params": "param: Array<string>",
               "returns": "Array<string>",
-              "description": "",
-              "example": "",
+              "description": "converter.kebabToCamelCase('font-size'); // 'fontSize'",
+              "example": "converter.kebabToCamelCase('font-size'); // 'fontSize'",
               "paramDescriptions": {
                 "param": "Array of `Kebab-case` strings."
               },
@@ -5780,7 +5780,7 @@
               "params": "rgba: string",
               "returns": "string",
               "description": "Function to convert hex format to a `rgb` color",
-              "example": "",
+              "example": "converter.rgb2hex('rgb(255, 0, 0)'); // '#ff0000'\nconverter.rgb2hex('rgba(255, 0, 0, 0.5)'); // '#ff000080'",
               "paramDescriptions": {
                 "rgba": "RGBA color format"
               }
@@ -6442,7 +6442,7 @@
               "params": "offsets: Array<number>, parentNode: Node",
               "returns": "T",
               "description": "Returns the node in the location of the path array obtained from `helper.dom.getNodePath`.",
-              "example": "",
+              "example": "const node = dom.query.getNodeFromPath([0, 1, 0], wysiwygElement);",
               "paramDescriptions": {
                 "offsets": "Position array, array obtained from `helper.dom.getNodePath`",
                 "parentNode": "Base parent element"
@@ -6476,7 +6476,7 @@
               "params": "element: Node, validation: ((current: any) => boolean) | null, depth: number | null",
               "returns": "Array<T>",
               "description": "Get all `childNodes` of the argument value element (Include text nodes)",
-              "example": "",
+              "example": "const allNodes = dom.query.getListChildNodes(container, (node) => node.nodeType === 3);",
               "paramDescriptions": {
                 "element": "element to get child node",
                 "validation": "Conditional function",
@@ -6498,7 +6498,7 @@
               "params": "array: Array<Node>, des: boolean",
               "returns": "void",
               "description": "Sort a node array by depth of element.",
-              "example": "",
+              "example": "const sorted = dom.query.sortNodeByDepth([nodeA, nodeB], true);",
               "paramDescriptions": {
                 "array": "Node array",
                 "des": "`true`: descending order / `false`: ascending order"
@@ -6509,7 +6509,7 @@
               "params": "a: Node, b: Node",
               "returns": "{\n\tancestor: HTMLElement | null;\n\ta: Node;\n\tb: Node;\n\tresult: number;\n}",
               "description": "Compares two elements to find a common ancestor, and returns the order of the two elements.",
-              "example": "",
+              "example": "const result = dom.query.compareElements(nodeA, nodeB);\n// result: { ancestor: true, result: 0 } (same node), { ancestor: true, result: 1 } (a before b)",
               "paramDescriptions": {
                 "a": "Node to compare.",
                 "b": "Node to compare."
@@ -6567,7 +6567,7 @@
               "params": "node: Node, query: string | ((current: any) => boolean) | Node, last: boolean",
               "returns": "T | null",
               "description": "Get the child element of the argument value. - A tag that satisfies the query condition is imported.",
-              "example": "",
+              "example": "const firstLeaf = dom.query.getEdgeChild(container, (n) => n.nodeType === 3, false);\nconst lastLeaf = dom.query.getEdgeChild(container, (n) => n.nodeType === 3, true);",
               "paramDescriptions": {
                 "node": "Reference element",
                 "query": "Query String (`nodeName`, `.className`, `#ID`, `:name`) or validation function.",
@@ -6710,7 +6710,7 @@
               "params": "element: Node, exceptAttrs: Array<string> | null",
               "returns": "string",
               "description": "Get attributes of argument element to string ('class=\"---\" name=\"---\" ')",
-              "example": "",
+              "example": "const attrs = dom.utils.getAttributesToString(element, ['id', 'class']);",
               "paramDescriptions": {
                 "element": "Element object",
                 "exceptAttrs": "Array of attribute names to exclude from the result"
@@ -6787,7 +6787,7 @@
               "params": "originEl: Node, copyEl: Node, blacklist?: Array<string> | null",
               "returns": "void",
               "description": "Add style and className of copyEl to originEl",
-              "example": "",
+              "example": "dom.utils.copyTagAttributes(newElement, originalElement, ['contenteditable']);",
               "paramDescriptions": {
                 "originEl": "Origin element",
                 "copyEl": "Element to copy",
@@ -6820,7 +6820,7 @@
               "params": "element: Node, newElement: string | Node",
               "returns": "void",
               "description": "Replace element",
-              "example": "",
+              "example": "dom.utils.changeElement(oldSpan, 'STRONG');\ndom.utils.changeElement(oldElement, newElement);",
               "paramDescriptions": {
                 "element": "Target element",
                 "newElement": "String or element of the new element to apply"
@@ -6842,7 +6842,7 @@
               "params": "elements: Node | Node[], styleName: string, value: string | number",
               "returns": "void",
               "description": "Set style, if all styles are deleted, the style properties are deleted.",
-              "example": "",
+              "example": "dom.utils.setStyle(element, 'color', 'red');\ndom.utils.setStyle([el1, el2], 'display', 'none');",
               "paramDescriptions": {
                 "elements": "Element to set style",
                 "styleName": "Style attribute name (`marginLeft`, `textAlign`...)",
@@ -6889,7 +6889,7 @@
               "params": "element: Node | SunEditor.NodeCollection, className: string",
               "returns": "void",
               "description": "Append the className value of the argument value element",
-              "example": "",
+              "example": "dom.utils.addClass(element, 'active');\ndom.utils.addClass(element.children, 'highlight');",
               "paramDescriptions": {
                 "element": "Elements to add class name",
                 "className": "Class name to be add"
@@ -6900,7 +6900,7 @@
               "params": "element: Node | SunEditor.NodeCollection, className: string",
               "returns": "void",
               "description": "Delete the className value of the argument value element",
-              "example": "",
+              "example": "dom.utils.removeClass(element, 'active');",
               "paramDescriptions": {
                 "element": "Elements to remove class name",
                 "className": "Class name to be remove"
@@ -6922,7 +6922,7 @@
               "params": "element: Node, className: string, duration?: number",
               "returns": "void",
               "description": "Flash the class name of the argument value element for a certain time",
-              "example": "",
+              "example": "dom.utils.flashClass(element, 'blink', 500);",
               "paramDescriptions": {
                 "element": "Element to flash class name",
                 "className": "class name",
@@ -6952,7 +6952,7 @@
               "params": "wwTarget: Node, includeWW: boolean, styles: Iterable<string>",
               "returns": "HTMLElement",
               "description": "Copies the `wwTarget` element and returns it with inline all styles applied.",
-              "example": "",
+              "example": "dom.utils.applyInlineStylesAll(wysiwygElement, true, ['font-family', 'font-size']);",
               "paramDescriptions": {
                 "wwTarget": "Target element to copy(`.sun-editor.sun-editor-editable`)",
                 "includeWW": "Include the `wwTarget` element in the copy",
@@ -6964,7 +6964,7 @@
               "params": "target: Node, timeout?: number",
               "returns": "Promise<void>",
               "description": "Wait for media elements to load",
-              "example": "",
+              "example": "await dom.utils.waitForMediaLoad(imgElement, 5000);",
               "paramDescriptions": {
                 "target": "Target element",
                 "timeout": "Timeout milliseconds"
@@ -8812,29 +8812,29 @@
         },
         {
           "name": "EditorFrameOptions",
-          "definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value)\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\").\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`. (e.g. {'allow-scripts': 'true'})\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - (e.g. \"suneditor\" or \"suneditor.[a-z0-9]+\" matches \"suneditor.abc123.css\")\n\t * - \"*\": Wildcard to include ALL stylesheets from the page.\n\t * - Array: Multiple patterns (e.g. [\"suneditor\", \"custom\", \"*\"]).\n\t * - Absolute URLs and data URLs (data:text/css,) are also supported.\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar. (e.g. \"Characters : 20/200\")\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n}",
+          "definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable].\n\t * ```js\n\t * { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n\t * ```\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor.\n\t * ```js\n\t * { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n\t * ```\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`.\n\t * ```js\n\t * { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n\t * ```\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - `\"*\"`: Wildcard to include ALL stylesheets from the page.\n\t * - Absolute URLs and data URLs (`data:text/css,`) are also supported.\n\t * ```js\n\t * { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n\t * ```\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar.\n\t * ```js\n\t * { charCounter_label: 'Characters :' }\n\t * ```\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n}",
           "kind": "type",
           "memberDescriptions": {
             "value": "- Initial value for the editor.",
             "placeholder": "- Placeholder text.",
-            "editableFrameAttributes": "- Attributes for the editable frame[.sun-editor-editable]. (e.g. [key]: value) /// === Layout & Sizing ===",
+            "editableFrameAttributes": "- Attributes for the editable frame[.sun-editor-editable]. ```js { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } } ``` /// === Layout & Sizing ===",
             "width": "- Width for the editor.",
             "minWidth": "- Min width for the editor.",
             "maxWidth": "- Max width for the editor.",
             "height": "- Height for the editor.",
             "minHeight": "- Min height for the editor.",
             "maxHeight": "- Max height for the editor.",
-            "editorStyle": "- Style string of the top frame of the editor. (e.g. \"border: 1px solid #ccc;\"). /// === Iframe Mode ===",
+            "editorStyle": "- Style string of the top frame of the editor. ```js { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' } ``` /// === Iframe Mode ===",
             "iframe": "- Content will be placed in an iframe and isolated from the rest of the page.",
             "iframe_fullPage": "- Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.",
-            "iframe_attributes": "- Attributes of the `iframe`. (e.g. {'allow-scripts': 'true'})",
-            "iframe_cssFileName": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- (e.g. \"suneditor\" or \"suneditor.[a-z0-9]+\" matches \"suneditor.abc123.css\")\n- \"*\": Wildcard to include ALL stylesheets from the page.\n- Array: Multiple patterns (e.g. [\"suneditor\", \"custom\", \"*\"]).\n- Absolute URLs and data URLs (data:text/css,) are also supported. /// === Statusbar & Character Counter ===",
+            "iframe_attributes": "- Attributes of the `iframe`. ```js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```",
+            "iframe_cssFileName": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- `\"*\"`: Wildcard to include ALL stylesheets from the page.\n- Absolute URLs and data URLs (`data:text/css,`) are also supported. ```js { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] } ``` /// === Statusbar & Character Counter ===",
             "statusbar": "- Enables the status bar.",
             "statusbar_showPathLabel": "- Displays the current node structure in the status bar.",
             "statusbar_resizeEnable": "- Enables resize function of the bottom status bar.",
             "charCounter": "- Shows the number of characters in the editor.\n- If the `maxCharCount` option has a value, it becomes `true`.",
             "charCounter_max": "- The maximum number of characters allowed to be inserted into the editor.",
-            "charCounter_label": "- Text to be displayed in the `charCounter` area of the bottom bar. (e.g. \"Characters : 20/200\")",
+            "charCounter_label": "- Text to be displayed in the `charCounter` area of the bottom bar. ```js { charCounter_label: 'Characters :' } ```",
             "charCounter_type": "- Defines the calculation method of the `charCounter` option.\n- `char`: Characters length.\n- `byte`: Binary data size of characters.\n- `byte-html`: Binary data size of the full HTML string."
           },
           "source": "core/schema/options.d.ts"
@@ -8888,13 +8888,13 @@
         },
         {
           "name": "PrivateBaseOptions",
-          "definition": "{\n\t/**\n\t * - The basic tags that serves as the base for `textStyleTags`\n\t * - The default follows {@link DEFAULTS.TEXT_STYLE_TAGS}\n\t */\n\t__textStyleTags?: string;\n\t/**\n\t * - The basic tags that serves as the base for `tagStyles`\n\t * - The default follows {@link DEFAULTS.TAG_STYLES}\n\t */\n\t__tagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - A custom string used to construct a list of HTML elements to allow.\n\t * - The final list (regex pattern) is dynamically generated according to the following rules:\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_ELEMENT_WHITELIST}, is always included.\n\t * - If this option (`__defaultElementWhitelist`) is provided as a string: That value is used.\n\t * - If not provided or not a string: The default {@link DEFAULTS.ELEMENT_WHITELIST} is used.\n\t * - 1. If no options are given, the final pattern is:\n\t * - 'a|img|p|div|...' (REQUIRED + DEFAULT)\n\t * - 2. If options are given directly, the final pattern is:\n\t * - 'a|img|custom|tags' (REQUIRED + options.__defaultElementWhitelist)\n\t */\n\t__defaultElementWhitelist?: string;\n\t/**\n\t * - A complete list of attributes that are allowed by default on all tags.\n\t * - Delimiter: \"|\" (e.g. \"href|target\").\n\t * - The default follows {@link DEFAULTS.ATTRIBUTE_WHITELIST}///\n\t *\n\t * === Formatting  ===\n\t */\n\t__defaultAttributeWhitelist?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `line` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_LINE}\n\t */\n\t__defaultFormatLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `brLine` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_BR_LINE}\n\t */\n\t__defaultFormatBrLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `closureBrLine` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_CLOSURE_BR_LINE}\n\t */\n\t__defaultFormatClosureBrLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `block` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_BLOCK}\n\t */\n\t__defaultFormatBlock?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `closureBlock` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_CLOSURE_BLOCK}///\n\t *\n\t * === Filters & Behavior ===\n\t */\n\t__defaultFormatClosureBlock?: string;\n\t/**\n\t * - Line format filter configuration.\n\t */\n\t__lineFormatFilter?: boolean;\n\t/**\n\t * - Defines the styles applied directly to `<li>` when a text style is set on the entire list item.\n\t * - For example, when changing the font size or color of a list item (`<li>`),\n\t * - these styles apply to the `<li>` tag instead of wrapping content in additional tags.\n\t */\n\t__listCommonStyle?: Array<string>;\n\t/**\n\t * - Plugin retain filter configuration. (Internal use primarily)\n\t * - You can turn it off/on globally with `true`/`false` or set it per plugin. (e.g. { table: false })\n\t */\n\t__pluginRetainFilter?:\n\t\t| {\n\t\t\t\tpluginName: string;\n\t\t\t\twe: boolean;\n\t\t  }\n\t\t| boolean;\n}",
+          "definition": "{\n\t/**\n\t * - The basic tags that serves as the base for `textStyleTags`\n\t * - The default follows {@link DEFAULTS.TEXT_STYLE_TAGS}\n\t */\n\t__textStyleTags?: string;\n\t/**\n\t * - The basic tags that serves as the base for `tagStyles`\n\t * - The default follows {@link DEFAULTS.TAG_STYLES}\n\t */\n\t__tagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - A custom string used to construct a list of HTML elements to allow.\n\t * - The final list (regex pattern) is dynamically generated according to the following rules:\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_ELEMENT_WHITELIST}, is always included.\n\t * - If this option (`__defaultElementWhitelist`) is provided as a string: That value is used.\n\t * - If not provided or not a string: The default {@link DEFAULTS.ELEMENT_WHITELIST} is used.\n\t * - 1. If no options are given, the final pattern is:\n\t * - 'a|img|p|div|...' (REQUIRED + DEFAULT)\n\t * - 2. If options are given directly, the final pattern is:\n\t * - 'a|img|custom|tags' (REQUIRED + options.__defaultElementWhitelist)\n\t */\n\t__defaultElementWhitelist?: string;\n\t/**\n\t * - A complete list of attributes that are allowed by default on all tags. Delimiter: `\"|\"`.\n\t * - The default follows {@link DEFAULTS.ATTRIBUTE_WHITELIST}```js\n\t * { __defaultAttributeWhitelist: 'href|target|src|alt|class' }\n\t * ```\n\t * ///\n\t *\n\t * === Formatting  ===\n\t */\n\t__defaultAttributeWhitelist?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `line` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_LINE}\n\t */\n\t__defaultFormatLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `brLine` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_BR_LINE}\n\t */\n\t__defaultFormatBrLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `closureBrLine` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_CLOSURE_BR_LINE}\n\t */\n\t__defaultFormatClosureBrLine?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `block` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_BLOCK}\n\t */\n\t__defaultFormatBlock?: string;\n\t/**\n\t * - Specifies the tag to be used as the editor's default `closureBlock` element.\n\t * - The default follows {@link DEFAULTS.FORMAT_CLOSURE_BLOCK}///\n\t *\n\t * === Filters & Behavior ===\n\t */\n\t__defaultFormatClosureBlock?: string;\n\t/**\n\t * - Line format filter configuration.\n\t */\n\t__lineFormatFilter?: boolean;\n\t/**\n\t * - Defines the styles applied directly to `<li>` when a text style is set on the entire list item.\n\t * - For example, when changing the font size or color of a list item (`<li>`),\n\t * - these styles apply to the `<li>` tag instead of wrapping content in additional tags.\n\t */\n\t__listCommonStyle?: Array<string>;\n\t/**\n\t * - Plugin retain filter configuration. (Internal use primarily)\n\t * - You can turn it off/on globally with `true`/`false` or set it per plugin.\n\t * ```js\n\t * // __pluginRetainFilter - disable filter for table plugin only\n\t * { __pluginRetainFilter: { table: false } }\n\t * ```\n\t */\n\t__pluginRetainFilter?:\n\t\t| {\n\t\t\t\tpluginName: string;\n\t\t\t\twe: boolean;\n\t\t  }\n\t\t| boolean;\n}",
           "kind": "type",
           "memberDescriptions": {
             "__textStyleTags": "- The basic tags that serves as the base for `textStyleTags`\n- The default follows {@link DEFAULTS.TEXT_STYLE_TAGS}",
             "__tagStyles": "- The basic tags that serves as the base for `tagStyles`\n- The default follows {@link DEFAULTS.TAG_STYLES}",
             "__defaultElementWhitelist": "- A custom string used to construct a list of HTML elements to allow.\n- The final list (regex pattern) is dynamically generated according to the following rules:\n- A list of required elements, {@link DEFAULTS.REQUIRED_ELEMENT_WHITELIST}, is always included.\n- If this option (`__defaultElementWhitelist`) is provided as a string: That value is used.\n- If not provided or not a string: The default {@link DEFAULTS.ELEMENT_WHITELIST} is used.\n- 1. If no options are given, the final pattern is:\n- 'a|img|p|div|...' (REQUIRED + DEFAULT)\n- 2. If options are given directly, the final pattern is:\n- 'a|img|custom|tags' (REQUIRED + options.__defaultElementWhitelist)",
-            "__defaultAttributeWhitelist": "- A complete list of attributes that are allowed by default on all tags.\n- Delimiter: \"|\" (e.g. \"href|target\").\n- The default follows {@link DEFAULTS.ATTRIBUTE_WHITELIST}/// === Formatting  ===",
+            "__defaultAttributeWhitelist": "- A complete list of attributes that are allowed by default on all tags. Delimiter: `\"|\"`.\n- The default follows {@link DEFAULTS.ATTRIBUTE_WHITELIST}```js { __defaultAttributeWhitelist: 'href|target|src|alt|class' } ``` /// === Formatting  ===",
             "__defaultFormatLine": "- Specifies the tag to be used as the editor's default `line` element.\n- The default follows {@link DEFAULTS.FORMAT_LINE}",
             "__defaultFormatBrLine": "- Specifies the tag to be used as the editor's default `brLine` element.\n- The default follows {@link DEFAULTS.FORMAT_BR_LINE}",
             "__defaultFormatClosureBrLine": "- Specifies the tag to be used as the editor's default `closureBrLine` element.\n- The default follows {@link DEFAULTS.FORMAT_CLOSURE_BR_LINE}",
@@ -8902,47 +8902,47 @@
             "__defaultFormatClosureBlock": "- Specifies the tag to be used as the editor's default `closureBlock` element.\n- The default follows {@link DEFAULTS.FORMAT_CLOSURE_BLOCK}/// === Filters & Behavior ===",
             "__lineFormatFilter": "- Line format filter configuration.",
             "__listCommonStyle": "- Defines the styles applied directly to `<li>` when a text style is set on the entire list item.\n- For example, when changing the font size or color of a list item (`<li>`),\n- these styles apply to the `<li>` tag instead of wrapping content in additional tags.",
-            "__pluginRetainFilter": "- Plugin retain filter configuration. (Internal use primarily)\n- You can turn it off/on globally with `true`/`false` or set it per plugin. (e.g. { table: false })"
+            "__pluginRetainFilter": "- Plugin retain filter configuration. (Internal use primarily)\n- You can turn it off/on globally with `true`/`false` or set it per plugin. ```js // __pluginRetainFilter - disable filter for table plugin only { __pluginRetainFilter: { table: false } } ```"
           },
           "source": "core/schema/options.d.ts"
         },
         {
           "name": "EditorBaseOptions",
-          "definition": "{\n\t/**\n\t * - Plugin configuration.\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - Plugin configuration.\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always';\n\t/**\n\t * - Editor type: `document:header,page`.\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list.\n\t * - Delimiter: \"|\" (e.g. \"p|div\", \"*\").\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used.\n\t * - Delimiter: \"|\" (e.g. \"script|style\").\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag.\n\t * - (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"})\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag.\n\t * - (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"})\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles.\n\t * - Delimiter: \"|\" (e.g. \"color|background-color\").\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed styles for HTML tags.\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies allowed styles for the `span` tag.\n\t * - The default follows {@link DEFAULTS.SPAN_STYLES}\n\t */\n\tspanStyles?: string;\n\t/**\n\t * - Specifies allowed styles for the `line` element (p..).\n\t * - The default follows {@link DEFAULTS.LINE_STYLES}\n\t */\n\tlineStyles?: string;\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines (e.g. \"id|name\").\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default. (e.g. \"PRE\").\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar with optional offset.\n\t */\n\ttoolbar_sticky?: number;\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom template for preview mode.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom template for print mode.\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - {\"copy\": 1500} - Duration for displaying toast messages.\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - External libraries like CodeMirror or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tmention?: import('../../plugins/field/mention.js').MentionPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
+          "definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always';\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * { strictMode: { tagFilter: true, formatFilter: true, classFilter: true, textStyleTagFilter: true, attrFilter: false, styleFilter: false } }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * { attributeWhitelist: { a: 'href|target', img: 'src|alt', '*': 'id|data-*' } }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.\n\t * ```js\n\t * { tagStyles: { 'table|td': 'border|color|background-color', hr: 'border-top' } }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies allowed styles for the `span` tag.\n\t * - The default follows {@link DEFAULTS.SPAN_STYLES}\n\t */\n\tspanStyles?: string;\n\t/**\n\t * - Specifies allowed styles for the `line` element (p..).\n\t * - The default follows {@link DEFAULTS.LINE_STYLES}\n\t */\n\tlineStyles?: string;\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar with optional offset.\n\t */\n\ttoolbar_sticky?: number;\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * { shortcuts: { bold: ['c+KeyB', 'B'], _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', ''] } }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * { externalLibs: { katex: window.katex, codeMirror: { src: CodeMirror } } }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * { allowedExtraTags: { script: false, style: false, mark: true } }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tmention?: import('../../plugins/field/mention.js').MentionPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "plugins": "- Plugin configuration.",
-            "excludedPlugins": "- Plugin configuration.",
+            "plugins": "- Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name. ```js import plugins, { image, link, table } from 'suneditor/src/plugins'; { plugins: plugins, plugins: [image, link, table], plugins: { image, link, table } } ```",
+            "excludedPlugins": "- List of plugin names to exclude. ```js { excludedPlugins: ['image', 'video'] } ```",
             "buttonList": "- List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}/// === Modes & Themes ===",
             "v2Migration": "- Enables migration mode for SunEditor v2.",
             "mode": "- Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.",
-            "type": "- Editor type: `document:header,page`.",
+            "type": "- Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`. ```js // type 'document:header,page' ```",
             "theme": "- Editor theme.",
             "lang": "- Language configuration. default : EN",
             "icons": "- Overrides the default icons.",
             "textDirection": "- Text direction: `ltr` or `rtl`.",
             "reverseButtons": "- An array of command pairs whose shortcut icons should be opposite each other.\n- Depends on the `textDirection` mode. /// === Strict & Advanced Filtering ===",
-            "strictMode": "- Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)",
+            "strictMode": "- Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`) ```js // disable only attribute and style filters { strictMode: { tagFilter: true, formatFilter: true, classFilter: true, textStyleTagFilter: true, attrFilter: false, styleFilter: false } } ```",
             "scopeSelectionTags": "- Tags treated as whole units when selecting all content.\n- The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}/// === Content Filtering & Formatting === == #### 1) Tag & Element Control",
-            "elementWhitelist": "- Specifies HTML elements to additionally allow beyond the default allow list.\n- Delimiter: \"|\" (e.g. \"p|div\", \"*\").\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.",
-            "elementBlacklist": "- Specifies HTML elements that should not be used.\n- Delimiter: \"|\" (e.g. \"script|style\").\n- Tags specified here will eventually be removed, even if they are included in other whitelists.",
+            "elementWhitelist": "- Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}. ```js { elementWhitelist: 'mark|details|summary' } ```",
+            "elementBlacklist": "- Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n- Tags specified here will eventually be removed, even if they are included in other whitelists. ```js { elementBlacklist: 'script|style|iframe' } ```",
             "allowedEmptyTags": "- A list of tags that are allowed to be kept even if their values are empty.\n- The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.",
             "allowedClassName": "- Allowed class names.\n- Added the default value {@link DEFAULTS.CLASS_NAME}/// #### 2) Attribute Control",
-            "attributeWhitelist": "- Specifies additional attributes to allow for each tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"id\"})\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
-            "attributeBlacklist": "- Specifies attributes to disallow by tag.\n- (e.g. {a: \"href|target\", img: \"src|alt\", \"*\": \"name\"})\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. /// #### 3) Text & Inline Style Control",
+            "attributeWhitelist": "- Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}. ```js { attributeWhitelist: { a: 'href|target', img: 'src|alt', '*': 'id|data-*' } } ```",
+            "attributeBlacklist": "- Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) Text & Inline Style Control",
             "textStyleTags": "- Additional text style tags.\n- The default follows {@link PrivateBaseOptions.__textStyleTags}",
-            "convertTextTags": "- Maps text styles to specific HTML tags.",
-            "allUsedStyles": "- Specifies additional styles to the list of allowed styles.\n- Delimiter: \"|\" (e.g. \"color|background-color\").",
-            "tagStyles": "- Specifies allowed styles for HTML tags.",
+            "convertTextTags": "- Maps text styles to specific HTML tags. ```js { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } } ```",
+            "allUsedStyles": "- Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`. ```js { allUsedStyles: 'color|background-color|text-shadow' } ```",
+            "tagStyles": "- Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles. ```js { tagStyles: { 'table|td': 'border|color|background-color', hr: 'border-top' } } ```",
             "spanStyles": "- Specifies allowed styles for the `span` tag.\n- The default follows {@link DEFAULTS.SPAN_STYLES}",
             "lineStyles": "- Specifies allowed styles for the `line` element (p..).\n- The default follows {@link DEFAULTS.LINE_STYLES}",
             "fontSizeUnits": "- Allowed font size units.\n- The default follows {@link DEFAULTS.SIZE_UNITS}",
             "retainStyleMode": "- Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n- `repeat`: Styles are retained unless backspace is repeatedly pressed.\n- Continuous pressing will eventually remove the styles.\n- `none`: Styles are not retained. Inline elements are immediately removed with the text.\n- `always`: Styles persist indefinitely unless explicitly removed.\n- Even if all text inside an inline element is deleted, the element itself remains. /// #### 4) Line & Block Formatting",
             "defaultLine": "- Default `line` element when inserting new lines.",
             "defaultLineBreakFormat": "- Specifies the default line break format.\n- [Recommended] `line` : Line break is divided into general tags.\n- [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n- Line breaks are handled as <br> within `line`.\n- You can create a new `line` by entering a line break twice in a row.\n- Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n- suneditor processes work in `line` units.\n- When set to `br`, performance may decrease when editing a lot of data.",
-            "lineAttrReset": "- Line properties that should be reset when changing lines (e.g. \"id|name\").",
-            "formatLine": "- Additionally allowed `line` elements beyond the default. Delimiter: \"|\" (e.g. \"p|div\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.",
-            "formatBrLine": "- Additionally allowed `brLine` elements beyond the default. (e.g. \"PRE\").\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+            "lineAttrReset": "- Line properties that should be reset when changing lines. Delimiter: `\"|\"`. ```js { lineAttrReset: 'id|name' } ```",
+            "formatLine": "- Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element. ```js { formatLine: 'ARTICLE|SECTION' } ```",
+            "formatBrLine": "- Additionally allowed `brLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag. ```js { formatBrLine: 'CODE' } ```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
             "formatClosureBrLine": "- Additionally allowed `closureBrLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n- `closureBrLine` elements are included in the `brLine`.\n- `closureBrLine` elements' line break is `BR` tag.\n- ※ You cannot exit this format with the Enter key or Backspace key.\n- ※ Use it only in special cases. ([ex] format of table cells)",
             "formatBlock": "- Additionally allowed `block` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n- `block` wraps the `line` and `component`.",
             "formatClosureBlock": "- Additionally allowed `closureBlock` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n- `closureBlock` elements are included in the `block`.\n- `closureBlock` element wraps the `line` and `component`.\n- ※ You cannot exit this format with the Enter key or Backspace key.\n- ※ Use it only in special cases. (e.g. format of table cells) /// === UI & Interaction ===",
@@ -8953,26 +8953,26 @@
             "toolbar_container": "- Container element for the toolbar.",
             "toolbar_sticky": "- Enables sticky toolbar with optional offset.",
             "toolbar_hide": "- Hides toolbar initially.",
-            "subToolbar": "- Sub-toolbar configuration.",
+            "subToolbar": "- Sub-toolbar configuration. A secondary toolbar that appears on text selection.",
             "statusbar_container": "- Container element for the status bar.",
             "shortcutsHint": "- Displays shortcut hints in tooltips.",
             "shortcutsDisable": "- Disables keyboard shortcuts.",
-            "shortcuts": "- Custom keyboard shortcuts. /// === Advanced Features ===",
+            "shortcuts": "- Custom keyboard shortcuts. Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs. Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`. Use `$~pluginName.method` to call a specific plugin method. ```js { shortcuts: { bold: ['c+KeyB', 'B'], _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', ''] } } ``` /// === Advanced Features ===",
             "copyFormatKeepOn": "- Keeps the format of the copied content.",
             "autoLinkify": "- Automatically converts URLs into hyperlinks. (`Link` plugin required)\n- Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.",
             "autoStyleify": "- Styles applied automatically on text input.",
             "historyStackDelayTime": "- Delay time for history stack updates (ms).",
             "printClass": "- Class name for printing.",
             "fullScreenOffset": "- Offset applied when entering fullscreen mode.",
-            "previewTemplate": "- Custom template for preview mode.",
-            "printTemplate": "- Custom template for print mode.",
+            "previewTemplate": "- Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.",
+            "printTemplate": "- Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content. ```js { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' } ```",
             "componentInsertBehavior": "- Enables automatic selection of inserted components.\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing.",
             "defaultUrlProtocol": "- Default URL protocol for links.",
-            "toastMessageTime": "- {\"copy\": 1500} - Duration for displaying toast messages.",
+            "toastMessageTime": "- Duration for displaying toast messages (ms).",
             "freeCodeViewMode": "- Enables free code view mode. === Dynamic Options ===",
-            "externalLibs": "- External libraries like CodeMirror or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}",
-            "allowedExtraTags": "- Specifies extra allowed or disallowed tags.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}/// === User Events ===",
-            "events": "- User event handlers configuration /// === [ Plugin-Specific Options ] === ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---",
+            "externalLibs": "- External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js { externalLibs: { katex: window.katex, codeMirror: { src: CodeMirror } } } ```",
+            "allowedExtraTags": "- Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js { allowedExtraTags: { script: false, style: false, mark: true } } ``` /// === User Events ===",
+            "events": "- User event handlers configuration. ```js { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } } ``` /// === [ Plugin-Specific Options ] === ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---",
             "videoGallery": "/// ---[ End of auto-generated plugin options ]--- ================================================================================================================================"
           },
           "source": "core/schema/options.d.ts"
@@ -9147,14 +9147,14 @@
         },
         {
           "name": "FileBrowserPluginOptions",
-          "definition": "{\n\t/**\n\t * - Direct data without server calls\n\t */\n\tdata?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<any>;\n\t/**\n\t * - Server request URL\n\t */\n\turl?: string;\n\t/**\n\t * - Server request headers\n\t */\n\theaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Default thumbnail\n\t */\n\tthumbnail?: string | ((item: SunEditor.Module.Browser.File) => string);\n\t/**\n\t * - Additional tag names\n\t */\n\tprops?: Array<string>;\n}",
+          "definition": "{\n\t/**\n\t * - Direct data without server calls (bypasses URL fetch).\n\t */\n\tdata?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<any>;\n\t/**\n\t * - Server request URL\n\t */\n\turl?: string;\n\t/**\n\t * - Server request headers\n\t */\n\theaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Default thumbnail URL or a function that returns a thumbnail URL per item.\n\t */\n\tthumbnail?: string | ((item: SunEditor.Module.Browser.File) => string);\n\t/**\n\t * - Additional tag names\n\t * ```js\n\t * { url: '/api/files', headers: { Authorization: 'Bearer token' }, thumbnail: (item) => item.thumbUrl }\n\t * ```\n\t */\n\tprops?: Array<string>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "data": "- Direct data without server calls",
+            "data": "- Direct data without server calls (bypasses URL fetch).",
             "url": "- Server request URL",
             "headers": "- Server request headers",
-            "thumbnail": "- Default thumbnail",
-            "props": "- Additional tag names"
+            "thumbnail": "- Default thumbnail URL or a function that returns a thumbnail URL per item.",
+            "props": "- Additional tag names ```js { url: '/api/files', headers: { Authorization: 'Bearer token' }, thumbnail: (item) => item.thumbUrl } ```"
           },
           "source": "plugins/browser/fileBrowser.d.ts"
         },
@@ -9205,7 +9205,7 @@
         },
         {
           "name": "FileUploadPluginOptions",
-          "definition": "{\n\t/**\n\t * - Server request URL for file upload\n\t */\n\tuploadUrl: string;\n\t/**\n\t * - Server request headers\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Total upload size limit in bytes\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - Single file size limit in bytes\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Allow multiple file uploads\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats (e.g., 'image/*, .pdf')\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Specify the default form of the file component as `box` or `link`\n\t */\n\tas?: string;\n\t/**\n\t * - Additional controls to be added to the figure\n\t */\n\tcontrols?: Array<string>;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
+          "definition": "{\n\t/**\n\t * - Server request URL for file upload\n\t */\n\tuploadUrl: string;\n\t/**\n\t * - Server request headers\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Total upload size limit in bytes\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - Single file size limit in bytes\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Allow multiple file uploads\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats.\n\t * ```js\n\t * { acceptedFormats: 'image/*, .pdf, .docx' }\n\t * ```\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Specify the default form of the file component as `box` or `link`\n\t */\n\tas?: string;\n\t/**\n\t * - Additional controls to be added to the figure\n\t */\n\tcontrols?: Array<string>;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
           "kind": "type",
           "memberDescriptions": {
             "uploadUrl": "- Server request URL for file upload",
@@ -9213,7 +9213,7 @@
             "uploadSizeLimit": "- Total upload size limit in bytes",
             "uploadSingleSizeLimit": "- Single file size limit in bytes",
             "allowMultiple": "- Allow multiple file uploads",
-            "acceptedFormats": "- Accepted file formats (e.g., 'image/*, .pdf')",
+            "acceptedFormats": "- Accepted file formats. ```js { acceptedFormats: 'image/*, .pdf, .docx' } ```",
             "as": "- Specify the default form of the file component as `box` or `link`",
             "controls": "- Additional controls to be added to the figure",
             "insertBehavior": "- Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
@@ -9231,12 +9231,12 @@
         },
         {
           "name": "BackgroundColorPluginOptions",
-          "definition": "{\n\t/**\n\t * - Color list\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tvalue: string;\n\t\t\t\tname: string;\n\t\t  }\n\t>;\n\t/**\n\t * - Number of colors per line\n\t */\n\tsplitNum?: number;\n\t/**\n\t * - Disable HEX input\n\t */\n\tdisableHEXInput?: boolean;\n}",
+          "definition": "{\n\t/**\n\t * - Color list.\n\t * Use HEX strings or objects with `value`/`name` for labeled colors.\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tvalue: string;\n\t\t\t\tname: string;\n\t\t  }\n\t>;\n\t/**\n\t * - Number of colors per line\n\t */\n\tsplitNum?: number;\n\t/**\n\t * - Disable HEX input\n\t * ```js\n\t * { items: ['#ff0000', '#00ff00', { value: '#0000ff', name: 'Blue' }], splitNum: 6 }\n\t * ```\n\t */\n\tdisableHEXInput?: boolean;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Color list",
+            "items": "- Color list. Use HEX strings or objects with `value`/`name` for labeled colors.",
             "splitNum": "- Number of colors per line",
-            "disableHEXInput": "- Disable HEX input"
+            "disableHEXInput": "- Disable HEX input ```js { items: ['#ff0000', '#00ff00', { value: '#0000ff', name: 'Blue' }], splitNum: 6 } ```"
           },
           "source": "plugins/dropdown/backgroundColor.d.ts"
         },
@@ -9248,10 +9248,10 @@
         },
         {
           "name": "BlockStylePluginOptions",
-          "definition": "{\n\t/**\n\t * - Format list\n\t */\n\titems?: Array<'p' | 'div' | 'blockquote' | 'pre' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | string | BlockStyleItem>;\n}",
+          "definition": "{\n\t/**\n\t * - Format list.\n\t * Use string shortcuts for built-in tags, or `BlockStyleItem` objects for custom block styles.\n\t * - `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block.\n\t * ```js\n\t * // string shortcuts + custom item\n\t * ['p', 'h1', 'h2', 'blockquote', { tag: 'div', command: 'block', name: 'Custom Block', class: 'my-block' }]\n\t * ```\n\t */\n\titems?: Array<'p' | 'div' | 'blockquote' | 'pre' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | string | BlockStyleItem>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Format list"
+            "items": "- Format list. Use string shortcuts for built-in tags, or `BlockStyleItem` objects for custom block styles.\n- `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block. ```js // string shortcuts + custom item ['p', 'h1', 'h2', 'blockquote', { tag: 'div', command: 'block', name: 'Custom Block', class: 'my-block' }] ```"
           },
           "source": "plugins/dropdown/blockStyle.d.ts"
         },
@@ -9266,60 +9266,60 @@
         },
         {
           "name": "FontColorPluginOptions",
-          "definition": "{\n\t/**\n\t * - Color list\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tvalue: string;\n\t\t\t\tname: string;\n\t\t  }\n\t>;\n\t/**\n\t * - Number of colors per line\n\t */\n\tsplitNum?: number;\n\t/**\n\t * - Disable HEX input\n\t */\n\tdisableHEXInput?: boolean;\n}",
+          "definition": "{\n\t/**\n\t * - Color list.\n\t * Use HEX strings or objects with `value`/`name` for labeled colors.\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tvalue: string;\n\t\t\t\tname: string;\n\t\t  }\n\t>;\n\t/**\n\t * - Number of colors per line\n\t */\n\tsplitNum?: number;\n\t/**\n\t * - Disable HEX input\n\t * ```js\n\t * { items: ['#ff0000', '#00ff00', { value: '#0000ff', name: 'Blue' }], splitNum: 6 }\n\t * ```\n\t */\n\tdisableHEXInput?: boolean;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Color list",
+            "items": "- Color list. Use HEX strings or objects with `value`/`name` for labeled colors.",
             "splitNum": "- Number of colors per line",
-            "disableHEXInput": "- Disable HEX input"
+            "disableHEXInput": "- Disable HEX input ```js { items: ['#ff0000', '#00ff00', { value: '#0000ff', name: 'Blue' }], splitNum: 6 } ```"
           },
           "source": "plugins/dropdown/fontColor.d.ts"
         },
         {
           "name": "HRPluginOptions",
-          "definition": "{\n\t/**\n\t * - HR list\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\tclass: string;\n\t\tstyle?: string;\n\t}>;\n}",
+          "definition": "{\n\t/**\n\t * - HR list\n\t * ```js\n\t * [\n\t * { name: 'Solid', class: '__se__solid', style: 'border-top: 1px solid #000;' },\n\t * { name: 'Dashed', class: '__se__dashed' }\n\t * ]\n\t * ```\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\tclass: string;\n\t\tstyle?: string;\n\t}>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- HR list"
+            "items": "- HR list ```js [ { name: 'Solid', class: '__se__solid', style: 'border-top: 1px solid #000;' }, { name: 'Dashed', class: '__se__dashed' } ] ```"
           },
           "source": "plugins/dropdown/hr.d.ts"
         },
         {
           "name": "LayoutPluginOptions",
-          "definition": "{\n\t/**\n\t * - Layout list\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\thtml: string;\n\t}>;\n}",
+          "definition": "{\n\t/**\n\t * - Layout list. Each item defines a named layout template with raw HTML.\n\t * ```js\n\t * [{ name: 'Two Columns', html: '<div style=\"display:flex\"><div style=\"flex:1\">Left</div><div style=\"flex:1\">Right</div></div>' }]\n\t * ```\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\thtml: string;\n\t}>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Layout list"
+            "items": "- Layout list. Each item defines a named layout template with raw HTML. ```js [{ name: 'Two Columns', html: '<div style=\"display:flex\"><div style=\"flex:1\">Left</div><div style=\"flex:1\">Right</div></div>' }] ```"
           },
           "source": "plugins/dropdown/layout.d.ts"
         },
         {
           "name": "LineHeightPluginOptions",
-          "definition": "{\n\t/**\n\t * - Line height list\n\t */\n\titems?: Array<{\n\t\ttext: string;\n\t\tvalue: string;\n\t}>;\n}",
+          "definition": "{\n\t/**\n\t * - Line height list\n\t * ```js\n\t * [{ text: 'Single', value: '1' }, { text: '1.5', value: '1.5' }, { text: 'Double', value: '2' }]\n\t * ```\n\t */\n\titems?: Array<{\n\t\ttext: string;\n\t\tvalue: string;\n\t}>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Line height list"
+            "items": "- Line height list ```js [{ text: 'Single', value: '1' }, { text: '1.5', value: '1.5' }, { text: 'Double', value: '2' }] ```"
           },
           "source": "plugins/dropdown/lineHeight.d.ts"
         },
         {
           "name": "ParagraphStylePluginOptions",
-          "definition": "{\n\t/**\n\t * - Paragraph item list\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tname: string;\n\t\t\t\tclass: string;\n\t\t\t\t_class: string;\n\t\t  }\n\t>;\n}",
+          "definition": "{\n\t/**\n\t * - Paragraph item list\n\t * ```js\n\t * // use default paragraph styles\n\t * ['spaced', 'bordered', 'neon']\n\t * // custom paragraph styles\n\t * [\n\t * { name: 'spaced', class: '__se__p-spaced', _class: '' },\n\t * { name: 'bordered', class: '__se__p-bordered', _class: '' },\n\t * { name: 'neon', class: '__se__p-neon', _class: '' }\n\t * ]\n\t * ```\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tname: string;\n\t\t\t\tclass: string;\n\t\t\t\t_class: string;\n\t\t  }\n\t>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Paragraph item list"
+            "items": "- Paragraph item list ```js // use default paragraph styles ['spaced', 'bordered', 'neon'] // custom paragraph styles [ { name: 'spaced', class: '__se__p-spaced', _class: '' }, { name: 'bordered', class: '__se__p-bordered', _class: '' }, { name: 'neon', class: '__se__p-neon', _class: '' } ] ```"
           },
           "source": "plugins/dropdown/paragraphStyle.d.ts"
         },
         {
           "name": "TablePluginOptions",
-          "definition": "{\n\t/**\n\t * - Scroll type (`x`, `y`, `xy`)\n\t */\n\tscrollType?: 'x' | 'y' | 'xy';\n\t/**\n\t * - Caption position (`top`, `bottom`)\n\t */\n\tcaptionPosition?: 'top' | 'bottom';\n\t/**\n\t * - Cell controller position (`cell`, `table`)\n\t */\n\tcellControllerPosition?: 'cell' | 'table';\n\t/**\n\t * - Color list, used in cell color picker\n\t */\n\tcolorList?: any[];\n}",
+          "definition": "{\n\t/**\n\t * - Scroll type (`x`, `y`, `xy`)\n\t */\n\tscrollType?: 'x' | 'y' | 'xy';\n\t/**\n\t * - Caption position (`top`, `bottom`)\n\t */\n\tcaptionPosition?: 'top' | 'bottom';\n\t/**\n\t * - Cell controller position (`cell`, `table`)\n\t */\n\tcellControllerPosition?: 'cell' | 'table';\n\t/**\n\t * - HEX color list for the cell background color picker.\n\t * ```js\n\t * { colorList: ['#bbf7d0', '#fde68a', '#fecaca', '#e9d5ff'] }\n\t * ```\n\t */\n\tcolorList?: Array<string>;\n}",
           "kind": "type",
           "memberDescriptions": {
             "scrollType": "- Scroll type (`x`, `y`, `xy`)",
             "captionPosition": "- Caption position (`top`, `bottom`)",
             "cellControllerPosition": "- Cell controller position (`cell`, `table`)",
-            "colorList": "- Color list, used in cell color picker"
+            "colorList": "- HEX color list for the cell background color picker. ```js { colorList: ['#bbf7d0', '#fde68a', '#fecaca', '#e9d5ff'] } ```"
           },
           "source": "plugins/dropdown/table/index.d.ts"
         },
@@ -9331,32 +9331,32 @@
         },
         {
           "name": "TemplatePluginOptions",
-          "definition": "{\n\t/**\n\t * - Template list\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\thtml: string;\n\t}>;\n}",
+          "definition": "{\n\t/**\n\t * - Template list\n\t * ```js\n\t * [{ name: 'Greeting', html: '<p>Hello! Thank you for contacting us.</p>' }]\n\t * ```\n\t */\n\titems?: Array<{\n\t\tname: string;\n\t\thtml: string;\n\t}>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Template list"
+            "items": "- Template list ```js [{ name: 'Greeting', html: '<p>Hello! Thank you for contacting us.</p>' }] ```"
           },
           "source": "plugins/dropdown/template.d.ts"
         },
         {
           "name": "TextStylePluginOptions",
-          "definition": "{\n\t/**\n\t * - Text style item list\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tname: string;\n\t\t\t\tclass: string;\n\t\t\t\ttag?: string;\n\t\t  }\n\t>;\n}",
+          "definition": "{\n\t/**\n\t * - Text style item list.\n\t * Use string shortcuts for built-in styles (e.g., `'shadow'`), or objects for custom styles.\n\t * ```js\n\t * ['shadow', { name: 'Highlight', class: 'my-highlight', tag: 'mark' }]\n\t * ```\n\t */\n\titems?: Array<\n\t\t| string\n\t\t| {\n\t\t\t\tname: string;\n\t\t\t\tclass: string;\n\t\t\t\ttag?: string;\n\t\t  }\n\t>;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "items": "- Text style item list"
+            "items": "- Text style item list. Use string shortcuts for built-in styles (e.g., `'shadow'`), or objects for custom styles. ```js ['shadow', { name: 'Highlight', class: 'my-highlight', tag: 'mark' }] ```"
           },
           "source": "plugins/dropdown/textStyle.d.ts"
         },
         {
           "name": "MentionPluginOptions",
-          "definition": "{\n\t/**\n\t * - The character that triggers the mention list.\n\t */\n\ttriggerText?: string;\n\t/**\n\t * - The number of items to display in the mention list\n\t */\n\tlimitSize?: number;\n\t/**\n\t * - The number of characters to start searching for the mention list\n\t */\n\tsearchStartLength?: number;\n\t/**\n\t * - The time to wait before displaying the mention list\n\t */\n\tdelayTime?: number;\n\t/**\n\t * - Use data without using API\n\t */\n\tdata?: Array<{\n\t\tkey: string;\n\t\tname: string;\n\t\turl: string;\n\t}>;\n\t/**\n\t * - The URL to call the mention list\n\t */\n\tapiUrl?: string;\n\t/**\n\t * - The headers to send with the API call\n\t */\n\tapiHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Whether to cache the mention list data\n\t */\n\tuseCachingData?: boolean;\n\t/**\n\t * - Whether to cache the mention list data in the field\n\t */\n\tuseCachingFieldData?: boolean;\n}",
+          "definition": "{\n\t/**\n\t * - The character that triggers the mention list.\n\t */\n\ttriggerText?: string;\n\t/**\n\t * - The number of items to display in the mention list\n\t */\n\tlimitSize?: number;\n\t/**\n\t * - The number of characters to start searching for the mention list\n\t */\n\tsearchStartLength?: number;\n\t/**\n\t * - The time to wait before displaying the mention list\n\t */\n\tdelayTime?: number;\n\t/**\n\t * - Static mention data (used instead of API).\n\t * ```js\n\t * // data\n\t * [{ key: 'john', name: 'John Doe', url: '/users/john' }]\n\t * ```\n\t */\n\tdata?: Array<{\n\t\tkey: string;\n\t\tname: string;\n\t\turl: string;\n\t}>;\n\t/**\n\t * - The URL to call the mention list\n\t */\n\tapiUrl?: string;\n\t/**\n\t * - The headers to send with the API call\n\t */\n\tapiHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Whether to cache the mention list data\n\t */\n\tuseCachingData?: boolean;\n\t/**\n\t * - Whether to cache the mention list data in the field\n\t */\n\tuseCachingFieldData?: boolean;\n}",
           "kind": "type",
           "memberDescriptions": {
             "triggerText": "- The character that triggers the mention list.",
             "limitSize": "- The number of items to display in the mention list",
             "searchStartLength": "- The number of characters to start searching for the mention list",
             "delayTime": "- The time to wait before displaying the mention list",
-            "data": "- Use data without using API",
+            "data": "- Static mention data (used instead of API). ```js // data [{ key: 'john', name: 'John Doe', url: '/users/john' }] ```",
             "apiUrl": "- The URL to call the mention list",
             "apiHeaders": "- The headers to send with the API call",
             "useCachingData": "- Whether to cache the mention list data",
@@ -9366,24 +9366,24 @@
         },
         {
           "name": "FontSizePluginOptions",
-          "definition": "{\n\t/**\n\t * - The unit for the font size.\n\t * - Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n\t * - If `'text'` is used, a text-based font size list is applied.\n\t */\n\tsizeUnit?: string;\n\t/**\n\t * - Determines whether the default size label is displayed in the dropdown menu.\n\t */\n\tshowDefaultSizeLabel?: boolean;\n\t/**\n\t * - When `true`, displays increase and decrease buttons for font size adjustments.\n\t */\n\tshowIncDecControls?: boolean;\n\t/**\n\t * - When `true`, disables the direct font size input box.\n\t */\n\tdisableInput?: boolean;\n\t/**\n\t * - Optional object to override or extend the default unit mapping for font sizes.\n\t */\n\tunitMap?: {\n\t\t[x: string]: {\n\t\t\tdefault: number;\n\t\t\tinc: number;\n\t\t\tmin: number;\n\t\t\tmax: number;\n\t\t\tlist: Array<number>;\n\t\t};\n\t};\n}",
+          "definition": "{\n\t/**\n\t * - The unit for the font size.\n\t * - Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n\t * - If `'text'` is used, a text-based font size list is applied.\n\t */\n\tsizeUnit?: string;\n\t/**\n\t * - Determines whether the default size label is displayed in the dropdown menu.\n\t */\n\tshowDefaultSizeLabel?: boolean;\n\t/**\n\t * - When `true`, displays increase and decrease buttons for font size adjustments.\n\t */\n\tshowIncDecControls?: boolean;\n\t/**\n\t * - When `true`, disables the direct font size input box.\n\t */\n\tdisableInput?: boolean;\n\t/**\n\t * - Override or extend the default unit mapping for font sizes.\n\t * Each key is a unit name (e.g., `'px'`, `'em'`). `default`: initial size, `inc`: step for inc/dec buttons, `min`/`max`: range limits, `list`: dropdown values.\n\t * When `sizeUnit` is `'text'`, list items use `{title: string, size: string}` instead of numbers.\n\t * ```js\n\t * { unitMap: { px: { default: 16, inc: 1, min: 8, max: 72, list: [8, 12, 16, 20, 24, 32, 48] } } }\n\t * ```\n\t */\n\tunitMap?: {\n\t\t[x: string]: {\n\t\t\tdefault: number;\n\t\t\tinc: number;\n\t\t\tmin: number;\n\t\t\tmax: number;\n\t\t\tlist: Array<number>;\n\t\t};\n\t};\n}",
           "kind": "type",
           "memberDescriptions": {
             "sizeUnit": "- The unit for the font size.\n- Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n- If `'text'` is used, a text-based font size list is applied.",
             "showDefaultSizeLabel": "- Determines whether the default size label is displayed in the dropdown menu.",
             "showIncDecControls": "- When `true`, displays increase and decrease buttons for font size adjustments.",
             "disableInput": "- When `true`, disables the direct font size input box.",
-            "unitMap": "- Optional object to override or extend the default unit mapping for font sizes."
+            "unitMap": "- Override or extend the default unit mapping for font sizes. Each key is a unit name (e.g., `'px'`, `'em'`). `default`: initial size, `inc`: step for inc/dec buttons, `min`/`max`: range limits, `list`: dropdown values. When `sizeUnit` is `'text'`, list items use `{title: string, size: string}` instead of numbers. ```js { unitMap: { px: { default: 16, inc: 1, min: 8, max: 72, list: [8, 12, 16, 20, 24, 32, 48] } } } ```"
           },
           "source": "plugins/input/fontSize.d.ts"
         },
         {
           "name": "AudioPluginOptions",
-          "definition": "{\n\t/**\n\t * - The default width of the `AUDIO` tag (e.g., `\"300px\"`).\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the `AUDIO` tag (e.g., `\"150px\"`).\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to create a file input element.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element (default is `true` if file input is not created).\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL to which files will be uploaded.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Headers to include in the file upload request.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether to allow multiple file uploads.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats (default is `\"audio/*\"`).\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Additional attributes to set on the `AUDIO` tag.\n\t */\n\taudioTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
+          "definition": "{\n\t/**\n\t * - The default width of the `AUDIO` tag.\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the `AUDIO` tag.\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to create a file input element.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element (default is `true` if file input is not created).\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL to which files will be uploaded.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Headers to include in the file upload request.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether to allow multiple file uploads.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats (default is `\"audio/*\"`).\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Additional attributes to set on the `AUDIO` tag.\n\t * ```js\n\t * { audioTagAttributes: { controls: 'true', preload: 'metadata' } }\n\t * ```\n\t */\n\taudioTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
           "kind": "type",
           "memberDescriptions": {
-            "defaultWidth": "- The default width of the `AUDIO` tag (e.g., `\"300px\"`).",
-            "defaultHeight": "- The default height of the `AUDIO` tag (e.g., `\"150px\"`).",
+            "defaultWidth": "- The default width of the `AUDIO` tag.",
+            "defaultHeight": "- The default height of the `AUDIO` tag.",
             "createFileInput": "- Whether to create a file input element.",
             "createUrlInput": "- Whether to create a URL input element (default is `true` if file input is not created).",
             "uploadUrl": "- The URL to which files will be uploaded.",
@@ -9392,7 +9392,7 @@
             "uploadSingleSizeLimit": "- The single file size limit in bytes.",
             "allowMultiple": "- Whether to allow multiple file uploads.",
             "acceptedFormats": "- Accepted file formats (default is `\"audio/*\"`).",
-            "audioTagAttributes": "- Additional attributes to set on the `AUDIO` tag.",
+            "audioTagAttributes": "- Additional attributes to set on the `AUDIO` tag. ```js { audioTagAttributes: { controls: 'true', preload: 'metadata' } } ```",
             "insertBehavior": "- Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
           },
           "source": "plugins/modal/audio.d.ts"
@@ -9418,7 +9418,7 @@
         },
         {
           "name": "EmbedPluginOptions",
-          "definition": "{\n\t/**\n\t * - Whether the embed element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the embed element (numeric value or with unit).\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the embed element (numeric value or with unit).\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - The URL for file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Headers to include in file upload requests.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total file upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Additional attributes to set on the `IFRAME` tag.\n\t */\n\tiframeTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - YouTube query parameter.\n\t */\n\tquery_youtube?: string;\n\t/**\n\t * - Vimeo query parameter.\n\t */\n\tquery_vimeo?: string;\n\t/**\n\t * - Additional URL patterns for embed.\n\t */\n\turlPatterns?: Array<RegExp>;\n\t/**\n\t * - Custom query objects for additional embedding services.\n\t * Example :\n\t * {\n\t * facebook: {\n\t * pattern: /(?:https?:\\/\\/)?(?:www\\.)?(?:facebook\\.com)\\/(.+)/i,\n\t * action: (url) => {\n\t * return `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=500`;\n\t * },\n\t * tag: 'iframe'\n\t * },\n\t * twitter: {\n\t * pattern: /(?:https?:\\/\\/)?(?:www\\.)?(?:twitter\\.com)\\/(status|embed)\\/(.+)/i,\n\t * action: (url) => {\n\t * return `https://platform.twitter.com/embed/Tweet.html?url=${encodeURIComponent(url)}`;\n\t * },\n\t * tag: 'iframe'\n\t * },\n\t * // Additional services...\n\t * }\n\t */\n\tembedQuery?: {\n\t\t[x: string]: {\n\t\t\tpattern: RegExp;\n\t\t\taction: (url: string) => string;\n\t\t\ttag: string;\n\t\t};\n\t};\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
+          "definition": "{\n\t/**\n\t * - Whether the embed element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the embed element (numeric value or with unit).\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the embed element (numeric value or with unit).\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - The URL for file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Headers to include in file upload requests.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total file upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Additional attributes to set on the `IFRAME` tag.\n\t * ```js\n\t * { iframeTagAttributes: { allowfullscreen: 'true', loading: 'lazy' } }\n\t * ```\n\t */\n\tiframeTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - YouTube query parameter appended to the embed URL.\n\t * ```js\n\t * { query_youtube: 'autoplay=1&mute=1' }\n\t * ```\n\t */\n\tquery_youtube?: string;\n\t/**\n\t * - Vimeo query parameter appended to the embed URL.\n\t * ```js\n\t * { query_vimeo: 'autoplay=1' }\n\t * ```\n\t */\n\tquery_vimeo?: string;\n\t/**\n\t * - Additional URL patterns to recognize as embeddable content.\n\t */\n\turlPatterns?: Array<RegExp>;\n\t/**\n\t * - Custom embed service definitions.\n\t * Each key is a service name, with `pattern` to match the URL, `action` to transform it into an embed URL, and `tag` for the output element.\n\t * ```js\n\t * {\n\t * embedQuery: {\n\t * facebook: {\n\t * pattern: /(?:https?:\\/\\/)?(?:www\\.)?facebook\\.com\\/(.+)/i,\n\t * action: (url) => `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}`,\n\t * tag: 'iframe'\n\t * }\n\t * }\n\t * }\n\t * ```\n\t */\n\tembedQuery?: {\n\t\t[x: string]: {\n\t\t\tpattern: RegExp;\n\t\t\taction: (url: string) => string;\n\t\t\ttag: string;\n\t\t};\n\t};\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
           "kind": "type",
           "memberDescriptions": {
             "canResize": "- Whether the embed element can be resized.",
@@ -9430,11 +9430,11 @@
             "uploadHeaders": "- Headers to include in file upload requests.",
             "uploadSizeLimit": "- The total file upload size limit in bytes.",
             "uploadSingleSizeLimit": "- The single file upload size limit in bytes.",
-            "iframeTagAttributes": "- Additional attributes to set on the `IFRAME` tag.",
-            "query_youtube": "- YouTube query parameter.",
-            "query_vimeo": "- Vimeo query parameter.",
-            "urlPatterns": "- Additional URL patterns for embed.",
-            "embedQuery": "- Custom query objects for additional embedding services. Example : { facebook: { pattern: /(?:https?:\\/\\/)?(?:www\\.)?(?:facebook\\.com)\\/(.+)/i, action: (url) => { return `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=500`; }, tag: 'iframe' }, twitter: { pattern: /(?:https?:\\/\\/)?(?:www\\.)?(?:twitter\\.com)\\/(status|embed)\\/(.+)/i, action: (url) => { return `https://platform.twitter.com/embed/Tweet.html?url=${encodeURIComponent(url)}`; }, tag: 'iframe' }, // Additional services... }",
+            "iframeTagAttributes": "- Additional attributes to set on the `IFRAME` tag. ```js { iframeTagAttributes: { allowfullscreen: 'true', loading: 'lazy' } } ```",
+            "query_youtube": "- YouTube query parameter appended to the embed URL. ```js { query_youtube: 'autoplay=1&mute=1' } ```",
+            "query_vimeo": "- Vimeo query parameter appended to the embed URL. ```js { query_vimeo: 'autoplay=1' } ```",
+            "urlPatterns": "- Additional URL patterns to recognize as embeddable content.",
+            "embedQuery": "- Custom embed service definitions. Each key is a service name, with `pattern` to match the URL, `action` to transform it into an embed URL, and `tag` for the output element. ```js { embedQuery: { facebook: { pattern: /(?:https?:\\/\\/)?(?:www\\.)?facebook\\.com\\/(.+)/i, action: (url) => `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}`, tag: 'iframe' } } } ```",
             "controls": "- Figure controls.",
             "insertBehavior": "- Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
           },
@@ -9442,7 +9442,7 @@
         },
         {
           "name": "ImagePluginOptions",
-          "definition": "{\n\t/**\n\t * - Whether the image element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the image. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the image. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - Whether to create a file input element for image uploads.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element for image insertion.\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL endpoint for image file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers to include in the file upload request.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether multiple image uploads are allowed.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - The accepted file formats for image uploads.\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Whether to enable format type selection (`block` or `inline`).\n\t */\n\tuseFormatType?: boolean;\n\t/**\n\t * - The default image format type (`\"block\"` or `\"inline\"`).\n\t */\n\tdefaultFormatType?: 'block' | 'inline';\n\t/**\n\t * - Whether to retain the chosen format type after image insertion.\n\t */\n\tkeepFormatType?: boolean;\n\t/**\n\t * - Whether to enable file uploads for linked images.\n\t */\n\tlinkEnableFileUpload?: boolean;\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
+          "definition": "{\n\t/**\n\t * - Whether the image element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the image. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the image. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - Whether to create a file input element for image uploads.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element for image insertion.\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL endpoint for image file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers to include in the file upload request.\n\t * ```js\n\t * { uploadUrl: '/api/upload/image', uploadHeaders: { Authorization: 'Bearer token' } }\n\t * ```\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether multiple image uploads are allowed.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - The accepted file formats for image uploads.\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - Whether to enable format type selection (`block` or `inline`).\n\t */\n\tuseFormatType?: boolean;\n\t/**\n\t * - The default image format type (`\"block\"` or `\"inline\"`).\n\t */\n\tdefaultFormatType?: 'block' | 'inline';\n\t/**\n\t * - Whether to retain the chosen format type after image insertion.\n\t */\n\tkeepFormatType?: boolean;\n\t/**\n\t * - Whether to enable file uploads for linked images.\n\t */\n\tlinkEnableFileUpload?: boolean;\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
           "kind": "type",
           "memberDescriptions": {
             "canResize": "- Whether the image element can be resized.",
@@ -9453,7 +9453,7 @@
             "createFileInput": "- Whether to create a file input element for image uploads.",
             "createUrlInput": "- Whether to create a URL input element for image insertion.",
             "uploadUrl": "- The URL endpoint for image file uploads.",
-            "uploadHeaders": "- Additional headers to include in the file upload request.",
+            "uploadHeaders": "- Additional headers to include in the file upload request. ```js { uploadUrl: '/api/upload/image', uploadHeaders: { Authorization: 'Bearer token' } } ```",
             "uploadSizeLimit": "- The total upload size limit in bytes.",
             "uploadSingleSizeLimit": "- The single file upload size limit in bytes.",
             "allowMultiple": "- Whether multiple image uploads are allowed.",
@@ -9499,12 +9499,12 @@
         },
         {
           "name": "MathPluginOptions",
-          "definition": "{\n\t/**\n\t * - Whether the math modal can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to automatically adjust the height of the modal.\n\t */\n\tautoHeight?: boolean;\n\t/**\n\t * - A list of font size options for rendering math expressions.\n\t */\n\tfontSizeList?: Array<object>;\n\t/**\n\t * - A callback function to handle paste events in the math input area.\n\t */\n\tonPaste?: ((...args: any) => any) | null;\n\t/**\n\t * - An object specifying the dimensions for the math modal.\n\t */\n\tformSize?: {\n\t\twidth?: string;\n\t\theight?: string;\n\t\tmaxWidth?: string;\n\t\tmaxHeight?: string;\n\t\tminWidth?: string;\n\t\tminHeight?: string;\n\t};\n}",
+          "definition": "{\n\t/**\n\t * - Whether the math modal can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to automatically adjust the height of the modal.\n\t */\n\tautoHeight?: boolean;\n\t/**\n\t * - A list of font size options for the math expression size selector.\n\t * ```js\n\t * // fontSizeList\n\t * [{ text: '1', value: '1em', default: true }, { text: '1.5', value: '1.5em' }, { text: '2', value: '2em' }]\n\t * ```\n\t */\n\tfontSizeList?: Array<{\n\t\ttext: string;\n\t\tvalue: string;\n\t\tdefault?: true;\n\t}>;\n\t/**\n\t * - A callback function to handle paste events in the math input area.\n\t */\n\tonPaste?: ((...args: any) => any) | null;\n\t/**\n\t * - An object specifying the dimensions for the math modal.\n\t */\n\tformSize?: {\n\t\twidth?: string;\n\t\theight?: string;\n\t\tmaxWidth?: string;\n\t\tmaxHeight?: string;\n\t\tminWidth?: string;\n\t\tminHeight?: string;\n\t};\n}",
           "kind": "type",
           "memberDescriptions": {
             "canResize": "- Whether the math modal can be resized.",
             "autoHeight": "- Whether to automatically adjust the height of the modal.",
-            "fontSizeList": "- A list of font size options for rendering math expressions.",
+            "fontSizeList": "- A list of font size options for the math expression size selector. ```js // fontSizeList [{ text: '1', value: '1em', default: true }, { text: '1.5', value: '1.5em' }, { text: '2', value: '2em' }] ```",
             "onPaste": "- A callback function to handle paste events in the math input area.",
             "formSize": "- An object specifying the dimensions for the math modal."
           },
@@ -9512,7 +9512,7 @@
         },
         {
           "name": "VideoPluginOptions",
-          "definition": "{\n\t/**\n\t * - Whether the video element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the video element. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the video element. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - Whether to create a file input element for video uploads.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element for video embedding.\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL endpoint for video file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers to include in the video upload request.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit for videos in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit for videos in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether multiple video uploads are allowed.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats for video uploads (`\"video/*\"`).\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - The default aspect ratio for the video (e.g., 16:9 is 0.5625).\n\t */\n\tdefaultRatio?: number;\n\t/**\n\t * - Whether to display the ratio option in the modal.\n\t */\n\tshowRatioOption?: boolean;\n\t/**\n\t * - Custom ratio options for video resizing.\n\t */\n\tratioOptions?: any[];\n\t/**\n\t * - Additional attributes to set on the `VIDEO` tag.\n\t */\n\tvideoTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Additional attributes to set on the `IFRAME` tag.\n\t */\n\tiframeTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Additional query parameters for YouTube embedding.\n\t */\n\tquery_youtube?: string;\n\t/**\n\t * - Additional query parameters for Vimeo embedding.\n\t */\n\tquery_vimeo?: string;\n\t/**\n\t * - Custom query objects for additional embedding services.\n\t */\n\tembedQuery?: {\n\t\t[x: string]: {\n\t\t\tpattern: RegExp;\n\t\t\taction: (url: string) => string;\n\t\t\ttag: string;\n\t\t};\n\t};\n\t/**\n\t * - Additional URL patterns for video embedding.\n\t */\n\turlPatterns?: Array<RegExp>;\n\t/**\n\t * - Additional file extensions to be recognized for video uploads.\n\t */\n\textensions?: Array<string>;\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
+          "definition": "{\n\t/**\n\t * - Whether the video element can be resized.\n\t */\n\tcanResize?: boolean;\n\t/**\n\t * - Whether to display the height input field.\n\t */\n\tshowHeightInput?: boolean;\n\t/**\n\t * - The default width of the video element. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultWidth?: string;\n\t/**\n\t * - The default height of the video element. If a number is provided, `\"px\"` will be appended.\n\t */\n\tdefaultHeight?: string;\n\t/**\n\t * - Whether to allow only percentage-based sizing.\n\t */\n\tpercentageOnlySize?: boolean;\n\t/**\n\t * - Whether to create a file input element for video uploads.\n\t */\n\tcreateFileInput?: boolean;\n\t/**\n\t * - Whether to create a URL input element for video embedding.\n\t */\n\tcreateUrlInput?: boolean;\n\t/**\n\t * - The URL endpoint for video file uploads.\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers to include in the video upload request.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total upload size limit for videos in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit for videos in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Whether multiple video uploads are allowed.\n\t */\n\tallowMultiple?: boolean;\n\t/**\n\t * - Accepted file formats for video uploads (`\"video/*\"`).\n\t */\n\tacceptedFormats?: string;\n\t/**\n\t * - The default aspect ratio for the video (height/width, e.g. 16:9 → `9/16 = 0.5625`).\n\t */\n\tdefaultRatio?: number;\n\t/**\n\t * - Whether to display the ratio option in the modal.\n\t */\n\tshowRatioOption?: boolean;\n\t/**\n\t * - Custom ratio options for video resizing (value = height/width).\n\t * ```js\n\t * // ratioOptions\n\t * [{ name: '16:9', value: 0.5625 }, { name: '4:3', value: 0.75 }]\n\t * ```\n\t */\n\tratioOptions?: Array<{\n\t\tname: string;\n\t\tvalue: number;\n\t}>;\n\t/**\n\t * - Additional attributes to set on the `VIDEO` tag.\n\t * ```js\n\t * { videoTagAttributes: { controls: 'true', muted: 'true', playsinline: '' } }\n\t * ```\n\t */\n\tvideoTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Additional attributes to set on the `IFRAME` tag.\n\t * ```js\n\t * { iframeTagAttributes: { allowfullscreen: 'true', loading: 'lazy' } }\n\t * ```\n\t */\n\tiframeTagAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Additional query parameters for YouTube embedding.\n\t * ```js\n\t * { query_youtube: 'autoplay=1&mute=1' }\n\t * ```\n\t */\n\tquery_youtube?: string;\n\t/**\n\t * - Additional query parameters for Vimeo embedding.\n\t * ```js\n\t * { query_vimeo: 'autoplay=1' }\n\t * ```\n\t */\n\tquery_vimeo?: string;\n\t/**\n\t * - Custom embed service definitions (see `EmbedPluginOptions.embedQuery`).\n\t */\n\tembedQuery?: {\n\t\t[x: string]: {\n\t\t\tpattern: RegExp;\n\t\t\taction: (url: string) => string;\n\t\t\ttag: string;\n\t\t};\n\t};\n\t/**\n\t * - Additional URL patterns for video embedding.\n\t */\n\turlPatterns?: Array<RegExp>;\n\t/**\n\t * - Additional file extensions to be recognized for video uploads.\n\t */\n\textensions?: Array<string>;\n\t/**\n\t * - Figure controls.\n\t */\n\tcontrols?: SunEditor.Module.Figure.Controls;\n\t/**\n\t * - Component insertion behavior for selection and cursor placement.\n\t * - [default: `options.get('componentInsertBehavior')`]\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tinsertBehavior?: SunEditor.ComponentInsertType;\n}",
           "kind": "type",
           "memberDescriptions": {
             "canResize": "- Whether the video element can be resized.",
@@ -9528,14 +9528,14 @@
             "uploadSingleSizeLimit": "- The single file upload size limit for videos in bytes.",
             "allowMultiple": "- Whether multiple video uploads are allowed.",
             "acceptedFormats": "- Accepted file formats for video uploads (`\"video/*\"`).",
-            "defaultRatio": "- The default aspect ratio for the video (e.g., 16:9 is 0.5625).",
+            "defaultRatio": "- The default aspect ratio for the video (height/width, e.g. 16:9 → `9/16 = 0.5625`).",
             "showRatioOption": "- Whether to display the ratio option in the modal.",
-            "ratioOptions": "- Custom ratio options for video resizing.",
-            "videoTagAttributes": "- Additional attributes to set on the `VIDEO` tag.",
-            "iframeTagAttributes": "- Additional attributes to set on the `IFRAME` tag.",
-            "query_youtube": "- Additional query parameters for YouTube embedding.",
-            "query_vimeo": "- Additional query parameters for Vimeo embedding.",
-            "embedQuery": "- Custom query objects for additional embedding services.",
+            "ratioOptions": "- Custom ratio options for video resizing (value = height/width). ```js // ratioOptions [{ name: '16:9', value: 0.5625 }, { name: '4:3', value: 0.75 }] ```",
+            "videoTagAttributes": "- Additional attributes to set on the `VIDEO` tag. ```js { videoTagAttributes: { controls: 'true', muted: 'true', playsinline: '' } } ```",
+            "iframeTagAttributes": "- Additional attributes to set on the `IFRAME` tag. ```js { iframeTagAttributes: { allowfullscreen: 'true', loading: 'lazy' } } ```",
+            "query_youtube": "- Additional query parameters for YouTube embedding. ```js { query_youtube: 'autoplay=1&mute=1' } ```",
+            "query_vimeo": "- Additional query parameters for Vimeo embedding. ```js { query_vimeo: 'autoplay=1' } ```",
+            "embedQuery": "- Custom embed service definitions (see `EmbedPluginOptions.embedQuery`).",
             "urlPatterns": "- Additional URL patterns for video embedding.",
             "extensions": "- Additional file extensions to be recognized for video uploads.",
             "controls": "- Figure controls.",

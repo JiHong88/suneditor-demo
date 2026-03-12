@@ -177,16 +177,6 @@ function TextareaField({
 	);
 }
 
-/** Disabled option indicator — shown for options that can't be configured in playground */
-function DisabledField({ label, reason }: { label: string; reason?: string }) {
-	return (
-		<div className='flex items-center justify-between gap-2 py-0.5 opacity-40'>
-			<span className='text-[11px] text-muted-foreground'>{label}</span>
-			<span className='text-[10px] text-muted-foreground/70 italic shrink-0'>{reason ?? "complex type"}</span>
-		</div>
-	);
-}
-
 /** TextInput/Textarea with a mini toggle that fills preset value when toggled on, clears when off */
 function ToggleableTextInput({
 	label,
@@ -326,7 +316,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<TextInput label='acceptedFormats' value={state.image_acceptedFormats} onChange={set("image_acceptedFormats")} placeholder='image/*' optionKey='image_acceptedFormats' />
 								<SwitchField label='percentageOnlySize' checked={state.image_percentageOnlySize} onChange={set("image_percentageOnlySize")} optionKey='image_percentageOnlySize' />
 								<SwitchField label='showHeightInput' checked={state.image_showHeightInput} onChange={set("image_showHeightInput")} optionKey='image_showHeightInput' />
-								<DisabledField label='controls' reason='Figure.Controls' />
+								<ToggleableTextarea label='controls (JSON)' value={state.image_controls} preset={ITEM_PRESETS.image_controls} onChange={set("image_controls")} placeholder='[["align","caption","edit","copy","remove"]]' rows={2} optionKey='image_controls' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -359,10 +349,10 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<TextInput label='extensions' value={state.video_extensions} onChange={set("video_extensions")} placeholder='mp4,webm,...' optionKey='video_extensions' />
 								<TextInput label='videoTagAttributes' value={state.video_videoTagAttributes} onChange={set("video_videoTagAttributes")} placeholder='{"key":"value"}' optionKey='video_videoTagAttributes' />
 								<TextInput label='iframeTagAttributes' value={state.video_iframeTagAttributes} onChange={set("video_iframeTagAttributes")} placeholder='{"key":"value"}' optionKey='video_iframeTagAttributes' />
-								<DisabledField label='ratioOptions' reason='Array' />
-								<DisabledField label='controls' reason='Figure.Controls' />
-								<DisabledField label='urlPatterns' reason='RegExp[]' />
-								<DisabledField label='embedQuery' reason='complex object' />
+								<ToggleableTextarea label='ratioOptions (JSON)' value={state.video_ratioOptions} preset={ITEM_PRESETS.video_ratioOptions} onChange={set("video_ratioOptions")} placeholder='[{"value":0.5625,"text":"16:9"}]' rows={2} optionKey='video_ratioOptions' />
+								<ToggleableTextarea label='controls (JSON)' value={state.video_controls} preset={ITEM_PRESETS.video_controls} onChange={set("video_controls")} placeholder='[["align","caption","edit","copy","remove"]]' rows={2} optionKey='video_controls' />
+								<ToggleableTextInput label='urlPatterns (RegExp[])' value={state.video_urlPatterns} preset={ITEM_PRESETS.video_urlPatterns} onChange={set("video_urlPatterns")} placeholder='/dailymotion\.com\/video\//' optionKey='video_urlPatterns' />
+								<ToggleableTextarea label='embedQuery (JSON)' value={state.video_embedQuery} preset={ITEM_PRESETS.video_embedQuery} onChange={set("video_embedQuery")} placeholder='{"service":{pattern,action,tag}}' rows={3} optionKey='video_embedQuery' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -410,9 +400,9 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<NumberInput label='uploadSizeLimit' value={state.embed_uploadSizeLimit} onChange={set("embed_uploadSizeLimit")} optionKey='embed_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.embed_uploadSingleSizeLimit} onChange={set("embed_uploadSingleSizeLimit")} optionKey='embed_uploadSingleSizeLimit' />
 								<TextInput label='iframeTagAttributes' value={state.embed_iframeTagAttributes} onChange={set("embed_iframeTagAttributes")} placeholder='{"key":"value"}' optionKey='embed_iframeTagAttributes' />
-								<DisabledField label='controls' reason='Figure.Controls' />
-								<DisabledField label='urlPatterns' reason='RegExp[]' />
-								<DisabledField label='embedQuery' reason='complex object' />
+								<ToggleableTextarea label='controls (JSON)' value={state.embed_controls} preset={ITEM_PRESETS.embed_controls} onChange={set("embed_controls")} placeholder='[["align","edit","copy","remove"]]' rows={2} optionKey='embed_controls' />
+								<ToggleableTextInput label='urlPatterns (RegExp[])' value={state.embed_urlPatterns} preset={ITEM_PRESETS.embed_urlPatterns} onChange={set("embed_urlPatterns")} placeholder='/reddit\.com\/r\//' optionKey='embed_urlPatterns' />
+								<ToggleableTextarea label='embedQuery (JSON)' value={state.embed_embedQuery} preset={ITEM_PRESETS.embed_embedQuery} onChange={set("embed_embedQuery")} placeholder='{"service":{pattern,action,tag}}' rows={3} optionKey='embed_embedQuery' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -433,8 +423,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<NumberInput label='uploadSizeLimit' value={state.link_uploadSizeLimit} onChange={set("link_uploadSizeLimit")} optionKey='link_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.link_uploadSingleSizeLimit} onChange={set("link_uploadSingleSizeLimit")} optionKey='link_uploadSingleSizeLimit' />
 								<TextInput label='acceptedFormats' value={state.link_acceptedFormats} onChange={set("link_acceptedFormats")} optionKey='link_acceptedFormats' />
-								<DisabledField label='relList' reason='Array' />
-								<DisabledField label='defaultRel' reason='complex object' />
+								<ToggleableTextInput label='relList' value={state.link_relList} preset={ITEM_PRESETS.link_relList} onChange={set("link_relList")} placeholder='nofollow,noreferrer,noopener' optionKey='link_relList' />
+								<ToggleableTextarea label='defaultRel (JSON)' value={state.link_defaultRel} preset={ITEM_PRESETS.link_defaultRel} onChange={set("link_defaultRel")} placeholder='{"default":"nofollow"}' rows={2} optionKey='link_defaultRel' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -448,7 +438,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SelectField label='scrollType' value={state.table_scrollType} options={[{ value: "x", label: "x" }, { value: "y", label: "y" }, { value: "xy", label: "xy" }]} onChange={(v) => set("table_scrollType")(v as PlaygroundState["table_scrollType"])} optionKey='table_scrollType' />
 							<SelectField label='captionPosition' value={state.table_captionPosition} options={[{ value: "bottom", label: "bottom" }, { value: "top", label: "top" }]} onChange={(v) => set("table_captionPosition")(v as PlaygroundState["table_captionPosition"])} optionKey='table_captionPosition' />
 							<SelectField label='cellControllerPosition' value={state.table_cellControllerPosition} options={[{ value: "cell", label: "cell" }, { value: "table", label: "table" }]} onChange={(v) => set("table_cellControllerPosition")(v as PlaygroundState["table_cellControllerPosition"])} optionKey='table_cellControllerPosition' />
-							<DisabledField label='colorList' reason='Array' />
+							<ToggleableTextInput label='colorList' value={state.table_colorList} preset={ITEM_PRESETS.table_colorList} onChange={set("table_colorList")} placeholder='#ff0000,#00ff00,#0000ff,...' optionKey='table_colorList' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -463,7 +453,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<AdvancedSection label={advLabel}>
 								<SwitchField label='showDefaultSizeLabel' checked={state.fontSize_showDefaultSizeLabel} onChange={set("fontSize_showDefaultSizeLabel")} optionKey='fontSize_showDefaultSizeLabel' />
 								<SwitchField label='disableInput' checked={state.fontSize_disableInput} onChange={set("fontSize_disableInput")} optionKey='fontSize_disableInput' />
-								<DisabledField label='unitMap' reason='complex object' />
+								<ToggleableTextarea label='unitMap (JSON)' value={state.fontSize_unitMap} preset={ITEM_PRESETS.fontSize_unitMap} onChange={set("fontSize_unitMap")} placeholder='{"px":{"default":16,"inc":1,...}}' rows={3} optionKey='fontSize_unitMap' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -476,7 +466,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						<div className='space-y-3'>
 							<SwitchField label='disableHEXInput' checked={state.fontColor_disableHEXInput} onChange={set("fontColor_disableHEXInput")} optionKey='fontColor_disableHEXInput' />
 							<NumberInput label='splitNum' value={state.fontColor_splitNum} onChange={set("fontColor_splitNum")} optionKey='fontColor_splitNum' />
-							<DisabledField label='items' reason='Array' />
+							<ToggleableTextInput label='items' value={state.fontColor_items} preset={ITEM_PRESETS.fontColor_items} onChange={set("fontColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='fontColor_items' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -488,7 +478,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						<div className='space-y-3'>
 							<SwitchField label='disableHEXInput' checked={state.backgroundColor_disableHEXInput} onChange={set("backgroundColor_disableHEXInput")} optionKey='backgroundColor_disableHEXInput' />
 							<NumberInput label='splitNum' value={state.backgroundColor_splitNum} onChange={set("backgroundColor_splitNum")} optionKey='backgroundColor_splitNum' />
-							<DisabledField label='items' reason='Array' />
+							<ToggleableTextInput label='items' value={state.backgroundColor_items} preset={ITEM_PRESETS.backgroundColor_items} onChange={set("backgroundColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='backgroundColor_items' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -509,7 +499,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<SwitchField label='canResize' checked={state.drawing_canResize} onChange={set("drawing_canResize")} optionKey='drawing_canResize' />
 								<TextInput label='lineColor' value={state.drawing_lineColor} onChange={set("drawing_lineColor")} placeholder='#000000' optionKey='drawing_lineColor' />
 								<SwitchField label='lineReconnect' checked={state.drawing_lineReconnect} onChange={set("drawing_lineReconnect")} optionKey='drawing_lineReconnect' />
-								<DisabledField label='formSize' reason='complex object' />
+								<ToggleableTextarea label='formSize (JSON)' value={state.drawing_formSize} preset={ITEM_PRESETS.drawing_formSize} onChange={set("drawing_formSize")} placeholder='{"width":"750px","height":"50vh"}' rows={2} optionKey='drawing_formSize' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -529,7 +519,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder='/api/mention' optionKey='mention_apiUrl' />
 								<TextInput label='apiHeaders' value={state.mention_apiHeaders} onChange={set("mention_apiHeaders")} placeholder='{"Authorization":"..."}' optionKey='mention_apiHeaders' />
 								<SwitchField label='useCachingData' checked={state.mention_useCachingData} onChange={set("mention_useCachingData")} optionKey='mention_useCachingData' />
-								<DisabledField label='data' reason='Array<object>' />
+								<ToggleableTextarea label='data (JSON)' value={state.mention_data} preset={ITEM_PRESETS.mention_data} onChange={set("mention_data")} placeholder='[{"key":"john","name":"John","url":"/users/john"}]' rows={3} optionKey='mention_data' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -557,9 +547,9 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							)}
 							<SwitchField label='canResize' checked={state.math_canResize} onChange={set("math_canResize")} optionKey='math_canResize' />
 							<SwitchField label='autoHeight' checked={state.math_autoHeight} onChange={set("math_autoHeight")} optionKey='math_autoHeight' />
-							<DisabledField label='fontSizeList' reason='Array<object>' />
-							<DisabledField label='formSize' reason='complex object' />
-							<DisabledField label='onPaste' reason='Function' />
+							<ToggleableTextarea label='fontSizeList (JSON)' value={state.math_fontSizeList} preset={ITEM_PRESETS.math_fontSizeList} onChange={set("math_fontSizeList")} placeholder='[{"text":"1","value":"1em"}]' rows={2} optionKey='math_fontSizeList' />
+							<ToggleableTextarea label='formSize (JSON)' value={state.math_formSize} preset={ITEM_PRESETS.math_formSize} onChange={set("math_formSize")} placeholder='{"width":"460px","height":"14em"}' rows={2} optionKey='math_formSize' />
+							<ToggleableTextarea label='onPaste (Function)' value={state.math_onPaste} preset={ITEM_PRESETS.math_onPaste} onChange={set("math_onPaste")} placeholder='function(e) { ... }' rows={3} optionKey='math_onPaste' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -588,8 +578,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<TextInput label='uploadHeaders' value={state.fileUpload_uploadHeaders} onChange={set("fileUpload_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='fileUpload_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit' value={state.fileUpload_uploadSizeLimit} onChange={set("fileUpload_uploadSizeLimit")} optionKey='fileUpload_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.fileUpload_uploadSingleSizeLimit} onChange={set("fileUpload_uploadSingleSizeLimit")} optionKey='fileUpload_uploadSingleSizeLimit' />
-								<DisabledField label='controls' reason='Array' />
-								<DisabledField label='insertBehavior' reason='complex type' />
+								<ToggleableTextarea label='controls (JSON)' value={state.fileUpload_controls} preset={ITEM_PRESETS.fileUpload_controls} onChange={set("fileUpload_controls")} placeholder='[["edit","copy","remove"]]' rows={2} optionKey='fileUpload_controls' />
+								<SelectField label='insertBehavior' value={state.fileUpload_insertBehavior} options={INSERT_BEHAVIOR_OPTS} onChange={set("fileUpload_insertBehavior")} optionKey='fileUpload_insertBehavior' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -663,9 +653,9 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 
 				{/* HR */}
 				<AccordionItem value='hr'>
-					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground'>HR</AccordionTrigger>
+					<AccordionTrigger className='text-xs font-semibold py-2'>HR</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
-						<NoOptionsNote />
+						<ToggleableTextarea label='items (JSON)' value={state.hr_items} preset={ITEM_PRESETS.hr_items} onChange={set("hr_items")} placeholder='[{"name":"Solid","class":"__se__solid"},{"name":"Dashed","class":"__se__dashed"}]' rows={3} optionKey='hr_items' />
 					</AccordionContent>
 				</AccordionItem>
 

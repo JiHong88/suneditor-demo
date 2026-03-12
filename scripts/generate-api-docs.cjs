@@ -806,55 +806,63 @@ function extractPluginOptionDescriptions(filePath) {
 			const raw = typeName.replace("PluginOptions", "");
 			const pluginName = raw.charAt(0).toLowerCase() + raw.slice(1);
 
-			// Extract members with their JSDoc
+			/** Extract description from a property member's JSDoc */
+			function extractMemberDesc(member, sf) {
+				if (!ts.isPropertySignature(member) || !member.name) return null;
+				try {
+					const propName = member.name.getText(sf);
+					const fullText = sf.getFullText();
+					const ranges = ts.getLeadingCommentRanges(fullText, member.getFullStart());
+					if (!ranges || ranges.length === 0) return null;
+
+					const comment = fullText.substring(ranges[ranges.length - 1].pos, ranges[ranges.length - 1].end);
+					const lines = comment
+						.split("\n")
+						.map((l) => l.replace(/^\s*\*\s*/, "").trim())
+						.filter((l) => l && !l.startsWith("@") && l !== "/**" && l !== "*/" && l !== "-");
+
+					let desc = "";
+					for (const line of lines) {
+						if (line.startsWith("- ")) { desc = line.slice(2).trim(); break; }
+						else if (line && !line.startsWith("///")) { desc = line; break; }
+					}
+
+					let collecting = false;
+					for (const line of lines) {
+						if (collecting && line.startsWith("- ")) desc += "\n" + line;
+						if (line === desc || line === `- ${desc}`) collecting = true;
+					}
+
+					return desc ? { propName, desc } : null;
+				} catch { return null; }
+			}
+
+			// Extract members with their JSDoc - directly from type literal
 			if (node.type && ts.isTypeLiteralNode(node.type)) {
 				node.type.members.forEach((member) => {
-					if (ts.isPropertySignature(member) && member.name) {
-						try {
-							const propName = member.name.getText(sourceFile);
-
-							// Get JSDoc comment
-							const fullText = sourceFile.getFullText();
-							const ranges = ts.getLeadingCommentRanges(fullText, member.getFullStart());
-							if (ranges && ranges.length > 0) {
-								const comment = fullText.substring(ranges[ranges.length - 1].pos, ranges[ranges.length - 1].end);
-								const lines = comment
-									.split("\n")
-									.map((l) => l.replace(/^\s*\*\s*/, "").trim())
-									.filter((l) => l && !l.startsWith("@") && l !== "/**" && l !== "*/" && l !== "-");
-
-								// First line starting with "- " is the description
-								let desc = "";
-								for (const line of lines) {
-									if (line.startsWith("- ")) {
-										desc = line.slice(2).trim();
-										break;
-									} else if (line && !line.startsWith("///")) {
-										desc = line;
-										break;
-									}
-								}
-
-								// Collect continuation lines
-								let collecting = false;
-								for (const line of lines) {
-									if (collecting && line.startsWith("- ")) {
-										desc += "\n" + line;
-									}
-									if (line === desc || line === `- ${desc}`) {
-										collecting = true;
-									}
-								}
-
-								if (desc) {
-									options[`${pluginName}_${propName}`] = { description: desc };
+					const result = extractMemberDesc(member, sourceFile);
+					if (result) options[`${pluginName}_${result.propName}`] = { description: result.desc };
+				});
+			} else {
+				// Fallback: use type checker to resolve complex types (e.g. Omit<A & B, ''>)
+				try {
+					const checker = ctx.program.getTypeChecker();
+					const symbol = checker.getSymbolAtLocation(node.name);
+					if (symbol) {
+						const resolvedType = checker.getDeclaredTypeOfSymbol(symbol);
+						const props = resolvedType.getProperties ? resolvedType.getProperties() : [];
+						for (const prop of props) {
+							const decls = prop.getDeclarations ? prop.getDeclarations() : [];
+							if (decls.length > 0 && ts.isPropertySignature(decls[0])) {
+								const memberSf = decls[0].getSourceFile();
+								if (memberSf) {
+									const result = extractMemberDesc(decls[0], memberSf);
+									if (result) options[`${pluginName}_${result.propName}`] = { description: result.desc };
 								}
 							}
-						} catch {
-							/* skip */
 						}
 					}
-				});
+				} catch { /* skip */ }
 			}
 		}
 		ts.forEachChild(node, visit);

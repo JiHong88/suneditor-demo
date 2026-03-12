@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import "suneditor/css/editor";
 import type { BuilderRow, BreakpointConfig } from "./builderTypes";
 import { BUTTON_MAP } from "./buttonCatalog";
@@ -50,7 +50,6 @@ const BUTTON_ICON_MAP: Record<string, string> = {
 	math: "math",
 	template: "template",
 	layout: "layout",
-	mention: "edit",
 	image: "image",
 	drawing: "drawing",
 	video: "video",
@@ -78,7 +77,7 @@ const BUTTON_ICON_MAP: Record<string, string> = {
 const SELECT_BUTTON_INFO: Record<string, { className: string; defaultText: string }> = {
 	font: { className: "se-btn-select se-btn-tool-font", defaultText: "Font" },
 	blockStyle: { className: "se-btn-select se-btn-tool-format", defaultText: "Format" },
-	fontSize: { className: "se-btn-select se-btn-input se-btn-tool-font-size", defaultText: "Size" },
+	fontSize: { className: "se-btn-select se-btn-tool-font-size", defaultText: "Size" },
 };
 
 const MIN_PREVIEW_WIDTH = 320;
@@ -90,17 +89,24 @@ interface BuilderToolbarPreviewProps {
 	breakpoints?: BreakpointConfig[];
 	activeBreakpointId?: string;
 	onBreakpointSelect?: (id: string | undefined) => void;
+	hoveredButton?: { name: string; groupId: string; index: number } | null;
+	hoveredMoreGroupId?: string | null;
+	hoveredGroupAction?: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null;
 }
 
 /* ── Button rendered with real se-btn classes ───────── */
 
-function PreviewBtn({ name, icons }: { name: string; icons: Record<string, string> }) {
+function PreviewBtn({ name, icons, highlighted }: { name: string; icons: Record<string, string>; highlighted?: boolean }) {
 	const iconKey = BUTTON_ICON_MAP[name];
 	const svg = iconKey ? icons[iconKey] : undefined;
 	const meta = BUTTON_MAP[name];
 	const label = meta?.label ?? name;
 	const tooltip = `<span class="se-tooltip-inner"><span class="se-tooltip-text">${label}</span></span>`;
 	const selectInfo = SELECT_BUTTON_INFO[name];
+
+	const highlightStyle: React.CSSProperties | undefined = highlighted
+		? { outline: "2px solid #6366f1", outlineOffset: "-1px", borderRadius: "3px", background: "rgba(99,102,241,0.12)" }
+		: undefined;
 
 	// Select-style button: text label + dropdown arrow
 	if (selectInfo) {
@@ -113,6 +119,7 @@ function PreviewBtn({ name, icons }: { name: string; icons: Record<string, strin
 					className={`se-toolbar-btn se-btn se-tooltip ${selectInfo.className}`}
 					aria-label={label}
 					tabIndex={-1}
+					style={highlightStyle}
 					dangerouslySetInnerHTML={{ __html: html }}
 				/>
 			</li>
@@ -128,6 +135,7 @@ function PreviewBtn({ name, icons }: { name: string; icons: Record<string, strin
 				className='se-toolbar-btn se-btn se-tooltip'
 				aria-label={label}
 				tabIndex={-1}
+				style={highlightStyle}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
 		</li>
@@ -136,10 +144,14 @@ function PreviewBtn({ name, icons }: { name: string; icons: Record<string, strin
 
 /* ── Separator ──────────────────────────────────────── */
 
-function PreviewSeparator() {
+function PreviewSeparator({ highlighted }: { highlighted?: boolean }) {
 	return (
 		<li>
-			<div className='se-toolbar-separator-vertical' tabIndex={-1} />
+			<div
+				className='se-toolbar-separator-vertical'
+				tabIndex={-1}
+				style={highlighted ? { backgroundColor: "#6366f1", width: "2.5px", opacity: 1 } : undefined}
+			/>
 		</li>
 	);
 }
@@ -253,6 +265,9 @@ export default function BuilderToolbarPreview({
 	breakpoints,
 	activeBreakpointId,
 	onBreakpointSelect,
+	hoveredButton,
+	hoveredMoreGroupId,
+	hoveredGroupAction,
 }: BuilderToolbarPreviewProps) {
 	const [openMoreId, setOpenMoreId] = useState<string | null>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -362,20 +377,31 @@ export default function BuilderToolbarPreview({
 
 	// Collect more-button groups for the expandable layer
 	const moreGroups = useMemo(() => {
-		const result: { moreId: string; label: string; items: string[] }[] = [];
+		const result: { moreId: string; label: string; allItems: string[] }[] = [];
 		for (const row of previewData) {
 			for (const group of row.groups) {
 				if (group.moreButton) {
 					result.push({
 						moreId: group.id,
 						label: group.moreButton.label,
-						items: group.items,
+						allItems: group.allItems,
 					});
 				}
 			}
 		}
 		return result;
 	}, [previewData]);
+
+	// If hovered button is inside a more group, force that more layer open
+	const hoverMoreId = useMemo(() => {
+		if (!hoveredButton) return null;
+		for (const mg of moreGroups) {
+			if (mg.moreId === hoveredButton.groupId) return mg.moreId;
+		}
+		return null;
+	}, [hoveredButton, moreGroups]);
+
+	const effectiveOpenMoreId = hoveredMoreGroupId ?? hoverMoreId ?? openMoreId;
 
 	const handleToggleMore = (id: string) => {
 		setOpenMoreId((prev) => (prev === id ? null : id));
@@ -408,8 +434,8 @@ export default function BuilderToolbarPreview({
 					<div className={`sun-editor ${themeClass}`} style={{ border: "none" }}>
 						<div className={`se-toolbar sun-editor-common ${themeClass}`} style={{ position: "relative" }}>
 							<div className='se-btn-tray'>
-								{previewData.map((row, ri) =>
-									row.groups.map((group) => {
+								{previewData.map((row, ri) => {
+									const groupElements = row.groups.map((group) => {
 										const moduleClass = `se-btn-module se-btn-module-border${group.floatRight ? " module-float-right" : ""}`;
 										const elements: React.ReactNode[] = [];
 
@@ -422,7 +448,7 @@ export default function BuilderToolbarPreview({
 													iconClassName={group.moreButton.className}
 													icons={icons}
 													moreId={group.id}
-													openMoreId={openMoreId}
+													openMoreId={effectiveOpenMoreId}
 													onToggle={handleToggleMore}
 												/>,
 											);
@@ -434,7 +460,7 @@ export default function BuilderToolbarPreview({
 												const name = group.allItems[i];
 												if (name === "|") {
 													elements.push(
-														<PreviewSeparator key={`insep-${group.id}-${i}`} />,
+														<PreviewSeparator key={`insep-${group.id}-${i}`} highlighted={hoveredButton?.name === "|" && hoveredButton.groupId === group.id && hoveredButton.index === i} />,
 													);
 												} else {
 													elements.push(
@@ -442,21 +468,39 @@ export default function BuilderToolbarPreview({
 															key={`btn-${group.id}-${i}`}
 															name={name}
 															icons={icons}
+															highlighted={hoveredButton?.name === name}
 														/>,
 													);
 												}
 											}
 										}
 
+										// Group action hover border style
+										const actionMatch = hoveredGroupAction?.groupId === group.id ? hoveredGroupAction.action : null;
+										const actionBorderStyle: React.CSSProperties | undefined = actionMatch
+											? {
+												outline: `2px solid ${actionMatch === "drag" ? "#34d399" : actionMatch === "float" ? "#fb923c" : actionMatch === "more" ? "#a78bfa" : "#f87171"}`,
+												outlineOffset: "-1px",
+												borderRadius: "var(--se-border-radius)",
+											}
+											: undefined;
+
 										return (
-											<div key={group.id} className={moduleClass}>
-												<ul className='se-menu-list' style={ri > 0 ? { clear: "both" } : undefined}>
+											<div key={group.id} className={moduleClass} style={actionBorderStyle}>
+												<ul className='se-menu-list'>
 													{elements}
 												</ul>
 											</div>
 										);
-									}),
-								)}
+									});
+
+									return (
+										<React.Fragment key={row.id}>
+											{ri > 0 && <div className='se-btn-module-enter' />}
+											{groupElements}
+										</React.Fragment>
+									);
+								})}
 
 								{/* More layers — expandable sections below the toolbar */}
 								{moreGroups.length > 0 && (
@@ -465,17 +509,25 @@ export default function BuilderToolbarPreview({
 											<div
 												key={mg.moreId}
 												className='se-more-layer'
-												style={{ display: openMoreId === mg.moreId ? "block" : "none" }}
+												style={{ display: effectiveOpenMoreId === mg.moreId ? "block" : "none" }}
 											>
 												<div className='se-more-form'>
 													<ul className='se-menu-list'>
-														{mg.items.map((name, i) => (
-															<PreviewBtn
-																key={`more-btn-${mg.moreId}-${i}`}
-																name={name}
-																icons={icons}
-															/>
-														))}
+														{mg.allItems.map((name, i) =>
+															name === "|" ? (
+																<PreviewSeparator
+																	key={`more-sep-${mg.moreId}-${i}`}
+																	highlighted={hoveredButton?.name === "|" && hoveredButton.groupId === mg.moreId && hoveredButton.index === i}
+																/>
+															) : (
+																<PreviewBtn
+																	key={`more-btn-${mg.moreId}-${i}`}
+																	name={name}
+																	icons={icons}
+																	highlighted={hoveredButton?.name === name}
+																/>
+															),
+														)}
 													</ul>
 												</div>
 											</div>

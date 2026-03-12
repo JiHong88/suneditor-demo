@@ -31,7 +31,7 @@ export interface BuilderState {
 
 /* ── Button catalog types ─────────────────────────────── */
 
-export type ButtonCategory = "document" | "format" | "text" | "layout" | "insert" | "media" | "gallery" | "view" | "page";
+export type ButtonCategory = "document" | "format" | "text" | "layout" | "insert" | "media" | "gallery" | "view" | "page" | string;
 
 export interface ButtonMeta {
 	name: string;

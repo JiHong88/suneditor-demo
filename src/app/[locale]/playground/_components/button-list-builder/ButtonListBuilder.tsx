@@ -54,6 +54,9 @@ export default function ButtonListBuilder({
 	const initialState = useMemo(() => buttonListToBuilder(initialButtonList), [initialButtonList]);
 	const { state, dispatch, set } = useBuilderState(initialState);
 	const [activeBreakpointId, setActiveBreakpointId] = useState<string | undefined>(undefined);
+	const [hoveredButton, setHoveredButton] = useState<{ name: string; groupId: string; index: number } | null>(null);
+	const [hoveredMoreGroupId, setHoveredMoreGroupId] = useState<string | null>(null);
+	const [hoveredGroupAction, setHoveredGroupAction] = useState<{ groupId: string; action: "drag" | "float" | "more" | "delete" } | null>(null);
 
 	// Re-sync builder state from latest initialButtonList when sheet opens
 	const prevOpenRef = useRef(open);
@@ -67,6 +70,17 @@ export default function ButtonListBuilder({
 	const [dragData, setDragData] = useState<{ buttonName: string; type?: string; groupId?: string } | null>(null);
 	const [dragPreview, setDragPreview] = useState<{ groupId: string; index: number } | null>(null);
 	const dragSourceRef = useRef<{ groupId: string; index: number } | null>(null);
+	const isDraggingRef = useRef(false);
+
+	const handleButtonHover = useCallback((info: { name: string; groupId: string; index: number } | null) => {
+		if (!isDraggingRef.current) setHoveredButton(info);
+	}, []);
+	const handleMoreGroupHover = useCallback((groupId: string | null) => {
+		if (!isDraggingRef.current) setHoveredMoreGroupId(groupId);
+	}, []);
+	const handleGroupActionHover = useCallback((info: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null) => {
+		if (!isDraggingRef.current) setHoveredGroupAction(info);
+	}, []);
 
 	// Collect all used button names across active rows (exclude separators - they can be duplicated)
 	const usedButtons = useMemo(() => {
@@ -114,6 +128,10 @@ export default function ButtonListBuilder({
 	/* ── Drag handlers ─────────────────────────────────── */
 
 	const handleDragStart = useCallback((event: DragStartEvent) => {
+		isDraggingRef.current = true;
+		setHoveredButton(null);
+		setHoveredMoreGroupId(null);
+		setHoveredGroupAction(null);
 		const data = event.active.data.current;
 		if (data) {
 			if (data.type === "canvas-group") {
@@ -206,6 +224,7 @@ export default function ButtonListBuilder({
 
 	const handleDragEnd = useCallback(
 		(event: DragEndEvent) => {
+			isDraggingRef.current = false;
 			setDragData(null);
 			setDragPreview(null);
 			dragSourceRef.current = null;
@@ -483,6 +502,9 @@ export default function ButtonListBuilder({
 								dragPreview={dragPreview}
 								isDragging={!!dragData}
 								isDraggingGroup={dragData?.type === "canvas-group"}
+								onButtonHover={handleButtonHover}
+								onMoreGroupHover={handleMoreGroupHover}
+								onGroupActionHover={handleGroupActionHover}
 							/>
 						</div>
 					</div>
@@ -521,6 +543,9 @@ export default function ButtonListBuilder({
 					breakpoints={state.breakpoints}
 					activeBreakpointId={activeBreakpointId}
 					onBreakpointSelect={setActiveBreakpointId}
+					hoveredButton={hoveredButton}
+					hoveredMoreGroupId={hoveredMoreGroupId}
+					hoveredGroupAction={hoveredGroupAction}
 				/>
 
 				{/* Footer */}

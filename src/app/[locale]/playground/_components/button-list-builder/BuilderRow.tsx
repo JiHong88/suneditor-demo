@@ -39,9 +39,12 @@ interface BuilderRowProps {
 	dragPreview?: { groupId: string; index: number } | null;
 	isDragging?: boolean;
 	isDraggingGroup?: boolean;
+	onButtonHover?: (info: { name: string; groupId: string; index: number } | null) => void;
+	onMoreGroupHover?: (groupId: string | null) => void;
+	onGroupActionHover?: (info: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null) => void;
 }
 
-export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpointId, dragPreview, isDragging, isDraggingGroup }: BuilderRowProps) {
+export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpointId, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover }: BuilderRowProps) {
 	return (
 		<div className='group/row relative'>
 			{/* Row label */}
@@ -78,6 +81,9 @@ export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpo
 							dragPreview={dragPreview?.groupId === group.id ? dragPreview : null}
 							isDragging={isDragging}
 							isDraggingGroup={isDraggingGroup}
+							onButtonHover={onButtonHover}
+							onMoreGroupHover={onMoreGroupHover}
+							onGroupActionHover={onGroupActionHover}
 						/>
 					</div>
 				))}

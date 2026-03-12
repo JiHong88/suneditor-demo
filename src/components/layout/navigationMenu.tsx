@@ -38,7 +38,7 @@ function NavigationMenuList({ className, ...props }: React.ComponentProps<typeof
 	return (
 		<NavigationMenuPrimitive.List
 			data-slot='navigation-menu-list'
-			className={cn("group flex flex-1 list-none items-center justify-center gap-4", className)}
+			className={cn("group flex flex-1 list-none items-center justify-center gap-1 xl:gap-4", className)}
 			{...props}
 		/>
 	);
@@ -88,6 +88,7 @@ export function SiteNav() {
 		{ label: t("playground"), href: "/playground" },
 		{ label: t("plugin-guide"), href: "/plugin-guide" },
 		{ label: t("deep-dive"), href: "/deep-dive" },
+		{ label: t("options"), href: "/options" },
 		{ label: t("docs-api"), href: "/docs-api" },
 	];
 
@@ -119,14 +120,24 @@ export function SiteNav() {
 				<div className='container mx-auto flex h-14 items-center justify-center px-4'>
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex'>
-						<Link href='/' className='flex items-center gap-3 shrink-0 mx-6' aria-label='Home'>
+						<Link href='/' className='flex items-center shrink-0 mx-2 lg:mx-6' aria-label='Home'>
+							{/* md~lg: 아이콘만 */}
+							<Image
+								src='/se3_logo_flat.svg'
+								alt='SunEditor Logo'
+								width={36}
+								height={36}
+								priority
+								className='lg:hidden'
+							/>
+							{/* lg+: 풀 로고 */}
 							<Image
 								src='/se3_logo_title.svg'
 								alt='SunEditor Logo'
 								width={148 * 1.12}
 								height={44 * 1.12}
 								priority
-								className='dark:hidden'
+								className='hidden lg:block dark:hidden'
 							/>
 							<Image
 								src='/se3_logo_title_flat.svg'
@@ -134,10 +145,10 @@ export function SiteNav() {
 								width={148 * 1.12}
 								height={44 * 1.12}
 								priority
-								className='hidden dark:block'
+								className='hidden dark:lg:block'
 							/>
 						</Link>
-						<NavigationMenu className='mx-6' dir={dir}>
+						<NavigationMenu className='mx-2 lg:mx-6' dir={dir}>
 							<NavigationMenuList>
 								{items.map((it) => (
 									<NavigationMenuItem key={it.label} className='group'>

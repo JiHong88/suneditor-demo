@@ -32,6 +32,37 @@ function pluginLines(
 	return [`${prefix}: {`, ...inner, "},"];
 }
 
+/** Merge a raw JSON field into the last pLines entry, or create a new plugin block. */
+function mergeJsonField(pLines: string[][], prefix: string, key: string, rawJson: string) {
+	const last = pLines[pLines.length - 1];
+	if (last && last.length > 0 && last[0].startsWith(`${prefix}: {`)) {
+		last.splice(last.length - 1, 0, `  ${key}: ${rawJson},`);
+	} else {
+		pLines.push([`${prefix}: {`, `  ${key}: ${rawJson},`, "},"]);
+	}
+}
+
+/** Format comma-separated regex strings as code: [/foo/, /bar/i] */
+function fmtRegExpList(str: string): string {
+	const parts = str.split(",").map((s) => s.trim());
+	return `[${parts.join(", ")}]`;
+}
+
+/** Format embedQuery JSON as code with RegExp patterns */
+function fmtEmbedQuery(json: string): string {
+	try {
+		const raw = JSON.parse(json);
+		const entries: string[] = [];
+		for (const [key, val] of Object.entries(raw)) {
+			const v = val as { pattern: string; action: string; tag: string };
+			entries.push(`${key}: { pattern: ${v.pattern}, action: ${JSON.stringify(v.action)}, tag: "${v.tag}" }`);
+		}
+		return `{ ${entries.join(", ")} }`;
+	} catch {
+		return json;
+	}
+}
+
 /** Returns an ESM import line for lang pack, or empty string. */
 function langImport(lang: string): string {
 	if (!lang) return "";
@@ -320,6 +351,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["insertBehavior", state.image_insertBehavior, DEFAULTS.image_insertBehavior],
 		]),
 	);
+	if (state.image_controls) mergeJsonField(pLines, "image", "controls", state.image_controls);
 	pLines.push(
 		pluginLines("video", [
 			["canResize", state.video_canResize, DEFAULTS.video_canResize],
@@ -342,6 +374,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["insertBehavior", state.video_insertBehavior, DEFAULTS.video_insertBehavior],
 		]),
 	);
+	if (state.video_controls) mergeJsonField(pLines, "video", "controls", state.video_controls);
+	if (state.video_ratioOptions) mergeJsonField(pLines, "video", "ratioOptions", state.video_ratioOptions);
+	if (state.video_urlPatterns) mergeJsonField(pLines, "video", "urlPatterns", fmtRegExpList(state.video_urlPatterns));
+	if (state.video_embedQuery) mergeJsonField(pLines, "video", "embedQuery", fmtEmbedQuery(state.video_embedQuery));
 	pLines.push(
 		pluginLines("audio", [
 			["defaultWidth", state.audio_defaultWidth, DEFAULTS.audio_defaultWidth],
@@ -356,6 +392,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["insertBehavior", state.audio_insertBehavior, DEFAULTS.audio_insertBehavior],
 		]),
 	);
+	// HR
+	if (state.hr_items) {
+		lines.push(`hr: {\n  items: ${state.hr_items},\n},`);
+	}
 	pLines.push(
 		pluginLines("table", [
 			["scrollType", state.table_scrollType, DEFAULTS.table_scrollType],
@@ -363,6 +403,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["cellControllerPosition", state.table_cellControllerPosition, DEFAULTS.table_cellControllerPosition],
 		]),
 	);
+	if (state.table_colorList) {
+		const colors = state.table_colorList.split(",").map((s) => `"${s.trim()}"`);
+		mergeJsonField(pLines, "table", "colorList", `[${colors.join(", ")}]`);
+	}
 	pLines.push(
 		pluginLines("fontSize", [
 			["sizeUnit", state.fontSize_sizeUnit, DEFAULTS.fontSize_sizeUnit],
@@ -371,18 +415,27 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["disableInput", state.fontSize_disableInput, DEFAULTS.fontSize_disableInput],
 		]),
 	);
+	if (state.fontSize_unitMap) mergeJsonField(pLines, "fontSize", "unitMap", state.fontSize_unitMap);
 	pLines.push(
 		pluginLines("fontColor", [
 			["disableHEXInput", state.fontColor_disableHEXInput, DEFAULTS.fontColor_disableHEXInput],
 			["splitNum", state.fontColor_splitNum, DEFAULTS.fontColor_splitNum],
 		]),
 	);
+	if (state.fontColor_items) {
+		const colors = state.fontColor_items.split(",").map((s) => `"${s.trim()}"`);
+		mergeJsonField(pLines, "fontColor", "items", `[${colors.join(", ")}]`);
+	}
 	pLines.push(
 		pluginLines("backgroundColor", [
 			["disableHEXInput", state.backgroundColor_disableHEXInput, DEFAULTS.backgroundColor_disableHEXInput],
 			["splitNum", state.backgroundColor_splitNum, DEFAULTS.backgroundColor_splitNum],
 		]),
 	);
+	if (state.backgroundColor_items) {
+		const colors = state.backgroundColor_items.split(",").map((s) => `"${s.trim()}"`);
+		mergeJsonField(pLines, "backgroundColor", "items", `[${colors.join(", ")}]`);
+	}
 	pLines.push(
 		pluginLines("embed", [
 			["canResize", state.embed_canResize, DEFAULTS.embed_canResize],
@@ -398,6 +451,9 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["insertBehavior", state.embed_insertBehavior, DEFAULTS.embed_insertBehavior],
 		]),
 	);
+	if (state.embed_controls) mergeJsonField(pLines, "embed", "controls", state.embed_controls);
+	if (state.embed_urlPatterns) mergeJsonField(pLines, "embed", "urlPatterns", fmtRegExpList(state.embed_urlPatterns));
+	if (state.embed_embedQuery) mergeJsonField(pLines, "embed", "embedQuery", fmtEmbedQuery(state.embed_embedQuery));
 	pLines.push(
 		pluginLines("drawing", [
 			["outputFormat", state.drawing_outputFormat, DEFAULTS.drawing_outputFormat],
@@ -412,6 +468,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["maintainRatio", state.drawing_maintainRatio, DEFAULTS.drawing_maintainRatio],
 		]),
 	);
+	if (state.drawing_formSize) mergeJsonField(pLines, "drawing", "formSize", state.drawing_formSize);
 	pLines.push(
 		pluginLines("mention", [
 			["triggerText", state.mention_triggerText, DEFAULTS.mention_triggerText],
@@ -423,12 +480,16 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["useCachingFieldData", state.mention_useCachingFieldData, DEFAULTS.mention_useCachingFieldData],
 		]),
 	);
+	if (state.mention_data) mergeJsonField(pLines, "mention", "data", state.mention_data);
 	pLines.push(
 		pluginLines("math", [
 			["canResize", state.math_canResize, DEFAULTS.math_canResize],
 			["autoHeight", state.math_autoHeight, DEFAULTS.math_autoHeight],
 		]),
 	);
+	if (state.math_fontSizeList) mergeJsonField(pLines, "math", "fontSizeList", state.math_fontSizeList);
+	if (state.math_formSize) mergeJsonField(pLines, "math", "formSize", state.math_formSize);
+	if (state.math_onPaste) mergeJsonField(pLines, "math", "onPaste", state.math_onPaste);
 	pLines.push(
 		pluginLines("link", [
 			["title", state.link_title, DEFAULTS.link_title],
@@ -441,6 +502,11 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["acceptedFormats", state.link_acceptedFormats, DEFAULTS.link_acceptedFormats],
 		]),
 	);
+	if (state.link_relList) {
+		const items = state.link_relList.split(",").map((s) => `"${s.trim()}"`);
+		mergeJsonField(pLines, "link", "relList", `[${items.join(", ")}]`);
+	}
+	if (state.link_defaultRel) mergeJsonField(pLines, "link", "defaultRel", state.link_defaultRel);
 	pLines.push(
 		pluginLines("exportPDF", [
 			["apiUrl", state.exportPDF_apiUrl, DEFAULTS.exportPDF_apiUrl],
@@ -459,8 +525,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["allowMultiple", state.fileUpload_allowMultiple, DEFAULTS.fileUpload_allowMultiple],
 			["acceptedFormats", state.fileUpload_acceptedFormats, DEFAULTS.fileUpload_acceptedFormats],
 			["as", state.fileUpload_as, DEFAULTS.fileUpload_as],
+		["insertBehavior", state.fileUpload_insertBehavior, DEFAULTS.fileUpload_insertBehavior],
 		]),
 	);
+	if (state.fileUpload_controls) mergeJsonField(pLines, "fileUpload", "controls", state.fileUpload_controls);
 
 	// Items-based plugins
 	if (state.align_items) {

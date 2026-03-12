@@ -8,7 +8,7 @@
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "سمات الإطار القابل للتحرير[.sun-editor-editable]. (على سبيل المثال، [المفتاح]: القيمة)",
+    "description": "سمات الإطار القابل للتحرير[.sun-editor-editable].",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
@@ -36,7 +36,7 @@
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "سلسلة نمط الإطار العلوي للمحرر. (على سبيل المثال، \"border: 1px Solid #ccc;\").",
+    "description": "سلسلة نمط الإطار العلوي للمحرر.",
     "default": "\"\""
   },
   "iframe": {
@@ -48,7 +48,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "سمات `iframe`. (على سبيل المثال، {'allow-scripts': 'true'})",
+    "description": "سمات `iframe`.",
     "default": "{}"
   },
   "statusbar": {
@@ -72,7 +72,7 @@
     "default": "null"
   },
   "charCounter_label": {
-    "description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي. (على سبيل المثال، \"الأحرف: 20/200\")",
+    "description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي.",
     "default": "null"
   },
   "charCounter_type": {
@@ -88,14 +88,11 @@
   "editor": {
     "description": "الأنماط المطبقة على منطقة المحتوى القابلة للتحرير."
   },
-  "codeMirror5Editor": {
-    "description": "مثيل محرر CodeMirror5 (على مستوى الإطار). تم التعيين بواسطة `_checkCodeMirror` بعد التهيئة."
-  },
-  "codeMirror6Editor": {
-    "description": "مثيل CodeMirror6 EditorView (على مستوى الإطار). تم التعيين بواسطة `_checkCodeMirror` بعد التهيئة."
+  "codeMirrorEditor": {
+    "description": "مثيل محرر CodeMirror (على مستوى الإطار). تم التعيين بواسطة `_checkCodeMirror` بعد التهيئة."
   },
   "plugins": {
-    "description": "تكوين البرنامج المساعد."
+    "description": "تكوين البرنامج المساعد. قم بتمرير مجموعة من فئات المكونات الإضافية أو كائن مرتبط باسم البرنامج المساعد."
   },
   "buttonList": {
     "description": "قائمة أزرار شريط الأدوات، مجمعة حسب المصفوفات الفرعية. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.BUTTON_LIST}",
@@ -110,7 +107,7 @@
     "default": "\"classic\""
   },
   "type": {
-    "description": "نوع المحرر: `document:header,page`.",
+    "description": "نوع المحرر. استخدم `\"document\"` لتخطيط نمط المستند، مع أنواع فرعية اختيارية بعد `:`.",
     "default": "\"\""
   },
   "theme": {
@@ -136,11 +133,11 @@
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. \n- المحدد: \"|\" (على سبيل المثال، \"p|div\"، \"*\"). \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}.",
+    "description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. المحدد: `\"|\"`. \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}.",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "يحدد عناصر HTML التي لا ينبغي استخدامها. \n- المحدد: \"|\" (على سبيل المثال، \"النص|النمط\"). \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى.",
+    "description": "يحدد عناصر HTML التي لا ينبغي استخدامها. المحدد: `\"|\"`. \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى.",
     "default": "\"\""
   },
   "allowedEmptyTags": {
@@ -152,11 +149,11 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "يحدد سمات إضافية للسماح بكل علامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"id\"}) \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
+    "description": "يحدد سمات إضافية للسماح بكل علامة. ينطبق `\"*\"` على جميع العلامات. \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. \n- (على سبيل المثال {a: \"href|target\"، img: \"src|alt\"، \"*\": \"name\"}) \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا.",
+    "description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. ينطبق `\"*\"` على جميع العلامات. \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا.",
     "default": "null"
   },
   "textStyleTags": {
@@ -168,10 +165,10 @@
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. \n- المحدد: \"|\" (على سبيل المثال، \"اللون|لون الخلفية\")."
+    "description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. المحدد: `\"|\"`."
   },
   "tagStyles": {
-    "description": "يحدد الأنماط المسموح بها لعلامات HTML.",
+    "description": "يحدد الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامات، والقيمة هي الأنماط المسموح بها والمفصولة بشُرط رأسية.",
     "default": "{}"
   },
   "spanStyles": {
@@ -199,15 +196,15 @@
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "خصائص الخط التي يجب إعادة تعيينها عند تغيير الخطوط (مثل \"id|name\").",
+    "description": "خصائص الخط التي يجب إعادة ضبطها عند تغيير الخطوط. المحدد: `\"|\"`.",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. الفاصل: \"|\" (على سبيل المثال، \"p|div\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` ​​النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. المحدد: `\"|\"`. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`.",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. (على سبيل المثال \"قبل\"). \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`. \n- ※ يؤدي إدخال مفتاح Enter في السطر الأخير إلى إنهاء `brLine` وإلحاق `line`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
@@ -250,7 +247,7 @@
     "default": "false"
   },
   "subToolbar": {
-    "description": "تكوين شريط الأدوات الفرعي",
+    "description": "تكوين شريط الأدوات الفرعي شريط أدوات ثانوي يظهر عند تحديد النص.",
     "default": "{}"
   },
   "statusbar_container": {
@@ -288,11 +285,11 @@
     "default": "0"
   },
   "previewTemplate": {
-    "description": "قالب مخصص لوضع المعاينة.",
+    "description": "قالب HTML مخصص لوضع المعاينة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر.",
     "default": "null"
   },
   "printTemplate": {
-    "description": "قالب مخصص لوضع الطباعة.",
+    "description": "قالب HTML مخصص لوضع الطباعة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر.",
     "default": "null"
   },
   "componentInsertBehavior": {
@@ -304,7 +301,7 @@
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "{\"نسخة\": 1500} - مدة عرض رسائل التوست.",
+    "description": "مدة عرض رسائل التوست (مللي ثانية).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
@@ -312,14 +309,14 @@
     "default": "false"
   },
   "externalLibs": {
-    "description": "المكتبات الخارجية مثل CodeMirror أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
+    "description": "المكتبات الخارجية مثل CodeMirror أو KaTeX أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
   },
   "allowedExtraTags": {
-    "description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}",
+    "description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. `true` للسماح، `false` ​​لعدم السماح. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "تكوين معالجات أحداث المستخدم"
+    "description": "تكوين معالجات أحداث المستخدم."
   },
   "buttons": {
     "description": "قائمة أزرار شريط الأدوات المستخدمة حاليا"
@@ -352,7 +349,7 @@
     "description": "الصورة المصغرة الافتراضية"
   },
   "fileBrowser_data": {
-    "description": "البيانات المباشرة دون مكالمات الخادم"
+    "description": "البيانات المباشرة بدون استدعاءات الخادم (تجاوز جلب URL)."
   },
   "fileBrowser_url": {
     "description": "عنوان URL لطلب الخادم"
@@ -361,7 +358,7 @@
     "description": "رؤوس طلبات الخادم"
   },
   "fileBrowser_thumbnail": {
-    "description": "الصورة المصغرة الافتراضية"
+    "description": "عنوان URL للصورة المصغرة الافتراضية أو وظيفة تقوم بإرجاع عنوان URL للصورة المصغرة لكل عنصر."
   },
   "fileBrowser_props": {
     "description": "أسماء العلامات الإضافية"
@@ -421,7 +418,7 @@
     "description": "السماح بتحميل ملفات متعددة"
   },
   "fileUpload_acceptedFormats": {
-    "description": "تنسيقات الملفات المقبولة (على سبيل المثال، \"image/*، .pdf\")"
+    "description": "تنسيقات الملفات المقبولة."
   },
   "fileUpload_as": {
     "description": "حدد النموذج الافتراضي لمكون الملف كـ `box` أو `link`"
@@ -436,7 +433,7 @@
     "description": "محاذاة العناصر"
   },
   "backgroundColor_items": {
-    "description": "قائمة الألوان"
+    "description": "قائمة الألوان."
   },
   "backgroundColor_splitNum": {
     "description": "عدد الألوان لكل سطر"
@@ -445,13 +442,13 @@
     "description": "تعطيل إدخال HEX"
   },
   "blockStyle_items": {
-    "description": "قائمة التنسيق"
+    "description": "قائمة التنسيق. \n- `command` — `\"line\"`: كتلة سطر واحد، `\"br-line\"`: كتلة مفصولة br، `\"block\"`: كتلة حاوية."
   },
   "font_items": {
     "description": "قائمة الخطوط"
   },
   "fontColor_items": {
-    "description": "قائمة الألوان"
+    "description": "قائمة الألوان."
   },
   "fontColor_splitNum": {
     "description": "عدد الألوان لكل سطر"
@@ -463,7 +460,7 @@
     "description": "قائمة الموارد البشرية"
   },
   "layout_items": {
-    "description": "قائمة التخطيط"
+    "description": "قائمة التخطيط. يحدد كل عنصر قالب تخطيط مسمى باستخدام HTML الخام."
   },
   "lineHeight_items": {
     "description": "قائمة ارتفاع الخط"
@@ -481,13 +478,13 @@
     "description": "موضع وحدة التحكم بالخلية (`cell`، `table`)"
   },
   "table_colorList": {
-    "description": "قائمة الألوان المستخدمة في منتقي ألوان الخلية"
+    "description": "قائمة ألوان HEX لمنتقي ألوان خلفية الخلية."
   },
   "template_items": {
     "description": "قائمة القالب"
   },
   "textStyle_items": {
-    "description": "قائمة عناصر نمط النص"
+    "description": "قائمة عناصر نمط النص."
   },
   "mention_triggerText": {
     "description": "الشخصية التي تقوم بتشغيل قائمة الإشارات."
@@ -496,13 +493,13 @@
     "description": "عدد العناصر المراد عرضها في قائمة الإشارة"
   },
   "mention_searchStartLength": {
-    "description": "عدد الحروف لبدء البحث عن قائمة الإشارات"
+    "description": "عدد الأحرف لبدء البحث عن قائمة الإشارات"
   },
   "mention_delayTime": {
     "description": "وقت الانتظار قبل عرض قائمة الإشارات"
   },
   "mention_data": {
-    "description": "استخدم البيانات دون استخدام API"
+    "description": "بيانات الإشارة الثابتة (المستخدمة بدلاً من واجهة برمجة التطبيقات)."
   },
   "mention_apiUrl": {
     "description": "عنوان URL للاتصال بالقائمة المذكورة"
@@ -529,13 +526,13 @@
     "description": "عند `true`، يتم تعطيل مربع إدخال حجم الخط المباشر."
   },
   "fontSize_unitMap": {
-    "description": "كائن اختياري لتجاوز أو توسيع تعيين الوحدة الافتراضية لأحجام الخطوط."
+    "description": "تجاوز أو توسيع تعيين الوحدة الافتراضية لأحجام الخطوط."
   },
   "audio_defaultWidth": {
-    "description": "العرض الافتراضي للعلامة `AUDIO` (على سبيل المثال، `\"300px\"`)."
+    "description": "العرض الافتراضي للعلامة `AUDIO`."
   },
   "audio_defaultHeight": {
-    "description": "الارتفاع الافتراضي للعلامة `AUDIO` (على سبيل المثال، `\"150px\"`)."
+    "description": "الارتفاع الافتراضي للعلامة `AUDIO`."
   },
   "audio_createFileInput": {
     "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف."
@@ -631,16 +628,16 @@
     "description": "سمات إضافية لتعيينها على العلامة `IFRAME`."
   },
   "embed_query_youtube": {
-    "description": "معلمة استعلام YouTube."
+    "description": "تم إلحاق معلمة استعلام YouTube بعنوان URL للتضمين."
   },
   "embed_query_vimeo": {
-    "description": "معلمة استعلام Vimeo."
+    "description": "تم إلحاق معلمة استعلام Vimeo بعنوان URL للتضمين."
   },
   "embed_urlPatterns": {
-    "description": "أنماط URL إضافية للتضمين."
+    "description": "أنماط URL إضافية للتعرف عليها كمحتوى قابل للتضمين."
   },
   "embed_embedQuery": {
-    "description": "كائنات استعلام مخصصة لخدمات التضمين الإضافية."
+    "description": "تعريفات خدمة التضمين المخصصة."
   },
   "embed_controls": {
     "description": "ضوابط الشكل."
@@ -705,8 +702,41 @@
   "image_insertBehavior": {
     "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- بالنسبة للمكونات المضمنة: ضع المؤشر بالقرب من المكون، أو حدد إذا لم يكن هناك نطاق قريب. \n- بالنسبة لمكونات الكتلة: يتم تنفيذ السلوك بناءً على `selectMode`: \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
   },
-  "math_mathLib": {
-    "description": "مكتبة عرض الرياضيات. KaTeX خفيفة وسريعة (موصى بها). MathJax تدعم المزيد من أوامر LaTeX ولكنها تتطلب حزمة mathjax-full npm."
+  "link_uploadUrl": {
+    "description": "نقطة نهاية URL لتحميل الملفات."
+  },
+  "link_uploadHeaders": {
+    "description": "رؤوس إضافية لطلبات تحميل الملفات."
+  },
+  "link_uploadSizeLimit": {
+    "description": "الحد الأقصى لحجم تحميل الملف بالبايت."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "الحد الأقصى لحجم تحميل الملف الواحد بالبايت."
+  },
+  "link_acceptedFormats": {
+    "description": "تنسيقات الملفات المقبولة لتحميل الروابط."
+  },
+  "link_title": {
+    "description": "عرض العنوان مشروط."
+  },
+  "link_textToDisplay": {
+    "description": "إنشاء نص لعرض الإدخال."
+  },
+  "link_openNewWindow": {
+    "description": "القيمة الافتراضية المحددة لمربع الاختيار \"فتح في نافذة جديدة\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "إذا كان `true`، فسيتم تعطيل البادئة التلقائية لعنوان URL المضيف لقيمة الارتباط."
+  },
+  "link_relList": {
+    "description": "تظهر قيم السمات `rel` المتوفرة كمربعات اختيار في الرابط المشروط."
+  },
+  "link_defaultRel": {
+    "description": "يتم تطبيق القيم الافتراضية `rel` تلقائيًا حسب الشرط."
+  },
+  "link_enableFileUpload": {
+    "description": "إذا كان `true`، قم بتمكين تحميل الملف."
   },
   "math_canResize": {
     "description": "ما إذا كان من الممكن تغيير حجم نموذج الرياضيات."
@@ -715,7 +745,7 @@
     "description": "ما إذا كان سيتم ضبط ارتفاع النموذج تلقائيًا أم لا."
   },
   "math_fontSizeList": {
-    "description": "قائمة بخيارات حجم الخط لعرض التعبيرات الرياضية."
+    "description": "قائمة بخيارات حجم الخط لمحدد حجم التعبير الرياضي."
   },
   "math_onPaste": {
     "description": "وظيفة رد اتصال للتعامل مع أحداث اللصق في منطقة إدخال الرياضيات."
@@ -763,13 +793,13 @@
     "description": "تنسيقات الملفات المقبولة لتحميلات الفيديو (`\"video/*\"`)."
   },
   "video_defaultRatio": {
-    "description": "نسبة العرض إلى الارتفاع الافتراضية للفيديو (على سبيل المثال، 16:9 هي 0.5625)."
+    "description": "نسبة العرض إلى الارتفاع الافتراضية للفيديو (الارتفاع/العرض، على سبيل المثال 16:9 → `9/16 = 0.5625`)."
   },
   "video_showRatioOption": {
     "description": "ما إذا كان سيتم عرض خيار النسبة في النموذج."
   },
   "video_ratioOptions": {
-    "description": "خيارات النسبة المخصصة لتغيير حجم الفيديو."
+    "description": "خيارات النسبة المخصصة لتغيير حجم الفيديو (القيمة = الارتفاع/العرض)."
   },
   "video_videoTagAttributes": {
     "description": "سمات إضافية لتعيينها على العلامة `VIDEO`."
@@ -784,7 +814,7 @@
     "description": "معلمات استعلام إضافية لتضمين Vimeo."
   },
   "video_embedQuery": {
-    "description": "كائنات استعلام مخصصة لخدمات التضمين الإضافية."
+    "description": "تعريفات خدمة التضمين المخصصة (راجع `EmbedPluginOptions.embedQuery`)."
   },
   "video_urlPatterns": {
     "description": "أنماط URL إضافية لتضمين الفيديو."

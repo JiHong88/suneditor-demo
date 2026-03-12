@@ -51,7 +51,6 @@ const BUTTONS: ButtonMeta[] = [
 	{ name: "math", label: "Math", category: "insert" },
 	{ name: "template", label: "Template", category: "insert" },
 	{ name: "layout", label: "Layout", category: "insert" },
-	{ name: "mention", label: "Mention", category: "insert" },
 
 	// ── Media ────────────────────────────────────────────
 	{ name: "image", label: "Image", category: "media" },

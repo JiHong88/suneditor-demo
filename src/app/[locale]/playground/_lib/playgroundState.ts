@@ -145,10 +145,14 @@ export interface PlaygroundState {
 	audio_allowMultiple: boolean;
 	audio_acceptedFormats: string;
 
+	// — Plugin: HR —
+	hr_items: string;
+
 	// — Plugin: Table —
 	table_scrollType: "x" | "y" | "xy";
 	table_captionPosition: "top" | "bottom";
 	table_cellControllerPosition: "cell" | "table";
+	table_colorList: string;
 
 	// — Plugin: FontSize —
 	fontSize_sizeUnit: string;
@@ -156,11 +160,16 @@ export interface PlaygroundState {
 	fontSize_showDefaultSizeLabel: boolean;
 	fontSize_disableInput: boolean;
 
+	// — Plugin: FontSize (extended) —
+	fontSize_unitMap: string;
+
 	// — Plugin: FontColor —
 	fontColor_disableHEXInput: boolean;
+	fontColor_items: string;
 
 	// — Plugin: BackgroundColor —
 	backgroundColor_disableHEXInput: boolean;
+	backgroundColor_items: string;
 
 	// — Plugin: Embed —
 	embed_canResize: boolean;
@@ -198,6 +207,7 @@ export interface PlaygroundState {
 	image_keepFormatType: boolean;
 	image_linkEnableFileUpload: boolean;
 	image_insertBehavior: string;
+	image_controls: string;
 
 	// — Plugin: Video (extended) —
 	video_uploadHeaders: string;
@@ -208,6 +218,10 @@ export interface PlaygroundState {
 	video_query_vimeo: string;
 	video_extensions: string;
 	video_insertBehavior: string;
+	video_controls: string;
+	video_ratioOptions: string;
+	video_urlPatterns: string;
+	video_embedQuery: string;
 
 	// — Plugin: Audio (extended) —
 	audio_uploadHeaders: string;
@@ -224,12 +238,16 @@ export interface PlaygroundState {
 	embed_query_youtube: string;
 	embed_query_vimeo: string;
 	embed_insertBehavior: string;
+	embed_controls: string;
+	embed_urlPatterns: string;
+	embed_embedQuery: string;
 
 	// — Plugin: Drawing (extended) —
 	drawing_useFormatType: boolean;
 	drawing_defaultFormatType: string;
 	drawing_keepFormatType: boolean;
 	drawing_maintainRatio: boolean;
+	drawing_formSize: string;
 
 	// — Plugin: Mention (extended) —
 	mention_apiHeaders: string;
@@ -241,6 +259,14 @@ export interface PlaygroundState {
 	// — Plugin: BackgroundColor (extended) —
 	backgroundColor_splitNum: number;
 
+	// — Plugin: Mention (extended2) —
+	mention_data: string;
+
+	// — Plugin: Math (extended) —
+	math_fontSizeList: string;
+	math_formSize: string;
+	math_onPaste: string;
+
 	// — Plugin: Link —
 	link_title: boolean;
 	link_textToDisplay: boolean;
@@ -251,6 +277,8 @@ export interface PlaygroundState {
 	link_uploadSizeLimit: number;
 	link_uploadSingleSizeLimit: number;
 	link_acceptedFormats: string;
+	link_relList: string;
+	link_defaultRel: string;
 
 	// — Plugin: ExportPDF —
 	exportPDF_apiUrl: string;
@@ -264,6 +292,8 @@ export interface PlaygroundState {
 	fileUpload_allowMultiple: boolean;
 	fileUpload_acceptedFormats: string;
 	fileUpload_as: string;
+	fileUpload_insertBehavior: string;
+	fileUpload_controls: string;
 
 	// — Plugin: Align —
 	align_items: string;
@@ -496,22 +526,29 @@ export const DEFAULTS: PlaygroundState = {
 	audio_allowMultiple: false,
 	audio_acceptedFormats: "audio/*",
 
+	// Plugin: HR
+	hr_items: "",
+
 	// Plugin: Table
 	table_scrollType: "x",
 	table_captionPosition: "bottom",
 	table_cellControllerPosition: "cell",
+	table_colorList: "",
 
 	// Plugin: FontSize
 	fontSize_sizeUnit: "px",
 	fontSize_showIncDecControls: false,
 	fontSize_showDefaultSizeLabel: true,
 	fontSize_disableInput: true,
+	fontSize_unitMap: "",
 
 	// Plugin: FontColor
 	fontColor_disableHEXInput: false,
+	fontColor_items: "",
 
 	// Plugin: BackgroundColor
 	backgroundColor_disableHEXInput: false,
+	backgroundColor_items: "",
 
 	// Plugin: Embed
 	embed_canResize: true,
@@ -549,6 +586,7 @@ export const DEFAULTS: PlaygroundState = {
 	image_keepFormatType: false,
 	image_linkEnableFileUpload: false,
 	image_insertBehavior: "auto",
+	image_controls: "",
 
 	// Plugin: Video (extended)
 	video_uploadHeaders: "",
@@ -559,6 +597,10 @@ export const DEFAULTS: PlaygroundState = {
 	video_query_vimeo: "",
 	video_extensions: "",
 	video_insertBehavior: "auto",
+	video_controls: "",
+	video_ratioOptions: "",
+	video_urlPatterns: "",
+	video_embedQuery: "",
 
 	// Plugin: Audio (extended)
 	audio_uploadHeaders: "",
@@ -575,16 +617,26 @@ export const DEFAULTS: PlaygroundState = {
 	embed_query_youtube: "",
 	embed_query_vimeo: "",
 	embed_insertBehavior: "auto",
+	embed_controls: "",
+	embed_urlPatterns: "",
+	embed_embedQuery: "",
 
 	// Plugin: Drawing (extended)
 	drawing_useFormatType: false,
 	drawing_defaultFormatType: "block",
 	drawing_keepFormatType: false,
 	drawing_maintainRatio: true,
+	drawing_formSize: "",
 
 	// Plugin: Mention (extended)
 	mention_apiHeaders: "",
 	mention_useCachingFieldData: true,
+	mention_data: "",
+
+	// Plugin: Math (extended)
+	math_fontSizeList: "",
+	math_formSize: "",
+	math_onPaste: "",
 
 	// Plugin: FontColor (extended)
 	fontColor_splitNum: 7,
@@ -602,6 +654,8 @@ export const DEFAULTS: PlaygroundState = {
 	link_uploadSizeLimit: 0,
 	link_uploadSingleSizeLimit: 0,
 	link_acceptedFormats: "",
+	link_relList: "",
+	link_defaultRel: "",
 
 	// Plugin: ExportPDF
 	exportPDF_apiUrl: "",
@@ -615,6 +669,8 @@ export const DEFAULTS: PlaygroundState = {
 	fileUpload_allowMultiple: false,
 	fileUpload_acceptedFormats: "*",
 	fileUpload_as: "box",
+	fileUpload_insertBehavior: "auto",
+	fileUpload_controls: "",
 
 	// Plugin: Align
 	align_items: "",
@@ -718,6 +774,27 @@ export const ITEM_PRESETS: Record<string, string> = {
 	textStyle_items: "code,shadow",
 	template_items: '[{"name":"Greeting","html":"<p>Hello!</p>"}]',
 	layout_items: '[{"name":"Two Column","html":"<div style=\\"display:flex;gap:1em\\"><div style=\\"flex:1\\">Left</div><div style=\\"flex:1\\">Right</div></div>"}]',
+	hr_items: '[{"name":"Solid","class":"__se__solid"},{"name":"Dashed","class":"__se__dashed"}]',
+	fontColor_items: '#ff0000,#ff5722,#ff9800,#ffc107,#ffeb3b,#4caf50,#2196f3,#3f51b5,#9c27b0,#000000,#333333,#666666,#999999,#cccccc,#ffffff',
+	backgroundColor_items: '#ff0000,#ff5722,#ff9800,#ffc107,#ffeb3b,#4caf50,#2196f3,#3f51b5,#9c27b0,#000000,#333333,#666666,#999999,#cccccc,#ffffff',
+	table_colorList: '#ff0000,#ff5722,#ff9800,#ffc107,#ffeb3b,#4caf50,#2196f3,#3f51b5,#9c27b0,#000000,#333333,#666666,#999999,#cccccc,#ffffff',
+	image_controls: '[["align","caption","revert","edit","copy","remove"]]',
+	video_controls: '[["align","caption","revert","edit","copy","remove"]]',
+	video_ratioOptions: '[{"value":0.5625,"text":"16:9"},{"value":0.75,"text":"4:3"},{"value":1,"text":"1:1"}]',
+	embed_controls: '[["align","revert","edit","copy","remove"]]',
+	drawing_formSize: '{"width":"600px","height":"40vh","minWidth":"200px","minHeight":"150px"}',
+	mention_data: '[{"key":"john","name":"John Doe","url":"/users/john"},{"key":"jane","name":"Jane Smith","url":"/users/jane"}]',
+	math_fontSizeList: '[{"text":"1","value":"1em"},{"text":"2","value":"2em"}]',
+	math_formSize: '{"width":"460px","height":"14em","minWidth":"400px","minHeight":"40px"}',
+	link_relList: 'nofollow,noreferrer,noopener',
+	link_defaultRel: '{"default":"nofollow","check_new_window":"noreferrer noopener"}',
+	fileUpload_controls: '[["edit","copy","remove"]]',
+	video_urlPatterns: '/dailymotion\\.com\\/video\\//,/facebook\\.com\\/.+\\/videos\\//,/tiktok\\.com\\/@[^/]+\\/video\\//',
+	video_embedQuery: '{"dailymotion":{"pattern":"/dailymotion\\\\.com\\\\/video\\\\/(\\\\w+)/i","action":"https://www.dailymotion.com/embed/video/$1","tag":"iframe"}}',
+	embed_urlPatterns: '/reddit\\.com\\/r\\//,/github\\.com\\/.+\\/issues\\//,/stackoverflow\\.com\\/questions\\//',
+	embed_embedQuery: '{"reddit":{"pattern":"/reddit\\\\.com\\\\/r\\\\/(\\\\w+)\\\\/comments\\\\/(\\\\w+)/i","action":"https://www.redditmedia.com/r/$1/comments/$2?embed=true","tag":"iframe"}}',
+	fontSize_unitMap: '{"px":{"default":16,"inc":1,"min":8,"max":72,"list":[8,10,12,14,16,18,20,24,28,32,36,48,72]},"pt":{"default":12,"inc":1,"min":6,"max":72,"list":[6,8,10,12,14,18,24,36]},"em":{"default":1,"inc":0.1,"min":0.5,"max":5,"list":[0.5,0.75,1,1.25,1.5,2,2.5,3]},"rem":{"default":1,"inc":0.1,"min":0.5,"max":5,"list":[0.5,0.75,1,1.25,1.5,2,2.5,3]}}',
+	math_onPaste: 'function(e) {\n  const text = e.clipboardData.getData("text/plain");\n  e.preventDefault();\n  document.execCommand("insertText", false, text);\n}',
 };
 
 export const GALLERY_DATA_PRESETS: Record<string, string> = {
@@ -827,15 +904,20 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"audio_uploadSizeLimit",
 	"audio_allowMultiple",
 	"audio_acceptedFormats",
+	"hr_items",
 	"table_scrollType",
 	"table_captionPosition",
 	"table_cellControllerPosition",
+	"table_colorList",
 	"fontSize_sizeUnit",
 	"fontSize_showIncDecControls",
 	"fontSize_showDefaultSizeLabel",
 	"fontSize_disableInput",
+	"fontSize_unitMap",
 	"fontColor_disableHEXInput",
+	"fontColor_items",
 	"backgroundColor_disableHEXInput",
+	"backgroundColor_items",
 	"embed_canResize",
 	"embed_defaultWidth",
 	"embed_defaultHeight",
@@ -864,6 +946,7 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"image_keepFormatType",
 	"image_linkEnableFileUpload",
 	"image_insertBehavior",
+	"image_controls",
 	// Video (extended)
 	"video_uploadHeaders",
 	"video_uploadSingleSizeLimit",
@@ -873,6 +956,10 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"video_query_vimeo",
 	"video_extensions",
 	"video_insertBehavior",
+	"video_controls",
+	"video_ratioOptions",
+	"video_urlPatterns",
+	"video_embedQuery",
 	// Audio (extended)
 	"audio_uploadHeaders",
 	"audio_uploadSingleSizeLimit",
@@ -887,14 +974,23 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"embed_query_youtube",
 	"embed_query_vimeo",
 	"embed_insertBehavior",
+	"embed_controls",
+	"embed_urlPatterns",
+	"embed_embedQuery",
 	// Drawing (extended)
 	"drawing_useFormatType",
 	"drawing_defaultFormatType",
 	"drawing_keepFormatType",
 	"drawing_maintainRatio",
+	"drawing_formSize",
 	// Mention (extended)
 	"mention_apiHeaders",
 	"mention_useCachingFieldData",
+	"mention_data",
+	// Math (extended)
+	"math_fontSizeList",
+	"math_formSize",
+	"math_onPaste",
 	// FontColor (extended)
 	"fontColor_splitNum",
 	// BackgroundColor (extended)
@@ -909,6 +1005,8 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"link_uploadSizeLimit",
 	"link_uploadSingleSizeLimit",
 	"link_acceptedFormats",
+	"link_relList",
+	"link_defaultRel",
 	// ExportPDF
 	"exportPDF_apiUrl",
 	"exportPDF_fileName",
@@ -920,6 +1018,8 @@ const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
 	"fileUpload_allowMultiple",
 	"fileUpload_acceptedFormats",
 	"fileUpload_as",
+	"fileUpload_insertBehavior",
+	"fileUpload_controls",
 	// Align
 	"align_items",
 	// Font
@@ -1026,9 +1126,9 @@ function filterPageButtons(list: unknown[]): unknown[] {
 				// Button group: ["undo", "redo", ...]
 				const filtered = (item as unknown[]).filter((b) => typeof b !== "string" || !PAGE_BUTTONS.has(b));
 				// Remove group labels referencing "Pages" if no page buttons remain
-				const cleaned = filtered.filter((b) => typeof b !== "string" || !b.toString().includes(":Pages"));
+				const noPageLabels = filtered.filter((b) => typeof b !== "string" || !b.toString().includes(":Pages"));
 				// Also clean up groups like ":View & Pages-..." to ":View-..."
-				const final = cleaned.map((b) => {
+				const final = noPageLabels.map((b) => {
 					if (typeof b === "string" && b.includes(" & Pages")) {
 						return b.replace(" & Pages", "");
 					}
@@ -1038,7 +1138,20 @@ function filterPageButtons(list: unknown[]): unknown[] {
 			}
 		}
 	}
-	return result;
+	// Remove consecutive/leading/trailing separators left after filtering
+	const dedupedSeps: unknown[] = [];
+	for (const item of result) {
+		if (item === "|" || item === "/") {
+			const prev = dedupedSeps[dedupedSeps.length - 1];
+			if (dedupedSeps.length === 0 || prev === "|" || prev === "/") continue;
+		}
+		dedupedSeps.push(item);
+	}
+	// Remove trailing separator
+	while (dedupedSeps.length > 0 && (dedupedSeps[dedupedSeps.length - 1] === "|" || dedupedSeps[dedupedSeps.length - 1] === "/")) {
+		dedupedSeps.pop();
+	}
+	return dedupedSeps;
 }
 
 export function getButtonList(preset: ButtonListPreset, type?: string, customButtonList?: string): unknown[] {
@@ -1062,10 +1175,12 @@ export function getButtonList(preset: ButtonListPreset, type?: string, customBut
 			break;
 	}
 
-	// Remove page buttons when not in document mode
-	const isDocumentMode = type ? type.toLowerCase().includes("document") : false;
-	if (!isDocumentMode) {
-		list = filterPageButtons(list);
+	// Remove page buttons when not in document mode (only for presets, not custom)
+	if (preset !== "custom") {
+		const isDocumentMode = type ? type.toLowerCase().includes("document") : false;
+		if (!isDocumentMode) {
+			list = filterPageButtons(list);
+		}
 	}
 
 	return list;
@@ -1077,6 +1192,41 @@ export function hasButton(preset: ButtonListPreset, type: string | undefined, na
 	const search = (arr: unknown[]): boolean =>
 		arr.some((item) => (Array.isArray(item) ? search(item) : item === name));
 	return search(list);
+}
+
+/* ── Helpers for complex option parsing ─────────────────── */
+
+/** Parse comma-separated regex strings like "/foo/,/bar/i" into RegExp[] */
+function parseRegExpList(str: string): RegExp[] {
+	return str.split(",").map((s) => {
+		const m = s.trim().match(/^\/(.+)\/([gimsuy]*)$/);
+		return m ? new RegExp(m[1], m[2]) : new RegExp(s.trim());
+	});
+}
+
+/** Parse embedQuery JSON: converts "pattern" string fields to RegExp */
+function parseEmbedQuery(json: string): Record<string, { pattern: RegExp; action: string; tag: string }> {
+	const raw = JSON.parse(json);
+	const result: Record<string, { pattern: RegExp; action: string; tag: string }> = {};
+	for (const [key, val] of Object.entries(raw)) {
+		const v = val as { pattern: string; action: string; tag: string };
+		const m = v.pattern.match(/^\/(.+)\/([gimsuy]*)$/);
+		result[key] = {
+			pattern: m ? new RegExp(m[1], m[2]) : new RegExp(v.pattern),
+			action: v.action,
+			tag: v.tag,
+		};
+	}
+	return result;
+}
+
+/** Parse a function string into an actual Function */
+function parseFunction(str: string): ((...args: unknown[]) => unknown) | null {
+	try {
+		return new Function("return (" + str + ")")() as (...args: unknown[]) => unknown;
+	} catch {
+		return null;
+	}
 }
 
 /* ── State → SunEditor options ─────────────────────────── */
@@ -1267,6 +1417,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.image_keepFormatType) img.keepFormatType = true;
 	if (state.image_linkEnableFileUpload) img.linkEnableFileUpload = true;
 	if (state.image_insertBehavior !== "auto") img.insertBehavior = state.image_insertBehavior;
+	if (state.image_controls) { try { img.controls = JSON.parse(state.image_controls); } catch { /* skip */ } }
 	if (Object.keys(img).length) opts.image = img;
 
 	const vid: Record<string, unknown> = {};
@@ -1291,6 +1442,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.video_query_vimeo) vid.query_vimeo = state.video_query_vimeo;
 	if (state.video_extensions) vid.extensions = state.video_extensions.split(",").map((s) => s.trim());
 	if (state.video_insertBehavior !== "auto") vid.insertBehavior = state.video_insertBehavior;
+	if (state.video_controls) { try { vid.controls = JSON.parse(state.video_controls); } catch { /* skip */ } }
+	if (state.video_ratioOptions) { try { vid.ratioOptions = JSON.parse(state.video_ratioOptions); } catch { /* skip */ } }
+	if (state.video_urlPatterns) { try { vid.urlPatterns = parseRegExpList(state.video_urlPatterns); } catch { /* skip */ } }
+	if (state.video_embedQuery) { try { vid.embedQuery = parseEmbedQuery(state.video_embedQuery); } catch { /* skip */ } }
 	if (Object.keys(vid).length) opts.video = vid;
 
 	const aud: Record<string, unknown> = {};
@@ -1308,10 +1463,16 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.audio_insertBehavior !== "auto") aud.insertBehavior = state.audio_insertBehavior;
 	if (Object.keys(aud).length) opts.audio = aud;
 
+	// HR
+	if (state.hr_items) {
+		try { opts.hr = { items: JSON.parse(state.hr_items) }; } catch { /* skip */ }
+	}
+
 	const tbl: Record<string, unknown> = {};
 	if (state.table_scrollType !== "x") tbl.scrollType = state.table_scrollType;
 	if (state.table_captionPosition !== "bottom") tbl.captionPosition = state.table_captionPosition;
 	if (state.table_cellControllerPosition !== "cell") tbl.cellControllerPosition = state.table_cellControllerPosition;
+	if (state.table_colorList) tbl.colorList = state.table_colorList.split(",").map((s) => s.trim());
 	if (Object.keys(tbl).length) opts.table = tbl;
 
 	const fs: Record<string, unknown> = {};
@@ -1319,16 +1480,19 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.fontSize_showIncDecControls) fs.showIncDecControls = true;
 	if (!state.fontSize_showDefaultSizeLabel) fs.showDefaultSizeLabel = false;
 	if (!state.fontSize_disableInput) fs.disableInput = false;
+	if (state.fontSize_unitMap) { try { fs.unitMap = JSON.parse(state.fontSize_unitMap); } catch { /* skip */ } }
 	if (Object.keys(fs).length) opts.fontSize = fs;
 
 	const fc: Record<string, unknown> = {};
 	if (state.fontColor_disableHEXInput) fc.disableHEXInput = true;
 	if (state.fontColor_splitNum !== 7) fc.splitNum = state.fontColor_splitNum;
+	if (state.fontColor_items) fc.items = state.fontColor_items.split(",").map((s) => s.trim());
 	if (Object.keys(fc).length) opts.fontColor = fc;
 
 	const bc: Record<string, unknown> = {};
 	if (state.backgroundColor_disableHEXInput) bc.disableHEXInput = true;
 	if (state.backgroundColor_splitNum !== 7) bc.splitNum = state.backgroundColor_splitNum;
+	if (state.backgroundColor_items) bc.items = state.backgroundColor_items.split(",").map((s) => s.trim());
 	if (Object.keys(bc).length) opts.backgroundColor = bc;
 
 	const emb: Record<string, unknown> = {};
@@ -1345,6 +1509,9 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.embed_query_youtube) emb.query_youtube = state.embed_query_youtube;
 	if (state.embed_query_vimeo) emb.query_vimeo = state.embed_query_vimeo;
 	if (state.embed_insertBehavior !== "auto") emb.insertBehavior = state.embed_insertBehavior;
+	if (state.embed_controls) { try { emb.controls = JSON.parse(state.embed_controls); } catch { /* skip */ } }
+	if (state.embed_urlPatterns) { try { emb.urlPatterns = parseRegExpList(state.embed_urlPatterns); } catch { /* skip */ } }
+	if (state.embed_embedQuery) { try { emb.embedQuery = parseEmbedQuery(state.embed_embedQuery); } catch { /* skip */ } }
 	if (Object.keys(emb).length) opts.embed = emb;
 
 	const drw: Record<string, unknown> = {};
@@ -1358,6 +1525,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.drawing_defaultFormatType !== "block") drw.defaultFormatType = state.drawing_defaultFormatType;
 	if (state.drawing_keepFormatType) drw.keepFormatType = true;
 	if (!state.drawing_maintainRatio) drw.maintainRatio = false;
+	if (state.drawing_formSize) { try { drw.formSize = JSON.parse(state.drawing_formSize); } catch { /* skip */ } }
 	if (Object.keys(drw).length) opts.drawing = drw;
 
 	const mnt: Record<string, unknown> = {};
@@ -1369,11 +1537,15 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (!state.mention_useCachingData) mnt.useCachingData = false;
 	if (state.mention_apiHeaders) { try { mnt.apiHeaders = JSON.parse(state.mention_apiHeaders); } catch { /* skip */ } }
 	if (!state.mention_useCachingFieldData) mnt.useCachingFieldData = false;
+	if (state.mention_data) { try { mnt.data = JSON.parse(state.mention_data); } catch { /* skip */ } }
 	if (Object.keys(mnt).length) opts.mention = mnt;
 
 	const mth: Record<string, unknown> = {};
 	if (!state.math_canResize) mth.canResize = false;
 	if (state.math_autoHeight) mth.autoHeight = true;
+	if (state.math_fontSizeList) { try { mth.fontSizeList = JSON.parse(state.math_fontSizeList); } catch { /* skip */ } }
+	if (state.math_formSize) { try { mth.formSize = JSON.parse(state.math_formSize); } catch { /* skip */ } }
+	if (state.math_onPaste) { const fn = parseFunction(state.math_onPaste); if (fn) mth.onPaste = fn; }
 	if (Object.keys(mth).length) opts.math = mth;
 
 	// Link
@@ -1387,6 +1559,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.link_uploadSizeLimit) lnk.uploadSizeLimit = state.link_uploadSizeLimit;
 	if (state.link_uploadSingleSizeLimit) lnk.uploadSingleSizeLimit = state.link_uploadSingleSizeLimit;
 	if (state.link_acceptedFormats) lnk.acceptedFormats = state.link_acceptedFormats;
+	if (state.link_relList) lnk.relList = state.link_relList.split(",").map((s) => s.trim());
+	if (state.link_defaultRel) { try { lnk.defaultRel = JSON.parse(state.link_defaultRel); } catch { /* skip */ } }
 	if (Object.keys(lnk).length) opts.link = lnk;
 
 	// ExportPDF
@@ -1404,6 +1578,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.fileUpload_allowMultiple) fu.allowMultiple = true;
 	if (state.fileUpload_acceptedFormats !== "*") fu.acceptedFormats = state.fileUpload_acceptedFormats;
 	if (state.fileUpload_as !== "box") fu.as = state.fileUpload_as;
+	if (state.fileUpload_insertBehavior !== "auto") fu.insertBehavior = state.fileUpload_insertBehavior;
+	if (state.fileUpload_controls) { try { fu.controls = JSON.parse(state.fileUpload_controls); } catch { /* skip */ } }
 	if (Object.keys(fu).length) opts.fileUpload = fu;
 
 	// Align
@@ -1720,19 +1896,25 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"a.sl": "audio_uploadSizeLimit",
 	"a.am": "audio_allowMultiple",
 	"a.af": "audio_acceptedFormats",
+	// Plugin: HR
+	"hr.i": "hr_items",
 	// Plugin: Table
 	"tb.s": "table_scrollType",
 	"tb.cp": "table_captionPosition",
 	"tb.cc": "table_cellControllerPosition",
+	"tb.cl": "table_colorList",
 	// Plugin: FontSize
 	"fs.u": "fontSize_sizeUnit",
 	"fs.ic": "fontSize_showIncDecControls",
 	"fs.sdl": "fontSize_showDefaultSizeLabel",
 	"fs.di": "fontSize_disableInput",
+	"fs.um": "fontSize_unitMap",
 	// Plugin: FontColor
 	"fc.dh": "fontColor_disableHEXInput",
+	"fc.i": "fontColor_items",
 	// Plugin: BackgroundColor
 	"bc.dh": "backgroundColor_disableHEXInput",
+	"bc.i": "backgroundColor_items",
 	// Plugin: Embed
 	"em.r": "embed_canResize",
 	"em.w": "embed_defaultWidth",
@@ -1765,6 +1947,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"i.kft": "image_keepFormatType",
 	"i.lfu": "image_linkEnableFileUpload",
 	"i.ib": "image_insertBehavior",
+	"i.ct": "image_controls",
 	// Plugin: Video (extended)
 	"v.uh": "video_uploadHeaders",
 	"v.ssl": "video_uploadSingleSizeLimit",
@@ -1774,6 +1957,10 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"v.qv": "video_query_vimeo",
 	"v.ext": "video_extensions",
 	"v.ib": "video_insertBehavior",
+	"v.ct": "video_controls",
+	"v.ro": "video_ratioOptions",
+	"v.up": "video_urlPatterns",
+	"v.eq": "video_embedQuery",
 	// Plugin: Audio (extended)
 	"a.uh": "audio_uploadHeaders",
 	"a.ssl": "audio_uploadSingleSizeLimit",
@@ -1788,14 +1975,23 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"em.qy": "embed_query_youtube",
 	"em.qv": "embed_query_vimeo",
 	"em.ib": "embed_insertBehavior",
+	"em.ct": "embed_controls",
+	"em.up": "embed_urlPatterns",
+	"em.eq": "embed_embedQuery",
 	// Plugin: Drawing (extended)
 	"dr.uft": "drawing_useFormatType",
 	"dr.dft": "drawing_defaultFormatType",
 	"dr.kft": "drawing_keepFormatType",
 	"dr.mr": "drawing_maintainRatio",
+	"dr.fs": "drawing_formSize",
 	// Plugin: Mention (extended)
 	"mn.ah": "mention_apiHeaders",
 	"mn.ucfd": "mention_useCachingFieldData",
+	"mn.dt": "mention_data",
+	// Plugin: Math (extended)
+	"mt.fsl": "math_fontSizeList",
+	"mt.fs": "math_formSize",
+	"mt.op": "math_onPaste",
 	// Plugin: FontColor (extended)
 	"fc.sn": "fontColor_splitNum",
 	// Plugin: BackgroundColor (extended)
@@ -1810,6 +2006,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"lk.sl": "link_uploadSizeLimit",
 	"lk.ssl": "link_uploadSingleSizeLimit",
 	"lk.af": "link_acceptedFormats",
+	"lk.rl": "link_relList",
+	"lk.dr": "link_defaultRel",
 	// Plugin: ExportPDF
 	"ep.au": "exportPDF_apiUrl",
 	"ep.fn": "exportPDF_fileName",
@@ -1821,6 +2019,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"fu.am": "fileUpload_allowMultiple",
 	"fu.af": "fileUpload_acceptedFormats",
 	"fu.as": "fileUpload_as",
+	"fu.ib": "fileUpload_insertBehavior",
+	"fu.ct": "fileUpload_controls",
 	// Plugin: Align
 	"al.i": "align_items",
 	// Plugin: Font

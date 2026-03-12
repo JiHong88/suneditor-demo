@@ -12,9 +12,10 @@ interface BuilderButtonProps {
 	onRemove?: () => void;
 	isDragOverlay?: boolean;
 	suppressHover?: boolean;
+	onHover?: (info: { name: string; groupId: string; index: number } | null) => void;
 }
 
-export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay, suppressHover }: BuilderButtonProps) {
+export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay, suppressHover, onHover }: BuilderButtonProps) {
 	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
 		id,
 		data: { type: "canvas-button" as const, buttonName },
@@ -32,6 +33,10 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 		transition,
 		opacity: isDragging ? 0.3 : 1,
 	};
+
+	// Parse groupId and index from id: "groupId__index__name"
+	const idParts = id.split("__");
+	const hoverInfo = { name: buttonName, groupId: idParts[0], index: parseInt(idParts[1], 10) };
 
 	const isSeparator = buttonName === "|";
 	const meta = BUTTON_MAP[buttonName];
@@ -51,6 +56,8 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 					${isDragOverlay ? "shadow-lg border border-amber-400 bg-amber-50 ring-2 ring-amber-400/20 dark:border-amber-500/60 dark:bg-amber-950/30 dark:ring-amber-500/20" : `border border-dashed border-amber-400/50 bg-amber-50/40 dark:border-amber-500/30 dark:bg-amber-950/20 ${hoverClasses}`}
 					${isDragging ? "z-50 opacity-30" : ""}
 					${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
+				onMouseEnter={() => onHover?.(hoverInfo)}
+				onMouseLeave={() => onHover?.(null)}
 			>
 				<div
 					className={`drag-zone flex-1 flex items-center gap-0.5 px-1 py-0.5 rounded-s transition-colors ${suppressHover ? "cursor-default" : "cursor-grab hover:text-amber-800 dark:hover:text-amber-300"}`}
@@ -85,6 +92,8 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:text-blue-400 dark:ring-blue-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/15 ${hoverClasses}`}
 				${isDragging ? "z-50" : ""}
 				${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
+			onMouseEnter={() => onHover?.(hoverInfo)}
+			onMouseLeave={() => onHover?.(null)}
 		>
 			<div
 				className={`drag-zone flex-1 flex items-center gap-0.5 px-1.5 py-0.5 rounded-s transition-colors ${suppressHover ? "cursor-default" : "cursor-grab hover:text-blue-600 dark:hover:text-blue-400"}`}

@@ -38,9 +38,12 @@ interface BuilderGroupProps {
 	dragPreview?: { groupId: string; index: number } | null;
 	isDragging?: boolean;
 	isDraggingGroup?: boolean;
+	onButtonHover?: (info: { name: string; groupId: string; index: number } | null) => void;
+	onMoreGroupHover?: (groupId: string | null) => void;
+	onGroupActionHover?: (info: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null) => void;
 }
 
-export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dragPreview, isDragging, isDraggingGroup }: BuilderGroupProps) {
+export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover }: BuilderGroupProps) {
 	const { attributes: groupDragAttrs, listeners: groupDragListeners, setNodeRef: setDragRef, isDragging: isGroupDragging } = useDraggable({
 		id: `group-drag-${group.id}`,
 		data: { type: "canvas-group" as const, groupId: group.id },
@@ -78,7 +81,12 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 				${isOver ? "border-primary !border-solid bg-primary/5 shadow-sm" : `${borderColor} bg-background`}
 				${isGroupDragging ? "!border-emerald-400 !bg-emerald-50/50 opacity-40 dark:!border-emerald-500/60 dark:!bg-emerald-950/20" : ""}
 				${groupHoverClasses}
-				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-950/20`}
+				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-950/20
+				has-[.group-float-zone:hover]:border-orange-400 has-[.group-float-zone:hover]:bg-orange-50/30 dark:has-[.group-float-zone:hover]:border-orange-500/60 dark:has-[.group-float-zone:hover]:bg-orange-950/20
+				has-[.group-more-zone:hover]:border-violet-400 has-[.group-more-zone:hover]:bg-violet-50/30 dark:has-[.group-more-zone:hover]:border-violet-500/60 dark:has-[.group-more-zone:hover]:bg-violet-950/20
+				has-[.group-delete-zone:hover]:border-red-400 has-[.group-delete-zone:hover]:bg-red-50/30 dark:has-[.group-delete-zone:hover]:border-red-500/60 dark:has-[.group-delete-zone:hover]:bg-red-950/20`}
+			onMouseEnter={group.moreButton ? () => onMoreGroupHover?.(group.id) : undefined}
+			onMouseLeave={group.moreButton ? () => onMoreGroupHover?.(null) : undefined}
 		>
 			{/* MoreButton label */}
 			{group.moreButton && (
@@ -104,6 +112,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 							buttonName={name}
 							onRemove={() => dispatch({ type: "REMOVE_BUTTON", groupId: group.id, buttonName: name, index: i, breakpointId })}
 							suppressHover={isDraggingGroup}
+							onHover={onButtonHover}
 						/>
 					</div>
 				))}
@@ -124,14 +133,18 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 					{...groupDragListeners}
 					className='group-drag-zone p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors cursor-grab text-muted-foreground/50 hover:text-emerald-600 dark:hover:text-emerald-400'
 					title='Drag group'
+					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "drag" })}
+					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
 					<GripVertical className='h-3.5 w-3.5' />
 				</div>
 				<button
 					type='button'
 					onClick={() => dispatch({ type: "SET_FLOAT_RIGHT", groupId: group.id, value: !group.floatRight, breakpointId })}
-					className={`p-1 rounded hover:bg-muted transition-colors cursor-pointer ${group.floatRight ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground/50"}`}
+					className={`group-float-zone p-1 rounded hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors cursor-pointer ${group.floatRight ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground/50 hover:text-orange-600 dark:hover:text-orange-400"}`}
 					title='Float right'
+					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "float" })}
+					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
 					<AlignRight className='h-3.5 w-3.5' />
 				</button>
@@ -145,8 +158,10 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 							breakpointId,
 						})
 					}
-					className={`p-1 rounded hover:bg-muted transition-colors cursor-pointer ${group.moreButton ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground/50"}`}
+					className={`group-more-zone p-1 rounded hover:bg-violet-100 dark:hover:bg-violet-900/40 transition-colors cursor-pointer ${group.moreButton ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground/50 hover:text-violet-600 dark:hover:text-violet-400"}`}
 					title='Toggle :MoreButton dropdown'
+					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "more" })}
+					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
 					<ChevronDown className='h-3.5 w-3.5' />
 				</button>
@@ -154,8 +169,10 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 					<button
 						type='button'
 						onClick={() => dispatch({ type: "REMOVE_GROUP", groupId: group.id, breakpointId })}
-						className='p-1 rounded hover:bg-destructive/10 hover:text-destructive transition-colors cursor-pointer text-muted-foreground/50'
+						className='group-delete-zone p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer text-muted-foreground/50'
 						title='Remove group'
+						onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "delete" })}
+						onMouseLeave={() => onGroupActionHover?.(null)}
 					>
 						<Trash2 className='h-3.5 w-3.5' />
 					</button>
