@@ -32,8 +32,10 @@ export interface PlaygroundState {
 	toolbar_width: string;
 	toolbar_sticky: number;
 	toolbar_hide: boolean;
+	toolbar_container_enabled: boolean;
 	shortcutsHint: boolean;
 	shortcutsDisable: boolean;
+	shortcuts: string; // JSON: {[key: string]: [keyCombo, hintLabel]}
 
 	// — Sub-Toolbar —
 	subToolbar_enabled: boolean;
@@ -42,6 +44,7 @@ export interface PlaygroundState {
 	subToolbar_width: string;
 
 	// — Statusbar & Counter (frame) —
+	statusbar_container_enabled: boolean;
 	statusbar: boolean;
 	statusbar_showPathLabel: boolean;
 	statusbar_resizeEnable: boolean;
@@ -418,14 +421,17 @@ export const DEFAULTS: PlaygroundState = {
 	toolbar_width: "auto",
 	toolbar_sticky: 0,
 	toolbar_hide: false,
+	toolbar_container_enabled: false,
 	shortcutsHint: true,
 	shortcutsDisable: false,
+	shortcuts: "",
 
 	subToolbar_enabled: false,
 	subToolbar_buttonListPreset: "basic",
 	subToolbar_mode: "balloon",
 	subToolbar_width: "auto",
 
+	statusbar_container_enabled: false,
 	statusbar: true,
 	statusbar_showPathLabel: true,
 	statusbar_resizeEnable: true,
@@ -539,7 +545,7 @@ export const DEFAULTS: PlaygroundState = {
 	fontSize_sizeUnit: "px",
 	fontSize_showIncDecControls: false,
 	fontSize_showDefaultSizeLabel: true,
-	fontSize_disableInput: true,
+	fontSize_disableInput: false,
 	fontSize_unitMap: "",
 
 	// Plugin: FontColor
@@ -816,6 +822,9 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"customButtonList",
 	"type",
 	"shortcutsDisable",
+	"shortcuts",
+	"toolbar_container_enabled",
+	"statusbar_container_enabled",
 	"subToolbar_enabled",
 	"subToolbar_buttonListPreset",
 	"subToolbar_mode",
@@ -1248,6 +1257,13 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		shortcutsDisable: state.shortcutsDisable,
 	};
 
+	// shortcuts (JSON string → object)
+	if (state.shortcuts) {
+		try {
+			opts.shortcuts = JSON.parse(state.shortcuts);
+		} catch { /* skip invalid JSON */ }
+	}
+
 	// subToolbar
 	if (state.subToolbar_enabled) {
 		const st: Record<string, unknown> = {
@@ -1479,7 +1495,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.fontSize_sizeUnit !== "px") fs.sizeUnit = state.fontSize_sizeUnit;
 	if (state.fontSize_showIncDecControls) fs.showIncDecControls = true;
 	if (!state.fontSize_showDefaultSizeLabel) fs.showDefaultSizeLabel = false;
-	if (!state.fontSize_disableInput) fs.disableInput = false;
+	if (state.fontSize_disableInput) fs.disableInput = true;
 	if (state.fontSize_unitMap) { try { fs.unitMap = JSON.parse(state.fontSize_unitMap); } catch { /* skip */ } }
 	if (Object.keys(fs).length) opts.fontSize = fs;
 
@@ -1745,8 +1761,10 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tw: "toolbar_width",
 	ts: "toolbar_sticky",
 	th: "toolbar_hide",
+	tce: "toolbar_container_enabled",
 	sh: "shortcutsHint",
 	sd: "shortcutsDisable",
+	sc: "shortcuts",
 	// Sub-Toolbar
 	ste: "subToolbar_enabled",
 	stp: "subToolbar_buttonListPreset",
@@ -1800,6 +1818,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	rbccl: "root_body_charCounter_label",
 	rbcct: "root_body_charCounter_type",
 	// Statusbar
+	ssce: "statusbar_container_enabled",
 	sb: "statusbar",
 	sp: "statusbar_showPathLabel",
 	sr: "statusbar_resizeEnable",

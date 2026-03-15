@@ -45,9 +45,11 @@ interface SunEditorProps {
 	theme?: string;
 	options?: SunEditor.InitOptions;
 	onInstance?: (instance: SunEditor.Instance) => void;
+	toolbarContainerRef?: React.RefObject<HTMLDivElement | null>;
+	statusbarContainerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstance }) => {
+const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstance, toolbarContainerRef, statusbarContainerRef }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const instanceRef = useRef<SunEditor.Instance | null>(null);
 	const mountedRef = useRef(true);
@@ -72,6 +74,8 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 			value: value || options.value || "",
 			theme,
 			buttonList: FullButtonList,
+			...(toolbarContainerRef?.current && { toolbar_container: toolbarContainerRef.current }),
+			...(statusbarContainerRef?.current && { statusbar_container: statusbarContainerRef.current }),
 			...restOptions,
 		});
 

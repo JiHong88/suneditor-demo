@@ -99,7 +99,7 @@ export function OptionInfo({ optionKey, description }: Props) {
 									</svg>
 								</button>
 							</div>
-							<p className='text-xs leading-relaxed text-muted-foreground'>{highlightInline(description)}</p>
+							<div className='text-xs leading-relaxed text-muted-foreground'>{highlightInline(description)}</div>
 						</div>
 					</div>,
 					document.body,

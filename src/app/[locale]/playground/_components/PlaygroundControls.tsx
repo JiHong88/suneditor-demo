@@ -228,6 +228,86 @@ function TextareaField({
 	);
 }
 
+/** Toggle for container options (toolbar_container, statusbar_container) — value is always an HTMLElement ref */
+function ContainerField({
+	label,
+	checked,
+	onChange,
+	locked = false,
+	valueHint,
+	disabled,
+	disabledReason,
+}: {
+	label: string;
+	checked: boolean;
+	onChange: (v: boolean) => void;
+	locked?: boolean;
+	valueHint?: string;
+	disabled?: boolean;
+	disabledReason?: string;
+}) {
+	return (
+		<div className={`flex flex-col gap-1.5 py-0.5 ${disabled ? "opacity-40" : ""}`}>
+			<div className='flex items-start justify-between gap-2'>
+				<span className='min-w-0 flex items-center gap-1.5'>
+					<FieldLabel label={label} />
+					{disabled && disabledReason && (
+						<span className='text-[10px] text-muted-foreground/70 italic shrink-0'>{disabledReason}</span>
+					)}
+				</span>
+				<button
+					type='button'
+					role='switch'
+					aria-checked={checked}
+					onClick={() => !locked && !disabled && onChange(!checked)}
+					className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors ${
+						locked || disabled ? "cursor-not-allowed" : "cursor-pointer"
+					} ${checked ? (locked ? "bg-orange-500" : "bg-primary") : "bg-muted"}`}
+				>
+					<span
+						className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
+					/>
+				</button>
+			</div>
+			{checked && valueHint && (
+				<code className='text-[10px] text-muted-foreground/60 bg-muted/50 px-2 py-0.5 rounded font-mono truncate'>
+					{valueHint}
+				</code>
+			)}
+		</div>
+	);
+}
+
+const SHORTCUTS_DEFAULT = '{"bold":["c+KeyB","B"],"_h1":["c+s+Digit1+$~blockStyle.applyHeaderByShortcut",""]}';
+
+/** Toggle for shortcuts option — OFF clears value, ON auto-fills default JSON */
+function ShortcutsField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+	const checked = !!value;
+	return (
+		<div className='flex flex-col gap-1.5 py-0.5'>
+			<div className='flex items-start justify-between gap-2'>
+				<span className='min-w-0'>
+					<FieldLabel label='shortcuts' />
+				</span>
+				<button
+					type='button'
+					role='switch'
+					aria-checked={checked}
+					onClick={() => onChange(checked ? "" : SHORTCUTS_DEFAULT)}
+					className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${checked ? "bg-primary" : "bg-muted"}`}
+				>
+					<span className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`} />
+				</button>
+			</div>
+			{checked && (
+				<code className='text-[10px] text-muted-foreground/60 bg-muted/50 px-2 py-0.5 rounded font-mono break-all'>
+					{value}
+				</code>
+			)}
+		</div>
+	);
+}
+
 /** Disabled option indicator — shown for options that can't be configured in playground */
 function DisabledField({ label, reason }: { label: string; reason?: string }) {
 	const locale = useLocale();
@@ -593,6 +673,7 @@ function useSet(dispatch: Dispatch<PlaygroundAction>) {
 export default function PlaygroundControls({ state, dispatch }: Props) {
 	const t = useTranslations("Playground");
 	const set = useSet(dispatch);
+	const isMultirootClassic = state.multiroot && state.mode === "classic";
 
 	return (
 		<Accordion type='multiple' defaultValue={["mode-theme"]} className='w-full'>
@@ -845,9 +926,20 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							resettable={!isFixedOption("shortcutsDisable")}
 						/>
 					</div>
-					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
-						<DisabledField label='toolbar_container' reason='HTMLElement' />
-						<DisabledField label='shortcuts' reason='Object' />
+					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20 grid gap-2'>
+						<ContainerField
+							label='toolbar_container'
+							checked={isMultirootClassic || state.toolbar_container_enabled}
+							onChange={set("toolbar_container_enabled")}
+							locked={isMultirootClassic}
+							valueHint='HTMLElement — div#se-toolbar-container'
+							disabled={state.mode !== "classic" && !isMultirootClassic}
+							disabledReason='classic mode only'
+						/>
+						<ShortcutsField
+							value={state.shortcuts}
+							onChange={set("shortcuts")}
+						/>
 					</div>
 				</AccordionContent>
 			</AccordionItem>
@@ -916,7 +1008,12 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 						/>
 					</div>
 					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
-						<DisabledField label='statusbar_container' reason='HTMLElement' />
+						<ContainerField
+							label='statusbar_container'
+							checked={state.statusbar_container_enabled}
+							onChange={set("statusbar_container_enabled")}
+							valueHint='HTMLElement — div#se-statusbar-container'
+						/>
 					</div>
 				</AccordionContent>
 			</AccordionItem>

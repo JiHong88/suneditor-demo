@@ -1,28 +1,28 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import type { SunEditor } from "suneditor/types";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";
 import { FullButtonList } from "@/components/editor/buttonList";
 import type { PlaygroundState } from "../_lib/playgroundState";
-import { stateToEditorOptions, getRootConfigs, hasButton } from "../_lib/playgroundState";
-import { loadExternalLibs } from "./externalLibsLoader";
+import { stateToEditorOptions, getRootConfigs } from "../_lib/playgroundState";
+import { type AllLibs, getActiveLibs } from "./externalLibsLoader";
 
 interface Props {
 	state: PlaygroundState;
 	editorRef: React.RefObject<SunEditor.Instance | null>;
 	contentRef: React.RefObject<Record<string, string>>;
+	allLibs: AllLibs;
 }
 
-export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef }: Props) {
+export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef, allLibs }: Props) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const toolbarRef = useRef<HTMLDivElement>(null);
-	const [extLibs, setExtLibs] = useState<Record<string, unknown> | null>(null);
+	const statusbarRef = useRef<HTMLDivElement>(null);
 
 	const isClassic = state.mode === "classic" || !state.mode;
-	const needMath = hasButton(state.buttonListPreset, state.type, "math");
 
 	const roots = useMemo(() => getRootConfigs(state), [state]);
 
@@ -32,12 +32,9 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		delete (opts as Record<string, unknown>).height;
 		delete (opts as Record<string, unknown>).width;
 		return opts;
-	}, []);
+	}, [state]);
 
-	// Load external libraries
-	useEffect(() => {
-		loadExternalLibs(needMath, state.math_mathLib).then(setExtLibs);
-	}, [needMath, state.math_mathLib]);
+	const extLibs = useMemo(() => getActiveLibs(allLibs, state.math_mathLib), [allLibs, state.math_mathLib]);
 
 	useEffect(() => {
 		if (!containerRef.current || extLibs === null) return;
@@ -68,6 +65,10 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		if (isClassic && toolbarRef.current) {
 			toolbarRef.current.innerHTML = "";
 			initOptions.toolbar_container = toolbarRef.current;
+		}
+		if (state.statusbar_container_enabled && statusbarRef.current) {
+			statusbarRef.current.innerHTML = "";
+			initOptions.statusbar_container = statusbarRef.current;
 		}
 		// External libraries
 		if (Object.keys(extLibs).length > 0) {
@@ -127,8 +128,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		}
 
 		// Auto theme: sync with page theme
-		const getPageTheme = () =>
-			document.documentElement.classList.contains("dark") ? "midnight" : "default";
+		const getPageTheme = () => (document.documentElement.classList.contains("dark") ? "midnight" : "default");
 
 		applyTheme(getPageTheme());
 
@@ -137,11 +137,10 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		return () => window.removeEventListener("themechange", onThemeChange);
 	}, [state.theme, editorRef]);
 
-	if (extLibs === null) return null;
-
 	return (
-		<div ref={containerRef} className="space-y-0">
+		<div ref={containerRef} className='space-y-0'>
 			{isClassic && <div ref={toolbarRef} />}
+			{state.statusbar_container_enabled && <div className='mt-3' ref={statusbarRef} />}
 			{roots.map((root) => {
 				const isHeader = root.key === "header";
 				const dotColor = isHeader ? "bg-violet-500" : "bg-emerald-500";
@@ -150,12 +149,10 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 				const textColor = isHeader ? "text-violet-700 dark:text-violet-300" : "text-emerald-700 dark:text-emerald-300";
 				const subTextColor = isHeader ? "text-violet-500/60 dark:text-violet-400/50" : "text-emerald-500/60 dark:text-emerald-400/50";
 				return (
-					<div key={root.key} className="mt-5">
+					<div key={root.key} className='mt-5'>
 						<div className={`flex items-center gap-2 px-3 py-1.5 ${bgColor} border ${borderColor} border-b-0 rounded-t-md`}>
 							<span className={`inline-block w-2 h-2 rounded-full ${dotColor}`} />
-							<span className={`text-xs font-semibold ${textColor} uppercase tracking-wider`}>
-								{root.label}
-							</span>
+							<span className={`text-xs font-semibold ${textColor} uppercase tracking-wider`}>{root.label}</span>
 							<code className={`text-[10px] ${subTextColor}`}>root: &quot;{root.key}&quot;</code>
 						</div>
 						<div data-root={root.key} />

@@ -1,3 +1,17 @@
+/**
+ * @fileoverview 프레임워크별 SunEditor 초기화 코드 스니펫 (7개 프레임워크)
+ *
+ * 사용처:
+ * - getting-started 페이지 > Step 1 "코드 예제" 탭
+ *   → codeExampleFrameworks.ts에서 import 후 FrameworkBadge 컴포넌트에 전달
+ *   → 각 프레임워크(HTML/CDN, JS/NPM, React, Vue, Angular, Svelte, Web Components) 탭에 코드 블록으로 표시
+ *
+ * 각 스니펫 구조:
+ * - key: 프레임워크 식별자 (URL 파라미터, 탭 전환에 사용)
+ * - name: 표시 이름
+ * - icon: 로고 이미지 경로
+ * - snippet: 해당 프레임워크에서 SunEditor를 설치하고 초기화하는 전체 코드
+ */
 import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, DEFAULT_VALUE, BASIC_BUTTON_LIST, fmtButtonList } from "./editorPresets";
 
 export type FrameworkEntry = {

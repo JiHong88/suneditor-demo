@@ -2,7 +2,7 @@ import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-	typescript: { ignoreBuildErrors: true },
+	typescript: { ignoreBuildErrors: false },
 };
 
 const withNextIntl = createNextIntlPlugin();

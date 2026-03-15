@@ -177,6 +177,7 @@
 		"formatExtDesc": "Adds additional format tags beyond the built-in defaults. Delimiter: |. Supports regex (e.g. H[1-6]).",
 		"builtIn": "Built-in:",
 		"advanced": "Advanced",
+		"showAllPlugins": "Include plugins without options",
 		"multiroot": "Multi-root Editor",
 		"multirootDesc": "Enable multiple editable regions"
 	},
@@ -331,6 +332,7 @@
 			"example9Title": "Text Scale",
 			"example9Desc": "Cross-plugin composition combining input, dropdown, and command for font sizing.",
 			"tryIt": "Try it",
+			"tryExample": "Example plugin",
 			"registration": "Plugin Registration",
 			"registrationDesc": "Plugins are registered as class references in options.plugins.",
 			"pluginOptions": "Plugin Options",
@@ -523,7 +525,7 @@
 			"step2Desc": "Import the CSS file in your app and set the theme option to match your theme name.",
 			"tips": "Tips",
 			"tip1": "Copy an existing theme (e.g. dark.css) as your base — it has all required variables.",
-			"tip2": "The selector must include both .sun-editor.se-theme-{name} (UI) and .sun-editor-editable.se-theme-{name} (content).",
+			"tip2": "The selector must include both .sun-editor.se-theme-'{'name'}' (UI) and .sun-editor-editable.se-theme-'{'name'}' (content).",
 			"tip3": "Use setTheme() to switch themes at runtime without recreating the editor.",
 			"tip4": "Theme CSS is additive — unlisted variables fall back to the default theme."
 		},
@@ -621,7 +623,15 @@
 		"description": "Complete reference for all SunEditor initialization options, including plugin options.",
 		"searchPlaceholder": "Search options...",
 		"results": "results",
-		"categories": "Categories",
-		"noResults": "No options found matching your search."
+		"options": "options",
+		"noResults": "No options found matching your search.",
+		"noDescription": "No description available.",
+		"default": "Default",
+		"example": "Example",
+		"editorOptions": "Editor Options",
+		"frameOptions": "Frame Options",
+		"pluginOptions": "Plugin Options",
+		"perFrame": "per-frame",
+		"perFrameHint": "These options can be configured individually per root in multi-root mode."
 	}
 }

@@ -178,6 +178,7 @@
 		"formatExtDesc": "기본 내장 포맷 태그 외에 추가 포맷 태그를 등록합니다. 구분자: |. 정규식 지원 (예: H[1-6]).",
 		"builtIn": "내장:",
 		"advanced": "고급",
+		"showAllPlugins": "옵션 없는 플러그인 포함",
 		"multiroot": "멀티루트 에디터",
 		"multirootDesc": "여러 편집 가능 영역을 활성화합니다"
 	},
@@ -332,6 +333,7 @@
 			"example9Title": "텍스트 스케일",
 			"example9Desc": "인풋, 드롭다운, 커맨드를 결합한 크로스 플러그인 합성으로 폰트 크기를 조절합니다.",
 			"tryIt": "바로해보기",
+			"tryExample": "예시 플러그인 보기",
 			"registration": "플러그인 등록",
 			"registrationDesc": "플러그인은 options.plugins에 클래스 참조로 등록됩니다.",
 			"pluginOptions": "플러그인 옵션",
@@ -524,7 +526,7 @@
 			"step2Desc": "앱에서 CSS 파일을 import하고 theme 옵션에 테마 이름을 설정합니다.",
 			"tips": "팁",
 			"tip1": "기존 테마(예: dark.css)를 복사하여 기반으로 사용할 수 있습니다 — 필요한 모든 변수가 포함되어 있습니다.",
-			"tip2": "셀렉터는 .sun-editor.se-theme-{이름} (UI)과 .sun-editor-editable.se-theme-{이름} (콘텐츠) 모두 포함해야 합니다.",
+			"tip2": "셀렉터는 .sun-editor.se-theme-'{'name'}' (UI)과 .sun-editor-editable.se-theme-'{'name'}' (콘텐츠) 모두 포함해야 합니다.",
 			"tip3": "setTheme()으로 에디터를 다시 생성하지 않고 런타임에 테마를 전환할 수 있습니다.",
 			"tip4": "테마 CSS는 추가적(additive)입니다 — 미정의 변수는 기본 테마로 폴백됩니다."
 		},
@@ -622,7 +624,15 @@
 		"description": "플러그인 옵션을 포함한 모든 SunEditor 초기화 옵션의 전체 레퍼런스입니다.",
 		"searchPlaceholder": "옵션 검색...",
 		"results": "개 결과",
-		"categories": "카테고리",
-		"noResults": "검색과 일치하는 옵션이 없습니다."
+		"options": "개 옵션",
+		"noResults": "검색과 일치하는 옵션이 없습니다.",
+		"noDescription": "설명이 없습니다.",
+		"default": "기본값",
+		"example": "예제",
+		"editorOptions": "에디터 옵션",
+		"frameOptions": "프레임 옵션",
+		"pluginOptions": "플러그인 옵션",
+		"perFrame": "프레임별",
+		"perFrameHint": "멀티루트 모드에서 각 루트별로 개별 설정할 수 있는 옵션입니다."
 	}
 }

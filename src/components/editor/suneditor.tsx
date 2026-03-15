@@ -15,9 +15,11 @@ interface SunEditorProps {
 	options?: SunEditor.InitOptions;
 	theme?: "default" | "dark" | "midnight" | "cobalt" | "cream";
 	onInstance?: (instance: SunEditor.Instance) => void;
+	toolbarContainerRef?: React.RefObject<HTMLDivElement | null>;
+	statusbarContainerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp, onInstance }) => {
+const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp, onInstance, toolbarContainerRef, statusbarContainerRef }) => {
 	const [autoTheme, setAutoTheme] = useState<SunEditorProps["theme"]>(() =>
 		typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "midnight" : "default",
 	);
@@ -36,7 +38,7 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp,
 		return () => window.removeEventListener("themechange", handler);
 	}, [themeProp]);
 
-	return <Editor value={value} options={options} theme={themeProp ?? autoTheme} onInstance={onInstance} />;
+	return <Editor value={value} options={options} theme={themeProp ?? autoTheme} onInstance={onInstance} toolbarContainerRef={toolbarContainerRef} statusbarContainerRef={statusbarContainerRef} />;
 };
 
 export default SunEditor;

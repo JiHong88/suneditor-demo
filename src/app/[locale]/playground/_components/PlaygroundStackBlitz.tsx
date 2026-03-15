@@ -4,12 +4,16 @@ import sdk from "@stackblitz/sdk";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SUNEDITOR_VERSION } from "@/data/code-examples/editorPresets";
-import { generateCode } from "../_lib/codeGenerator";
+import { generateCode, getNpmDeps } from "../_lib/codeGenerator";
 import type { PlaygroundState, CodeFramework } from "../_lib/playgroundState";
+
+// mathjax-full/js/components/version.js uses eval('require') to read its package.json.
+// Vite's define replaces the PACKAGE_VERSION global so that branch is never taken.
+const MATHJAX_VITE_DEFINE = `define: { PACKAGE_VERSION: '"3.2.1"' },`;
 
 /* ── Project generators per framework ─────────────────── */
 
-function getVanillaProject(code: string) {
+function getVanillaProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - Vanilla JS",
 		template: "node" as const,
@@ -30,17 +34,17 @@ function getVanillaProject(code: string) {
 					private: true,
 					type: "module",
 					scripts: { dev: "vite", build: "vite build" },
-					dependencies: { suneditor: SUNEDITOR_VERSION, vite: "^5" },
+					dependencies: { suneditor: SUNEDITOR_VERSION, ...getNpmDeps(state), vite: "^5" },
 				},
 				null,
 				2,
 			),
-			"vite.config.js": `export default { root: "." };`,
+			"vite.config.js": `export default { root: ".", ${MATHJAX_VITE_DEFINE} };`,
 		},
 	};
 }
 
-function getReactProject(code: string) {
+function getReactProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - React",
 		template: "node" as const,
@@ -65,7 +69,7 @@ createRoot(document.getElementById("root")).render(<StrictMode><App /></StrictMo
 </html>`,
 			"vite.config.js": `import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-export default defineConfig({ plugins: [react()] });`,
+export default defineConfig({ plugins: [react()], ${MATHJAX_VITE_DEFINE} });`,
 			"package.json": JSON.stringify(
 				{
 					name: "suneditor-react-demo",
@@ -74,6 +78,7 @@ export default defineConfig({ plugins: [react()] });`,
 					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
+						...getNpmDeps(state),
 						react: "^18",
 						"react-dom": "^18",
 						"@vitejs/plugin-react": "^4",
@@ -87,7 +92,7 @@ export default defineConfig({ plugins: [react()] });`,
 	};
 }
 
-function getVueProject(code: string) {
+function getVueProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - Vue 3",
 		template: "node" as const,
@@ -111,7 +116,7 @@ createApp(App).mount("#app");`,
 </html>`,
 			"vite.config.js": `import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-export default defineConfig({ plugins: [vue()] });`,
+export default defineConfig({ plugins: [vue()], ${MATHJAX_VITE_DEFINE} });`,
 			"package.json": JSON.stringify(
 				{
 					name: "suneditor-vue-demo",
@@ -120,6 +125,7 @@ export default defineConfig({ plugins: [vue()] });`,
 					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
+						...getNpmDeps(state),
 						vue: "^3",
 						"@vitejs/plugin-vue": "^5",
 						vite: "^5",
@@ -132,7 +138,7 @@ export default defineConfig({ plugins: [vue()] });`,
 	};
 }
 
-function getSvelteProject(code: string) {
+function getSvelteProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - Svelte",
 		template: "node" as const,
@@ -154,7 +160,7 @@ export default app;`,
 </html>`,
 			"vite.config.js": `import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-export default defineConfig({ plugins: [svelte()] });`,
+export default defineConfig({ plugins: [svelte()], ${MATHJAX_VITE_DEFINE} });`,
 			"package.json": JSON.stringify(
 				{
 					name: "suneditor-svelte-demo",
@@ -163,6 +169,7 @@ export default defineConfig({ plugins: [svelte()] });`,
 					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
+						...getNpmDeps(state),
 						svelte: "^4",
 						"@sveltejs/vite-plugin-svelte": "^3",
 						vite: "^5",
@@ -175,7 +182,7 @@ export default defineConfig({ plugins: [svelte()] });`,
 	};
 }
 
-function getAngularProject(code: string) {
+function getAngularProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - Angular",
 		template: "node" as const,
@@ -201,7 +208,7 @@ bootstrapApplication(AppComponent);`,
 </html>`,
 			"vite.config.mts": `import { defineConfig } from "vite";
 import angular from "@analogjs/vite-plugin-angular";
-export default defineConfig({ plugins: [angular()] });`,
+export default defineConfig({ plugins: [angular()], ${MATHJAX_VITE_DEFINE} });`,
 			"tsconfig.json": JSON.stringify(
 				{
 					compilerOptions: {
@@ -227,6 +234,7 @@ export default defineConfig({ plugins: [angular()] });`,
 					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
+						...getNpmDeps(state),
 						"@angular/core": "^17",
 						"@angular/common": "^17",
 						"@angular/compiler": "^17",
@@ -245,7 +253,7 @@ export default defineConfig({ plugins: [angular()] });`,
 	};
 }
 
-function getWebComponentsProject(code: string) {
+function getWebComponentsProject(code: string, state: PlaygroundState) {
 	return {
 		title: "SunEditor - Web Components",
 		template: "node" as const,
@@ -266,25 +274,25 @@ function getWebComponentsProject(code: string) {
 				null,
 				2,
 			),
-			"vite.config.js": `export default { root: "." };`,
+			"vite.config.js": `export default { root: ".", ${MATHJAX_VITE_DEFINE} };`,
 		},
 	};
 }
 
-function getProject(framework: CodeFramework, code: string) {
+function getProject(framework: CodeFramework, code: string, state: PlaygroundState) {
 	switch (framework) {
 		case "react":
-			return getReactProject(code);
+			return getReactProject(code, state);
 		case "vue":
-			return getVueProject(code);
+			return getVueProject(code, state);
 		case "angular":
-			return getAngularProject(code);
+			return getAngularProject(code, state);
 		case "svelte":
-			return getSvelteProject(code);
+			return getSvelteProject(code, state);
 		case "webcomponents":
-			return getWebComponentsProject(code);
+			return getWebComponentsProject(code, state);
 		default:
-			return getVanillaProject(code);
+			return getVanillaProject(code, state);
 	}
 }
 
@@ -301,7 +309,7 @@ export function OpenInStackBlitzButton({ state, framework }: { state: Playground
 				// CDN scripts can't load in StackBlitz WebContainers — use npm version instead
 				const sbFramework = framework === "javascript-cdn" ? "javascript-npm" : framework;
 				const code = generateCode(state, sbFramework);
-				const project = getProject(sbFramework, code);
+				const project = getProject(sbFramework, code, state);
 				sdk.openProject(project);
 			}}
 		>

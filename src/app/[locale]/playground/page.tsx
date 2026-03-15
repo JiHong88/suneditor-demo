@@ -26,6 +26,7 @@ import PlaygroundPluginSidebar from "./_components/PlaygroundPluginSidebar";
 import dynamic from "next/dynamic";
 import PlaygroundEditor from "./_components/PlaygroundEditor";
 import PlaygroundCodePanel from "./_components/PlaygroundCodePanel";
+import { type AllLibs, loadAllExternalLibs } from "./_components/externalLibsLoader";
 
 const PlaygroundMultiRootEditor = dynamic(() => import("./_components/PlaygroundMultiRootEditor"), { ssr: false });
 const ButtonListBuilder = dynamic(() => import("./_components/button-list-builder/ButtonListBuilder"), { ssr: false });
@@ -95,6 +96,7 @@ export default function PlaygroundPage() {
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });
 	const prevStateRef = useRef<PlaygroundState>(DEFAULTS);
+	const [allLibs, setAllLibs] = useState<AllLibs | null>(null);
 	const [urlCopied, setUrlCopied] = useState(false);
 	const [ready, setReady] = useState(false);
 	const [builderOpen, setBuilderOpen] = useState(false);
@@ -112,6 +114,11 @@ export default function PlaygroundPage() {
 		const json = JSON.stringify(buttonList);
 		dispatch({ type: "SET", key: "customButtonList", value: json });
 		dispatch({ type: "SET", key: "buttonListPreset", value: "custom" });
+	}, []);
+
+	// Preload all external libs immediately on mount
+	useEffect(() => {
+		loadAllExternalLibs().then(setAllLibs);
 	}, []);
 
 	// Apply URL params after hydration, then mark ready
@@ -340,13 +347,14 @@ export default function PlaygroundPage() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 }}
 						>
-							{ready &&
+							{ready && allLibs &&
 								(state.multiroot ? (
 									<PlaygroundMultiRootEditor
 										key={editorKey}
 										state={state}
 										editorRef={editorRef}
 										contentRef={multiRootContentRef}
+										allLibs={allLibs}
 									/>
 								) : (
 									<PlaygroundEditor
@@ -354,6 +362,7 @@ export default function PlaygroundPage() {
 										state={state}
 										editorRef={editorRef}
 										contentRef={contentRef}
+										allLibs={allLibs}
 									/>
 								))}
 						</motion.div>

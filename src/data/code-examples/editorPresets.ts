@@ -1,18 +1,32 @@
-/** Shared editor presets — button lists, default content, and helpers. Version/CDN URLs live in @/store/version. */
+/**
+ * @fileoverview 에디터 공통 프리셋 — 버튼 리스트, 기본 콘텐츠, 코드 포맷팅 헬퍼
+ *
+ * 사용처:
+ * - playground/page.tsx            → PLAYGROUND_VALUE (플레이그라운드 에디터 초기 콘텐츠)
+ * - playground/_lib/codeGenerator  → SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList (코드 생성기에서 CDN 코드 빌드)
+ * - playground/_lib/playgroundState → BASIC/STANDARD/FULL_BUTTON_LIST (프리셋 선택 시 버튼 리스트 결정)
+ * - playground/PlaygroundStackBlitz → SUNEDITOR_VERSION (StackBlitz 데모용 버전 정보)
+ * - frameworks.ts                  → DEFAULT_VALUE, BASIC_BUTTON_LIST, fmtButtonList (프레임워크별 코드 스니펫 생성)
+ * - renderSnippets.ts              → CDN_CONTENTS_CSS (콘텐츠 렌더링 가이드의 CSS URL)
+ */
 
+/** SunEditor 버전 및 CDN URL — @/store/version에서 관리 */
 export { SUNEDITOR_VERSION, CDN_CSS, CDN_CONTENTS_CSS, CDN_JS } from "@/store/version";
 
+/** getting-started 및 frameworks.ts에서 기본 에디터 콘텐츠로 사용 */
 export const DEFAULT_VALUE = "<p>Hello SunEditor</p>";
+
+/** playground 에디터의 초기 콘텐츠 */
 export const PLAYGROUND_VALUE = "<p>Hello <strong>SunEditor</strong>!</p><p>Try editing this content.</p>";
 
-/** Basic — used in quick-start code examples */
+/** Basic — getting-started 퀵스타트 코드 예제 및 frameworks.ts에서 사용 */
 export const BASIC_BUTTON_LIST: unknown[] = [
 	["undo", "redo"],
 	["bold", "italic", "underline"],
 	["link", "image"],
 ];
 
-/** Standard — playground default (responsive) */
+/** Standard — playground 기본 프리셋 (반응형). playgroundState에서 preset="standard" 선택 시 사용 */
 export const STANDARD_BUTTON_LIST: unknown[] = [
 	// full size
 	["undo", "redo"],
@@ -55,7 +69,7 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 	],
 ];
 
-/** Full — playground full features (responsive) */
+/** Full — playground 전체 기능 프리셋 (반응형). playgroundState에서 preset="full" 선택 시 사용 */
 export const FULL_BUTTON_LIST: unknown[] = [
 	// full size
 	["undo", "redo", "|", "dir", "newDocument", "selectAll", "save", "preview", "print", "exportPDF"],
@@ -316,7 +330,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 
 /* ── Helpers for building code-display strings ──────────── */
 
-/** Format a buttonList array as a pretty-printed JS string (supports responsive format). */
+/** buttonList 배열을 JS 코드 문자열로 포맷팅. codeGenerator와 frameworks.ts에서 코드 표시용으로 사용 */
 export function fmtButtonList(list: unknown[], baseIndent = 4): string {
 	function formatItems(items: unknown[], depth: number): string {
 		const pad = " ".repeat(depth);

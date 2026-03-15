@@ -1,6 +1,6 @@
 "use client";
 
-import { type Dispatch } from "react";
+import { type Dispatch, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, ITEM_PRESETS, GALLERY_DATA_PRESETS } from "../_lib/playgroundState";
@@ -289,9 +289,27 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 	const t = useTranslations("Playground");
 	const set = useSet(dispatch);
 	const advLabel = t("advanced");
+	const [showAll, setShowAll] = useState(false);
 	return (
 		<div className='space-y-1'>
+			<label className='flex items-center justify-end gap-2 px-1 pb-1'>
+				<span className='text-[11px] text-muted-foreground select-none'>{t("showAllPlugins")}</span>
+				<button
+					type='button'
+					role='switch'
+					aria-checked={showAll}
+					onClick={() => setShowAll(!showAll)}
+					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${showAll ? "bg-primary" : "bg-muted"}`}
+				>
+					<span className={`pointer-events-none block h-3 w-3 rounded-full bg-background shadow-sm transition-transform ${showAll ? "translate-x-3" : "translate-x-0"}`} />
+				</button>
+			</label>
 			<Accordion type='multiple' className='w-full'>
+
+				{/* ── modal ─────────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-violet-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-violet-500/10 text-violet-600 dark:bg-violet-400/15 dark:text-violet-400 border border-violet-300/30 dark:border-violet-400/20 mb-1.5 mt-0.5 select-none'>modal</span>
+
 				{/* Image */}
 				<AccordionItem value='image'>
 					<AccordionTrigger className='text-xs font-semibold py-2'>Image</AccordionTrigger>
@@ -429,60 +447,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						</div>
 					</AccordionContent>
 				</AccordionItem>
-
-				{/* Table */}
-				<AccordionItem value='table'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>Table</AccordionTrigger>
-					<AccordionContent className='px-1 pb-3'>
-						<div className='space-y-3'>
-							<SelectField label='scrollType' value={state.table_scrollType} options={[{ value: "x", label: "x" }, { value: "y", label: "y" }, { value: "xy", label: "xy" }]} onChange={(v) => set("table_scrollType")(v as PlaygroundState["table_scrollType"])} optionKey='table_scrollType' />
-							<SelectField label='captionPosition' value={state.table_captionPosition} options={[{ value: "bottom", label: "bottom" }, { value: "top", label: "top" }]} onChange={(v) => set("table_captionPosition")(v as PlaygroundState["table_captionPosition"])} optionKey='table_captionPosition' />
-							<SelectField label='cellControllerPosition' value={state.table_cellControllerPosition} options={[{ value: "cell", label: "cell" }, { value: "table", label: "table" }]} onChange={(v) => set("table_cellControllerPosition")(v as PlaygroundState["table_cellControllerPosition"])} optionKey='table_cellControllerPosition' />
-							<ToggleableTextInput label='colorList' value={state.table_colorList} preset={ITEM_PRESETS.table_colorList} onChange={set("table_colorList")} placeholder='#ff0000,#00ff00,#0000ff,...' optionKey='table_colorList' />
-						</div>
-					</AccordionContent>
-				</AccordionItem>
-
-				{/* FontSize */}
-				<AccordionItem value='fontSize'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>FontSize</AccordionTrigger>
-					<AccordionContent className='px-1 pb-3'>
-						<div className='space-y-3'>
-							<SelectField label='sizeUnit' value={state.fontSize_sizeUnit} options={[{ value: "px", label: "px" }, { value: "pt", label: "pt" }, { value: "em", label: "em" }, { value: "rem", label: "rem" }, { value: "vw", label: "vw" }, { value: "%", label: "%" }, { value: "text", label: "text" }]} onChange={set("fontSize_sizeUnit")} optionKey='fontSize_sizeUnit' />
-							<SwitchField label='showIncDecControls' checked={state.fontSize_showIncDecControls} onChange={set("fontSize_showIncDecControls")} optionKey='fontSize_showIncDecControls' />
-							<AdvancedSection label={advLabel}>
-								<SwitchField label='showDefaultSizeLabel' checked={state.fontSize_showDefaultSizeLabel} onChange={set("fontSize_showDefaultSizeLabel")} optionKey='fontSize_showDefaultSizeLabel' />
-								<SwitchField label='disableInput' checked={state.fontSize_disableInput} onChange={set("fontSize_disableInput")} optionKey='fontSize_disableInput' />
-								<ToggleableTextarea label='unitMap (JSON)' value={state.fontSize_unitMap} preset={ITEM_PRESETS.fontSize_unitMap} onChange={set("fontSize_unitMap")} placeholder='{"px":{"default":16,"inc":1,...}}' rows={3} optionKey='fontSize_unitMap' />
-							</AdvancedSection>
-						</div>
-					</AccordionContent>
-				</AccordionItem>
-
-				{/* FontColor */}
-				<AccordionItem value='fontColor'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>FontColor</AccordionTrigger>
-					<AccordionContent className='px-1 pb-3'>
-						<div className='space-y-3'>
-							<SwitchField label='disableHEXInput' checked={state.fontColor_disableHEXInput} onChange={set("fontColor_disableHEXInput")} optionKey='fontColor_disableHEXInput' />
-							<NumberInput label='splitNum' value={state.fontColor_splitNum} onChange={set("fontColor_splitNum")} optionKey='fontColor_splitNum' />
-							<ToggleableTextInput label='items' value={state.fontColor_items} preset={ITEM_PRESETS.fontColor_items} onChange={set("fontColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='fontColor_items' />
-						</div>
-					</AccordionContent>
-				</AccordionItem>
-
-				{/* BackgroundColor */}
-				<AccordionItem value='backgroundColor'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>BackgroundColor</AccordionTrigger>
-					<AccordionContent className='px-1 pb-3'>
-						<div className='space-y-3'>
-							<SwitchField label='disableHEXInput' checked={state.backgroundColor_disableHEXInput} onChange={set("backgroundColor_disableHEXInput")} optionKey='backgroundColor_disableHEXInput' />
-							<NumberInput label='splitNum' value={state.backgroundColor_splitNum} onChange={set("backgroundColor_splitNum")} optionKey='backgroundColor_splitNum' />
-							<ToggleableTextInput label='items' value={state.backgroundColor_items} preset={ITEM_PRESETS.backgroundColor_items} onChange={set("backgroundColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='backgroundColor_items' />
-						</div>
-					</AccordionContent>
-				</AccordionItem>
-
 				{/* Drawing */}
 				<AccordionItem value='drawing'>
 					<AccordionTrigger className='text-xs font-semibold py-2'>Drawing</AccordionTrigger>
@@ -500,26 +464,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 								<TextInput label='lineColor' value={state.drawing_lineColor} onChange={set("drawing_lineColor")} placeholder='#000000' optionKey='drawing_lineColor' />
 								<SwitchField label='lineReconnect' checked={state.drawing_lineReconnect} onChange={set("drawing_lineReconnect")} optionKey='drawing_lineReconnect' />
 								<ToggleableTextarea label='formSize (JSON)' value={state.drawing_formSize} preset={ITEM_PRESETS.drawing_formSize} onChange={set("drawing_formSize")} placeholder='{"width":"750px","height":"50vh"}' rows={2} optionKey='drawing_formSize' />
-							</AdvancedSection>
-						</div>
-					</AccordionContent>
-				</AccordionItem>
-
-				{/* Mention */}
-				<AccordionItem value='mention'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>Mention</AccordionTrigger>
-					<AccordionContent className='px-1 pb-3'>
-						<div className='space-y-3'>
-							<TextInput label='triggerText' value={state.mention_triggerText} onChange={set("mention_triggerText")} placeholder='@' optionKey='mention_triggerText' />
-							<NumberInput label='limitSize' value={state.mention_limitSize} onChange={set("mention_limitSize")} optionKey='mention_limitSize' />
-							<NumberInput label='delayTime' value={state.mention_delayTime} onChange={set("mention_delayTime")} optionKey='mention_delayTime' />
-							<SwitchField label='useCachingFieldData' checked={state.mention_useCachingFieldData} onChange={set("mention_useCachingFieldData")} optionKey='mention_useCachingFieldData' />
-							<AdvancedSection label={advLabel}>
-								<NumberInput label='searchStartLength' value={state.mention_searchStartLength} onChange={set("mention_searchStartLength")} optionKey='mention_searchStartLength' />
-								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder='/api/mention' optionKey='mention_apiUrl' />
-								<TextInput label='apiHeaders' value={state.mention_apiHeaders} onChange={set("mention_apiHeaders")} placeholder='{"Authorization":"..."}' optionKey='mention_apiHeaders' />
-								<SwitchField label='useCachingData' checked={state.mention_useCachingData} onChange={set("mention_useCachingData")} optionKey='mention_useCachingData' />
-								<ToggleableTextarea label='data (JSON)' value={state.mention_data} preset={ITEM_PRESETS.mention_data} onChange={set("mention_data")} placeholder='[{"key":"john","name":"John","url":"/users/john"}]' rows={3} optionKey='mention_data' />
 							</AdvancedSection>
 						</div>
 					</AccordionContent>
@@ -554,33 +498,45 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					</AccordionContent>
 				</AccordionItem>
 
-				{/* ExportPDF */}
-				<AccordionItem value='exportPDF'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>ExportPDF</AccordionTrigger>
+				</div>{/* end modal group */}
+
+				{/* ── dropdown ──────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-sky-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-sky-500/10 text-sky-600 dark:bg-sky-400/15 dark:text-sky-400 border border-sky-300/30 dark:border-sky-400/20 mb-1.5 mt-0.5 select-none'>dropdown</span>
+
+				{/* Table */}
+				<AccordionItem value='table'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>Table</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<div className='space-y-3'>
-							<TextInput label='apiUrl' value={state.exportPDF_apiUrl} onChange={set("exportPDF_apiUrl")} placeholder='/api/export-pdf' optionKey='exportPDF_apiUrl' />
-							<TextInput label='fileName' value={state.exportPDF_fileName} onChange={set("exportPDF_fileName")} placeholder='suneditor-pdf' optionKey='exportPDF_fileName' />
+							<SelectField label='scrollType' value={state.table_scrollType} options={[{ value: "x", label: "x" }, { value: "y", label: "y" }, { value: "xy", label: "xy" }]} onChange={(v) => set("table_scrollType")(v as PlaygroundState["table_scrollType"])} optionKey='table_scrollType' />
+							<SelectField label='captionPosition' value={state.table_captionPosition} options={[{ value: "bottom", label: "bottom" }, { value: "top", label: "top" }]} onChange={(v) => set("table_captionPosition")(v as PlaygroundState["table_captionPosition"])} optionKey='table_captionPosition' />
+							<SelectField label='cellControllerPosition' value={state.table_cellControllerPosition} options={[{ value: "cell", label: "cell" }, { value: "table", label: "table" }]} onChange={(v) => set("table_cellControllerPosition")(v as PlaygroundState["table_cellControllerPosition"])} optionKey='table_cellControllerPosition' />
+							<ToggleableTextInput label='colorList' value={state.table_colorList} preset={ITEM_PRESETS.table_colorList} onChange={set("table_colorList")} placeholder='#ff0000,#00ff00,#0000ff,...' optionKey='table_colorList' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
 
-				{/* FileUpload */}
-				<AccordionItem value='fileUpload'>
-					<AccordionTrigger className='text-xs font-semibold py-2'>FileUpload</AccordionTrigger>
+				{/* FontColor */}
+				<AccordionItem value='fontColor'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>FontColor</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<div className='space-y-3'>
-							<TextInput label='uploadUrl' value={state.fileUpload_uploadUrl} onChange={set("fileUpload_uploadUrl")} placeholder='/upload/file' optionKey='fileUpload_uploadUrl' />
-							<SwitchField label='allowMultiple' checked={state.fileUpload_allowMultiple} onChange={set("fileUpload_allowMultiple")} optionKey='fileUpload_allowMultiple' />
-							<TextInput label='acceptedFormats' value={state.fileUpload_acceptedFormats} onChange={set("fileUpload_acceptedFormats")} placeholder='*' optionKey='fileUpload_acceptedFormats' />
-							<SelectField label='as' value={state.fileUpload_as} options={[{ value: "box", label: "box" }, { value: "link", label: "link" }]} onChange={set("fileUpload_as")} optionKey='fileUpload_as' />
-							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadHeaders' value={state.fileUpload_uploadHeaders} onChange={set("fileUpload_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='fileUpload_uploadHeaders' />
-								<NumberInput label='uploadSizeLimit' value={state.fileUpload_uploadSizeLimit} onChange={set("fileUpload_uploadSizeLimit")} optionKey='fileUpload_uploadSizeLimit' />
-								<NumberInput label='uploadSingleSizeLimit' value={state.fileUpload_uploadSingleSizeLimit} onChange={set("fileUpload_uploadSingleSizeLimit")} optionKey='fileUpload_uploadSingleSizeLimit' />
-								<ToggleableTextarea label='controls (JSON)' value={state.fileUpload_controls} preset={ITEM_PRESETS.fileUpload_controls} onChange={set("fileUpload_controls")} placeholder='[["edit","copy","remove"]]' rows={2} optionKey='fileUpload_controls' />
-								<SelectField label='insertBehavior' value={state.fileUpload_insertBehavior} options={INSERT_BEHAVIOR_OPTS} onChange={set("fileUpload_insertBehavior")} optionKey='fileUpload_insertBehavior' />
-							</AdvancedSection>
+							<SwitchField label='disableHEXInput' checked={state.fontColor_disableHEXInput} onChange={set("fontColor_disableHEXInput")} optionKey='fontColor_disableHEXInput' />
+							<NumberInput label='splitNum' value={state.fontColor_splitNum} onChange={set("fontColor_splitNum")} optionKey='fontColor_splitNum' />
+							<ToggleableTextInput label='items' value={state.fontColor_items} preset={ITEM_PRESETS.fontColor_items} onChange={set("fontColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='fontColor_items' />
+						</div>
+					</AccordionContent>
+				</AccordionItem>
+
+				{/* BackgroundColor */}
+				<AccordionItem value='backgroundColor'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>BackgroundColor</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<div className='space-y-3'>
+							<SwitchField label='disableHEXInput' checked={state.backgroundColor_disableHEXInput} onChange={set("backgroundColor_disableHEXInput")} optionKey='backgroundColor_disableHEXInput' />
+							<NumberInput label='splitNum' value={state.backgroundColor_splitNum} onChange={set("backgroundColor_splitNum")} optionKey='backgroundColor_splitNum' />
+							<ToggleableTextInput label='items' value={state.backgroundColor_items} preset={ITEM_PRESETS.backgroundColor_items} onChange={set("backgroundColor_items")} placeholder='#ff0000,#00ff00,...' optionKey='backgroundColor_items' />
 						</div>
 					</AccordionContent>
 				</AccordionItem>
@@ -658,16 +614,129 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						<ToggleableTextarea label='items (JSON)' value={state.hr_items} preset={ITEM_PRESETS.hr_items} onChange={set("hr_items")} placeholder='[{"name":"Solid","class":"__se__solid"},{"name":"Dashed","class":"__se__dashed"}]' rows={3} optionKey='hr_items' />
 					</AccordionContent>
 				</AccordionItem>
+				</div>{/* end dropdown group */}
 
+				{/* ── command ──────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-amber-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400 border border-amber-300/30 dark:border-amber-400/20 mb-1.5 mt-0.5 select-none'>command</span>
+
+				{showAll && <>
 				{/* Blockquote */}
 				<AccordionItem value='blockquote'>
-					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground'>Blockquote</AccordionTrigger>
+					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground/60'>Blockquote</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<NoOptionsNote />
 					</AccordionContent>
 				</AccordionItem>
 
-				{/* ── Gallery Plugins ── */}
+				{/* List_bulleted */}
+				<AccordionItem value='list_bulleted'>
+					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground/60'>List_bulleted</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<NoOptionsNote />
+					</AccordionContent>
+				</AccordionItem>
+
+				{/* List_numbered */}
+				<AccordionItem value='list_numbered'>
+					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground/60'>List_numbered</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<NoOptionsNote />
+					</AccordionContent>
+				</AccordionItem>
+			</>}
+				{/* ExportPDF */}
+				<AccordionItem value='exportPDF'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>ExportPDF</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<div className='space-y-3'>
+							<TextInput label='apiUrl' value={state.exportPDF_apiUrl} onChange={set("exportPDF_apiUrl")} placeholder='/api/export-pdf' optionKey='exportPDF_apiUrl' />
+							<TextInput label='fileName' value={state.exportPDF_fileName} onChange={set("exportPDF_fileName")} placeholder='suneditor-pdf' optionKey='exportPDF_fileName' />
+						</div>
+					</AccordionContent>
+				</AccordionItem>
+
+				{/* FileUpload */}
+				<AccordionItem value='fileUpload'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>FileUpload</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<div className='space-y-3'>
+							<TextInput label='uploadUrl' value={state.fileUpload_uploadUrl} onChange={set("fileUpload_uploadUrl")} placeholder='/upload/file' optionKey='fileUpload_uploadUrl' />
+							<SwitchField label='allowMultiple' checked={state.fileUpload_allowMultiple} onChange={set("fileUpload_allowMultiple")} optionKey='fileUpload_allowMultiple' />
+							<TextInput label='acceptedFormats' value={state.fileUpload_acceptedFormats} onChange={set("fileUpload_acceptedFormats")} placeholder='*' optionKey='fileUpload_acceptedFormats' />
+							<SelectField label='as' value={state.fileUpload_as} options={[{ value: "box", label: "box" }, { value: "link", label: "link" }]} onChange={set("fileUpload_as")} optionKey='fileUpload_as' />
+							<AdvancedSection label={advLabel}>
+								<TextInput label='uploadHeaders' value={state.fileUpload_uploadHeaders} onChange={set("fileUpload_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='fileUpload_uploadHeaders' />
+								<NumberInput label='uploadSizeLimit' value={state.fileUpload_uploadSizeLimit} onChange={set("fileUpload_uploadSizeLimit")} optionKey='fileUpload_uploadSizeLimit' />
+								<NumberInput label='uploadSingleSizeLimit' value={state.fileUpload_uploadSingleSizeLimit} onChange={set("fileUpload_uploadSingleSizeLimit")} optionKey='fileUpload_uploadSingleSizeLimit' />
+								<ToggleableTextarea label='controls (JSON)' value={state.fileUpload_controls} preset={ITEM_PRESETS.fileUpload_controls} onChange={set("fileUpload_controls")} placeholder='[["edit","copy","remove"]]' rows={2} optionKey='fileUpload_controls' />
+								<SelectField label='insertBehavior' value={state.fileUpload_insertBehavior} options={INSERT_BEHAVIOR_OPTS} onChange={set("fileUpload_insertBehavior")} optionKey='fileUpload_insertBehavior' />
+							</AdvancedSection>
+						</div>
+					</AccordionContent>
+				</AccordionItem>
+
+				</div>{/* end command group */}
+
+				{/* ── input ────────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-teal-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-teal-500/10 text-teal-600 dark:bg-teal-400/15 dark:text-teal-400 border border-teal-300/30 dark:border-teal-400/20 mb-1.5 mt-0.5 select-none'>input</span>
+				{showAll && <>
+				{/* PageNavigator */}
+				<AccordionItem value='pageNavigator'>
+					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground/60'>PageNavigator</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<NoOptionsNote />
+					</AccordionContent>
+				</AccordionItem>
+			</>}
+
+				{/* FontSize */}
+				<AccordionItem value='fontSize'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>FontSize</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<div className='space-y-3'>
+							<SelectField label='sizeUnit' value={state.fontSize_sizeUnit} options={[{ value: "px", label: "px" }, { value: "pt", label: "pt" }, { value: "em", label: "em" }, { value: "rem", label: "rem" }, { value: "vw", label: "vw" }, { value: "%", label: "%" }, { value: "text", label: "text" }]} onChange={set("fontSize_sizeUnit")} optionKey='fontSize_sizeUnit' />
+							<SwitchField label='showIncDecControls' checked={state.fontSize_showIncDecControls} onChange={set("fontSize_showIncDecControls")} optionKey='fontSize_showIncDecControls' />
+							<AdvancedSection label={advLabel}>
+								<SwitchField label='showDefaultSizeLabel' checked={state.fontSize_showDefaultSizeLabel} onChange={set("fontSize_showDefaultSizeLabel")} optionKey='fontSize_showDefaultSizeLabel' />
+								<SwitchField label='disableInput' checked={state.fontSize_disableInput} onChange={set("fontSize_disableInput")} optionKey='fontSize_disableInput' />
+								<ToggleableTextarea label='unitMap (JSON)' value={state.fontSize_unitMap} preset={ITEM_PRESETS.fontSize_unitMap} onChange={set("fontSize_unitMap")} placeholder='{"px":{"default":16,"inc":1,...}}' rows={3} optionKey='fontSize_unitMap' />
+							</AdvancedSection>
+						</div>
+					</AccordionContent>
+				</AccordionItem>
+
+				</div>{/* end input group */}
+
+				{/* ── field ────────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-rose-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-rose-500/10 text-rose-600 dark:bg-rose-400/15 dark:text-rose-400 border border-rose-300/30 dark:border-rose-400/20 mb-1.5 mt-0.5 select-none'>field</span>
+				{/* Mention */}
+				<AccordionItem value='mention'>
+					<AccordionTrigger className='text-xs font-semibold py-2'>Mention</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<div className='space-y-3'>
+							<TextInput label='triggerText' value={state.mention_triggerText} onChange={set("mention_triggerText")} placeholder='@' optionKey='mention_triggerText' />
+							<NumberInput label='limitSize' value={state.mention_limitSize} onChange={set("mention_limitSize")} optionKey='mention_limitSize' />
+							<NumberInput label='delayTime' value={state.mention_delayTime} onChange={set("mention_delayTime")} optionKey='mention_delayTime' />
+							<SwitchField label='useCachingFieldData' checked={state.mention_useCachingFieldData} onChange={set("mention_useCachingFieldData")} optionKey='mention_useCachingFieldData' />
+							<AdvancedSection label={advLabel}>
+								<NumberInput label='searchStartLength' value={state.mention_searchStartLength} onChange={set("mention_searchStartLength")} optionKey='mention_searchStartLength' />
+								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder='/api/mention' optionKey='mention_apiUrl' />
+								<TextInput label='apiHeaders' value={state.mention_apiHeaders} onChange={set("mention_apiHeaders")} placeholder='{"Authorization":"..."}' optionKey='mention_apiHeaders' />
+								<SwitchField label='useCachingData' checked={state.mention_useCachingData} onChange={set("mention_useCachingData")} optionKey='mention_useCachingData' />
+								<ToggleableTextarea label='data (JSON)' value={state.mention_data} preset={ITEM_PRESETS.mention_data} onChange={set("mention_data")} placeholder='[{"key":"john","name":"John","url":"/users/john"}]' rows={3} optionKey='mention_data' />
+							</AdvancedSection>
+						</div>
+					</AccordionContent>
+				</AccordionItem>
+
+				</div>{/* end field group */}
+
+				{/* ── browser ──────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-purple-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-purple-500/10 text-purple-600 dark:bg-purple-400/15 dark:text-purple-400 border border-purple-300/30 dark:border-purple-400/20 mb-1.5 mt-0.5 select-none'>browser</span>
 
 				{/* ImageGallery */}
 				<AccordionItem value='imageGallery'>
@@ -733,6 +802,23 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						</div>
 					</AccordionContent>
 				</AccordionItem>
+				</div>{/* end browser group */}
+
+			{/* ── popup ────────────────────────────────── */}
+				<div className='ms-0.5 border-l-2 border-orange-400/50 ps-2 mb-2'>
+					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-orange-500/10 text-orange-600 dark:bg-orange-400/15 dark:text-orange-400 border border-orange-300/30 dark:border-orange-400/20 mb-1.5 mt-0.5 select-none'>popup</span>
+
+				{showAll && <>
+				{/* Anchor */}
+				<AccordionItem value='anchor'>
+					<AccordionTrigger className='text-xs font-semibold py-2 text-muted-foreground/60'>Anchor</AccordionTrigger>
+					<AccordionContent className='px-1 pb-3'>
+						<NoOptionsNote />
+					</AccordionContent>
+				</AccordionItem>
+			</>}
+
+				</div>{/* end popup group */}
 			</Accordion>
 		</div>
 	);

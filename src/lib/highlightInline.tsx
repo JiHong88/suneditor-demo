@@ -38,7 +38,7 @@ export function highlightInline(text: string): React.ReactNode {
 	return <>{result}</>;
 }
 
-/** Parse `backtick` and "quoted" text into <code> elements, and \n into <br/> */
+/** Parse `backtick`, "quoted" text, and {@link Type.Property} into styled elements, and \n into <br/> */
 function highlightText(text: string): React.ReactNode {
 	const lines = text.split("\n");
 	const result: React.ReactNode[] = [];
@@ -47,7 +47,8 @@ function highlightText(text: string): React.ReactNode {
 		if (li > 0) result.push(<br key={`br-${li}`} />);
 
 		const line = lines[li];
-		const regex = /`([^`]+)`|"([^"]+)"/g;
+		// Also matches {@link TypeName.PropertyName} for JSDoc-style type links
+		const regex = /`([^`]+)`|"([^"]+)"|\{@link ([A-Z]\w+)\.(\w+)\}/g;
 		let lastIndex = 0;
 		let match;
 
@@ -55,21 +56,32 @@ function highlightText(text: string): React.ReactNode {
 			if (match.index > lastIndex) {
 				result.push(line.substring(lastIndex, match.index));
 			}
-			const content = match[1] || match[2];
-			const typeRef = match[1] ? TYPE_REF_RE.exec(content) : null;
-			if (typeRef) {
-				const typeName = typeRef[1];
+			if (match[3]) {
+				// {@link TypeName.PropertyName}
+				const typeName = match[3];
+				const propName = match[4];
 				result.push(
 					<a key={`${li}-${match.index}`} href={`/docs-api?s=types#type-${typeName}`} className={TYPE_LINK_STYLE}>
-						{content}
+						{typeName}.{propName}
 					</a>,
 				);
 			} else {
-				result.push(
-					<code key={`${li}-${match.index}`} className={CODE_STYLE}>
-						{content}
-					</code>,
-				);
+				const content = match[1] || match[2];
+				const typeRef = match[1] ? TYPE_REF_RE.exec(content) : null;
+				if (typeRef) {
+					const typeName = typeRef[1];
+					result.push(
+						<a key={`${li}-${match.index}`} href={`/docs-api?s=types#type-${typeName}`} className={TYPE_LINK_STYLE}>
+							{content}
+						</a>,
+					);
+				} else {
+					result.push(
+						<code key={`${li}-${match.index}`} className={CODE_STYLE}>
+							{content}
+						</code>,
+					);
+				}
 			}
 			lastIndex = regex.lastIndex;
 		}

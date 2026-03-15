@@ -8,7 +8,7 @@
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "Attributes for the editable frame[.sun-editor-editable].",
+    "description": "Attributes for the editable frame[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
@@ -36,7 +36,7 @@
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "Style string of the top frame of the editor.",
+    "description": "Style string of the top frame of the editor.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
     "default": "\"\""
   },
   "iframe": {
@@ -48,7 +48,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributes of the `iframe`.",
+    "description": "Attributes of the `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
   "statusbar": {
@@ -72,7 +72,7 @@
     "default": "null"
   },
   "charCounter_label": {
-    "description": "Text to be displayed in the `charCounter` area of the bottom bar.",
+    "description": "Text to be displayed in the `charCounter` area of the bottom bar.\n```js\n{ charCounter_label: 'Characters :' }\n```",
     "default": "null"
   },
   "charCounter_type": {
@@ -92,7 +92,7 @@
     "description": "CodeMirror editor instance (frame-level). Set by `_checkCodeMirror` after initialization."
   },
   "plugins": {
-    "description": "Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name."
+    "description": "Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
   "buttonList": {
     "description": "List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}",
@@ -107,7 +107,7 @@
     "default": "\"classic\""
   },
   "type": {
-    "description": "Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.",
+    "description": "Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n```js\n// type\n'document:header,page'\n```",
     "default": "\"\""
   },
   "theme": {
@@ -125,7 +125,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)",
+    "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -133,11 +133,11 @@
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.",
+    "description": "Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n- Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n- Tags specified here will eventually be removed, even if they are included in other whitelists.",
+    "description": "Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n- Tags specified here will eventually be removed, even if they are included in other whitelists.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
     "default": "\"\""
   },
   "allowedEmptyTags": {
@@ -149,11 +149,11 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
+    "description": "Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.",
+    "description": "Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
   },
   "textStyleTags": {
@@ -161,14 +161,14 @@
     "default": "__textStyleTags"
   },
   "convertTextTags": {
-    "description": "Maps text styles to specific HTML tags.",
+    "description": "Maps text styles to specific HTML tags.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`."
+    "description": "Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.",
+    "description": "Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
     "default": "{}"
   },
   "spanStyles": {
@@ -196,15 +196,15 @@
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "Line properties that should be reset when changing lines. Delimiter: `\"|\"`.",
+    "description": "Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.",
+    "description": "Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n- `line` element also contains `brLine` element.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "Additionally allowed `brLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.",
+    "description": "Additionally allowed `brLine` elements beyond the default.\n- Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n- `brLine` elements are included in the `line` element.\n- `brLine` elements' line break is `BR` tag.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
@@ -262,7 +262,7 @@
     "default": "false"
   },
   "shortcuts": {
-    "description": "Custom keyboard shortcuts.",
+    "description": "Custom keyboard shortcuts.\n- Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n- Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n- Use `$~pluginName.method` to call a specific plugin method.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
     "default": "{}"
   },
   "copyFormatKeepOn": {
@@ -289,7 +289,7 @@
     "default": "null"
   },
   "printTemplate": {
-    "description": "Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.",
+    "description": "Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
     "default": "null"
   },
   "componentInsertBehavior": {
@@ -309,14 +309,14 @@
     "default": "false"
   },
   "externalLibs": {
-    "description": "External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}"
+    "description": "External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
-    "description": "Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}",
+    "description": "Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "User event handlers configuration."
+    "description": "User event handlers configuration.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
   },
   "buttons": {
     "description": "List of currently used toolbar buttons"
@@ -520,10 +520,10 @@
     "description": "Determines whether the default size label is displayed in the dropdown menu."
   },
   "fontSize_showIncDecControls": {
-    "description": "When `true`, displays increase and decrease buttons for font size adjustments."
+    "description": "When `true`, displays increase and decrease buttons for font size adjustments.\n- Defaults to `false`. Always `false` when `sizeUnit` is `'text'` (ignored)."
   },
   "fontSize_disableInput": {
-    "description": "When `true`, disables the direct font size input box."
+    "description": "When `true`, disables the direct font size input box.\n- Defaults to `true` when `sizeUnit` is `'text'`, otherwise `false`."
   },
   "fontSize_unitMap": {
     "description": "Override or extend the default unit mapping for font sizes."
@@ -538,7 +538,7 @@
     "description": "Whether to create a file input element."
   },
   "audio_createUrlInput": {
-    "description": "Whether to create a URL input element (default is `true` if file input is not created)."
+    "description": "Whether to create a URL input element.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "audio_uploadUrl": {
     "description": "The URL to which files will be uploaded."
@@ -664,7 +664,7 @@
     "description": "Whether to create a file input element for image uploads."
   },
   "image_createUrlInput": {
-    "description": "Whether to create a URL input element for image insertion."
+    "description": "Whether to create a URL input element for image insertion.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "image_uploadUrl": {
     "description": "The URL endpoint for image file uploads."
@@ -772,7 +772,7 @@
     "description": "Whether to create a file input element for video uploads."
   },
   "video_createUrlInput": {
-    "description": "Whether to create a URL input element for video embedding."
+    "description": "Whether to create a URL input element for video embedding.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "video_uploadUrl": {
     "description": "The URL endpoint for video file uploads."

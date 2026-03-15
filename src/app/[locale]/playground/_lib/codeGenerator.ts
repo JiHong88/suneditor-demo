@@ -66,7 +66,7 @@ function fmtEmbedQuery(json: string): string {
 /** Returns an ESM import line for lang pack, or empty string. */
 function langImport(lang: string): string {
 	if (!lang) return "";
-	return `\nimport { ${lang} } from "suneditor/src/langs";`;
+	return `\nimport ${lang} from "suneditor/langs/${lang}";`;
 }
 
 /** Returns an ESM import line for theme CSS, or empty string. */
@@ -88,7 +88,20 @@ function themeCDNLink(theme: string): string {
 /* ── External library helpers ──────────────────────────── */
 
 const CM_VERSION = "6.65.7";
-const KATEX_VERSION = "0.16.11";
+const KATEX_VERSION = "0.16.38";
+const MATHJAX_VERSION = "3";
+
+/** Returns extra npm dependencies needed based on state (for StackBlitz package.json etc.) */
+export function getNpmDeps(state: PlaygroundState): Record<string, string> {
+	const needMath = hasButton(state.buttonListPreset, state.type, "math", state.customButtonList);
+	const deps: Record<string, string> = { codemirror: `^${CM_VERSION}` };
+	if (needMath && state.math_mathLib === "katex") {
+		deps.katex = `^${KATEX_VERSION}`;
+	} else if (needMath && state.math_mathLib === "mathjax") {
+		deps["mathjax-full"] = `^${MATHJAX_VERSION}`;
+	}
+	return deps;
+}
 
 /** CDN tags for external libraries (CodeMirror + KaTeX/MathJax) */
 function extLibsCDNTags(state: PlaygroundState): string {
@@ -122,6 +135,18 @@ function extLibsCDNTags(state: PlaygroundState): string {
 	return lines.length > 0 ? "\n" + lines.join("\n") : "";
 }
 
+/** ESM import lines for MathJax (for <script type="module"> in CDN template) */
+function extLibsCDNMathjaxImports(): string {
+	const base = `https://esm.sh/mathjax-full@${MATHJAX_VERSION}`;
+	return [
+		`import { mathjax } from "${base}/js/mathjax";`,
+		`import { TeX } from "${base}/js/input/tex";`,
+		`import { CHTML } from "${base}/js/output/chtml";`,
+		`import { browserAdaptor } from "${base}/js/adaptors/browserAdaptor";`,
+		`import { RegisterHTMLHandler } from "${base}/js/handlers/html";`,
+	].join("\n");
+}
+
 /** CDN externalLibs option body */
 function extLibsCDNOption(state: PlaygroundState): string {
 	const needMath = hasButton(state.buttonListPreset, state.type, "math", state.customButtonList);
@@ -130,6 +155,8 @@ function extLibsCDNOption(state: PlaygroundState): string {
 	lines.push("  codeMirror: { src: CodeMirror },");
 	if (needMath && state.math_mathLib === "katex") {
 		lines.push("  katex: { src: katex },");
+	} else if (needMath && state.math_mathLib === "mathjax") {
+		lines.push("  mathjax: { src: mathjax, TeX, CHTML, browserAdaptor, RegisterHTMLHandler },");
 	}
 	lines.push("},");
 	return lines.join("\n");
@@ -199,12 +226,6 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// type
 	if (state.type) add("type", `"${state.type}"`);
-
-	// buttonList
-	add(
-		"buttonList",
-		fmtButtonList(getButtonList(state.buttonListPreset, state.type, state.customButtonList), indentBase + 2),
-	);
 
 	// theme
 	if (state.theme) add("theme", `"${state.theme}"`);
@@ -625,6 +646,11 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 		if (pl.length) lines.push(...pl);
 	}
 
+	// buttonList — always last
+	lines.push(
+		`buttonList: ${fmtButtonList(getButtonList(state.buttonListPreset, state.type, state.customButtonList), indentBase + 2)},`,
+	);
+
 	return lines.join("\n");
 }
 
@@ -671,11 +697,21 @@ function generateCDN(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4, true);
 	const bodyIndented = indent(body, 6);
 	const extTags = extLibsCDNTags(state);
+	const needMath = hasButton(state.buttonListPreset, state.type, "math", state.customButtonList);
+	const useMathJax = needMath && state.math_mathLib === "mathjax";
+	const scriptOpen = useMathJax ? '<script type="module">' : "<script>";
+	const mjImports = useMathJax
+		? extLibsCDNMathjaxImports()
+				.split("\n")
+				.join("\n    ") + "\n\n    "
+		: "    ";
 
 	if (state.multiroot) {
 		const toolbarHtml = state.mode === "classic" ? '\n  <div id="toolbar"></div>' : "";
 		const toolbarOpt =
 			state.mode === "classic" ? '\n      toolbar_container: document.getElementById("toolbar"),' : "";
+		const statusbarHtml = state.statusbar_container_enabled ? '\n  <div id="statusbar"></div>' : "";
+		const statusbarOpt = state.statusbar_container_enabled ? '\n      statusbar_container: document.getElementById("statusbar"),' : "";
 		return `<!DOCTYPE html>
 <html>
 <head>
@@ -687,11 +723,11 @@ function generateCDN(state: PlaygroundState): string {
 <body style="margin:6em 4rem 4rem">
   <h1>SunEditor Multi-Root Demo</h1>${toolbarHtml}
   <textarea id="header"></textarea>
-  <textarea id="body"></textarea>
-  <script>
-    const editor = SUNEDITOR.create({
+  <textarea id="body"></textarea>${statusbarHtml}
+  ${scriptOpen}
+    ${mjImports}const editor = SUNEDITOR.create({
 ${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 6)}
-    }, {${toolbarOpt}
+    }, {${toolbarOpt}${statusbarOpt}
 ${bodyIndented}
     });
   <\/script>
@@ -699,6 +735,10 @@ ${bodyIndented}
 </html>`;
 	}
 
+	const toolbarHtmlS = state.toolbar_container_enabled && state.mode === "classic" ? '\n  <div id="toolbar"></div>' : "";
+	const toolbarOptS = state.toolbar_container_enabled && state.mode === "classic" ? '\n      toolbar_container: document.getElementById("toolbar"),' : "";
+	const statusbarHtmlS = state.statusbar_container_enabled ? '\n  <div id="statusbar"></div>' : "";
+	const statusbarOptS = state.statusbar_container_enabled ? '\n      statusbar_container: document.getElementById("statusbar"),' : "";
 	return `<!DOCTYPE html>
 <html>
 <head>
@@ -708,10 +748,10 @@ ${bodyIndented}
   <script src="${CDN_JS}"><\/script>
 </head>
 <body style="margin:6em 4rem 4rem">
-  <h1>SunEditor Demo</h1>
-  <textarea id="editor"></textarea>
-  <script>
-    const editor = SUNEDITOR.create(document.getElementById("editor"), {
+  <h1>SunEditor Demo</h1>${toolbarHtmlS}
+  <textarea id="editor"></textarea>${statusbarHtmlS}
+  ${scriptOpen}
+    ${mjImports}const editor = SUNEDITOR.create(document.getElementById("editor"), {${toolbarOptS}${statusbarOptS}
 ${bodyIndented}
     });
   <\/script>
@@ -725,6 +765,7 @@ function generateVanilla(state: PlaygroundState): string {
 
 	if (state.multiroot) {
 		const toolbarOpt = state.mode === "classic" ? '\n  toolbar_container: document.getElementById("toolbar"),' : "";
+		const statusbarOptV = state.statusbar_container_enabled ? '\n  statusbar_container: document.getElementById("statusbar"),' : "";
 		return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
@@ -733,18 +774,20 @@ import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.la
 const editor = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 2)}
 }, {
-  plugins,${toolbarOpt}
+  plugins,${toolbarOpt}${statusbarOptV}
 ${bodyIndented}
 });`;
 	}
 
+	const toolbarOptVS = state.toolbar_container_enabled && state.mode === "classic" ? '\n  toolbar_container: document.getElementById("toolbar"),' : "";
+	const statusbarOptVS = state.statusbar_container_enabled ? '\n  statusbar_container: document.getElementById("statusbar"),' : "";
 	return `// npm i suneditor@${SUNEDITOR_VERSION}
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const editor = suneditor.create(document.getElementById("editor"), {
-  plugins,
+  plugins,${toolbarOptVS}${statusbarOptVS}
 ${bodyIndented}
 });`;
 }
@@ -758,6 +801,9 @@ function generateReact(state: PlaygroundState): string {
 		const toolbarRef = isClassic ? "\n  const toolbarRef = useRef(null);" : "";
 		const toolbarOpt = isClassic ? "\n      toolbar_container: toolbarRef.current," : "";
 		const toolbarJsx = isClassic ? "\n      <div ref={toolbarRef} />" : "";
+		const statusbarRefR = state.statusbar_container_enabled ? "\n  const statusbarRef = useRef(null);" : "";
+		const statusbarOptR = state.statusbar_container_enabled ? "\n      statusbar_container: statusbarRef.current," : "";
+		const statusbarJsxR = state.statusbar_container_enabled ? "\n      <div ref={statusbarRef} />" : "";
 		return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
@@ -765,13 +811,13 @@ import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.la
 
 export default function Editor() {
   const headerRef = useRef(null);
-  const bodyRef = useRef(null);${toolbarRef}
+  const bodyRef = useRef(null);${toolbarRef}${statusbarRefR}
 
   useEffect(() => {
     const instance = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `${k}Ref.current`, 6)}
     }, {
-      plugins,${toolbarOpt}
+      plugins,${toolbarOpt}${statusbarOptR}
 ${bodyIndented}
     });
 
@@ -781,30 +827,40 @@ ${bodyIndented}
   return (
     <div>${toolbarJsx}
       <textarea ref={headerRef} />
-      <textarea ref={bodyRef} />
+      <textarea ref={bodyRef} />${statusbarJsxR}
     </div>
   );
 }`;
 	}
 
+	const toolbarRefRS = state.toolbar_container_enabled && state.mode === "classic" ? "\n  const toolbarRef = useRef(null);" : "";
+	const toolbarOptRS = state.toolbar_container_enabled && state.mode === "classic" ? "\n      toolbar_container: toolbarRef.current," : "";
+	const toolbarJsxRS = state.toolbar_container_enabled && state.mode === "classic" ? "\n      <div ref={toolbarRef} />" : "";
+	const statusbarRefRS = state.statusbar_container_enabled ? "\n  const statusbarRef = useRef(null);" : "";
+	const statusbarOptRS = state.statusbar_container_enabled ? "\n      statusbar_container: statusbarRef.current," : "";
+	const statusbarJsxRS = state.statusbar_container_enabled ? "\n      <div ref={statusbarRef} />" : "";
+	const reactNeedWrapper = (state.toolbar_container_enabled && state.mode === "classic") || state.statusbar_container_enabled;
+	const reactReturn = reactNeedWrapper
+		? `  return (\n    <div>${toolbarJsxRS}\n      <textarea ref={ref} />${statusbarJsxRS}\n    </div>\n  );`
+		: `  return <textarea ref={ref} />;`;
 	return `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 export default function Editor() {
-  const ref = useRef(null);
+  const ref = useRef(null);${toolbarRefRS}${statusbarRefRS}
 
   useEffect(() => {
     const instance = suneditor.create(ref.current, {
-      plugins,
+      plugins,${toolbarOptRS}${statusbarOptRS}
 ${bodyIndented}
     });
 
     return () => instance.destroy();
   }, []);
 
-  return <textarea ref={ref} />;
+${reactReturn}
 }`;
 }
 
@@ -817,6 +873,9 @@ function generateVue(state: PlaygroundState): string {
 		const toolbarRefDecl = isClassic ? "\nconst toolbarEl = ref(null);" : "";
 		const toolbarOpt = isClassic ? "\n    toolbar_container: toolbarEl.value," : "";
 		const toolbarTmpl = isClassic ? '\n    <div ref="toolbarEl" />' : "";
+		const statusbarDeclV = state.statusbar_container_enabled ? "\nconst statusbarEl = ref(null);" : "";
+		const statusbarOptV2 = state.statusbar_container_enabled ? "\n    statusbar_container: statusbarEl.value," : "";
+		const statusbarTmplV = state.statusbar_container_enabled ? '\n    <div ref="statusbarEl" />' : "";
 		return `<script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
@@ -824,14 +883,14 @@ import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 const headerEl = ref(null);
-const bodyEl = ref(null);${toolbarRefDecl}
+const bodyEl = ref(null);${toolbarRefDecl}${statusbarDeclV}
 let instance = null;
 
 onMounted(() => {
   instance = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `${k}El.value`, 4)}
   }, {
-    plugins,${toolbarOpt}
+    plugins,${toolbarOpt}${statusbarOptV2}
 ${bodyIndented}
   });
 });
@@ -844,23 +903,33 @@ onBeforeUnmount(() => {
 <template>
   <div>${toolbarTmpl}
     <textarea ref="headerEl" />
-    <textarea ref="bodyEl" />
+    <textarea ref="bodyEl" />${statusbarTmplV}
   </div>
 </template>`;
 	}
 
+	const toolbarDeclVS = state.toolbar_container_enabled && state.mode === "classic" ? "\nconst toolbarEl = ref(null);" : "";
+	const toolbarOptVS = state.toolbar_container_enabled && state.mode === "classic" ? "\n    toolbar_container: toolbarEl.value," : "";
+	const statusbarDeclVS = state.statusbar_container_enabled ? "\nconst statusbarEl = ref(null);" : "";
+	const statusbarOptVS = state.statusbar_container_enabled ? "\n    statusbar_container: statusbarEl.value," : "";
+	const vueNeedWrapper = (state.toolbar_container_enabled && state.mode === "classic") || state.statusbar_container_enabled;
+	const toolbarTmplVS = state.toolbar_container_enabled && state.mode === "classic" ? '\n    <div ref="toolbarEl" />' : "";
+	const statusbarTmplVS = state.statusbar_container_enabled ? '\n    <div ref="statusbarEl" />' : "";
+	const vueTmpl = vueNeedWrapper
+		? `<template>\n  <div>${toolbarTmplVS}\n    <textarea ref="el" />${statusbarTmplVS}\n  </div>\n</template>`
+		: `<template>\n  <textarea ref="el" />\n</template>`;
 	return `<script setup>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
-const el = ref(null);
+const el = ref(null);${toolbarDeclVS}${statusbarDeclVS}
 let instance = null;
 
 onMounted(() => {
   instance = suneditor.create(el.value, {
-    plugins,
+    plugins,${toolbarOptVS}${statusbarOptVS}
 ${bodyIndented}
   });
 });
@@ -870,9 +939,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<template>
-  <textarea ref="el" />
-</template>`;
+${vueTmpl}`;
 }
 
 function generateAngular(state: PlaygroundState): string {
@@ -886,6 +953,11 @@ function generateAngular(state: PlaygroundState): string {
 			? '\n  @ViewChild("toolbarEl", { static: true }) toolbarEl!: ElementRef<HTMLDivElement>;'
 			: "";
 		const toolbarOpt = isClassic ? "\n      toolbar_container: this.toolbarEl.nativeElement," : "";
+		const statusbarTmplA = state.statusbar_container_enabled ? "\n    <div #statusbarEl></div>" : "";
+		const statusbarViewChildA = state.statusbar_container_enabled
+			? '\n  @ViewChild("statusbarEl", { static: true }) statusbarEl!: ElementRef<HTMLDivElement>;'
+			: "";
+		const statusbarOptA = state.statusbar_container_enabled ? "\n      statusbar_container: this.statusbarEl.nativeElement," : "";
 		return `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
@@ -896,19 +968,19 @@ import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.la
   selector: "app-editor",
   template: \`${toolbarTmpl}
     <textarea #headerEl></textarea>
-    <textarea #bodyEl></textarea>
+    <textarea #bodyEl></textarea>${statusbarTmplA}
   \`
 })
 export class EditorComponent implements AfterViewInit, OnDestroy {
   @ViewChild("headerEl", { static: true }) headerEl!: ElementRef<HTMLTextAreaElement>;
-  @ViewChild("bodyEl", { static: true }) bodyEl!: ElementRef<HTMLTextAreaElement>;${toolbarViewChild}
+  @ViewChild("bodyEl", { static: true }) bodyEl!: ElementRef<HTMLTextAreaElement>;${toolbarViewChild}${statusbarViewChildA}
   private instance: SunEditor.Instance | null = null;
 
   ngAfterViewInit() {
     this.instance = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `this.${k}El.nativeElement`, 6)}
     }, {
-      plugins,${toolbarOpt}
+      plugins,${toolbarOpt}${statusbarOptA}
 ${bodyIndented}
     });
   }
@@ -919,6 +991,16 @@ ${bodyIndented}
 }`;
 	}
 
+	const toolbarTmplAS = state.toolbar_container_enabled && state.mode === "classic" ? "<div #toolbarEl></div>\n    " : "";
+	const toolbarViewChildAS = state.toolbar_container_enabled && state.mode === "classic"
+		? '\n  @ViewChild("toolbarEl", { static: true }) toolbarEl!: ElementRef<HTMLDivElement>;'
+		: "";
+	const toolbarOptAS = state.toolbar_container_enabled && state.mode === "classic" ? "\n      toolbar_container: this.toolbarEl.nativeElement," : "";
+	const statusbarTmplAS = state.statusbar_container_enabled ? "\n    <div #statusbarEl></div>" : "";
+	const statusbarViewChildAS = state.statusbar_container_enabled
+		? '\n  @ViewChild("statusbarEl", { static: true }) statusbarEl!: ElementRef<HTMLDivElement>;'
+		: "";
+	const statusbarOptAS = state.statusbar_container_enabled ? "\n      statusbar_container: this.statusbarEl.nativeElement," : "";
 	return `import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
 import suneditor, { plugins } from "suneditor";
 import type { SunEditor } from "suneditor/types";
@@ -927,15 +1009,15 @@ import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.la
 
 @Component({
   selector: "app-editor",
-  template: \`<textarea #editorEl></textarea>\`
+  template: \`${toolbarTmplAS}<textarea #editorEl></textarea>${statusbarTmplAS}\`
 })
 export class EditorComponent implements AfterViewInit, OnDestroy {
-  @ViewChild("editorEl", { static: true }) editorEl!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild("editorEl", { static: true }) editorEl!: ElementRef<HTMLTextAreaElement>;${toolbarViewChildAS}${statusbarViewChildAS}
   private instance: SunEditor.Instance | null = null;
 
   ngAfterViewInit() {
     this.instance = suneditor.create(this.editorEl.nativeElement, {
-      plugins,
+      plugins,${toolbarOptAS}${statusbarOptAS}
 ${bodyIndented}
     });
   }
@@ -955,6 +1037,9 @@ function generateSvelte(state: PlaygroundState): string {
 		const toolbarVar = isClassic ? "\n  let toolbarEl;" : "";
 		const toolbarOpt = isClassic ? "\n      toolbar_container: toolbarEl," : "";
 		const toolbarHtml = isClassic ? "\n<div bind:this={toolbarEl}></div>" : "";
+		const statusbarVarSv = state.statusbar_container_enabled ? "\n  let statusbarEl;" : "";
+		const statusbarOptSv = state.statusbar_container_enabled ? "\n      statusbar_container: statusbarEl," : "";
+		const statusbarHtmlSv = state.statusbar_container_enabled ? "\n<div bind:this={statusbarEl}></div>" : "";
 		return `<script>
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
@@ -962,14 +1047,14 @@ function generateSvelte(state: PlaygroundState): string {
   import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
   let headerEl;
-  let bodyEl;${toolbarVar}
+  let bodyEl;${toolbarVar}${statusbarVarSv}
   let instance;
 
   onMount(() => {
     instance = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `${k}El`, 6)}
     }, {
-      plugins,${toolbarOpt}
+      plugins,${toolbarOpt}${statusbarOptSv}
 ${bodyIndented}
     });
 
@@ -978,29 +1063,35 @@ ${bodyIndented}
 </script>${toolbarHtml}
 
 <textarea bind:this={headerEl}></textarea>
-<textarea bind:this={bodyEl}></textarea>`;
+<textarea bind:this={bodyEl}></textarea>${statusbarHtmlSv}`;
 	}
 
+	const toolbarVarSS = state.toolbar_container_enabled && state.mode === "classic" ? "\n  let toolbarEl;" : "";
+	const toolbarOptSS = state.toolbar_container_enabled && state.mode === "classic" ? "\n      toolbar_container: toolbarEl," : "";
+	const toolbarHtmlSS = state.toolbar_container_enabled && state.mode === "classic" ? "\n<div bind:this={toolbarEl}></div>" : "";
+	const statusbarVarSS = state.statusbar_container_enabled ? "\n  let statusbarEl;" : "";
+	const statusbarOptSS = state.statusbar_container_enabled ? "\n      statusbar_container: statusbarEl," : "";
+	const statusbarHtmlSS = state.statusbar_container_enabled ? "\n<div bind:this={statusbarEl}></div>" : "";
 	return `<script>
   import { onMount } from "svelte";
   import suneditor, { plugins } from "suneditor";
   import "suneditor/css/editor";
   import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
-  let editorEl;
+  let editorEl;${toolbarVarSS}${statusbarVarSS}
   let instance;
 
   onMount(() => {
     instance = suneditor.create(editorEl, {
-      plugins,
+      plugins,${toolbarOptSS}${statusbarOptSS}
 ${bodyIndented}
     });
 
     return () => instance?.destroy();
   });
-</script>
+</script>${toolbarHtmlSS}
 
-<textarea bind:this={editorEl}></textarea>`;
+<textarea bind:this={editorEl}></textarea>${statusbarHtmlSS}`;
 }
 
 function generateWebComponents(state: PlaygroundState): string {
@@ -1011,18 +1102,20 @@ function generateWebComponents(state: PlaygroundState): string {
 		const isClassic = state.mode === "classic";
 		const toolbarInner = isClassic ? '<div id="toolbar"></div>' : "";
 		const toolbarOpt = isClassic ? '\n      toolbar_container: this.querySelector("#toolbar"),' : "";
+		const statusbarInnerWC = state.statusbar_container_enabled ? '<div id="statusbar"></div>' : "";
+		const statusbarOptWC = state.statusbar_container_enabled ? '\n      statusbar_container: this.querySelector("#statusbar"),' : "";
 		return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = \`${toolbarInner}<textarea id="header"></textarea><textarea id="body"></textarea>\`;
+    this.innerHTML = \`${toolbarInner}<textarea id="header"></textarea><textarea id="body"></textarea>${statusbarInnerWC}\`;
 
     this.editor = suneditor.create({
 ${buildMultiRootTargets(state, (k) => `this.querySelector("#${k}")`, 6)}
     }, {
-      plugins,${toolbarOpt}
+      plugins,${toolbarOpt}${statusbarOptWC}
 ${bodyIndented}
     });
   }
@@ -1035,17 +1128,21 @@ ${bodyIndented}
 customElements.define("sun-editor", SunEditorElement);`;
 	}
 
-	return `import suneditor, { plugins } from "suneditor";
+	const toolbarInnerWCS = state.toolbar_container_enabled && state.mode === "classic" ? '<div id="toolbar"></div>' : "";
+	const toolbarOptWCS = state.toolbar_container_enabled && state.mode === "classic" ? '\n      toolbar_container: this.querySelector("#toolbar"),' : "";
+	const statusbarInnerWCS = state.statusbar_container_enabled ? '<div id="statusbar"></div>' : "";
+	const statusbarOptWCS = state.statusbar_container_enabled ? '\n      statusbar_container: this.querySelector("#statusbar"),' : "";
+		return `import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}
 
 class SunEditorElement extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = \`<textarea></textarea>\`;
+    this.innerHTML = \`${toolbarInnerWCS}<textarea></textarea>${statusbarInnerWCS}\`;
 
     const textarea = this.querySelector("textarea");
     this.editor = suneditor.create(textarea, {
-      plugins,
+      plugins,${toolbarOptWCS}${statusbarOptWCS}
 ${bodyIndented}
     });
   }

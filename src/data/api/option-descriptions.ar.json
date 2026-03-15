@@ -8,7 +8,7 @@
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "سمات الإطار القابل للتحرير[.sun-editor-editable].",
+    "description": "سمات الإطار القابل للتحرير[.sun-editor-editable]. \n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
@@ -36,7 +36,7 @@
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "سلسلة نمط الإطار العلوي للمحرر.",
+    "description": "سلسلة نمط الإطار العلوي للمحرر. \n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
     "default": "\"\""
   },
   "iframe": {
@@ -48,7 +48,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "سمات `iframe`.",
+    "description": "سمات `iframe`. \n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
   "statusbar": {
@@ -72,7 +72,7 @@
     "default": "null"
   },
   "charCounter_label": {
-    "description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي.",
+    "description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي. \n```js\n{ charCounter_label: 'Characters :' }\n```",
     "default": "null"
   },
   "charCounter_type": {
@@ -92,7 +92,7 @@
     "description": "مثيل محرر CodeMirror (على مستوى الإطار). تم التعيين بواسطة `_checkCodeMirror` بعد التهيئة."
   },
   "plugins": {
-    "description": "تكوين البرنامج المساعد. قم بتمرير مجموعة من فئات المكونات الإضافية أو كائن مرتبط باسم البرنامج المساعد."
+    "description": "تكوين البرنامج المساعد. قم بتمرير مجموعة من فئات المكونات الإضافية أو كائن مرتبط باسم البرنامج المساعد. \n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
   "buttonList": {
     "description": "قائمة أزرار شريط الأدوات، مجمعة حسب المصفوفات الفرعية. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.BUTTON_LIST}",
@@ -107,7 +107,7 @@
     "default": "\"classic\""
   },
   "type": {
-    "description": "نوع المحرر. استخدم `\"document\"` لتخطيط نمط المستند، مع أنواع فرعية اختيارية بعد `:`.",
+    "description": "نوع المحرر. استخدم `\"document\"` لتخطيط نمط المستند، مع أنواع فرعية اختيارية بعد `:`. \n```js\n// type\n'document:header,page'\n```",
     "default": "\"\""
   },
   "theme": {
@@ -125,7 +125,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`)",
+    "description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -133,11 +133,11 @@
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. المحدد: `\"|\"`. \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}.",
+    "description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. المحدد: `\"|\"`. \n- تمت إضافتها إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}. \n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "يحدد عناصر HTML التي لا ينبغي استخدامها. المحدد: `\"|\"`. \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى.",
+    "description": "يحدد عناصر HTML التي لا ينبغي استخدامها. المحدد: `\"|\"`. \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى. \n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
     "default": "\"\""
   },
   "allowedEmptyTags": {
@@ -149,11 +149,11 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "يحدد سمات إضافية للسماح بكل علامة. ينطبق `\"*\"` على جميع العلامات. \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}.",
+    "description": "يحدد سمات إضافية للسماح بكل علامة. ينطبق `\"*\"` على جميع العلامات. \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. ينطبق `\"*\"` على جميع العلامات. \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا.",
+    "description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. ينطبق `\"*\"` على جميع العلامات. \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا. \n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
   },
   "textStyleTags": {
@@ -161,14 +161,14 @@
     "default": "__textStyleTags"
   },
   "convertTextTags": {
-    "description": "تعيين أنماط النص إلى علامات HTML محددة.",
+    "description": "تعيين أنماط النص إلى علامات HTML محددة. \n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. المحدد: `\"|\"`."
+    "description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. المحدد: `\"|\"`. \n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "يحدد الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامات، والقيمة هي الأنماط المسموح بها والمفصولة بشُرط رأسية.",
+    "description": "يحدد الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامات، والقيمة هي الأنماط المسموح بها والمفصولة بشُرط رأسية. \n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
     "default": "{}"
   },
   "spanStyles": {
@@ -196,15 +196,15 @@
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "خصائص الخط التي يجب إعادة ضبطها عند تغيير الخطوط. المحدد: `\"|\"`.",
+    "description": "خصائص الخط التي يجب إعادة ضبطها عند تغيير الخطوط. المحدد: `\"|\"`. \n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. المحدد: `\"|\"`. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. المحدد: `\"|\"`. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`. \n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`. \n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
@@ -262,7 +262,7 @@
     "default": "false"
   },
   "shortcuts": {
-    "description": "اختصارات لوحة المفاتيح المخصصة.",
+    "description": "اختصارات لوحة المفاتيح المخصصة. \n- المفاتيح التي تبدأ بـ `_` هي اختصارات مخصصة يحددها المستخدم. كل قيمة عبارة عن مصفوفة من أزواج `[keyCombo, hintLabel]`. \n- تستخدم مجموعات المفاتيح القيم `c` (Ctrl/Cmd)، و`s` (Shift)، و`KeyEvent.code` المرتبطة بـ `+`. \n- استخدم `$~pluginName.method` لاستدعاء طريقة مكون إضافي محدد. \n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
     "default": "{}"
   },
   "copyFormatKeepOn": {
@@ -289,7 +289,7 @@
     "default": "null"
   },
   "printTemplate": {
-    "description": "قالب HTML مخصص لوضع الطباعة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر.",
+    "description": "قالب HTML مخصص لوضع الطباعة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر. \n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
     "default": "null"
   },
   "componentInsertBehavior": {
@@ -301,7 +301,7 @@
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "مدة عرض رسائل التوست (مللي ثانية).",
+    "description": "مدة عرض رسائل التوست (ملي ثانية).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
@@ -309,14 +309,14 @@
     "default": "false"
   },
   "externalLibs": {
-    "description": "المكتبات الخارجية مثل CodeMirror أو KaTeX أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية}"
+    "description": "المكتبات الخارجية مثل CodeMirror أو KaTeX أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
-    "description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. `true` للسماح، `false` ​​لعدم السماح. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}",
+    "description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. `true` للسماح، `false` ​​لعدم السماح. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP} \n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "تكوين معالجات أحداث المستخدم."
+    "description": "تكوين معالجات أحداث المستخدم. \n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
   },
   "buttons": {
     "description": "قائمة أزرار شريط الأدوات المستخدمة حاليا"
@@ -520,10 +520,10 @@
     "description": "يحدد ما إذا كان سيتم عرض تسمية الحجم الافتراضي في القائمة المنسدلة."
   },
   "fontSize_showIncDecControls": {
-    "description": "عند `true`، يتم عرض أزرار الزيادة والتقليل لتعديلات حجم الخط."
+    "description": "عند `true`، يتم عرض أزرار الزيادة والتقليل لتعديلات حجم الخط. \n- الإعدادات الافتراضية هي `false`. دائمًا `false` عندما يكون `sizeUnit` هو `'text'` (يتم تجاهله)."
   },
   "fontSize_disableInput": {
-    "description": "عند `true`، يتم تعطيل مربع إدخال حجم الخط المباشر."
+    "description": "عند `true`، يتم تعطيل مربع إدخال حجم الخط المباشر. \n- القيمة الافتراضية هي `true` ​​عندما تكون `sizeUnit` هي `'text'`، وإلا فإن `false`."
   },
   "fontSize_unitMap": {
     "description": "تجاوز أو توسيع تعيين الوحدة الافتراضية لأحجام الخطوط."
@@ -538,7 +538,7 @@
     "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف."
   },
   "audio_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL (الافتراضي هو `true` إذا لم يتم إنشاء إدخال الملف)."
+    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
   },
   "audio_uploadUrl": {
     "description": "عنوان URL الذي سيتم تحميل الملفات إليه."
@@ -664,7 +664,7 @@
     "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف لتحميلات الصور."
   },
   "image_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لإدراج الصورة."
+    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لإدراج الصورة. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
   },
   "image_uploadUrl": {
     "description": "نقطة نهاية URL لتحميلات ملفات الصور."
@@ -772,7 +772,7 @@
     "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف لتحميلات الفيديو."
   },
   "video_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لتضمين الفيديو."
+    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لتضمين الفيديو. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
   },
   "video_uploadUrl": {
     "description": "نقطة نهاية URL لتحميلات ملفات الفيديو."

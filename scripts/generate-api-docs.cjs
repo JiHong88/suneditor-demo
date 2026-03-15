@@ -762,15 +762,33 @@ function extractOptionDescriptions(filePath) {
 
 		const defaultValue = nameMatch[2] !== undefined ? nameMatch[2].trim() : undefined;
 
-		// Collect multi-line description (following lines starting with " * - ")
+		// Collect multi-line description (following lines starting with " * - " and ```lang blocks)
 		let desc = nameMatch[3].trim();
+		let inFence = false;
+		let fenceLang = "";
+		let fenceLines = [];
 		for (let k = (j > i ? j : i) + 1; k < lines.length; k++) {
 			const nextLine = lines[k].replace(/^\s*\*\s*/, "").trim();
-			if (!nextLine || nextLine.startsWith("@") || nextLine === "*/" || nextLine.startsWith("===") || nextLine.startsWith("---") || nextLine === "///") break;
-			if (nextLine.startsWith("- ")) {
-				desc += "\n" + nextLine;
+			if (inFence) {
+				if (nextLine === "```" || nextLine.startsWith("```") && nextLine.slice(3).trim() === "") {
+					// End of fence
+					desc += "\n```" + fenceLang + "\n" + fenceLines.join("\n") + "\n```";
+					inFence = false;
+					fenceLines = [];
+				} else {
+					fenceLines.push(nextLine);
+				}
 			} else {
-				break;
+				if (!nextLine || nextLine.startsWith("@") || nextLine === "*/" || nextLine.startsWith("===") || nextLine.startsWith("---") || nextLine === "///") break;
+				if (nextLine.startsWith("```")) {
+					inFence = true;
+					fenceLang = nextLine.slice(3).trim();
+					fenceLines = [];
+				} else if (nextLine.startsWith("- ")) {
+					desc += "\n" + nextLine;
+				} else {
+					break;
+				}
 			}
 		}
 
@@ -1291,6 +1309,48 @@ if (fs.existsSync(path.join(TYPES_DIR, "hooks/base.d.ts"))) {
 }
 
 apiDocs.structure.types.items = Array.from(typeMap.values());
+
+// ── Append DEFAULTS constants (from core/schema/options.js) ──
+// These are referenced via {@link DEFAULTS.XXX} in option descriptions but are not in .d.ts files.
+const DEFAULTS_SOURCE = path.join(__dirname, "../node_modules/suneditor/src/core/schema/options.js");
+if (fs.existsSync(DEFAULTS_SOURCE)) {
+	const src = fs.readFileSync(DEFAULTS_SOURCE, "utf-8");
+	/** Extract the value of a DEFAULTS.KEY = ... assignment */
+	function extractDefaultValue(key) {
+		const re = new RegExp(`${key}:\\s*([\\s\\S]*?)(?=,\\s*[A-Z_]+:|\\n\\})`);
+		const m = src.match(re);
+		if (!m) return null;
+		return m[1].trim().replace(/,\s*$/, "");
+	}
+	const defaultsKeys = [
+		"BUTTON_LIST", "SCOPE_SELECTION_TAGS", "ALLOWED_EMPTY_NODE_LIST",
+		"CLASS_NAME", "REQUIRED_FORMAT_LINE", "SPAN_STYLES", "LINE_STYLES",
+		"SIZE_UNITS", "EXTRA_TAG_MAP",
+	];
+	const memberDescriptions = {};
+	for (const key of defaultsKeys) {
+		const val = extractDefaultValue(key);
+		memberDescriptions[key] = val ? `Default value: \`${val.replace(/\n\s*/g, " ")}\`` : "";
+	}
+	apiDocs.structure.types.items.push({
+		name: "DEFAULTS",
+		definition: [
+			"BUTTON_LIST: (string | string[])[]",
+			"SCOPE_SELECTION_TAGS: string[]",
+			"ALLOWED_EMPTY_NODE_LIST: string",
+			"CLASS_NAME: string",
+			"REQUIRED_FORMAT_LINE: string",
+			"SPAN_STYLES: string",
+			"LINE_STYLES: string",
+			"SIZE_UNITS: string[]",
+			"EXTRA_TAG_MAP: Record<string, boolean>",
+		].join("\n"),
+		kind: "interface",
+		memberDescriptions,
+		source: "core/schema/options.js",
+	});
+}
+
 console.log(`  ✓ Type Definitions (${apiDocs.structure.types.items.length} types)`);
 
 // ── 10. Option Descriptions (for playground tooltips) ──

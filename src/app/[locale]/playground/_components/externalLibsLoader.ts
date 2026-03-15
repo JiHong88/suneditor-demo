@@ -1,73 +1,76 @@
-/* ── CDN script/css loader for external libraries ──────── */
-
-const CODEMIRROR_VERSION = "6.65.7";
-const KATEX_VERSION = "0.16.11";
-
-const CM_ASSETS = [
-	{ type: "css", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/lib/codemirror.min.css` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/lib/codemirror.min.js` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/mode/xml/xml.min.js` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/mode/css/css.min.js` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/mode/javascript/javascript.min.js` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/codemirror@${CODEMIRROR_VERSION}/mode/htmlmixed/htmlmixed.min.js` },
-];
-
-const KATEX_ASSETS = [
-	{ type: "css", url: `https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/katex.min.css` },
-	{ type: "js", url: `https://cdn.jsdelivr.net/npm/katex@${KATEX_VERSION}/dist/katex.min.js` },
-];
-
-function loadCss(url: string): Promise<void> {
-	return new Promise((resolve, reject) => {
-		if (document.querySelector(`link[href="${url}"]`)) { resolve(); return; }
-		const link = document.createElement("link");
-		link.rel = "stylesheet";
-		link.href = url;
-		link.onload = () => resolve();
-		link.onerror = reject;
-		document.head.appendChild(link);
-	});
-}
-
-function loadScript(url: string): Promise<void> {
-	return new Promise((resolve, reject) => {
-		if (document.querySelector(`script[src="${url}"]`)) { resolve(); return; }
-		const script = document.createElement("script");
-		script.src = url;
-		script.onload = () => resolve();
-		script.onerror = reject;
-		document.head.appendChild(script);
-	});
-}
-
-async function loadAssets(assets: { type: string; url: string }[]): Promise<void> {
-	for (const asset of assets) {
-		if (asset.type === "css") await loadCss(asset.url);
-		else await loadScript(asset.url);
-	}
-}
+/* ── Dynamic import loader for external libraries ──────── */
 
 export type ExternalLibs = Record<string, unknown>;
 
-export async function loadExternalLibs(needMath: boolean, mathLib: "katex" | "mathjax"): Promise<ExternalLibs> {
-	const libs: ExternalLibs = {};
-	const w = window as unknown as Record<string, unknown>;
+export type AllLibs = {
+	codeMirror: { src: unknown };
+	katex: { src: unknown };
+	mathjax: Record<string, unknown> | null;
+};
 
-	// CodeMirror — always load for code view syntax highlighting
-	await loadAssets(CM_ASSETS);
-	if (w.CodeMirror) {
-		libs.codeMirror = { src: w.CodeMirror };
-	}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const g = globalThis as any;
 
-	// KaTeX — load when math button is present and katex is selected
-	if (needMath && mathLib === "katex") {
-		await loadAssets(KATEX_ASSETS);
-		if (w.katex) {
-			libs.katex = { src: w.katex };
+async function loadMathjax(): Promise<Record<string, unknown> | null> {
+	// Polyfill PACKAGE_VERSION before import so mathjax-full/js/components/version.js
+	// skips its eval('require') branch (needed in Turbopack where DefinePlugin is not active)
+	if (typeof g.PACKAGE_VERSION === "undefined") g.PACKAGE_VERSION = "3.2.1";
+	try {
+		const [{ mathjax: mj }, { TeX }, { CHTML: CHtmlBase }, { TeXFont }, { browserAdaptor }, { RegisterHTMLHandler }] =
+			await Promise.all([
+				import("mathjax-full/js/mathjax"),
+				import("mathjax-full/js/input/tex"),
+				import("mathjax-full/js/output/chtml"),
+				import("mathjax-full/js/output/chtml/fonts/tex"),
+				import("mathjax-full/js/adaptors/browserAdaptor"),
+				import("mathjax-full/js/handlers/html"),
+			]);
+		const FONT_URL = "https://cdn.jsdelivr.net/npm/mathjax-full@3/es5/output/chtml/fonts/woff-v2";
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		function CHTML(options: Record<string, unknown> | null = null): any {
+			const font = new TeXFont({ fontURL: FONT_URL });
+			return new CHtmlBase(options ? { ...options, font } : { font });
 		}
+		return { src: mj, TeX, CHTML, browserAdaptor, RegisterHTMLHandler };
+	} catch (err) {
+		console.warn("[playground] MathJax load failed", err);
+		return null;
 	}
+}
 
-	// MathJax — not supported via CDN in playground (requires mathjax-full npm package)
+/** Load all external libs in parallel on mount. Results are module-cached. */
+export async function loadAllExternalLibs(): Promise<AllLibs> {
+	const [codeMirror, katex, mathjax] = await Promise.all([
+		// CodeMirror
+		Promise.all([
+			import("codemirror"),
+			import("codemirror/lib/codemirror.css"),
+			import("codemirror/mode/xml/xml"),
+			import("codemirror/mode/css/css"),
+			import("codemirror/mode/javascript/javascript"),
+			import("codemirror/mode/htmlmixed/htmlmixed"),
+		]).then(([{ default: CodeMirror }]) => ({ src: CodeMirror })),
 
+		// KaTeX
+		Promise.all([
+			import("katex"),
+			import("katex/dist/katex.min.css"),
+		]).then(([{ default: katexLib }]) => ({ src: katexLib })),
+
+		// MathJax
+		loadMathjax(),
+	]);
+
+	return { codeMirror, katex, mathjax };
+}
+
+/** Extract the active subset of libs for the current editor options. */
+export function getActiveLibs(allLibs: AllLibs, mathLib: "katex" | "mathjax"): ExternalLibs {
+	const libs: ExternalLibs = { codeMirror: allLibs.codeMirror };
+	if (mathLib === "mathjax" && allLibs.mathjax) {
+		libs.mathjax = allLibs.mathjax;
+	} else {
+		libs.katex = allLibs.katex;
+	}
 	return libs;
 }
