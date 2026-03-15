@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import {
 	EVENTS_BASIC, EVENTS_INPUT, EVENTS_CLIPBOARD, EVENTS_IMAGE, EVENTS_UI, EVENTS_FOCUS,
 	EVENT_LIST, CATEGORY_COLORS,
-} from "@/data/code-examples/eventSnippets";
+} from "@/data/snippets/eventSnippets";
 
 /* ── Component ────────────────────────────────────────── */
 

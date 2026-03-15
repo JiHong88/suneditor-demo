@@ -1,4 +1,4 @@
-import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/code-examples/editorPresets";
+import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/snippets/editorPresets";
 import {
 	type PlaygroundState,
 	type CodeFramework,

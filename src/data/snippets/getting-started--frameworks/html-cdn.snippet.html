@@ -1,0 +1,15 @@
+<!-- 1. Include CSS -->
+<link href="{{CDN_CSS}}" rel="stylesheet">
+<!-- 2. Include JS -->
+<script src="{{CDN_JS}}"><\/script>
+
+<!-- 3. Create Textarea -->
+<textarea id="my-editor"></textarea>
+
+<!-- 4. Create Editor -->
+<script>
+  const editor = SUNEDITOR.create("my-editor", {
+    value: "{{DEFAULT_VALUE}}",
+    buttonList: {{BUTTON_LIST_4}}
+  });
+<\/script>

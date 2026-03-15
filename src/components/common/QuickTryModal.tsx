@@ -67,11 +67,17 @@ export default function QuickTryModal({
 
 	if (!open) return null;
 
+	const editorType = config.editorOptions?.type as string | undefined;
+	const isDocument = editorType?.startsWith("document");
+
 	const editorOptions = {
 		buttonList: config.buttonList,
-		height: "200",
+		height: isDocument ? "600" : "200",
 		...(config.editorOptions || {}),
 	};
+
+	const mode = config.editorOptions?.mode as string | undefined;
+	const needsTopPadding = mode === "inline";
 
 	return (
 		<div
@@ -81,7 +87,7 @@ export default function QuickTryModal({
 				if (e.target === backdropRef.current) onClose();
 			}}
 		>
-			<div className='bg-card border rounded-xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200'>
+			<div className={`bg-card border rounded-xl shadow-2xl w-full flex flex-col animate-in fade-in zoom-in-95 duration-200 ${isDocument ? "max-w-5xl max-h-[92vh]" : "max-w-2xl max-h-[85vh]"}`}>
 				{/* Header */}
 				<div className='flex items-center gap-3 px-5 py-4 border-b shrink-0'>
 					{icon && <span className={color}>{icon}</span>}
@@ -100,7 +106,7 @@ export default function QuickTryModal({
 				</div>
 
 				{/* Live Editor */}
-				<div className='flex-1 overflow-y-auto px-5 py-4'>
+				<div className='flex-1 overflow-y-auto px-5 py-4' style={needsTopPadding ? { paddingTop: 50 } : undefined}>
 					<SunEditorComponent
 						key={editorKey}
 						value={config.demoHtml}

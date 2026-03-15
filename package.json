@@ -8,6 +8,7 @@
     "build:prod": "npm unlink suneditor && npm run docs:generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "snippets:generate": "node scripts/generate-framework-snippets.cjs",
     "docs:generate": "node scripts/generate-api-docs.cjs",
     "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs"
   },
@@ -32,6 +33,7 @@
     "mathjax-full": "^3.2.1",
     "next": "^15.5.4",
     "next-intl": "^4.3.4",
+    "puppeteer": "^24.39.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "shiki": "^3.23.0",

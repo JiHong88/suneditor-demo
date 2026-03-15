@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import CodeBlock from "@/components/common/CodeBlock";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { THEME_USAGE, THEME_STRUCTURE, THEME_APPLY, VARIABLE_CATEGORIES } from "@/data/code-examples/themeSnippets";
+import { THEME_USAGE, THEME_STRUCTURE, THEME_APPLY, VARIABLE_CATEGORIES } from "@/data/snippets/themeSnippets";
 
 /* ── Component ────────────────────────────────────────── */
 

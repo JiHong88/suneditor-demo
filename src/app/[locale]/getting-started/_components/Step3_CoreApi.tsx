@@ -3,14 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import SectionHeading from "./SectionHeading";
 import CodeBlock from "@/components/common/CodeBlock";
-
-const SNIPPET = `const editor = SunEditor.create('textarea', { /* options */ });
-
-// $ — dependency bag (all internals)
-editor.$.selection  // Selection handler
-editor.$.format     // Block formatting
-editor.$.history    // Undo/Redo stack
-// ... and more`;
+import { CORE_API_SNIPPET } from "@/data/snippets/pluginGuideSnippets";
 
 export default function Step3CoreApi() {
 	const t = useTranslations("GettingStarted.step3");
@@ -20,7 +13,7 @@ export default function Step3CoreApi() {
 			<SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("desc")} />
 
 			<div className='mt-6'>
-				<CodeBlock code={SNIPPET} lang='javascript' />
+				<CodeBlock code={CORE_API_SNIPPET} lang='javascript' />
 			</div>
 
 			<div className='mt-6 flex flex-wrap gap-4'>

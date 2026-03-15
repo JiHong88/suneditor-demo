@@ -8,10 +8,7 @@ import { getDir } from "@/i18n/lang";
 import { getLocale } from "next-intl/server";
 import "../globals.css";
 
-export default async function RootLayout({
-	children,
-	locale,
-}: Readonly<{ children: React.ReactNode; locale: string }>) {
+export default async function RootLayout({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
 	const version = SUNEDITOR_VERSION;
 	const resolvedLocale = locale || (await getLocale());
 
@@ -32,9 +29,7 @@ export default async function RootLayout({
 				</script>
 			</head>
 
-			<body
-				style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
-			>
+			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
 				<NextIntlClientProvider>
 					{/* 네비게이션 */}
 					<SiteNav />

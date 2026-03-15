@@ -9,7 +9,7 @@ import { getCodeFramework, hexToRgba, type FrameworkKey } from "@/components/com
 import CodeBlock from "@/components/common/CodeBlock";
 import FrameworkBadge from "./FrameworkBadge";
 import SectionHeading from "./SectionHeading";
-import { getRenderSnippet } from "@/data/code-examples/renderSnippets";
+import { getRenderSnippet } from "@/data/snippets/renderSnippets";
 
 type StepTwoProps = {
 	framework: FrameworkKey;

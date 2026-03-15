@@ -11,12 +11,12 @@ import {
 	DEMO_COPY_FORMAT, DEMO_IMAGE, DEMO_IMAGE_RESIZE, DEMO_VIDEO,
 	DEMO_AUDIO, DEMO_EMBED, DEMO_DRAWING, DEMO_FILE_UPLOAD,
 	DEMO_TABLE, DEMO_CELL_MERGE, DEMO_ROW_COL, DEMO_LISTS,
-	DEMO_BLOCKQUOTE, DEMO_HR, DEMO_PAGE_BREAK, DEMO_MATH,
+	DEMO_BLOCKQUOTE, DEMO_HR, DEMO_MATH,
 	DEMO_MENTION, DEMO_LINKS, DEMO_CODE_VIEW, DEMO_CHAR_COUNTER,
 	DEMO_UNDO_REDO, DEMO_CLASSIC, DEMO_INLINE, DEMO_BALLOON,
 	DEMO_BALLOON_ALWAYS, DEMO_DOCUMENT, DEMO_MULTIROOT, DEMO_FULLSCREEN,
 	DEMO_RTL, DEMO_STRICT_MODE, DEMO_EXPORT_PDF, DEMO_KEYBOARD,
-} from "@/data/code-examples/featureDemoSnippets";
+} from "@/data/snippets/featureDemoSnippets";
 
 export type FeatureLink = {
 	/** URL query string (without leading ?) */
@@ -144,10 +144,6 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		{ p: "full", val: DEMO_HR },
 		[["hr"], "|", ["bold", "italic"]],
 	),
-	pageBreak: fl(
-		{ p: "full", val: DEMO_PAGE_BREAK },
-		[["pageBreak"], "|", ["bold", "italic"]],
-	),
 
 	// ── Advanced ──
 	math: fl(
@@ -199,7 +195,8 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 	),
 	documentLayout: fl(
 		{ p: "full", val: DEMO_DOCUMENT },
-		[["bold", "italic", "underline"], "|", ["blockStyle"], "|", ["align"]],
+		[["bold", "italic", "underline"], "|", ["blockStyle"], "|", ["align"], "|", ["pageBreak", "pageNavigator", "pageUp", "pageDown"]],
+		{ type: "document:page,header" },
 	),
 	multiRoot: fl(
 		{ mr: "1", val: DEMO_MULTIROOT },

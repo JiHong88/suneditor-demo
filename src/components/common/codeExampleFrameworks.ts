@@ -1,4 +1,4 @@
-import rawFrameworks from "@/data/code-examples/frameworks";
+import rawFrameworks from "@/data/snippets/frameworks";
 
 export type FrameworkKey = "javascript-cdn" | "javascript-npm" | "angular" | "react" | "svelte" | "vue" | "webcomponents";
 

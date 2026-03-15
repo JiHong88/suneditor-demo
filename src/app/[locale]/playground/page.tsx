@@ -7,7 +7,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { SunEditor } from "suneditor/types";
-import { PLAYGROUND_VALUE } from "@/data/code-examples/editorPresets";
+import { PLAYGROUND_VALUE } from "@/data/snippets/editorPresets";
 import {
 	type PlaygroundState,
 	DEFAULTS,

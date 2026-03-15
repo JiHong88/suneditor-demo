@@ -49,20 +49,20 @@ export const DEMO_COPY_FORMAT = `<p><strong style="color: #e74c3c; font-size: 20
 
 /* ══ 미디어 ══════════════════════════════════════════ */
 
-/** 이미지 업로드/삽입 데모 */
-export const DEMO_IMAGE = `<p>Click the image button in the toolbar to upload or insert an image.</p><p>You can drag &amp; drop images directly into the editor.</p>`;
+/** 이미지 업로드/삽입 데모 — 이미지 컴포넌트 포함 */
+export const DEMO_IMAGE = `<p>Click the image to see resize handles and controls.</p><div class="se-component se-image-container __se__float-none" contenteditable="false"><figure style="margin:0"><img src="xxxxx" alt="sample" style="width:300px"></figure></div><p>You can also drag &amp; drop images directly into the editor.</p>`;
 
-/** 이미지 리사이즈 데모 */
-export const DEMO_IMAGE_RESIZE = `<p>Insert an image and try resizing it by dragging the corner handles.</p>`;
+/** 이미지 리사이즈 데모 — 리사이즈 가능한 이미지 포함 */
+export const DEMO_IMAGE_RESIZE = `<p>Click the image and drag the corner handles to resize.</p><div class="se-component se-image-container __se__float-none" contenteditable="false"><figure style="margin:0"><img src="xxxxx" alt="resizable" style="width:400px"></figure></div>`;
 
-/** 비디오 임베드/업로드 데모 */
-export const DEMO_VIDEO = `<p>Click the video button to embed a video from YouTube, Vimeo, or upload a video file.</p>`;
+/** 비디오 임베드/업로드 데모 — 비디오 컴포넌트 포함 */
+export const DEMO_VIDEO = `<p>A video component is embedded below. Click it to see the controller.</p><div class="se-component se-video-container" contenteditable="false"><figure style="margin:0"><video src="xxxxx" controls style="width:100%;max-width:560px"></video></figure></div>`;
 
-/** 오디오 임베드/업로드 데모 */
-export const DEMO_AUDIO = `<p>Click the audio button to embed or upload audio files.</p>`;
+/** 오디오 임베드/업로드 데모 — 오디오 컴포넌트 포함 */
+export const DEMO_AUDIO = `<p>An audio player is embedded below. Click it to see the controller.</p><div class="se-component se-audio-container" contenteditable="false"><figure style="margin:0"><audio src="xxxxx" controls style="width:300px"></audio></figure></div>`;
 
-/** iframe 임베드 데모 */
-export const DEMO_EMBED = `<p>Click the embed button to insert an iframe embed (YouTube, maps, etc).</p>`;
+/** iframe 임베드 데모 — iframe 컴포넌트 포함 */
+export const DEMO_EMBED = `<p>An iframe embed is shown below. Click it to see resize and alignment controls.</p><div class="se-component se-embed-container" contenteditable="false"><figure style="margin:0"><iframe src="xxxxx" style="width:100%;max-width:560px;height:315px" frameborder="0"></iframe></figure></div>`;
 
 /** 그리기 캔버스 데모 */
 export const DEMO_DRAWING = `<p>Click the drawing button to open the drawing canvas. Draw freely and insert into the editor.</p>`;
@@ -89,9 +89,6 @@ export const DEMO_BLOCKQUOTE = `<blockquote><p>This is a blockquote. Use it to h
 
 /** 수평선 데모 */
 export const DEMO_HR = `<p>Content above the horizontal rule.</p><hr/><p>Content below the horizontal rule.</p>`;
-
-/** 페이지 나누기 데모 */
-export const DEMO_PAGE_BREAK = `<p>Page 1 content — try the page break button in the toolbar to insert a page break below.</p>`;
 
 /* ══ 고급 기능 ════════════════════════════════════════ */
 
@@ -121,14 +118,14 @@ export const DEMO_CLASSIC = `<p>This is <strong>Classic mode</strong> — the to
 /** Inline 모드 데모 (포커스 시 툴바 표시) */
 export const DEMO_INLINE = `<p>This is <strong>Inline mode</strong> — the toolbar appears at the top when you focus the editor.</p><p>Click here to see the toolbar.</p>`;
 
-/** Balloon 모드 데모 (텍스트 선택 시 플로팅 툴바) */
-export const DEMO_BALLOON = `<p>This is <strong>Balloon mode</strong> — select text to see the floating toolbar.</p><p>Try selecting this sentence to see the balloon toolbar appear.</p>`;
+/** Balloon 모드 데모 (텍스트 선택 시 플로팅 툴바) — 4줄 이상으로 선택 영역 확보 */
+export const DEMO_BALLOON = `<p>This is <strong>Balloon mode</strong> — select text to see the floating toolbar appear above your selection.</p><p>Try selecting any part of this sentence. The toolbar will float right above the selected text.</p><p>You can apply <em>formatting</em>, insert links, and change alignment — all from the floating toolbar.</p><p>This mode is great for distraction-free writing where the toolbar only appears when you need it.</p>`;
 
-/** Balloon-Always 모드 데모 (클릭 시 항상 플로팅 툴바) */
-export const DEMO_BALLOON_ALWAYS = `<p>This is <strong>Balloon-Always mode</strong> — the floating toolbar is always visible when you click in the editor.</p><p>Click anywhere in this text.</p>`;
+/** Balloon-Always 모드 데모 (클릭 시 항상 플로팅 툴바) — 4줄 이상으로 선택 영역 확보 */
+export const DEMO_BALLOON_ALWAYS = `<p>This is <strong>Balloon-Always mode</strong> — the floating toolbar is always visible when you click anywhere in the editor.</p><p>Unlike regular Balloon mode, you don't need to select text first. Just click anywhere.</p><p>The toolbar will appear at your cursor position, ready for immediate use.</p><p>This mode combines the clean look of balloon mode with the convenience of always-available formatting tools.</p>`;
 
-/** Document 레이아웃 데모 (종이 문서 형태) */
-export const DEMO_DOCUMENT = `<p>This is <strong>Document layout</strong> — the editor looks like a paper document.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>`;
+/** Document 레이아웃 데모 (종이 문서 형태, type:'document:page,header' + 페이지 네비게이션) — 2페이지 분량 */
+export const DEMO_DOCUMENT = `<h1>SunEditor Document Mode</h1><p>The document type renders the editor as paginated paper — just like a word processor. Each page has a fixed height, and content flows naturally across pages.</p><h2>1. Getting Started</h2><p>To enable document mode, set the <code>type</code> option to <code>"document:page,header"</code>. The editor will display page boundaries and support page navigation.</p><p>You can use the <strong>pageBreak</strong>, <strong>pageNavigator</strong>, <strong>pageUp</strong>, and <strong>pageDown</strong> buttons in the toolbar to navigate between pages.</p><h2>2. Page Layout Features</h2><p>Document mode supports headers that repeat on every page, automatic page breaks when content overflows, and manual page breaks via the toolbar button.</p><p>The page size defaults to A4 dimensions (210mm × 297mm), providing a realistic document editing experience that matches printed output.</p><h3>2.1 Headers</h3><p>When using the <code>header</code> sub-type, a dedicated header area appears at the top of each page. Header content is automatically replicated across all pages.</p><h3>2.2 Page Navigation</h3><p>The <strong>pageNavigator</strong> input in the toolbar shows the current page number. Type a page number and press Enter to jump directly to that page. Use pageUp/pageDown buttons for sequential navigation.</p><h2>3. Use Cases</h2><ul><li>Report generation with consistent formatting</li><li>Letter and document templates</li><li>PDF-ready content editing</li><li>Print-preview style editing</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>`;
 
 /** 멀티루트 에디터 데모 (header + body 영역 분리) */
 export const DEMO_MULTIROOT = `<p>Multi-root editor with separate editable areas (header + body) sharing one toolbar.</p>`;

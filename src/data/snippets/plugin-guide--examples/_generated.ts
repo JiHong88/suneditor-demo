@@ -1,54 +1,10 @@
 /**
- * @fileoverview 플러그인 가이드 > Examples 탭의 실제 동작하는 예제 플러그인 소스 코드
- *
- * 사용처:
- * - plugin-guide 페이지 > CustomPluginGuide.tsx > ExamplesTab
- *   → 각 ExampleCard의 "코드보기" 버튼 클릭 시 CodeBlock으로 표시
- *   → "바로해보기" 클릭 시 QuickTryModal에서 해당 플러그인이 실제 로드되어 동작
- *   → plugin-guide/_examples/ 폴더의 실제 .ts 파일과 동일한 코드 (표시용 문자열)
- *
- * 구성 (9개 예제, 각 플러그인 타입별 1개씩 + 합성 1개):
- *   CODE_WORDCOUNT    → PluginCommand 예제: 단어 수 카운트 → 토스트 표시
- *   CODE_CALLOUTBLOCK → PluginDropdown 예제: Note/Warning/Info 콜아웃 블록
- *   CODE_EMBED        → PluginModal 예제: iframe 임베드 (Modal + Figure + Component)
- *   CODE_COLORPALETTE → PluginDropdownFree 예제: 색상 팔레트 (자체 이벤트 처리)
- *   CODE_HASHTAG      → PluginField 예제: #해시태그 감지 (입력 이벤트 기반)
- *   CODE_ZOOMLEVEL    → PluginInput 예제: 줌 레벨 인풋 (50~200%)
- *   CODE_EMOJI        → PluginBrowser 예제: 이모지 갤러리 브라우저
- *   CODE_INFOPOPUP    → PluginPopup 예제: 커서 위치 서식 정보 팝업
- *   CODE_TEXTSCALE    → Composite 예제: Input + Command + Dropdown 합성 (fontSize 패턴)
+ * @generated 이 파일은 자동 생성됩니다. 직접 수정하지 마세요.
+ * 원본: src/data/snippets/plugin-guide--examples/*.snippet.*
+ * 생성: node scripts/generate-framework-snippets.cjs
  */
 
-/* ── PluginCommand 예제: 단어 수 카운트 → 토스트 표시 ── */
-export const CODE_WORDCOUNT = `import { interfaces } from "suneditor";
-import type { SunEditor } from "suneditor/types";
-
-/**
- * @class
- * @description PluginCommand — Button click triggers action() immediately.
- * Pattern: blockquote, strike, subscript, superscript
- */
-class WordCount extends interfaces.PluginCommand {
-  static key = "wordCount";
-
-  constructor(kernel: SunEditor.Kernel) {
-    super(kernel);
-    this.title = "Word Count";
-    this.icon = '<span style="font-size:12px;font-weight:bold">WC</span>';
-  }
-
-  /** @override @type {PluginCommand['action']} — Required: main execution */
-  action(): void {
-    const text = this.$.html.get({ format: "text" });
-    const count = text.trim().split(/\\s+/).filter(Boolean).length;
-    this.$.ui.showToast(\`Words: \${count}\`, 2000);
-  }
-}
-
-export default WordCount;`;
-
-/* ── PluginDropdown 예제: Note/Warning/Info 콜아웃 블록 ── */
-export const CODE_CALLOUTBLOCK = `import { interfaces, helper } from "suneditor";
+export const PLUGIN_EXAMPLE_CALLOUTBLOCK = `import { interfaces, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { dom } = helper;
@@ -141,8 +97,63 @@ class CalloutBlock extends interfaces.PluginDropdown {
 
 export default CalloutBlock;`;
 
-/* ── PluginModal 예제: iframe 임베드 (Modal + Figure + EditorComponent) ── */
-export const CODE_EMBED = `import { interfaces, modules, helper } from "suneditor";
+export const PLUGIN_EXAMPLE_COLORPALETTE = `import { interfaces, helper } from "suneditor";
+import type { SunEditor } from "suneditor/types";
+
+const { dom } = helper;
+
+/**
+ * @class
+ * @description PluginDropdownFree — Plugin handles its own events (no auto action() routing).
+ * Pattern: fontColor, backgroundColor, table
+ */
+class ColorPalette extends interfaces.PluginDropdownFree {
+  static key = "colorPalette";
+
+  constructor(kernel: SunEditor.Kernel) {
+    super(kernel);
+    this.title = "Color Palette";
+    this.icon = "font_color";
+
+    const colors = ["#ff0000", "#ff8800", "#00cc00", "#0088ff", "#8800ff", "#cc0066", "#333333", "#666666", "#999999"];
+    let html = "";
+    for (const c of colors) {
+      html += \`<button type="button" class="se-btn" data-color="\${c}" style="background:\${c};width:22px;height:22px;margin:2px;border-radius:3px;border:1px solid rgba(0,0,0,.15)"></button>\`;
+    }
+
+    const menu = dom.utils.createElement("div",
+      { class: "se-dropdown se-list-layer" },
+      \`<div class="se-list-inner" style="padding:6px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">\${html}</div></div>\`
+    );
+
+    // Own event listener — no action() callback from suneditor
+    menu.addEventListener("click", this.#handleClick.bind(this));
+    this.$.menu.initDropdownTarget(ColorPalette, menu);
+  }
+
+  /** @override — Called when dropdown opens */
+  on(): void {}
+
+  /** @override — Called when dropdown closes */
+  off(): void {}
+
+  #handleClick(e: MouseEvent): void {
+    const color = (e.target as HTMLElement).getAttribute("data-color");
+    if (!color) return;
+
+    const span = dom.utils.createElement("SPAN") as HTMLElement;
+    span.style.color = color;
+    this.$.inline.apply(span, { stylesToModify: ["color"], nodesToRemove: null });
+
+    this.$.menu.dropdownOff();
+    this.$.focusManager.focus();
+    this.$.history.push(false);
+  }
+}
+
+export default ColorPalette;`;
+
+export const PLUGIN_EXAMPLE_EMBED = `import { interfaces, modules, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { Modal, Figure } = modules.contract;
@@ -271,150 +282,7 @@ class Embed extends interfaces.PluginModal
 
 export default Embed;`;
 
-/* ── PluginDropdownFree 예제: 색상 팔레트 (자체 이벤트 처리) ── */
-export const CODE_COLORPALETTE = `import { interfaces, helper } from "suneditor";
-import type { SunEditor } from "suneditor/types";
-
-const { dom } = helper;
-
-/**
- * @class
- * @description PluginDropdownFree — Plugin handles its own events (no auto action() routing).
- * Pattern: fontColor, backgroundColor, table
- */
-class ColorPalette extends interfaces.PluginDropdownFree {
-  static key = "colorPalette";
-
-  constructor(kernel: SunEditor.Kernel) {
-    super(kernel);
-    this.title = "Color Palette";
-    this.icon = "font_color";
-
-    const colors = ["#ff0000", "#ff8800", "#00cc00", "#0088ff", "#8800ff", "#cc0066", "#333333", "#666666", "#999999"];
-    let html = "";
-    for (const c of colors) {
-      html += \`<button type="button" class="se-btn" data-color="\${c}" style="background:\${c};width:22px;height:22px;margin:2px;border-radius:3px;border:1px solid rgba(0,0,0,.15)"></button>\`;
-    }
-
-    const menu = dom.utils.createElement("div",
-      { class: "se-dropdown se-list-layer" },
-      \`<div class="se-list-inner" style="padding:6px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">\${html}</div></div>\`
-    );
-
-    // Own event listener — no action() callback from suneditor
-    menu.addEventListener("click", this.#handleClick.bind(this));
-    this.$.menu.initDropdownTarget(ColorPalette, menu);
-  }
-
-  /** @override — Called when dropdown opens */
-  on(): void {}
-
-  /** @override — Called when dropdown closes */
-  off(): void {}
-
-  #handleClick(e: MouseEvent): void {
-    const color = (e.target as HTMLElement).getAttribute("data-color");
-    if (!color) return;
-
-    const span = dom.utils.createElement("SPAN") as HTMLElement;
-    span.style.color = color;
-    this.$.inline.apply(span, { stylesToModify: ["color"], nodesToRemove: null });
-
-    this.$.menu.dropdownOff();
-    this.$.focusManager.focus();
-    this.$.history.push(false);
-  }
-}
-
-export default ColorPalette;`;
-
-/* ── PluginField 예제: #해시태그 감지 (입력 이벤트, 디바운스) ── */
-export const CODE_HASHTAG = `import { interfaces, helper } from "suneditor";
-import type { SunEditor } from "suneditor/types";
-
-const { converter } = helper;
-
-/**
- * @class
- * @description PluginField — Responds to editor input events. No toolbar button.
- * Pattern: mention
- */
-class HashtagHighlight extends interfaces.PluginField {
-  static key = "hashtagHighlight";
-  static className = "";
-
-  constructor(kernel: SunEditor.Kernel) {
-    super(kernel);
-    // Debounce onInput to avoid excessive calls
-    this.onInput = converter.debounce(this.onInput.bind(this), 300);
-  }
-
-  /** @hook Event.OnInput — Fires on every editor input */
-  onInput(): void {
-    const sel = this.$.selection.get();
-    const text = sel.anchorNode?.textContent || "";
-    const before = text.substring(0, sel.anchorOffset);
-    const match = before.match(/#(\\w+)$/);
-
-    if (match) {
-      this.$.ui.showToast(\`Hashtag: #\${match[1]}\`, 2000);
-    }
-  }
-}
-
-export default HashtagHighlight;`;
-
-/* ── PluginInput 예제: 줌 레벨 인풋 (50~200% 스케일) ── */
-export const CODE_ZOOMLEVEL = `import { interfaces } from "suneditor";
-import type { SunEditor } from "suneditor/types";
-
-/**
- * @class
- * @description PluginInput — Renders an input element in the toolbar (not a button).
- * Pattern: fontSize, pageNavigator
- */
-class ZoomLevel extends interfaces.PluginInput {
-  static key = "zoomLevel";
-  static className = "se-btn-input se-btn-tool-zoom";
-  declare inner: string | HTMLElement | false;
-
-  constructor(kernel: SunEditor.Kernel) {
-    super(kernel);
-    this.title = "Zoom";
-    this.inner = '<input type="text" class="se-not-arrow-text" placeholder="100%" style="width:50px;text-align:center" />';
-  }
-
-  /** @override — Toolbar input keydown (Enter to apply) */
-  toolbarInputKeyDown(params: SunEditor.HookParams.ToolbarInputKeyDown): void {
-    if (params.event.key === "Enter") {
-      params.event.preventDefault();
-      this.#applyZoom((params.target as HTMLInputElement).value);
-    }
-  }
-
-  /** @override — Toolbar input blur/change */
-  toolbarInputChange(params: SunEditor.HookParams.ToolbarInputChange): void {
-    this.#applyZoom(String(params.value));
-  }
-
-  #applyZoom(raw: string): void {
-    let val = parseInt(raw, 10);
-    if (isNaN(val)) val = 100;
-    val = Math.max(50, Math.min(200, val));
-
-    const ww = this.$.frameContext.get("wysiwygFrame") as HTMLElement;
-    if (ww) {
-      ww.style.transform = val === 100 ? "" : \`scale(\${val / 100})\`;
-      ww.style.transformOrigin = "top left";
-    }
-    this.$.ui.showToast(\`Zoom: \${val}%\`, 1500);
-  }
-}
-
-export default ZoomLevel;`;
-
-/* ── PluginBrowser 예제: 이모지 갤러리 (정적 데이터 기반) ── */
-export const CODE_EMOJI = `import { interfaces, modules } from "suneditor";
+export const PLUGIN_EXAMPLE_EMOJIPICKER = `import { interfaces, modules } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { Browser } = modules.contract;
@@ -486,8 +354,42 @@ class EmojiPicker extends interfaces.PluginBrowser {
 
 export default EmojiPicker;`;
 
-/* ── PluginPopup 예제: 커서 위치 서식 정보 팝업 (Controller 모듈) ── */
-export const CODE_INFOPOPUP = `import { interfaces, modules, helper } from "suneditor";
+export const PLUGIN_EXAMPLE_HASHTAGHIGHLIGHT = `import { interfaces, helper } from "suneditor";
+import type { SunEditor } from "suneditor/types";
+
+const { converter } = helper;
+
+/**
+ * @class
+ * @description PluginField — Responds to editor input events. No toolbar button.
+ * Pattern: mention
+ */
+class HashtagHighlight extends interfaces.PluginField {
+  static key = "hashtagHighlight";
+  static className = "";
+
+  constructor(kernel: SunEditor.Kernel) {
+    super(kernel);
+    // Debounce onInput to avoid excessive calls
+    this.onInput = converter.debounce(this.onInput.bind(this), 300);
+  }
+
+  /** @hook Event.OnInput — Fires on every editor input */
+  onInput(): void {
+    const sel = this.$.selection.get();
+    const text = sel.anchorNode?.textContent || "";
+    const before = text.substring(0, sel.anchorOffset);
+    const match = before.match(/#(\\w+)$/);
+
+    if (match) {
+      this.$.ui.showToast(\`Hashtag: #\${match[1]}\`, 2000);
+    }
+  }
+}
+
+export default HashtagHighlight;`;
+
+export const PLUGIN_EXAMPLE_INFOPOPUP = `import { interfaces, modules, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { Controller } = modules.contract;
@@ -560,8 +462,7 @@ class InfoPopup extends interfaces.PluginPopup implements interfaces.ModuleContr
 
 export default InfoPopup;`;
 
-/* ── Composite 예제: Input + Command + Dropdown 합성 (fontSize 패턴) ── */
-export const CODE_TEXTSCALE = `import { interfaces, helper } from "suneditor";
+export const PLUGIN_EXAMPLE_TEXTSCALE = `import { interfaces, helper } from "suneditor";
 import type { SunEditor } from "suneditor/types";
 
 const { dom } = helper;
@@ -678,3 +579,78 @@ class TextScale extends interfaces.PluginInput
 }
 
 export default TextScale;`;
+
+export const PLUGIN_EXAMPLE_WORDCOUNT = `import { interfaces } from "suneditor";
+import type { SunEditor } from "suneditor/types";
+
+/**
+ * @class
+ * @description PluginCommand — Button click triggers action() immediately.
+ * Pattern: blockquote, strike, subscript, superscript
+ */
+class WordCount extends interfaces.PluginCommand {
+  static key = "wordCount";
+
+  constructor(kernel: SunEditor.Kernel) {
+    super(kernel);
+    this.title = "Word Count";
+    this.icon = '<span style="font-size:12px;font-weight:bold">WC</span>';
+  }
+
+  /** @override @type {PluginCommand['action']} — Required: main execution */
+  action(): void {
+    const text = this.$.html.get({ format: "text" });
+    const count = text.trim().split(/\\s+/).filter(Boolean).length;
+    this.$.ui.showToast(\`Words: \${count}\`, 2000);
+  }
+}
+
+export default WordCount;`;
+
+export const PLUGIN_EXAMPLE_ZOOMLEVEL = `import { interfaces } from "suneditor";
+import type { SunEditor } from "suneditor/types";
+
+/**
+ * @class
+ * @description PluginInput — Renders an input element in the toolbar (not a button).
+ * Pattern: fontSize, pageNavigator
+ */
+class ZoomLevel extends interfaces.PluginInput {
+  static key = "zoomLevel";
+  static className = "se-btn-input se-btn-tool-zoom";
+  declare inner: string | HTMLElement | false;
+
+  constructor(kernel: SunEditor.Kernel) {
+    super(kernel);
+    this.title = "Zoom";
+    this.inner = '<input type="text" class="se-not-arrow-text" placeholder="100%" style="width:50px;text-align:center" />';
+  }
+
+  /** @override — Toolbar input keydown (Enter to apply) */
+  toolbarInputKeyDown(params: SunEditor.HookParams.ToolbarInputKeyDown): void {
+    if (params.event.key === "Enter") {
+      params.event.preventDefault();
+      this.#applyZoom((params.target as HTMLInputElement).value);
+    }
+  }
+
+  /** @override — Toolbar input blur/change */
+  toolbarInputChange(params: SunEditor.HookParams.ToolbarInputChange): void {
+    this.#applyZoom(String(params.value));
+  }
+
+  #applyZoom(raw: string): void {
+    let val = parseInt(raw, 10);
+    if (isNaN(val)) val = 100;
+    val = Math.max(50, Math.min(200, val));
+
+    const ww = this.$.frameContext.get("wysiwygFrame") as HTMLElement;
+    if (ww) {
+      ww.style.transform = val === 100 ? "" : \`scale(\${val / 100})\`;
+      ww.style.transformOrigin = "top left";
+    }
+    this.$.ui.showToast(\`Zoom: \${val}%\`, 1500);
+  }
+}
+
+export default ZoomLevel;`;

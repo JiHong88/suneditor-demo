@@ -2,7 +2,7 @@ import type { QuickTryEditorConfig } from "@/components/common/QuickTryModal";
 import {
 	CODE_WORDCOUNT, CODE_CALLOUTBLOCK, CODE_EMBED, CODE_COLORPALETTE,
 	CODE_HASHTAG, CODE_ZOOMLEVEL, CODE_EMOJI, CODE_INFOPOPUP, CODE_TEXTSCALE,
-} from "@/data/code-examples/pluginExampleSnippets";
+} from "@/data/snippets/pluginExampleSnippets";
 
 export type PluginExample = {
 	/** Example key / display name */

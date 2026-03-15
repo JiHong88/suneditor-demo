@@ -3,7 +3,7 @@
 import sdk from "@stackblitz/sdk";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SUNEDITOR_VERSION } from "@/data/code-examples/editorPresets";
+import { SUNEDITOR_VERSION } from "@/data/snippets/editorPresets";
 import { generateCode, getNpmDeps } from "../_lib/codeGenerator";
 import type { PlaygroundState, CodeFramework } from "../_lib/playgroundState";
 

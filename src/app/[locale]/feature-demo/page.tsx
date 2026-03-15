@@ -25,7 +25,6 @@ import {
 	ListOrdered,
 	Quote,
 	Minus,
-	SeparatorHorizontal,
 	Calculator,
 	AtSign,
 	Link2,
@@ -37,16 +36,14 @@ import {
 	MessageCircle,
 	MessageCircleDashed,
 	FileText,
-	Layers,
 	Maximize,
-	Package,
-	FileCode,
 	Languages,
 	Shield,
-	Blocks,
 	Printer,
 	Keyboard,
 	ArrowRight,
+	Package,
+	FileCode,
 	Puzzle,
 	Globe,
 } from "lucide-react";
@@ -59,139 +56,42 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
 import QuickTryModal from "@/components/common/QuickTryModal";
+import { FEATURE_CATEGORIES, STAT_META } from "@/data/snippets/featureDemoCategories";
 
-/* ── Feature data (non-translatable: icons only) ──────── */
-
-type FeatureDef = {
-	key: string;
-	icon: React.ReactNode;
-};
-
-type CategoryDef = {
-	key: string;
-	color: string;
-	features: FeatureDef[];
-};
+/* ── 아이콘 매핑 (JSX는 컴포넌트에서 관리) ──────────── */
 
 const ICON = "size-4 shrink-0";
+const ICON_LG = "h-5 w-5";
 
-const categories: CategoryDef[] = [
-	{
-		key: "textFormatting",
-		color: "text-blue-600 dark:text-blue-400",
-		features: [
-			{ key: "boldItalic", icon: <Bold className={ICON} /> },
-			{ key: "fontFamily", icon: <Type className={ICON} /> },
-			{ key: "fontSize", icon: <Hash className={ICON} /> },
-			{ key: "fontColor", icon: <Palette className={ICON} /> },
-			{ key: "bgColor", icon: <Highlighter className={ICON} /> },
-			{ key: "alignment", icon: <AlignLeft className={ICON} /> },
-			{ key: "blockStyles", icon: <Heading className={ICON} /> },
-			{ key: "lineHeight", icon: <Space className={ICON} /> },
-			{ key: "copyFormat", icon: <CopyCheck className={ICON} /> },
-		],
-	},
-	{
-		key: "media",
-		color: "text-violet-600 dark:text-violet-400",
-		features: [
-			{ key: "imageUpload", icon: <Image className={ICON} /> },
-			{ key: "imageResize", icon: <Move className={ICON} /> },
-			{ key: "video", icon: <Video className={ICON} /> },
-			{ key: "audio", icon: <Music className={ICON} /> },
-			{ key: "embed", icon: <Code2 className={ICON} /> },
-			{ key: "drawing", icon: <PenTool className={ICON} /> },
-			{ key: "fileUpload", icon: <FileUp className={ICON} /> },
-		],
-	},
-	{
-		key: "tableStructure",
-		color: "text-green-600 dark:text-green-400",
-		features: [
-			{ key: "tableInsert", icon: <Table2 className={ICON} /> },
-			{ key: "cellMerge", icon: <TableCellsMerge className={ICON} /> },
-			{ key: "rowColOps", icon: <Columns3 className={ICON} /> },
-			{ key: "lists", icon: <ListOrdered className={ICON} /> },
-			{ key: "blockquote", icon: <Quote className={ICON} /> },
-			{ key: "hr", icon: <Minus className={ICON} /> },
-			{ key: "pageBreak", icon: <SeparatorHorizontal className={ICON} /> },
-		],
-	},
-	{
-		key: "advanced",
-		color: "text-amber-600 dark:text-amber-400",
-		features: [
-			{ key: "math", icon: <Calculator className={ICON} /> },
-			{ key: "mention", icon: <AtSign className={ICON} /> },
-			{ key: "links", icon: <Link2 className={ICON} /> },
-			{ key: "codeView", icon: <Eye className={ICON} /> },
-			{ key: "charCounter", icon: <LetterText className={ICON} /> },
-			{ key: "undoRedo", icon: <Undo2 className={ICON} /> },
-		],
-	},
-	{
-		key: "modesLayout",
-		color: "text-teal-600 dark:text-teal-400",
-		features: [
-			{ key: "classicMode", icon: <PanelTop className={ICON} /> },
-			{ key: "inlineMode", icon: <PanelTopInactive className={ICON} /> },
-			{ key: "balloonMode", icon: <MessageCircle className={ICON} /> },
-			{ key: "balloonAlways", icon: <MessageCircleDashed className={ICON} /> },
-			{ key: "documentLayout", icon: <FileText className={ICON} /> },
-			{ key: "multiRoot", icon: <Layers className={ICON} /> },
-			{ key: "fullScreen", icon: <Maximize className={ICON} /> },
-		],
-	},
-	{
-		key: "platform",
-		color: "text-rose-600 dark:text-rose-400",
-		features: [
-			{ key: "zeroDeps", icon: <Package className={ICON} /> },
-			{ key: "tsSupport", icon: <FileCode className={ICON} /> },
-			{ key: "i18nRtl", icon: <Languages className={ICON} /> },
-			{ key: "strictMode", icon: <Shield className={ICON} /> },
-			{ key: "pluginAPI", icon: <Blocks className={ICON} /> },
-			{ key: "exportPdf", icon: <Printer className={ICON} /> },
-			{ key: "keyboard", icon: <Keyboard className={ICON} /> },
-		],
-	},
-];
+/** featureKey → 아이콘 */
+const featureIcons: Record<string, React.ReactNode> = {
+	boldItalic: <Bold className={ICON} />, fontFamily: <Type className={ICON} />, fontSize: <Hash className={ICON} />,
+	fontColor: <Palette className={ICON} />, bgColor: <Highlighter className={ICON} />, alignment: <AlignLeft className={ICON} />,
+	blockStyles: <Heading className={ICON} />, lineHeight: <Space className={ICON} />, copyFormat: <CopyCheck className={ICON} />,
+	imageUpload: <Image className={ICON} />, imageResize: <Move className={ICON} />, video: <Video className={ICON} />,
+	audio: <Music className={ICON} />, embed: <Code2 className={ICON} />, drawing: <PenTool className={ICON} />, fileUpload: <FileUp className={ICON} />,
+	tableInsert: <Table2 className={ICON} />, cellMerge: <TableCellsMerge className={ICON} />, rowColOps: <Columns3 className={ICON} />,
+	lists: <ListOrdered className={ICON} />, blockquote: <Quote className={ICON} />, hr: <Minus className={ICON} />,
+	math: <Calculator className={ICON} />, mention: <AtSign className={ICON} />, links: <Link2 className={ICON} />,
+	codeView: <Eye className={ICON} />, charCounter: <LetterText className={ICON} />, undoRedo: <Undo2 className={ICON} />,
+	classicMode: <PanelTop className={ICON} />, inlineMode: <PanelTopInactive className={ICON} />,
+	balloonMode: <MessageCircle className={ICON} />, balloonAlways: <MessageCircleDashed className={ICON} />,
+	documentLayout: <FileText className={ICON} />, fullScreen: <Maximize className={ICON} />,
+	i18nRtl: <Languages className={ICON} />, strictMode: <Shield className={ICON} />,
+	exportPdf: <Printer className={ICON} />, keyboard: <Keyboard className={ICON} />,
+};
 
-/* ── Stat pills ───────────────────────────────────────── */
-
-const statMeta = [
-	{
-		key: "modes" as const,
-		icon: <PanelTop className='h-5 w-5' />,
-		className: "bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-400",
-	},
-	{
-		key: "plugins" as const,
-		icon: <Puzzle className='h-5 w-5' />,
-		className: "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400",
-	},
-	{
-		key: "languages" as const,
-		icon: <Globe className='h-5 w-5' />,
-		className: "bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400",
-	},
-	{
-		key: "zeroDeps" as const,
-		icon: <Package className='h-5 w-5' />,
-		className: "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400",
-	},
-	{
-		key: "typescript" as const,
-		icon: <FileCode className='h-5 w-5' />,
-		className: "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400",
-	},
-];
+/** statKey → 아이콘 */
+const statIcons: Record<string, React.ReactNode> = {
+	modes: <PanelTop className={ICON_LG} />, plugins: <Puzzle className={ICON_LG} />,
+	languages: <Globe className={ICON_LG} />, zeroDeps: <Package className={ICON_LG} />, typescript: <FileCode className={ICON_LG} />,
+};
 
 /* ── Page component ───────────────────────────────────── */
 
 export default function FeatureDemoPage() {
 	const t = useTranslations("FeatureDemo");
-	const [activeTab, setActiveTab] = useState(categories[0].key);
+	const [activeTab, setActiveTab] = useState(FEATURE_CATEGORIES[0].key);
 
 	// Quick Try modal state
 	const [modalOpen, setModalOpen] = useState(false);
@@ -213,11 +113,7 @@ export default function FeatureDemoPage() {
 		<div className='min-h-screen'>
 			{/* Hero */}
 			<section className='container mx-auto px-6 py-12'>
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					className='text-center max-w-3xl mx-auto'
-				>
+				<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className='text-center max-w-3xl mx-auto'>
 					<h1 className='text-4xl font-bold tracking-tight md:text-5xl'>{t("title")}</h1>
 					<p className='mt-4 text-lg text-muted-foreground'>{t("subtitle")}</p>
 				</motion.div>
@@ -226,14 +122,9 @@ export default function FeatureDemoPage() {
 			{/* Stat pills */}
 			<section className='container mx-auto px-4 pb-8'>
 				<div className='flex flex-wrap items-center justify-center gap-3 md:gap-5'>
-					{statMeta.map((item) => (
-						<div
-							key={item.key}
-							className='flex items-center gap-2.5 rounded-full border px-4 py-2 bg-background/80 backdrop-blur-sm'
-						>
-							<span className={`flex h-8 w-8 items-center justify-center rounded-full ${item.className}`}>
-								{item.icon}
-							</span>
+					{STAT_META.map((item) => (
+						<div key={item.key} className='flex items-center gap-2.5 rounded-full border px-4 py-2 bg-background/80 backdrop-blur-sm'>
+							<span className={`flex h-8 w-8 items-center justify-center rounded-full ${item.className}`}>{statIcons[item.key]}</span>
 							<span className='text-sm font-medium'>{t(`stats.${item.key}`)}</span>
 						</div>
 					))}
@@ -242,14 +133,10 @@ export default function FeatureDemoPage() {
 
 			<div className='container mx-auto px-6 pb-20 space-y-20'>
 				{/* Feature catalog */}
-				<motion.section
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.1 }}
-				>
+				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
 					<Tabs value={activeTab} onValueChange={setActiveTab}>
 						<TabsList className='flex flex-wrap h-auto gap-1 mb-6'>
-							{categories.map((cat) => (
+							{FEATURE_CATEGORIES.map((cat) => (
 								<TabsTrigger key={cat.key} value={cat.key} className='text-xs'>
 									<span className={cat.color}>{t(`categories.${cat.key}`)}</span>
 									<Badge variant='outline' className='ms-1.5 text-[10px] px-1.5 py-0'>
@@ -259,35 +146,32 @@ export default function FeatureDemoPage() {
 							))}
 						</TabsList>
 
-						{categories.map((cat) => (
+						{FEATURE_CATEGORIES.map((cat) => (
 							<TabsContent key={cat.key} value={cat.key}>
 								<Card className='mb-6'>
 									<CardHeader className='pb-3'>
-										<CardTitle className={`text-lg ${cat.color}`}>
-											{t(`categories.${cat.key}`)}
-										</CardTitle>
+										<CardTitle className={`text-lg ${cat.color}`}>{t(`categories.${cat.key}`)}</CardTitle>
 										<CardDescription>{t(`categories.${cat.key}Desc`)}</CardDescription>
 									</CardHeader>
 								</Card>
 
 								<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
-									{cat.features.map((feature) => (
+									{cat.features.map((featureKey) => (
 										<button
-											key={feature.key}
+											key={featureKey}
 											type='button'
-											onClick={() => openQuickTry(feature.key, cat.color, feature.icon)}
+											onClick={() => openQuickTry(featureKey, cat.color, featureIcons[featureKey])}
 											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start cursor-pointer'
 										>
-											<span className={`mt-0.5 ${cat.color}`}>{feature.icon}</span>
+											<span className={`mt-0.5 ${cat.color}`}>{featureIcons[featureKey]}</span>
 											<div className='min-w-0 flex-1'>
-												<span className='text-sm font-medium'>
-													{t(`features.${feature.key}`)}
-												</span>
-												<p className='text-xs text-muted-foreground mt-0.5'>
-													{t(`features.${feature.key}Desc`)}
-												</p>
+												<span className='text-sm font-medium'>{t(`features.${featureKey}`)}</span>
+												<p className='text-xs text-muted-foreground mt-0.5'>{t(`features.${featureKey}Desc`)}</p>
 											</div>
-											<Badge variant='secondary' className='mt-0.5 text-[10px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity'>
+											<Badge
+												variant='secondary'
+												className='mt-0.5 text-[10px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity'
+											>
 												{t("quickTry")}
 											</Badge>
 										</button>
@@ -299,11 +183,7 @@ export default function FeatureDemoPage() {
 				</motion.section>
 
 				{/* Playground CTA */}
-				<motion.section
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.2 }}
-				>
+				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 					<Card className='bg-gradient-to-r from-primary/5 to-secondary/5'>
 						<CardContent className='p-6 flex flex-col sm:flex-row items-center gap-6'>
 							<div className='flex-1'>
@@ -321,11 +201,7 @@ export default function FeatureDemoPage() {
 				</motion.section>
 
 				{/* Resources */}
-				<motion.section
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: 0.3 }}
-				>
+				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
 					<h2 className='text-2xl font-semibold mb-6'>{t("resourcesTitle")}</h2>
 					<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>
 						<Button variant='outline' className='h-auto py-4 justify-start' asChild>

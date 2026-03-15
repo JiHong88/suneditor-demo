@@ -1,4 +1,4 @@
-import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/code-examples/editorPresets";
+import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
 
 /* ── Types ─────────────────────────────────────────────── */
 

@@ -39,7 +39,8 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	},
 ];
 
-const sampleValue = `<h2>SunEditor v3</h2><p>A lightweight, flexible WYSIWYG editor with zero dependencies.</p><p>Try switching between the <strong>presets</strong> above to see different toolbar modes.</p>`;
+import { INTERACTIVE_DEMO_VALUE } from "@/data/snippets/pluginGuideSnippets";
+const sampleValue = INTERACTIVE_DEMO_VALUE;
 
 export default function InteractiveDemo() {
 	const t = useTranslations("Home.InteractiveDemo");

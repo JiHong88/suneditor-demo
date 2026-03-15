@@ -92,6 +92,15 @@ export default function DeepDivePage() {
 								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
 							</Link>
 						</Button>
+						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
+							<Link href='https://github.com/JiHong88/SunEditor/blob/master/GUIDE.md' target='_blank'>
+								<div className='text-start'>
+									<span className='font-medium'>{t("architectureGuide")}</span>
+									<p className='text-xs text-muted-foreground mt-0.5'>{t("architectureGuideDesc")}</p>
+								</div>
+								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
+							</Link>
+						</Button>
 					</div>
 				</motion.section>
 			</div>

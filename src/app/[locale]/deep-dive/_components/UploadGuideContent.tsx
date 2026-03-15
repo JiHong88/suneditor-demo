@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import {
 	UPLOAD_BASIC, SERVER_RESPONSE, SERVER_EXPRESS, CUSTOM_HANDLER,
 	UPLOAD_BEFORE, UPLOAD_ERROR, LIFECYCLE_TRACKING, MEDIA_TYPES,
-} from "@/data/code-examples/uploadSnippets";
+} from "@/data/snippets/uploadSnippets";
 
 /* ── Component ────────────────────────────────────────── */
 
