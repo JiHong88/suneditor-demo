@@ -8,6 +8,7 @@ import { OptionInfo } from "./OptionInfo";
 import optDescEn from "@/data/api/option-descriptions.en.json";
 import optDescKo from "@/data/api/option-descriptions.ko.json";
 import optDescAr from "@/data/api/option-descriptions.ar.json";
+import { API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
 
 type OptDesc = Record<string, { description: string; default?: string }>;
 const optDescMap: Record<string, OptDesc> = {
@@ -326,8 +327,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SwitchField label='linkEnableFileUpload' checked={state.image_linkEnableFileUpload} onChange={set("image_linkEnableFileUpload")} optionKey='image_linkEnableFileUpload' />
 							<SelectField label='insertBehavior' value={state.image_insertBehavior} options={INSERT_BEHAVIOR_OPTS} onChange={set("image_insertBehavior")} optionKey='image_insertBehavior' />
 							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadUrl' value={state.image_uploadUrl} onChange={set("image_uploadUrl")} placeholder='/upload/image' optionKey='image_uploadUrl' />
-								<TextInput label='uploadHeaders' value={state.image_uploadHeaders} onChange={set("image_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='image_uploadHeaders' />
+								<ToggleableTextInput label='uploadUrl' value={state.image_uploadUrl} preset={API_UPLOAD_IMAGE} onChange={set("image_uploadUrl")} placeholder={API_UPLOAD_IMAGE} optionKey='image_uploadUrl' />
+								<ToggleableTextInput label='uploadHeaders' value={state.image_uploadHeaders} preset='{}' onChange={set("image_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='image_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.image_uploadSizeLimit} onChange={set("image_uploadSizeLimit")} optionKey='image_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.image_uploadSingleSizeLimit} onChange={set("image_uploadSingleSizeLimit")} optionKey='image_uploadSingleSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.image_allowMultiple} onChange={set("image_allowMultiple")} optionKey='image_allowMultiple' />
@@ -354,8 +355,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<TextInput label='query_youtube' value={state.video_query_youtube} onChange={set("video_query_youtube")} placeholder='YouTube embed query' optionKey='video_query_youtube' />
 							<TextInput label='query_vimeo' value={state.video_query_vimeo} onChange={set("video_query_vimeo")} placeholder='Vimeo embed query' optionKey='video_query_vimeo' />
 							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadUrl' value={state.video_uploadUrl} onChange={set("video_uploadUrl")} placeholder='/upload/video' optionKey='video_uploadUrl' />
-								<TextInput label='uploadHeaders' value={state.video_uploadHeaders} onChange={set("video_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='video_uploadHeaders' />
+								<ToggleableTextInput label='uploadUrl' value={state.video_uploadUrl} preset={API_UPLOAD_VIDEO} onChange={set("video_uploadUrl")} placeholder={API_UPLOAD_VIDEO} optionKey='video_uploadUrl' />
+								<ToggleableTextInput label='uploadHeaders' value={state.video_uploadHeaders} preset='{}' onChange={set("video_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='video_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.video_uploadSizeLimit} onChange={set("video_uploadSizeLimit")} optionKey='video_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.video_uploadSingleSizeLimit} onChange={set("video_uploadSingleSizeLimit")} optionKey='video_uploadSingleSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.video_allowMultiple} onChange={set("video_allowMultiple")} optionKey='video_allowMultiple' />
@@ -387,8 +388,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SwitchField label='createUrlInput' checked={state.audio_createUrlInput} onChange={set("audio_createUrlInput")} optionKey='audio_createUrlInput' />
 							<SelectField label='insertBehavior' value={state.audio_insertBehavior} options={INSERT_BEHAVIOR_OPTS} onChange={set("audio_insertBehavior")} optionKey='audio_insertBehavior' />
 							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadUrl' value={state.audio_uploadUrl} onChange={set("audio_uploadUrl")} placeholder='/upload/audio' optionKey='audio_uploadUrl' />
-								<TextInput label='uploadHeaders' value={state.audio_uploadHeaders} onChange={set("audio_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='audio_uploadHeaders' />
+								<ToggleableTextInput label='uploadUrl' value={state.audio_uploadUrl} preset={API_UPLOAD_AUDIO} onChange={set("audio_uploadUrl")} placeholder={API_UPLOAD_AUDIO} optionKey='audio_uploadUrl' />
+								<ToggleableTextInput label='uploadHeaders' value={state.audio_uploadHeaders} preset='{}' onChange={set("audio_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='audio_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit (bytes)' value={state.audio_uploadSizeLimit} onChange={set("audio_uploadSizeLimit")} optionKey='audio_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.audio_uploadSingleSizeLimit} onChange={set("audio_uploadSingleSizeLimit")} optionKey='audio_uploadSingleSizeLimit' />
 								<SwitchField label='allowMultiple' checked={state.audio_allowMultiple} onChange={set("audio_allowMultiple")} optionKey='audio_allowMultiple' />
@@ -413,8 +414,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<AdvancedSection label={advLabel}>
 								<SwitchField label='showHeightInput' checked={state.embed_showHeightInput} onChange={set("embed_showHeightInput")} optionKey='embed_showHeightInput' />
 								<SwitchField label='percentageOnlySize' checked={state.embed_percentageOnlySize} onChange={set("embed_percentageOnlySize")} optionKey='embed_percentageOnlySize' />
-								<TextInput label='uploadUrl' value={state.embed_uploadUrl} onChange={set("embed_uploadUrl")} placeholder='/upload/embed' optionKey='embed_uploadUrl' />
-								<TextInput label='uploadHeaders' value={state.embed_uploadHeaders} onChange={set("embed_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='embed_uploadHeaders' />
+								<ToggleableTextInput label='uploadUrl' value={state.embed_uploadUrl} preset={API_UPLOAD_FILE} onChange={set("embed_uploadUrl")} placeholder={API_UPLOAD_FILE} optionKey='embed_uploadUrl' />
+								<ToggleableTextInput label='uploadHeaders' value={state.embed_uploadHeaders} preset='{}' onChange={set("embed_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='embed_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit' value={state.embed_uploadSizeLimit} onChange={set("embed_uploadSizeLimit")} optionKey='embed_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.embed_uploadSingleSizeLimit} onChange={set("embed_uploadSingleSizeLimit")} optionKey='embed_uploadSingleSizeLimit' />
 								<TextInput label='iframeTagAttributes' value={state.embed_iframeTagAttributes} onChange={set("embed_iframeTagAttributes")} placeholder='{"key":"value"}' optionKey='embed_iframeTagAttributes' />
@@ -436,8 +437,8 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SwitchField label='openNewWindow' checked={state.link_openNewWindow} onChange={set("link_openNewWindow")} optionKey='link_openNewWindow' />
 							<SwitchField label='noAutoPrefix' checked={state.link_noAutoPrefix} onChange={set("link_noAutoPrefix")} optionKey='link_noAutoPrefix' />
 							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadUrl' value={state.link_uploadUrl} onChange={set("link_uploadUrl")} placeholder='/upload/link' optionKey='link_uploadUrl' />
-								<TextInput label='uploadHeaders' value={state.link_uploadHeaders} onChange={set("link_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='link_uploadHeaders' />
+								<ToggleableTextInput label='uploadUrl' value={state.link_uploadUrl} preset={API_UPLOAD_FILE} onChange={set("link_uploadUrl")} placeholder={API_UPLOAD_FILE} optionKey='link_uploadUrl' />
+								<ToggleableTextInput label='uploadHeaders' value={state.link_uploadHeaders} preset='{}' onChange={set("link_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='link_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit' value={state.link_uploadSizeLimit} onChange={set("link_uploadSizeLimit")} optionKey='link_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.link_uploadSingleSizeLimit} onChange={set("link_uploadSingleSizeLimit")} optionKey='link_uploadSingleSizeLimit' />
 								<TextInput label='acceptedFormats' value={state.link_acceptedFormats} onChange={set("link_acceptedFormats")} optionKey='link_acceptedFormats' />
@@ -650,7 +651,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>ExportPDF</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<div className='space-y-3'>
-							<TextInput label='apiUrl' value={state.exportPDF_apiUrl} onChange={set("exportPDF_apiUrl")} placeholder='/api/export-pdf' optionKey='exportPDF_apiUrl' />
+							<TextInput label='apiUrl' value={state.exportPDF_apiUrl} onChange={set("exportPDF_apiUrl")} placeholder={API_DOWNLOAD_PDF} optionKey='exportPDF_apiUrl' />
 							<TextInput label='fileName' value={state.exportPDF_fileName} onChange={set("exportPDF_fileName")} placeholder='suneditor-pdf' optionKey='exportPDF_fileName' />
 						</div>
 					</AccordionContent>
@@ -661,12 +662,12 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<AccordionTrigger className='text-xs font-semibold py-2'>FileUpload</AccordionTrigger>
 					<AccordionContent className='px-1 pb-3'>
 						<div className='space-y-3'>
-							<TextInput label='uploadUrl' value={state.fileUpload_uploadUrl} onChange={set("fileUpload_uploadUrl")} placeholder='/upload/file' optionKey='fileUpload_uploadUrl' />
+							<ToggleableTextInput label='uploadUrl' value={state.fileUpload_uploadUrl} preset={API_UPLOAD_FILE} onChange={set("fileUpload_uploadUrl")} placeholder={API_UPLOAD_FILE} optionKey='fileUpload_uploadUrl' />
 							<SwitchField label='allowMultiple' checked={state.fileUpload_allowMultiple} onChange={set("fileUpload_allowMultiple")} optionKey='fileUpload_allowMultiple' />
 							<TextInput label='acceptedFormats' value={state.fileUpload_acceptedFormats} onChange={set("fileUpload_acceptedFormats")} placeholder='*' optionKey='fileUpload_acceptedFormats' />
 							<SelectField label='as' value={state.fileUpload_as} options={[{ value: "box", label: "box" }, { value: "link", label: "link" }]} onChange={set("fileUpload_as")} optionKey='fileUpload_as' />
 							<AdvancedSection label={advLabel}>
-								<TextInput label='uploadHeaders' value={state.fileUpload_uploadHeaders} onChange={set("fileUpload_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='fileUpload_uploadHeaders' />
+								<ToggleableTextInput label='uploadHeaders' value={state.fileUpload_uploadHeaders} preset='{}' onChange={set("fileUpload_uploadHeaders")} placeholder='{"Authorization":"..."}' optionKey='fileUpload_uploadHeaders' />
 								<NumberInput label='uploadSizeLimit' value={state.fileUpload_uploadSizeLimit} onChange={set("fileUpload_uploadSizeLimit")} optionKey='fileUpload_uploadSizeLimit' />
 								<NumberInput label='uploadSingleSizeLimit' value={state.fileUpload_uploadSingleSizeLimit} onChange={set("fileUpload_uploadSingleSizeLimit")} optionKey='fileUpload_uploadSingleSizeLimit' />
 								<ToggleableTextarea label='controls (JSON)' value={state.fileUpload_controls} preset={ITEM_PRESETS.fileUpload_controls} onChange={set("fileUpload_controls")} placeholder='[["edit","copy","remove"]]' rows={2} optionKey='fileUpload_controls' />
@@ -723,7 +724,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							<SwitchField label='useCachingFieldData' checked={state.mention_useCachingFieldData} onChange={set("mention_useCachingFieldData")} optionKey='mention_useCachingFieldData' />
 							<AdvancedSection label={advLabel}>
 								<NumberInput label='searchStartLength' value={state.mention_searchStartLength} onChange={set("mention_searchStartLength")} optionKey='mention_searchStartLength' />
-								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder='/api/mention' optionKey='mention_apiUrl' />
+								<TextInput label='apiUrl' value={state.mention_apiUrl} onChange={set("mention_apiUrl")} placeholder={API_MENTION} optionKey='mention_apiUrl' />
 								<TextInput label='apiHeaders' value={state.mention_apiHeaders} onChange={set("mention_apiHeaders")} placeholder='{"Authorization":"..."}' optionKey='mention_apiHeaders' />
 								<SwitchField label='useCachingData' checked={state.mention_useCachingData} onChange={set("mention_useCachingData")} optionKey='mention_useCachingData' />
 								<ToggleableTextarea label='data (JSON)' value={state.mention_data} preset={ITEM_PRESETS.mention_data} onChange={set("mention_data")} placeholder='[{"key":"john","name":"John","url":"/users/john"}]' rows={3} optionKey='mention_data' />

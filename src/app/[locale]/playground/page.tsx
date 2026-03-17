@@ -27,6 +27,7 @@ import dynamic from "next/dynamic";
 import PlaygroundEditor from "./_components/PlaygroundEditor";
 import PlaygroundCodePanel from "./_components/PlaygroundCodePanel";
 import { type AllLibs, loadAllExternalLibs } from "./_components/externalLibsLoader";
+import FileListPanel, { useFileList } from "@/components/editor/FileListPanel";
 
 const PlaygroundMultiRootEditor = dynamic(() => import("./_components/PlaygroundMultiRootEditor"), { ssr: false });
 const ButtonListBuilder = dynamic(() => import("./_components/button-list-builder/ButtonListBuilder"), { ssr: false });
@@ -101,6 +102,7 @@ export default function PlaygroundPage() {
 	const [ready, setReady] = useState(false);
 	const [builderOpen, setBuilderOpen] = useState(false);
 	const [editorRenderedWidth, setEditorRenderedWidth] = useState(0);
+	const { files, handleFileManagerAction, clearFiles } = useFileList();
 
 	const handleBuilderOpen = useCallback((open: boolean) => {
 		if (open) {
@@ -144,6 +146,15 @@ export default function PlaygroundPage() {
 			.map(([, v]) => String(v))
 			.join("|");
 	}, [state]);
+
+	// Clear file list when editor is remounted (key change) to prevent stale closures
+	const prevEditorKeyRef = useRef(editorKey);
+	useEffect(() => {
+		if (prevEditorKeyRef.current !== editorKey) {
+			prevEditorKeyRef.current = editorKey;
+			clearFiles();
+		}
+	}, [editorKey, clearFiles]);
 
 	// Apply resettable option changes via resetOptions
 	useEffect(() => {
@@ -363,9 +374,13 @@ export default function PlaygroundPage() {
 										editorRef={editorRef}
 										contentRef={contentRef}
 										allLibs={allLibs}
+										onFileManagerAction={handleFileManagerAction}
 									/>
 								))}
 						</motion.div>
+
+						{/* File List Panel */}
+						<FileListPanel files={files} />
 
 						{/* Code Panel */}
 						<motion.div

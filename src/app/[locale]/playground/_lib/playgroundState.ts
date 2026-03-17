@@ -1,4 +1,5 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
+import { API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
 
 /* ── Types ─────────────────────────────────────────────── */
 
@@ -576,7 +577,7 @@ export const DEFAULTS: PlaygroundState = {
 	mention_limitSize: 5,
 	mention_delayTime: 200,
 	mention_searchStartLength: 0,
-	mention_apiUrl: "",
+	mention_apiUrl: API_MENTION,
 	mention_useCachingData: true,
 
 	// Plugin: Math
@@ -664,7 +665,7 @@ export const DEFAULTS: PlaygroundState = {
 	link_defaultRel: "",
 
 	// Plugin: ExportPDF
-	exportPDF_apiUrl: "",
+	exportPDF_apiUrl: API_DOWNLOAD_PDF,
 	exportPDF_fileName: "suneditor-pdf",
 
 	// Plugin: FileUpload

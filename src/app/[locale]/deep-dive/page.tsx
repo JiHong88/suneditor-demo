@@ -31,7 +31,7 @@ export default function DeepDivePage() {
 				{/* Main content tabs */}
 				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
 					<Tabs value={activeTab} onValueChange={setActiveTab}>
-						<TabsList className='mb-6'>
+						<TabsList className='mb-2'>
 							<TabsTrigger value='theme' className='gap-2'>
 								<Palette className='size-4' />
 								{t("tabs.theme")}
@@ -45,6 +45,18 @@ export default function DeepDivePage() {
 								{t("tabs.events")}
 							</TabsTrigger>
 						</TabsList>
+
+						<a
+							href='https://github.com/JiHong88/SunEditor/blob/master/GUIDE.md'
+							target='_blank'
+							rel='noopener noreferrer'
+							className='inline-flex items-center gap-1.5 mt-1 text-xs text-orange-600/70 hover:text-orange-600 dark:text-orange-400/70 dark:hover:text-orange-400 transition-colors'
+						>
+							<Github className='size-3.5' />
+							{t("architectureGuide")}
+							<ExternalLink className='size-3' />
+						</a>
+						<div className='border-b pb-3 mb-3' />
 
 						<TabsContent value='theme'>
 							<ThemeGuideContent />
@@ -88,15 +100,6 @@ export default function DeepDivePage() {
 									<Github className='h-4 w-4 mb-1' />
 									<span className='font-medium'>{t("sourceCode")}</span>
 									<p className='text-xs text-muted-foreground mt-0.5'>{t("sourceCodeDesc")}</p>
-								</div>
-								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
-							</Link>
-						</Button>
-						<Button variant='outline' className='h-auto py-4 justify-start' asChild>
-							<Link href='https://github.com/JiHong88/SunEditor/blob/master/GUIDE.md' target='_blank'>
-								<div className='text-start'>
-									<span className='font-medium'>{t("architectureGuide")}</span>
-									<p className='text-xs text-muted-foreground mt-0.5'>{t("architectureGuideDesc")}</p>
 								</div>
 								<ExternalLink className='ms-auto h-4 w-4 shrink-0' />
 							</Link>

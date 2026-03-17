@@ -8,7 +8,12 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
+import FileListPanel, { useFileList } from "@/components/editor/FileListPanel";
+
 const SunEditorComponent = dynamic(() => import("@/components/editor/suneditor"), { ssr: false });
+
+/** Buttons that indicate upload-related features */
+const UPLOAD_BUTTONS = new Set(["image", "video", "audio", "fileUpload", "embed"]);
 
 export type QuickTryEditorConfig = {
 	/** Raw demo HTML for preview */
@@ -45,6 +50,14 @@ export default function QuickTryModal({
 	const t = useTranslations("FeatureDemo");
 	const backdropRef = useRef<HTMLDivElement>(null);
 	const [editorKey, setEditorKey] = useState(0);
+	const { files, handleFileManagerAction, clearFiles } = useFileList();
+
+	// Determine if this config uses upload-related buttons
+	const hasUploadButtons = config.buttonList.some((item) => {
+		if (typeof item === "string") return UPLOAD_BUTTONS.has(item);
+		if (Array.isArray(item)) return item.some((b) => UPLOAD_BUTTONS.has(b));
+		return false;
+	});
 
 	const handleKeyDown = useCallback(
 		(e: KeyboardEvent) => {
@@ -58,6 +71,7 @@ export default function QuickTryModal({
 			document.addEventListener("keydown", handleKeyDown);
 			document.body.style.overflow = "hidden";
 			setEditorKey((k) => k + 1);
+			clearFiles();
 		}
 		return () => {
 			document.removeEventListener("keydown", handleKeyDown);
@@ -74,6 +88,12 @@ export default function QuickTryModal({
 		buttonList: config.buttonList,
 		height: isDocument ? "600" : "200",
 		...(config.editorOptions || {}),
+		...(hasUploadButtons && {
+			events: {
+				...(config.editorOptions?.events as Record<string, unknown> | undefined),
+				onFileManagerAction: handleFileManagerAction,
+			},
+		}),
 	};
 
 	const mode = config.editorOptions?.mode as string | undefined;
@@ -113,6 +133,13 @@ export default function QuickTryModal({
 						options={editorOptions}
 					/>
 				</div>
+
+				{/* File List Panel — only for upload-related features */}
+				{hasUploadButtons && files.length > 0 && (
+					<div className='px-5 pb-2'>
+						<FileListPanel files={files} />
+					</div>
+				)}
 
 				{/* Footer actions */}
 				<div className='flex items-center justify-between gap-3 px-5 py-3 border-t shrink-0'>

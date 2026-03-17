@@ -17,6 +17,7 @@ import {
 	DEMO_BALLOON_ALWAYS, DEMO_DOCUMENT, DEMO_MULTIROOT, DEMO_FULLSCREEN,
 	DEMO_RTL, DEMO_STRICT_MODE, DEMO_EXPORT_PDF, DEMO_KEYBOARD,
 } from "@/data/snippets/featureDemoSnippets";
+import { API_UPLOAD_IMAGE, API_UPLOAD_FILE, API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
 
 export type FeatureLink = {
 	/** URL query string (without leading ?) */
@@ -91,7 +92,7 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 
 	// ── Media ──
 	imageUpload: fl(
-		{ p: "full", "i.uu": "xxx://image-upload-server", val: DEMO_IMAGE },
+		{ p: "full", "i.uu": API_UPLOAD_IMAGE, val: DEMO_IMAGE },
 		[["image"]],
 	),
 	imageResize: fl(
@@ -115,7 +116,7 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		[["drawing"]],
 	),
 	fileUpload: fl(
-		{ p: "full", "fu.uu": "xxx://file-upload-server", val: DEMO_FILE_UPLOAD },
+		{ p: "full", "fu.uu": API_UPLOAD_FILE, val: DEMO_FILE_UPLOAD },
 		[["fileUpload"]],
 	),
 
@@ -151,7 +152,7 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		[["math"], "|", ["bold", "italic"]],
 	),
 	mention: fl(
-		{ p: "full", "mn.au": "xxx://mention-api", val: DEMO_MENTION },
+		{ p: "full", "mn.au": API_MENTION, val: DEMO_MENTION },
 		[["bold", "italic"]],
 	),
 	links: fl(
@@ -233,7 +234,7 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		[["bold", "italic", "underline"], "|", ["link", "image"]],
 	),
 	exportPdf: fl(
-		{ p: "full", "ep.au": "xxx://pdf-export-api", val: DEMO_EXPORT_PDF },
+		{ p: "full", "ep.au": API_DOWNLOAD_PDF, val: DEMO_EXPORT_PDF },
 		[["exportPDF", "print", "preview"], "|", ["bold", "italic"]],
 	),
 	keyboard: fl(

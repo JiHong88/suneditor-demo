@@ -12,6 +12,11 @@ interface Props {
 	editorRef: React.RefObject<SunEditor.Instance | null>;
 	contentRef: React.RefObject<string>;
 	allLibs: AllLibs;
+	onFileManagerAction?: (params: {
+		info: { src: string; index: number; name: string; size: number; delete: () => void; select: () => void };
+		state: "create" | "update" | "delete";
+		pluginName: string;
+	}) => void;
 }
 
 /** Dynamic import for SunEditor lang packs */
@@ -25,7 +30,7 @@ async function loadLang(code: string): Promise<Record<string, unknown> | undefin
 	}
 }
 
-export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs }: Props) {
+export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs, onFileManagerAction }: Props) {
 	const toolbarContainerRef = useRef<HTMLDivElement>(null);
 	const statusbarContainerRef = useRef<HTMLDivElement>(null);
 	const [langPack, setLangPack] = useState<Record<string, unknown> | undefined>(undefined);
@@ -62,8 +67,13 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 		if (extLibs && Object.keys(extLibs).length > 0) {
 			opts.externalLibs = extLibs;
 		}
+		// Wire up onFileManagerAction event
+		if (onFileManagerAction) {
+			opts.events = { ...(opts.events as Record<string, unknown> || {}), onFileManagerAction };
+		}
+
 		return { ...opts } as SunEditor.InitOptions;
-	}, [state, langPack, extLibs]);
+	}, [state, langPack, extLibs, onFileManagerAction]);
 
 	const handleInstance = useCallback(
 		(instance: SunEditor.Instance) => {

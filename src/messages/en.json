@@ -16,7 +16,8 @@
 			"plugin-guide": "Plugin Guide",
 			"deep-dive": "Deep Dive",
 			"docs-api": "Docs/API",
-			"options": "Options"
+			"options": "Options",
+			"migration": "v2 → v3"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -619,6 +620,30 @@
 		"layerL3DomDesc": "DOM manipulation and content analysis subsystems. Provides a unified abstraction over contentEditable: offset calculates positions, selection manages ranges, format handles block-level structure, inline applies character-level styling, html sanitizes content, and char enforces character limits.",
 		"layerL3ShellDesc": "Editor operation and interaction orchestration. component manages rich media lifecycles, pluginManager handles plugin registration, commandDispatcher routes button clicks to plugins, history manages undo/redo, and shortcuts maps keyboard commands.",
 		"layerL3PanelDesc": "UI presentation layer. toolbar renders the main toolbar, subToolbar is an optional second toolbar instance, menu handles dropdowns and selection effects, and viewer controls view modes (code view, fullscreen, preview)."
+	},
+	"Migration": {
+		"title": "v2 → v3 Migration",
+		"subtitle": "Paste your SunEditor v2 options and get the v3 equivalent.",
+		"converterTab": "Converter",
+		"tableTab": "Reference Table",
+		"converterDesc": "Paste your v2 options object (the contents inside the { }) below. The converter will rename keys, move plugin options to nested format, and flag removed options.",
+		"inputPlaceholder": "// Paste v2 options here\nimageUploadUrl: '/upload',\nimageWidth: '100%',\nvideoResizing: true,\ncolorList: [...],",
+		"outputPlaceholder": "Converted v3 options will appear here...",
+		"copy": "Copy",
+		"copied": "Copied!",
+		"converted": "converted",
+		"removed": "removed",
+		"unknown": "unknown",
+		"changes": "Changes",
+		"searchPlaceholder": "Search options...",
+		"note": "Note",
+		"entries": "entries"
+	},
+	"FileListPanel": {
+		"uploadedFiles": "Uploaded Files",
+		"noFiles": "No uploaded files",
+		"selectInEditor": "Select in editor",
+		"deleteFile": "Delete file"
 	},
 	"Options": {
 		"title": "Options Reference",
