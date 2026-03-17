@@ -580,7 +580,14 @@
 			"errors": "오류 처리",
 			"errorsDesc": "업로드 실패 시 사용자에게 표시되는 오류 메시지를 커스터마이징합니다. 문자열을 반환하면 기본 메시지를 대체합니다.",
 			"lifecycle": "미디어 라이프사이클 추적",
-			"lifecycleDesc": "미디어가 생성, 수정, 삭제될 때를 추적합니다. onFileManagerAction으로 모든 타입을 통합 추적하거나, 타입별 이벤트로 개별 처리할 수 있습니다."
+			"lifecycleDesc": "미디어가 생성, 수정, 삭제될 때를 추적합니다. onFileManagerAction으로 모든 타입을 통합 추적하거나, 타입별 이벤트로 개별 처리할 수 있습니다.",
+			"imageResize": "업로드 전 이미지 리사이즈",
+			"imageResizeDesc": "휴대폰 카메라 사진은 10MB 이상일 수 있습니다. 업로드 전에 클라이언트에서 리사이즈하면 대역폭 비용과 서버 CPU 부하를 줄일 수 있습니다. onImageUploadBefore에서 Canvas API로 이미지를 축소합니다. SVG와 애니메이션 GIF는 래스터화가 무의미하므로 건너뜁니다.",
+			"imageResizeNote": "서버에서도 별도의 용량 제한을 두어야 합니다. 클라이언트 리사이즈는 최적화이지, 서버 검증을 대체하는 것이 아닙니다.",
+			"fileManagementUI": "파일 관리 UI",
+			"fileManagementUIDesc": "SunEditor는 플러그인 종류와 관계없이 미디어가 생성, 수정, 삭제될 때마다 onFileManagerAction을 발생시킵니다. 이 이벤트를 상태 배열로 추적하면 업로드된 모든 파일을 보여주는 패널을 만들 수 있습니다. select(에디터 내 해당 요소로 스크롤 및 선택)와 delete 같은 액션도 함께 제공됩니다.",
+			"fileManagementUIPreview": "미리보기",
+			"fileManagementUINote": "info.delete()와 info.select()는 SunEditor가 제공하는 클로저입니다. info.delete()를 호출하면 에디터에서 요소가 제거되고 delete 이벤트가 다시 발생하므로, 목록은 자동으로 동기화됩니다."
 		},
 		"resourcesTitle": "리소스",
 		"pluginGuide": "플러그인 가이드",

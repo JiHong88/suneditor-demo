@@ -170,6 +170,114 @@ editor.events.onImageDeleteBefore = async ({ url }) => {
   return confirm(\`Delete this image? \${url}\`);
 };`;
 
+/* ── 이미지 리사이즈: Canvas API로 업로드 전 클라이언트 리사이즈 ── */
+export const IMAGE_RESIZE_BEFORE_UPLOAD = `// Resize large images on the client before uploading.
+// Reduces bandwidth and server load — especially for phone cameras (10MB+).
+
+const MAX_WIDTH = 1920;
+const JPEG_QUALITY = 0.9;
+const SKIP_TYPES = new Set(['image/svg+xml', 'image/gif']);
+
+function resizeImage(file) {
+  return new Promise((resolve) => {
+    if (SKIP_TYPES.has(file.type)) return resolve(file);
+
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      if (img.naturalWidth <= MAX_WIDTH) return resolve(file);
+
+      const ratio = MAX_WIDTH / img.naturalWidth;
+      const canvas = document.createElement('canvas');
+      canvas.width = MAX_WIDTH;
+      canvas.height = Math.round(img.naturalHeight * ratio);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      const type = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      canvas.toBlob(
+        (blob) => resolve(new File([blob], file.name, { type })),
+        type,
+        type === 'image/jpeg' ? JPEG_QUALITY : undefined,
+      );
+    };
+    img.src = url;
+  });
+}
+
+// Hook into SunEditor
+const editor = suneditor.create(textarea, {
+  image: { uploadUrl: '/api/upload/image' },
+  events: {
+    onImageUploadBefore: async ({ info, handler }) => {
+      const dt = new DataTransfer();
+      for (const file of info.files) {
+        dt.items.add(await resizeImage(file));
+      }
+      handler({ ...info, files: dt.files });
+    },
+  },
+});`;
+
+/* ── 파일 관리 UI: onFileManagerAction으로 업로드 파일 목록 관리 ── */
+export const FILE_MANAGEMENT_UI = `// Build a file management UI that tracks all uploaded media.
+// onFileManagerAction fires for every create / update / delete across all plugins.
+
+import { useState, useCallback } from 'react';
+
+function useFileList() {
+  const [files, setFiles] = useState([]);
+
+  const handleFileManagerAction = useCallback(({ info, state, pluginName }) => {
+    const entry = {
+      src: info.src,
+      name: info.name,
+      size: info.size,
+      pluginName,
+      delete: info.delete,  // Call to remove from editor
+      select: info.select,  // Call to scroll & select in editor
+    };
+
+    setFiles((prev) => {
+      if (state === 'create') {
+        // Avoid duplicates by src
+        if (prev.some((f) => f.src === entry.src)) {
+          return prev.map((f) => (f.src === entry.src ? entry : f));
+        }
+        return [...prev, entry];
+      }
+      if (state === 'update') {
+        return prev.map((f) => (f.src === entry.src ? entry : f));
+      }
+      if (state === 'delete') {
+        return prev.filter((f) => f.src !== entry.src);
+      }
+      return prev;
+    });
+  }, []);
+
+  return { files, handleFileManagerAction };
+}
+
+// Usage with SunEditor
+const { files, handleFileManagerAction } = useFileList();
+
+const editor = suneditor.create(textarea, {
+  image: { uploadUrl: '/api/upload/image' },
+  events: {
+    onFileManagerAction: handleFileManagerAction,
+  },
+});
+
+// Render the file list
+files.map((file) => (
+  <div key={file.src}>
+    <span>{file.name} ({file.pluginName})</span>
+    <button onClick={() => file.select()}>Select</button>
+    <button onClick={() => file.delete()}>Delete</button>
+  </div>
+));`;
+
 /* ── 개요 테이블: 미디어 타입별 옵션키/이벤트수/핸들러 참조 ── */
 export const MEDIA_TYPES = [
 	{ type: "image", option: "image.uploadUrl", events: 6, handler: "imageUploadHandler" },

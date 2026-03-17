@@ -6,6 +6,7 @@ import type { SunEditor } from "suneditor/types";
 import "suneditor/css/editor";
 import "suneditor/css/contents";
 import { FullButtonList } from "./buttonList";
+import { resizeImageFiles } from "@/lib/resizeImage";
 
 class A extends interfaces.PluginModal implements interfaces.ModuleModal, interfaces.PluginDropdown, interfaces.EditorComponent {
 	constructor(kernel: SunEditor.Kernel) {
@@ -67,7 +68,16 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 		const mergedPlugins = options.plugins
 			? { ...(plugins as Record<string, unknown>), ...(options.plugins as Record<string, unknown>) }
 			: plugins;
-		const { plugins: _omit, ...restOptions } = options;
+		const { plugins: _omit, events: userEvents, ...restOptions } = options;
+
+		// 사용자 이벤트에 이미지 리사이즈 핸들러를 주입
+		const mergedEvents = {
+			...(userEvents as Record<string, unknown>),
+			onImageUploadBefore: async ({ info, handler }: { info: { files: FileList }; handler: (newInfo?: unknown) => void }) => {
+				const resizedFiles = await resizeImageFiles(info.files);
+				handler({ ...info, files: resizedFiles });
+			},
+		} as SunEditor.InitOptions["events"];
 
 		const instance = suneditor.create(textarea, {
 			plugins: mergedPlugins,
@@ -77,6 +87,7 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 			...(toolbarContainerRef?.current && { toolbar_container: toolbarContainerRef.current }),
 			...(statusbarContainerRef?.current && { statusbar_container: statusbarContainerRef.current }),
 			...restOptions,
+			events: mergedEvents,
 		});
 
 		instanceRef.current = instance;

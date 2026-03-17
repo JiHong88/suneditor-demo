@@ -579,7 +579,14 @@
 			"errors": "Error Handling",
 			"errorsDesc": "Customize error messages shown to users when uploads fail. Return a string to override the default message.",
 			"lifecycle": "Media Lifecycle Tracking",
-			"lifecycleDesc": "Track when media is created, updated, or deleted. Use onFileManagerAction for unified tracking across all types, or per-type events for specific handling."
+			"lifecycleDesc": "Track when media is created, updated, or deleted. Use onFileManagerAction for unified tracking across all types, or per-type events for specific handling.",
+			"imageResize": "Image Resize Before Upload",
+			"imageResizeDesc": "Large photos from phone cameras can be 10MB+. Resizing on the client before upload reduces bandwidth costs and server CPU load. Use the Canvas API in onImageUploadBefore to downscale images — SVG and animated GIF are skipped since they can't be rasterized meaningfully.",
+			"imageResizeNote": "The server should still enforce its own size limit as a safety net. Client-side resize is an optimization, not a replacement for server validation.",
+			"fileManagementUI": "File Management UI",
+			"fileManagementUIDesc": "SunEditor fires onFileManagerAction whenever media is created, updated, or deleted — regardless of plugin type. By tracking these events in a state array, you can build a panel that shows all uploaded files with actions like select (scroll to the element in the editor) and delete.",
+			"fileManagementUIPreview": "Preview",
+			"fileManagementUINote": "info.delete() and info.select() are closures provided by SunEditor. Calling info.delete() removes the element from the editor and triggers the delete event again, so the list stays in sync automatically."
 		},
 		"resourcesTitle": "Resources",
 		"pluginGuide": "Plugin Guide",

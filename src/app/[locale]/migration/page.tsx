@@ -331,7 +331,7 @@ export default function MigrationPage() {
 													{e.v3 ? (
 														<code className='font-mono text-green-600 dark:text-green-400'>{e.v3}</code>
 													) : (
-														<span className='text-red-500 font-medium'>Removed</span>
+														<span className='text-red-500 font-medium'>{t("removed")}</span>
 													)}
 												</td>
 												<td className='px-4 py-2 text-muted-foreground'>{e.note || "—"}</td>

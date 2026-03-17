@@ -187,8 +187,9 @@ function FileItem({ file }: { file: FileEntry }) {
 
 	return (
 		<div className='inline-flex items-center gap-1.5 max-w-48 rounded-md border bg-muted/30 px-1.5 py-1 hover:bg-muted/60 group transition-colors'>
-			{/* Thumbnail or icon */}
+			{/* Thumbnail or icon — dynamic upload URL, not optimizable by next/image */}
 			{imgSrc ? (
+				// eslint-disable-next-line @next/next/no-img-element
 				<img
 					src={imgSrc}
 					alt={file.name}
@@ -201,8 +202,9 @@ function FileItem({ file }: { file: FileEntry }) {
 				<PluginIcon pluginName={file.pluginName} />
 			)}
 
-			{/* Name */}
+			{/* Name + Size */}
 			<span className='text-[11px] truncate'>{file.name}</span>
+			{file.size > 0 && <span className='text-[10px] text-muted-foreground shrink-0'>{formatSize(file.size)}</span>}
 
 			{/* Actions */}
 			<span className='inline-flex items-center gap-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity'>
