@@ -8,7 +8,7 @@ export type AllLibs = {
 	mathjax: Record<string, unknown> | null;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 const g = globalThis as any;
 
 async function loadMathjax(): Promise<Record<string, unknown> | null> {
@@ -26,7 +26,7 @@ async function loadMathjax(): Promise<Record<string, unknown> | null> {
 				import("mathjax-full/js/handlers/html"),
 			]);
 		const FONT_URL = "https://cdn.jsdelivr.net/npm/mathjax-full@3/es5/output/chtml/fonts/woff-v2";
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		 
 		function CHTML(options: Record<string, unknown> | null = null): any {
 			const font = new TeXFont({ fontURL: FONT_URL });
 			return new CHtmlBase(options ? { ...options, font } : { font });

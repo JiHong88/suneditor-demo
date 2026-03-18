@@ -8,6 +8,7 @@ import InteractiveDemo from "./_components/InteractiveDemo";
 import LiveStatsBadges from "./_components/LiveStatsBadges";
 import FeatureHighlights from "./_components/FeatureHighlights";
 import FinalCTA from "./_components/FinalCTA";
+import { InfeedAd } from "@/components/ad/AdBanner";
 
 export default function HomePage({ metric }: { metric: SiteMetricType | null }) {
 	return (
@@ -16,6 +17,7 @@ export default function HomePage({ metric }: { metric: SiteMetricType | null }) 
 			<InteractiveDemo />
 			{metric && <LiveStatsBadges stats={metric} />}
 			<FeatureHighlights />
+			<InfeedAd />
 			<CodeExamples />
 			<FinalCTA />
 		</div>

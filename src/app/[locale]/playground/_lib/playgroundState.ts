@@ -1,5 +1,6 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
 import { API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
+import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
 
 /* ── Types ─────────────────────────────────────────────── */
 
@@ -815,263 +816,54 @@ export const GALLERY_DATA_PRESETS: Record<string, string> = {
 
 /* ── Fixed option keys (require remount) ───────────────── */
 
-/** Base options flagged as 'fixed' in OPTION_FIXED_FLAG */
+const _allStateKeys = new Set<string>(Object.keys(DEFAULTS));
+const _isStateKey = (k: string): k is keyof PlaygroundState => _allStateKeys.has(k);
+
+/** Base options: 'fixed' entries from OPTION_FIXED_FLAG that exist in PlaygroundState */
 const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
+	// Playground-specific keys (no direct suneditor counterpart)
 	"multiroot",
-	"mode",
 	"buttonListPreset",
 	"customButtonList",
-	"type",
-	"shortcutsDisable",
-	"shortcuts",
 	"toolbar_container_enabled",
 	"statusbar_container_enabled",
 	"subToolbar_enabled",
 	"subToolbar_buttonListPreset",
 	"subToolbar_mode",
 	"subToolbar_width",
-	"closeModalOutsideClick",
-	"defaultLine",
-	"strictMode",
 	"strictMode_tagFilter",
 	"strictMode_formatFilter",
 	"strictMode_classFilter",
 	"strictMode_textStyleTagFilter",
 	"strictMode_attrFilter",
 	"strictMode_styleFilter",
-	"elementWhitelist",
-	"elementBlacklist",
-	"attributeWhitelist",
-	"attributeBlacklist",
-	"fontSizeUnits",
-	"formatLine",
-	"formatBrLine",
-	"formatClosureBrLine",
-	"formatBlock",
-	"formatClosureBlock",
-	"spanStyles",
-	"lineStyles",
-	"textStyleTags",
-	"allowedClassName",
-	"allUsedStyles",
-	"reverseButtons",
-	"v2Migration",
-	"lang",
-	"icons",
-	"convertTextTags",
-	"tagStyles",
+	// From suneditor OPTION_FIXED_FLAG
+	...(Object.entries(OPTION_FIXED_FLAG) as [string, unknown][])
+		.filter(([k, v]) => v === "fixed" && _isStateKey(k))
+		.map(([k]) => k as keyof PlaygroundState),
 ];
 
-/** Frame options flagged as 'fixed' in OPTION_FRAME_FIXED_FLAG */
+/** Frame options: 'fixed' direct keys + all root-prefixed frame keys */
 const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = [
-	"iframe", "iframe_fullPage", "statusbar_resizeEnable",
-	// per-root: all frame options require remount
-	"root_header_height", "root_header_width", "root_header_minWidth", "root_header_maxWidth",
-	"root_header_minHeight", "root_header_maxHeight", "root_header_editorStyle",
-	"root_header_placeholder", "root_header_value", "root_header_editableFrameAttributes",
-	"root_header_iframe", "root_header_iframe_fullPage", "root_header_iframe_attributes", "root_header_iframe_cssFileName",
-	"root_header_statusbar", "root_header_statusbar_showPathLabel", "root_header_statusbar_resizeEnable",
-	"root_header_charCounter", "root_header_charCounter_max", "root_header_charCounter_label", "root_header_charCounter_type",
-	"root_body_height", "root_body_width", "root_body_minWidth", "root_body_maxWidth",
-	"root_body_minHeight", "root_body_maxHeight", "root_body_editorStyle",
-	"root_body_placeholder", "root_body_value", "root_body_editableFrameAttributes",
-	"root_body_iframe", "root_body_iframe_fullPage", "root_body_iframe_attributes", "root_body_iframe_cssFileName",
-	"root_body_statusbar", "root_body_statusbar_showPathLabel", "root_body_statusbar_resizeEnable",
-	"root_body_charCounter", "root_body_charCounter_max", "root_body_charCounter_label", "root_body_charCounter_type",
+	// Direct frame keys flagged as 'fixed'
+	...(Object.entries(OPTION_FRAME_FIXED_FLAG) as [string, unknown][])
+		.filter(([k, v]) => v === "fixed" && _isStateKey(k))
+		.map(([k]) => k as keyof PlaygroundState),
+	// Per-root: all frame options require remount
+	...(Object.keys(OPTION_FRAME_FIXED_FLAG) as string[]).flatMap((k) => {
+		const keys: (keyof PlaygroundState)[] = [];
+		const hk = `root_header_${k}`;
+		const bk = `root_body_${k}`;
+		if (_isStateKey(hk)) keys.push(hk);
+		if (_isStateKey(bk)) keys.push(bk);
+		return keys;
+	}),
 ];
 
-/** Plugin options are effectively fixed (plugins themselves are fixed) */
-const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = [
-	"image_canResize",
-	"image_defaultWidth",
-	"image_defaultHeight",
-	"image_createFileInput",
-	"image_createUrlInput",
-	"image_uploadUrl",
-	"image_uploadSizeLimit",
-	"image_allowMultiple",
-	"image_acceptedFormats",
-	"image_percentageOnlySize",
-	"image_showHeightInput",
-	"video_canResize",
-	"video_defaultWidth",
-	"video_defaultHeight",
-	"video_createFileInput",
-	"video_createUrlInput",
-	"video_uploadUrl",
-	"video_uploadSizeLimit",
-	"video_allowMultiple",
-	"video_acceptedFormats",
-	"video_percentageOnlySize",
-	"video_showHeightInput",
-	"video_showRatioOption",
-	"video_defaultRatio",
-	"audio_defaultWidth",
-	"audio_defaultHeight",
-	"audio_createFileInput",
-	"audio_createUrlInput",
-	"audio_uploadUrl",
-	"audio_uploadSizeLimit",
-	"audio_allowMultiple",
-	"audio_acceptedFormats",
-	"hr_items",
-	"table_scrollType",
-	"table_captionPosition",
-	"table_cellControllerPosition",
-	"table_colorList",
-	"fontSize_sizeUnit",
-	"fontSize_showIncDecControls",
-	"fontSize_showDefaultSizeLabel",
-	"fontSize_disableInput",
-	"fontSize_unitMap",
-	"fontColor_disableHEXInput",
-	"fontColor_items",
-	"backgroundColor_disableHEXInput",
-	"backgroundColor_items",
-	"embed_canResize",
-	"embed_defaultWidth",
-	"embed_defaultHeight",
-	"embed_showHeightInput",
-	"embed_percentageOnlySize",
-	"drawing_outputFormat",
-	"drawing_lineWidth",
-	"drawing_lineCap",
-	"drawing_canResize",
-	"drawing_lineColor",
-	"drawing_lineReconnect",
-	"mention_triggerText",
-	"mention_limitSize",
-	"mention_delayTime",
-	"mention_searchStartLength",
-	"mention_apiUrl",
-	"mention_useCachingData",
-	"math_mathLib",
-	"math_canResize",
-	"math_autoHeight",
-	// Image (extended)
-	"image_uploadHeaders",
-	"image_uploadSingleSizeLimit",
-	"image_useFormatType",
-	"image_defaultFormatType",
-	"image_keepFormatType",
-	"image_linkEnableFileUpload",
-	"image_insertBehavior",
-	"image_controls",
-	// Video (extended)
-	"video_uploadHeaders",
-	"video_uploadSingleSizeLimit",
-	"video_videoTagAttributes",
-	"video_iframeTagAttributes",
-	"video_query_youtube",
-	"video_query_vimeo",
-	"video_extensions",
-	"video_insertBehavior",
-	"video_controls",
-	"video_ratioOptions",
-	"video_urlPatterns",
-	"video_embedQuery",
-	// Audio (extended)
-	"audio_uploadHeaders",
-	"audio_uploadSingleSizeLimit",
-	"audio_audioTagAttributes",
-	"audio_insertBehavior",
-	// Embed (extended)
-	"embed_uploadUrl",
-	"embed_uploadHeaders",
-	"embed_uploadSizeLimit",
-	"embed_uploadSingleSizeLimit",
-	"embed_iframeTagAttributes",
-	"embed_query_youtube",
-	"embed_query_vimeo",
-	"embed_insertBehavior",
-	"embed_controls",
-	"embed_urlPatterns",
-	"embed_embedQuery",
-	// Drawing (extended)
-	"drawing_useFormatType",
-	"drawing_defaultFormatType",
-	"drawing_keepFormatType",
-	"drawing_maintainRatio",
-	"drawing_formSize",
-	// Mention (extended)
-	"mention_apiHeaders",
-	"mention_useCachingFieldData",
-	"mention_data",
-	// Math (extended)
-	"math_fontSizeList",
-	"math_formSize",
-	"math_onPaste",
-	// FontColor (extended)
-	"fontColor_splitNum",
-	// BackgroundColor (extended)
-	"backgroundColor_splitNum",
-	// Link
-	"link_title",
-	"link_textToDisplay",
-	"link_openNewWindow",
-	"link_noAutoPrefix",
-	"link_uploadUrl",
-	"link_uploadHeaders",
-	"link_uploadSizeLimit",
-	"link_uploadSingleSizeLimit",
-	"link_acceptedFormats",
-	"link_relList",
-	"link_defaultRel",
-	// ExportPDF
-	"exportPDF_apiUrl",
-	"exportPDF_fileName",
-	// FileUpload
-	"fileUpload_uploadUrl",
-	"fileUpload_uploadHeaders",
-	"fileUpload_uploadSizeLimit",
-	"fileUpload_uploadSingleSizeLimit",
-	"fileUpload_allowMultiple",
-	"fileUpload_acceptedFormats",
-	"fileUpload_as",
-	"fileUpload_insertBehavior",
-	"fileUpload_controls",
-	// Align
-	"align_items",
-	// Font
-	"font_items",
-	// BlockStyle
-	"blockStyle_items",
-	// LineHeight
-	"lineHeight_items",
-	// ParagraphStyle
-	"paragraphStyle_items",
-	// TextStyle
-	"textStyle_items",
-	// Template
-	"template_items",
-	// Layout
-	"layout_items",
-	// ImageGallery
-	"imageGallery_url",
-	"imageGallery_headers",
-	"imageGallery_data",
-	// VideoGallery
-	"videoGallery_url",
-	"videoGallery_headers",
-	"videoGallery_thumbnail",
-	"videoGallery_data",
-	// AudioGallery
-	"audioGallery_url",
-	"audioGallery_headers",
-	"audioGallery_thumbnail",
-	"audioGallery_data",
-	// FileGallery
-	"fileGallery_url",
-	"fileGallery_headers",
-	"fileGallery_thumbnail",
-	"fileGallery_data",
-	// FileBrowser
-	"fileBrowser_url",
-	"fileBrowser_headers",
-	"fileBrowser_thumbnail",
-	"fileBrowser_data",
-	"fileBrowser_props",
-];
+/** Plugin options are effectively fixed (plugins themselves are fixed) — all plugin-prefixed state keys */
+const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = (Object.keys(DEFAULTS) as (keyof PlaygroundState)[]).filter(
+	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|mention|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
+);
 
 const FIXED_KEYS = new Set<string>([...FIXED_BASE_KEYS, ...FIXED_FRAME_KEYS, ...FIXED_PLUGIN_KEYS]);
 
