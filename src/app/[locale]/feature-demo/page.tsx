@@ -33,6 +33,7 @@ import {
 	Undo2,
 	PanelTop,
 	PanelTopInactive,
+	PanelBottom,
 	MessageCircle,
 	MessageCircleDashed,
 	FileText,
@@ -41,6 +42,7 @@ import {
 	Shield,
 	Printer,
 	Keyboard,
+	Search,
 	ArrowRight,
 	Package,
 	FileCode,
@@ -56,7 +58,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
 import QuickTryModal from "@/components/common/QuickTryModal";
-import { FEATURE_CATEGORIES, STAT_META } from "@/data/snippets/featureDemoCategories";
+import { FEATURE_CATEGORIES } from "@/data/snippets/featureDemoCategories";
 
 /* ── 아이콘 매핑 (JSX는 컴포넌트에서 관리) ──────────── */
 
@@ -65,26 +67,57 @@ const ICON_LG = "h-5 w-5";
 
 /** featureKey → 아이콘 */
 const featureIcons: Record<string, React.ReactNode> = {
-	boldItalic: <Bold className={ICON} />, fontFamily: <Type className={ICON} />, fontSize: <Hash className={ICON} />,
-	fontColor: <Palette className={ICON} />, bgColor: <Highlighter className={ICON} />, alignment: <AlignLeft className={ICON} />,
-	blockStyles: <Heading className={ICON} />, lineHeight: <Space className={ICON} />, copyFormat: <CopyCheck className={ICON} />,
-	imageUpload: <Image className={ICON} />, imageResize: <Move className={ICON} />, video: <Video className={ICON} />,
-	audio: <Music className={ICON} />, embed: <Code2 className={ICON} />, drawing: <PenTool className={ICON} />, fileUpload: <FileUp className={ICON} />,
-	tableInsert: <Table2 className={ICON} />, cellMerge: <TableCellsMerge className={ICON} />, rowColOps: <Columns3 className={ICON} />,
-	lists: <ListOrdered className={ICON} />, blockquote: <Quote className={ICON} />, hr: <Minus className={ICON} />,
-	math: <Calculator className={ICON} />, mention: <AtSign className={ICON} />, links: <Link2 className={ICON} />,
-	codeView: <Eye className={ICON} />, charCounter: <LetterText className={ICON} />, undoRedo: <Undo2 className={ICON} />,
-	classicMode: <PanelTop className={ICON} />, inlineMode: <PanelTopInactive className={ICON} />,
-	balloonMode: <MessageCircle className={ICON} />, balloonAlways: <MessageCircleDashed className={ICON} />,
-	documentLayout: <FileText className={ICON} />, fullScreen: <Maximize className={ICON} />,
-	i18nRtl: <Languages className={ICON} />, strictMode: <Shield className={ICON} />,
-	exportPdf: <Printer className={ICON} />, keyboard: <Keyboard className={ICON} />,
+	boldItalic: <Bold className={ICON} />,
+	fontFamily: <Type className={ICON} />,
+	fontSize: <Hash className={ICON} />,
+	fontColor: <Palette className={ICON} />,
+	bgColor: <Highlighter className={ICON} />,
+	alignment: <AlignLeft className={ICON} />,
+	blockStyles: <Heading className={ICON} />,
+	lineHeight: <Space className={ICON} />,
+	copyFormat: <CopyCheck className={ICON} />,
+	imageUpload: <Image className={ICON} />,
+	imageResize: <Move className={ICON} />,
+	video: <Video className={ICON} />,
+	audio: <Music className={ICON} />,
+	embed: <Code2 className={ICON} />,
+	drawing: <PenTool className={ICON} />,
+	fileUpload: <FileUp className={ICON} />,
+	tableInsert: <Table2 className={ICON} />,
+	cellMerge: <TableCellsMerge className={ICON} />,
+	rowColOps: <Columns3 className={ICON} />,
+	lists: <ListOrdered className={ICON} />,
+	blockquote: <Quote className={ICON} />,
+	hr: <Minus className={ICON} />,
+	math: <Calculator className={ICON} />,
+	mention: <AtSign className={ICON} />,
+	links: <Link2 className={ICON} />,
+	codeView: <Eye className={ICON} />,
+	markdownView: <FileText className={ICON} />,
+	codeBlock: <Code2 className={ICON} />,
+	finder: <Search className={ICON} />,
+	charCounter: <LetterText className={ICON} />,
+	undoRedo: <Undo2 className={ICON} />,
+	classicMode: <PanelTop className={ICON} />,
+	inlineMode: <PanelTopInactive className={ICON} />,
+	balloonMode: <MessageCircle className={ICON} />,
+	balloonAlways: <MessageCircleDashed className={ICON} />,
+	toolbarBottom: <PanelBottom className={ICON} />,
+	documentLayout: <FileText className={ICON} />,
+	fullScreen: <Maximize className={ICON} />,
+	i18nRtl: <Languages className={ICON} />,
+	strictMode: <Shield className={ICON} />,
+	exportPdf: <Printer className={ICON} />,
+	keyboard: <Keyboard className={ICON} />,
 };
 
 /** statKey → 아이콘 */
 const statIcons: Record<string, React.ReactNode> = {
-	modes: <PanelTop className={ICON_LG} />, plugins: <Puzzle className={ICON_LG} />,
-	languages: <Globe className={ICON_LG} />, zeroDeps: <Package className={ICON_LG} />, typescript: <FileCode className={ICON_LG} />,
+	modes: <PanelTop className={ICON_LG} />,
+	plugins: <Puzzle className={ICON_LG} />,
+	languages: <Globe className={ICON_LG} />,
+	zeroDeps: <Package className={ICON_LG} />,
+	typescript: <FileCode className={ICON_LG} />,
 };
 
 /* ── Page component ───────────────────────────────────── */
@@ -117,18 +150,6 @@ export default function FeatureDemoPage() {
 					<h1 className='text-4xl font-bold tracking-tight md:text-5xl'>{t("title")}</h1>
 					<p className='mt-4 text-lg text-muted-foreground'>{t("subtitle")}</p>
 				</motion.div>
-			</section>
-
-			{/* Stat pills */}
-			<section className='container mx-auto px-4 pb-8'>
-				<div className='flex flex-wrap items-center justify-center gap-3 md:gap-5'>
-					{STAT_META.map((item) => (
-						<div key={item.key} className='flex items-center gap-2.5 rounded-full border px-4 py-2 bg-background/80 backdrop-blur-sm'>
-							<span className={`flex h-8 w-8 items-center justify-center rounded-full ${item.className}`}>{statIcons[item.key]}</span>
-							<span className='text-sm font-medium'>{t(`stats.${item.key}`)}</span>
-						</div>
-					))}
-				</div>
 			</section>
 
 			<div className='container mx-auto px-6 pb-20 space-y-20'>

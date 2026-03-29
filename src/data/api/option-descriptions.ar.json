@@ -103,7 +103,7 @@
     "default": "false"
   },
   "mode": {
-    "description": "وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`.",
+    "description": "وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`. قم بإلحاق `:bottom` لوضع شريط الأدوات في الأسفل (على سبيل المثال `classic:bottom`، `inline:bottom`).",
     "default": "\"classic\""
   },
   "type": {
@@ -276,6 +276,10 @@
     "description": "وقت التأخير لتحديثات مكدس المحفوظات (مللي ثانية).",
     "default": "400"
   },
+  "historyStackSize": {
+    "description": "الحد الأقصى لعدد إدخالات السجل لكل إطار جذر. يتم تجاهل الإدخالات الأقدم عند تجاوزها.",
+    "default": "100"
+  },
   "printClass": {
     "description": "اسم الفئة للطباعة.",
     "default": "\"\""
@@ -301,12 +305,20 @@
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "مدة عرض رسائل التوست (ملي ثانية).",
+    "description": "مدة عرض رسائل التوست (مللي ثانية).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
     "description": "تمكين وضع عرض التعليمات البرمجية المجاني.",
     "default": "false"
+  },
+  "finder_panel": {
+    "description": "يعرض واجهة مستخدم لوحة البحث/الاستبدال المضمنة. \n- يتم دائمًا إنشاء المكتشف داخليًا؛ يتحكم هذا الخيار في ما إذا كانت اللوحة مرئية للمستخدمين (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "يبحث على الفور أثناء الكتابة (رفض). عندما يكون خطأ، يتم تشغيل البحث فقط على Enter.",
+    "default": "true"
   },
   "externalLibs": {
     "description": "المكتبات الخارجية مثل CodeMirror أو KaTeX أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
@@ -395,6 +407,9 @@
   },
   "videoGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
+  },
+  "codeBlock_langs": {
+    "description": "قائمة لغات البرمجة القابلة للتحديد لكتل ​​التعليمات البرمجية. \n- الإعدادات الافتراضية لـ 21 لغة مشتركة \n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go,rust, Ruby, php, Swift, kotlin, sql, bash, markdown, xml, yaml]. \n- اضبط على المصفوفة الفارغة `[]` لتعطيل واجهة مستخدم اختيار اللغة بالكامل."
   },
   "exportPDF_apiUrl": {
     "description": "عنوان URL لطلب الخادم لإنشاء ملف PDF"

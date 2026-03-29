@@ -26,6 +26,7 @@ export default function Hero() {
 						<span className='bg-gradient-to-r from-orange-400 via-rose-500 to-purple-600 bg-clip-text text-transparent'>SunEditor</span>
 					</h1>
 					<p className='mx-auto mt-6 max-w-2xl text-base text-muted-foreground'>{t("title")}</p>
+					<p className='mt-2 text-base font-medium text-foreground/80'>{t("tagline")}</p>
 					<div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
 						<Button
 							asChild

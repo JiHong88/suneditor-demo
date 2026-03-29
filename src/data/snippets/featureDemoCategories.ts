@@ -34,12 +34,12 @@ export const FEATURE_CATEGORIES: FeatureCategoryDef[] = [
 	{
 		key: "advanced",
 		color: "text-amber-600 dark:text-amber-400",
-		features: ["math", "mention", "links", "codeView", "charCounter", "undoRedo"],
+		features: ["math", "mention", "links", "codeView", "markdownView", "codeBlock", "finder", "charCounter", "undoRedo"],
 	},
 	{
 		key: "modesLayout",
 		color: "text-teal-600 dark:text-teal-400",
-		features: ["classicMode", "inlineMode", "balloonMode", "balloonAlways", "documentLayout", "fullScreen"],
+		features: ["classicMode", "inlineMode", "balloonMode", "balloonAlways", "toolbarBottom", "documentLayout", "fullScreen"],
 	},
 	{
 		key: "platform",
@@ -55,11 +55,3 @@ export type StatDef = {
 	key: StatKey;
 	className: string;
 };
-
-export const STAT_META: StatDef[] = [
-	{ key: "modes", className: "bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-400" },
-	{ key: "plugins", className: "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400" },
-	{ key: "languages", className: "bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400" },
-	{ key: "zeroDeps", className: "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400" },
-	{ key: "typescript", className: "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400" },
-];

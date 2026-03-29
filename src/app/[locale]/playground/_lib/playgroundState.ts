@@ -32,6 +32,7 @@ export interface PlaygroundState {
 
 	// — Toolbar —
 	toolbar_width: string;
+	toolbar_position: "top" | "bottom";
 	toolbar_sticky: number;
 	toolbar_hide: boolean;
 	toolbar_container_enabled: boolean;
@@ -66,6 +67,7 @@ export interface PlaygroundState {
 	defaultLineBreakFormat: "line" | "br";
 	retainStyleMode: "repeat" | "always" | "none";
 	freeCodeViewMode: boolean;
+	codeBlock: string;
 
 	// — Features —
 	autoLinkify: boolean;
@@ -421,6 +423,7 @@ export const DEFAULTS: PlaygroundState = {
 	editorStyle: "",
 
 	toolbar_width: "auto",
+	toolbar_position: "top",
 	toolbar_sticky: 0,
 	toolbar_hide: false,
 	toolbar_container_enabled: false,
@@ -452,6 +455,7 @@ export const DEFAULTS: PlaygroundState = {
 	defaultLineBreakFormat: "line",
 	retainStyleMode: "repeat",
 	freeCodeViewMode: false,
+	codeBlock: "",
 
 	autoLinkify: true,
 	autoStyleify: "bold,underline,italic,strike",
@@ -1044,6 +1048,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		height: state.height || "auto",
 
 		// toolbar
+		toolbar_position: state.toolbar_position,
 		toolbar_sticky: state.toolbar_sticky,
 		toolbar_hide: state.toolbar_hide,
 		shortcutsHint: state.shortcutsHint,
@@ -1078,6 +1083,9 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	opts.defaultLineBreakFormat = state.defaultLineBreakFormat;
 	opts.retainStyleMode = state.retainStyleMode;
 	opts.freeCodeViewMode = state.freeCodeViewMode;
+	if (state.codeBlock) {
+		opts.codeBlock = state.codeBlock.split(",").map((s: string) => s.trim()).filter(Boolean);
+	}
 
 	// features
 	opts.autoLinkify = state.autoLinkify;
@@ -1552,6 +1560,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	es: "editorStyle",
 	// Toolbar
 	tw: "toolbar_width",
+	tpo: "toolbar_position",
 	ts: "toolbar_sticky",
 	th: "toolbar_hide",
 	tce: "toolbar_container_enabled",
@@ -1630,6 +1639,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	dlb: "defaultLineBreakFormat",
 	rsm: "retainStyleMode",
 	fcv: "freeCodeViewMode",
+	cl: "codeBlock",
 	// Features
 	al: "autoLinkify",
 	asy: "autoStyleify",

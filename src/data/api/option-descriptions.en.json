@@ -103,7 +103,7 @@
     "default": "false"
   },
   "mode": {
-    "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.",
+    "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
   },
   "type": {
@@ -276,6 +276,10 @@
     "description": "Delay time for history stack updates (ms).",
     "default": "400"
   },
+  "historyStackSize": {
+    "description": "Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.",
+    "default": "100"
+  },
   "printClass": {
     "description": "Class name for printing.",
     "default": "\"\""
@@ -307,6 +311,14 @@
   "freeCodeViewMode": {
     "description": "Enables free code view mode.",
     "default": "false"
+  },
+  "finder_panel": {
+    "description": "Shows the built-in Find/Replace panel UI.\n- The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Searches instantly as you type (debounced). When false, search runs only on Enter.",
+    "default": "true"
   },
   "externalLibs": {
     "description": "External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
@@ -395,6 +407,9 @@
   },
   "videoGallery_thumbnail": {
     "description": "Default thumbnail"
+  },
+  "codeBlock_langs": {
+    "description": "List of selectable programming languages for code blocks.\n- Defaults to 21 common languages\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Set to empty array `[]` to disable language selection UI entirely."
   },
   "exportPDF_apiUrl": {
     "description": "Server request URL for PDF generation"

@@ -10,8 +10,8 @@ import { downloadPDF } from "@/../server/service/download/pdf";
 
 export async function POST(request: NextRequest) {
 	try {
-		const { html, fileName = "suneditor-pdf" } = await request.json();
-		const pdf = await downloadPDF(html);
+		const { htmlContent, fileName = "suneditor-pdf" } = await request.json();
+		const pdf = await downloadPDF(htmlContent);
 
 		return new NextResponse(new Uint8Array(pdf), {
 			status: 200,

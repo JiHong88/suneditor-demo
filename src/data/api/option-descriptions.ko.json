@@ -103,7 +103,7 @@
     "default": "false"
   },
   "mode": {
-    "description": "도구 모음 모드: `classic`, `inline`, `balloon`, `balloon-always`.",
+    "description": "도구 모음 모드: `classic`, `inline`, `balloon`, `balloon-always`. 도구 모음을 하단에 배치하려면 `:bottom`를 추가하세요(예: `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
   },
   "type": {
@@ -276,6 +276,10 @@
     "description": "기록 스택 업데이트 지연 시간(ms)입니다.",
     "default": "400"
   },
+  "historyStackSize": {
+    "description": "루트 프레임당 최대 기록 항목 수입니다. 초과되면 가장 오래된 항목이 삭제됩니다.",
+    "default": "100"
+  },
   "printClass": {
     "description": "인쇄용 클래스 이름입니다.",
     "default": "\"\""
@@ -307,6 +311,14 @@
   "freeCodeViewMode": {
     "description": "무료 코드 보기 모드를 활성화합니다.",
     "default": "false"
+  },
+  "finder_panel": {
+    "description": "내장된 찾기/바꾸기 패널 UI를 표시합니다. \n- 파인더는 항상 내부적으로 생성됩니다. 이 옵션은 패널이 사용자에게 표시되는지 여부를 제어합니다(Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "입력하는 즉시 검색합니다(디바운싱). false인 경우 Enter 키를 누를 때만 검색이 실행됩니다.",
+    "default": "true"
   },
   "externalLibs": {
     "description": "CodeMirror, KaTeX 또는 MathJax와 같은 외부 라이브러리. \n- {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md 외부 라이브러리 가이드}를 참조하세요. \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
@@ -395,6 +407,9 @@
   },
   "videoGallery_thumbnail": {
     "description": "기본 썸네일"
+  },
+  "codeBlock_langs": {
+    "description": "코드 블록에 대해 선택 가능한 프로그래밍 언어 목록입니다. \n- 기본적으로 21개 공용 언어가 사용됩니다. \n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, Rust, ruby, php, Swift, kotlin, sql, bash, markdown, xml, yaml]. \n- 언어 선택 UI를 완전히 비활성화하려면 빈 배열 `[]`로 설정합니다."
   },
   "exportPDF_apiUrl": {
     "description": "PDF 생성을 위한 서버 요청 URL"

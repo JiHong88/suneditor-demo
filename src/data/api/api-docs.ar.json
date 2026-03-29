@@ -1,6 +1,6 @@
 {
 	"version": "3.0.0-rc.5",
-	"generatedAt": "2026-03-15T05:57:17.508Z",
+	"generatedAt": "2026-03-29T12:20:03.596Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -281,7 +281,7 @@
 					"methods": [
 						{
 							"name": "addEvent",
-							"params": "target: any, type: string, listener: EventListenerOrEventListenerObject, useCapture?: boolean | AddEventListenerOptions",
+							"params": "target: any, type: string, listener: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "SunEditor.Event.Info | null",
 							"description": "قم بالتسجيل في هذا الحدث. - الأحداث المسجلة بهذه الطريقة فقط هي التي يتم إلغاء تسجيلها أو إعادة تسجيلها عند استدعاء أساليب مثل 'setOptions' و'destroy'.",
 							"example": "",
@@ -306,7 +306,7 @@
 						},
 						{
 							"name": "addGlobalEvent",
-							"params": "type: string, listener: (...args: any) => any, useCapture?: boolean | AddEventListenerOptions",
+							"params": "type: string, listener: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "SunEditor.Event.GlobalInfo",
 							"description": "أضف حدثًا إلى المستند. - عند الإنشاء كإطار Iframe، تتم إضافة نفس الحدث إلى المستند في Iframe.",
 							"example": "",
@@ -319,7 +319,7 @@
 						},
 						{
 							"name": "removeGlobalEvent",
-							"params": "type: string | SunEditor.Event.GlobalInfo, listener?: (...args: any) => any, useCapture?: boolean | AddEventListenerOptions",
+							"params": "type: string | SunEditor.Event.GlobalInfo, listener?: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "undefined | null",
 							"description": "إزالة الأحداث من المستند. - عند الإنشاء كإطار Iframe، تتم أيضًا إزالة حدث المستند الموجود داخل Iframe.",
 							"example": "",
@@ -1100,7 +1100,7 @@
 						},
 						{
 							"name": "setRelPosition",
-							"params": "element: HTMLElement, e_container: HTMLElement, target: HTMLElement, t_container: HTMLElement",
+							"params": "element: HTMLElement, e_container: HTMLElement, target: HTMLElement, t_container: HTMLElement, {\n\t\t\tpreferUp,\n\t\t}?: {\n\t\t\tpreferUp?: boolean;\n\t\t}",
 							"returns": "void",
 							"description": "يضبط الموضع النسبي للعنصر",
 							"example": "",
@@ -1108,21 +1108,23 @@
 								"element": "عنصر للموقف",
 								"e_container": "حاوية جذر العنصر",
 								"target": "العنصر المستهدف للموضع ضده",
-								"t_container": "حاوية جذر الهدف"
+								"t_container": "حاوية جذر الهدف",
+								"opts?": "خيارات",
+								"opts.preferUp?=false": "فتح لأعلى بشكل افتراضي (لشريط الأدوات السفلي)"
 							}
 						},
 						{
 							"name": "setAbsPosition",
-							"params": "element: HTMLElement, target: HTMLElement, params: {\n\t\t\tisWWTarget?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft: number;\n\t\t\t\ttop: number;\n\t\t\t};\n\t\t\tposition?: 'bottom' | 'top';\n\t\t\tinst: any;\n\t\t\tsibling?: HTMLElement;\n\t\t}",
+							"params": "element: HTMLElement, target: HTMLElement, params: {\n\t\t\tisWWTarget?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft: number;\n\t\t\t\tright: number;\n\t\t\t\ttop: number;\n\t\t\t};\n\t\t\tposition?: 'bottom' | 'top';\n\t\t\tinst: any;\n\t\t\tsibling?: HTMLElement;\n\t\t}",
 							"returns": "| {\n\t\t\t\tposition: 'top' | 'bottom';\n\t\t  }\n\t\t| undefined",
 							"description": "يضبط الموضع المطلق للعنصر",
-							"example": "const result = editor.$.offset.setAbsPosition(controller, targetElement, {\nposition: 'bottom', inst: this, addOffset: { left: 0, top: 0 }\n});",
+							"example": "const result = editor.$.offset.setAbsPosition(controller, targetElement, {\nposition: 'bottom', inst: this, addOffset: { left: 0, right: 0, top: 0 }\n});",
 							"paramDescriptions": {
 								"element": "عنصر للموقف",
 								"target": "العنصر المستهدف",
 								"params": "معلمات الموقف",
 								"params.isWWTarget?=false": "ما إذا كان الهدف موجودًا ضمن منطقة WYSIWYG الخاصة بالمحرر",
-								"params.addOffset?={left:0, top:0}": "إزاحة إضافية",
+								"params.addOffset?={left:0, right:0, top:0}": "إزاحة إضافية",
 								"params.position?=\"bottom\"": "الموضع ('أسفل'|'أعلى')",
 								"params.inst": "كائن مثيل المتصل",
 								"params.sibling?=null": "عنصر تحكم الأخوة"
@@ -1248,13 +1250,13 @@
 						},
 						{
 							"name": "scrollTo",
-							"params": "ref: Selection | Range | Node, scrollOption?: {\n\t\t\t[x: string]: any;\n\t\t}",
+							"params": "ref: Selection | Range | Node, scrollOption?: ScrollIntoViewOptions & {\n\t\t\tnoFocus?: boolean;\n\t\t}",
 							"returns": "void",
 							"description": "قم بالتمرير إلى التحديد المقابل أو موضع النطاق.",
 							"example": "// Scroll to current selection smoothly\neditor.selection.scrollTo(editor.selection.get());\n// Scroll to specific node\nconst targetNode = document.querySelector('.target-element');\neditor.selection.scrollTo(targetNode);\n// Scroll with custom options\neditor.selection.scrollTo(editor.selection.getRange(), {\nbehavior: 'auto',\nblock: 'center'\n});",
 							"paramDescriptions": {
 								"ref": "كائن التحديد أو النطاق",
-								"scrollOption?": "خيار التمرير إلى"
+								"scrollOption?": "خيارات التمرير. يمتد `ScrollIntoViewOptions` (`behavior`، `block`، `inline`) مع `noFocus` لمنع تغيير التركيز."
 							}
 						},
 						{
@@ -1270,6 +1272,109 @@
 							"params": "",
 							"returns": "HTMLInputElement",
 							"description": "حفظ كائن النطاق وعقدة المحرر المحددة حاليًا",
+							"example": ""
+						}
+					]
+				},
+				"finder": {
+					"title": "editor.finder",
+					"description": "طرق مكتشف",
+					"methods": [
+						{
+							"name": "#injectHighlightStyles",
+							"params": "",
+							"returns": "void",
+							"description": "",
+							"example": "",
+							"memberKind": "static"
+						},
+						{
+							"name": "isOpen",
+							"params": "",
+							"returns": "boolean",
+							"description": "ما إذا كانت اللوحة مفتوحة.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "open",
+							"params": "replaceMode?: boolean",
+							"returns": "void",
+							"description": "يفتح الباحث. مع اللوحة: يظهر واجهة المستخدم. بدون لوحة: لتنشيط حالة البحث فقط.",
+							"example": "",
+							"paramDescriptions": {
+								"replaceMode?=true": "ما إذا كان سيتم إظهار صف الاستبدال"
+							}
+						},
+						{
+							"name": "close",
+							"params": "",
+							"returns": "void",
+							"description": "لإغلاق الباحث ومسح الإبرازات.",
+							"example": ""
+						},
+						{
+							"name": "findNext",
+							"params": "",
+							"returns": "void",
+							"description": "انتقل إلى المباراة التالية (عامة لربط الاختصار).",
+							"example": ""
+						},
+						{
+							"name": "findPrev",
+							"params": "",
+							"returns": "void",
+							"description": "انتقل إلى المطابقة السابقة (عامة لربط الاختصار).",
+							"example": ""
+						},
+						{
+							"name": "search",
+							"params": "term: string, {\n\t\t\tmatchCase,\n\t\t\twholeWord,\n\t\t\tregex,\n\t\t}?: {\n\t\t\tmatchCase?: boolean;\n\t\t\twholeWord?: boolean;\n\t\t\tregex?: boolean;\n\t\t}",
+							"returns": "number",
+							"description": "ابحث عن مصطلح في محتوى المحرر (API بدون رأس).",
+							"example": "",
+							"paramDescriptions": {
+								"term": "مصطلح البحث",
+								"options?": "خيارات البحث",
+								"options.matchCase?=false": "بحث حساس لحالة الأحرف",
+								"options.wholeWord?=false": "البحث عن كلمة كاملة",
+								"options.regex?=false": "بحث ريجكس"
+							},
+							"returnsDescription": "عدد التطابقات التي تم العثور عليها"
+						},
+						{
+							"name": "replace",
+							"params": "replaceText: string",
+							"returns": "void",
+							"description": "استبدل المطابقة الحالية (API مقطوعة الرأس).",
+							"example": "",
+							"paramDescriptions": {
+								"replaceText": "نص بديل"
+							}
+						},
+						{
+							"name": "replaceAll",
+							"params": "replaceText: string",
+							"returns": "void",
+							"description": "استبدل جميع التطابقات (API مقطوعة الرأس).",
+							"example": "",
+							"paramDescriptions": {
+								"replaceText": "نص بديل"
+							}
+						},
+						{
+							"name": "matchInfo",
+							"params": "",
+							"returns": "{\n\t\tcurrent: number;\n\t\ttotal: number;\n\t}",
+							"description": "عدد التطابقات الحالية والفهرس.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "refresh",
+							"params": "",
+							"returns": "void",
+							"description": "أعد تشغيل البحث بالمصطلح الحالي (تم حذفه لمدة 300 مللي ثانية). تم استدعاؤه لتغيير محتوى wysiwyg.",
 							"example": ""
 						}
 					]
@@ -1344,6 +1449,22 @@
 					"description": "طرق شريط الأدوات",
 					"methods": [
 						{
+							"name": "isSticky",
+							"params": "",
+							"returns": "boolean",
+							"description": "ما إذا كان شريط الأدوات حاليًا في حالة ثابتة (ثابتة). بالنسبة للوضع الثابت في CSS، يتم حسابه من موضع إطار العرض الخاص بالعنصر. بالنسبة إلى الوضع الثابت لـ JS (toolbar_container)، يستخدم علامة يدوية.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "isCSSSticky",
+							"params": "",
+							"returns": "boolean",
+							"description": "ما إذا كان شريط الأدوات يستخدم CSS `position: sticky` الأصلي. - عندما يكون `false`، يكون الإجراء الاحتياطي الثابت المستند إلى JS (`position: fixed`) نشطًا.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "disable",
 							"params": "",
 							"returns": "void",
@@ -1402,6 +1523,16 @@
 							"example": "",
 							"paramDescriptions": {
 								"value?": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `codeView`."
+							}
+						},
+						{
+							"name": "markdownView",
+							"params": "value?: boolean",
+							"returns": "void",
+							"description": "تغييرات على عرض تخفيض السعر أو عرض wysiwyg",
+							"example": "",
+							"paramDescriptions": {
+								"value?": "`true`/`false`، إذا كان `undefined` قم بتبديل وضع `markdownView`."
 							}
 						},
 						{
@@ -2178,6 +2309,80 @@
 						}
 					]
 				},
+				"codeLang": {
+					"title": "editor.codeLang",
+					"description": "طرق codeLang",
+					"methods": [
+						{
+							"name": "unwrapCode",
+							"params": "preElement: HTMLElement",
+							"returns": "void",
+							"description": "تحويل الإدخال: `<pre><code class=\"language-xxx\">...</code></pre>` → `<pre class=\"language-xxx\" data-se-lang=\"xxx\">...`",
+							"example": "",
+							"paramDescriptions": {
+								"preElement": "العنصر `<pre>` المطلوب فكه"
+							},
+							"memberKind": "static"
+						},
+						{
+							"name": "wrapCode",
+							"params": "preElement: Element",
+							"returns": "void",
+							"description": "تحويل الإخراج: `<pre class=\"language-xxx\" data-se-lang=\"xxx\">...` → `<pre><code class=\"language-xxx\">...</code></pre>`",
+							"example": "",
+							"paramDescriptions": {
+								"preElement": "العنصر `<pre>` المطلوب التفافه"
+							},
+							"memberKind": "static"
+						},
+						{
+							"name": "isOpen",
+							"params": "",
+							"returns": "boolean",
+							"description": "ما إذا كانت واجهة مستخدم المحدد مرئية حاليًا (الزر أو القائمة مفتوحة).",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "show",
+							"params": "preElement: HTMLElement",
+							"returns": "void",
+							"description": "يعرض محدد اللغة فوق العنصر المسبق المحدد.",
+							"example": "",
+							"paramDescriptions": {
+								"preElement": "العنصر `<pre>`"
+							}
+						},
+						{
+							"name": "hide",
+							"params": "",
+							"returns": "void",
+							"description": "إخفاء محدد اللغة.",
+							"example": ""
+						},
+						{
+							"name": "close",
+							"params": "",
+							"returns": "void",
+							"description": "فرض إغلاق محدد اللغة واختيار القائمة.",
+							"example": ""
+						},
+						{
+							"name": "controllerClose",
+							"params": "",
+							"returns": "void",
+							"description": "يتم الاتصال به عند إغلاق وحدة التحكم.",
+							"example": ""
+						},
+						{
+							"name": "destroy",
+							"params": "",
+							"returns": "void",
+							"description": "ينظف الموارد.",
+							"example": ""
+						}
+					]
+				},
 				"constructor": {
 					"title": "editor.constructor",
 					"description": "أساليب البناء",
@@ -2451,6 +2656,12 @@
 							"params": "",
 							"returns": "boolean",
 							"description": "- ما إذا كان شريط الأدوات الفرعي في الوضع `balloon-always`."
+						},
+						{
+							"name": "isBottom",
+							"params": "",
+							"returns": "boolean",
+							"description": "- ما إذا كان شريط الأدوات موجودًا في أسفل المحرر (`classic:bottom`، `inline:bottom`)."
 						}
 					]
 				},
@@ -2598,6 +2809,24 @@
 							"description": "- عنصر يعرض أرقام الأسطر في وضع عرض الكود."
 						},
 						{
+							"name": "markdownWrapper",
+							"params": "",
+							"returns": "HTMLElement",
+							"description": "- عنصر الغلاف لوضع عرض تخفيض السعر."
+						},
+						{
+							"name": "markdown",
+							"params": "",
+							"returns": "HTMLTextAreaElement",
+							"description": "- عنصر تحرير عرض Markdown (<textarea>)."
+						},
+						{
+							"name": "markdownNumbers",
+							"params": "",
+							"returns": "HTMLTextAreaElement",
+							"description": "- عنصر يعرض أرقام الأسطر في وضع عرض تخفيض السعر."
+						},
+						{
 							"name": "placeholder",
 							"params": "",
 							"returns": "HTMLElement",
@@ -2644,6 +2873,12 @@
 							"params": "",
 							"returns": "boolean",
 							"description": "- ما إذا كان المحرر حاليًا في وضع عرض التعليمات البرمجية."
+						},
+						{
+							"name": "isMarkdownView",
+							"params": "",
+							"returns": "boolean",
+							"description": "- ما إذا كان المحرر حاليًا في وضع عرض تخفيض السعر."
 						},
 						{
 							"name": "isFullScreen",
@@ -2721,7 +2956,7 @@
 							"name": "documentType_use_page",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ما إذا كان تخطيط الصفحة ممكّنًا في وضع نوع المستند. === وقت التشغيل / القيم المحسوبة ==="
+							"description": "- ما إذا كان تخطيط الصفحة ممكّنًا في وضع نوع المستند. === وقت التشغيل/القيم المحسوبة ==="
 						},
 						{
 							"name": "wwComputedStyle",
@@ -2762,8 +2997,8 @@
 						{
 							"name": "mode",
 							"params": "",
-							"returns": "'classic' | 'inline' | 'balloon' | 'balloon-always'",
-							"description": "- وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`."
+							"returns": "'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom'",
+							"description": "- وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`. قم بإلحاق `:bottom` لوضع شريط الأدوات في الأسفل (على سبيل المثال `classic:bottom`، `inline:bottom`)."
 						},
 						{
 							"name": "type",
@@ -3042,6 +3277,12 @@
 							"description": "- وقت التأخير لتحديثات مكدس المحفوظات (مللي ثانية)."
 						},
 						{
+							"name": "historyStackSize",
+							"params": "",
+							"returns": "number",
+							"description": "- الحد الأقصى لعدد إدخالات التاريخ لكل إطار جذر. يتم تجاهل الإدخالات الأقدم عند تجاوزها."
+						},
+						{
 							"name": "printClass",
 							"params": "",
 							"returns": "string",
@@ -3087,7 +3328,19 @@
 							"name": "freeCodeViewMode",
 							"params": "",
 							"returns": "boolean",
-							"description": "- تمكين وضع عرض التعليمات البرمجية المجاني. === الخيارات الديناميكية ==="
+							"description": "- تمكين وضع عرض التعليمات البرمجية المجاني."
+						},
+						{
+							"name": "finder_panel",
+							"params": "",
+							"returns": "boolean",
+							"description": "- يعرض واجهة مستخدم لوحة البحث/الاستبدال المضمنة. \n- يتم دائمًا إنشاء المكتشف داخليًا؛ يتحكم هذا الخيار في ما إذا كانت اللوحة مرئية للمستخدمين (Ctrl+F / Ctrl+H)."
+						},
+						{
+							"name": "finder_liveSearch",
+							"params": "",
+							"returns": "boolean",
+							"description": "- البحث فورًا أثناء الكتابة (مرتد). عندما يكون خطأ، يتم تشغيل البحث فقط على Enter. /// === الخيارات الديناميكية ==="
 						},
 						{
 							"name": "externalLibs",
@@ -3135,6 +3388,12 @@
 							"name": "blockStyle",
 							"params": "",
 							"returns": "import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions",
+							"description": ""
+						},
+						{
+							"name": "codeBlock",
+							"params": "",
+							"returns": "import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions",
 							"description": ""
 						},
 						{
@@ -3546,6 +3805,47 @@
 							"params": "element: HTMLElement | null, target: HTMLElement | null",
 							"returns": "boolean | void",
 							"description": "",
+							"example": ""
+						}
+					]
+				},
+				"codeBlock": {
+					"title": "Code Block",
+					"type": "command",
+					"methods": [
+						{
+							"name": "onMouseMove",
+							"params": "params: SunEditor.HookParams.MouseEvent",
+							"returns": "void",
+							"description": "",
+							"example": ""
+						},
+						{
+							"name": "active",
+							"params": "element: HTMLElement | null, target: HTMLElement | null",
+							"returns": "boolean | void",
+							"description": "",
+							"example": ""
+						},
+						{
+							"name": "on",
+							"params": "target?: HTMLElement",
+							"returns": "void",
+							"description": "",
+							"example": ""
+						},
+						{
+							"name": "controllerClose",
+							"params": "",
+							"returns": "void",
+							"description": "/** @hook Module.Controller *",
+							"example": ""
+						},
+						{
+							"name": "destroy",
+							"params": "",
+							"returns": "void",
+							"description": "ينظف الموارد.",
 							"example": ""
 						}
 					]
@@ -4974,7 +5274,7 @@
 					"methods": [
 						{
 							"name": "open",
-							"params": "target: Node | Range, positionTarget?: Node, {\n\t\t\tisWWTarget,\n\t\t\tinitMethod,\n\t\t\tdisabled,\n\t\t\taddOffset,\n\t\t}?: {\n\t\t\tisWWTarget?: boolean;\n\t\t\tinitMethod?: () => void;\n\t\t\tdisabled?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft?: number;\n\t\t\t\ttop?: number;\n\t\t\t};\n\t\t}",
+							"params": "target: Node | Range, positionTarget?: Node, {\n\t\t\tisWWTarget,\n\t\t\tpassive,\n\t\t\tinitMethod,\n\t\t\tdisabled,\n\t\t\taddOffset,\n\t\t}?: {\n\t\t\tisWWTarget?: boolean;\n\t\t\tpassive?: boolean;\n\t\t\tinitMethod?: () => void;\n\t\t\tdisabled?: boolean;\n\t\t\taddOffset?: {\n\t\t\t\tleft?: number;\n\t\t\t\tright?: number;\n\t\t\t\ttop?: number;\n\t\t\t};\n\t\t}",
 							"returns": "void",
 							"description": "افتح البرنامج المساعد مشروط",
 							"example": "// Open controller on a target element with default options\nthis.controller.open(target);\n// Open with explicit options and additional offset\nthis.controller.open(target, null, { isWWTarget: false, initMethod: null, addOffset: null });\n// Open on a Range target (e.g., text selection)\nthis.controller.open(this.$.selection.getRange());",
@@ -4983,6 +5283,7 @@
 								"positionTarget?": "موضع العنصر المستهدف",
 								"params?={}": "المعلمات",
 								"params.isWWTarget?": "إذا كانت وحدة التحكم في منطقة WYSIWYG، فاضبطها على `true`.",
+								"params.passive?": "إذا كان `true`، فسيتم فتح وحدة التحكم بشكل مرئي دون التأثير على حالة المحرر",
 								"params.initMethod?": "الطريقة التي يتم استدعاؤها عند إغلاق وحدة التحكم.",
 								"params.disabled?": "إذا كان `true`، عند فتح `controller`، يتم تعطيل الأزرار التي لا تحتوي على فئة `se-component-enabled`. (الافتراضي: `this.disabled`)",
 								"params.addOffset?": "قيم الإزاحة الإضافية"
@@ -6057,6 +6358,35 @@
 						}
 					]
 				},
+				"markdown": {
+					"title": "Markdown",
+					"description": "وظائف فائدة تخفيض السعر",
+					"methods": [
+						{
+							"name": "jsonToMarkdown",
+							"params": "jsonNode: any",
+							"returns": "string",
+							"description": "يحول شجرة JSON (من htmlToJson) إلى سلسلة Markdown.",
+							"example": "const json = htmlToJson('<p><strong>Hello</strong> World</p>');\nconst md = jsonToMarkdown(json);\n// '**Hello** World\\n\\n'",
+							"paramDescriptions": {
+								"jsonNode": "عقدة JSON من htmlToJson"
+							},
+							"returnsDescription": "سلسلة تخفيض السعر"
+						},
+						{
+							"name": "markdownToHtml",
+							"params": "md: string, defaultLine?: string",
+							"returns": "string",
+							"description": "يوزع سلسلة Markdown إلى سلسلة HTML. - يتم تمرير علامات HTML الموجودة في عملية التخفيض كما هي (للعناصر الاحتياطية).",
+							"example": "markdownToHtml('# Hello\\n\\n**bold** text');\n// '<h1>Hello</h1><p><strong>bold</strong> text</p>'",
+							"paramDescriptions": {
+								"md": "سلسلة تخفيض السعر",
+								"defaultLine?='p'": "علامة عنصر الكتلة الافتراضية"
+							},
+							"returnsDescription": "سلسلة HTML"
+						}
+					]
+				},
 				"numbers": {
 					"title": "Numbers",
 					"description": "وظائف فائدة الأرقام",
@@ -6908,13 +7238,14 @@
 						},
 						{
 							"name": "toggleClass",
-							"params": "element: Node, className: string",
-							"returns": "boolean | undefined",
+							"params": "element: Node, className: string, force?: boolean",
+							"returns": "void",
 							"description": "قيمة الوسيطة إذا لم يكن هناك اسم فئة، أدخله واحذف اسم الفئة إذا كان موجودًا",
 							"example": "",
 							"paramDescriptions": {
 								"element": "عنصر ليحل محل اسم الفئة",
-								"className": "اسم الفئة المراد تغييرها"
+								"className": "اسم الفئة المراد تغييرها",
+								"force?": "إذا كان صحيحا، يضيف الفصل؛ إذا كان كاذبا، يزيله."
 							}
 						},
 						{
@@ -7190,6 +7521,17 @@
 					"paramDescriptions": {
 						"params": ".$ - تبعيات النواة",
 						"params.is": "حالة عرض الكود"
+					}
+				},
+				{
+					"name": "onToggleMarkdownView",
+					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; is: boolean }",
+					"returns": "void",
+					"description": "يتم تشغيله عندما يقوم المحرر بالتبديل بين عرض WYSIWYG وعرض تخفيض السعر. تشير المعلمة `is` إلى ما إذا كان عرض تخفيض السعر نشطًا الآن (`true`) أو عرض WYSIWYG نشطًا (`false`).",
+					"example": "",
+					"paramDescriptions": {
+						"params": ".$ - تبعيات النواة",
+						"params.is": "حالة عرض تخفيض السعر"
 					}
 				},
 				{
@@ -8705,7 +9047,7 @@
 				},
 				{
 					"name": "GlobalInfo",
-					"definition": "{\n\t\t\t\t/**\n\t\t\t\t * Event type\n\t\t\t\t */\n\t\t\t\ttype: string;\n\t\t\t\t/**\n\t\t\t\t * Event listener\n\t\t\t\t */\n\t\t\t\tlistener: (...args: any) => any;\n\t\t\t\t/**\n\t\t\t\t * Use event capture\n\t\t\t\t */\n\t\t\t\tuseCapture?: boolean | AddEventListenerOptions;\n\t\t\t}",
+					"definition": "{\n\t\t\t\t/**\n\t\t\t\t * Event type\n\t\t\t\t */\n\t\t\t\ttype: string;\n\t\t\t\t/**\n\t\t\t\t * Event listener\n\t\t\t\t */\n\t\t\t\tlistener: any;\n\t\t\t\t/**\n\t\t\t\t * Use event capture\n\t\t\t\t */\n\t\t\t\tuseCapture?: boolean | AddEventListenerOptions;\n\t\t\t}",
 					"kind": "type",
 					"memberDescriptions": {
 						"type": "Event type",
@@ -8788,13 +9130,13 @@
 				},
 				{
 					"name": "ButtonCommand",
-					"definition": "| 'bold'\n\t\t\t\t| 'underline'\n\t\t\t\t| 'italic'\n\t\t\t\t| 'strike'\n\t\t\t\t| 'subscript'\n\t\t\t\t| 'superscript'\n\t\t\t\t| 'removeFormat'\n\t\t\t\t| 'copyFormat'\n\t\t\t\t| 'indent'\n\t\t\t\t| 'outdent'\n\t\t\t\t| 'fullScreen'\n\t\t\t\t| 'showBlocks'\n\t\t\t\t| 'codeView'\n\t\t\t\t| 'undo'\n\t\t\t\t| 'redo'\n\t\t\t\t| 'preview'\n\t\t\t\t| 'print'\n\t\t\t\t| 'copy'\n\t\t\t\t| 'dir'\n\t\t\t\t| 'dir_ltr'\n\t\t\t\t| 'dir_rtl'\n\t\t\t\t| 'save'\n\t\t\t\t| 'newDocument'\n\t\t\t\t| 'selectAll'\n\t\t\t\t| 'pageBreak'\n\t\t\t\t| 'pageUp'\n\t\t\t\t| 'pageDown'\n\t\t\t\t| 'pageNavigator'",
+					"definition": "| 'bold'\n\t\t\t\t| 'underline'\n\t\t\t\t| 'italic'\n\t\t\t\t| 'strike'\n\t\t\t\t| 'subscript'\n\t\t\t\t| 'superscript'\n\t\t\t\t| 'removeFormat'\n\t\t\t\t| 'copyFormat'\n\t\t\t\t| 'indent'\n\t\t\t\t| 'outdent'\n\t\t\t\t| 'fullScreen'\n\t\t\t\t| 'showBlocks'\n\t\t\t\t| 'codeView'\n\t\t\t\t| 'markdownView'\n\t\t\t\t| 'undo'\n\t\t\t\t| 'redo'\n\t\t\t\t| 'preview'\n\t\t\t\t| 'print'\n\t\t\t\t| 'copy'\n\t\t\t\t| 'dir'\n\t\t\t\t| 'dir_ltr'\n\t\t\t\t| 'dir_rtl'\n\t\t\t\t| 'finder'\n\t\t\t\t| 'save'\n\t\t\t\t| 'newDocument'\n\t\t\t\t| 'selectAll'\n\t\t\t\t| 'pageBreak'\n\t\t\t\t| 'pageUp'\n\t\t\t\t| 'pageDown'\n\t\t\t\t| 'pageNavigator'",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "ButtonPlugin",
-					"definition": "| 'blockquote'\n\t\t\t\t| 'exportPDF'\n\t\t\t\t| 'fileUpload'\n\t\t\t\t| 'list_bulleted'\n\t\t\t\t| 'list_numbered'\n\t\t\t\t| 'mention'\n\t\t\t\t| 'align'\n\t\t\t\t| 'font'\n\t\t\t\t| 'fontColor'\n\t\t\t\t| 'backgroundColor'\n\t\t\t\t| 'list'\n\t\t\t\t| 'table'\n\t\t\t\t| 'blockStyle'\n\t\t\t\t| 'hr'\n\t\t\t\t| 'layout'\n\t\t\t\t| 'lineHeight'\n\t\t\t\t| 'template'\n\t\t\t\t| 'paragraphStyle'\n\t\t\t\t| 'textStyle'\n\t\t\t\t| 'link'\n\t\t\t\t| 'image'\n\t\t\t\t| 'video'\n\t\t\t\t| 'audio'\n\t\t\t\t| 'embed'\n\t\t\t\t| 'math'\n\t\t\t\t| 'drawing'\n\t\t\t\t| 'imageGallery'\n\t\t\t\t| 'videoGallery'\n\t\t\t\t| 'audioGallery'\n\t\t\t\t| 'fileGallery'\n\t\t\t\t| 'fileBrowser'\n\t\t\t\t| 'fontSize'\n\t\t\t\t| 'pageNavigator'\n\t\t\t\t| 'anchor'",
+					"definition": "| 'blockquote'\n\t\t\t\t| 'codeBlock'\n\t\t\t\t| 'exportPDF'\n\t\t\t\t| 'fileUpload'\n\t\t\t\t| 'list_bulleted'\n\t\t\t\t| 'list_numbered'\n\t\t\t\t| 'mention'\n\t\t\t\t| 'align'\n\t\t\t\t| 'font'\n\t\t\t\t| 'fontColor'\n\t\t\t\t| 'backgroundColor'\n\t\t\t\t| 'list'\n\t\t\t\t| 'table'\n\t\t\t\t| 'blockStyle'\n\t\t\t\t| 'hr'\n\t\t\t\t| 'layout'\n\t\t\t\t| 'lineHeight'\n\t\t\t\t| 'template'\n\t\t\t\t| 'paragraphStyle'\n\t\t\t\t| 'textStyle'\n\t\t\t\t| 'link'\n\t\t\t\t| 'image'\n\t\t\t\t| 'video'\n\t\t\t\t| 'audio'\n\t\t\t\t| 'embed'\n\t\t\t\t| 'math'\n\t\t\t\t| 'drawing'\n\t\t\t\t| 'imageGallery'\n\t\t\t\t| 'videoGallery'\n\t\t\t\t| 'audioGallery'\n\t\t\t\t| 'fileGallery'\n\t\t\t\t| 'fileBrowser'\n\t\t\t\t| 'fontSize'\n\t\t\t\t| 'pageNavigator'\n\t\t\t\t| 'anchor'",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
@@ -8908,14 +9250,14 @@
 				},
 				{
 					"name": "EditorBaseOptions",
-					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always';\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-*'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * 'table|td': 'border|color|background-color',\n\t * hr: 'border-top'\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies allowed styles for the `span` tag.\n\t * - The default follows {@link DEFAULTS.SPAN_STYLES}\n\t */\n\tspanStyles?: string;\n\t/**\n\t * - Specifies allowed styles for the `line` element (p..).\n\t * - The default follows {@link DEFAULTS.LINE_STYLES}\n\t */\n\tlineStyles?: string;\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar with optional offset.\n\t */\n\ttoolbar_sticky?: number;\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tmention?: import('../../plugins/field/mention.js').MentionPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
+					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom';\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-*'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * 'table|td': 'border|color|background-color',\n\t * hr: 'border-top'\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies allowed styles for the `span` tag.\n\t * - The default follows {@link DEFAULTS.SPAN_STYLES}\n\t */\n\tspanStyles?: string;\n\t/**\n\t * - Specifies allowed styles for the `line` element (p..).\n\t * - The default follows {@link DEFAULTS.LINE_STYLES}\n\t */\n\tlineStyles?: string;\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar with optional offset.\n\t */\n\ttoolbar_sticky?: number;\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.\n\t */\n\thistoryStackSize?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - Shows the built-in Find/Replace panel UI.\n\t * - The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).\n\t */\n\tfinder_panel?: boolean;\n\t/**\n\t * - Searches instantly as you type (debounced). When false, search runs only on Enter.\n\t *\n\t * ///\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfinder_liveSearch?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tcodeBlock?: import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tmention?: import('../../plugins/field/mention.js').MentionPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"plugins": "- Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name. ```js import plugins, { image, link, table } from 'suneditor/src/plugins'; { plugins: plugins, plugins: [image, link, table], plugins: { image, link, table } } ```",
 						"excludedPlugins": "- List of plugin names to exclude. ```js { excludedPlugins: ['image', 'video'] } ```",
 						"buttonList": "- List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}/// === Modes & Themes ===",
 						"v2Migration": "- Enables migration mode for SunEditor v2.",
-						"mode": "- Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`.",
+						"mode": "- Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).",
 						"type": "- Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`. ```js // type 'document:header,page' ```",
 						"theme": "- Editor theme.",
 						"lang": "- Language configuration. default : EN",
@@ -8962,6 +9304,7 @@
 						"autoLinkify": "- Automatically converts URLs into hyperlinks. (`Link` plugin required)\n- Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.",
 						"autoStyleify": "- Styles applied automatically on text input.",
 						"historyStackDelayTime": "- Delay time for history stack updates (ms).",
+						"historyStackSize": "- Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.",
 						"printClass": "- Class name for printing.",
 						"fullScreenOffset": "- Offset applied when entering fullscreen mode.",
 						"previewTemplate": "- Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.",
@@ -8969,7 +9312,9 @@
 						"componentInsertBehavior": "- Enables automatic selection of inserted components.\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing.",
 						"defaultUrlProtocol": "- Default URL protocol for links.",
 						"toastMessageTime": "- Duration for displaying toast messages (ms).",
-						"freeCodeViewMode": "- Enables free code view mode. === Dynamic Options ===",
+						"freeCodeViewMode": "- Enables free code view mode.",
+						"finder_panel": "- Shows the built-in Find/Replace panel UI.\n- The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).",
+						"finder_liveSearch": "- Searches instantly as you type (debounced). When false, search runs only on Enter. /// === Dynamic Options ===",
 						"externalLibs": "- External libraries like CodeMirror, KaTeX, or MathJax.\n- See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js { externalLibs: { katex: window.katex, codeMirror: { src: CodeMirror } } } ```",
 						"allowedExtraTags": "- Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n- The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js { allowedExtraTags: { script: false, style: false, mark: true } } ``` /// === User Events ===",
 						"events": "- User event handlers configuration. ```js { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } } ``` /// === [ Plugin-Specific Options ] === ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---",
@@ -9073,7 +9418,7 @@
 				},
 				{
 					"name": "FrameContextStore",
-					"definition": "{\n\t/**\n\t * - Unique key identifying this editor instance (useful for multi-root editors).\n\t */\n\tkey: any;\n\t/**\n\t * - Frame-specific options (toolbar, plugins, behaviors, etc.).\n\t *\n\t * === Core DOM References ===\n\t */\n\toptions: SunEditor.FrameOptions;\n\t/**\n\t * - The original source element (usually a <textarea> or target element).\n\t */\n\toriginElement: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - The outermost container wrapping the entire editor (toolbar + editor + status bar).\n\t */\n\ttopArea: HTMLElement;\n\t/**\n\t * - The `.se-container` element that holds the editor's UI.\n\t */\n\tcontainer: HTMLElement;\n\t/**\n\t * - The `.se-wrapper` element containing the editable area and internal components.\n\t */\n\twrapper: HTMLElement;\n\t/**\n\t * - The WYSIWYG frame element (either an <iframe> or a div in inline mode).\n\t */\n\twysiwygFrame: SunEditor.WysiwygFrame;\n\t/**\n\t * - The actual editable content area (usually the iframe’s <body> or a contentEditable div).\n\t */\n\twysiwyg: HTMLElement;\n\t/**\n\t * - Internal reference for wysiwyg events (set on initialization).\n\t */\n\teventWysiwyg: SunEditor.EventWysiwyg;\n\t/**\n\t * - Wrapper element for the code-view mode.\n\t */\n\tcodeWrapper: HTMLElement;\n\t/**\n\t * - Code view editing element (a <textarea> or <pre>).\n\t */\n\tcode: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in code view mode.\n\t */\n\tcodeNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Placeholder element shown when the editor is empty.\n\t */\n\tplaceholder: HTMLElement;\n\t/**\n\t * - Editor status bar element (for resizing, info, etc.).\n\t */\n\tstatusbar: HTMLElement;\n\t/**\n\t * - Navigation element (e.g., for outline or bookmarks).\n\t */\n\tnavigation: HTMLElement;\n\t/**\n\t * - Wrapper for the character counter element.\n\t */\n\tcharWrapper: HTMLElement;\n\t/**\n\t * - Element showing the character counter.\n\t */\n\tcharCounter: HTMLElement;\n\t/**\n\t * - The window object of the WYSIWYG frame (iframe window).\n\t */\n\t_ww?: Window;\n\t/**\n\t * - The document object of the WYSIWYG frame (iframe document).\n\t *\n\t * === UI Utilities & Visual Components ===\n\t */\n\t_wd?: Document;\n\t/**\n\t * - Top floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_t: HTMLElement;\n\t/**\n\t * - Bottom floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_b: HTMLElement;\n\t/**\n\t * - Placeholder element used for sticky toolbar behavior.\n\t */\n\t_stickyDummy?: HTMLElement;\n\t/**\n\t * - Shadow element below the toolbar for visual effects.\n\t */\n\t_toolbarShadow?: HTMLElement;\n\t/**\n\t * - Current active figure component (image, table, etc.).\n\t *\n\t * === State Flags ===\n\t */\n\t_figure?: {\n\t\tmain: HTMLElement;\n\t\tborder: HTMLElement;\n\t\tdisplay: HTMLElement;\n\t\thandles: HTMLElement[];\n\t};\n\t/**\n\t * - Whether the editor is currently in code view mode.\n\t */\n\tisCodeView: boolean;\n\t/**\n\t * - Whether the editor is currently in fullscreen mode.\n\t */\n\tisFullScreen: boolean;\n\t/**\n\t * - Whether the editor is set to readonly mode.\n\t */\n\tisReadOnly: boolean;\n\t/**\n\t * - Whether the editor is currently disabled.\n\t */\n\tisDisabled: boolean;\n\t/**\n\t * - Whether block structure visualization is enabled.\n\t */\n\tisShowBlocks?: boolean;\n\t/**\n\t * - Whether the content has been changed (-1 means initial state).\n\t *\n\t * === History Tracking ===\n\t */\n\tisChanged: boolean;\n\t/**\n\t * - Current index in the history stack (undo/redo).\n\t */\n\thistoryIndex: number;\n\t/**\n\t * - Last saved index in the history stack.\n\t *\n\t * === DocumentType Editing (Optional) ===\n\t */\n\tsavedIndex: number;\n\t/**\n\t * - Document-type specific configuration or module reference.\n\t */\n\tdocumentType?: any;\n\t/**\n\t * - Inner container for document-type editors.\n\t */\n\tdocumentTypeInner?: HTMLElement;\n\t/**\n\t * - Page wrapper for paginated editing mode.\n\t */\n\tdocumentTypePage?: HTMLElement;\n\t/**\n\t * - Mirror page element used for selection/layout adjustments.\n\t */\n\tdocumentTypePageMirror?: HTMLElement;\n\t/**\n\t * - Whether headers are used in document-type mode.\n\t */\n\tdocumentType_use_header?: boolean;\n\t/**\n\t * - Whether page layout is enabled in document-type mode.\n\t *\n\t * === Runtime / Computed Values ===\n\t */\n\tdocumentType_use_page?: boolean;\n\t/**\n\t * - Minimum height of the wysiwyg area (parsed from inline style or options).\n\t */\n\t_minHeight: number;\n\t/**\n\t * - Cached computed styles for the wysiwyg element.\n\t * - Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n\t * - Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n\t * - Improves performance by avoiding repeated `getComputedStyle()` calls.\n\t */\n\twwComputedStyle?: CSSStyleDeclaration;\n\t/**\n\t * - Auto-resizing helper iframe (used for dynamic sizing).\n\t */\n\t_iframeAuto?: HTMLElement;\n\t/**\n\t * - Current height of the editor.\n\t * ================================================================================================================================\n\t */\n\t_editorHeight?: number;\n}",
+					"definition": "{\n\t/**\n\t * - Unique key identifying this editor instance (useful for multi-root editors).\n\t */\n\tkey: any;\n\t/**\n\t * - Frame-specific options (toolbar, plugins, behaviors, etc.).\n\t *\n\t * === Core DOM References ===\n\t */\n\toptions: SunEditor.FrameOptions;\n\t/**\n\t * - The original source element (usually a <textarea> or target element).\n\t */\n\toriginElement: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - The outermost container wrapping the entire editor (toolbar + editor + status bar).\n\t */\n\ttopArea: HTMLElement;\n\t/**\n\t * - The `.se-container` element that holds the editor's UI.\n\t */\n\tcontainer: HTMLElement;\n\t/**\n\t * - The `.se-wrapper` element containing the editable area and internal components.\n\t */\n\twrapper: HTMLElement;\n\t/**\n\t * - The WYSIWYG frame element (either an <iframe> or a div in inline mode).\n\t */\n\twysiwygFrame: SunEditor.WysiwygFrame;\n\t/**\n\t * - The actual editable content area (usually the iframe’s <body> or a contentEditable div).\n\t */\n\twysiwyg: HTMLElement;\n\t/**\n\t * - Internal reference for wysiwyg events (set on initialization).\n\t */\n\teventWysiwyg: SunEditor.EventWysiwyg;\n\t/**\n\t * - Wrapper element for the code-view mode.\n\t */\n\tcodeWrapper: HTMLElement;\n\t/**\n\t * - Code view editing element (a <textarea> or <pre>).\n\t */\n\tcode: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in code view mode.\n\t */\n\tcodeNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Wrapper element for the markdown-view mode.\n\t */\n\tmarkdownWrapper: HTMLElement;\n\t/**\n\t * - Markdown view editing element (a <textarea>).\n\t */\n\tmarkdown: HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in markdown view mode.\n\t */\n\tmarkdownNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Placeholder element shown when the editor is empty.\n\t */\n\tplaceholder: HTMLElement;\n\t/**\n\t * - Editor status bar element (for resizing, info, etc.).\n\t */\n\tstatusbar: HTMLElement;\n\t/**\n\t * - Navigation element (e.g., for outline or bookmarks).\n\t */\n\tnavigation: HTMLElement;\n\t/**\n\t * - Wrapper for the character counter element.\n\t */\n\tcharWrapper: HTMLElement;\n\t/**\n\t * - Element showing the character counter.\n\t */\n\tcharCounter: HTMLElement;\n\t/**\n\t * - The window object of the WYSIWYG frame (iframe window).\n\t */\n\t_ww?: Window;\n\t/**\n\t * - The document object of the WYSIWYG frame (iframe document).\n\t *\n\t * === UI Utilities & Visual Components ===\n\t */\n\t_wd?: Document;\n\t/**\n\t * - Top floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_t: HTMLElement;\n\t/**\n\t * - Bottom floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_b: HTMLElement;\n\t/**\n\t * - Placeholder element used for sticky toolbar behavior.\n\t */\n\t_stickyDummy?: HTMLElement;\n\t/**\n\t * - Shadow element below the toolbar for visual effects.\n\t */\n\t_toolbarShadow?: HTMLElement;\n\t/**\n\t * - Current active figure component (image, table, etc.).\n\t *\n\t * === State Flags ===\n\t */\n\t_figure?: {\n\t\tmain: HTMLElement;\n\t\tborder: HTMLElement;\n\t\tdisplay: HTMLElement;\n\t\thandles: HTMLElement[];\n\t};\n\t/**\n\t * - Whether the editor is currently in code view mode.\n\t */\n\tisCodeView: boolean;\n\t/**\n\t * - Whether the editor is currently in markdown view mode.\n\t */\n\tisMarkdownView: boolean;\n\t/**\n\t * - Whether the editor is currently in fullscreen mode.\n\t */\n\tisFullScreen: boolean;\n\t/**\n\t * - Whether the editor is set to readonly mode.\n\t */\n\tisReadOnly: boolean;\n\t/**\n\t * - Whether the editor is currently disabled.\n\t */\n\tisDisabled: boolean;\n\t/**\n\t * - Whether block structure visualization is enabled.\n\t */\n\tisShowBlocks?: boolean;\n\t/**\n\t * - Whether the content has been changed (-1 means initial state).\n\t *\n\t * === History Tracking ===\n\t */\n\tisChanged: boolean;\n\t/**\n\t * - Current index in the history stack (undo/redo).\n\t */\n\thistoryIndex: number;\n\t/**\n\t * - Last saved index in the history stack.\n\t *\n\t * === DocumentType Editing (Optional) ===\n\t */\n\tsavedIndex: number;\n\t/**\n\t * - Document-type specific configuration or module reference.\n\t */\n\tdocumentType?: any;\n\t/**\n\t * - Inner container for document-type editors.\n\t */\n\tdocumentTypeInner?: HTMLElement;\n\t/**\n\t * - Page wrapper for paginated editing mode.\n\t */\n\tdocumentTypePage?: HTMLElement;\n\t/**\n\t * - Mirror page element used for selection/layout adjustments.\n\t */\n\tdocumentTypePageMirror?: HTMLElement;\n\t/**\n\t * - Whether headers are used in document-type mode.\n\t */\n\tdocumentType_use_header?: boolean;\n\t/**\n\t * - Whether page layout is enabled in document-type mode.\n\t *\n\t * === Runtime / Computed Values ===\n\t */\n\tdocumentType_use_page?: boolean;\n\t/**\n\t * - Minimum height of the wysiwyg area (parsed from inline style or options).\n\t */\n\t_minHeight: number;\n\t/**\n\t * - Cached computed styles for the wysiwyg element.\n\t * - Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n\t * - Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n\t * - Improves performance by avoiding repeated `getComputedStyle()` calls.\n\t */\n\twwComputedStyle?: CSSStyleDeclaration;\n\t/**\n\t * - Auto-resizing helper iframe (used for dynamic sizing).\n\t */\n\t_iframeAuto?: HTMLElement;\n\t/**\n\t * - Current height of the editor.\n\t * ================================================================================================================================\n\t */\n\t_editorHeight?: number;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"key": "- Unique key identifying this editor instance (useful for multi-root editors).",
@@ -9088,6 +9433,9 @@
 						"codeWrapper": "- Wrapper element for the code-view mode.",
 						"code": "- Code view editing element (a <textarea> or <pre>).",
 						"codeNumbers": "- Element displaying line numbers in code view mode.",
+						"markdownWrapper": "- Wrapper element for the markdown-view mode.",
+						"markdown": "- Markdown view editing element (a <textarea>).",
+						"markdownNumbers": "- Element displaying line numbers in markdown view mode.",
 						"placeholder": "- Placeholder element shown when the editor is empty.",
 						"statusbar": "- Editor status bar element (for resizing, info, etc.).",
 						"navigation": "- Navigation element (e.g., for outline or bookmarks).",
@@ -9101,6 +9449,7 @@
 						"_toolbarShadow": "- Shadow element below the toolbar for visual effects.",
 						"_figure": "- Current active figure component (image, table, etc.). === State Flags ===",
 						"isCodeView": "- Whether the editor is currently in code view mode.",
+						"isMarkdownView": "- Whether the editor is currently in markdown view mode.",
 						"isFullScreen": "- Whether the editor is currently in fullscreen mode.",
 						"isReadOnly": "- Whether the editor is set to readonly mode.",
 						"isDisabled": "- Whether the editor is currently disabled.",
@@ -9129,7 +9478,7 @@
 				},
 				{
 					"name": "EventHandlers",
-					"definition": "{\n\tonload?: typeof onload | null;\n\tonScroll?: typeof onScroll | null;\n\tonMouseDown?: typeof onMouseDown | null;\n\tonClick?: typeof onClick | null;\n\tonBeforeInput?: typeof onBeforeInput | null;\n\tonInput?: typeof onInput | null;\n\tonMouseLeave?: typeof onMouseLeave | null;\n\tonMouseUp?: typeof onMouseUp | null;\n\tonKeyDown?: typeof onKeyDown | null;\n\tonKeyUp?: typeof onKeyUp | null;\n\tonFocus?: typeof onFocus | null;\n\tonNativeFocus?: typeof onNativeFocus | null;\n\tonBlur?: typeof onBlur | null;\n\tonNativeBlur?: typeof onNativeBlur | null;\n\tonCopy?: typeof onCopy | null;\n\tonCut?: typeof onCut | null;\n\tonChange?: typeof onChange | null;\n\tonShowToolbar?: typeof onShowToolbar | null;\n\tonShowController?: typeof onShowController | null;\n\tonBeforeShowController?: typeof onBeforeShowController | null;\n\tonToggleCodeView?: typeof onToggleCodeView | null;\n\tonToggleFullScreen?: typeof onToggleFullScreen | null;\n\tonResizeEditor?: typeof onResizeEditor | null;\n\tonSetToolbarButtons?: typeof onSetToolbarButtons | null;\n\tonSave?: typeof onSave | null;\n\tonResetButtons?: typeof onResetButtons | null;\n\tonFontActionBefore?: typeof onFontActionBefore | null;\n\tonDrop?: typeof onDrop | null;\n\tonPaste?: typeof onPaste | null;\n\timageUploadHandler?: typeof imageUploadHandler | null;\n\tonImageUploadBefore?: typeof onImageUploadBefore | null;\n\tonImageLoad?: typeof onImageLoad | null;\n\tonImageAction?: typeof onImageAction | null;\n\tonImageUploadError?: typeof onImageUploadError | null;\n\tonImageDeleteBefore?: typeof onImageDeleteBefore | null;\n\tvideoUploadHandler?: typeof videoUploadHandler | null;\n\tonVideoUploadBefore?: typeof onVideoUploadBefore | null;\n\tonVideoLoad?: typeof onVideoLoad | null;\n\tonVideoAction?: typeof onVideoAction | null;\n\tonVideoUploadError?: typeof onVideoUploadError | null;\n\tonVideoDeleteBefore?: typeof onVideoDeleteBefore | null;\n\taudioUploadHandler?: typeof audioUploadHandler | null;\n\tonAudioUploadBefore?: typeof onAudioUploadBefore | null;\n\tonAudioUploadError?: typeof onAudioUploadError | null;\n\tonAudioLoad?: typeof onAudioLoad | null;\n\tonAudioAction?: typeof onAudioAction | null;\n\tonAudioDeleteBefore?: typeof onAudioDeleteBefore | null;\n\tonFileUploadBefore?: typeof onFileUploadBefore | null;\n\tonFileLoad?: typeof onFileLoad | null;\n\tonFileAction?: typeof onFileAction | null;\n\tonFileUploadError?: typeof onFileUploadError | null;\n\tonFileDeleteBefore?: typeof onFileDeleteBefore | null;\n\tonExportPDFBefore?: typeof onExportPDFBefore | null;\n\tonFileManagerAction?: typeof onFileManagerAction | null;\n\tonEmbedInputBefore?: typeof onEmbedInputBefore | null;\n\tonEmbedDeleteBefore?: typeof onEmbedDeleteBefore | null;\n}",
+					"definition": "{\n\tonload?: typeof onload | null;\n\tonScroll?: typeof onScroll | null;\n\tonMouseDown?: typeof onMouseDown | null;\n\tonClick?: typeof onClick | null;\n\tonBeforeInput?: typeof onBeforeInput | null;\n\tonInput?: typeof onInput | null;\n\tonMouseLeave?: typeof onMouseLeave | null;\n\tonMouseUp?: typeof onMouseUp | null;\n\tonKeyDown?: typeof onKeyDown | null;\n\tonKeyUp?: typeof onKeyUp | null;\n\tonFocus?: typeof onFocus | null;\n\tonNativeFocus?: typeof onNativeFocus | null;\n\tonBlur?: typeof onBlur | null;\n\tonNativeBlur?: typeof onNativeBlur | null;\n\tonCopy?: typeof onCopy | null;\n\tonCut?: typeof onCut | null;\n\tonChange?: typeof onChange | null;\n\tonShowToolbar?: typeof onShowToolbar | null;\n\tonShowController?: typeof onShowController | null;\n\tonBeforeShowController?: typeof onBeforeShowController | null;\n\tonToggleCodeView?: typeof onToggleCodeView | null;\n\tonToggleMarkdownView?: typeof onToggleMarkdownView | null;\n\tonToggleFullScreen?: typeof onToggleFullScreen | null;\n\tonResizeEditor?: typeof onResizeEditor | null;\n\tonSetToolbarButtons?: typeof onSetToolbarButtons | null;\n\tonSave?: typeof onSave | null;\n\tonResetButtons?: typeof onResetButtons | null;\n\tonFontActionBefore?: typeof onFontActionBefore | null;\n\tonDrop?: typeof onDrop | null;\n\tonPaste?: typeof onPaste | null;\n\timageUploadHandler?: typeof imageUploadHandler | null;\n\tonImageUploadBefore?: typeof onImageUploadBefore | null;\n\tonImageLoad?: typeof onImageLoad | null;\n\tonImageAction?: typeof onImageAction | null;\n\tonImageUploadError?: typeof onImageUploadError | null;\n\tonImageDeleteBefore?: typeof onImageDeleteBefore | null;\n\tvideoUploadHandler?: typeof videoUploadHandler | null;\n\tonVideoUploadBefore?: typeof onVideoUploadBefore | null;\n\tonVideoLoad?: typeof onVideoLoad | null;\n\tonVideoAction?: typeof onVideoAction | null;\n\tonVideoUploadError?: typeof onVideoUploadError | null;\n\tonVideoDeleteBefore?: typeof onVideoDeleteBefore | null;\n\taudioUploadHandler?: typeof audioUploadHandler | null;\n\tonAudioUploadBefore?: typeof onAudioUploadBefore | null;\n\tonAudioUploadError?: typeof onAudioUploadError | null;\n\tonAudioLoad?: typeof onAudioLoad | null;\n\tonAudioAction?: typeof onAudioAction | null;\n\tonAudioDeleteBefore?: typeof onAudioDeleteBefore | null;\n\tonFileUploadBefore?: typeof onFileUploadBefore | null;\n\tonFileLoad?: typeof onFileLoad | null;\n\tonFileAction?: typeof onFileAction | null;\n\tonFileUploadError?: typeof onFileUploadError | null;\n\tonFileDeleteBefore?: typeof onFileDeleteBefore | null;\n\tonExportPDFBefore?: typeof onExportPDFBefore | null;\n\tonFileManagerAction?: typeof onFileManagerAction | null;\n\tonEmbedInputBefore?: typeof onEmbedInputBefore | null;\n\tonEmbedDeleteBefore?: typeof onEmbedDeleteBefore | null;\n}",
 					"kind": "type",
 					"source": "events.d.ts"
 				},
@@ -9192,6 +9541,15 @@
 						"thumbnail": "- Default thumbnail"
 					},
 					"source": "plugins/browser/videoGallery.d.ts"
+				},
+				{
+					"name": "CodeBlockPluginOptions",
+					"definition": "{\n\t/**\n\t * - List of selectable programming languages for code blocks.\n\t * - Defaults to 21 common languages\n\t * - [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\t * - Set to empty array `[]` to disable language selection UI entirely.\n\t * ```js\n\t * { codeBlock: { langs: ['javascript', 'python', 'html', 'css'] } }\n\t * ```\n\t */\n\tlangs?: Array<string>;\n}",
+					"kind": "type",
+					"memberDescriptions": {
+						"langs": "- List of selectable programming languages for code blocks.\n- Defaults to 21 common languages\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Set to empty array `[]` to disable language selection UI entirely. ```js { codeBlock: { langs: ['javascript', 'python', 'html', 'css'] } } ```"
+					},
+					"source": "plugins/command/codeBlock.d.ts"
 				},
 				{
 					"name": "ExportPDFPluginOptions",
@@ -9624,7 +9982,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "Default value: `'font-family|font-size|color|background-color|width|height'`",
 						"LINE_STYLES": "Default value: `'text-align|margin|margin-left|margin-right|line-height'`",

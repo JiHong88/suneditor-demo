@@ -7,9 +7,10 @@ import { highlightInline } from "@/lib/highlightInline";
 type Props = {
 	optionKey: string;
 	description: string;
+	type?: string;
 };
 
-export function OptionInfo({ optionKey, description }: Props) {
+export function OptionInfo({ optionKey, description, type }: Props) {
 	const [tooltip, setTooltip] = useState<{ x: number; y: number } | null>(null);
 	const [dialog, setDialog] = useState(false);
 	const ref = useRef<HTMLSpanElement>(null);
@@ -73,6 +74,9 @@ export function OptionInfo({ optionKey, description }: Props) {
 						className='pointer-events-none z-[200] -translate-x-1/2 -translate-y-full pb-1.5'
 					>
 						<div className={`${tooltipMaxW} rounded-md bg-popover px-2.5 py-1.5 text-[11px] leading-relaxed text-popover-foreground shadow-lg ring-1 ring-border`}>
+							{type && (
+								<div className='mb-1 font-mono text-[10px] text-blue-500 dark:text-amber-300/80'>{type}</div>
+							)}
 							{highlightInline(description)}
 						</div>
 					</div>,
@@ -99,6 +103,9 @@ export function OptionInfo({ optionKey, description }: Props) {
 									</svg>
 								</button>
 							</div>
+							{type && (
+								<div className='mb-2 rounded bg-muted/60 px-2 py-1 font-mono text-[11px] text-blue-600 dark:text-amber-300/90'>{type}</div>
+							)}
 							<div className='text-xs leading-relaxed text-muted-foreground'>{highlightInline(description)}</div>
 						</div>
 					</div>,

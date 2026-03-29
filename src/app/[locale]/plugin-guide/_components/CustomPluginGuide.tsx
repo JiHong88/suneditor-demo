@@ -325,7 +325,7 @@ function PluginTypeCard({ info, t, onTry }: { info: PluginTypeInfo; t: ReturnTyp
 	const c = COLOR_MAP[info.color];
 
 	return (
-		<div className={`rounded-lg border ${c.border} overflow-hidden`}>
+		<div className={`rounded-lg border overflow-hidden`}>
 			<div className='flex items-start gap-3 p-4'>
 				<span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${c.dot}`} />
 				<div className='flex-1 min-w-0'>
@@ -383,7 +383,7 @@ function CompositePluginCard({ info, t, onTry }: { info: CompositePluginInfo; t:
 	const [open, setOpen] = useState(false);
 	const c = COLOR_MAP[info.color];
 	return (
-		<div className={`rounded-lg border ${c.border} overflow-hidden`}>
+		<div className={`rounded-lg border overflow-hidden`}>
 			<div className='flex items-start gap-3 p-4'>
 				<span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${c.dot}`} />
 				<div className='flex-1 min-w-0'>
@@ -1660,7 +1660,7 @@ function HtmlStructureTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 					const isOpen = openIdx === idx;
 
 					return (
-						<div key={info.key} className={`rounded-lg border ${c.border} overflow-hidden`}>
+						<div key={info.key} className={`rounded-lg border overflow-hidden`}>
 							<button
 								type='button'
 								onClick={() => setOpenIdx(isOpen ? null : idx)}
@@ -1738,13 +1738,13 @@ function ExampleCard({ example, idx, t, onTry }: { example: PluginExample; idx: 
 	const c = COLOR_MAP[colorKey];
 
 	return (
-		<div className={`rounded-lg border ${c.border} overflow-hidden`}>
+		<div className={`rounded-lg border overflow-hidden`}>
 			<div className='flex items-start gap-3 p-4'>
 				<span className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${c.dot}`} />
 				<div className='flex-1 min-w-0'>
 					<div className='flex items-center gap-2 flex-wrap'>
 						<h4 className='text-sm font-semibold'>{t(`example${idx + 1}Title`)}</h4>
-						<Badge variant='outline' className={`text-[9px] px-1.5 py-0 ${c.text} ${c.border}`}>
+						<Badge variant='outline' className={`text-[9px] px-1.5 py-0 ${c.text}`}>
 							{example.pluginType}
 						</Badge>
 					</div>

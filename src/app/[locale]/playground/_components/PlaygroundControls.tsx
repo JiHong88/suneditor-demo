@@ -9,6 +9,7 @@ import { OptionInfo } from "./OptionInfo";
 import optDescEn from "@/data/api/option-descriptions.en.json";
 import optDescKo from "@/data/api/option-descriptions.ko.json";
 import optDescAr from "@/data/api/option-descriptions.ar.json";
+import apiDocsEn from "@/data/api/api-docs.en.json";
 
 type OptDesc = Record<string, { description: string; default?: string }>;
 const optDescMap: Record<string, OptDesc> = {
@@ -16,6 +17,13 @@ const optDescMap: Record<string, OptDesc> = {
 	ko: optDescKo as OptDesc,
 	ar: optDescAr as OptDesc,
 };
+
+/* ── Option type map (locale-independent) ──────────────── */
+const optionTypeMap: Record<string, string> = {};
+for (const section of ["options", "frameOptions"] as const) {
+	const methods = (apiDocsEn.structure.editor.subgroups as Record<string, { methods: { name: string; returns: string }[] }>)[section]?.methods;
+	if (methods) for (const m of methods) optionTypeMap[m.name] = m.returns;
+}
 
 type Props = {
 	state: PlaygroundState;
@@ -37,7 +45,7 @@ function FieldLabel({ label, resettable, description }: { label: string; resetta
 					live
 				</span>
 			)}
-			{desc && <OptionInfo optionKey={label} description={desc} />}
+			{desc && <OptionInfo optionKey={label} description={desc} type={optionTypeMap[label]} />}
 		</span>
 	);
 }
@@ -317,7 +325,7 @@ function DisabledField({ label, reason }: { label: string; reason?: string }) {
 		<div className='flex items-center justify-between gap-2 py-0.5 opacity-40'>
 			<span className='flex items-center gap-1.5 text-[11px] text-muted-foreground'>
 				<span>{label}</span>
-				{desc && <OptionInfo optionKey={label} description={desc} />}
+				{desc && <OptionInfo optionKey={label} description={desc} type={optionTypeMap[label]} />}
 			</span>
 			<span className='text-[10px] text-muted-foreground/70 italic shrink-0'>{reason ?? "complex type"}</span>
 		</div>
@@ -898,6 +906,16 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							placeholder='auto'
 							resettable={!isFixedOption("toolbar_width")}
 						/>
+						<SelectField
+							label='toolbar_position'
+							value={state.toolbar_position}
+							options={[
+								{ value: "top", label: "top" },
+								{ value: "bottom", label: "bottom" },
+							]}
+							onChange={set("toolbar_position") as (v: string) => void}
+							resettable={!isFixedOption("toolbar_position")}
+						/>
 						<NumberInput
 							label='toolbar_sticky'
 							value={state.toolbar_sticky}
@@ -1115,6 +1133,13 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							checked={state.freeCodeViewMode}
 							onChange={set("freeCodeViewMode")}
 							resettable={!isFixedOption("freeCodeViewMode")}
+						/>
+						<TextInput
+							label='codeBlock'
+							value={state.codeBlock}
+							onChange={set("codeBlock")}
+							placeholder='javascript, python, html, css'
+							resettable={!isFixedOption("codeBlock")}
 						/>
 					</div>
 				</AccordionContent>

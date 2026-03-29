@@ -12,9 +12,10 @@ import {
 	DEMO_AUDIO, DEMO_EMBED, DEMO_DRAWING, DEMO_FILE_UPLOAD,
 	DEMO_TABLE, DEMO_CELL_MERGE, DEMO_ROW_COL, DEMO_LISTS,
 	DEMO_BLOCKQUOTE, DEMO_HR, DEMO_MATH,
-	DEMO_MENTION, DEMO_LINKS, DEMO_CODE_VIEW, DEMO_CHAR_COUNTER,
+	DEMO_MENTION, DEMO_LINKS, DEMO_CODE_VIEW, DEMO_MARKDOWN_VIEW,
+	DEMO_CODE_BLOCK, DEMO_FINDER, DEMO_CHAR_COUNTER,
 	DEMO_UNDO_REDO, DEMO_CLASSIC, DEMO_INLINE, DEMO_BALLOON,
-	DEMO_BALLOON_ALWAYS, DEMO_DOCUMENT, DEMO_MULTIROOT, DEMO_FULLSCREEN,
+	DEMO_BALLOON_ALWAYS, DEMO_TOOLBAR_BOTTOM, DEMO_DOCUMENT, DEMO_MULTIROOT, DEMO_FULLSCREEN,
 	DEMO_RTL, DEMO_STRICT_MODE, DEMO_EXPORT_PDF, DEMO_KEYBOARD,
 } from "@/data/snippets/featureDemoSnippets";
 import { API_UPLOAD_IMAGE, API_UPLOAD_FILE, API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
@@ -163,6 +164,18 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		{ p: "standard", val: DEMO_CODE_VIEW },
 		[["codeView"], "|", ["bold", "italic", "underline"]],
 	),
+	markdownView: fl(
+		{ p: "standard", val: DEMO_MARKDOWN_VIEW },
+		[["markdownView"], "|", ["bold", "italic", "underline"]],
+	),
+	codeBlock: fl(
+		{ p: "full", val: DEMO_CODE_BLOCK },
+		[["blockStyle"], "|", ["bold", "italic", "underline"]],
+	),
+	finder: fl(
+		{ p: "standard", val: DEMO_FINDER },
+		[["bold", "italic", "underline"]],
+	),
 	charCounter: fl(
 		{ cc: "1", ccm: "500", val: DEMO_CHAR_COUNTER },
 		[["bold", "italic", "underline"]],
@@ -193,6 +206,11 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		{ m: "balloon-always", val: DEMO_BALLOON_ALWAYS },
 		[["bold", "italic", "underline"], "|", ["align"], "|", ["link"]],
 		{ mode: "balloon-always" },
+	),
+	toolbarBottom: fl(
+		{ p: "standard", val: DEMO_TOOLBAR_BOTTOM, tpo: "bottom" },
+		[["bold", "italic", "underline"], "|", ["align"], "|", ["link", "image"]],
+		{ toolbar_position: "bottom" },
 	),
 	documentLayout: fl(
 		{ p: "full", val: DEMO_DOCUMENT },

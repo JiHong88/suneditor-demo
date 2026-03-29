@@ -104,6 +104,15 @@ export const DEMO_LINKS = `<p>Select text and click the link button: <a href="ht
 /** 코드뷰 토글 데모 */
 export const DEMO_CODE_VIEW = `<p><strong>Toggle code view</strong> to see and edit the raw HTML source.</p><p>Click the <code>&lt;/&gt;</code> button in the toolbar.</p>`;
 
+/** 마크다운뷰 토글 데모 */
+export const DEMO_MARKDOWN_VIEW = `<p><strong>Toggle markdown view</strong> to edit content in Markdown syntax.</p><p>Click the markdown button in the toolbar to switch between WYSIWYG and Markdown editing modes.</p>`;
+
+/** 코드 블록 플러그인 데모 */
+export const DEMO_CODE_BLOCK = `<p>Hover over the code block below to see the language selector dropdown and hover UI.</p><pre>const greeting = "Hello, World!";\nconsole.log(greeting);</pre><p>The <code>codeBlock</code> plugin provides a language selector dropdown and hover UI for code blocks.</p>`;
+
+/** 찾기/바꾸기 패널 데모 */
+export const DEMO_FINDER = `<p>Press <strong>Ctrl+F</strong> (or <strong>Cmd+F</strong> on Mac) to open the <em>Find/Replace</em> panel.</p><p>Features include <strong>live search</strong>, <strong>regex</strong>, <strong>match case</strong>, and <strong>whole word</strong> options.</p><p>Uses the CSS Custom Highlight API with a &lt;mark&gt; fallback for iframe mode.</p>`;
+
 /** 글자수 카운터 데모 */
 export const DEMO_CHAR_COUNTER = `<p>Check the character counter in the statusbar below. Try typing more text to see the count update.</p>`;
 
@@ -120,6 +129,9 @@ export const DEMO_INLINE = `<p>This is <strong>Inline mode</strong> — the tool
 
 /** Balloon 모드 데모 (텍스트 선택 시 플로팅 툴바) — 4줄 이상으로 선택 영역 확보 */
 export const DEMO_BALLOON = `<p>This is <strong>Balloon mode</strong> — select text to see the floating toolbar appear above your selection.</p><p>Try selecting any part of this sentence. The toolbar will float right above the selected text.</p><p>You can apply <em>formatting</em>, insert links, and change alignment — all from the floating toolbar.</p><p>This mode is great for distraction-free writing where the toolbar only appears when you need it.</p>`;
+
+/** 하단 툴바 모드 데모 */
+export const DEMO_TOOLBAR_BOTTOM = `<p>The toolbar is positioned at the <strong>bottom</strong> of the editor.</p><p>Set <code>toolbar_position: 'bottom'</code> to move the toolbar below the editing area.</p><p>This layout can feel more natural for certain use cases, similar to chat input interfaces.</p>`;
 
 /** Balloon-Always 모드 데모 (클릭 시 항상 플로팅 툴바) — 4줄 이상으로 선택 영역 확보 */
 export const DEMO_BALLOON_ALWAYS = `<p>This is <strong>Balloon-Always mode</strong> — the floating toolbar is always visible when you click anywhere in the editor.</p><p>Unlike regular Balloon mode, you don't need to select text first. Just click anywhere.</p><p>The toolbar will appear at your cursor position, ready for immediate use.</p><p>This mode combines the clean look of balloon mode with the convenience of always-available formatting tools.</p>`;
