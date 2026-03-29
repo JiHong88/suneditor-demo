@@ -1022,6 +1022,22 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						</AccordionContent>
 					</AccordionItem>
 
+					{/* CodeBlock */}
+					<AccordionItem value='codeBlock'>
+						<AccordionTrigger className='text-xs font-semibold py-2'>Code Block</AccordionTrigger>
+						<AccordionContent className='px-1 pb-3'>
+							<div className='space-y-3'>
+								<TextInput
+									label='langs'
+									value={state.codeBlock_langs}
+									onChange={set("codeBlock_langs")}
+									placeholder='javascript, python, html, css'
+									optionKey='codeBlock_langs'
+								/>
+							</div>
+						</AccordionContent>
+					</AccordionItem>
+
 					{/* Math */}
 					<AccordionItem value='math'>
 						<AccordionTrigger className='text-xs font-semibold py-2'>Math</AccordionTrigger>

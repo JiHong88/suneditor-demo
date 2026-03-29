@@ -1134,13 +1134,6 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							onChange={set("freeCodeViewMode")}
 							resettable={!isFixedOption("freeCodeViewMode")}
 						/>
-						<TextInput
-							label='codeBlock'
-							value={state.codeBlock}
-							onChange={set("codeBlock")}
-							placeholder='javascript, python, html, css'
-							resettable={!isFixedOption("codeBlock")}
-						/>
 					</div>
 				</AccordionContent>
 			</AccordionItem>

@@ -280,10 +280,6 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.defaultLineBreakFormat !== "line") add("defaultLineBreakFormat", `"${state.defaultLineBreakFormat}"`);
 	if (state.retainStyleMode !== "repeat") add("retainStyleMode", `"${state.retainStyleMode}"`);
 	if (state.freeCodeViewMode) add("freeCodeViewMode", "true");
-	if (state.codeBlock) {
-		const langs = state.codeBlock.split(",").map((s) => `"${s.trim()}"`).filter((s) => s !== '""');
-		add("codeBlock", `[${langs.join(", ")}]`);
-	}
 
 	// features
 	if (!state.autoLinkify) add("autoLinkify", "false");
@@ -355,6 +351,12 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// ── Plugin options ──
 	const pLines: string[][] = [];
+
+	// codeBlock plugin
+	if (state.codeBlock_langs) {
+		const langs = state.codeBlock_langs.split(",").map((s) => `"${s.trim()}"`).filter((s) => s !== '""');
+		if (langs.length) pLines.push([`codeBlock: {`, `  langs: [${langs.join(", ")}],`, "},"]);
+	}
 
 	pLines.push(
 		pluginLines("image", [

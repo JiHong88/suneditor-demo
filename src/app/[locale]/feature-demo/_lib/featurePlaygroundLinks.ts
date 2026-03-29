@@ -170,7 +170,7 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 	),
 	codeBlock: fl(
 		{ p: "full", val: DEMO_CODE_BLOCK },
-		[["blockStyle"], "|", ["bold", "italic", "underline"]],
+		[["codeBlock", "blockStyle"], "|", ["bold", "italic", "underline"]],
 	),
 	finder: fl(
 		{ p: "standard", val: DEMO_FINDER },

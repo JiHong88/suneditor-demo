@@ -12,7 +12,9 @@
     "lint:es": "npx eslint src/ --fix",
     "snippets:generate": "node scripts/generate-framework-snippets.cjs",
     "docs:generate": "node scripts/generate-api-docs.cjs",
-    "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs"
+    "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -58,6 +60,7 @@
     "google-translate-api-x": "^10.7.2",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.2"
   }
 }

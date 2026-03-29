@@ -67,7 +67,6 @@ export interface PlaygroundState {
 	defaultLineBreakFormat: "line" | "br";
 	retainStyleMode: "repeat" | "always" | "none";
 	freeCodeViewMode: boolean;
-	codeBlock: string;
 
 	// — Features —
 	autoLinkify: boolean;
@@ -200,6 +199,9 @@ export interface PlaygroundState {
 	mention_searchStartLength: number;
 	mention_apiUrl: string;
 	mention_useCachingData: boolean;
+
+	// — Plugin: CodeBlock —
+	codeBlock_langs: string;
 
 	// — Plugin: Math —
 	math_mathLib: "katex" | "mathjax";
@@ -455,7 +457,6 @@ export const DEFAULTS: PlaygroundState = {
 	defaultLineBreakFormat: "line",
 	retainStyleMode: "repeat",
 	freeCodeViewMode: false,
-	codeBlock: "",
 
 	autoLinkify: true,
 	autoStyleify: "bold,underline,italic,strike",
@@ -586,6 +587,8 @@ export const DEFAULTS: PlaygroundState = {
 	mention_useCachingData: true,
 
 	// Plugin: Math
+	codeBlock_langs: "",
+
 	math_mathLib: "katex" as const,
 	math_canResize: true,
 	math_autoHeight: false,
@@ -866,7 +869,7 @@ const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = [
 
 /** Plugin options are effectively fixed (plugins themselves are fixed) — all plugin-prefixed state keys */
 const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = (Object.keys(DEFAULTS) as (keyof PlaygroundState)[]).filter(
-	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|mention|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
+	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|mention|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|codeBlock|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
 );
 
 const FIXED_KEYS = new Set<string>([...FIXED_BASE_KEYS, ...FIXED_FRAME_KEYS, ...FIXED_PLUGIN_KEYS]);
@@ -1083,8 +1086,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	opts.defaultLineBreakFormat = state.defaultLineBreakFormat;
 	opts.retainStyleMode = state.retainStyleMode;
 	opts.freeCodeViewMode = state.freeCodeViewMode;
-	if (state.codeBlock) {
-		opts.codeBlock = state.codeBlock.split(",").map((s: string) => s.trim()).filter(Boolean);
+	// codeBlock plugin
+	if (state.codeBlock_langs) {
+		const langs = state.codeBlock_langs.split(",").map((s: string) => s.trim()).filter(Boolean);
+		if (langs.length) opts.codeBlock = { langs };
 	}
 
 	// features
@@ -1639,7 +1644,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	dlb: "defaultLineBreakFormat",
 	rsm: "retainStyleMode",
 	fcv: "freeCodeViewMode",
-	cl: "codeBlock",
+	"cb.l": "codeBlock_langs",
 	// Features
 	al: "autoLinkify",
 	asy: "autoStyleify",
