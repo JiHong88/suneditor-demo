@@ -13,7 +13,10 @@ frontend:
         - rm -rf node_modules/next/next-swc-fallback
         - rm -rf node_modules/@rolldown node_modules/@img
         - rm -rf node_modules/typescript
-        - rm -rf node_modules/puppeteer/.local-chromium node_modules/@puppeteer
+        # 디버깅 — 용량 확인 후 제거
+        - du -sh .next/ node_modules/ public/ || true
+        - du -sh node_modules/*/ | sort -rh | head -15 || true
+        - du -sh .next/*/ | sort -rh | head -10 || true
   artifacts:
     baseDirectory: .next
     files:
