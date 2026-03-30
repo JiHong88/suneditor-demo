@@ -6,6 +6,7 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
+        - rm -rf .next
         - npm run build
         # 빌드 후 불필요한 패키지/바이너리 제거
         - npm prune --production
@@ -15,7 +16,6 @@ frontend:
         - rm -rf node_modules/typescript
         # 디버깅 — 용량 확인 후 제거
         - du -sh .next/ node_modules/ public/ || true
-        - du -sh node_modules/*/ | sort -rh | head -15 || true
         - du -sh .next/*/ | sort -rh | head -10 || true
   artifacts:
     baseDirectory: .next
@@ -23,5 +23,4 @@ frontend:
       - '**/*'
   cache:
     paths:
-      - .next/cache/**/*
       - .npm/**/*
