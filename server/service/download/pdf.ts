@@ -1,11 +1,11 @@
 /**
- * @fileoverview PDF 다운로드 — puppeteer 기반 HTML → PDF 변환
+ * @fileoverview PDF 다운로드 — puppeteer-core + @sparticuz/chromium 기반 HTML → PDF 변환
  *
- * 기존 server/service/pdf.js를 TypeScript로 변환
- * puppeteer는 optional dependency — 설치 후 사용: npm i puppeteer
+ * - Amplify/Lambda: @sparticuz/chromium이 제공하는 경량 Chromium 사용
+ * - 로컬 개발: 시스템에 설치된 Chrome 사용
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import puppeteer from "puppeteer-core";
 
 /** 미디어 리소스(img, video, audio, iframe) 로딩 대기 */
 async function waitForMediaLoad(page: any, timeout = 5000): Promise<void> {
@@ -33,16 +33,40 @@ export async function downloadPDF(htmlContent: string): Promise<Buffer> {
 		throw new Error("No HTML content provided.");
 	}
 
-	let launch: any;
-	try {
-		({ launch } = await import(/* webpackIgnore: true */ "puppeteer" as string));
-	} catch {
-		throw new Error("puppeteer is not installed. Run: npm i puppeteer");
+	let executablePath: string;
+	let args: string[];
+
+	if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+		// Amplify/Lambda 환경 — @sparticuz/chromium 사용
+		const chromium = (await import("@sparticuz/chromium")).default;
+		executablePath = await chromium.executablePath();
+		args = chromium.args;
+	} else {
+		// 로컬 개발 환경 — 시스템 Chrome 탐색
+		const fs = await import("fs");
+		const candidates = [
+			"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+			"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+			"/usr/bin/google-chrome",
+			"/usr/bin/chromium-browser",
+		];
+		const found = candidates.find((p) => {
+			try {
+				fs.accessSync(p);
+				return true;
+			} catch {
+				return false;
+			}
+		});
+		if (!found) throw new Error("Chrome not found. Install Google Chrome.");
+		executablePath = found;
+		args = ["--no-sandbox", "--disable-setuid-sandbox"];
 	}
 
-	const browser = await launch({
+	const browser = await puppeteer.launch({
 		headless: true,
-		args: ["--no-sandbox", "--disable-setuid-sandbox"],
+		executablePath,
+		args,
 	});
 
 	const page = await browser.newPage();
