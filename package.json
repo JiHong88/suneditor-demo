@@ -9,6 +9,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "lint:es": "npx eslint src/ --fix",
+    "lint:type": "tsc --noEmit",
+    "check": "npm run lint && npm run lint:type",
     "snippets:generate": "node scripts/generate-framework-snippets.cjs",
     "docs:generate": "node scripts/generate-api-docs.cjs",
     "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs",
