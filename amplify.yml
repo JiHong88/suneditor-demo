@@ -8,15 +8,16 @@ frontend:
       commands:
         - rm -rf .next
         - npm run build
-        # 빌드 후 불필요한 패키지/바이너리 제거
-        - npm prune --production
-        - rm -rf node_modules/@swc/core-linux-x64-gnu node_modules/@swc/core-linux-x64-musl
-        - rm -rf node_modules/next/next-swc-fallback
-        - rm -rf node_modules/@rolldown node_modules/@img
-        - rm -rf node_modules/typescript
-        # 디버깅 — 용량 확인 후 제거
-        - du -sh .next/ node_modules/ public/ || true
+        # 빌드 캐시 제거 (배포에 불필요)
+        - rm -rf .next/cache
+        # standalone 내 빌드 전용 바이너리 제거
+        - rm -rf .next/standalone/node_modules/next/next-swc-fallback
+        - rm -rf .next/standalone/node_modules/@next/swc-linux-x64-gnu
+        - rm -rf .next/standalone/node_modules/@next/swc-linux-x64-musl
+        # 디버깅 — 확인 후 제거
+        - du -sh .next/ || true
         - du -sh .next/*/ | sort -rh | head -10 || true
+        - du -sh .next/standalone/node_modules/*/ | sort -rh | head -15 || true
   artifacts:
     baseDirectory: .next
     files:
