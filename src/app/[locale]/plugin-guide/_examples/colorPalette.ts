@@ -32,7 +32,7 @@ class ColorPalette extends interfaces.PluginDropdownFree {
 
 		// Own event listener — no action() callback from suneditor
 		this.$.eventManager.addEvent(menu, "click", this.#handleClick.bind(this));
-		
+
 		this.$.menu.initDropdownTarget(ColorPalette, menu);
 	}
 
@@ -42,7 +42,7 @@ class ColorPalette extends interfaces.PluginDropdownFree {
 	/** @override — Called when dropdown closes */
 	off(): void {}
 
-	#handleClick(e: MouseEvent): void {
+	#handleClick(e: Event): void {
 		const color = (e.target as HTMLElement).getAttribute("data-color");
 		if (!color) return;
 
