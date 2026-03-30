@@ -70,7 +70,9 @@ const BUTTONS: ButtonMeta[] = [
 	// ── View ─────────────────────────────────────────────
 	{ name: "fullScreen", label: "Full Screen", category: "view" },
 	{ name: "showBlocks", label: "Show Blocks", category: "view" },
+	{ name: "codeBlock", label: "Code Block", category: "view" },
 	{ name: "codeView", label: "Code View", category: "view" },
+	{ name: "markdownView", label: "Markdown View", category: "view" },
 
 	// ── Page ─────────────────────────────────────────────
 	{ name: "pageBreak", label: "Page Break", category: "page" },

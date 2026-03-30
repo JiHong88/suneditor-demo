@@ -697,7 +697,9 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							value={state.mode}
 							options={[
 								{ value: "classic", label: "classic" },
+								{ value: "classic:bottom", label: "classic:bottom" },
 								{ value: "inline", label: "inline" },
+								{ value: "inline:bottom", label: "inline:bottom" },
 								{ value: "balloon", label: "balloon" },
 								{ value: "balloon-always", label: "balloon-always" },
 							]}
@@ -905,16 +907,6 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							onChange={set("toolbar_width")}
 							placeholder='auto'
 							resettable={!isFixedOption("toolbar_width")}
-						/>
-						<SelectField
-							label='toolbar_position'
-							value={state.toolbar_position}
-							options={[
-								{ value: "top", label: "top" },
-								{ value: "bottom", label: "bottom" },
-							]}
-							onChange={set("toolbar_position") as (v: string) => void}
-							resettable={!isFixedOption("toolbar_position")}
 						/>
 						<NumberInput
 							label='toolbar_sticky'

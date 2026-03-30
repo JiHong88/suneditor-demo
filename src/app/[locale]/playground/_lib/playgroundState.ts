@@ -10,7 +10,7 @@ export type CodeFramework = "javascript-cdn" | "javascript-npm" | "react" | "vue
 export interface PlaygroundState {
 	// — Mode & Theme —
 	multiroot: boolean;
-	mode: "classic" | "inline" | "balloon" | "balloon-always";
+	mode: "classic" | "classic:bottom" | "inline" | "inline:bottom" | "balloon" | "balloon-always";
 	buttonListPreset: ButtonListPreset;
 	customButtonList: string; // JSON-serialized custom buttonList array
 	type: string;
@@ -32,7 +32,6 @@ export interface PlaygroundState {
 
 	// — Toolbar —
 	toolbar_width: string;
-	toolbar_position: "top" | "bottom";
 	toolbar_sticky: number;
 	toolbar_hide: boolean;
 	toolbar_container_enabled: boolean;
@@ -425,7 +424,6 @@ export const DEFAULTS: PlaygroundState = {
 	editorStyle: "",
 
 	toolbar_width: "auto",
-	toolbar_position: "top",
 	toolbar_sticky: 0,
 	toolbar_hide: false,
 	toolbar_container_enabled: false,
@@ -1051,7 +1049,6 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		height: state.height || "auto",
 
 		// toolbar
-		toolbar_position: state.toolbar_position,
 		toolbar_sticky: state.toolbar_sticky,
 		toolbar_hide: state.toolbar_hide,
 		shortcutsHint: state.shortcutsHint,
@@ -1565,7 +1562,6 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	es: "editorStyle",
 	// Toolbar
 	tw: "toolbar_width",
-	tpo: "toolbar_position",
 	ts: "toolbar_sticky",
 	th: "toolbar_hide",
 	tce: "toolbar_container_enabled",

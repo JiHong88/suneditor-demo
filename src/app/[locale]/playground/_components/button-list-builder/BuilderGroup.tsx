@@ -41,9 +41,10 @@ interface BuilderGroupProps {
 	onButtonHover?: (info: { name: string; groupId: string; index: number } | null) => void;
 	onMoreGroupHover?: (groupId: string | null) => void;
 	onGroupActionHover?: (info: { groupId: string; action: "drag" | "float" | "more" | "delete" } | null) => void;
+	searchQuery?: string;
 }
 
-export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover }: BuilderGroupProps) {
+export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover, searchQuery }: BuilderGroupProps) {
 	const { attributes: groupDragAttrs, listeners: groupDragListeners, setNodeRef: setDragRef, isDragging: isGroupDragging } = useDraggable({
 		id: `group-drag-${group.id}`,
 		data: { type: "canvas-group" as const, groupId: group.id },
@@ -113,6 +114,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 							onRemove={() => dispatch({ type: "REMOVE_BUTTON", groupId: group.id, buttonName: name, index: i, breakpointId })}
 							suppressHover={isDraggingGroup}
 							onHover={onButtonHover}
+							highlight={searchQuery}
 						/>
 					</div>
 				))}

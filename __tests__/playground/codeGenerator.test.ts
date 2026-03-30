@@ -59,11 +59,10 @@ describe("generateCode", () => {
 		expect(code).toContain('"python"');
 	});
 
-	it("toolbar_position 옵션 출력", () => {
-		const state = { ...DEFAULTS, toolbar_position: "bottom" as const };
+	it("classic:bottom 모드 출력", () => {
+		const state = { ...DEFAULTS, mode: "classic:bottom" as const };
 		const code = generateCode(state, "javascript-npm");
-		expect(code).toContain("toolbar_position");
-		expect(code).toContain('"bottom"');
+		expect(code).toContain("classic:bottom");
 	});
 });
 

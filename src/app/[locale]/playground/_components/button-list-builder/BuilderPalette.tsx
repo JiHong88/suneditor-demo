@@ -146,10 +146,11 @@ function CategorySection({
 interface BuilderPaletteProps {
 	usedButtons: Set<string>;
 	onAdd: (buttonName: string) => void;
+	search: string;
+	onSearchChange: (value: string) => void;
 }
 
-export default function BuilderPalette({ usedButtons, onAdd }: BuilderPaletteProps) {
-	const [search, setSearch] = useState("");
+export default function BuilderPalette({ usedButtons, onAdd, search, onSearchChange }: BuilderPaletteProps) {
 	const byCategory = useMemo(() => getButtonsByCategory(), []);
 
 	const filteredCategories = useMemo(() => {
@@ -175,7 +176,7 @@ export default function BuilderPalette({ usedButtons, onAdd }: BuilderPalettePro
 				<input
 					type='text'
 					value={search}
-					onChange={(e) => setSearch(e.target.value)}
+					onChange={(e) => onSearchChange(e.target.value)}
 					placeholder='Search buttons...'
 					className='w-full ps-7 pe-2 py-1.5 text-xs rounded-md border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary/40 placeholder:text-muted-foreground/50'
 				/>

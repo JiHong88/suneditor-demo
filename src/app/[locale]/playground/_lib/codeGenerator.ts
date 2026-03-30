@@ -244,7 +244,6 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// toolbar
 	if (state.toolbar_width !== "auto") add("toolbar_width", `"${state.toolbar_width}"`);
-	if (state.toolbar_position !== "top") add("toolbar_position", `"${state.toolbar_position}"`);
 	if (state.toolbar_sticky !== 0) add("toolbar_sticky", String(state.toolbar_sticky));
 	if (state.toolbar_hide) add("toolbar_hide", "true");
 	if (!state.shortcutsHint) add("shortcutsHint", "false");

@@ -208,9 +208,9 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		{ mode: "balloon-always" },
 	),
 	toolbarBottom: fl(
-		{ p: "standard", val: DEMO_TOOLBAR_BOTTOM, tpo: "bottom" },
+		{ m: "classic:bottom", p: "standard", val: DEMO_TOOLBAR_BOTTOM },
 		[["bold", "italic", "underline"], "|", ["align"], "|", ["link", "image"]],
-		{ toolbar_position: "bottom" },
+		{ mode: "classic:bottom" },
 	),
 	documentLayout: fl(
 		{ p: "full", val: DEMO_DOCUMENT },

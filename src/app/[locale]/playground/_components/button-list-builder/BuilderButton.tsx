@@ -13,9 +13,10 @@ interface BuilderButtonProps {
 	isDragOverlay?: boolean;
 	suppressHover?: boolean;
 	onHover?: (info: { name: string; groupId: string; index: number } | null) => void;
+	highlight?: string;
 }
 
-export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay, suppressHover, onHover }: BuilderButtonProps) {
+export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay, suppressHover, onHover, highlight }: BuilderButtonProps) {
 	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
 		id,
 		data: { type: "canvas-button" as const, buttonName },
@@ -41,6 +42,11 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 	const isSeparator = buttonName === "|";
 	const meta = BUTTON_MAP[buttonName];
 	const label = meta?.label ?? buttonName;
+
+	const isHighlighted = !isSeparator && !!highlight?.trim() && (
+		buttonName.toLowerCase().includes(highlight.toLowerCase()) ||
+		label.toLowerCase().includes(highlight.toLowerCase())
+	);
 
 	// Separator rendering
 	if (isSeparator) {
@@ -89,7 +95,7 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 			ref={!isDragOverlay ? setNodeRef : undefined}
 			style={!isDragOverlay ? style : undefined}
 			className={`inline-flex items-center rounded text-[11px] font-medium border select-none transition-all
-				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:text-blue-400 dark:ring-blue-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/15 ${hoverClasses}`}
+				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:text-blue-400 dark:ring-blue-500/20" : isHighlighted ? "border-amber-400 bg-amber-50 text-amber-700 ring-1 ring-amber-400/30 dark:border-amber-500/60 dark:bg-amber-950/30 dark:text-amber-300 dark:ring-amber-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/15 ${hoverClasses}`}
 				${isDragging ? "z-50" : ""}
 				${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
 			onMouseEnter={() => onHover?.(hoverInfo)}

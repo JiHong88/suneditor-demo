@@ -92,7 +92,7 @@ export default function PlaygroundPage() {
 	const tc = useTranslations("Common");
 	const locale = useLocale();
 	const initialLang = locale !== "en" && editorLangCodes.includes(locale) ? locale : "";
-	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, toolbar_sticky: 92, lang: initialLang });
+	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });

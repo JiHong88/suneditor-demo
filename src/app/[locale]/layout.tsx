@@ -43,8 +43,9 @@ export const metadata: Metadata = {
 	manifest: "/site.webmanifest",
 };
 
-export default async function RootLayout({ children, locale }: Readonly<{ children: React.ReactNode; locale: string }>) {
+export default async function RootLayout({ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
 	const version = SUNEDITOR_VERSION;
+	const { locale } = await params;
 	const resolvedLocale = locale || (await getLocale());
 
 	return (

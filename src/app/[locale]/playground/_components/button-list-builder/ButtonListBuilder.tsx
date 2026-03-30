@@ -67,6 +67,7 @@ export default function ButtonListBuilder({
 		}
 		prevOpenRef.current = open;
 	}, [open, initialState, set]);
+	const [paletteSearch, setPaletteSearch] = useState("");
 	const [dragData, setDragData] = useState<{ buttonName: string; type?: string; groupId?: string } | null>(null);
 	const [dragPreview, setDragPreview] = useState<{ groupId: string; index: number } | null>(null);
 	const dragSourceRef = useRef<{ groupId: string; index: number } | null>(null);
@@ -490,7 +491,7 @@ export default function ButtonListBuilder({
 					<div className='flex-1 flex min-h-0'>
 						{/* Palette */}
 						<div className='w-56 shrink-0 border-e bg-muted/20 p-3 overflow-y-auto'>
-							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} />
+							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} search={paletteSearch} onSearchChange={setPaletteSearch} />
 						</div>
 
 						{/* Canvas */}
@@ -505,6 +506,7 @@ export default function ButtonListBuilder({
 								onButtonHover={handleButtonHover}
 								onMoreGroupHover={handleMoreGroupHover}
 								onGroupActionHover={handleGroupActionHover}
+								searchQuery={paletteSearch}
 							/>
 						</div>
 					</div>
