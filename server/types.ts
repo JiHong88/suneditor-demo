@@ -41,5 +41,5 @@ export const DEFAULT_SIZE_LIMITS: Record<MediaType, number> = {
 	file: 50 * 1024 * 1024, // 50MB
 };
 
-/** 업로드 파일 저장 기본 경로 */
-export const UPLOAD_BASE_PATH = "public/uploads";
+/** 업로드 파일 저장 기본 경로 — Vercel: /tmp, 로컬: public/uploads */
+export const UPLOAD_BASE_PATH = process.env.VERCEL ? "/tmp/uploads" : "public/uploads";

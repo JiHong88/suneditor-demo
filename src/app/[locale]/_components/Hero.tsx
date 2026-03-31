@@ -23,7 +23,8 @@ export default function Hero() {
 			<div className='container mx-auto px-6 pt-12 pb-16'>
 				<motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className='mx-auto max-w-4xl text-center'>
 					<h1 className='text-5xl font-bold tracking-tight md:text-7xl'>
-						<span className='bg-gradient-to-r from-orange-400 via-rose-500 to-purple-600 bg-clip-text text-transparent'>SunEditor v3</span>
+						<span className='bg-gradient-to-r from-orange-400 via-rose-500 to-purple-600 bg-clip-text text-transparent'>SunEditor</span>
+							<sup className='text-[0.3em] font-semibold text-muted-foreground/60 align-super ms-1'>v3</sup>
 					</h1>
 					<p className='mx-auto mt-6 max-w-2xl text-base text-muted-foreground'>{t("title")}</p>
 					<p className='mt-2 text-base font-medium text-foreground/80'>{t("tagline")}</p>

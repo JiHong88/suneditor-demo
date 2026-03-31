@@ -45,7 +45,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	{
 		id: "classic",
 		tKey: "classic",
-		options: { subToolbar: { mode: "balloon", buttonList: subButtonList } },
+		options: { toolbar_sticky: 92, subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "bottom",
@@ -55,7 +55,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	{
 		id: "inline",
 		tKey: "inline",
-		options: { mode: "inline", buttonList: inlineButtonList },
+		options: { mode: "inline", toolbar_sticky: 92, buttonList: inlineButtonList },
 	},
 	{
 		id: "balloon",
@@ -68,6 +68,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 		options: {
 			mode: "classic",
 			type: "document:header,page",
+			toolbar_sticky: 92,
 			buttonList: DocumentButtonList,
 			subToolbar: { mode: "balloon-always", buttonList: subButtonList },
 		},

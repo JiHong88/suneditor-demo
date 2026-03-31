@@ -24,7 +24,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 		return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
 	}
 
-	const filePath = path.join(process.cwd(), UPLOAD_BASE_PATH, type as MediaType, safeName);
+	// UPLOAD_BASE_PATH is absolute on Vercel (/tmp/uploads), relative locally
+	const basePath = path.isAbsolute(UPLOAD_BASE_PATH) ? UPLOAD_BASE_PATH : path.join(process.cwd(), UPLOAD_BASE_PATH);
+	const filePath = path.join(basePath, type as MediaType, safeName);
 
 	try {
 		const file = await fs.readFile(filePath);

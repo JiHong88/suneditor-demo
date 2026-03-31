@@ -17,7 +17,8 @@ export function hashFile(buffer: Buffer): string {
 
 /** 업로드 저장 디렉토리 생성 (없으면 재귀 생성) */
 export async function ensureUploadDir(mediaType: MediaType): Promise<string> {
-	const dir = path.join(UPLOAD_BASE_PATH, mediaType);
+	const basePath = path.isAbsolute(UPLOAD_BASE_PATH) ? UPLOAD_BASE_PATH : path.join(process.cwd(), UPLOAD_BASE_PATH);
+	const dir = path.join(basePath, mediaType);
 	await fs.mkdir(dir, { recursive: true });
 	return dir;
 }
