@@ -63,7 +63,7 @@ export default function MicroBar({ className }: Props) {
 							className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-colors'
 						>
 							<History className='size-3' aria-hidden />
-							<span>v2-legacy</span>
+							<span>v2</span>
 							<ChevronDown className={cn("size-3 transition-transform", v2Open && "rotate-180")} />
 						</button>
 
