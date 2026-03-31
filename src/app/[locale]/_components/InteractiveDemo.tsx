@@ -5,11 +5,40 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
+import { DocumentButtonList } from "@/components/editor/buttonList";
 
 const subButtonList = [
 	["bold", "underline", "italic", "strike", "subscript", "superscript"],
 	"|",
 	["fontColor", "backgroundColor"],
+];
+
+const inlineButtonList = [
+	["undo", "redo"],
+	"|",
+	["blockStyle", "font", "fontSize"],
+	"|",
+	["bold", "underline", "italic", "strike"],
+	"|",
+	["fontColor", "backgroundColor"],
+	"|",
+	["removeFormat"],
+	"|",
+	["align", "list", "outdent", "indent"],
+	"|",
+	["table", "link", "image"],
+	"|",
+	["fullScreen", "codeView"],
+];
+
+const balloonButtonList = [
+	["bold", "underline", "italic", "strike"],
+	"|",
+	["fontColor", "backgroundColor"],
+	"|",
+	["removeFormat"],
+	"|",
+	["link"],
 ];
 
 const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions }[] = [
@@ -19,14 +48,19 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 		options: { subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
+		id: "bottom",
+		tKey: "bottom",
+		options: { mode: "classic:bottom", subToolbar: { mode: "balloon", buttonList: subButtonList } },
+	},
+	{
 		id: "inline",
 		tKey: "inline",
-		options: { mode: "inline" },
+		options: { mode: "inline", buttonList: inlineButtonList },
 	},
 	{
 		id: "balloon",
 		tKey: "balloon",
-		options: { mode: "balloon" },
+		options: { mode: "balloon", buttonList: balloonButtonList },
 	},
 	{
 		id: "document",
@@ -34,6 +68,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 		options: {
 			mode: "classic",
 			type: "document:header,page",
+			buttonList: DocumentButtonList,
 			subToolbar: { mode: "balloon-always", buttonList: subButtonList },
 		},
 	},

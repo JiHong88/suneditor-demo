@@ -1,5 +1,5 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
-import { API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
+import { API_MENTION, API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
 
 /* ── Types ─────────────────────────────────────────────── */
@@ -581,7 +581,7 @@ export const DEFAULTS: PlaygroundState = {
 	mention_limitSize: 5,
 	mention_delayTime: 200,
 	mention_searchStartLength: 0,
-	mention_apiUrl: API_MENTION,
+	mention_apiUrl: "",
 	mention_useCachingData: true,
 
 	// Plugin: Math
@@ -671,7 +671,7 @@ export const DEFAULTS: PlaygroundState = {
 	link_defaultRel: "",
 
 	// Plugin: ExportPDF
-	exportPDF_apiUrl: API_DOWNLOAD_PDF,
+	exportPDF_apiUrl: "",
 	exportPDF_fileName: "suneditor-pdf",
 
 	// Plugin: FileUpload
@@ -876,6 +876,83 @@ export function isFixedOption(key: string): boolean {
 	return FIXED_KEYS.has(key);
 }
 
+/* ── Auto-enable plugin options for preset buttons ────── */
+
+/**
+ * Maps button names → required PlaygroundState keys + their preset values.
+ * When a preset is selected, if the button is present and the option is empty,
+ * the preset value is auto-filled.
+ */
+const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
+	image: { image_uploadUrl: API_UPLOAD_IMAGE } as Partial<PlaygroundState>,
+	video: { video_uploadUrl: API_UPLOAD_VIDEO } as Partial<PlaygroundState>,
+	audio: { audio_uploadUrl: API_UPLOAD_AUDIO } as Partial<PlaygroundState>,
+	embed: { embed_uploadUrl: API_UPLOAD_FILE } as Partial<PlaygroundState>,
+	fileUpload: { fileUpload_uploadUrl: API_UPLOAD_FILE } as Partial<PlaygroundState>,
+	link: { link_uploadUrl: API_UPLOAD_FILE } as Partial<PlaygroundState>,
+	exportPDF: { exportPDF_apiUrl: API_DOWNLOAD_PDF } as Partial<PlaygroundState>,
+	imageGallery: { imageGallery_data: GALLERY_DATA_PRESETS.imageGallery_data } as Partial<PlaygroundState>,
+	videoGallery: { videoGallery_data: GALLERY_DATA_PRESETS.videoGallery_data } as Partial<PlaygroundState>,
+	audioGallery: { audioGallery_data: GALLERY_DATA_PRESETS.audioGallery_data } as Partial<PlaygroundState>,
+	fileGallery: { fileGallery_data: GALLERY_DATA_PRESETS.fileGallery_data } as Partial<PlaygroundState>,
+	fileBrowser: { fileBrowser_data: GALLERY_DATA_PRESETS.fileBrowser_data } as Partial<PlaygroundState>,
+};
+
+/** Field plugins (not button-based) auto-enabled per preset */
+const PRESET_FIELD_OPTIONS: Partial<Record<ButtonListPreset, Partial<PlaygroundState>>> = {
+	full: {
+		mention_apiUrl: API_MENTION,
+		mention_data: ITEM_PRESETS.mention_data,
+	} as Partial<PlaygroundState>,
+};
+
+/** Collect all button names from a resolved button list (deep) */
+function collectButtonNames(list: unknown[]): Set<string> {
+	const names = new Set<string>();
+	for (const item of list) {
+		if (typeof item === "string" && item !== "|" && item !== "/" && !item.startsWith("%") && !item.startsWith(":") && !item.startsWith("-")) {
+			names.add(item);
+		} else if (Array.isArray(item)) {
+			for (const name of collectButtonNames(item)) names.add(name);
+		}
+	}
+	return names;
+}
+
+/**
+ * Auto-fill required plugin options for buttons present in the given preset.
+ * Only fills empty (falsy) values — never overwrites user-set values.
+ */
+function autoEnablePluginOptions(state: PlaygroundState, preset: ButtonListPreset): Partial<PlaygroundState> {
+	const list = getButtonList(preset, state.type);
+	const buttons = collectButtonNames(list);
+	const patch: Record<string, unknown> = {};
+
+	// Button-based options
+	for (const [button, requiredOpts] of Object.entries(BUTTON_REQUIRED_OPTIONS)) {
+		if (!buttons.has(button)) continue;
+		for (const [key, presetValue] of Object.entries(requiredOpts)) {
+			const currentValue = state[key as keyof PlaygroundState];
+			if (!currentValue) {
+				patch[key] = presetValue;
+			}
+		}
+	}
+
+	// Field plugin options per preset
+	const fieldOpts = PRESET_FIELD_OPTIONS[preset];
+	if (fieldOpts) {
+		for (const [key, presetValue] of Object.entries(fieldOpts)) {
+			const currentValue = state[key as keyof PlaygroundState];
+			if (!currentValue) {
+				patch[key] = presetValue;
+			}
+		}
+	}
+
+	return patch as Partial<PlaygroundState>;
+}
+
 /* ── Reducer ───────────────────────────────────────────── */
 
 export type PlaygroundAction =
@@ -896,12 +973,25 @@ export function playgroundReducer(state: PlaygroundState, action: PlaygroundActi
 					customButtonList: JSON.stringify(currentList),
 				};
 			}
+			// Auto-enable plugin options when changing preset
+			if (action.key === "buttonListPreset" && action.value !== "custom") {
+				const nextState = { ...state, buttonListPreset: action.value as ButtonListPreset };
+				const patch = autoEnablePluginOptions(nextState, action.value as ButtonListPreset);
+				return { ...nextState, ...patch };
+			}
 			return { ...state, [action.key]: action.value };
 		}
-		case "RESET":
-			return { ...DEFAULTS };
-		case "LOAD":
-			return { ...DEFAULTS, ...action.payload };
+		case "RESET": {
+			const reset = { ...DEFAULTS };
+			const resetPatch = autoEnablePluginOptions(reset, reset.buttonListPreset);
+			return { ...reset, ...resetPatch };
+		}
+		case "LOAD": {
+			const loaded = { ...DEFAULTS, ...action.payload };
+			// Auto-enable for initial load too
+			const patch = autoEnablePluginOptions(loaded, loaded.buttonListPreset);
+			return { ...loaded, ...patch };
+		}
 		default:
 			return state;
 	}

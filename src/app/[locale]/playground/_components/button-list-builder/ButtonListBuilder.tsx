@@ -490,7 +490,7 @@ export default function ButtonListBuilder({
 				>
 					<div className='flex-1 flex min-h-0'>
 						{/* Palette */}
-						<div className='w-56 shrink-0 border-e bg-muted/20 p-3 overflow-y-auto'>
+						<div className='w-56 shrink-0 border-e bg-muted/30 dark:bg-[oklch(0.18_0_0)] p-3 overflow-y-auto'>
 							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} search={paletteSearch} onSearchChange={setPaletteSearch} />
 						</div>
 
@@ -514,7 +514,7 @@ export default function ButtonListBuilder({
 					{/* Drag overlay */}
 					<DragOverlay dropAnimation={null} modifiers={[snapToCursor]}>
 						{dragData && dragData.type === "canvas-group" ? (
-							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-950/30 dark:ring-emerald-500/20 -translate-x-1/2'>
+							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
 								<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
 								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
 									Group
@@ -522,12 +522,12 @@ export default function ButtonListBuilder({
 							</div>
 						) : dragData ? (
 							dragData.buttonName === "|" ? (
-								<div className='inline-flex items-center gap-1 px-2.5 py-1 rounded border border-dashed border-blue-400 bg-blue-50 shadow-lg ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:ring-blue-500/20 -translate-x-1/2'>
+								<div className='inline-flex items-center gap-1 px-2.5 py-1 rounded border border-dashed border-blue-400 bg-blue-50 shadow-lg ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-900/40 dark:ring-blue-500/20 -translate-x-1/2'>
 									<div className='w-0.5 h-4 bg-blue-500/60 rounded-full' />
 									<span className='text-[10px] font-medium text-blue-600 dark:text-blue-400'>|</span>
 								</div>
 							) : (
-								<div className='inline-flex items-center gap-0.5 px-2 py-1 rounded text-[11px] font-medium border border-blue-400 bg-blue-50 shadow-lg ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:ring-blue-500/20 -translate-x-1/2'>
+								<div className='inline-flex items-center gap-0.5 px-2 py-1 rounded text-[11px] font-medium border border-blue-400 bg-blue-50 shadow-lg ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-900/40 dark:ring-blue-500/20 -translate-x-1/2'>
 									<span className='truncate max-w-[80px] text-blue-600 dark:text-blue-400'>
 										{BUTTON_MAP[dragData.buttonName]?.label ?? dragData.buttonName}
 									</span>

@@ -2,7 +2,7 @@
 
 import { type Dispatch, useState, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
@@ -678,7 +678,7 @@ function useSet(dispatch: Dispatch<PlaygroundAction>) {
 
 /* ── Main component ────────────────────────────────────── */
 
-export default function PlaygroundControls({ state, dispatch }: Props) {
+export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: Props & { onOpenBuilder?: () => void }) {
 	const t = useTranslations("Playground");
 	const set = useSet(dispatch);
 	const isMultirootClassic = state.multiroot && state.mode === "classic";
@@ -706,18 +706,31 @@ export default function PlaygroundControls({ state, dispatch }: Props) {
 							onChange={(v) => set("mode")(v as PlaygroundState["mode"])}
 							resettable={!isFixedOption("mode")}
 						/>
-						<SelectField
-							label='buttonList'
-							value={state.buttonListPreset}
-							options={[
-								{ value: "basic", label: "basic" },
-								{ value: "standard", label: "standard" },
-								{ value: "full", label: "full" },
-								{ value: "custom", label: "custom" },
-							]}
-							onChange={(v) => set("buttonListPreset")(v as PlaygroundState["buttonListPreset"])}
-							resettable={!isFixedOption("buttonListPreset")}
-						/>
+						<div className='flex flex-col gap-1'>
+							<FieldLabel label='buttonList' resettable={!isFixedOption("buttonListPreset")} />
+							<div className='flex items-center gap-1'>
+								<select
+									value={state.buttonListPreset}
+									onChange={(e) => set("buttonListPreset")(e.target.value as PlaygroundState["buttonListPreset"])}
+									className='h-8 flex-1 min-w-0 rounded-md border border-input bg-background px-2 text-xs outline-none focus:ring-2 focus:ring-ring'
+								>
+									<option value='basic'>basic</option>
+									<option value='standard'>standard</option>
+									<option value='full'>full</option>
+									{state.buttonListPreset === "custom" && <option value='custom'>custom</option>}
+								</select>
+								{onOpenBuilder && (
+									<button
+										type='button'
+										onClick={onOpenBuilder}
+										className='shrink-0 h-8 w-8 inline-flex items-center justify-center rounded-md border border-violet-300 bg-violet-50 text-violet-600 hover:bg-violet-100 dark:border-violet-600 dark:bg-violet-900/40 dark:text-violet-300 dark:hover:bg-violet-800/40 transition-colors cursor-pointer'
+										title='Customize ButtonList'
+									>
+										<SlidersHorizontal className='h-3.5 w-3.5' />
+									</button>
+								)}
+							</div>
+						</div>
 						<SelectField
 							label='theme'
 							value={state.theme}

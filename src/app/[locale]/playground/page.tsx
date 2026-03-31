@@ -2,7 +2,7 @@
 
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Share2, Check, Settings2, Puzzle, SlidersHorizontal } from "lucide-react";
+import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -172,7 +172,10 @@ export default function PlaygroundPage() {
 		// to avoid triggering #RestoreFrameOptions for unchanged frame options
 		const opts = stateToEditorOptions(state) as Record<string, unknown>;
 		const prevOpts = stateToEditorOptions(prev) as Record<string, unknown>;
-		for (const k of FIXED_RESET_KEYS) { delete opts[k]; delete prevOpts[k]; }
+		for (const k of FIXED_RESET_KEYS) {
+			delete opts[k];
+			delete prevOpts[k];
+		}
 		for (const k of Object.keys(opts)) {
 			if (JSON.stringify(opts[k]) === JSON.stringify(prevOpts[k])) {
 				delete opts[k];
@@ -200,14 +203,10 @@ export default function PlaygroundPage() {
 	}, [state]);
 
 	return (
-		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col'>
+		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-[oklch(0.175_0_0)]'>
 			{/* Header */}
 			<section className='container mx-auto px-6 py-6 border-b'>
-				<motion.div
-					initial={{ opacity: 0, y: 16 }}
-					animate={{ opacity: 1, y: 0 }}
-					className='flex items-center justify-between'
-				>
+				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className='flex items-center justify-between'>
 					<div>
 						<h1 className='text-2xl font-bold tracking-tight'>{t("title")}</h1>
 						<p className='text-sm text-muted-foreground mt-1'>{t("desc")}</p>
@@ -239,7 +238,7 @@ export default function PlaygroundPage() {
 						transition={{ delay: 0.05 }}
 						className='hidden lg:block w-64 shrink-0 sticky top-[93px] self-start'
 					>
-						<div className='rounded-lg border bg-card/90 max-h-[calc(100vh-93px-1rem)] flex flex-col'>
+						<div className='rounded-lg border bg-card max-h-[calc(100vh-93px-1rem)] flex flex-col'>
 							<div className='shrink-0 px-3 py-2.5 border-b'>
 								<span className='text-[12px] font-bold text-orange-600 dark:text-amber-400 uppercase tracking-wider'>
 									{t("pluginOptions")}
@@ -254,7 +253,7 @@ export default function PlaygroundPage() {
 					{/* Right Content */}
 					<div className='flex-1 min-w-0 space-y-6 pb-24'>
 						{/* Multiroot Toggle */}
-						<div className='flex items-center justify-between rounded-lg border bg-card/90 px-4 py-3'>
+						<div className='flex items-center justify-between rounded-lg border bg-card px-4 py-3'>
 							<div>
 								<span className='text-sm font-semibold'>{t("multiroot")}</span>
 								<p className='text-[11px] text-muted-foreground mt-0.5'>{t("multirootDesc")}</p>
@@ -273,26 +272,23 @@ export default function PlaygroundPage() {
 						</div>
 
 						{/* Per-Root Frame Options — right below multiroot toggle */}
-						{state.multiroot && (
-							<PlaygroundPerRootPanel state={state} dispatch={dispatch} />
-						)}
+						{state.multiroot && <PlaygroundPerRootPanel state={state} dispatch={dispatch} />}
 
 						{/* Controls — Desktop: inline, Mobile: Sheet */}
-						<motion.div
-							initial={{ opacity: 0, y: 16 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.05 }}
-						>
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
 							{/* Desktop */}
-							<div className='hidden md:block rounded-lg border bg-card/90 pt-4 pb-8'>
-								<PlaygroundControls state={state} dispatch={dispatch} />
+							<div className='hidden md:block rounded-lg border bg-card pt-4 pb-8'>
+								<PlaygroundControls state={state} dispatch={dispatch} onOpenBuilder={() => handleBuilderOpen(true)} />
 							</div>
 
 							{/* Mobile: Editor Options */}
 							<div className='md:hidden'>
 								<Sheet>
 									<SheetTrigger asChild>
-										<Button variant='outline' className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950/60 dark:text-blue-300 dark:hover:bg-blue-900/60'>
+										<Button
+											variant='outline'
+											className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-900/50 dark:text-blue-300 dark:hover:bg-blue-800/50'
+										>
 											<Settings2 className='me-2 h-4 w-4' />
 											{t("editorOptions")}
 										</Button>
@@ -302,7 +298,7 @@ export default function PlaygroundPage() {
 											<SheetTitle>{t("editorOptions")}</SheetTitle>
 										</SheetHeader>
 										<div className='mt-4 pb-8'>
-											<PlaygroundControls state={state} dispatch={dispatch} />
+											<PlaygroundControls state={state} dispatch={dispatch} onOpenBuilder={() => handleBuilderOpen(true)} />
 										</div>
 									</SheetContent>
 								</Sheet>
@@ -312,7 +308,10 @@ export default function PlaygroundPage() {
 							<div className='lg:hidden mt-5'>
 								<Sheet>
 									<SheetTrigger asChild>
-										<Button variant='outline' className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-950/60 dark:text-orange-300 dark:hover:bg-orange-900/60'>
+										<Button
+											variant='outline'
+											className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-900/50 dark:text-orange-300 dark:hover:bg-orange-800/50'
+										>
 											<Puzzle className='me-2 h-4 w-4' />
 											{t("pluginOptions")}
 										</Button>
@@ -329,17 +328,7 @@ export default function PlaygroundPage() {
 							</div>
 						</motion.div>
 
-						{/* Customize ButtonList */}
-						{state.buttonListPreset === "custom" && (
-							<Button
-								variant='outline'
-								className='w-full border-2 border-violet-300 bg-violet-50 text-violet-700 hover:bg-violet-100 dark:border-violet-700 dark:bg-violet-950/60 dark:text-violet-300 dark:hover:bg-violet-900/60'
-								onClick={() => handleBuilderOpen(true)}
-							>
-								<SlidersHorizontal className='me-2 h-4 w-4' />
-								Customize ButtonList
-							</Button>
-						)}
+						{/* Customize ButtonList — always available */}
 
 						{/* ButtonList Builder */}
 						<ButtonListBuilder
@@ -352,13 +341,9 @@ export default function PlaygroundPage() {
 						/>
 
 						{/* Editor — wait until URL params are applied to avoid double creation */}
-						<motion.div
-							id='editor'
-							initial={{ opacity: 0, y: 16 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.1 }}
-						>
-							{ready && allLibs &&
+						<motion.div id='editor' initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+							{ready &&
+								allLibs &&
 								(state.multiroot ? (
 									<PlaygroundMultiRootEditor
 										key={editorKey}
@@ -383,11 +368,7 @@ export default function PlaygroundPage() {
 						<FileListPanel files={files} />
 
 						{/* Code Panel */}
-						<motion.div
-							initial={{ opacity: 0, y: 16 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.15 }}
-						>
+						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
 							<PlaygroundCodePanel state={state} />
 						</motion.div>
 					</div>

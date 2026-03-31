@@ -18,9 +18,9 @@ function SeparatorPaletteItem({ onAdd }: { onAdd: (name: string) => void }) {
 		<div
 			ref={setNodeRef}
 			className={`flex items-center gap-0.5 rounded-md border border-dashed border-amber-400/50 bg-amber-50/40 text-amber-700 select-none transition-all
-				dark:border-amber-500/30 dark:bg-amber-950/20 dark:text-amber-400
-				has-[.add-zone:hover]:border-amber-400 has-[.add-zone:hover]:bg-amber-50 dark:has-[.add-zone:hover]:border-amber-500/60 dark:has-[.add-zone:hover]:bg-amber-950/30
-				has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-950/40
+				dark:border-amber-500/40 dark:bg-amber-900/30 dark:text-amber-300
+				has-[.add-zone:hover]:border-amber-400 has-[.add-zone:hover]:bg-amber-50 dark:has-[.add-zone:hover]:border-amber-500/60 dark:has-[.add-zone:hover]:bg-amber-900/40
+				has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-900/50
 				${isDragging ? "opacity-40" : ""}`}
 		>
 			<button
@@ -56,8 +56,8 @@ function PaletteButton({ meta, onAdd }: { meta: ButtonMeta; onAdd: (name: string
 		<div
 			ref={setNodeRef}
 			className={`flex items-center gap-0.5 rounded text-[11px] border border-border bg-muted/40 select-none transition-all
-				has-[.add-zone:hover]:border-blue-300 has-[.add-zone:hover]:bg-blue-50/50 dark:has-[.add-zone:hover]:border-blue-500/40 dark:has-[.add-zone:hover]:bg-blue-950/20
-				has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-950/30
+				has-[.add-zone:hover]:border-blue-300 has-[.add-zone:hover]:bg-blue-50/50 dark:has-[.add-zone:hover]:border-blue-500/40 dark:has-[.add-zone:hover]:bg-blue-900/30
+				has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-900/40
 				${isDragging ? "opacity-40" : ""}`}
 		>
 			{/* Click-to-add button */}
@@ -125,7 +125,7 @@ function CategorySection({
 					{used.map((b) => (
 						<div
 							key={b.name}
-							className='flex items-center gap-1 px-1.5 py-1 rounded text-[11px] border border-transparent text-muted-foreground/40 cursor-default select-none'
+							className='flex items-center gap-1 px-1.5 py-1 rounded text-[11px] border border-transparent text-muted-foreground/50 dark:text-muted-foreground/45 cursor-default select-none'
 						>
 							<span className='truncate line-through relative group/tip'>
 								{b.label}

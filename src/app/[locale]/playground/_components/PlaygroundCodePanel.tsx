@@ -44,7 +44,7 @@ export default function PlaygroundCodePanel({ state }: Props) {
 
 	return (
 		<>
-			<div className='rounded-lg border bg-card/90 overflow-hidden'>
+			<div className='rounded-lg border bg-card overflow-hidden'>
 				{/* Header */}
 				<div className='border-b px-4 py-2'>
 					<div className='flex items-center justify-between'>

@@ -31,8 +31,10 @@ const DEFAULT_VALUE = "<p>Hello SunEditor</p>";
 
 const BASIC_BUTTON_LIST = [
 	["undo", "redo"],
+	"|",
 	["bold", "italic", "underline"],
-	["link", "image"],
+	"|",
+	["list", "link", "image"],
 ];
 
 function fmtButtonList(list, indent) {

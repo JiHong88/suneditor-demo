@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { LangSelect } from "./lang-select";
-import { Heart, History, ArrowRightLeft, ChevronDown } from "lucide-react";
+import { Heart, History, ArrowRightLeft, ChevronDown, Github } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -55,8 +55,6 @@ export default function MicroBar({ className }: Props) {
 
 				{/* 오른쪽 */}
 				<div className='flex items-center gap-2'>
-					<ThemeToggle />
-
 					{/* v2 dropdown */}
 					<div ref={v2Ref} className='relative'>
 						<button
@@ -72,7 +70,7 @@ export default function MicroBar({ className }: Props) {
 						{v2Open && (
 							<div className='absolute end-0 top-full mt-1.5 w-40 rounded-lg border bg-popover shadow-md py-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150'>
 								<a
-									href='/v2-legacy/sample/index.html'
+									href='https://legacy.suneditor.com'
 									target='_blank'
 									className='flex items-center gap-2 px-3 py-1.5 text-xs hover:bg-accent hover:text-accent-foreground transition-colors'
 									onClick={() => setV2Open(false)}
@@ -92,6 +90,8 @@ export default function MicroBar({ className }: Props) {
 						)}
 					</div>
 
+					<ThemeToggle />
+
 					<Link
 						href='https://opencollective.com/suneditor'
 						target='_blank'
@@ -101,6 +101,15 @@ export default function MicroBar({ className }: Props) {
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
 						<span>{tc("sponsor")}</span>
 					</Link>
+
+					<a
+						href='https://github.com/JiHong88/SunEditor'
+						target='_blank'
+						rel='noreferrer'
+						className='inline-flex items-center h-6 rounded px-1.5 py-1 hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-colors'
+					>
+						<Github className='size-3.5' aria-hidden />
+					</a>
 				</div>
 			</div>
 		</div>

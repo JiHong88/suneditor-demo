@@ -58,8 +58,8 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 			<div
 				ref={!isDragOverlay ? setNodeRef : undefined}
 				style={!isDragOverlay ? style : undefined}
-				className={`inline-flex items-center gap-0.5 rounded select-none transition-all text-amber-700 dark:text-amber-400
-					${isDragOverlay ? "shadow-lg border border-amber-400 bg-amber-50 ring-2 ring-amber-400/20 dark:border-amber-500/60 dark:bg-amber-950/30 dark:ring-amber-500/20" : `border border-dashed border-amber-400/50 bg-amber-50/40 dark:border-amber-500/30 dark:bg-amber-950/20 ${hoverClasses}`}
+				className={`inline-flex items-center gap-0.5 rounded select-none transition-all text-amber-700 dark:text-amber-300
+					${isDragOverlay ? "shadow-lg border border-amber-400 bg-amber-50 ring-2 ring-amber-400/20 dark:border-amber-500/60 dark:bg-amber-900/40 dark:ring-amber-500/20" : `border border-dashed border-amber-400/50 bg-amber-50/40 dark:border-amber-500/40 dark:bg-amber-900/30 ${hoverClasses}`}
 					${isDragging ? "z-50 opacity-30" : ""}
 					${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
 				onMouseEnter={() => onHover?.(hoverInfo)}
@@ -88,14 +88,14 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 
 	const hoverClasses = suppressHover
 		? ""
-		: "has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-950/30 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-950/30";
+		: "has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-900/40 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-900/40";
 
 	return (
 		<div
 			ref={!isDragOverlay ? setNodeRef : undefined}
 			style={!isDragOverlay ? style : undefined}
 			className={`inline-flex items-center rounded text-[11px] font-medium border select-none transition-all
-				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-950/30 dark:text-blue-400 dark:ring-blue-500/20" : isHighlighted ? "border-amber-400 bg-amber-50 text-amber-700 ring-1 ring-amber-400/30 dark:border-amber-500/60 dark:bg-amber-950/30 dark:text-amber-300 dark:ring-amber-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/15 ${hoverClasses}`}
+				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-900/40 dark:text-blue-300 dark:ring-blue-500/20" : isHighlighted ? "border-amber-400 bg-amber-50 text-amber-700 ring-1 ring-amber-400/30 dark:border-amber-500/60 dark:bg-amber-900/30 dark:text-amber-300 dark:ring-amber-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/20 ${hoverClasses}`}
 				${isDragging ? "z-50" : ""}
 				${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
 			onMouseEnter={() => onHover?.(hoverInfo)}

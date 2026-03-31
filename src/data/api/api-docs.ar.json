@@ -1,6 +1,6 @@
 {
-	"version": "3.0.0-rc.5",
-	"generatedAt": "2026-03-29T12:20:03.596Z",
+	"version": "3.0.0",
+	"generatedAt": "2026-03-31T16:48:03.819Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -2305,80 +2305,6 @@
 							"params": "",
 							"returns": "void",
 							"description": "",
-							"example": ""
-						}
-					]
-				},
-				"codeLang": {
-					"title": "editor.codeLang",
-					"description": "طرق codeLang",
-					"methods": [
-						{
-							"name": "unwrapCode",
-							"params": "preElement: HTMLElement",
-							"returns": "void",
-							"description": "تحويل الإدخال: `<pre><code class=\"language-xxx\">...</code></pre>` → `<pre class=\"language-xxx\" data-se-lang=\"xxx\">...`",
-							"example": "",
-							"paramDescriptions": {
-								"preElement": "العنصر `<pre>` المطلوب فكه"
-							},
-							"memberKind": "static"
-						},
-						{
-							"name": "wrapCode",
-							"params": "preElement: Element",
-							"returns": "void",
-							"description": "تحويل الإخراج: `<pre class=\"language-xxx\" data-se-lang=\"xxx\">...` → `<pre><code class=\"language-xxx\">...</code></pre>`",
-							"example": "",
-							"paramDescriptions": {
-								"preElement": "العنصر `<pre>` المطلوب التفافه"
-							},
-							"memberKind": "static"
-						},
-						{
-							"name": "isOpen",
-							"params": "",
-							"returns": "boolean",
-							"description": "ما إذا كانت واجهة مستخدم المحدد مرئية حاليًا (الزر أو القائمة مفتوحة).",
-							"example": "",
-							"memberKind": "getter"
-						},
-						{
-							"name": "show",
-							"params": "preElement: HTMLElement",
-							"returns": "void",
-							"description": "يعرض محدد اللغة فوق العنصر المسبق المحدد.",
-							"example": "",
-							"paramDescriptions": {
-								"preElement": "العنصر `<pre>`"
-							}
-						},
-						{
-							"name": "hide",
-							"params": "",
-							"returns": "void",
-							"description": "إخفاء محدد اللغة.",
-							"example": ""
-						},
-						{
-							"name": "close",
-							"params": "",
-							"returns": "void",
-							"description": "فرض إغلاق محدد اللغة واختيار القائمة.",
-							"example": ""
-						},
-						{
-							"name": "controllerClose",
-							"params": "",
-							"returns": "void",
-							"description": "يتم الاتصال به عند إغلاق وحدة التحكم.",
-							"example": ""
-						},
-						{
-							"name": "destroy",
-							"params": "",
-							"returns": "void",
-							"description": "ينظف الموارد.",
 							"example": ""
 						}
 					]

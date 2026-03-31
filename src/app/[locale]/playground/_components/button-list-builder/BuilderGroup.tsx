@@ -80,25 +80,25 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 			ref={setNodeRef}
 			className={`group/grp relative flex flex-wrap items-center min-h-[36px] min-w-[70px] px-1.5 py-2 rounded-lg border border-dashed transition-colors
 				${isOver ? "border-primary !border-solid bg-primary/5 shadow-sm" : `${borderColor} bg-background`}
-				${isGroupDragging ? "!border-emerald-400 !bg-emerald-50/50 opacity-40 dark:!border-emerald-500/60 dark:!bg-emerald-950/20" : ""}
+				${isGroupDragging ? "!border-emerald-400 !bg-emerald-50/50 opacity-40 dark:!border-emerald-500/60 dark:!bg-emerald-900/25" : ""}
 				${groupHoverClasses}
-				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-950/20
-				has-[.group-float-zone:hover]:border-orange-400 has-[.group-float-zone:hover]:bg-orange-50/30 dark:has-[.group-float-zone:hover]:border-orange-500/60 dark:has-[.group-float-zone:hover]:bg-orange-950/20
-				has-[.group-more-zone:hover]:border-violet-400 has-[.group-more-zone:hover]:bg-violet-50/30 dark:has-[.group-more-zone:hover]:border-violet-500/60 dark:has-[.group-more-zone:hover]:bg-violet-950/20
-				has-[.group-delete-zone:hover]:border-red-400 has-[.group-delete-zone:hover]:bg-red-50/30 dark:has-[.group-delete-zone:hover]:border-red-500/60 dark:has-[.group-delete-zone:hover]:bg-red-950/20`}
+				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-900/25
+				has-[.group-float-zone:hover]:border-orange-400 has-[.group-float-zone:hover]:bg-orange-50/30 dark:has-[.group-float-zone:hover]:border-orange-500/60 dark:has-[.group-float-zone:hover]:bg-orange-900/25
+				has-[.group-more-zone:hover]:border-violet-400 has-[.group-more-zone:hover]:bg-violet-50/30 dark:has-[.group-more-zone:hover]:border-violet-500/60 dark:has-[.group-more-zone:hover]:bg-violet-900/25
+				has-[.group-delete-zone:hover]:border-red-400 has-[.group-delete-zone:hover]:bg-red-50/30 dark:has-[.group-delete-zone:hover]:border-red-500/60 dark:has-[.group-delete-zone:hover]:bg-red-900/25`}
 			onMouseEnter={group.moreButton ? () => onMoreGroupHover?.(group.id) : undefined}
 			onMouseLeave={group.moreButton ? () => onMoreGroupHover?.(null) : undefined}
 		>
 			{/* MoreButton label */}
 			{group.moreButton && (
-				<span className='text-[10px] font-semibold text-violet-700 dark:text-violet-300 bg-violet-100 dark:bg-violet-900/50 px-2 py-0.5 rounded me-1'>
+				<span className='text-[10px] font-semibold text-violet-700 dark:text-violet-200 bg-violet-100 dark:bg-violet-800/50 px-2 py-0.5 rounded me-1'>
 					:{group.moreButton.label}
 				</span>
 			)}
 
 			{/* Float right indicator */}
 			{group.floatRight && (
-				<span className='text-[10px] font-semibold text-orange-700 dark:text-orange-300 bg-orange-100 dark:bg-orange-900/50 px-1.5 py-0.5 rounded me-1'>
+				<span className='text-[10px] font-semibold text-orange-700 dark:text-orange-200 bg-orange-100 dark:bg-orange-800/50 px-1.5 py-0.5 rounded me-1'>
 					-right
 				</span>
 			)}

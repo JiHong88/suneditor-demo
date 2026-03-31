@@ -378,15 +378,15 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("image_insertBehavior")}
 									optionKey='image_insertBehavior'
 								/>
+								<ToggleableTextInput
+									label='uploadUrl'
+									value={state.image_uploadUrl}
+									preset={API_UPLOAD_IMAGE}
+									onChange={set("image_uploadUrl")}
+									placeholder={API_UPLOAD_IMAGE}
+									optionKey='image_uploadUrl'
+								/>
 								<AdvancedSection label={advLabel}>
-									<ToggleableTextInput
-										label='uploadUrl'
-										value={state.image_uploadUrl}
-										preset={API_UPLOAD_IMAGE}
-										onChange={set("image_uploadUrl")}
-										placeholder={API_UPLOAD_IMAGE}
-										optionKey='image_uploadUrl'
-									/>
 									<ToggleableTextInput
 										label='uploadHeaders'
 										value={state.image_uploadHeaders}
@@ -504,15 +504,15 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									placeholder='Vimeo embed query'
 									optionKey='video_query_vimeo'
 								/>
+								<ToggleableTextInput
+									label='uploadUrl'
+									value={state.video_uploadUrl}
+									preset={API_UPLOAD_VIDEO}
+									onChange={set("video_uploadUrl")}
+									placeholder={API_UPLOAD_VIDEO}
+									optionKey='video_uploadUrl'
+								/>
 								<AdvancedSection label={advLabel}>
-									<ToggleableTextInput
-										label='uploadUrl'
-										value={state.video_uploadUrl}
-										preset={API_UPLOAD_VIDEO}
-										onChange={set("video_uploadUrl")}
-										placeholder={API_UPLOAD_VIDEO}
-										optionKey='video_uploadUrl'
-									/>
 									<ToggleableTextInput
 										label='uploadHeaders'
 										value={state.video_uploadHeaders}
@@ -669,15 +669,15 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("audio_insertBehavior")}
 									optionKey='audio_insertBehavior'
 								/>
+								<ToggleableTextInput
+									label='uploadUrl'
+									value={state.audio_uploadUrl}
+									preset={API_UPLOAD_AUDIO}
+									onChange={set("audio_uploadUrl")}
+									placeholder={API_UPLOAD_AUDIO}
+									optionKey='audio_uploadUrl'
+								/>
 								<AdvancedSection label={advLabel}>
-									<ToggleableTextInput
-										label='uploadUrl'
-										value={state.audio_uploadUrl}
-										preset={API_UPLOAD_AUDIO}
-										onChange={set("audio_uploadUrl")}
-										placeholder={API_UPLOAD_AUDIO}
-										optionKey='audio_uploadUrl'
-									/>
 									<ToggleableTextInput
 										label='uploadHeaders'
 										value={state.audio_uploadHeaders}
@@ -769,6 +769,14 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									placeholder='Vimeo query'
 									optionKey='embed_query_vimeo'
 								/>
+								<ToggleableTextInput
+									label='uploadUrl'
+									value={state.embed_uploadUrl}
+									preset={API_UPLOAD_FILE}
+									onChange={set("embed_uploadUrl")}
+									placeholder={API_UPLOAD_FILE}
+									optionKey='embed_uploadUrl'
+								/>
 								<AdvancedSection label={advLabel}>
 									<SwitchField
 										label='showHeightInput'
@@ -781,14 +789,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 										checked={state.embed_percentageOnlySize}
 										onChange={set("embed_percentageOnlySize")}
 										optionKey='embed_percentageOnlySize'
-									/>
-									<ToggleableTextInput
-										label='uploadUrl'
-										value={state.embed_uploadUrl}
-										preset={API_UPLOAD_FILE}
-										onChange={set("embed_uploadUrl")}
-										placeholder={API_UPLOAD_FILE}
-										optionKey='embed_uploadUrl'
 									/>
 									<ToggleableTextInput
 										label='uploadHeaders'
@@ -872,15 +872,15 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("link_noAutoPrefix")}
 									optionKey='link_noAutoPrefix'
 								/>
+								<ToggleableTextInput
+									label='uploadUrl'
+									value={state.link_uploadUrl}
+									preset={API_UPLOAD_FILE}
+									onChange={set("link_uploadUrl")}
+									placeholder={API_UPLOAD_FILE}
+									optionKey='link_uploadUrl'
+								/>
 								<AdvancedSection label={advLabel}>
-									<ToggleableTextInput
-										label='uploadUrl'
-										value={state.link_uploadUrl}
-										preset={API_UPLOAD_FILE}
-										onChange={set("link_uploadUrl")}
-										placeholder={API_UPLOAD_FILE}
-										optionKey='link_uploadUrl'
-									/>
 									<ToggleableTextInput
 										label='uploadHeaders'
 										value={state.link_uploadHeaders}
@@ -1405,9 +1405,10 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 						<AccordionTrigger className='text-xs font-semibold py-2'>ExportPDF</AccordionTrigger>
 						<AccordionContent className='px-1 pb-3'>
 							<div className='space-y-3'>
-								<TextInput
+								<ToggleableTextInput
 									label='apiUrl'
 									value={state.exportPDF_apiUrl}
+									preset={API_DOWNLOAD_PDF}
 									onChange={set("exportPDF_apiUrl")}
 									placeholder={API_DOWNLOAD_PDF}
 									optionKey='exportPDF_apiUrl'
@@ -1612,19 +1613,29 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("mention_useCachingFieldData")}
 									optionKey='mention_useCachingFieldData'
 								/>
+								<ToggleableTextInput
+									label='apiUrl'
+									value={state.mention_apiUrl}
+									preset={API_MENTION}
+									onChange={set("mention_apiUrl")}
+									placeholder={API_MENTION}
+									optionKey='mention_apiUrl'
+								/>
+								<ToggleableTextarea
+									label='data (JSON)'
+									value={state.mention_data}
+									preset={ITEM_PRESETS.mention_data}
+									onChange={set("mention_data")}
+									placeholder='[{"key":"john","name":"John","url":"/users/john"}]'
+									rows={3}
+									optionKey='mention_data'
+								/>
 								<AdvancedSection label={advLabel}>
 									<NumberInput
 										label='searchStartLength'
 										value={state.mention_searchStartLength}
 										onChange={set("mention_searchStartLength")}
 										optionKey='mention_searchStartLength'
-									/>
-									<TextInput
-										label='apiUrl'
-										value={state.mention_apiUrl}
-										onChange={set("mention_apiUrl")}
-										placeholder={API_MENTION}
-										optionKey='mention_apiUrl'
 									/>
 									<TextInput
 										label='apiHeaders'
@@ -1638,15 +1649,6 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 										checked={state.mention_useCachingData}
 										onChange={set("mention_useCachingData")}
 										optionKey='mention_useCachingData'
-									/>
-									<ToggleableTextarea
-										label='data (JSON)'
-										value={state.mention_data}
-										preset={ITEM_PRESETS.mention_data}
-										onChange={set("mention_data")}
-										placeholder='[{"key":"john","name":"John","url":"/users/john"}]'
-										rows={3}
-										optionKey='mention_data'
 									/>
 								</AdvancedSection>
 							</div>
