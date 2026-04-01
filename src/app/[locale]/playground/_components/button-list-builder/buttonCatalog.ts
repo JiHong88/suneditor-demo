@@ -80,6 +80,7 @@ const BUTTONS: ButtonMeta[] = [
 	{ name: "pageUp", label: "Page Up", category: "page" },
 	{ name: "pageDown", label: "Page Down", category: "page" },
 	{ name: "copy", label: "Copy", category: "document" },
+	{ name: "finder", label: "Finder", category: "document" },
 ];
 
 export const BUTTON_MAP: Record<string, ButtonMeta> = {};

@@ -45,7 +45,7 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 	"|",
 	["table", "link", "image"],
 	"|",
-	["fullScreen", "codeView"],
+	["fullScreen", "codeView", "markdownView"],
 	// ≤768px
 	[
 		"%768",
@@ -58,7 +58,7 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 			"|",
 			[":Insert-default.more_plus", "table", "link", "image"],
 			"|",
-			["fullScreen", "codeView"],
+			["fullScreen", "codeView", "markdownView"],
 		],
 	],
 	// ≤576px
@@ -69,7 +69,7 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize"],
 			[":Text-default.more_text", "bold", "italic", "underline", "strike", "|", "fontColor", "backgroundColor", "|", "removeFormat"],
 			[":Insert-default.more_plus", "outdent", "indent", "align", "list", "|", "table", "link", "image"],
-			["-right", ":View-default.more_view", "fullScreen", "codeView"],
+			["-right", ":View-default.more_view", "fullScreen", "codeView", "markdownView"],
 		],
 	],
 ];
@@ -96,7 +96,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 	[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 	"|",
 	["fullScreen", "showBlocks", "codeView"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "dir", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
+	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
 
 	// ═══ ≤1200px (2 rows, row 2 collapsed into more-buttons) ═══
 	[
@@ -118,7 +118,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			"|",
 			["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 			["-right", ":Pages-default.more_page", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
 		],
 	],
@@ -137,7 +137,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
 			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -153,7 +153,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -166,7 +166,7 @@ export const FULL_BUTTON_LIST: unknown[] = [
 			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 ];

@@ -71,9 +71,9 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		color: "indigo",
 		required: [],
 		uiBehavior: "Button opens menu, plugin handles own events",
-		examples: "table, fontColor",
+		examples: "table, fontColor, codeBlock",
 		code: CODE_DROPDOWN_FREE,
-		demoButtons: ["table", "fontColor", "backgroundColor"],
+		demoButtons: ["table", "fontColor", "backgroundColor", "codeBlock"],
 		demoHtml: "<p>These plugins manage their own event handling within the dropdown panel.</p>",
 	},
 	{

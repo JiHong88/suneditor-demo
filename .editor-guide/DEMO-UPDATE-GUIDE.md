@@ -117,6 +117,7 @@ toolbar, layout, content 등 에디터 기본 옵션을 추가할 때.
 버튼:
 - [ ] `editorPresets.ts` — FULL_BUTTON_LIST에 추가 (**모든 반응형 breakpoint 포함**)
 - [ ] `buttonCatalog.ts` — ButtonList Builder 팔레트에 추가
+- [ ] `plugin-guide/CustomPluginGuide.tsx` — 해당 플러그인 타입의 `examples`/`demoButtons`에 추가
 
 플러그인 옵션:
 - [ ] `playgroundState.ts` — 인터페이스: `플러그인명_옵션명: 타입`
@@ -132,8 +133,9 @@ toolbar, layout, content 등 에디터 기본 옵션을 추가할 때.
 
 **예시 (codeBlock 플러그인):**
 ```typescript
-// buttonCatalog.ts
+// buttonCatalog.ts — 새 버튼은 반드시 팔레트에 추가 (finder, codeBlock 등)
 { name: "codeBlock", label: "Code Block", category: "view" },
+{ name: "finder", label: "Finder", category: "document" },
 
 // editorPresets.ts — FULL_BUTTON_LIST (모든 breakpoint에 추가!)
 ["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],

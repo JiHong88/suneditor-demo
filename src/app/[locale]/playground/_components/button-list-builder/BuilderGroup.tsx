@@ -59,27 +59,26 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 	// Create stable sortable IDs: groupId__index__buttonName
 	const sortableIds = group.items.map((name, i) => `${group.id}__${i}__${name}`);
 
-	// Border color based on floatRight / moreButton state
+	// Border color based on floatRight / moreButton state (transparent by default, visible on hover)
 	const hasRight = !!group.floatRight;
 	const hasMore = !!group.moreButton;
-	const borderColor = hasRight && hasMore
-		? "border-rose-400 dark:border-rose-500/60"
-		: hasRight
-			? "border-orange-400 dark:border-orange-500/60"
-			: hasMore
-				? "border-violet-400 dark:border-violet-500/60"
-				: "border-border";
 
 	// Group hover prominence classes (only when not dragging a group)
 	const groupHoverClasses = isDraggingGroup
 		? ""
-		: "hover:border-foreground/30 hover:bg-muted/30 hover:shadow-sm dark:hover:border-foreground/20 dark:hover:bg-muted/20";
+		: hasRight && hasMore
+			? "hover:border-rose-400 hover:bg-muted/30 hover:shadow-sm dark:hover:border-rose-500/60 dark:hover:bg-muted/20"
+			: hasRight
+				? "hover:border-orange-400 hover:bg-muted/30 hover:shadow-sm dark:hover:border-orange-500/60 dark:hover:bg-muted/20"
+				: hasMore
+					? "hover:border-violet-400 hover:bg-muted/30 hover:shadow-sm dark:hover:border-violet-500/60 dark:hover:bg-muted/20"
+					: "hover:border-foreground/30 hover:bg-muted/30 hover:shadow-sm dark:hover:border-foreground/20 dark:hover:bg-muted/20";
 
 	return (
 		<div
 			ref={setNodeRef}
 			className={`group/grp relative flex flex-wrap items-center min-h-[36px] min-w-[70px] px-1.5 py-2 rounded-lg border border-dashed transition-colors
-				${isOver ? "border-primary !border-solid bg-primary/5 shadow-sm" : `${borderColor} bg-background`}
+				${isOver ? "border-primary !border-solid bg-primary/5 shadow-sm" : "border-transparent bg-background"}
 				${isGroupDragging ? "!border-emerald-400 !bg-emerald-50/50 opacity-40 dark:!border-emerald-500/60 dark:!bg-emerald-900/25" : ""}
 				${groupHoverClasses}
 				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-900/25

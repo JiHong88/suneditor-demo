@@ -42,7 +42,7 @@ export default function BuilderCanvas({ rows, dispatch, breakpointId, dragPrevie
 			<button
 				type='button'
 				onClick={() => dispatch({ type: "ADD_ROW", breakpointId })}
-				className='flex items-center gap-1.5 w-full justify-center py-2 rounded-lg border border-dashed border-border text-[11px] text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors cursor-pointer'
+				className='flex items-center gap-1.5 w-full justify-center py-2 rounded-lg border border-dashed border-border/60 text-[11px] text-muted-foreground/80 bg-muted/30 hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer'
 			>
 				<Plus className='h-3.5 w-3.5' />
 				Add Row (line break)

@@ -21,7 +21,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 	[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 	"|",
 	["fullScreen", "showBlocks", "codeView"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "dir", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
+	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
 
 	// ═══ ≤1200px (1 row, collapsed groups) ═══
 	[
@@ -38,7 +38,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			"|",
 			["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -56,7 +56,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
 			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -72,7 +72,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -85,7 +85,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 ];
@@ -112,7 +112,7 @@ export const DocumentButtonList: SunEditor.UI.ButtonList = [
 	"|",
 	["fullScreen", "showBlocks", "codeView"],
 	["pageBreak", "pageNavigator", "pageUp", "pageDown"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "dir", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
+	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
 
 	// ≤992px
 	[
@@ -130,7 +130,7 @@ export const DocumentButtonList: SunEditor.UI.ButtonList = [
 			"|",
 			["pageBreak", "pageNavigator", "pageUp", "pageDown"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -147,7 +147,7 @@ export const DocumentButtonList: SunEditor.UI.ButtonList = [
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":Pages-default.more_page", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 
@@ -160,7 +160,7 @@ export const DocumentButtonList: SunEditor.UI.ButtonList = [
 			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "dir", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
 		],
 	],
 ];
