@@ -126,6 +126,25 @@ export default function ButtonListBuilder({
 		[activeRows, dispatch, activeBreakpointId],
 	);
 
+	/* ── Add preset group handler ─────────────────────── */
+
+	const handlePaletteAddGroup = useCallback(
+		(items: string[]) => {
+			const rows = activeRows;
+			if (rows.length === 0) return;
+			const lastRow = rows[rows.length - 1];
+
+			dispatch({
+				type: "INSERT_GROUP",
+				rowId: lastRow.id,
+				groupIndex: lastRow.groups.length,
+				items,
+				breakpointId: activeBreakpointId,
+			});
+		},
+		[activeRows, dispatch, activeBreakpointId],
+	);
+
 	/* ── Drag handlers ─────────────────────────────────── */
 
 	const handleDragStart = useCallback((event: DragStartEvent) => {
@@ -137,6 +156,9 @@ export default function ButtonListBuilder({
 		if (data) {
 			if (data.type === "canvas-group") {
 				setDragData({ buttonName: "", type: "canvas-group", groupId: data.groupId as string });
+				dragSourceRef.current = null;
+			} else if (data.type === "palette-group") {
+				setDragData({ buttonName: "", type: "palette-group" });
 				dragSourceRef.current = null;
 			} else {
 				setDragData({ buttonName: data.buttonName as string, type: data.type as string });
@@ -155,8 +177,8 @@ export default function ButtonListBuilder({
 		(event: DragOverEvent) => {
 			const { over, active } = event;
 
-			// No preview for group drags
-			if (active.data.current?.type === "canvas-group") {
+			// No preview for group drags (canvas or palette)
+			if (active.data.current?.type === "canvas-group" || active.data.current?.type === "palette-group") {
 				setDragPreview(null);
 				return;
 			}
@@ -247,6 +269,34 @@ export default function ButtonListBuilder({
 						groupId,
 						targetRowId,
 						targetIndex,
+						breakpointId: activeBreakpointId,
+					});
+				}
+				return;
+			}
+
+			// Palette group drag — insert as new group at drop position or last row
+			if (activeData.type === "palette-group") {
+				const items = activeData.items as string[];
+				if (!items?.length) return;
+				if (overData?.type === "between-group-drop") {
+					dispatch({
+						type: "INSERT_GROUP",
+						rowId: overData.rowId as string,
+						groupIndex: overData.groupIndex as number,
+						items,
+						breakpointId: activeBreakpointId,
+					});
+				} else {
+					// Fallback: append to last row
+					const rows = activeRows;
+					if (rows.length === 0) return;
+					const lastRow = rows[rows.length - 1];
+					dispatch({
+						type: "INSERT_GROUP",
+						rowId: lastRow.id,
+						groupIndex: lastRow.groups.length,
+						items,
 						breakpointId: activeBreakpointId,
 					});
 				}
@@ -491,7 +541,7 @@ export default function ButtonListBuilder({
 					<div className='flex-1 flex min-h-0'>
 						{/* Palette */}
 						<div className='w-56 shrink-0 border-e bg-muted/30 dark:bg-[oklch(0.18_0_0)] p-3 overflow-y-auto'>
-							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} search={paletteSearch} onSearchChange={setPaletteSearch} />
+							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} onAddGroup={handlePaletteAddGroup} search={paletteSearch} onSearchChange={setPaletteSearch} />
 						</div>
 
 						{/* Canvas */}
@@ -513,7 +563,14 @@ export default function ButtonListBuilder({
 
 					{/* Drag overlay */}
 					<DragOverlay dropAnimation={null} modifiers={[snapToCursor]}>
-						{dragData && dragData.type === "canvas-group" ? (
+						{dragData && dragData.type === "palette-group" ? (
+								<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
+									<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
+									<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
+										Preset Group
+									</span>
+								</div>
+							) : dragData && dragData.type === "canvas-group" ? (
 							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
 								<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
 								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>

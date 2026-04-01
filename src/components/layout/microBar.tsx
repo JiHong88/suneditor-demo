@@ -60,6 +60,7 @@ export default function MicroBar({ className }: Props) {
 						<button
 							type='button'
 							onClick={() => setV2Open((p) => !p)}
+							title='SunEditor v2'
 							className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-colors'
 						>
 							<History className='size-3' aria-hidden />
@@ -96,6 +97,7 @@ export default function MicroBar({ className }: Props) {
 						href='https://opencollective.com/suneditor'
 						target='_blank'
 						rel='noreferrer'
+						title={tc("sponsor")}
 						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
 					>
 						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
@@ -106,9 +108,10 @@ export default function MicroBar({ className }: Props) {
 						href='https://github.com/JiHong88/SunEditor'
 						target='_blank'
 						rel='noreferrer'
-						className='inline-flex items-center h-6 rounded px-1.5 py-1 hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-colors'
+						title='GitHub'
+						className='inline-flex items-center h-6 rounded px-1.5 py-1 hover:bg-accent hover:text-accent-foreground transition-colors'
 					>
-						<Github className='size-3.5' aria-hidden />
+						<Github className='size-3.5' aria-hidden style={{ color: "#6e40c9" }} />
 					</a>
 				</div>
 			</div>

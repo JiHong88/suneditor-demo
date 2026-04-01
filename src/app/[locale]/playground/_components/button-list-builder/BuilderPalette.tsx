@@ -87,6 +87,88 @@ function PaletteButton({ meta, onAdd }: { meta: ButtonMeta; onAdd: (name: string
 	);
 }
 
+/* ── Draggable category header ────────────────────────── */
+
+function CategoryHeader({
+	category,
+	availableItems,
+	totalCount,
+	open,
+	onToggle,
+	onAddGroup,
+}: {
+	category: ButtonCategory;
+	availableItems: string[];
+	totalCount: number;
+	open: boolean;
+	onToggle: () => void;
+	onAddGroup?: (items: string[]) => void;
+}) {
+	const hasAvailable = availableItems.length > 0;
+	const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+		id: `palette-group-${category}`,
+		data: { type: "palette-group" as const, items: availableItems },
+		disabled: !hasAvailable,
+	});
+
+	if (!onAddGroup || !hasAvailable) {
+		// Non-draggable fallback (no group handler or all used)
+		return (
+			<button
+				type='button'
+				onClick={onToggle}
+				className='flex items-center gap-1.5 w-full text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground py-1.5 transition-colors cursor-pointer'
+			>
+				<span className={`transition-transform ${open ? "rotate-90" : ""}`}>▸</span>
+				{CATEGORY_LABELS[category]}
+				<span className='text-muted-foreground/60 font-normal normal-case'>
+					{availableItems.length}/{totalCount}
+				</span>
+			</button>
+		);
+	}
+
+	return (
+		<div
+			ref={setNodeRef}
+			className={`flex items-center gap-0.5 rounded-md border select-none transition-all mb-1
+				border-emerald-300/60 bg-emerald-50/40 text-emerald-700
+				dark:border-emerald-600/40 dark:bg-emerald-900/30 dark:text-emerald-300
+				has-[.add-zone:hover]:border-emerald-400 has-[.add-zone:hover]:bg-emerald-50 dark:has-[.add-zone:hover]:border-emerald-500/60 dark:has-[.add-zone:hover]:bg-emerald-900/40
+				has-[.drag-zone:hover]:border-emerald-500 has-[.drag-zone:hover]:bg-emerald-50 dark:has-[.drag-zone:hover]:border-emerald-500/70 dark:has-[.drag-zone:hover]:bg-emerald-900/50
+				${isDragging ? "opacity-40" : ""}`}
+		>
+			{/* Click-to-add group */}
+			<button
+				type='button'
+				onClick={() => onAddGroup(availableItems)}
+				className='add-zone shrink-0 px-1 py-0.5 rounded-s-md hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors cursor-pointer'
+				title={`Add ${CATEGORY_LABELS[category]} group`}
+			>
+				<Plus className='h-3 w-3' />
+			</button>
+			{/* Drag handle + toggle */}
+			<div
+				{...attributes}
+				{...listeners}
+				className='drag-zone flex-1 flex items-center gap-1 pe-2 py-0.5 cursor-grab min-w-0 rounded-e-md hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors'
+			>
+				<GripVertical className='h-3 w-3 shrink-0 opacity-50' />
+				<span className='text-[10px] font-semibold uppercase tracking-wider'>{CATEGORY_LABELS[category]}</span>
+				<span className='text-[9px] opacity-60 ms-auto font-normal normal-case'>{availableItems.length}/{totalCount}</span>
+			</div>
+			{/* Collapse toggle */}
+			<button
+				type='button'
+				onClick={onToggle}
+				className='shrink-0 px-1.5 py-0.5 rounded-e-md text-emerald-600/60 hover:text-emerald-700 dark:text-emerald-400/60 dark:hover:text-emerald-300 transition-colors cursor-pointer'
+			>
+				<span className={`inline-block text-[10px] transition-transform ${open ? "rotate-90" : ""}`}>▸</span>
+			</button>
+		</div>
+	);
+}
+
 /* ── Category section ──────────────────────────────────── */
 
 function CategorySection({
@@ -94,11 +176,13 @@ function CategorySection({
 	buttons,
 	usedButtons,
 	onAdd,
+	onAddGroup,
 }: {
 	category: ButtonCategory;
 	buttons: ButtonMeta[];
 	usedButtons: Set<string>;
 	onAdd: (name: string) => void;
+	onAddGroup?: (items: string[]) => void;
 }) {
 	const [open, setOpen] = useState(true);
 	const available = buttons.filter((b) => !usedButtons.has(b.name));
@@ -106,17 +190,14 @@ function CategorySection({
 
 	return (
 		<div>
-			<button
-				type='button'
-				onClick={() => setOpen(!open)}
-				className='flex items-center gap-1.5 w-full text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground py-1.5 transition-colors cursor-pointer'
-			>
-				<span className={`transition-transform ${open ? "rotate-90" : ""}`}>▸</span>
-				{CATEGORY_LABELS[category]}
-				<span className='text-muted-foreground/60 font-normal normal-case'>
-					{available.length}/{buttons.length}
-				</span>
-			</button>
+			<CategoryHeader
+				category={category}
+				availableItems={available.map((b) => b.name)}
+				totalCount={buttons.length}
+				open={open}
+				onToggle={() => setOpen(!open)}
+				onAddGroup={onAddGroup}
+			/>
 			{open && (
 				<div className='grid grid-cols-2 gap-1 mt-1 mb-3'>
 					{available.map((b) => (
@@ -146,11 +227,12 @@ function CategorySection({
 interface BuilderPaletteProps {
 	usedButtons: Set<string>;
 	onAdd: (buttonName: string) => void;
+	onAddGroup?: (items: string[]) => void;
 	search: string;
 	onSearchChange: (value: string) => void;
 }
 
-export default function BuilderPalette({ usedButtons, onAdd, search, onSearchChange }: BuilderPaletteProps) {
+export default function BuilderPalette({ usedButtons, onAdd, onAddGroup, search, onSearchChange }: BuilderPaletteProps) {
 	const byCategory = useMemo(() => getButtonsByCategory(), []);
 
 	const filteredCategories = useMemo(() => {
@@ -183,9 +265,9 @@ export default function BuilderPalette({ usedButtons, onAdd, search, onSearchCha
 			</div>
 
 			{/* Categories */}
-			<div className='flex-1 overflow-y-auto space-y-1 -me-1 pe-1'>
+			<div className='flex-1 overflow-y-auto space-y-1 -me-1 pe-1 pb-24'>
 				{filteredCategories.map(({ category, buttons }) => (
-					<CategorySection key={category} category={category} buttons={buttons} usedButtons={usedButtons} onAdd={onAdd} />
+					<CategorySection key={category} category={category} buttons={buttons} usedButtons={usedButtons} onAdd={onAdd} onAddGroup={onAddGroup} />
 				))}
 				{filteredCategories.length === 0 && (
 					<p className='text-[11px] text-muted-foreground/60 italic py-4 text-center'>No buttons found</p>

@@ -161,11 +161,31 @@ export function getDir(tag: string): "rtl" | "ltr" {
 
 import { getLang } from "@/i18n/languages";
 
+/**
+ * Windows does not render flag emojis (regional indicator sequences).
+ * Detect Windows and strip flag emojis from option labels.
+ */
+function isWindows(): boolean {
+	if (typeof navigator === "undefined") return false;
+	return /Win/i.test(navigator.platform || "") || /Windows/i.test(navigator.userAgent || "");
+}
+
+/** Convert a country-flag emoji to its 2-letter code (e.g. 🇺🇸 → "US") */
+function flagToCode(flag: string): string {
+	const codePoints = [...flag].map((c) => c.codePointAt(0) ?? 0);
+	if (codePoints.length === 2 && codePoints.every((cp) => cp >= 0x1f1e6 && cp <= 0x1f1ff)) {
+		return codePoints.map((cp) => String.fromCharCode(cp - 0x1f1e6 + 65)).join("");
+	}
+	return flag;
+}
+
 export function buildLanguageOptions(codes: string[]) {
+	const win = isWindows();
 	return codes.map((code) => {
 		const entry = getLang(code);
 		const nativeName = getLanguageLabel(code);
-		const icon = entry?.icon ?? "";
+		const rawIcon = entry?.icon ?? "";
+		const icon = win && typeof rawIcon === "string" ? flagToCode(rawIcon) : rawIcon;
 		return {
 			value: code,
 			label: `${icon} ${code} [${nativeName}]`.trim(),

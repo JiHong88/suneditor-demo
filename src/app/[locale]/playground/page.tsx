@@ -2,7 +2,7 @@
 
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Share2, Check, Settings2, Puzzle } from "lucide-react";
+import { RotateCcw, Share2, Check, Settings2, Puzzle, SlidersHorizontal } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -92,7 +92,7 @@ export default function PlaygroundPage() {
 	const tc = useTranslations("Common");
 	const locale = useLocale();
 	const initialLang = locale !== "en" && editorLangCodes.includes(locale) ? locale : "";
-	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang });
+	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, toolbar_sticky: 92 });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });
@@ -328,8 +328,6 @@ export default function PlaygroundPage() {
 							</div>
 						</motion.div>
 
-						{/* Customize ButtonList — always available */}
-
 						{/* ButtonList Builder */}
 						<ButtonListBuilder
 							open={builderOpen}
@@ -339,6 +337,19 @@ export default function PlaygroundPage() {
 							editorRenderedWidth={editorRenderedWidth}
 							editorTheme={state.theme}
 						/>
+
+						{/* Customize ButtonList — above editor */}
+						<div className='flex justify-end'>
+							<Button
+								variant='outline'
+								size='sm'
+								onClick={() => handleBuilderOpen(true)}
+								className='border-violet-300 text-violet-600 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/40'
+							>
+								<SlidersHorizontal className='me-1.5 h-3.5 w-3.5' />
+								{t("customizeButtonList")}
+							</Button>
+						</div>
 
 						{/* Editor — wait until URL params are applied to avoid double creation */}
 						<motion.div id='editor' initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>

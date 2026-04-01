@@ -23,7 +23,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 	["fullScreen", "showBlocks", "codeView"],
 	[":More-default.more_view", "codeBlock", "markdownView", "|", "dir", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
 
-	// ═══ ≤1200px (2 rows, row 2 collapsed) ═══
+	// ═══ ≤1200px (1 row, collapsed groups) ═══
 	[
 		"%1200",
 		[
@@ -31,12 +31,7 @@ export const FullButtonList: SunEditor.UI.ButtonList = [
 			"|",
 			["blockStyle", "font", "fontSize"],
 			"|",
-			["bold", "underline", "italic", "strike", "subscript", "superscript"],
-			"|",
-			["fontColor", "backgroundColor"],
-			"|",
-			["removeFormat", "copyFormat", "textStyle"],
-			"/",
+			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
 			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],

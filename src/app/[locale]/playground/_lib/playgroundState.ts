@@ -982,7 +982,7 @@ export function playgroundReducer(state: PlaygroundState, action: PlaygroundActi
 			return { ...state, [action.key]: action.value };
 		}
 		case "RESET": {
-			const reset = { ...DEFAULTS };
+			const reset = { ...DEFAULTS, toolbar_sticky: 92 };
 			const resetPatch = autoEnablePluginOptions(reset, reset.buttonListPreset);
 			return { ...reset, ...resetPatch };
 		}
