@@ -8,6 +8,8 @@ import { SUNEDITOR_VERSION } from "@/store/version";
 import { getDir } from "@/i18n/lang";
 import { getLocale } from "next-intl/server";
 import { TopBanner, FooterBanner } from "@/components/ad/AdBanner";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -89,6 +91,8 @@ export default async function RootLayout({ children, params }: Readonly<{ childr
 					{/* 푸터 */}
 					<Footer version={`v${version}`} />
 				</NextIntlClientProvider>
+				<Analytics />
+				<SpeedInsights />
 			</body>
 		</html>
 	);

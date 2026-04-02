@@ -14,6 +14,7 @@
     "snippets:generate": "node scripts/generate-framework-snippets.cjs",
     "docs:generate": "node scripts/generate-api-docs.cjs",
     "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs",
+    "docs:translate2": "cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-api-docs-v2.cjs && cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-option-desc-v2.cjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -29,6 +30,8 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
     "@stackblitz/sdk": "^1.11.0",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "codemirror": "^6.65.7",
@@ -48,6 +51,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@google-cloud/translate": "^9.3.0",
     "@sparticuz/chromium": "^143.0.4",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
@@ -55,6 +59,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "doctrine": "^3.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
