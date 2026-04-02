@@ -1,4 +1,5 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
+import { HEADER_HEIGHT } from "@/lib/constants";
 import { API_MENTION, API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
 
@@ -982,7 +983,7 @@ export function playgroundReducer(state: PlaygroundState, action: PlaygroundActi
 			return { ...state, [action.key]: action.value };
 		}
 		case "RESET": {
-			const reset = { ...DEFAULTS, toolbar_sticky: 92 };
+			const reset = { ...DEFAULTS, toolbar_sticky: HEADER_HEIGHT };
 			const resetPatch = autoEnablePluginOptions(reset, reset.buttonListPreset);
 			return { ...reset, ...resetPatch };
 		}

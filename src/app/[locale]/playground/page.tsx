@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { SunEditor } from "suneditor/types";
 import { PLAYGROUND_VALUE } from "@/data/snippets/editorPresets";
+import { HEADER_HEIGHT } from "@/lib/constants";
 import {
 	type PlaygroundState,
 	DEFAULTS,
@@ -92,7 +93,7 @@ export default function PlaygroundPage() {
 	const tc = useTranslations("Common");
 	const locale = useLocale();
 	const initialLang = locale !== "en" && editorLangCodes.includes(locale) ? locale : "";
-	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, toolbar_sticky: 92 });
+	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, toolbar_sticky: HEADER_HEIGHT });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });

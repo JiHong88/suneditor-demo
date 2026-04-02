@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
 import { DocumentButtonList } from "@/components/editor/buttonList";
+import { HEADER_HEIGHT } from "@/lib/constants";
 
 const subButtonList = [
 	["bold", "underline", "italic", "strike", "subscript", "superscript"],
@@ -45,7 +46,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	{
 		id: "classic",
 		tKey: "classic",
-		options: { toolbar_sticky: 92, subToolbar: { mode: "balloon", buttonList: subButtonList } },
+		options: { toolbar_sticky: HEADER_HEIGHT, subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "bottom",
@@ -55,7 +56,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 	{
 		id: "inline",
 		tKey: "inline",
-		options: { mode: "inline", toolbar_sticky: 92, buttonList: inlineButtonList },
+		options: { mode: "inline", toolbar_sticky: HEADER_HEIGHT, buttonList: inlineButtonList },
 	},
 	{
 		id: "balloon",
@@ -68,7 +69,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 		options: {
 			mode: "classic",
 			type: "document:header,page",
-			toolbar_sticky: 92,
+			toolbar_sticky: HEADER_HEIGHT,
 			buttonList: DocumentButtonList,
 			subToolbar: { mode: "balloon-always", buttonList: subButtonList },
 		},

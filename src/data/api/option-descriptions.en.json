@@ -239,7 +239,7 @@
     "description": "Container element for the toolbar."
   },
   "toolbar_sticky": {
-    "description": "Enables sticky toolbar with optional offset.",
+    "description": "Enables sticky toolbar.\n- `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n- `{top, offset}`: `top` is the sticky position when the page header is visible.\n- `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n- When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n- for a page header that has scrolled out of view. Default `offset` is `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {

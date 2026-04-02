@@ -5,7 +5,7 @@ import AdSlot from "./AdSlot";
 /** Top leaderboard banner (728x90) - shown below microbar */
 export function TopBanner() {
 	return (
-		<div className="mx-auto w-full max-w-5xl px-4 py-2">
+		<div className="mx-auto w-full max-w-5xl px-4 py-2 bg-transparent">
 			<AdSlot slotId="top-banner" className="flex items-center justify-center" />
 		</div>
 	);

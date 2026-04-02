@@ -172,11 +172,11 @@
     "default": "{}"
   },
   "spanStyles": {
-    "description": "يحدد الأنماط المسموح بها للعلامة `span`. \n- الافتراضي يتبع {@link DEFAULTS.SPAN_STYLES}",
+    "description": "يحدد الأنماط المسموح بها للعلامة `span`. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SPAN_STYLES}",
     "default": "CONSTANTS.SPAN_STYLES"
   },
   "lineStyles": {
-    "description": "يحدد الأنماط المسموح بها للعنصر `line` (ص.). \n- يتبع الإعداد الافتراضي {@link DEFAULTS.LINE_STYLES}",
+    "description": "يحدد الأنماط المسموح بها للعنصر `line` (ص..). \n- يتبع الإعداد الافتراضي {@link DEFAULTS.LINE_STYLES}",
     "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
@@ -239,7 +239,7 @@
     "description": "عنصر الحاوية لشريط الأدوات."
   },
   "toolbar_sticky": {
-    "description": "لتمكين شريط الأدوات الثابت مع الإزاحة الاختيارية.",
+    "description": "تمكين شريط الأدوات لزجة. \n- `number`: يضبط الموضع العلوي الثابت (px). استخدم `-1` ​​لتعطيل الثبات. \n- `{top, offset}`: `top` هو الموضع الثابت عندما يكون رأس الصفحة مرئيًا. \n- `offset` هو الموضع الثابت عندما تقوم لوحة المفاتيح الافتراضية بتغيير إطار العرض (على سبيل المثال، على الأجهزة اللوحية وأجهزة اللمس). \n- عندما تكون لوحة المفاتيح الافتراضية نشطة، يحل `offset` محل `top` حتى لا يترك شريط الأدوات فجوة \n- لرأس الصفحة الذي تم تمريره خارج نطاق العرض. الافتراضي `offset` هو `0`. \n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {
@@ -505,7 +505,7 @@
     "description": "الشخصية التي تقوم بتشغيل قائمة الإشارات."
   },
   "mention_limitSize": {
-    "description": "عدد العناصر التي سيتم عرضها في قائمة الإشارة"
+    "description": "عدد العناصر المراد عرضها في قائمة الإشارة"
   },
   "mention_searchStartLength": {
     "description": "عدد الأحرف لبدء البحث عن قائمة الإشارات"

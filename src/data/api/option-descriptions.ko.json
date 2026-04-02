@@ -239,7 +239,7 @@
     "description": "도구 모음의 컨테이너 요소입니다."
   },
   "toolbar_sticky": {
-    "description": "선택적 오프셋을 사용하여 고정 도구 모음을 활성화합니다.",
+    "description": "고정 도구 모음을 활성화합니다. \n- `number`: 고정 상단 위치(px)를 설정합니다. 고정을 비활성화하려면 `-1`을 사용하세요. \n- `{top, offset}`: `top`은 페이지 헤더가 표시될 때 고정 위치입니다. \n- `offset`는 가상 키보드가 뷰포트를 이동할 때 고정 위치입니다(예: 태블릿, 터치 장치). \n- 가상 키보드가 활성화되면 도구 모음에 공백이 생기지 않도록 `offset`가 `top`을 대체합니다. \n- 스크롤되어 보이지 않는 페이지 헤더의 경우. 기본 `offset`은 `0`입니다. \n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {
