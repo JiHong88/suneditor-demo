@@ -20,25 +20,17 @@ export type AdSlotConfig = {
  * When type is "empty", the slot renders nothing (placeholder for future ads).
  */
 export const AD_SLOTS: Record<string, AdSlotConfig[]> = {
-	"top-banner": [
-		{ slotId: "top-banner", type: "empty" },
-	],
-	"sidebar-rect": [
-		{ slotId: "sidebar-rect", type: "empty" },
-	],
-	"content-infeed": [
-		{ slotId: "content-infeed", type: "empty" },
-	],
-	"footer-banner": [
-		{ slotId: "footer-banner", type: "empty" },
-	],
+	"top-banner": [{ slotId: "top-banner", type: "empty" }],
+	"sidebar-rect": [{ slotId: "sidebar-rect", type: "empty" }],
+	"content-infeed": [{ slotId: "content-infeed", type: "empty" }],
+	"footer-banner": [{ slotId: "footer-banner", type: "empty" }],
 };
 
 /**
  * Google AdSense client ID.
  * Set to empty string to disable AdSense globally.
  */
-export const ADSENSE_CLIENT_ID = "";
+export const ADSENSE_CLIENT_ID = "ca-pub-6933506635175446";
 
 /** Get the active config for a slot (first non-expired entry) */
 export function getActiveAd(slotId: string): AdSlotConfig | null {

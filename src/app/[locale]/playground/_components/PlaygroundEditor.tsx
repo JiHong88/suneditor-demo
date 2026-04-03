@@ -56,7 +56,9 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 
 	const options = useMemo(() => {
 		const opts = stateToEditorOptions(state);
-		if (langPack) opts.lang = langPack;
+		// Always set lang — prevents auto-detection in base SunEditor component.
+		// null sentinel = explicit English; lang pack object = selected language.
+		opts.lang = langPack ?? null;
 		// icons — parse JSON and merge
 		if (state.icons) {
 			try {

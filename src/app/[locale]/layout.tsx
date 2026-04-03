@@ -18,7 +18,8 @@ export const metadata: Metadata = {
 		default: "SunEditor — Lightweight WYSIWYG Editor",
 		template: "%s | SunEditor",
 	},
-	description: "A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+	description:
+		"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
 	keywords: ["wysiwyg", "editor", "javascript", "rich text editor", "suneditor", "text editor", "html editor"],
 	authors: [{ name: "JiHong88" }],
 	creator: "JiHong88",
@@ -26,26 +27,29 @@ export const metadata: Metadata = {
 		type: "website",
 		siteName: "SunEditor",
 		title: "SunEditor — Lightweight WYSIWYG Editor",
-		description: "A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+		description:
+			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
 		url: "https://suneditor.com",
 		images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SunEditor" }],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "SunEditor — Lightweight WYSIWYG Editor",
-		description: "A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+		description:
+			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
 		images: ["/og-image.png"],
 	},
 	icons: {
-		icon: [
-			{ url: "/favicon.svg", type: "image/svg+xml" },
-		],
+		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
 		apple: "/apple-touch-icon.png",
 	},
 	manifest: "/site.webmanifest",
 };
 
-export default async function RootLayout({ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
+export default async function RootLayout({
+	children,
+	params,
+}: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
 	const version = SUNEDITOR_VERSION;
 	const { locale } = await params;
 	const resolvedLocale = locale || (await getLocale());
@@ -54,8 +58,8 @@ export default async function RootLayout({ children, params }: Readonly<{ childr
 		<html suppressHydrationWarning lang={resolvedLocale} dir={getDir(resolvedLocale)} data-lang={resolvedLocale}>
 			<head>
 				<meta name='color-scheme' content='dark light' />
-				<meta name="theme-color" content="#f4b124" media="(prefers-color-scheme: light)" />
-				<meta name="theme-color" content="#253445" media="(prefers-color-scheme: dark)" />
+				<meta name='theme-color' content='#f4b124' media='(prefers-color-scheme: light)' />
+				<meta name='theme-color' content='#253445' media='(prefers-color-scheme: dark)' />
 				<script id='theme-init'>
 					{`(function(){
 					try {
@@ -67,6 +71,11 @@ export default async function RootLayout({ children, params }: Readonly<{ childr
 					} catch (_) {}
 				})();`}
 				</script>
+				<script
+					async
+					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933506635175446'
+					crossOrigin='anonymous'
+				></script>
 			</head>
 
 			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>

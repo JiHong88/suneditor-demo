@@ -97,11 +97,11 @@ export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpo
 				<button
 					type='button'
 					onClick={() => dispatch({ type: "ADD_GROUP", rowId: row.id, breakpointId })}
-					className='inline-flex items-center gap-1 px-2 py-1.5 ms-2 rounded-lg border border-dashed border-border/60 text-[11px] text-muted-foreground/80 bg-muted/30 hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer'
-					title='Add group'
+					className='inline-flex items-center gap-1.5 px-3 py-2 ms-2 rounded-lg border-2 border-dashed border-primary/40 text-xs font-semibold text-primary/70 bg-primary/5 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-sm transition-all cursor-pointer dark:border-primary/30 dark:text-primary/60 dark:bg-primary/5 dark:hover:border-primary/70 dark:hover:text-primary dark:hover:bg-primary/10'
+					title='Add group — buttons must be placed inside a group'
 				>
-					<Plus className='h-3 w-3' />
-					Group
+					<Plus className='h-3.5 w-3.5' />
+					+ Group
 				</button>
 			</div>
 		</div>

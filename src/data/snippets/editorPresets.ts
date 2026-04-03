@@ -30,7 +30,7 @@ export const BASIC_BUTTON_LIST: unknown[] = [
 
 /** Standard — playground 기본 프리셋 (반응형). playgroundState에서 preset="standard" 선택 시 사용 */
 export const STANDARD_BUTTON_LIST: unknown[] = [
-	// full size
+	// full size (2 rows — blockStyle 128px + font 96px → single row overflows at ~1000px)
 	["undo", "redo"],
 	"|",
 	["blockStyle", "font", "fontSize"],
@@ -40,15 +40,52 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 	["fontColor", "backgroundColor"],
 	"|",
 	["removeFormat"],
-	"|",
+	"/",
 	["outdent", "indent", "align", "list"],
 	"|",
 	["table", "link", "image"],
 	"|",
 	["fullScreen", "codeView", "markdownView"],
-	// ≤768px
+	// ≤992px
+	[
+		"%992",
+		[
+			["undo", "redo"],
+			"|",
+			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize"],
+			["bold", "italic", "underline", "strike"],
+			"|",
+			["fontColor", "backgroundColor"],
+			"|",
+			["removeFormat"],
+			"|",
+			["outdent", "indent", "align", "list"],
+			"|",
+			["table", "link", "image"],
+			"|",
+			["fullScreen", "codeView", "markdownView"],
+		],
+	],
+	// ≤768px (bold/color visible, removeFormat into Format more)
 	[
 		"%768",
+		[
+			["undo", "redo"],
+			"|",
+			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "removeFormat"],
+			["bold", "italic", "underline", "strike"],
+			"|",
+			["fontColor", "backgroundColor"],
+			["outdent", "indent", "align", "list"],
+			"|",
+			[":Insert-default.more_plus", "table", "link", "image"],
+			"|",
+			["fullScreen", "codeView", "markdownView"],
+		],
+	],
+	// ≤576px (text into more, view into more)
+	[
+		"%576",
 		[
 			["undo", "redo"],
 			"|",
@@ -57,18 +94,6 @@ export const STANDARD_BUTTON_LIST: unknown[] = [
 			["outdent", "indent", "align", "list"],
 			"|",
 			[":Insert-default.more_plus", "table", "link", "image"],
-			"|",
-			["fullScreen", "codeView", "markdownView"],
-		],
-	],
-	// ≤576px
-	[
-		"%576",
-		[
-			["undo", "redo"],
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize"],
-			[":Text-default.more_text", "bold", "italic", "underline", "strike", "|", "fontColor", "backgroundColor", "|", "removeFormat"],
-			[":Insert-default.more_plus", "outdent", "indent", "align", "list", "|", "table", "link", "image"],
 			["-right", ":View-default.more_view", "fullScreen", "codeView", "markdownView"],
 		],
 	],
@@ -82,74 +107,54 @@ export const FULL_BUTTON_LIST: unknown[] = [
 	"|",
 	["blockStyle", "font", "fontSize"],
 	"|",
-	["bold", "underline", "italic", "strike", "subscript", "superscript"],
+	["bold", "italic", "underline", "strike", "subscript", "superscript"],
 	"|",
 	["fontColor", "backgroundColor"],
 	"|",
 	["removeFormat", "copyFormat", "textStyle"],
 	"/",
-	// Row 2: Content & utilities (less-used items in more-buttons)
-	[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
+	// Row 2: Paragraph controls visible, media/gallery in more, 5 view buttons
+	["blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
 	["table", "link", "image"],
 	[":Insert-default.more_plus", "hr", "anchor", "math", "|", "template", "layout"],
 	[":Media-default.more_media", "drawing", "video", "audio", "embed", "fileUpload"],
 	[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 	"|",
-	["fullScreen", "showBlocks", "codeView"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
+	["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
+	[":More-default.more_view", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
 
-	// ═══ ≤1200px (2 rows, row 2 collapsed into more-buttons) ═══
-	[
-		"%1200",
-		[
-			["undo", "redo"],
-			"|",
-			["blockStyle", "font", "fontSize"],
-			"|",
-			["bold", "underline", "italic", "strike", "subscript", "superscript"],
-			"|",
-			["fontColor", "backgroundColor"],
-			"|",
-			["removeFormat", "copyFormat", "textStyle"],
-			"/",
-			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
-			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			"|",
-			["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
-			["-right", ":Pages-default.more_page", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
-		],
-	],
-
-	// ═══ ≤992px (1 row, aggressive collapse) ═══
+	// ═══ ≤992px (1 row — format selectors + text utilities into more, bold/table directly visible) ═══
 	[
 		"%992",
 		[
 			["undo", "redo"],
 			"|",
-			["blockStyle", "font", "fontSize"],
-			"|",
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
+			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize"],
+			["bold", "italic", "underline", "strike", "subscript", "superscript"],
+			[":Text-default.more_text", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
+			[":Paragraph-default.more_list", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
+			["table", "link", "image"],
+			[":Insert-default.more_plus", "hr", "anchor", "math", "|", "template", "layout"],
+			[":Media-default.more_media", "drawing", "video", "audio", "embed", "fileUpload"],
 			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			"|",
+			["fullScreen", "showBlocks", "codeView"],
+			[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
 		],
 	],
 
-	// ═══ ≤768px (tablet) ═══
+	// ═══ ≤768px (tablet — bold/color visible, removeFormat into Text more) ═══
 	[
 		"%768",
 		[
 			["undo", "redo"],
 			"|",
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_list", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
+			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize"],
+			["bold", "italic", "underline", "strike"],
+			"|",
+			["fontColor", "backgroundColor"],
+			[":Text-default.more_text", "removeFormat", "|", "subscript", "superscript", "|", "copyFormat", "textStyle"],
+			[":Paragraph-default.more_list", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
@@ -157,13 +162,15 @@ export const FULL_BUTTON_LIST: unknown[] = [
 		],
 	],
 
-	// ═══ ≤576px (mobile) ═══
+	// ═══ ≤576px (mobile — all into more, Docs merged into View) ═══
 	[
 		"%576",
 		[
 			["undo", "redo"],
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
+			"|",
+			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle"],
+			[":Text-default.more_text", "bold", "italic", "underline", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
+			[":Paragraph-default.more_list", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
 			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
 			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
 			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { SunEditor } from "suneditor/types";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
@@ -9,6 +9,17 @@ import { FullButtonList } from "@/components/editor/buttonList";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import { stateToEditorOptions, getRootConfigs } from "../_lib/playgroundState";
 import { type AllLibs, getActiveLibs } from "./externalLibsLoader";
+
+/** Dynamic import for SunEditor lang packs */
+async function loadLangPack(code: string): Promise<Record<string, unknown> | undefined> {
+	if (!code) return undefined;
+	try {
+		const mod = await import(`suneditor/langs/${code}`);
+		return mod.default ?? mod;
+	} catch {
+		return undefined;
+	}
+}
 
 interface Props {
 	state: PlaygroundState;
@@ -26,18 +37,36 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 
 	const roots = useMemo(() => getRootConfigs(state), [state]);
 
+	// Lang pack loading
+	const [langPack, setLangPack] = useState<Record<string, unknown> | undefined>(undefined);
+	const [langLoaded, setLangLoaded] = useState(!state.lang);
+
+	useEffect(() => {
+		if (!state.lang) {
+			setLangPack(undefined);
+			setLangLoaded(true);
+			return;
+		}
+		setLangLoaded(false);
+		loadLangPack(state.lang).then((pack) => {
+			setLangPack(pack);
+			setLangLoaded(true);
+		});
+	}, [state.lang]);
+
 	const options = useMemo(() => {
 		const opts = stateToEditorOptions(state);
+		opts.lang = langPack ?? null;
 		// Remove per-frame options that will be set per-root
 		delete (opts as Record<string, unknown>).height;
 		delete (opts as Record<string, unknown>).width;
 		return opts;
-	}, [state]);
+	}, [state, langPack]);
 
 	const extLibs = useMemo(() => getActiveLibs(allLibs, state.math_mathLib), [allLibs, state.math_mathLib]);
 
 	useEffect(() => {
-		if (!containerRef.current || extLibs === null) return;
+		if (!containerRef.current || extLibs === null || !langLoaded) return;
 
 		// Create textarea elements for each root
 		// Clear previous DOM to handle React Strict Mode double-mount
@@ -110,7 +139,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 			}
 			editorRef.current = null;
 		};
-	}, [extLibs]);
+	}, [extLibs, langLoaded]);
 
 	// Theme sync
 	useEffect(() => {

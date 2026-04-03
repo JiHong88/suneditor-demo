@@ -37,8 +37,8 @@ export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
 			style={{ display: "block" }}
 			data-ad-client={ADSENSE_CLIENT_ID}
 			data-ad-slot={adSlot}
-			data-ad-format="auto"
-			data-full-width-responsive="true"
+			data-ad-format='auto'
+			data-full-width-responsive='true'
 		/>
 	);
 }
