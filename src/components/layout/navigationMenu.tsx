@@ -1,76 +1,19 @@
 "use client";
 
 import * as React from "react";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Menu } from "lucide-react";
+import { Menu, Ellipsis } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavA } from "@/components/nav/navA";
 import { useTranslations, useLocale } from "next-intl";
 import { getDir } from "@/i18n/lang";
+import { useOverflowNav } from "@/hooks/useOverflowNav";
 
-function NavigationMenu({
-	className,
-	children,
-	viewport = true,
-	...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & { viewport?: boolean }) {
-	return (
-		<NavigationMenuPrimitive.Root
-			data-slot='navigation-menu'
-			data-viewport={viewport}
-			className={cn(
-				"group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
-				className,
-			)}
-			{...props}
-		>
-			{children}
-			{viewport && <NavigationMenuViewport />}
-		</NavigationMenuPrimitive.Root>
-	);
-}
-
-function NavigationMenuList({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {
-	return (
-		<NavigationMenuPrimitive.List
-			data-slot='navigation-menu-list'
-			className={cn("group flex flex-1 list-none items-center justify-center gap-1 xl:gap-4", className)}
-			{...props}
-		/>
-	);
-}
-
-function NavigationMenuItem({ className, ...props }: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
-	return (
-		<NavigationMenuPrimitive.Item
-			data-slot='navigation-menu-item'
-			className={cn("relative group", className)}
-			{...props}
-		/>
-	);
-}
-
-function NavigationMenuViewport({
-	className,
-	...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
-	return (
-		<div className={cn("absolute top-full start-0 isolate z-50 flex justify-center")}>
-			<NavigationMenuPrimitive.Viewport
-				data-slot='navigation-menu-viewport'
-				className={cn(
-					"origin-top-center bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border shadow md:w-[var(--radix-navigation-menu-viewport-width)]",
-					className,
-				)}
-				{...props}
-			/>
-		</div>
-	);
-}
+const navLinkClass =
+	"relative block rounded-sm px-1.5 xl:px-3 py-2 text-xs xl:text-sm whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
 
 function getLastPathSegment(url: string) {
 	const clean = url.split("?")[0].split("#")[0];
@@ -114,12 +57,37 @@ export function SiteNav() {
 		setOpenMobile(false);
 	}, [pathname]);
 
+	// Priority+ overflow
+	const { containerRef, moreRef, setItemRef, visibleCount } = useOverflowNav(items.length, locale);
+	const overflowItems = items.slice(visibleCount);
+	const hasOverflow = overflowItems.length > 0;
+
+	// More 드롭다운 상태
+	const [openMore, setOpenMore] = React.useState(false);
+	const moreButtonRef = React.useRef<HTMLButtonElement>(null);
+
+	// 바깥 클릭 시 닫기
+	React.useEffect(() => {
+		if (!openMore) return;
+		function handleClick(e: MouseEvent) {
+			if (moreButtonRef.current?.contains(e.target as Node)) return;
+			setOpenMore(false);
+		}
+		document.addEventListener("click", handleClick);
+		return () => document.removeEventListener("click", handleClick);
+	}, [openMore]);
+
+	// 라우트 변경 시 More 닫기
+	React.useEffect(() => {
+		setOpenMore(false);
+	}, [pathname]);
+
 	return (
 		<>
 			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
 				<div className='mx-auto flex h-14 items-center justify-center px-4 max-w-screen-2xl'>
 					{/* Desktop nav */}
-					<div className='hidden items-center gap-1 md:flex'>
+					<div className='hidden items-center gap-1 md:flex flex-1 min-w-0'>
 						<Link href='/' className='flex items-center shrink-0 mx-2 lg:mx-6' aria-label='Home'>
 							{/* md~lg: 아이콘만 */}
 							<Image
@@ -148,19 +116,64 @@ export function SiteNav() {
 								className='hidden dark:lg:block'
 							/>
 						</Link>
-						<NavigationMenu className='mx-2 lg:mx-6 min-w-0 overflow-x-auto' dir={dir}>
-							<NavigationMenuList className='flex-nowrap'>
-								{items.map((it) => (
-									<NavigationMenuItem key={it.label} className='group'>
-										<NavigationMenuPrimitive.Link asChild>
-											<NavA href={it.href} active={isActive(it.href)}>
+						<nav
+							ref={containerRef}
+							className='mx-2 lg:mx-6 min-w-0 flex-1 flex items-center gap-1 xl:gap-4 flex-nowrap'
+							dir={dir}
+						>
+							{items.map((it, i) => (
+								<div
+									key={it.href}
+									ref={setItemRef(i)}
+									className={cn(i >= visibleCount && "invisible absolute")}
+									aria-hidden={i >= visibleCount || undefined}
+								>
+									<NavA href={it.href} active={isActive(it.href)}>
+										{it.label}
+									</NavA>
+								</div>
+							))}
+
+							{/* More 버튼 */}
+							<div
+								ref={moreRef}
+								className={cn("relative", !hasOverflow && "hidden")}
+							>
+								<button
+									ref={moreButtonRef}
+									onClick={() => setOpenMore((v) => !v)}
+									className={cn(
+										navLinkClass,
+										"text-muted-foreground hover:text-foreground",
+									)}
+									aria-expanded={openMore}
+									aria-label='More pages'
+								>
+									<Ellipsis className='size-4' />
+								</button>
+
+								{openMore && (
+									<div
+										className={cn(
+											"absolute top-full z-50 mt-1.5 min-w-40 rounded-md border bg-popover p-1 shadow-md",
+											dir === "rtl" ? "left-0" : "right-0",
+										)}
+									>
+										{overflowItems.map((it) => (
+											<NavA
+												key={it.href}
+												href={it.href}
+												active={isActive(it.href)}
+												underlineOrigin='left'
+												className='py-2'
+											>
 												{it.label}
 											</NavA>
-										</NavigationMenuPrimitive.Link>
-									</NavigationMenuItem>
-								))}
-							</NavigationMenuList>
-						</NavigationMenu>
+										))}
+									</div>
+								)}
+							</div>
+						</nav>
 					</div>
 
 					{/* Mobile nav */}
