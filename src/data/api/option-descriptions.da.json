@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Startværdi for editoren.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Pladsholdertekst.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Attributter for den redigerbare ramme [.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Bredde for editoren.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Minimumsbredde for editoren.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Maksimal bredde for editoren.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Højde for redaktøren.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Minimumshøjde for redaktøren.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Maksimal højde for editoren.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Stilstreng for den øverste ramme i editoren.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Indholdet vil blive placeret i en iframe og isoleret fra resten af ​​siden.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Tillader brugen af ​​HTML, HEAD, BODY-tags og DOCTYPE-deklaration på `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Attributter for `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Aktiverer statuslinjen.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Viser den aktuelle nodestruktur i statuslinjen.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Aktiverer funktionen til at ændre størrelsen på den nederste statuslinje.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Viser antallet af tegn i editoren.\n- Hvis `maxCharCount`-indstillingen har en værdi, bliver den til `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Det maksimale antal tegn, der må indsættes i editoren.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Tekst, der skal vises i `charCounter`-området i den nederste bjælke.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definerer beregningsmetoden for `charCounter`-indstillingen.\n- `char`: Tegnlængde.\n- `byte`: Binær datastørrelse for tegn.\n- `byte-html`: Binær datastørrelse for den fulde HTML-streng.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Viser antallet af ord i editoren.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Tekst, der skal vises i `wordCounter`-området i den nederste bjælke.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Stilarter anvendt på den øverste container (f.eks. bredde, z-indeks osv.)."
+  },
+  "frame": {
+    "description": "Stilarter anvendt på iframe-containeren (f.eks. højde, min-højde)."
+  },
+  "editor": {
+    "description": "Typografier anvendt på det redigerbare indholdsområde."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror-editorinstans (frame-niveau). Angivet af `_checkCodeMirror` efter initialisering."
+  },
+  "plugins": {
+    "description": "Plugin-konfiguration. Send et array af plugin-klasser eller et objekt, der er nøglebaseret på plugin-navnet.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Liste over værktøjslinjeknapper, grupperet efter underarrays.\n- Standardindstillingen følger {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Aktiverer migreringstilstand for SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Værktøjslinjetilstand: `classic`, `inline`, `balloon`, `balloon-always`. Tilføj `:bottom` for at placere værktøjslinjen nederst (f.eks. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Redigeringstype. Brug `\"document\"` til et layout i dokumentstil med valgfrie undertyper efter `:`.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Redaktørens tema.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Sprogkonfiguration. Standard: EN"
+  },
+  "icons": {
+    "description": "Tilsidesætter standardikonerne."
+  },
+  "textDirection": {
+    "description": "Tekstretning: `ltr` eller `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Aktiverer streng filtrering af tags, attributter og stilarter.\n- Brug `true` til at aktivere alle filtre (standard), eller et objekt til at styre individuelle filtre.\n- Indstilling af `false` ​​understøttes ikke; brug objektformularen til at deaktivere specifikke filtre i stedet.\n- :filterbeskrivelse\n- `tagFilter`: Filtrerer ikke tilladte HTML-tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrerer formatelementer (`formatLine`/`formatBlock`)\n- `classFilter`: Filtrerer ikke tilladte CSS-klassenavne (`allowedClassName`)\n- `textStyleTagFilter`: Filtrerer tekststiltag (b, i, u, span osv.)\n- `attrFilter`: Filtrerer ikke tilladte HTML-attributter (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtrerer ikke tilladte inline-stilarter (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Tags behandles som hele enheder, når alt indhold vælges.\n- Standardindstillingen følger {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Angiver HTML-elementer, der skal tillades yderligere ud over standardtilladelseslisten. Afgrænsningstegn: `\"|\"`.\n- Tilføjet til standardlisten bestemt af {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Angiver HTML-elementer, der ikke skal bruges. Afgrænsningstegn: `\"|\"`.\n- Tags angivet her vil med tiden blive fjernet, selvom de er inkluderet i andre hvidlister.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "En liste over tags, der må bevares, selvom deres værdier er tomme.\n- Standardværdien følger {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Sammenkædet med `ALLOWED_EMPTY_NODE_LIST` for at danne den endelige `allowedEmptyTags`-liste.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Tilladte klassenavne.\n- Tilføjet standardværdien {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Angiver yderligere attributter, der skal tillades for hvert tag. `\"*\"` gælder for alle tags.\n- Regler angivet her vil blive flettet ind i {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Angiver attributter, der ikke skal tillades via tag. `\"*\"` gælder for alle tags.\n- Attributter, der er angivet her, vil med tiden blive fjernet, selvom de er tilladt af andre indstillinger.\n- En liste over obligatoriske elementer, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, er altid inkluderet.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Yderligere tekststiltag.\n- Standardindstillingen følger {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Knytter tekststile til specifikke HTML-tags.",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Angiver yderligere stilarter til listen over tilladte stilarter. Afgrænsningstegn: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Angiver tilladte stilarter for HTML-tags. Nøglen er tagnavn(e), værdien er tilladte stilarter adskilt af lodret linjeafgrænsede ...",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Angiver tilladte stilarter for `span`-tagget.\n- Standarden følger {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Angiver tilladte stilarter for `line`-elementet (p..).\n- Standardindstillingen følger {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Tilladte skriftstørrelsesenheder.\n- Standarden følger {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Bestemmer, hvordan indlejrede elementer (f.eks. `<span>`, `<strong>`) håndteres, når tekst slettes.\n- `repeat`: Typografier bevares, medmindre der trykkes gentagne gange på backspace.\n- Vedvarende tryk vil til sidst fjerne typografierne.\n- `none`: Typografier bevares ikke. Indlejrede elementer fjernes øjeblikkeligt sammen med teksten.\n- `always`: Typografier bevares på ubestemt tid, medmindre de eksplicit fjernes.\n- Selv hvis al tekst i et indlejret element slettes, bevares selve elementet.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Standard `line`-element ved indsættelse af nye linjer.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Angiver standardformatet for linjeskift.\n- [Anbefales] `line`: Linjeskift er opdelt i generelle tags.\n- [Anbefales ikke] `br`: Linjeskift behandles som <br> på samme linje. (som shift+enter)\n- Linjeskift håndteres som <br> i `line`.\n- Du kan oprette et nyt `line` ved at indtaste et linjeskift to gange i træk.\n- Formater, der inkluderer `line`, såsom \"Citat\", fungerer stadig på en `line`-basis.\n- Suneditor-processer arbejder i `line`-enheder.\n- Når den er indstillet til `br`, kan ydeevnen falde, når der redigeres mange data.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Linjeegenskaber, der skal nulstilles, når der skiftes linjer. Afgrænsningstegn: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Derudover tilladte `line` elementer ud over standardværdien. Afgrænsningstegn: `\"|\"`.\n- Sammenkædet med {@link PrivateBaseOptions.__defaultFormatLine} for at danne den endelige `line` liste.\n- `line` elementet indeholder også `brLine` elementet.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Derudover tilladt `brLine` elementer ud over standardværdien.\n- Sammenkædet med {@link PrivateBaseOptions.__defaultFormatBrLine} for at danne den endelige `brLine` ​​liste.\n- `brLine` elementer er inkluderet i `line` elementet.\n- `brLine` elementernes linjeskift er `BR` tagget.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Derudover tilladte `closureBrLine` elementer ud over standardværdien.\n- Sammenkædet med {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for den endelige `closureBrLine` ​​liste.\n- `closureBrLine` elementer er inkluderet i `brLine`.\n- `closureBrLine` elementernes linjeskift er `BR` tagget.\n- ※ Du kan ikke afslutte dette format med Enter-tasten eller Backspace-tasten.\n- ※ Brug det kun i særlige tilfælde. ([f.eks.] format for tabelceller)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Derudover tilladte `block` elementer ud over standardværdien.\n- Sammenkædet med {@link PrivateBaseOptions.__defaultFormatBlock} for at danne den endelige `block` ​​liste.\n- `block` ombryder `line` og `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Derudover tilladte `closureBlock`-elementer ud over standardværdien.\n- Sammenkædet med {@link PrivateBaseOptions.__defaultFormatClosureBlock} for den endelige `closureBlock`-liste.\n- `closureBlock`-elementer er inkluderet i `block`.\n- `closureBlock`-elementet ombryder `line` og `component`.\n- ※ Du kan ikke afslutte dette format med Enter-tasten eller Backspace-tasten.\n- ※ Brug det kun i særlige tilfælde. (f.eks. formatering af tabelceller)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Lukker modalvinduer, når der klikkes udenfor.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synkroniserer tabulatorindrykning med mellemrum.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Deaktiverer input med tabulatortasten.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Værktøjslinjebredde.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Containerelement til værktøjslinjen."
+  },
+  "toolbar_sticky": {
+    "description": "Aktiverer fastlåst værktøjslinje.\n- `number`: Angiver den fastlåste øverste position (px). Brug `-1` ​​til at deaktivere fastlåsning.\n- `{top, offset}`: `top` er den fastlåste position, når sidehovedet er synligt.\n- `offset` er den fastlåste position, når et virtuelt tastatur flytter visningsporten (f.eks. på tablets, touch-enheder).\n- Når det virtuelle tastatur er aktivt, erstatter `offset` `top`, så værktøjslinjen ikke efterlader et mellemrum\n- for en sidehoved, der er rullet ud af visning. Standard `offset` er `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Skjuler værktøjslinjen i første omgang.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Konfiguration af underværktøjslinje. En sekundær værktøjslinje, der vises ved tekstmarkering.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Containerelement til statuslinjen."
+  },
+  "shortcutsHint": {
+    "description": "Viser genvejstips i værktøjstip.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Deaktiverer tastaturgenveje.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Brugerdefinerede tastaturgenveje.\n- Taster, der starter med `_`, er brugerdefinerede brugerdefinerede genveje. Hver værdi er et array af `[keyCombo, hintLabel]`-par.\n- Tastekombinationer bruger `c` (Ctrl/Cmd), `s` (Shift) og `KeyEvent.code`-værdier forbundet med `+`.\n- Brug `$~pluginName.method` til at kalde en specifik plugin-metode.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Bevarer formatet på det kopierede indhold.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Konverterer automatisk URL'er til hyperlinks. (`Link` plugin kræves)\n- Standard: `Boolean(plugins.link)` ​​— bestemmes af, om `link` plugin'et er aktiveret."
+  },
+  "historyStackDelayTime": {
+    "description": "Forsinkelsestid for opdateringer af historikstak (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Maksimalt antal historikposter pr. rodramme. Ældste poster kasseres, når de overskrides.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Klassenavn til udskrivning.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Forskydning anvendes ved aktivering af fuldskærmstilstand.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Brugerdefineret HTML-skabelon til forhåndsvisningstilstand. Brug `{{ contents }}` som pladsholder til editorindhold.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Brugerdefineret HTML-skabelon til udskriftstilstand. Brug `{{ contents }}` som pladsholder til editorindhold.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Aktiverer automatisk valg af indsatte komponenter.\n- For indlejrede komponenter: Placerer markøren i nærheden af ​​komponenten, eller vælger hvis der ikke er et nærliggende område.\n- For blokkomponenter: Udfører adfærd baseret på `selectMode`:\n- `auto`: Flyt markøren til den næste linje hvis muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje hvis muligt, eller opret en ny linje og flyt dertil.\n- `none`: Gør ingenting.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Standard URL-protokol for links.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Varighed for visning af toast-beskeder (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Aktiverer fri kodevisningstilstand.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Viser den indbyggede brugergrænseflade til panelet Find/Erstat.\n- Finderen oprettes altid internt; denne indstilling styrer, om panelet er synligt for brugerne (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Søger øjeblikkeligt, mens du skriver (afbounces). Når falsk, kører søgningen kun ved Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Eksterne biblioteker som CodeMirror, KaTeX eller MathJax.\n- Se {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Vejledning til eksterne biblioteker}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Angiver ekstra tilladte eller ikke-tilladte tags. `true` for at tillade, `false` ​​for at forbyde.\n- Standardindstillingen følger {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Konfiguration af brugerhændelseshåndterere.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Liste over aktuelt anvendte værktøjslinjeknapper"
+  },
+  "buttons_sub": {
+    "description": "Liste over aktuelt anvendte underværktøjslinjeknapper"
+  },
+  "toolbar_sub_width": {
+    "description": "Bredde på underværktøjslinjen."
+  },
+  "reverseCommands": {
+    "description": "Sammenflettet array af omvendte kommandopar.\n- Inkluderer standard `indent-outdent` + brugerens `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "CodeMirror-konfigurationsobjekt fra `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Bruger CodeMirror til kodevisning."
+  },
+  "audioGallery_data": {
+    "description": "Direkte data uden serverkald"
+  },
+  "audioGallery_url": {
+    "description": "URL for serveranmodning"
+  },
+  "audioGallery_headers": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Standardminiaturebillede"
+  },
+  "fileBrowser_data": {
+    "description": "Direkte data uden serverkald (omgår URL-hentning)."
+  },
+  "fileBrowser_url": {
+    "description": "URL for serveranmodning"
+  },
+  "fileBrowser_headers": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Standardminiature-URL eller en funktion, der returnerer en miniature-URL pr. element."
+  },
+  "fileBrowser_props": {
+    "description": "Yderligere tagnavne"
+  },
+  "fileGallery_data": {
+    "description": "Direkte data uden serverkald"
+  },
+  "fileGallery_url": {
+    "description": "URL for serveranmodning"
+  },
+  "fileGallery_headers": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Standardminiaturebillede"
+  },
+  "imageGallery_data": {
+    "description": "Direkte data uden serverkald"
+  },
+  "imageGallery_url": {
+    "description": "URL for serveranmodning"
+  },
+  "imageGallery_headers": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "videoGallery_data": {
+    "description": "Direkte data uden serverkald"
+  },
+  "videoGallery_url": {
+    "description": "URL for serveranmodning"
+  },
+  "videoGallery_headers": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Standardminiaturebillede"
+  },
+  "codeBlock_langs": {
+    "description": "Liste over valgbare programmeringssprog til kodeblokke.\n- Standardindstillingen er 21 almindelige sprog\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Indstil arrayet `[]` til et tomt område for at deaktivere sprogvalgsgrænsefladen helt."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Serveranmodnings-URL til PDF-generering"
+  },
+  "exportPDF_fileName": {
+    "description": "Navn på den genererede PDF-fil"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Serveranmodnings-URL til filupload"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Serverforespørgselsheadere"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Samlet uploadstørrelsesgrænse i bytes"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænse for enkeltfiler i bytes"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Tillad upload af flere filer"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Accepterede filformater."
+  },
+  "fileUpload_as": {
+    "description": "Angiv standardformen for filkomponenten som `box` eller `link`"
+  },
+  "fileUpload_controls": {
+    "description": "Yderligere kontroller, der skal tilføjes til figuren"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flyt markøren til den næste linje, hvis det er muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje, hvis det er muligt, eller opret en ny linje og flyt den dertil.\n- `none`: Gør ingenting."
+  },
+  "align_items": {
+    "description": "Juster elementer"
+  },
+  "backgroundColor_items": {
+    "description": "Farveliste."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Antal farver pr. linje"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Deaktiver HEX-input"
+  },
+  "blockStyle_items": {
+    "description": "Formatér liste.\n- `command` — `\"line\"`: blok med én linje, `\"br-line\"`: blok adskilt af br, `\"block\"`: containerblok."
+  },
+  "font_items": {
+    "description": "Liste over skrifttyper"
+  },
+  "fontColor_items": {
+    "description": "Farveliste."
+  },
+  "fontColor_splitNum": {
+    "description": "Antal farver pr. linje"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Deaktiver HEX-input"
+  },
+  "hR_items": {
+    "description": "HR-liste"
+  },
+  "layout_items": {
+    "description": "Layoutliste. Hvert element definerer en navngiven layoutskabelon med rå HTML."
+  },
+  "lineHeight_items": {
+    "description": "Liste over linjehøjder"
+  },
+  "paragraphStyle_items": {
+    "description": "Liste over afsnitelementer"
+  },
+  "table_scrollType": {
+    "description": "Rulningstype (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Billedtekstens placering (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Cellecontrollerens position (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX-farveliste til vælgeren af ​​cellebaggrundsfarve."
+  },
+  "template_items": {
+    "description": "Skabelonliste"
+  },
+  "textStyle_items": {
+    "description": "Liste over tekststilelementer."
+  },
+  "mention_triggerText": {
+    "description": "Det tegn, der udløser omtalelisten."
+  },
+  "mention_limitSize": {
+    "description": "Antallet af elementer, der skal vises på omtalelisten"
+  },
+  "mention_searchStartLength": {
+    "description": "Antallet af tegn, der skal bruges til at starte søgningen efter omtalelisten"
+  },
+  "mention_delayTime": {
+    "description": "Ventetiden før visning af omtalelisten"
+  },
+  "mention_data": {
+    "description": "Statiske omtaledata (bruges i stedet for API)."
+  },
+  "mention_apiUrl": {
+    "description": "URL'en til at kalde omtalelisten"
+  },
+  "mention_apiHeaders": {
+    "description": "De headere, der skal sendes med API-kaldet"
+  },
+  "mention_useCachingData": {
+    "description": "Om dataene fra omtalelisten skal cache"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Om dataene fra omtalelisten skal cachelagres i feltet"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Enheden for skriftstørrelsen.\n- Accepterede værdier inkluderer: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` eller `'text'`.\n- Hvis `'text'` bruges, anvendes en tekstbaseret liste over skriftstørrelser."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Bestemmer, om standardstørrelsesetiketten vises i rullemenuen."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Når `true` vises knapper til at øge og mindske skriftstørrelsen.\n- Standardindstillingen er `false`. Altid `false`, når `sizeUnit` er `'text'` (ignoreret)."
+  },
+  "fontSize_disableInput": {
+    "description": "Når `true`, deaktiveres feltet til direkte indtastning af skriftstørrelse.\n- Standardindstillingen er `true`, når `sizeUnit` er `'text'`, ellers `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Tilsidesæt eller udvid standardenhedstilknytningen for skriftstørrelser."
+  },
+  "audio_defaultWidth": {
+    "description": "Standardbredden for `AUDIO`-tagget."
+  },
+  "audio_defaultHeight": {
+    "description": "Standardhøjden for `AUDIO`-tagget."
+  },
+  "audio_createFileInput": {
+    "description": "Om der skal oprettes et filinputelement."
+  },
+  "audio_createUrlInput": {
+    "description": "Om der skal oprettes et URL-inputelement.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL'en, hvortil filerne uploades."
+  },
+  "audio_uploadHeaders": {
+    "description": "Overskrifter, der skal inkluderes i anmodningen om filupload."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Den samlede uploadstørrelsesgrænse i bytes."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænsen for en enkelt fil i bytes."
+  },
+  "audio_allowMultiple": {
+    "description": "Om det skal være tilladt at uploade flere filer."
+  },
+  "audio_acceptedFormats": {
+    "description": "Accepterede filformater (standard er `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Yderligere attributter, der skal indstilles på `AUDIO`-tagget."
+  },
+  "audio_insertBehavior": {
+    "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flyt markøren til den næste linje, hvis det er muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje, hvis det er muligt, eller opret en ny linje og flyt den dertil.\n- `none`: Gør ingenting."
+  },
+  "drawing_outputFormat": {
+    "description": "Tegningens outputformat. Valgmuligheder: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Om valg af formattype skal aktiveres (`block` vs. `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Standardformattypen er enten `\"block\"` eller `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Om den valgte formattype skal bevares efter tegning."
+  },
+  "drawing_lineWidth": {
+    "description": "Bredden af ​​tegnelinjen."
+  },
+  "drawing_lineReconnect": {
+    "description": "Om linjerne skal forbindes igen under tegning."
+  },
+  "drawing_lineCap": {
+    "description": "Stilen på linjekapslen (`\"butt\"`, `\"round\"` ​​eller `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Farven på tegnelinjen."
+  },
+  "drawing_canResize": {
+    "description": "Om størrelsen på den modale form kan ændres."
+  },
+  "drawing_maintainRatio": {
+    "description": "Om billedformatet skal bevares ved ændring af størrelse."
+  },
+  "drawing_formSize": {
+    "description": "Størrelseskonfigurationen for tegningens modale formular."
+  },
+  "embed_canResize": {
+    "description": "Om størrelsen på indlejringselementet kan ændres."
+  },
+  "embed_showHeightInput": {
+    "description": "Om højdefeltet skal vises."
+  },
+  "embed_defaultWidth": {
+    "description": "Standardbredden på embed-elementet (numerisk værdi eller med enhed)."
+  },
+  "embed_defaultHeight": {
+    "description": "Standardhøjden på embed-elementet (numerisk værdi eller med enhed)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Om kun procentbaseret størrelsesjustering skal tillades."
+  },
+  "embed_uploadUrl": {
+    "description": "URL'en til filuploads."
+  },
+  "embed_uploadHeaders": {
+    "description": "Overskrifter, der skal inkluderes i anmodninger om filupload."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Den samlede størrelsesgrænse for filupload i bytes."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænsen for upload af enkeltfiler i bytes."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Yderligere attributter, der skal indstilles på `IFRAME`-tagget."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube-forespørgselsparameter tilføjet til indlejrings-URL'en."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo-forespørgselsparameter tilføjet til indlejrings-URL'en."
+  },
+  "embed_urlPatterns": {
+    "description": "Yderligere URL-mønstre, der skal genkendes som integrerbart indhold."
+  },
+  "embed_embedQuery": {
+    "description": "Definitioner af brugerdefinerede indlejringstjenester."
+  },
+  "embed_controls": {
+    "description": "Figurkontroller."
+  },
+  "embed_insertBehavior": {
+    "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flyt markøren til den næste linje, hvis det er muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje, hvis det er muligt, eller opret en ny linje og flyt den dertil.\n- `none`: Gør ingenting."
+  },
+  "image_canResize": {
+    "description": "Om billedelementet kan skaleres."
+  },
+  "image_showHeightInput": {
+    "description": "Om højdefeltet skal vises."
+  },
+  "image_defaultWidth": {
+    "description": "Standardbredden på billedet. Hvis der angives et tal, tilføjes `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Standardhøjden på billedet. Hvis der angives et tal, tilføjes `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Om kun procentbaseret størrelsesjustering skal tillades."
+  },
+  "image_createFileInput": {
+    "description": "Om der skal oprettes et filinputelement til billeduploads."
+  },
+  "image_createUrlInput": {
+    "description": "Om der skal oprettes et URL-inputelement til billedindsættelse.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
+  },
+  "image_uploadUrl": {
+    "description": "URL-slutpunktet for upload af billedfiler."
+  },
+  "image_uploadHeaders": {
+    "description": "Yderligere overskrifter, der skal inkluderes i anmodningen om filupload."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Den samlede uploadstørrelsesgrænse i bytes."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænsen for upload af enkeltfiler i bytes."
+  },
+  "image_allowMultiple": {
+    "description": "Om det er tilladt at uploade flere billeder."
+  },
+  "image_acceptedFormats": {
+    "description": "De accepterede filformater til upload af billeder."
+  },
+  "image_useFormatType": {
+    "description": "Om valg af formattype skal aktiveres (`block` eller `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Standardbilledformattypen (`\"block\"` eller `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Om den valgte formattype skal bevares efter indsættelse af billede."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Om filuploads skal aktiveres for linkede billeder."
+  },
+  "image_controls": {
+    "description": "Figurkontroller."
+  },
+  "image_insertBehavior": {
+    "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- For inline-komponenter: Placerer markøren i nærheden af ​​komponenten, eller vælger hvis der ikke er et nærliggende område.\n- For blokkomponenter: Udfører adfærd baseret på `selectMode`:\n- `auto`: Flyt markøren til den næste linje hvis muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje hvis muligt, eller opret en ny linje og flyt dertil.\n- `none`: Gør ingenting."
+  },
+  "link_uploadUrl": {
+    "description": "URL-slutpunktet for filuploads."
+  },
+  "link_uploadHeaders": {
+    "description": "Yderligere overskrifter til anmodninger om filupload."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Den samlede størrelsesgrænse for filupload i bytes."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænsen for upload af enkeltfiler i bytes."
+  },
+  "link_acceptedFormats": {
+    "description": "Accepterede filformater til linkuploads."
+  },
+  "link_title": {
+    "description": "Modal titelvisning."
+  },
+  "link_textToDisplay": {
+    "description": "Opret tekst for at vise input."
+  },
+  "link_openNewWindow": {
+    "description": "Standardværdien for afkrydsningsfeltet \"Åbn i nyt vindue\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Hvis `true`, deaktiveres den automatiske præfiksering af værts-URL'en til linkets værdi."
+  },
+  "link_relList": {
+    "description": "Tilgængelige `rel`-attributværdier vist som afkrydsningsfelter i linkmodalen."
+  },
+  "link_defaultRel": {
+    "description": "Standard `rel`-værdier anvendes automatisk efter betingelse."
+  },
+  "link_enableFileUpload": {
+    "description": "Hvis `true`, aktiveres filupload."
+  },
+  "math_canResize": {
+    "description": "Om størrelsen på den matematiske modal kan ændres."
+  },
+  "math_autoHeight": {
+    "description": "Om højden på modalen skal justeres automatisk."
+  },
+  "math_fontSizeList": {
+    "description": "En liste over skriftstørrelsesindstillinger for størrelsesvælgeren for matematiske udtryk."
+  },
+  "math_onPaste": {
+    "description": "En callback-funktion til at håndtere indsætningshændelser i det matematiske inputområde."
+  },
+  "math_formSize": {
+    "description": "Et objekt, der angiver dimensionerne for den matematiske modal."
+  },
+  "video_canResize": {
+    "description": "Om videoelementet kan skaleres."
+  },
+  "video_showHeightInput": {
+    "description": "Om højdefeltet skal vises."
+  },
+  "video_defaultWidth": {
+    "description": "Standardbredden på videoelementet. Hvis der angives et tal, tilføjes `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Standardhøjden for videoelementet. Hvis der angives et tal, tilføjes `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Om kun procentbaseret størrelsesjustering skal tillades."
+  },
+  "video_createFileInput": {
+    "description": "Om der skal oprettes et filinputelement til videouploads."
+  },
+  "video_createUrlInput": {
+    "description": "Om der skal oprettes et URL-inputelement til videoindlejring.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
+  },
+  "video_uploadUrl": {
+    "description": "URL-slutpunktet for upload af videofiler."
+  },
+  "video_uploadHeaders": {
+    "description": "Yderligere overskrifter, der skal inkluderes i anmodningen om videoupload."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Den samlede uploadstørrelsesgrænse for videoer i bytes."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Størrelsesgrænsen for upload af enkeltfiler for videoer i bytes."
+  },
+  "video_allowMultiple": {
+    "description": "Om det er tilladt at uploade flere videoer."
+  },
+  "video_acceptedFormats": {
+    "description": "Accepterede filformater til videouploads (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Standardformatet for videoen (højde/bredde, f.eks. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Om forholdsindstillingen skal vises i modalen."
+  },
+  "video_ratioOptions": {
+    "description": "Brugerdefinerede forholdsindstillinger for ændring af videostørrelse (værdi = højde/bredde)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Yderligere attributter, der skal indstilles på `VIDEO`-tagget."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Yderligere attributter, der skal indstilles på `IFRAME`-tagget."
+  },
+  "video_query_youtube": {
+    "description": "Yderligere forespørgselsparametre til YouTube-indlejring."
+  },
+  "video_query_vimeo": {
+    "description": "Yderligere forespørgselsparametre til Vimeo-indlejring."
+  },
+  "video_embedQuery": {
+    "description": "Definitioner af brugerdefinerede indlejringstjenester (se `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Yderligere URL-mønstre til videoindlejring."
+  },
+  "video_extensions": {
+    "description": "Yderligere filtypenavne, der skal genkendes ved videouploads."
+  },
+  "video_controls": {
+    "description": "Figurkontroller."
+  },
+  "video_insertBehavior": {
+    "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flyt markøren til den næste linje, hvis det er muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje, hvis det er muligt, eller opret en ny linje og flyt den dertil.\n- `none`: Gør ingenting."
+  }
+}

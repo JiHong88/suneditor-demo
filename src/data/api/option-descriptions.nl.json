@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Initiële waarde voor de editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Plaatsvervangende tekst.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Attributen voor het bewerkbare frame[.sun-editor-editable].\n\n``js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Breedte voor de editor.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Minimale breedte voor de editor.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Maximale breedte voor de editor.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Hoogte voor de redacteur.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Minimale hoogte voor de editor.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Maximale hoogte voor de editor.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Stijlstring van het bovenste frame van de editor.\n\n``js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "De inhoud wordt in een iframe geplaatst en is daardoor afgescheiden van de rest van de pagina.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Hiermee kan gebruik worden gemaakt van HTML-, HEAD- en BODY-tags en een DOCTYPE-declaratie op de `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Kenmerken van de `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Schakelt de statusbalk in.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Geeft de huidige knooppuntstructuur weer in de statusbalk.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Hiermee kan de statusbalk onderaan worden verkleind of vergroot.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Geeft het aantal tekens in de editor weer.\n\n- Als de optie `maxCharCount` een waarde heeft, wordt deze `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Het maximale aantal tekens dat in de editor mag worden ingevoerd.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Tekst die moet worden weergegeven in het `charCounter`-gebied van de onderste balk.\n\n``js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definieert de berekeningsmethode van de optie `charCounter`.\n\n- `char`: Lengte van de tekens.\n\n- `byte`: Grootte van de binaire gegevens van de tekens.\n\n- `byte-html`: Grootte van de binaire gegevens van de volledige HTML-string.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Geeft het aantal woorden in de editor weer.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Tekst die moet worden weergegeven in het `wordCounter`-gebied van de onderste balk.\n\n``js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Stijlen die worden toegepast op de bovenste container (bijv. breedte, z-index, enz.)."
+  },
+  "frame": {
+    "description": "Stijlen die op de iframe-container worden toegepast (bijv. hoogte, minimale hoogte)."
+  },
+  "editor": {
+    "description": "Stijlen toegepast op het bewerkbare inhoudsgebied."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror-editorinstantie (frameniveau). Wordt ingesteld door `_checkCodeMirror` na initialisatie."
+  },
+  "plugins": {
+    "description": "Pluginconfiguratie. Geef een array met pluginklassen of een object met de pluginnaam als sleutel door.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Lijst met knoppen in de werkbalk, gegroepeerd per subcategorie.\n\n- De standaardinstelling volgt {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Schakelt de migratiemodus in voor SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Werkbalkmodus: `classic`, `inline`, `balloon`, `balloon-always`. Voeg `:bottom` toe om de werkbalk onderaan te plaatsen (bijv. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Editortype. Gebruik `\"document\"` voor een documentachtige lay-out, met optionele subtypen na `:`.\n\n``js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Editor-thema.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Taalconfiguratie. Standaard: EN"
+  },
+  "icons": {
+    "description": "Vervangt de standaardpictogrammen."
+  },
+  "textDirection": {
+    "description": "Tekstrichting: `ltr` of `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Hiermee kunt u tags, attributen en stijlen strikt filteren.\n\n- Gebruik `true` om alle filters in te schakelen (standaard), of een object om individuele filters te beheren.\n\n- Het instellen van `false` ​​wordt niet ondersteund; gebruik in plaats daarvan de objectvorm om specifieke filters uit te schakelen.\n\n- :filterbeschrijving\n- `tagFilter`: Filtert niet-toegestane HTML-tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtert opmaakelementen (`formatLine`/`formatBlock`)\n- `classFilter`: Filtert niet-toegestane CSS-klassenamen (`allowedClassName`)\n- `textStyleTagFilter`: Filtert tekststijltags (b, i, u, span, enz.)\n- `attrFilter`: Filtert niet-toegestane HTML-attributen (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtert niet-toegestane inline stijlen (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Tags worden als één geheel behandeld bij het selecteren van alle inhoud.\n\n- De standaardinstelling is {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Specificeert HTML-elementen die, naast de standaardlijst, ook toegestaan ​​moeten worden. Scheidingsteken: `\"|\"`.\n\n- Toegevoegd aan de standaardlijst bepaald door {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\n``js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Specificeert HTML-elementen die niet gebruikt mogen worden. Scheidingsteken: `\"|\"`.\n\n- Tags die hier worden gespecificeerd, worden uiteindelijk verwijderd, zelfs als ze in andere whitelists zijn opgenomen.\n\n``js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Een lijst met tags die behouden mogen blijven, zelfs als hun waarden leeg zijn.\n\n- De standaardwaarde volgt {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Samengevoegd met `ALLOWED_EMPTY_NODE_LIST` om de uiteindelijke `allowedEmptyTags` ​​lijst te vormen.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Toegestane klassenamen.\n\n- De standaardwaarde {@link DEFAULTS.CLASS_NAME} is toegevoegd.",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Specificeert extra attributen die voor elke tag zijn toegestaan. `\"*\"` is van toepassing op alle tags.\n\n- De hier gespecificeerde regels worden samengevoegd met {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n``js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Specificeert attributen die per tag niet zijn toegestaan. `\"*\"` is van toepassing op alle tags.\n\n- Attributen die hier worden gespecificeerd, worden uiteindelijk verwijderd, zelfs als ze door andere instellingen zijn toegestaan.\n\n- Een lijst met verplichte elementen, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, wordt altijd meegeleverd.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Aanvullende tekststijltags.\n\n- De standaardinstelling volgt {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Koppelt tekststijlen aan specifieke HTML-tags.\n\n``js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Hiermee kunt u extra stijlen toevoegen aan de lijst met toegestane stijlen. Scheidingsteken: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Specificeert toegestane stijlen voor HTML-tags. De sleutel is de tagnaam/namen, de waarde zijn de toegestane stijlen, gescheiden door een verticale streep.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Specificeert de toegestane stijlen voor de `span`-tag.\n\n- De standaardstijl volgt {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Specificeert de toegestane stijlen voor het `line` element (p..).\n\n- De standaardstijl volgt {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Toegestane eenheden voor lettergrootte.\n\n- De standaardwaarde volgt {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Bepaalt hoe inline-elementen (bijv. `<span>`, `<strong>`) worden behandeld bij het verwijderen van tekst.\n\n- `repeat`: Stijlen blijven behouden, tenzij herhaaldelijk op de backspace-toets wordt gedrukt.\n\n- Door herhaaldelijk op de backspace-toets te drukken, worden de stijlen uiteindelijk verwijderd.\n\n- `none`: Stijlen blijven niet behouden. Inline-elementen worden direct samen met de tekst verwijderd.\n\n- `always`: Stijlen blijven voor onbepaalde tijd behouden, tenzij ze expliciet worden verwijderd.\n\n- Zelfs als alle tekst binnen een inline-element wordt verwijderd, blijft het element zelf behouden.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Standaard `line` element bij het invoegen van nieuwe regels.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Specificeert de standaard regeleinde-indeling.\n\n- [Aanbevolen] `line`: Regeleinden worden verdeeld in algemene tags.\n\n- [Niet aanbevolen] `br`: Regeleinden worden behandeld als <br> op dezelfde regel (zoals Shift+Enter).\n- Regeleinden worden behandeld als <br> binnen `line`.\n\n- U kunt een nieuwe `line` maken door twee regeleinden achter elkaar in te voeren.\n\n- Opmaak die `line` bevat, zoals \"Quote\", werkt nog steeds op basis van `line`.\n\n- Suneditor-processen werken in `line`-eenheden.\n\n- Wanneer ingesteld op `br`, kan de prestatie afnemen bij het bewerken van veel gegevens.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Regeleigenschappen die gereset moeten worden bij het wisselen van regel. Scheidingsteken: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Daarnaast zijn er naast de standaardelementen ook `line`-elementen toegestaan. Scheidingsteken: `\"|\"`.\n\n- Samengevoegd met {@link PrivateBaseOptions.__defaultFormatLine} om de uiteindelijke `line`-lijst te vormen.\n\n- Het `line`-element bevat ook het `brLine`-element.\n\n``js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Daarnaast zijn er naast de standaardelementen ook `brLine`-elementen toegestaan.\n\n- Samengevoegd met {@link PrivateBaseOptions.__defaultFormatBrLine} om de uiteindelijke `brLine`-lijst te vormen.\n\n- `brLine`-elementen zijn opgenomen in het `line`-element.\n\n- De regelafbreking van `brLine`-elementen is de `BR`-tag.\n\n``js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Daarnaast zijn er naast de standaardelementen ook `closureBrLine`-elementen toegestaan.\n\n- Samengevoegd met {@link PrivateBaseOptions.__defaultFormatClosureBrLine} voor de uiteindelijke `closureBrLine`-lijst.\n\n- `closureBrLine`-elementen zijn opgenomen in de `brLine`.\n\n- De regelafbreking voor `closureBrLine`-elementen is de `BR`-tag.\n\n- ※ U kunt deze opmaak niet verlaten met de Enter-toets of de Backspace-toets.\n\n- ※ Gebruik deze opmaak alleen in speciale gevallen. (bijv. opmaak van tabelcellen)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Daarnaast zijn er naast de standaardelementen ook `block`-elementen toegestaan.\n\n- Samengevoegd met {@link PrivateBaseOptions.__defaultFormatBlock} om de uiteindelijke `block`-lijst te vormen.\n\n- `block` omvat de `line` en `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Daarnaast zijn er naast de standaardelementen ook `closureBlock`-elementen toegestaan.\n\n- Samengevoegd met {@link PrivateBaseOptions.__defaultFormatClosureBlock} voor de uiteindelijke `closureBlock`-lijst.\n\n- `closureBlock`-elementen zijn opgenomen in de `block`.\n\n- Het `closureBlock`-element omvat de `line` en `component`.\n\n- ※ U kunt deze opmaak niet verlaten met de Enter-toets of de Backspace-toets.\n\n- ※ Gebruik dit alleen in speciale gevallen (bijv. opmaak van tabelcellen).",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Sluit modale vensters wanneer er buiten wordt geklikt.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synchroniseert de tab-inspringing met spaties.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Schakelt invoer via de tabtoets uit.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Breedte van de werkbalk.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Containerelement voor de werkbalk."
+  },
+  "toolbar_sticky": {
+    "description": "Schakelt de plakkerige werkbalk in.\n\n- `number`: Stelt de bovenste plakpositie in (px). Gebruik `-1` ​​om de plakkerigheid uit te schakelen.\n\n- `{top, offset}`: `top` is de plakpositie wanneer de paginakop zichtbaar is.\n\n- `offset` is de plakpositie wanneer een virtueel toetsenbord de viewport verschuift (bijv. op tablets, touch-apparaten).\n\n- Wanneer het virtuele toetsenbord actief is, vervangt `offset` `top` zodat de werkbalk geen gat achterlaat\n- voor een paginakop die uit beeld is gescrold. Standaard is `offset` gelijk aan `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Verbergt de werkbalk in eerste instantie.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Configuratie van de subwerkbalk. Een secundaire werkbalk die verschijnt bij het selecteren van tekst.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Containerelement voor de statusbalk."
+  },
+  "shortcutsHint": {
+    "description": "Geeft sneltoets-suggesties weer in tooltips.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Schakelt sneltoetsen uit.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Aangepaste sneltoetsen.\n\n- Toetsen die beginnen met `_` zijn door de gebruiker gedefinieerde aangepaste sneltoetsen. Elke waarde is een array van `[keyCombo, hintLabel]`-paren.\n\n- Toetsencombinaties gebruiken de waarden `c` (Ctrl/Cmd), `s` (Shift) en `KeyEvent.code`, verbonden door `+`.\n\n- Gebruik `$~pluginName.method` om een ​​specifieke pluginmethode aan te roepen.\n\n``js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Behoudt de opmaak van de gekopieerde inhoud.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Converteert URL's automatisch naar hyperlinks. (`Link` plugin vereist)\n- Standaard: `Boolean(plugins.link)` ​​— bepaald door of de `link` plugin is ingeschakeld."
+  },
+  "historyStackDelayTime": {
+    "description": "Vertragingstijd voor updates van de geschiedenisstapel (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Maximaal aantal geschiedenisvermeldingen per hoofdframe. De oudste vermeldingen worden verwijderd wanneer dit aantal wordt overschreden.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Klasnaam voor afdrukken.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "De offset wordt toegepast bij het overschakelen naar de volledige schermmodus.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Aangepaste HTML-sjabloon voor de voorbeeldmodus. Gebruik `{{ contents }}` als placeholder voor de editorinhoud.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Aangepaste HTML-sjabloon voor de afdrukmodus. Gebruik `{{ contents }}` als placeholder voor de editorinhoud.\n\n``js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Maakt automatische selectie van ingevoegde componenten mogelijk.\n\n- Voor inline componenten: plaatst de cursor in de buurt van de component, of selecteert deze als er geen nabijgelegen bereik is.\n\n- Voor blokcomponenten: voert gedrag uit op basis van `selectMode`:\n- `auto`: Verplaats de cursor indien mogelijk naar de volgende regel, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor indien mogelijk naar de volgende regel, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Standaard URL-protocol voor links.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Tijdsduur voor het weergeven van toastberichten (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Schakelt de vrije codeweergavemodus in.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Toont de ingebouwde gebruikersinterface van het paneel Zoeken/Vervangen.\n\n- De zoekfunctie wordt altijd intern aangemaakt; deze optie bepaalt of het paneel zichtbaar is voor gebruikers (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Zoekt direct terwijl u typt (debounced). Als dit is uitgeschakeld, wordt de zoekopdracht pas uitgevoerd wanneer u op Enter drukt.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Externe bibliotheken zoals CodeMirror, KaTeX of MathJax.\n\n- Zie {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Handleiding voor externe bibliotheken}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Specificeert extra toegestane of niet-toegestane tags. `true` om toe te staan, `false` ​​om te verbieden.\n\n- De standaardwaarde volgt {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Configuratie van gebruikersgebeurtenishandlers.\n\n``js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Lijst met momenteel gebruikte knoppen in de werkbalk"
+  },
+  "buttons_sub": {
+    "description": "Lijst met momenteel gebruikte knoppen in de subwerkbalk"
+  },
+  "toolbar_sub_width": {
+    "description": "Breedte van de subwerkbalk."
+  },
+  "reverseCommands": {
+    "description": "Samengevoegde array met omgekeerde commandoparen.\n\n- Bevat de standaard `indent-outdent` + de `reverseButtons` ​​van de gebruiker."
+  },
+  "codeMirror": {
+    "description": "CodeMirror-configuratieobject van `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Maakt gebruik van CodeMirror voor het bekijken van de code."
+  },
+  "audioGallery_data": {
+    "description": "Directe gegevens zonder serveraanroepen"
+  },
+  "audioGallery_url": {
+    "description": "Serveraanvraag-URL"
+  },
+  "audioGallery_headers": {
+    "description": "Serveraanvraagheaders"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Standaard miniatuurafbeelding"
+  },
+  "fileBrowser_data": {
+    "description": "Directe gegevensoverdracht zonder serveraanroepen (omzeilt het ophalen van URL's)."
+  },
+  "fileBrowser_url": {
+    "description": "Serveraanvraag-URL"
+  },
+  "fileBrowser_headers": {
+    "description": "Serveraanvraagheaders"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Standaard miniatuur-URL of een functie die per item een ​​miniatuur-URL retourneert."
+  },
+  "fileBrowser_props": {
+    "description": "Aanvullende tagnamen"
+  },
+  "fileGallery_data": {
+    "description": "Directe gegevens zonder serveraanroepen"
+  },
+  "fileGallery_url": {
+    "description": "Serveraanvraag-URL"
+  },
+  "fileGallery_headers": {
+    "description": "Serveraanvraagheaders"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Standaard miniatuurafbeelding"
+  },
+  "imageGallery_data": {
+    "description": "Directe gegevens zonder serveraanroepen"
+  },
+  "imageGallery_url": {
+    "description": "Serveraanvraag-URL"
+  },
+  "imageGallery_headers": {
+    "description": "Serveraanvraagheaders"
+  },
+  "videoGallery_data": {
+    "description": "Directe gegevens zonder serveraanroepen"
+  },
+  "videoGallery_url": {
+    "description": "Serveraanvraag-URL"
+  },
+  "videoGallery_headers": {
+    "description": "Serveraanvraagheaders"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Standaard miniatuurafbeelding"
+  },
+  "codeBlock_langs": {
+    "description": "Lijst met selecteerbare programmeertalen voor codeblokken.\n\n- Standaard 21 veelgebruikte talen\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- Stel in op een lege array `[]` om de gebruikersinterface voor taalselectie volledig uit te schakelen."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Server-URL voor het genereren van PDF-bestanden"
+  },
+  "exportPDF_fileName": {
+    "description": "Naam van het gegenereerde PDF-bestand"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Server-URL opgevraagd voor het uploaden van bestanden"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Serveraanvraagheaders"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Maximale uploadgrootte in bytes"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Maximale bestandsgrootte in bytes"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Meerdere bestanden tegelijk uploaden toestaan"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Geaccepteerde bestandsformaten."
+  },
+  "fileUpload_as": {
+    "description": "Geef de standaardvorm van het bestandscomponent op als `box` of `link`."
+  },
+  "fileUpload_controls": {
+    "description": "Er moeten nog extra bedieningselementen aan de figuur worden toegevoegd."
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Invoeggedrag van componenten bij selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
+  },
+  "align_items": {
+    "description": "Lijn items uit"
+  },
+  "backgroundColor_items": {
+    "description": "Kleurenlijst."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Aantal kleuren per regel"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Schakel HEX-invoer uit"
+  },
+  "blockStyle_items": {
+    "description": "Lijst opmaken.\n\n- `command` — `\"line\"`: blok met één regel, `\"br-line\"`: blok met regeleinden, `\"block\"`: containerblok."
+  },
+  "font_items": {
+    "description": "Lijst met lettertypen"
+  },
+  "fontColor_items": {
+    "description": "Kleurenlijst."
+  },
+  "fontColor_splitNum": {
+    "description": "Aantal kleuren per regel"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Schakel HEX-invoer uit"
+  },
+  "hR_items": {
+    "description": "HR-lijst"
+  },
+  "layout_items": {
+    "description": "Lijst met lay-outs. Elk item definieert een benoemde lay-outsjabloon met pure HTML."
+  },
+  "lineHeight_items": {
+    "description": "Lijst met lijnhoogtes"
+  },
+  "paragraphStyle_items": {
+    "description": "Lijst met alinea-items"
+  },
+  "table_scrollType": {
+    "description": "Scrolltype (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Bijschriftpositie (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Positie van de celcontroller (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Lijst met HEX-kleuren voor de achtergrondkleurkiezer van de cel."
+  },
+  "template_items": {
+    "description": "Sjabloonlijst"
+  },
+  "textStyle_items": {
+    "description": "Lijst met items in tekststijl."
+  },
+  "mention_triggerText": {
+    "description": "Het personage dat de vermeldingenlijst activeert."
+  },
+  "mention_limitSize": {
+    "description": "Het aantal items dat in de lijst met vermeldingen moet worden weergegeven."
+  },
+  "mention_searchStartLength": {
+    "description": "Het aantal tekens waarmee de zoekopdracht in de lijst met vermeldingen moet beginnen."
+  },
+  "mention_delayTime": {
+    "description": "De wachttijd voordat de lijst met vermeldingen wordt weergegeven."
+  },
+  "mention_data": {
+    "description": "Statische vermeldinggegevens (gebruikt in plaats van API)."
+  },
+  "mention_apiUrl": {
+    "description": "De URL om de lijst met vermeldingen op te roepen."
+  },
+  "mention_apiHeaders": {
+    "description": "De headers die met de API-aanroep moeten worden meegestuurd."
+  },
+  "mention_useCachingData": {
+    "description": "Of de gegevens van de lijst met vermeldingen in de cache moeten worden opgeslagen."
+  },
+  "mention_useCachingFieldData": {
+    "description": "Of de gegevens van de lijst met vermeldingen in het veld moeten worden opgeslagen."
+  },
+  "fontSize_sizeUnit": {
+    "description": "De eenheid voor de lettergrootte.\n\n- Geaccepteerde waarden zijn: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` of `'text'`.\n\n- Als `'text'` wordt gebruikt, wordt een op tekst gebaseerde lijst met lettergroottes toegepast."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Bepaalt of het label voor de standaardmaat wordt weergegeven in het keuzemenu."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Wanneer `true`, worden knoppen voor het vergroten en verkleinen van de lettergrootte weergegeven.\n\n- Standaardwaarde is `false`. Altijd `false` wanneer `sizeUnit` `'text'` is (genegeerd)."
+  },
+  "fontSize_disableInput": {
+    "description": "Wanneer `true`, wordt het invoerveld voor de lettergrootte direct uitgeschakeld.\n\n- Standaardwaarde is `true` ​​wanneer `sizeUnit` gelijk is aan `'text'`, anders `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "De standaard eenheidstoewijzing voor lettergroottes overschrijven of uitbreiden."
+  },
+  "audio_defaultWidth": {
+    "description": "De standaardbreedte van de `AUDIO`-tag."
+  },
+  "audio_defaultHeight": {
+    "description": "De standaardhoogte van de `AUDIO`-tag."
+  },
+  "audio_createFileInput": {
+    "description": "Of er een bestandsinvoerelement moet worden aangemaakt."
+  },
+  "audio_createUrlInput": {
+    "description": "Of er een URL-invoerelement moet worden aangemaakt.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "De URL waarnaar de bestanden worden geüpload."
+  },
+  "audio_uploadHeaders": {
+    "description": "Headers die moeten worden opgenomen in het verzoek voor het uploaden van bestanden."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "De maximale uploadgrootte in bytes."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "De maximale bestandsgrootte in bytes."
+  },
+  "audio_allowMultiple": {
+    "description": "Of het toestaan ​​van meerdere bestandsuploads is toegestaan."
+  },
+  "audio_acceptedFormats": {
+    "description": "Geaccepteerde bestandsformaten (standaard is `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Aanvullende attributen die moeten worden ingesteld voor de `AUDIO` tag."
+  },
+  "audio_insertBehavior": {
+    "description": "Invoeggedrag van componenten bij selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
+  },
+  "drawing_outputFormat": {
+    "description": "Het uitvoerformaat van de tekening. Opties: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Of het selecteren van het formaattype moet worden ingeschakeld (`block` versus `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Het standaard formaattype is `\"block\"` of `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Of het gekozen formaat na het tekenen behouden moet blijven."
+  },
+  "drawing_lineWidth": {
+    "description": "De breedte van de tekenlijn."
+  },
+  "drawing_lineReconnect": {
+    "description": "Of lijnen opnieuw verbonden moeten worden tijdens het tekenen."
+  },
+  "drawing_lineCap": {
+    "description": "De stijl van de lijnkap (`\"butt\"`, `\"round\"` ​​of `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "De kleur van de tekenlijn."
+  },
+  "drawing_canResize": {
+    "description": "Of het modale formulier kan worden aangepast in grootte."
+  },
+  "drawing_maintainRatio": {
+    "description": "Of de beeldverhouding behouden moet blijven bij het wijzigen van de grootte."
+  },
+  "drawing_formSize": {
+    "description": "De formaatconfiguratie voor het tekeningmodel."
+  },
+  "embed_canResize": {
+    "description": "Of het ingebedde element kan worden aangepast in grootte."
+  },
+  "embed_showHeightInput": {
+    "description": "Of het invoerveld voor de hoogte moet worden weergegeven."
+  },
+  "embed_defaultWidth": {
+    "description": "De standaardbreedte van het ingesloten element (numerieke waarde of met eenheid)."
+  },
+  "embed_defaultHeight": {
+    "description": "De standaardhoogte van het ingesloten element (numerieke waarde of met eenheid)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Of alleen op percentages gebaseerde maataanduidingen toegestaan ​​moeten zijn."
+  },
+  "embed_uploadUrl": {
+    "description": "De URL voor het uploaden van bestanden."
+  },
+  "embed_uploadHeaders": {
+    "description": "Headers die moeten worden opgenomen in verzoeken voor het uploaden van bestanden."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "De maximale maximale bestandsgrootte voor uploads in bytes."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "De maximale bestandsgrootte voor een enkele upload, in bytes."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Aanvullende attributen die moeten worden ingesteld voor de `IFRAME` tag."
+  },
+  "embed_query_youtube": {
+    "description": "De queryparameter van YouTube wordt toegevoegd aan de insluit-URL."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo-queryparameter toegevoegd aan de embed-URL."
+  },
+  "embed_urlPatterns": {
+    "description": "Aanvullende URL-patronen die als insluitbare inhoud herkend moeten worden."
+  },
+  "embed_embedQuery": {
+    "description": "Aangepaste definities voor ingebedde services."
+  },
+  "embed_controls": {
+    "description": "Figuurbesturing."
+  },
+  "embed_insertBehavior": {
+    "description": "Invoeggedrag van componenten bij selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
+  },
+  "image_canResize": {
+    "description": "Of het afbeeldingselement kan worden aangepast in grootte."
+  },
+  "image_showHeightInput": {
+    "description": "Of het invoerveld voor de hoogte moet worden weergegeven."
+  },
+  "image_defaultWidth": {
+    "description": "De standaardbreedte van de afbeelding. Indien een getal wordt opgegeven, wordt `\"px\"` eraan toegevoegd."
+  },
+  "image_defaultHeight": {
+    "description": "De standaardhoogte van de afbeelding. Indien een getal wordt opgegeven, wordt `\"px\"` eraan toegevoegd."
+  },
+  "image_percentageOnlySize": {
+    "description": "Of alleen op percentages gebaseerde maataanduidingen toegestaan ​​moeten zijn."
+  },
+  "image_createFileInput": {
+    "description": "Of er een invoerveld voor bestanden moet worden aangemaakt voor het uploaden van afbeeldingen."
+  },
+  "image_createUrlInput": {
+    "description": "Of er een URL-invoerelement moet worden aangemaakt voor het invoegen van een afbeelding.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
+  },
+  "image_uploadUrl": {
+    "description": "Het URL-eindpunt voor het uploaden van afbeeldingsbestanden."
+  },
+  "image_uploadHeaders": {
+    "description": "Aanvullende headers die moeten worden opgenomen in het verzoek voor het uploaden van bestanden."
+  },
+  "image_uploadSizeLimit": {
+    "description": "De maximale uploadgrootte in bytes."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "De maximale bestandsgrootte voor een enkele upload, in bytes."
+  },
+  "image_allowMultiple": {
+    "description": "Of het is toegestaan ​​om meerdere afbeeldingen tegelijk te uploaden."
+  },
+  "image_acceptedFormats": {
+    "description": "De geaccepteerde bestandsformaten voor het uploaden van afbeeldingen."
+  },
+  "image_useFormatType": {
+    "description": "Of de selectie van het formaattype moet worden ingeschakeld (`block` of `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Het standaard afbeeldingsformaat (`\"block\"` of `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Of het gekozen formaat behouden moet blijven na het invoegen van de afbeelding."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Of het mogelijk moet zijn om bestanden te uploaden voor gekoppelde afbeeldingen."
+  },
+  "image_controls": {
+    "description": "Figuurbesturing."
+  },
+  "image_insertBehavior": {
+    "description": "Invoeggedrag van componenten voor selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- Voor inline componenten: plaatst de cursor in de buurt van de component, of selecteert deze als er geen nabijgelegen bereik is.\n\n- Voor blokcomponenten: voert gedrag uit op basis van `selectMode`:\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
+  },
+  "link_uploadUrl": {
+    "description": "Het URL-eindpunt voor het uploaden van bestanden."
+  },
+  "link_uploadHeaders": {
+    "description": "Extra headers voor verzoeken om bestanden te uploaden."
+  },
+  "link_uploadSizeLimit": {
+    "description": "De maximale maximale bestandsgrootte voor uploads in bytes."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "De maximale bestandsgrootte voor een enkele upload, in bytes."
+  },
+  "link_acceptedFormats": {
+    "description": "Geaccepteerde bestandsformaten voor het uploaden via links."
+  },
+  "link_title": {
+    "description": "Modale titelweergave."
+  },
+  "link_textToDisplay": {
+    "description": "Maak een tekstveld aan om de invoer weer te geven."
+  },
+  "link_openNewWindow": {
+    "description": "Standaard aangevinkte waarde van het selectievakje \"Openen in nieuw venster\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Als `true` is ingesteld, wordt het automatisch toevoegen van het voorvoegsel van de host-URL aan de waarde van de link uitgeschakeld."
+  },
+  "link_relList": {
+    "description": "Beschikbare `rel` attribuutwaarden worden weergegeven als selectievakjes in het linkvenster."
+  },
+  "link_defaultRel": {
+    "description": "Standaardwaarden voor `rel` worden automatisch toegepast op basis van de voorwaarde."
+  },
+  "link_enableFileUpload": {
+    "description": "Als `true` is ingeschakeld, wordt het uploaden van bestanden mogelijk gemaakt."
+  },
+  "math_canResize": {
+    "description": "Of het wiskundige dialoogvenster kan worden aangepast in grootte."
+  },
+  "math_autoHeight": {
+    "description": "Of de hoogte van het modale venster automatisch moet worden aangepast."
+  },
+  "math_fontSizeList": {
+    "description": "Een lijst met opties voor de lettergrootte in de selectietool voor de grootte van wiskundige formules."
+  },
+  "math_onPaste": {
+    "description": "Een callbackfunctie voor het afhandelen van plakgebeurtenissen in het invoerveld voor wiskundige formules."
+  },
+  "math_formSize": {
+    "description": "Een object dat de afmetingen voor het wiskundige modaal venster specificeert."
+  },
+  "video_canResize": {
+    "description": "Of het video-element kan worden aangepast in formaat."
+  },
+  "video_showHeightInput": {
+    "description": "Of het invoerveld voor de hoogte moet worden weergegeven."
+  },
+  "video_defaultWidth": {
+    "description": "De standaardbreedte van het video-element. Indien een getal wordt opgegeven, wordt `\"px\"` eraan toegevoegd."
+  },
+  "video_defaultHeight": {
+    "description": "De standaardhoogte van het video-element. Als er een getal wordt opgegeven, wordt `\"px\"` eraan toegevoegd."
+  },
+  "video_percentageOnlySize": {
+    "description": "Of alleen op percentages gebaseerde maataanduidingen toegestaan ​​moeten zijn."
+  },
+  "video_createFileInput": {
+    "description": "Of er een bestandsinvoerelement moet worden gemaakt voor het uploaden van video's."
+  },
+  "video_createUrlInput": {
+    "description": "Of er een URL-invoerelement moet worden aangemaakt voor het insluiten van video's.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
+  },
+  "video_uploadUrl": {
+    "description": "Het URL-eindpunt voor het uploaden van videobestanden."
+  },
+  "video_uploadHeaders": {
+    "description": "Extra headers die je kunt toevoegen aan het verzoek om de video te uploaden."
+  },
+  "video_uploadSizeLimit": {
+    "description": "De maximale uploadgrootte voor video's in bytes."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "De maximale bestandsgrootte voor het uploaden van video's is de limiet in bytes."
+  },
+  "video_allowMultiple": {
+    "description": "Of het is toegestaan ​​om meerdere video's tegelijk te uploaden."
+  },
+  "video_acceptedFormats": {
+    "description": "Geaccepteerde bestandsformaten voor video-uploads (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "De standaard beeldverhouding voor de video (hoogte/breedte, bijv. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Of de ratio-optie in het modale venster moet worden weergegeven."
+  },
+  "video_ratioOptions": {
+    "description": "Aangepaste verhoudingsopties voor het wijzigen van de videogrootte (waarde = hoogte/breedte)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Aanvullende attributen die moeten worden ingesteld voor de `VIDEO` tag."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Aanvullende attributen die moeten worden ingesteld voor de `IFRAME` tag."
+  },
+  "video_query_youtube": {
+    "description": "Aanvullende queryparameters voor het insluiten van video's op YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Aanvullende queryparameters voor Vimeo-integratie."
+  },
+  "video_embedQuery": {
+    "description": "Aangepaste definities voor ingebedde services (zie `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Aanvullende URL-patronen voor het insluiten van video's."
+  },
+  "video_extensions": {
+    "description": "Aanvullende bestandsextensies die herkend moeten worden voor video-uploads."
+  },
+  "video_controls": {
+    "description": "Figuurbesturing."
+  },
+  "video_insertBehavior": {
+    "description": "Invoeggedrag van componenten bij selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
+  }
+}

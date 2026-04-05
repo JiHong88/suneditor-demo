@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Álgoárvu redaktevrii.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Báiketeaksta.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Attributtat rievdaduvvon rámmas[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Viidodat redaktevrra várás.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Min viidodat redaktevrii.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Alimus viidodat redaktevrra várás.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Redaktevrra guhkkodat.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Unnimus govdodat redaktevrra várás.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Redaktevrra alimus govdodat.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Stiilastreaŋga editora bajimus rámmas.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Sisdoallu biddjojuvvo iframe:ii ja isolerejuvvo muđui siiddus.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Láhčá dili geavahit HTML-, HEAD-, BODY-mearkkaid ja DOCTYPE-julggaštusa `iframe`:s.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe` iešvuođat.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Aktivere stáhtuslinnjá.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Čájeha dálá noddastruktuvrra stáhtuslinjjás.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Láhčá dili nuppástuhttit sturrodaga vuolimus stáhtuslinjjás.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Čájeha mearkkaid logu editoris.\n- Jus `maxCharCount`-válljejumis lea árvu, de šaddá `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Eanemus čálamearkkaid lohku maid sáhttá bidjat redigerii.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Teaksta mii galgá čájehuvvot `charCounter` guovllus vuolimus čuoggás.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definere `charCounter`-válljema rehkenastinvuogi.\n- `char`: Bustávaid guhkkodat.\n- `byte`: Binára diehtosturrodat čálamearkkain.\n- `byte-html`: Binára diehtosturrodat olles HTML-streaŋggas.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Čájeha sániid logu doaimmaheaddjis.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Teaksta mii galgá čájehuvvot `wordCounter` guovllus vuolimus čuoggás.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Stiillat mat leat biddjon bajimus konteinerii (omd. viidodat, z-indeaksa jna.)."
+  },
+  "frame": {
+    "description": "Stiillat mat leat biddjon iframe-konteavsttas (omd. govdodat, min-govdodat)."
+  },
+  "editor": {
+    "description": "Stiillat mat leat heivehuvvon rievdaduvvon sisdoalloguovllus."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror-editora ovdamearka (rámmadásis). Ásahuvvon `_checkCodeMirror` maŋŋel álggaheami."
+  },
+  "plugins": {
+    "description": "Plugina konfigureren. Bija plugin-luohkáid dahje objeavtta mii lea čállojuvvon plugin-namain.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Listu fierpmádaga nuppástusain, joavkkuhuvvon oassearrayid mielde.\n- Standárda čuovvu {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Aktivere sirdinmodealla SunEditor v2:i.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Bija `:bottom` vai bidjat fierpmádaga vuolábeallái (omd. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Redaktevrašládja. Geavat `\"document\"` dokumeantastiila hábmemii, mas leat válljejuvvon oassetyppat maŋŋel `:`.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Redaktevra fáddá.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Giellakonfigurašuvdna. default : EN"
+  },
+  "icons": {
+    "description": "Heaittiha standárdaikonaid."
+  },
+  "textDirection": {
+    "description": "Teakstačujuhus: `ltr` dahje `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Dahká vejolažžan garrasit filtrerema merkemiid, attributtaid ja stiillaid gaskkas.\n- Geavat `true` buot filteriid álggaheapmái (standárda), dahje objeavtta stivret sierra filteriid.\n- `false` ​​bidjan ii doarjjojuvvo; geavat objeaktahámi heaittihit dihto filteriid dan sadjái.\n- :filter čilgehus\n- `tagFilter`: Filterat eai dohkkehuvvon HTML-mearkkaid (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtere formáhttaelemeanttaid (`formatLine`/`formatBlock`)\n- `classFilter`: Filtere CSS-luohkkáid namaid mat eai leat dohkkehuvvon (`allowedClassName`)\n- `textStyleTagFilter`: Filtre teakstastiilamerkemiid (b, i, u, span jna.)\n- `attrFilter`: Filterat eai leat dohkkehuvvon HTML-attributtaid (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filterat eai dohkket sisačálihanstiillaid (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Merkemiid gieđahallet olles ovttadahkan go válljet buot sisdoalu.\n- Standárda čuovvu {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Deattuha HTML-elemeanttaid mat lassin dohkkehit standárda dohkkehanlisttu. Ráddjehus: `\"|\"`.\n- Lasihuvvon standárdalistui mii lea mearriduvvon {@link PrivateBaseOptions.__defaultElementWhitelist} bokte.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Deattuha HTML-elemeanttaid mat eai galgga geavahuvvot. Ráddjehus: `\"|\"`.\n- Dás meroštallojuvvon merkejumit váldojuvvojit loahpas eret, vaikko dat leat mielde eará čáhppeslisttuin.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Listu merkemiin maid sáhttá doallat vaikko daid árvvut leat guoros.\n- Default čuovvu {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- `ALLOWED_EMPTY_NODE_LIST` čatnon oktii vai šaddá loahpalaš `allowedEmptyTags`-listtu.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Dohkkehuvvon luohkkánamat.\n- Lassin standárdaárvu {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Deattuha lassi iešvuođaid mat dohkkehit juohke mearkka. `\"*\"` guoská buot mearkkaide.\n- Dás meroštallojuvvon njuolggadusat ovttastuvvojit {@link PrivateBaseOptions.__defaultAttributeWhitelist}:ii.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Deattuha attributtaid maid ii galgga dohkkehit merkema mielde. `\"*\"` guoská buot mearkkaide.\n- Dás meroštallojuvvon iešvuođat váldojuvvojit loahpas eret vaikko eará heiveheamit dohkkehit daid.\n- Gáibiduvvon elemeanttaid listu, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, lea álo mielde.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Lassi teakstastiilamearkkat.\n- Default čuovvu {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Kárte teakstastiillaid dihto HTML-mearkkaide.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Deattuha lassi stiillaid dohkkehuvvon stiillaid listui. Ráddjehus: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Deattuha dohkkehuvvon stiillaid HTML-mearkkaide. Nubbi lea merkejuvvon namma(t), árvu lea johtolatráddjejuvvon dohkkehuvvon stiillat.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Deattuha dohkkehuvvon stiillaid `span`-merkemii.\n- Default čuovvu {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Deattuha dohkkehuvvon stiillaid `line`-elemeantta várás (s..).\n- Default čuovvu {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Dohkkehuvvon čállinmeari sturrodat.\n- Standárda čuovvu {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Mearrida mo sisačálihuvvon elemeanttat (omd. `<span>`, `<strong>`) gieđahallojuvvojit go teavstta sihkkut.\n- `repeat`: Stiillat bisuhuvvojit jus ii máŋgii deaddilat maŋosguvlui.\n- Joatkkačuohppan loahpas váldá eret stiillaid.\n- `none`: Stiillat eai leat seailluhuvvon. Inline-elemeanttat váldojuvvojit dakkaviđe eret teavsttain.\n- `always`: Stiillat bissot mearreáigásaččat jus eai leat čielgasit váldon eret.\n- Vaikko buot teaksta sisáibmoelemeantta siskkobealde sihkkojuvvo, de elemeanta ieš bissu.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Default `line` elemeanta go bidjá ođđa linjjáid.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Deattuha standárda linnjáčuohppanhámi.\n- [Ávžžuhuvvon] `line` : Linjáčuohppan lea juhkkojuvvon oppalaš merkemiidda.\n- [Ii ávžžuhuvvo] `br` ​​: Linjáčuoggát gieđahallojuvvojit <br> seamma linjjás. (dego shift+enter)\n- Linjáčuoggát gieđahallojuvvojit <br> `line` siskkobealde.\n- Sáhtát ráhkadit ođđa `line` go čálát linnjáčuoggá guovtte geardde čuovvovaččat.\n- Formáhtat main lea `line`, nugo \"Sitašuvdna\", doibmet ain `line` vuođul.\n- suneditora proseassat doibmet `line` ovttadagain.\n- Go biddjojuvvo `br`, de sáhttá doaibma lassánit go rievdada ollu dieđuid.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Linjá iešvuođat mat galget nuppástuhttojuvvot go rievdada linjjáid. Ráddjehus: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Dasa lassin dohkkehit `line` elemeanttaid olggobealde standárdda. Ráddjehus: `\"|\"`.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatLine}:in vai šaddá loahpalaš `line` listtu.\n- `line` elemeantta sisdoallá maiddái `brLine` elemeantta.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Dasa lassin dohkkehit `brLine` elemeanttaid olggobealde standárdda.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatBrLine}:in vai šaddá loahpalaš `brLine` ​​listtu.\n- `brLine` elemeanttat leat mielde `line` elemeanttas.\n- `brLine` elemeanttaid linnjáčuohppan lea `BR`-mearka.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Dasa lassin dohkkehit `closureBrLine` elemeanttaid olggobealde standárdda.\n- Loahpalaš `closureBrLine` ​​listui lea čadnojuvvon {@link PrivateBaseOptions.__defaultFormatClosureBrLine}:ii.\n- `closureBrLine` elemeanttat leat mielde `brLine`:s.\n- `closureBrLine` elemeanttaid linnjáčuohppan lea `BR`-mearka.\n- ※ Don it sáhte heaittihit dán formáhtta Enter-távvala dahje Backspace-távvala bokte.\n- ※ Geavat dan dušše erenoamáš dáhpáhusain. ([ex] tabeallaseallaid hápmi)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Dasa lassin dohkkehit `block` elemeanttaid olggobealde standárdda.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatBlock}:in vai šaddá loahpalaš `block` ​​listtu.\n- `block` gokčá `line` ja `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Dasa lassin dohkkehit `closureBlock` elemeanttaid olggobealde standárdda.\n- Loahpalaš `closureBlock` ​​listui lea čadnojuvvon {@link PrivateBaseOptions.__defaultFormatClosureBlock}:ii.\n- `closureBlock` elemeanttat leat mielde `block`:s.\n- `closureBlock` elemeanta gokčá `line` ja `component`.\n- ※ Don it sáhte heaittihit dán formáhtta Enter-távvala dahje Backspace-távvala bokte.\n- ※ Geavat dan dušše erenoamáš dáhpáhusain. (omd. tabeallaseallaid hápmi)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Gidde modalaid go deaddilat olggos.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synkronisere távvala sisačáliheami gaskkaiguin.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Deaktivere tab-távvala sisačáliheami.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Bargoneavvu viidodat.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Konteavstta elemeanta fierpmádatbáikái."
+  },
+  "toolbar_sticky": {
+    "description": "Aktivere sticky toolbar.\n- `number`: Ásaha čáhppes bajimus saji (px). Geavat `-1` ​​deaktiveret sticky.\n- `{top, offset}`: `top` lea čáhppes sadji go siiddu bajilgovva lea oidnosis.\n- `offset` lea čáhppes sadji go virtuála tastatur sirdá geahččanbáikki (omd. neahttabreahtain, guoskkahanrusttegiin).\n- Go virtuála tastatur lea aktiiva, de `offset` sadjái boahtá `top` nu ahte fierpmádat ii šatta gaska\n- siiddu bajilčállosii mii ii leat čájehuvvon. Standárda `offset` lea `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Álggos čiegada fierpmádaga.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Oassebargoneavvu konfigureren. Sekundára fierpmádat mii boahtá ovdan teakstaválljemis.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Konteavstta elemeanta stáhtuslinjái."
+  },
+  "shortcutsHint": {
+    "description": "Čájeha čujuhusrávvagiid fierpmádagain.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Deaktivere tastaturčujuhusaid.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Eaktodáhtolaš tastaturčujuhusat.\n- Nuppit mat álget `_` leat geavaheaddji mearridan iešheanalaš čujuhusat. Juohke árvu lea `[keyCombo, hintLabel]` ​​páraid ráidu.\n- Nuppiid kombinašuvnnat geavahit `c` (Ctrl/Cmd), `s` (Shift) ja `KeyEvent.code` árvvuid mat leat ovttastuvvon `+`:in.\n- Geavat `$~pluginName.method` go galggat gohččut dihto plugin-vuogádaga.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Doallá kopierejuvvon sisdoalu hámi.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Automáhtalaččat rievdada URL:aid hyperliŋkkaide. (`Link` plugin dárbbašuvvo)\n- Default: `Boolean(plugins.link)` ​​— mearriduvvo dan mielde lea go `link`-plugin aktiverejuvvon."
+  },
+  "historyStackDelayTime": {
+    "description": "Maŋiduvvon áigi historjástašuvnna ođasmahttimii (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Eanemusat historjáčállosat juohke root-rámmas. Boarráseamos čállosat hilgojuvvojit go leat badjelmeare.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Luohká namma prentemii.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Offset biddjojuvvo go beasat olles čájáhusmodusii.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Iešheanalaš HTML-málle ovdačájáhusmodealla várás. Geavat `{{ contents }}` sajádatčálli sisdollui.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Iešheanalaš HTML-málle prentema modealla várás. Geavat `{{ contents }}` sajádatčálli sisdollui.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Dahká vejolažžan automáhtalaččat válljet sisačálihuvvon komponeanttaid.\n- Inline-komponeanttaide: bidjá kursora komponeantta lahka, dahje vállje jus ii leat lahka rádji.\n- Lohkokomponeanttaide: čađaha doaibmabijuid mat vuođđuduvvet `selectMode`:\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Default URL-protokolla liŋkkaide.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Áigodat čájehit toast-dieđuid (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Avžžuha friddja koda geahččanmodealla.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Čájeha sisačálihuvvon Find/Replace-panela UI.\n- Finder lea álo ráhkaduvvon siskkáldasat; dát válljenvejolašvuohta stivre leago panela oidnosis geavaheddjiide (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Ohcá dakkaviđe go čálát (heivehuvvon). Go lea boastut, de ohcan čađahuvvo dušše Enter bokte.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Olggobeale girjerádjosat nugo CodeMirror, KaTeX dahje MathJax.\n- Geahča {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Deattuha lassi dohkkehuvvon dahje ii dohkkehuvvon merkemiid. `true` dohkkehit, `false` ​​ii dohkkehit.\n- Standárda čuovvu {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Geavaheaddji dáhpáhusaid gieđahalli konfigurašuvdna.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Dál geavahuvvon fierpmádatčuoggáid listu"
+  },
+  "buttons_sub": {
+    "description": "Dál geavahuvvon vuollebargoneavvuid listu"
+  },
+  "toolbar_sub_width": {
+    "description": "Oassebargoneavvu viidodat."
+  },
+  "reverseCommands": {
+    "description": "Ovttastuvvon nuppástuhttin gohččunpáraid ráidu.\n- Sisdoallá standárda `indent-outdent` + geavaheaddji `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "CodeMirror konfigurašuvdnaobjeakta `externalLibs.codeMirror`:s."
+  },
+  "hasCodeMirror": {
+    "description": "Geavaha CodeMirror kodačájáhussii."
+  },
+  "audioGallery_data": {
+    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+  },
+  "audioGallery_url": {
+    "description": "Bálvaleaddji jearaldaga URL"
+  },
+  "audioGallery_headers": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Dábálaš smávvagovva"
+  },
+  "fileBrowser_data": {
+    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga (URL-čujuhusaid viežžama birra)."
+  },
+  "fileBrowser_url": {
+    "description": "Bálvaleaddji jearaldaga URL"
+  },
+  "fileBrowser_headers": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Dábálaš smávvagovva-URL dahje funkšuvdna mii máhcaha smávvagovva-URL juohke áššis."
+  },
+  "fileBrowser_props": {
+    "description": "Lassi mearkanamat"
+  },
+  "fileGallery_data": {
+    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+  },
+  "fileGallery_url": {
+    "description": "Bálvaleaddji jearaldaga URL"
+  },
+  "fileGallery_headers": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Dábálaš smávvagovva"
+  },
+  "imageGallery_data": {
+    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+  },
+  "imageGallery_url": {
+    "description": "Bálvaleaddji jearaldaga URL"
+  },
+  "imageGallery_headers": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "videoGallery_data": {
+    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+  },
+  "videoGallery_url": {
+    "description": "Bálvaleaddji jearaldaga URL"
+  },
+  "videoGallery_headers": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Dábálaš smávvagovva"
+  },
+  "codeBlock_langs": {
+    "description": "Listu válljejuvvon prográmmagielain kodalohkui.\n- Defaultat leat 21 dábálaš giela\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Bija empty-array `[]` vai giellaválljen UI áibbas deaktiverejuvvo."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Bálvaleaddji jearaldaga URL PDF-buvttadeapmái"
+  },
+  "exportPDF_fileName": {
+    "description": "Ráhkaduvvon PDF-fiilla namma"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Bálvaleaddji gáibádusa URL fiillaid lasiheapmái"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Bálvaleaddji jearaldagat"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Oktiibuot lasiheami sturrodaga rádji bytein"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Okta fiilla sturrodatrádji bytein"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Dohkkehit máŋga fiilla lasiheami"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Dohkkehuvvon fiilahámit."
+  },
+  "fileUpload_as": {
+    "description": "Deattuhit fiillaoasi standárdahámi `box` dahje `link`"
+  },
+  "fileUpload_controls": {
+    "description": "Lassi stivremat galget lasihuvvot govus"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+  },
+  "align_items": {
+    "description": "Heivehit áššiid"
+  },
+  "backgroundColor_items": {
+    "description": "Ivdnelistu."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Ivnniid lohku juohke linjjás"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Heaittihit HEX-sisaboađu"
+  },
+  "blockStyle_items": {
+    "description": "Formáhtalisttu.\n- `command` — `\"line\"`: ovtta linjá lohku, `\"br-line\"`: br-sirrejuvvon lohku, `\"block\"`: gálvojoavku."
+  },
+  "font_items": {
+    "description": "Čállinlisttu"
+  },
+  "fontColor_items": {
+    "description": "Ivdnelistu."
+  },
+  "fontColor_splitNum": {
+    "description": "Ivnniid lohku juohke linjjás"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Heaittihit HEX-sisaboađu"
+  },
+  "hR_items": {
+    "description": "HR-listu"
+  },
+  "layout_items": {
+    "description": "Layout-listu. Juohke ávnnas definere nammaduvvon layout-málle mas lea ráfálaš HTML."
+  },
+  "lineHeight_items": {
+    "description": "Linjá govdodatlisttu"
+  },
+  "paragraphStyle_items": {
+    "description": "Paragráfa áššiid listu"
+  },
+  "table_scrollType": {
+    "description": "Rullašládja (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Teavstta sadji (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Seallastivrejeaddji sadji (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX-ivdnelistu seallaid duogášivdneválljejeaddji várás."
+  },
+  "template_items": {
+    "description": "Mállelistu"
+  },
+  "textStyle_items": {
+    "description": "Teakstastiila áššelistu."
+  },
+  "mention_triggerText": {
+    "description": "Mearka mii álggaha namuhanlisttu."
+  },
+  "mention_limitSize": {
+    "description": "Man ollu áššit galget čájehuvvot namuhanlisttus"
+  },
+  "mention_searchStartLength": {
+    "description": "Man ollu mearkkaid galgá álgit ohcat namuhanlisttus"
+  },
+  "mention_delayTime": {
+    "description": "Áigi vuordit ovdal go čájehuvvo namuhanlisttu"
+  },
+  "mention_data": {
+    "description": "Statihkalaš namuhandieđut (geavahuvvojit API sadjái)."
+  },
+  "mention_apiUrl": {
+    "description": "URL-čujuhus man bokte gohččut namuhanlisttu"
+  },
+  "mention_apiHeaders": {
+    "description": "Oaivvit mat galget sáddejuvvot API-čujuhusain"
+  },
+  "mention_useCachingData": {
+    "description": "Galgá go vurket namuhanlisttu dieđuid"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Galgá go vurket namuhanlisttu dieđuid suorgái"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Čállinmeari sturrodaga ovttadat.\n- Dohkkehuvvon árvvut leat: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` dahje `'text'`.\n- Jus geavahuvvo `'text'`, de biddjojuvvo teakstavuođđuduvvon čállinsturrodatlisttu."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Mearrida čájehuvvo go standárdasturrodatmerkejuvvon čujuhuslisttus."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Go `true`, de čájehuvvo lasihit ja unnidit čuoggáid čállinmeari heiveheapmái.\n- Álgoálggus lea `false`. Álo `false` go `sizeUnit` lea `'text'` (ii váldojuvvon vuhtii)."
+  },
+  "fontSize_disableInput": {
+    "description": "Go `true`, de deaktivere njuolggo čállinsturrodaga sisačállinboksa.\n- Default lea `true` ​​go `sizeUnit` lea `'text'`, muđui `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Váldde eret dahje viiddidit standárda ovttadatkártema čállinmeari sturrodagaide."
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO`-mearkka standárdaviidodat."
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO`-mearkka standárda govdodat."
+  },
+  "audio_createFileInput": {
+    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta."
+  },
+  "audio_createUrlInput": {
+    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL masa fiillat biddjojuvvojit."
+  },
+  "audio_uploadHeaders": {
+    "description": "Oaiveskálžžut mat galget leat mielde fiillaid lasiheami gáibádusas."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Ollislaš lasiheami sturrodatrádji bytein."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Ovtta fiilla sturrodaga rádji bytein."
+  },
+  "audio_allowMultiple": {
+    "description": "Galgá go dohkkehit máŋggaid fiillaid lasiheami."
+  },
+  "audio_acceptedFormats": {
+    "description": "Dohkkehuvvon fiilahámit (standárda lea `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Lassi attributtat maid galggat bidjat `AUDIO`-merkemii."
+  },
+  "audio_insertBehavior": {
+    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+  },
+  "drawing_outputFormat": {
+    "description": "Govvaráiddu olggosbuktinhápmi. Válljemat: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Galgá go álggahit formáhttaválljema (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Standárdahápmi, juogo `\"block\"` dahje `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Galgá go doalahit válljejuvvon hápmi maŋŋel govvema."
+  },
+  "drawing_lineWidth": {
+    "description": "Govvenlinjjá viidodat."
+  },
+  "drawing_lineReconnect": {
+    "description": "Galgá go fas čatnat linjjáid go govve."
+  },
+  "drawing_lineCap": {
+    "description": "Linjáhámi stiila (`\"butt\"`, `\"round\"`, dahje `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Govvenlinjjá ivdni."
+  },
+  "drawing_canResize": {
+    "description": "Sáhttá go modála hámi sturrodat rievdaduvvot."
+  },
+  "drawing_maintainRatio": {
+    "description": "Galgá go doalahit govvenproporšuvnna go rievdada sturrodaga."
+  },
+  "drawing_formSize": {
+    "description": "Govvenmodala hámi sturrodatkonfigurašuvdna."
+  },
+  "embed_canResize": {
+    "description": "Sáhttá go sisabahkkenelemeantta sturrodat rievdaduvvot."
+  },
+  "embed_showHeightInput": {
+    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+  },
+  "embed_defaultWidth": {
+    "description": "Sisáibmoelemeantta standárdaviidodat (numerála árvu dahje ovttadagain)."
+  },
+  "embed_defaultHeight": {
+    "description": "Sisáibmoelemeantta standárda govdodat (numerála árvu dahje ovttadagain)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+  },
+  "embed_uploadUrl": {
+    "description": "URL-čujuhus fiillaid lasiheapmái."
+  },
+  "embed_uploadHeaders": {
+    "description": "Oaivvit mat galget leat mielde fiillaid lasiheami jearaldagain."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Ollislaš fiillaid lasiheami sturrodat rádji bytein."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Lassi attributtat maid galggat bidjat `IFRAME`-merkemii."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube-jearahallanparamehter lea lasihuvvon sisačálihan-URL:ii."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo jearahallanparamehter lea lasihuvvon sisačálihan-URL:ii."
+  },
+  "embed_urlPatterns": {
+    "description": "Lassi URL-mállet maid sáhttá dovdat sisačálihuvvon sisdoallun."
+  },
+  "embed_embedQuery": {
+    "description": "Eaktodáhtolaš sisačálihanbálvalusa definišuvnnat."
+  },
+  "embed_controls": {
+    "description": "Govus stivremat."
+  },
+  "embed_insertBehavior": {
+    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+  },
+  "image_canResize": {
+    "description": "Sáhttá go govvaelemeantta sturrodat rievdaduvvot."
+  },
+  "image_showHeightInput": {
+    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+  },
+  "image_defaultWidth": {
+    "description": "Govva standárdaviidodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Govva standárda govdodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+  },
+  "image_createFileInput": {
+    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta govaid lasiheapmái."
+  },
+  "image_createUrlInput": {
+    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta gova sisačáliheapmái.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+  },
+  "image_uploadUrl": {
+    "description": "URL-loahppačuokkis govvafiillaid lasiheapmái."
+  },
+  "image_uploadHeaders": {
+    "description": "Lassi čállosat mat galget leat mielde fiillaid lasiheami gáibádusas."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Ollislaš lasiheami sturrodatrádji bytein."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+  },
+  "image_allowMultiple": {
+    "description": "Leago lohpi lasihit máŋga gova."
+  },
+  "image_acceptedFormats": {
+    "description": "Dohkkehuvvon fiilahámit govaid lasiheapmái."
+  },
+  "image_useFormatType": {
+    "description": "Galgá go álggahit formáhttaválljema (`block` dahje `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Dábálaš govvahápmi (`\"block\"` dahje `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Galgá go doalahit válljejuvvon formáhttašlája maŋŋel gova sisabidjama."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Galgá go álggahit fiillaid lasiheami čadnojuvvon govaide."
+  },
+  "image_controls": {
+    "description": "Govus stivremat."
+  },
+  "image_insertBehavior": {
+    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- Inline-komponeanttaide: bidjá kursora komponeantta lahka, dahje vállje jus ii leat lahka rádji.\n- Lohkokomponeanttaide: čađaha doaibmabijuid mat vuođđuduvvet `selectMode`:\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdde dohko.\n- `none`: Ale daga maidege."
+  },
+  "link_uploadUrl": {
+    "description": "URL-loahppačuokkis fiillaid lasiheapmái."
+  },
+  "link_uploadHeaders": {
+    "description": "Lassi čállosat fiillaid lasiheami jearaldagaide."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Ollislaš fiillaid lasiheami sturrodat rádji bytein."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+  },
+  "link_acceptedFormats": {
+    "description": "Dohkkehuvvon fiilahámit liŋkkaid lasiheapmái."
+  },
+  "link_title": {
+    "description": "Modala nammačájáhus."
+  },
+  "link_textToDisplay": {
+    "description": "Luohte teavstta čájehit sisačáliheami."
+  },
+  "link_openNewWindow": {
+    "description": "\"Rahpat ođđa uvssas\" merkenboksa standárdamerkejuvvon árvu."
+  },
+  "link_noAutoPrefix": {
+    "description": "Jus `true`, de deaktivere automáhtalaččat ovdačujuhusa vuostáiváldi URL:ii liŋkka árvui."
+  },
+  "link_relList": {
+    "description": "Gávdnomis `rel`-attribuhtaárvvut čájehuvvojit merkenboksain liŋkkamodalas."
+  },
+  "link_defaultRel": {
+    "description": "Standárda `rel` árvvut heivehuvvojit automáhtalaččat eavttuid mielde."
+  },
+  "link_enableFileUpload": {
+    "description": "Jus `true`, de álggaha fiillaid lasiheami."
+  },
+  "math_canResize": {
+    "description": "Sáhttá go matematihkkamodala rievdadit sturrodaga."
+  },
+  "math_autoHeight": {
+    "description": "Galgá go automáhtalaččat heivehit modála govdodaga."
+  },
+  "math_fontSizeList": {
+    "description": "Listu čállinmeari sturrodaga válljemiin matematihka ovdanbuktima sturrodaga válljemii."
+  },
+  "math_onPaste": {
+    "description": "Ruovttoluottačujuhusfunkšuvdna mii gieđahallá liibmendáhpáhusaid matematihka sisačálihanguovllus."
+  },
+  "math_formSize": {
+    "description": "Objekta mii meroštallá matematihkkamodala dimenšuvnnaid."
+  },
+  "video_canResize": {
+    "description": "Sáhttá go videoelemeantta sturrodat rievdaduvvot."
+  },
+  "video_showHeightInput": {
+    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+  },
+  "video_defaultWidth": {
+    "description": "Videoelemeantta standárdaviidodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Videoelemeantta standárda govdodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+  },
+  "video_createFileInput": {
+    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta videoid lasiheapmái."
+  },
+  "video_createUrlInput": {
+    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta video sisabahkkemii.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+  },
+  "video_uploadUrl": {
+    "description": "URL-loahppačuokkis videofiillaid lasiheapmái."
+  },
+  "video_uploadHeaders": {
+    "description": "Lassi čállosat mat galget leat mielde videoid lasiheami gáibádusas."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Videoid ollislaš lasiheami sturrodat rádji bytein."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Ovtta fiilla lasiheami sturrodatrádji videoide bytein."
+  },
+  "video_allowMultiple": {
+    "description": "Leago lohpi bidjat máŋga video."
+  },
+  "video_acceptedFormats": {
+    "description": "Dohkkehuvvon fiilahámit videoid lasiheapmái (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Video standárdagovva (govdodat/viidodat, omd. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Galgá go čájehit ratio-válljema modálas."
+  },
+  "video_ratioOptions": {
+    "description": "Eaktodáhtolaš gaskavuođaválljemat video sturrodaga rievdadeapmái (árvu = govdodat/viidodat)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Lassi attributtat maid galggat bidjat `VIDEO`-merkemii."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Lassi attributtat maid galggat bidjat `IFRAME`-merkemii."
+  },
+  "video_query_youtube": {
+    "description": "Lassi jearahallanparamehterat YouTube-bidjamii."
+  },
+  "video_query_vimeo": {
+    "description": "Lassi jearahallanparamehterat Vimeo sisabahkkemii."
+  },
+  "video_embedQuery": {
+    "description": "Eaktodáhtolaš sisačálihanbálvalusa definišuvnnat (gč. `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Lassi URL-mállet videoid sisabahkkemii."
+  },
+  "video_extensions": {
+    "description": "Lassi fiillaviiddideamit galget dohkkehuvvot videoid lasiheami várás."
+  },
+  "video_controls": {
+    "description": "Govus stivremat."
+  },
+  "video_insertBehavior": {
+    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+  }
+}

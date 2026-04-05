@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "ایڈیٹر کے لیے ابتدائی قدر۔",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "پلیس ہولڈر متن۔",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "قابل تدوین فریم کے لیے اوصاف[.sun-editor-editable]۔\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "ایڈیٹر کے لیے چوڑائی۔",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "ایڈیٹر کے لیے کم سے کم چوڑائی۔",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "ایڈیٹر کے لیے زیادہ سے زیادہ چوڑائی۔",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "ایڈیٹر کے لیے اونچائی۔",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "ایڈیٹر کے لیے کم سے کم اونچائی۔",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "ایڈیٹر کے لیے زیادہ سے زیادہ اونچائی۔",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "ایڈیٹر کے اوپر والے فریم کی اسٹائل سٹرنگ۔\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "مواد کو ایک iframe میں رکھا جائے گا اور باقی صفحہ سے الگ کر دیا جائے گا۔",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "`iframe` پر HTML، HEAD، BODY ٹیگز اور DOCTYPE ڈیکلریشن کے استعمال کی اجازت دیتا ہے۔",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe` کی خصوصیات۔\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "اسٹیٹس بار کو فعال کرتا ہے۔",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "اسٹیٹس بار میں موجودہ نوڈ ڈھانچہ دکھاتا ہے۔",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "نیچے اسٹیٹس بار کے سائز کو تبدیل کرنے کے فنکشن کو فعال کرتا ہے۔",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "ایڈیٹر میں حروف کی تعداد دکھاتا ہے۔\n- اگر `maxCharCount` آپشن کی کوئی قدر ہے، تو یہ `true` ​​بن جاتی ہے۔",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "ایڈیٹر میں حروف کی زیادہ سے زیادہ تعداد داخل کرنے کی اجازت ہے۔",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "نیچے والے بار کے `charCounter` علاقے میں ظاہر ہونے والا متن۔\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "`charCounter` اختیار کے حساب کے طریقہ کی وضاحت کرتا ہے۔\n- `char`: حروف کی لمبائی۔\n- `byte`: حروف کا بائنری ڈیٹا سائز۔\n- `byte-html`: مکمل HTML سٹرنگ کا بائنری ڈیٹا سائز۔",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "ایڈیٹر میں الفاظ کی تعداد دکھاتا ہے۔",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "نیچے والے بار کے `wordCounter` علاقے میں ظاہر ہونے والا متن۔\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "اوپر والے کنٹینر پر لگائی گئی طرزیں (جیسے چوڑائی، زیڈ انڈیکس وغیرہ)۔"
+  },
+  "frame": {
+    "description": "طرزیں iframe کنٹینر پر لاگو ہوتی ہیں (جیسے اونچائی، کم سے کم اونچائی)۔"
+  },
+  "editor": {
+    "description": "طرزیں قابل تدوین مواد کے علاقے پر لاگو ہوتی ہیں۔"
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror ایڈیٹر مثال (فریم لیول)۔ شروع کرنے کے بعد `_checkCodeMirror` کے ذریعے سیٹ کریں۔"
+  },
+  "plugins": {
+    "description": "پلگ ان کنفیگریشن۔ پلگ ان کلاسز کی ایک صف یا پلگ ان کے نام سے کلید کردہ آبجیکٹ کو پاس کریں۔\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "ٹول بار کے بٹنوں کی فہرست، ذیلی صفوں کے لحاظ سے گروپ کردہ۔\n- ڈیفالٹ {@link DEFAULTS.BUTTON_LIST} کی پیروی کرتا ہے",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "SunEditor v2 کے لیے مائیگریشن موڈ کو فعال کرتا ہے۔",
+    "default": "false"
+  },
+  "mode": {
+    "description": "ٹول بار موڈ: `classic`، `inline`، `balloon`، `balloon-always`۔ ٹول بار کو نیچے رکھنے کے لیے `:bottom` شامل کریں (جیسے `classic:bottom`, `inline:bottom`)۔",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "ایڈیٹر کی قسم۔ `:` ​​کے بعد اختیاری ذیلی اقسام کے ساتھ، دستاویز کی طرز کے لے آؤٹ کے لیے `\"document\"` استعمال کریں۔\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "ایڈیٹر تھیم۔",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "زبان کی ترتیب۔ پہلے سے طے شدہ: EN"
+  },
+  "icons": {
+    "description": "ڈیفالٹ آئیکنز کو اوور رائیڈ کرتا ہے۔"
+  },
+  "textDirection": {
+    "description": "متن کی سمت: `ltr` یا `rtl`۔",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "ٹیگز، اوصاف، اور طرزوں کی سخت فلٹرنگ کو فعال کرتا ہے۔\n- تمام فلٹرز (پہلے سے طے شدہ) کو فعال کرنے کے لیے `true` کا استعمال کریں، یا انفرادی فلٹرز کو کنٹرول کرنے کے لیے کوئی چیز استعمال کریں۔\n- سیٹنگ `false` ​​تعاون یافتہ نہیں ہے۔ اس کے بجائے مخصوص فلٹرز کو غیر فعال کرنے کے لیے آبجیکٹ فارم کا استعمال کریں۔\n- : فلٹر کی تفصیل\n- `tagFilter`: فلٹرز نامنظور HTML ٹیگز (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: فلٹرز فارمیٹ عناصر (`formatLine`/`formatBlock`)\n- `classFilter`: فلٹرز نامنظور CSS کلاس کے نام (`allowedClassName`)\n- `textStyleTagFilter`: ٹیکسٹ اسٹائل ٹیگز کو فلٹر کرتا ہے (b، i، u، span، وغیرہ)\n- `attrFilter`: فلٹرز نامنظور HTML صفات (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: فلٹرز کی اجازت نہیں دی گئی ان لائن طرزیں (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "تمام مواد کو منتخب کرتے وقت ٹیگز کو پوری اکائیوں کے طور پر سمجھا جاتا ہے۔\n- ڈیفالٹ {@link DEFAULTS.SCOPE_SELECTION_TAGS} کی پیروی کرتا ہے",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "پہلے سے طے شدہ اجازت کی فہرست سے آگے کی اجازت دینے کے لیے HTML عناصر کی وضاحت کرتا ہے۔ حد بندی: `\"|\"`۔\n- {@link PrivateBaseOptions.__defaultElementWhitelist} کے ذریعہ طے شدہ ڈیفالٹ فہرست میں شامل کیا گیا۔\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "HTML عناصر کی وضاحت کرتا ہے جنہیں استعمال نہیں کیا جانا چاہیے۔ حد بندی: `\"|\"`۔\n- یہاں بیان کردہ ٹیگز بالآخر ہٹا دیے جائیں گے، چاہے وہ دیگر وائٹ لسٹ میں شامل ہوں۔\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "ٹیگز کی فہرست جنہیں رکھنے کی اجازت ہے چاہے ان کی قدریں خالی ہوں۔\n- ڈیفالٹ {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} کی پیروی کرتا ہے\n- حتمی `allowedEmptyTags` ​​فہرست بنانے کے لیے `ALLOWED_EMPTY_NODE_LIST` کے ساتھ جوڑ کر۔",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "کلاس کے ناموں کی اجازت ہے۔\n- ڈیفالٹ قدر {@link DEFAULTS.CLASS_NAME} شامل کر دی گئی",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "ہر ٹیگ کی اجازت دینے کے لیے اضافی صفات کا تعین کرتا ہے۔ `\"*\"` تمام ٹیگز پر لاگو ہوتا ہے۔\n- یہاں بیان کردہ قواعد کو {@link PrivateBaseOptions.__defaultAttributeWhitelist} میں ضم کر دیا جائے گا۔\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "ٹیگ کے ذریعے نامنظور کرنے کے لیے اوصاف کی وضاحت کرتا ہے۔ `\"*\"` تمام ٹیگز پر لاگو ہوتا ہے۔\n- یہاں بیان کردہ اوصاف آخرکار ہٹا دیے جائیں گے چاہے انہیں دوسری ترتیبات کے ذریعے اجازت دی جائے۔\n- مطلوبہ عناصر کی ایک فہرست، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، ہمیشہ شامل ہوتی ہے۔\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "اضافی ٹیکسٹ اسٹائل ٹیگز۔\n- ڈیفالٹ {@link PrivateBaseOptions.__textStyleTags} کی پیروی کرتا ہے",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "مخصوص HTML ٹیگز پر ٹیکسٹ اسٹائل کا نقشہ۔\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "اجازت شدہ شیلیوں کی فہرست میں اضافی شیلیوں کی وضاحت کرتا ہے۔ حد بندی: `\"|\"`۔\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "ایچ ٹی ایم ایل ٹیگز کے لیے اجازت شدہ اسٹائل بتاتا ہے۔ کلید ٹیگ کے نام (ناموں) ہے، قدر پائپ کی حد بندی کی اجازت شدہ طرز ہے۔\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "`span` ٹیگ کے لیے اجازت شدہ طرزیں بتاتا ہے۔\n- ڈیفالٹ {@link DEFAULTS.SPAN_STYLES} کی پیروی کرتا ہے",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "`line` عنصر (p..) کے لیے اجازت شدہ طرزیں بتاتا ہے۔\n- ڈیفالٹ {@link DEFAULTS.LINE_STYLES} کی پیروی کرتا ہے",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "اجازت شدہ فونٹ سائز یونٹس۔\n- ڈیفالٹ {@link DEFAULTS.SIZE_UNITS} کی پیروی کرتا ہے",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "اس بات کا تعین کرتا ہے کہ متن کو حذف کرتے وقت ان لائن عناصر (جیسے `<span>`, `<strong>`) کو کیسے ہینڈل کیا جاتا ہے۔\n- `repeat`: طرزیں برقرار رہتی ہیں جب تک کہ بیک اسپیس کو بار بار دبایا نہ جائے۔\n- مسلسل دبانے سے آخرکار اسٹائلز ہٹ جائیں گے۔\n- `none`: طرزیں برقرار نہیں ہیں۔ متن کے ساتھ ان لائن عناصر کو فوری طور پر ہٹا دیا جاتا ہے۔\n- `always`: طرزیں غیر معینہ مدت تک برقرار رہتی ہیں جب تک کہ واضح طور پر ہٹا دیا نہ جائے۔\n- یہاں تک کہ اگر ان لائن عنصر کے اندر موجود تمام متن کو حذف کر دیا جائے تو بھی عنصر باقی رہتا ہے۔",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "نئی لائنیں داخل کرتے وقت ڈیفالٹ `line` عنصر۔",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "ڈیفالٹ لائن بریک فارمیٹ کی وضاحت کرتا ہے۔\n- [تجویز کردہ] `line` : لائن بریک کو عام ٹیگز میں تقسیم کیا گیا ہے۔\n- [تجویز نہیں کی گئی] `br` ​​: لائن بریک کو اسی لائن پر <br> سمجھا جاتا ہے۔ (جیسے شفٹ+انٹر)\n- لائن بریک کو <br> کے طور پر `line` کے اندر ہینڈل کیا جاتا ہے۔\n- آپ لگاتار دو بار لائن بریک ڈال کر ایک نیا `line` بنا سکتے ہیں۔\n- وہ فارمیٹس جن میں `line` شامل ہیں، جیسے \"اقتباس\"، اب بھی `line` کی بنیاد پر کام کرتے ہیں۔\n- سنیڈیٹر کے عمل `line` یونٹس میں کام کرتے ہیں۔\n- `br` پر سیٹ ہونے پر، بہت سارے ڈیٹا میں ترمیم کرتے وقت کارکردگی کم ہو سکتی ہے۔",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "لائن کی خصوصیات جو لائنوں کو تبدیل کرتے وقت دوبارہ ترتیب دی جانی چاہئیں۔ حد بندی: `\"|\"`۔\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "اضافی طور پر اجازت دی گئی `line` عناصر کو ڈیفالٹ سے باہر۔ حد بندی: `\"|\"`۔\n- حتمی `line` فہرست بنانے کے لیے {@link PrivateBaseOptions.__defaultFormatLine} کے ساتھ مربوط۔\n- `line` عنصر میں `brLine` عنصر بھی ہوتا ہے۔\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "اضافی طور پر اجازت دی گئی `brLine` عناصر کو ڈیفالٹ سے باہر۔\n- حتمی `brLine` ​​فہرست بنانے کے لیے {@link PrivateBaseOptions.__defaultFormatBrLine} کے ساتھ مربوط۔\n- `brLine` عناصر `line` عنصر میں شامل ہیں۔\n- `brLine` عناصر کا لائن بریک `BR` ٹیگ ہے۔\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`۔",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "اضافی طور پر اجازت دی گئی `closureBrLine` عناصر کو ڈیفالٹ سے باہر۔\n- حتمی `closureBrLine` ​​فہرست کے لیے {@link PrivateBaseOptions.__defaultFormatClosureBrLine} کے ساتھ مربوط۔\n- `closureBrLine` عناصر `brLine` میں شامل ہیں۔\n- `closureBrLine` عناصر کا لائن بریک `BR` ٹیگ ہے۔\n- ※ آپ Enter کلید یا Backspace کلید کے ساتھ اس فارمیٹ سے باہر نہیں نکل سکتے۔\n- ※ اسے صرف خاص معاملات میں استعمال کریں۔ ([سابق] ٹیبل سیلز کی شکل)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "اضافی طور پر اجازت دی گئی `block` عناصر کو ڈیفالٹ سے باہر۔\n- حتمی `block` ​​فہرست بنانے کے لیے {@link PrivateBaseOptions.__defaultFormatBlock} کے ساتھ مربوط۔\n- `block` `line` اور `component` کو لپیٹتا ہے۔",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "اضافی طور پر اجازت دی گئی `closureBlock` عناصر کو ڈیفالٹ سے باہر۔\n- حتمی `closureBlock` ​​فہرست کے لیے {@link PrivateBaseOptions.__defaultFormatClosureBlock} کے ساتھ مربوط۔\n- `closureBlock` عناصر `block` میں شامل ہیں۔\n- `closureBlock` عنصر `line` اور `component` کو لپیٹتا ہے۔\n- ※ آپ Enter کلید یا Backspace کلید کے ساتھ اس فارمیٹ سے باہر نہیں نکل سکتے۔\n- ※ اسے صرف خاص معاملات میں استعمال کریں۔ (مثال کے طور پر ٹیبل سیل کی شکل)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "باہر کلک کرنے پر موڈلز بند کر دیتا ہے۔",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "ٹیب انڈینٹ کو خالی جگہوں کے ساتھ سنکرونائز کرتا ہے۔",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "ٹیب کلیدی ان پٹ کو غیر فعال کرتا ہے۔",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "ٹول بار کی چوڑائی۔",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "ٹول بار کے لیے کنٹینر عنصر۔"
+  },
+  "toolbar_sticky": {
+    "description": "چسپاں ٹول بار کو فعال کرتا ہے۔\n- `number`: چپچپا ٹاپ پوزیشن (px) سیٹ کرتا ہے۔ چسپاں کو غیر فعال کرنے کے لیے `-1` ​​استعمال کریں۔\n- `{top, offset}`: `top` ایک چپچپا پوزیشن ہے جب صفحہ کا ہیڈر نظر آتا ہے۔\n- `offset` چپچپا پوزیشن ہے جب ایک ورچوئل کی بورڈ ویو پورٹ کو شفٹ کرتا ہے (مثال کے طور پر، ٹیبلیٹ، ٹچ ڈیوائسز پر)۔\n- جب ورچوئل کی بورڈ فعال ہوتا ہے، تو `offset` `top` کی جگہ لے لیتا ہے تاکہ ٹول بار کوئی خلا نہ چھوڑے\n- صفحہ کے ہیڈر کے لیے جو منظر سے باہر ہو چکا ہے۔ ڈیفالٹ `offset` ہے `0`۔\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "ابتدائی طور پر ٹول بار چھپاتا ہے۔",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "ذیلی ٹول بار کی ترتیب۔ ایک ثانوی ٹول بار جو متن کے انتخاب پر ظاہر ہوتا ہے۔",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "اسٹیٹس بار کے لیے کنٹینر عنصر۔"
+  },
+  "shortcutsHint": {
+    "description": "ٹول ٹپس میں شارٹ کٹ اشارے دکھاتا ہے۔",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "کی بورڈ شارٹ کٹس کو غیر فعال کرتا ہے۔",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "حسب ضرورت کی بورڈ شارٹ کٹس۔\n- `_` سے شروع ہونے والی کلیدیں صارف کی طرف سے طے شدہ حسب ضرورت شارٹ کٹ ہیں۔ ہر قدر `[keyCombo, hintLabel]` ​​جوڑوں کی ایک صف ہے۔\n- کلیدی کمبوز `c` (Ctrl/Cmd)، `s` (Shift)، اور `KeyEvent.code` اقدار کو `+` سے جوڑتے ہیں۔\n- ایک مخصوص پلگ ان طریقہ کو کال کرنے کے لیے `$~pluginName.method` استعمال کریں۔\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "کاپی شدہ مواد کا فارمیٹ رکھتا ہے۔",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "یو آر ایل کو خودکار طور پر ہائپر لنکس میں تبدیل کرتا ہے۔ (`Link` پلگ ان درکار ہے)\n- ڈیفالٹ: `Boolean(plugins.link)` ​​— اس بات سے طے ہوتا ہے کہ آیا `link` پلگ ان فعال ہے۔"
+  },
+  "historyStackDelayTime": {
+    "description": "ہسٹری اسٹیک اپ ڈیٹس (ms) کے لیے تاخیر کا وقت۔",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "فی روٹ فریم تاریخ کے اندراجات کی زیادہ سے زیادہ تعداد۔ حد سے زیادہ ہونے پر قدیم ترین اندراجات کو مسترد کر دیا جاتا ہے۔",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "طباعت کے لیے کلاس کا نام۔",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "فل سکرین موڈ میں داخل ہونے پر آفسیٹ لاگو ہوتا ہے۔",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "پیش نظارہ موڈ کے لیے حسب ضرورت HTML ٹیمپلیٹ۔ ایڈیٹر کے مواد کے لیے بطور پلیس ہولڈر `{{ contents }}` استعمال کریں۔",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "پرنٹ موڈ کے لیے حسب ضرورت HTML ٹیمپلیٹ۔ ایڈیٹر کے مواد کے لیے بطور پلیس ہولڈر `{{ contents }}` استعمال کریں۔\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "داخل کردہ اجزاء کے خودکار انتخاب کو فعال کرتا ہے۔\n- ان لائن اجزاء کے لیے: جزو کے قریب کرسر رکھتا ہے، یا اگر کوئی قریبی رینج نہیں ہے تو منتخب کرتا ہے۔\n- بلاک اجزاء کے لیے: `selectMode` کی بنیاد پر رویے کو انجام دیتا ہے:\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، یا ایک نئی لائن بنائیں اور وہاں جائیں۔\n- `none`: کچھ نہ کرو۔",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "لنکس کے لیے ڈیفالٹ یو آر ایل پروٹوکول۔",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "ٹوسٹ پیغامات (ایم ایس) ڈسپلے کرنے کا دورانیہ۔",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "مفت کوڈ ویو موڈ کو فعال کرتا ہے۔",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "بلٹ ان Find/Replace پینل UI دکھاتا ہے۔\n- تلاش کرنے والا ہمیشہ اندرونی طور پر بنایا جاتا ہے۔ یہ آپشن کنٹرول کرتا ہے کہ آیا پینل صارفین کو دکھائی دے رہا ہے (Ctrl+F / Ctrl+H)۔",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "آپ کے ٹائپ کرتے ہی فوری طور پر تلاش کرتا ہے (ڈیباؤنس)۔ غلط ہونے پر، تلاش صرف Enter پر چلتی ہے۔",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "بیرونی لائبریریاں جیسے CodeMirror، KaTeX، یا MathJax۔\n- دیکھیں {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md بیرونی لائبریری گائیڈ}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "اضافی اجازت یافتہ یا غیر اجازت شدہ ٹیگز کی وضاحت کرتا ہے۔ `true` اجازت دینے کے لئے، `false` ​​اجازت دینے کے لئے۔\n- ڈیفالٹ {@link DEFAULTS.EXTRA_TAG_MAP} کی پیروی کرتا ہے\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "یوزر ایونٹ ہینڈلرز کنفیگریشن۔\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "فی الحال استعمال شدہ ٹول بار بٹنوں کی فہرست"
+  },
+  "buttons_sub": {
+    "description": "فی الحال استعمال شدہ ذیلی ٹول بار بٹنوں کی فہرست"
+  },
+  "toolbar_sub_width": {
+    "description": "ذیلی ٹول بار کی چوڑائی۔"
+  },
+  "reverseCommands": {
+    "description": "ضم شدہ ریورس کمانڈ جوڑوں کی صف۔\n- پہلے سے طے شدہ `indent-outdent` + صارف کا `reverseButtons` ​​شامل ہے۔"
+  },
+  "codeMirror": {
+    "description": "`externalLibs.codeMirror` سے CodeMirror کنفیگریشن آبجیکٹ۔"
+  },
+  "hasCodeMirror": {
+    "description": "کوڈ ویو کے لیے CodeMirror استعمال کرتا ہے۔"
+  },
+  "audioGallery_data": {
+    "description": "سرور کالوں کے بغیر براہ راست ڈیٹا"
+  },
+  "audioGallery_url": {
+    "description": "سرور کی درخواست URL"
+  },
+  "audioGallery_headers": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "audioGallery_thumbnail": {
+    "description": "ڈیفالٹ تھمب نیل"
+  },
+  "fileBrowser_data": {
+    "description": "سرور کالز کے بغیر براہ راست ڈیٹا (یو آر ایل بازیافت کو نظرانداز کرتا ہے)۔"
+  },
+  "fileBrowser_url": {
+    "description": "سرور کی درخواست URL"
+  },
+  "fileBrowser_headers": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "ڈیفالٹ تھمب نیل یو آر ایل یا ایک فنکشن جو فی آئٹم تھمب نیل یو آر ایل لوٹاتا ہے۔"
+  },
+  "fileBrowser_props": {
+    "description": "اضافی ٹیگ کے نام"
+  },
+  "fileGallery_data": {
+    "description": "سرور کالوں کے بغیر براہ راست ڈیٹا"
+  },
+  "fileGallery_url": {
+    "description": "سرور کی درخواست URL"
+  },
+  "fileGallery_headers": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "fileGallery_thumbnail": {
+    "description": "ڈیفالٹ تھمب نیل"
+  },
+  "imageGallery_data": {
+    "description": "سرور کالوں کے بغیر براہ راست ڈیٹا"
+  },
+  "imageGallery_url": {
+    "description": "سرور کی درخواست URL"
+  },
+  "imageGallery_headers": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "videoGallery_data": {
+    "description": "سرور کالوں کے بغیر براہ راست ڈیٹا"
+  },
+  "videoGallery_url": {
+    "description": "سرور کی درخواست URL"
+  },
+  "videoGallery_headers": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "videoGallery_thumbnail": {
+    "description": "ڈیفالٹ تھمب نیل"
+  },
+  "codeBlock_langs": {
+    "description": "کوڈ بلاکس کے لیے قابل انتخاب پروگرامنگ زبانوں کی فہرست۔\n- 21 عام زبانوں میں ڈیفالٹ\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, Rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml]۔\n- زبان کے انتخاب UI کو مکمل طور پر غیر فعال کرنے کے لیے خالی صف `[]` پر سیٹ کریں۔"
+  },
+  "exportPDF_apiUrl": {
+    "description": "پی ڈی ایف جنریشن کے لیے سرور کی درخواست URL"
+  },
+  "exportPDF_fileName": {
+    "description": "تیار کردہ پی ڈی ایف فائل کا نام"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "فائل اپ لوڈ کے لیے سرور کی درخواست URL"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "بائٹس میں اپ لوڈ سائز کی کل حد"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "بائٹس میں سنگل فائل سائز کی حد"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "متعدد فائل اپ لوڈ کرنے کی اجازت دیں۔"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "قبول شدہ فائل فارمیٹس۔"
+  },
+  "fileUpload_as": {
+    "description": "فائل کے جزو کی ڈیفالٹ شکل کو بطور `box` یا `link` ​​بیان کریں۔"
+  },
+  "fileUpload_controls": {
+    "description": "اعداد و شمار میں شامل کیے جانے والے اضافی کنٹرولز"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن میں لے جائیں، یا ایک نئی لائن بنائیں اور وہاں منتقل کریں۔\n- `none`: کچھ نہ کرو۔"
+  },
+  "align_items": {
+    "description": "اشیاء کو سیدھ کریں۔"
+  },
+  "backgroundColor_items": {
+    "description": "رنگین فہرست۔"
+  },
+  "backgroundColor_splitNum": {
+    "description": "فی لائن رنگوں کی تعداد"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "HEX ان پٹ کو غیر فعال کریں۔"
+  },
+  "blockStyle_items": {
+    "description": "فارمیٹ کی فہرست۔\n- `command` — `\"line\"`: سنگل لائن بلاک، `\"br-line\"`: br سے الگ کردہ بلاک، `\"block\"`: کنٹینر بلاک۔"
+  },
+  "font_items": {
+    "description": "فونٹ کی فہرست"
+  },
+  "fontColor_items": {
+    "description": "رنگین فہرست۔"
+  },
+  "fontColor_splitNum": {
+    "description": "فی لائن رنگوں کی تعداد"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "HEX ان پٹ کو غیر فعال کریں۔"
+  },
+  "hR_items": {
+    "description": "HR فہرست"
+  },
+  "layout_items": {
+    "description": "لے آؤٹ لسٹ۔ ہر آئٹم خام HTML کے ساتھ ایک نامزد لے آؤٹ ٹیمپلیٹ کی وضاحت کرتا ہے۔"
+  },
+  "lineHeight_items": {
+    "description": "لائن کی اونچائی کی فہرست"
+  },
+  "paragraphStyle_items": {
+    "description": "پیراگراف آئٹم کی فہرست"
+  },
+  "table_scrollType": {
+    "description": "اسکرول کی قسم (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "کیپشن پوزیشن (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "سیل کنٹرولر پوزیشن (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "سیل کے پس منظر کے رنگ چننے والے کے لیے HEX رنگ کی فہرست۔"
+  },
+  "template_items": {
+    "description": "ٹیمپلیٹ کی فہرست"
+  },
+  "textStyle_items": {
+    "description": "ٹیکسٹ اسٹائل آئٹم کی فہرست۔"
+  },
+  "mention_triggerText": {
+    "description": "وہ کردار جو ذکر کی فہرست کو متحرک کرتا ہے۔"
+  },
+  "mention_limitSize": {
+    "description": "ذکر کی فہرست میں ڈسپلے کرنے کے لیے آئٹمز کی تعداد"
+  },
+  "mention_searchStartLength": {
+    "description": "ذکر کی فہرست کی تلاش شروع کرنے کے لیے حروف کی تعداد"
+  },
+  "mention_delayTime": {
+    "description": "ذکر کی فہرست کو ظاہر کرنے سے پہلے انتظار کرنے کا وقت"
+  },
+  "mention_data": {
+    "description": "جامد ذکر ڈیٹا (API کے بجائے استعمال کیا جاتا ہے)۔"
+  },
+  "mention_apiUrl": {
+    "description": "ذکر کی فہرست کو کال کرنے کے لیے URL"
+  },
+  "mention_apiHeaders": {
+    "description": "API کال کے ساتھ بھیجنے کے لیے ہیڈرز"
+  },
+  "mention_useCachingData": {
+    "description": "آیا ذکر کی فہرست کے ڈیٹا کو کیش کرنا ہے۔"
+  },
+  "mention_useCachingFieldData": {
+    "description": "آیا فیلڈ میں ذکر کی فہرست کے ڈیٹا کو کیش کرنا ہے۔"
+  },
+  "fontSize_sizeUnit": {
+    "description": "فونٹ سائز کے لیے یونٹ۔\n- قبول شدہ اقدار میں شامل ہیں: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` یا `'text'`۔\n- اگر `'text'` استعمال کیا جاتا ہے تو، متن پر مبنی فونٹ سائز کی فہرست لاگو کی جاتی ہے۔"
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "اس بات کا تعین کرتا ہے کہ آیا پہلے سے طے شدہ سائز کا لیبل ڈراپ ڈاؤن مینو میں ظاہر ہوتا ہے۔"
+  },
+  "fontSize_showIncDecControls": {
+    "description": "جب `true`، ڈسپلے فونٹ سائز ایڈجسٹمنٹ کے لیے بٹن بڑھانے اور گھٹاتا ہے۔\n- پہلے سے طے شدہ `false` ​​پر۔ ہمیشہ `false` جب `sizeUnit` `'text'` ہو (نظر انداز کیا گیا)۔"
+  },
+  "fontSize_disableInput": {
+    "description": "جب `true`، ڈائریکٹ فونٹ سائز ان پٹ باکس کو غیر فعال کر دیتا ہے۔\n- پہلے سے طے شدہ `true` ​​جب `sizeUnit` `'text'` ہو، ورنہ `false`۔"
+  },
+  "fontSize_unitMap": {
+    "description": "فونٹ کے سائز کے لیے ڈیفالٹ یونٹ میپنگ کو اوور رائیڈ یا بڑھا دیں۔"
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO` ٹیگ کی ڈیفالٹ چوڑائی۔"
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO` ٹیگ کی ڈیفالٹ اونچائی۔"
+  },
+  "audio_createFileInput": {
+    "description": "آیا فائل ان پٹ عنصر بنانا ہے۔"
+  },
+  "audio_createUrlInput": {
+    "description": "آیا یو آر ایل ان پٹ عنصر بنانا ہے۔\n- پہلے سے طے شدہ `true` پر۔ ہمیشہ `true` ​​جب `createFileInput` `false` ہو۔"
+  },
+  "audio_uploadUrl": {
+    "description": "وہ URL جس پر فائلیں اپ لوڈ کی جائیں گی۔"
+  },
+  "audio_uploadHeaders": {
+    "description": "فائل اپ لوڈ کی درخواست میں شامل کرنے کے لیے ہیڈرز۔"
+  },
+  "audio_uploadSizeLimit": {
+    "description": "بائٹس میں اپ لوڈ سائز کی کل حد۔"
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "بائٹس میں واحد فائل سائز کی حد۔"
+  },
+  "audio_allowMultiple": {
+    "description": "آیا متعدد فائل اپ لوڈز کی اجازت دی جائے۔"
+  },
+  "audio_acceptedFormats": {
+    "description": "قبول شدہ فائل فارمیٹس (پہلے سے طے شدہ `\"audio/*\"` ہے)۔"
+  },
+  "audio_audioTagAttributes": {
+    "description": "`AUDIO` ٹیگ پر سیٹ کرنے کے لیے اضافی خصوصیات۔"
+  },
+  "audio_insertBehavior": {
+    "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، یا ایک نئی لائن بنائیں اور وہاں جائیں۔\n- `none`: کچھ نہ کرو۔"
+  },
+  "drawing_outputFormat": {
+    "description": "ڈرائنگ کا آؤٹ پٹ فارمیٹ۔ اختیارات: `\"dataurl\"`، `\"svg\"`۔"
+  },
+  "drawing_useFormatType": {
+    "description": "فارمیٹ قسم کے انتخاب کو فعال کرنا ہے یا نہیں (`block` بمقابلہ `inline`)۔"
+  },
+  "drawing_defaultFormatType": {
+    "description": "ڈیفالٹ فارمیٹ کی قسم، یا تو `\"block\"` یا `\"inline\"`۔"
+  },
+  "drawing_keepFormatType": {
+    "description": "آیا ڈرائنگ کے بعد منتخب کردہ فارمیٹ کی قسم کو برقرار رکھنا ہے۔"
+  },
+  "drawing_lineWidth": {
+    "description": "ڈرائنگ لائن کی چوڑائی۔"
+  },
+  "drawing_lineReconnect": {
+    "description": "آیا ڈرائنگ کرتے وقت لائنوں کو دوبارہ جوڑنا ہے۔"
+  },
+  "drawing_lineCap": {
+    "description": "لائن کیپ کا انداز (`\"butt\"`، `\"round\"`، یا `\"square\"`)۔"
+  },
+  "drawing_lineColor": {
+    "description": "ڈرائنگ لائن کا رنگ۔"
+  },
+  "drawing_canResize": {
+    "description": "آیا موڈل فارم کا سائز تبدیل کیا جا سکتا ہے۔"
+  },
+  "drawing_maintainRatio": {
+    "description": "کیا سائز تبدیل کرتے وقت پہلو کا تناسب برقرار رکھنا ہے۔"
+  },
+  "drawing_formSize": {
+    "description": "ڈرائنگ موڈل فارم کے لیے سائز کی ترتیب۔"
+  },
+  "embed_canResize": {
+    "description": "آیا ایمبیڈ عنصر کا سائز تبدیل کیا جا سکتا ہے۔"
+  },
+  "embed_showHeightInput": {
+    "description": "آیا اونچائی ان پٹ فیلڈ کو ظاہر کرنا ہے۔"
+  },
+  "embed_defaultWidth": {
+    "description": "ایمبیڈ عنصر کی ڈیفالٹ چوڑائی (عددی قدر یا یونٹ کے ساتھ)۔"
+  },
+  "embed_defaultHeight": {
+    "description": "ایمبیڈ عنصر کی ڈیفالٹ اونچائی (عددی قدر یا یونٹ کے ساتھ)۔"
+  },
+  "embed_percentageOnlySize": {
+    "description": "آیا صرف فیصد کی بنیاد پر سائز دینے کی اجازت دی جائے۔"
+  },
+  "embed_uploadUrl": {
+    "description": "فائل اپ لوڈز کے لیے URL۔"
+  },
+  "embed_uploadHeaders": {
+    "description": "فائل اپ لوڈ کی درخواستوں میں شامل کرنے کے لیے ہیڈر۔"
+  },
+  "embed_uploadSizeLimit": {
+    "description": "کل فائل اپ لوڈ سائز کی حد بائٹس میں۔"
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "بائٹس میں سنگل فائل اپ لوڈ سائز کی حد۔"
+  },
+  "embed_iframeTagAttributes": {
+    "description": "`IFRAME` ٹیگ پر سیٹ کرنے کے لیے اضافی خصوصیات۔"
+  },
+  "embed_query_youtube": {
+    "description": "یوٹیوب استفسار پیرامیٹر سرایت URL میں شامل کیا گیا۔"
+  },
+  "embed_query_vimeo": {
+    "description": "ایمبیڈ یو آر ایل میں Vimeo استفسار پیرامیٹر شامل کیا گیا۔"
+  },
+  "embed_urlPatterns": {
+    "description": "سرایت کے قابل مواد کے طور پر پہچاننے کے لیے اضافی URL پیٹرن۔"
+  },
+  "embed_embedQuery": {
+    "description": "حسب ضرورت ایمبیڈ سروس کی تعریفیں۔"
+  },
+  "embed_controls": {
+    "description": "فگر کنٹرولز۔"
+  },
+  "embed_insertBehavior": {
+    "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن میں لے جائیں، یا ایک نئی لائن بنائیں اور وہاں منتقل کریں۔\n- `none`: کچھ نہ کرو۔"
+  },
+  "image_canResize": {
+    "description": "آیا تصویر کے عنصر کا سائز تبدیل کیا جا سکتا ہے۔"
+  },
+  "image_showHeightInput": {
+    "description": "آیا اونچائی ان پٹ فیلڈ کو ظاہر کرنا ہے۔"
+  },
+  "image_defaultWidth": {
+    "description": "تصویر کی ڈیفالٹ چوڑائی۔ اگر کوئی نمبر فراہم کیا جاتا ہے، تو `\"px\"` شامل کیا جائے گا۔"
+  },
+  "image_defaultHeight": {
+    "description": "تصویر کی ڈیفالٹ اونچائی۔ اگر کوئی نمبر فراہم کیا جاتا ہے تو، `\"px\"` شامل کیا جائے گا۔"
+  },
+  "image_percentageOnlySize": {
+    "description": "آیا صرف فیصد کی بنیاد پر سائز کی اجازت دی جائے۔"
+  },
+  "image_createFileInput": {
+    "description": "آیا امیج اپ لوڈز کے لیے فائل ان پٹ عنصر بنانا ہے۔"
+  },
+  "image_createUrlInput": {
+    "description": "آیا تصویر داخل کرنے کے لیے یو آر ایل ان پٹ عنصر بنانا ہے۔\n- پہلے سے طے شدہ `true` پر۔ ہمیشہ `true` ​​جب `createFileInput` `false` ہو۔"
+  },
+  "image_uploadUrl": {
+    "description": "تصویری فائل اپ لوڈز کے لیے URL اختتامی نقطہ۔"
+  },
+  "image_uploadHeaders": {
+    "description": "فائل اپ لوڈ کی درخواست میں شامل کرنے کے لیے اضافی ہیڈرز۔"
+  },
+  "image_uploadSizeLimit": {
+    "description": "بائٹس میں اپ لوڈ سائز کی کل حد۔"
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "بائٹس میں سنگل فائل اپ لوڈ سائز کی حد۔"
+  },
+  "image_allowMultiple": {
+    "description": "آیا متعدد امیج اپ لوڈز کی اجازت ہے۔"
+  },
+  "image_acceptedFormats": {
+    "description": "تصویری اپ لوڈز کے لیے قبول شدہ فائل فارمیٹس۔"
+  },
+  "image_useFormatType": {
+    "description": "چاہے فارمیٹ قسم کے انتخاب کو فعال کیا جائے (`block` یا `inline`)۔"
+  },
+  "image_defaultFormatType": {
+    "description": "پہلے سے طے شدہ تصویری شکل کی قسم (`\"block\"` یا `\"inline\"`)۔"
+  },
+  "image_keepFormatType": {
+    "description": "آیا تصویر داخل کرنے کے بعد منتخب کردہ فارمیٹ کی قسم کو برقرار رکھنا ہے۔"
+  },
+  "image_linkEnableFileUpload": {
+    "description": "آیا منسلک تصاویر کے لیے فائل اپ لوڈز کو فعال کرنا ہے۔"
+  },
+  "image_controls": {
+    "description": "فگر کنٹرولز۔"
+  },
+  "image_insertBehavior": {
+    "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- ان لائن اجزاء کے لیے: جزو کے قریب کرسر رکھتا ہے، یا اگر کوئی قریبی رینج نہیں ہے تو منتخب کرتا ہے۔\n- بلاک اجزاء کے لیے: `selectMode` ​​کی بنیاد پر رویے کو انجام دیتا ہے:\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن میں لے جائیں، یا ایک نئی لائن بنائیں اور وہاں منتقل کریں۔\n- `none`: کچھ نہ کرو۔"
+  },
+  "link_uploadUrl": {
+    "description": "فائل اپ لوڈز کے لیے URL اختتامی نقطہ۔"
+  },
+  "link_uploadHeaders": {
+    "description": "فائل اپ لوڈ کی درخواستوں کے لیے اضافی ہیڈر۔"
+  },
+  "link_uploadSizeLimit": {
+    "description": "بائٹس میں کل فائل اپ لوڈ سائز کی حد۔"
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "بائٹس میں سنگل فائل اپ لوڈ سائز کی حد۔"
+  },
+  "link_acceptedFormats": {
+    "description": "لنک اپ لوڈز کے لیے قبول شدہ فائل فارمیٹس۔"
+  },
+  "link_title": {
+    "description": "ماڈل ٹائٹل ڈسپلے۔"
+  },
+  "link_textToDisplay": {
+    "description": "ان پٹ کو ظاہر کرنے کے لیے متن بنائیں۔"
+  },
+  "link_openNewWindow": {
+    "description": "\"نئی ونڈو میں کھولیں\" چیک باکس کی ڈیفالٹ چیک شدہ قدر۔"
+  },
+  "link_noAutoPrefix": {
+    "description": "اگر `true`، میزبان یو آر ایل کے خودکار سابقہ ​​کو لنک کی قدر سے غیر فعال کر دیتا ہے۔"
+  },
+  "link_relList": {
+    "description": "دستیاب `rel` انتساب کی قدریں لنک موڈل میں چیک باکس کے طور پر دکھائی دیتی ہیں۔"
+  },
+  "link_defaultRel": {
+    "description": "پہلے سے طے شدہ `rel` قدریں شرط کے لحاظ سے خودکار طور پر لاگو ہوتی ہیں۔"
+  },
+  "link_enableFileUpload": {
+    "description": "اگر `true`، فائل اپ لوڈ کو قابل بناتا ہے۔"
+  },
+  "math_canResize": {
+    "description": "آیا ریاضی کے موڈل کا سائز تبدیل کیا جا سکتا ہے۔"
+  },
+  "math_autoHeight": {
+    "description": "آیا خودکار طور پر موڈل کی اونچائی کو ایڈجسٹ کرنا ہے۔"
+  },
+  "math_fontSizeList": {
+    "description": "میتھ ایکسپریشن سائز سلیکٹر کے لیے فونٹ سائز کے اختیارات کی فہرست۔"
+  },
+  "math_onPaste": {
+    "description": "ریاضی کے ان پٹ ایریا میں پیسٹ ایونٹس کو ہینڈل کرنے کے لیے ایک کال بیک فنکشن۔"
+  },
+  "math_formSize": {
+    "description": "ایک آبجیکٹ جو ریاضی کے موڈل کے طول و عرض کی وضاحت کرتی ہے۔"
+  },
+  "video_canResize": {
+    "description": "آیا ویڈیو عنصر کا سائز تبدیل کیا جا سکتا ہے۔"
+  },
+  "video_showHeightInput": {
+    "description": "آیا اونچائی ان پٹ فیلڈ کو ظاہر کرنا ہے۔"
+  },
+  "video_defaultWidth": {
+    "description": "ویڈیو عنصر کی ڈیفالٹ چوڑائی۔ اگر کوئی نمبر فراہم کیا جاتا ہے، تو `\"px\"` شامل کیا جائے گا۔"
+  },
+  "video_defaultHeight": {
+    "description": "ویڈیو عنصر کی ڈیفالٹ اونچائی۔ اگر کوئی نمبر فراہم کیا جاتا ہے، تو `\"px\"` شامل کیا جائے گا۔"
+  },
+  "video_percentageOnlySize": {
+    "description": "آیا صرف فیصد کی بنیاد پر سائز دینے کی اجازت دی جائے۔"
+  },
+  "video_createFileInput": {
+    "description": "آیا ویڈیو اپ لوڈز کے لیے فائل ان پٹ عنصر بنانا ہے۔"
+  },
+  "video_createUrlInput": {
+    "description": "آیا ویڈیو ایمبیڈنگ کے لیے یو آر ایل ان پٹ عنصر بنانا ہے۔\n- پہلے سے طے شدہ `true` پر۔ ہمیشہ `true` ​​جب `createFileInput` `false` ہو۔"
+  },
+  "video_uploadUrl": {
+    "description": "ویڈیو فائل اپ لوڈز کے لیے URL اختتامی نقطہ۔"
+  },
+  "video_uploadHeaders": {
+    "description": "ویڈیو اپ لوڈ کی درخواست میں شامل کرنے کے لیے اضافی ہیڈرز۔"
+  },
+  "video_uploadSizeLimit": {
+    "description": "بائٹس میں ویڈیوز کے لیے کل اپ لوڈ سائز کی حد۔"
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "بائٹس میں ویڈیوز کے لیے سنگل فائل اپ لوڈ سائز کی حد۔"
+  },
+  "video_allowMultiple": {
+    "description": "آیا متعدد ویڈیو اپ لوڈز کی اجازت ہے۔"
+  },
+  "video_acceptedFormats": {
+    "description": "ویڈیو اپ لوڈز کے لیے قبول شدہ فائل فارمیٹس (`\"video/*\"`)۔"
+  },
+  "video_defaultRatio": {
+    "description": "ویڈیو کے لیے پہلے سے طے شدہ پہلو کا تناسب (اونچائی/چوڑائی، مثلاً 16:9 → `9/16 = 0.5625`)۔"
+  },
+  "video_showRatioOption": {
+    "description": "آیا موڈل میں تناسب کا اختیار ظاہر کرنا ہے۔"
+  },
+  "video_ratioOptions": {
+    "description": "ویڈیو کا سائز تبدیل کرنے کے لیے حسب ضرورت تناسب کے اختیارات (قدر = اونچائی/چوڑائی)۔"
+  },
+  "video_videoTagAttributes": {
+    "description": "`VIDEO` ٹیگ پر سیٹ کرنے کے لیے اضافی خصوصیات۔"
+  },
+  "video_iframeTagAttributes": {
+    "description": "`IFRAME` ٹیگ پر سیٹ کرنے کے لیے اضافی خصوصیات۔"
+  },
+  "video_query_youtube": {
+    "description": "YouTube ایمبیڈنگ کے لیے اضافی استفسار کے پیرامیٹرز۔"
+  },
+  "video_query_vimeo": {
+    "description": "Vimeo ایمبیڈنگ کے لیے اضافی استفسار کے پیرامیٹرز۔"
+  },
+  "video_embedQuery": {
+    "description": "حسب ضرورت ایمبیڈ سروس کی تعریفیں (دیکھیں `EmbedPluginOptions.embedQuery`)۔"
+  },
+  "video_urlPatterns": {
+    "description": "ویڈیو ایمبیڈنگ کے لیے اضافی URL پیٹرن۔"
+  },
+  "video_extensions": {
+    "description": "ویڈیو اپ لوڈز کے لیے اضافی فائل ایکسٹینشنز کو تسلیم کیا جائے۔"
+  },
+  "video_controls": {
+    "description": "فگر کنٹرولز۔"
+  },
+  "video_insertBehavior": {
+    "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، یا ایک نئی لائن بنائیں اور وہاں جائیں۔\n- `none`: کچھ نہ کرو۔"
+  }
+}

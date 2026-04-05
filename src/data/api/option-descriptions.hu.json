@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "A szerkesztő kezdeti értéke.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Helyőrző szöveg.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "A szerkeszthető keret attribútumai[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "A szerkesztő szélessége.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "A szerkesztő minimális szélessége.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "A szerkesztő maximális szélessége.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Magasság a szerkesztő számára.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "A szerkesztő minimális magassága.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "A szerkesztő maximális magassága.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "A szerkesztő felső keretének stíluskarakterlánca.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "A tartalom egy iframe-be kerül, és elkülönül az oldal többi részétől.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Lehetővé teszi HTML, HEAD, BODY tagek és DOCTYPE deklaráció használatát a `iframe`-n.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "A `iframe` attribútumai.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Engedélyezi az állapotsort.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Megjeleníti az aktuális csomópont-struktúrát az állapotsorban.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Engedélyezi az alsó állapotsor átméretezési funkcióját.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Megjeleníti a karakterek számát a szerkesztőben.\n- Ha a `maxCharCount` opciónak van értéke, akkor `true` ​​lesz belőle.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "A szerkesztőbe beilleszthető karakterek maximális száma.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Az alsó sáv `charCounter` területén megjelenítendő szöveg.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Meghatározza a `charCounter` opció számítási módszerét.\n- `char`: Karakterek hossza.\n- `byte`: Karakterek bináris adatmérete.\n- `byte-html`: A teljes HTML karakterlánc bináris adatmérete.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Megjeleníti a szerkesztőben lévő szavak számát.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Az alsó sáv `wordCounter` területén megjelenítendő szöveg.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "A legfelső konténerre alkalmazott stílusok (pl. szélesség, z-index stb.)."
+  },
+  "frame": {
+    "description": "Az iframe konténerre alkalmazott stílusok (pl. magasság, min-magasság)."
+  },
+  "editor": {
+    "description": "A szerkeszthető tartalomterületre alkalmazott stílusok."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror szerkesztőpéldány (frame-szint). A `_checkCodeMirror` inicializálás után állítja be."
+  },
+  "plugins": {
+    "description": "Bővítmény konfiguráció. Adjon át egy plugin osztályokból álló tömböt vagy egy, a plugin nevével kulcsolt objektumot.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Eszköztár gombjainak listája, altömbök szerint csoportosítva.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Engedélyezi a SunEditor v2 migrációs módját.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Eszköztár mód: `classic`, `inline`, `balloon`, `balloon-always`. A `:bottom` karakterlánccal alulra helyezhető az eszköztár (pl. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Szerkesztő típusa. Dokumentum stílusú elrendezéshez használja a `\"document\"` típust, opcionális altípusokkal a `:` ​​után.\n\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Szerkesztői téma.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Nyelvi konfiguráció. alapértelmezett: EN"
+  },
+  "icons": {
+    "description": "Felülírja az alapértelmezett ikonokat."
+  },
+  "textDirection": {
+    "description": "Szövegirány: `ltr` vagy `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Lehetővé teszi a címkék, attribútumok és stílusok szigorú szűrését.\n\n- A `true` paraméterrel engedélyezheti az összes szűrőt (alapértelmezett), vagy egy objektummal vezérelheti az egyes szűrőket.\n\n- A `false` ​​beállítása nem támogatott; ehelyett az objektuműrlapot használja az egyes szűrők letiltásához.\n- :filter leírása\n- `tagFilter`: HTML címkék szűrése letiltva (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Formátumelemek szűrése letiltva (`formatLine`/`formatBlock`)\n- `classFilter`: CSS osztálynevek szűrése letiltva (`allowedClassName`)\n- `textStyleTagFilter`: Szövegstílus címkék szűrése (b, i, u, span stb.)\n- `attrFilter`: HTML attribútumok szűrése letiltva (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Beágyazott stílusok szűrése letiltva (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "A címkéket a teljes tartalom kiválasztásakor egész egységként kezeli a rendszer.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Meghatározza azokat a HTML elemeket, amelyeket az alapértelmezett engedélyezési listán túl is engedélyezni kell. Elválasztó: `\"|\"`.\n\n- Hozzáadva az alapértelmezett listához, amelyet a {@link PrivateBaseOptions.__defaultElementWhitelist} határoz meg.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Meghatározza azokat a HTML elemeket, amelyeket nem szabad használni. Elválasztó: `\"|\"`.\n\n- Az itt megadott címkék végül eltávolításra kerülnek, még akkor is, ha más fehérlistákon szerepelnek.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Azon címkék listája, amelyek megtarthatók akkor is, ha az értékeik üresek.\n- Az alapértelmezett érték a következő: {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- A `ALLOWED_EMPTY_NODE_LIST`-val összefűzve a végső `allowedEmptyTags` ​​lista létrehozásához.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Engedélyezett osztálynevek.\n\n- Hozzáadva az alapértelmezett érték: {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Meghatározza az egyes címkékhez engedélyezendő további attribútumokat. A `\"*\"` minden címkére vonatkozik.\n\n- Az itt megadott szabályok a {@link PrivateBaseOptions.__defaultAttributeWhitelist} listába lesznek egyesítve.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Meghatározza a címkénként letiltandó attribútumokat. A `\"*\"` minden címkére vonatkozik.\n\n- Az itt megadott attribútumok végül eltávolításra kerülnek, még akkor is, ha más beállítások engedélyezik őket.\n\n- A kötelező elemek listája, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, mindig szerepel.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "További szövegstílus-címkék.\n- Az alapértelmezett érték a következő: {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Szövegstílusokat rendel hozzá adott HTML-címkékhez.\n\n``js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "További stílusokat ad meg az engedélyezett stílusok listájához. Elválasztó: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Meghatározza a HTML-címkékhez engedélyezett stílusokat. A kulcs a címke(k) neve, az érték pedig a függőleges vonallal elválasztott engedélyezett stílusok.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Meghatározza a `span` tag megengedett stílusait.\n\n- Az alapértelmezett érték a {@link DEFAULTS.SPAN_STYLES} stílust követi.",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Meghatározza a `line` elemhez engedélyezett stílusokat (p..).\n- Az alapértelmezett érték a {@link DEFAULTS.LINE_STYLES} stílust követi.",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Megengedett betűméret-egységek.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Meghatározza, hogyan kezelje a rendszer a beágyazott elemeket (pl. `<span>`, `<strong>`) szöveg törlésekor.\n\n- `repeat`: A stílusok megmaradnak, hacsak a Backspace billentyűt ismételten megnyomja.\n\n- A folyamatos lenyomás végül eltávolítja a stílusokat.\n\n- `none`: A stílusok nem maradnak meg. A beágyazott elemek azonnal törlődnek a szöveggel együtt.\n\n- `always`: A stílusok határozatlan ideig megmaradnak, hacsak explicit módon nem törlik őket.\n\n- Még ha egy beágyazott elemen belüli összes szöveg törlődik is, maga az elem megmarad.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Alapértelmezett `line` elem új sorok beszúrásakor.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Meghatározza az alapértelmezett sortörés formátumot.\n- [Ajánlott] `line` : A sortörés általános címkékre van osztva.\n- [Nem ajánlott] `br` ​​: A sortöréseket <br>-ként kezeli a rendszer ugyanazon a sorban. (mint a shift+enter)\n- A sortöréseket <br>-ként kezeli a rendszer a `line`-n belül.\n- Új `line`-t hozhat létre, ha kétszer egymás után beír egy sortörést.\n- A `line`-t tartalmazó formátumok, például az \"Idézet\", továbbra is `line` alapon működnek.\n- A suneditor folyamatok `line` egységekben működnek.\n- Ha `br`-ra van állítva, a teljesítmény csökkenhet sok adat szerkesztésekor.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Sortulajdonságok, amelyeket sorváltásakor vissza kell állítani. Elválasztó: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Ezenkívül engedélyezettek a `line` elemek az alapértelmezettön túl. Elválasztó: `\"|\"`.\n\n- Összefűzve a {@link PrivateBaseOptions.__defaultFormatLine} elemmel a végső `line` lista létrehozásához.\n- A `line` elem tartalmazza a `brLine` elemet is.\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Ezenkívül engedélyezettek a `brLine` elemek az alapértelmezetten túl.\n\n- Összefűzve a {@link PrivateBaseOptions.__defaultFormatBrLine} elemmel a végső `brLine` ​​lista létrehozásához.\n\n- A `brLine` elemek a `line` elemben találhatók.\n- A `brLine` elemek sortörése a `BR` tag.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "További engedélyezett `closureBrLine` elemek az alapértelmezettől.\n- Összefűzve a {@link PrivateBaseOptions.__defaultFormatClosureBrLine} elemmel a végső `closureBrLine` ​​listához.\n- A `closureBrLine` elemek szerepelnek a `brLine`-ban.\n- A `closureBrLine` elemek sortörése a `BR` tag.\n- ※ Ebből a formátumból nem lehet kilépni az Enter vagy a Backspace billentyűvel.\n- ※ Csak különleges esetekben használja. ([pl.] táblázatcellák formátuma)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Ezenkívül engedélyezettek a `block` elemek az alapértelmezettön túl.\n\n- Összefűzve a {@link PrivateBaseOptions.__defaultFormatBlock} elemmel a végső `block` ​​lista létrehozásához.\n- A `block` magába foglalja a `line` és `component` elemeket.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "További engedélyezett `closureBlock` elemek az alapértelmezettön túl.\n- Összefűzve a {@link PrivateBaseOptions.__defaultFormatClosureBlock} elemmel a végső `closureBlock` ​​listához.\n- A `closureBlock` elemek szerepelnek a `block`-ban.\n- A `closureBlock` elem magába foglalja a `line` és `component` elemeket.\n- ※ Ebből a formátumból nem lehet kilépni az Enter vagy a Backspace billentyűvel.\n- ※ Csak különleges esetekben használja. (pl. táblázatcellák formátuma)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Kívülre kattintva bezárja a modális ablakokat.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Szinkronizálja a tabulátor behúzását a szóközökkel.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Letiltja a tabulátor billentyűvel történő bevitelt.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Eszköztár szélessége.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Az eszköztár tárolóeleme."
+  },
+  "toolbar_sticky": {
+    "description": "Engedélyezi a ragadós eszköztárat.\n\n- `number`: Beállítja a ragadós felső pozíciót (képpontban). A `-1` ​​letiltásával letilthatja a ragadós részt.\n\n- `{top, offset}`: A `top` a ragadós pozíció, amikor az oldal fejléce látható.\n\n- A `offset` a ragadós pozíció, amikor egy virtuális billentyűzet eltolja a nézetablakot (pl. táblagépeken, érintőképernyős eszközökön).\n\n- Amikor a virtuális billentyűzet aktív, a `offset` lecseréli a `top`-t, így az eszköztár nem hagy rést\n- egy olyan oldal fejléc esetén, amely kigörgetésre került a látómezőből. Az alapértelmezett `offset` a `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Kezdetben elrejti az eszköztárat.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Aleszköztár konfigurációja. Egy másodlagos eszköztár, amely szövegkijelöléskor jelenik meg.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Az állapotsor tárolóeleme."
+  },
+  "shortcutsHint": {
+    "description": "Gyorsbillentyű-tippeket jelenít meg az eszköztippekben.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Letiltja a billentyűparancsokat.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Egyéni billentyűparancsok.\n- A `_` kezdetű billentyűk felhasználó által definiált egyéni billentyűparancsok. Minden érték `[keyCombo, hintLabel]` ​​párok tömbje.\n- A billentyűkombinációk a `c` (Ctrl/Cmd), `s` (Shift) és `KeyEvent.code` értékeket használják, amelyeket `+` köt össze.\n- A `$~pluginName.method` használatával hívhat meg egy adott bővítménymetódust.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Megőrzi a másolt tartalom formátumát.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Automatikusan hiperhivatkozásokká alakítja az URL-eket. (`Link` bővítmény szükséges)\n- Alapértelmezett: `Boolean(plugins.link)` ​​— a `link` bővítmény engedélyezése határozza meg."
+  },
+  "historyStackDelayTime": {
+    "description": "A történeti verem frissítéseinek késleltetési ideje (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "A gyökérkeretenkénti előzménybejegyzések maximális száma. A legrégebbi bejegyzések elvetésre kerülnek, ha túllépik ezt a számot.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Osztálynév nyomtatáshoz.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Eltolás alkalmazva teljes képernyős módba lépéskor.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Egyéni HTML sablon előnézeti módhoz. Használja a `{{ contents }}` karakterláncot helyőrzőként a szerkesztő tartalmához.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Egyéni HTML sablon nyomtatási módhoz. Használja a `{{ contents }}` helykitöltőként a szerkesztő tartalmához.\n\n``js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Engedélyezi a beszúrt komponensek automatikus kiválasztását.\n- Beágyazott komponensek esetén: a kurzort a komponens közelébe helyezi, vagy kiválaszt, ha nincs közeli tartomány.\n- Blokk komponensek esetén: a `selectMode` alapján végrehajtja a viselkedést:\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként a komponenst jelöli ki.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Ne tegyen semmit.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Alapértelmezett URL-protokoll linkekhez.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "A bejelentési üzenetek megjelenítésének időtartama (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Engedélyezi a szabad kódnézeti módot.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Megjeleníti a beépített Keresés/Csere panel felhasználói felületét.\n\n- A kereső mindig belsőleg jön létre; ez a beállítás szabályozza, hogy a panel látható-e a felhasználók számára (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Azonnal keres gépelés közben (visszapattanásmentes). Ha hamis, a keresés csak az Enter billentyű lenyomásával fut.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Külső könyvtárak, mint például a CodeMirror, a KaTeX vagy a MathJax.\n\n- Lásd: {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Külső könyvtárak útmutatója}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Meghatározza a további engedélyezett vagy tiltott címkéket. `true` az engedélyezéshez, `false` ​​a tiltáshoz.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Felhasználói eseménykezelők konfigurációja.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "A jelenleg használt eszköztár gombok listája"
+  },
+  "buttons_sub": {
+    "description": "A jelenleg használt aleszköztár gombjainak listája"
+  },
+  "toolbar_sub_width": {
+    "description": "Aleszköztár szélessége."
+  },
+  "reverseCommands": {
+    "description": "Fordított parancspárok tömbjének egyesítése.\n\n- Tartalmazza az alapértelmezett `indent-outdent` + a felhasználó `reverseButtons`_ értékét."
+  },
+  "codeMirror": {
+    "description": "CodeMirror konfigurációs objektum a `externalLibs.codeMirror`-ból."
+  },
+  "hasCodeMirror": {
+    "description": "A CodeMirrort használja a kód megtekintéséhez."
+  },
+  "audioGallery_data": {
+    "description": "Közvetlen adatok szerverhívások nélkül"
+  },
+  "audioGallery_url": {
+    "description": "Szerverkérelem URL-címe"
+  },
+  "audioGallery_headers": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Alapértelmezett bélyegkép"
+  },
+  "fileBrowser_data": {
+    "description": "Közvetlen adatok szerverhívások nélkül (megkerüli az URL-lehívást)."
+  },
+  "fileBrowser_url": {
+    "description": "Szerverkérelem URL-címe"
+  },
+  "fileBrowser_headers": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Alapértelmezett bélyegkép URL-címe vagy egy függvény, amely elemenként bélyegkép URL-címet ad vissza."
+  },
+  "fileBrowser_props": {
+    "description": "További címkenevek"
+  },
+  "fileGallery_data": {
+    "description": "Közvetlen adatok szerverhívások nélkül"
+  },
+  "fileGallery_url": {
+    "description": "Szerverkérelem URL-címe"
+  },
+  "fileGallery_headers": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Alapértelmezett bélyegkép"
+  },
+  "imageGallery_data": {
+    "description": "Közvetlen adatok szerverhívások nélkül"
+  },
+  "imageGallery_url": {
+    "description": "Szerverkérelem URL-címe"
+  },
+  "imageGallery_headers": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "videoGallery_data": {
+    "description": "Közvetlen adatok szerverhívások nélkül"
+  },
+  "videoGallery_url": {
+    "description": "Szerverkérelem URL-címe"
+  },
+  "videoGallery_headers": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Alapértelmezett bélyegkép"
+  },
+  "codeBlock_langs": {
+    "description": "Kódblokkokhoz kiválasztható programozási nyelvek listája.\n- Alapértelmezés szerint 21 gyakori nyelv\n- [javascript, Typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- A nyelvválasztó felhasználói felület teljes letiltásához üres tömbre kell állítani a `[]` értéket."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Szerverkérelem URL-címe PDF generálásához"
+  },
+  "exportPDF_fileName": {
+    "description": "A létrehozott PDF fájl neve"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Szerverkérelem URL-címe fájlfeltöltéshez"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Szerverkérelem fejlécek"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Teljes feltöltési méretkorlát bájtban"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Egy fájl méretkorlátja bájtban"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Több fájl feltöltésének engedélyezése"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Elfogadott fájlformátumok."
+  },
+  "fileUpload_as": {
+    "description": "Adja meg a fájlkomponens alapértelmezett formátumát `box` vagy `link` ​​formátumban."
+  },
+  "fileUpload_controls": {
+    "description": "További vezérlők hozzáadhatók az ábrához"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként kijelöli a komponenst.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
+  },
+  "align_items": {
+    "description": "Elemek igazítása"
+  },
+  "backgroundColor_items": {
+    "description": "Színlista."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Színek száma soronként"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "HEX bemenet letiltása"
+  },
+  "blockStyle_items": {
+    "description": "Formátumlista.\n- `command` — `\"line\"`: egysoros blokk, `\"br-line\"`: br-elválasztott blokk, `\"block\"`: konténerblokk."
+  },
+  "font_items": {
+    "description": "Betűtípusok listája"
+  },
+  "fontColor_items": {
+    "description": "Színlista."
+  },
+  "fontColor_splitNum": {
+    "description": "Színek száma soronként"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "HEX bemenet letiltása"
+  },
+  "hR_items": {
+    "description": "HR-lista"
+  },
+  "layout_items": {
+    "description": "Elrendezéslista. Minden elem egy elnevezett elrendezéssablont határoz meg nyers HTML-lel."
+  },
+  "lineHeight_items": {
+    "description": "Sormagasság lista"
+  },
+  "paragraphStyle_items": {
+    "description": "Bekezdés elemeinek listája"
+  },
+  "table_scrollType": {
+    "description": "Görgetési típus (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Felirat pozíciója (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Cellavezérlő pozíciója (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX színlista a cella háttérszín-választójához."
+  },
+  "template_items": {
+    "description": "Sablonlista"
+  },
+  "textStyle_items": {
+    "description": "Szövegstílus elemlista."
+  },
+  "mention_triggerText": {
+    "description": "A karakter, aki kiváltja az említési listát."
+  },
+  "mention_limitSize": {
+    "description": "A megemlítési listában megjelenítendő elemek száma"
+  },
+  "mention_searchStartLength": {
+    "description": "A megemlítési lista keresésének megkezdéséhez szükséges karakterek száma"
+  },
+  "mention_delayTime": {
+    "description": "A megemlítési lista megjelenítése előtti várakozási idő"
+  },
+  "mention_data": {
+    "description": "Statikus említési adatok (API helyett használva)."
+  },
+  "mention_apiUrl": {
+    "description": "Az URL, amelyen keresztül a megemlítési lista meghívható"
+  },
+  "mention_apiHeaders": {
+    "description": "Az API-hívással küldendő fejlécek"
+  },
+  "mention_useCachingData": {
+    "description": "Hogy a megemlítési lista adatait gyorsítótárazzák-e"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Hogy a mezőben gyorsítótárazzák-e az említési lista adatait"
+  },
+  "fontSize_sizeUnit": {
+    "description": "A betűméret mértékegysége.\n\n- Elfogadott értékek: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` vagy `'text'`.\n\n- Ha `'text'` van használatban, akkor szövegalapú betűméret-lista kerül alkalmazásra."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Meghatározza, hogy az alapértelmezett méretcímke megjelenjen-e a legördülő menüben."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Ha `true`, akkor a betűméret módosításához megjeleníti a növelés és csökkentés gombokat.\n\n- Alapértelmezés szerint `false`. Mindig `false`, ha `sizeUnit` `'text'` (figyelmen kívül hagyva)."
+  },
+  "fontSize_disableInput": {
+    "description": "Ha `true` van beállítva, akkor letiltja a közvetlen betűméret-beviteli mezőt.\n\n- Alapértelmezés szerint `true`, ha `sizeUnit` értéke `'text'`, egyébként `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "A betűméretek alapértelmezett mértékegység-leképezésének felülbírálása vagy kiterjesztése."
+  },
+  "audio_defaultWidth": {
+    "description": "A `AUDIO` címke alapértelmezett szélessége."
+  },
+  "audio_defaultHeight": {
+    "description": "A `AUDIO` címke alapértelmezett magassága."
+  },
+  "audio_createFileInput": {
+    "description": "Létre kell-e hozni egy fájl bemeneti elemet."
+  },
+  "audio_createUrlInput": {
+    "description": "Létre kell-e hozni egy URL bemeneti elemet.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "Az URL, ahová a fájlok feltöltésre kerülnek."
+  },
+  "audio_uploadHeaders": {
+    "description": "A fájlfeltöltési kérelemben szerepeltetendő fejlécek."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "A teljes feltöltési méretkorlát bájtban."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Az egyetlen fájl méretkorlátja bájtban."
+  },
+  "audio_allowMultiple": {
+    "description": "Engedélyezi-e több fájl feltöltését."
+  },
+  "audio_acceptedFormats": {
+    "description": "Elfogadott fájlformátumok (alapértelmezett: `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "További attribútumok, amelyeket be kell állítani a `AUDIO` címkén."
+  },
+  "audio_insertBehavior": {
+    "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként kijelöli a komponenst.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
+  },
+  "drawing_outputFormat": {
+    "description": "A rajz kimeneti formátuma. Lehetőségek: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Engedélyezett formátumtípus-kiválasztás (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Az alapértelmezett formátumtípus, amely lehet `\"block\"` vagy `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Megőrzi-e a kiválasztott formátumtípust a rajzolás után."
+  },
+  "drawing_lineWidth": {
+    "description": "A rajzvonal szélessége."
+  },
+  "drawing_lineReconnect": {
+    "description": "Hogy rajzoláskor újra kell-e húzni a vonalakat."
+  },
+  "drawing_lineCap": {
+    "description": "A vonalvég stílusa (`\"butt\"`, `\"round\"` ​​vagy `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "A rajzvonal színe."
+  },
+  "drawing_canResize": {
+    "description": "Átméretezhető-e a modális űrlap."
+  },
+  "drawing_maintainRatio": {
+    "description": "Megőrizze-e a képarányt átméretezéskor."
+  },
+  "drawing_formSize": {
+    "description": "A rajz modális űrlapjának méretkonfigurációja."
+  },
+  "embed_canResize": {
+    "description": "Átméretezhető-e a beágyazott elem."
+  },
+  "embed_showHeightInput": {
+    "description": "Megjelenítse-e a magasság beviteli mezőt."
+  },
+  "embed_defaultWidth": {
+    "description": "A beágyazási elem alapértelmezett szélessége (numerikus érték vagy mértékegység)."
+  },
+  "embed_defaultHeight": {
+    "description": "A beágyazott elem alapértelmezett magassága (numerikus érték vagy mértékegység)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Csak százalékos alapú méretezést engedélyezzen-e."
+  },
+  "embed_uploadUrl": {
+    "description": "A fájlfeltöltések URL-címe."
+  },
+  "embed_uploadHeaders": {
+    "description": "A fájlfeltöltési kérelmekben szerepeltetendő fejlécek."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "A teljes feltöltendő fájlméret korlátja bájtban."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Az egy fájl feltöltésének méretkorlátja bájtban."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "További attribútumok, amelyeket be kell állítani a `IFRAME` címkén."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube lekérdezési paraméter hozzáfűzve a beágyazási URL-hez."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo lekérdezési paraméter hozzáfűzve a beágyazási URL-hez."
+  },
+  "embed_urlPatterns": {
+    "description": "További URL-minták, amelyeket beágyazható tartalomként kell felismerni."
+  },
+  "embed_embedQuery": {
+    "description": "Egyéni beágyazási szolgáltatásdefiníciók."
+  },
+  "embed_controls": {
+    "description": "Ábravezérlők."
+  },
+  "embed_insertBehavior": {
+    "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként kijelöli a komponenst.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
+  },
+  "image_canResize": {
+    "description": "Átméretezhető-e a képelem."
+  },
+  "image_showHeightInput": {
+    "description": "Megjelenítse-e a magasság beviteli mezőt."
+  },
+  "image_defaultWidth": {
+    "description": "A kép alapértelmezett szélessége. Ha számot ad meg, akkor a `\"px\"` hozzáfűződik."
+  },
+  "image_defaultHeight": {
+    "description": "A kép alapértelmezett magassága. Ha számot ad meg, akkor a `\"px\"` hozzáfűződik."
+  },
+  "image_percentageOnlySize": {
+    "description": "Csak százalékos alapú méretezést engedélyezzen-e."
+  },
+  "image_createFileInput": {
+    "description": "Létre kell-e hozni egy fájlbeviteli elemet a képfeltöltésekhez."
+  },
+  "image_createUrlInput": {
+    "description": "Létre kell-e hozni egy URL bemeneti elemet a kép beszúrásához.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
+  },
+  "image_uploadUrl": {
+    "description": "A képfájlok feltöltésének URL-végpontja."
+  },
+  "image_uploadHeaders": {
+    "description": "További fejlécek, amelyeket a fájlfeltöltési kérelemben szerepeltetni kell."
+  },
+  "image_uploadSizeLimit": {
+    "description": "A teljes feltöltési méretkorlát bájtban."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Az egy fájl feltöltésének méretkorlátja bájtban."
+  },
+  "image_allowMultiple": {
+    "description": "Több kép feltöltése engedélyezett-e."
+  },
+  "image_acceptedFormats": {
+    "description": "A képfeltöltéshez elfogadott fájlformátumok."
+  },
+  "image_useFormatType": {
+    "description": "Engedélyezett formátumtípus-kiválasztás (`block` vagy `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Az alapértelmezett képformátum típusa (`\"block\"` vagy `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Megőrzi-e a kiválasztott formátumtípust a kép beszúrása után."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Engedélyezett-e a csatolt képek fájlfeltöltése."
+  },
+  "image_controls": {
+    "description": "Ábravezérlők."
+  },
+  "image_insertBehavior": {
+    "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- Beágyazott komponensek esetén: a kurzort a komponens közelébe helyezi, vagy kiválaszt, ha nincs közeli tartomány.\n- Blokk komponensek esetén: a `selectMode` ​​alapján végrehajtja a viselkedést:\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként a komponenst jelöli ki.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
+  },
+  "link_uploadUrl": {
+    "description": "A fájlfeltöltések URL-végpontja."
+  },
+  "link_uploadHeaders": {
+    "description": "További fejlécek a fájlfeltöltési kérelmekhez."
+  },
+  "link_uploadSizeLimit": {
+    "description": "A teljes feltöltendő fájlméret korlátja bájtban."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Az egy fájl feltöltésének méretkorlátja bájtban."
+  },
+  "link_acceptedFormats": {
+    "description": "Elfogadott fájlformátumok linkek feltöltéséhez."
+  },
+  "link_title": {
+    "description": "Modális cím megjelenítése."
+  },
+  "link_textToDisplay": {
+    "description": "Szöveg létrehozása a bemenet megjelenítéséhez."
+  },
+  "link_openNewWindow": {
+    "description": "Az „Új ablakban megnyitás” jelölőnégyzet alapértelmezett bejelölt értéke."
+  },
+  "link_noAutoPrefix": {
+    "description": "Ha `true`, akkor letiltja a gazda URL-címének automatikus előtaggal való kiegészítését a hivatkozás értékéhez."
+  },
+  "link_relList": {
+    "description": "Az elérhető `rel` attribútumértékek jelölőnégyzetekként jelennek meg a hivatkozás modális ablakában."
+  },
+  "link_defaultRel": {
+    "description": "Az alapértelmezett `rel` értékek feltétel szerint automatikusan alkalmazva."
+  },
+  "link_enableFileUpload": {
+    "description": "Ha `true`, akkor engedélyezi a fájl feltöltését."
+  },
+  "math_canResize": {
+    "description": "Átméretezhető-e a matematikai modális függvény."
+  },
+  "math_autoHeight": {
+    "description": "A modális ablak magasságának automatikus beállítása."
+  },
+  "math_fontSizeList": {
+    "description": "A matematikai kifejezés méretválasztójának betűméret-beállításainak listája."
+  },
+  "math_onPaste": {
+    "description": "Visszahívó függvény a matematikai beviteli területen a beillesztési események kezeléséhez."
+  },
+  "math_formSize": {
+    "description": "Egy objektum, amely a matematikai modális függvény méreteit adja meg."
+  },
+  "video_canResize": {
+    "description": "Átméretezhető-e a videó elem."
+  },
+  "video_showHeightInput": {
+    "description": "Megjelenítse-e a magasság beviteli mezőt."
+  },
+  "video_defaultWidth": {
+    "description": "A videó elem alapértelmezett szélessége. Ha számot adunk meg, akkor a `\"px\"` lesz hozzáfűzve."
+  },
+  "video_defaultHeight": {
+    "description": "A videó elem alapértelmezett magassága. Ha meg van adva egy szám, akkor a `\"px\"` hozzáfűződik."
+  },
+  "video_percentageOnlySize": {
+    "description": "Csak százalékos alapú méretezést engedélyezzen-e."
+  },
+  "video_createFileInput": {
+    "description": "Létre kell-e hozni egy fájlbeviteli elemet a videófeltöltésekhez."
+  },
+  "video_createUrlInput": {
+    "description": "Létre kell-e hozni egy URL bemeneti elemet a videó beágyazásához.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
+  },
+  "video_uploadUrl": {
+    "description": "A videofájlok feltöltésének URL-végpontja."
+  },
+  "video_uploadHeaders": {
+    "description": "További fejlécek, amelyeket a videó feltöltési kérésében szerepeltetni kell."
+  },
+  "video_uploadSizeLimit": {
+    "description": "A videók teljes feltöltési méretkorlátja bájtban."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "A videók feltöltésének egyetlen fájlméretének korlátja bájtban."
+  },
+  "video_allowMultiple": {
+    "description": "Több videó feltöltése engedélyezett-e."
+  },
+  "video_acceptedFormats": {
+    "description": "Elfogadott fájlformátumok videófeltöltéshez (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "A videó alapértelmezett képaránya (magasság/szélesség, pl. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Megjelenítse-e az arány opciót a modális ablakban."
+  },
+  "video_ratioOptions": {
+    "description": "Egyéni aránybeállítások a videó átméretezéséhez (érték = magasság/szélesség)."
+  },
+  "video_videoTagAttributes": {
+    "description": "További attribútumok, amelyeket be kell állítani a `VIDEO` címkén."
+  },
+  "video_iframeTagAttributes": {
+    "description": "További attribútumok, amelyeket be kell állítani a `IFRAME` címkén."
+  },
+  "video_query_youtube": {
+    "description": "További lekérdezési paraméterek YouTube-beágyazáshoz."
+  },
+  "video_query_vimeo": {
+    "description": "További lekérdezési paraméterek a Vimeo beágyazásához."
+  },
+  "video_embedQuery": {
+    "description": "Egyéni beágyazási szolgáltatásdefiníciók (lásd `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "További URL-minták videóbeágyazáshoz."
+  },
+  "video_extensions": {
+    "description": "További fájlkiterjesztések, amelyeket a videófeltöltéseknél fel kell ismerni."
+  },
+  "video_controls": {
+    "description": "Ábravezérlők."
+  },
+  "video_insertBehavior": {
+    "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként kijelöli a komponenst.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
+  }
+}

@@ -21,7 +21,7 @@ import {
 	isFixedOption,
 	getButtonList,
 } from "./_lib/playgroundState";
-import { editorLangCodes } from "@/i18n/languages";
+import { localeCodes, toEditorCode } from "@/i18n/languages";
 import PlaygroundControls, { PlaygroundPerRootPanel } from "./_components/PlaygroundControls";
 import PlaygroundPluginSidebar from "./_components/PlaygroundPluginSidebar";
 import dynamic from "next/dynamic";
@@ -92,7 +92,7 @@ export default function PlaygroundPage() {
 	const t = useTranslations("Playground");
 	const tc = useTranslations("Common");
 	const locale = useLocale();
-	const initialLang = locale !== "en" && editorLangCodes.includes(locale) ? locale : "";
+	const initialLang = locale !== "en" && localeCodes.includes(locale) ? toEditorCode(locale) : "";
 	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, toolbar_sticky: HEADER_HEIGHT });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);

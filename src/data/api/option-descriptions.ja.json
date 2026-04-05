@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "エディタの初期値。",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "プレースホルダーテキスト。",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "編集可能なフレーム[.sun-editor-editable]の属性。\n\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "エディターの幅。",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "エディタの最小幅。",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "エディタの最大幅。",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "編集者向けの高さ。",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "エディタの最小高さ。",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "エディタの最大高さ。",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "エディタのトップフレームのスタイル文字列。\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "コンテンツはiframe内に配置され、ページの他の部分から隔離されます。",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "`iframe` 上で HTML、HEAD、BODY タグおよび DOCTYPE 宣言の使用を許可します。",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe` の属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "ステータスバーを有効にします。",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "ステータスバーに現在のノード構造を表示します。",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "下部ステータスバーのサイズ変更機能を有効にします。",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "エディタ内の文字数を表示します。\n\n- `maxCharCount` オプションに値が設定されている場合は、`true` になります。",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "エディタに入力できる最大文字数。",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "下部バーの`charCounter`領域に表示されるテキスト。\n\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "`charCounter` オプションの計算方法を定義します。\n\n- `char`: 文字数。\n\n- `byte`: 文字のバイナリデータサイズ。\n\n- `byte-html`: HTML 文字列全体のバイナリデータサイズ。",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "エディタ内の単語数を表示します。",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "下部バーの`wordCounter`領域に表示されるテキスト。\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "上部コンテナに適用されるスタイル（例：幅、z-indexなど）。"
+  },
+  "frame": {
+    "description": "iframeコンテナに適用されるスタイル（例：高さ、最小高さ）。"
+  },
+  "editor": {
+    "description": "編集可能なコンテンツ領域に適用されるスタイル。"
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirrorエディタインスタンス（フレームレベル）。初期化後に`_checkCodeMirror`によって設定されます。"
+  },
+  "plugins": {
+    "description": "プラグイン設定。プラグインクラスの配列、またはプラグイン名をキーとするオブジェクトを渡してください。\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "ツールバーボタンの一覧。サブ配列ごとにグループ化されています。\n\n- デフォルトは {@link DEFAULTS.BUTTON_LIST} に従います。",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "SunEditor v2の移行モードを有効にします。",
+    "default": "false"
+  },
+  "mode": {
+    "description": "ツールバーモード：`classic`、`inline`、`balloon`、`balloon-always`。ツールバーを下部に配置するには、`:bottom`を追加します（例：`classic:bottom`、`inline:bottom`）。",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "エディタの種類。ドキュメントスタイルのレイアウトには `\"document\"` を使用し、`:` の後にオプションのサブタイプを指定できます。\n\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "エディターテーマ。",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "言語設定。デフォルト：EN"
+  },
+  "icons": {
+    "description": "デフォルトのアイコンを上書きします。"
+  },
+  "textDirection": {
+    "description": "テキストの方向：`ltr` または `rtl`。",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "タグ、属性、スタイルの厳密なフィルタリングを有効にします。\n\n- すべてのフィルタを有効にするには `true` を使用します（デフォルト）。個々のフィルタを制御するにはオブジェクトを使用します。\n\n- `false` の設定はサポートされていません。特定のフィルタを無効にするには、オブジェクト形式を使用してください。\n\n- :フィルタの説明\n- `tagFilter`: 許可されていない HTML タグ (`elementWhitelist`/`elementBlacklist`) をフィルタリングします\n- `formatFilter`: 書式要素 (`formatLine`/`formatBlock`) をフィルタリングします\n- `classFilter`: 許可されていない CSS クラス名 (`allowedClassName`) をフィルタリングします\n- `textStyleTagFilter`: テキストスタイルタグ (b、i、u、span など) をフィルタリングします\n- `attrFilter`: 許可されていない HTML 属性 (`attributeWhitelist`/`attributeBlacklist`) をフィルタリングします\n- `styleFilter`: 許可されていないインラインスタイル (`spanStyles`/`lineStyles`/`allUsedStyles`) をフィルタリングします\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "コンテンツ全体を選択した場合、タグは単位として扱われます。\n\n- デフォルトは {@link DEFAULTS.SCOPE_SELECTION_TAGS} に従います。",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "デフォルトの許可リストに加えて、許可するHTML要素を指定します。区切り文字：`\"|\"`。\n\n- {@link PrivateBaseOptions.__defaultElementWhitelist}で決定されるデフォルトリストに追加されます。\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "使用すべきでないHTML要素を指定します。区切り文字：`\"|\"`。\n\n- ここで指定されたタグは、他のホワイトリストに含まれていても、最終的には削除されます。\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "値が空であっても保持が許可されるタグのリスト。\n\n- デフォルト値は {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} に従います。\n- `ALLOWED_EMPTY_NODE_LIST` と連結され、最終的な `allowedEmptyTags` リストが作成されます。",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "許可されるクラス名。\n\n- デフォルト値 {@link DEFAULTS.CLASS_NAME} を追加しました。",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "各タグに許可する追加属性を指定します。`\"*\"` はすべてのタグに適用されます。\n\n- ここで指定されたルールは {@link PrivateBaseOptions.__defaultAttributeWhitelist} にマージされます。\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "タグごとに禁止する属性を指定します。`\"*\"` はすべてのタグに適用されます。\n\n- ここで指定された属性は、他の設定で許可されている場合でも、最終的には削除されます。\n\n- 必須要素のリスト {@link DEFAULTS.REQUIRED_FORMAT_LINE} は常に含まれます。\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "追加のテキストスタイルタグ。\n\n- デフォルトでは {@link PrivateBaseOptions.__textStyleTags} に従います。",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "テキストスタイルを特定のHTMLタグにマッピングします。\n\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "許可されたスタイルリストに追加のスタイルを指定します。区切り文字：`\"|\"`。\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "HTMLタグに許可されるスタイルを指定します。キーはタグ名、値はパイプ区切りの許可スタイルです。\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "`span` タグに許可されるスタイルを指定します。\n\n- デフォルトは {@link DEFAULTS.SPAN_STYLES} に従います。",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "`line`要素（p..）に許可されるスタイルを指定します。\n\n- デフォルトは{@link DEFAULTS.LINE_STYLES}に従います。",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "使用可能なフォントサイズ単位。\n\n- デフォルト値は {@link DEFAULTS.SIZE_UNITS} に従います。",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "テキスト削除時にインライン要素（例：`<span>`、`<strong>`）がどのように処理されるかを決定します。\n\n- `repeat`：バックスペースキーを繰り返し押さない限り、スタイルは保持されます。\n\n- バックスペースキーを繰り返し押すと、最終的にスタイルが削除されます。\n\n- `none`：スタイルは保持されません。インライン要素はテキストとともに即座に削除されます。\n\n- `always`：明示的に削除しない限り、スタイルは永続的に保持されます。\n\n- インライン要素内のテキストがすべて削除されても、要素自体は残ります。",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "新しい行を挿入する際のデフォルトの`line`要素。",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "デフォルトの改行形式を指定します。\n\n- [推奨] `line`：改行は一般的なタグに分割されます。\n\n- [非推奨] `br`：改行は同じ行内の<br>として扱われます（Shift+Enterと同様）。\n- `line`内では、改行は<br>として扱われます。\n\n- 改行を2回連続して入力すると、新しい`line`を作成できます。\n\n- 「引用」など、`line`を含む形式は、引き続き`line`に基づいて動作します。\n\n- suneditorプロセスは`line`単位で動作します。\n\n- `br`に設定すると、大量のデータを編集する際にパフォーマンスが低下する場合があります。",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "行を変更する際にリセットする必要のある行プロパティ。区切り文字：`\"|\"`。\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "さらに、デフォルト以外の`line`要素も許可されています。区切り文字：`\"|\"`。\n\n- {@link PrivateBaseOptions.__defaultFormatLine}と連結して、最終的な`line`リストを作成します。\n\n- `line`要素には`brLine`要素も含まれます。\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "さらに、デフォルト以外の `brLine` 要素も許可されます。\n\n- {@link PrivateBaseOptions.__defaultFormatBrLine} と連結して、最終的な `brLine` リストを形成します。\n\n- `brLine` 要素は `line` 要素に含まれます。\n\n- `brLine` 要素の改行は `BR` タグです。\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "さらに、デフォルト以外の `closureBrLine` 要素も許可されます。\n\n- 最終的な `closureBrLine` リストは、{@link PrivateBaseOptions.__defaultFormatClosureBrLine} と連結されます。\n\n- `closureBrLine` 要素は `brLine` に含まれます。\n\n- `closureBrLine` 要素の改行は `BR` タグです。\n\n- ※ Enter キーまたは Backspace キーでこの書式を終了することはできません。\n\n- ※ 特殊なケースでのみ使用してください。（例：表のセルの書式設定）",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "さらに、デフォルト以外の `block` 要素も許可しました。\n\n- {@link PrivateBaseOptions.__defaultFormatBlock} と連結して、最終的な `block` リストを作成します。\n\n- `block` は `line` と `component` をラップします。",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "さらに、デフォルト以外の `closureBlock` 要素も許可されます。\n\n- 最終的な `closureBlock` リストは、{@link PrivateBaseOptions.__defaultFormatClosureBlock} と連結されます。\n\n- `closureBlock` 要素は `block` に含まれます。\n\n- `closureBlock` 要素は `line` と `component` を囲みます。\n\n- ※ Enter キーまたは Backspace キーでこの書式を終了することはできません。\n\n- ※ 特殊なケース（例：表のセルの書式設定）でのみ使用してください。",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "モーダルウィンドウの外側をクリックすると閉じます。",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "タブインデントをスペースと同期させます。",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "タブキーの入力を無効にします。",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "ツールバーの幅。",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "ツールバーのコンテナ要素。"
+  },
+  "toolbar_sticky": {
+    "description": "ツールバーを固定表示します。\n\n- `number`: 固定表示の上端位置 (px) を設定します。固定表示を無効にするには `-1` を使用します。\n\n- `{top, offset}`: `top` は、ページヘッダーが表示されているときの固定位置です。\n\n- `offset` は、仮想キーボードによってビューポートが移動したとき (タブレットやタッチデバイスなど) の固定位置です。\n\n- 仮想キーボードがアクティブな場合、`offset` が `top` に置き換わり、ツールバーに隙間ができないようにします。\n- ページヘッダーが画面外にスクロールアウトした場合。デフォルトの `offset` は `0` です。\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "初期状態ではツールバーを非表示にします。",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "サブツールバーの設定。テキスト選択時に表示される補助ツールバー。",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "ステータスバーのコンテナ要素。"
+  },
+  "shortcutsHint": {
+    "description": "ツールチップにショートカットのヒントを表示します。",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "キーボードショートカットを無効にします。",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "カスタムキーボードショートカット。\n\n- `_` で始まるキーは、ユーザー定義のカスタムショートカットです。各値は `[keyCombo, hintLabel]` のペアの配列です。\n\n- キーの組み合わせは、`c` (Ctrl/Cmd)、`s` (Shift)、および `KeyEvent.code` の値を `+` で結合して使用します。\n\n- `$~pluginName.method` を使用して、特定のプラグインメソッドを呼び出します。\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "コピーしたコンテンツのフォーマットを保持します。",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "URLを自動的にハイパーリンクに変換します。（`Link`プラグインが必要です）\n- デフォルト：`Boolean(plugins.link)` — `link`プラグインが有効になっているかどうかによって決まります。"
+  },
+  "historyStackDelayTime": {
+    "description": "履歴スタックの更新にかかる遅延時間（ミリ秒）。",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "ルートフレームあたりの履歴エントリの最大数。上限を超えた場合、最も古いエントリが破棄されます。",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "印刷用のクラス名。",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "フルスクリーンモードに入ったときにオフセットが適用されます。",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "プレビューモード用のカスタムHTMLテンプレート。エディターコンテンツのプレースホルダーとして`{{ contents }}`を使用してください。",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "印刷モード用のカスタムHTMLテンプレート。エディタコンテンツのプレースホルダーとして`{{ contents }}`を使用してください。\n\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "挿入されたコンポーネントの自動選択を有効にします。\n\n- インラインコンポーネントの場合：コンポーネントの近くにカーソルを配置します。近くに範囲がない場合は、コンポーネントを選択します。\n\n- ブロックコンポーネントの場合：`selectMode`に基づいて動作を実行します。\n- `auto`：可能であればカーソルを次の行に移動します。移動できない場合は、コンポーネントを選択します。\n\n- `select`：常に挿入されたコンポーネントを選択します。\n\n- `line`：可能であればカーソルを次の行に移動します。移動できない場合は、新しい行を作成してそこに移動します。\n\n- `none`：何もしません。",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "リンクに使用されるデフォルトのURLプロトコル。",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "トーストメッセージを表示する時間（ミリ秒）。",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "フリーコード表示モードを有効にします。",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "組み込みの検索/置換パネルのユーザーインターフェースを表示します。\n\n- 検索機能は常に内部的に作成されます。このオプションは、パネルをユーザー（Ctrl+F / Ctrl+H）に表示するかどうかを制御します。",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "入力と同時に検索を実行します（デバウンス処理済み）。falseに設定すると、Enterキーを押したときのみ検索が実行されます。",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "CodeMirror、KaTeX、MathJaxなどの外部ライブラリ。\n\n- {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md 外部ライブラリガイド} を参照してください。\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "許可または禁止する追加タグを指定します。`true` は許可、`false` は禁止です。\n\n- デフォルトは {@link DEFAULTS.EXTRA_TAG_MAP} に従います。\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "ユーザーイベントハンドラーの設定。\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "現在使用されているツールバーボタンの一覧"
+  },
+  "buttons_sub": {
+    "description": "現在使用されているサブツールバーボタンの一覧"
+  },
+  "toolbar_sub_width": {
+    "description": "サブツールバーの幅。"
+  },
+  "reverseCommands": {
+    "description": "リバースコマンドペア配列を統合しました。\n\n- デフォルトの`indent-outdent`とユーザーの`reverseButtons`が含まれます。"
+  },
+  "codeMirror": {
+    "description": "`externalLibs.codeMirror` からの CodeMirror 設定オブジェクト。"
+  },
+  "hasCodeMirror": {
+    "description": "コード表示にはCodeMirrorを使用します。"
+  },
+  "audioGallery_data": {
+    "description": "サーバー呼び出しなしの直接データ"
+  },
+  "audioGallery_url": {
+    "description": "サーバーリクエストURL"
+  },
+  "audioGallery_headers": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "audioGallery_thumbnail": {
+    "description": "デフォルトのサムネイル"
+  },
+  "fileBrowser_data": {
+    "description": "サーバー呼び出しなしの直接データ取得（URL取得をバイパス）。"
+  },
+  "fileBrowser_url": {
+    "description": "サーバーリクエストURL"
+  },
+  "fileBrowser_headers": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "デフォルトのサムネイルURL、またはアイテムごとにサムネイルURLを返す関数。"
+  },
+  "fileBrowser_props": {
+    "description": "追加のタグ名"
+  },
+  "fileGallery_data": {
+    "description": "サーバー呼び出しなしの直接データ"
+  },
+  "fileGallery_url": {
+    "description": "サーバーリクエストURL"
+  },
+  "fileGallery_headers": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "fileGallery_thumbnail": {
+    "description": "デフォルトのサムネイル"
+  },
+  "imageGallery_data": {
+    "description": "サーバー呼び出しなしの直接データ"
+  },
+  "imageGallery_url": {
+    "description": "サーバーリクエストURL"
+  },
+  "imageGallery_headers": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "videoGallery_data": {
+    "description": "サーバー呼び出しなしの直接データ"
+  },
+  "videoGallery_url": {
+    "description": "サーバーリクエストURL"
+  },
+  "videoGallery_headers": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "videoGallery_thumbnail": {
+    "description": "デフォルトのサムネイル"
+  },
+  "codeBlock_langs": {
+    "description": "コードブロックで選択可能なプログラミング言語の一覧。\n\n- デフォルトでは21種類の一般的な言語が選択可能です。\n- [javascript、typescript、html、css、json、python、java、c、cpp、csharp、go、rust、ruby、php、swift、kotlin、sql、bash、markdown、xml、yaml]。\n\n- 言語選択UIを完全に無効にするには、空の配列`[]`を設定してください。"
+  },
+  "exportPDF_apiUrl": {
+    "description": "PDF生成のためのサーバーリクエストURL"
+  },
+  "exportPDF_fileName": {
+    "description": "生成されたPDFファイルの名前"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "ファイルアップロード用のサーバーリクエストURL"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "サーバーリクエストヘッダー"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "合計アップロードサイズ制限（バイト単位）"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "単一ファイルのサイズ制限（バイト単位）"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "複数のファイルアップロードを許可する"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "対応ファイル形式。"
+  },
+  "fileUpload_as": {
+    "description": "ファイルコンポーネントのデフォルト形式を`box`または`link`として指定します。"
+  },
+  "fileUpload_controls": {
+    "description": "図に追加される追加のコントロール"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- `auto`: 可能であればカーソルを次の行に移動します。移動できない場合は、コンポーネントを選択します。\n\n- `select`: 挿入したコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。移動できない場合は、新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
+  },
+  "align_items": {
+    "description": "アイテムを整列させる"
+  },
+  "backgroundColor_items": {
+    "description": "カラーリスト。"
+  },
+  "backgroundColor_splitNum": {
+    "description": "1行あたりの色の数"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "HEX入力を無効にする"
+  },
+  "blockStyle_items": {
+    "description": "書式リスト。\n\n- `command` — `\"line\"`: 単一行ブロック、`\"br-line\"`: br区切りブロック、`\"block\"`: コンテナブロック。"
+  },
+  "font_items": {
+    "description": "フォント一覧"
+  },
+  "fontColor_items": {
+    "description": "カラーリスト。"
+  },
+  "fontColor_splitNum": {
+    "description": "1行あたりの色の数"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "HEX入力を無効にする"
+  },
+  "hR_items": {
+    "description": "人事担当者一覧"
+  },
+  "layout_items": {
+    "description": "レイアウト一覧。各項目は、名前付きのレイアウトテンプレートを生のHTMLで定義します。"
+  },
+  "lineHeight_items": {
+    "description": "行の高さリスト"
+  },
+  "paragraphStyle_items": {
+    "description": "段落項目リスト"
+  },
+  "table_scrollType": {
+    "description": "スクロールタイプ（`x`、`y`、`xy`）"
+  },
+  "table_captionPosition": {
+    "description": "キャプションの位置（`top`、`bottom`）"
+  },
+  "table_cellControllerPosition": {
+    "description": "セルコントローラの位置（`cell`、`table`）"
+  },
+  "table_colorList": {
+    "description": "セル背景色選択ツールで使用する16進数カラーリスト。"
+  },
+  "template_items": {
+    "description": "テンプレート一覧"
+  },
+  "textStyle_items": {
+    "description": "テキスト形式のアイテムリスト。"
+  },
+  "mention_triggerText": {
+    "description": "メンションリストのトリガーとなるキャラクター。"
+  },
+  "mention_limitSize": {
+    "description": "メンションリストに表示する項目の数"
+  },
+  "mention_searchStartLength": {
+    "description": "メンションリストの検索を開始する文字数"
+  },
+  "mention_delayTime": {
+    "description": "メンションリストを表示するまでの待機時間"
+  },
+  "mention_data": {
+    "description": "静的なメンションデータ（APIの代わりに使用）。"
+  },
+  "mention_apiUrl": {
+    "description": "メンションリストを呼び出すためのURL"
+  },
+  "mention_apiHeaders": {
+    "description": "API呼び出しで送信するヘッダー"
+  },
+  "mention_useCachingData": {
+    "description": "メンションリストデータをキャッシュするかどうか"
+  },
+  "mention_useCachingFieldData": {
+    "description": "メンションリストデータをフィールドにキャッシュするかどうか"
+  },
+  "fontSize_sizeUnit": {
+    "description": "フォントサイズの単位。\n\n- 指定可能な値は、`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'`、`'text'`です。\n\n- `'text'`を指定した場合、テキストベースのフォントサイズリストが適用されます。"
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "ドロップダウンメニューにデフォルトのサイズラベルを表示するかどうかを決定します。"
+  },
+  "fontSize_showIncDecControls": {
+    "description": "`true` の場合、フォントサイズ調整用の拡大・縮小ボタンが表示されます。\n\n- デフォルトは `false` です。`sizeUnit` が `'text'` の場合（無視）、常に `false` になります。"
+  },
+  "fontSize_disableInput": {
+    "description": "`true` の場合、フォントサイズを直接入力するボックスを無効にします。\n\n- `sizeUnit` が `'text'` の場合はデフォルトで `true` になり、それ以外の場合は `false` になります。"
+  },
+  "fontSize_unitMap": {
+    "description": "フォントサイズのデフォルトの単位マッピングを上書きまたは拡張します。"
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO`タグのデフォルトの幅。"
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO` タグのデフォルトの高さ。"
+  },
+  "audio_createFileInput": {
+    "description": "ファイル入力要素を作成するかどうか。"
+  },
+  "audio_createUrlInput": {
+    "description": "URL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
+  },
+  "audio_uploadUrl": {
+    "description": "ファイルがアップロードされるURL。"
+  },
+  "audio_uploadHeaders": {
+    "description": "ファイルアップロードリクエストに含めるヘッダー。"
+  },
+  "audio_uploadSizeLimit": {
+    "description": "アップロードできる合計サイズの上限（バイト単位）。"
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "単一ファイルのサイズ制限（バイト単位）。"
+  },
+  "audio_allowMultiple": {
+    "description": "複数ファイルのアップロードを許可するかどうか。"
+  },
+  "audio_acceptedFormats": {
+    "description": "対応ファイル形式（デフォルトは`\"audio/*\"`）。"
+  },
+  "audio_audioTagAttributes": {
+    "description": "`AUDIO`タグに設定する追加属性。"
+  },
+  "audio_insertBehavior": {
+    "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- `auto`: 可能であればカーソルを次の行に移動します。移動できない場合は、コンポーネントを選択します。\n\n- `select`: 挿入したコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。移動できない場合は、新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
+  },
+  "drawing_outputFormat": {
+    "description": "図面の出力形式。オプション：`\"dataurl\"`、`\"svg\"`。"
+  },
+  "drawing_useFormatType": {
+    "description": "フォーマットタイプの選択（`block` 対 `inline`）を有効にするかどうか。"
+  },
+  "drawing_defaultFormatType": {
+    "description": "デフォルトのフォーマットタイプは、`\"block\"` または `\"inline\"` のいずれかです。"
+  },
+  "drawing_keepFormatType": {
+    "description": "描画後に選択したフォーマットタイプを維持するかどうか。"
+  },
+  "drawing_lineWidth": {
+    "description": "描画線の幅。"
+  },
+  "drawing_lineReconnect": {
+    "description": "描画時に線を再接続するかどうか。"
+  },
+  "drawing_lineCap": {
+    "description": "行頭のスタイル（`\"butt\"`、`\"round\"`、または`\"square\"`）。"
+  },
+  "drawing_lineColor": {
+    "description": "描画線の色。"
+  },
+  "drawing_canResize": {
+    "description": "モーダルフォームのサイズを変更できるかどうか。"
+  },
+  "drawing_maintainRatio": {
+    "description": "サイズ変更時に縦横比を維持するかどうか。"
+  },
+  "drawing_formSize": {
+    "description": "描画モーダルフォームのサイズ設定。"
+  },
+  "embed_canResize": {
+    "description": "埋め込み要素のサイズ変更が可能かどうか。"
+  },
+  "embed_showHeightInput": {
+    "description": "高さ入力フィールドを表示するかどうか。"
+  },
+  "embed_defaultWidth": {
+    "description": "埋め込み要素のデフォルトの幅（数値または単位付き）。"
+  },
+  "embed_defaultHeight": {
+    "description": "埋め込み要素のデフォルトの高さ（数値または単位付き）。"
+  },
+  "embed_percentageOnlySize": {
+    "description": "パーセンテージベースのサイズ指定のみを許可するかどうか。"
+  },
+  "embed_uploadUrl": {
+    "description": "ファイルアップロード用のURL。"
+  },
+  "embed_uploadHeaders": {
+    "description": "ファイルアップロードリクエストに含めるヘッダー。"
+  },
+  "embed_uploadSizeLimit": {
+    "description": "ファイルアップロードの合計サイズ制限（バイト単位）。"
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "単一ファイルのアップロードサイズ制限（バイト単位）。"
+  },
+  "embed_iframeTagAttributes": {
+    "description": "`IFRAME`タグに設定する追加属性。"
+  },
+  "embed_query_youtube": {
+    "description": "YouTubeクエリパラメータが埋め込みURLに追加されます。"
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeoクエリパラメータが埋め込みURLに追加されました。"
+  },
+  "embed_urlPatterns": {
+    "description": "埋め込み可能なコンテンツとして認識される追加のURLパターン。"
+  },
+  "embed_embedQuery": {
+    "description": "カスタム埋め込みサービス定義。"
+  },
+  "embed_controls": {
+    "description": "図のコントロール。"
+  },
+  "embed_insertBehavior": {
+    "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- `auto`: 可能であればカーソルを次の行に移動します。移動できない場合は、コンポーネントを選択します。\n\n- `select`: 挿入したコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。移動できない場合は、新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
+  },
+  "image_canResize": {
+    "description": "画像要素のサイズを変更できるかどうか。"
+  },
+  "image_showHeightInput": {
+    "description": "高さ入力フィールドを表示するかどうか。"
+  },
+  "image_defaultWidth": {
+    "description": "画像のデフォルトの幅。数値を指定した場合、`\"px\"` が追加されます。"
+  },
+  "image_defaultHeight": {
+    "description": "画像のデフォルトの高さ。数値を指定した場合、`\"px\"` が追加されます。"
+  },
+  "image_percentageOnlySize": {
+    "description": "パーセンテージベースのサイズ指定のみを許可するかどうか。"
+  },
+  "image_createFileInput": {
+    "description": "画像アップロード用のファイル入力要素を作成するかどうか。"
+  },
+  "image_createUrlInput": {
+    "description": "画像挿入用のURL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
+  },
+  "image_uploadUrl": {
+    "description": "画像ファイルアップロード用のURLエンドポイント。"
+  },
+  "image_uploadHeaders": {
+    "description": "ファイルアップロードリクエストに含める追加ヘッダー。"
+  },
+  "image_uploadSizeLimit": {
+    "description": "アップロードできる合計サイズの上限（バイト単位）。"
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "単一ファイルのアップロードサイズ制限（バイト単位）。"
+  },
+  "image_allowMultiple": {
+    "description": "複数の画像アップロードが許可されているかどうか。"
+  },
+  "image_acceptedFormats": {
+    "description": "画像アップロードに使用できるファイル形式。"
+  },
+  "image_useFormatType": {
+    "description": "フォーマットタイプの選択（`block`または`inline`）を有効にするかどうか。"
+  },
+  "image_defaultFormatType": {
+    "description": "デフォルトの画像フォーマットタイプ（`\"block\"`または`\"inline\"`）。"
+  },
+  "image_keepFormatType": {
+    "description": "画像挿入後も選択したフォーマットタイプを保持するかどうか。"
+  },
+  "image_linkEnableFileUpload": {
+    "description": "リンクされた画像に対してファイルアップロードを有効にするかどうか。"
+  },
+  "image_controls": {
+    "description": "図のコントロール。"
+  },
+  "image_insertBehavior": {
+    "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- インラインコンポーネントの場合: コンポーネントの近くにカーソルを配置します。近くに範囲がない場合は選択します。\n\n- ブロックコンポーネントの場合: `selectMode` に基づいて動作を実行します。\n- `auto`: 可能であればカーソルを次の行に移動します。そうでない場合はコンポーネントを選択します。\n\n- `select`: 挿入されたコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。そうでない場合は新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
+  },
+  "link_uploadUrl": {
+    "description": "ファイルアップロード用のURLエンドポイント。"
+  },
+  "link_uploadHeaders": {
+    "description": "ファイルアップロードリクエスト用の追加ヘッダー。"
+  },
+  "link_uploadSizeLimit": {
+    "description": "ファイルアップロードの合計サイズ制限（バイト単位）。"
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "単一ファイルのアップロードサイズ制限（バイト単位）。"
+  },
+  "link_acceptedFormats": {
+    "description": "リンクアップロードに使用できるファイル形式。"
+  },
+  "link_title": {
+    "description": "モーダルタイトルの表示。"
+  },
+  "link_textToDisplay": {
+    "description": "入力内容を表示するテキストを作成します。"
+  },
+  "link_openNewWindow": {
+    "description": "「新しいウィンドウで開く」チェックボックスのデフォルトのチェック値。"
+  },
+  "link_noAutoPrefix": {
+    "description": "`true` の場合、ホスト URL をリンクの値に自動的にプレフィックスとして追加する機能を無効にします。"
+  },
+  "link_relList": {
+    "description": "利用可能な`rel`属性値は、リンクモーダルにチェックボックスとして表示されます。"
+  },
+  "link_defaultRel": {
+    "description": "デフォルトの`rel`値は、条件によって自動的に適用されます。"
+  },
+  "link_enableFileUpload": {
+    "description": "`true`の場合、ファイルアップロードが有効になります。"
+  },
+  "math_canResize": {
+    "description": "数式表示ウィンドウのサイズを変更できるかどうか。"
+  },
+  "math_autoHeight": {
+    "description": "モーダルウィンドウの高さを自動的に調整するかどうか。"
+  },
+  "math_fontSizeList": {
+    "description": "数式サイズセレクターで使用できるフォントサイズオプションの一覧。"
+  },
+  "math_onPaste": {
+    "description": "数式入力エリアでの貼り付けイベントを処理するコールバック関数。"
+  },
+  "math_formSize": {
+    "description": "数式モーダルの寸法を指定するオブジェクト。"
+  },
+  "video_canResize": {
+    "description": "動画要素のサイズを変更できるかどうか。"
+  },
+  "video_showHeightInput": {
+    "description": "高さ入力フィールドを表示するかどうか。"
+  },
+  "video_defaultWidth": {
+    "description": "ビデオ要素のデフォルトの幅。数値を指定した場合、`\"px\"` が追加されます。"
+  },
+  "video_defaultHeight": {
+    "description": "ビデオ要素のデフォルトの高さ。数値を指定した場合、`\"px\"` が追加されます。"
+  },
+  "video_percentageOnlySize": {
+    "description": "パーセンテージベースのサイズ指定のみを許可するかどうか。"
+  },
+  "video_createFileInput": {
+    "description": "動画アップロード用のファイル入力要素を作成するかどうか。"
+  },
+  "video_createUrlInput": {
+    "description": "動画埋め込み用のURL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
+  },
+  "video_uploadUrl": {
+    "description": "動画ファイルアップロード用のURLエンドポイント。"
+  },
+  "video_uploadHeaders": {
+    "description": "動画アップロードリクエストに含める追加ヘッダー。"
+  },
+  "video_uploadSizeLimit": {
+    "description": "動画のアップロード可能な合計サイズ制限（バイト単位）。"
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "動画ファイルのアップロードにおける単一ファイルの最大サイズ制限（バイト単位）。"
+  },
+  "video_allowMultiple": {
+    "description": "複数の動画アップロードが許可されているかどうか。"
+  },
+  "video_acceptedFormats": {
+    "description": "動画アップロードに受け入れられるファイル形式（`\"video/*\"`）。"
+  },
+  "video_defaultRatio": {
+    "description": "動画のデフォルトのアスペクト比（高さ/幅、例：16:9 → `9/16 = 0.5625`）。"
+  },
+  "video_showRatioOption": {
+    "description": "モーダルウィンドウに比率オプションを表示するかどうか。"
+  },
+  "video_ratioOptions": {
+    "description": "動画のリサイズにおけるカスタム比率オプション（値＝高さ／幅）。"
+  },
+  "video_videoTagAttributes": {
+    "description": "`VIDEO`タグに設定する追加属性。"
+  },
+  "video_iframeTagAttributes": {
+    "description": "`IFRAME`タグに設定する追加属性。"
+  },
+  "video_query_youtube": {
+    "description": "YouTube埋め込みのための追加クエリパラメータ。"
+  },
+  "video_query_vimeo": {
+    "description": "Vimeo埋め込みのための追加クエリパラメータ。"
+  },
+  "video_embedQuery": {
+    "description": "カスタム埋め込みサービス定義（`EmbedPluginOptions.embedQuery`を参照）。"
+  },
+  "video_urlPatterns": {
+    "description": "動画埋め込みのための追加のURLパターン。"
+  },
+  "video_extensions": {
+    "description": "動画アップロード時に認識されるファイル拡張子が追加されます。"
+  },
+  "video_controls": {
+    "description": "図のコントロール。"
+  },
+  "video_insertBehavior": {
+    "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- `auto`: 可能であればカーソルを次の行に移動します。移動できない場合は、コンポーネントを選択します。\n\n- `select`: 挿入したコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。移動できない場合は、新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
+  }
+}

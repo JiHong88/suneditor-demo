@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "ערך התחלתי עבור העורך.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "טקסט מציין מיקום.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "תכונות עבור המסגרת הניתנת לעריכה [.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "רוחב עבור העורך.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "רוחב מינימלי עבור העורך.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "רוחב מקסימלי עבור העורך.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "גובה לעורך.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "גובה מינימלי לעורך.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "גובה מקסימלי עבור העורך.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "מחרוזת סגנון של המסגרת העליונה של העורך. ```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "התוכן ימוקם בתוך iframe ויבודד משאר הדף.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "מאפשר שימוש בתגיות HTML, HEAD, BODY והצהרת DOCTYPE על הקובץ `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "תכונות של `iframe`. ```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "מפעיל את סרגל המצב.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "מציג את מבנה הצומת הנוכחי בשורת המצב.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "מאפשר פונקציית שינוי גודל של סרגל המצב התחתון.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "מציג את מספר התווים בעורך.\n- אם לאפשרות `maxCharCount` יש ערך, היא הופכת ל-`true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "מספר התווים המרבי המותר להוספה לעורך.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "טקסט שיוצג באזור `charCounter` של הסרגל התחתון. ```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "מגדיר את שיטת החישוב של האפשרות `charCounter`.\n- `char`: אורך תווים.\n- `byte`: גודל נתונים בינאריים של תווים.\n- `byte-html`: גודל נתונים בינאריים של מחרוזת HTML מלאה.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "מציג את מספר המילים בעורך.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "טקסט שיוצג באזור `wordCounter` של הסרגל התחתון. ```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "סגנונות שהוחלו על המכולה העליונה (למשל רוחב, אינדקס z וכו')."
+  },
+  "frame": {
+    "description": "סגנונות שהוחלו על מיכל ה-iframe (למשל גובה, גובה מינימלי)."
+  },
+  "editor": {
+    "description": "סגנונות שהוחלו על אזור התוכן הניתן לעריכה."
+  },
+  "codeMirrorEditor": {
+    "description": "מופע עורך CodeMirror (ברמת המסגרת). נקבע על ידי `_checkCodeMirror` לאחר האתחול."
+  },
+  "plugins": {
+    "description": "הגדרת תוסף. העברת מערך של מחלקות תוסף או אובייקט עם מפתח לפי שם תוסף. ```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "רשימת כפתורי סרגל הכלים, מקובצים לפי מערכי משנה.\n- ברירת המחדל היא {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "מאפשר מצב הגירה עבור SunEditor גרסה 2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "מצב סרגל כלים: `classic`, `inline`, `balloon`, `balloon-always`. הוסף `:bottom` כדי למקם את סרגל הכלים בתחתית (לדוגמה `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "סוג עורך. השתמש ב-`\"document\"` עבור פריסה בסגנון מסמך, עם תת-סוגים אופציונליים לאחר `:`. ```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "ערכת נושא של עורך.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "הגדרת שפה. ברירת מחדל: אנגלית"
+  },
+  "icons": {
+    "description": "עוקף את סמלי ברירת המחדל."
+  },
+  "textDirection": {
+    "description": "כיוון טקסט: `ltr` או `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "מאפשר סינון קפדני של תגיות, תכונות וסגנונות.\n- השתמש ב-`true` כדי להפעיל את כל המסננים (ברירת מחדל), או באובייקט כדי לשלוט במסננים בודדים.\n- הגדרת `false` ​​אינה נתמכת; השתמש בצורת האובייקט כדי להשבית מסננים ספציפיים במקום זאת.\n- :תיאור מסנן\n- `tagFilter`: מסננים תגי HTML אסורים (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: מסננים אלמנטים של עיצוב (`formatLine`/`formatBlock`)\n- `classFilter`: מסננים שמות מחלקות CSS אסורים (`allowedClassName`)\n- `textStyleTagFilter`: מסננים תגי סגנון טקסט (b, i, u, span וכו')\n- `attrFilter`: מסננים תכונות HTML אסורות (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: מסננים סגנונות מוטבעים אסורים (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "תגיות מטופלות כיחידות שלמות בעת בחירת כל התוכן.\n- ברירת המחדל היא {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "מציין רכיבי HTML שיותרו בנוסף מעבר לרשימת ההיתרים המוגדרת כברירת מחדל. מפריד: `\"|\"`.\n- נוסף לרשימת ברירת המחדל שנקבעה על ידי {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "מציין רכיבי HTML שאין להשתמש בהם. מפריד: `\"|\"`.\n- תגיות שצוינו כאן יוסרו בסופו של דבר, גם אם הן נכללות ברשימות לבנות אחרות.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "רשימה של תגיות שמותר לשמור גם אם הערכים שלהן ריקים.\n- ברירת המחדל היא {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- משורשר עם `ALLOWED_EMPTY_NODE_LIST` ליצירת הרשימה הסופית `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "שמות מחלקות מותרים.\n- נוסף ערך ברירת המחדל {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "מציין מאפיינים נוספים שיאפשרו לכל תג. `\"*\"` חל על כל התגים.\n- הכללים שצוינו כאן ימוזגו לתוך {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "מציין מאפיינים שלא יורשו לפי תג. `\"*\"` חל על כל התגים.\n- מאפיינים שצוינו כאן יוסרו בסופו של דבר גם אם הם מותרים על ידי הגדרות אחרות.\n- רשימה של אלמנטים נדרשים, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, תמיד כלולה.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "תגי סגנון טקסט נוספים.\n- ברירת המחדל היא {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "ממפה סגנונות טקסט לתגיות HTML ספציפיות. ```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "מציין סגנונות נוספים לרשימת הסגנונות המותרים. מפריד: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "מציין סגנונות מותרים עבור תגי HTML. המפתח הוא שם/שמות התגיות, הערך הוא סגנונות מותרים המופרדים באמצעות צינור.",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "מציין סגנונות מותרים עבור התג `span`.\n- ברירת המחדל היא {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "מציין סגנונות מותרים עבור אלמנט `line` (p..).\n- ברירת המחדל היא {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "יחידות גודל גופן מותרות.\n- ברירת המחדל היא {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "קובע כיצד אלמנטים מוטבעים (למשל `<span>`, `<strong>`) מטופלים בעת מחיקת טקסט.\n- `repeat`: סגנונות נשמרים אלא אם כן מתבצעת לחיצה חוזרת על מקש Backspace.\n- לחיצה רציפה תסיר בסופו של דבר את הסגנונות.\n- `none`: סגנונות אינם נשמרים. אלמנטים מוטבעים מוסרים מיד עם הטקסט.\n- `always`: סגנונות נשארים ללא הגבלת זמן אלא אם כן יוסרו במפורש.\n- גם אם כל הטקסט בתוך אלמנט מוטבע נמחק, האלמנט עצמו נשאר.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "אלמנט `line` המוגדר כברירת מחדל בעת הוספת שורות חדשות.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "מציין את פורמט ברירת המחדל של מעבר שורה.\n- [מומלץ] `line` : מעבר שורה מחולק לתגים כלליים.\n- [לא מומלץ] `br` ​​: מעברי שורה מטופלים כ-<br> באותה שורה. (כמו shift+enter)\n- מעברי שורה מטופלים כ-<br> בתוך `line`.\n- ניתן ליצור `line` חדש על ידי הזנת מעבר שורה פעמיים ברציפות.\n- פורמטים הכוללים `line`, כגון \"ציטוט\", עדיין פועלים על בסיס `line`.\n- עיבודי suneditor עובדים ביחידות `line`.\n- כאשר מוגדר ל-`br`, הביצועים עשויים לרדת בעת עריכת נתונים רבים.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "מאפייני שורה שיש לאפס בעת שינוי שורות. מפריד: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "בנוסף, הותר רכיבי `line` מעבר לברירת המחדל. מפריד: `\"|\"`.\n- משורשר עם {@link PrivateBaseOptions.__defaultFormatLine} ליצירת הרשימה הסופית של `line`.\n- רכיב `line` מכיל גם את רכיב `brLine`.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "בנוסף, הותר אלמנטים `brLine` מעבר לברירת המחדל.\n- שורשר עם {@link PrivateBaseOptions.__defaultFormatBrLine} כדי ליצור את הרשימה הסופית של `brLine`.\n- אלמנטים `brLine` כלולים באלמנט `line`.\n- מעבר השורה של אלמנטים `brLine` הוא תג `BR`.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "בנוסף, אלמנטים של `closureBrLine` הותרו מעבר לברירת המחדל.\n- משורשר עם {@link PrivateBaseOptions.__defaultFormatClosureBrLine} עבור הרשימה הסופית של `closureBrLine`.\n- אלמנטים של `closureBrLine` כלולים ב-`brLine`.\n- מעבר השורה של אלמנטים של `closureBrLine` הוא תגית `BR`.\n- ※ לא ניתן לצאת מתבנית זו באמצעות מקש Enter או מקש Backspace.\n- ※ השתמש בו רק במקרים מיוחדים. ([לדוגמה] תבנית של תאי טבלה)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "בנוסף, הותר אלמנטים של `block` מעבר לברירת המחדל.\n- שולבו עם {@link PrivateBaseOptions.__defaultFormatBlock} כדי ליצור את רשימת `block` ​​הסופית.\n- `block` עוטף את `line` ואת `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "בנוסף, אלמנטים `closureBlock` הותרו מעבר לברירת המחדל.\n- משורשר עם {@link PrivateBaseOptions.__defaultFormatClosureBlock} עבור הרשימה הסופית `closureBlock`.\n- אלמנטים `closureBlock` כלולים ב-`block`.\n- אלמנט `closureBlock` עוטף את `line` ו-`component`.\n- ※ לא ניתן לצאת מתבנית זו באמצעות מקש Enter או מקש Backspace.\n- ※ השתמש בו רק במקרים מיוחדים. (למשל, תבנית של תאי טבלה)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "סוגר מודלים בעת לחיצה מחוץ לדף.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "מסנכרן כניסת טאב עם רווחים.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "מבטל קלט באמצעות מקש טאב.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "רוחב סרגל הכלים.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "רכיב מיכל עבור סרגל הכלים."
+  },
+  "toolbar_sticky": {
+    "description": "מאפשר סרגל כלים דביק.\n- `number`: מגדיר את המיקום העליון הדביק (px). השתמש ב-`-1` ​​כדי להשבית את המיקום הדביק.\n- `{top, offset}`: `top` הוא המיקום הדביק כאשר כותרת העמוד גלויה.\n- `offset` הוא המיקום הדביק כאשר מקלדת וירטואלית מזיזה את חלון התצוגה (למשל, בטאבלטים, מכשירי מגע).\n- כאשר המקלדת הווירטואלית פעילה, `offset` מחליף את `top` כך שסרגל הכלים לא ישאיר פער\n- עבור כותרת עמוד שנגללה מחוץ לתצוגה. ברירת המחדל `offset` היא `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "מסתיר את סרגל הכלים בתחילה.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "הגדרת סרגל כלים משני. סרגל כלים משני שמופיע בעת בחירת טקסט.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "רכיב מיכל עבור שורת המצב."
+  },
+  "shortcutsHint": {
+    "description": "מציג רמזים לקיצורי דרך בתיאורי כלים.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "מבטל קיצורי מקלדת.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "קיצורי מקלדת מותאמים אישית.\n- מקשים המתחילים ב-`_` הם קיצורי מקלדת מותאמים אישית המוגדרים על ידי המשתמש. כל ערך הוא מערך של זוגות `[keyCombo, hintLabel]`.\n- שילובי מקשים משתמשים בערכים `c` (Ctrl/Cmd), `s` (Shift), ו-`KeyEvent.code` המחוברים יחד על ידי `+`.\n- השתמש ב-`$~pluginName.method` כדי לקרוא לשיטת תוסף ספציפית.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "שומר על הפורמט של התוכן שהועתק.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "ממיר אוטומטית כתובות URL להיפר-קישורים. (נדרש תוסף `Link`)\n- ברירת מחדל: `Boolean(plugins.link)` ​​— נקבע על ידי האם התוסף `link` מופעל."
+  },
+  "historyStackDelayTime": {
+    "description": "זמן השהייה לעדכוני מחסנית היסטוריה (מילישניות).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "מספר מקסימלי של רשומות היסטוריה לכל מסגרת שורש. רשומות ישנות יותר נמחקות כאשר חורגות מהן.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "שם מחלקה להדפסה.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "היסט מוחל בעת כניסה למצב מסך מלא.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "תבנית HTML מותאמת אישית למצב תצוגה מקדימה. השתמש ב-`{{ contents }}` כמציין מיקום עבור תוכן העורך.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "תבנית HTML מותאמת אישית למצב הדפסה. השתמש ב-`{{ contents }}` כמציין מיקום עבור תוכן העורך. ```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "מאפשר בחירה אוטומטית של רכיבים שנוספו.\n- עבור רכיבים מוטבעים: ממקם את הסמן ליד הרכיב, או בוחר אם אין טווח קרוב.\n- עבור רכיבי בלוק: מבצע התנהגות המבוססת על `selectMode`:\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שנוסף.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "פרוטוקול URL ברירת מחדל עבור קישורים.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "משך זמן הצגת הודעות טוסט (אלפיות שנייה).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "מאפשר מצב תצוגת קוד חופשי.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "מציג את ממשק המשתמש המובנה של לוח החיפוש/החלפה.\n- המחפש נוצר תמיד באופן פנימי; אפשרות זו קובעת האם הלוח גלוי למשתמשים (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "מחפש באופן מיידי תוך כדי הקלדה (מבוטל). כאשר הפונקציה false (false), החיפוש יפעל רק על Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "ספריות חיצוניות כמו CodeMirror, KaTeX, או MathJax.\n- ראה {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md מדריך לספריות חיצוניות}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "מציין תגיות נוספות מותרות או אסורות. `true` כדי לאפשר, `false` ​​כדי לאסור.\n- ברירת המחדל היא {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "הגדרת מטפלי אירועים של משתמש. ```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "רשימת כפתורי סרגל הכלים הנמצאים כעת בשימוש"
+  },
+  "buttons_sub": {
+    "description": "רשימת כפתורי סרגל הכלים המשנה שנמצאים כעת בשימוש"
+  },
+  "toolbar_sub_width": {
+    "description": "רוחב סרגל הכלים המשנה."
+  },
+  "reverseCommands": {
+    "description": "מערך של זוגות פקודות הפוכה הוזרם.\n- כולל `indent-outdent` ברירת מחדל + `reverseButtons` ​​של המשתמש."
+  },
+  "codeMirror": {
+    "description": "אובייקט תצורה של CodeMirror מ-`externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "משתמש ב-CodeMirror לתצוגת קוד."
+  },
+  "audioGallery_data": {
+    "description": "נתונים ישירים ללא קריאות לשרת"
+  },
+  "audioGallery_url": {
+    "description": "כתובת URL של בקשת שרת"
+  },
+  "audioGallery_headers": {
+    "description": "כותרות בקשות שרת"
+  },
+  "audioGallery_thumbnail": {
+    "description": "תמונה ממוזערת ברירת מחדל"
+  },
+  "fileBrowser_data": {
+    "description": "נתונים ישירים ללא קריאות לשרת (עוקף אחזור URL)."
+  },
+  "fileBrowser_url": {
+    "description": "כתובת URL של בקשת שרת"
+  },
+  "fileBrowser_headers": {
+    "description": "כותרות בקשות שרת"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "כתובת URL של תמונה ממוזערת המוגדרת כברירת מחדל או פונקציה שמחזירה כתובת URL של תמונה ממוזערת לכל פריט."
+  },
+  "fileBrowser_props": {
+    "description": "שמות תגיות נוספות"
+  },
+  "fileGallery_data": {
+    "description": "נתונים ישירים ללא קריאות לשרת"
+  },
+  "fileGallery_url": {
+    "description": "כתובת URL של בקשת שרת"
+  },
+  "fileGallery_headers": {
+    "description": "כותרות בקשות שרת"
+  },
+  "fileGallery_thumbnail": {
+    "description": "תמונה ממוזערת ברירת מחדל"
+  },
+  "imageGallery_data": {
+    "description": "נתונים ישירים ללא קריאות לשרת"
+  },
+  "imageGallery_url": {
+    "description": "כתובת URL של בקשת שרת"
+  },
+  "imageGallery_headers": {
+    "description": "כותרות בקשות שרת"
+  },
+  "videoGallery_data": {
+    "description": "נתונים ישירים ללא קריאות לשרת"
+  },
+  "videoGallery_url": {
+    "description": "כתובת URL של בקשת שרת"
+  },
+  "videoGallery_headers": {
+    "description": "כותרות בקשות שרת"
+  },
+  "videoGallery_thumbnail": {
+    "description": "תמונה ממוזערת ברירת מחדל"
+  },
+  "codeBlock_langs": {
+    "description": "רשימת שפות תכנות לבחירה עבור בלוקי קוד.\n- ברירת מחדל היא 21 שפות נפוצות\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- הגדר את המערך `[]` לריקון כדי להשבית לחלוטין את ממשק המשתמש של בחירת שפה."
+  },
+  "exportPDF_apiUrl": {
+    "description": "כתובת URL של בקשת שרת ליצירת PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "שם קובץ ה-PDF שנוצר"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "כתובת URL של בקשת שרת להעלאת קובץ"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "כותרות בקשות שרת"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "מגבלת גודל העלאה כוללת בבתים"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל קובץ בודד בבתים"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "אפשר העלאות קבצים מרובים"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "פורמטי קבצים מקובלים."
+  },
+  "fileUpload_as": {
+    "description": "ציין את צורת ברירת המחדל של רכיב הקובץ כ-`box` או `link`"
+  },
+  "fileUpload_controls": {
+    "description": "בקרות נוספות שיש להוסיף לאיור"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "אופן הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
+  },
+  "align_items": {
+    "description": "יישור פריטים"
+  },
+  "backgroundColor_items": {
+    "description": "רשימת צבעים."
+  },
+  "backgroundColor_splitNum": {
+    "description": "מספר צבעים בכל שורה"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "השבתת קלט HEX"
+  },
+  "blockStyle_items": {
+    "description": "רשימת עיצוב.\n- `command` — `\"line\"`: בלוק בעל שורה אחת, `\"br-line\"`: בלוק מופרד על ידי br, `\"block\"`: בלוק מכיל."
+  },
+  "font_items": {
+    "description": "רשימת גופנים"
+  },
+  "fontColor_items": {
+    "description": "רשימת צבעים."
+  },
+  "fontColor_splitNum": {
+    "description": "מספר צבעים בכל שורה"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "השבתת קלט HEX"
+  },
+  "hR_items": {
+    "description": "רשימת משאבי אנוש"
+  },
+  "layout_items": {
+    "description": "רשימת פריסה. כל פריט מגדיר תבנית פריסה בעלת שם עם HTML גולמי."
+  },
+  "lineHeight_items": {
+    "description": "רשימת גובה השורות"
+  },
+  "paragraphStyle_items": {
+    "description": "רשימת פריטי פסקה"
+  },
+  "table_scrollType": {
+    "description": "סוג גלילה (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "מיקום הכיתוב (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "מיקום בקר התא (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "רשימת צבעים הקסדצימליים עבור בורר צבעי הרקע של התא."
+  },
+  "template_items": {
+    "description": "רשימת תבניות"
+  },
+  "textStyle_items": {
+    "description": "רשימת פריטי סגנון טקסט."
+  },
+  "mention_triggerText": {
+    "description": "הדמות שמפעילה את רשימת האזכורים."
+  },
+  "mention_limitSize": {
+    "description": "מספר הפריטים שיוצגו ברשימת האזכורים"
+  },
+  "mention_searchStartLength": {
+    "description": "מספר התווים להתחלת חיפוש עבור רשימת האזכורים"
+  },
+  "mention_delayTime": {
+    "description": "זמן ההמתנה לפני הצגת רשימת האזכורים"
+  },
+  "mention_data": {
+    "description": "נתוני אזכור סטטיים (בשימוש במקום API)."
+  },
+  "mention_apiUrl": {
+    "description": "כתובת ה-URL לקריאה לרשימת האזכורים"
+  },
+  "mention_apiHeaders": {
+    "description": "הכותרות שיש לשלוח עם קריאת ה-API"
+  },
+  "mention_useCachingData": {
+    "description": "האם לשמור במטמון את נתוני רשימת האזכורים"
+  },
+  "mention_useCachingFieldData": {
+    "description": "האם לשמור במטמון את נתוני רשימת האזכורים בשדה"
+  },
+  "fontSize_sizeUnit": {
+    "description": "יחידת גודל הגופן.\n- ערכים מקובלים כוללים: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` או `'text'`.\n- אם נעשה שימוש ב-`'text'`, מוחל רשימת גודלי גופנים מבוססת טקסט."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "קובע האם תווית הגודל המוגדרת כברירת מחדל מוצגת בתפריט הנפתח."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "כאשר `true`, מוצגים כפתורי הגדלה והקטנה להתאמות גודל גופן.\n- ברירת המחדל היא `false`. תמיד `false` כאשר `sizeUnit` הוא `'text'` (מתעלמים ממנו)."
+  },
+  "fontSize_disableInput": {
+    "description": "כאשר `true`, משבית את תיבת הקלט הישיר של גודל גופן.\n- ברירת המחדל היא `true` ​​כאשר `sizeUnit` הוא `'text'`, אחרת `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "עקיפת או הרחב את מיפוי היחידות המוגדר כברירת מחדל עבור גדלי גופנים."
+  },
+  "audio_defaultWidth": {
+    "description": "רוחב ברירת המחדל של התג `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "גובה ברירת המחדל של התג `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "האם ליצור אלמנט קלט קובץ."
+  },
+  "audio_createUrlInput": {
+    "description": "האם ליצור אלמנט קלט URL.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "כתובת ה-URL שאליה יועלו הקבצים."
+  },
+  "audio_uploadHeaders": {
+    "description": "כותרות שיש לכלול בבקשת העלאת הקובץ."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "מגבלת גודל ההעלאה הכוללת בבתים."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל קובץ בודד בבתים."
+  },
+  "audio_allowMultiple": {
+    "description": "האם לאפשר העלאות קבצים מרובים."
+  },
+  "audio_acceptedFormats": {
+    "description": "פורמטי קבצים מקובלים (ברירת המחדל היא `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "מאפיינים נוספים להגדרה בתג `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "אופן הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
+  },
+  "drawing_outputFormat": {
+    "description": "פורמט הפלט של הציור. אפשרויות: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "האם להפעיל בחירת סוג פורמט (`block` לעומת `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "סוג הפורמט המוגדר כברירת מחדל, `\"block\"` או `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "האם לשמור על סוג הפורמט שנבחר לאחר הציור."
+  },
+  "drawing_lineWidth": {
+    "description": "רוחב קו הציור."
+  },
+  "drawing_lineReconnect": {
+    "description": "האם לחבר מחדש קווים בעת הציור."
+  },
+  "drawing_lineCap": {
+    "description": "סגנון מכסה הקו (`\"butt\"`, `\"round\"`, או `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "צבע קו הציור."
+  },
+  "drawing_canResize": {
+    "description": "האם ניתן לשנות את גודל הצורה המודאלית."
+  },
+  "drawing_maintainRatio": {
+    "description": "האם לשמור על יחס הגובה-רוחב בעת שינוי גודל."
+  },
+  "drawing_formSize": {
+    "description": "תצורת הגודל עבור טופס הציור המודאלי."
+  },
+  "embed_canResize": {
+    "description": "האם ניתן לשנות את גודל אלמנט ההטמעה."
+  },
+  "embed_showHeightInput": {
+    "description": "האם להציג את שדה הקלט של הגובה."
+  },
+  "embed_defaultWidth": {
+    "description": "רוחב ברירת המחדל של אלמנט ההטמעה (ערך מספרי או עם יחידה)."
+  },
+  "embed_defaultHeight": {
+    "description": "גובה ברירת המחדל של אלמנט ההטמעה (ערך מספרי או עם יחידה)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "האם לאפשר רק שינוי גודל המבוסס על אחוזים."
+  },
+  "embed_uploadUrl": {
+    "description": "כתובת ה-URL להעלאות קבצים."
+  },
+  "embed_uploadHeaders": {
+    "description": "כותרות שיש לכלול בבקשות העלאת קבצים."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "מגבלת גודל העלאת הקבצים הכוללת בבתים."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל העלאת קובץ בודד בבתים."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "מאפיינים נוספים להגדרה בתג `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "פרמטר שאילתה של YouTube נוסף לכתובת ה-URL של ההטמעה."
+  },
+  "embed_query_vimeo": {
+    "description": "פרמטר שאילתה של Vimeo נוסף לכתובת ה-URL של ההטמעה."
+  },
+  "embed_urlPatterns": {
+    "description": "תבניות URL נוספות לזיהוי כתוכן הניתן להטמעה."
+  },
+  "embed_embedQuery": {
+    "description": "הגדרות שירות הטמעה מותאמות אישית."
+  },
+  "embed_controls": {
+    "description": "בקרות איור."
+  },
+  "embed_insertBehavior": {
+    "description": "אופן הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
+  },
+  "image_canResize": {
+    "description": "האם ניתן לשנות את גודל רכיב התמונה."
+  },
+  "image_showHeightInput": {
+    "description": "האם להציג את שדה הקלט של הגובה."
+  },
+  "image_defaultWidth": {
+    "description": "רוחב ברירת המחדל של התמונה. אם יסופק מספר, `\"px\"` יתווסף."
+  },
+  "image_defaultHeight": {
+    "description": "גובה ברירת המחדל של התמונה. אם יסופק מספר, יצורף `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "האם לאפשר רק שינוי גודל המבוסס על אחוזים."
+  },
+  "image_createFileInput": {
+    "description": "האם ליצור רכיב קלט קובץ עבור העלאות תמונות."
+  },
+  "image_createUrlInput": {
+    "description": "האם ליצור אלמנט קלט URL להכנסת תמונה.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
+  },
+  "image_uploadUrl": {
+    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצי תמונה."
+  },
+  "image_uploadHeaders": {
+    "description": "כותרות נוספות שיש לכלול בבקשת העלאת הקובץ."
+  },
+  "image_uploadSizeLimit": {
+    "description": "מגבלת גודל ההעלאה הכוללת בבתים."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל העלאת קובץ בודד בבתים."
+  },
+  "image_allowMultiple": {
+    "description": "האם מותר להעלות מספר תמונות."
+  },
+  "image_acceptedFormats": {
+    "description": "פורמטי הקבצים המקובלים להעלאת תמונות."
+  },
+  "image_useFormatType": {
+    "description": "האם להפעיל בחירת סוג פורמט (`block` או `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "סוג פורמט התמונה המוגדר כברירת מחדל (`\"block\"` או `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "האם לשמור את סוג הפורמט שנבחר לאחר הוספת תמונה."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "האם לאפשר העלאת קבצים עבור תמונות מקושרות."
+  },
+  "image_controls": {
+    "description": "בקרות איור."
+  },
+  "image_insertBehavior": {
+    "description": "התנהגות הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- עבור רכיבים מוטבעים: ממקם את הסמן ליד הרכיב, או בוחר אם אין טווח קרוב.\n- עבור רכיבי בלוק: מבצע התנהגות המבוססת על `selectMode`:\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
+  },
+  "link_uploadUrl": {
+    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצים."
+  },
+  "link_uploadHeaders": {
+    "description": "כותרות נוספות עבור בקשות העלאת קבצים."
+  },
+  "link_uploadSizeLimit": {
+    "description": "מגבלת גודל העלאת הקבצים הכוללת בבתים."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל העלאת קובץ בודד בבתים."
+  },
+  "link_acceptedFormats": {
+    "description": "פורמטים מקובלים של קבצים להעלאת קישורים."
+  },
+  "link_title": {
+    "description": "תצוגת כותרת מודאלית."
+  },
+  "link_textToDisplay": {
+    "description": "צור טקסט להצגת קלט."
+  },
+  "link_openNewWindow": {
+    "description": "ערך ברירת מחדל המסומן של תיבת הסימון \"פתח בחלון חדש\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "אם `true`, הפעולה מבטלת את הקידומת האוטומטית של כתובת ה-URL של המארח לערך הקישור."
+  },
+  "link_relList": {
+    "description": "ערכי התכונה `rel` זמינים מוצגים כתיבות סימון במודל הקישור."
+  },
+  "link_defaultRel": {
+    "description": "ערכי ברירת מחדל `rel` מוחלים אוטומטית לפי תנאי."
+  },
+  "link_enableFileUpload": {
+    "description": "אם `true`, מאפשר העלאת קבצים."
+  },
+  "math_canResize": {
+    "description": "האם ניתן לשנות את גודל המודאל המתמטי."
+  },
+  "math_autoHeight": {
+    "description": "האם להתאים אוטומטית את גובה המודאל."
+  },
+  "math_fontSizeList": {
+    "description": "רשימה של אפשרויות גודל גופן עבור בורר גודל הביטוי המתמטי."
+  },
+  "math_onPaste": {
+    "description": "פונקציית קריאה חוזרת לטיפול באירועי הדבקה באזור הקלט המתמטי."
+  },
+  "math_formSize": {
+    "description": "אובייקט המציין את המימדים עבור המודאל המתמטי."
+  },
+  "video_canResize": {
+    "description": "האם ניתן לשנות את גודל רכיב הווידאו."
+  },
+  "video_showHeightInput": {
+    "description": "האם להציג את שדה הקלט של הגובה."
+  },
+  "video_defaultWidth": {
+    "description": "רוחב ברירת המחדל של רכיב הווידאו. אם יסופק מספר, `\"px\"` יתווסף."
+  },
+  "video_defaultHeight": {
+    "description": "גובה ברירת המחדל של רכיב הווידאו. אם יסופק מספר, יתווסף `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "האם לאפשר רק שינוי גודל המבוסס על אחוזים."
+  },
+  "video_createFileInput": {
+    "description": "האם ליצור רכיב קלט קובץ עבור העלאות סרטונים."
+  },
+  "video_createUrlInput": {
+    "description": "האם ליצור אלמנט קלט URL עבור הטמעת וידאו.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
+  },
+  "video_uploadUrl": {
+    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצי וידאו."
+  },
+  "video_uploadHeaders": {
+    "description": "כותרות נוספות שיש לכלול בבקשת העלאת הסרטון."
+  },
+  "video_uploadSizeLimit": {
+    "description": "מגבלת גודל ההעלאה הכוללת של סרטונים בבתים."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "מגבלת גודל העלאת קובץ בודד לסרטונים בבתים."
+  },
+  "video_allowMultiple": {
+    "description": "האם מותר להעלות מספר סרטונים."
+  },
+  "video_acceptedFormats": {
+    "description": "פורמטי קבצים מקובלים להעלאות סרטונים (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "יחס הגובה-רוחב המוגדר כברירת מחדל עבור הסרטון (גובה/רוחב, לדוגמה 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "האם להציג את אפשרות היחס בקובץ המודאלי."
+  },
+  "video_ratioOptions": {
+    "description": "אפשרויות יחס מותאמות אישית לשינוי גודל וידאו (ערך = גובה/רוחב)."
+  },
+  "video_videoTagAttributes": {
+    "description": "מאפיינים נוספים להגדרה בתג `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "מאפיינים נוספים להגדרה בתג `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "פרמטרים נוספים של שאילתה להטמעה ביוטיוב."
+  },
+  "video_query_vimeo": {
+    "description": "פרמטרים נוספים של שאילתה להטמעת Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "הגדרות שירות הטמעה מותאמות אישית (ראה `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "תבניות URL נוספות להטמעת וידאו."
+  },
+  "video_extensions": {
+    "description": "סיומות קבצים נוספות שיזוהו עבור העלאות סרטונים."
+  },
+  "video_controls": {
+    "description": "בקרות איור."
+  },
+  "video_insertBehavior": {
+    "description": "אופן הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
+  }
+}

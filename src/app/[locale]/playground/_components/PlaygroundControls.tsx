@@ -1,22 +1,13 @@
 "use client";
 
 import { type Dispatch, useState, useEffect, useRef } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
-import optDescEn from "@/data/api/option-descriptions.en.json";
-import optDescKo from "@/data/api/option-descriptions.ko.json";
-import optDescAr from "@/data/api/option-descriptions.ar.json";
+import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
-
-type OptDesc = Record<string, { description: string; default?: string }>;
-const optDescMap: Record<string, OptDesc> = {
-	en: optDescEn as OptDesc,
-	ko: optDescKo as OptDesc,
-	ar: optDescAr as OptDesc,
-};
 
 /* ── Option type map (locale-independent) ──────────────── */
 const optionTypeMap: Record<string, string> = {};
@@ -33,8 +24,7 @@ type Props = {
 /* ── Reusable field components ─────────────────────────── */
 
 function FieldLabel({ label, resettable, description }: { label: string; resettable?: boolean; description?: string }) {
-	const locale = useLocale();
-	const optDesc = optDescMap[locale] ?? optDescMap.en;
+	const optDesc = useOptDesc();
 	const entry = optDesc[label];
 	const desc = description ?? entry?.description;
 	return (
@@ -318,8 +308,7 @@ function ShortcutsField({ value, onChange }: { value: string; onChange: (v: stri
 
 /** Disabled option indicator — shown for options that can't be configured in playground */
 function DisabledField({ label, reason }: { label: string; reason?: string }) {
-	const locale = useLocale();
-	const optDesc = optDescMap[locale] ?? optDescMap.en;
+	const optDesc = useOptDesc();
 	const desc = optDesc[label]?.description;
 	return (
 		<div className='flex items-center justify-between gap-2 py-0.5 opacity-40'>
@@ -342,10 +331,13 @@ import { languages } from "@/i18n/languages";
 
 const LANG_OPTIONS: { value: string; label: string }[] = languages
 	.filter((l) => l.editorLang)
-	.map((l) => ({
-		value: l.code === "en" ? "" : l.code,
-		label: `${l.icon ?? ""} ${l.code} [${l.nativeName}]${l.code === "en" ? " (default)" : ""}`.trim(),
-	}));
+	.map((l) => {
+		const editorCode = l.editorCode ?? l.code;
+		return {
+			value: l.code === "en" ? "" : editorCode,
+			label: `${l.icon ?? ""} ${editorCode} [${l.nativeName}]${l.code === "en" ? " (default)" : ""}`.trim(),
+		};
+	});
 
 function LangSelectField({
 	value,

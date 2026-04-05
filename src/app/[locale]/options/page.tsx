@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Search, Copy, Check, ChevronRight, Link2, Settings2, Puzzle, Layers } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import optDescEn from "@/data/api/option-descriptions.en.json";
-import optDescKo from "@/data/api/option-descriptions.ko.json";
-import optDescAr from "@/data/api/option-descriptions.ar.json";
+import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
 import { highlightInline } from "@/lib/highlightInline";
 import CodeBlock from "@/components/common/CodeBlock";
@@ -56,11 +54,6 @@ type SidebarCategory = {
 
 /* ── Data ──────────────────────────────────────────────── */
 
-const optDescMap: Record<string, OptDesc> = {
-	en: optDescEn as OptDesc,
-	ko: optDescKo as OptDesc,
-	ar: optDescAr as OptDesc,
-};
 
 /* ── Type map from api-docs ────────────────────────────── */
 
@@ -511,8 +504,7 @@ function Sidebar({
 
 export default function OptionsPage() {
 	const t = useTranslations("Options");
-	const locale = useLocale();
-	const optDesc = optDescMap[locale] ?? optDescMap.en;
+	const optDesc = useOptDesc();
 	const sections = useMemo(() => buildSections(optDesc), [optDesc]);
 
 	const [search, setSearch] = useState("");

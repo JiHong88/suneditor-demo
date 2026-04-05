@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "مقدار اولیه برای ویرایشگر.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "متن جایگزین.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "ویژگی‌های قاب قابل ویرایش [.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "عرض برای ویرایشگر.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "حداقل عرض برای ویرایشگر.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "حداکثر عرض برای ویرایشگر",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "ارتفاع برای ویرایشگر.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "حداقل ارتفاع برای ویرایشگر.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "حداکثر ارتفاع برای ویرایشگر",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "رشته‌ی استایل فریم بالای ویرایشگر.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "محتوا در یک iframe قرار می‌گیرد و از بقیه صفحه جدا می‌شود.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "استفاده از تگ‌های HTML، HEAD، BODY و تعریف DOCTYPE را در `iframe` مجاز می‌کند.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "ویژگی‌های `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "نوار وضعیت را فعال می‌کند.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "ساختار گره فعلی را در نوار وضعیت نمایش می‌دهد.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "عملکرد تغییر اندازه نوار وضعیت پایین را فعال می‌کند.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "تعداد کاراکترهای موجود در ویرایشگر را نشان می‌دهد.\n- اگر گزینه `maxCharCount` مقداری داشته باشد، به `true` ​​تبدیل می‌شود.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "حداکثر تعداد کاراکترهای مجاز برای درج در ویرایشگر.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "متنی که قرار است در ناحیه `charCounter` نوار پایین نمایش داده شود.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "روش محاسبه گزینه `charCounter` را تعریف می‌کند.\n- `char`: طول کاراکترها.\n- `byte`: اندازه داده دودویی کاراکترها.\n- `byte-html`: اندازه داده دودویی رشته کامل HTML.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "تعداد کلمات موجود در ویرایشگر را نشان می‌دهد.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "متنی که قرار است در ناحیه `wordCounter` نوار پایین نمایش داده شود.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "سبک‌هایی که به کانتینر بالایی اعمال می‌شوند (مثلاً عرض، z-index و غیره)."
+  },
+  "frame": {
+    "description": "سبک‌هایی که به ظرف iframe اعمال می‌شوند (مثلاً height، min-height)."
+  },
+  "editor": {
+    "description": "سبک‌هایی که به ناحیه محتوای قابل ویرایش اعمال می‌شوند."
+  },
+  "codeMirrorEditor": {
+    "description": "نمونه ویرایشگر CodeMirror (سطح فریم). پس از مقداردهی اولیه توسط `_checkCodeMirror` تنظیم می‌شود."
+  },
+  "plugins": {
+    "description": "پیکربندی افزونه. آرایه‌ای از کلاس‌های افزونه یا یک شیء که با نام افزونه کلیدگذاری شده است را ارسال کنید.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "فهرست دکمه‌های نوار ابزار، گروه‌بندی شده بر اساس زیرآرایه‌ها.\n- پیش‌فرض از {@link DEFAULTS.BUTTON_LIST} پیروی می‌کند.",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "حالت مهاجرت را برای SunEditor نسخه ۲ فعال می‌کند.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "حالت نوار ابزار: `classic`، `inline`، `balloon`، `balloon-always`. برای قرار دادن نوار ابزار در پایین، `:bottom` را اضافه کنید (مثلاً `classic:bottom`، `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "نوع ویرایشگر. برای طرح‌بندی به سبک سند از `\"document\"` استفاده کنید، و زیرنوع‌های اختیاری بعد از `:` ​​قرار می‌گیرند.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "تم ویرایشگر.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "پیکربندی زبان. پیش‌فرض: EN"
+  },
+  "icons": {
+    "description": "آیکون‌های پیش‌فرض را نادیده می‌گیرد."
+  },
+  "textDirection": {
+    "description": "جهت متن: `ltr` یا `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "فیلترینگ دقیق برچسب‌ها، ویژگی‌ها و سبک‌ها را فعال می‌کند.\n- از `true` برای فعال کردن همه فیلترها (پیش‌فرض) یا از یک شیء برای کنترل فیلترهای منفرد استفاده کنید.\n- تنظیم `false` ​​پشتیبانی نمی‌شود؛ به جای آن از فرم شیء برای غیرفعال کردن فیلترهای خاص استفاده کنید.\n- :filter description\n- `tagFilter`: فیلترهایی که تگ‌های HTML را مجاز نمی‌دانند (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: فیلترهایی که عناصر قالب را مجاز نمی‌دانند (`formatLine`/`formatBlock`)\n- `classFilter`: فیلترهایی که نام کلاس CSS را مجاز نمی‌دانند (`allowedClassName`)\n- `textStyleTagFilter`: فیلترهایی که تگ‌های سبک متن (b، i، u، span و غیره) را مجاز نمی‌دانند\n- `attrFilter`: فیلترهایی که ویژگی‌های HTML را مجاز نمی‌دانند (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: فیلترهایی که سبک‌های درون‌خطی را مجاز نمی‌دانند (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "هنگام انتخاب تمام محتوا، برچسب‌ها به عنوان واحدهای کامل در نظر گرفته می‌شوند.\n- پیش‌فرض از {@link DEFAULTS.SCOPE_SELECTION_TAGS} پیروی می‌کند.",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "عناصر HTML را مشخص می‌کند که فراتر از لیست مجاز پیش‌فرض، اجازه دسترسی اضافی بدهند. جداکننده: `\"|\"`.\n- به لیست پیش‌فرض تعیین‌شده توسط {@link PrivateBaseOptions.__defaultElementWhitelist} اضافه می‌شود.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "عناصر HTML که نباید استفاده شوند را مشخص می‌کند. جداکننده: `\"|\"`.\n- برچسب‌های مشخص شده در اینجا در نهایت حذف خواهند شد، حتی اگر در لیست‌های سفید دیگری قرار داشته باشند.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "فهرستی از تگ‌هایی که حتی اگر مقادیرشان خالی باشد، مجاز به نگهداری هستند.\n\n- مقدار پیش‌فرض از {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} پیروی می‌کند.\n\n- با `ALLOWED_EMPTY_NODE_LIST` ترکیب شده تا فهرست نهایی `allowedEmptyTags` ​​را تشکیل دهد.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "نام‌های کلاس مجاز.\n- مقدار پیش‌فرض {@link DEFAULTS.CLASS_NAME} اضافه شد.",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "ویژگی‌های اضافی را برای هر برچسب مشخص می‌کند. `\"*\"` برای همه برچسب‌ها اعمال می‌شود.\n- قوانین مشخص شده در اینجا در {@link PrivateBaseOptions.__defaultAttributeWhitelist} ادغام می‌شوند.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "ویژگی‌هایی را مشخص می‌کند که باید بر اساس برچسب غیرفعال شوند. `\"*\"` برای همه برچسب‌ها اعمال می‌شود.\n- ویژگی‌هایی که در اینجا مشخص شده‌اند، حتی اگر توسط تنظیمات دیگر مجاز باشند، در نهایت حذف خواهند شد.\n- لیستی از عناصر مورد نیاز، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، همیشه شامل می‌شود.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "تگ‌های استایل متن اضافی.\n- پیش‌فرض از {@link PrivateBaseOptions.__textStyleTags} پیروی می‌کند.",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "سبک‌های متن را به تگ‌های خاص HTML نگاشت می‌کند.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "سبک‌های اضافی را به لیست سبک‌های مجاز مشخص می‌کند. جداکننده: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "سبک‌های مجاز برای تگ‌های HTML را مشخص می‌کند. کلید، نام(های) تگ و مقدار، سبک‌های مجازِ جدا شده از خط لوله است.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "استایل‌های مجاز برای تگ `span` را مشخص می‌کند.\n- پیش‌فرض از {@link DEFAULTS.SPAN_STYLES} پیروی می‌کند.",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "استایل‌های مجاز برای عنصر `line` (p..) را مشخص می‌کند.\n- پیش‌فرض از {@link DEFAULTS.LINE_STYLES} پیروی می‌کند.",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "واحدهای اندازه فونت مجاز.\n- مقدار پیش‌فرض از {@link DEFAULTS.SIZE_UNITS} پیروی می‌کند.",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "نحوه برخورد با عناصر درون‌خطی (مثلاً `<span>`، `<strong>`) هنگام حذف متن را تعیین می‌کند.\n\n- `repeat`: استایل‌ها حفظ می‌شوند مگر اینکه به طور مکرر کلید backspace فشرده شود.\n\n- فشردن مداوم کلید backspace در نهایت استایل‌ها را حذف می‌کند.\n\n- `none`: استایل‌ها حفظ نمی‌شوند. عناصر درون‌خطی بلافاصله همراه با متن حذف می‌شوند.\n\n- `always`: استایل‌ها به طور نامحدود باقی می‌مانند مگر اینکه صریحاً حذف شوند.\n\n- حتی اگر تمام متن داخل یک عنصر درون‌خطی حذف شود، خود عنصر باقی می‌ماند.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "عنصر پیش‌فرض `line` هنگام درج خطوط جدید.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "قالب پیش‌فرض شکست خط را مشخص می‌کند.\n- [توصیه می‌شود] `line` : شکست خط به تگ‌های عمومی تقسیم می‌شود.\n- [توصیه نمی‌شود] `br` ​​: شکست خط در همان خط به عنوان <br> در نظر گرفته می‌شود. (مانند shift+enter)\n- شکست خط در `line` به عنوان <br> در نظر گرفته می‌شود.\n\n- می‌توانید با وارد کردن دو بار پشت سر هم یک شکست خط، یک `line` جدید ایجاد کنید.\n\n- قالب‌هایی که شامل `line` هستند، مانند \"نقل قول\"، همچنان بر اساس `line` عمل می‌کنند.\n\n- فرآیندهای suneditor در واحدهای `line` کار می‌کنند.\n\n- وقتی روی `br` تنظیم می‌شوند، ممکن است هنگام ویرایش داده‌های زیاد، عملکرد کاهش یابد.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "ویژگی‌های خطی که باید هنگام تغییر خطوط، تنظیم مجدد شوند. جداکننده: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "علاوه بر این، عناصر `line` فراتر از پیش‌فرض مجاز هستند. جداکننده: `\"|\"`.\n- با {@link PrivateBaseOptions.__defaultFormatLine} ترکیب شده تا لیست نهایی `line` را تشکیل دهد.\n- عنصر `line` همچنین شامل عنصر `brLine` است.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "علاوه بر این، عناصر `brLine` فراتر از پیش‌فرض مجاز هستند.\n- با {@link PrivateBaseOptions.__defaultFormatBrLine} ترکیب می‌شوند تا لیست نهایی `brLine` ​​را تشکیل دهند.\n- عناصر `brLine` در عنصر `line` گنجانده شده‌اند.\n- شکست خط عناصر `brLine` با تگ `BR` انجام می‌شود.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "علاوه بر این، عناصر `closureBrLine` فراتر از پیش‌فرض مجاز هستند.\n\n- برای لیست نهایی `closureBrLine` ​​با {@link PrivateBaseOptions.__defaultFormatClosureBrLine} ترکیب می‌شوند.\n\n- عناصر `closureBrLine` در `brLine` گنجانده شده‌اند.\n\n- شکست خط عناصر `closureBrLine` با برچسب `BR` انجام می‌شود.\n\n- ※ نمی‌توانید با کلید Enter یا کلید Backspace از این قالب خارج شوید.\n\n※ فقط در موارد خاص از آن استفاده کنید. ([مثال] قالب سلول‌های جدول)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "علاوه بر این، عناصر `block` فراتر از پیش‌فرض مجاز هستند.\n- با {@link PrivateBaseOptions.__defaultFormatBlock} ترکیب شده تا لیست نهایی `block` ​​را تشکیل دهد.\n- `block` عناصر `line` و `component` را در بر می‌گیرد.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "علاوه بر این، عناصر `closureBlock` فراتر از پیش‌فرض مجاز هستند.\n\n- برای لیست نهایی `closureBlock` ​​با {@link PrivateBaseOptions.__defaultFormatClosureBlock} ترکیب می‌شوند.\n\n- عناصر `closureBlock` در `block` گنجانده شده‌اند.\n\n- عنصر `closureBlock` شامل `line` و `component` می‌شود.\n\n- ※ نمی‌توانید با کلید Enter یا کلید Backspace از این قالب خارج شوید.\n\n※ فقط در موارد خاص از آن استفاده کنید. (مثلاً قالب سلول‌های جدول)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "هنگام کلیک کردن در خارج از پنجره، ماژول‌ها را می‌بندد.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "تورفتگی تب را با فاصله‌ها هماهنگ می‌کند.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "ورودی کلید تب را غیرفعال می‌کند.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "عرض نوار ابزار.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "عنصر نگهدارنده برای نوار ابزار."
+  },
+  "toolbar_sticky": {
+    "description": "نوار ابزار چسبنده را فعال می‌کند.\n- `number`: موقعیت بالای چسبنده (px) را تنظیم می‌کند. از `-1` ​​برای غیرفعال کردن چسبندگی استفاده کنید.\n- `{top, offset}`: `top` موقعیت چسبنده زمانی است که سرصفحه قابل مشاهده است.\n- `offset` موقعیت چسبنده زمانی است که یک صفحه کلید مجازی، نمای صفحه را تغییر می‌دهد (مثلاً در تبلت‌ها، دستگاه‌های لمسی).\n- هنگامی که صفحه کلید مجازی فعال است، `offset` جایگزین `top` می‌شود تا نوار ابزار جای خالی باقی نگذارد\n- برای سرصفحه‌ای که از دید خارج شده است. مقدار پیش‌فرض `offset` برابر با `0` است.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "در ابتدا نوار ابزار را پنهان می‌کند.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "پیکربندی زیرنوار ابزار. یک نوار ابزار ثانویه که هنگام انتخاب متن ظاهر می‌شود.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "عنصر کانتینر برای نوار وضعیت."
+  },
+  "shortcutsHint": {
+    "description": "نکات میانبر را در راهنماهای ابزار نمایش می‌دهد.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "میانبرهای صفحه کلید را غیرفعال می‌کند.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "میانبرهای صفحه کلید سفارشی.\n- کلیدهایی که با `_` شروع می‌شوند، میانبرهای سفارشی تعریف شده توسط کاربر هستند. هر مقدار آرایه‌ای از جفت‌های `[keyCombo, hintLabel]` ​​است.\n- ترکیب کلیدها از مقادیر `c` (Ctrl/Cmd)، `s` (Shift) و `KeyEvent.code` که توسط `+` به هم متصل شده‌اند، استفاده می‌کند.\n- از `$~pluginName.method` برای فراخوانی یک متد افزونه خاص استفاده کنید.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "قالب محتوای کپی شده را حفظ می‌کند.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "به طور خودکار URL ها را به هایپرلینک تبدیل می‌کند. (به افزونه `Link` نیاز است)\n- پیش‌فرض: `Boolean(plugins.link)` ​​— با توجه به فعال بودن افزونه `link` تعیین می‌شود."
+  },
+  "historyStackDelayTime": {
+    "description": "زمان تأخیر برای به‌روزرسانی‌های پشته تاریخچه (میلی‌ثانیه).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "حداکثر تعداد ورودی‌های تاریخچه در هر فریم ریشه. ورودی‌های قدیمی‌تر در صورت تجاوز از تعداد مجاز، حذف می‌شوند.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "نام کلاس برای چاپ.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "هنگام ورود به حالت تمام صفحه، آفست اعمال می‌شود.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "قالب HTML سفارشی برای حالت پیش‌نمایش. از `{{ contents }}` به عنوان محل قرارگیری محتوای ویرایشگر استفاده کنید.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "قالب HTML سفارشی برای حالت چاپ. از `{{ contents }}` به عنوان محل قرارگیری محتوای ویرایشگر استفاده کنید.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "انتخاب خودکار اجزای درج‌شده را فعال می‌کند.\n- برای اجزای درون‌خطی: مکان‌نما را نزدیک جزء قرار می‌دهد، یا اگر محدوده‌ای در نزدیکی وجود نداشته باشد، انتخاب می‌کند.\n- برای اجزای بلوکی: رفتار را بر اساس `selectMode` اجرا می‌کند:\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، در غیر این صورت جزء را انتخاب می‌کند.\n- `select`: همیشه جزء درج‌شده را انتخاب می‌کند.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، یا یک خط جدید ایجاد می‌کند و به آنجا می‌رود.\n- `none`: هیچ کاری انجام نمی‌دهد.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "پروتکل پیش‌فرض URL برای لینک‌ها.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "مدت زمان نمایش پیام‌های Toast (میلی‌ثانیه).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "حالت مشاهده کد رایگان را فعال می‌کند.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "رابط کاربری پنل Find/Replace داخلی را نشان می‌دهد.\n- یابنده همیشه به صورت داخلی ایجاد می‌شود؛ این گزینه کنترل می‌کند که آیا پنل برای کاربران قابل مشاهده باشد یا خیر (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "همزمان با تایپ شما، جستجو را انجام می‌دهد (لغو می‌شود). در صورت نادرست بودن، جستجو فقط با وارد کردن اجرا می‌شود.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "کتابخانه‌های خارجی مانند CodeMirror، KaTeX یا MathJax.\n- به {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md راهنمای کتابخانه‌های خارجی مراجعه کنید}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "تگ‌های مجاز یا غیرمجاز اضافی را مشخص می‌کند. `true` برای مجاز کردن، `false` ​​برای غیرمجاز کردن.\n- مقدار پیش‌فرض از {@link DEFAULTS.EXTRA_TAG_MAP} پیروی می‌کند.\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "پیکربندی کنترل‌کننده‌های رویداد کاربر.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "فهرست دکمه‌های نوار ابزار که در حال حاضر استفاده می‌شوند"
+  },
+  "buttons_sub": {
+    "description": "فهرست دکمه‌های زیرنوار ابزار که در حال حاضر استفاده می‌شوند"
+  },
+  "toolbar_sub_width": {
+    "description": "عرض زیرنوار ابزار."
+  },
+  "reverseCommands": {
+    "description": "آرایه جفت فرمان معکوس ادغام شده.\n- شامل `indent-outdent` پیش‌فرض + `reverseButtons` ​​کاربر است."
+  },
+  "codeMirror": {
+    "description": "شیء پیکربندی CodeMirror از `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "برای مشاهده کد از CodeMirror استفاده می‌کند."
+  },
+  "audioGallery_data": {
+    "description": "داده مستقیم بدون فراخوانی سرور"
+  },
+  "audioGallery_url": {
+    "description": "آدرس درخواست سرور"
+  },
+  "audioGallery_headers": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "audioGallery_thumbnail": {
+    "description": "تصویر بندانگشتی پیش‌فرض"
+  },
+  "fileBrowser_data": {
+    "description": "داده مستقیم بدون فراخوانی سرور (فراخوانی URL را دور می‌زند)."
+  },
+  "fileBrowser_url": {
+    "description": "آدرس درخواست سرور"
+  },
+  "fileBrowser_headers": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "آدرس پیش‌فرض تصویر بندانگشتی یا تابعی که برای هر آیتم، یک آدرس تصویر بندانگشتی برمی‌گرداند."
+  },
+  "fileBrowser_props": {
+    "description": "نام‌های برچسب اضافی"
+  },
+  "fileGallery_data": {
+    "description": "داده مستقیم بدون فراخوانی سرور"
+  },
+  "fileGallery_url": {
+    "description": "آدرس درخواست سرور"
+  },
+  "fileGallery_headers": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "fileGallery_thumbnail": {
+    "description": "تصویر بندانگشتی پیش‌فرض"
+  },
+  "imageGallery_data": {
+    "description": "داده مستقیم بدون فراخوانی سرور"
+  },
+  "imageGallery_url": {
+    "description": "آدرس درخواست سرور"
+  },
+  "imageGallery_headers": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "videoGallery_data": {
+    "description": "داده مستقیم بدون فراخوانی سرور"
+  },
+  "videoGallery_url": {
+    "description": "آدرس درخواست سرور"
+  },
+  "videoGallery_headers": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "videoGallery_thumbnail": {
+    "description": "تصویر بندانگشتی پیش‌فرض"
+  },
+  "codeBlock_langs": {
+    "description": "فهرست زبان‌های برنامه‌نویسی قابل انتخاب برای بلوک‌های کد.\n- پیش‌فرض‌ها روی ۲۱ زبان رایج\n- [javascript، typescript، html، css، json، python، java، c، cpp، csharp، go، rust، ruby، php، swift، kotlin، sql، bash، markdown، xml، yaml].\n\n- برای غیرفعال کردن کامل رابط کاربری انتخاب زبان، آرایه خالی `[]` را تنظیم کنید."
+  },
+  "exportPDF_apiUrl": {
+    "description": "آدرس اینترنتی درخواست سرور برای تولید PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "نام فایل PDF تولید شده"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "آدرس درخواست سرور برای آپلود فایل"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "هدرهای درخواست سرور"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود بر حسب بایت"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "محدودیت اندازه فایل واحد بر حسب بایت"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "اجازه آپلود چندین فایل"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "فرمت‌های فایل پذیرفته شده"
+  },
+  "fileUpload_as": {
+    "description": "فرم پیش‌فرض کامپوننت فایل را به صورت `box` یا `link` ​​مشخص کنید."
+  },
+  "fileUpload_controls": {
+    "description": "کنترل‌های اضافی که باید به شکل اضافه شوند"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، در غیر این صورت کامپوننت را انتخاب کنید.\n- `select`: همیشه کامپوننت درج شده را انتخاب کنید.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، یا یک خط جدید ایجاد کنید و به آنجا بروید.\n- `none`: هیچ کاری انجام ندهید."
+  },
+  "align_items": {
+    "description": "تراز کردن آیتم‌ها"
+  },
+  "backgroundColor_items": {
+    "description": "فهرست رنگ‌ها."
+  },
+  "backgroundColor_splitNum": {
+    "description": "تعداد رنگ در هر خط"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "غیرفعال کردن ورودی HEX"
+  },
+  "blockStyle_items": {
+    "description": "قالب‌بندی لیست.\n- `command` — `\"line\"`: بلوک تک‌خطی، `\"br-line\"`: بلوک جدا شده با br، `\"block\"`: بلوک کانتینر."
+  },
+  "font_items": {
+    "description": "فهرست فونت‌ها"
+  },
+  "fontColor_items": {
+    "description": "فهرست رنگ‌ها."
+  },
+  "fontColor_splitNum": {
+    "description": "تعداد رنگ در هر خط"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "غیرفعال کردن ورودی HEX"
+  },
+  "hR_items": {
+    "description": "فهرست منابع انسانی"
+  },
+  "layout_items": {
+    "description": "لیست طرح‌بندی. هر آیتم یک قالب طرح‌بندی نامگذاری شده با HTML خام تعریف می‌کند."
+  },
+  "lineHeight_items": {
+    "description": "فهرست ارتفاع خط"
+  },
+  "paragraphStyle_items": {
+    "description": "فهرست اقلام پاراگراف"
+  },
+  "table_scrollType": {
+    "description": "نوع پیمایش (`x`، `y`، `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "موقعیت عنوان (`top`، `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "موقعیت کنترل‌کننده سلول (`cell`، `table`)"
+  },
+  "table_colorList": {
+    "description": "لیست رنگ HEX برای انتخابگر رنگ پس‌زمینه سلول."
+  },
+  "template_items": {
+    "description": "فهرست الگوها"
+  },
+  "textStyle_items": {
+    "description": "فهرست آیتم‌های سبک متن."
+  },
+  "mention_triggerText": {
+    "description": "شخصیتی که باعث نمایش لیست منشن‌ها می‌شود."
+  },
+  "mention_limitSize": {
+    "description": "تعداد مواردی که در لیست ذکر شده نمایش داده می‌شوند"
+  },
+  "mention_searchStartLength": {
+    "description": "تعداد کاراکترها برای شروع جستجو در لیست ذکر شده"
+  },
+  "mention_delayTime": {
+    "description": "زمان انتظار قبل از نمایش لیست منشن‌ها"
+  },
+  "mention_data": {
+    "description": "داده‌های استاتیک منشن (به جای API استفاده می‌شود)."
+  },
+  "mention_apiUrl": {
+    "description": "آدرس اینترنتی برای فراخوانی لیست منشن‌ها"
+  },
+  "mention_apiHeaders": {
+    "description": "هدرهایی که باید با فراخوانی API ارسال شوند"
+  },
+  "mention_useCachingData": {
+    "description": "اینکه آیا داده‌های لیست منشن‌ها ذخیره شوند یا خیر"
+  },
+  "mention_useCachingFieldData": {
+    "description": "آیا داده‌های لیست ذکر شده در فیلد ذخیره شوند یا خیر."
+  },
+  "fontSize_sizeUnit": {
+    "description": "واحد اندازه فونت.\n- مقادیر پذیرفته شده عبارتند از: `'px'`، `'pt'`، `'em'`، `'rem'`، `'vw'`، `'vh'`، `'%'` یا `'text'`.\n- در صورت استفاده از `'text'`، یک لیست اندازه فونت مبتنی بر متن اعمال می‌شود."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "تعیین می‌کند که آیا برچسب اندازه پیش‌فرض در منوی کشویی نمایش داده شود یا خیر."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "وقتی `true` باشد، دکمه‌های افزایش و کاهش اندازه فونت را نمایش می‌دهد.\n- پیش‌فرض روی `false` ​​است. همیشه `false` وقتی `sizeUnit` برابر با `'text'` باشد (نادیده گرفته می‌شود)."
+  },
+  "fontSize_disableInput": {
+    "description": "وقتی `true` باشد، کادر ورودی مستقیم اندازه فونت را غیرفعال می‌کند.\n- وقتی `sizeUnit` برابر با `'text'` باشد، پیش‌فرض روی `true` ​​است، در غیر این صورت روی `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "نگاشت واحد پیش‌فرض برای اندازه فونت را لغو یا گسترش دهید."
+  },
+  "audio_defaultWidth": {
+    "description": "عرض پیش‌فرض تگ `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "ارتفاع پیش‌فرض تگ `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "آیا یک عنصر ورودی فایل ایجاد شود یا خیر."
+  },
+  "audio_createUrlInput": {
+    "description": "آیا یک عنصر ورودی URL ایجاد شود یا خیر.\n- پیش‌فرض روی `true` است. همیشه `true` ​​وقتی `createFileInput` برابر `false` باشد."
+  },
+  "audio_uploadUrl": {
+    "description": "آدرس اینترنتی که فایل‌ها در آن آپلود می‌شوند."
+  },
+  "audio_uploadHeaders": {
+    "description": "هدرهایی که باید در درخواست آپلود فایل لحاظ شوند."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود بر حسب بایت."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "محدودیت اندازه فایل واحد بر حسب بایت."
+  },
+  "audio_allowMultiple": {
+    "description": "آیا اجازه آپلود چندین فایل داده شود یا خیر."
+  },
+  "audio_acceptedFormats": {
+    "description": "فرمت‌های فایل پذیرفته‌شده (پیش‌فرض `\"audio/*\"` است)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "ویژگی‌های اضافی که باید روی تگ `AUDIO` تنظیم شوند."
+  },
+  "audio_insertBehavior": {
+    "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، در غیر این صورت کامپوننت را انتخاب کنید.\n- `select`: همیشه کامپوننت درج شده را انتخاب کنید.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، یا یک خط جدید ایجاد کنید و به آنجا بروید.\n- `none`: هیچ کاری انجام ندهید."
+  },
+  "drawing_outputFormat": {
+    "description": "فرمت خروجی نقشه. گزینه‌ها: `\"dataurl\"`، `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "اینکه آیا انتخاب نوع قالب فعال باشد یا خیر (`block` در مقابل `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "نوع قالب پیش‌فرض، یا `\"block\"` یا `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "اینکه آیا نوع قالب انتخاب شده پس از ترسیم حفظ شود یا خیر."
+  },
+  "drawing_lineWidth": {
+    "description": "عرض خط ترسیم."
+  },
+  "drawing_lineReconnect": {
+    "description": "اینکه آیا هنگام ترسیم، خطوط دوباره به هم وصل شوند یا خیر."
+  },
+  "drawing_lineCap": {
+    "description": "سبکِ طولِ سطر (`\"butt\"`، `\"round\"`، یا `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "رنگ خط نقاشی."
+  },
+  "drawing_canResize": {
+    "description": "آیا می‌توان اندازه فرم مدال را تغییر داد یا خیر."
+  },
+  "drawing_maintainRatio": {
+    "description": "آیا هنگام تغییر اندازه، نسبت ابعاد حفظ شود یا خیر."
+  },
+  "drawing_formSize": {
+    "description": "پیکربندی اندازه برای فرم مدال ترسیم."
+  },
+  "embed_canResize": {
+    "description": "آیا می‌توان اندازه عنصر جاسازی شده را تغییر داد یا خیر."
+  },
+  "embed_showHeightInput": {
+    "description": "آیا فیلد ورودی ارتفاع نمایش داده شود یا خیر."
+  },
+  "embed_defaultWidth": {
+    "description": "عرض پیش‌فرض عنصر جاسازی‌شده (مقدار عددی یا با واحد)."
+  },
+  "embed_defaultHeight": {
+    "description": "ارتفاع پیش‌فرض عنصر جاسازی‌شده (مقدار عددی یا با واحد)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "اینکه آیا فقط اندازه‌بندی بر اساس درصد مجاز باشد یا خیر."
+  },
+  "embed_uploadUrl": {
+    "description": "آدرس اینترنتی (URL) برای آپلود فایل."
+  },
+  "embed_uploadHeaders": {
+    "description": "سربرگ‌هایی که باید در درخواست‌های آپلود فایل لحاظ شوند."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود فایل بر حسب بایت."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "محدودیت حجم آپلود تک فایل بر حسب بایت."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "ویژگی‌های اضافی که باید روی تگ `IFRAME` تنظیم شوند."
+  },
+  "embed_query_youtube": {
+    "description": "پارامتر جستجوی یوتیوب به URL جاسازی‌شده اضافه شده است."
+  },
+  "embed_query_vimeo": {
+    "description": "پارامتر کوئری Vimeo به URL جاسازی اضافه شده است."
+  },
+  "embed_urlPatterns": {
+    "description": "الگوهای URL اضافی برای تشخیص به عنوان محتوای قابل جاسازی."
+  },
+  "embed_embedQuery": {
+    "description": "تعاریف سفارشی سرویس جاسازی."
+  },
+  "embed_controls": {
+    "description": "کنترل‌های شکل."
+  },
+  "embed_insertBehavior": {
+    "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، در غیر این صورت کامپوننت را انتخاب کنید.\n- `select`: همیشه کامپوننت درج شده را انتخاب کنید.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، یا یک خط جدید ایجاد کنید و به آنجا بروید.\n- `none`: هیچ کاری انجام ندهید."
+  },
+  "image_canResize": {
+    "description": "آیا می‌توان اندازه عنصر تصویر را تغییر داد یا خیر."
+  },
+  "image_showHeightInput": {
+    "description": "آیا فیلد ورودی ارتفاع نمایش داده شود یا خیر."
+  },
+  "image_defaultWidth": {
+    "description": "عرض پیش‌فرض تصویر. اگر عددی ارائه شود، `\"px\"` اضافه خواهد شد."
+  },
+  "image_defaultHeight": {
+    "description": "ارتفاع پیش‌فرض تصویر. اگر عددی ارائه شود، `\"px\"` اضافه خواهد شد."
+  },
+  "image_percentageOnlySize": {
+    "description": "اینکه آیا فقط اندازه‌بندی بر اساس درصد مجاز باشد یا خیر."
+  },
+  "image_createFileInput": {
+    "description": "آیا برای آپلود تصویر، یک عنصر ورودی فایل ایجاد شود یا خیر."
+  },
+  "image_createUrlInput": {
+    "description": "آیا برای درج تصویر، یک عنصر ورودی URL ایجاد شود یا خیر. - پیش‌فرض روی `true` است. همیشه `true` ​​است وقتی `createFileInput` برابر با `false` باشد."
+  },
+  "image_uploadUrl": {
+    "description": "نقطه پایانی URL برای آپلود فایل تصویر."
+  },
+  "image_uploadHeaders": {
+    "description": "هدرهای اضافی برای افزودن به درخواست آپلود فایل."
+  },
+  "image_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود بر حسب بایت."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "محدودیت حجم آپلود تک فایل بر حسب بایت."
+  },
+  "image_allowMultiple": {
+    "description": "آیا آپلود چندین تصویر مجاز است؟"
+  },
+  "image_acceptedFormats": {
+    "description": "فرمت‌های فایل پذیرفته شده برای آپلود تصویر."
+  },
+  "image_useFormatType": {
+    "description": "آیا انتخاب نوع قالب (`block` یا `inline`) فعال باشد یا خیر."
+  },
+  "image_defaultFormatType": {
+    "description": "نوع فرمت تصویر پیش‌فرض (`\"block\"` یا `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "آیا نوع قالب انتخاب شده پس از درج تصویر حفظ شود یا خیر."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "فعال بودن آپلود فایل برای تصاویر لینک‌دار."
+  },
+  "image_controls": {
+    "description": "کنترل‌های شکل."
+  },
+  "image_insertBehavior": {
+    "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- برای کامپوننت‌های درون‌خطی: مکان‌نما را نزدیک کامپوننت قرار می‌دهد، یا اگر محدوده‌ای در نزدیکی وجود ندارد، انتخاب می‌کند.\n- برای کامپوننت‌های بلوکی: رفتاری را بر اساس `selectMode` ​​اجرا می‌کند:\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، در غیر این صورت کامپوننت را انتخاب می‌کند.\n- `select`: همیشه کامپوننت درج‌شده را انتخاب می‌کند.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، یا یک خط جدید ایجاد می‌کند و به آنجا می‌رود.\n- `none`: هیچ کاری انجام نمی‌دهد."
+  },
+  "link_uploadUrl": {
+    "description": "نقطه پایانی URL برای آپلود فایل."
+  },
+  "link_uploadHeaders": {
+    "description": "هدرهای اضافی برای درخواست‌های آپلود فایل."
+  },
+  "link_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود فایل بر حسب بایت."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "محدودیت حجم آپلود تک فایل بر حسب بایت."
+  },
+  "link_acceptedFormats": {
+    "description": "فرمت‌های فایل پذیرفته شده برای آپلود لینک."
+  },
+  "link_title": {
+    "description": "نمایش عنوان مودال."
+  },
+  "link_textToDisplay": {
+    "description": "ایجاد متن برای نمایش ورودی"
+  },
+  "link_openNewWindow": {
+    "description": "مقدار پیش‌فرض علامت‌گذاری‌شده‌ی کادر انتخاب «باز کردن در پنجره‌ی جدید»"
+  },
+  "link_noAutoPrefix": {
+    "description": "اگر `true` باشد، پیشوند خودکار URL میزبان را به مقدار لینک غیرفعال می‌کند."
+  },
+  "link_relList": {
+    "description": "مقادیر ویژگی `rel` موجود که به صورت کادرهای انتخاب در پنجره‌ی پیوند نشان داده می‌شوند."
+  },
+  "link_defaultRel": {
+    "description": "مقادیر پیش‌فرض `rel` به صورت خودکار بر اساس شرایط اعمال می‌شوند."
+  },
+  "link_enableFileUpload": {
+    "description": "اگر `true` باشد، آپلود فایل را فعال می‌کند."
+  },
+  "math_canResize": {
+    "description": "آیا می‌توان اندازه‌ی پنجره‌ی ریاضی را تغییر داد یا خیر."
+  },
+  "math_autoHeight": {
+    "description": "آیا ارتفاع مودال به طور خودکار تنظیم شود یا خیر."
+  },
+  "math_fontSizeList": {
+    "description": "فهرستی از گزینه‌های اندازه فونت برای انتخابگر اندازه عبارت ریاضی."
+  },
+  "math_onPaste": {
+    "description": "یک تابع فراخوانی برای مدیریت رویدادهای چسباندن (paste) در ناحیه ورودی ریاضی."
+  },
+  "math_formSize": {
+    "description": "یک شیء که ابعاد مربوط به مدل ریاضی را مشخص می‌کند."
+  },
+  "video_canResize": {
+    "description": "اینکه آیا می‌توان اندازه عنصر ویدیو را تغییر داد یا خیر."
+  },
+  "video_showHeightInput": {
+    "description": "آیا فیلد ورودی ارتفاع نمایش داده شود یا خیر."
+  },
+  "video_defaultWidth": {
+    "description": "عرض پیش‌فرض عنصر ویدیو. اگر عددی ارائه شود، `\"px\"` اضافه خواهد شد."
+  },
+  "video_defaultHeight": {
+    "description": "ارتفاع پیش‌فرض عنصر ویدیو. اگر عددی ارائه شود، `\"px\"` اضافه خواهد شد."
+  },
+  "video_percentageOnlySize": {
+    "description": "اینکه آیا فقط اندازه‌بندی بر اساس درصد مجاز باشد یا خیر."
+  },
+  "video_createFileInput": {
+    "description": "آیا برای آپلود ویدیو، یک عنصر ورودی فایل ایجاد شود یا خیر."
+  },
+  "video_createUrlInput": {
+    "description": "آیا برای جاسازی ویدیو، یک عنصر ورودی URL ایجاد شود یا خیر. - پیش‌فرض روی `true` است. همیشه `true` ​​باشد وقتی `createFileInput` برابر `false` باشد."
+  },
+  "video_uploadUrl": {
+    "description": "نقطه پایانی URL برای آپلود فایل‌های ویدیویی."
+  },
+  "video_uploadHeaders": {
+    "description": "هدرهای اضافی برای افزودن به درخواست آپلود ویدیو."
+  },
+  "video_uploadSizeLimit": {
+    "description": "محدودیت حجم کل آپلود برای ویدیوها بر حسب بایت."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "محدودیت حجم آپلود تک فایل برای ویدیوها بر حسب بایت."
+  },
+  "video_allowMultiple": {
+    "description": "اینکه آیا آپلود چندین ویدیو مجاز است یا خیر."
+  },
+  "video_acceptedFormats": {
+    "description": "فرمت‌های فایل پذیرفته‌شده برای آپلود ویدیو (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "نسبت ابعاد پیش‌فرض برای ویدیو (ارتفاع/عرض، مثلاً ۱۶:۹ → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "آیا گزینه نسبت در پنجره‌ی مودال نمایش داده شود یا خیر."
+  },
+  "video_ratioOptions": {
+    "description": "گزینه‌های نسبت سفارشی برای تغییر اندازه ویدیو (مقدار = ارتفاع/عرض)."
+  },
+  "video_videoTagAttributes": {
+    "description": "ویژگی‌های اضافی که باید روی تگ `VIDEO` تنظیم شوند."
+  },
+  "video_iframeTagAttributes": {
+    "description": "ویژگی‌های اضافی که باید روی تگ `IFRAME` تنظیم شوند."
+  },
+  "video_query_youtube": {
+    "description": "پارامترهای جستجوی اضافی برای جاسازی یوتیوب."
+  },
+  "video_query_vimeo": {
+    "description": "پارامترهای پرس و جوی اضافی برای جاسازی Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "تعاریف سفارشی سرویس جاسازی (به `EmbedPluginOptions.embedQuery` مراجعه کنید)."
+  },
+  "video_urlPatterns": {
+    "description": "الگوهای URL اضافی برای جاسازی ویدیو."
+  },
+  "video_extensions": {
+    "description": "پسوندهای فایل اضافی که برای آپلود ویدیو شناخته می‌شوند."
+  },
+  "video_controls": {
+    "description": "کنترل‌های شکل."
+  },
+  "video_insertBehavior": {
+    "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، در غیر این صورت کامپوننت را انتخاب کنید.\n- `select`: همیشه کامپوننت درج شده را انتخاب کنید.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل کنید، یا یک خط جدید ایجاد کنید و به آنجا بروید.\n- `none`: هیچ کاری انجام ندهید."
+  }
+}

@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Redaktora sākotnējā vērtība.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Viettura teksts.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Rediģējamā rāmja atribūti [.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Redaktora platums.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Redaktora minimālais platums.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Redaktora maksimālais platums.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Redaktora augstums.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Redaktora minimālais augstums.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Redaktora maksimālais augstums.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Redaktora augšējā rāmja stila virkne.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Saturs tiks ievietots iframe ietvarā un izolēts no pārējās lapas.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Ļauj izmantot HTML, HEAD, BODY tagus un DOCTYPE deklarāciju `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe` atribūti.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Iespējo statusa joslu.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Statusa joslā parāda pašreizējo mezglu struktūru.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Iespējo apakšējās statusa joslas izmēru maiņas funkciju.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Parāda rakstzīmju skaitu redaktorā.\n- Ja opcijai `maxCharCount` ir vērtība, tā kļūst par `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Maksimālais rakstzīmju skaits, ko atļauts ievietot redaktorā.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Teksts, kas jāparāda apakšējās joslas `charCounter` apgabalā.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definē `charCounter` opcijas aprēķina metodi.\n- `char`: Rakstzīmju garums.\n- `byte`: Rakstzīmju bināro datu lielums.\n- `byte-html`: Pilnas HTML virknes bināro datu lielums.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Parāda vārdu skaitu redaktorā.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Teksts, kas jāparāda apakšējās joslas `wordCounter` apgabalā.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Augšējam konteineram piemērotie stili (piemēram, platums, z-indekss utt.)."
+  },
+  "frame": {
+    "description": "iframe konteineram piemērotie stili (piemēram, augstums, minimālais augstums)."
+  },
+  "editor": {
+    "description": "Rediģējamajam satura apgabalam lietotie stili."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror redaktora instance (kadra līmenī). Iestata `_checkCodeMirror` pēc inicializācijas."
+  },
+  "plugins": {
+    "description": "Spraudņa konfigurācija. Nodot spraudņa klašu masīvu vai objektu, kura atslēga ir spraudņa nosaukums.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Rīkjoslas pogu saraksts, grupēts pa apakšmasīviem.\n\n- Noklusējuma vērtība seko {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Iespējo migrācijas režīmu SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Rīkjoslas režīms: `classic`, `inline`, `balloon`, `balloon-always`. Pievienojiet `:bottom`, lai rīkjoslu novietotu apakšā (piemēram, `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Redaktora tips. Izmantojiet `\"document\"` dokumenta stila izkārtojumam, ar papildu apakštipiem aiz `:`.\n\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Redaktora tēma.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Valodas konfigurācija. Noklusējums: EN"
+  },
+  "icons": {
+    "description": "Pārraksta noklusējuma ikonas."
+  },
+  "textDirection": {
+    "description": "Teksta virziens: `ltr` vai `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Iespējo stingru tagu, atribūtu un stilu filtrēšanu.\n- Izmantojiet `true`, lai iespējotu visus filtrus (pēc noklusējuma), vai objektu, lai kontrolētu atsevišķus filtrus.\n- `false` ​​iestatīšana netiek atbalstīta; tā vietā izmantojiet objekta formu, lai atspējotu konkrētus filtrus.\n- :filtra apraksts\n- `tagFilter`: Filtri neatļauj HTML tagus (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtri formāta elementus (`formatLine`/`formatBlock`)\n- `classFilter`: Filtri neatļauj CSS klašu nosaukumus (`allowedClassName`)\n- `textStyleTagFilter`: Filtri teksta stila tagus (b, i, u, span utt.)\n- `attrFilter`: Filtri neatļauj HTML atribūtus (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtri neatļauj iekļautos stilus (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Atlasot visu saturu, tagi tiek apstrādāti kā veselas vienības.\n\n- Noklusējuma iestatījums ir šāds: {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Norāda HTML elementus, kas jāatļauj papildus noklusējuma atļauto elementu sarakstam. Atdalītājs: `\"|\"`.\n- Pievienots noklusējuma sarakstam, ko nosaka {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Norāda HTML elementus, kurus nevajadzētu izmantot. Atdalītājs: `\"|\"`.\n\n- Šeit norādītās atzīmes galu galā tiks noņemtas, pat ja tās ir iekļautas citos baltajos sarakstos.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "To tagu saraksts, kurus atļauts saglabāt pat tad, ja to vērtības ir tukšas.\n- Noklusējuma vērtība ir šāda: {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Apvienots ar `ALLOWED_EMPTY_NODE_LIST`, lai izveidotu galīgo `allowedEmptyTags` ​​sarakstu.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Atļautie klašu nosaukumi.\n- Pievienota noklusējuma vērtība {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Norāda papildu atribūtus, kas jāatļauj katram tagam. `\"*\"` attiecas uz visiem tagiem.\n\n- Šeit norādītie noteikumi tiks apvienoti ar {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Norāda atribūtus, ko aizliegt pēc taga. `\"*\"` attiecas uz visiem tagiem.\n\n- Šeit norādītie atribūti galu galā tiks noņemti, pat ja tos atļauj citi iestatījumi.\n\n- Vienmēr ir iekļauts obligāto elementu saraksts {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Papildu teksta stila tagi.\n- Noklusējuma iestatījums atbilst {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Saista teksta stilus ar konkrētiem HTML tagiem.\n\n``js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Norāda papildu stilus atļauto stilu sarakstam. Atdalītājs: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Norāda atļautos HTML tagu stilus. Atslēga ir taga(-u) nosaukums(-i), vērtība ir ar vertikālo svītru atdalīti atļautie stili.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Norāda atļautos stilus `span` tagam.\n- Noklusējuma stils seko {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Norāda atļautos stilus `line` elementam (p..).\n- Noklusējuma iestatījums atbilst {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Atļautās fonta lieluma vienības.\n- Noklusējuma vērtība ir šāda: {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Nosaka, kā tiek apstrādāti iekļautie elementi (piemēram, `<span>`, `<strong>`), dzēšot tekstu.\n- `repeat`: Stili tiek saglabāti, ja vien atkārtoti netiek nospiesta atpakaļatkāpes poga.\n- Turpinot nospiest, stili galu galā tiks noņemti.\n- `none`: Stili netiek saglabāti. Iekļautie elementi tiek nekavējoties noņemti kopā ar tekstu.\n- `always`: Stili paliek bezgalīgi, ja vien tie netiek skaidri noņemti.\n- Pat ja viss teksts iekļautajā elementā tiek dzēsts, pats elements paliek.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Noklusējuma `line` elements, ievietojot jaunas rindas.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Norāda noklusējuma rindiņas pārtraukuma formātu.\n- [Ieteicams] `line` : Rindiņas pārtraukums ir sadalīts vispārīgās birkās.\n- [Nav ieteicams] `br` ​​: Rindiņas pārtraukumi tiek apstrādāti kā <br> tajā pašā rindā. (līdzīgi kā shift+enter)\n- Rindiņas pārtraukumi tiek apstrādāti kā <br> iekš `line`.\n- Varat izveidot jaunu `line`, divreiz pēc kārtas ievadot rindiņas pārtraukumu.\n- Formāti, kas ietver `line`, piemēram, \"Citāts\", joprojām darbojas, pamatojoties uz `line`.\n- suneditor procesi darbojas `line` vienībās.\n- Ja iestatīts uz `br`, veiktspēja var samazināties, rediģējot lielu datu apjomu.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Līniju īpašības, kas jāatiestata, mainot līnijas. Atdalītājs: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Papildus atļauti `line` elementi papildus noklusējuma elementiem. Atdalītājs: `\"|\"`.\n- Apvienots ar {@link PrivateBaseOptions.__defaultFormatLine}, lai izveidotu galīgo `line` sarakstu.\n- `line` elements satur arī `brLine` elementu.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Papildus atļauti `brLine` elementi papildus noklusējuma elementiem.\n- Apvienots ar {@link PrivateBaseOptions.__defaultFormatBrLine}, lai izveidotu galīgo `brLine` ​​sarakstu.\n- `brLine` elementi ir iekļauti `line` elementā.\n- `brLine` elementu rindiņas pārtraukums ir `BR` birka.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Papildus atļauti `closureBrLine` elementi papildus noklusējuma elementiem.\n- Apvienots ar {@link PrivateBaseOptions.__defaultFormatClosureBrLine} galīgajam `closureBrLine` ​​sarakstam.\n- `closureBrLine` elementi ir iekļauti `brLine`.\n- `closureBrLine` elementu rindiņas pārtraukums ir `BR` tags.\n- ※ No šī formāta nevar iziet ar taustiņu Enter vai Backspace.\n- ※ Izmantojiet to tikai īpašos gadījumos. ([piem.] tabulas šūnu formāts)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Papildus atļauti `block` elementi ārpus noklusējuma.\n- Apvienots ar {@link PrivateBaseOptions.__defaultFormatBlock}, lai izveidotu galīgo `block` ​​sarakstu.\n- `block` ietver `line` un `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Papildus atļauti `closureBlock` elementi papildus noklusējuma elementiem.\n- Apvienoti ar {@link PrivateBaseOptions.__defaultFormatClosureBlock} galīgajam `closureBlock` ​​sarakstam.\n- `closureBlock` elementi ir iekļauti `block`.\n- `closureBlock` elements ietver `line` un `component`.\n- ※ No šī formāta nevar iziet ar taustiņu Enter vai Backspace.\n- ※ Izmantojiet to tikai īpašos gadījumos. (piemēram, tabulas šūnu formāts)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Aizver modālos logus, noklikšķinot ārpusē.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Sinhronizē tabulēšanas atkāpi ar atstarpēm.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Atspējo tabulēšanas taustiņu ievadi.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Rīkjoslas platums.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Rīkjoslas konteinera elements."
+  },
+  "toolbar_sticky": {
+    "description": "Iespējo fiksēto rīkjoslu.\n- `number`: Iestata fiksēto augšējo pozīciju (pikseļos). Izmantojiet `-1`, lai atspējotu fiksēto pozīciju.\n- `{top, offset}`: `top` ir fiksētā pozīcija, kad ir redzama lapas galvene.\n- `offset` ir fiksētā pozīcija, kad virtuālā tastatūra pārvieto skata logu (piemēram, planšetdatoros, skārienekrānos).\n- Kad virtuālā tastatūra ir aktīva, `offset` aizstāj `top`, lai rīkjosla neatstātu atstarpi\n- lapas galvenei, kas ir izritināta ārpus skata. Noklusējuma `offset` ir `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Sākotnēji slēpj rīkjoslu.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Apakšrīkjoslas konfigurācija. Otra rīkjosla, kas tiek parādīta, atlasot tekstu.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Statusa joslas konteinera elements."
+  },
+  "shortcutsHint": {
+    "description": "Parāda īsinājumtaustiņu padomus rīkjoslā.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Atspējo īsinājumtaustiņus.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Pielāgoti īsinājumtaustiņi.\n- Taustiņi, kas sākas ar `_`, ir lietotāja definēti pielāgoti īsinājumtaustiņi. Katra vērtība ir `[keyCombo, hintLabel]` ​​pāru masīvs.\n- Taustiņu kombinācijās tiek izmantotas `c` (Ctrl/Cmd), `s` (Shift) un `KeyEvent.code` vērtības, kas savienotas ar `+`.\n- Izmantojiet `$~pluginName.method`, lai izsauktu konkrētu spraudņa metodi.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Saglabā kopētā satura formātu.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Automātiski konvertē URL hipersaitēs. (Nepieciešams spraudnis `Link`)\n- Noklusējums: `Boolean(plugins.link)` ​​— nosaka, vai ir iespējots spraudnis `link`."
+  },
+  "historyStackDelayTime": {
+    "description": "Vēstures steka atjauninājumu aizkaves laiks (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Maksimālais vēstures ierakstu skaits katrā saknes kadrā. Vecākie ieraksti tiek atmesti, kad tas tiek pārsniegts.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Drukāšanas klases nosaukums.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Nobīde tiek piemērota, pārejot uz pilnekrāna režīmu.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Pielāgota HTML veidne priekšskatījuma režīmam. Izmantojiet `{{ contents }}` kā redaktora satura aizvietotāju.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Pielāgota HTML veidne drukāšanas režīmam. Izmantojiet `{{ contents }}` kā redaktora satura aizvietotāju.\n\n``js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Iespējo ievietoto komponentu automātisku atlasi.\n- Iekļautajiem komponentiem: novieto kursoru komponenta tuvumā vai atlasa, ja tuvumā nav diapazona.\n- Bloka komponentiem: izpilda darbību, pamatojoties uz `selectMode`:\n- `auto`: Pārvieto kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasa komponentu.\n- `select`: Vienmēr atlasa ievietoto komponentu.\n- `line`: Pārvieto kursoru uz nākamo rindu, ja iespējams, vai izveido jaunu rindu un pārvietojas uz turieni.\n- `none`: Neko nedarīt.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Noklusējuma URL protokols saitēm.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Uznirstošo ziņojumu rādīšanas ilgums (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Iespējo brīvā koda skata režīmu.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Parāda iebūvēto meklēšanas/aizstāt paneļa lietotāja saskarni.\n\n- Meklētājs vienmēr tiek izveidots iekšēji; šī opcija kontrolē, vai panelis ir redzams lietotājiem (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Meklēšana notiek acumirklī, tiklīdz rakstāt (bez atlēkušās skaņas). Ja vērtība ir “false”, meklēšana tiek veikta tikai nospiežot taustiņu Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Ārējās bibliotēkas, piemēram, CodeMirror, KaTeX vai MathJax.\n— Skatiet {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Ārējo bibliotēku ceļvedi}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Norāda papildu atļautās vai neatļautās atzīmes. `true` atļaujai, `false` ​​neļaujai.\n\n- Noklusējuma vērtība ir šāda: {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Lietotāja notikumu apstrādātāju konfigurācija.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Pašlaik izmantoto rīkjoslas pogu saraksts"
+  },
+  "buttons_sub": {
+    "description": "Pašlaik izmantoto apakšrīkjoslas pogu saraksts"
+  },
+  "toolbar_sub_width": {
+    "description": "Apakšrīkjoslas platums."
+  },
+  "reverseCommands": {
+    "description": "Apvienots apgriezto komandu pāru masīvs.\n- Ietver noklusējuma `indent-outdent` + lietotāja `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "CodeMirror konfigurācijas objekts no `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Izmanto CodeMirror koda skatīšanai."
+  },
+  "audioGallery_data": {
+    "description": "Tiešie dati bez servera izsaukumiem"
+  },
+  "audioGallery_url": {
+    "description": "Servera pieprasījuma URL"
+  },
+  "audioGallery_headers": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Noklusējuma sīktēls"
+  },
+  "fileBrowser_data": {
+    "description": "Tiešie dati bez servera izsaukumiem (apejot URL ielādi)."
+  },
+  "fileBrowser_url": {
+    "description": "Servera pieprasījuma URL"
+  },
+  "fileBrowser_headers": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Noklusējuma sīktēla URL vai funkcija, kas atgriež sīktēla URL katram vienumam."
+  },
+  "fileBrowser_props": {
+    "description": "Papildu tagu nosaukumi"
+  },
+  "fileGallery_data": {
+    "description": "Tiešie dati bez servera izsaukumiem"
+  },
+  "fileGallery_url": {
+    "description": "Servera pieprasījuma URL"
+  },
+  "fileGallery_headers": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Noklusējuma sīktēls"
+  },
+  "imageGallery_data": {
+    "description": "Tiešie dati bez servera izsaukumiem"
+  },
+  "imageGallery_url": {
+    "description": "Servera pieprasījuma URL"
+  },
+  "imageGallery_headers": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "videoGallery_data": {
+    "description": "Tiešie dati bez servera izsaukumiem"
+  },
+  "videoGallery_url": {
+    "description": "Servera pieprasījuma URL"
+  },
+  "videoGallery_headers": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Noklusējuma sīktēls"
+  },
+  "codeBlock_langs": {
+    "description": "Koda blokiem atlasāmo programmēšanas valodu saraksts.\n- Noklusējuma iestatījums ir 21 izplatītākā valoda\n- [javascript, Typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Iestatiet tukšu masīvu `[]`, lai pilnībā atspējotu valodas izvēles lietotāja saskarni."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Servera pieprasījuma URL PDF ģenerēšanai"
+  },
+  "exportPDF_fileName": {
+    "description": "Ģenerētā PDF faila nosaukums"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Servera pieprasījuma URL faila augšupielādei"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Servera pieprasījumu galvenes"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Kopējais augšupielādes lieluma ierobežojums baitos"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Viena faila lieluma ierobežojums baitos"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Atļaut vairāku failu augšupielādi"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Pieņemtie failu formāti."
+  },
+  "fileUpload_as": {
+    "description": "Norādiet faila komponenta noklusējuma formu kā `box` vai `link`"
+  },
+  "fileUpload_controls": {
+    "description": "Papildu vadīklas, kas jāpievieno attēlam"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- `auto`: Pārvietot kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasīt komponentu.\n- `select`: Vienmēr atlasīt ievietoto komponentu.\n- `line`: Pārvietot kursoru uz nākamo rindu, ja iespējams, vai izveidot jaunu rindu un pārvietot to uz turieni.\n- `none`: Nedarīt neko."
+  },
+  "align_items": {
+    "description": "Izlīdzināt elementus"
+  },
+  "backgroundColor_items": {
+    "description": "Krāsu saraksts."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Krāsu skaits katrā rindā"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Atspējot heksadecimāldaļas ievadi"
+  },
+  "blockStyle_items": {
+    "description": "Formātu saraksts.\n- `command` — `\"line\"`: vienas rindas bloks, `\"br-line\"`: ar br atdalīts bloks, `\"block\"`: konteinera bloks."
+  },
+  "font_items": {
+    "description": "Fontu saraksts"
+  },
+  "fontColor_items": {
+    "description": "Krāsu saraksts."
+  },
+  "fontColor_splitNum": {
+    "description": "Krāsu skaits katrā rindā"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Atspējot heksadecimāldaļas ievadi"
+  },
+  "hR_items": {
+    "description": "Personāla saraksts"
+  },
+  "layout_items": {
+    "description": "Izkārtojuma saraksts. Katrs elements definē nosauktu izkārtojuma veidni ar neapstrādātu HTML."
+  },
+  "lineHeight_items": {
+    "description": "Līnijas augstuma saraksts"
+  },
+  "paragraphStyle_items": {
+    "description": "Rindkopu vienumu saraksts"
+  },
+  "table_scrollType": {
+    "description": "Ritināšanas veids (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Paraksta pozīcija (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Šūnas kontrollera pozīcija (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Šūnas fona krāsas atlasītāja heksadecimālais krāsu saraksts."
+  },
+  "template_items": {
+    "description": "Veidņu saraksts"
+  },
+  "textStyle_items": {
+    "description": "Teksta stila elementu saraksts."
+  },
+  "mention_triggerText": {
+    "description": "Personāžs, kas aktivizē pieminēšanas sarakstu."
+  },
+  "mention_limitSize": {
+    "description": "Pieminēšanas sarakstā rādāmo vienumu skaits"
+  },
+  "mention_searchStartLength": {
+    "description": "Rakstzīmju skaits, ar kuru sākt meklēšanu pieminēšanas sarakstā"
+  },
+  "mention_delayTime": {
+    "description": "Laiks, kas jāgaida pirms pieminēšanas saraksta parādīšanas"
+  },
+  "mention_data": {
+    "description": "Statiskie pieminēšanas dati (tiek izmantoti API vietā)."
+  },
+  "mention_apiUrl": {
+    "description": "URL, lai izsauktu pieminēšanas sarakstu"
+  },
+  "mention_apiHeaders": {
+    "description": "Galvenes, kas jānosūta kopā ar API izsaukumu"
+  },
+  "mention_useCachingData": {
+    "description": "Vai kešatmiņā saglabāt pieminēšanas saraksta datus"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Vai kešatmiņā saglabāt pieminēšanas saraksta datus laukā"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Fonta lieluma mērvienība.\n- Pieņemtās vērtības ir: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` vai `'text'`.\n- Ja tiek izmantots `'text'`, tiek lietots uz tekstu balstīts fonta lieluma saraksts."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Nosaka, vai nolaižamajā izvēlnē tiek parādīta noklusējuma izmēra etiķete."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Ja `true`, tiek parādītas palielināšanas un samazināšanas pogas fonta lieluma pielāgošanai.\n- Noklusējuma iestatījums ir `false`. Vienmēr `false`, ja ​​`sizeUnit` ir `'text'` (ignorēts)."
+  },
+  "fontSize_disableInput": {
+    "description": "Ja `true`, tiek atspējota tiešā fonta lieluma ievades lodziņa iestatīšana.\n- Noklusējuma iestatījums ir `true`, ja ​​`sizeUnit` ir `'text'`, pretējā gadījumā `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Pārrakstīt vai paplašināt fontu izmēru noklusējuma mērvienību kartējumu."
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO` taga noklusējuma platums."
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO` taga noklusējuma augstums."
+  },
+  "audio_createFileInput": {
+    "description": "Vai izveidot faila ievades elementu."
+  },
+  "audio_createUrlInput": {
+    "description": "Vai izveidot URL ievades elementu.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL, kurā faili tiks augšupielādēti."
+  },
+  "audio_uploadHeaders": {
+    "description": "Galvenes, kas jāiekļauj faila augšupielādes pieprasījumā."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Kopējais augšupielādes lieluma ierobežojums baitos."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Viena faila lieluma ierobežojums baitos."
+  },
+  "audio_allowMultiple": {
+    "description": "Vai atļaut vairāku failu augšupielādi."
+  },
+  "audio_acceptedFormats": {
+    "description": "Pieņemtie failu formāti (pēc noklusējuma ir `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Papildu atribūti, kas jāiestata `AUDIO` tagā."
+  },
+  "audio_insertBehavior": {
+    "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- `auto`: Pārvietot kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasīt komponentu.\n- `select`: Vienmēr atlasīt ievietoto komponentu.\n- `line`: Pārvietot kursoru uz nākamo rindu, ja iespējams, vai izveidot jaunu rindu un pārvietot to uz turieni.\n- `none`: Nedarīt neko."
+  },
+  "drawing_outputFormat": {
+    "description": "Zīmējuma izvades formāts. Opcijas: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Vai iespējot formāta tipa atlasi (`block` pret `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Noklusējuma formāta tips — `\"block\"` vai `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Vai saglabāt izvēlēto formāta veidu pēc zīmēšanas."
+  },
+  "drawing_lineWidth": {
+    "description": "Zīmēšanas līnijas platums."
+  },
+  "drawing_lineReconnect": {
+    "description": "Vai zīmējot atjaunot līnijas."
+  },
+  "drawing_lineCap": {
+    "description": "Līnijas sākuma burta stils (`\"butt\"`, `\"round\"` ​​vai `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Zīmēšanas līnijas krāsa."
+  },
+  "drawing_canResize": {
+    "description": "Vai modālās formas izmērus var mainīt."
+  },
+  "drawing_maintainRatio": {
+    "description": "Vai saglabāt malu attiecību, mainot izmēru."
+  },
+  "drawing_formSize": {
+    "description": "Zīmēšanas modālās formas izmēra konfigurācija."
+  },
+  "embed_canResize": {
+    "description": "Vai iegultā elementa izmēru var mainīt."
+  },
+  "embed_showHeightInput": {
+    "description": "Vai rādīt augstuma ievades lauku."
+  },
+  "embed_defaultWidth": {
+    "description": "Iegultā elementa noklusējuma platums (skaitliska vērtība vai ar mērvienību)."
+  },
+  "embed_defaultHeight": {
+    "description": "Iegultā elementa noklusējuma augstums (skaitliska vērtība vai ar mērvienību)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Vai atļaut tikai procentuālu izmēru noteikšanu."
+  },
+  "embed_uploadUrl": {
+    "description": "Failu augšupielādes URL."
+  },
+  "embed_uploadHeaders": {
+    "description": "Galvenes, kas jāiekļauj failu augšupielādes pieprasījumos."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Kopējais augšupielādējamo failu lieluma ierobežojums baitos."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Viena augšupielādējamā faila lieluma ierobežojums baitos."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Papildu atribūti, kas jāiestata `IFRAME` tagā."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube vaicājuma parametrs ir pievienots iegulšanas URL."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo vaicājuma parametrs ir pievienots iegulšanas URL."
+  },
+  "embed_urlPatterns": {
+    "description": "Papildu URL raksti, kas jāatpazīst kā ieguldāms saturs."
+  },
+  "embed_embedQuery": {
+    "description": "Pielāgotas iegulšanas pakalpojumu definīcijas."
+  },
+  "embed_controls": {
+    "description": "Figūras vadība."
+  },
+  "embed_insertBehavior": {
+    "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- `auto`: Pārvietot kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasīt komponentu.\n- `select`: Vienmēr atlasīt ievietoto komponentu.\n- `line`: Pārvietot kursoru uz nākamo rindu, ja iespējams, vai izveidot jaunu rindu un pārvietot to uz turieni.\n- `none`: Nedarīt neko."
+  },
+  "image_canResize": {
+    "description": "Vai attēla elementa izmēru var mainīt."
+  },
+  "image_showHeightInput": {
+    "description": "Vai rādīt augstuma ievades lauku."
+  },
+  "image_defaultWidth": {
+    "description": "Attēla noklusējuma platums. Ja ir norādīts skaitlis, tiks pievienots `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Attēla noklusējuma augstums. Ja ir norādīts skaitlis, tiks pievienots `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Vai atļaut tikai procentuālu izmēru noteikšanu."
+  },
+  "image_createFileInput": {
+    "description": "Vai attēlu augšupielādei izveidot faila ievades elementu."
+  },
+  "image_createUrlInput": {
+    "description": "Vai attēla ievietošanai izveidot URL ievades elementu.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
+  },
+  "image_uploadUrl": {
+    "description": "Attēlu failu augšupielādes URL galapunkts."
+  },
+  "image_uploadHeaders": {
+    "description": "Papildu galvenes, kas jāiekļauj faila augšupielādes pieprasījumā."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Kopējais augšupielādes lieluma ierobežojums baitos."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Viena augšupielādējamā faila lieluma ierobežojums baitos."
+  },
+  "image_allowMultiple": {
+    "description": "Vai ir atļauta vairāku attēlu augšupielāde."
+  },
+  "image_acceptedFormats": {
+    "description": "Pieņemtie attēlu augšupielādes failu formāti."
+  },
+  "image_useFormatType": {
+    "description": "Vai iespējot formāta tipa atlasi (`block` vai `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Noklusējuma attēla formāta tips (`\"block\"` vai `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Vai saglabāt izvēlēto formāta veidu pēc attēla ievietošanas."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Vai iespējot saistīto attēlu failu augšupielādi."
+  },
+  "image_controls": {
+    "description": "Figūras vadīklas."
+  },
+  "image_insertBehavior": {
+    "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- Iekļautiem komponentiem: novieto kursoru komponenta tuvumā vai atlasa, ja tuvumā nav diapazona.\n- Bloku komponentiem: izpilda darbību, pamatojoties uz `selectMode`:\n- `auto`: Pārvieto kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasa komponentu.\n- `select`: Vienmēr atlasa ievietoto komponentu.\n- `line`: Pārvieto kursoru uz nākamo rindu, ja iespējams, vai izveido jaunu rindu un pārvietojas uz turieni.\n- `none`: Neko nedarīt."
+  },
+  "link_uploadUrl": {
+    "description": "Failu augšupielādes URL galapunkts."
+  },
+  "link_uploadHeaders": {
+    "description": "Papildu galvenes failu augšupielādes pieprasījumiem."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Kopējais augšupielādējamā faila lieluma ierobežojums baitos."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Viena augšupielādējamā faila lieluma ierobežojums baitos."
+  },
+  "link_acceptedFormats": {
+    "description": "Pieņemtie failu formāti saišu augšupielādei."
+  },
+  "link_title": {
+    "description": "Modālā nosaukuma attēlošana."
+  },
+  "link_textToDisplay": {
+    "description": "Izveidojiet tekstu ievades attēlošanai."
+  },
+  "link_openNewWindow": {
+    "description": "Izvēles rūtiņas \"Atvērt jaunā logā\" noklusējuma atzīmētā vērtība."
+  },
+  "link_noAutoPrefix": {
+    "description": "Ja `true`, tiek atspējota automātiska resursdatora URL prefiksa pievienošana saites vērtībai."
+  },
+  "link_relList": {
+    "description": "Pieejamās `rel` atribūtu vērtības saites modālajā logā tiek parādītas kā izvēles rūtiņas."
+  },
+  "link_defaultRel": {
+    "description": "Noklusējuma `rel` vērtības tiek automātiski piemērotas pēc nosacījuma."
+  },
+  "link_enableFileUpload": {
+    "description": "Ja `true`, iespējo failu augšupielādi."
+  },
+  "math_canResize": {
+    "description": "Vai matemātiskā modālā loga izmērus var mainīt."
+  },
+  "math_autoHeight": {
+    "description": "Vai automātiski pielāgot modālā loga augstumu."
+  },
+  "math_fontSizeList": {
+    "description": "Matemātiskās izteiksmes lieluma atlasītāja fonta lieluma opciju saraksts."
+  },
+  "math_onPaste": {
+    "description": "Atzvanīšanas funkcija, lai apstrādātu ielīmēšanas notikumus matemātikas ievades apgabalā."
+  },
+  "math_formSize": {
+    "description": "Objekts, kas norāda matemātiskā modālā loga izmērus."
+  },
+  "video_canResize": {
+    "description": "Vai video elementa izmēru var mainīt."
+  },
+  "video_showHeightInput": {
+    "description": "Vai rādīt augstuma ievades lauku."
+  },
+  "video_defaultWidth": {
+    "description": "Video elementa noklusējuma platums. Ja ir norādīts skaitlis, tiks pievienots `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Video elementa noklusējuma augstums. Ja ir norādīts skaitlis, tiks pievienots `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Vai atļaut tikai procentuālu izmēru noteikšanu."
+  },
+  "video_createFileInput": {
+    "description": "Vai izveidot faila ievades elementu video augšupielādēm."
+  },
+  "video_createUrlInput": {
+    "description": "Vai izveidot URL ievades elementu video iegulšanai.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
+  },
+  "video_uploadUrl": {
+    "description": "Video failu augšupielādes URL galapunkts."
+  },
+  "video_uploadHeaders": {
+    "description": "Papildu galvenes, kas jāiekļauj video augšupielādes pieprasījumā."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Kopējais augšupielādes lieluma ierobežojums videoklipiem baitos."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Viena faila augšupielādes lieluma ierobežojums video baitos."
+  },
+  "video_allowMultiple": {
+    "description": "Vai ir atļauta vairāku video augšupielāde."
+  },
+  "video_acceptedFormats": {
+    "description": "Pieņemtie failu formāti video augšupielādei (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Video noklusējuma malu attiecība (augstums/platums, piemēram, 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Vai modālajā logā rādīt proporcijas opciju."
+  },
+  "video_ratioOptions": {
+    "description": "Pielāgotas proporcijas opcijas video izmēru maiņai (vērtība = augstums/platums)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Papildu atribūti, kas jāiestata `VIDEO` tagā."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Papildu atribūti, kas jāiestata `IFRAME` tagā."
+  },
+  "video_query_youtube": {
+    "description": "Papildu vaicājuma parametri iegulšanai pakalpojumā YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Papildu vaicājuma parametri Vimeo iegulšanai."
+  },
+  "video_embedQuery": {
+    "description": "Pielāgotu iegulšanas pakalpojumu definīcijas (skatiet `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Papildu URL modeļi video iegulšanai."
+  },
+  "video_extensions": {
+    "description": "Papildu failu paplašinājumi, kas jāatpazīst augšupielādētajiem video."
+  },
+  "video_controls": {
+    "description": "Figūras vadīklas."
+  },
+  "video_insertBehavior": {
+    "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- `auto`: Pārvietot kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasīt komponentu.\n- `select`: Vienmēr atlasīt ievietoto komponentu.\n- `line`: Pārvietot kursoru uz nākamo rindu, ja iespējams, vai izveidot jaunu rindu un pārvietot to uz turieni.\n- `none`: Nedarīt neko."
+  }
+}

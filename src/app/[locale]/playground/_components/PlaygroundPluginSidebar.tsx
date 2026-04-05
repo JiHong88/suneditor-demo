@@ -1,13 +1,11 @@
 "use client";
 
 import { type Dispatch, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, ITEM_PRESETS, GALLERY_DATA_PRESETS } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
-import optDescEn from "@/data/api/option-descriptions.en.json";
-import optDescKo from "@/data/api/option-descriptions.ko.json";
-import optDescAr from "@/data/api/option-descriptions.ar.json";
+import { useOptDesc } from "@/hooks/useOptDesc";
 import {
 	API_UPLOAD_IMAGE,
 	API_UPLOAD_VIDEO,
@@ -17,13 +15,6 @@ import {
 	API_DOWNLOAD_PDF,
 } from "@/data/snippets/apiEndpoints";
 
-type OptDesc = Record<string, { description: string; default?: string }>;
-const optDescMap: Record<string, OptDesc> = {
-	en: optDescEn as OptDesc,
-	ko: optDescKo as OptDesc,
-	ar: optDescAr as OptDesc,
-};
-
 type Props = {
 	state: PlaygroundState;
 	dispatch: Dispatch<PlaygroundAction>;
@@ -32,8 +23,7 @@ type Props = {
 /* ── Reusable field components ─────────────────────────── */
 
 function FieldLabel({ label, optionKey }: { label: string; optionKey?: string }) {
-	const locale = useLocale();
-	const optDesc = optDescMap[locale] ?? optDescMap.en;
+	const optDesc = useOptDesc();
 	const key = optionKey ?? label;
 	const desc = optDesc[key]?.description;
 	return (

@@ -8,13 +8,14 @@ import "suneditor/src/themes/midnight.css";
 import "suneditor/src/themes/cobalt.css";
 import "suneditor/src/themes/cream.css";
 import dynamic from "next/dynamic";
-import { editorLangCodes } from "@/i18n/languages";
+import { localeCodes, toEditorCode } from "@/i18n/languages";
 
 const Editor = dynamic(() => import("./_editor"), { ssr: false });
 
-/** Dynamic import for SunEditor lang packs */
-async function loadLangPack(code: string): Promise<Record<string, string> | undefined> {
-	if (!code) return undefined;
+/** Dynamic import for SunEditor lang packs (accepts BCP 47 locale or editor code) */
+async function loadLangPack(locale: string): Promise<Record<string, string> | undefined> {
+	if (!locale) return undefined;
+	const code = toEditorCode(locale);
 	try {
 		const mod = await import(`suneditor/langs/${code}`);
 		return (mod.default ?? mod) as Record<string, string>;
@@ -38,7 +39,7 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp,
 	// Auto-detect lang from locale — skip if caller already provides lang (object or null sentinel)
 	const autoLangCode = useMemo(() => {
 		if (options && "lang" in options) return ""; // caller handles lang explicitly
-		if (locale === "en" || !editorLangCodes.includes(locale)) return "";
+		if (locale === "en" || !localeCodes.includes(locale)) return "";
 		return locale;
 	}, [options, locale]);
 

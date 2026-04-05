@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "តម្លៃដំបូងសម្រាប់អ្នកកែសម្រួល។",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "អត្ថបទ​ជំនួស។",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "គុណលក្ខណៈសម្រាប់ស៊ុមដែលអាចកែសម្រួលបាន [.sun-editor-editable]។\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "ទទឹងសម្រាប់កម្មវិធីនិពន្ធ។",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "ទទឹងអប្បបរមាសម្រាប់កម្មវិធីនិពន្ធ។",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "ទទឹងអតិបរមាសម្រាប់កម្មវិធីនិពន្ធ។",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "កម្ពស់សម្រាប់អ្នកកែសម្រួល។",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "កម្ពស់អប្បបរមាសម្រាប់អ្នកកែសម្រួល។",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "កម្ពស់អតិបរមាសម្រាប់អ្នកកែសម្រួល។",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "ខ្សែអក្សររចនាប័ទ្មនៃស៊ុមខាងលើនៃកម្មវិធីនិពន្ធ។\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "ខ្លឹមសារនឹងត្រូវបានដាក់ក្នុង iframe ហើយញែកដាច់ពីផ្នែកដែលនៅសល់នៃទំព័រ។",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "អនុញ្ញាតឱ្យប្រើប្រាស់ស្លាក HTML, HEAD, BODY និងការប្រកាស DOCTYPE នៅលើឯកសារ `iframe`។",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "គុណលក្ខណៈនៃ `iframe`។\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "បើកដំណើរការរបារស្ថានភាព។",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "បង្ហាញរចនាសម្ព័ន្ធណូតបច្ចុប្បន្ននៅក្នុងរបារស្ថានភាព។",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "បើកមុខងារប្ដូរទំហំនៃរបារស្ថានភាពខាងក្រោម។",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "បង្ហាញចំនួនតួអក្សរនៅក្នុងកម្មវិធីនិពន្ធ។\n- ប្រសិនបើជម្រើស `maxCharCount` មានតម្លៃ វានឹងក្លាយជា `true`។",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "ចំនួនតួអក្សរអតិបរមាដែលអនុញ្ញាតឱ្យបញ្ចូលទៅក្នុងកម្មវិធីនិពន្ធ។",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "អត្ថបទដែលត្រូវបង្ហាញនៅក្នុងតំបន់ `charCounter` នៃរបារខាងក្រោម។\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "កំណត់វិធីសាស្ត្រគណនានៃជម្រើស `charCounter`។\n- `char`: ប្រវែងតួអក្សរ។\n- `byte`: ទំហំទិន្នន័យគោលពីរនៃតួអក្សរ។\n- `byte-html`: ទំហំទិន្នន័យគោលពីរនៃខ្សែអក្សរ HTML ពេញលេញ។",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "បង្ហាញចំនួនពាក្យនៅក្នុងកម្មវិធីនិពន្ធ។",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "អត្ថបទដែលត្រូវបង្ហាញនៅក្នុងតំបន់ `wordCounter` នៃរបារខាងក្រោម។\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "រចនាប័ទ្ម​ត្រូវ​បាន​អនុវត្ត​ទៅ​កុងតឺន័រ​ខាងលើ (ឧ. ទទឹង, លិបិក្រម z, ល។)។"
+  },
+  "frame": {
+    "description": "រចនាប័ទ្ម​ត្រូវ​បាន​អនុវត្ត​ទៅ​កុងតឺន័រ iframe (ឧ. កម្ពស់, កម្ពស់​អប្បបរមា)។"
+  },
+  "editor": {
+    "description": "រចនាប័ទ្ម​ត្រូវ​បាន​អនុវត្ត​ទៅ​លើ​ផ្នែក​មាតិកា​ដែល​អាច​កែសម្រួល​បាន។"
+  },
+  "codeMirrorEditor": {
+    "description": "ឧទាហរណ៍​នៃ​កម្មវិធី​និពន្ធ CodeMirror (កម្រិត​ស៊ុម)។ កំណត់​ដោយ `_checkCodeMirror` បន្ទាប់​ពី​ការ​ចាប់ផ្ដើម។"
+  },
+  "plugins": {
+    "description": "ការកំណត់រចនាសម្ព័ន្ធកម្មវិធីជំនួយ។ បញ្ជូនអារេនៃថ្នាក់កម្មវិធីជំនួយ ឬវត្ថុដែលមានឈ្មោះកម្មវិធីជំនួយ។\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "បញ្ជីប៊ូតុងរបារឧបករណ៍ ដែលត្រូវបានដាក់ជាក្រុមតាមអារេរង។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "បើកដំណើរការរបៀបធ្វើចំណាកស្រុកសម្រាប់ SunEditor v2។",
+    "default": "false"
+  },
+  "mode": {
+    "description": "របៀបរបារឧបករណ៍៖ `classic`, `inline`, `balloon`, `balloon-always`។ បន្ថែម `:bottom` ដើម្បីដាក់របារឧបករណ៍នៅខាងក្រោម (ឧទាហរណ៍ `classic:bottom`, `inline:bottom`)។",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "ប្រភេទ​កម្មវិធី​និពន្ធ។ ប្រើ `\"document\"` សម្រាប់​ប្លង់​រចនាប័ទ្ម​ឯកសារ ជាមួយ​ប្រភេទ​រង​ជា​ជម្រើស​បន្ទាប់​ពី `:`។\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "ប្រធានបទអ្នកកែសម្រួល។",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "ការកំណត់រចនាសម្ព័ន្ធភាសា។ លំនាំដើម៖ EN"
+  },
+  "icons": {
+    "description": "ជំនួស​រូបតំណាង​លំនាំដើម។"
+  },
+  "textDirection": {
+    "description": "ទិសដៅអត្ថបទ៖ `ltr` ឬ `rtl`។",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "អនុញ្ញាតឱ្យមានការច្រោះយ៉ាងតឹងរ៉ឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។\n- ប្រើ `true` ដើម្បីបើកដំណើរការតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុមួយដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។\n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ - :filter description\n- `tagFilter`: តម្រង​មិន​អនុញ្ញាត​ស្លាក HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: តម្រង​ធាតុ​ទ្រង់ទ្រាយ (`formatLine`/`formatBlock`)\n- `classFilter`: តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`)\n- `textStyleTagFilter`: តម្រង​ស្លាក​រចនាប័ទ្ម​អត្ថបទ (b, i, u, span, ។ល។)\n- `attrFilter`: តម្រង​មិន​អនុញ្ញាត​គុណលក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: តម្រង​មិន​អនុញ្ញាត​រចនាប័ទ្ម​ក្នុង​ជួរ (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "ស្លាកត្រូវបានចាត់ទុកជាឯកតាទាំងមូលនៅពេលជ្រើសរើសខ្លឹមសារទាំងអស់។ - លំនាំដើមគឺធ្វើតាម {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "បញ្ជាក់ធាតុ HTML ដើម្បីអនុញ្ញាតបន្ថែមលើសពីបញ្ជីអនុញ្ញាតលំនាំដើម។ សញ្ញាកំណត់៖ `\"|\"`។\n- បានបន្ថែមទៅក្នុងបញ្ជីលំនាំដើមដែលកំណត់ដោយ {@link PrivateBaseOptions.__defaultElementWhitelist}។\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "បញ្ជាក់ធាតុ HTML ដែលមិនគួរប្រើ។ សញ្ញាកំណត់៖ `\"|\"`។\n- ស្លាកដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានដកចេញនៅទីបំផុត ទោះបីជាពួកវាត្រូវបានរួមបញ្ចូលនៅក្នុងបញ្ជីសផ្សេងទៀតក៏ដោយ។\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "បញ្ជីស្លាកដែលត្រូវបានអនុញ្ញាតឱ្យរក្សាទុកទោះបីជាតម្លៃរបស់វាទទេក៏ដោយ។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- ភ្ជាប់ជាមួយ `ALLOWED_EMPTY_NODE_LIST` ដើម្បីបង្កើតបញ្ជី `allowedEmptyTags` ​​ចុងក្រោយ។",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "ឈ្មោះថ្នាក់ដែលត្រូវបានអនុញ្ញាត។\n- បានបន្ថែមតម្លៃលំនាំដើម {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "បញ្ជាក់គុណលក្ខណៈបន្ថែមដើម្បីអនុញ្ញាតសម្រាប់ស្លាកនីមួយៗ។ `\"*\"` អនុវត្តចំពោះស្លាកទាំងអស់។\n- ច្បាប់ដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានបញ្ចូលទៅក្នុង {@link PrivateBaseOptions.__defaultAttributeWhitelist}។\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "បញ្ជាក់គុណលក្ខណៈដែលមិនអនុញ្ញាតដោយស្លាក។ `\"*\"` អនុវត្តចំពោះស្លាកទាំងអស់។\n- គុណលក្ខណៈដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានដកចេញនៅទីបំផុត ទោះបីជាពួកវាត្រូវបានអនុញ្ញាតដោយការកំណត់ផ្សេងទៀតក៏ដោយ។\n- បញ្ជីនៃធាតុដែលត្រូវការ {@link DEFAULTS.REQUIRED_FORMAT_LINE} តែងតែត្រូវបានរួមបញ្ចូល។\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "ស្លាករចនាប័ទ្មអត្ថបទបន្ថែម។\n- លំនាំដើមធ្វើតាម {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "ផ្គូផ្គងរចនាប័ទ្មអត្ថបទទៅនឹងស្លាក HTML ជាក់លាក់។",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "បញ្ជាក់​រចនាប័ទ្ម​បន្ថែម​ទៅ​ក្នុង​បញ្ជី​រចនាប័ទ្ម​ដែល​អនុញ្ញាត។ សញ្ញា​កំណត់៖ `\"|\"`។\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ស្លាក HTML។ សោគឺជាឈ្មោះស្លាក តម្លៃគឺជារចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតដោយសញ្ញាបំបែក។\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ស្លាក `span`។ - លំនាំដើមគឺធ្វើតាម {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ធាតុ `line` (p..)។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "ឯកតាទំហំពុម្ពអក្សរដែលត្រូវបានអនុញ្ញាត។\n- លំនាំដើមគឺ {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "កំណត់ពីរបៀបដែលធាតុក្នុងបន្ទាត់ (ឧ. `<span>`, `<strong>`) ត្រូវបានដោះស្រាយនៅពេលលុបអត្ថបទ។\n- `repeat`: រចនាប័ទ្មត្រូវបានរក្សាទុកលុះត្រាតែចុច backspace ម្តងហើយម្តងទៀត។\n- ការចុចជាប់ៗគ្នានឹងលុបរចនាប័ទ្មនៅទីបំផុត។\n- `none`: រចនាប័ទ្មមិនត្រូវបានរក្សាទុកទេ។ ធាតុក្នុងបន្ទាត់ត្រូវបានលុបចេញភ្លាមៗជាមួយអត្ថបទ។\n- `always`: រចនាប័ទ្មនៅតែបន្តដោយគ្មានកំណត់លុះត្រាតែត្រូវបានលុបចេញយ៉ាងច្បាស់លាស់។\n- ទោះបីជាអត្ថបទទាំងអស់នៅក្នុងធាតុក្នុងបន្ទាត់ត្រូវបានលុបក៏ដោយ ធាតុខ្លួនវានៅតែដដែល។",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "ធាតុ `line` លំនាំដើម នៅពេលបញ្ចូលបន្ទាត់ថ្មី។",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "បញ្ជាក់​ទម្រង់​បំបែក​បន្ទាត់​លំនាំដើម។\n- [បានណែនាំ] `line` : ការបំបែកបន្ទាត់ត្រូវបានបែងចែកជាស្លាកទូទៅ។\n- [មិនណែនាំ] `br` ​​: ការបំបែកបន្ទាត់ត្រូវបានចាត់ទុកជា <br> នៅលើបន្ទាត់ដូចគ្នា។ (ដូចជា shift+enter)\n- ការបំបែកបន្ទាត់ត្រូវបានដោះស្រាយជា <br> នៅក្នុង `line`។\n- អ្នកអាចបង្កើត `line` ថ្មីដោយបញ្ចូលការបំបែកបន្ទាត់ពីរដងជាប់ៗគ្នា។\n- ទម្រង់ដែលរួមបញ្ចូល `line` ដូចជា \"សម្រង់\" នៅតែដំណើរការលើមូលដ្ឋាន `line`។\n- ដំណើរការ suneditor ដំណើរការក្នុងឯកតា `line`។\n- នៅពេលកំណត់ទៅ `br` ប្រសិទ្ធភាពអាចថយចុះនៅពេលកែសម្រួលទិន្នន័យច្រើន។",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "លក្ខណសម្បត្តិបន្ទាត់ដែលគួរតែត្រូវបានកំណត់ឡើងវិញនៅពេលផ្លាស់ប្តូរបន្ទាត់។ សញ្ញាកំណត់ព្រំដែន៖ `\"|\"`។\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "លើសពីនេះ ធាតុ `line` ត្រូវបានអនុញ្ញាតឲ្យលើសពីលំនាំដើម។ សញ្ញាកំណត់៖ `\"|\"`។\n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatLine} ដើម្បីបង្កើតជាបញ្ជី `line` ចុងក្រោយ។\n- ធាតុ `line` ក៏មានធាតុ `brLine` ផងដែរ។\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "លើសពីនេះ អនុញ្ញាតឱ្យមានធាតុ `brLine` លើសពីលំនាំដើម។\n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatBrLine} ដើម្បីបង្កើតជាបញ្ជី `brLine` ​​ចុងក្រោយ។\n- ធាតុ `brLine` ត្រូវបានរួមបញ្ចូលនៅក្នុងធាតុ `line`។\n- ការបំបែកបន្ទាត់របស់ធាតុ `brLine` គឺ `BR` ស្លាក។\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`។",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "លើសពីនេះ ធាតុ `closureBrLine` ត្រូវបានអនុញ្ញាតឲ្យប្រើប្រាស់លើសពីលំនាំដើម។\n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatClosureBrLine} សម្រាប់បញ្ជី `closureBrLine` ​​ចុងក្រោយ។\n- ធាតុ `closureBrLine` ត្រូវបានរួមបញ្ចូលនៅក្នុង `brLine`។\n- ការបំបែកបន្ទាត់របស់ធាតុ `closureBrLine` គឺ `BR` ស្លាក។\n- ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុច Enter ឬគ្រាប់ចុច Backspace បានទេ។\n- ※ ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ ([ឧទាហរណ៍] ទម្រង់នៃក្រឡាតារាង)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "លើសពីនេះ អនុញ្ញាតឱ្យមានធាតុ `block` លើសពីលំនាំដើម។\n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatBlock} ដើម្បីបង្កើតជាបញ្ជី `block` ​​ចុងក្រោយ។\n- `block` រុំ `line` និង `component`។",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "លើសពីនេះ ធាតុ `closureBlock` ត្រូវបានអនុញ្ញាតឲ្យប្រើប្រាស់លើសពីលំនាំដើម។\n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatClosureBlock} សម្រាប់បញ្ជី `closureBlock` ​​ចុងក្រោយ។\n- ធាតុ `closureBlock` ត្រូវបានរួមបញ្ចូលនៅក្នុង `block`។\n- ធាតុ `closureBlock` រុំ `line` និង `component`។\n- ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុច Enter ឬគ្រាប់ចុច Backspace បានទេ។\n- ※ ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ (ឧ. ទម្រង់នៃក្រឡាតារាង)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "បិទ​ម៉ូឌុល​នៅពេល​ចុច​ខាងក្រៅ។",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "ធ្វើសមកាលកម្មការចូលបន្ទាត់ផ្ទាំងជាមួយចន្លោះ។",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "បិទការបញ្ចូលគ្រាប់ចុចថេប។",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "ទទឹងរបារឧបករណ៍។",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "ធាតុកុងតឺន័រសម្រាប់របារឧបករណ៍។"
+  },
+  "toolbar_sticky": {
+    "description": "បើកដំណើរការរបារឧបករណ៍ស្អិត។\n- `number`: កំណត់ទីតាំងកំពូលស្អិត (px)។ ប្រើ `-1` ​​ដើម្បីបិទដំណើរការស្អិត។\n- `{top, offset}`: `top` គឺជាទីតាំងស្អិតនៅពេលដែលបឋមកថាទំព័រអាចមើលឃើញ។\n- `offset` គឺជាទីតាំងស្អិតនៅពេលដែលក្តារចុចនិម្មិតផ្លាស់ប្តូរច្រកមើល (ឧទាហរណ៍ នៅលើថេប្លេត ឧបករណ៍ប៉ះ)។\n- នៅពេលដែលក្តារចុចនិម្មិតសកម្ម `offset` ជំនួស `top` ដូច្នេះរបារឧបករណ៍មិនទុកចន្លោះទេ\n- សម្រាប់បឋមកថាទំព័រដែលបានរមូរចេញពីទិដ្ឋភាព។ លំនាំដើម `offset` គឺ `0`។\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "ដំបូងឡើយ លាក់របារឧបករណ៍។",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "ការកំណត់រចនាសម្ព័ន្ធរបារឧបករណ៍រង។ របារឧបករណ៍បន្ទាប់បន្សំដែលលេចឡើងនៅពេលជ្រើសរើសអត្ថបទ។",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "ធាតុកុងតឺន័រសម្រាប់របារស្ថានភាព។"
+  },
+  "shortcutsHint": {
+    "description": "បង្ហាញ​ការណែនាំ​អំពី​ផ្លូវកាត់​នៅក្នុង​គន្លឹះ។",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "បិទដំណើរការផ្លូវកាត់ក្តារចុច។",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "ផ្លូវកាត់ក្តារចុចផ្ទាល់ខ្លួន។\n- គ្រាប់ចុចដែលចាប់ផ្តើមដោយ `_` គឺជាផ្លូវកាត់ផ្ទាល់ខ្លួនដែលកំណត់ដោយអ្នកប្រើប្រាស់។ តម្លៃនីមួយៗគឺជាអារេនៃគូ `[keyCombo, hintLabel]`។\n- បន្សំគ្រាប់ចុចប្រើតម្លៃ `c` (Ctrl/Cmd), `s` (Shift) និង `KeyEvent.code` ដែលភ្ជាប់ដោយ `+`។\n- ប្រើ `$~pluginName.method` ដើម្បីហៅវិធីសាស្ត្រកម្មវិធីជំនួយជាក់លាក់មួយ។\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "រក្សា​ទម្រង់​នៃ​ខ្លឹមសារ​ដែល​បាន​ចម្លង។",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "បម្លែង URL ទៅជាតំណភ្ជាប់ដោយស្វ័យប្រវត្តិ។ (តម្រូវឲ្យមានកម្មវិធីជំនួយ `Link`)\n- លំនាំដើម៖ `Boolean(plugins.link)` ​​— កំណត់ដោយថាតើកម្មវិធីជំនួយ `link` ត្រូវបានបើកដំណើរការឬអត់។"
+  },
+  "historyStackDelayTime": {
+    "description": "ពេលវេលាពន្យារពេលសម្រាប់ការអាប់ដេតជង់ប្រវត្តិ (មីលីវិនាទី)។",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "ចំនួនអតិបរមានៃធាតុប្រវត្តិក្នុងមួយហ្វ្រេមឫស។ ធាតុចាស់បំផុតត្រូវបានលុបចោលនៅពេលដែលលើស។",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "ឈ្មោះថ្នាក់សម្រាប់បោះពុម្ព។",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "អុហ្វសិត​បាន​អនុវត្ត​នៅពេល​ចូល​ទៅ​ក្នុង​របៀប​ពេញ​អេក្រង់។",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "គំរូ HTML ផ្ទាល់ខ្លួនសម្រាប់របៀបមើលជាមុន។ ប្រើ `{{ contents }}` ជាកន្លែងដាក់សម្រាប់ខ្លឹមសារកម្មវិធីនិពន្ធ។",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "គំរូ HTML ផ្ទាល់ខ្លួនសម្រាប់របៀបបោះពុម្ព។ ប្រើ `{{ contents }}` ជាកន្លែងសម្រាប់មាតិកាកម្មវិធីនិពន្ធ។\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "បើកការជ្រើសរើសដោយស្វ័យប្រវត្តិនៃសមាសធាតុដែលបានបញ្ចូល។\n- សម្រាប់សមាសធាតុក្នុងជួរ៖ ដាក់ទស្សន៍ទ្រនិចនៅជិតសមាសធាតុ ឬជ្រើសរើសប្រសិនបើគ្មានជួរនៅក្បែរ។\n- សម្រាប់សមាសធាតុប្លុក៖ ប្រតិបត្តិឥរិយាបថដោយផ្អែកលើ `selectMode`៖\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នេះទេជ្រើសរើសសមាសធាតុ។\n- `select`៖ តែងតែជ្រើសរើសសមាសធាតុដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "ពិធីការ URL លំនាំដើមសម្រាប់តំណភ្ជាប់។",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "រយៈពេលសម្រាប់បង្ហាញសារជូនដំណឹង (មីលីវិនាទី)។",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "បើក​របៀប​មើល​កូដ​ដោយ​ឥតគិតថ្លៃ។",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "បង្ហាញ UI បន្ទះ Find/Replace ដែលភ្ជាប់មកជាមួយ។\n- ឧបករណ៍ស្វែងរកត្រូវបានបង្កើតជាផ្ទៃក្នុងជានិច្ច។ ជម្រើសនេះគ្រប់គ្រងថាតើបន្ទះនេះអាចមើលឃើញដោយអ្នកប្រើប្រាស់ឬអត់ (Ctrl+F / Ctrl+H)។",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "ស្វែងរកភ្លាមៗនៅពេលអ្នកវាយបញ្ចូល (បដិសេធ)។ នៅពេលដែលមិនពិត ការស្វែងរកដំណើរការតែលើ Enter ប៉ុណ្ណោះ។",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "បណ្ណាល័យខាងក្រៅដូចជា CodeMirror, KaTeX ឬ MathJax។\n- សូមមើល {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md មគ្គុទ្ទេសក៍បណ្ណាល័យខាងក្រៅ}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "បញ្ជាក់​ស្លាក​បន្ថែម​ដែល​ត្រូវ​បាន​អនុញ្ញាត ឬ​មិន​ត្រូវ​បាន​អនុញ្ញាត។ `true` ដើម្បី​អនុញ្ញាត, `false` ​​ដើម្បី​មិន​អនុញ្ញាត។ - លំនាំដើម​គឺ​តាម​ពីក្រោយ {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "ការកំណត់រចនាសម្ព័ន្ធឧបករណ៍ដោះស្រាយព្រឹត្តិការណ៍អ្នកប្រើប្រាស់។\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "បញ្ជីប៊ូតុងរបារឧបករណ៍ដែលប្រើបច្ចុប្បន្ន"
+  },
+  "buttons_sub": {
+    "description": "បញ្ជីប៊ូតុងរបារឧបករណ៍រងដែលប្រើបច្ចុប្បន្ន"
+  },
+  "toolbar_sub_width": {
+    "description": "ទទឹងរបារឧបករណ៍រង។"
+  },
+  "reverseCommands": {
+    "description": "អារេ​គូ​ពាក្យ​បញ្ជា​បញ្ច្រាស​ដែល​បាន​បញ្ចូល​គ្នា។\n- រួម​បញ្ចូល​ទាំង​លំនាំដើម `indent-outdent` + របស់​អ្នក​ប្រើ `reverseButtons`។"
+  },
+  "codeMirror": {
+    "description": "វត្ថុកំណត់រចនាសម្ព័ន្ធ CodeMirror ពី `externalLibs.codeMirror`។"
+  },
+  "hasCodeMirror": {
+    "description": "ប្រើ CodeMirror សម្រាប់មើលកូដ។"
+  },
+  "audioGallery_data": {
+    "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ"
+  },
+  "audioGallery_url": {
+    "description": "URL សំណើ​របស់​ម៉ាស៊ីន​បម្រើ"
+  },
+  "audioGallery_headers": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "audioGallery_thumbnail": {
+    "description": "រូបភាពតូចលំនាំដើម"
+  },
+  "fileBrowser_data": {
+    "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ (រំលងការទាញយក URL)។"
+  },
+  "fileBrowser_url": {
+    "description": "URL សំណើ​របស់​ម៉ាស៊ីន​បម្រើ"
+  },
+  "fileBrowser_headers": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "URL រូបភាពតូចៗលំនាំដើម ឬអនុគមន៍ដែលប្រគល់ URL រូបភាពតូចៗក្នុងមួយធាតុ។"
+  },
+  "fileBrowser_props": {
+    "description": "ឈ្មោះ​ស្លាក​បន្ថែម"
+  },
+  "fileGallery_data": {
+    "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ"
+  },
+  "fileGallery_url": {
+    "description": "URL សំណើ​របស់​ម៉ាស៊ីន​បម្រើ"
+  },
+  "fileGallery_headers": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "fileGallery_thumbnail": {
+    "description": "រូបភាពតូចលំនាំដើម"
+  },
+  "imageGallery_data": {
+    "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ"
+  },
+  "imageGallery_url": {
+    "description": "URL សំណើ​របស់​ម៉ាស៊ីន​បម្រើ"
+  },
+  "imageGallery_headers": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "videoGallery_data": {
+    "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ"
+  },
+  "videoGallery_url": {
+    "description": "URL សំណើ​របស់​ម៉ាស៊ីន​បម្រើ"
+  },
+  "videoGallery_headers": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "videoGallery_thumbnail": {
+    "description": "រូបភាពតូចលំនាំដើម"
+  },
+  "codeBlock_langs": {
+    "description": "បញ្ជីភាសាសរសេរកម្មវិធីដែលអាចជ្រើសរើសបានសម្រាប់ប្លុកកូដ។\n- លំនាំដើមទៅ 21 ភាសាទូទៅ\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml]។\n- កំណត់ទៅអារេទទេ `[]` ដើម្បីបិទ UI ជ្រើសរើសភាសាទាំងស្រុង។"
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL សំណើរបស់ម៉ាស៊ីនមេសម្រាប់បង្កើត PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "ឈ្មោះឯកសារ PDF ដែលបានបង្កើត"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL សំណើរបស់ម៉ាស៊ីនមេសម្រាប់ការផ្ទុកឡើងឯកសារ"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "ដែនកំណត់ទំហំផ្ទុកឡើងសរុបជាបៃ"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំឯកសារតែមួយជាបៃ"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "អនុញ្ញាតឱ្យផ្ទុកឡើងឯកសារច្រើន"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "ទម្រង់ឯកសារដែលទទួលយក។"
+  },
+  "fileUpload_as": {
+    "description": "បញ្ជាក់ទម្រង់លំនាំដើមនៃសមាសភាគឯកសារជា `box` ឬ `link`"
+  },
+  "fileUpload_controls": {
+    "description": "ការគ្រប់គ្រងបន្ថែមដែលត្រូវបន្ថែមទៅក្នុងរូបភាព"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "ឥរិយាបថបញ្ចូលសមាសភាគសម្រាប់ការជ្រើសរើស និងការដាក់ទស្សន៍ទ្រនិច។\n- [លំនាំដើម៖ `options.get('componentInsertBehavior')`]\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នោះទេ សូមជ្រើសរើសសមាសភាគ។\n- `select`៖ តែងតែជ្រើសរើសសមាសភាគដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។"
+  },
+  "align_items": {
+    "description": "តម្រឹមធាតុ"
+  },
+  "backgroundColor_items": {
+    "description": "បញ្ជីពណ៌។"
+  },
+  "backgroundColor_splitNum": {
+    "description": "ចំនួនពណ៌ក្នុងមួយជួរ"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "បិទការបញ្ចូល HEX"
+  },
+  "blockStyle_items": {
+    "description": "ធ្វើទ្រង់ទ្រាយបញ្ជី។\n- `command` — `\"line\"`: ប្លុកបន្ទាត់តែមួយ, `\"br-line\"`: ប្លុកដែលបំបែកដោយ br, `\"block\"`: ប្លុកកុងតឺន័រ។"
+  },
+  "font_items": {
+    "description": "បញ្ជីពុម្ពអក្សរ"
+  },
+  "fontColor_items": {
+    "description": "បញ្ជីពណ៌។"
+  },
+  "fontColor_splitNum": {
+    "description": "ចំនួនពណ៌ក្នុងមួយជួរ"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "បិទការបញ្ចូល HEX"
+  },
+  "hR_items": {
+    "description": "បញ្ជីធនធានមនុស្ស"
+  },
+  "layout_items": {
+    "description": "បញ្ជីប្លង់។ ធាតុនីមួយៗកំណត់គំរូប្លង់ដែលមានឈ្មោះជាមួយ HTML ឆៅ។"
+  },
+  "lineHeight_items": {
+    "description": "បញ្ជីកម្ពស់បន្ទាត់"
+  },
+  "paragraphStyle_items": {
+    "description": "បញ្ជីធាតុកថាខណ្ឌ"
+  },
+  "table_scrollType": {
+    "description": "ប្រភេទ​រមូរ (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "ទីតាំង​ចំណងជើង (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "ទីតាំងឧបករណ៍បញ្ជាក្រឡា (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "បញ្ជីពណ៌ HEX សម្រាប់ឧបករណ៍ជ្រើសរើសពណ៌ផ្ទៃខាងក្រោយក្រឡា។"
+  },
+  "template_items": {
+    "description": "បញ្ជីគំរូ"
+  },
+  "textStyle_items": {
+    "description": "បញ្ជីធាតុរចនាប័ទ្មអត្ថបទ។"
+  },
+  "mention_triggerText": {
+    "description": "តួអក្សរដែលបង្កឱ្យមានបញ្ជីលើកឡើង។"
+  },
+  "mention_limitSize": {
+    "description": "ចំនួន​ធាតុ​ដែល​ត្រូវ​បង្ហាញ​ក្នុង​បញ្ជី​ដែល​បាន​លើក​ឡើង"
+  },
+  "mention_searchStartLength": {
+    "description": "ចំនួនតួអក្សរដែលត្រូវចាប់ផ្តើមស្វែងរកបញ្ជីលើកឡើង"
+  },
+  "mention_delayTime": {
+    "description": "ពេលវេលាដែលត្រូវរង់ចាំមុនពេលបង្ហាញបញ្ជីលើកឡើង"
+  },
+  "mention_data": {
+    "description": "ទិន្នន័យ​បញ្ជាក់​ឋិតិវន្ត (ប្រើ​ជំនួស​ឲ្យ API)។"
+  },
+  "mention_apiUrl": {
+    "description": "URL ដើម្បីហៅបញ្ជីការលើកឡើង"
+  },
+  "mention_apiHeaders": {
+    "description": "បឋមកថាដែលត្រូវផ្ញើជាមួយការហៅ API"
+  },
+  "mention_useCachingData": {
+    "description": "ថាតើត្រូវរក្សាទុកទិន្នន័យបញ្ជីលើកឡើងក្នុងឃ្លាំងសម្ងាត់ឬអត់"
+  },
+  "mention_useCachingFieldData": {
+    "description": "ថាតើត្រូវរក្សាទុកទិន្នន័យបញ្ជីលើកឡើងនៅក្នុងវាលនេះឬអត់"
+  },
+  "fontSize_sizeUnit": {
+    "description": "ឯកតាសម្រាប់ទំហំពុម្ពអក្សរ។\n- តម្លៃដែលទទួលយករួមមាន៖ `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` ឬ `'text'`។\n- ប្រសិនបើ `'text'` ត្រូវបានប្រើ បញ្ជីទំហំពុម្ពអក្សរដែលមានមូលដ្ឋានលើអត្ថបទត្រូវបានអនុវត្ត។"
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "កំណត់ថាតើស្លាកទំហំលំនាំដើមត្រូវបានបង្ហាញនៅក្នុងម៉ឺនុយទម្លាក់ចុះឬអត់។"
+  },
+  "fontSize_showIncDecControls": {
+    "description": "នៅពេល `true` បង្ហាញប៊ូតុងបង្កើន និងបន្ថយសម្រាប់ការកែតម្រូវទំហំពុម្ពអក្សរ។ - លំនាំដើមទៅ `false`។ តែងតែ `false` នៅពេល `sizeUnit` គឺ `'text'` (មិនអើពើ)។"
+  },
+  "fontSize_disableInput": {
+    "description": "នៅពេល `true` បិទប្រអប់បញ្ចូលទំហំពុម្ពអក្សរដោយផ្ទាល់។ - កំណត់លំនាំដើមទៅ `true` ​​នៅពេល `sizeUnit` គឺ `'text'` បើមិនដូច្នោះទេ `false`។"
+  },
+  "fontSize_unitMap": {
+    "description": "បដិសេធ ឬពង្រីកការផ្គូផ្គងឯកតាលំនាំដើមសម្រាប់ទំហំពុម្ពអក្សរ។"
+  },
+  "audio_defaultWidth": {
+    "description": "ទទឹងលំនាំដើមនៃស្លាក `AUDIO` ។"
+  },
+  "audio_defaultHeight": {
+    "description": "កម្ពស់លំនាំដើមនៃស្លាក `AUDIO`។"
+  },
+  "audio_createFileInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូលឯកសារឬអត់។"
+  },
+  "audio_createUrlInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូល URL ដែរឬទេ។\n- លំនាំដើមគឺ `true`។ តែងតែ `true` ​​នៅពេលដែល `createFileInput` គឺ `false`។"
+  },
+  "audio_uploadUrl": {
+    "description": "URL ដែលឯកសារនឹងត្រូវបានផ្ទុកឡើង។"
+  },
+  "audio_uploadHeaders": {
+    "description": "ចំណងជើងដែលត្រូវរួមបញ្ចូលនៅក្នុងសំណើបង្ហោះឯកសារ។"
+  },
+  "audio_uploadSizeLimit": {
+    "description": "ទំហំ​ផ្ទុក​ឡើង​សរុប​កំណត់​ជា​បៃ។"
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំឯកសារតែមួយជាបៃ។"
+  },
+  "audio_allowMultiple": {
+    "description": "ថាតើត្រូវអនុញ្ញាតឱ្យបង្ហោះឯកសារច្រើនឬអត់។"
+  },
+  "audio_acceptedFormats": {
+    "description": "ទម្រង់ឯកសារដែលទទួលយក (លំនាំដើមគឺ `\"audio/*\"`)។"
+  },
+  "audio_audioTagAttributes": {
+    "description": "គុណលក្ខណៈបន្ថែមដែលត្រូវបានកំណត់នៅលើស្លាក `AUDIO` ។"
+  },
+  "audio_insertBehavior": {
+    "description": "ឥរិយាបថបញ្ចូលសមាសភាគសម្រាប់ការជ្រើសរើស និងការដាក់ទស្សន៍ទ្រនិច។\n- [លំនាំដើម៖ `options.get('componentInsertBehavior')`]\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នោះទេ សូមជ្រើសរើសសមាសភាគ។\n- `select`៖ តែងតែជ្រើសរើសសមាសភាគដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។"
+  },
+  "drawing_outputFormat": {
+    "description": "ទម្រង់​លទ្ធផល​នៃ​គំនូរ។ ជម្រើស៖ `\"dataurl\"`, `\"svg\"`។"
+  },
+  "drawing_useFormatType": {
+    "description": "ថាតើត្រូវបើកការជ្រើសរើសប្រភេទទម្រង់ឬអត់ (`block` ទល់នឹង `inline`)។"
+  },
+  "drawing_defaultFormatType": {
+    "description": "ប្រភេទ​ទម្រង់​លំនាំដើម ទាំង `\"block\"` ឬ `\"inline\"`។"
+  },
+  "drawing_keepFormatType": {
+    "description": "ថាតើត្រូវរក្សាប្រភេទទម្រង់ដែលបានជ្រើសរើសបន្ទាប់ពីគូរឬអត់។"
+  },
+  "drawing_lineWidth": {
+    "description": "ទទឹងនៃបន្ទាត់គូរ។"
+  },
+  "drawing_lineReconnect": {
+    "description": "ថាតើត្រូវភ្ជាប់បន្ទាត់ឡើងវិញនៅពេលគូរឬអត់។"
+  },
+  "drawing_lineCap": {
+    "description": "រចនាប័ទ្ម​នៃ​គម្រប​បន្ទាត់ (`\"butt\"`, `\"round\"`, ឬ `\"square\"`)។"
+  },
+  "drawing_lineColor": {
+    "description": "ពណ៌នៃបន្ទាត់គូរ។"
+  },
+  "drawing_canResize": {
+    "description": "ថាតើទម្រង់ម៉ូឌុលអាចត្រូវបានផ្លាស់ប្តូរទំហំឬអត់។"
+  },
+  "drawing_maintainRatio": {
+    "description": "ថាតើត្រូវរក្សាសមាមាត្រទិដ្ឋភាពនៅពេលផ្លាស់ប្តូរទំហំឬអត់។"
+  },
+  "drawing_formSize": {
+    "description": "ការកំណត់រចនាសម្ព័ន្ធទំហំសម្រាប់ទម្រង់ម៉ូឌុលគំនូរ។"
+  },
+  "embed_canResize": {
+    "description": "ថាតើធាតុបង្កប់អាចត្រូវបានផ្លាស់ប្តូរទំហំឬអត់។"
+  },
+  "embed_showHeightInput": {
+    "description": "ថាតើត្រូវបង្ហាញវាលបញ្ចូលកម្ពស់ឬអត់។"
+  },
+  "embed_defaultWidth": {
+    "description": "ទទឹងលំនាំដើមនៃធាតុបង្កប់ (តម្លៃលេខ ឬជាមួយឯកតា)។"
+  },
+  "embed_defaultHeight": {
+    "description": "កម្ពស់លំនាំដើមនៃធាតុបង្កប់ (តម្លៃលេខ ឬជាមួយឯកតា)។"
+  },
+  "embed_percentageOnlySize": {
+    "description": "ថាតើត្រូវអនុញ្ញាតតែការកំណត់ទំហំដោយផ្អែកលើភាគរយឬអត់។"
+  },
+  "embed_uploadUrl": {
+    "description": "URL សម្រាប់​ផ្ទុក​ឡើង​ឯកសារ។"
+  },
+  "embed_uploadHeaders": {
+    "description": "បឋមកថាដែលត្រូវរួមបញ្ចូលនៅក្នុងសំណើបង្ហោះឯកសារ។"
+  },
+  "embed_uploadSizeLimit": {
+    "description": "ទំហំ​ផ្ទុក​ឯកសារ​សរុប​កំណត់​ជា​បៃ។"
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំផ្ទុកឡើងឯកសារតែមួយជាបៃ។"
+  },
+  "embed_iframeTagAttributes": {
+    "description": "គុណលក្ខណៈបន្ថែមដែលត្រូវបានកំណត់នៅលើស្លាក `IFRAME` ។"
+  },
+  "embed_query_youtube": {
+    "description": "ប៉ារ៉ាម៉ែត្រសំណួរ YouTube ត្រូវបានបន្ថែមទៅ URL ដែលបង្កប់។"
+  },
+  "embed_query_vimeo": {
+    "description": "ប៉ារ៉ាម៉ែត្រសំណួរ Vimeo ត្រូវបានបន្ថែមទៅ URL ដែលបង្កប់។"
+  },
+  "embed_urlPatterns": {
+    "description": "លំនាំ URL បន្ថែមដើម្បីសម្គាល់ថាជាខ្លឹមសារដែលអាចបង្កប់បាន។"
+  },
+  "embed_embedQuery": {
+    "description": "និយមន័យសេវាកម្មបង្កប់ផ្ទាល់ខ្លួន។"
+  },
+  "embed_controls": {
+    "description": "ការគ្រប់គ្រងរូបភាព។"
+  },
+  "embed_insertBehavior": {
+    "description": "ឥរិយាបថបញ្ចូលសមាសភាគសម្រាប់ការជ្រើសរើស និងការដាក់ទស្សន៍ទ្រនិច។\n- [លំនាំដើម៖ `options.get('componentInsertBehavior')`]\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នោះទេ សូមជ្រើសរើសសមាសភាគ។\n- `select`៖ តែងតែជ្រើសរើសសមាសភាគដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។"
+  },
+  "image_canResize": {
+    "description": "ថាតើធាតុរូបភាពអាចត្រូវបានផ្លាស់ប្តូរទំហំឬអត់។"
+  },
+  "image_showHeightInput": {
+    "description": "ថាតើត្រូវបង្ហាញវាលបញ្ចូលកម្ពស់ឬអត់។"
+  },
+  "image_defaultWidth": {
+    "description": "ទទឹង​លំនាំដើម​នៃ​រូបភាព។ ប្រសិនបើ​លេខ​ត្រូវ​បាន​ផ្តល់​ឲ្យ `\"px\"` នឹង​ត្រូវ​បាន​បន្ថែម​ខាង​ចុង។"
+  },
+  "image_defaultHeight": {
+    "description": "កម្ពស់លំនាំដើមរបស់រូបភាព។ ប្រសិនបើលេខត្រូវបានផ្តល់ `\"px\"` នឹងត្រូវបានបន្ថែម។"
+  },
+  "image_percentageOnlySize": {
+    "description": "ថាតើត្រូវអនុញ្ញាតតែការកំណត់ទំហំដោយផ្អែកលើភាគរយឬអត់។"
+  },
+  "image_createFileInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូលឯកសារសម្រាប់ការផ្ទុកឡើងរូបភាពឬអត់។"
+  },
+  "image_createUrlInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូល URL សម្រាប់ការបញ្ចូលរូបភាពឬអត់។\n- លំនាំដើមគឺ `true`។ តែងតែ `true` ​​នៅពេលដែល `createFileInput` គឺ `false`។"
+  },
+  "image_uploadUrl": {
+    "description": "ចំណុចបញ្ចប់ URL សម្រាប់ការផ្ទុកឡើងឯកសាររូបភាព។"
+  },
+  "image_uploadHeaders": {
+    "description": "បឋមកថាបន្ថែមដែលត្រូវរួមបញ្ចូលនៅក្នុងសំណើបង្ហោះឯកសារ។"
+  },
+  "image_uploadSizeLimit": {
+    "description": "ទំហំ​ផ្ទុក​ឡើង​សរុប​កំណត់​ជា​បៃ។"
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំផ្ទុកឡើងឯកសារតែមួយជាបៃ។"
+  },
+  "image_allowMultiple": {
+    "description": "ថាតើការផ្ទុកឡើងរូបភាពច្រើនត្រូវបានអនុញ្ញាតឬអត់។"
+  },
+  "image_acceptedFormats": {
+    "description": "ទម្រង់ឯកសារដែលទទួលយកសម្រាប់ការបង្ហោះរូបភាព។"
+  },
+  "image_useFormatType": {
+    "description": "ថាតើត្រូវបើកការជ្រើសរើសប្រភេទទម្រង់ (`block` ឬ `inline`) ដែរឬទេ។"
+  },
+  "image_defaultFormatType": {
+    "description": "ប្រភេទ​ទ្រង់ទ្រាយ​រូបភាព​លំនាំដើម (`\"block\"` ឬ `\"inline\"`)។"
+  },
+  "image_keepFormatType": {
+    "description": "ថាតើត្រូវរក្សាប្រភេទទម្រង់ដែលបានជ្រើសរើសបន្ទាប់ពីការបញ្ចូលរូបភាពឬអត់។"
+  },
+  "image_linkEnableFileUpload": {
+    "description": "ថាតើត្រូវបើកការផ្ទុកឡើងឯកសារសម្រាប់រូបភាពដែលបានភ្ជាប់ឬអត់។"
+  },
+  "image_controls": {
+    "description": "ការគ្រប់គ្រងរូបភាព។"
+  },
+  "image_insertBehavior": {
+    "description": "ឥរិយាបថបញ្ចូលសមាសភាគសម្រាប់ការជ្រើសរើស និងការដាក់ទស្សន៍ទ្រនិច។\n- [លំនាំដើម៖ `options.get('componentInsertBehavior')`]\n- សម្រាប់សមាសភាគក្នុងជួរ៖ ដាក់ទស្សន៍ទ្រនិចនៅជិតសមាសភាគ ឬជ្រើសរើសប្រសិនបើគ្មានជួរនៅក្បែរ។\n- សម្រាប់សមាសភាគប្លុក៖ ប្រតិបត្តិឥរិយាបថដោយផ្អែកលើ `selectMode`៖\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នោះទេ សូមជ្រើសរើសសមាសភាគ។\n- `select`៖ តែងតែជ្រើសរើសសមាសភាគដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។"
+  },
+  "link_uploadUrl": {
+    "description": "ចំណុចបញ្ចប់ URL សម្រាប់ការផ្ទុកឡើងឯកសារ។"
+  },
+  "link_uploadHeaders": {
+    "description": "បឋមកថាបន្ថែមសម្រាប់សំណើបង្ហោះឯកសារ។"
+  },
+  "link_uploadSizeLimit": {
+    "description": "ទំហំ​ផ្ទុក​ឯកសារ​សរុប​កំណត់​ជា​បៃ។"
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំផ្ទុកឡើងឯកសារតែមួយជាបៃ។"
+  },
+  "link_acceptedFormats": {
+    "description": "ទម្រង់ឯកសារដែលទទួលយកសម្រាប់ការផ្ទុកឡើងតំណភ្ជាប់។"
+  },
+  "link_title": {
+    "description": "ការបង្ហាញចំណងជើងម៉ូឌុល។"
+  },
+  "link_textToDisplay": {
+    "description": "បង្កើតអត្ថបទដើម្បីបង្ហាញការបញ្ចូល។"
+  },
+  "link_openNewWindow": {
+    "description": "តម្លៃ​ដែល​បាន​ធីក​តាម​លំនាំដើម​នៃ​ប្រអប់​ធីក \"បើក​ក្នុង​បង្អួច​ថ្មី\"។"
+  },
+  "link_noAutoPrefix": {
+    "description": "ប្រសិនបើ `true` វាបិទការដាក់បុព្វបទដោយស្វ័យប្រវត្តិនៃ URL ម៉ាស៊ីនទៅតម្លៃនៃតំណភ្ជាប់។"
+  },
+  "link_relList": {
+    "description": "តម្លៃគុណលក្ខណៈ `rel` ដែលអាចប្រើបានត្រូវបានបង្ហាញជាប្រអប់ធីកនៅក្នុងម៉ូឌុលតំណភ្ជាប់។"
+  },
+  "link_defaultRel": {
+    "description": "តម្លៃ `rel` លំនាំដើមត្រូវបានអនុវត្តដោយស្វ័យប្រវត្តិតាមលក្ខខណ្ឌ។"
+  },
+  "link_enableFileUpload": {
+    "description": "ប្រសិនបើ `true` វា​នឹង​អនុញ្ញាត​ឱ្យ​ផ្ទុក​ឡើង​ឯកសារ។"
+  },
+  "math_canResize": {
+    "description": "ថាតើម៉ូឌុលគណិតវិទ្យាអាចប្តូរទំហំបានឬអត់។"
+  },
+  "math_autoHeight": {
+    "description": "ថាតើត្រូវកែតម្រូវកម្ពស់របស់ម៉ូឌុលដោយស្វ័យប្រវត្តិឬអត់។"
+  },
+  "math_fontSizeList": {
+    "description": "បញ្ជីជម្រើសទំហំពុម្ពអក្សរសម្រាប់ឧបករណ៍ជ្រើសរើសទំហំកន្សោមគណិតវិទ្យា។"
+  },
+  "math_onPaste": {
+    "description": "អនុគមន៍ callback ដើម្បីដោះស្រាយព្រឹត្តិការណ៍បិទភ្ជាប់នៅក្នុងតំបន់បញ្ចូលគណិតវិទ្យា។"
+  },
+  "math_formSize": {
+    "description": "វត្ថុមួយដែលបញ្ជាក់វិមាត្រសម្រាប់ម៉ូឌុលគណិតវិទ្យា។"
+  },
+  "video_canResize": {
+    "description": "ថាតើធាតុវីដេអូអាចប្តូរទំហំបានឬអត់។"
+  },
+  "video_showHeightInput": {
+    "description": "ថាតើត្រូវបង្ហាញវាលបញ្ចូលកម្ពស់ឬអត់។"
+  },
+  "video_defaultWidth": {
+    "description": "ទទឹងលំនាំដើមនៃធាតុវីដេអូ។ ប្រសិនបើលេខត្រូវបានផ្តល់ `\"px\"` នឹងត្រូវបានបន្ថែម។"
+  },
+  "video_defaultHeight": {
+    "description": "កម្ពស់លំនាំដើមនៃធាតុវីដេអូ។ ប្រសិនបើលេខត្រូវបានផ្តល់ `\"px\"` នឹងត្រូវបានបន្ថែម។"
+  },
+  "video_percentageOnlySize": {
+    "description": "ថាតើត្រូវអនុញ្ញាតតែការកំណត់ទំហំដោយផ្អែកលើភាគរយឬអត់។"
+  },
+  "video_createFileInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូលឯកសារសម្រាប់ការផ្ទុកឡើងវីដេអូឬអត់។"
+  },
+  "video_createUrlInput": {
+    "description": "ថាតើត្រូវបង្កើតធាតុបញ្ចូល URL សម្រាប់ការបង្កប់វីដេអូឬអត់។\n- លំនាំដើមគឺ `true`។ តែងតែ `true` ​​នៅពេលដែល `createFileInput` គឺ `false`។"
+  },
+  "video_uploadUrl": {
+    "description": "ចំណុចបញ្ចប់ URL សម្រាប់ការបង្ហោះឯកសារវីដេអូ។"
+  },
+  "video_uploadHeaders": {
+    "description": "ចំណងជើងបន្ថែមដែលត្រូវរួមបញ្ចូលនៅក្នុងសំណើបង្ហោះវីដេអូ។"
+  },
+  "video_uploadSizeLimit": {
+    "description": "ទំហំ​កំណត់​សរុប​សម្រាប់​ការ​ផ្ទុក​ឡើង​សម្រាប់​វីដេអូ​ជា​បៃ។"
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "ដែនកំណត់ទំហំផ្ទុកឡើងឯកសារតែមួយសម្រាប់វីដេអូជាបៃ។"
+  },
+  "video_allowMultiple": {
+    "description": "ថាតើការបង្ហោះវីដេអូច្រើនត្រូវបានអនុញ្ញាតឬអត់។"
+  },
+  "video_acceptedFormats": {
+    "description": "ទម្រង់ឯកសារដែលទទួលយកសម្រាប់ការផ្ទុកឡើងវីដេអូ (`\"video/*\"`)។"
+  },
+  "video_defaultRatio": {
+    "description": "សមាមាត្រ​លំនាំដើម​សម្រាប់​វីដេអូ (កម្ពស់/ទទឹង ឧ. 16:9 → `9/16 = 0.5625`)។"
+  },
+  "video_showRatioOption": {
+    "description": "ថាតើត្រូវបង្ហាញជម្រើសសមាមាត្រនៅក្នុងម៉ូឌុលឬអត់។"
+  },
+  "video_ratioOptions": {
+    "description": "ជម្រើសសមាមាត្រផ្ទាល់ខ្លួនសម្រាប់ការផ្លាស់ប្តូរទំហំវីដេអូ (តម្លៃ = កម្ពស់/ទទឹង)។"
+  },
+  "video_videoTagAttributes": {
+    "description": "គុណលក្ខណៈបន្ថែមដែលត្រូវបានកំណត់នៅលើស្លាក `VIDEO` ។"
+  },
+  "video_iframeTagAttributes": {
+    "description": "គុណលក្ខណៈបន្ថែមដែលត្រូវបានកំណត់នៅលើស្លាក `IFRAME` ។"
+  },
+  "video_query_youtube": {
+    "description": "ប៉ារ៉ាម៉ែត្រសំណួរបន្ថែមសម្រាប់ការបង្កប់ YouTube។"
+  },
+  "video_query_vimeo": {
+    "description": "ប៉ារ៉ាម៉ែត្រសំណួរបន្ថែមសម្រាប់ការបង្កប់ Vimeo។"
+  },
+  "video_embedQuery": {
+    "description": "និយមន័យសេវាកម្មបង្កប់ផ្ទាល់ខ្លួន (សូមមើល `EmbedPluginOptions.embedQuery`)។"
+  },
+  "video_urlPatterns": {
+    "description": "លំនាំ URL បន្ថែមសម្រាប់ការបង្កប់វីដេអូ។"
+  },
+  "video_extensions": {
+    "description": "ផ្នែកបន្ថែមឯកសារដែលត្រូវទទួលស្គាល់សម្រាប់ការផ្ទុកឡើងវីដេអូ។"
+  },
+  "video_controls": {
+    "description": "ការគ្រប់គ្រងរូបភាព។"
+  },
+  "video_insertBehavior": {
+    "description": "ឥរិយាបថបញ្ចូលសមាសភាគសម្រាប់ការជ្រើសរើស និងការដាក់ទស្សន៍ទ្រនិច។\n- [លំនាំដើម៖ `options.get('componentInsertBehavior')`]\n- `auto`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន បើមិនដូច្នោះទេ សូមជ្រើសរើសសមាសភាគ។\n- `select`៖ តែងតែជ្រើសរើសសមាសភាគដែលបានបញ្ចូល។\n- `line`៖ ផ្លាស់ទីទស្សន៍ទ្រនិចទៅបន្ទាត់បន្ទាប់ប្រសិនបើអាចធ្វើទៅបាន ឬបង្កើតបន្ទាត់ថ្មី ហើយផ្លាស់ទីទៅទីនោះ។\n- `none`៖ មិនធ្វើអ្វីទាំងអស់។"
+  }
+}

@@ -4,31 +4,31 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "نص العنصر النائب.",
+    "description": "نص توضيحي.",
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "سمات الإطار القابل للتحرير[.sun-editor-editable]. \n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "description": "خصائص الإطار القابل للتحرير [.sun-editor-editable].\n\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
-    "description": "العرض للمحرر.",
+    "description": "عرض مخصص للمحرر.",
     "default": "\"100%\""
   },
   "minWidth": {
-    "description": "الحد الأدنى للعرض للمحرر.",
+    "description": "الحد الأدنى لعرض المحرر.",
     "default": "\"\""
   },
   "maxWidth": {
-    "description": "أقصى عرض للمحرر.",
+    "description": "الحد الأقصى لعرض المحرر.",
     "default": "\"\""
   },
   "height": {
-    "description": "الارتفاع للمحرر.",
+    "description": "ارتفاع مناسب للمحرر.",
     "default": "\"auto\""
   },
   "minHeight": {
-    "description": "الحد الأدنى للارتفاع للمحرر.",
+    "description": "الحد الأدنى لطول المحرر.",
     "default": "\"\""
   },
   "maxHeight": {
@@ -36,7 +36,7 @@
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "سلسلة نمط الإطار العلوي للمحرر. \n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "description": "نمط الإطار العلوي للمحرر.\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
     "default": "\"\""
   },
   "iframe": {
@@ -44,15 +44,15 @@
     "default": "false"
   },
   "iframe_fullPage": {
-    "description": "يسمح باستخدام علامات HTML وHEAD وBODY وإعلان DOCTYPE على `iframe`.",
+    "description": "يسمح باستخدام علامات HTML و HEAD و BODY وإعلان DOCTYPE على `iframe`.",
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "سمات `iframe`. \n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "خصائص `iframe`.\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
   "statusbar": {
-    "description": "تمكين شريط الحالة.",
+    "description": "يُفعّل شريط الحالة.",
     "default": "true"
   },
   "statusbar_showPathLabel": {
@@ -60,11 +60,11 @@
     "default": "true"
   },
   "statusbar_resizeEnable": {
-    "description": "لتمكين وظيفة تغيير الحجم لشريط الحالة السفلي.",
+    "description": "يُمكّن وظيفة تغيير حجم شريط الحالة السفلي.",
     "default": "true"
   },
   "charCounter": {
-    "description": "يظهر عدد الأحرف في المحرر. \n- إذا كان للخيار `maxCharCount` قيمة، تصبح `true`.",
+    "description": "يعرض عدد الأحرف في المحرر.\n\n- إذا كانت قيمة الخيار `maxCharCount` موجودة، فستصبح `true`.",
     "default": "false"
   },
   "charCounter_max": {
@@ -72,127 +72,127 @@
     "default": "null"
   },
   "charCounter_label": {
-    "description": "النص الذي سيتم عرضه في منطقة `charCounter` بالشريط السفلي. \n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "description": "النص المراد عرضه في منطقة `charCounter` في الشريط السفلي.\n\n```js\n{ charCounter_label: 'Characters :' }\n```",
     "default": "null"
   },
   "charCounter_type": {
-    "description": "يحدد طريقة الحساب للخيار `charCounter`. \n- `char`: طول الأحرف. \n- `byte`: حجم البيانات الثنائية للأحرف. \n- `byte-html`: حجم البيانات الثنائية لسلسلة HTML الكاملة.",
+    "description": "يُحدد هذا الخيار طريقة حساب قيمة الخيار `charCounter`.\n\n- `char`: طول الأحرف.\n\n- `byte`: حجم البيانات الثنائية للأحرف.\n\n- `byte-html`: حجم البيانات الثنائية لسلسلة HTML الكاملة.",
     "default": "\"char\""
   },
   "wordCounter": {
-    "description": "يظهر عدد الكلمات في المحرر.",
+    "description": "يعرض عدد الكلمات في المحرر.",
     "default": "false"
   },
   "wordCounter_label": {
-    "description": "النص الذي سيتم عرضه في منطقة `wordCounter` بالشريط السفلي. \n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "description": "النص المراد عرضه في منطقة `wordCounter` في الشريط السفلي.\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
     "default": "null"
   },
   "top": {
-    "description": "الأنماط المطبقة على الحاوية العلوية (مثل العرض ومؤشر z وما إلى ذلك)."
+    "description": "الأنماط المطبقة على الحاوية العلوية (مثل العرض، ومؤشر z، وما إلى ذلك)."
   },
   "frame": {
-    "description": "الأنماط المطبقة على حاوية iframe (مثل الارتفاع، والحد الأدنى للارتفاع)."
+    "description": "الأنماط المطبقة على حاوية الإطار المضمن (على سبيل المثال، الارتفاع، الحد الأدنى للارتفاع)."
   },
   "editor": {
     "description": "الأنماط المطبقة على منطقة المحتوى القابلة للتحرير."
   },
   "codeMirrorEditor": {
-    "description": "مثيل محرر CodeMirror (على مستوى الإطار). تم التعيين بواسطة `_checkCodeMirror` بعد التهيئة."
+    "description": "نسخة محرر CodeMirror (على مستوى الإطار). يتم تعيينها بواسطة `_checkCodeMirror` بعد التهيئة."
   },
   "plugins": {
-    "description": "تكوين البرنامج المساعد. قم بتمرير مجموعة من فئات المكونات الإضافية أو كائن مرتبط باسم البرنامج المساعد. \n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+    "description": "إعدادات الإضافة. مرر مصفوفة من فئات الإضافات أو كائنًا مفهرسًا باسم الإضافة.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
   "buttonList": {
-    "description": "قائمة أزرار شريط الأدوات، مجمعة حسب المصفوفات الفرعية. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.BUTTON_LIST}",
+    "description": "قائمة أزرار شريط الأدوات، مُجمّعة حسب المصفوفات الفرعية.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
   },
   "v2Migration": {
-    "description": "تمكين وضع الترحيل لـ SunEditor v2.",
+    "description": "يُفعّل وضع الترحيل لبرنامج SunEditor الإصدار 2.",
     "default": "false"
   },
   "mode": {
-    "description": "وضع شريط الأدوات: `classic`، `inline`، `balloon`، `balloon-always`. قم بإلحاق `:bottom` لوضع شريط الأدوات في الأسفل (على سبيل المثال `classic:bottom`، `inline:bottom`).",
+    "description": "وضع شريط الأدوات: `classic`, `inline`, `balloon`, `balloon-always`. أضف `:bottom` لوضع شريط الأدوات في الأسفل (على سبيل المثال `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
   },
   "type": {
-    "description": "نوع المحرر. استخدم `\"document\"` لتخطيط نمط المستند، مع أنواع فرعية اختيارية بعد `:`. \n```js\n// type\n'document:header,page'\n```",
+    "description": "نوع المحرر. استخدم `\"document\"` لتنسيق المستند، مع إمكانية إضافة أنواع فرعية بعد `:`.\n\n```js\n// type\n'document:header,page'\n```",
     "default": "\"\""
   },
   "theme": {
-    "description": "موضوع المحرر.",
+    "description": "قالب المحرر.",
     "default": "\"\""
   },
   "lang": {
-    "description": "تكوين اللغة. الافتراضي: إن"
+    "description": "إعدادات اللغة. الافتراضي: الإنجليزية"
   },
   "icons": {
-    "description": "يتجاوز الرموز الافتراضية."
+    "description": "يستبدل الأيقونات الافتراضية."
   },
   "textDirection": {
     "description": "اتجاه النص: `ltr` أو `rtl`.",
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (`spanStyles`/`lineStyles`/`allUsedStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "يُتيح هذا الخيار تصفية دقيقة للوسوم والخصائص والأنماط.\n\n- استخدم `true` لتفعيل جميع عوامل التصفية (الوضع الافتراضي)، أو استخدم كائنًا للتحكم في عوامل تصفية مُحددة.\n\n- لا يدعم هذا الخيار تعيين `false`؛ استخدم صيغة الكائن لتعطيل عوامل تصفية مُحددة.\n... - :filter description\n- `tagFilter`: تصفية وسوم HTML غير المسموح بها (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: تصفية عناصر التنسيق (`formatLine`/`formatBlock`)\n- `classFilter`: تصفية أسماء فئات CSS غير المسموح بها (`allowedClassName`)\n- `textStyleTagFilter`: تصفية وسوم أنماط النصوص (b، i، u، span، إلخ)\n- `attrFilter`: تصفية سمات HTML غير المسموح بها (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: تصفية الأنماط المضمنة غير المسموح بها (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
-    "description": "يتم التعامل مع العلامات كوحدات كاملة عند تحديد كل المحتوى. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "description": "تُعامل الوسوم كوحدات كاملة عند تحديد جميع المحتويات.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "يحدد عناصر HTML للسماح بها بشكل إضافي خارج قائمة السماح الافتراضية. المحدد: `\"|\"`. \n- تمت إضافته إلى القائمة الافتراضية التي يحددها {@link PrivateBaseOptions.__defaultElementWhitelist}. \n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "description": "يُحدد هذا الخيار عناصر HTML المسموح بها بالإضافة إلى قائمة العناصر المسموح بها افتراضيًا. الفاصل: `\"|\"`.\n\n- تمت إضافتها إلى القائمة الافتراضية المُحددة بواسطة {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "يحدد عناصر HTML التي لا ينبغي استخدامها. المحدد: `\"|\"`. \n- ستتم إزالة العلامات المحددة هنا في النهاية، حتى لو تم تضمينها في قوائم بيضاء أخرى. \n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "description": "يُحدد هذا الخيار عناصر HTML التي لا ينبغي استخدامها. الفاصل: `\"|\"`.\n\n- ستُحذف الوسوم المحددة هنا في النهاية، حتى لو كانت مُدرجة في قوائم بيضاء أخرى.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
     "default": "\"\""
   },
   "allowedEmptyTags": {
-    "description": "قائمة العلامات المسموح بالاحتفاظ بها حتى لو كانت قيمها فارغة. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} \n- متسلسلة مع `ALLOWED_EMPTY_NODE_LIST` لتكوين قائمة `allowedEmptyTags` النهائية.",
+    "description": "قائمة بالوسوم المسموح بالاحتفاظ بها حتى لو كانت قيمها فارغة.\n\n- القيمة الافتراضية هي {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n\n- تُدمج مع `ALLOWED_EMPTY_NODE_LIST` لتكوين قائمة `allowedEmptyTags` ​​النهائية.",
     "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
   },
   "allowedClassName": {
-    "description": "أسماء الفئات المسموح بها \n- تمت إضافة القيمة الافتراضية {@link DEFAULTS.CLASS_NAME}",
+    "description": "أسماء الفئات المسموح بها.\n\n- تمت إضافة القيمة الافتراضية {@link DEFAULTS.CLASS_NAME}",
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "يحدد سمات إضافية للسماح بكل علامة. ينطبق `\"*\"` على جميع العلامات. \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "يُحدد هذا الخيار سمات إضافية لكل وسم. ينطبق `\"*\"` على جميع الوسوم.\n\n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "يحدد السمات التي يجب عدم السماح بها بواسطة العلامة. ينطبق `\"*\"` على جميع العلامات. \n- ستتم إزالة السمات المحددة هنا في النهاية حتى لو كانت الإعدادات الأخرى تسمح بها. \n- يتم تضمين قائمة العناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، دائمًا. \n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "description": "يُحدد هذا الخيار السمات التي يجب حظرها لكل وسم. ينطبق `\"*\"` على جميع الوسوم.\n\n- ستُحذف السمات المُحددة هنا في النهاية حتى لو كانت مسموحة في إعدادات أخرى.\n\n- تُضمّن دائمًا قائمة بالعناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
   },
   "textStyleTags": {
-    "description": "علامات نمط النص الإضافية. \n- يتبع الإعداد الافتراضي {@link PrivateBaseOptions.__textStyleTags}",
+    "description": "علامات تنسيق نص إضافية.\n\n- يتبع التنسيق الافتراضي {@link PrivateBaseOptions.__textStyleTags}",
     "default": "__textStyleTags"
   },
   "convertTextTags": {
-    "description": "تعيين أنماط النص إلى علامات HTML محددة. \n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "description": "يربط أنماط النصوص بعلامات HTML محددة.\n\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "يحدد أنماطًا إضافية لقائمة الأنماط المسموح بها. المحدد: `\"|\"`. \n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+    "description": "يُحدد أنماطًا إضافية إلى قائمة الأنماط المسموح بها. الفاصل: `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "يحدد الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامات، والقيمة هي الأنماط المسموح بها والمفصولة بشُرط رأسية. \n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "يُحدد هذا الخيار الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامة، والقيمة هي الأنماط المسموح بها مفصولة بعلامة الأنبوب (|).\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
     "default": "{}"
   },
   "spanStyles": {
-    "description": "يحدد الأنماط المسموح بها للعلامة `span`. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SPAN_STYLES}",
+    "description": "يُحدد هذا الخيار الأنماط المسموح بها لوسم `span`.\n\n- النمط الافتراضي هو {@link DEFAULTS.SPAN_STYLES}",
     "default": "CONSTANTS.SPAN_STYLES"
   },
   "lineStyles": {
-    "description": "يحدد الأنماط المسموح بها للعنصر `line` (ص..). \n- يتبع الإعداد الافتراضي {@link DEFAULTS.LINE_STYLES}",
+    "description": "يُحدد هذا الخيار الأنماط المسموح بها لعنصر `line` (p..).\n\n- النمط الافتراضي هو {@link DEFAULTS.LINE_STYLES}",
     "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
-    "description": "وحدات حجم الخط المسموح بها. \n- يتبع الإعداد الافتراضي {@link DEFAULTS.SIZE_UNITS}",
+    "description": "وحدات حجم الخط المسموح بها.\n\n- القيمة الافتراضية هي {@link DEFAULTS.SIZE_UNITS}",
     "default": "CONSTANTS.SIZE_UNITS"
   },
   "retainStyleMode": {
-    "description": "يحدد كيفية التعامل مع العناصر المضمنة (مثل `<span>`، `<strong>`) عند حذف النص. \n- `repeat`: يتم الاحتفاظ بالأنماط ما لم يتم الضغط على مسافة للخلف بشكل متكرر. \n- سيؤدي الضغط المستمر إلى إزالة الأنماط في النهاية. \n- `none`: لا يتم الاحتفاظ بالأنماط. تتم إزالة العناصر المضمنة على الفور مع النص. \n- `always`: تستمر الأنماط إلى أجل غير مسمى ما لم تتم إزالتها بشكل صريح. \n- حتى إذا تم حذف كل النص الموجود داخل عنصر مضمّن، فسيظل العنصر نفسه قائمًا.",
+    "description": "يُحدد هذا الخيار كيفية التعامل مع العناصر المضمنة (مثل `<span>`، `<strong>`) عند حذف النص.\n\n- `repeat`: تُحفظ الأنماط ما لم يتم الضغط على مفتاح الحذف بشكل متكرر.\n\n- الضغط المستمر سيؤدي في النهاية إلى إزالة الأنماط.\n\n- `none`: لا تُحفظ الأنماط. تُحذف العناصر المضمنة فورًا مع النص.\n\n- `always`: تبقى الأنماط إلى أجل غير مسمى ما لم تُحذف صراحةً.\n\n- حتى في حال حذف جميع النصوص داخل عنصر مضمن، يبقى العنصر نفسه.",
     "default": "\"repeat\""
   },
   "defaultLine": {
@@ -200,43 +200,43 @@
     "default": "\"p\""
   },
   "defaultLineBreakFormat": {
-    "description": "يحدد التنسيق الافتراضي لفاصل الأسطر. \n- [مستحسن] `line` : يتم تقسيم فاصل الأسطر إلى علامات عامة. \n- [غير مستحسن] `br` ​​: تتم معاملة فواصل الأسطر على أنها <br> على نفس السطر. (مثل التحول + أدخل) \n- تتم معالجة فواصل الأسطر كـ <br> داخل `line`. \n- يمكنك إنشاء `line` جديد عن طريق إدخال فاصل أسطر مرتين على التوالي. \n- التنسيقات التي تتضمن `line`، مثل \"اقتباس\"، لا تزال تعمل على أساس `line`. \n- تعمل عمليات محرر الشمس في وحدات `line`. \n- عند الضبط على `br`، قد ينخفض ​​الأداء عند تحرير الكثير من البيانات.",
+    "description": "يُحدد هذا الخيار تنسيق فاصل الأسطر الافتراضي.\n\n- [مُوصى به] `line`: يُقسّم فاصل الأسطر إلى علامات عامة.\n\n- [غير مُوصى به] `br`: تُعامل فواصل الأسطر كـ <br> في نفس السطر (مثل Shift+Enter).\n\n- تُعامل فواصل الأسطر كـ <br> ضمن `line`.\n\n- يُمكنك إنشاء `line` جديد بإدخال فاصل أسطر مرتين متتاليتين.\n\n- التنسيقات التي تتضمن `line`، مثل \"علامة اقتباس\"، لا تزال تعمل على أساس `line`.\n\n- تعمل عمليات محرر النصوص بوحدات `line`.\n\n- عند التعيين إلى `br`، قد ينخفض ​​الأداء عند تحرير كمية كبيرة من البيانات.",
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "خصائص الخط التي يجب إعادة ضبطها عند تغيير الخطوط. المحدد: `\"|\"`. \n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "description": "خصائص السطر التي يجب إعادة ضبطها عند تغيير الأسطر. الفاصل: `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` بخلاف العناصر الافتراضية. المحدد: `\"|\"`. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` النهائية. \n- يحتوي عنصر `line` أيضًا على عنصر `brLine`. \n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `line` تتجاوز القيمة الافتراضية. الفاصل: `\"|\"`.\n\n- تم دمجها مع {@link PrivateBaseOptions.__defaultFormatLine} لتكوين قائمة `line` النهائية.\n\n- يحتوي عنصر `line` أيضًا على عنصر `brLine`.\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية. \n- تم تضمين عناصر `brLine` في عنصر `line`. \n- فاصل أسطر عناصر `brLine` هو علامة `BR`. \n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `brLine` تتجاوز العناصر الافتراضية.\n\n- تم دمجها مع {@link PrivateBaseOptions.__defaultFormatBrLine} لتكوين قائمة `brLine` ​​النهائية.\n\n- تم تضمين عناصر `brLine` في عنصر `line`.\n\n- فاصل الأسطر لعناصر `brLine` هو وسم `BR`.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `closureBrLine` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBrLine} لقائمة `closureBrLine` ​​النهائية. \n- تم تضمين عناصر `closureBrLine` في `brLine`. \n- فاصل أسطر عناصر `closureBrLine` هو علامة `BR`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. ([على سبيل المثال] تنسيق خلايا الجدول)",
+    "description": "بالإضافة إلى ذلك، يُسمح بعناصر `closureBrLine` إضافية.\n\n- يتم دمجها مع {@link PrivateBaseOptions.__defaultFormatClosureBrLine} للحصول على قائمة `closureBrLine` ​​النهائية.\n\n- يتم تضمين عناصر `closureBrLine` في `brLine`.\n\n- فاصل الأسطر لعناصر `closureBrLine` هو وسم `BR`.\n\n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح الإدخال أو مفتاح الحذف.\n\n- ※ استخدمه فقط في حالات خاصة. (مثال: تنسيق خلايا الجدول)",
     "default": "__defaultFormatClosureBrLine"
   },
   "formatBlock": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `block` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatBlock} لتكوين قائمة `block` ​​النهائية. \n- `block` يغلف `line` و`component`.",
+    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `block` تتجاوز العناصر الافتراضية.\n\n- تم دمجها مع {@link PrivateBaseOptions.__defaultFormatBlock} لتكوين قائمة `block` ​​النهائية.\n\n- `block` يغلّف `line` و `component`.",
     "default": "__defaultFormatBlock"
   },
   "formatClosureBlock": {
-    "description": "بالإضافة إلى ذلك، تم السماح بعناصر `closureBlock` بخلاف العناصر الافتراضية. \n- متسلسلة مع {@link PrivateBaseOptions.__defaultFormatClosureBlock} لقائمة `closureBlock` ​​النهائية. \n- تم تضمين عناصر `closureBlock` في `block`. \n- عنصر `closureBlock` يغطي `line` و`component`. \n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح Enter أو مفتاح Backspace. \n- ※ استخدمه فقط في حالات خاصة. (على سبيل المثال، تنسيق خلايا الجدول)",
+    "description": "بالإضافة إلى ذلك، يُسمح بعناصر `closureBlock` غير الافتراضية.\n\n- يتم دمجها مع {@link PrivateBaseOptions.__defaultFormatClosureBlock} للحصول على قائمة `closureBlock` ​​النهائية.\n\n- يتم تضمين عناصر `closureBlock` في `block`.\n\n- يغلّف عنصر `closureBlock` عنصري `line` و`component`.\n\n- ※ لا يمكنك الخروج من هذا التنسيق باستخدام مفتاح الإدخال أو مفتاح الحذف.\n\n- ※ استخدمه فقط في حالات خاصة (مثل تنسيق خلايا الجدول).",
     "default": "__defaultFormatClosureBlock"
   },
   "closeModalOutsideClick": {
-    "description": "يغلق الوسائط عند النقر بالخارج.",
+    "description": "يُغلق النوافذ المنبثقة عند النقر خارجها.",
     "default": "false"
   },
   "syncTabIndent": {
-    "description": "مزامنة المسافة البادئة لعلامة التبويب مع المسافات.",
+    "description": "يقوم بمزامنة مسافة الجدولة مع المسافات.",
     "default": "true"
   },
   "tabDisable": {
-    "description": "تعطيل إدخال مفتاح علامة التبويب.",
+    "description": "يعطل إدخال مفتاح الجدولة.",
     "default": "false"
   },
   "toolbar_width": {
@@ -244,33 +244,33 @@
     "default": "\"auto\""
   },
   "toolbar_container": {
-    "description": "عنصر الحاوية لشريط الأدوات."
+    "description": "عنصر حاوية لشريط الأدوات."
   },
   "toolbar_sticky": {
-    "description": "تمكين شريط الأدوات لزجة. \n- `number`: يضبط الموضع العلوي الثابت (px). استخدم `-1` ​​لتعطيل الثبات. \n- `{top, offset}`: `top` هو الموضع الثابت عندما يكون رأس الصفحة مرئيًا. \n- `offset` هو الموضع الثابت عندما تقوم لوحة المفاتيح الافتراضية بتغيير إطار العرض (على سبيل المثال، على الأجهزة اللوحية وأجهزة اللمس). \n- عندما تكون لوحة المفاتيح الافتراضية نشطة، يحل `offset` محل `top` حتى لا يترك شريط الأدوات فجوة \n- لرأس الصفحة الذي تم تمريره خارج نطاق العرض. الافتراضي `offset` هو `0`. \n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "تفعيل شريط الأدوات الثابت.\n\n- `number`: يُحدد موضع شريط الأدوات الثابت (بالبكسل). استخدم `-1` ​​لتعطيل خاصية التثبيت.\n\n- `{top, offset}`: `top` هو موضع التثبيت عندما يكون رأس الصفحة مرئيًا.\n\n- `offset` هو موضع التثبيت عندما تُغير لوحة المفاتيح الافتراضية نطاق العرض (مثلًا، على الأجهزة اللوحية، والأجهزة التي تعمل باللمس).\n\n- عند تفعيل لوحة المفاتيح الافتراضية، يحل `offset` محل `top` حتى لا يترك شريط الأدوات فراغًا.\n\n- لرأس الصفحة الذي تم تمريره خارج نطاق العرض. القيمة الافتراضية لـ `offset` هي `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {
-    "description": "إخفاء شريط الأدوات في البداية.",
+    "description": "يخفي شريط الأدوات في البداية.",
     "default": "false"
   },
   "subToolbar": {
-    "description": "تكوين شريط الأدوات الفرعي شريط أدوات ثانوي يظهر عند تحديد النص.",
+    "description": "إعدادات شريط الأدوات الفرعي. شريط أدوات ثانوي يظهر عند تحديد نص.",
     "default": "{}"
   },
   "statusbar_container": {
-    "description": "عنصر الحاوية لشريط الحالة."
+    "description": "عنصر حاوية لشريط الحالة."
   },
   "shortcutsHint": {
     "description": "يعرض تلميحات الاختصارات في تلميحات الأدوات.",
     "default": "true"
   },
   "shortcutsDisable": {
-    "description": "تعطيل اختصارات لوحة المفاتيح.",
+    "description": "يعطل اختصارات لوحة المفاتيح.",
     "default": "false"
   },
   "shortcuts": {
-    "description": "اختصارات لوحة المفاتيح المخصصة. \n- المفاتيح التي تبدأ بـ `_` هي اختصارات مخصصة يحددها المستخدم. كل قيمة عبارة عن مصفوفة من أزواج `[keyCombo, hintLabel]`. \n- تستخدم مجموعات المفاتيح القيم `c` (Ctrl/Cmd)، و`s` (Shift)، و`KeyEvent.code` المرتبطة بـ `+`. \n- استخدم `$~pluginName.method` لاستدعاء طريقة مكون إضافي محدد. \n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "description": "اختصارات لوحة المفاتيح المخصصة.\n\n- المفاتيح التي تبدأ بـ `_` هي اختصارات مخصصة يُحددها المستخدم. كل قيمة عبارة عن مصفوفة من أزواج `[keyCombo, hintLabel]`.\n\n- تستخدم مجموعات المفاتيح قيم `c` (Ctrl/Cmd) و`s` (Shift) و`KeyEvent.code` موصولة بـ `+`.\n\n- استخدم `$~pluginName.method` لاستدعاء دالة معينة من دالة الملحق.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
     "default": "{}"
   },
   "copyFormatKeepOn": {
@@ -278,22 +278,22 @@
     "default": "false"
   },
   "autoLinkify": {
-    "description": "يقوم تلقائيًا بتحويل عناوين URL إلى ارتباطات تشعبية. (`Link` مطلوب البرنامج المساعد) \n- الافتراضي: `Boolean(plugins.link)` — يتم تحديده بناءً على ما إذا كان المكوّن الإضافي `link` ممكّنًا أم لا."
+    "description": "يحوّل عناوين URL تلقائيًا إلى روابط تشعبية. (يتطلب إضافة `Link`)\n\n- القيمة الافتراضية: `Boolean(plugins.link)` ​​— يتم تحديدها بناءً على تفعيل إضافة `link`."
   },
   "historyStackDelayTime": {
-    "description": "وقت التأخير لتحديثات مكدس المحفوظات (مللي ثانية).",
+    "description": "وقت التأخير لتحديثات سجل الأحداث (بالمللي ثانية).",
     "default": "400"
   },
   "historyStackSize": {
-    "description": "الحد الأقصى لعدد إدخالات السجل لكل إطار جذر. يتم تجاهل الإدخالات الأقدم عند تجاوزها.",
+    "description": "الحد الأقصى لعدد سجلات التاريخ لكل إطار رئيسي. يتم تجاهل أقدم السجلات عند تجاوز هذا الحد.",
     "default": "100"
   },
   "printClass": {
-    "description": "اسم الفئة للطباعة.",
+    "description": "اسم الفصل للطباعة.",
     "default": "\"\""
   },
   "fullScreenOffset": {
-    "description": "يتم تطبيق الإزاحة عند الدخول في وضع ملء الشاشة.",
+    "description": "يتم تطبيق الإزاحة عند الدخول إلى وضع ملء الشاشة.",
     "default": "0"
   },
   "previewTemplate": {
@@ -301,138 +301,138 @@
     "default": "null"
   },
   "printTemplate": {
-    "description": "قالب HTML مخصص لوضع الطباعة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر. \n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "description": "قالب HTML مخصص لوضع الطباعة. استخدم `{{ contents }}` كعنصر نائب لمحتوى المحرر.\n\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
     "default": "null"
   },
   "componentInsertBehavior": {
-    "description": "تمكين التحديد التلقائي للمكونات المدرجة. \n- بالنسبة للمكونات المضمنة: ضع المؤشر بالقرب من المكون، أو حدد إذا لم يكن هناك نطاق قريب. \n- بالنسبة لمكونات الكتلة: يتم تنفيذ السلوك بناءً على `selectMode`: \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا.",
+    "description": "يُمكّن هذا الخيار التحديد التلقائي للمكونات المُدرجة.\n\n- بالنسبة للمكونات المضمنة: يضع المؤشر بالقرب من المكون، أو يحدده إذا لم يكن هناك نطاق قريب.\n\n- بالنسبة للمكونات الكتلية: يُنفذ سلوكًا بناءً على `selectMode`:\n\n- `auto`: ينقل المؤشر إلى السطر التالي إن أمكن، وإلا يحدد المكون.\n\n- `select`: يحدد المكون المُدرج دائمًا.\n\n- `line`: ينقل المؤشر إلى السطر التالي إن أمكن، أو يُنشئ سطرًا جديدًا وينقل المؤشر إليه.\n\n- `none`: لا يفعل شيئًا.",
     "default": "\"auto\""
   },
   "defaultUrlProtocol": {
-    "description": "بروتوكول URL الافتراضي للروابط.",
+    "description": "بروتوكول عنوان URL الافتراضي للروابط.",
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "مدة عرض رسائل التوست (ملي ثانية).",
+    "description": "مدة عرض رسائل التنبيه (بالمللي ثانية).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
-    "description": "تمكين وضع عرض التعليمات البرمجية المجاني.",
+    "description": "يُفعّل وضع عرض الكود الحر.",
     "default": "false"
   },
   "finder_panel": {
-    "description": "يعرض واجهة مستخدم لوحة البحث/الاستبدال المضمنة. \n- يتم دائمًا إنشاء المكتشف داخليًا؛ يتحكم هذا الخيار في ما إذا كانت اللوحة مرئية للمستخدمين (Ctrl+F / Ctrl+H).",
+    "description": "يعرض واجهة لوحة البحث والاستبدال المدمجة.\n\n- يتم إنشاء أداة البحث تلقائيًا؛ ويتحكم هذا الخيار في إمكانية رؤية اللوحة للمستخدمين (Ctrl+F / Ctrl+H).",
     "default": "true"
   },
   "finder_liveSearch": {
-    "description": "يبحث على الفور أثناء الكتابة (رفض). عندما يكون خطأ، يتم تشغيل البحث فقط على Enter.",
+    "description": "يتم البحث فورًا أثناء الكتابة (بدون تأخير). عند تعطيل هذه الخاصية، يتم تشغيل البحث فقط عند الضغط على مفتاح الإدخال (Enter).",
     "default": "true"
   },
   "externalLibs": {
-    "description": "المكتبات الخارجية مثل CodeMirror أو KaTeX أو MathJax. \n- راجع {@link https://github.com/ARA-developer/suneeditor/blob/develop/guide/external-libraries.md دليل المكتبات الخارجية} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "مكتبات خارجية مثل CodeMirror وKaTeX وMathJax.\n\n- راجع دليل المكتبات الخارجية على الرابط التالي: {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
-    "description": "يحدد العلامات الإضافية المسموح بها أو غير المسموح بها. `true` للسماح، `false` ​​لعدم السماح. \n- الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP} \n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "description": "يُحدد هذا الخيار علامات إضافية مسموح بها أو ممنوعة. استخدم `true` للسماح، و `false` ​​لمنعها.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "تكوين معالجات أحداث المستخدم. \n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+    "description": "إعدادات معالجات أحداث المستخدم.\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
   },
   "buttons": {
-    "description": "قائمة أزرار شريط الأدوات المستخدمة حاليا"
+    "description": "قائمة أزرار شريط الأدوات المستخدمة حاليًا"
   },
   "buttons_sub": {
-    "description": "قائمة أزرار شريط الأدوات الفرعية المستخدمة حاليًا"
+    "description": "قائمة أزرار شريط الأدوات الفرعي المستخدمة حاليًا"
   },
   "toolbar_sub_width": {
     "description": "عرض شريط الأدوات الفرعي."
   },
   "reverseCommands": {
-    "description": "دمج مجموعة أزواج الأوامر العكسية. \n- يتضمن `indent-outdent` الافتراضي + `reverseButtons` ​​الخاص بالمستخدم."
+    "description": "مصفوفة أزواج الأوامر العكسية المدمجة.\n\n- تتضمن `indent-outdent` الافتراضي + `reverseButtons` ​​الخاص بالمستخدم."
   },
   "codeMirror": {
     "description": "كائن تكوين CodeMirror من `externalLibs.codeMirror`."
   },
   "hasCodeMirror": {
-    "description": "يستخدم CodeMirror لعرض التعليمات البرمجية."
+    "description": "يستخدم CodeMirror لعرض الكود."
   },
   "audioGallery_data": {
-    "description": "البيانات المباشرة دون مكالمات الخادم"
+    "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "audioGallery_url": {
     "description": "عنوان URL لطلب الخادم"
   },
   "audioGallery_headers": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "audioGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
   },
   "fileBrowser_data": {
-    "description": "البيانات المباشرة بدون استدعاءات الخادم (تجاوز جلب URL)."
+    "description": "بيانات مباشرة بدون استدعاءات للخادم (يتجاوز جلب عنوان URL)."
   },
   "fileBrowser_url": {
     "description": "عنوان URL لطلب الخادم"
   },
   "fileBrowser_headers": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "fileBrowser_thumbnail": {
-    "description": "عنوان URL للصورة المصغرة الافتراضية أو وظيفة تقوم بإرجاع عنوان URL للصورة المصغرة لكل عنصر."
+    "description": "عنوان URL للصورة المصغرة الافتراضي أو دالة تُرجع عنوان URL للصورة المصغرة لكل عنصر."
   },
   "fileBrowser_props": {
-    "description": "أسماء العلامات الإضافية"
+    "description": "أسماء علامات إضافية"
   },
   "fileGallery_data": {
-    "description": "البيانات المباشرة دون مكالمات الخادم"
+    "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "fileGallery_url": {
     "description": "عنوان URL لطلب الخادم"
   },
   "fileGallery_headers": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "fileGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
   },
   "imageGallery_data": {
-    "description": "البيانات المباشرة دون مكالمات الخادم"
+    "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "imageGallery_url": {
     "description": "عنوان URL لطلب الخادم"
   },
   "imageGallery_headers": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "videoGallery_data": {
-    "description": "البيانات المباشرة دون مكالمات الخادم"
+    "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "videoGallery_url": {
     "description": "عنوان URL لطلب الخادم"
   },
   "videoGallery_headers": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "videoGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
   },
   "codeBlock_langs": {
-    "description": "قائمة لغات البرمجة القابلة للتحديد لكتل ​​التعليمات البرمجية. \n- الإعدادات الافتراضية لـ 21 لغة مشتركة \n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go,rust, Ruby, php, Swift, kotlin, sql, bash, markdown, xml, yaml]. \n- اضبط على المصفوفة الفارغة `[]` لتعطيل واجهة مستخدم اختيار اللغة بالكامل."
+    "description": "قائمة لغات البرمجة المتاحة لاختيارها في كتل التعليمات البرمجية.\n\n- افتراضيًا: ٢١ لغة شائعة\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- اضبط المصفوفة `[]` على قيمة فارغة لتعطيل واجهة اختيار اللغة بالكامل."
   },
   "exportPDF_apiUrl": {
     "description": "عنوان URL لطلب الخادم لإنشاء ملف PDF"
   },
   "exportPDF_fileName": {
-    "description": "اسم ملف PDF الذي تم إنشاؤه"
+    "description": "اسم ملف PDF المُنشأ"
   },
   "fileUpload_uploadUrl": {
-    "description": "عنوان URL لطلب الخادم لتحميل الملف"
+    "description": "عنوان URL لطلب الخادم لتحميل الملفات"
   },
   "fileUpload_uploadHeaders": {
-    "description": "رؤوس طلبات الخادم"
+    "description": "رؤوس طلب الخادم"
   },
   "fileUpload_uploadSizeLimit": {
-    "description": "الحد الإجمالي لحجم التحميل بالبايت"
+    "description": "الحد الأقصى لحجم التحميل بالبايت"
   },
   "fileUpload_uploadSingleSizeLimit": {
     "description": "الحد الأقصى لحجم الملف الواحد بالبايت"
@@ -444,13 +444,13 @@
     "description": "تنسيقات الملفات المقبولة."
   },
   "fileUpload_as": {
-    "description": "حدد النموذج الافتراضي لمكون الملف كـ `box` أو `link`"
+    "description": "حدد الشكل الافتراضي لمكون الملف كـ `box` أو `link`"
   },
   "fileUpload_controls": {
-    "description": "ضوابط إضافية لإضافتها إلى هذا الرقم"
+    "description": "سيتم إضافة عناصر تحكم إضافية إلى الشكل"
   },
   "fileUpload_insertBehavior": {
-    "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+    "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- `auto`: نقل المؤشر إلى السطر التالي إن أمكن، وإلا تحديد المكون.\n\n- `select`: تحديد المكون المُدرج دائمًا.\n\n- `line`: نقل المؤشر إلى السطر التالي إن أمكن، أو إنشاء سطر جديد والانتقال إليه.\n\n- `none`: عدم القيام بأي شيء."
   },
   "align_items": {
     "description": "محاذاة العناصر"
@@ -459,13 +459,13 @@
     "description": "قائمة الألوان."
   },
   "backgroundColor_splitNum": {
-    "description": "عدد الألوان لكل سطر"
+    "description": "عدد الألوان في كل سطر"
   },
   "backgroundColor_disableHEXInput": {
     "description": "تعطيل إدخال HEX"
   },
   "blockStyle_items": {
-    "description": "قائمة التنسيق. \n- `command` — `\"line\"`: كتلة سطر واحد، `\"br-line\"`: كتلة مفصولة br، `\"block\"`: كتلة حاوية."
+    "description": "قائمة التنسيقات.\n\n- `command` — `\"line\"`: كتلة سطر واحد، `\"br-line\"`: كتلة مفصولة بفاصل أسطر، `\"block\"`: كتلة حاوية."
   },
   "font_items": {
     "description": "قائمة الخطوط"
@@ -474,7 +474,7 @@
     "description": "قائمة الألوان."
   },
   "fontColor_splitNum": {
-    "description": "عدد الألوان لكل سطر"
+    "description": "عدد الألوان في كل سطر"
   },
   "fontColor_disableHEXInput": {
     "description": "تعطيل إدخال HEX"
@@ -483,94 +483,94 @@
     "description": "قائمة الموارد البشرية"
   },
   "layout_items": {
-    "description": "قائمة التخطيط. يحدد كل عنصر قالب تخطيط مسمى باستخدام HTML الخام."
+    "description": "قائمة التخطيط. يحدد كل عنصر قالب تخطيط مسمى باستخدام لغة HTML الخام."
   },
   "lineHeight_items": {
-    "description": "قائمة ارتفاع الخط"
+    "description": "قائمة ارتفاعات الأسطر"
   },
   "paragraphStyle_items": {
-    "description": "قائمة عناصر الفقرة"
+    "description": "قائمة بنود الفقرة"
   },
   "table_scrollType": {
-    "description": "نوع التمرير (`x`، `y`، `xy`)"
+    "description": "نوع التمرير (`x`, `y`, `xy`)"
   },
   "table_captionPosition": {
-    "description": "موضع التسمية التوضيحية (`top`، `bottom`)"
+    "description": "موضع التسمية التوضيحية (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "موضع وحدة التحكم بالخلية (`cell`، `table`)"
+    "description": "موضع وحدة التحكم الخلوية (`cell`, `table`)"
   },
   "table_colorList": {
     "description": "قائمة ألوان HEX لمنتقي ألوان خلفية الخلية."
   },
   "template_items": {
-    "description": "قائمة القالب"
+    "description": "قائمة القوالب"
   },
   "textStyle_items": {
     "description": "قائمة عناصر نمط النص."
   },
   "mention_triggerText": {
-    "description": "الشخصية التي تقوم بتشغيل قائمة الإشارات."
+    "description": "الشخصية التي تُفعّل قائمة الإشارات."
   },
   "mention_limitSize": {
-    "description": "عدد العناصر المراد عرضها في قائمة الإشارة"
+    "description": "عدد العناصر التي سيتم عرضها في قائمة الإشارات"
   },
   "mention_searchStartLength": {
-    "description": "عدد الأحرف لبدء البحث عن قائمة الإشارات"
+    "description": "عدد الأحرف لبدء البحث في قائمة الإشارات"
   },
   "mention_delayTime": {
-    "description": "وقت الانتظار قبل عرض قائمة الإشارات"
+    "description": "الوقت اللازم للانتظار قبل عرض قائمة الإشارات"
   },
   "mention_data": {
-    "description": "بيانات الإشارة الثابتة (المستخدمة بدلاً من واجهة برمجة التطبيقات)."
+    "description": "بيانات الإشارة الثابتة (تستخدم بدلاً من واجهة برمجة التطبيقات)."
   },
   "mention_apiUrl": {
-    "description": "عنوان URL للاتصال بالقائمة المذكورة"
+    "description": "عنوان URL لاستدعاء قائمة الإشارات"
   },
   "mention_apiHeaders": {
-    "description": "الرؤوس التي سيتم إرسالها مع استدعاء API"
+    "description": "الرؤوس التي يجب إرسالها مع استدعاء واجهة برمجة التطبيقات"
   },
   "mention_useCachingData": {
-    "description": "ما إذا كان سيتم تخزين بيانات قائمة الإشارات مؤقتًا أم لا"
+    "description": "ما إذا كان سيتم تخزين بيانات قائمة الإشارات مؤقتًا"
   },
   "mention_useCachingFieldData": {
-    "description": "ما إذا كان سيتم تخزين بيانات قائمة الإشارات مؤقتًا في الحقل أم لا"
+    "description": "ما إذا كان سيتم تخزين بيانات قائمة الإشارات مؤقتًا في الحقل"
   },
   "fontSize_sizeUnit": {
-    "description": "وحدة حجم الخط. \n- تشمل القيم المقبولة: `'px'`، `'pt'`، `'em'`، `'rem'`، `'vw'`، `'vh'`، `'%'` أو `'text'`. \n- إذا تم استخدام `'text'`، فسيتم تطبيق قائمة حجم الخط المستندة إلى النص."
+    "description": "وحدة قياس حجم الخط.\n\n- القيم المقبولة: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` أو `'text'`.\n\n- في حال استخدام `'text'`، يتم تطبيق قائمة أحجام الخطوط النصية."
   },
   "fontSize_showDefaultSizeLabel": {
     "description": "يحدد ما إذا كان سيتم عرض تسمية الحجم الافتراضي في القائمة المنسدلة."
   },
   "fontSize_showIncDecControls": {
-    "description": "عند `true`، يتم عرض أزرار الزيادة والتقليل لتعديلات حجم الخط. \n- الإعدادات الافتراضية هي `false`. دائمًا `false` عندما يكون `sizeUnit` هو `'text'` (يتم تجاهله)."
+    "description": "عند `true`، يتم عرض أزرار تكبير وتصغير حجم الخط.\n\n- القيمة الافتراضية هي `false`. دائمًا `false` عندما تكون `sizeUnit` هي `'text'` (يتم تجاهلها)."
   },
   "fontSize_disableInput": {
-    "description": "عند `true`، يتم تعطيل مربع إدخال حجم الخط المباشر. \n- القيمة الافتراضية هي `true` ​​عندما تكون `sizeUnit` هي `'text'`، وإلا فإن `false`."
+    "description": "عند تفعيل `true`، يتم تعطيل مربع إدخال حجم الخط المباشر.\n\n- القيمة الافتراضية هي `true` ​​عندما تكون `sizeUnit` هي `'text'`، وإلا `false`."
   },
   "fontSize_unitMap": {
-    "description": "تجاوز أو توسيع تعيين الوحدة الافتراضية لأحجام الخطوط."
+    "description": "تجاوز أو توسيع تعيين الوحدات الافتراضي لأحجام الخطوط."
   },
   "audio_defaultWidth": {
-    "description": "العرض الافتراضي للعلامة `AUDIO`."
+    "description": "العرض الافتراضي لعلامة `AUDIO`."
   },
   "audio_defaultHeight": {
-    "description": "الارتفاع الافتراضي للعلامة `AUDIO`."
+    "description": "الارتفاع الافتراضي لعلامة `AUDIO`."
   },
   "audio_createFileInput": {
     "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف."
   },
   "audio_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
+    "description": "إنشاء عنصر إدخال عنوان URL.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "audio_uploadUrl": {
     "description": "عنوان URL الذي سيتم تحميل الملفات إليه."
   },
   "audio_uploadHeaders": {
-    "description": "الرؤوس المطلوب تضمينها في طلب تحميل الملف."
+    "description": "العناوين التي يجب تضمينها في طلب تحميل الملف."
   },
   "audio_uploadSizeLimit": {
-    "description": "الحد الأقصى لحجم التحميل بالبايت."
+    "description": "الحد الأقصى لحجم التحميل الإجمالي بالبايت."
   },
   "audio_uploadSingleSizeLimit": {
     "description": "الحد الأقصى لحجم الملف الواحد بالبايت."
@@ -582,13 +582,13 @@
     "description": "تنسيقات الملفات المقبولة (الافتراضي هو `\"audio/*\"`)."
   },
   "audio_audioTagAttributes": {
-    "description": "سمات إضافية لتعيينها على العلامة `AUDIO`."
+    "description": "سمات إضافية لتعيينها على علامة `AUDIO`."
   },
   "audio_insertBehavior": {
-    "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+    "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- `auto`: نقل المؤشر إلى السطر التالي إن أمكن، وإلا تحديد المكون.\n\n- `select`: تحديد المكون المُدرج دائمًا.\n\n- `line`: نقل المؤشر إلى السطر التالي إن أمكن، أو إنشاء سطر جديد والانتقال إليه.\n\n- `none`: عدم القيام بأي شيء."
   },
   "drawing_outputFormat": {
-    "description": "تنسيق الإخراج للرسم. الخيارات: `\"dataurl\"`، `\"svg\"`."
+    "description": "تنسيق إخراج الرسم. الخيارات: `\"dataurl\"`, `\"svg\"`."
   },
   "drawing_useFormatType": {
     "description": "ما إذا كان سيتم تمكين تحديد نوع التنسيق (`block` مقابل `inline`)."
@@ -597,112 +597,112 @@
     "description": "نوع التنسيق الافتراضي، إما `\"block\"` أو `\"inline\"`."
   },
   "drawing_keepFormatType": {
-    "description": "ما إذا كان سيتم الحفاظ على نوع التنسيق المختار بعد الرسم."
+    "description": "ما إذا كان ينبغي الاحتفاظ بنوع التنسيق المختار بعد الرسم."
   },
   "drawing_lineWidth": {
     "description": "عرض خط الرسم."
   },
   "drawing_lineReconnect": {
-    "description": "ما إذا كان سيتم إعادة توصيل الخطوط عند الرسم."
+    "description": "ما إذا كان ينبغي إعادة توصيل الخطوط عند الرسم."
   },
   "drawing_lineCap": {
-    "description": "نمط رأس الخط (`\"butt\"`، `\"round\"`، أو `\"square\"`)."
+    "description": "نمط نهاية السطر (`\"butt\"`, `\"round\"`, أو `\"square\"`)."
   },
   "drawing_lineColor": {
     "description": "لون خط الرسم."
   },
   "drawing_canResize": {
-    "description": "ما إذا كان يمكن تغيير حجم النموذج المشروط."
+    "description": "ما إذا كان من الممكن تغيير حجم النموذج المشروط."
   },
   "drawing_maintainRatio": {
-    "description": "ما إذا كان سيتم الحفاظ على نسبة العرض إلى الارتفاع عند تغيير الحجم."
+    "description": "ما إذا كان ينبغي الحفاظ على نسبة العرض إلى الارتفاع عند تغيير الحجم."
   },
   "drawing_formSize": {
-    "description": "تكوين الحجم لنموذج الرسم المشروط."
+    "description": "إعدادات حجم نموذج الرسم."
   },
   "embed_canResize": {
-    "description": "ما إذا كان من الممكن تغيير حجم عنصر التضمين."
+    "description": "ما إذا كان من الممكن تغيير حجم العنصر المضمن."
   },
   "embed_showHeightInput": {
-    "description": "ما إذا كان سيتم عرض حقل إدخال الارتفاع."
+    "description": "ما إذا كان سيتم عرض حقل إدخال الطول."
   },
   "embed_defaultWidth": {
-    "description": "العرض الافتراضي لعنصر التضمين (قيمة رقمية أو بوحدة)."
+    "description": "العرض الافتراضي لعنصر التضمين (قيمة رقمية أو مع وحدة قياس)."
   },
   "embed_defaultHeight": {
-    "description": "الارتفاع الافتراضي لعنصر التضمين (قيمة رقمية أو بوحدة)."
+    "description": "الارتفاع الافتراضي لعنصر التضمين (قيمة عددية أو مع وحدة قياس)."
   },
   "embed_percentageOnlySize": {
-    "description": "ما إذا كان سيتم السماح بالتحجيم على أساس النسبة المئوية فقط."
+    "description": "ما إذا كان ينبغي السماح بتحديد الحجم بناءً على النسبة المئوية فقط."
   },
   "embed_uploadUrl": {
-    "description": "عنوان URL لتحميل الملفات."
+    "description": "رابط تحميل الملفات."
   },
   "embed_uploadHeaders": {
-    "description": "الرؤوس المطلوب تضمينها في طلبات تحميل الملفات."
+    "description": "العناوين التي يجب تضمينها في طلبات تحميل الملفات."
   },
   "embed_uploadSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف بالبايت."
+    "description": "الحد الأقصى لحجم الملفات المرفوعة بالبايت."
   },
   "embed_uploadSingleSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف الواحد بالبايت."
+    "description": "الحد الأقصى لحجم الملف الواحد الذي يتم تحميله بالبايت."
   },
   "embed_iframeTagAttributes": {
-    "description": "سمات إضافية لتعيينها على العلامة `IFRAME`."
+    "description": "سمات إضافية لتعيينها على علامة `IFRAME`."
   },
   "embed_query_youtube": {
-    "description": "تم إلحاق معلمة استعلام YouTube بعنوان URL للتضمين."
+    "description": "تمت إضافة معلمات استعلام يوتيوب إلى عنوان URL المضمن."
   },
   "embed_query_vimeo": {
-    "description": "تم إلحاق معلمة استعلام Vimeo بعنوان URL للتضمين."
+    "description": "تمت إضافة معلمات استعلام Vimeo إلى عنوان URL للتضمين."
   },
   "embed_urlPatterns": {
-    "description": "أنماط URL إضافية للتعرف عليها كمحتوى قابل للتضمين."
+    "description": "أنماط عناوين URL إضافية للتعرف عليها كمحتوى قابل للتضمين."
   },
   "embed_embedQuery": {
     "description": "تعريفات خدمة التضمين المخصصة."
   },
   "embed_controls": {
-    "description": "ضوابط الشكل."
+    "description": "عناصر التحكم في الشكل."
   },
   "embed_insertBehavior": {
-    "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+    "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- `auto`: نقل المؤشر إلى السطر التالي إن أمكن، وإلا تحديد المكون.\n\n- `select`: تحديد المكون المُدرج دائمًا.\n\n- `line`: نقل المؤشر إلى السطر التالي إن أمكن، أو إنشاء سطر جديد والانتقال إليه.\n\n- `none`: عدم القيام بأي شيء."
   },
   "image_canResize": {
-    "description": "ما إذا كان يمكن تغيير حجم عنصر الصورة."
+    "description": "ما إذا كان من الممكن تغيير حجم عنصر الصورة."
   },
   "image_showHeightInput": {
-    "description": "ما إذا كان سيتم عرض حقل إدخال الارتفاع."
+    "description": "ما إذا كان سيتم عرض حقل إدخال الطول."
   },
   "image_defaultWidth": {
-    "description": "العرض الافتراضي للصورة. إذا تم توفير رقم، فسيتم إلحاق `\"px\"`."
+    "description": "العرض الافتراضي للصورة. إذا تم إدخال رقم، فسيتم إضافة `\"px\"`."
   },
   "image_defaultHeight": {
-    "description": "الارتفاع الافتراضي للصورة. إذا تم توفير رقم، فسيتم إلحاق `\"px\"`."
+    "description": "الارتفاع الافتراضي للصورة. إذا تم إدخال رقم، فسيتم إضافة `\"px\"`."
   },
   "image_percentageOnlySize": {
-    "description": "ما إذا كان سيتم السماح بالتحجيم على أساس النسبة المئوية فقط."
+    "description": "ما إذا كان ينبغي السماح بتحديد الحجم بناءً على النسبة المئوية فقط."
   },
   "image_createFileInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف لتحميلات الصور."
+    "description": "ما إذا كان ينبغي إنشاء عنصر إدخال ملف لتحميل الصور."
   },
   "image_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لإدراج الصورة. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
+    "description": "تحديد ما إذا كان سيتم إنشاء عنصر إدخال عنوان URL لإدراج الصور.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "image_uploadUrl": {
-    "description": "نقطة نهاية URL لتحميلات ملفات الصور."
+    "description": "نقطة نهاية عنوان URL لتحميل ملفات الصور."
   },
   "image_uploadHeaders": {
-    "description": "رؤوس إضافية لتضمينها في طلب تحميل الملف."
+    "description": "رؤوس إضافية يجب تضمينها في طلب تحميل الملف."
   },
   "image_uploadSizeLimit": {
-    "description": "الحد الأقصى لحجم التحميل بالبايت."
+    "description": "الحد الأقصى لحجم التحميل الإجمالي بالبايت."
   },
   "image_uploadSingleSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف الواحد بالبايت."
+    "description": "الحد الأقصى لحجم الملف الواحد الذي يتم تحميله بالبايت."
   },
   "image_allowMultiple": {
-    "description": "ما إذا كان مسموحًا بتحميل صور متعددة أم لا."
+    "description": "هل يُسمح بتحميل صور متعددة؟"
   },
   "image_acceptedFormats": {
     "description": "تنسيقات الملفات المقبولة لتحميل الصور."
@@ -717,138 +717,138 @@
     "description": "ما إذا كان سيتم الاحتفاظ بنوع التنسيق المختار بعد إدراج الصورة."
   },
   "image_linkEnableFileUpload": {
-    "description": "ما إذا كان سيتم تمكين تحميل الملفات للصور المرتبطة."
+    "description": "ما إذا كان سيتم تفعيل تحميل الملفات للصور المرتبطة."
   },
   "image_controls": {
-    "description": "ضوابط الشكل."
+    "description": "عناصر التحكم في الشكل."
   },
   "image_insertBehavior": {
-    "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- بالنسبة للمكونات المضمنة: ضع المؤشر بالقرب من المكون، أو حدد إذا لم يكن هناك نطاق قريب. \n- بالنسبة لمكونات الكتلة: يتم تنفيذ السلوك بناءً على `selectMode`: \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+    "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- بالنسبة للمكونات المضمنة: يضع المؤشر بالقرب من المكون، أو يحدده إذا لم يكن هناك نطاق قريب.\n\n- بالنسبة للمكونات الكتلية: ينفذ السلوك بناءً على `selectMode`:\n\n- `auto`: ينقل المؤشر إلى السطر التالي إن أمكن، وإلا يحدد المكون.\n\n- `select`: يحدد المكون المُدرج دائمًا.\n\n- `line`: ينقل المؤشر إلى السطر التالي إن أمكن، أو ينشئ سطرًا جديدًا وينقل المؤشر إليه.\n\n- `none`: لا يفعل شيئًا."
   },
   "link_uploadUrl": {
-    "description": "نقطة نهاية URL لتحميل الملفات."
+    "description": "نقطة نهاية عنوان URL لتحميل الملفات."
   },
   "link_uploadHeaders": {
     "description": "رؤوس إضافية لطلبات تحميل الملفات."
   },
   "link_uploadSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف بالبايت."
+    "description": "الحد الأقصى لحجم الملفات المرفوعة بالبايت."
   },
   "link_uploadSingleSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف الواحد بالبايت."
+    "description": "الحد الأقصى لحجم الملف الواحد الذي يتم تحميله بالبايت."
   },
   "link_acceptedFormats": {
     "description": "تنسيقات الملفات المقبولة لتحميل الروابط."
   },
   "link_title": {
-    "description": "عرض العنوان مشروط."
+    "description": "عرض عنوان النافذة المنبثقة."
   },
   "link_textToDisplay": {
-    "description": "إنشاء نص لعرض الإدخال."
+    "description": "أنشئ نصًا لعرض المدخلات."
   },
   "link_openNewWindow": {
     "description": "القيمة الافتراضية المحددة لمربع الاختيار \"فتح في نافذة جديدة\"."
   },
   "link_noAutoPrefix": {
-    "description": "إذا كان `true`، فسيتم تعطيل البادئة التلقائية لعنوان URL المضيف لقيمة الارتباط."
+    "description": "إذا كان `true`، فإنه يعطل البادئة التلقائية لعنوان URL المضيف لقيمة الرابط."
   },
   "link_relList": {
-    "description": "تظهر قيم السمات `rel` المتوفرة كمربعات اختيار في الرابط المشروط."
+    "description": "تظهر قيم سمة `rel` المتاحة على شكل مربعات اختيار في نافذة الرابط."
   },
   "link_defaultRel": {
-    "description": "يتم تطبيق القيم الافتراضية `rel` تلقائيًا حسب الشرط."
+    "description": "يتم تطبيق القيم الافتراضية لـ `rel` تلقائيًا حسب الشرط."
   },
   "link_enableFileUpload": {
-    "description": "إذا كان `true`، قم بتمكين تحميل الملف."
+    "description": "إذا كان `true`، فإنه يُمكّن تحميل الملفات."
   },
   "math_canResize": {
-    "description": "ما إذا كان من الممكن تغيير حجم نموذج الرياضيات."
+    "description": "هل يمكن تغيير حجم نافذة الرياضيات؟"
   },
   "math_autoHeight": {
-    "description": "ما إذا كان سيتم ضبط ارتفاع النموذج تلقائيًا أم لا."
+    "description": "ما إذا كان سيتم ضبط ارتفاع النافذة المنبثقة تلقائيًا."
   },
   "math_fontSizeList": {
     "description": "قائمة بخيارات حجم الخط لمحدد حجم التعبير الرياضي."
   },
   "math_onPaste": {
-    "description": "وظيفة رد اتصال للتعامل مع أحداث اللصق في منطقة إدخال الرياضيات."
+    "description": "دالة رد نداء لمعالجة أحداث اللصق في منطقة إدخال المعادلات الرياضية."
   },
   "math_formSize": {
     "description": "كائن يحدد أبعاد النموذج الرياضي."
   },
   "video_canResize": {
-    "description": "ما إذا كان يمكن تغيير حجم عنصر الفيديو."
+    "description": "ما إذا كان من الممكن تغيير حجم عنصر الفيديو."
   },
   "video_showHeightInput": {
-    "description": "ما إذا كان سيتم عرض حقل إدخال الارتفاع."
+    "description": "ما إذا كان سيتم عرض حقل إدخال الطول."
   },
   "video_defaultWidth": {
-    "description": "العرض الافتراضي لعنصر الفيديو. إذا تم توفير رقم، فسيتم إلحاق `\"px\"`."
+    "description": "العرض الافتراضي لعنصر الفيديو. إذا تم تحديد رقم، فسيتم إضافة `\"px\"`."
   },
   "video_defaultHeight": {
-    "description": "الارتفاع الافتراضي لعنصر الفيديو. إذا تم توفير رقم، فسيتم إلحاق `\"px\"`."
+    "description": "الارتفاع الافتراضي لعنصر الفيديو. في حال إدخال رقم، سيتم إضافة `\"px\"`."
   },
   "video_percentageOnlySize": {
-    "description": "ما إذا كان سيتم السماح بالتحجيم على أساس النسبة المئوية فقط."
+    "description": "ما إذا كان ينبغي السماح بتحديد الحجم بناءً على النسبة المئوية فقط."
   },
   "video_createFileInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال ملف لتحميلات الفيديو."
+    "description": "ما إذا كان ينبغي إنشاء عنصر إدخال ملف لتحميل مقاطع الفيديو."
   },
   "video_createUrlInput": {
-    "description": "ما إذا كان سيتم إنشاء عنصر إدخال URL لتضمين الفيديو. \n- الإعدادات الافتراضية هي `true`. دائمًا `true` ​​عندما يكون `createFileInput` هو `false`."
+    "description": "تحديد ما إذا كان سيتم إنشاء عنصر إدخال عنوان URL لتضمين الفيديو.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "video_uploadUrl": {
-    "description": "نقطة نهاية URL لتحميلات ملفات الفيديو."
+    "description": "نقطة نهاية عنوان URL لتحميل ملفات الفيديو."
   },
   "video_uploadHeaders": {
-    "description": "رؤوس إضافية لتضمينها في طلب تحميل الفيديو."
+    "description": "عناوين إضافية يجب تضمينها في طلب تحميل الفيديو."
   },
   "video_uploadSizeLimit": {
-    "description": "الحد الإجمالي لحجم التحميل لمقاطع الفيديو بالبايت."
+    "description": "الحد الأقصى لحجم التحميل الإجمالي للفيديوهات بالبايت."
   },
   "video_uploadSingleSizeLimit": {
-    "description": "الحد الأقصى لحجم تحميل الملف الواحد لمقاطع الفيديو بالبايت."
+    "description": "الحد الأقصى لحجم الملف الواحد الذي يمكن تحميله للفيديوهات بالبايت."
   },
   "video_allowMultiple": {
-    "description": "ما إذا كان مسموحًا بتحميلات فيديو متعددة."
+    "description": "هل يُسمح بتحميل مقاطع فيديو متعددة؟"
   },
   "video_acceptedFormats": {
-    "description": "تنسيقات الملفات المقبولة لتحميلات الفيديو (`\"video/*\"`)."
+    "description": "تنسيقات الملفات المقبولة لتحميل الفيديو (`\"video/*\"`)."
   },
   "video_defaultRatio": {
     "description": "نسبة العرض إلى الارتفاع الافتراضية للفيديو (الارتفاع/العرض، على سبيل المثال 16:9 → `9/16 = 0.5625`)."
   },
   "video_showRatioOption": {
-    "description": "ما إذا كان سيتم عرض خيار النسبة في النموذج."
+    "description": "ما إذا كان سيتم عرض خيار النسبة في النافذة المنبثقة."
   },
   "video_ratioOptions": {
     "description": "خيارات النسبة المخصصة لتغيير حجم الفيديو (القيمة = الارتفاع/العرض)."
   },
   "video_videoTagAttributes": {
-    "description": "سمات إضافية لتعيينها على العلامة `VIDEO`."
+    "description": "سمات إضافية لتعيينها على علامة `VIDEO`."
   },
   "video_iframeTagAttributes": {
-    "description": "سمات إضافية لتعيينها على العلامة `IFRAME`."
+    "description": "سمات إضافية لتعيينها على علامة `IFRAME`."
   },
   "video_query_youtube": {
-    "description": "معلمات استعلام إضافية لتضمين YouTube."
+    "description": "معلمات استعلام إضافية لتضمين فيديوهات يوتيوب."
   },
   "video_query_vimeo": {
     "description": "معلمات استعلام إضافية لتضمين Vimeo."
   },
   "video_embedQuery": {
-    "description": "تعريفات خدمة التضمين المخصصة (راجع `EmbedPluginOptions.embedQuery`)."
+    "description": "تعريفات خدمة التضمين المخصصة (انظر `EmbedPluginOptions.embedQuery`)."
   },
   "video_urlPatterns": {
-    "description": "أنماط URL إضافية لتضمين الفيديو."
+    "description": "أنماط عناوين URL إضافية لتضمين الفيديو."
   },
   "video_extensions": {
-    "description": "امتدادات الملفات الإضافية التي سيتم التعرف عليها لتحميلات الفيديو."
+    "description": "سيتم التعرف على امتدادات ملفات إضافية لتحميل مقاطع الفيديو."
   },
   "video_controls": {
-    "description": "ضوابط الشكل."
+    "description": "عناصر التحكم في الشكل."
   },
   "video_insertBehavior": {
-    "description": "سلوك إدراج المكونات للاختيار ووضع المؤشر. \n- [الافتراضي: `options.get('componentInsertBehavior')`] \n- `auto`: انقل المؤشر إلى السطر التالي إن أمكن، وإلا حدد المكون. \n- `select`: حدد دائمًا المكون المدرج. \n- `line`: انقل المؤشر إلى السطر التالي إن أمكن، أو أنشئ سطرًا جديدًا وانتقل إلى هناك. \n- `none`: لا تفعل شيئًا."
+    "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- `auto`: نقل المؤشر إلى السطر التالي إن أمكن، وإلا تحديد المكون.\n\n- `select`: تحديد المكون المُدرج دائمًا.\n\n- `line`: نقل المؤشر إلى السطر التالي إن أمكن، أو إنشاء سطر جديد والانتقال إليه.\n\n- `none`: عدم القيام بأي شيء."
   }
 }

@@ -15,6 +15,8 @@
     "docs:generate": "node scripts/generate-api-docs.cjs",
     "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs",
     "docs:translate2": "cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-api-docs-v2.cjs && cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-option-desc-v2.cjs",
+    "messages:translate": "cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-messages-v2.cjs",
+    "translate:all": "npm run messages:translate && npm run docs:translate2",
     "test": "vitest run",
     "test:watch": "vitest"
   },

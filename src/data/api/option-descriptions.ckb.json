@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "بەهای سەرەتایی بۆ سەرنوسەر.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "دەقی شوێنگرەوە.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "تایبەتمەندییەکان بۆ چوارچێوەی دەستکاریکراو[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "پانایی بۆ سەرنوسەر.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "کەمترین پانایی بۆ سەرنوسەر.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "زۆرترین پانایی بۆ سەرنوسەر.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "باڵا بۆ سەرنوسەر.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "کەمترین بەرزی بۆ سەرنوسەر.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "بەرزی زۆرترین بۆ سەرنوسەر.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "ڕستەی ستایل لە چوارچێوەی سەرەوەی دەستکاریکەر.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "ناوەڕۆک لە iframe دادەنرێت و لە باقی لاپەڕەکە جیا دەکرێتەوە.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "ڕێگە بە بەکارهێنانی تاگەکانی HTML و HEAD و BODY و ڕاگەیاندنی DOCTYPE دەدات لەسەر `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "سیفاتەکانی `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "پەتی دۆخ چالاک دەکات.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "پێکهاتەی گرێی ئێستا لە باری دۆخدا پیشان دەدات.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "کارایی گۆڕینی قەبارەی پەتی دۆخی خوارەوە چالاک دەکات.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "ژمارەی کاراکتەرەکانی ناو دەستکاریکەرەکە پیشان دەدات.\n- ئەگەر هەڵبژاردەی `maxCharCount` بەهای هەبێت ئەوا دەبێتە `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "زۆرترین ژمارەی ئەو کاراکتەرانەی کە ڕێگەیان پێدراوە بخرێنە ناو دەستکاریکەرەکەوە.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "دەقێک کە لە ناوچەی `charCounter` لە باری خوارەوەدا پیشان بدرێت.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "شێوازی حیسابکردنی هەڵبژاردەی `charCounter` پێناسە دەکات.\n- `char`: درێژی کاراکتەرەکان.\n- `byte`: قەبارەی داتا دووانەییەکەی کاراکتەرەکان.\n- `byte-html`: قەبارەی داتا دووانەییەکەی ڕستەی تەواوی HTML.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "ژمارەی وشەکانی ناو دەستکاریکەر نیشان دەدات.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "دەقێک کە لە ناوچەی `wordCounter` لە باری خوارەوەدا پیشان بدرێت.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "ئەو ستایلانەی کە لەسەر دەفری سەرەوە جێبەجێ دەکرێن (بۆ نموونە پانایی، z-index و هتد)."
+  },
+  "frame": {
+    "description": "ئەو ستایلانەی کە لەسەر دەفری iframe بەکاردەهێنرێن (بۆ نموونە بەرزی، کەمترین بەرزی)."
+  },
+  "editor": {
+    "description": "ستایلەکانی جێبەجێکراو بۆ ناوچەی ناوەڕۆکی دەستکاریکراو."
+  },
+  "codeMirrorEditor": {
+    "description": "نموونەی دەستکاریکەری CodeMirror (ئاستی چوارچێوە). بە `_checkCodeMirror` دانراوە دوای دەستپێکردن."
+  },
+  "plugins": {
+    "description": "ڕێکخستنی پلاگین. ڕیزبەندییەک لە پۆلەکانی پێوەکراو یان شتێک کە بە ناوی پێوەکراو کلیل کراوە تێپەڕێنە.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "لیستی دوگمەکانی توولبار، کە بەپێی ڕیزبەندی لاوەکی گرووپ کراون.\n- پێشوەختە بەپێی {@link DEFAULTS.BUTTON_LIST} دێت.",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "دۆخی کۆچکردن بۆ SunEditor v2 چالاک دەکات.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "دۆخی توولبار: `classic`، `inline`، `balloon`، `balloon-always`. `:bottom` زیاد بکە بۆ دانانی توولبار لە خوارەوە (بۆ نموونە `classic:bottom`، `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "جۆری سەرنوسەر. `\"document\"` بەکاربهێنە بۆ نەخشەی شێوازی بەڵگەنامە، لەگەڵ ژێر جۆرە ئیختیارییەکان دوای `:`.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "تەوەرەی سەرنوسەر.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "ڕێکخستنی زمان. پێشوەختە : EN"
+  },
+  "icons": {
+    "description": "ئایکۆنەکانی پێشوەختە جێبەجێ دەکات."
+  },
+  "textDirection": {
+    "description": "ئاراستەی دەق: `ltr` یان `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "فلتەرکردنی توندی تاگەکان، تایبەتمەندییەکان و ستایلەکان چالاک دەکات.\n- `true` بەکاربهێنە بۆ چالاککردنی هەموو فلتەرەکان (بەپێی پێشوەختە)، یان شتێک بۆ کۆنترۆڵکردنی تاکە فلتەرەکان.\n- ڕێکخستنی `false` ​​پشتگیری ناکرێت؛ فۆڕمی ئۆبجێکتی بەکاربهێنە بۆ لەکارخستنی فلتەرە تایبەتەکان لەبری ئەوە.\n- :وەسفکردنی فلتەر\n- `tagFilter`: تاگەکانی HTML ڕێگەپێنەدراوەکان فلتەر دەکات (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: توخمەکانی فۆرمات فلتەر دەکات (`formatLine`/`formatBlock`)\n- `classFilter`: فلتەرەکانی ناوی پۆلەکانی CSS ڕێگەپێنەدراوەکان (`allowedClassName`)\n- `textStyleTagFilter`: تاگەکانی شێوازی دەق فلتەر دەکات (b، i، u، span و هتد)\n- `attrFilter`: فلتەرەکانی تایبەتمەندی HTML ڕێگەپێنەدراو (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: فلتەرەکانی ڕێگەپێنەدراو ستایلەکانی ناو هێڵ (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "تاگەکان وەک یەکەیەکی تەواو مامەڵەیان لەگەڵ دەکرێت لە کاتی هەڵبژاردنی هەموو ناوەڕۆکەکاندا.\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "توخمەکانی HTML دیاری دەکات بۆ ئەوەی بە شێوەیەکی زیادە ڕێگە بدات لە دەرەوەی لیستی ڕێگەپێدانی پێشوەختە. سنووردارکەر: `\"|\"`.\n- زیادکراوە بۆ لیستی پێشوەختە کە لەلایەن {@link PrivateBaseOptions.__defaultElementWhitelist} دیاری کراوە.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "توخمەکانی HTML دیاری دەکات کە نابێت بەکاربهێنرێن. سنووردارکەر: `\"|\"`.\n- ئەو تاگانەی لێرەدا دیاری کراون لە کۆتاییدا لادەبرێن، تەنانەت ئەگەر لە لیستە سپییەکانی دیکەشدا جێگیر بکرێن.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "لیستی ئەو تاگانەی کە ڕێگەیان پێدەدرێت هەڵبگیرێن تەنانەت ئەگەر بەهاکانیان بەتاڵ بن.\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- بەستراوەتەوە بە `ALLOWED_EMPTY_NODE_LIST` بۆ پێکهێنانی لیستی کۆتایی `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "ناوی پۆلەکانی ڕێگەپێدراو.\n- بەهای پێشوەختە زیادکرا {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "تایبەتمەندی زیادە دیاری دەکات بۆ ئەوەی ڕێگە بدات بە هەر تاگێک. `\"*\"` بۆ هەموو تاگەکان دەگونجێت.\n- ئەو یاسایانەی لێرەدا دیاری کراون تێکەڵ دەکرێن بۆ {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "تایبەتمەندییەکان دیاری دەکات کە ڕێگەی پێنەدرێت بە تاگ. `\"*\"` بۆ هەموو تاگەکان دەگونجێت.\n- ئەو تایبەتمەندیانەی لێرەدا دیاری کراون لە کۆتاییدا لا دەبرێن تەنانەت ئەگەر لەلایەن ڕێکخستنەکانی ترەوە ڕێگەیان پێبدرێت.\n- لیستی توخمە پێویستەکان، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، هەمیشە لەخۆدەگرێت.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "تاگی ستایلی دەقی زیادە.\n- پێشوەختە بەم شێوەیە دەبێت {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "نەخشەی شێوازەکانی دەق بۆ تاگی HTML تایبەت.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "ستایلە زیادەکان بۆ لیستی ستایلە ڕێگەپێدراوەکان دیاری دەکات. سنووردارکەر: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "ستایلە ڕێگەپێدراوەکان بۆ تاگەکانی HTML دیاری دەکات. کلیل ناوی تاگ(ەکان)ە، بەها بریتییە لە ستایلە ڕێگەپێدراوەکانی بۆری.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "ستایلە ڕێگەپێدراوەکان بۆ تاگی `span` دیاری دەکات.\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "شێوازە ڕێگەپێدراوەکان بۆ توخمە `line` دیاری دەکات (ل..).\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "یەکەکانی قەبارەی فۆنت ڕێگەپێدراو.\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "دیاری دەکات کە چۆن توخمەکانی ناو هێڵ (بۆ نموونە `<span>`، `<strong>`) مامەڵەیان لەگەڵ دەکرێت لە کاتی سڕینەوەی دەقدا.\n- `repeat`: ستایلەکان دەهێڵرێنەوە مەگەر شوێنی پشتەوە دووبارە و سێبارە فشار بخرێتە سەر.\n- فشاری بەردەوام لە کۆتاییدا ستایلەکان لادەبات.\n- `none`: ستایلەکان نەهێڵرێنەوە. توخمەکانی ناو هێڵ یەکسەر لەگەڵ دەقەکەدا لا دەبرێن.\n- `always`: ستایلەکان بۆ ماوەیەکی نادیار بەردەوام دەبن مەگەر بە ڕوونی لاببرێن.\n- تەنانەت ئەگەر هەموو دەقەکانی ناو توخمێکی ناو هێڵ بسڕدرێتەوە، ئەوا توخمەکە خۆی دەمێنێتەوە.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "توخمە `line` ی پێشوەختە لە کاتی دانانی هێڵی نوێ.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "فۆرماتێکی پێشوەختەی هێڵ شکاندن دیاری دەکات.\n- [پێشنیارکراوە] `line` : هێڵ شکاندن دابەشکراوە بەسەر تاگی گشتیدا.\n- [پێشنیار ناکرێت] `br` ​​: هێڵ شکاندنەکان وەک <br> لە هەمان هێڵدا مامەڵەیان لەگەڵ دەکرێت. (وەک shift+enter)\n- هێڵ شکاندنەکان وەک <br> لە ناو `line` مامەڵەیان لەگەڵ دەکرێت.\n- دەتوانیت `line` نوێ دروست بکەیت بە داخڵکردنی هێڵ شکاندن دوو جار لەسەر یەک.\n- ئەو فۆرماتانەی کە `line` لەخۆدەگرن، وەک \"Quote\"، هێشتا لەسەر بنەمای `line` کاردەکەن.\n- پرۆسەکانی suneditor بە یەکەکانی `line` کاردەکەن.\n- کاتێک لەسەر `br` دانراوە، ڕەنگە کارایی کەم ببێتەوە لە کاتی دەستکاریکردنی داتایەکی زۆر.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "تایبەتمەندی هێڵەکان کە پێویستە لە کاتی گۆڕینی هێڵەکاندا ڕێست بکرێن. سنووردارکەر: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "سەرەڕای ئەوەش ڕێگەپێدراوە `line` توخمەکان لە دەرەوەی پێشوەختە. سنووردارکەر: `\"|\"`.\n- بەستراوەتەوە بە {@link PrivateBaseOptions.__defaultFormatLine} بۆ پێکهێنانی لیستی کۆتایی `line`.\n- توخمەکەی `line` هەروەها توخمێکی `brLine` لەخۆدەگرێت.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "سەرەڕای ئەوەش ڕێگەپێدراوە `brLine` توخمەکان لە دەرەوەی پێشوەختە.\n- بەستراوەتەوە بە {@link PrivateBaseOptions.__defaultFormatBrLine} بۆ پێکهێنانی لیستی کۆتایی `brLine`.\n- توخمەکانی `brLine` لە توخمەکەی `line` دا جێگیر کراون.\n- `brLine` هێڵ شکاندنی توخمەکان `BR` تاگی یە.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brهێڵ` and appends `هێڵ`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "سەرەڕای ئەوەش ڕێگەپێدراوە `closureBrLine` توخمەکان لە دەرەوەی پێشوەختە.\n- بەستراوەتەوە بە {@link PrivateBaseOptions.__defaultFormatClosureBrLine} بۆ لیستی کۆتایی `closureBrLine`.\n- توخمەکانی `closureBrLine` لە `brLine` دا جێگیر کراون.\n- `closureBrLine` هێڵ شکاندنی توخمەکان `BR` تاگی یە.\n- ※ ناتوانیت بە کلیلی Enter یان کلیلی Backspace لەم فۆرماتە دەربچیت.\n- ※ تەنها لە حاڵەتی تایبەتدا بەکاری بهێنە. ([ex] فۆرمات لە خانەکانی خشتەکان)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "سەرەڕای ئەوەش ڕێگەپێدراوە `block` توخمەکان لە دەرەوەی پێشوەختە.\n- بەستراوەتەوە بە {@link PrivateBaseOptions.__defaultFormatBlock} بۆ پێکهێنانی لیستی کۆتایی `block`.\n- `block` `line` و `component` دەپێچێتەوە.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "سەرەڕای ئەوەش ڕێگەپێدراوە `closureBlock` توخمەکان لە دەرەوەی پێشوەختە.\n- بەستراوەتەوە بە {@link PrivateBaseOptions.__defaultFormatClosureBlock} بۆ لیستی کۆتایی `closureBlock`.\n- توخمەکانی `closureBlock` لە `block` دا جێگیر کراون.\n- توخمەکەی `closureBlock` `line` و `component` دەپێچێتەوە.\n- ※ ناتوانیت بە کلیلی Enter یان کلیلی Backspace لەم فۆرماتە دەربچیت.\n- ※ تەنها لە حاڵەتی تایبەتدا بەکاری بهێنە. (بۆ نموونە فۆرماتکردنی خانەکانی خشتەکان)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "مۆداڵەکان دادەخات لەکاتی کلیککردن لە دەرەوە.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "ئیندێنتی تاب لەگەڵ بۆشاییەکان هاوکات دەکات.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "هاتنە ژوورەوەی کلیلی تابەکان لەکاردەخات.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "پانایی توولبار.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "توخمێکی کۆنتێنەر بۆ توولبارەکە."
+  },
+  "toolbar_sticky": {
+    "description": "ئامرازی چەسپاو چالاک دەکات.\n- `number`: شوێنی سەرەوەی چەسپاو (px) دادەنێت. بۆ لەکارخستنی sticky `-1` ​​بەکاربهێنە.\n- `{top, offset}`: `top` شوێنی چەسپاوییە کاتێک سەردێڕی لاپەڕەکە دیارە.\n- `offset` شوێنی چەسپاوە کاتێک کیبۆردێکی مەجازی دەرچەی بینینەکە دەگۆڕێت (بۆ نموونە لەسەر تابلێتەکان، ئامێرە تاچەکان).\n- کاتێک تەختەکلیلی مەجازی چالاکە `offset` جێگەی `top` دەگرێتەوە بۆ ئەوەی توولبارەکە بۆشایی بەجێ نەهێڵێت\n- بۆ سەردێڕی لاپەڕەیەک کە لە بینین دەرچووە. پێشوەختە `offset` `0` یە.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "لە سەرەتادا توولبار دەشارێتەوە.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "ڕێکخستنی ژێر ئامرازەکان. ئامرازێکی لاوەکی کە لەسەر هەڵبژاردنی دەق دەردەکەوێت.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "توخمێکی کۆنتێنەر بۆ باری دۆخ."
+  },
+  "shortcutsHint": {
+    "description": "ئاماژەکانی کورتکراوە لە ئامرازەکانی ئامرازەکاندا پیشان دەدات.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "شۆرتکاتەکانی کیبۆرد لەکاردەخات.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "کورتە ڕێگاکانی تەختەکلیلی تایبەت.\n- ئەو کلیلانەی کە بە `_` دەست پێدەکەن، کورتکراوەی تایبەتمەندن کە بەکارهێنەر پێناسەی دەکات. هەر بەهایەک ڕیزبەندییەکە لە `[keyCombo, hintLabel]` ​​جووتە.\n- کۆمبۆی کلیلەکان بەهاکانی `c` (Ctrl/Cmd)، `s` (Shift)، و `KeyEvent.code` بەکاردەهێنن کە بە `+` یەکدەگرنەوە.\n- `$~pluginName.method` بەکاربهێنە بۆ بانگکردنی شێوازێکی تایبەتی پێوەکراو.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "فۆرماتەکەی ناوەڕۆکی کۆپیکراو دەهێڵێتەوە.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "بە شێوەیەکی ئۆتۆماتیکی URLەکان دەگۆڕێت بۆ هایپەرلینک. (`Link` پێوەکراو پێویستە)\n- پێشوەختە: `Boolean(plugins.link)` ​​— دیاری دەکرێت کە ئایا پێوەکراوەکەی `link` چالاک کراوە یان نا."
+  },
+  "historyStackDelayTime": {
+    "description": "کاتی دواکەوتن بۆ نوێکردنەوەی ستاکی مێژوو (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "زۆرترین ژمارەی نووسراوەکانی مێژوو بۆ هەر چوارچێوەیەکی ڕەگ. کۆنترین نووسینەکان کاتێک تێپەڕێنرێن فڕێ دەدرێن.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "ناوی پۆل بۆ چاپکردن.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "ئۆفسێت لەکاتی چوونە ناو دۆخی تەواوی شاشەدا جێبەجێ دەکرێت.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "قاڵبی HTML تایبەتمەند بۆ دۆخی پێشبینیکردن. `{{ contents }}` وەک شوێنگر بۆ ناوەڕۆکی دەستکاریکەر بەکاربهێنە.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "قاڵبی HTML تایبەتمەند بۆ دۆخی چاپکردن. `{{ contents }}` وەک شوێنگر بۆ ناوەڕۆکی دەستکاریکەر بەکاربهێنە.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "هەڵبژاردنی ئۆتۆماتیکی پێکهاتە جێگیرکراوەکان چالاک دەکات.\n- بۆ پێکهاتەکانی ناو هێڵ: ئاماژەدەر لە نزیک پێکهاتەکە دادەنێت، یان هەڵدەبژێرێت ئەگەر مەودای نزیک نەبێت.\n- بۆ پێکهاتەکانی بلۆک: ڕەفتارەکان لەسەر بنەمای `selectMode` جێبەجێ دەکات:\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "پرۆتۆکۆڵی URLی پێشوەختە بۆ بەستەرەکان.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "ماوەی پیشاندانی پەیامەکانی تۆست (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "دۆخی بینینی کۆدی ئازاد چالاک دەکات.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "UI ی پانێڵی Find/Replace ی ناوەکی پیشان دەدات.\n- دۆزەرەوە هەمیشە لە ناوەوە دروست دەبێت؛ ئەم هەڵبژاردنە کۆنتڕۆڵی ئەوە دەکات کە ئایا پانێڵەکە بۆ بەکارهێنەران دیارە یان نا (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "دەستبەجێ دەگەڕێت لەگەڵ نووسینەکەت (debounced). کاتێک هەڵە، گەڕان تەنها لەسەر Enter کاردەکات.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "کتێبخانە دەرەکییەکانی وەک CodeMirror، KaTeX، یان MathJax.\n- سەیری {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md ڕێبەری کتێبخانە دەرەکییەکان بکە}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "تاگی زیادەی ڕێگەپێدراو یان ڕێگەپێنەدراو دیاری دەکات. `true` بۆ ڕێگەدان، `false` ​​بۆ ڕێگەنەدان.\n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "ڕێکخستنی مامەڵەکارانی ڕووداوی بەکارهێنەر.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "لیستی دوگمەکانی توولبار کە لە ئێستادا بەکاردەهێنرێن"
+  },
+  "buttons_sub": {
+    "description": "لیستی دوگمەکانی ژێر ئامرازەکانی بەکارهێنراو لە ئێستادا"
+  },
+  "toolbar_sub_width": {
+    "description": "پانایی ژێر ئامرازەکان."
+  },
+  "reverseCommands": {
+    "description": "ڕیزبەندی جووتەکانی فەرمانی پێچەوانە تێکەڵکراوە.\n- `indent-outdent` + `reverseButtons` ​​ی بەکارهێنەر لەخۆدەگرێت."
+  },
+  "codeMirror": {
+    "description": "ئۆبجێکتی ڕێکخستنی CodeMirror لە `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "بۆ بینینی کۆدەکان CodeMirror بەکاردەهێنێت."
+  },
+  "audioGallery_data": {
+    "description": "داتا ڕاستەوخۆ بەبێ پەیوەندی سێرڤەر"
+  },
+  "audioGallery_url": {
+    "description": "URL داواکاری سێرڤەر"
+  },
+  "audioGallery_headers": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "audioGallery_thumbnail": {
+    "description": "وێنەی بچووکی پێشوەختە"
+  },
+  "fileBrowser_data": {
+    "description": "داتا ڕاستەوخۆ بەبێ پەیوەندی سێرڤەر (بەدەر لە هێنانی URL)."
+  },
+  "fileBrowser_url": {
+    "description": "URL داواکاری سێرڤەر"
+  },
+  "fileBrowser_headers": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "URL ی وێنەی بچووکی پێشوەختە یان فەنکشنێک کە URL ی وێنە بچووک بۆ هەر شتێک دەگەڕێنێتەوە."
+  },
+  "fileBrowser_props": {
+    "description": "ناوی تاگی زیادە"
+  },
+  "fileGallery_data": {
+    "description": "داتا ڕاستەوخۆ بەبێ پەیوەندی سێرڤەر"
+  },
+  "fileGallery_url": {
+    "description": "URL داواکاری سێرڤەر"
+  },
+  "fileGallery_headers": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "fileGallery_thumbnail": {
+    "description": "وێنەی بچووکی پێشوەختە"
+  },
+  "imageGallery_data": {
+    "description": "داتا ڕاستەوخۆ بەبێ پەیوەندی سێرڤەر"
+  },
+  "imageGallery_url": {
+    "description": "URL داواکاری سێرڤەر"
+  },
+  "imageGallery_headers": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "videoGallery_data": {
+    "description": "داتا ڕاستەوخۆ بەبێ پەیوەندی سێرڤەر"
+  },
+  "videoGallery_url": {
+    "description": "URL داواکاری سێرڤەر"
+  },
+  "videoGallery_headers": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "videoGallery_thumbnail": {
+    "description": "وێنەی بچووکی پێشوەختە"
+  },
+  "codeBlock_langs": {
+    "description": "لیستی زمانە بەرنامەسازییە هەڵبژێردراوەکان بۆ بلۆکی کۆد.\n- بە شێوەی پێشوەختە بۆ ٢١ زمانی باو\n- [جاڤاسکڕێپت، تایپسکڕێپت، html، css، json، پایتۆن، جاڤا، c، cpp، csharp، بڕۆ، ژەنگ، یاقوت، php، swift، kotlin، sql، bash، markdown، xml، yaml].\n- ڕێکبخە بۆ ڕیزبەندی بەتاڵ `[]` بۆ لەکارخستنی UI هەڵبژاردنی زمان بە تەواوی."
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL داواکاری سێرڤەر بۆ دروستکردنی PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "ناوی فایلە PDF ی دروستکراو"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL داواکاری سێرڤەر بۆ بارکردنی پەڕگە"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "سەردێڕی داواکاری سێرڤەر"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "کۆی سنووری قەبارەی بارکردن بە بایت"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی تاکە پەڕگە بە بایت"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "ڕێگە بە بارکردنی چەندین فایل بدە"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "فۆرماتەکانی فایلەکانی وەرگیراو."
+  },
+  "fileUpload_as": {
+    "description": "فۆڕمی پێشوەختەی پێکهاتەی پەڕگەکە وەک `box` یان `link` ​​دیاری بکە"
+  },
+  "fileUpload_controls": {
+    "description": "کۆنتڕۆڵی زیادە بۆ زیاد دەکرێت بۆ وێنەکە"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر.\n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`].\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە."
+  },
+  "align_items": {
+    "description": "شتەکان ڕێکبخە"
+  },
+  "backgroundColor_items": {
+    "description": "لیستی ڕەنگەکان."
+  },
+  "backgroundColor_splitNum": {
+    "description": "ژمارەی ڕەنگەکان بۆ هەر دێڕێک"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "هاتنە ژوورەوەی HEX لەکاربخە"
+  },
+  "blockStyle_items": {
+    "description": "لیستی فۆرمات.\n- `command` — `\"line\"`: بلۆکی تاکە هێڵ، `\"br-line\"`: بلۆکی جیاکراوەی br، `\"block\"`: بلۆکی کۆنتێنەر."
+  },
+  "font_items": {
+    "description": "لیستی فۆنتەکان"
+  },
+  "fontColor_items": {
+    "description": "لیستی ڕەنگەکان."
+  },
+  "fontColor_splitNum": {
+    "description": "ژمارەی ڕەنگەکان بۆ هەر دێڕێک"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "هاتنە ژوورەوەی HEX لەکاربخە"
+  },
+  "hR_items": {
+    "description": "لیستی HR"
+  },
+  "layout_items": {
+    "description": "لیستی نەخشە. هەر بابەتێک قاڵبێکی نەخشەی ناودار بە HTMLی خاو پێناسە دەکات."
+  },
+  "lineHeight_items": {
+    "description": "لیستی بەرزی هێڵەکان"
+  },
+  "paragraphStyle_items": {
+    "description": "لیستی بابەتەکانی پەرەگراف"
+  },
+  "table_scrollType": {
+    "description": "جۆری سکڕۆڵ (`x`، `y`، `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "شوێنی کاپشن (`top`، `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "شوێنی کۆنترۆڵکەری خانە (`cell`، `table`)"
+  },
+  "table_colorList": {
+    "description": "لیستی ڕەنگەکانی HEX بۆ هەڵبژێرەری ڕەنگی پاشبنەمای خانە."
+  },
+  "template_items": {
+    "description": "لیستی قاڵبەکان"
+  },
+  "textStyle_items": {
+    "description": "لیستی بابەتەکانی شێوازی دەق."
+  },
+  "mention_triggerText": {
+    "description": "ئەو کارەکتەرەی کە لیستی ئاماژەکردنەکە دەستپێدەکات."
+  },
+  "mention_limitSize": {
+    "description": "ژمارەی ئەو شتانەی کە لە لیستی ئاماژەکردنەکاندا پیشان دەدرێن"
+  },
+  "mention_searchStartLength": {
+    "description": "ژمارەی کارەکتەرەکان بۆ دەستپێکردنی گەڕان بەدوای لیستی ئاماژەکردنەکەدا"
+  },
+  "mention_delayTime": {
+    "description": "کاتی چاوەڕوانی پێش پیشاندانی لیستی ئاماژەکردن"
+  },
+  "mention_data": {
+    "description": "داتاکانی باسی ئیستاتیک (لەبری API بەکاردێت)."
+  },
+  "mention_apiUrl": {
+    "description": "URL بۆ بانگکردنی لیستی ئاماژەکردنەکە"
+  },
+  "mention_apiHeaders": {
+    "description": "ئەو سەردێڕانەی کە لەگەڵ بانگەوازی API بنێردرێت"
+  },
+  "mention_useCachingData": {
+    "description": "ئایا داتاکانی لیستی باسکردنەکان لە کاشدا دابنێن یان نا"
+  },
+  "mention_useCachingFieldData": {
+    "description": "ئایا داتاکانی لیستی باسکردن لە مەیدانەکەدا کاش بکرێت یان نا"
+  },
+  "fontSize_sizeUnit": {
+    "description": "یەکەکە بۆ قەبارەی فۆنتەکە.\n- بەها وەرگیراوەکان بریتین لە: `'px'`، `'pt'`، `'em'`، `'rem'`، `'vw'`، `'vh'`، `'%'` یان `'text'`.\n- ئەگەر `'text'` بەکارهات، لیستی قەبارەی فۆنت لەسەر بنەمای دەق جێبەجێ دەکرێت."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "دیاری دەکات کە ئایا ناوی قەبارەی پێشوەختە لە مینیوی دابەزینەکەدا پیشان دەدرێت یان نا."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "کاتێک `true`، دوگمەی زیادکردن و کەمکردنەوەی پیشان دەدات بۆ ڕێکخستنی قەبارەی فۆنت.\n- بە شێوازی پێشوەختە بۆ `false`. هەمیشە `false` کاتێک `sizeUnit` `'text'` ( پشتگوێ خراوە)."
+  },
+  "fontSize_disableInput": {
+    "description": "کاتێک `true`، سندوقی چوونەژوورەوەی قەبارەی فۆنت ڕاستەوخۆ لەکاردەخات.\n- بە پێشوەختە دەچێتە سەر `true` ​​کاتێک `sizeUnit` `'text'` بێت، ئەگەرنا `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "نەخشەسازی یەکەی پێشوەختە بۆ قەبارەی فۆنتەکان جێبەجێ بکە یان درێژ بکەرەوە."
+  },
+  "audio_defaultWidth": {
+    "description": "پانایی پێشوەختەی تاگی `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "بەرزی پێشوەختەی تاگی `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی فایل دروست بکرێت یان نا."
+  },
+  "audio_createUrlInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی URL دروست بکرێت یان نا.\n- بە شێوازی پێشوەختە بۆ `true`. هەمیشە `true` ​​کاتێک `createFileInput` `false` بێت."
+  },
+  "audio_uploadUrl": {
+    "description": "ئەو URLەی کە فایلەکان بۆی باردەکرێن."
+  },
+  "audio_uploadHeaders": {
+    "description": "سەردێڕەکان بۆ ئەوەی لە داواکاری بارکردنی پەڕگەدا جێگیر بکرێن."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "کۆی سنووری قەبارەی بارکردن بە بایت."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی تاکە پەڕگە بە بایت."
+  },
+  "audio_allowMultiple": {
+    "description": "ئایا ڕێگە بە بارکردنی چەندین فایل بدرێت یان نا."
+  },
+  "audio_acceptedFormats": {
+    "description": "فۆرماتەکانی پەڕگە وەرگیراوەکان (بەپێی پێشوەختە `\"audio/*\"` ە)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "تایبەتمەندییە زیادەکان بۆ دانانی لەسەر تاگی `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر.\n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`].\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە."
+  },
+  "drawing_outputFormat": {
+    "description": "فۆرماتێکی دەرچوونی وێنەکێشانەکە. هەڵبژاردنەکان: `\"dataurl\"`، `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "ئایا هەڵبژاردنی جۆری فۆرمات چالاک بکرێت یان نا (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "جۆری فۆرماتەکەی پێشوەختە، یان `\"block\"` یان `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "ئایا جۆری فۆرمات هەڵبژێردراو دوای وێنەکێشان بپارێزرێت یان نا."
+  },
+  "drawing_lineWidth": {
+    "description": "پانی هێڵی کێشانەکە."
+  },
+  "drawing_lineReconnect": {
+    "description": "ئایا لە کاتی وێنەکێشاندا هێڵەکان بەیەکەوە ببەسترێتەوە یان نا."
+  },
+  "drawing_lineCap": {
+    "description": "شێوازی سەرپۆشی هێڵەکە (`\"butt\"`، `\"round\"`، یان `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "ڕەنگی هێڵی کێشانەکە."
+  },
+  "drawing_canResize": {
+    "description": "ئایا دەتوانرێت قەبارەی فۆڕمی مۆداڵی بگۆڕدرێت یان نا."
+  },
+  "drawing_maintainRatio": {
+    "description": "ئایا لە کاتی گۆڕینی قەبارەدا ڕێژەی ڕووبەرەکە بپارێزرێت یان نا."
+  },
+  "drawing_formSize": {
+    "description": "ڕێکخستنی قەبارە بۆ فۆڕمی مۆداڵی وێنەکێشان."
+  },
+  "embed_canResize": {
+    "description": "ئایا دەتوانرێت قەبارەی توخمە جێگیرکراوەکان بگۆڕدرێت یان نا."
+  },
+  "embed_showHeightInput": {
+    "description": "ئایا مەیدانی هاتنە ژوورەوەی بەرزی پیشان بدرێت یان نا."
+  },
+  "embed_defaultWidth": {
+    "description": "پانایی پێشوەختەی توخمە جێگیرکردنەکە (بەهای ژمارەیی یان لەگەڵ یەکە)."
+  },
+  "embed_defaultHeight": {
+    "description": "بەرزی پێشوەختەی توخمە جێگیرکراوەکان (بەهای ژمارەیی یان لەگەڵ یەکە)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "ئایا تەنها ڕێگە بە قەبارەدانان بدرێت لەسەر بنەمای لەسەدا."
+  },
+  "embed_uploadUrl": {
+    "description": "URL بۆ بارکردنی فایلەکان."
+  },
+  "embed_uploadHeaders": {
+    "description": "سەردێڕەکان بۆ ئەوەی لە داواکاری بارکردنی فایلەکاندا جێگیر بکرێن."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی کۆی پەڕگە بە بایت."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی تاکە پەڕگە بە بایت."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "تایبەتمەندییە زیادەکان بۆ دانانی لەسەر تاگی `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "پارامێتری پرسیاری یوتیوب هاوپێچ کراوە بۆ URL ی جێگیرکردن."
+  },
+  "embed_query_vimeo": {
+    "description": "پارامێتری پرسیاری Vimeo هاوپێچ کراوە بۆ URL ی جێگیرکردن."
+  },
+  "embed_urlPatterns": {
+    "description": "نەخشی URLی زیادە بۆ ناسینەوە وەک ناوەڕۆکی جێگیرکراو."
+  },
+  "embed_embedQuery": {
+    "description": "پێناسەکانی خزمەتگوزاری جێگیرکردنی تایبەت."
+  },
+  "embed_controls": {
+    "description": "کۆنتڕۆڵەکانی وێنە."
+  },
+  "embed_insertBehavior": {
+    "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر.\n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`].\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە."
+  },
+  "image_canResize": {
+    "description": "ئایا دەتوانرێت قەبارەی توخمە وێنەکە بگۆڕدرێت یان نا."
+  },
+  "image_showHeightInput": {
+    "description": "ئایا مەیدانی هاتنە ژوورەوەی بەرزی پیشان بدرێت یان نا."
+  },
+  "image_defaultWidth": {
+    "description": "پانایی پێشوەختەی وێنەکە. ئەگەر ژمارەیەک دابینکرا، `\"px\"` هاوپێچ دەکرێت."
+  },
+  "image_defaultHeight": {
+    "description": "بەرزی پێشوەختەی وێنەکە. ئەگەر ژمارەیەک دابینکرا، `\"px\"` هاوپێچ دەکرێت."
+  },
+  "image_percentageOnlySize": {
+    "description": "ئایا تەنها ڕێگە بە قەبارەدانان بدرێت لەسەر بنەمای لەسەدا."
+  },
+  "image_createFileInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی فایل بۆ بارکردنی وێنە دروست بکرێت یان نا."
+  },
+  "image_createUrlInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی URL بۆ دانانی وێنە دروست بکرێت.\n- بە شێوازی پێشوەختە بۆ `true`. هەمیشە `true` ​​کاتێک `createFileInput` `false` بێت."
+  },
+  "image_uploadUrl": {
+    "description": "خاڵی کۆتایی URL بۆ بارکردنی پەڕگەی وێنە."
+  },
+  "image_uploadHeaders": {
+    "description": "سەردێڕی زیادە بۆ ئەوەی لە داواکاری بارکردنی پەڕگەدا جێگیر بکرێت."
+  },
+  "image_uploadSizeLimit": {
+    "description": "کۆی سنووری قەبارەی بارکردن بە بایت."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی تاکە پەڕگە بە بایت."
+  },
+  "image_allowMultiple": {
+    "description": "ئایا ڕێگە بە بارکردنی چەندین وێنە دەدرێت یان نا."
+  },
+  "image_acceptedFormats": {
+    "description": "فۆرماتەکانی فایلە وەرگیراوەکان بۆ بارکردنی وێنە."
+  },
+  "image_useFormatType": {
+    "description": "ئایا هەڵبژاردنی جۆری فۆرمات چالاک بکرێت (`block` یان `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "جۆری فۆرمات وێنەی پێشوەختە (`\"block\"` یان `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "ئایا جۆری فۆرماتە هەڵبژێردراوەکە دوای دانانی وێنەکە بهێڵرێتەوە یان نا."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "ئایا بارکردنی فایلەکان بۆ وێنە بەستراوەکان چالاک بکرێت یان نا."
+  },
+  "image_controls": {
+    "description": "کۆنتڕۆڵەکانی وێنە."
+  },
+  "image_insertBehavior": {
+    "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر.\n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`].\n- بۆ پێکهاتەکانی ناو هێڵ: ئاماژەدەر لە نزیک پێکهاتەکە دادەنێت، یان هەڵدەبژێرێت ئەگەر مەودای نزیک نەبێت.\n- بۆ پێکهاتەکانی بلۆک: ڕەفتارەکان جێبەجێ دەکات لەسەر بنەمای `selectMode`:\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە."
+  },
+  "link_uploadUrl": {
+    "description": "خاڵی کۆتایی URL بۆ بارکردنی پەڕگە."
+  },
+  "link_uploadHeaders": {
+    "description": "سەردێڕی زیادە بۆ داواکاری بارکردنی پەڕگە."
+  },
+  "link_uploadSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی کۆی پەڕگە بە بایت."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی تاکە پەڕگە بە بایت."
+  },
+  "link_acceptedFormats": {
+    "description": "فۆرماتەکانی فایل وەرگیراو بۆ بارکردنی بەستەر."
+  },
+  "link_title": {
+    "description": "پیشاندانی ناونیشانی مۆداڵی."
+  },
+  "link_textToDisplay": {
+    "description": "دروستکردنی Text بۆ پیشاندانی زانیاری."
+  },
+  "link_openNewWindow": {
+    "description": "بەهای هەڵبژاردنی پێشوەختەی بۆکسی هەڵبژاردنی \"لە پەنجەرەیەکی نوێدا بکەرەوە\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "ئەگەر `true`، پێشگرکردنی ئۆتۆماتیکی URLی هۆستەکە بۆ بەهای بەستەرەکە لەکاردەخات."
+  },
+  "link_relList": {
+    "description": "بەهاکانی تایبەتمەندی `rel` بەردەست کە وەک سندوقی هەڵبژاردن لە مۆداڵی بەستەردا نیشان دراون."
+  },
+  "link_defaultRel": {
+    "description": "بەهاکانی `rel` پێشوەختە بە شێوەیەکی ئۆتۆماتیکی بەپێی مەرج جێبەجێ دەکرێن."
+  },
+  "link_enableFileUpload": {
+    "description": "ئەگەر `true`، بارکردنی پەڕگە چالاک دەکات."
+  },
+  "math_canResize": {
+    "description": "ئایا دەتوانرێت قەبارەی مۆداڵی بیرکاری بگۆڕدرێت یان نا."
+  },
+  "math_autoHeight": {
+    "description": "ئایا بە شێوەیەکی ئۆتۆماتیکی بەرزی مۆداڵەکە ڕێکبخرێت یان نا."
+  },
+  "math_fontSizeList": {
+    "description": "لیستی هەڵبژاردەکانی قەبارەی فۆنت بۆ هەڵبژێرەری قەبارەی دەربڕینی بیرکاری."
+  },
+  "math_onPaste": {
+    "description": "فەنکشنێکی بانگکردنەوە بۆ مامەڵەکردن لەگەڵ ڕووداوەکانی لێدان لە ناوچەی هاتنە ژوورەوەی بیرکاری."
+  },
+  "math_formSize": {
+    "description": "شتێک کە ڕەهەندەکانی بۆ مۆداڵی بیرکاری دیاری دەکات."
+  },
+  "video_canResize": {
+    "description": "ئایا دەتوانرێت قەبارەی توخمە ڤیدیۆکە بگۆڕدرێت یان نا."
+  },
+  "video_showHeightInput": {
+    "description": "ئایا مەیدانی هاتنە ژوورەوەی بەرزی پیشان بدرێت یان نا."
+  },
+  "video_defaultWidth": {
+    "description": "پانایی پێشوەختەی توخمە ڤیدیۆکە. ئەگەر ژمارەیەک دابینکرا، `\"px\"` هاوپێچ دەکرێت."
+  },
+  "video_defaultHeight": {
+    "description": "بەرزی پێشوەختەی توخمە ڤیدیۆکە. ئەگەر ژمارەیەک دابینکرا، `\"px\"` هاوپێچ دەکرێت."
+  },
+  "video_percentageOnlySize": {
+    "description": "ئایا تەنها ڕێگە بە قەبارەدانان بدرێت لەسەر بنەمای لەسەدا."
+  },
+  "video_createFileInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی فایل بۆ بارکردنی ڤیدیۆ دروست بکرێت یان نا."
+  },
+  "video_createUrlInput": {
+    "description": "ئایا توخمێکی چوونەژوورەوەی URL بۆ جێگیرکردنی ڤیدیۆ دروست بکرێت یان نا.\n- بە شێوازی پێشوەختە بۆ `true`. هەمیشە `true` ​​کاتێک `createFileInput` `false` بێت."
+  },
+  "video_uploadUrl": {
+    "description": "خاڵی کۆتایی URL بۆ بارکردنی فایلە ڤیدیۆییەکان."
+  },
+  "video_uploadHeaders": {
+    "description": "سەردێڕی زیادە بۆ ئەوەی لە داواکاری بارکردنی ڤیدیۆدا جێگیر بکرێت."
+  },
+  "video_uploadSizeLimit": {
+    "description": "کۆی سنووری قەبارەی بارکردن بۆ ڤیدیۆکان بە بایت."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "سنووری قەبارەی بارکردنی تاکە فایل بۆ ڤیدیۆکان بە بایت."
+  },
+  "video_allowMultiple": {
+    "description": "ئایا ڕێگە بە بارکردنی چەندین ڤیدیۆ دەدرێت یان نا."
+  },
+  "video_acceptedFormats": {
+    "description": "فۆرماتەکانی پەڕگەی وەرگیراو بۆ بارکردنی ڤیدیۆ (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "ڕێژەی ڕووبەری پێشوەختە بۆ ڤیدیۆکە (بەرزی/پانی، بۆ نموونە 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "ئایا بژاردەی ڕێژە لە مۆداڵەکەدا پیشان بدرێت یان نا."
+  },
+  "video_ratioOptions": {
+    "description": "هەڵبژاردەکانی ڕێژەی تایبەت بۆ گۆڕینی قەبارەی ڤیدیۆ (بەها = بەرزی/پانی)."
+  },
+  "video_videoTagAttributes": {
+    "description": "تایبەتمەندییە زیادەکان بۆ دانانی لەسەر تاگی `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "تایبەتمەندییە زیادەکان بۆ دانانی لەسەر تاگی `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "پارامێتەرەکانی پرسیاری زیادە بۆ جێگیرکردنی یوتیوب."
+  },
+  "video_query_vimeo": {
+    "description": "پارامێتەرەکانی پرسیاری زیادە بۆ جێگیرکردنی Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "پێناسەکانی خزمەتگوزاری جێگیرکردنی تایبەتمەند (بڕوانە `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "نەخشی URLی زیادە بۆ جێگیرکردنی ڤیدیۆ."
+  },
+  "video_extensions": {
+    "description": "درێژکراوەی پەڕگەی زیادە کە بۆ بارکردنی ڤیدیۆ دەناسرێتەوە."
+  },
+  "video_controls": {
+    "description": "کۆنتڕۆڵەکانی وێنە."
+  },
+  "video_insertBehavior": {
+    "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر.\n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`].\n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە.\n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە.\n- `line`: ئەگەر دەکرێت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە.\n- `none`: هیچ مەکە."
+  }
+}

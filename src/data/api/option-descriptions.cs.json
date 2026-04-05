@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Počáteční hodnota pro editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Zástupný text.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Atributy pro upravitelný rámec[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Šířka editoru.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Minimální šířka editoru.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Maximální šířka editoru.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Výška pro editora.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Minimální výška editoru.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Maximální výška editoru.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Řetězec stylu horního rámečku editoru.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Obsah bude umístěn do iframe a izolován od zbytku stránky.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Umožňuje použití HTML, tagů HEAD, BODY a deklarace DOCTYPE na `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Atributy `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Povolí stavový řádek.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Zobrazuje aktuální strukturu uzlu ve stavovém řádku.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Umožňuje funkci změny velikosti spodního stavového řádku.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Zobrazuje počet znaků v editoru.\n- Pokud má volba `maxCharCount` hodnotu, změní se na `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Maximální počet znaků, které lze vložit do editoru.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Text, který se má zobrazit v oblasti `charCounter` spodního panelu.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definuje metodu výpočtu volby `charCounter`.\n- `char`: Délka znaků.\n- `byte`: Velikost binárních dat znaků.\n- `byte-html`: Velikost binárních dat celého řetězce HTML.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Zobrazuje počet slov v editoru.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Text, který se má zobrazit v oblasti `wordCounter` spodního panelu.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Styly použité na horní kontejner (např. šířka, z-index atd.)."
+  },
+  "frame": {
+    "description": "Styly použité na kontejner iframe (např. výška, minimální výška)."
+  },
+  "editor": {
+    "description": "Styly použité na oblast upravitelného obsahu."
+  },
+  "codeMirrorEditor": {
+    "description": "Instance editoru CodeMirror (úroveň rámce). Nastaveno `_checkCodeMirror` po inicializaci."
+  },
+  "plugins": {
+    "description": "Konfigurace pluginu. Předejte pole tříd pluginů nebo objekt s klíčem podle názvu pluginu.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Seznam tlačítek panelu nástrojů seskupených podle podpolí.\n- Výchozí nastavení následuje {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Povolí režim migrace pro SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Režim panelu nástrojů: `classic`, `inline`, `balloon`, `balloon-always`. Přidáním `:bottom` umístěte panel nástrojů dole (např. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Typ editoru. Pro rozvržení ve stylu dokumentu použijte `\"document\"` s volitelnými podtypy po `:`.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Téma editoru.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Konfigurace jazyka. Výchozí: EN"
+  },
+  "icons": {
+    "description": "Přepíše výchozí ikony."
+  },
+  "textDirection": {
+    "description": "Směr textu: `ltr` nebo `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Umožňuje striktní filtrování tagů, atributů a stylů.\n- Použijte `true` k povolení všech filtrů (výchozí) nebo objekt k ovládání jednotlivých filtrů.\n- Nastavení `false` ​​není podporováno; k zakázání konkrétních filtrů použijte formulář objektu.\n- :popis filtru\n- `tagFilter`: Filtruje zakázané tagy HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtruje prvky formátu (`formatLine`/`formatBlock`)\n- `classFilter`: Filtruje zakázané názvy tříd CSS (`allowedClassName`)\n- `textStyleTagFilter`: Filtruje tagy stylů textu (b, i, u, span atd.)\n- `attrFilter`: Filtruje zakázané atributy HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtruje zakázané inline styly (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Štítky jsou při výběru veškerého obsahu považovány za celé jednotky.\n- Výchozí nastavení je {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Určuje HTML elementy, které mají být povoleny i mimo výchozí seznam povolených elementů. Oddělovač: `\"|\"`.\n- Přidáno do výchozího seznamu určeného parametrem {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Určuje HTML prvky, které by se neměly používat. Oddělovač: `\"|\"`.\n- Zde uvedené tagy budou nakonec odstraněny, i když jsou zahrnuty v jiných seznamech povolených.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Seznam tagů, které je povoleno ponechat, i když jsou jejich hodnoty prázdné.\n- Výchozí hodnota je {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Zřetězeno s `ALLOWED_EMPTY_NODE_LIST` a tvoří finální seznam `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Povolené názvy tříd.\n- Přidána výchozí hodnota {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Určuje další atributy, které je možné povolit pro každou značku. `\"*\"` platí pro všechny značky.\n- Pravidla uvedená zde budou sloučena do {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Určuje atributy, které mají být tagy zakázány. `\"*\"` platí pro všechny tagy.\n- Atributy zde uvedené budou nakonec odebrány, i když jsou povoleny jinými nastaveními.\n- Seznam povinných prvků {@link DEFAULTS.REQUIRED_FORMAT_LINE} je vždy zahrnut.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Další tagy stylu textu.\n- Výchozí hodnota je {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Mapuje textové styly na konkrétní HTML tagy.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Určuje další styly do seznamu povolených stylů. Oddělovač: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Určuje povolené styly pro HTML tagy. Klíč je název(y) tagu(ů), hodnota je povolený styl oddělený svislými čarami.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Určuje povolené styly pro tag `span`.\n- Výchozí hodnota je {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Určuje povolené styly pro element `line` (p..).\n- Výchozí hodnota je {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Povolené jednotky velikosti písma.\n- Výchozí hodnota je {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Určuje, jak se s vloženými prvky (např. `<span>`, `<strong>`) zachází při mazání textu.\n- `repeat`: Styly se zachovají, dokud se opakovaně nestiskne klávesa Backspace.\n- Dlouhé stisknutí klávesy nakonec styly odstraní.\n- `none`: Styly se nezachovají. Vložené prvky se okamžitě odstraní s textem.\n- `always`: Styly přetrvávají neomezeně dlouho, dokud nejsou explicitně odstraněny.\n- I když je veškerý text uvnitř vloženého prvku smazán, samotný prvek zůstává zachován.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Výchozí prvek `line` při vkládání nových řádků.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Určuje výchozí formát zalomení řádku.\n- [Doporučeno] `line`: Zalomení řádku je rozděleno na obecné tagy.\n- [Nedoporučeno] `br`: Zalomení řádku je na stejném řádku považováno za <br>. (jako shift+enter)\n- Zalomení řádku je v rámci `line` považováno za <br>.\n- Nový `line` můžete vytvořit zadáním zalomení řádku dvakrát za sebou.\n- Formáty, které obsahují `line`, například „Citace“, stále fungují na bázi `line`.\n- Procesy suneditor fungují v jednotkách `line`.\n- Při nastavení na `br` se může výkon snížit při úpravě velkého množství dat.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Vlastnosti čáry, které by se měly resetovat při změně čáry. Oddělovač: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Dále povoleny prvky `line` nad rámec výchozí hodnoty. Oddělovač: `\"|\"`.\n- Zřetězeno s {@link PrivateBaseOptions.__defaultFormatLine} za účelem vytvoření finálního seznamu `line`.\n- Element `line` obsahuje také element `brLine`.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Dále povoleny prvky `brLine` nad rámec výchozí hodnoty.\n- Zřetězeno s {@link PrivateBaseOptions.__defaultFormatBrLine} za účelem vytvoření finálního seznamu `brLine`.\n- Prvky `brLine` jsou zahrnuty v elementu `line`. - Zalomení řádku prvků `brLine` je tag `BR`.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Dále povoleny prvky `closureBrLine` nad rámec výchozí hodnoty.\n- Zřetězeno s {@link PrivateBaseOptions.__defaultFormatClosureBrLine} pro finální seznam `closureBrLine`.\n- Prvky `closureBrLine` jsou zahrnuty v `brLine`.\n- Zalomení řádku prvků `closureBrLine` je tag `BR`.\n- ※ Tento formát nelze ukončit klávesou Enter ani klávesou Backspace.\n- ※ Používejte pouze ve zvláštních případech. ([např.] formát buněk tabulky)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Dále povoleny prvky `block` nad rámec výchozí hodnoty.\n- Zřetězeno s {@link PrivateBaseOptions.__defaultFormatBlock} za účelem vytvoření finálního seznamu `block`.\n- `block` zabalí prvky `line` a `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Dále povoleny prvky `closureBlock` nad rámec výchozí hodnoty.\n- Zřetězeno s {@link PrivateBaseOptions.__defaultFormatClosureBlock} pro finální seznam `closureBlock`.\n- Prvky `closureBlock` jsou zahrnuty v `block`.\n- Prvek `closureBlock` zalamuje prvky `line` a `component`.\n- ※ Tento formát nelze ukončit klávesou Enter ani klávesou Backspace.\n- ※ Používejte pouze ve zvláštních případech. (např. formát buněk tabulky)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Zavře modální okna kliknutím mimo něj.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synchronizuje odsazení tabulace s mezerami.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Zakáže zadávání pomocí klávesy Tab.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Šířka panelu nástrojů.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Kontejnerový prvek pro panel nástrojů."
+  },
+  "toolbar_sticky": {
+    "description": "Povolí lepivý panel nástrojů.\n- `number`: Nastaví lepivou horní pozici (px). Pro zakázání lepivosti použijte `-1`.\n- `{top, offset}`: `top` je lepivá pozice, když je viditelná záhlaví stránky.\n- `offset` je lepivá pozice, když virtuální klávesnice posune zobrazovanou oblast (např. na tabletech, dotykových zařízeních).\n- Když je virtuální klávesnice aktivní, `offset` nahradí `top`, aby panel nástrojů nezanechával mezeru\n- pro záhlaví stránky, které se posunulo mimo zobrazení. Výchozí `offset` je `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Zpočátku skryje panel nástrojů.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Konfigurace dílčího panelu nástrojů. Sekundární panel nástrojů, který se zobrazí při výběru textu.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Kontejnerový element pro stavový řádek."
+  },
+  "shortcutsHint": {
+    "description": "Zobrazuje tipy ke zkratkám v popiscích.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Zakáže klávesové zkratky.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Vlastní klávesové zkratky.\n- Klávesy začínající `_` jsou uživatelem definované vlastní zkratky. Každá hodnota je pole párů `[keyCombo, hintLabel]`.\n- Kombinace kláves používají hodnoty `c` (Ctrl/Cmd), `s` (Shift) a `KeyEvent.code` spojené pomocí `+`. - Pro volání specifické metody pluginu použijte `$~pluginName.method`.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Zachovává formát kopírovaného obsahu.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Automaticky převádí adresy URL na hypertextové odkazy. (Vyžaduje plugin `Link`)\n- Výchozí: `Boolean(plugins.link)` ​​– určuje, zda je povolen plugin `link`."
+  },
+  "historyStackDelayTime": {
+    "description": "Doba zpoždění pro aktualizace zásobníku historie (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Maximální počet záznamů historie na kořenový rámec. Nejstarší záznamy jsou při překročení zahozeny.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Název třídy pro tisk.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Posun aplikován při přechodu do režimu celé obrazovky.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Vlastní HTML šablona pro režim náhledu. Použijte `{{ contents }}` jako zástupný symbol pro obsah editoru.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Vlastní HTML šablona pro tiskový režim. Použijte `{{ contents }}` jako zástupný symbol pro obsah editoru.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Umožňuje automatický výběr vložených komponent.\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Neprovede nic.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Výchozí protokol URL pro odkazy.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Doba zobrazování informačních zpráv (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Umožňuje režim zobrazení volného kódu.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Zobrazuje uživatelské rozhraní vestavěného panelu Najít/Nahradit.\n– Vyhledávač se vždy vytváří interně; tato možnost určuje, zda je panel viditelný pro uživatele (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Vyhledává okamžitě při psaní (bez odskoků). Pokud je hodnota false, vyhledávání se spustí pouze při stisknutí klávesy Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Externí knihovny jako CodeMirror, KaTeX nebo MathJax.\n- Viz {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Průvodce externími knihovnami}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Určuje další povolené nebo zakázané tagy. `true` pro povolení, `false` ​​pro zakázání.\n- Výchozí hodnota je {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Konfigurace obslužných rutin událostí uživatele.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Seznam aktuálně používaných tlačítek panelu nástrojů"
+  },
+  "buttons_sub": {
+    "description": "Seznam aktuálně používaných tlačítek dílčího panelu nástrojů"
+  },
+  "toolbar_sub_width": {
+    "description": "Šířka dílčího panelu nástrojů."
+  },
+  "reverseCommands": {
+    "description": "Sloučené pole párů reverzních příkazů.\n- Obsahuje výchozí `indent-outdent` + uživatelský `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "Konfigurační objekt CodeMirror z `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Používá CodeMirror pro zobrazení kódu."
+  },
+  "audioGallery_data": {
+    "description": "Přímá data bez volání serveru"
+  },
+  "audioGallery_url": {
+    "description": "URL požadavku serveru"
+  },
+  "audioGallery_headers": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Výchozí miniatura"
+  },
+  "fileBrowser_data": {
+    "description": "Přímá data bez volání serveru (obejde načítání URL)."
+  },
+  "fileBrowser_url": {
+    "description": "URL požadavku serveru"
+  },
+  "fileBrowser_headers": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Výchozí URL miniatury nebo funkce, která vrací URL miniatury pro každou položku."
+  },
+  "fileBrowser_props": {
+    "description": "Další názvy tagů"
+  },
+  "fileGallery_data": {
+    "description": "Přímá data bez volání serveru"
+  },
+  "fileGallery_url": {
+    "description": "URL požadavku serveru"
+  },
+  "fileGallery_headers": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Výchozí miniatura"
+  },
+  "imageGallery_data": {
+    "description": "Přímá data bez volání serveru"
+  },
+  "imageGallery_url": {
+    "description": "URL požadavku serveru"
+  },
+  "imageGallery_headers": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "videoGallery_data": {
+    "description": "Přímá data bez volání serveru"
+  },
+  "videoGallery_url": {
+    "description": "URL požadavku serveru"
+  },
+  "videoGallery_headers": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Výchozí miniatura"
+  },
+  "codeBlock_langs": {
+    "description": "Seznam volitelných programovacích jazyků pro bloky kódu.\n- Výchozí nastavení je 21 běžných jazyků.\n- [javascript, Typescript, html, CSS, JSON, Python, Java, C, CPP, Csharp, Go, Rust, Ruby, PHP, Swift, Kotlin, Sql, Bash, Markdown, XML, Yaml].\n- Nastavením pole `[]` na prázdné zcela vypnete výběr jazyka v uživatelském rozhraní."
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL požadavku serveru pro generování PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "Název vygenerovaného PDF souboru"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL požadavku serveru pro nahrání souboru"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Záhlaví požadavků serveru"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávání v bajtech"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Limit velikosti jednoho souboru v bajtech"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Povolit nahrání více souborů"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Akceptované formáty souborů."
+  },
+  "fileUpload_as": {
+    "description": "Zadejte výchozí tvar souborové komponenty jako `box` nebo `link`."
+  },
+  "fileUpload_controls": {
+    "description": "Další ovládací prvky, které je třeba přidat k obrázku"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- `auto`: Pokud je to možné, přesunout kurzor na další řádek, jinak komponentu vybrat.\n- `select`: Vždy vybrat vloženou komponentu.\n- `line`: Pokud je to možné, přesunout kurzor na další řádek nebo vytvořit nový řádek a přesunout se tam.\n- `none`: Nedělat nic."
+  },
+  "align_items": {
+    "description": "Zarovnání položek"
+  },
+  "backgroundColor_items": {
+    "description": "Seznam barev."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Počet barev na řádek"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Zakázat hexadecimální vstup"
+  },
+  "blockStyle_items": {
+    "description": "Seznam formátů.\n- `command` — `\"line\"`: jednořádkový blok, `\"br-line\"`: blok oddělený znaky br, `\"block\"`: blok kontejneru."
+  },
+  "font_items": {
+    "description": "Seznam písem"
+  },
+  "fontColor_items": {
+    "description": "Seznam barev."
+  },
+  "fontColor_splitNum": {
+    "description": "Počet barev na řádek"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Zakázat hexadecimální vstup"
+  },
+  "hR_items": {
+    "description": "Seznam zaměstnanců"
+  },
+  "layout_items": {
+    "description": "Seznam rozvržení. Každá položka definuje pojmenovanou šablonu rozvržení s nezpracovaným HTML."
+  },
+  "lineHeight_items": {
+    "description": "Seznam výšek řádku"
+  },
+  "paragraphStyle_items": {
+    "description": "Seznam položek odstavce"
+  },
+  "table_scrollType": {
+    "description": "Typ rolování (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Pozice titulků (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Pozice regulátoru buněk (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX seznam barev pro výběr barvy pozadí buňky."
+  },
+  "template_items": {
+    "description": "Seznam šablon"
+  },
+  "textStyle_items": {
+    "description": "Seznam položek textového stylu."
+  },
+  "mention_triggerText": {
+    "description": "Postava, která spouští seznam zmínek."
+  },
+  "mention_limitSize": {
+    "description": "Počet položek, které se mají zobrazit v seznamu zmínek"
+  },
+  "mention_searchStartLength": {
+    "description": "Počet znaků pro zahájení vyhledávání v seznamu zmínek"
+  },
+  "mention_delayTime": {
+    "description": "Doba čekání před zobrazením seznamu zmínek"
+  },
+  "mention_data": {
+    "description": "Statická data o zmínkách (používaná místo API)."
+  },
+  "mention_apiUrl": {
+    "description": "URL adresa pro volání seznamu zmínek"
+  },
+  "mention_apiHeaders": {
+    "description": "Záhlaví, která se mají odeslat s voláním API"
+  },
+  "mention_useCachingData": {
+    "description": "Zda ukládat data seznamu zmínek do mezipaměti"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Zda ukládat data seznamu zmínek do mezipaměti v poli"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Jednotka pro velikost písma.\n- Přijatelné hodnoty zahrnují: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` nebo `'text'`.\n- Pokud se použije `'text'`, použije se textový seznam velikostí písma."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Určuje, zda se v rozbalovací nabídce zobrazí výchozí popisek velikosti."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Pokud je `true`, zobrazí se tlačítka pro zvýšení a snížení velikosti písma.\n- Výchozí nastavení je `false`. Vždy `false`, pokud je `sizeUnit` `'text'` (ignorováno)."
+  },
+  "fontSize_disableInput": {
+    "description": "Pokud je `true`, zakáže se pole pro přímé zadávání velikosti písma.\n- Výchozí hodnota je `true`, pokud je `sizeUnit` `'text'`, jinak `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Přepsat nebo rozšířit výchozí mapování jednotek pro velikosti písma."
+  },
+  "audio_defaultWidth": {
+    "description": "Výchozí šířka tagu `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "Výchozí výška tagu `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "Zda vytvořit vstupní element souboru."
+  },
+  "audio_createUrlInput": {
+    "description": "Zda vytvořit vstupní element URL. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL adresa, na kterou budou soubory nahrány."
+  },
+  "audio_uploadHeaders": {
+    "description": "Záhlaví, která mají být zahrnuta v požadavku na nahrání souboru."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávání v bajtech."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Limit velikosti jednoho souboru v bajtech."
+  },
+  "audio_allowMultiple": {
+    "description": "Zda povolit nahrání více souborů."
+  },
+  "audio_acceptedFormats": {
+    "description": "Akceptované formáty souborů (výchozí je `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Další atributy, které je třeba nastavit u tagu `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- `auto`: Pokud je to možné, přesunout kurzor na další řádek, jinak komponentu vybrat.\n- `select`: Vždy vybrat vloženou komponentu.\n- `line`: Pokud je to možné, přesunout kurzor na další řádek nebo vytvořit nový řádek a přesunout se tam.\n- `none`: Nedělat nic."
+  },
+  "drawing_outputFormat": {
+    "description": "Výstupní formát výkresu. Možnosti: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Zda povolit výběr typu formátu (`block` vs. `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Výchozí typ formátu, buď `\"block\"` nebo `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Zda se má po vykreslení zachovat zvolený typ formátu."
+  },
+  "drawing_lineWidth": {
+    "description": "Šířka čáry kreslení."
+  },
+  "drawing_lineReconnect": {
+    "description": "Zda se mají čáry při kreslení znovu propojit."
+  },
+  "drawing_lineCap": {
+    "description": "Styl zakončení řádku (`\"butt\"`, `\"round\"` ​​nebo `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Barva čáry kreslení."
+  },
+  "drawing_canResize": {
+    "description": "Zda lze změnit velikost modálního formuláře."
+  },
+  "drawing_maintainRatio": {
+    "description": "Zda se má při změně velikosti zachovat poměr stran."
+  },
+  "drawing_formSize": {
+    "description": "Konfigurace velikosti pro modální formulář výkresu."
+  },
+  "embed_canResize": {
+    "description": "Zda lze změnit velikost vloženého prvku."
+  },
+  "embed_showHeightInput": {
+    "description": "Zda se má zobrazit pole pro zadání výšky."
+  },
+  "embed_defaultWidth": {
+    "description": "Výchozí šířka vloženého elementu (číselná hodnota nebo s jednotkou)."
+  },
+  "embed_defaultHeight": {
+    "description": "Výchozí výška vloženého elementu (číselná hodnota nebo s jednotkou)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Zda povolit pouze změnu velikosti v procentech."
+  },
+  "embed_uploadUrl": {
+    "description": "URL adresa pro nahrávání souborů."
+  },
+  "embed_uploadHeaders": {
+    "description": "Záhlaví, která mají být zahrnuta v požadavcích na nahrání souborů."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávaného souboru v bajtech."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Limit velikosti jednoho nahrávaného souboru v bajtech."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Další atributy, které je třeba nastavit u tagu `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "Parametr dotazu YouTube připojený k adrese URL pro vložení."
+  },
+  "embed_query_vimeo": {
+    "description": "Parametr dotazu Vimeo připojený k URL adresě pro vložení."
+  },
+  "embed_urlPatterns": {
+    "description": "Další vzory URL, které mají být rozpoznány jako vložitelný obsah."
+  },
+  "embed_embedQuery": {
+    "description": "Definice vlastních vkládacích služeb."
+  },
+  "embed_controls": {
+    "description": "Ovládací prvky obrázku."
+  },
+  "embed_insertBehavior": {
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- `auto`: Pokud je to možné, přesunout kurzor na další řádek, jinak komponentu vybrat.\n- `select`: Vždy vybrat vloženou komponentu.\n- `line`: Pokud je to možné, přesunout kurzor na další řádek nebo vytvořit nový řádek a přesunout se tam.\n- `none`: Nedělat nic."
+  },
+  "image_canResize": {
+    "description": "Zda lze změnit velikost obrazového prvku."
+  },
+  "image_showHeightInput": {
+    "description": "Zda se má zobrazit pole pro zadání výšky."
+  },
+  "image_defaultWidth": {
+    "description": "Výchozí šířka obrázku. Pokud je zadáno číslo, bude připojena hodnota `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Výchozí výška obrázku. Pokud je zadáno číslo, bude připojena hodnota `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Zda povolit pouze změnu velikosti v procentech."
+  },
+  "image_createFileInput": {
+    "description": "Zda vytvořit vstupní element souboru pro nahrávání obrázků."
+  },
+  "image_createUrlInput": {
+    "description": "Zda vytvořit vstupní element URL pro vložení obrázku. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
+  },
+  "image_uploadUrl": {
+    "description": "Koncový bod URL pro nahrávání obrazových souborů."
+  },
+  "image_uploadHeaders": {
+    "description": "Další záhlaví, která mají být zahrnuta v požadavku na nahrání souboru."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávání v bajtech."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Limit velikosti jednoho nahrávaného souboru v bajtech."
+  },
+  "image_allowMultiple": {
+    "description": "Zda je povoleno nahrání více obrázků."
+  },
+  "image_acceptedFormats": {
+    "description": "Akceptované formáty souborů pro nahrávání obrázků."
+  },
+  "image_useFormatType": {
+    "description": "Zda povolit výběr typu formátu (`block` nebo `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Výchozí typ formátu obrázku (`\"block\"` nebo `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Zda se má po vložení obrázku zachovat zvolený typ formátu."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Zda povolit nahrávání souborů pro propojené obrázky."
+  },
+  "image_controls": {
+    "description": "Ovládací prvky obrázku."
+  },
+  "image_insertBehavior": {
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Neprovede nic."
+  },
+  "link_uploadUrl": {
+    "description": "Koncový bod URL pro nahrávání souborů."
+  },
+  "link_uploadHeaders": {
+    "description": "Další hlavičky pro požadavky na nahrání souborů."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávaného souboru v bajtech."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Limit velikosti jednoho nahrávaného souboru v bajtech."
+  },
+  "link_acceptedFormats": {
+    "description": "Akceptované formáty souborů pro nahrávání odkazů."
+  },
+  "link_title": {
+    "description": "Zobrazení modálního titulku."
+  },
+  "link_textToDisplay": {
+    "description": "Vytvořit text pro zobrazení vstupu."
+  },
+  "link_openNewWindow": {
+    "description": "Výchozí zaškrtávací políčko „Otevřít v novém okně“ je zaškrtnuto."
+  },
+  "link_noAutoPrefix": {
+    "description": "Pokud je `true`, zakáže automatické přidávání předpony URL hostitele k hodnotě odkazu."
+  },
+  "link_relList": {
+    "description": "Dostupné hodnoty atributu `rel` zobrazené jako zaškrtávací políčka v modálním okně odkazu."
+  },
+  "link_defaultRel": {
+    "description": "Výchozí hodnoty `rel` se automaticky aplikují podle podmínky."
+  },
+  "link_enableFileUpload": {
+    "description": "Pokud `true`, povolí nahrávání souboru."
+  },
+  "math_canResize": {
+    "description": "Zda lze změnit velikost matematického modálního okna."
+  },
+  "math_autoHeight": {
+    "description": "Zda se má automaticky upravovat výška modálního okna."
+  },
+  "math_fontSizeList": {
+    "description": "Seznam možností velikosti písma pro selektor velikosti matematického výrazu."
+  },
+  "math_onPaste": {
+    "description": "Funkce zpětného volání pro zpracování událostí vkládání v oblasti pro matematický vstup."
+  },
+  "math_formSize": {
+    "description": "Objekt určující rozměry pro matematický modální okno."
+  },
+  "video_canResize": {
+    "description": "Zda lze změnit velikost prvku videa."
+  },
+  "video_showHeightInput": {
+    "description": "Zda se má zobrazit pole pro zadání výšky."
+  },
+  "video_defaultWidth": {
+    "description": "Výchozí šířka prvku videa. Pokud je zadáno číslo, bude připojena hodnota `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Výchozí výška prvku videa. Pokud je zadáno číslo, bude připojena hodnota `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Zda povolit pouze změnu velikosti v procentech."
+  },
+  "video_createFileInput": {
+    "description": "Zda vytvořit vstupní prvek souboru pro nahrávání videa."
+  },
+  "video_createUrlInput": {
+    "description": "Zda vytvořit vstupní element URL pro vkládání videa. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
+  },
+  "video_uploadUrl": {
+    "description": "Koncový bod URL pro nahrávání videosouborů."
+  },
+  "video_uploadHeaders": {
+    "description": "Další záhlaví, která mají být zahrnuta v požadavku na nahrání videa."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Celkový limit velikosti nahrávaných videí v bajtech."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Limit velikosti nahrávání jednoho souboru pro videa v bajtech."
+  },
+  "video_allowMultiple": {
+    "description": "Zda je povoleno nahrání více videí."
+  },
+  "video_acceptedFormats": {
+    "description": "Akceptované formáty souborů pro nahrávání videa (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Výchozí poměr stran videa (výška/šířka, např. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Zda se má v modálním okně zobrazit možnost poměru."
+  },
+  "video_ratioOptions": {
+    "description": "Možnosti vlastního poměru stran pro změnu velikosti videa (hodnota = výška/šířka)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Další atributy, které je třeba nastavit u tagu `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Další atributy, které je třeba nastavit u tagu `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "Další parametry dotazu pro vkládání na YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Další parametry dotazu pro vkládání do Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "Definice vlastních vkládacích služeb (viz `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Další vzory URL pro vkládání videa."
+  },
+  "video_extensions": {
+    "description": "Další přípony souborů, které mají být rozpoznány pro nahrávání videa."
+  },
+  "video_controls": {
+    "description": "Ovládací prvky obrázku."
+  },
+  "video_insertBehavior": {
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- `auto`: Pokud je to možné, přesunout kurzor na další řádek, jinak komponentu vybrat.\n- `select`: Vždy vybrat vloženou komponentu.\n- `line`: Pokud je to možné, přesunout kurzor na další řádek nebo vytvořit nový řádek a přesunout se tam.\n- `none`: Nedělat nic."
+  }
+}

@@ -117,7 +117,7 @@ export function SiteNav() {
 	return (
 		<>
 			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
-				<div className='container mx-auto flex h-14 items-center justify-center px-4'>
+				<div className='mx-auto flex h-14 items-center justify-center px-4 max-w-screen-2xl'>
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex'>
 						<Link href='/' className='flex items-center shrink-0 mx-2 lg:mx-6' aria-label='Home'>
@@ -148,8 +148,8 @@ export function SiteNav() {
 								className='hidden dark:lg:block'
 							/>
 						</Link>
-						<NavigationMenu className='mx-2 lg:mx-6' dir={dir}>
-							<NavigationMenuList>
+						<NavigationMenu className='mx-2 lg:mx-6 min-w-0 overflow-x-auto' dir={dir}>
+							<NavigationMenuList className='flex-nowrap'>
 								{items.map((it) => (
 									<NavigationMenuItem key={it.label} className='group'>
 										<NavigationMenuPrimitive.Link asChild>

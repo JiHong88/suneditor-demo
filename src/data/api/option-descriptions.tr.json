@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Editör için başlangıç ​​değeri.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Yer tutucu metin.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Düzenlenebilir çerçeve için özellikler[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Editör için genişlik.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Editör için minimum genişlik.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Editör için maksimum genişlik.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Editör için yükseklik.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Editör için minimum yükseklik.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Editör için maksimum yükseklik.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Editörün üst çerçevesinin stil dizesi.\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "İçerik bir iframe içine yerleştirilecek ve sayfanın geri kalanından izole edilecektir.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "`iframe` üzerinde HTML, HEAD, BODY etiketlerinin ve DOCTYPE bildiriminin kullanımına izin verir.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe`'ın özellikleri.\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Durum çubuğunu etkinleştirir.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Mevcut düğüm yapısını durum çubuğunda görüntüler.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Alt durum çubuğunun boyutunu değiştirme işlevini etkinleştirir.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Editördeki karakter sayısını gösterir.\n\n- Eğer `maxCharCount` seçeneğinin bir değeri varsa, `true` ​​olur.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Editöre eklenebilecek maksimum karakter sayısı.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Alt çubuğun `charCounter` alanında görüntülenecek metin.\n\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "`charCounter` seçeneğinin hesaplama yöntemini tanımlar.\n\n- `char`: Karakter uzunluğu.\n\n- `byte`: Karakterlerin ikili veri boyutu.\n\n- `byte-html`: Tam HTML dizesinin ikili veri boyutu.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Editördeki kelime sayısını gösterir.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Alt çubuğun `wordCounter` alanında görüntülenecek metin.\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Üstteki konteynere uygulanan stiller (örneğin genişlik, z-indeksi vb.)."
+  },
+  "frame": {
+    "description": "İframe kapsayıcısına uygulanan stiller (örneğin yükseklik, minimum yükseklik)."
+  },
+  "editor": {
+    "description": "Düzenlenebilir içerik alanına uygulanan stiller."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror düzenleyici örneği (çerçeve düzeyinde). Başlatıldıktan sonra `_checkCodeMirror` tarafından ayarlanır."
+  },
+  "plugins": {
+    "description": "Eklenti yapılandırması. Eklenti sınıflarının bir dizisini veya eklenti adına göre anahtarlanmış bir nesneyi iletin.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Alt dizilere göre gruplandırılmış araç çubuğu düğmelerinin listesi.\n\n- Varsayılan değer {@link DEFAULTS.BUTTON_LIST}'i takip eder.",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "SunEditor v2 için geçiş modunu etkinleştirir.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Araç çubuğu modu: `classic`, `inline`, `balloon`, `balloon-always`. Araç çubuğunu alta yerleştirmek için `:bottom` ekleyin (örneğin `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Editör tipi. Belge stili düzeni için `\"document\"` kullanın, `:`'den sonra isteğe bağlı alt tipler ekleyin.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Editör teması.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Dil yapılandırması. Varsayılan: İngilizce"
+  },
+  "icons": {
+    "description": "Varsayılan simgelerin yerine geçer."
+  },
+  "textDirection": {
+    "description": "Metin yönü: `ltr` veya `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Etiketlerin, özniteliklerin ve stillerin sıkı bir şekilde filtrelenmesini sağlar.\n\n- Tüm filtreleri etkinleştirmek için `true` kullanın (varsayılan) veya tek tek filtreleri kontrol etmek için bir nesne kullanın.\n\n- `false` ​​ayarı desteklenmiyor; bunun yerine belirli filtreleri devre dışı bırakmak için nesne biçimini kullanın.\n\n- :filtre açıklaması\n- `tagFilter`: İzin verilmeyen HTML etiketlerini filtreler (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Biçim öğelerini filtreler (`formatLine`/`formatBlock`)\n- `classFilter`: İzin verilmeyen CSS sınıf adlarını filtreler (`allowedClassName`)\n- `textStyleTagFilter`: Metin stili etiketlerini filtreler (b, i, u, span, vb.)\n- `attrFilter`: İzin verilmeyen HTML özniteliklerini filtreler (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: İzin verilmeyen satır içi stilleri filtreler (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Tüm içerik seçilirken etiketler bütün birimler olarak ele alınır.\n- Varsayılan değer {@link DEFAULTS.SCOPE_SELECTION_TAGS}'i izler.",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Varsayılan izin verilenler listesinin ötesinde ek olarak izin verilecek HTML öğelerini belirtir. Ayırıcı: `\"|\"`.\n\n- {@link PrivateBaseOptions.__defaultElementWhitelist} tarafından belirlenen varsayılan listeye eklendi.\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Kullanılmaması gereken HTML öğelerini belirtir. Ayırıcı: `\"|\"`.\n\n- Burada belirtilen etiketler, diğer beyaz listelere dahil edilmiş olsalar bile, eninde sonunda kaldırılacaktır.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Değerleri boş olsa bile saklanmasına izin verilen etiketlerin listesi.\n\n- Varsayılan değer {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}'i takip eder.\n- Son `allowedEmptyTags` ​​listesini oluşturmak için `ALLOWED_EMPTY_NODE_LIST` ile birleştirilir.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "İzin verilen sınıf adları.\n\n- Varsayılan değer {@link DEFAULTS.CLASS_NAME} eklendi.",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Her etiket için izin verilecek ek öznitelikleri belirtir. `\"*\"` tüm etiketler için geçerlidir.\n\n- Burada belirtilen kurallar {@link PrivateBaseOptions.__defaultAttributeWhitelist} içine entegre edilecektir.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Etikete göre izin verilmeyen öznitelikleri belirtir. `\"*\"` tüm etiketler için geçerlidir.\n\n- Burada belirtilen öznitelikler, diğer ayarlar tarafından izin verilmiş olsalar bile, sonunda kaldırılacaktır.\n\n- Gerekli öğelerin listesi, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, her zaman dahil edilir.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Ek metin stili etiketleri.\n\n- Varsayılan olarak {@link PrivateBaseOptions.__textStyleTags} kullanılır.",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Metin stillerini belirli HTML etiketlerine eşler.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "İzin verilen stiller listesine ek stiller belirtir. Ayırıcı: `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "HTML etiketleri için izin verilen stilleri belirtir. Anahtar etiket adı(ları), değer ise boru işaretiyle ayrılmış izin verilen stillerdir.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "`span` etiketi için izin verilen stilleri belirtir.\n\n- Varsayılan değer {@link DEFAULTS.SPAN_STYLES}'ı takip eder.",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "`line` öğesi için izin verilen stilleri belirtir (s..).\n\n- Varsayılan değer {@link DEFAULTS.LINE_STYLES}'ı takip eder.",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "İzin verilen yazı tipi boyutu birimleri.\n\n- Varsayılan değer {@link DEFAULTS.SIZE_UNITS} değerini takip eder.",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Metin silinirken satır içi öğelerin (örneğin `<span>`, `<strong>`) nasıl ele alınacağını belirler.\n\n- `repeat`: Geri tuşuna tekrar tekrar basılmadığı sürece stiller korunur.\n\n- Sürekli basmak sonunda stilleri kaldıracaktır.\n\n- `none`: Stiller korunmaz. Satır içi öğeler metinle birlikte hemen kaldırılır.\n\n- `always`: Stiller açıkça kaldırılmadığı sürece süresiz olarak kalır.\n\n- Bir satır içi öğenin içindeki tüm metin silinse bile, öğenin kendisi kalır.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Yeni satırlar eklenirken varsayılan `line` öğesi.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Varsayılan satır sonu biçimini belirtir.\n\n- [Önerilen] `line`: Satır sonu genel etiketlere bölünür.\n\n- [Önerilmeyen] `br`: Satır sonları aynı satırda <br> olarak ele alınır. (Shift+Enter gibi)\n- Satır sonları `line` içinde <br> olarak ele alınır.\n\n- Art arda iki kez satır sonu girerek yeni bir `line` oluşturabilirsiniz.\n\n- \"Alıntı\" gibi `line` içeren biçimler hala `line` temelinde çalışır.\n\n- suneditor işlemleri `line` birimlerinde çalışır.\n\n- `br` olarak ayarlandığında, çok fazla veri düzenlenirken performans düşebilir.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Satırları değiştirirken sıfırlanması gereken satır özellikleri. Ayırıcı: `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Ayrıca varsayılanın ötesinde `line` öğelerine de izin verilir. Ayırıcı: `\"|\"`.\n\n- Son `line` listesini oluşturmak için {@link PrivateBaseOptions.__defaultFormatLine} ile birleştirilir.\n\n- `line` öğesi ayrıca `brLine` öğesini de içerir.\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Ayrıca varsayılanın ötesinde `brLine` öğelerine de izin verilir.\n\n- Son `brLine` ​​listesini oluşturmak için {@link PrivateBaseOptions.__defaultFormatBrLine} ile birleştirilir.\n\n- `brLine` öğeleri `line` öğesine dahil edilir.\n\n- `brLine` öğelerinin satır sonu `BR` etiketidir.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Ayrıca varsayılanın ötesinde `closureBrLine` öğelerine de izin verilir.\n\n- Son `closureBrLine` ​​listesi için {@link PrivateBaseOptions.__defaultFormatClosureBrLine} ile birleştirilir.\n\n- `closureBrLine` öğeleri `brLine`'e dahil edilir.\n\n- `closureBrLine` öğelerinin satır sonu `BR` etiketidir.\n\n- ※ Bu formatı Enter veya Backspace tuşuyla kapatamazsınız.\n\n- ※ Yalnızca özel durumlarda kullanın. ([ör] tablo hücrelerinin formatı)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Ayrıca varsayılanın ötesinde `block` öğelerine de izin verilir.\n\n- Son `block` ​​listesini oluşturmak için {@link PrivateBaseOptions.__defaultFormatBlock} ile birleştirilir.\n\n- `block`, `line` ve `component`'ü sarmalar.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Ayrıca varsayılanın ötesinde `closureBlock` öğelerine de izin verilir.\n\n- Son `closureBlock` ​​listesi için {@link PrivateBaseOptions.__defaultFormatClosureBlock} ile birleştirilir.\n\n- `closureBlock` öğeleri `block`'e dahil edilir.\n\n- `closureBlock` öğesi `line` ve `component`'yı sarmalar.\n\n- ※ Bu formatı Enter veya Backspace tuşuyla kapatamazsınız.\n\n- ※ Yalnızca özel durumlarda kullanın. (örneğin tablo hücrelerinin formatı)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Dışarıya tıklandığında açılan pencereleri kapatır.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Sekme girintisini boşluklarla senkronize eder.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Sekme tuşu girişini devre dışı bırakır.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Araç çubuğunun genişliği.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Araç çubuğu için kapsayıcı öğe."
+  },
+  "toolbar_sticky": {
+    "description": "Sabit araç çubuğunu etkinleştirir.\n\n- `number`: Sabit üst konumu (piksel) ayarlar. Sabitliği devre dışı bırakmak için `-1` ​​kullanın.\n\n- `{top, offset}`: Sayfa başlığı görünür olduğunda sabit konum `top`'tür.\n\n- Sanal klavye görünüm alanını kaydırdığında (örneğin, tabletlerde, dokunmatik cihazlarda) sabit konum `offset`'tür.\n\n- Sanal klavye etkin olduğunda, araç çubuğunun görünümden kaydırılmış bir sayfa başlığı için boşluk bırakmaması için `offset`, `top`'nın yerini alır.\n\nVarsayılan `offset`, `0`'dir.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Araç çubuğunu başlangıçta gizler.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Alt araç çubuğu yapılandırması. Metin seçimi yapıldığında görünen ikincil bir araç çubuğu.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Durum çubuğu için kapsayıcı öğe."
+  },
+  "shortcutsHint": {
+    "description": "Kısayol ipuçlarını araç ipuçlarında görüntüler.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Klavye kısayollarını devre dışı bırakır.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Özel klavye kısayolları.\n\n- `_` ile başlayan tuşlar, kullanıcı tanımlı özel kısayollardır. Her değer, `[keyCombo, hintLabel]` ​​çiftlerinden oluşan bir dizidir.\n\n- Tuş kombinasyonları, `c` (Ctrl/Cmd), `s` (Shift) ve `KeyEvent.code` değerlerinin `+` ile birleştirilmesiyle oluşturulur.\n\n- Belirli bir eklenti yöntemini çağırmak için `$~pluginName.method` kullanın.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Kopyalanan içeriğin biçimini korur.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "URL'leri otomatik olarak köprüye dönüştürür. (`Link` eklentisi gereklidir)\n- Varsayılan: `Boolean(plugins.link)` ​​— `link` eklentisinin etkin olup olmamasına bağlı olarak belirlenir."
+  },
+  "historyStackDelayTime": {
+    "description": "Geçmiş yığını güncellemeleri için gecikme süresi (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Kök çerçeve başına maksimum geçmiş kaydı sayısı. Bu sayı aşıldığında en eski kayıtlar silinir.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Yazdırma için sınıf adı.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Tam ekran moduna geçildiğinde uygulanan kaydırma değeri.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Önizleme modu için özel HTML şablonu. Düzenleyici içeriği için yer tutucu olarak `{{ contents }}` kullanın.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Yazdırma modu için özel HTML şablonu. Düzenleyici içeriği için yer tutucu olarak `{{ contents }}` kullanın.\n\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Eklenen bileşenlerin otomatik olarak seçilmesini sağlar.\n\n- Satır içi bileşenler için: İmleci bileşenin yakınına yerleştirir veya yakınlarda bileşen yoksa seçer.\n\n- Blok bileşenler için: `selectMode`'a göre davranışı yürütür:\n- `auto`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde bileşeni seç.\n\n- `select`: Her zaman eklenen bileşeni seç.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşı veya yeni bir satır oluşturup oraya taşı.\n\n- `none`: Hiçbir şey yapma.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Bağlantılar için varsayılan URL protokolü.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Bildirim mesajlarının görüntülenme süresi (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Ücretsiz kod görüntüleme modunu etkinleştirir.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Dahili Bul/Değiştir panelinin kullanıcı arayüzünü gösterir.\n\n- Bulucu her zaman dahili olarak oluşturulur; bu seçenek, panelin kullanıcılara görünür olup olmadığını (Ctrl+F / Ctrl+H) kontrol eder.",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Yazarken anında arama yapar (gecikmeli). Yanlış seçildiğinde, arama yalnızca Enter tuşuna basıldığında çalışır.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "CodeMirror, KaTeX veya MathJax gibi harici kütüphaneler.\n\n- Bkz. {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "İzin verilen veya verilmeyen ek etiketleri belirtir. `true` izin vermek için, `false` ​​izin vermemek için kullanılır.\n\n- Varsayılan değer {@link DEFAULTS.EXTRA_TAG_MAP}'i takip eder.\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Kullanıcı olay işleyicilerinin yapılandırması.\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Şu anda kullanılan araç çubuğu düğmelerinin listesi"
+  },
+  "buttons_sub": {
+    "description": "Şu anda kullanılan alt araç çubuğu düğmelerinin listesi"
+  },
+  "toolbar_sub_width": {
+    "description": "Alt araç çubuğunun genişliği."
+  },
+  "reverseCommands": {
+    "description": "Birleştirilmiş ters komut çiftleri dizisi.\n\n- Varsayılan `indent-outdent` + kullanıcının `reverseButtons` ​​komutlarını içerir."
+  },
+  "codeMirror": {
+    "description": "`externalLibs.codeMirror`'dan alınan CodeMirror yapılandırma nesnesi."
+  },
+  "hasCodeMirror": {
+    "description": "Kod görüntüleme için CodeMirror kullanır."
+  },
+  "audioGallery_data": {
+    "description": "Sunucu çağrıları olmadan doğrudan veri"
+  },
+  "audioGallery_url": {
+    "description": "Sunucu isteği URL'si"
+  },
+  "audioGallery_headers": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Varsayılan küçük resim"
+  },
+  "fileBrowser_data": {
+    "description": "Sunucu çağrısı yapmadan doğrudan veri (URL alma işlemini atlar)."
+  },
+  "fileBrowser_url": {
+    "description": "Sunucu isteği URL'si"
+  },
+  "fileBrowser_headers": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Varsayılan küçük resim URL'si veya her öğe için küçük resim URL'si döndüren bir işlev."
+  },
+  "fileBrowser_props": {
+    "description": "Ek etiket adları"
+  },
+  "fileGallery_data": {
+    "description": "Sunucu çağrıları olmadan doğrudan veri"
+  },
+  "fileGallery_url": {
+    "description": "Sunucu isteği URL'si"
+  },
+  "fileGallery_headers": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Varsayılan küçük resim"
+  },
+  "imageGallery_data": {
+    "description": "Sunucu çağrıları olmadan doğrudan veri"
+  },
+  "imageGallery_url": {
+    "description": "Sunucu isteği URL'si"
+  },
+  "imageGallery_headers": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "videoGallery_data": {
+    "description": "Sunucu çağrıları olmadan doğrudan veri"
+  },
+  "videoGallery_url": {
+    "description": "Sunucu isteği URL'si"
+  },
+  "videoGallery_headers": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Varsayılan küçük resim"
+  },
+  "codeBlock_langs": {
+    "description": "Kod blokları için seçilebilir programlama dilleri listesi.\n\n- Varsayılan olarak 21 yaygın dil\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- Dil seçimi arayüzünü tamamen devre dışı bırakmak için boş dizi `[]` olarak ayarlayın."
+  },
+  "exportPDF_apiUrl": {
+    "description": "PDF oluşturma için sunucu isteği URL'si"
+  },
+  "exportPDF_fileName": {
+    "description": "Oluşturulan PDF dosyasının adı"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Dosya yükleme için sunucu isteği URL'si"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Sunucu isteği başlıkları"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Toplam yükleme boyutu sınırı (bayt cinsinden)"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Tek dosya boyutu sınırı (bayt cinsinden)"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Birden fazla dosya yüklemeye izin ver"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Kabul edilen dosya formatları."
+  },
+  "fileUpload_as": {
+    "description": "Dosya bileşeninin varsayılan biçimini `box` veya `link` ​​olarak belirtin."
+  },
+  "fileUpload_controls": {
+    "description": "Şekle eklenecek ek kontroller"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme için).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- `auto`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde bileşeni seç.\n\n- `select`: Eklenen bileşeni her zaman seç.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde yeni bir satır oluştur ve oraya taşı.\n\n- `none`: Hiçbir şey yapma."
+  },
+  "align_items": {
+    "description": "Öğeleri hizala"
+  },
+  "backgroundColor_items": {
+    "description": "Renk listesi."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Satır başına renk sayısı"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "HEX girişini devre dışı bırak"
+  },
+  "blockStyle_items": {
+    "description": "Listeyi biçimlendirin.\n\n- `command` — `\"line\"`: tek satırlı blok, `\"br-line\"`: br ile ayrılmış blok, `\"block\"`: kapsayıcı blok."
+  },
+  "font_items": {
+    "description": "Yazı tipi listesi"
+  },
+  "fontColor_items": {
+    "description": "Renk listesi."
+  },
+  "fontColor_splitNum": {
+    "description": "Satır başına renk sayısı"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "HEX girişini devre dışı bırak"
+  },
+  "hR_items": {
+    "description": "İK listesi"
+  },
+  "layout_items": {
+    "description": "Yerleşim planı listesi. Her öğe, ham HTML içeren adlandırılmış bir yerleşim planı şablonu tanımlar."
+  },
+  "lineHeight_items": {
+    "description": "Satır yüksekliği listesi"
+  },
+  "paragraphStyle_items": {
+    "description": "Paragraf öğesi listesi"
+  },
+  "table_scrollType": {
+    "description": "Kaydırma tipi (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Altyazı konumu (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Hücre kontrol cihazı konumu (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Hücre arka plan rengi seçici için HEX renk listesi."
+  },
+  "template_items": {
+    "description": "Şablon listesi"
+  },
+  "textStyle_items": {
+    "description": "Metin stili öğe listesi."
+  },
+  "mention_triggerText": {
+    "description": "Bahsedilme listesini tetikleyen karakter."
+  },
+  "mention_limitSize": {
+    "description": "Bahsedilenler listesinde görüntülenecek öğe sayısı"
+  },
+  "mention_searchStartLength": {
+    "description": "Bahsedilenler listesinde aramaya başlamak için karakter sayısı"
+  },
+  "mention_delayTime": {
+    "description": "Bahsedilenler listesinin görüntülenmesinden önce beklenecek süre"
+  },
+  "mention_data": {
+    "description": "Statik bahsetme verileri (API yerine kullanılır)."
+  },
+  "mention_apiUrl": {
+    "description": "Bahsedilenler listesini çağırmak için kullanılacak URL"
+  },
+  "mention_apiHeaders": {
+    "description": "API çağrısıyla birlikte gönderilecek başlıklar"
+  },
+  "mention_useCachingData": {
+    "description": "Bahsedilenler listesi verilerinin önbelleğe alınıp alınmayacağı"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Bahsedilenler listesi verilerinin alanda önbelleğe alınıp alınmayacağı"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Yazı tipi boyutu için birim.\n\n- Kabul edilen değerler şunlardır: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` veya `'text'`.\n\n- `'text'` kullanılırsa, metne dayalı bir yazı tipi boyutu listesi uygulanır."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Varsayılan boyut etiketinin açılır menüde görüntülenip görüntülenmeyeceğini belirler."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "`true` olduğunda, yazı tipi boyutu ayarlamaları için artırma ve azaltma düğmeleri görüntülenir.\n\n- Varsayılan olarak `false` ​​kullanılır. `sizeUnit`, `'text'` olduğunda her zaman `false` kullanılır (yoksayılır)."
+  },
+  "fontSize_disableInput": {
+    "description": "`true` olduğunda, doğrudan yazı tipi boyutu giriş kutusunu devre dışı bırakır.\n\n- `sizeUnit`, `'text'` olduğunda varsayılan olarak `true`, aksi halde `false` kullanılır."
+  },
+  "fontSize_unitMap": {
+    "description": "Yazı tipi boyutları için varsayılan birim eşlemesini geçersiz kılın veya genişletin."
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO` etiketinin varsayılan genişliği."
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO` etiketinin varsayılan yüksekliği."
+  },
+  "audio_createFileInput": {
+    "description": "Dosya giriş öğesi oluşturulup oluşturulmayacağı."
+  },
+  "audio_createUrlInput": {
+    "description": "URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
+  },
+  "audio_uploadUrl": {
+    "description": "Dosyaların yükleneceği URL adresi."
+  },
+  "audio_uploadHeaders": {
+    "description": "Dosya yükleme isteğine eklenecek başlıklar."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Toplam yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Tek dosya boyutu sınırı (bayt cinsinden)."
+  },
+  "audio_allowMultiple": {
+    "description": "Birden fazla dosya yüklemeye izin verilip verilmeyeceği."
+  },
+  "audio_acceptedFormats": {
+    "description": "Kabul edilen dosya formatları (varsayılan `\"audio/*\"`'dır)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "`AUDIO` etiketine eklenecek ek özellikler."
+  },
+  "audio_insertBehavior": {
+    "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme için).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- `auto`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde bileşeni seç.\n\n- `select`: Eklenen bileşeni her zaman seç.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde yeni bir satır oluştur ve oraya taşı.\n\n- `none`: Hiçbir şey yapma."
+  },
+  "drawing_outputFormat": {
+    "description": "Çizimin çıktı formatı. Seçenekler: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Biçim türü seçiminin etkinleştirilip etkinleştirilmeyeceği (`block` veya `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Varsayılan format türü ya `\"block\"` ya da `\"inline\"`'dir."
+  },
+  "drawing_keepFormatType": {
+    "description": "Çizim işleminden sonra seçilen format türünün korunup korunmayacağı."
+  },
+  "drawing_lineWidth": {
+    "description": "Çizim çizgisinin genişliği."
+  },
+  "drawing_lineReconnect": {
+    "description": "Çizim yaparken çizgileri yeniden birleştirmek gerekip gerekmediği."
+  },
+  "drawing_lineCap": {
+    "description": "Satır başlığının stili (`\"butt\"`, `\"round\"` ​​veya `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Çizim çizgisinin rengi."
+  },
+  "drawing_canResize": {
+    "description": "Modal formun yeniden boyutlandırılıp boyutlandırılamayacağı."
+  },
+  "drawing_maintainRatio": {
+    "description": "Yeniden boyutlandırırken en boy oranını koruyup korumamak."
+  },
+  "drawing_formSize": {
+    "description": "Çizim model formu için boyut yapılandırması."
+  },
+  "embed_canResize": {
+    "description": "Gömülü öğenin yeniden boyutlandırılıp boyutlandırılamayacağı."
+  },
+  "embed_showHeightInput": {
+    "description": "Yükseklik giriş alanının görüntülenip görüntülenmeyeceği."
+  },
+  "embed_defaultWidth": {
+    "description": "Gömülü öğenin varsayılan genişliği (sayısal değer veya birimle birlikte)."
+  },
+  "embed_defaultHeight": {
+    "description": "Gömülü öğenin varsayılan yüksekliği (sayısal değer veya birimle birlikte)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Sadece yüzdelik oranlı boyutlandırmaya izin verilip verilmeyeceği."
+  },
+  "embed_uploadUrl": {
+    "description": "Dosya yüklemeleri için URL."
+  },
+  "embed_uploadHeaders": {
+    "description": "Dosya yükleme isteklerine eklenecek başlıklar."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Toplam dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Tek dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "`IFRAME` etiketine eklenecek ek özellikler."
+  },
+  "embed_query_youtube": {
+    "description": "YouTube sorgu parametresi, yerleştirme URL'sine eklendi."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo sorgu parametresi, yerleştirme URL'sine eklendi."
+  },
+  "embed_urlPatterns": {
+    "description": "Gömülebilir içerik olarak tanınacak ek URL kalıpları."
+  },
+  "embed_embedQuery": {
+    "description": "Özel gömme servis tanımları."
+  },
+  "embed_controls": {
+    "description": "Şekil kontrolleri."
+  },
+  "embed_insertBehavior": {
+    "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme için).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- `auto`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde bileşeni seç.\n\n- `select`: Eklenen bileşeni her zaman seç.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde yeni bir satır oluştur ve oraya taşı.\n\n- `none`: Hiçbir şey yapma."
+  },
+  "image_canResize": {
+    "description": "Görüntü öğesinin yeniden boyutlandırılıp boyutlandırılamayacağı."
+  },
+  "image_showHeightInput": {
+    "description": "Yükseklik giriş alanının görüntülenip görüntülenmeyeceği."
+  },
+  "image_defaultWidth": {
+    "description": "Görüntünün varsayılan genişliği. Bir sayı belirtilirse, sonuna `\"px\"` eklenecektir."
+  },
+  "image_defaultHeight": {
+    "description": "Görüntünün varsayılan yüksekliği. Bir sayı belirtilirse, sonuna `\"px\"` eklenecektir."
+  },
+  "image_percentageOnlySize": {
+    "description": "Sadece yüzdelik oranlı boyutlandırmaya izin verilip verilmeyeceği."
+  },
+  "image_createFileInput": {
+    "description": "Görüntü yüklemeleri için dosya giriş öğesi oluşturulup oluşturulmayacağı."
+  },
+  "image_createUrlInput": {
+    "description": "Resim eklemek için bir URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
+  },
+  "image_uploadUrl": {
+    "description": "Görüntü dosyası yüklemeleri için URL uç noktası."
+  },
+  "image_uploadHeaders": {
+    "description": "Dosya yükleme isteğine eklenecek ek başlıklar."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Toplam yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Tek dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "image_allowMultiple": {
+    "description": "Birden fazla görsel yüklemeye izin verilip verilmediği."
+  },
+  "image_acceptedFormats": {
+    "description": "Görüntü yüklemeleri için kabul edilen dosya formatları."
+  },
+  "image_useFormatType": {
+    "description": "Biçim türü seçiminin etkinleştirilip etkinleştirilmeyeceği (`block` veya `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Varsayılan görüntü formatı türü (`\"block\"` veya `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Görüntü eklendikten sonra seçilen format türünün korunup korunmayacağı."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Bağlantılı resimler için dosya yükleme özelliğini etkinleştirip etkinleştirmeme."
+  },
+  "image_controls": {
+    "description": "Şekil kontrolleri."
+  },
+  "image_insertBehavior": {
+    "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- Satır içi bileşenler için: imleci bileşenin yakınına yerleştirir veya yakınlarda aralık yoksa seçer.\n\n- Blok bileşenler için: `selectMode`'e göre davranışı yürütür:\n- `auto`: İmleci mümkünse bir sonraki satıra taşır, aksi takdirde bileşeni seçer.\n\n- `select`: Eklenen bileşeni her zaman seçer.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşır veya yeni bir satır oluşturup oraya taşır.\n\n- `none`: Hiçbir şey yapmaz."
+  },
+  "link_uploadUrl": {
+    "description": "Dosya yüklemeleri için URL uç noktası."
+  },
+  "link_uploadHeaders": {
+    "description": "Dosya yükleme istekleri için ek başlıklar."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Toplam dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Tek dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "link_acceptedFormats": {
+    "description": "Bağlantı yüklemeleri için kabul edilen dosya formatları."
+  },
+  "link_title": {
+    "description": "Modal başlık gösterimi."
+  },
+  "link_textToDisplay": {
+    "description": "Girdiyi görüntülemek için metin oluşturun."
+  },
+  "link_openNewWindow": {
+    "description": "\"Yeni pencerede aç\" onay kutusunun varsayılan işaretli değeri."
+  },
+  "link_noAutoPrefix": {
+    "description": "`true` seçeneği, bağlantı değerine ana bilgisayar URL'sinin otomatik olarak önek eklenmesini devre dışı bırakır."
+  },
+  "link_relList": {
+    "description": "Bağlantı iletişim kutusunda onay kutuları olarak gösterilen kullanılabilir `rel` öznitelik değerleri."
+  },
+  "link_defaultRel": {
+    "description": "Varsayılan `rel` değerleri koşula bağlı olarak otomatik olarak uygulanır."
+  },
+  "link_enableFileUpload": {
+    "description": "`true` ise dosya yüklemeyi etkinleştirir."
+  },
+  "math_canResize": {
+    "description": "Matematik modülünün yeniden boyutlandırılıp boyutlandırılamayacağı."
+  },
+  "math_autoHeight": {
+    "description": "Modal penceresinin yüksekliğinin otomatik olarak ayarlanıp ayarlanmayacağı."
+  },
+  "math_fontSizeList": {
+    "description": "Matematiksel ifade boyutu seçici için yazı tipi boyutu seçeneklerinin listesi."
+  },
+  "math_onPaste": {
+    "description": "Matematik giriş alanındaki yapıştırma olaylarını işlemek için kullanılan bir geri çağırma fonksiyonu."
+  },
+  "math_formSize": {
+    "description": "Matematiksel modal için boyutları belirten bir nesne."
+  },
+  "video_canResize": {
+    "description": "Video öğesinin yeniden boyutlandırılıp boyutlandırılamayacağı."
+  },
+  "video_showHeightInput": {
+    "description": "Yükseklik giriş alanının görüntülenip görüntülenmeyeceği."
+  },
+  "video_defaultWidth": {
+    "description": "Video öğesinin varsayılan genişliği. Bir sayı belirtilirse, sonuna `\"px\"` eklenir."
+  },
+  "video_defaultHeight": {
+    "description": "Video öğesinin varsayılan yüksekliği. Bir sayı belirtilirse, sonuna `\"px\"` eklenecektir."
+  },
+  "video_percentageOnlySize": {
+    "description": "Sadece yüzdelik oranlı boyutlandırmaya izin verilip verilmeyeceği."
+  },
+  "video_createFileInput": {
+    "description": "Video yüklemeleri için dosya giriş öğesi oluşturulup oluşturulmayacağı."
+  },
+  "video_createUrlInput": {
+    "description": "Video yerleştirme için bir URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
+  },
+  "video_uploadUrl": {
+    "description": "Video dosyası yüklemeleri için URL uç noktası."
+  },
+  "video_uploadHeaders": {
+    "description": "Video yükleme isteğine eklenecek ek başlıklar."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Videoların toplam yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Video dosyaları için tek dosya yükleme boyutu sınırı (bayt cinsinden)."
+  },
+  "video_allowMultiple": {
+    "description": "Birden fazla video yüklemeye izin verilip verilmediği."
+  },
+  "video_acceptedFormats": {
+    "description": "Video yüklemeleri için kabul edilen dosya formatları (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Videonun varsayılan en boy oranı (yükseklik/genişlik, örneğin 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Açılan pencerede oran seçeneğinin gösterilip gösterilmeyeceği."
+  },
+  "video_ratioOptions": {
+    "description": "Video yeniden boyutlandırma için özel oran seçenekleri (değer = yükseklik/genişlik)."
+  },
+  "video_videoTagAttributes": {
+    "description": "`VIDEO` etiketine eklenecek ek özellikler."
+  },
+  "video_iframeTagAttributes": {
+    "description": "`IFRAME` etiketine eklenecek ek özellikler."
+  },
+  "video_query_youtube": {
+    "description": "YouTube video yerleştirme için ek sorgu parametreleri."
+  },
+  "video_query_vimeo": {
+    "description": "Vimeo yerleştirme için ek sorgu parametreleri."
+  },
+  "video_embedQuery": {
+    "description": "Özel gömme hizmet tanımları (bkz. `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Video yerleştirme için ek URL kalıpları."
+  },
+  "video_extensions": {
+    "description": "Video yüklemeleri için tanınacak ek dosya uzantıları."
+  },
+  "video_controls": {
+    "description": "Şekil kontrolleri."
+  },
+  "video_insertBehavior": {
+    "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme için).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- `auto`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde bileşeni seç.\n\n- `select`: Eklenen bileşeni her zaman seç.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşı, aksi takdirde yeni bir satır oluştur ve oraya taşı.\n\n- `none`: Hiçbir şey yapma."
+  }
+}

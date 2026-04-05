@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Начальная стоимость для редактора.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Текст-заполнитель.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Атрибуты для редактируемого фрейма[.sun-editor-editable].\n\n``js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Ширина для редактора.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Минимальная ширина редактора.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Максимальная ширина редактора.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Рост для редактора.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Минимальная высота редактора.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Максимальная высота для редактора.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Строка стиля верхнего фрейма редактора.\n\n``js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Содержимое будет размещено в iframe и изолировано от остальной части страницы.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Позволяет использовать теги HTML, HEAD, BODY и объявление DOCTYPE для `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Характеристики `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Включает строку состояния.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Отображает текущую структуру узлов в строке состояния.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Включает функцию изменения размера нижней строки состояния.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Отображает количество символов в редакторе.\n\n— Если параметр `maxCharCount` имеет значение, он становится `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Максимальное количество символов, разрешенное для вставки в редактор.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Текст, который будет отображаться в области `charCounter` нижней панели.\n\n``js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Определяет метод вычисления для параметра `charCounter`.\n\n- `char`: Длина символов.\n\n- `byte`: Двоичный размер данных символов.\n\n- `byte-html`: Двоичный размер данных всей HTML-строки.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Отображает количество слов в редакторе.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Текст, который будет отображаться в области `wordCounter` нижней панели.\n\n``js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Стили, применяемые к верхнему контейнеру (например, ширина, z-индекс и т. д.)."
+  },
+  "frame": {
+    "description": "Стили, применяемые к контейнеру iframe (например, высота, минимальная высота)."
+  },
+  "editor": {
+    "description": "Стили, применяемые к редактируемой области контента."
+  },
+  "codeMirrorEditor": {
+    "description": "Экземпляр редактора CodeMirror (на уровне фрейма). Устанавливается параметром `_checkCodeMirror` после инициализации."
+  },
+  "plugins": {
+    "description": "Конфигурация плагина. Передайте массив классов плагинов или объект, ключом которого является имя плагина.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Список кнопок панели инструментов, сгруппированных по подмассивам.\n\n- По умолчанию используется {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Включает режим миграции для SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Режим панели инструментов: `classic`, `inline`, `balloon`, `balloon-always`. Добавьте `:bottom`, чтобы разместить панель инструментов внизу (например, `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Тип редактора. Используйте `\"document\"` для макета в стиле документа, с необязательными подтипами после `:`.\n\n``js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Тема оформления редактора.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Настройка языка. По умолчанию: EN"
+  },
+  "icons": {
+    "description": "Заменяет значки по умолчанию."
+  },
+  "textDirection": {
+    "description": "Направление текста: `ltr` или `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Включает строгую фильтрацию тегов, атрибутов и стилей.\n\n— Используйте `true` для включения всех фильтров (по умолчанию) или объект для управления отдельными фильтрами.\n\n— Установка `false` ​​не поддерживается; вместо этого используйте объектную форму для отключения определенных фильтров.\n\n- :filter description\n- `tagFilter`: Фильтрует запрещенные HTML-теги (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Фильтрует элементы форматирования (`formatLine`/`formatBlock`)\n- `classFilter`: Фильтрует запрещенные имена CSS-классов (`allowedClassName`)\n- `textStyleTagFilter`: Фильтрует теги стилей текста (b, i, u, span и т. д.)\n- `attrFilter`: Фильтрует запрещенные HTML-атрибуты (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Фильтрует запрещенные встроенные стили (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Теги рассматриваются как целые единицы при выделении всего содержимого.\n\n- По умолчанию используется {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Указывает HTML-элементы, которые следует дополнительно разрешить помимо списка разрешенных по умолчанию. Разделитель: `\"|\"`.\n\n- Добавляется в список по умолчанию, определяемый {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Указывает HTML-элементы, которые не следует использовать. Разделитель: `\"|\"`.\n\n— Указанные здесь теги в конечном итоге будут удалены, даже если они включены в другие белые списки.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Список тегов, которые разрешено сохранять, даже если их значения пусты.\n\n- По умолчанию используется {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Объединяется с `ALLOWED_EMPTY_NODE_LIST` для формирования итогового списка `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Разрешенные имена классов.\n\n- Добавлено значение по умолчанию {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Указывает дополнительные атрибуты для каждого тега. `\"*\"` применяется ко всем тегам.\n\n— Правила, указанные здесь, будут объединены в {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n``js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Указывает атрибуты, которые следует запретить для каждого тега. `\"*\"` применяется ко всем тегам.\n\n- Указанные здесь атрибуты в конечном итоге будут удалены, даже если они разрешены другими настройками.\n\n- Список обязательных элементов, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, всегда включается.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Дополнительные теги стиля текста.\n\n- По умолчанию используется {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Сопоставляет стили текста с конкретными HTML-тегами.\n\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Указывает дополнительные стили к списку разрешенных стилей. Разделитель: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Указывает допустимые стили для HTML-тегов. Ключ — имя (имена) тега, значение — допустимые стили, разделённые символом вертикальной черты.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Задает допустимые стили для тега `span`.\n\n- По умолчанию используется {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Задает допустимые стили для элемента `line` (стр.).\n\n- По умолчанию используется {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Допустимые единицы измерения размера шрифта.\n\n- Значение по умолчанию соответствует {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Определяет, как обрабатываются строчные элементы (например, `<span>`, `<strong>`) при удалении текста.\n\n- `repeat`: Стили сохраняются, если не нажимать клавишу Backspace многократно.\n\n- Непрерывное нажатие в конечном итоге удалит стили.\n\n- `none`: Стили не сохраняются. Строковые элементы удаляются немедленно вместе с текстом.\n\n- `always`: Стили сохраняются неограниченно долго, если не удалены явно.\n\n- Даже если весь текст внутри строчного элемента удален, сам элемент остается.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Элемент `line` используется по умолчанию при вставке новых строк.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Задает формат переноса строки по умолчанию.\n\n- [Рекомендуется] `line`: Перенос строки разделен на общие теги.\n\n- [Не рекомендуется] `br`: Переносы строк обрабатываются как <br> на той же строке (как Shift+Enter).\n- Переносы строк обрабатываются как <br> в рамках `line`.\n\n- Вы можете создать новый `line`, введя перенос строки дважды подряд.\n\n- Форматы, включающие `line`, такие как «Цитата», по-прежнему работают на основе `line`.\n\n- Процессы suneditor работают в единицах `line`.\n\n- При установке значения `br` производительность может снизиться при редактировании большого объема данных.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Свойства строки, которые следует сбросить при смене строки. Разделитель: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Дополнительно разрешены элементы `line` помимо элементов по умолчанию. Разделитель: `\"|\"`.\n\n- Объединены с {@link PrivateBaseOptions.__defaultFormatLine} для формирования окончательного списка `line`.\n\n- Элемент `line` также содержит элемент `brLine`.\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Дополнительно разрешены элементы `brLine` помимо элементов по умолчанию.\n\n- Объединены с {@link PrivateBaseOptions.__defaultFormatBrLine} для формирования окончательного списка `brLine`.\n\n- Элементы `brLine` включены в элемент `line`.\n\n- Перенос строки для элементов `brLine` осуществляется с помощью тега `BR`.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Дополнительно разрешены элементы `closureBrLine` помимо элементов по умолчанию.\n\n- Объединены с {@link PrivateBaseOptions.__defaultFormatClosureBrLine} для получения окончательного списка `closureBrLine`.\n\n- Элементы `closureBrLine` включены в `brLine`.\n\n- Перенос строки для элементов `closureBrLine` осуществляется с помощью тега `BR`.\n\n- ※ Выход из этого формата с помощью клавиш Enter или Backspace невозможен.\n\n- ※ Используйте только в особых случаях (например, форматирование ячеек таблицы).",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Дополнительно разрешены элементы `block` помимо значений по умолчанию.\n\n- Объединены с {@link PrivateBaseOptions.__defaultFormatBlock} для формирования окончательного списка `block`.\n\n- `block` оборачивает `line` и `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Дополнительно разрешены элементы `closureBlock` помимо элементов по умолчанию.\n\n- Объединены с {@link PrivateBaseOptions.__defaultFormatClosureBlock} для получения окончательного списка `closureBlock`.\n\n- Элементы `closureBlock` включены в `block`.\n\n- Элемент `closureBlock` оборачивает `line` и `component`.\n\n- ※ Выход из этого формата с помощью клавиш Enter или Backspace невозможен.\n\n- ※ Используйте только в особых случаях (например, для форматирования ячеек таблицы).",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Закрывает модальные окна при щелчке за их пределами.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Синхронизирует отступ табуляции с пробелами.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Отключает ввод с помощью клавиши Tab.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Ширина панели инструментов.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Контейнерный элемент для панели инструментов."
+  },
+  "toolbar_sticky": {
+    "description": "Включает фиксированную панель инструментов.\n\n- `number`: Задает положение фиксированной верхней части (в пикселях). Используйте `-1` ​​для отключения фиксированной панели.\n\n- `{top, offset}`: `top` — это положение фиксированной панели, когда заголовок страницы виден.\n\n- `offset` — это положение фиксированной панели, когда виртуальная клавиатура сдвигает область просмотра (например, на планшетах, сенсорных устройствах).\n\n- Когда виртуальная клавиатура активна, `offset` заменяет `top`, чтобы панель инструментов не оставляла зазор\n- для заголовка страницы, который прокрутился за пределы видимости. По умолчанию `offset` — это `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Изначально скрывает панель инструментов.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Настройка дополнительной панели инструментов. Вторичная панель инструментов, которая отображается при выделении текста.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Контейнерный элемент для строки состояния."
+  },
+  "shortcutsHint": {
+    "description": "Отображает подсказки о сочетаниях клавиш во всплывающих подсказках.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Отключает сочетания клавиш.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Пользовательские сочетания клавиш.\n\n- Клавиши, начинающиеся с `_`, — это пользовательские сочетания клавиш. Каждое значение представляет собой массив пар `[keyCombo, hintLabel]`.\n\n- Комбинации клавиш используют значения `c` (Ctrl/Cmd), `s` (Shift) и `KeyEvent.code`, объединенные `+`.\n\n- Используйте `$~pluginName.method` для вызова определенного метода плагина.\n\n``js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Сохраняет формат скопированного контента.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Автоматически преобразует URL-адреса в гиперссылки. (Требуется плагин `Link`)\n- По умолчанию: `Boolean(plugins.link)` ​​— определяется, включен ли плагин `link`."
+  },
+  "historyStackDelayTime": {
+    "description": "Задержка обновления стека истории (мс).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Максимальное количество записей истории на один корневой фрейм. При превышении этого количества самые старые записи удаляются.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Название класса для печати.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Смещение применяется при переходе в полноэкранный режим.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Пользовательский HTML-шаблон для режима предварительного просмотра. Используйте `{{ contents }}` в качестве заполнителя для содержимого редактора.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Пользовательский HTML-шаблон для режима печати. ​​Используйте `{{ contents }}` в качестве заполнителя для содержимого редактора.\n\n``js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Включает автоматический выбор вставляемых компонентов.\n\n- Для встроенных компонентов: перемещает курсор рядом с компонентом или выбирает его, если поблизости нет подходящего диапазона.\n\n- Для блочных компонентов: выполняет действия на основе `selectMode`:\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выбрать компонент.\n\n- `select`: Всегда выбирать вставляемый компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Протокол URL по умолчанию для ссылок.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Длительность отображения всплывающих сообщений (мс).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Включает режим бесплатного просмотра кода.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Отображает встроенный интерфейс панели «Найти/Заменить».\n\n— Поиск всегда создается внутри системы; эта опция определяет, будет ли панель видна пользователям (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Поиск выполняется мгновенно по мере ввода (с подавлением дребезга контактов). Если значение равно false, поиск выполняется только при нажатии клавиши Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Внешние библиотеки, такие как CodeMirror, KaTeX или MathJax.\n\n- См. {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Руководство по внешним библиотекам}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Указывает дополнительные разрешенные или запрещенные теги. `true` разрешает, `false` ​​запрещает.\n\n- Значение по умолчанию соответствует {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Конфигурация обработчиков пользовательских событий.\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Список используемых в данный момент кнопок панели инструментов"
+  },
+  "buttons_sub": {
+    "description": "Список используемых в данный момент кнопок на панели инструментов"
+  },
+  "toolbar_sub_width": {
+    "description": "Ширина дополнительной панели инструментов."
+  },
+  "reverseCommands": {
+    "description": "Объединен массив пар команд обратного порядка.\n\n- Включает в себя `indent-outdent` по умолчанию + `reverseButtons` ​​пользователя."
+  },
+  "codeMirror": {
+    "description": "Объект конфигурации CodeMirror из `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Использует CodeMirror для просмотра кода."
+  },
+  "audioGallery_data": {
+    "description": "Прямая передача данных без обращений к серверу."
+  },
+  "audioGallery_url": {
+    "description": "URL-адрес запроса сервера"
+  },
+  "audioGallery_headers": {
+    "description": "Заголовки запроса сервера"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Миниатюра по умолчанию"
+  },
+  "fileBrowser_data": {
+    "description": "Прямая передача данных без обращений к серверу (обходит получение URL-адреса)."
+  },
+  "fileBrowser_url": {
+    "description": "URL-адрес запроса сервера"
+  },
+  "fileBrowser_headers": {
+    "description": "Заголовки запроса сервера"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "URL-адрес миниатюры по умолчанию или функция, возвращающая URL-адрес миниатюры для каждого элемента."
+  },
+  "fileBrowser_props": {
+    "description": "Дополнительные названия тегов"
+  },
+  "fileGallery_data": {
+    "description": "Прямая передача данных без обращений к серверу."
+  },
+  "fileGallery_url": {
+    "description": "URL-адрес запроса сервера"
+  },
+  "fileGallery_headers": {
+    "description": "Заголовки запроса сервера"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Миниатюра по умолчанию"
+  },
+  "imageGallery_data": {
+    "description": "Прямая передача данных без обращений к серверу."
+  },
+  "imageGallery_url": {
+    "description": "URL-адрес запроса сервера"
+  },
+  "imageGallery_headers": {
+    "description": "Заголовки запроса сервера"
+  },
+  "videoGallery_data": {
+    "description": "Прямая передача данных без обращений к серверу."
+  },
+  "videoGallery_url": {
+    "description": "URL-адрес запроса сервера"
+  },
+  "videoGallery_headers": {
+    "description": "Заголовки запроса сервера"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Миниатюра по умолчанию"
+  },
+  "codeBlock_langs": {
+    "description": "Список выбираемых языков программирования для блоков кода.\n\n- По умолчанию доступно 21 распространенный язык\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- Установите пустой массив `[]`, чтобы полностью отключить интерфейс выбора языка."
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL-адрес запроса к серверу для генерации PDF-файла"
+  },
+  "exportPDF_fileName": {
+    "description": "Название сгенерированного PDF-файла"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL-адрес запроса сервера для загрузки файла"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Заголовки запроса сервера"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых файлов в байтах."
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер одного файла в байтах."
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Разрешить загрузку нескольких файлов"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Принимаемые форматы файлов."
+  },
+  "fileUpload_as": {
+    "description": "Укажите формат по умолчанию для компонента файла как `box` или `link`"
+  },
+  "fileUpload_controls": {
+    "description": "К рисунку будут добавлены дополнительные элементы управления."
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Поведение при вставке компонентов для выделения и размещения курсора.\n\n- [по умолчанию: `options.get('componentInsertBehavior')`]\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выделить компонент.\n\n- `select`: Всегда выделять вставленный компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать."
+  },
+  "align_items": {
+    "description": "Выровнять элементы"
+  },
+  "backgroundColor_items": {
+    "description": "Список цветов."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Количество цветов в строке"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Отключить ввод HEX"
+  },
+  "blockStyle_items": {
+    "description": "Форматировать список.\n\n- `command` — `\"line\"`: однострочный блок, `\"br-line\"`: блок, разделённый символами br, `\"block\"`: блок-контейнер."
+  },
+  "font_items": {
+    "description": "Список шрифтов"
+  },
+  "fontColor_items": {
+    "description": "Список цветов."
+  },
+  "fontColor_splitNum": {
+    "description": "Количество цветов в строке"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Отключить ввод HEX"
+  },
+  "hR_items": {
+    "description": "список HR"
+  },
+  "layout_items": {
+    "description": "Список макетов. Каждый элемент определяет именованный шаблон макета с исходным HTML-кодом."
+  },
+  "lineHeight_items": {
+    "description": "список высоты строки"
+  },
+  "paragraphStyle_items": {
+    "description": "Список пунктов абзаца"
+  },
+  "table_scrollType": {
+    "description": "Тип прокрутки (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Позиция подписи (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Положение контроллера ячейки (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX-список цветов для палитры выбора цвета фона ячейки."
+  },
+  "template_items": {
+    "description": "Список шаблонов"
+  },
+  "textStyle_items": {
+    "description": "Список элементов текстового стиля."
+  },
+  "mention_triggerText": {
+    "description": "Персонаж, который запускает список упоминаний."
+  },
+  "mention_limitSize": {
+    "description": "Количество элементов для отображения в списке упоминаний"
+  },
+  "mention_searchStartLength": {
+    "description": "Количество символов, с которого начинается поиск в списке упоминаний."
+  },
+  "mention_delayTime": {
+    "description": "Время ожидания перед отображением списка упоминаний"
+  },
+  "mention_data": {
+    "description": "Статические данные об упоминаниях (используются вместо API)."
+  },
+  "mention_apiUrl": {
+    "description": "URL-адрес для вызова списка упоминаний"
+  },
+  "mention_apiHeaders": {
+    "description": "Заголовки, отправляемые вместе с вызовом API."
+  },
+  "mention_useCachingData": {
+    "description": "Следует ли кэшировать данные списка упоминаний"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Следует ли кэшировать данные списка упоминаний в поле"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Единица измерения размера шрифта.\n\n- Допустимые значения: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` или `'text'`.\n\n- Если используется `'text'`, применяется список размеров шрифта, основанный на тексте."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Определяет, отображается ли в выпадающем меню метка размера по умолчанию."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Когда `true`, отображаются кнопки увеличения и уменьшения размера шрифта.\n\n— По умолчанию используется `false`. Всегда `false`, когда `sizeUnit` равно `'text'` (игнорируется)."
+  },
+  "fontSize_disableInput": {
+    "description": "Если `true`, то поле для прямого ввода размера шрифта отключается.\n\n— По умолчанию используется `true`, если `sizeUnit` равно `'text'`, в противном случае — `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Переопределить или расширить стандартное сопоставление единиц измерения для размеров шрифтов."
+  },
+  "audio_defaultWidth": {
+    "description": "Ширина тега `AUDIO` по умолчанию."
+  },
+  "audio_defaultHeight": {
+    "description": "Высота тега `AUDIO` по умолчанию."
+  },
+  "audio_createFileInput": {
+    "description": "Следует ли создавать элемент ввода файла."
+  },
+  "audio_createUrlInput": {
+    "description": "Создавать ли элемент ввода URL.\n\n- По умолчанию используется `true`. Всегда `true`, если `createFileInput` равно `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL-адрес, на который будут загружаться файлы."
+  },
+  "audio_uploadHeaders": {
+    "description": "Заголовки, которые необходимо включить в запрос на загрузку файла."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых файлов в байтах."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер одного файла в байтах."
+  },
+  "audio_allowMultiple": {
+    "description": "Разрешить ли одновременную загрузку нескольких файлов."
+  },
+  "audio_acceptedFormats": {
+    "description": "Принимаются следующие форматы файлов (по умолчанию — `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Дополнительные атрибуты для установки на теге `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "Поведение при вставке компонентов для выделения и размещения курсора.\n\n- [по умолчанию: `options.get('componentInsertBehavior')`]\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выделить компонент.\n\n- `select`: Всегда выделять вставленный компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать."
+  },
+  "drawing_outputFormat": {
+    "description": "Формат вывода чертежа. Варианты: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Включить ли выбор типа формата (`block` или `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Тип формата по умолчанию: `\"block\"` или `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Следует ли сохранять выбранный тип формата после рисования."
+  },
+  "drawing_lineWidth": {
+    "description": "Ширина линии чертежа."
+  },
+  "drawing_lineReconnect": {
+    "description": "Нужно ли соединять линии при рисовании."
+  },
+  "drawing_lineCap": {
+    "description": "Стиль окончания строки (`\"butt\"`, `\"round\"` ​​или `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Цвет линии рисунка."
+  },
+  "drawing_canResize": {
+    "description": "Можно ли изменить размер модальной формы?"
+  },
+  "drawing_maintainRatio": {
+    "description": "Следует ли сохранять соотношение сторон при изменении размера."
+  },
+  "drawing_formSize": {
+    "description": "Настройка размеров для модальной формы чертежа."
+  },
+  "embed_canResize": {
+    "description": "Можно ли изменять размер встраиваемого элемента?"
+  },
+  "embed_showHeightInput": {
+    "description": "Отображать ли поле ввода высоты."
+  },
+  "embed_defaultWidth": {
+    "description": "Ширина встраиваемого элемента по умолчанию (числовое значение или в единицах измерения)."
+  },
+  "embed_defaultHeight": {
+    "description": "Высота встраиваемого элемента по умолчанию (числовое значение или единица измерения)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Разрешить ли только использование процентных показателей для определения размера."
+  },
+  "embed_uploadUrl": {
+    "description": "URL-адрес для загрузки файлов."
+  },
+  "embed_uploadHeaders": {
+    "description": "Заголовки, которые необходимо включить в запросы на загрузку файлов."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых файлов в байтах."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер загружаемого файла в байтах."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Дополнительные атрибуты для установки на теге `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "Параметр запроса YouTube добавляется к URL-адресу встраивания."
+  },
+  "embed_query_vimeo": {
+    "description": "Параметр запроса Vimeo добавляется к URL-адресу встраивания."
+  },
+  "embed_urlPatterns": {
+    "description": "Дополнительные шаблоны URL-адресов для распознавания в качестве встраиваемого контента."
+  },
+  "embed_embedQuery": {
+    "description": "Пользовательские определения служб встраивания."
+  },
+  "embed_controls": {
+    "description": "Элементы управления рисунком."
+  },
+  "embed_insertBehavior": {
+    "description": "Поведение при вставке компонентов для выделения и размещения курсора.\n\n- [по умолчанию: `options.get('componentInsertBehavior')`]\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выделить компонент.\n\n- `select`: Всегда выделять вставленный компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать."
+  },
+  "image_canResize": {
+    "description": "Возможность изменения размера элемента изображения."
+  },
+  "image_showHeightInput": {
+    "description": "Отображать ли поле ввода высоты."
+  },
+  "image_defaultWidth": {
+    "description": "Ширина изображения по умолчанию. Если указано число, к нему будет добавлено `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Высота изображения по умолчанию. Если указано число, к нему будет добавлено `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Разрешить ли только использование процентных показателей для определения размера."
+  },
+  "image_createFileInput": {
+    "description": "Следует ли создавать элемент ввода файла для загрузки изображений."
+  },
+  "image_createUrlInput": {
+    "description": "Создавать ли элемент ввода URL-адреса для вставки изображения.\n\n- По умолчанию используется `true`. Всегда `true`, если `createFileInput` равно `false`."
+  },
+  "image_uploadUrl": {
+    "description": "URL-адрес конечной точки для загрузки файлов изображений."
+  },
+  "image_uploadHeaders": {
+    "description": "Дополнительные заголовки, которые необходимо включить в запрос на загрузку файла."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых файлов в байтах."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер загружаемого файла в байтах."
+  },
+  "image_allowMultiple": {
+    "description": "Разрешена ли загрузка нескольких изображений."
+  },
+  "image_acceptedFormats": {
+    "description": "Допустимые форматы файлов для загрузки изображений."
+  },
+  "image_useFormatType": {
+    "description": "Включить ли выбор типа формата (`block` или `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Тип формата изображения по умолчанию (`\"block\"` или `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Следует ли сохранять выбранный формат после вставки изображения."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Включать ли возможность загрузки файлов для связанных изображений."
+  },
+  "image_controls": {
+    "description": "Элементы управления рисунком."
+  },
+  "image_insertBehavior": {
+    "description": "Поведение при вставке компонентов для выделения и размещения курсора.\n\n- [по умолчанию: `options.get('componentInsertBehavior')`]\n- Для встроенных компонентов: размещает курсор рядом с компонентом или выделяет его, если поблизости нет нужного диапазона.\n\n- Для блочных компонентов: выполняет поведение на основе `selectMode`:\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выделить компонент.\n\n- `select`: Всегда выделять вставленный компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать."
+  },
+  "link_uploadUrl": {
+    "description": "URL-адрес для загрузки файлов."
+  },
+  "link_uploadHeaders": {
+    "description": "Дополнительные заголовки для запросов на загрузку файлов."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых файлов в байтах."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер загружаемого файла в байтах."
+  },
+  "link_acceptedFormats": {
+    "description": "Допустимые форматы файлов для загрузки ссылок."
+  },
+  "link_title": {
+    "description": "Отображение заголовка модального окна."
+  },
+  "link_textToDisplay": {
+    "description": "Создайте текстовое поле для отображения."
+  },
+  "link_openNewWindow": {
+    "description": "Значение по умолчанию для флажка «Открыть в новом окне» установлено."
+  },
+  "link_noAutoPrefix": {
+    "description": "Если значение равно `true`, это отключает автоматическое добавление префикса к URL-адресу хоста в значении ссылки."
+  },
+  "link_relList": {
+    "description": "Доступные значения атрибута `rel` отображаются в виде флажков в модальном окне ссылки."
+  },
+  "link_defaultRel": {
+    "description": "Значения `rel` по умолчанию применяются автоматически в зависимости от условия."
+  },
+  "link_enableFileUpload": {
+    "description": "Если `true`, то включается загрузка файлов."
+  },
+  "math_canResize": {
+    "description": "Можно ли изменить размер математического модального окна?"
+  },
+  "math_autoHeight": {
+    "description": "Автоматически ли регулировать высоту модального окна."
+  },
+  "math_fontSizeList": {
+    "description": "Список вариантов размера шрифта для селектора размера математического выражения."
+  },
+  "math_onPaste": {
+    "description": "Функция обратного вызова для обработки событий вставки в область ввода математических выражений."
+  },
+  "math_formSize": {
+    "description": "Объект, определяющий размеры математического модального окна."
+  },
+  "video_canResize": {
+    "description": "Возможность изменения размера видеоэлемента."
+  },
+  "video_showHeightInput": {
+    "description": "Отображать ли поле ввода высоты."
+  },
+  "video_defaultWidth": {
+    "description": "Ширина видеоэлемента по умолчанию. Если указано число, к нему будет добавлено `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Высота видеоэлемента по умолчанию. Если указано число, к нему будет добавлено `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Разрешить ли только использование процентных показателей для определения размера."
+  },
+  "video_createFileInput": {
+    "description": "Следует ли создавать элемент ввода файла для загрузки видео."
+  },
+  "video_createUrlInput": {
+    "description": "Создавать ли элемент ввода URL-адреса для встраивания видео.\n\n- По умолчанию используется `true`. Всегда `true`, если `createFileInput` равно `false`."
+  },
+  "video_uploadUrl": {
+    "description": "URL-адрес конечной точки для загрузки видеофайлов."
+  },
+  "video_uploadHeaders": {
+    "description": "Дополнительные заголовки, которые необходимо включить в запрос на загрузку видео."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Общий лимит размера загружаемых видеофайлов в байтах."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Ограничение на размер загружаемого видеофайла в байтах."
+  },
+  "video_allowMultiple": {
+    "description": "Разрешена ли загрузка нескольких видеороликов."
+  },
+  "video_acceptedFormats": {
+    "description": "Принимаемые форматы файлов для загрузки видео (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Соотношение сторон видео по умолчанию (высота/ширина, например, 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Отображать ли параметр соотношения в модальном окне."
+  },
+  "video_ratioOptions": {
+    "description": "Настраиваемые параметры соотношения сторон для изменения размера видео (значение = высота/ширина)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Дополнительные атрибуты для установки на теге `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Дополнительные атрибуты для установки на теге `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "Дополнительные параметры запроса для встраивания видео с YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Дополнительные параметры запроса для встраивания видео с Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "Определения пользовательских служб встраивания (см. `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Дополнительные шаблоны URL-адресов для встраивания видео."
+  },
+  "video_extensions": {
+    "description": "Для загрузки видеофайлов будут распознаваться дополнительные расширения файлов."
+  },
+  "video_controls": {
+    "description": "Элементы управления рисунком."
+  },
+  "video_insertBehavior": {
+    "description": "Поведение при вставке компонентов для выделения и размещения курсора.\n\n- [по умолчанию: `options.get('componentInsertBehavior')`]\n- `auto`: Переместить курсор на следующую строку, если это возможно, в противном случае выделить компонент.\n\n- `select`: Всегда выделять вставленный компонент.\n\n- `line`: Переместить курсор на следующую строку, если это возможно, или создать новую строку и переместиться туда.\n\n- `none`: Ничего не делать."
+  }
+}

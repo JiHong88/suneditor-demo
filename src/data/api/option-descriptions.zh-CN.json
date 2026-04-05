@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "编辑器的初始值。",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "占位符文本。",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "可编辑框架[.sun-editor-editable]的属性。\n\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "编辑器宽度。",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "编辑器最小宽度。",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "编辑器最大宽度。",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "编辑身高。",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "编辑器最小高度。",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "编辑器最大高度。",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "编辑器顶部框架的样式字符串。\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "内容将放置在 iframe 中，并与页面的其余部分隔离。",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "允许在 `iframe` 上使用 HTML、HEAD、BODY 标签和 DOCTYPE 声明。",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "`iframe` 的属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "启用状态栏。",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "在状态栏中显示当前节点结构。",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "启用底部状态栏的调整大小功能。",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "显示编辑器中的字符数。\n\n- 如果 `maxCharCount` 选项有值，则它变为 `true`。",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "编辑器中允许插入的最大字符数。",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "底部栏 `charCounter` 区域将显示的文本。\n\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "定义 `charCounter` 选项的计算方法。\n\n- `char`：字符长度。\n\n- `byte`：字符的二进制数据大小。\n\n- `byte-html`：完整 HTML 字符串的二进制数据大小。",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "显示编辑器中的字数。",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "显示在底部栏 `wordCounter` 区域的文本。\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "应用于顶部容器的样式（例如宽度、z-index 等）。"
+  },
+  "frame": {
+    "description": "应用于 iframe 容器的样式（例如高度、最小高度）。"
+  },
+  "editor": {
+    "description": "应用于可编辑内容区域的样式。"
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror 编辑器实例（帧级别）。初始化后由 `_checkCodeMirror` 设置。"
+  },
+  "plugins": {
+    "description": "插件配置。传递一个插件类数组或一个以插件名称为键的对象。\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "工具栏按钮列表，按子数组分组。\n\n- 默认值遵循 {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "为 SunEditor v2 启用迁移模式。",
+    "default": "false"
+  },
+  "mode": {
+    "description": "工具栏模式：`classic`、`inline`、`balloon`、`balloon-always`。附加`:bottom`可将工具栏放置在底部（例如`classic:bottom`、`inline:bottom`）。",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "编辑器类型。使用 `\"document\"` 表示文档样式布局，`:` 之后可添加可选子类型。\n\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "编辑器主题。",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "语言配置。默认值：英语"
+  },
+  "icons": {
+    "description": "覆盖默认图标。"
+  },
+  "textDirection": {
+    "description": "文本方向：`ltr` 或 `rtl`。",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "启用对标签、属性和样式的严格过滤。\n\n- 使用 `true` 启用所有过滤器（默认），或使用对象控制单个过滤器。\n\n- 不支持设置 `false`；请改用对象形式禁用特定过滤器。\n\n- :filter description\n\n- `tagFilter`：过滤不允许的 HTML 标签（`elementWhitelist`/`elementBlacklist`）\n\n- `formatFilter`：过滤格式元素（`formatLine`/`formatBlock`）\n\n- `classFilter`：过滤不允许的 CSS 类名（`allowedClassName`）\n\n- `textStyleTagFilter`：过滤文本样式标签（b、i、u、span 等）\n\n- `attrFilter`：过滤不允许的 HTML 属性（`attributeWhitelist`/`attributeBlacklist`）\n\n- `styleFilter`：过滤不允许的内联样式（`spanStyles`/`lineStyles`/`allUsedStyles`）\n\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "选择所有内容时，标签将被视为一个整体。\n\n- 默认遵循 {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "指定除默认允许列表之外，还要允许的 HTML 元素。分隔符：`\"|\"`。\n\n- 添加到由 {@link PrivateBaseOptions.__defaultElementWhitelist} 确定的默认列表中。\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "指定不应使用的 HTML 元素。分隔符：`\"|\"`。\n\n- 此处指定的标签最终将被移除，即使它们包含在其他白名单中。\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "即使值为空，也允许保留的标签列表。\n\n- 默认值遵循 {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n\n- 与 `ALLOWED_EMPTY_NODE_LIST` 连接，形成最终的 `allowedEmptyTags` 列表。",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "允许的类名。\n\n- 添加了默认值 {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "指定每个标签允许的附加属性。`\"*\"` 适用于所有标签。\n\n- 此处指定的规则将合并到 {@link PrivateBaseOptions.__defaultAttributeWhitelist} 中。\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "指定要按标签禁止的属性。`\"*\"` 适用于所有标签。\n\n- 即使其他设置允许，此处指定的属性最终也会被移除。\n\n- 始终包含必需元素列表 {@link DEFAULTS.REQUIRED_FORMAT_LINE}。\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "其他文本样式标签。\n\n- 默认遵循 {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "将文本样式映射到特定的 HTML 标签。\n\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "指定要添加到允许样式列表中的其他样式。分隔符：`\"|\"`。\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "指定 HTML 标签允许的样式。键是标签名称，值是以竖线分隔的允许样式。\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "指定 `span` 标签允许的样式。\n\n- 默认样式遵循 {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "指定 `line` 元素（p..）允许的样式。\n\n- 默认值遵循 {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "允许的字体大小单位。\n\n- 默认值遵循 {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "决定删除文本时如何处理行内元素（例如 `<span>`、`<strong>`）。\n\n- `repeat`：除非反复按下退格键，否则样式将被保留。\n\n- 持续按下退格键最终会移除样式。\n\n- `none`：样式不会被保留。行内元素会随文本一起立即删除。\n\n- `always`：样式会无限期保留，除非显式移除。\n\n- 即使删除了行内元素内的所有文本，元素本身仍然保留。",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "插入新行时的默认`line`元素。",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "指定默认换行符格式。\n\n- [推荐] `line`：换行符被划分为通用标签。\n\n- [不推荐] `br`：同一行中的换行符被视为 <br>。（类似于 Shift+Enter）\n\n- `line` 中的换行符被视为 <br>。\n\n- 您可以通过连续输入两次换行符来创建一个新的 `line`。\n\n- 包含 `line` 的格式（例如“引用”）仍然基于 `line` 运行。\n\n- suneditor 进程以 `line` 为单位运行。\n\n- 设置为 `br` 时，编辑大量数据可能会降低性能。",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "换行时需要重置的行属性。分隔符：`\"|\"`。\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "此外，还允许使用超出默认值的 `line` 元素。分隔符：`\"|\"`。\n\n- 与 {@link PrivateBaseOptions.__defaultFormatLine} 连接，形成最终的 `line` 列表。\n\n- `line` 元素也包含 `brLine` 元素。\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "此外，还允许使用超出默认值的 `brLine` 元素。\n\n- 与 {@link PrivateBaseOptions.__defaultFormatBrLine} 连接，形成最终的 `brLine` 列表。\n\n- `brLine` 元素包含在 `line` 元素中。\n\n- `brLine` 元素的换行符为 `BR` 标签。\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`。",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "此外，还允许使用超出默认值的 `closureBrLine` 元素。\n\n- 与 {@link PrivateBaseOptions.__defaultFormatClosureBrLine} 连接，形成最终的 `closureBrLine` 列表。\n\n- `closureBrLine` 元素包含在 `brLine` 中。\n\n- `closureBrLine` 元素的换行符为 `BR` 标签。\n\n- ※ 您无法使用 Enter 键或 Backspace 键退出此格式。\n\n- ※ 仅在特殊情况下使用。（例如：表格单元格格式）",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "此外，还允许使用超出默认值的 `block` 元素。\n\n- 与 {@link PrivateBaseOptions.__defaultFormatBlock} 连接，形成最终的 `block` 列表。\n\n- `block` 包含 `line` 和 `component`。",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "此外，还允许使用超出默认值的 `closureBlock` 元素。\n\n- 与 {@link PrivateBaseOptions.__defaultFormatClosureBlock} 连接，形成最终的 `closureBlock` 列表。\n\n- `closureBlock` 元素包含在 `block` 中。\n\n- `closureBlock` 元素包裹 `line` 和 `component`。\n\n- ※ 您无法使用 Enter 键或 Backspace 键退出此格式。\n\n- ※ 仅在特殊情况下使用。（例如，表格单元格格式）",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "点击外部区域关闭模态框。",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "将制表符缩进与空格同步。",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "禁用 Tab 键输入。",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "工具栏宽度。",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "工具栏的容器元素。"
+  },
+  "toolbar_sticky": {
+    "description": "启用固定工具栏。\n\n- `number`：设置固定顶部位置（像素）。使用 `-1` 禁用固定功能。\n\n- `{top, offset}`：`top` 是页面标题可见时的固定位置。\n\n- `offset` 是虚拟键盘移动视口时（例如，在平板电脑、触摸设备上）的固定位置。\n\n- 当虚拟键盘处于活动状态时，`offset` 会替换 `top`，以避免工具栏在页面标题滚动出视图后留下空白。\n\n默认值 `offset` 为 `0`。\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "初始状态下隐藏工具栏。",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "子工具栏配置。选中文本时显示的辅助工具栏。",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "状态栏的容器元素。"
+  },
+  "shortcutsHint": {
+    "description": "在工具提示中显示快捷键提示。",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "禁用键盘快捷键。",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "自定义键盘快捷键。\n\n- 以 `_` 开头的按键是用户自定义的快捷键。每个值都是一个 `[keyCombo, hintLabel]` 对的数组。\n\n- 组合键使用 `c`（Ctrl/Cmd）、`s`（Shift）和 `KeyEvent.code` 值，并通过 `+` 连接。\n\n- 使用 `$~pluginName.method` 调用特定的插件方法。\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "保持复制内容的格式。",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "自动将 URL 转换为超链接。（需要 `Link` 插件）\n\n- 默认值：`Boolean(plugins.link)` — 由 `link` 插件是否启用决定。"
+  },
+  "historyStackDelayTime": {
+    "description": "历史堆栈更新的延迟时间（毫秒）。",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "每个根帧的最大历史记录条目数。超过此限制后，将丢弃最旧的条目。",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "用于打印的类名。",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "进入全屏模式时应用偏移量。",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "预览模式的自定义 HTML 模板。使用 `{{ contents }}` 作为编辑器内容的占位符。",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "用于打印模式的自定义 HTML 模板。使用 `{{ contents }}` 作为编辑器内容的占位符。\n\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "启用自动选择插入组件的功能。\n\n- 对于行内组件：将光标置于组件附近，如果没有附近范围，则选中该组件。\n\n- 对于块组件：根据 `selectMode` 执行相应的行为：\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中该组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "链接的默认URL协议。",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "显示 Toast 消息的持续时间（毫秒）。",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "启用免费代码查看模式。",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "显示内置的查找/替换面板用户界面。\n\n- 查找器始终在内部创建；此选项控制面板是否对用户可见（Ctrl+F / Ctrl+H）。",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "输入时立即进行搜索（防抖动）。如果设置为“否”，则仅在按下 Enter 键时进行搜索。",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "外部库，例如 CodeMirror、KaTeX 或 MathJax。\n\n- 请参阅 {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md 外部库指南}\n\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "指定允许或禁止使用的额外标签。`true` 表示允许，`false` 表示禁止。\n\n- 默认值遵循 {@link DEFAULTS.EXTRA_TAG_MAP}\n\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "用户事件处理程序配置。\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "当前使用的工具栏按钮列表"
+  },
+  "buttons_sub": {
+    "description": "当前使用的子工具栏按钮列表"
+  },
+  "toolbar_sub_width": {
+    "description": "子工具栏宽度。"
+  },
+  "reverseCommands": {
+    "description": "合并反向命令对数组。\n\n- 包括默认的 `indent-outdent` + 用户指定的 `reverseButtons`。"
+  },
+  "codeMirror": {
+    "description": "来自 `externalLibs.codeMirror` 的 CodeMirror 配置对象。"
+  },
+  "hasCodeMirror": {
+    "description": "使用 CodeMirror 进行代码查看。"
+  },
+  "audioGallery_data": {
+    "description": "无需服务器调用即可直接传输数据"
+  },
+  "audioGallery_url": {
+    "description": "服务器请求 URL"
+  },
+  "audioGallery_headers": {
+    "description": "服务器请求头"
+  },
+  "audioGallery_thumbnail": {
+    "description": "默认缩略图"
+  },
+  "fileBrowser_data": {
+    "description": "直接获取数据，无需调用服务器（绕过 URL 获取）。"
+  },
+  "fileBrowser_url": {
+    "description": "服务器请求 URL"
+  },
+  "fileBrowser_headers": {
+    "description": "服务器请求头"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "默认缩略图 URL 或为每个项目返回缩略图 URL 的函数。"
+  },
+  "fileBrowser_props": {
+    "description": "其他标签名称"
+  },
+  "fileGallery_data": {
+    "description": "无需服务器调用即可直接传输数据"
+  },
+  "fileGallery_url": {
+    "description": "服务器请求 URL"
+  },
+  "fileGallery_headers": {
+    "description": "服务器请求头"
+  },
+  "fileGallery_thumbnail": {
+    "description": "默认缩略图"
+  },
+  "imageGallery_data": {
+    "description": "无需服务器调用即可直接传输数据"
+  },
+  "imageGallery_url": {
+    "description": "服务器请求 URL"
+  },
+  "imageGallery_headers": {
+    "description": "服务器请求头"
+  },
+  "videoGallery_data": {
+    "description": "无需服务器调用即可直接传输数据"
+  },
+  "videoGallery_url": {
+    "description": "服务器请求 URL"
+  },
+  "videoGallery_headers": {
+    "description": "服务器请求头"
+  },
+  "videoGallery_thumbnail": {
+    "description": "默认缩略图"
+  },
+  "codeBlock_langs": {
+    "description": "代码块可选编程语言列表。\n\n- 默认为 21 种常用语言\n\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby​​, php, swift, kotlin, sql, bash, markdown, xml, yaml]\n\n- 设置为空数组 `[]` 可完全禁用语言选择界面。"
+  },
+  "exportPDF_apiUrl": {
+    "description": "用于生成 PDF 的服务器请求 URL"
+  },
+  "exportPDF_fileName": {
+    "description": "生成的PDF文件的名称"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "用于文件上传的服务器请求 URL"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "服务器请求头"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "上传文件总大小限制（以字节为单位）"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "单个文件大小限制（以字节为单位）"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "允许上传多个文件。"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "可接受的文件格式。"
+  },
+  "fileUpload_as": {
+    "description": "将文件组件的默认形式指定为 `box` 或 `link`"
+  },
+  "fileUpload_controls": {
+    "description": "图中将添加其他控件"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "组件插入行为（选择和光标位置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
+  },
+  "align_items": {
+    "description": "对齐项目"
+  },
+  "backgroundColor_items": {
+    "description": "颜色列表。"
+  },
+  "backgroundColor_splitNum": {
+    "description": "每行颜色数"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "禁用十六进制输入"
+  },
+  "blockStyle_items": {
+    "description": "格式列表。\n\n- `command` — `\"line\"`：单行块，`\"br-line\"`：br 分隔符块，`\"block\"`：容器块。"
+  },
+  "font_items": {
+    "description": "字体列表"
+  },
+  "fontColor_items": {
+    "description": "颜色列表。"
+  },
+  "fontColor_splitNum": {
+    "description": "每行颜色数"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "禁用十六进制输入"
+  },
+  "hR_items": {
+    "description": "人力资源清单"
+  },
+  "layout_items": {
+    "description": "布局列表。每个项目定义一个带有原始 HTML 代码的命名布局模板。"
+  },
+  "lineHeight_items": {
+    "description": "行高列表"
+  },
+  "paragraphStyle_items": {
+    "description": "段落项目列表"
+  },
+  "table_scrollType": {
+    "description": "滚动类型（`x`、`y`、`xy`）"
+  },
+  "table_captionPosition": {
+    "description": "标题位置（`top`，`bottom`）"
+  },
+  "table_cellControllerPosition": {
+    "description": "单元控制器位置（`cell`，`table`）"
+  },
+  "table_colorList": {
+    "description": "单元格背景颜色选择器的 HEX 颜色列表。"
+  },
+  "template_items": {
+    "description": "模板列表"
+  },
+  "textStyle_items": {
+    "description": "文本样式项目列表。"
+  },
+  "mention_triggerText": {
+    "description": "触发提及列表的角色。"
+  },
+  "mention_limitSize": {
+    "description": "提及列表中要显示的项目数量"
+  },
+  "mention_searchStartLength": {
+    "description": "开始搜索提及列表的字符数"
+  },
+  "mention_delayTime": {
+    "description": "显示提及列表前需要等待的时间"
+  },
+  "mention_data": {
+    "description": "静态提及数据（代替 API 使用）。"
+  },
+  "mention_apiUrl": {
+    "description": "调用提及列表的 URL"
+  },
+  "mention_apiHeaders": {
+    "description": "API 调用中要发送的标头"
+  },
+  "mention_useCachingData": {
+    "description": "是否缓存提及列表数据"
+  },
+  "mention_useCachingFieldData": {
+    "description": "是否缓存字段中的提及列表数据"
+  },
+  "fontSize_sizeUnit": {
+    "description": "字体大小的单位。\n\n- 可接受的值包括：`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'` 或 `'text'`。\n\n- 如果使用 `'text'`，则应用基于文本的字体大小列表。"
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "确定是否在下拉菜单中显示默认尺寸标签。"
+  },
+  "fontSize_showIncDecControls": {
+    "description": "当 `true` 时，显示用于调整字体大小的增大和减小按钮。\n\n- 默认为 `false`。当 `sizeUnit` 为 `'text'` 时（被忽略），始终为 `false`。"
+  },
+  "fontSize_disableInput": {
+    "description": "当 `true` 时，禁用直接字体大小输入框。\n\n- 当 `sizeUnit` 为 `'text'` 时，默认为 `true`；否则为 `false`。"
+  },
+  "fontSize_unitMap": {
+    "description": "覆盖或扩展字体大小的默认单位映射。"
+  },
+  "audio_defaultWidth": {
+    "description": "`AUDIO` 标签的默认宽度。"
+  },
+  "audio_defaultHeight": {
+    "description": "`AUDIO` 标签的默认高度。"
+  },
+  "audio_createFileInput": {
+    "description": "是否创建文件输入元素。"
+  },
+  "audio_createUrlInput": {
+    "description": "是否创建 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
+  },
+  "audio_uploadUrl": {
+    "description": "文件将上传到的网址。"
+  },
+  "audio_uploadHeaders": {
+    "description": "文件上传请求中要包含的标头。"
+  },
+  "audio_uploadSizeLimit": {
+    "description": "上传文件总大小限制（以字节为单位）。"
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "单个文件大小限制（以字节为单位）。"
+  },
+  "audio_allowMultiple": {
+    "description": "是否允许上传多个文件。"
+  },
+  "audio_acceptedFormats": {
+    "description": "可接受的文件格式（默认为`\"audio/*\"`）。"
+  },
+  "audio_audioTagAttributes": {
+    "description": "要设置 `AUDIO` 标签的其他属性。"
+  },
+  "audio_insertBehavior": {
+    "description": "组件插入行为（选择和光标位置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
+  },
+  "drawing_outputFormat": {
+    "description": "图形的输出格式。选项：`\"dataurl\"`、`\"svg\"`。"
+  },
+  "drawing_useFormatType": {
+    "description": "是否启用格式类型选择（`block` 与 `inline`）。"
+  },
+  "drawing_defaultFormatType": {
+    "description": "默认格式类型，为`\"block\"`或`\"inline\"`。"
+  },
+  "drawing_keepFormatType": {
+    "description": "绘制完成后是否保留所选格式类型。"
+  },
+  "drawing_lineWidth": {
+    "description": "绘图线条的宽度。"
+  },
+  "drawing_lineReconnect": {
+    "description": "绘图时是否需要重新连接线条。"
+  },
+  "drawing_lineCap": {
+    "description": "线帽样式（`\"butt\"`、`\"round\"` 或 `\"square\"`）。"
+  },
+  "drawing_lineColor": {
+    "description": "线条的颜色。"
+  },
+  "drawing_canResize": {
+    "description": "模态框是否可以调整大小。"
+  },
+  "drawing_maintainRatio": {
+    "description": "调整尺寸时是否保持宽高比。"
+  },
+  "drawing_formSize": {
+    "description": "绘图模态表单的尺寸配置。"
+  },
+  "embed_canResize": {
+    "description": "嵌入元素是否可以调整大小。"
+  },
+  "embed_showHeightInput": {
+    "description": "是否显示身高输入框。"
+  },
+  "embed_defaultWidth": {
+    "description": "嵌入元素的默认宽度（数值或带单位）。"
+  },
+  "embed_defaultHeight": {
+    "description": "嵌入元素的默认高度（数值或带单位）。"
+  },
+  "embed_percentageOnlySize": {
+    "description": "是否只允许按百分比选择尺寸。"
+  },
+  "embed_uploadUrl": {
+    "description": "文件上传网址。"
+  },
+  "embed_uploadHeaders": {
+    "description": "文件上传请求中要包含的头部信息。"
+  },
+  "embed_uploadSizeLimit": {
+    "description": "文件上传总大小限制（以字节为单位）。"
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "单个文件上传大小限制（以字节为单位）。"
+  },
+  "embed_iframeTagAttributes": {
+    "description": "要设置 `IFRAME` 标签的其他属性。"
+  },
+  "embed_query_youtube": {
+    "description": "在嵌入网址后附加 YouTube 查询参数。"
+  },
+  "embed_query_vimeo": {
+    "description": "在嵌入 URL 后附加 Vimeo 查询参数。"
+  },
+  "embed_urlPatterns": {
+    "description": "可识别为可嵌入内容的其他 URL 模式。"
+  },
+  "embed_embedQuery": {
+    "description": "自定义嵌入服务定义。"
+  },
+  "embed_controls": {
+    "description": "图形控制。"
+  },
+  "embed_insertBehavior": {
+    "description": "组件插入行为（选择和光标位置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
+  },
+  "image_canResize": {
+    "description": "图像元素是否可以调整大小。"
+  },
+  "image_showHeightInput": {
+    "description": "是否显示身高输入框。"
+  },
+  "image_defaultWidth": {
+    "description": "图片的默认宽度。如果提供的是数字，则会在末尾添加 `\"px\"`。"
+  },
+  "image_defaultHeight": {
+    "description": "图片的默认高度。如果提供的是数字，则会在末尾添加 `\"px\"`。"
+  },
+  "image_percentageOnlySize": {
+    "description": "是否只允许按百分比选择尺寸。"
+  },
+  "image_createFileInput": {
+    "description": "是否创建用于图片上传的文件输入元素。"
+  },
+  "image_createUrlInput": {
+    "description": "是否创建用于插入图片的 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
+  },
+  "image_uploadUrl": {
+    "description": "图片文件上传的URL端点。"
+  },
+  "image_uploadHeaders": {
+    "description": "文件上传请求中要包含的其他标头。"
+  },
+  "image_uploadSizeLimit": {
+    "description": "上传文件总大小限制（以字节为单位）。"
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "单个文件上传大小限制（以字节为单位）。"
+  },
+  "image_allowMultiple": {
+    "description": "是否允许上传多张图片。"
+  },
+  "image_acceptedFormats": {
+    "description": "支持的图片上传文件格式。"
+  },
+  "image_useFormatType": {
+    "description": "是否启用格式类型选择（`block` 或 `inline`）。"
+  },
+  "image_defaultFormatType": {
+    "description": "默认图像格式类型（`\"block\"` 或 `\"inline\"`）。"
+  },
+  "image_keepFormatType": {
+    "description": "插入图像后是否保留所选格式类型。"
+  },
+  "image_linkEnableFileUpload": {
+    "description": "是否启用链接图像的文件上传功能。"
+  },
+  "image_controls": {
+    "description": "图形控制。"
+  },
+  "image_insertBehavior": {
+    "description": "组件插入行为（选择和光标放置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- 对于行内组件：将光标放置在组件附近，如果没有附近范围则选中组件。\n\n- 对于块组件：根据 `selectMode` 执行相应的行为：\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
+  },
+  "link_uploadUrl": {
+    "description": "文件上传的URL端点。"
+  },
+  "link_uploadHeaders": {
+    "description": "文件上传请求的附加标头。"
+  },
+  "link_uploadSizeLimit": {
+    "description": "文件上传总大小限制（以字节为单位）。"
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "单个文件上传大小限制（以字节为单位）。"
+  },
+  "link_acceptedFormats": {
+    "description": "链接上传可接受的文件格式。"
+  },
+  "link_title": {
+    "description": "显示模态标题。"
+  },
+  "link_textToDisplay": {
+    "description": "创建用于显示输入内容的文本框。"
+  },
+  "link_openNewWindow": {
+    "description": "“在新窗口中打开”复选框的默认选中状态。"
+  },
+  "link_noAutoPrefix": {
+    "description": "如果为 `true`，则禁用将主机 URL 自动添加到链接值的功能。"
+  },
+  "link_relList": {
+    "description": "链接模态框中以复选框形式显示的可用 `rel` 属性值。"
+  },
+  "link_defaultRel": {
+    "description": "默认值 `rel` 根据条件自动应用。"
+  },
+  "link_enableFileUpload": {
+    "description": "如果 `true`，则启用文件上传。"
+  },
+  "math_canResize": {
+    "description": "数学模态框是否可以调整大小。"
+  },
+  "math_autoHeight": {
+    "description": "是否自动调整模态框高度。"
+  },
+  "math_fontSizeList": {
+    "description": "数学表达式大小选择器的字体大小选项列表。"
+  },
+  "math_onPaste": {
+    "description": "用于处理数学输入区域粘贴事件的回调函数。"
+  },
+  "math_formSize": {
+    "description": "指定数学模型维度的对象。"
+  },
+  "video_canResize": {
+    "description": "视频元素是否可以调整大小。"
+  },
+  "video_showHeightInput": {
+    "description": "是否显示身高输入框。"
+  },
+  "video_defaultWidth": {
+    "description": "视频元素的默认宽度。如果提供的是数字，则会在末尾添加 `\"px\"`。"
+  },
+  "video_defaultHeight": {
+    "description": "视频元素的默认高度。如果提供的是数字，则会在末尾添加 `\"px\"`。"
+  },
+  "video_percentageOnlySize": {
+    "description": "是否只允许按百分比选择尺寸。"
+  },
+  "video_createFileInput": {
+    "description": "是否创建用于视频上传的文件输入元素。"
+  },
+  "video_createUrlInput": {
+    "description": "是否创建用于视频嵌入的 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
+  },
+  "video_uploadUrl": {
+    "description": "视频文件上传的URL端点。"
+  },
+  "video_uploadHeaders": {
+    "description": "视频上传请求中要包含的其他标头。"
+  },
+  "video_uploadSizeLimit": {
+    "description": "视频上传总大小限制（以字节为单位）。"
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "视频单文件上传大小限制（以字节为单位）。"
+  },
+  "video_allowMultiple": {
+    "description": "是否允许上传多个视频。"
+  },
+  "video_acceptedFormats": {
+    "description": "可接受的视频上传文件格式（`\"video/*\"`）。"
+  },
+  "video_defaultRatio": {
+    "description": "视频的默认宽高比（高度/宽度，例如 16:9 → `9/16 = 0.5625`）。"
+  },
+  "video_showRatioOption": {
+    "description": "是否在模态框中显示比例选项。"
+  },
+  "video_ratioOptions": {
+    "description": "视频缩放的自定义比例选项（值 = 高度/宽度）。"
+  },
+  "video_videoTagAttributes": {
+    "description": "要设置 `VIDEO` 标签的其他属性。"
+  },
+  "video_iframeTagAttributes": {
+    "description": "要设置 `IFRAME` 标签的其他属性。"
+  },
+  "video_query_youtube": {
+    "description": "YouTube 嵌入的其他查询参数。"
+  },
+  "video_query_vimeo": {
+    "description": "Vimeo嵌入的其他查询参数。"
+  },
+  "video_embedQuery": {
+    "description": "自定义嵌入服务定义（参见`EmbedPluginOptions.embedQuery`）。"
+  },
+  "video_urlPatterns": {
+    "description": "用于视频嵌入的其他 URL 模式。"
+  },
+  "video_extensions": {
+    "description": "视频上传时需要识别的其他文件扩展名。"
+  },
+  "video_controls": {
+    "description": "图形控制。"
+  },
+  "video_insertBehavior": {
+    "description": "组件插入行为（选择和光标位置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
+  }
+}

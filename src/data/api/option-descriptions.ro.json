@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Valoare inițială pentru editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Text substituent.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Atribute pentru cadrul editabil[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Lățime pentru editor.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Lățime minimă pentru editor.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Lățime maximă pentru editor.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Înălțime pentru editor.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Înălțimea minimă pentru editor.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Înălțimea maximă pentru editor.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Șir de stil al cadrului superior al editorului.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Conținutul va fi plasat într-un iframe și izolat de restul paginii.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Permite utilizarea etichetelor HTML, HEAD, BODY și a declarației DOCTYPE pe `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Atributele lui `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Activează bara de stare.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Afișează structura curentă a nodurilor în bara de stare.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Activează funcția de redimensionare a barei de stare inferioare.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Afișează numărul de caractere din editor.\n- Dacă opțiunea `maxCharCount` are o valoare, aceasta devine `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Numărul maxim de caractere permise a fi inserate în editor.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Text care va fi afișat în zona `charCounter` din bara de jos.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definește metoda de calcul a opțiunii `charCounter`.\n- `char`: Lungimea caracterelor.\n- `byte`: Dimensiunea datelor binare ale caracterelor.\n- `byte-html`: Dimensiunea datelor binare ale întregului șir HTML.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Arată numărul de cuvinte din editor.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Text care va fi afișat în zona `wordCounter` din bara de jos.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Stiluri aplicate containerului superior (de exemplu, lățime, z-index etc.)."
+  },
+  "frame": {
+    "description": "Stiluri aplicate containerului iframe (de exemplu, înălțime, înălțime minimă)."
+  },
+  "editor": {
+    "description": "Stiluri aplicate zonei de conținut editabil."
+  },
+  "codeMirrorEditor": {
+    "description": "Instanță editor CodeMirror (la nivel de cadru). Setată de `_checkCodeMirror` după inițializare."
+  },
+  "plugins": {
+    "description": "Configurarea pluginului. Transmite o matrice de clase de pluginuri sau un obiect cu cheie după numele pluginului.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Listă de butoane din bara de instrumente, grupate pe sub-matrici.\n- Valoarea implicită urmează cu {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Activează modul de migrare pentru SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Mod bară de instrumente: `classic`, `inline`, `balloon`, `balloon-always`. Adăugați `:bottom` pentru a plasa bara de instrumente în partea de jos (de exemplu, `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Tip editor. Folosește `\"document\"` pentru un layout în stil document, cu subtipuri opționale după `:`.\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Temă editor.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Configurare limbă. Implicit: EN"
+  },
+  "icons": {
+    "description": "Suprascrie pictogramele implicite."
+  },
+  "textDirection": {
+    "description": "Direcția textului: `ltr` sau `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Permite filtrarea strictă a etichetelor, atributelor și stilurilor.\n- Folosește `true` pentru a activa toate filtrele (implicit) sau un obiect pentru a controla filtrele individuale.\n- Setarea `false` ​​nu este acceptată; folosește formularul obiectului pentru a dezactiva anumite filtre.\n- :descrierea filtrului\n- `tagFilter`: Filtrează etichetele HTML nepermise (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrează elementele de formatare (`formatLine`/`formatBlock`)\n- `classFilter`: Filtrează numele claselor CSS nepermise (`allowedClassName`)\n- `textStyleTagFilter`: Filtrează etichetele de stil text (b, i, u, span, etc.)\n- `attrFilter`: Filtrează atributele HTML nepermise (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtrează stilurile inline nepermise (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Etichetele sunt tratate ca unități întregi la selectarea întregului conținut.\n- Valoarea implicită urmează {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Specifică elemente HTML care să permită acces suplimentar dincolo de lista implicită de permisiuni. Delimitator: `\"|\"`.\n- Adăugat la lista implicită determinată de {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Specifică elementele HTML care nu ar trebui utilizate. Delimitator: `\"|\"`.\n- Etichetele specificate aici vor fi eliminate în cele din urmă, chiar dacă sunt incluse în alte liste albe.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "O listă de etichete care pot fi păstrate chiar dacă valorile lor sunt goale.\n- Valoarea implicită urmează după {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Concatenate cu `ALLOWED_EMPTY_NODE_LIST` pentru a forma lista finală `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Nume de clase permise.\n- Adăugată valoarea implicită {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Specifică atribute suplimentare permise pentru fiecare etichetă. `\"*\"` se aplică tuturor etichetelor.\n- Regulile specificate aici vor fi îmbinate în {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Specifică atributele care nu sunt permise de etichetă. `\"*\"` se aplică tuturor etichetelor.\n- Atributele specificate aici vor fi eliminate în cele din urmă, chiar dacă sunt permise de alte setări.\n- O listă de elemente obligatorii, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, este întotdeauna inclusă.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Etichete suplimentare pentru stilul textului.\n- Valoarea implicită urmează după {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Mapează stilurile de text la etichete HTML specifice.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Specifică stiluri suplimentare la lista de stiluri permise. Delimitator: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Specifică stilurile permise pentru etichetele HTML. Cheia este numele etichetei (etichetele), valoarea este stilurile permise delimitate prin viraje verticale.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Specifică stilurile permise pentru eticheta `span`.\n- Valoarea implicită urmează după {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Specifică stilurile permise pentru elementul `line` (p..).\n- Valoarea implicită urmează după {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Unități de dimensiune a fontului permise.\n- Valoarea implicită urmează {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Determină modul în care sunt gestionate elementele inline (de exemplu, `<span>`, `<strong>`) la ștergerea textului.\n- `repeat`: Stilurile sunt păstrate, cu excepția cazului în care se apasă repetat tasta Backspace.\n- Apăsarea continuă va elimina în cele din urmă stilurile.\n- `none`: Stilurile nu sunt păstrate. Elementele inline sunt eliminate imediat odată cu textul.\n- `always`: Stilurile persistă pe termen nelimitat, cu excepția cazului în care sunt eliminate explicit.\n- Chiar dacă tot textul dintr-un element inline este șters, elementul în sine rămâne.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Elementul implicit `line` la inserarea de linii noi.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Specifică formatul implicit pentru sfârșitul de linie.\n- [Recomandat] `line` : Sfârșitul de linie este împărțit în etichete generale.\n- [Nerecomandat] `br` ​​: Sfârșiturile de linie sunt tratate ca <br> pe aceeași linie. (ca shift+enter)\n- Sfârșiturile de linie sunt tratate ca <br> în cadrul `line`.\n- Puteți crea un nou `line` introducând un sfârșit de linie de două ori la rând.\n- Formatele care includ `line`, cum ar fi „Citat”, funcționează în continuare pe baza `line`.\n- procesele suneditor funcționează în unități `line`.\n- Când este setat la `br`, performanța poate scădea la editarea multor date.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Proprietățile liniei care ar trebui resetate la schimbarea liniilor. Delimitator: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "În plus, sunt permise elemente `line` dincolo de cele implicite. Delimitator: `\"|\"`.\n- Concatenat cu {@link PrivateBaseOptions.__defaultFormatLine} pentru a forma lista finală `line`.\n- Elementul `line` conține și elementul `brLine`.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "În plus, sunt permise elemente `brLine` dincolo de cele implicite.\n- Concatenat cu {@link PrivateBaseOptions.__defaultFormatBrLine} pentru a forma lista finală `brLine`.\n- Elementele `brLine` sunt incluse în elementul `line`.\n- Sfârșitul de linie al elementelor `brLine` este eticheta `BR`.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "În plus, sunt permise elemente `closureBrLine` dincolo de cele implicite.\n- Concatenat cu {@link PrivateBaseOptions.__defaultFormatClosureBrLine} pentru lista finală `closureBrLine`.\n- Elementele `closureBrLine` sunt incluse în `brLine`.\n- Sfârșitul de linie al elementelor `closureBrLine` este eticheta `BR`.\n- ※ Nu puteți ieși din acest format cu tasta Enter sau tasta Backspace.\n- ※ Folosiți-l doar în cazuri speciale. ([ex] formatul celulelor din tabel)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "În plus, sunt permise elemente `block` dincolo de cele implicite.\n- Concatenat cu {@link PrivateBaseOptions.__defaultFormatBlock} pentru a forma lista finală `block`.\n- `block` încapsulează `line` și `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "În plus, sunt permise elemente `closureBlock` dincolo de cele implicite.\n- Concatenat cu {@link PrivateBaseOptions.__defaultFormatClosureBlock} pentru lista finală `closureBlock`.\n- Elementele `closureBlock` sunt incluse în `block`.\n- Elementul `closureBlock` încapsulează `line` și `component`.\n- ※ Nu puteți ieși din acest format cu tasta Enter sau Backspace.\n- ※ Folosiți-l doar în cazuri speciale. (de exemplu, formatul celulelor din tabel)",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Închide ferestrele modale când se face clic în afara acestora.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Sincronizează indentarea tabulatorilor cu spațiile.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Dezactivează introducerea cu tasta Tab.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Lățimea barei de instrumente.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Element container pentru bara de instrumente."
+  },
+  "toolbar_sticky": {
+    "description": "Activează bara de instrumente fixată.\n- `number`: Setează poziția superioară a barei de instrumente fixate (px). Folosește `-1` ​​pentru a dezactiva bara de instrumente fixată.\n- `{top, offset}`: `top` este poziția fixată când antetul paginii este vizibil.\n- `offset` este poziția fixată când o tastatură virtuală deplasează viewport-ul (de exemplu, pe tablete, dispozitive tactile).\n- Când tastatura virtuală este activă, `offset` înlocuiește `top` astfel încât bara de instrumente să nu lase un spațiu liber\n- pentru un antet de pagină care a ieșit din vedere. Implicit `offset` este `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Ascunde inițial bara de instrumente.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Configurarea subbarei de instrumente. O bară de instrumente secundară care apare la selectarea textului.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Element container pentru bara de stare."
+  },
+  "shortcutsHint": {
+    "description": "Afișează indicii pentru comenzi rapide în tooltip-uri.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Dezactivează comenzile rapide de la tastatură.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Comenzi rapide personalizate de la tastatură.\n- Tastele care încep cu `_` sunt comenzi rapide personalizate definite de utilizator. Fiecare valoare este o matrice de perechi `[keyCombo, hintLabel]`.\n- Combinațiile de taste utilizează valorile `c` (Ctrl/Cmd), `s` (Shift) și `KeyEvent.code` unite prin `+`.\n- Folosește `$~pluginName.method` pentru a apela o metodă specifică a pluginului.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Păstrează formatul conținutului copiat.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Convertește automat adresele URL în hyperlinkuri. (Este necesar pluginul `Link`)\n- Implicit: `Boolean(plugins.link)` ​​— determinat de dacă pluginul `link` este activat."
+  },
+  "historyStackDelayTime": {
+    "description": "Timp de întârziere pentru actualizările stivei istorice (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Numărul maxim de intrări în istoric per cadru rădăcină. Cele mai vechi intrări sunt eliminate când sunt depășite.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Numele clasei pentru imprimare.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Decalaj aplicat la intrarea în modul ecran complet.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Șablon HTML personalizat pentru modul de previzualizare. Folosește `{{ contents }}` ca substituent pentru conținutul editorului.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Șablon HTML personalizat pentru modul de imprimare. Folosiți `{{ contents }}` ca substituent pentru conținutul editorului.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Activează selecția automată a componentelor inserate.\n- Pentru componentele în linie: plasează cursorul lângă componentă sau selectează dacă nu există un interval în apropiere.\n- Pentru componentele bloc: execută comportamentul bazat pe `selectMode`:\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Protocol URL implicit pentru linkuri.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Durata de afișare a mesajelor de tip toast (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Activează modul de vizualizare a codului liber.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Afișează interfața încorporată a panoului Căutare/Înlocuire.\n- Găsirea este întotdeauna creată intern; această opțiune controlează dacă panoul este vizibil pentru utilizatori (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Caută instantaneu pe măsură ce tastați (cu respingere automată). Când este apăsată tasta fals, căutarea se execută doar cu Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Biblioteci externe precum CodeMirror, KaTeX sau MathJax.\n- Consultați {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Ghidul Bibliotecilor Externe}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Specifică etichete suplimentare permise sau nepermise. `true` pentru a permite, `false` ​​pentru a interzice.\n- Valoarea implicită urmează {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Configurarea rutinelor de gestionare a evenimentelor utilizatorului.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Lista butoanelor barei de instrumente utilizate în prezent"
+  },
+  "buttons_sub": {
+    "description": "Lista butoanelor din subbara de instrumente utilizate în prezent"
+  },
+  "toolbar_sub_width": {
+    "description": "Lățimea subbarei de instrumente."
+  },
+  "reverseCommands": {
+    "description": "Matrice de perechi de comenzi inverse îmbinate.\n- Include `indent-outdent` implicit + `reverseButtons` ​​al utilizatorului."
+  },
+  "codeMirror": {
+    "description": "Obiectul de configurare CodeMirror din `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Folosește CodeMirror pentru vizualizarea codului."
+  },
+  "audioGallery_data": {
+    "description": "Date directe fără apeluri la server"
+  },
+  "audioGallery_url": {
+    "description": "URL-ul solicitării serverului"
+  },
+  "audioGallery_headers": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Miniatură implicită"
+  },
+  "fileBrowser_data": {
+    "description": "Date directe fără apeluri la server (evitează preluarea URL-ului)."
+  },
+  "fileBrowser_url": {
+    "description": "URL-ul solicitării serverului"
+  },
+  "fileBrowser_headers": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Adresa URL implicită pentru miniatură sau o funcție care returnează o adresă URL pentru miniatură per element."
+  },
+  "fileBrowser_props": {
+    "description": "Nume suplimentare de etichete"
+  },
+  "fileGallery_data": {
+    "description": "Date directe fără apeluri la server"
+  },
+  "fileGallery_url": {
+    "description": "URL-ul solicitării serverului"
+  },
+  "fileGallery_headers": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Miniatură implicită"
+  },
+  "imageGallery_data": {
+    "description": "Date directe fără apeluri la server"
+  },
+  "imageGallery_url": {
+    "description": "URL-ul solicitării serverului"
+  },
+  "imageGallery_headers": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "videoGallery_data": {
+    "description": "Date directe fără apeluri la server"
+  },
+  "videoGallery_url": {
+    "description": "URL-ul solicitării serverului"
+  },
+  "videoGallery_headers": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Miniatură implicită"
+  },
+  "codeBlock_langs": {
+    "description": "Listă de limbaje de programare selectabile pentru blocuri de cod.\n- Implicit setează 21 de limbaje comune\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Setează matricea goală `[]` pentru a dezactiva complet interfața de selectare a limbii."
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL-ul solicitării serverului pentru generarea PDF-ului"
+  },
+  "exportPDF_fileName": {
+    "description": "Numele fișierului PDF generat"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL-ul solicitării serverului pentru încărcarea fișierului"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Anteturile cererilor serverului"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Limita dimensiunii totale de încărcare în octeți"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Limită de dimensiune a unui singur fișier în octeți"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Permiteți încărcarea mai multor fișiere"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Formate de fișiere acceptate."
+  },
+  "fileUpload_as": {
+    "description": "Specificați forma implicită a componentei de fișier ca `box` sau `link`"
+  },
+  "fileUpload_controls": {
+    "description": "Controale suplimentare care vor fi adăugate figurii"
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Comportamentul inserării componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
+  },
+  "align_items": {
+    "description": "Aliniați elementele"
+  },
+  "backgroundColor_items": {
+    "description": "Listă de culori."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Numărul de culori pe linie"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Dezactivați intrarea HEX"
+  },
+  "blockStyle_items": {
+    "description": "Listă de formate.\n- `command` — `\"line\"`: bloc pe o singură linie, `\"br-line\"`: bloc separat prin br, `\"block\"`: bloc container."
+  },
+  "font_items": {
+    "description": "Listă de fonturi"
+  },
+  "fontColor_items": {
+    "description": "Listă de culori."
+  },
+  "fontColor_splitNum": {
+    "description": "Numărul de culori pe linie"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Dezactivați intrarea HEX"
+  },
+  "hR_items": {
+    "description": "Listă de resurse umane"
+  },
+  "layout_items": {
+    "description": "Listă de layout-uri. Fiecare element definește un șablon de layout denumit cu HTML brut."
+  },
+  "lineHeight_items": {
+    "description": "Listă de înălțimi ale liniilor"
+  },
+  "paragraphStyle_items": {
+    "description": "Listă de elemente de paragraf"
+  },
+  "table_scrollType": {
+    "description": "Tip de derulare (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Poziția subtitrării (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Poziția controlerului de celulă (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Listă de culori HEX pentru selectorul de culoare de fundal al celulei."
+  },
+  "template_items": {
+    "description": "Listă de șabloane"
+  },
+  "textStyle_items": {
+    "description": "Listă de elemente în stil text."
+  },
+  "mention_triggerText": {
+    "description": "Caracterul care declanșează lista de mențiuni."
+  },
+  "mention_limitSize": {
+    "description": "Numărul de elemente de afișat în lista de mențiuni"
+  },
+  "mention_searchStartLength": {
+    "description": "Numărul de caractere pentru a începe căutarea listei de mențiuni"
+  },
+  "mention_delayTime": {
+    "description": "Timpul de așteptare înainte de afișarea listei de mențiuni"
+  },
+  "mention_data": {
+    "description": "Date statice de menționare (folosite în loc de API)."
+  },
+  "mention_apiUrl": {
+    "description": "URL-ul pentru apelarea listei de mențiuni"
+  },
+  "mention_apiHeaders": {
+    "description": "Anteturile de trimis odată cu apelul API"
+  },
+  "mention_useCachingData": {
+    "description": "Dacă se vor salva în cache datele din lista de mențiuni"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Dacă se vor memora în cache datele listei de mențiuni în câmp"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Unitatea pentru dimensiunea fontului.\n- Valorile acceptate includ: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` sau `'text'`.\n- Dacă se utilizează `'text'`, se aplică o listă de dimensiuni ale fontului bazată pe text."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Stabilește dacă eticheta cu dimensiunea implicită este afișată în meniul derulant."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Când `true`, se afișează butoanele de mărire și micșorare pentru ajustarea dimensiunii fontului.\n\n- Implicit, se folosește `false`. Întotdeauna `false` când `sizeUnit` este `'text'` (ignorat)."
+  },
+  "fontSize_disableInput": {
+    "description": "Când este `true`, dezactivează caseta de introducere directă a dimensiunii fontului.\n- Implicit, este `true` ​​când `sizeUnit` este `'text'`, altfel este `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Suprascrie sau extinde maparea implicită a unităților pentru dimensiunile fonturilor."
+  },
+  "audio_defaultWidth": {
+    "description": "Lățimea implicită a etichetei `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "Înălțimea implicită a etichetei `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "Dacă se creează un element de intrare pentru fișier."
+  },
+  "audio_createUrlInput": {
+    "description": "Dacă se creează un element de introducere URL.\n- Implicit este `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "URL-ul la care vor fi încărcate fișierele."
+  },
+  "audio_uploadHeaders": {
+    "description": "Anteturi de inclus în solicitarea de încărcare a fișierului."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Limita totală de dimensiune a încărcării în octeți."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Limita de dimensiune a unui singur fișier în octeți."
+  },
+  "audio_allowMultiple": {
+    "description": "Dacă se permit încărcările multiple de fișiere."
+  },
+  "audio_acceptedFormats": {
+    "description": "Formate de fișier acceptate (implicit este `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Atribute suplimentare de setat pe eticheta `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "Comportamentul inserării componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
+  },
+  "drawing_outputFormat": {
+    "description": "Formatul de ieșire al desenului. Opțiuni: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Dacă se activează selectarea tipului de format (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Tipul de format implicit, fie `\"block\"`, fie `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Dacă se menține tipul de format ales după desenare."
+  },
+  "drawing_lineWidth": {
+    "description": "Lățimea liniei de desen."
+  },
+  "drawing_lineReconnect": {
+    "description": "Dacă se reconectau liniile la desenare."
+  },
+  "drawing_lineCap": {
+    "description": "Stilul încheierii liniei (`\"butt\"`, `\"round\"` ​​sau `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Culoarea liniei de desen."
+  },
+  "drawing_canResize": {
+    "description": "Dacă formularul modal poate fi redimensionat."
+  },
+  "drawing_maintainRatio": {
+    "description": "Dacă se menține raportul de aspect la redimensionare."
+  },
+  "drawing_formSize": {
+    "description": "Configurația dimensiunii pentru formularul modal de desen."
+  },
+  "embed_canResize": {
+    "description": "Dacă elementul embed poate fi redimensionat."
+  },
+  "embed_showHeightInput": {
+    "description": "Dacă se afișează câmpul de introducere a înălțimii."
+  },
+  "embed_defaultWidth": {
+    "description": "Lățimea implicită a elementului embed (valoare numerică sau cu unitate)."
+  },
+  "embed_defaultHeight": {
+    "description": "Înălțimea implicită a elementului embed (valoare numerică sau cu unitate)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Dacă se permite doar dimensionarea bazată pe procente."
+  },
+  "embed_uploadUrl": {
+    "description": "Adresa URL pentru încărcarea fișierelor."
+  },
+  "embed_uploadHeaders": {
+    "description": "Anteturi de inclus în cererile de încărcare a fișierelor."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Limita de dimensiune totală a fișierelor încărcate, în octeți."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Limita de dimensiune a unui singur fișier încărcat, în octeți."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Atribute suplimentare de setat pe eticheta `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "Parametrul de interogare YouTube a fost adăugat la adresa URL de încorporare."
+  },
+  "embed_query_vimeo": {
+    "description": "Parametrul de interogare Vimeo a fost adăugat la adresa URL de încorporare."
+  },
+  "embed_urlPatterns": {
+    "description": "Modele URL suplimentare de recunoscut ca și conținut încorporat."
+  },
+  "embed_embedQuery": {
+    "description": "Definiții personalizate ale serviciilor de încorporare."
+  },
+  "embed_controls": {
+    "description": "Controale figurative."
+  },
+  "embed_insertBehavior": {
+    "description": "Comportamentul inserării componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
+  },
+  "image_canResize": {
+    "description": "Dacă elementul de imagine poate fi redimensionat."
+  },
+  "image_showHeightInput": {
+    "description": "Dacă se afișează câmpul de introducere a înălțimii."
+  },
+  "image_defaultWidth": {
+    "description": "Lățimea implicită a imaginii. Dacă este furnizat un număr, se va adăuga `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "Înălțimea implicită a imaginii. Dacă este furnizat un număr, se va adăuga `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Dacă se permite doar dimensionarea bazată pe procente."
+  },
+  "image_createFileInput": {
+    "description": "Dacă se creează un element de introducere a fișierelor pentru încărcările de imagini."
+  },
+  "image_createUrlInput": {
+    "description": "Dacă se creează un element de introducere URL pentru inserarea imaginii.\n- Implicit se stabilește `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
+  },
+  "image_uploadUrl": {
+    "description": "Punctul final URL pentru încărcarea fișierelor imagine."
+  },
+  "image_uploadHeaders": {
+    "description": "Anteturi suplimentare de inclus în solicitarea de încărcare a fișierului."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Limita totală de dimensiune a încărcării în octeți."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Limita de dimensiune a unui singur fișier încărcat, în octeți."
+  },
+  "image_allowMultiple": {
+    "description": "Dacă sunt permise încărcările multiple de imagini."
+  },
+  "image_acceptedFormats": {
+    "description": "Formatele de fișier acceptate pentru încărcarea imaginilor."
+  },
+  "image_useFormatType": {
+    "description": "Dacă se activează selectarea tipului de format (`block` sau `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "Tipul implicit de format de imagine (`\"block\"` sau `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Dacă se păstrează tipul de format ales după inserarea imaginii."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Dacă se activează încărcarea fișierelor pentru imaginile conectate."
+  },
+  "image_controls": {
+    "description": "Controale figurative."
+  },
+  "image_insertBehavior": {
+    "description": "Comportamentul de inserare a componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- Pentru componentele inline: plasează cursorul lângă componentă sau selectează dacă nu există un interval în apropiere.\n- Pentru componentele bloc: execută comportamentul bazat pe `selectMode`:\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
+  },
+  "link_uploadUrl": {
+    "description": "Punctul final URL pentru încărcarea fișierelor."
+  },
+  "link_uploadHeaders": {
+    "description": "Anteturi suplimentare pentru solicitările de încărcare a fișierelor."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Limita de dimensiune totală a fișierelor încărcate, în octeți."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Limita de dimensiune a unui singur fișier încărcat, în octeți."
+  },
+  "link_acceptedFormats": {
+    "description": "Formate de fișier acceptate pentru încărcarea linkurilor."
+  },
+  "link_title": {
+    "description": "Afișarea titlului modal."
+  },
+  "link_textToDisplay": {
+    "description": "Creați text pentru a afișa intrarea."
+  },
+  "link_openNewWindow": {
+    "description": "Valoare implicită bifată a casetei de selectare „Deschide într-o fereastră nouă”."
+  },
+  "link_noAutoPrefix": {
+    "description": "Dacă este `true`, dezactivează prefixarea automată a adresei URL a gazdei la valoarea linkului."
+  },
+  "link_relList": {
+    "description": "Valorile atributului `rel` disponibile sunt afișate ca și casete de selectare în fereastra modală a linkului."
+  },
+  "link_defaultRel": {
+    "description": "Valorile implicite `rel` sunt aplicate automat în funcție de condiție."
+  },
+  "link_enableFileUpload": {
+    "description": "Dacă este `true`, activează încărcarea fișierelor."
+  },
+  "math_canResize": {
+    "description": "Dacă modalul matematic poate fi redimensionat."
+  },
+  "math_autoHeight": {
+    "description": "Dacă se ajustează automat înălțimea feței modale."
+  },
+  "math_fontSizeList": {
+    "description": "O listă de opțiuni pentru dimensiunea fontului pentru selectorul de dimensiune a expresiei matematice."
+  },
+  "math_onPaste": {
+    "description": "O funcție de apel invers pentru gestionarea evenimentelor de lipire în zona de introducere a datelor matematice."
+  },
+  "math_formSize": {
+    "description": "Un obiect care specifică dimensiunile pentru modalul matematic."
+  },
+  "video_canResize": {
+    "description": "Dacă elementul video poate fi redimensionat."
+  },
+  "video_showHeightInput": {
+    "description": "Dacă se afișează câmpul de introducere a înălțimii."
+  },
+  "video_defaultWidth": {
+    "description": "Lățimea implicită a elementului video. Dacă este furnizat un număr, se va adăuga `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "Înălțimea implicită a elementului video. Dacă este furnizat un număr, se va adăuga `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Dacă se permite doar dimensionarea bazată pe procente."
+  },
+  "video_createFileInput": {
+    "description": "Dacă se creează un element de introducere a fișierelor pentru încărcările video."
+  },
+  "video_createUrlInput": {
+    "description": "Dacă se creează un element de introducere URL pentru încorporarea videoclipurilor.\n- Implicit se stabilește `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
+  },
+  "video_uploadUrl": {
+    "description": "Punctul final URL pentru încărcarea fișierelor video."
+  },
+  "video_uploadHeaders": {
+    "description": "Anteturi suplimentare de inclus în solicitarea de încărcare a videoclipului."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Limita totală de încărcare pentru videoclipuri, în octeți."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Limita de dimensiune a unui singur fișier video încărcat, în octeți."
+  },
+  "video_allowMultiple": {
+    "description": "Dacă sunt permise încărcările multiple de videoclipuri."
+  },
+  "video_acceptedFormats": {
+    "description": "Formate de fișiere acceptate pentru încărcarea videoclipurilor (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Raportul de aspect implicit pentru videoclip (înălțime/lățime, de ex. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Dacă se afișează opțiunea de raport în fereastra modală."
+  },
+  "video_ratioOptions": {
+    "description": "Opțiuni de raport personalizate pentru redimensionarea videoclipurilor (valoare = înălțime/lățime)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Atribute suplimentare de setat pe eticheta `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Atribute suplimentare de setat pe eticheta `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "Parametri de interogare suplimentari pentru încorporarea YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Parametri de interogare suplimentari pentru încorporarea Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "Definiții personalizate pentru serviciile de încorporare (consultați `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Modele URL suplimentare pentru încorporarea videoclipurilor."
+  },
+  "video_extensions": {
+    "description": "Extensii de fișiere suplimentare care trebuie recunoscute pentru încărcările video."
+  },
+  "video_controls": {
+    "description": "Controale figurative."
+  },
+  "video_insertBehavior": {
+    "description": "Comportamentul inserării componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
+  }
+}

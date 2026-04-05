@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Anfangswert für den Editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Platzhaltertext.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Attribute für den bearbeitbaren Rahmen[.sun-editor-editable].\n\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Breite für den Editor.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Minimale Breite für den Editor.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Maximale Breite für den Editor.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Größe für den Redakteur.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Mindestgröße für den Editor.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Maximale Höhe für den Editor.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Stilzeichenfolge des oberen Rahmens des Editors.\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "Der Inhalt wird in einem iFrame platziert und vom Rest der Seite isoliert.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Ermöglicht die Verwendung von HTML-, HEAD-, BODY-Tags und DOCTYPE-Deklarationen auf `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Attribute von `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Aktiviert die Statusleiste.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Zeigt die aktuelle Knotenstruktur in der Statusleiste an.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Aktiviert die Funktion zum Ändern der Größe der unteren Statusleiste.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Zeigt die Anzahl der Zeichen im Editor an.\n\n– Wenn die Option `maxCharCount` einen Wert hat, wird sie zu `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "Die maximale Anzahl an Zeichen, die in den Editor eingefügt werden dürfen.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Text, der im Bereich `charCounter` der unteren Leiste angezeigt werden soll.\n\n``js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Definiert die Berechnungsmethode der Option `charCounter`.\n\n- `char`: Zeichenlänge.\n\n- `byte`: Binärdatengröße der Zeichen.\n\n- `byte-html`: Binärdatengröße der gesamten HTML-Zeichenkette.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Zeigt die Anzahl der Wörter im Editor an.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Text, der im Bereich `wordCounter` der unteren Leiste angezeigt werden soll.\n\n``js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Stile, die auf den oberen Container angewendet werden (z. B. Breite, z-Index usw.)."
+  },
+  "frame": {
+    "description": "Auf den iframe-Container angewendete Stile (z. B. Höhe, Mindesthöhe)."
+  },
+  "editor": {
+    "description": "Auf den bearbeitbaren Inhaltsbereich angewendete Stile."
+  },
+  "codeMirrorEditor": {
+    "description": "CodeMirror-Editorinstanz (Frame-Ebene). Wird nach der Initialisierung von `_checkCodeMirror` festgelegt."
+  },
+  "plugins": {
+    "description": "Plugin-Konfiguration. Übergeben Sie ein Array von Plugin-Klassen oder ein Objekt, dessen Schlüssel der Plugin-Name ist.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Liste der Symbolleistenschaltflächen, gruppiert nach Unterarrays.\n\n– Standardmäßig gilt: {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Aktiviert den Migrationsmodus für SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Symbolleistenmodus: `classic`, `inline`, `balloon`, `balloon-always`. Hängen Sie `:bottom` an, um die Symbolleiste unten zu platzieren (z. B. `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Editor-Typ. Verwenden Sie `\"document\"` für ein Dokumentlayout mit optionalen Untertypen nach `:`.\n\n``js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Editor-Design.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Sprachkonfiguration. Standard: EN"
+  },
+  "icons": {
+    "description": "Überschreibt die Standardsymbole."
+  },
+  "textDirection": {
+    "description": "Textrichtung: `ltr` oder `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Ermöglicht die strenge Filterung von Tags, Attributen und Stilen.\n\n- Verwenden Sie `true`, um alle Filter zu aktivieren (Standard), oder ein Objekt, um einzelne Filter zu steuern.\n\n- Die Einstellung `false` ​​wird nicht unterstützt; verwenden Sie stattdessen die Objektform, um bestimmte Filter zu deaktivieren.\n\n- :Filterbeschreibung\n\n- `tagFilter`: Filtert unzulässige HTML-Tags (`elementWhitelist`/`elementBlacklist`)\n\n- `formatFilter`: Filtert Formatierungselemente (`formatLine`/`formatBlock`)\n\n- `classFilter`: Filtert unzulässige CSS-Klassennamen (`allowedClassName`)\n\n- `textStyleTagFilter`: Filtert Textstil-Tags (b, i, u, span usw.)\n\n- `attrFilter`: Filtert unzulässige HTML-Attribute (`attributeWhitelist`/`attributeBlacklist`)\n\n- `styleFilter`: Filtert unzulässige Inline-Stile (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Tags werden bei der Auswahl des gesamten Inhalts als vollständige Einheiten behandelt.\n\n– Standardmäßig gilt {@link DEFAULTS.SCOPE_SELECTION_TAGS}.",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Gibt HTML-Elemente an, die zusätzlich zur Standard-Zulassungsliste erlaubt werden sollen. Trennzeichen: `\"|\"`.\n\n– Zur Standardliste hinzugefügt, die durch {@link PrivateBaseOptions.__defaultElementWhitelist} bestimmt wird.\n\n``js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Gibt HTML-Elemente an, die nicht verwendet werden sollen. Trennzeichen: `\"|\"`.\n\n- Die hier angegebenen Tags werden entfernt, selbst wenn sie in anderen Whitelists enthalten sind.\n\n``js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Eine Liste von Tags, die auch dann beibehalten werden dürfen, wenn ihre Werte leer sind.\n\n– Standardmäßig gilt {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}.\n\n– Wird mit `ALLOWED_EMPTY_NODE_LIST` verkettet, um die endgültige `allowedEmptyTags`-Liste zu bilden.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Zulässige Klassennamen.\n\n– Der Standardwert {@link DEFAULTS.CLASS_NAME} wurde hinzugefügt.",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Legt zusätzliche Attribute fest, die für jedes Tag zulässig sind. `\"*\"` gilt für alle Tags.\n\n- Die hier angegebenen Regeln werden in {@link PrivateBaseOptions.__defaultAttributeWhitelist} übernommen.\n\n``js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Legt Attribute fest, die pro Tag verboten werden sollen. `\"*\"` gilt für alle Tags.\n\n– Die hier angegebenen Attribute werden entfernt, selbst wenn sie durch andere Einstellungen erlaubt sind.\n\n– Eine Liste der erforderlichen Elemente, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, ist immer enthalten.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Zusätzliche Textstil-Tags.\n\n- Standardmäßig werden die Tags {@link PrivateBaseOptions.__textStyleTags} verwendet.",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Ordnet Textstile bestimmten HTML-Tags zu.\n\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Gibt zusätzliche Stile für die Liste der zulässigen Stile an. Trennzeichen: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Legt zulässige Stile für HTML-Tags fest. Der Schlüssel ist der/die Tag-Name(n), der Wert sind die durch Pipe-Zeichen getrennten zulässigen Stile.\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Legt zulässige Stile für das `span`-Tag fest.\n\n– Der Standardwert entspricht {@link DEFAULTS.SPAN_STYLES}.",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Legt zulässige Stile für das `line`-Element fest (p..).\n\n– Der Standardwert entspricht {@link DEFAULTS.LINE_STYLES}.",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Zulässige Schriftgrößeneinheiten.\n\n– Standardmäßig werden die Einheiten {@link DEFAULTS.SIZE_UNITS} verwendet.",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Legt fest, wie Inline-Elemente (z. B. `<span>`, `<strong>`) beim Löschen von Text behandelt werden.\n\n- `repeat`: Formatierungen bleiben erhalten, solange nicht wiederholt die Rücktaste gedrückt wird.\n\n- Durch wiederholtes Drücken der Rücktaste werden die Formatierungen schließlich entfernt.\n\n- `none`: Formatierungen werden nicht erhalten. Inline-Elemente werden sofort mit dem Text gelöscht.\n\n- `always`: Formatierungen bleiben dauerhaft erhalten, sofern sie nicht explizit entfernt werden.\n\n- Selbst wenn der gesamte Text innerhalb eines Inline-Elements gelöscht wird, bleibt das Element selbst erhalten.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Standardelement `line` beim Einfügen neuer Zeilen.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Legt das Standardformat für Zeilenumbrüche fest.\n\n- [Empfohlen] `line`: Zeilenumbrüche werden in allgemeine Tags unterteilt.\n\n- [Nicht empfohlen] `br`: Zeilenumbrüche werden als <br> in derselben Zeile behandelt (wie Shift+Enter).\n\n- Zeilenumbrüche werden innerhalb von `line` als <br> behandelt.\n\nSie können ein neues `line` erstellen, indem Sie zweimal hintereinander einen Zeilenumbruch eingeben.\n\nFormate, die `line` enthalten, wie z. B. „Zitat“, funktionieren weiterhin auf `line`-Basis.\n\nsuneditor-Prozesse arbeiten in `line`-Einheiten.\n\nBei der Einstellung `br` kann die Leistung beim Bearbeiten großer Datenmengen beeinträchtigt sein.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Zeileneigenschaften, die beim Zeilenwechsel zurückgesetzt werden sollen. Trennzeichen: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Zusätzlich sind weitere `line`-Elemente über die Standardeinstellung hinaus zulässig. Trennzeichen: `\"|\"`.\n\n– Verkettet mit {@link PrivateBaseOptions.__defaultFormatLine} zur Bildung der endgültigen `line`-Liste.\n\n– Das `line`-Element enthält auch das `brLine`-Element.\n\n``js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Zusätzlich sind weitere `brLine`-Elemente über die Standardeinstellung hinaus zulässig.\n\n- Die `brLine`-Liste wird mit {@link PrivateBaseOptions.__defaultFormatBrLine} verkettet.\n\n- `brLine`-Elemente sind im `line`-Element enthalten.\n\n- Der Zeilenumbruch der `brLine`-Elemente erfolgt durch das `BR`-Tag.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Zusätzlich sind weitere `closureBrLine`-Elemente über die Standardeinstellung hinaus zulässig.\n\n- Die `closureBrLine`-Liste wird mit {@link PrivateBaseOptions.__defaultFormatClosureBrLine} verkettet.\n\n- `closureBrLine`-Elemente sind in `brLine` enthalten.\n\n- Der Zeilenumbruch von `closureBrLine`-Elementen erfolgt durch das `BR`-Tag.\n\n- ※ Dieses Format kann nicht mit der Eingabetaste oder der Rücktaste verlassen werden.\n\n- ※ Nur in Ausnahmefällen verwenden. (Beispiel: Formatierung von Tabellenzellen)",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Zusätzlich wurden weitere `block`-Elemente über den Standardwert hinaus zugelassen.\n\n– Diese wurden mit {@link PrivateBaseOptions.__defaultFormatBlock} verkettet, um die endgültige `block`-Liste zu bilden.\n\n– `block` umschließt `line` und `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Zusätzlich sind weitere `closureBlock`-Elemente über die Standardeinstellung hinaus zulässig.\n\n- Die `closureBlock`-Liste wird mit {@link PrivateBaseOptions.__defaultFormatClosureBlock} verkettet.\n\n- `closureBlock`-Elemente sind in `block` enthalten.\n\n- Das `closureBlock`-Element umschließt `line` und `component`.\n\n- ※ Dieses Format kann nicht mit der Eingabetaste oder der Rücktaste verlassen werden.\n\n- ※ Verwenden Sie es nur in Sonderfällen (z. B. zur Formatierung von Tabellenzellen).",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Schließt Modalfenster beim Klicken außerhalb des Fensters.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Synchronisiert den Tabulatoreinzug mit den Leerzeichen.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Deaktiviert die Eingabe mit der Tabulatortaste.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Breite der Symbolleiste.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Container-Element für die Symbolleiste."
+  },
+  "toolbar_sticky": {
+    "description": "Aktiviert die fixierte Symbolleiste.\n\n- `number`: Legt die Position der fixierten Symbolleiste oben fest (px). Verwenden Sie `-1`, um die Fixierung zu deaktivieren.\n\n- `{top, offset}`: `top` ist die Position der fixierten Symbolleiste, wenn die Seitenkopfzeile sichtbar ist.\n\n- `offset` ist die Position der fixierten Symbolleiste, wenn eine virtuelle Tastatur den Anzeigebereich verschiebt (z. B. auf Tablets und Touchscreens).\n\n- Wenn die virtuelle Tastatur aktiv ist, ersetzt `offset` `top`, damit die Symbolleiste keine Lücke hinterlässt\n- für eine Seitenkopfzeile, die aus dem sichtbaren Bereich gescrollt wurde. Standardmäßig ist `offset` gleich `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Blendet die Symbolleiste zunächst aus.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Konfiguration der Untersymbolleiste. Eine sekundäre Symbolleiste, die bei Textauswahl erscheint.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Container-Element für die Statusleiste."
+  },
+  "shortcutsHint": {
+    "description": "Zeigt Tastenkombinationshinweise in Tooltips an.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Deaktiviert Tastenkombinationen.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Benutzerdefinierte Tastenkombinationen.\n\n– Tasten, die mit `_` beginnen, sind benutzerdefinierte Tastenkombinationen. Jeder Wert ist ein Array von `[keyCombo, hintLabel]`-Paaren.\n\n– Tastenkombinationen verwenden `c` (Strg/Cmd), `s` (Umschalt) und `KeyEvent.code`-Werte, die durch `+` verbunden werden.\n\n– Verwenden Sie `$~pluginName.method`, um eine bestimmte Plugin-Methode aufzurufen.\n\n``js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Behält das Format des kopierten Inhalts bei.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Wandelt URLs automatisch in Hyperlinks um. (`Link`-Plugin erforderlich)\n\n- Standard: `Boolean(plugins.link)` ​​– abhängig davon, ob das `link`-Plugin aktiviert ist."
+  },
+  "historyStackDelayTime": {
+    "description": "Verzögerungszeit für Aktualisierungen des Verlaufsstapels (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Maximale Anzahl von Verlaufseinträgen pro Stamm-Frame. Älteste Einträge werden verworfen, sobald diese Grenze überschritten ist.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Klassenname zum Drucken.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Offset wird beim Wechsel in den Vollbildmodus angewendet.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Benutzerdefinierte HTML-Vorlage für den Vorschaumodus. Verwenden Sie `{{ contents }}` als Platzhalter für den Editorinhalt.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Benutzerdefinierte HTML-Vorlage für den Druckmodus. Verwenden Sie `{{ contents }}` als Platzhalter für den Editorinhalt.\n\n``js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Ermöglicht die automatische Auswahl eingefügter Komponenten.\n\n- Für Inline-Komponenten: Der Cursor wird in der Nähe der Komponente platziert oder, falls kein Bereich in der Nähe vorhanden ist, diese ausgewählt.\n\n- Für Blockkomponenten: Das Verhalten basiert auf `selectMode`:\n\n- `auto`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird die Komponente ausgewählt.\n\n- `select`: Die eingefügte Komponente wird immer ausgewählt.\n\n- `line`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird eine neue Zeile erstellt und dorthin bewegt.\n\n- `none`: Es wird keine Aktion ausgeführt.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Standard-URL-Protokoll für Links.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Dauer für die Anzeige von Toast-Meldungen (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Aktiviert den freien Code-Ansichtsmodus.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Zeigt die Benutzeroberfläche des integrierten Suchen/Ersetzen-Bedienfelds an.\n\n– Der Finder wird immer intern erstellt; diese Option steuert, ob das Bedienfeld für Benutzer sichtbar ist (Strg+F / Strg+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "Die Suche erfolgt sofort während der Eingabe (entprellt). Ist dies deaktiviert, wird die Suche erst nach Eingabe der Eingabetaste ausgeführt.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Externe Bibliotheken wie CodeMirror, KaTeX oder MathJax.\n\n– Siehe {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Leitfaden für externe Bibliotheken}\n\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Legt zusätzliche zulässige oder unzulässige Tags fest. `true` erlaubt, `false` ​​verbietet.\n\n- Standardmäßig gilt {@link DEFAULTS.EXTRA_TAG_MAP}\n\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Konfiguration der Benutzerereignisbehandlung.\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Liste der aktuell verwendeten Symbolleistenschaltflächen"
+  },
+  "buttons_sub": {
+    "description": "Liste der aktuell verwendeten Untersymbolleistenschaltflächen"
+  },
+  "toolbar_sub_width": {
+    "description": "Breite der Untersymbolleiste."
+  },
+  "reverseCommands": {
+    "description": "Zusammengeführtes Array mit umgekehrten Befehlspaaren.\n\n- Enthält den Standardbefehl `indent-outdent` und den benutzerdefinierten Befehl `reverseButtons`."
+  },
+  "codeMirror": {
+    "description": "CodeMirror-Konfigurationsobjekt von `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Verwendet CodeMirror zur Codeansicht."
+  },
+  "audioGallery_data": {
+    "description": "Direkte Datenübertragung ohne Serveraufrufe"
+  },
+  "audioGallery_url": {
+    "description": "Serveranfrage-URL"
+  },
+  "audioGallery_headers": {
+    "description": "Server-Anfrageheader"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Standard-Miniaturansicht"
+  },
+  "fileBrowser_data": {
+    "description": "Direkte Datenübertragung ohne Serveraufrufe (umgeht das Abrufen von URLs)."
+  },
+  "fileBrowser_url": {
+    "description": "Serveranfrage-URL"
+  },
+  "fileBrowser_headers": {
+    "description": "Server-Anfrageheader"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "Standardmäßige Miniaturansicht-URL oder eine Funktion, die pro Element eine Miniaturansicht-URL zurückgibt."
+  },
+  "fileBrowser_props": {
+    "description": "Zusätzliche Tag-Namen"
+  },
+  "fileGallery_data": {
+    "description": "Direkte Datenübertragung ohne Serveraufrufe"
+  },
+  "fileGallery_url": {
+    "description": "Serveranfrage-URL"
+  },
+  "fileGallery_headers": {
+    "description": "Server-Anfrageheader"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Standard-Miniaturansicht"
+  },
+  "imageGallery_data": {
+    "description": "Direkte Datenübertragung ohne Serveraufrufe"
+  },
+  "imageGallery_url": {
+    "description": "Serveranfrage-URL"
+  },
+  "imageGallery_headers": {
+    "description": "Server-Anfrageheader"
+  },
+  "videoGallery_data": {
+    "description": "Direkte Datenübertragung ohne Serveraufrufe"
+  },
+  "videoGallery_url": {
+    "description": "Serveranfrage-URL"
+  },
+  "videoGallery_headers": {
+    "description": "Server-Anfrageheader"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Standard-Miniaturansicht"
+  },
+  "codeBlock_langs": {
+    "description": "Liste der auswählbaren Programmiersprachen für Codeblöcke.\n\n- Standardmäßig 21 gängige Sprachen\n\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- Auf ein leeres Array `[]` setzen, um die Sprachauswahl vollständig zu deaktivieren."
+  },
+  "exportPDF_apiUrl": {
+    "description": "Server-Anfrage-URL für die PDF-Generierung"
+  },
+  "exportPDF_fileName": {
+    "description": "Name der generierten PDF-Datei"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "Serveranfrage-URL für Datei-Upload"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Server-Anfrageheader"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Maximale Uploadgröße in Bytes"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Größenbeschränkung für einzelne Dateien in Bytes"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Mehrere Datei-Uploads zulassen"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Akzeptierte Dateiformate."
+  },
+  "fileUpload_as": {
+    "description": "Legen Sie die Standardform der Dateikomponente als `box` oder `link` ​​fest."
+  },
+  "fileUpload_controls": {
+    "description": "Der Abbildung sollen zusätzliche Steuerelemente hinzugefügt werden."
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Verhalten beim Einfügen von Komponenten je nach Auswahl und Cursorposition.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- `auto`: Cursor nach Möglichkeit in die nächste Zeile bewegen, andernfalls die Komponente auswählen.\n\n- `select`: Die eingefügte Komponente immer auswählen.\n\n- `line`: Cursor nach Möglichkeit in die nächste Zeile bewegen oder eine neue Zeile erstellen und dorthin bewegen.\n\n- `none`: Keine Aktion ausführen."
+  },
+  "align_items": {
+    "description": "Elemente ausrichten"
+  },
+  "backgroundColor_items": {
+    "description": "Farbliste."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Anzahl der Farben pro Linie"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "HEX-Eingabe deaktivieren"
+  },
+  "blockStyle_items": {
+    "description": "Formatliste.\n\n- `command` — `\"line\"`: Einzeiliger Block, `\"br-line\"`: Block mit Zeilenumbruch getrennt, `\"block\"`: Containerblock."
+  },
+  "font_items": {
+    "description": "Schriftartenliste"
+  },
+  "fontColor_items": {
+    "description": "Farbliste."
+  },
+  "fontColor_splitNum": {
+    "description": "Anzahl der Farben pro Linie"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "HEX-Eingabe deaktivieren"
+  },
+  "hR_items": {
+    "description": "Personalliste"
+  },
+  "layout_items": {
+    "description": "Layoutliste. Jeder Eintrag definiert eine benannte Layoutvorlage mit unformatiertem HTML-Code."
+  },
+  "lineHeight_items": {
+    "description": "Liste der Linienhöhen"
+  },
+  "paragraphStyle_items": {
+    "description": "Absatz-Elementliste"
+  },
+  "table_scrollType": {
+    "description": "Scrolltyp (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Position der Bildunterschrift (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Position des Zellencontrollers (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "HEX-Farbliste für die Hintergrundfarbauswahl der Zelle."
+  },
+  "template_items": {
+    "description": "Vorlagenliste"
+  },
+  "textStyle_items": {
+    "description": "Textstil-Elementliste."
+  },
+  "mention_triggerText": {
+    "description": "Die Person, die die Erwähnungsliste auslöst."
+  },
+  "mention_limitSize": {
+    "description": "Die Anzahl der in der Erwähnungsliste anzuzeigenden Elemente"
+  },
+  "mention_searchStartLength": {
+    "description": "Die Anzahl der Zeichen, ab der die Suche in der Erwähnungsliste gestartet werden soll"
+  },
+  "mention_delayTime": {
+    "description": "Wartezeit vor dem Anzeigen der Erwähnungsliste"
+  },
+  "mention_data": {
+    "description": "Statische Erwähnungsdaten (werden anstelle der API verwendet)."
+  },
+  "mention_apiUrl": {
+    "description": "Die URL zum Aufrufen der Erwähnungsliste"
+  },
+  "mention_apiHeaders": {
+    "description": "Die Header, die mit dem API-Aufruf gesendet werden sollen"
+  },
+  "mention_useCachingData": {
+    "description": "Ob die Erwähnungslistendaten zwischengespeichert werden sollen"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Ob die Daten der Erwähnungsliste im Feld zwischengespeichert werden sollen"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Die Einheit für die Schriftgröße.\n\n– Zulässige Werte: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` oder `'text'`.\n\n– Bei Verwendung von `'text'` wird eine textbasierte Schriftgrößenliste verwendet."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Legt fest, ob die Standardgrößenangabe im Dropdown-Menü angezeigt wird."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Wenn `true` eingestellt ist, werden Schaltflächen zum Vergrößern und Verkleinern der Schriftgröße angezeigt.\n\nStandardmäßig wird `false` ​​verwendet. Immer `false`, wenn `sizeUnit` gleich `'text'` ist (wird ignoriert)."
+  },
+  "fontSize_disableInput": {
+    "description": "Bei `true` wird das Eingabefeld für die Schriftgröße deaktiviert.\n\nStandardmäßig wird `true` ​​verwendet, wenn `sizeUnit` gleich `'text'` ist, andernfalls `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Die Standard-Einheitenzuordnung für Schriftgrößen überschreiben oder erweitern."
+  },
+  "audio_defaultWidth": {
+    "description": "Die Standardbreite des `AUDIO`-Tags."
+  },
+  "audio_defaultHeight": {
+    "description": "Die Standardhöhe des `AUDIO`-Tags."
+  },
+  "audio_createFileInput": {
+    "description": "Ob ein Dateieingabeelement erstellt werden soll."
+  },
+  "audio_createUrlInput": {
+    "description": "Gibt an, ob ein URL-Eingabeelement erstellt werden soll.\n\nStandardmäßig wird `true` verwendet. Immer `true`, wenn `createFileInput` gleich `false` ist."
+  },
+  "audio_uploadUrl": {
+    "description": "Die URL, an die die Dateien hochgeladen werden."
+  },
+  "audio_uploadHeaders": {
+    "description": "Header, die in die Datei-Upload-Anfrage aufgenommen werden sollen."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "Die maximale Uploadgröße in Bytes."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "Die maximale Größe einer einzelnen Datei in Bytes."
+  },
+  "audio_allowMultiple": {
+    "description": "Ob mehrere Datei-Uploads zugelassen werden sollen."
+  },
+  "audio_acceptedFormats": {
+    "description": "Akzeptierte Dateiformate (Standard ist `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Zusätzliche Attribute, die für das `AUDIO`-Tag festgelegt werden sollen."
+  },
+  "audio_insertBehavior": {
+    "description": "Verhalten beim Einfügen von Komponenten je nach Auswahl und Cursorposition.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- `auto`: Cursor nach Möglichkeit in die nächste Zeile bewegen, andernfalls die Komponente auswählen.\n\n- `select`: Die eingefügte Komponente immer auswählen.\n\n- `line`: Cursor nach Möglichkeit in die nächste Zeile bewegen oder eine neue Zeile erstellen und dorthin bewegen.\n\n- `none`: Keine Aktion ausführen."
+  },
+  "drawing_outputFormat": {
+    "description": "Das Ausgabeformat der Zeichnung. Optionen: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Ob die Auswahl des Formattyps aktiviert werden soll (`block` vs `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "Der Standardformattyp, entweder `\"block\"` oder `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Ob der gewählte Formattyp nach dem Zeichnen beibehalten werden soll."
+  },
+  "drawing_lineWidth": {
+    "description": "Die Breite der Zeichenlinie."
+  },
+  "drawing_lineReconnect": {
+    "description": "Ob Linien beim Zeichnen wieder verbunden werden müssen."
+  },
+  "drawing_lineCap": {
+    "description": "Der Stil des Leitungsendes (`\"butt\"`, `\"round\"` ​​oder `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "Die Farbe der Zeichnungslinie."
+  },
+  "drawing_canResize": {
+    "description": "Ob das Modalformular in der Größe verändert werden kann."
+  },
+  "drawing_maintainRatio": {
+    "description": "Ob das Seitenverhältnis beim Ändern der Größe beibehalten werden soll."
+  },
+  "drawing_formSize": {
+    "description": "Die Größenkonfiguration für das Zeichnungsmodalformular."
+  },
+  "embed_canResize": {
+    "description": "Ob das eingebettete Element in der Größe verändert werden kann."
+  },
+  "embed_showHeightInput": {
+    "description": "Ob das Eingabefeld für die Körpergröße angezeigt werden soll."
+  },
+  "embed_defaultWidth": {
+    "description": "Die Standardbreite des Einbettungselements (numerischer Wert oder mit Einheit)."
+  },
+  "embed_defaultHeight": {
+    "description": "Die Standardhöhe des eingebetteten Elements (numerischer Wert oder mit Einheit)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Ob nur prozentuale Größenangaben zulässig sein sollen."
+  },
+  "embed_uploadUrl": {
+    "description": "Die URL für Datei-Uploads."
+  },
+  "embed_uploadHeaders": {
+    "description": "Header, die in Datei-Upload-Anfragen enthalten sein sollen."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "Die maximale Dateigröße für den Upload in Bytes."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "Die maximale Größe für den Upload einer einzelnen Datei in Bytes."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Zusätzliche Attribute, die für das `IFRAME`-Tag festgelegt werden sollen."
+  },
+  "embed_query_youtube": {
+    "description": "Der YouTube-Abfrageparameter wurde an die Einbettungs-URL angehängt."
+  },
+  "embed_query_vimeo": {
+    "description": "Vimeo-Abfrageparameter an die Einbettungs-URL angehängt."
+  },
+  "embed_urlPatterns": {
+    "description": "Zusätzliche URL-Muster, die als einbettbare Inhalte erkannt werden sollen."
+  },
+  "embed_embedQuery": {
+    "description": "Benutzerdefinierte Einbettungsdienstedefinitionen."
+  },
+  "embed_controls": {
+    "description": "Figurensteuerung."
+  },
+  "embed_insertBehavior": {
+    "description": "Verhalten beim Einfügen von Komponenten je nach Auswahl und Cursorposition.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- `auto`: Cursor nach Möglichkeit in die nächste Zeile bewegen, andernfalls die Komponente auswählen.\n\n- `select`: Die eingefügte Komponente immer auswählen.\n\n- `line`: Cursor nach Möglichkeit in die nächste Zeile bewegen oder eine neue Zeile erstellen und dorthin bewegen.\n\n- `none`: Keine Aktion ausführen."
+  },
+  "image_canResize": {
+    "description": "Ob das Bildelement in der Größe verändert werden kann."
+  },
+  "image_showHeightInput": {
+    "description": "Ob das Eingabefeld für die Körpergröße angezeigt werden soll."
+  },
+  "image_defaultWidth": {
+    "description": "Die Standardbreite des Bildes. Wird eine Zahl angegeben, wird `\"px\"` angehängt."
+  },
+  "image_defaultHeight": {
+    "description": "Die Standardhöhe des Bildes. Wird eine Zahl angegeben, wird `\"px\"` angehängt."
+  },
+  "image_percentageOnlySize": {
+    "description": "Ob nur prozentuale Größenangaben zulässig sein sollen."
+  },
+  "image_createFileInput": {
+    "description": "Ob ein Dateiauswahlelement für Bild-Uploads erstellt werden soll."
+  },
+  "image_createUrlInput": {
+    "description": "Gibt an, ob ein URL-Eingabeelement zum Einfügen von Bildern erstellt werden soll.\n\nStandardmäßig wird `true` verwendet. Immer `true`, wenn `createFileInput` gleich `false` ist."
+  },
+  "image_uploadUrl": {
+    "description": "Die URL-Endpunktadresse für Bilddatei-Uploads."
+  },
+  "image_uploadHeaders": {
+    "description": "Zusätzliche Header, die in die Datei-Upload-Anfrage aufgenommen werden sollen."
+  },
+  "image_uploadSizeLimit": {
+    "description": "Die maximale Uploadgröße in Bytes."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "Die maximale Größe für den Upload einer einzelnen Datei in Bytes."
+  },
+  "image_allowMultiple": {
+    "description": "Ob das Hochladen mehrerer Bilder erlaubt ist."
+  },
+  "image_acceptedFormats": {
+    "description": "Die akzeptierten Dateiformate für Bild-Uploads."
+  },
+  "image_useFormatType": {
+    "description": "Ob die Auswahl des Formattyps (`block` oder `inline`) aktiviert werden soll."
+  },
+  "image_defaultFormatType": {
+    "description": "Der Standardbildformattyp (`\"block\"` oder `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Ob der gewählte Formattyp nach dem Einfügen des Bildes beibehalten werden soll."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Ob Datei-Uploads für verknüpfte Bilder aktiviert werden sollen."
+  },
+  "image_controls": {
+    "description": "Figurensteuerung."
+  },
+  "image_insertBehavior": {
+    "description": "Verhalten beim Einfügen von Komponenten für die Auswahl und Cursorpositionierung.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- Bei Inline-Komponenten: Der Cursor wird in der Nähe der Komponente platziert oder, falls kein Bereich in der Nähe vorhanden ist, ausgewählt.\n\n- Bei Blockkomponenten: Das Verhalten richtet sich nach `selectMode`:\n\n- `auto`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird die Komponente ausgewählt.\n\n- `select`: Die eingefügte Komponente wird immer ausgewählt.\n\n- `line`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird eine neue Zeile erstellt und dorthin bewegt.\n\n- `none`: Es passiert nichts."
+  },
+  "link_uploadUrl": {
+    "description": "Die URL-Endpunktadresse für Datei-Uploads."
+  },
+  "link_uploadHeaders": {
+    "description": "Zusätzliche Header für Datei-Upload-Anfragen."
+  },
+  "link_uploadSizeLimit": {
+    "description": "Die maximale Dateigröße für den Upload in Bytes."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "Die maximale Größe für den Upload einer einzelnen Datei in Bytes."
+  },
+  "link_acceptedFormats": {
+    "description": "Akzeptierte Dateiformate für Link-Uploads."
+  },
+  "link_title": {
+    "description": "Modale Titelanzeige."
+  },
+  "link_textToDisplay": {
+    "description": "Eingabetext zur Anzeige erstellen."
+  },
+  "link_openNewWindow": {
+    "description": "Standardmäßig ist das Kontrollkästchen „In neuem Fenster öffnen“ aktiviert."
+  },
+  "link_noAutoPrefix": {
+    "description": "Wenn `true`, wird die automatische Voranstellung eines Präfixes an den Wert der Link-URL deaktiviert."
+  },
+  "link_relList": {
+    "description": "Die verfügbaren Attributwerte `rel` werden im Link-Modal als Kontrollkästchen angezeigt."
+  },
+  "link_defaultRel": {
+    "description": "Standardwerte für `rel` werden automatisch durch die Bedingung angewendet."
+  },
+  "link_enableFileUpload": {
+    "description": "Wenn `true`, wird der Dateiupload aktiviert."
+  },
+  "math_canResize": {
+    "description": "Ob die Größe des mathematischen Modaldiagramms verändert werden kann."
+  },
+  "math_autoHeight": {
+    "description": "Ob die Höhe des Modals automatisch angepasst werden soll."
+  },
+  "math_fontSizeList": {
+    "description": "Eine Liste der Schriftgrößenoptionen für die Größenauswahl mathematischer Ausdrücke."
+  },
+  "math_onPaste": {
+    "description": "Eine Callback-Funktion zur Behandlung von Einfügeereignissen im mathematischen Eingabebereich."
+  },
+  "math_formSize": {
+    "description": "Ein Objekt, das die Dimensionen für das mathematische Modal angibt."
+  },
+  "video_canResize": {
+    "description": "Ob das Videoelement in der Größe verändert werden kann."
+  },
+  "video_showHeightInput": {
+    "description": "Ob das Eingabefeld für die Körpergröße angezeigt werden soll."
+  },
+  "video_defaultWidth": {
+    "description": "Die Standardbreite des Videoelements. Wird eine Zahl angegeben, wird `\"px\"` angehängt."
+  },
+  "video_defaultHeight": {
+    "description": "Die Standardhöhe des Videoelements. Wird eine Zahl angegeben, wird `\"px\"` angehängt."
+  },
+  "video_percentageOnlySize": {
+    "description": "Ob nur prozentuale Größenangaben zulässig sein sollen."
+  },
+  "video_createFileInput": {
+    "description": "Ob ein Dateieingabeelement für Video-Uploads erstellt werden soll."
+  },
+  "video_createUrlInput": {
+    "description": "Gibt an, ob ein URL-Eingabeelement zum Einbetten von Videos erstellt werden soll.\n\nStandardwert: `true`. Immer `true`, wenn `createFileInput` gleich `false` ist."
+  },
+  "video_uploadUrl": {
+    "description": "Die URL-Endpunktadresse für Videodatei-Uploads."
+  },
+  "video_uploadHeaders": {
+    "description": "Zusätzliche Header, die in die Video-Upload-Anfrage aufgenommen werden sollen."
+  },
+  "video_uploadSizeLimit": {
+    "description": "Die maximale Uploadgröße für Videos in Bytes."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "Die maximale Dateigröße für den Upload von Videos in Bytes."
+  },
+  "video_allowMultiple": {
+    "description": "Ob mehrere Video-Uploads erlaubt sind."
+  },
+  "video_acceptedFormats": {
+    "description": "Akzeptierte Dateiformate für Video-Uploads (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "Das Standard-Seitenverhältnis für das Video (Höhe/Breite, z. B. 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Ob die Verhältnisoption im Modal angezeigt werden soll."
+  },
+  "video_ratioOptions": {
+    "description": "Benutzerdefinierte Seitenverhältnisoptionen für die Videogrößenänderung (Wert = Höhe/Breite)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Zusätzliche Attribute, die für das `VIDEO`-Tag festgelegt werden sollen."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Zusätzliche Attribute, die für das `IFRAME`-Tag festgelegt werden sollen."
+  },
+  "video_query_youtube": {
+    "description": "Zusätzliche Abfrageparameter für die YouTube-Einbettung."
+  },
+  "video_query_vimeo": {
+    "description": "Zusätzliche Abfrageparameter für die Vimeo-Einbettung."
+  },
+  "video_embedQuery": {
+    "description": "Benutzerdefinierte Einbettungsdienstedefinitionen (siehe `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Zusätzliche URL-Muster für die Videoeinbettung."
+  },
+  "video_extensions": {
+    "description": "Zusätzliche Dateierweiterungen, die beim Hochladen von Videos erkannt werden sollen."
+  },
+  "video_controls": {
+    "description": "Figurensteuerung."
+  },
+  "video_insertBehavior": {
+    "description": "Verhalten beim Einfügen von Komponenten je nach Auswahl und Cursorposition.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- `auto`: Cursor nach Möglichkeit in die nächste Zeile bewegen, andernfalls die Komponente auswählen.\n\n- `select`: Die eingefügte Komponente immer auswählen.\n\n- `line`: Cursor nach Möglichkeit in die nächste Zeile bewegen oder eine neue Zeile erstellen und dorthin bewegen.\n\n- `none`: Keine Aktion ausführen."
+  }
+}

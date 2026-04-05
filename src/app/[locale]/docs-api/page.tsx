@@ -16,12 +16,24 @@ import { buildSidebarItems, resolveContentData } from "./_lib/sidebarData";
 import { buildSearchIndex, searchApi } from "./_lib/apiSearchIndex";
 import { SidebarAd } from "@/components/ad/AdBanner";
 
-const localeDataLoaders: Record<string, () => Promise<ApiDocs>> = {
-	ko: () => import("@/data/api/api-docs.ko.json").then((m) => m.default as unknown as ApiDocs),
-	ar: () => import("@/data/api/api-docs.ar.json").then((m) => m.default as unknown as ApiDocs),
-};
-
 const apiDocsEn = apiDocsDataEn as unknown as ApiDocs;
+
+// Cache for loaded locale data
+const apiDocsCache = new Map<string, ApiDocs>();
+apiDocsCache.set("en", apiDocsEn);
+
+async function loadApiDocs(locale: string): Promise<ApiDocs> {
+	if (apiDocsCache.has(locale)) return apiDocsCache.get(locale)!;
+	try {
+		// webpack creates a chunk per matching file in the directory
+		const mod = await import(`@/data/api/api-docs.${locale}.json`);
+		const data = (mod.default ?? mod) as unknown as ApiDocs;
+		apiDocsCache.set(locale, data);
+		return data;
+	} catch {
+		return apiDocsEn;
+	}
+}
 const sidebarItems = buildSidebarItems(apiDocsEn);
 const searchIndex = buildSearchIndex(apiDocsEn);
 
@@ -53,11 +65,10 @@ export default function DocsApiPage() {
 
 	// Load locale-specific API docs
 	useEffect(() => {
-		const loader = localeDataLoaders[locale];
-		if (loader) {
-			loader().then(setApiDocs);
-		} else {
+		if (locale === "en") {
 			setApiDocs(apiDocsEn);
+		} else {
+			loadApiDocs(locale).then(setApiDocs);
 		}
 	}, [locale]);
 

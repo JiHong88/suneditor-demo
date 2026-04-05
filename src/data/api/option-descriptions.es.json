@@ -1,0 +1,854 @@
+{
+  "value": {
+    "description": "Valor inicial para el editor.",
+    "default": "\"\""
+  },
+  "placeholder": {
+    "description": "Texto de marcador de posición.",
+    "default": "\"\""
+  },
+  "editableFrameAttributes": {
+    "description": "Atributos para el marco editable[.sun-editor-editable].\n\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "default": "{spellcheck: \"false\"}"
+  },
+  "width": {
+    "description": "Ancho para el editor.",
+    "default": "\"100%\""
+  },
+  "minWidth": {
+    "description": "Ancho mínimo para el editor.",
+    "default": "\"\""
+  },
+  "maxWidth": {
+    "description": "Ancho máximo para el editor.",
+    "default": "\"\""
+  },
+  "height": {
+    "description": "Altura para el editor.",
+    "default": "\"auto\""
+  },
+  "minHeight": {
+    "description": "Altura mínima para el editor.",
+    "default": "\"\""
+  },
+  "maxHeight": {
+    "description": "Altura máxima para el editor.",
+    "default": "\"\""
+  },
+  "editorStyle": {
+    "description": "Cadena de estilo del marco superior del editor.\n\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "default": "\"\""
+  },
+  "iframe": {
+    "description": "El contenido se colocará en un iframe y se aislará del resto de la página.",
+    "default": "false"
+  },
+  "iframe_fullPage": {
+    "description": "Permite el uso de etiquetas HTML, HEAD, BODY y la declaración DOCTYPE en `iframe`.",
+    "default": "false"
+  },
+  "iframe_attributes": {
+    "description": "Atributos del `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "default": "{}"
+  },
+  "statusbar": {
+    "description": "Habilita la barra de estado.",
+    "default": "true"
+  },
+  "statusbar_showPathLabel": {
+    "description": "Muestra la estructura actual del nodo en la barra de estado.",
+    "default": "true"
+  },
+  "statusbar_resizeEnable": {
+    "description": "Permite cambiar el tamaño de la barra de estado inferior.",
+    "default": "true"
+  },
+  "charCounter": {
+    "description": "Muestra el número de caracteres en el editor.\n\n- Si la opción `maxCharCount` tiene un valor, se convierte en `true`.",
+    "default": "false"
+  },
+  "charCounter_max": {
+    "description": "El número máximo de caracteres que se pueden insertar en el editor.",
+    "default": "null"
+  },
+  "charCounter_label": {
+    "description": "Texto que se mostrará en el área `charCounter` de la barra inferior.\n\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "default": "null"
+  },
+  "charCounter_type": {
+    "description": "Define el método de cálculo de la opción `charCounter`.\n\n- `char`: Longitud de caracteres.\n\n- `byte`: Tamaño de los datos binarios de los caracteres.\n\n- `byte-html`: Tamaño de los datos binarios de la cadena HTML completa.",
+    "default": "\"char\""
+  },
+  "wordCounter": {
+    "description": "Muestra el número de palabras en el editor.",
+    "default": "false"
+  },
+  "wordCounter_label": {
+    "description": "Texto que se mostrará en el área `wordCounter` de la barra inferior.\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "default": "null"
+  },
+  "top": {
+    "description": "Estilos aplicados al contenedor superior (por ejemplo, ancho, índice z, etc.)."
+  },
+  "frame": {
+    "description": "Estilos aplicados al contenedor iframe (por ejemplo, altura, altura mínima)."
+  },
+  "editor": {
+    "description": "Estilos aplicados al área de contenido editable."
+  },
+  "codeMirrorEditor": {
+    "description": "Instancia del editor CodeMirror (a nivel de marco). Se establece mediante `_checkCodeMirror` después de la inicialización."
+  },
+  "plugins": {
+    "description": "Configuración del plugin. Pase una matriz de clases de plugins o un objeto indexado por el nombre del plugin.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+  },
+  "buttonList": {
+    "description": "Lista de botones de la barra de herramientas, agrupados por submatrices.\n\n- El valor predeterminado sigue {@link DEFAULTS.BUTTON_LIST}",
+    "default": "CONSTANTS.BUTTON_LIST"
+  },
+  "v2Migration": {
+    "description": "Habilita el modo de migración para SunEditor v2.",
+    "default": "false"
+  },
+  "mode": {
+    "description": "Modo de barra de herramientas: `classic`, `inline`, `balloon`, `balloon-always`. Añada `:bottom` para colocar la barra de herramientas en la parte inferior (por ejemplo, `classic:bottom`, `inline:bottom`).",
+    "default": "\"classic\""
+  },
+  "type": {
+    "description": "Tipo de editor. Use `\"document\"` para un diseño de estilo de documento, con subtipos opcionales después de `:`.\n\n```js\n// type\n'document:header,page'\n```",
+    "default": "\"\""
+  },
+  "theme": {
+    "description": "Tema del editor.",
+    "default": "\"\""
+  },
+  "lang": {
+    "description": "Configuración de idioma. Predeterminado: EN"
+  },
+  "icons": {
+    "description": "Sustituye los iconos predeterminados."
+  },
+  "textDirection": {
+    "description": "Dirección del texto: `ltr` o `rtl`.",
+    "default": "\"ltr\""
+  },
+  "strictMode": {
+    "description": "Permite el filtrado estricto de etiquetas, atributos y estilos.\n\n- Use ``true`` para habilitar todos los filtros (opción predeterminada) o un objeto para controlar filtros individuales.\n\n- No se admite la configuración de ``false``; utilice el formulario de objeto para deshabilitar filtros específicos.\n\n- Descripción del filtro\n- ``tagFilter``: Filtra las etiquetas HTML no permitidas (`elementWhitelist`/`elementBlacklist`)\n- ``formatFilter``: Filtra los elementos de formato (`formatLine`/`formatBlock`)\n- ``classFilter``: Filtra los nombres de clase CSS no permitidos (`allowedClassName`)\n- ``textStyleTagFilter``: Filtra las etiquetas de estilo de texto (b, i, u, span, etc.)\n- ``attrFilter``: Filtra los atributos HTML no permitidos (`attributeWhitelist`/`attributeBlacklist`)\n- ``styleFilter``: Filtra los estilos en línea no permitidos (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "default": "true"
+  },
+  "scopeSelectionTags": {
+    "description": "Las etiquetas se tratan como unidades completas al seleccionar todo el contenido.\n\n- El comportamiento predeterminado sigue {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
+  },
+  "elementWhitelist": {
+    "description": "Especifica elementos HTML adicionales que se permitirán más allá de la lista de permitidos predeterminada. Delimitador: `\"|\"`.\n\n- Agregado a la lista predeterminada determinada por {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "default": "\"\""
+  },
+  "elementBlacklist": {
+    "description": "Especifica los elementos HTML que no deben utilizarse. Delimitador: `\"|\"`.\n\n- Las etiquetas especificadas aquí se eliminarán eventualmente, incluso si están incluidas en otras listas blancas.\n\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "default": "\"\""
+  },
+  "allowedEmptyTags": {
+    "description": "Lista de etiquetas que se pueden conservar aunque sus valores estén vacíos.\n\n- Por defecto, sigue la lista {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}.\n- Se concatena con `ALLOWED_EMPTY_NODE_LIST` para formar la lista final `allowedEmptyTags`.",
+    "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
+  },
+  "allowedClassName": {
+    "description": "Nombres de clase permitidos.\n\n- Se agregó el valor predeterminado {@link DEFAULTS.CLASS_NAME}",
+    "default": "\"\""
+  },
+  "attributeWhitelist": {
+    "description": "Especifica atributos adicionales para permitir en cada etiqueta. `\"*\"` se aplica a todas las etiquetas.\n\n- Las reglas especificadas aquí se fusionarán en {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "default": "null"
+  },
+  "attributeBlacklist": {
+    "description": "Especifica los atributos que se deben prohibir por etiqueta. `\"*\"` se aplica a todas las etiquetas.\n\n- Los atributos especificados aquí se eliminarán eventualmente, incluso si están permitidos por otras configuraciones.\n\n- Siempre se incluye una lista de elementos obligatorios, {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "default": "null"
+  },
+  "textStyleTags": {
+    "description": "Etiquetas de estilo de texto adicionales.\n\n- El valor predeterminado sigue {@link PrivateBaseOptions.__textStyleTags}",
+    "default": "__textStyleTags"
+  },
+  "convertTextTags": {
+    "description": "Asigna estilos de texto a etiquetas HTML específicas.\n\n``js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
+  },
+  "allUsedStyles": {
+    "description": "Especifica estilos adicionales a la lista de estilos permitidos. Delimitador: `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+  },
+  "tagStyles": {
+    "description": "Especifica los estilos permitidos para las etiquetas HTML. La clave es el nombre o nombres de las etiquetas, el valor son los estilos permitidos separados por barras verticales.\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "default": "{}"
+  },
+  "spanStyles": {
+    "description": "Especifica los estilos permitidos para la etiqueta `span`.\n\n- El valor predeterminado sigue {@link DEFAULTS.SPAN_STYLES}",
+    "default": "CONSTANTS.SPAN_STYLES"
+  },
+  "lineStyles": {
+    "description": "Especifica los estilos permitidos para el elemento `line` (p..).\n\n- El valor predeterminado sigue {@link DEFAULTS.LINE_STYLES}",
+    "default": "CONSTANTS.LINE_STYLES"
+  },
+  "fontSizeUnits": {
+    "description": "Unidades de tamaño de fuente permitidas.\n\n- El valor predeterminado sigue {@link DEFAULTS.SIZE_UNITS}",
+    "default": "CONSTANTS.SIZE_UNITS"
+  },
+  "retainStyleMode": {
+    "description": "Determina cómo se gestionan los elementos en línea (p. ej., `<span>`, `<strong>`) al borrar texto.\n\n- `repeat`: Los estilos se conservan a menos que se pulse repetidamente la tecla de retroceso.\n\n- Si se pulsa repetidamente, los estilos se eliminarán.\n\n- `none`: Los estilos no se conservan. Los elementos en línea se eliminan inmediatamente junto con el texto.\n\n- `always`: Los estilos persisten indefinidamente a menos que se eliminen explícitamente.\n\n- Aunque se borre todo el texto dentro de un elemento en línea, el elemento en sí permanece.",
+    "default": "\"repeat\""
+  },
+  "defaultLine": {
+    "description": "Elemento `line` predeterminado al insertar nuevas líneas.",
+    "default": "\"p\""
+  },
+  "defaultLineBreakFormat": {
+    "description": "Especifica el formato de salto de línea predeterminado.\n\n- [Recomendado] `line`: El salto de línea se divide en etiquetas generales.\n\n- [No recomendado] `br`: Los saltos de línea se tratan como <br> en la misma línea (como Mayús+Intro).\n- Los saltos de línea se manejan como <br> dentro de `line`.\n\n- Puede crear un nuevo `line` introduciendo un salto de línea dos veces seguidas.\n\n- Los formatos que incluyen `line`, como \"Cita\", siguen funcionando con `line`.\n\n- Los procesos de suneditor funcionan con unidades `line`.\n\n- Cuando se establece en `br`, el rendimiento puede disminuir al editar grandes cantidades de datos.",
+    "default": "\"line\""
+  },
+  "lineAttrReset": {
+    "description": "Propiedades de línea que deben restablecerse al cambiar de línea. Delimitador: `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "default": "\"\""
+  },
+  "formatLine": {
+    "description": "Además, se permitieron elementos `line` más allá del predeterminado. Delimitador: `\"|\"`.\n\n- Concatenado con {@link PrivateBaseOptions.__defaultFormatLine} para formar la lista final `line`.\n\n- El elemento `line` también contiene el elemento `brLine`.\n\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "default": "__defaultFormatLine"
+  },
+  "formatBrLine": {
+    "description": "Además, se permitieron elementos `brLine` más allá del valor predeterminado.\n\n- Se concatenó con {@link PrivateBaseOptions.__defaultFormatBrLine} para formar la lista final `brLine`.\n\n- Los elementos `brLine` se incluyen en el elemento `line`.\n\n- El salto de línea de los elementos `brLine` es la etiqueta `BR`.\n\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "default": "__defaultFormatBrLine"
+  },
+  "formatClosureBrLine": {
+    "description": "Además, se permiten elementos `closureBrLine` más allá del formato predeterminado.\n\n- Se concatena con {@link PrivateBaseOptions.__defaultFormatClosureBrLine} para la lista final `closureBrLine`.\n\n- Los elementos `closureBrLine` se incluyen en `brLine`.\n\n- El salto de línea de los elementos `closureBrLine` es la etiqueta `BR`.\n\n- ※ No se puede salir de este formato con la tecla Intro ni con la tecla Retroceso.\n\n- ※ Úselo solo en casos especiales (por ejemplo, formato de celdas de tabla).",
+    "default": "__defaultFormatClosureBrLine"
+  },
+  "formatBlock": {
+    "description": "Además, se permitieron elementos `block` más allá de los predeterminados.\n\n- Se concatenó con {@link PrivateBaseOptions.__defaultFormatBlock} para formar la lista final `block`.\n\n- `block` envuelve a `line` y `component`.",
+    "default": "__defaultFormatBlock"
+  },
+  "formatClosureBlock": {
+    "description": "Además, se permiten elementos `closureBlock` más allá del formato predeterminado.\n\n- Se concatena con {@link PrivateBaseOptions.__defaultFormatClosureBlock} para la lista final `closureBlock`.\n\n- Los elementos `closureBlock` se incluyen en `block`.\n\n- El elemento `closureBlock` envuelve a `line` y `component`.\n\n- ※ No se puede salir de este formato con la tecla Intro ni con la tecla Retroceso.\n\n- ※ Úselo solo en casos especiales (por ejemplo, formato de celdas de tabla).",
+    "default": "__defaultFormatClosureBlock"
+  },
+  "closeModalOutsideClick": {
+    "description": "Cierra las ventanas modales al hacer clic fuera de ellas.",
+    "default": "false"
+  },
+  "syncTabIndent": {
+    "description": "Sincroniza la sangría de tabulación con los espacios.",
+    "default": "true"
+  },
+  "tabDisable": {
+    "description": "Deshabilita la entrada de la tecla Tab.",
+    "default": "false"
+  },
+  "toolbar_width": {
+    "description": "Ancho de la barra de herramientas.",
+    "default": "\"auto\""
+  },
+  "toolbar_container": {
+    "description": "Elemento contenedor para la barra de herramientas."
+  },
+  "toolbar_sticky": {
+    "description": "Habilita la barra de herramientas fija.\n\n- `number`: Establece la posición superior fija (px). Usa `-1` ​​para desactivarla.\n\n- `{top, offset}`: `top` es la posición fija cuando el encabezado de página está visible.\n\n- `offset` es la posición fija cuando un teclado virtual desplaza la ventana gráfica (p. ej., en tabletas o dispositivos táctiles).\n\n- Cuando el teclado virtual está activo, `offset` reemplaza a `top` para que la barra de herramientas no deje un espacio vacío.\n\n- para un encabezado de página que se ha desplazado fuera de la vista. El valor predeterminado de `offset` es `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "default": "0"
+  },
+  "toolbar_hide": {
+    "description": "Oculta la barra de herramientas inicialmente.",
+    "default": "false"
+  },
+  "subToolbar": {
+    "description": "Configuración de la subbarra de herramientas. Una barra de herramientas secundaria que aparece al seleccionar texto.",
+    "default": "{}"
+  },
+  "statusbar_container": {
+    "description": "Elemento contenedor para la barra de estado."
+  },
+  "shortcutsHint": {
+    "description": "Muestra sugerencias de accesos directos en las descripciones emergentes.",
+    "default": "true"
+  },
+  "shortcutsDisable": {
+    "description": "Deshabilita los atajos de teclado.",
+    "default": "false"
+  },
+  "shortcuts": {
+    "description": "Atajos de teclado personalizados.\n\n- Las teclas que comienzan con `_` son atajos personalizados definidos por el usuario. Cada valor es una matriz de pares `[keyCombo, hintLabel]`.\n\n- Las combinaciones de teclas utilizan los valores `c` (Ctrl/Cmd), `s` (Shift) y `KeyEvent.code`, unidos por `+`.\n\n- Utilice `$~pluginName.method` para llamar a un método específico del complemento.\n\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "default": "{}"
+  },
+  "copyFormatKeepOn": {
+    "description": "Conserva el formato del contenido copiado.",
+    "default": "false"
+  },
+  "autoLinkify": {
+    "description": "Convierte automáticamente las URL en hipervínculos. (Se requiere el complemento `Link`).\n- Predeterminado: `Boolean(plugins.link)` ​​— depende de si el complemento `link` está habilitado."
+  },
+  "historyStackDelayTime": {
+    "description": "Tiempo de retardo para las actualizaciones de la pila de historial (ms).",
+    "default": "400"
+  },
+  "historyStackSize": {
+    "description": "Número máximo de entradas de historial por marco raíz. Las entradas más antiguas se descartan cuando se supera este límite.",
+    "default": "100"
+  },
+  "printClass": {
+    "description": "Nombre de la clase para imprimir.",
+    "default": "\"\""
+  },
+  "fullScreenOffset": {
+    "description": "Se aplica un desplazamiento al entrar en modo de pantalla completa.",
+    "default": "0"
+  },
+  "previewTemplate": {
+    "description": "Plantilla HTML personalizada para el modo de vista previa. Utilice `{{ contents }}` como marcador de posición para el contenido del editor.",
+    "default": "null"
+  },
+  "printTemplate": {
+    "description": "Plantilla HTML personalizada para modo de impresión. Utilice `{{ contents }}` como marcador de posición para el contenido del editor.\n\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "default": "null"
+  },
+  "componentInsertBehavior": {
+    "description": "Permite la selección automática de los componentes insertados.\n\n- Para componentes en línea: coloca el cursor cerca del componente o lo selecciona si no hay ninguno cerca.\n\n- Para componentes de bloque: ejecuta el comportamiento según `selectMode`:\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible; o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada.",
+    "default": "\"auto\""
+  },
+  "defaultUrlProtocol": {
+    "description": "Protocolo URL predeterminado para enlaces.",
+    "default": "null"
+  },
+  "toastMessageTime": {
+    "description": "Duración de la visualización de los mensajes emergentes (ms).",
+    "default": "{copy: 1500}"
+  },
+  "freeCodeViewMode": {
+    "description": "Habilita el modo de visualización de código libre.",
+    "default": "false"
+  },
+  "finder_panel": {
+    "description": "Muestra la interfaz de usuario del panel Buscar/Reemplazar integrado.\n\n- El buscador siempre se crea internamente; esta opción controla si el panel es visible para los usuarios (Ctrl+F / Ctrl+H).",
+    "default": "true"
+  },
+  "finder_liveSearch": {
+    "description": "La búsqueda se realiza instantáneamente mientras escribes (con retardo). Si es falso, la búsqueda solo se ejecuta al presionar Enter.",
+    "default": "true"
+  },
+  "externalLibs": {
+    "description": "Bibliotecas externas como CodeMirror, KaTeX o MathJax.\n\n- Consulta la Guía de bibliotecas externas en {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+  },
+  "allowedExtraTags": {
+    "description": "Especifica etiquetas adicionales permitidas o no permitidas. `true` para permitir, `false` ​​para no permitir.\n\n- El valor predeterminado sigue {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "default": "CONSTANTS.EXTRA_TAG_MAP"
+  },
+  "events": {
+    "description": "Configuración de los controladores de eventos de usuario.\n\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+  },
+  "buttons": {
+    "description": "Lista de botones de la barra de herramientas que se utilizan actualmente"
+  },
+  "buttons_sub": {
+    "description": "Lista de botones de la subbarra de herramientas que se utilizan actualmente"
+  },
+  "toolbar_sub_width": {
+    "description": "Ancho de la subbarra de herramientas."
+  },
+  "reverseCommands": {
+    "description": "Matriz de pares de comandos inversos combinados.\n\n- Incluye el `indent-outdent` predeterminado + el `reverseButtons` ​​del usuario."
+  },
+  "codeMirror": {
+    "description": "Objeto de configuración de CodeMirror desde `externalLibs.codeMirror`."
+  },
+  "hasCodeMirror": {
+    "description": "Utiliza CodeMirror para la visualización del código."
+  },
+  "audioGallery_data": {
+    "description": "Datos directos sin llamadas al servidor."
+  },
+  "audioGallery_url": {
+    "description": "URL de solicitud del servidor"
+  },
+  "audioGallery_headers": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "audioGallery_thumbnail": {
+    "description": "Miniatura predeterminada"
+  },
+  "fileBrowser_data": {
+    "description": "Acceso directo a los datos sin necesidad de llamar al servidor (se omite la obtención de URL)."
+  },
+  "fileBrowser_url": {
+    "description": "URL de solicitud del servidor"
+  },
+  "fileBrowser_headers": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "fileBrowser_thumbnail": {
+    "description": "URL de miniatura predeterminada o una función que devuelva una URL de miniatura por cada elemento."
+  },
+  "fileBrowser_props": {
+    "description": "Nombres de etiquetas adicionales"
+  },
+  "fileGallery_data": {
+    "description": "Datos directos sin llamadas al servidor."
+  },
+  "fileGallery_url": {
+    "description": "URL de solicitud del servidor"
+  },
+  "fileGallery_headers": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "fileGallery_thumbnail": {
+    "description": "Miniatura predeterminada"
+  },
+  "imageGallery_data": {
+    "description": "Datos directos sin llamadas al servidor."
+  },
+  "imageGallery_url": {
+    "description": "URL de solicitud del servidor"
+  },
+  "imageGallery_headers": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "videoGallery_data": {
+    "description": "Datos directos sin llamadas al servidor."
+  },
+  "videoGallery_url": {
+    "description": "URL de solicitud del servidor"
+  },
+  "videoGallery_headers": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "videoGallery_thumbnail": {
+    "description": "Miniatura predeterminada"
+  },
+  "codeBlock_langs": {
+    "description": "Lista de lenguajes de programación seleccionables para bloques de código.\n\n- Por defecto, incluye 21 lenguajes comunes.\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n\n- Si se establece como array vacío `[]`, se desactiva por completo la interfaz de selección de lenguaje."
+  },
+  "exportPDF_apiUrl": {
+    "description": "URL de solicitud del servidor para la generación de PDF"
+  },
+  "exportPDF_fileName": {
+    "description": "Nombre del archivo PDF generado"
+  },
+  "fileUpload_uploadUrl": {
+    "description": "URL de solicitud del servidor para la carga de archivos"
+  },
+  "fileUpload_uploadHeaders": {
+    "description": "Encabezados de solicitud del servidor"
+  },
+  "fileUpload_uploadSizeLimit": {
+    "description": "Límite de tamaño total de carga en bytes"
+  },
+  "fileUpload_uploadSingleSizeLimit": {
+    "description": "Límite de tamaño de archivo único en bytes"
+  },
+  "fileUpload_allowMultiple": {
+    "description": "Permitir la carga de varios archivos"
+  },
+  "fileUpload_acceptedFormats": {
+    "description": "Formatos de archivo aceptados."
+  },
+  "fileUpload_as": {
+    "description": "Especifique el formato predeterminado del componente de archivo como `box` o `link`."
+  },
+  "fileUpload_controls": {
+    "description": "Se añadirán controles adicionales a la figura."
+  },
+  "fileUpload_insertBehavior": {
+    "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible, o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
+  },
+  "align_items": {
+    "description": "Alinear elementos"
+  },
+  "backgroundColor_items": {
+    "description": "Lista de colores."
+  },
+  "backgroundColor_splitNum": {
+    "description": "Número de colores por línea"
+  },
+  "backgroundColor_disableHEXInput": {
+    "description": "Deshabilitar la entrada HEX"
+  },
+  "blockStyle_items": {
+    "description": "Lista de formatos.\n\n- `command` — `\"line\"`: bloque de una sola línea, `\"br-line\"`: bloque separado por salto de línea, `\"block\"`: bloque contenedor."
+  },
+  "font_items": {
+    "description": "Lista de fuentes"
+  },
+  "fontColor_items": {
+    "description": "Lista de colores."
+  },
+  "fontColor_splitNum": {
+    "description": "Número de colores por línea"
+  },
+  "fontColor_disableHEXInput": {
+    "description": "Deshabilitar la entrada HEX"
+  },
+  "hR_items": {
+    "description": "lista de recursos humanos"
+  },
+  "layout_items": {
+    "description": "Lista de diseños. Cada elemento define una plantilla de diseño con nombre y código HTML sin formato."
+  },
+  "lineHeight_items": {
+    "description": "Lista de altura de línea"
+  },
+  "paragraphStyle_items": {
+    "description": "Lista de elementos del párrafo"
+  },
+  "table_scrollType": {
+    "description": "Tipo de desplazamiento (`x`, `y`, `xy`)"
+  },
+  "table_captionPosition": {
+    "description": "Posición del título (`top`, `bottom`)"
+  },
+  "table_cellControllerPosition": {
+    "description": "Posición del controlador de celda (`cell`, `table`)"
+  },
+  "table_colorList": {
+    "description": "Lista de colores HEX para el selector de color de fondo de la celda."
+  },
+  "template_items": {
+    "description": "Lista de plantillas"
+  },
+  "textStyle_items": {
+    "description": "Lista de elementos con estilo de texto."
+  },
+  "mention_triggerText": {
+    "description": "El personaje que activa la lista de menciones."
+  },
+  "mention_limitSize": {
+    "description": "Número de elementos a mostrar en la lista de menciones"
+  },
+  "mention_searchStartLength": {
+    "description": "El número de caracteres para comenzar la búsqueda en la lista de menciones"
+  },
+  "mention_delayTime": {
+    "description": "Tiempo de espera antes de mostrar la lista de menciones"
+  },
+  "mention_data": {
+    "description": "Datos de mención estáticos (utilizados en lugar de la API)."
+  },
+  "mention_apiUrl": {
+    "description": "La URL para llamar a la lista de menciones"
+  },
+  "mention_apiHeaders": {
+    "description": "Los encabezados que se enviarán con la llamada a la API"
+  },
+  "mention_useCachingData": {
+    "description": "Si se deben almacenar en caché los datos de la lista de menciones"
+  },
+  "mention_useCachingFieldData": {
+    "description": "Si se deben almacenar en caché los datos de la lista de menciones en el campo"
+  },
+  "fontSize_sizeUnit": {
+    "description": "Unidad de medida para el tamaño de fuente.\n\n- Los valores aceptados incluyen: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` o `'text'`.\n\n- Si se utiliza `'text'`, se aplica una lista de tamaños de fuente basada en texto."
+  },
+  "fontSize_showDefaultSizeLabel": {
+    "description": "Determina si la etiqueta de tamaño predeterminada se muestra en el menú desplegable."
+  },
+  "fontSize_showIncDecControls": {
+    "description": "Cuando `true`, muestra botones para aumentar y disminuir el tamaño de la fuente.\n\n- Por defecto, se muestra `false`. Siempre se muestra `false` cuando `sizeUnit` es `'text'` (ignorado)."
+  },
+  "fontSize_disableInput": {
+    "description": "Cuando `true`, desactiva el cuadro de entrada directa del tamaño de fuente.\n\n- El valor predeterminado es `true` ​​cuando `sizeUnit` es `'text'`; de lo contrario, es `false`."
+  },
+  "fontSize_unitMap": {
+    "description": "Anular o ampliar la asignación de unidades predeterminada para los tamaños de fuente."
+  },
+  "audio_defaultWidth": {
+    "description": "El ancho predeterminado de la etiqueta `AUDIO`."
+  },
+  "audio_defaultHeight": {
+    "description": "La altura predeterminada de la etiqueta `AUDIO`."
+  },
+  "audio_createFileInput": {
+    "description": "Si se debe crear un elemento de entrada de archivo."
+  },
+  "audio_createUrlInput": {
+    "description": "Indica si se debe crear un elemento de entrada de URL.\n\n- Por defecto es `true`. Siempre es `true` ​​cuando `createFileInput` es `false`."
+  },
+  "audio_uploadUrl": {
+    "description": "La URL a la que se subirán los archivos."
+  },
+  "audio_uploadHeaders": {
+    "description": "Encabezados que deben incluirse en la solicitud de carga de archivos."
+  },
+  "audio_uploadSizeLimit": {
+    "description": "El límite de tamaño total de carga en bytes."
+  },
+  "audio_uploadSingleSizeLimit": {
+    "description": "El límite de tamaño de un solo archivo en bytes."
+  },
+  "audio_allowMultiple": {
+    "description": "Si se debe permitir la carga de varios archivos."
+  },
+  "audio_acceptedFormats": {
+    "description": "Formatos de archivo aceptados (el predeterminado es `\"audio/*\"`)."
+  },
+  "audio_audioTagAttributes": {
+    "description": "Atributos adicionales para configurar en la etiqueta `AUDIO`."
+  },
+  "audio_insertBehavior": {
+    "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible, o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
+  },
+  "drawing_outputFormat": {
+    "description": "Formato de salida del dibujo. Opciones: `\"dataurl\"`, `\"svg\"`."
+  },
+  "drawing_useFormatType": {
+    "description": "Si se debe habilitar la selección del tipo de formato (`block` frente a `inline`)."
+  },
+  "drawing_defaultFormatType": {
+    "description": "El tipo de formato predeterminado, ya sea `\"block\"` o `\"inline\"`."
+  },
+  "drawing_keepFormatType": {
+    "description": "Si se debe mantener el tipo de formato elegido después de dibujar."
+  },
+  "drawing_lineWidth": {
+    "description": "El ancho de la línea de dibujo."
+  },
+  "drawing_lineReconnect": {
+    "description": "Si se deben volver a conectar las líneas al dibujar."
+  },
+  "drawing_lineCap": {
+    "description": "El estilo del remate de línea (`\"butt\"`, `\"round\"` ​​o `\"square\"`)."
+  },
+  "drawing_lineColor": {
+    "description": "El color de la línea del dibujo."
+  },
+  "drawing_canResize": {
+    "description": "Si el formulario modal se puede redimensionar."
+  },
+  "drawing_maintainRatio": {
+    "description": "Si se debe mantener la relación de aspecto al cambiar el tamaño."
+  },
+  "drawing_formSize": {
+    "description": "La configuración de tamaño para el formulario modal de dibujo."
+  },
+  "embed_canResize": {
+    "description": "Si el elemento incrustado se puede redimensionar."
+  },
+  "embed_showHeightInput": {
+    "description": "Si se debe mostrar el campo de entrada de altura."
+  },
+  "embed_defaultWidth": {
+    "description": "El ancho predeterminado del elemento incrustado (valor numérico o con unidad)."
+  },
+  "embed_defaultHeight": {
+    "description": "La altura predeterminada del elemento incrustado (valor numérico o con unidad)."
+  },
+  "embed_percentageOnlySize": {
+    "description": "Si se debe permitir únicamente el dimensionamiento basado en porcentajes."
+  },
+  "embed_uploadUrl": {
+    "description": "La URL para subir archivos."
+  },
+  "embed_uploadHeaders": {
+    "description": "Encabezados que deben incluirse en las solicitudes de carga de archivos."
+  },
+  "embed_uploadSizeLimit": {
+    "description": "El límite de tamaño total de carga de archivos en bytes."
+  },
+  "embed_uploadSingleSizeLimit": {
+    "description": "El límite de tamaño de carga de un solo archivo en bytes."
+  },
+  "embed_iframeTagAttributes": {
+    "description": "Atributos adicionales para configurar en la etiqueta `IFRAME`."
+  },
+  "embed_query_youtube": {
+    "description": "Parámetro de consulta de YouTube añadido a la URL de inserción."
+  },
+  "embed_query_vimeo": {
+    "description": "Parámetro de consulta de Vimeo añadido a la URL de inserción."
+  },
+  "embed_urlPatterns": {
+    "description": "Patrones de URL adicionales que se reconocen como contenido incrustable."
+  },
+  "embed_embedQuery": {
+    "description": "Definiciones de servicios de integración personalizadas."
+  },
+  "embed_controls": {
+    "description": "Controles de figura."
+  },
+  "embed_insertBehavior": {
+    "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible, o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
+  },
+  "image_canResize": {
+    "description": "Si el elemento de imagen se puede redimensionar."
+  },
+  "image_showHeightInput": {
+    "description": "Si se debe mostrar el campo de entrada de altura."
+  },
+  "image_defaultWidth": {
+    "description": "El ancho predeterminado de la imagen. Si se proporciona un número, se agregará `\"px\"`."
+  },
+  "image_defaultHeight": {
+    "description": "La altura predeterminada de la imagen. Si se proporciona un número, se añadirá `\"px\"`."
+  },
+  "image_percentageOnlySize": {
+    "description": "Si se debe permitir únicamente el dimensionamiento basado en porcentajes."
+  },
+  "image_createFileInput": {
+    "description": "Si se debe crear un elemento de entrada de archivos para la carga de imágenes."
+  },
+  "image_createUrlInput": {
+    "description": "Indica si se debe crear un elemento de entrada URL para insertar imágenes.\n\n- Por defecto, se utiliza `true`. Siempre se utiliza `true` ​​cuando `createFileInput` es `false`."
+  },
+  "image_uploadUrl": {
+    "description": "El punto final URL para la carga de archivos de imagen."
+  },
+  "image_uploadHeaders": {
+    "description": "Encabezados adicionales que deben incluirse en la solicitud de carga de archivos."
+  },
+  "image_uploadSizeLimit": {
+    "description": "El límite de tamaño total de carga en bytes."
+  },
+  "image_uploadSingleSizeLimit": {
+    "description": "El límite de tamaño de carga de un solo archivo en bytes."
+  },
+  "image_allowMultiple": {
+    "description": "Si se permite subir varias imágenes."
+  },
+  "image_acceptedFormats": {
+    "description": "Formatos de archivo aceptados para la carga de imágenes."
+  },
+  "image_useFormatType": {
+    "description": "Si se debe habilitar la selección del tipo de formato (`block` o `inline`)."
+  },
+  "image_defaultFormatType": {
+    "description": "El tipo de formato de imagen predeterminado (`\"block\"` o `\"inline\"`)."
+  },
+  "image_keepFormatType": {
+    "description": "Indica si se debe conservar el formato seleccionado después de insertar la imagen."
+  },
+  "image_linkEnableFileUpload": {
+    "description": "Si se debe habilitar la carga de archivos para imágenes vinculadas."
+  },
+  "image_controls": {
+    "description": "Controles de figura."
+  },
+  "image_insertBehavior": {
+    "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- Para componentes en línea: coloca el cursor cerca del componente o lo selecciona si no hay un rango cercano.\n\n- Para componentes de bloque: ejecuta el comportamiento según `selectMode`:\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible; o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
+  },
+  "link_uploadUrl": {
+    "description": "El punto final URL para la carga de archivos."
+  },
+  "link_uploadHeaders": {
+    "description": "Encabezados adicionales para las solicitudes de carga de archivos."
+  },
+  "link_uploadSizeLimit": {
+    "description": "El límite de tamaño total de carga de archivos en bytes."
+  },
+  "link_uploadSingleSizeLimit": {
+    "description": "El límite de tamaño de carga de un solo archivo en bytes."
+  },
+  "link_acceptedFormats": {
+    "description": "Formatos de archivo aceptados para la carga de enlaces."
+  },
+  "link_title": {
+    "description": "Visualización de título modal."
+  },
+  "link_textToDisplay": {
+    "description": "Crear texto para mostrar la entrada."
+  },
+  "link_openNewWindow": {
+    "description": "Valor predeterminado de la casilla de verificación \"Abrir en una ventana nueva\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Si es `true`, desactiva el prefijo automático de la URL del host al valor del enlace."
+  },
+  "link_relList": {
+    "description": "Los valores disponibles del atributo `rel` se muestran como casillas de verificación en la ventana modal del enlace."
+  },
+  "link_defaultRel": {
+    "description": "Valores predeterminados de `rel` aplicados automáticamente por condición."
+  },
+  "link_enableFileUpload": {
+    "description": "Si es `true`, habilita la carga de archivos."
+  },
+  "math_canResize": {
+    "description": "Si se puede cambiar el tamaño de la ventana modal matemática."
+  },
+  "math_autoHeight": {
+    "description": "Si se debe ajustar automáticamente la altura de la ventana modal."
+  },
+  "math_fontSizeList": {
+    "description": "Lista de opciones de tamaño de fuente para el selector de tamaño de expresiones matemáticas."
+  },
+  "math_onPaste": {
+    "description": "Una función de devolución de llamada para gestionar los eventos de pegado en el área de entrada matemática."
+  },
+  "math_formSize": {
+    "description": "Un objeto que especifica las dimensiones para el modal matemático."
+  },
+  "video_canResize": {
+    "description": "Si el elemento de vídeo se puede redimensionar."
+  },
+  "video_showHeightInput": {
+    "description": "Si se debe mostrar el campo de entrada de altura."
+  },
+  "video_defaultWidth": {
+    "description": "El ancho predeterminado del elemento de vídeo. Si se proporciona un número, se añadirá `\"px\"`."
+  },
+  "video_defaultHeight": {
+    "description": "La altura predeterminada del elemento de vídeo. Si se proporciona un número, se añadirá `\"px\"`."
+  },
+  "video_percentageOnlySize": {
+    "description": "Si se debe permitir únicamente el dimensionamiento basado en porcentajes."
+  },
+  "video_createFileInput": {
+    "description": "Si se debe crear un elemento de entrada de archivos para la carga de vídeos."
+  },
+  "video_createUrlInput": {
+    "description": "Indica si se debe crear un elemento de entrada de URL para la inserción de vídeo.\n\n- Por defecto, se utiliza `true`. Siempre se utiliza `true` ​​cuando `createFileInput` es `false`."
+  },
+  "video_uploadUrl": {
+    "description": "El punto final URL para la carga de archivos de vídeo."
+  },
+  "video_uploadHeaders": {
+    "description": "Encabezados adicionales que deben incluirse en la solicitud de carga de vídeo."
+  },
+  "video_uploadSizeLimit": {
+    "description": "El límite de tamaño total de subida para vídeos en bytes."
+  },
+  "video_uploadSingleSizeLimit": {
+    "description": "El límite de tamaño de archivo único para subir vídeos en bytes."
+  },
+  "video_allowMultiple": {
+    "description": "Si se permiten subir varios vídeos a la vez."
+  },
+  "video_acceptedFormats": {
+    "description": "Formatos de archivo aceptados para la carga de vídeos (`\"video/*\"`)."
+  },
+  "video_defaultRatio": {
+    "description": "La relación de aspecto predeterminada para el vídeo (alto/ancho, por ejemplo, 16:9 → `9/16 = 0.5625`)."
+  },
+  "video_showRatioOption": {
+    "description": "Indica si se debe mostrar la opción de ratio en la ventana modal."
+  },
+  "video_ratioOptions": {
+    "description": "Opciones de relación de aspecto personalizadas para el redimensionamiento de vídeo (valor = altura/anchura)."
+  },
+  "video_videoTagAttributes": {
+    "description": "Atributos adicionales para configurar en la etiqueta `VIDEO`."
+  },
+  "video_iframeTagAttributes": {
+    "description": "Atributos adicionales para configurar en la etiqueta `IFRAME`."
+  },
+  "video_query_youtube": {
+    "description": "Parámetros de consulta adicionales para la inserción de vídeos de YouTube."
+  },
+  "video_query_vimeo": {
+    "description": "Parámetros de consulta adicionales para la inserción de vídeos de Vimeo."
+  },
+  "video_embedQuery": {
+    "description": "Definiciones de servicios de inserción personalizados (ver `EmbedPluginOptions.embedQuery`)."
+  },
+  "video_urlPatterns": {
+    "description": "Patrones de URL adicionales para la inserción de vídeos."
+  },
+  "video_extensions": {
+    "description": "Extensiones de archivo adicionales que se reconocerán para las cargas de vídeo."
+  },
+  "video_controls": {
+    "description": "Controles de figura."
+  },
+  "video_insertBehavior": {
+    "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible, o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
+  }
+}
