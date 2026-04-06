@@ -20,8 +20,8 @@ export type AdSlotConfig = {
  * When type is "empty", the slot renders nothing (placeholder for future ads).
  */
 export const AD_SLOTS: Record<string, AdSlotConfig[]> = {
-	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: "auto" }],
-	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: "auto" }],
+	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: "2985737129" }],
+	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: "2985737129" }],
 };
 
 /**
