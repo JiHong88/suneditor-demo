@@ -7,7 +7,7 @@ import MicroBar from "@/components/layout/microBar";
 import { SUNEDITOR_VERSION } from "@/store/version";
 import { getDir } from "@/i18n/lang";
 import { getLocale } from "next-intl/server";
-import { TopBanner, FooterBanner } from "@/components/ad/AdBanner";
+import { FooterBanner } from "@/components/ad/AdBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
@@ -81,9 +81,6 @@ export default async function RootLayout({
 
 					{/* Info bar */}
 					<MicroBar className='sticky top-14' />
-
-					{/* 상단 광고 배너 */}
-					<TopBanner />
 
 					{/* 메인 */}
 					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>

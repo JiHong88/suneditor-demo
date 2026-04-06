@@ -10,7 +10,6 @@ import apiDocsEn from "@/data/api/api-docs.en.json";
 import { highlightInline } from "@/lib/highlightInline";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import CodeBlock from "@/components/common/CodeBlock";
-import { SidebarAd } from "@/components/ad/AdBanner";
 
 /* ── Constants ─────────────────────────────────────────── */
 // nav area = 92px (nav + breadcrumb/gap)
@@ -585,7 +584,6 @@ export default function OptionsPage() {
 					<aside className="hidden lg:block w-60 shrink-0">
 						<div className={cn("sticky max-h-[calc(100vh-5rem)] overflow-y-auto pr-2", SIDEBAR_TOP)}>
 							<Sidebar sections={filteredSections} activeId={activeCategory} onSelect={scrollTo} expandedSections={expandedSections} onToggleSection={toggleSection} />
-							<SidebarAd />
 						</div>
 					</aside>
 

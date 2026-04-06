@@ -5,10 +5,12 @@ import { useDraggable } from "@dnd-kit/core";
 import { Search, Plus, GripVertical, SeparatorVertical } from "lucide-react";
 import { getButtonsByCategory, CATEGORY_LABELS, CATEGORY_ORDER } from "./buttonCatalog";
 import type { ButtonMeta, ButtonCategory } from "./builderTypes";
+import { useTranslations } from "next-intl";
 
 /* ── Separator palette item ───────────────────────────── */
 
 function SeparatorPaletteItem({ onAdd }: { onAdd: (name: string) => void }) {
+	const t = useTranslations("Playground.builder");
 	const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
 		id: "palette-separator",
 		data: { type: "palette-button" as const, buttonName: "|" },
@@ -27,7 +29,7 @@ function SeparatorPaletteItem({ onAdd }: { onAdd: (name: string) => void }) {
 				type='button'
 				onClick={() => onAdd("|")}
 				className='add-zone shrink-0 p-1.5 rounded-s-md hover:text-amber-800 dark:hover:text-amber-300 transition-colors cursor-pointer'
-				title='Add separator'
+				title={t("addSeparator")}
 			>
 				<Plus className='h-3 w-3' />
 			</button>
@@ -37,7 +39,7 @@ function SeparatorPaletteItem({ onAdd }: { onAdd: (name: string) => void }) {
 				className='drag-zone flex-1 flex items-center gap-1 pe-2 py-1.5 cursor-grab min-w-0 rounded-e-md hover:text-amber-800 dark:hover:text-amber-300 transition-colors'
 			>
 				<SeparatorVertical className='h-3.5 w-3.5 shrink-0' />
-				<span className='text-[11px] font-medium'>Separator</span>
+				<span className='text-[11px] font-medium'>{t("separator")}</span>
 				<span className='text-[9px] opacity-60 ms-auto'>|</span>
 			</div>
 		</div>

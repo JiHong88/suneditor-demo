@@ -14,7 +14,6 @@ import apiDocsDataEn from "@/data/api/api-docs.en.json";
 import type { ApiDocs } from "./_lib/types";
 import { buildSidebarItems, resolveContentData } from "./_lib/sidebarData";
 import { buildSearchIndex, searchApi } from "./_lib/apiSearchIndex";
-import { SidebarAd } from "@/components/ad/AdBanner";
 
 const apiDocsEn = apiDocsDataEn as unknown as ApiDocs;
 
@@ -232,7 +231,6 @@ export default function DocsApiPage() {
 					className='hidden md:block w-60 lg:w-64 shrink-0 border-e bg-background sticky top-[91px] self-start max-h-[calc(100vh-91px)] overflow-y-auto'
 				>
 					<ApiSidebar items={sidebarItems} selectedId={selectedId} onSelect={handleSidebarSelect} />
-					<SidebarAd />
 				</div>
 
 				{/* Content area */}

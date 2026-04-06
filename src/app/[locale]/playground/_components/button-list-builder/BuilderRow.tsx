@@ -4,6 +4,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { Plus, Trash2 } from "lucide-react";
 import type { BuilderRow as RowType, BuilderAction } from "./builderTypes";
 import BuilderGroup from "./BuilderGroup";
+import { useTranslations } from "next-intl";
 
 /* ── Drop zone between groups ─────────────────────────── */
 
@@ -46,6 +47,7 @@ interface BuilderRowProps {
 }
 
 export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpointId, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover, searchQuery }: BuilderRowProps) {
+	const t = useTranslations("Playground.builder");
 	return (
 		<div className='group/row relative'>
 			{/* Row label */}
@@ -98,10 +100,10 @@ export default function BuilderRow({ row, rowIndex, totalRows, dispatch, breakpo
 					type='button'
 					onClick={() => dispatch({ type: "ADD_GROUP", rowId: row.id, breakpointId })}
 					className='inline-flex items-center gap-1.5 px-3 py-2 ms-2 rounded-lg border-2 border-dashed border-primary/40 text-xs font-semibold text-primary/70 bg-primary/5 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-sm transition-all cursor-pointer dark:border-primary/30 dark:text-primary/60 dark:bg-primary/5 dark:hover:border-primary/70 dark:hover:text-primary dark:hover:bg-primary/10'
-					title='Add group — buttons must be placed inside a group'
+					title={t("addGroupTitle")}
 				>
 					<Plus className='h-3.5 w-3.5' />
-					+ Group
+					{t("addGroup")}
 				</button>
 			</div>
 		</div>

@@ -90,30 +90,15 @@ export function SiteNav() {
 					<div className='hidden items-center gap-1 md:flex flex-1 min-w-0 max-w-fit mx-auto'>
 						<Link href='/' className='flex items-center shrink-0 mx-2 lg:mx-6' aria-label='Home'>
 							{/* md~lg: 아이콘만 */}
-							<Image
-								src='/se3_logo_flat.svg'
-								alt='SunEditor Logo'
-								width={36}
-								height={36}
-								priority
-								className='lg:hidden'
-							/>
+							<Image src='/se3_logo.svg' alt='SunEditor Logo' width={36} height={36} priority className='lg:hidden' />
 							{/* lg+: 풀 로고 */}
-							<Image
-								src='/se3_logo_title.svg'
-								alt='SunEditor Logo'
-								width={148 * 1.12}
-								height={44 * 1.12}
-								priority
-								className='hidden lg:block dark:hidden'
-							/>
 							<Image
 								src='/se3_logo_title_flat.svg'
 								alt='SunEditor Logo'
 								width={148 * 1.12}
 								height={44 * 1.12}
 								priority
-								className='hidden dark:lg:block'
+								className='hidden lg:block'
 							/>
 						</Link>
 						<nav
@@ -135,17 +120,11 @@ export function SiteNav() {
 							))}
 
 							{/* More 버튼 */}
-							<div
-								ref={moreRef}
-								className={cn("relative", !hasOverflow && "hidden")}
-							>
+							<div ref={moreRef} className={cn("relative", !hasOverflow && "hidden")}>
 								<button
 									ref={moreButtonRef}
 									onClick={() => setOpenMore((v) => !v)}
-									className={cn(
-										navLinkClass,
-										"text-muted-foreground hover:text-foreground",
-									)}
+									className={cn(navLinkClass, "text-muted-foreground hover:text-foreground")}
 									aria-expanded={openMore}
 									aria-label='More pages'
 								>

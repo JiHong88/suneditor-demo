@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from "react"
 import "suneditor/css/editor";
 import type { BuilderRow, BreakpointConfig } from "./builderTypes";
 import { BUTTON_MAP } from "./buttonCatalog";
+import { useTranslations } from "next-intl";
 
 /**
  * Map builder button names → suneditor defaultIcons key names.
@@ -271,6 +272,7 @@ export default function BuilderToolbarPreview({
 	hoveredMoreGroupId,
 	hoveredGroupAction,
 }: BuilderToolbarPreviewProps) {
+	const t = useTranslations("Playground.builder");
 	const [openMoreId, setOpenMoreId] = useState<string | null>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 
@@ -421,7 +423,7 @@ export default function BuilderToolbarPreview({
 		>
 			<div className='px-4 py-1.5 flex items-center justify-between'>
 				<span className='text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider'>
-					Toolbar Preview
+					{t("toolbarPreview")}
 				</span>
 				<span className='text-[10px] font-mono text-indigo-500/70 dark:text-indigo-300/60'>{displayWidth}</span>
 			</div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { MoreButtonConfig, BuilderAction } from "./builderTypes";
 
 interface BuilderMoreButtonDialogProps {
@@ -13,6 +14,7 @@ interface BuilderMoreButtonDialogProps {
 }
 
 export default function BuilderMoreButtonDialog({ groupId, config, dispatch, breakpointId, onClose }: BuilderMoreButtonDialogProps) {
+	const t = useTranslations("Playground.builder.moreButton");
 	const [label, setLabel] = useState(config.label);
 	const [icon, setIcon] = useState(config.icon);
 	const [className, setClassName] = useState(config.className);
@@ -36,7 +38,7 @@ export default function BuilderMoreButtonDialog({ groupId, config, dispatch, bre
 		<div className='fixed inset-0 z-50 flex items-center justify-center bg-black/30' onClick={onClose}>
 			<div className='bg-card border rounded-lg shadow-xl w-72 p-4' onClick={(e) => e.stopPropagation()}>
 				<div className='flex items-center justify-between mb-3'>
-					<h4 className='text-sm font-semibold'>:MoreButton Config</h4>
+					<h4 className='text-sm font-semibold'>{t("title")}</h4>
 					<button type='button' onClick={onClose} className='p-0.5 rounded hover:bg-muted transition-colors cursor-pointer'>
 						<X className='h-4 w-4' />
 					</button>
@@ -44,33 +46,33 @@ export default function BuilderMoreButtonDialog({ groupId, config, dispatch, bre
 
 				<div className='space-y-2'>
 					<div>
-						<label className='text-[10px] font-medium text-muted-foreground uppercase'>Label</label>
+						<label className='text-[10px] font-medium text-muted-foreground uppercase'>{t("label")}</label>
 						<input
 							type='text'
 							value={label}
 							onChange={(e) => setLabel(e.target.value)}
 							className='w-full mt-0.5 px-2 py-1 text-xs rounded border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary/30'
-							placeholder='More'
+							placeholder={t("labelPlaceholder")}
 						/>
 					</div>
 					<div>
-						<label className='text-[10px] font-medium text-muted-foreground uppercase'>Icon</label>
+						<label className='text-[10px] font-medium text-muted-foreground uppercase'>{t("icon")}</label>
 						<input
 							type='text'
 							value={icon}
 							onChange={(e) => setIcon(e.target.value)}
 							className='w-full mt-0.5 px-2 py-1 text-xs rounded border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary/30'
-							placeholder='default'
+							placeholder={t("iconPlaceholder")}
 						/>
 					</div>
 					<div>
-						<label className='text-[10px] font-medium text-muted-foreground uppercase'>Class Name</label>
+						<label className='text-[10px] font-medium text-muted-foreground uppercase'>{t("className")}</label>
 						<input
 							type='text'
 							value={className}
 							onChange={(e) => setClassName(e.target.value)}
 							className='w-full mt-0.5 px-2 py-1 text-xs rounded border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary/30'
-							placeholder='more_custom'
+							placeholder={t("classPlaceholder")}
 						/>
 					</div>
 				</div>
@@ -81,7 +83,7 @@ export default function BuilderMoreButtonDialog({ groupId, config, dispatch, bre
 						onClick={handleRemove}
 						className='px-2 py-1 text-[11px] rounded border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors cursor-pointer'
 					>
-						Remove
+						{t("remove")}
 					</button>
 					<div className='flex-1' />
 					<button
@@ -89,20 +91,20 @@ export default function BuilderMoreButtonDialog({ groupId, config, dispatch, bre
 						onClick={onClose}
 						className='px-2 py-1 text-[11px] rounded border border-border text-muted-foreground hover:bg-muted transition-colors cursor-pointer'
 					>
-						Cancel
+						{t("cancel")}
 					</button>
 					<button
 						type='button'
 						onClick={handleApply}
 						className='px-3 py-1 text-[11px] rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer'
 					>
-						Apply
+						{t("apply")}
 					</button>
 				</div>
 
 				{/* Preview */}
 				<div className='mt-3 pt-3 border-t'>
-					<p className='text-[9px] text-muted-foreground/60 uppercase tracking-wider mb-1'>Output format</p>
+					<p className='text-[9px] text-muted-foreground/60 uppercase tracking-wider mb-1'>{t("outputFormat")}</p>
 					<code className='text-[10px] text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-1 rounded block'>
 						:{label}-{icon}.{className}
 					</code>

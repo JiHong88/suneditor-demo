@@ -11,7 +11,9 @@ import {
 	type Modifier,
 } from "@dnd-kit/core";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Eraser, RotateCcw, GripVertical } from "lucide-react";
+import { Eraser, RotateCcw, GripVertical, X } from "lucide-react";
+import { BuilderTopBanner } from "@/components/ad/AdBanner";
+import { useTranslations } from "next-intl";
 import { useBuilderState } from "./useBuilderState";
 import { buttonListToBuilder, builderToButtonList } from "./builderConversion";
 import BuilderPalette from "./BuilderPalette";
@@ -51,6 +53,7 @@ export default function ButtonListBuilder({
 	editorRenderedWidth,
 	editorTheme,
 }: ButtonListBuilderProps) {
+	const t = useTranslations("Playground.builder");
 	const initialState = useMemo(() => buttonListToBuilder(initialButtonList), [initialButtonList]);
 	const { state, dispatch, set } = useBuilderState(initialState);
 	const [activeBreakpointId, setActiveBreakpointId] = useState<string | undefined>(undefined);
@@ -486,7 +489,7 @@ export default function ButtonListBuilder({
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
-			<SheetContent side='bottom' className='h-[92vh] flex flex-col p-0 gap-0'>
+			<SheetContent side='bottom' className='h-dvh flex flex-col p-0 gap-0' hideClose>
 				{/* Keyframe animation for button entry */}
 				<style>{`
 					@keyframes buttonPop {
@@ -496,18 +499,21 @@ export default function ButtonListBuilder({
 					}
 				`}</style>
 
+				{/* Ad banner */}
+				<BuilderTopBanner />
+
 				{/* Header */}
 				<SheetHeader className='shrink-0 px-4 py-3 border-b'>
 					<div className='flex items-center justify-between'>
-						<SheetTitle className='text-sm font-bold'>ButtonList Builder</SheetTitle>
-						<div className='flex items-center gap-2 mx-[24px]'>
+						<SheetTitle className='text-sm font-bold'>{t("title")}</SheetTitle>
+						<div className='flex items-center gap-2'>
 							<button
 								type='button'
 								onClick={handleClear}
 								className='inline-flex items-center gap-1 px-2.5 py-1 text-[11px] rounded border border-border text-muted-foreground hover:bg-muted transition-colors cursor-pointer'
 							>
 								<Eraser className='h-3 w-3' />
-								Clear
+								{t("clear")}
 							</button>
 							<button
 								type='button'
@@ -515,7 +521,15 @@ export default function ButtonListBuilder({
 								className='inline-flex items-center gap-1 px-2.5 py-1 text-[11px] rounded border border-border text-muted-foreground hover:bg-muted transition-colors cursor-pointer'
 							>
 								<RotateCcw className='h-3 w-3' />
-								Reset
+								{t("reset")}
+							</button>
+							<button
+								type='button'
+								onClick={() => onOpenChange(false)}
+								className='inline-flex items-center justify-center size-8 rounded-md border border-destructive text-destructive hover:bg-destructive/10 transition-colors cursor-pointer'
+								title={t("close")}
+							>
+								<X className='size-4' />
 							</button>
 						</div>
 					</div>
@@ -567,14 +581,14 @@ export default function ButtonListBuilder({
 								<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
 									<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
 									<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
-										Preset Group
+										{t("presetGroup")}
 									</span>
 								</div>
 							) : dragData && dragData.type === "canvas-group" ? (
 							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
 								<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
 								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
-									Group
+									{t("group")}
 								</span>
 							</div>
 						) : dragData ? (
@@ -610,7 +624,7 @@ export default function ButtonListBuilder({
 				{/* Footer */}
 				<div className='shrink-0 px-4 py-3 border-t bg-muted/30 flex items-center justify-between'>
 					<div className='flex items-center gap-3 text-[11px] text-muted-foreground'>
-						<span>{usedButtons.size} buttons configured</span>
+						<span>{t("buttonsConfigured", { count: usedButtons.size })}</span>
 						{editorRenderedWidth ? (
 							<span className='px-1.5 py-0.5 rounded bg-muted border border-border text-[10px] font-mono'>
 								editor: {editorRenderedWidth}px
@@ -623,14 +637,14 @@ export default function ButtonListBuilder({
 							onClick={() => onOpenChange(false)}
 							className='px-3 py-1.5 text-xs rounded border border-border text-muted-foreground hover:bg-muted transition-colors cursor-pointer'
 						>
-							Cancel
+							{t("cancel")}
 						</button>
 						<button
 							type='button'
 							onClick={handleApply}
 							className='px-4 py-1.5 text-xs rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium cursor-pointer'
 						>
-							Apply to Editor
+							{t("applyToEditor")}
 						</button>
 					</div>
 				</div>

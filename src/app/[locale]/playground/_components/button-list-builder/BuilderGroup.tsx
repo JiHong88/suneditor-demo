@@ -5,6 +5,7 @@ import { SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortabl
 import { ChevronDown, Trash2, AlignRight, GripVertical } from "lucide-react";
 import type { BuilderGroup as GroupType, BuilderAction } from "./builderTypes";
 import BuilderButton from "./BuilderButton";
+import { useTranslations } from "next-intl";
 
 /* ── Insertion gap between buttons ────────────────────── */
 
@@ -45,6 +46,10 @@ interface BuilderGroupProps {
 }
 
 export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dragPreview, isDragging, isDraggingGroup, onButtonHover, onMoreGroupHover, onGroupActionHover, searchQuery }: BuilderGroupProps) {
+	const t = useTranslations("Playground.builder");
+	// Separator-only group: just a "|" item, no group actions
+	const isSeparatorOnly = !group.floatRight && !group.moreButton && group.items.length === 1 && group.items[0] === "|";
+
 	const { attributes: groupDragAttrs, listeners: groupDragListeners, setNodeRef: setDragRef, isDragging: isGroupDragging } = useDraggable({
 		id: `group-drag-${group.id}`,
 		data: { type: "canvas-group" as const, groupId: group.id },
@@ -63,8 +68,10 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 	const hasRight = !!group.floatRight;
 	const hasMore = !!group.moreButton;
 
-	// Group hover prominence classes (only when not dragging a group)
-	const groupHoverClasses = isDraggingGroup
+	// Group hover prominence classes (only when not dragging a group, skip for separator-only)
+	const groupHoverClasses = isSeparatorOnly
+		? ""
+		: isDraggingGroup
 		? ""
 		: hasRight && hasMore
 			? "hover:border-rose-400 hover:bg-muted/30 hover:shadow-sm dark:hover:border-rose-500/60 dark:hover:bg-muted/20"
@@ -123,17 +130,17 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 
 			{/* Empty placeholder */}
 			{group.items.length === 0 && !group.moreButton && (
-				<span className='text-[11px] text-muted-foreground/60 italic px-1'>Drop buttons here</span>
+				<span className='text-[11px] text-muted-foreground/60 italic px-1'>{t("dropHere")}</span>
 			)}
 
-			{/* Group actions */}
-			<div className='absolute -top-3 end-0 flex items-center gap-0.5 opacity-0 group-hover/row:opacity-100 transition-opacity'>
+			{/* Group actions (hidden for separator-only groups) */}
+			{isSeparatorOnly ? null : <div className='absolute -top-3 end-0 flex items-center gap-0.5 opacity-0 group-hover/row:opacity-100 transition-opacity'>
 				<div
 					ref={setDragRef}
 					{...groupDragAttrs}
 					{...groupDragListeners}
 					className='group-drag-zone p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors cursor-grab text-muted-foreground/50 hover:text-emerald-600 dark:hover:text-emerald-400'
-					title='Drag group'
+					title={t("dragGroup")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "drag" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
@@ -143,7 +150,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 					type='button'
 					onClick={() => dispatch({ type: "SET_FLOAT_RIGHT", groupId: group.id, value: !group.floatRight, breakpointId })}
 					className={`group-float-zone p-1 rounded hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors cursor-pointer ${group.floatRight ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground/50 hover:text-orange-600 dark:hover:text-orange-400"}`}
-					title='Float right'
+					title={t("floatRight")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "float" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
@@ -160,7 +167,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 						})
 					}
 					className={`group-more-zone p-1 rounded hover:bg-violet-100 dark:hover:bg-violet-900/40 transition-colors cursor-pointer ${group.moreButton ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground/50 hover:text-violet-600 dark:hover:text-violet-400"}`}
-					title='Toggle :MoreButton dropdown'
+					title={t("toggleMore")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "more" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
 				>
@@ -171,14 +178,14 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 						type='button'
 						onClick={() => dispatch({ type: "REMOVE_GROUP", groupId: group.id, breakpointId })}
 						className='group-delete-zone p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer text-muted-foreground/50'
-						title='Remove group'
+						title={t("removeGroup")}
 						onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "delete" })}
 						onMouseLeave={() => onGroupActionHover?.(null)}
 					>
 						<Trash2 className='h-3.5 w-3.5' />
 					</button>
 				)}
-			</div>
+			</div>}
 		</div>
 	);
 }
