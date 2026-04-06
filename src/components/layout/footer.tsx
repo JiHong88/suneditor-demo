@@ -39,6 +39,16 @@ export default function Footer({ version = "" }: FooterProps) {
 						</li>
 						<li className='my-4'>
 							<a
+								href='https://github.com/JiHong88/suneditor-demo'
+								target='_blank'
+								rel='noreferrer'
+								className='hover:text-slate-900 dark:hover:text-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-slate-400/50 dark:focus-visible:ring-slate-500/50 rounded'
+							>
+								{t("demoSiteSource")}
+							</a>
+						</li>
+						<li className='my-4'>
+							<a
 								href='https://github.com/JiHong88/suneditor/issues'
 								target='_blank'
 								rel='noreferrer'

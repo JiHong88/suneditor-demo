@@ -39,7 +39,7 @@ export function LangSelect() {
 				className='cursor-pointer gap-2 border-none px-2 py-1 text-xs text-muted-foreground shadow-none m-0 appearance-none'
 			>
 				{buildLanguageOptions(localeCodes).map((l: any) => (
-					<option value={l.value} key={l.value} dir={l.dir}>
+					<option value={l.value} key={l.value}>
 						{l.dir === "rtl" ? `${l.label} ←` : l.label}
 					</option>
 				))}

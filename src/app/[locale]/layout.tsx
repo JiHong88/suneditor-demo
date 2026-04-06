@@ -60,17 +60,13 @@ export default async function RootLayout({
 				<meta name='color-scheme' content='dark light' />
 				<meta name='theme-color' content='#f4b124' media='(prefers-color-scheme: light)' />
 				<meta name='theme-color' content='#253445' media='(prefers-color-scheme: dark)' />
-				<script id='theme-init'>
-					{`(function(){
-					try {
-					var t = localStorage.getItem('theme');
-					if (!t || t === 'system') {
-						t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-					}
-					document.documentElement.classList.toggle('dark', t === 'dark');
-					} catch (_) {}
-				})();`}
-				</script>
+				<script
+					id='theme-init'
+					suppressHydrationWarning
+					dangerouslySetInnerHTML={{
+						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.classList.toggle('dark',t==='dark')}catch(_){}})()`,
+					}}
+				/>
 				<script
 					async
 					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933506635175446'

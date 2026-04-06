@@ -87,7 +87,7 @@ export function SiteNav() {
 			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-zinc-900/60'>
 				<div className='mx-auto flex h-14 items-center justify-center px-4 max-w-screen-2xl'>
 					{/* Desktop nav */}
-					<div className='hidden items-center gap-1 md:flex flex-1 min-w-0'>
+					<div className='hidden items-center gap-1 md:flex flex-1 min-w-0 max-w-fit mx-auto'>
 						<Link href='/' className='flex items-center shrink-0 mx-2 lg:mx-6' aria-label='Home'>
 							{/* md~lg: 아이콘만 */}
 							<Image
