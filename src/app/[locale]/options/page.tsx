@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
 import { highlightInline } from "@/lib/highlightInline";
+import ScrollToTop from "@/components/common/ScrollToTop";
 import CodeBlock from "@/components/common/CodeBlock";
 import { SidebarAd } from "@/components/ad/AdBanner";
 
@@ -642,6 +643,7 @@ export default function OptionsPage() {
 					</main>
 				</div>
 			</section>
+			<ScrollToTop />
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
+import { BookOpen } from "lucide-react";
 
 import ThemeGuideContent from "./_components/ThemeGuideContent";
 import EventsContent from "./_components/EventsContent";
@@ -46,17 +47,26 @@ export default function DeepDivePage() {
 							</TabsTrigger>
 						</TabsList>
 
-						<a
-							href='https://github.com/JiHong88/SunEditor/blob/master/GUIDE.md'
-							target='_blank'
-							rel='noopener noreferrer'
-							className='inline-flex items-center gap-1.5 mt-1 text-xs text-orange-600/70 hover:text-orange-600 dark:text-orange-400/70 dark:hover:text-orange-400 transition-colors'
-						>
-							<Github className='size-3.5' />
-							{t("architectureGuide")}
-							<ExternalLink className='size-3' />
-						</a>
-						<div className='border-b pb-3 mb-3' />
+						<div className='flex items-center gap-3 mt-3 mb-4 pb-4 border-b'>
+							<Link
+								href='/deep-dive/guide'
+								className='inline-flex items-center gap-2 rounded-lg border border-orange-300 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-700 shadow-sm transition-colors hover:bg-orange-100 dark:border-orange-500/30 dark:bg-orange-950/40 dark:text-orange-300 dark:hover:bg-orange-950/60'
+							>
+								<BookOpen className='size-4' />
+								{t("architectureGuide")}
+								<ArrowRight className='size-3.5' />
+							</Link>
+							<a
+								href='https://github.com/JiHong88/SunEditor/blob/master/GUIDE.md'
+								target='_blank'
+								rel='noopener noreferrer'
+								className='inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors'
+							>
+								<Github className='size-3.5' />
+								GitHub
+								<ExternalLink className='size-3' />
+							</a>
+						</div>
 
 						<TabsContent value='theme'>
 							<ThemeGuideContent />

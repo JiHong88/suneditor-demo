@@ -10,7 +10,7 @@ function getHighlighter() {
 		highlighterPromise = import("shiki").then((mod) =>
 			mod.createHighlighter({
 				themes: ["github-light", "github-dark"],
-				langs: ["javascript", "html", "jsx", "vue", "typescript", "bash", "css", "svelte"],
+				langs: ["javascript", "html", "jsx", "vue", "typescript", "bash", "css", "svelte", "json", "diff", "markdown", "yaml", "scss"],
 			}),
 		);
 	}
@@ -31,8 +31,10 @@ export default function CodeBlock({ code, lang = "javascript", className }: Code
 		let cancelled = false;
 		getHighlighter().then((highlighter) => {
 			if (cancelled) return;
+			const loadedLangs = highlighter.getLoadedLanguages();
+			const safeLang = loadedLangs.includes(lang) ? lang : "text";
 			const result = highlighter.codeToHtml(code, {
-				lang,
+				lang: safeLang,
 				themes: { light: "github-light", dark: "github-dark" },
 				defaultColor: false,
 			});
