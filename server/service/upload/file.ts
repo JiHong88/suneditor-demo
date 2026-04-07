@@ -9,7 +9,7 @@ import type { UploadResponse } from "../../types";
 import { processUpload } from "./index";
 
 const MEDIA_TYPE = "file" as const;
-const URL_PREFIX = "/uploads/file";
+const URL_PREFIX = "/api/download/file/file";
 
 export async function uploadFile(
 	files: Array<{ name: string; size: number; mimetype: string; data: Buffer }>,

@@ -138,12 +138,12 @@ function ModeIcon({ mode, active }: { mode: string; active?: boolean }) {
 }
 
 const MODES = [
-	{ value: "classic", label: "Classic", desc: "Toolbar fixed at top" },
-	{ value: "classic:bottom", label: "Bottom", desc: "Toolbar fixed at bottom" },
-	{ value: "inline", label: "Inline", desc: "Toolbar inline within content" },
-	{ value: "inline:bottom", label: "Inline:Bottom", desc: "Toolbar inline at bottom" },
-	{ value: "balloon", label: "Balloon", desc: "Floating toolbar on selection" },
-	{ value: "balloon-always", label: "Always", desc: "Floating toolbar always visible" },
+	{ value: "classic", label: "classic", desc: "Toolbar fixed at top" },
+	{ value: "classic:bottom", label: "classic\nbottom", desc: "Toolbar fixed at bottom" },
+	{ value: "inline", label: "inline", desc: "Toolbar inline within content" },
+	{ value: "inline:bottom", label: "inline\nbottom", desc: "Toolbar inline at bottom" },
+	{ value: "balloon", label: "balloon", desc: "Floating toolbar on selection" },
+	{ value: "balloon-always", label: "balloon\nalways", desc: "Floating toolbar always visible" },
 ] as const;
 
 function ModeSelector({ value, onChange, resettable }: { value: string; onChange: (v: string) => void; resettable?: boolean }) {
@@ -165,7 +165,7 @@ function ModeSelector({ value, onChange, resettable }: { value: string; onChange
 									}`}
 							>
 								<ModeIcon mode={m.value} active={active} />
-								<span className='text-[11px] font-medium leading-none truncate'>{m.label}</span>
+								<span className='text-[11px] font-medium leading-tight whitespace-pre-line text-center'>{m.label}</span>
 							</button>
 							<div className='absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2.5 py-1.5 rounded-md bg-zinc-900 dark:bg-zinc-100 shadow-lg text-[10px] text-zinc-100 dark:text-zinc-900 whitespace-nowrap opacity-0 pointer-events-none group-hover/mode:opacity-100 transition-opacity z-50'>
 								<span className='font-semibold'>{m.value}</span>
@@ -313,11 +313,11 @@ function SwitchField({
 				aria-checked={checked}
 				onClick={() => onChange(!checked)}
 				className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${
-					checked ? "bg-primary" : "bg-muted"
+					checked ? "toggle-on" : "toggle-off"
 				}`}
 			>
 				<span
-					className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
+					className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
 				/>
 			</button>
 		</label>
@@ -399,10 +399,10 @@ function ContainerField({
 					onClick={() => !locked && !disabled && onChange(!checked)}
 					className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border-2 border-transparent transition-colors ${
 						locked || disabled ? "cursor-not-allowed" : "cursor-pointer"
-					} ${checked ? (locked ? "bg-orange-500" : "bg-primary") : "bg-muted"}`}
+					} ${checked ? (locked ? "bg-orange-500" : "toggle-on") : "toggle-off"}`}
 				>
 					<span
-						className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
+						className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
 					/>
 				</button>
 			</div>
@@ -431,9 +431,9 @@ function ShortcutsField({ value, onChange }: { value: string; onChange: (v: stri
 					role='switch'
 					aria-checked={checked}
 					onClick={() => onChange(checked ? "" : SHORTCUTS_DEFAULT)}
-					className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${checked ? "bg-primary" : "bg-muted"}`}
+					className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${checked ? "toggle-on" : "toggle-off"}`}
 				>
-					<span className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`} />
+					<span className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`} />
 				</button>
 			</div>
 			{checked && (

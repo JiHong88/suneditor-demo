@@ -1,6 +1,6 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
 import { HEADER_HEIGHT } from "@/lib/constants";
-import { API_MENTION, API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE } from "@/data/snippets/apiEndpoints";
+import { API_MENTION, API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_GALLERY_IMAGE, API_GALLERY_VIDEO, API_GALLERY_AUDIO, API_GALLERY_FILE, API_GALLERY_BROWSE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
 
 /* ── Types ─────────────────────────────────────────────── */
@@ -816,7 +816,7 @@ export const GALLERY_DATA_PRESETS: Record<string, string> = {
 	videoGallery_data: '[\n  {"src": "{{videoGallery-source}}/1.mp4", "thumbnail": "{{videoGallery-source}}/thumb/1.jpg", "name": "Video 1"}\n]',
 	audioGallery_data: '[\n  {"src": "{{audioGallery-source}}/1.mp3", "name": "Audio 1"}\n]',
 	fileGallery_data: '[\n  {"src": "{{fileGallery-source}}/doc.pdf", "name": "Document.pdf", "size": "2.5MB"}\n]',
-	fileBrowser_data: '{\n  "root": [{"src": "{{fileBrowser-source}}/file1.pdf", "name": "file1.pdf"}]\n}',
+	fileBrowser_data: '{\n  "root": {"name": "Root", "default": true, "_data": [{"src": "https://suneditor-files.s3.ap-northeast-2.amazonaws.com/sample/media/sample_file_1.docx", "name": "sample_file_1.docx"}], "media": {"name": "Media", "_data": [{"src": "https://suneditor-files.s3.ap-northeast-2.amazonaws.com/sample/media/sample_video_1.mp4", "name": "sample_video_1.mp4"}]}}\n}',
 	fileBrowser_props: '["href", "data-size", "data-name"]',
 };
 
@@ -892,11 +892,11 @@ const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
 	fileUpload: { fileUpload_uploadUrl: API_UPLOAD_FILE } as Partial<PlaygroundState>,
 	link: { link_uploadUrl: API_UPLOAD_FILE } as Partial<PlaygroundState>,
 	exportPDF: { exportPDF_apiUrl: API_DOWNLOAD_PDF } as Partial<PlaygroundState>,
-	imageGallery: { imageGallery_data: GALLERY_DATA_PRESETS.imageGallery_data } as Partial<PlaygroundState>,
-	videoGallery: { videoGallery_data: GALLERY_DATA_PRESETS.videoGallery_data } as Partial<PlaygroundState>,
-	audioGallery: { audioGallery_data: GALLERY_DATA_PRESETS.audioGallery_data } as Partial<PlaygroundState>,
-	fileGallery: { fileGallery_data: GALLERY_DATA_PRESETS.fileGallery_data } as Partial<PlaygroundState>,
-	fileBrowser: { fileBrowser_data: GALLERY_DATA_PRESETS.fileBrowser_data } as Partial<PlaygroundState>,
+	imageGallery: { imageGallery_url: API_GALLERY_IMAGE } as Partial<PlaygroundState>,
+	videoGallery: { videoGallery_url: API_GALLERY_VIDEO } as Partial<PlaygroundState>,
+	audioGallery: { audioGallery_url: API_GALLERY_AUDIO } as Partial<PlaygroundState>,
+	fileGallery: { fileGallery_url: API_GALLERY_FILE } as Partial<PlaygroundState>,
+	fileBrowser: { fileBrowser_url: API_GALLERY_BROWSE } as Partial<PlaygroundState>,
 };
 
 /** Field plugins (not button-based) auto-enabled per preset */

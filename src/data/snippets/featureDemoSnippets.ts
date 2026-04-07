@@ -158,3 +158,4 @@ export const DEMO_EXPORT_PDF = `<p><strong>Export PDF</strong> — click the exp
 
 /** 키보드 단축키 안내 데모 */
 export const DEMO_KEYBOARD = `<p><strong>Keyboard shortcuts:</strong></p><ul><li><code>Ctrl+B</code> — Bold</li><li><code>Ctrl+I</code> — Italic</li><li><code>Ctrl+U</code> — Underline</li><li><code>Ctrl+Z</code> — Undo</li><li><code>Ctrl+Y</code> — Redo</li><li><code>Ctrl+A</code> — Select All</li></ul><p>Try using these shortcuts!</p>`;
+

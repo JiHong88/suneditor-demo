@@ -97,7 +97,9 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 	]),
 
 	// ── Media ──
-	imageUpload: fl({ p: "full", "i.uu": API_UPLOAD_IMAGE, val: DEMO_IMAGE }, [["image"]]),
+	imageUpload: fl({ p: "full", "i.uu": API_UPLOAD_IMAGE, val: DEMO_IMAGE }, [["image", "imageGallery"]], {
+		imageGallery: { url: "https://etyswjpn79.execute-api.ap-northeast-1.amazonaws.com/suneditor-demo" },
+	}),
 	imageResize: fl({ p: "full", val: DEMO_IMAGE_RESIZE }, [["image"]]),
 	video: fl({ p: "full", val: DEMO_VIDEO }, [["video"]]),
 	audio: fl({ p: "full", val: DEMO_AUDIO }, [["audio"]]),

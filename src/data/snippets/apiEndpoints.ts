@@ -11,6 +11,13 @@ export const API_UPLOAD_VIDEO = "/api/upload/video";
 export const API_UPLOAD_AUDIO = "/api/upload/audio";
 export const API_UPLOAD_FILE = "/api/upload/file";
 
+/** 갤러리/브라우저 API */
+export const API_GALLERY_IMAGE = "/api/gallery/image";
+export const API_GALLERY_VIDEO = "/api/gallery/video";
+export const API_GALLERY_AUDIO = "/api/gallery/audio";
+export const API_GALLERY_FILE = "/api/gallery/file";
+export const API_GALLERY_BROWSE = "/api/gallery/browse";
+
 /** 멘션 API */
 export const API_MENTION = "/api/mention";
 

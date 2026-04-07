@@ -173,7 +173,7 @@ async function translateLocale(locale, data, strings, localeHashes, force) {
 	}
 
 	const prevHashes = localeHashes[locale] || {};
-	const newHashes = {};
+	const newHashes = { ...prevHashes };
 
 	// Determine which items need translation
 	const toTranslate = []; // { index, item }

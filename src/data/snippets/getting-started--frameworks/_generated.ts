@@ -24,8 +24,10 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
       value: "<p>Hello SunEditor</p>",
       buttonList: [
         ["undo", "redo"],
+        "|",
         ["bold", "italic", "underline"],
-        ["link", "image"]
+        "|",
+        ["list", "link", "image"]
       ]
     });
   }
@@ -46,11 +48,14 @@ export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
 <!-- 4. Create Editor -->
 <script>
   const editor = SUNEDITOR.create("my-editor", {
+    plugins: SUNEDITOR.plugins,
     value: "<p>Hello SunEditor</p>",
     buttonList: [
       ["undo", "redo"],
+      "|",
       ["bold", "italic", "underline"],
-      ["link", "image"]
+      "|",
+      ["list", "link", "image"]
     ]
   });
 <\\/script>`;
@@ -65,8 +70,10 @@ const editor = suneditor.create("my-editor", {
   value: "<p>Hello SunEditor</p>",
   buttonList: [
       ["undo", "redo"],
+      "|",
       ["bold", "italic", "underline"],
-      ["link", "image"]
+      "|",
+      ["list", "link", "image"]
     ]
 });`;
 
@@ -84,8 +91,10 @@ export default function Editor() {
       value: "<p>Hello SunEditor</p>",
       buttonList: [
         ["undo", "redo"],
+        "|",
         ["bold", "italic", "underline"],
-        ["link", "image"]
+        "|",
+        ["list", "link", "image"]
       ]
     });
 
@@ -110,8 +119,10 @@ export const FRAMEWORK_SVELTE = `<script>
       value: "<p>Hello SunEditor</p>",
       buttonList: [
         ["undo", "redo"],
+        "|",
         ["bold", "italic", "underline"],
-        ["link", "image"]
+        "|",
+        ["list", "link", "image"]
       ]
     });
 
@@ -136,8 +147,10 @@ onMounted(() => {
     value: "<p>Hello SunEditor</p>",
     buttonList: [
       ["undo", "redo"],
+      "|",
       ["bold", "italic", "underline"],
-      ["link", "image"]
+      "|",
+      ["list", "link", "image"]
     ]
   });
 });
@@ -165,8 +178,10 @@ class SunEditorElement extends HTMLElement {
       value: "<p>Hello SunEditor</p>",
       buttonList: [
         ["undo", "redo"],
+        "|",
         ["bold", "italic", "underline"],
-        ["link", "image"]
+        "|",
+        ["list", "link", "image"]
       ]
     });
   }

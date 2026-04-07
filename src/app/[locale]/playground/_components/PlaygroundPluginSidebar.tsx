@@ -135,10 +135,10 @@ function SwitchField({
 				role='switch'
 				aria-checked={checked}
 				onClick={() => onChange(!checked)}
-				className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${checked ? "bg-primary" : "bg-muted"}`}
+				className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${checked ? "toggle-on" : "toggle-off"}`}
 			>
 				<span
-					className={`pointer-events-none block h-4 w-4 rounded-full bg-background shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
+					className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`}
 				/>
 			</button>
 		</label>
@@ -182,10 +182,10 @@ function ToggleableTextInput({
 					role='switch'
 					aria-checked={isActive}
 					onClick={() => onChange(isActive ? "" : preset)}
-					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${isActive ? "bg-primary" : "bg-muted"}`}
+					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${isActive ? "toggle-on" : "toggle-off"}`}
 				>
 					<span
-						className={`pointer-events-none block h-3 w-3 rounded-full bg-background shadow-sm transition-transform ${isActive ? "translate-x-3" : "translate-x-0"}`}
+						className={`pointer-events-none block h-3 w-3 rounded-full bg-white shadow-sm transition-transform ${isActive ? "translate-x-3" : "translate-x-0"}`}
 					/>
 				</button>
 			</span>
@@ -227,10 +227,10 @@ function ToggleableTextarea({
 					role='switch'
 					aria-checked={isActive}
 					onClick={() => onChange(isActive ? "" : preset)}
-					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${isActive ? "bg-primary" : "bg-muted"}`}
+					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${isActive ? "toggle-on" : "toggle-off"}`}
 				>
 					<span
-						className={`pointer-events-none block h-3 w-3 rounded-full bg-background shadow-sm transition-transform ${isActive ? "translate-x-3" : "translate-x-0"}`}
+						className={`pointer-events-none block h-3 w-3 rounded-full bg-white shadow-sm transition-transform ${isActive ? "translate-x-3" : "translate-x-0"}`}
 					/>
 				</button>
 			</span>
@@ -282,10 +282,10 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					role='switch'
 					aria-checked={showAll}
 					onClick={() => setShowAll(!showAll)}
-					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${showAll ? "bg-primary" : "bg-muted"}`}
+					className={`relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors ${showAll ? "toggle-on" : "toggle-off"}`}
 				>
 					<span
-						className={`pointer-events-none block h-3 w-3 rounded-full bg-background shadow-sm transition-transform ${showAll ? "translate-x-3" : "translate-x-0"}`}
+						className={`pointer-events-none block h-3 w-3 rounded-full bg-white shadow-sm transition-transform ${showAll ? "translate-x-3" : "translate-x-0"}`}
 					/>
 				</button>
 			</label>
@@ -1833,7 +1833,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									value={state.fileBrowser_data}
 									preset={GALLERY_DATA_PRESETS.fileBrowser_data}
 									onChange={set("fileBrowser_data")}
-									placeholder='{"root":[{"src":"...","name":"..."}]}'
+									placeholder='{"root":{"name":"Root","_data":[...]}}'
 									rows={3}
 									optionKey='fileBrowser_data'
 								/>
