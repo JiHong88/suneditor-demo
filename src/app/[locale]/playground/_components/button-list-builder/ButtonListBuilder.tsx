@@ -59,7 +59,9 @@ export default function ButtonListBuilder({
 	const [activeBreakpointId, setActiveBreakpointId] = useState<string | undefined>(undefined);
 	const [hoveredButton, setHoveredButton] = useState<{ name: string; groupId: string; index: number } | null>(null);
 	const [hoveredMoreGroupId, setHoveredMoreGroupId] = useState<string | null>(null);
-	const [hoveredGroupAction, setHoveredGroupAction] = useState<{ groupId: string; action: "drag" | "float" | "more" | "delete" } | null>(null);
+	const [hoveredGroupAction, setHoveredGroupAction] = useState<{ groupId: string; action: "drag" | "float" | "more" | "delete" } | null>(
+		null,
+	);
 
 	// Re-sync builder state from latest initialButtonList when sheet opens
 	const prevOpenRef = useRef(open);
@@ -88,9 +90,7 @@ export default function ButtonListBuilder({
 
 	// Collect all used button names across active rows (exclude separators - they can be duplicated)
 	const usedButtons = useMemo(() => {
-		const rows = activeBreakpointId
-			? (state.breakpoints.find((bp) => bp.id === activeBreakpointId)?.rows ?? state.rows)
-			: state.rows;
+		const rows = activeBreakpointId ? (state.breakpoints.find((bp) => bp.id === activeBreakpointId)?.rows ?? state.rows) : state.rows;
 		const used = new Set<string>();
 		for (const row of rows) {
 			for (const group of row.groups) {
@@ -228,11 +228,7 @@ export default function ButtonListBuilder({
 			if (targetGroupId !== null && targetIndex !== null) {
 				// Skip preview at the dragged item's own position or adjacent gap
 				const src = dragSourceRef.current;
-				if (
-					src &&
-					src.groupId === targetGroupId &&
-					(targetIndex === src.index || targetIndex === src.index + 1)
-				) {
+				if (src && src.groupId === targetGroupId && (targetIndex === src.index || targetIndex === src.index + 1)) {
 					setDragPreview(null);
 					return;
 				}
@@ -489,7 +485,13 @@ export default function ButtonListBuilder({
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
-			<SheetContent side='bottom' className='h-dvh flex flex-col p-0 gap-0' hideClose>
+			{/* Ad banner — above the panel */}
+			{open && (
+				<div className='fixed inset-x-0 top-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center'>
+					<BuilderTopBanner />
+				</div>
+			)}
+			<SheetContent side='bottom' className='h-[calc(100dvh-90px)] flex flex-col p-0 gap-0' hideClose>
 				{/* Keyframe animation for button entry */}
 				<style>{`
 					@keyframes buttonPop {
@@ -498,9 +500,6 @@ export default function ButtonListBuilder({
 						100% { transform: scale(1); opacity: 1; }
 					}
 				`}</style>
-
-				{/* Ad banner */}
-				<BuilderTopBanner />
 
 				{/* Header */}
 				<SheetHeader className='shrink-0 px-4 py-3 border-b'>
@@ -555,7 +554,13 @@ export default function ButtonListBuilder({
 					<div className='flex-1 flex min-h-0'>
 						{/* Palette */}
 						<div className='w-56 shrink-0 border-e bg-muted/30 dark:bg-[oklch(0.18_0_0)] p-3 overflow-y-auto'>
-							<BuilderPalette usedButtons={usedButtons} onAdd={handlePaletteAdd} onAddGroup={handlePaletteAddGroup} search={paletteSearch} onSearchChange={setPaletteSearch} />
+							<BuilderPalette
+								usedButtons={usedButtons}
+								onAdd={handlePaletteAdd}
+								onAddGroup={handlePaletteAddGroup}
+								search={paletteSearch}
+								onSearchChange={setPaletteSearch}
+							/>
 						</div>
 
 						{/* Canvas */}
@@ -578,18 +583,14 @@ export default function ButtonListBuilder({
 					{/* Drag overlay */}
 					<DragOverlay dropAnimation={null} modifiers={[snapToCursor]}>
 						{dragData && dragData.type === "palette-group" ? (
-								<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
-									<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
-									<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
-										{t("presetGroup")}
-									</span>
-								</div>
-							) : dragData && dragData.type === "canvas-group" ? (
 							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
 								<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
-								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
-									{t("group")}
-								</span>
+								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>{t("presetGroup")}</span>
+							</div>
+						) : dragData && dragData.type === "canvas-group" ? (
+							<div className='inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-dashed border-emerald-400 bg-emerald-50 shadow-lg ring-2 ring-emerald-400/20 dark:border-emerald-500/60 dark:bg-emerald-900/40 dark:ring-emerald-500/20 -translate-x-1/2'>
+								<GripVertical className='h-3.5 w-3.5 text-emerald-500' />
+								<span className='text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>{t("group")}</span>
 							</div>
 						) : dragData ? (
 							dragData.buttonName === "|" ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ADSENSE_CLIENT_ID } from "@/data/adConfig";
 
 interface GoogleAdProps {
@@ -17,9 +17,13 @@ declare global {
 export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
 	const adRef = useRef<HTMLModElement>(null);
 	const pushed = useRef(false);
+	const [isLocal, setIsLocal] = useState(false);
 
 	useEffect(() => {
-		if (!ADSENSE_CLIENT_ID || pushed.current) return;
+		const local = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+		setIsLocal(local);
+
+		if (!ADSENSE_CLIENT_ID || pushed.current || local) return;
 		try {
 			(window.adsbygoogle = window.adsbygoogle || []).push({});
 			pushed.current = true;
@@ -28,7 +32,7 @@ export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
 		}
 	}, []);
 
-	if (!ADSENSE_CLIENT_ID) return null;
+	if (!ADSENSE_CLIENT_ID || isLocal) return null;
 
 	return (
 		<ins

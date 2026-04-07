@@ -6,7 +6,6 @@ export const GUIDE_FILES: Record<string, string> = {
 	"": "GUIDE.md",
 	architecture: "ARCHITECTURE.md",
 	"external-libraries": "guide/external-libraries.md",
-	"changes-guide": "guide/changes-guide.md",
 	"custom-plugin": "guide/custom-plugin.md",
 	"typedef-guide": "guide/typedef-guide.md",
 };
@@ -35,6 +34,9 @@ export async function fetchGitHubMarkdown(slugKey: string): Promise<string | nul
 		next: { revalidate: REVALIDATE },
 	});
 
-	if (!res.ok) return null;
+	if (!res.ok) {
+		console.error(`[githubMarkdown] Failed to fetch ${filePath}: ${res.status}`);
+		return null;
+	}
 	return res.text();
 }

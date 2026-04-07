@@ -77,6 +77,12 @@ function themeImport(theme: string): string {
 	return "";
 }
 
+/** Returns a CDN `<script>` tag for lang pack, or empty string. */
+function langCDNScript(lang: string): string {
+	if (!lang) return "";
+	return `\n  <script src="https://cdn.jsdelivr.net/npm/suneditor@${SUNEDITOR_VERSION}/src/langs/${lang}.js"><\/script>`;
+}
+
 /** Returns a CDN `<link>` tag for theme CSS, or empty string. */
 function themeCDNLink(theme: string): string {
 	if (theme === "dark" || theme === "cobalt") {
@@ -209,7 +215,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.mode !== "classic") add("mode", `"${state.mode}"`);
 
 	// lang
-	if (state.lang) add("lang", state.lang);
+	if (state.lang) add("lang", isCDN ? `SUNEDITOR.LANGS.${state.lang}` : state.lang);
 
 	// icons
 	if (state.icons) {
@@ -703,6 +709,7 @@ function generateCDN(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4, true);
 	const bodyIndented = indent(body, 6);
 	const extTags = extLibsCDNTags(state);
+	const langTag = langCDNScript(state.lang);
 	const needMath = hasButton(state.buttonListPreset, state.type, "math", state.customButtonList);
 	const useMathJax = needMath && state.math_mathLib === "mathjax";
 	const scriptOpen = useMathJax ? '<script type="module">' : "<script>";
@@ -724,7 +731,7 @@ function generateCDN(state: PlaygroundState): string {
   <meta charset="utf-8">
   <title>SunEditor Multi-Root</title>
   <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}${extTags}
-  <script src="${CDN_JS}"><\/script>
+  <script src="${CDN_JS}"><\/script>${langTag}
 </head>
 <body style="margin:6em 4rem 4rem">
   <h1>SunEditor Multi-Root Demo</h1>${toolbarHtml}
@@ -733,7 +740,8 @@ function generateCDN(state: PlaygroundState): string {
   ${scriptOpen}
     ${mjImports}const editor = SUNEDITOR.create({
 ${buildMultiRootTargets(state, (k) => `document.getElementById("${k}")`, 6)}
-    }, {${toolbarOpt}${statusbarOpt}
+    }, {
+      plugins: SUNEDITOR.plugins,${toolbarOpt}${statusbarOpt}
 ${bodyIndented}
     });
   <\/script>
@@ -751,13 +759,14 @@ ${bodyIndented}
   <meta charset="utf-8">
   <title>SunEditor</title>
   <link href="${CDN_CSS}" rel="stylesheet">${themeCDNLink(state.theme)}${extTags}
-  <script src="${CDN_JS}"><\/script>
+  <script src="${CDN_JS}"><\/script>${langTag}
 </head>
 <body style="margin:6em 4rem 4rem">
   <h1>SunEditor Demo</h1>${toolbarHtmlS}
   <textarea id="editor"></textarea>${statusbarHtmlS}
   ${scriptOpen}
-    ${mjImports}const editor = SUNEDITOR.create(document.getElementById("editor"), {${toolbarOptS}${statusbarOptS}
+    ${mjImports}const editor = SUNEDITOR.create(document.getElementById("editor"), {
+      plugins: SUNEDITOR.plugins,${toolbarOptS}${statusbarOptS}
 ${bodyIndented}
     });
   <\/script>

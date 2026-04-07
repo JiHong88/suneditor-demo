@@ -180,15 +180,11 @@ function flagToCode(flag: string): string {
 }
 
 export function buildLanguageOptions(codes: string[]) {
-	const win = isWindows();
 	return codes.map((code) => {
-		const entry = getLang(code);
 		const nativeName = getLanguageLabel(code);
-		const rawIcon = entry?.icon ?? "";
-		const icon = win && typeof rawIcon === "string" ? flagToCode(rawIcon) : rawIcon;
 		return {
 			value: code,
-			label: `${icon} ${code} [${nativeName}]`.trim(),
+			label: nativeName,
 			dir: getDir(code),
 		};
 	});

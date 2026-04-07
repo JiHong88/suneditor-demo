@@ -2,7 +2,9 @@
 
 import { type Dispatch, useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronRight, SlidersHorizontal } from "lucide-react";
+import { ChevronRight, ChevronDown, SlidersHorizontal } from "lucide-react";
+import LangDropdown, { type LangOption } from "@/components/common/LangDropdown";
+import FlagIcon from "@/components/common/FlagIcon";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
@@ -37,6 +39,143 @@ function FieldLabel({ label, resettable, description }: { label: string; resetta
 			)}
 			{desc && <OptionInfo optionKey={label} description={desc} type={optionTypeMap[label]} />}
 		</span>
+	);
+}
+
+/* ── Mode visual icons ─────────────────────────────────── */
+
+function ModeIcon({ mode, active }: { mode: string; active?: boolean }) {
+	const w = 44, h = 30;
+	const outline = active ? "stroke-primary" : "stroke-current opacity-50";
+	const toolbar = active ? "fill-primary/30" : "fill-current opacity-15";
+	const btnLine = active ? "stroke-primary opacity-70" : "stroke-current opacity-40";
+	const textLine = active ? "stroke-current opacity-25" : "stroke-current opacity-15";
+
+	switch (mode) {
+		case "classic":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<rect x={3} y={3} width={38} height={5.5} rx={1.5} className={toolbar} />
+					<line x1={6} y1={5.8} x2={11} y2={5.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={13} y1={5.8} x2={18} y2={5.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={20} y1={5.8} x2={25} y2={5.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={6} y1={13} x2={38} y2={13} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={17.5} x2={30} y2={17.5} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={22} x2={34} y2={22} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		case "classic:bottom":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<rect x={3} y={21.5} width={38} height={5.5} rx={1.5} className={toolbar} />
+					<line x1={6} y1={24.2} x2={11} y2={24.2} strokeWidth={1.5} className={btnLine} />
+					<line x1={13} y1={24.2} x2={18} y2={24.2} strokeWidth={1.5} className={btnLine} />
+					<line x1={20} y1={24.2} x2={25} y2={24.2} strokeWidth={1.5} className={btnLine} />
+					<line x1={6} y1={6} x2={38} y2={6} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={10.5} x2={30} y2={10.5} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={15} x2={34} y2={15} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		case "inline":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<line x1={6} y1={5.5} x2={38} y2={5.5} strokeWidth={0.8} className={textLine} />
+					<rect x={3} y={9} width={38} height={5.5} rx={1.5} className={toolbar} />
+					<line x1={6} y1={11.8} x2={11} y2={11.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={13} y1={11.8} x2={18} y2={11.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={20} y1={11.8} x2={25} y2={11.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={6} y1={19} x2={30} y2={19} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={23.5} x2={34} y2={23.5} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		case "inline:bottom":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<line x1={6} y1={6} x2={38} y2={6} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={10.5} x2={30} y2={10.5} strokeWidth={0.8} className={textLine} />
+					<rect x={3} y={14} width={38} height={5.5} rx={1.5} className={toolbar} />
+					<line x1={6} y1={16.8} x2={11} y2={16.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={13} y1={16.8} x2={18} y2={16.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={20} y1={16.8} x2={25} y2={16.8} strokeWidth={1.5} className={btnLine} />
+					<line x1={6} y1={24} x2={34} y2={24} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		case "balloon":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<line x1={6} y1={6.5} x2={38} y2={6.5} strokeWidth={0.8} className={textLine} />
+					<rect x={8} y={10} width={28} height={5} rx={2} className={toolbar} />
+					<line x1={12} y1={12.5} x2={16} y2={12.5} strokeWidth={1.3} className={btnLine} />
+					<line x1={18} y1={12.5} x2={22} y2={12.5} strokeWidth={1.3} className={btnLine} />
+					<line x1={24} y1={12.5} x2={28} y2={12.5} strokeWidth={1.3} className={btnLine} />
+					<path d='M22 15 L22 17.5' strokeWidth={0.8} className={btnLine} />
+					<line x1={6} y1={19.5} x2={38} y2={19.5} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={24} x2={30} y2={24} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		case "balloon-always":
+			return (
+				<svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill='none'>
+					<rect x={1} y={1} width={42} height={28} rx={2.5} strokeWidth={1.2} className={outline} />
+					<line x1={6} y1={6.5} x2={38} y2={6.5} strokeWidth={0.8} className={textLine} />
+					<line x1={6} y1={11} x2={30} y2={11} strokeWidth={0.8} className={textLine} />
+					<rect x={8} y={14} width={28} height={5} rx={2} className={toolbar} />
+					<line x1={12} y1={16.5} x2={16} y2={16.5} strokeWidth={1.3} className={btnLine} />
+					<line x1={18} y1={16.5} x2={22} y2={16.5} strokeWidth={1.3} className={btnLine} />
+					<line x1={24} y1={16.5} x2={28} y2={16.5} strokeWidth={1.3} className={btnLine} />
+					<circle cx={7} cy={16.5} r={1.2} className={`${active ? "fill-primary/50" : "fill-current opacity-30"}`} />
+					<line x1={6} y1={24} x2={34} y2={24} strokeWidth={0.8} className={textLine} />
+				</svg>
+			);
+		default:
+			return null;
+	}
+}
+
+const MODES = [
+	{ value: "classic", label: "Classic", desc: "Toolbar fixed at top" },
+	{ value: "classic:bottom", label: "Bottom", desc: "Toolbar fixed at bottom" },
+	{ value: "inline", label: "Inline", desc: "Toolbar inline within content" },
+	{ value: "inline:bottom", label: "Inline:Bottom", desc: "Toolbar inline at bottom" },
+	{ value: "balloon", label: "Balloon", desc: "Floating toolbar on selection" },
+	{ value: "balloon-always", label: "Always", desc: "Floating toolbar always visible" },
+] as const;
+
+function ModeSelector({ value, onChange, resettable }: { value: string; onChange: (v: string) => void; resettable?: boolean }) {
+	return (
+		<div className='flex flex-col gap-1.5'>
+			<FieldLabel label='mode' resettable={resettable} />
+			<div className='flex flex-wrap gap-1.5'>
+				{MODES.map((m) => {
+					const active = value === m.value;
+					return (
+						<div key={m.value} className='relative group/mode basis-[calc(33.333%-0.375rem)] min-w-[calc(33.333%-0.375rem)] xl:basis-0 xl:min-w-0 xl:flex-1'>
+							<button
+								type='button'
+								onClick={() => onChange(m.value)}
+								className={`w-full flex items-center justify-center gap-1.5 rounded-lg border px-2 py-2 transition-all cursor-pointer
+									${active
+										? "border-primary bg-primary/10 dark:bg-primary/15 text-primary shadow-sm"
+										: "border-border bg-muted/30 dark:bg-muted/10 text-muted-foreground hover:border-primary/40 hover:bg-muted/50"
+									}`}
+							>
+								<ModeIcon mode={m.value} active={active} />
+								<span className='text-[11px] font-medium leading-none truncate'>{m.label}</span>
+							</button>
+							<div className='absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2.5 py-1.5 rounded-md bg-zinc-900 dark:bg-zinc-100 shadow-lg text-[10px] text-zinc-100 dark:text-zinc-900 whitespace-nowrap opacity-0 pointer-events-none group-hover/mode:opacity-100 transition-opacity z-50'>
+								<span className='font-semibold'>{m.value}</span>
+								<span className='block opacity-70 mt-0.5'>{m.desc}</span>
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</div>
 	);
 }
 
@@ -329,13 +468,14 @@ function DisabledField({ label, reason }: { label: string; reason?: string }) {
 
 import { languages } from "@/i18n/languages";
 
-const LANG_OPTIONS: { value: string; label: string }[] = languages
+const LANG_OPTIONS: LangOption[] = languages
 	.filter((l) => l.editorLang)
 	.map((l) => {
 		const editorCode = l.editorCode ?? l.code;
 		return {
 			value: l.code === "en" ? "" : editorCode,
-			label: `${l.icon ?? ""} ${editorCode} [${l.nativeName}]${l.code === "en" ? " (default)" : ""}`.trim(),
+			label: `${l.nativeName}${l.code === "en" ? " (default)" : ""}`,
+			locale: l.code,
 		};
 	});
 
@@ -348,21 +488,24 @@ function LangSelectField({
 	onChange: (v: string) => void;
 	resettable?: boolean;
 }) {
+	const current = LANG_OPTIONS.find((o) => o.value === value);
+
 	return (
-		<label className='flex flex-col gap-1'>
+		<div className='flex flex-col gap-1'>
 			<FieldLabel label='lang' resettable={resettable} />
-			<select
+			<LangDropdown
 				value={value}
-				onChange={(e) => onChange(e.target.value)}
-				className='rounded-md border border-input bg-background px-2 py-1.5 text-xs outline-none focus:ring-2 focus:ring-ring'
-			>
-				{LANG_OPTIONS.map((opt) => (
-					<option key={opt.value} value={opt.value}>
-						{opt.label}
-					</option>
-				))}
-			</select>
-		</label>
+				options={LANG_OPTIONS}
+				onChange={onChange}
+				trigger={
+					<button className='flex items-center gap-2 rounded-md border border-input bg-background px-2 py-1.5 text-xs outline-none focus:ring-2 focus:ring-ring cursor-pointer'>
+						{current && <FlagIcon locale={current.locale} className='text-sm' />}
+						<span className='flex-1 text-start truncate'>{current?.label ?? (value || "(default)")}</span>
+						<ChevronDown className='h-3 w-3 opacity-50' />
+					</button>
+				}
+			/>
+		</div>
 	);
 }
 
@@ -683,21 +826,15 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 					{t("sections.modeTheme")}
 				</AccordionTrigger>
 				<AccordionContent className='px-3 pb-3'>
-					<div className='grid grid-cols-2 gap-3'>
-						<SelectField
-							label='mode'
-							value={state.mode}
-							options={[
-								{ value: "classic", label: "classic" },
-								{ value: "classic:bottom", label: "classic:bottom" },
-								{ value: "inline", label: "inline" },
-								{ value: "inline:bottom", label: "inline:bottom" },
-								{ value: "balloon", label: "balloon" },
-								{ value: "balloon-always", label: "balloon-always" },
-							]}
-							onChange={(v) => set("mode")(v as PlaygroundState["mode"])}
-							resettable={!isFixedOption("mode")}
-						/>
+					{/* Mode — visual radio selector */}
+					<ModeSelector
+						value={state.mode}
+						onChange={(v) => set("mode")(v as PlaygroundState["mode"])}
+						resettable={!isFixedOption("mode")}
+					/>
+
+					{/* ButtonList + Theme — 2 columns */}
+					<div className='mt-3 grid grid-cols-2 gap-3'>
 						<div className='flex flex-col gap-1'>
 							<FieldLabel label='buttonList' resettable={!isFixedOption("buttonListPreset")} />
 							<div className='flex items-center gap-1'>
@@ -737,6 +874,15 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							onChange={set("theme")}
 							resettable={!isFixedOption("theme")}
 						/>
+					</div>
+
+					{/* Lang + TextDirection — side by side */}
+					<div className='mt-3 grid grid-cols-2 gap-3'>
+						<LangSelectField
+							value={state.lang}
+							onChange={set("lang")}
+							resettable={!isFixedOption("lang")}
+						/>
 						<SelectField
 							label='textDirection'
 							value={state.textDirection}
@@ -748,6 +894,7 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							resettable={!isFixedOption("textDirection")}
 						/>
 					</div>
+
 					<div className='mt-3'>
 						<TypeToggleField
 							value={state.type}
@@ -770,13 +917,6 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							checked={state.v2Migration}
 							onChange={set("v2Migration")}
 							resettable={!isFixedOption("v2Migration")}
-						/>
-					</div>
-					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
-						<LangSelectField
-							value={state.lang}
-							onChange={set("lang")}
-							resettable={!isFixedOption("lang")}
 						/>
 					</div>
 					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
