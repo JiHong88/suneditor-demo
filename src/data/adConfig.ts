@@ -15,24 +15,32 @@ export type AdSlotConfig = {
 };
 
 /**
+ * Google AdSense client ID.
+ * Set to empty string to disable AdSense globally.
+ */
+export const ADSENSE_CLIENT_ID = "ca-pub-6933506635175446";
+
+/** Google AdSense ad unit IDs */
+const AD_UNIT = {
+	HORIZONTAL: "2985737129",
+	HORIZONTAL_FIXED: "7731070413", // 728x90 fixed
+	VERTICAL: "8028048925",
+	RECTANGLE: "2539344137",
+} as const;
+
+/**
  * Ad slot definitions.
  * Ordered by priority — first matching active config wins.
  * When type is "empty", the slot renders nothing (placeholder for future ads).
  */
 export const AD_SLOTS: Record<string, AdSlotConfig[]> = {
-	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: "2985737129" }],
-	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: "2985737129" }],
-	"home-hero-below": [{ slotId: "home-hero-below", type: "google", googleAdSlot: "2985737129" }],
-	"getting-started-mid": [{ slotId: "getting-started-mid", type: "google", googleAdSlot: "2985737129" }],
-	"docs-sidebar": [{ slotId: "docs-sidebar", type: "google", googleAdSlot: "8028048925" }],
-	"feature-mid": [{ slotId: "feature-mid", type: "google", googleAdSlot: "2539344137" }],
+	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL }],
+	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL_FIXED }],
+	"home-hero-below": [{ slotId: "home-hero-below", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL }],
+	"getting-started-mid": [{ slotId: "getting-started-mid", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL }],
+	"docs-sidebar": [{ slotId: "docs-sidebar", type: "google", googleAdSlot: AD_UNIT.VERTICAL }],
+	"feature-mid": [{ slotId: "feature-mid", type: "google", googleAdSlot: AD_UNIT.RECTANGLE }],
 };
-
-/**
- * Google AdSense client ID.
- * Set to empty string to disable AdSense globally.
- */
-export const ADSENSE_CLIENT_ID = "ca-pub-6933506635175446";
 
 /** Get the active config for a slot (first non-expired entry) */
 export function getActiveAd(slotId: string): AdSlotConfig | null {

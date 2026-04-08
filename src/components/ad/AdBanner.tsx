@@ -63,9 +63,9 @@ export function BuilderTopBanner() {
 			{ready && (
 				<AdSlot
 					slotId="builder-top"
-					adFormat="horizontal"
+					adFormat=""
 					fullWidthResponsive={false}
-					adStyle={{ maxHeight: "90px", overflow: "hidden" }}
+					adStyle={{ width: "100%", maxWidth: "728px", height: "90px" }}
 					className="flex items-center justify-center"
 				/>
 			)}
