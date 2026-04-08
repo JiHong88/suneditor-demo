@@ -487,7 +487,7 @@ export default function ButtonListBuilder({
 		<Sheet open={open} onOpenChange={onOpenChange}>
 			<SheetContent side='bottom' className='h-dvh flex flex-col p-0 gap-0' hideClose>
 				{/* Ad banner */}
-				<div className='shrink-0 h-[90px] w-full flex items-center justify-center bg-background border-b'>
+				<div className='shrink-0 h-[90px] w-full overflow-hidden bg-background border-b flex items-center justify-center'>
 					<BuilderTopBanner />
 				</div>
 				{/* Keyframe animation for button entry */}

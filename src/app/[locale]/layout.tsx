@@ -67,6 +67,15 @@ export default async function RootLayout({
 						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.classList.toggle('dark',t==='dark')}catch(_){}})()`,
 					}}
 				/>
+				{/* Google Analytics */}
+				<script async src='https://www.googletagmanager.com/gtag/js?id=G-W0R51STQTY' />
+				<script
+					id='ga-init'
+					dangerouslySetInnerHTML={{
+						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-W0R51STQTY');`,
+					}}
+				/>
+				{/* Google AdSense */}
 				<script
 					async
 					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933506635175446'
