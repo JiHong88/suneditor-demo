@@ -232,7 +232,7 @@ export default function DocsApiPage() {
 					className='hidden md:block w-60 lg:w-64 shrink-0 border-e bg-background sticky top-[91px] self-start max-h-[calc(100vh-91px)] overflow-y-auto'
 				>
 					<ApiSidebar items={sidebarItems} selectedId={selectedId} onSelect={handleSidebarSelect} />
-					<div className='border-t px-2'>
+					<div className='border-t mt-2.5 px-2 pb-32'>
 						<DocsSidebarAd />
 					</div>
 				</div>

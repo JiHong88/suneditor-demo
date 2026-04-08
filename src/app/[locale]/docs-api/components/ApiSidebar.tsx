@@ -223,7 +223,7 @@ export default function ApiSidebar({ items, selectedId, onSelect }: ApiSidebarPr
 	let accentIdx = 0;
 	return (
 		<nav>
-			<div className='p-2 pb-48'>
+			<div className='p-2'>
 				{items.map((item) => {
 					if (item.type === "separator") {
 						return <hr key={item.id} className='my-3 border-t border-border/50' />;

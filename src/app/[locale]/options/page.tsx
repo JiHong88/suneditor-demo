@@ -448,7 +448,7 @@ function Sidebar({
 	onToggleSection: (id: string) => void;
 }) {
 	return (
-		<nav className="space-y-1 pb-16">
+		<nav className="space-y-1">
 			{sections.map((section) => {
 				const config = sectionConfig[section.icon];
 				const frameConfig = sectionConfig.frame;
@@ -624,7 +624,7 @@ export default function OptionsPage() {
 					<aside className="hidden lg:block w-60 shrink-0">
 						<div ref={sidebarRef} className={cn("sticky max-h-[calc(100vh-5rem)] overflow-y-auto pr-2", SIDEBAR_TOP)}>
 							<Sidebar sections={filteredSections} activeId={activeCategory} onSelect={scrollTo} expandedSections={expandedSections} onToggleSection={toggleSection} />
-							<div className="border-t px-2">
+							<div className="border-t mt-2.5 px-2 pb-32">
 								<DocsSidebarAd />
 							</div>
 						</div>
