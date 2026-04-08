@@ -360,7 +360,7 @@
     "description": "Direkte Datenübertragung ohne Serveraufrufe"
   },
   "audioGallery_url": {
-    "description": "Serveranfrage-URL"
+    "description": "Serveranfrage-URL\n\n- Der Server muss Folgendes zurückgeben:"
   },
   "audioGallery_headers": {
     "description": "Server-Anfrageheader"
@@ -372,13 +372,16 @@
     "description": "Direkte Datenübertragung ohne Serveraufrufe (umgeht das Abrufen von URLs)."
   },
   "fileBrowser_url": {
-    "description": "Serveranfrage-URL"
+    "description": "Serveranfrage-URL\n\n– Der Server muss eine verschachtelte Ordnerstruktur zurückgeben.\n\n– `_data`: Array (direkt) oder String-URL (wird beim Klicken auf den Ordner geladen).\n\n– `\"default\": true` ​​legt den anfänglich ausgewählten Ordner fest."
   },
   "fileBrowser_headers": {
     "description": "Server-Anfrageheader"
   },
   "fileBrowser_thumbnail": {
     "description": "Standardmäßige Miniaturansicht-URL oder eine Funktion, die pro Element eine Miniaturansicht-URL zurückgibt."
+  },
+  "fileBrowser_expand": {
+    "description": "Anfangs-Ordnererweiterungstiefe. `1` erweitert die erste Ebene, `Infinity` ​​erweitert alle Ebenen. Standard: `1`."
   },
   "fileBrowser_props": {
     "description": "Zusätzliche Tag-Namen"
@@ -387,7 +390,7 @@
     "description": "Direkte Datenübertragung ohne Serveraufrufe"
   },
   "fileGallery_url": {
-    "description": "Serveranfrage-URL"
+    "description": "Serveranfrage-URL\n\n- Der Server muss Folgendes zurückgeben:"
   },
   "fileGallery_headers": {
     "description": "Server-Anfrageheader"
@@ -399,7 +402,7 @@
     "description": "Direkte Datenübertragung ohne Serveraufrufe"
   },
   "imageGallery_url": {
-    "description": "Serveranfrage-URL"
+    "description": "Serveranfrage-URL\n\n- Der Server muss Folgendes zurückgeben:"
   },
   "imageGallery_headers": {
     "description": "Server-Anfrageheader"
@@ -408,7 +411,7 @@
     "description": "Direkte Datenübertragung ohne Serveraufrufe"
   },
   "videoGallery_url": {
-    "description": "Serveranfrage-URL"
+    "description": "Serveranfrage-URL\n\n- Der Server muss Folgendes zurückgeben:"
   },
   "videoGallery_headers": {
     "description": "Server-Anfrageheader"
@@ -426,7 +429,7 @@
     "description": "Name der generierten PDF-Datei"
   },
   "fileUpload_uploadUrl": {
-    "description": "Serveranfrage-URL für Datei-Upload"
+    "description": "Serveranfrage-URL für Datei-Upload\n\n- Der Server muss Folgendes zurückgeben:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Server-Anfrageheader"
@@ -564,7 +567,7 @@
     "description": "Gibt an, ob ein URL-Eingabeelement erstellt werden soll.\n\nStandardmäßig wird `true` verwendet. Immer `true`, wenn `createFileInput` gleich `false` ist."
   },
   "audio_uploadUrl": {
-    "description": "Die URL, an die die Dateien hochgeladen werden."
+    "description": "Die URL, an die die Dateien hochgeladen werden.\n\n– Der Server muss Folgendes zurückgeben:"
   },
   "audio_uploadHeaders": {
     "description": "Header, die in die Datei-Upload-Anfrage aufgenommen werden sollen."
@@ -636,7 +639,7 @@
     "description": "Ob nur prozentuale Größenangaben zulässig sein sollen."
   },
   "embed_uploadUrl": {
-    "description": "Die URL für Datei-Uploads."
+    "description": "Die URL für Datei-Uploads.\n\n– Der Server muss Folgendes zurückgeben:"
   },
   "embed_uploadHeaders": {
     "description": "Header, die in Datei-Upload-Anfragen enthalten sein sollen."
@@ -690,7 +693,7 @@
     "description": "Gibt an, ob ein URL-Eingabeelement zum Einfügen von Bildern erstellt werden soll.\n\nStandardmäßig wird `true` verwendet. Immer `true`, wenn `createFileInput` gleich `false` ist."
   },
   "image_uploadUrl": {
-    "description": "Die URL-Endpunktadresse für Bilddatei-Uploads."
+    "description": "Die URL-Endpunktadresse für Bilddatei-Uploads.\n\n– Der Server muss Folgendes zurückgeben:"
   },
   "image_uploadHeaders": {
     "description": "Zusätzliche Header, die in die Datei-Upload-Anfrage aufgenommen werden sollen."
@@ -726,7 +729,7 @@
     "description": "Verhalten beim Einfügen von Komponenten für die Auswahl und Cursorpositionierung.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- Bei Inline-Komponenten: Der Cursor wird in der Nähe der Komponente platziert oder, falls kein Bereich in der Nähe vorhanden ist, ausgewählt.\n\n- Bei Blockkomponenten: Das Verhalten richtet sich nach `selectMode`:\n\n- `auto`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird die Komponente ausgewählt.\n\n- `select`: Die eingefügte Komponente wird immer ausgewählt.\n\n- `line`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird eine neue Zeile erstellt und dorthin bewegt.\n\n- `none`: Es passiert nichts."
   },
   "link_uploadUrl": {
-    "description": "Die URL-Endpunktadresse für Datei-Uploads."
+    "description": "Die URL-Endpunktadresse für Datei-Uploads.\n\n– Der Server muss Folgendes zurückgeben:"
   },
   "link_uploadHeaders": {
     "description": "Zusätzliche Header für Datei-Upload-Anfragen."
@@ -798,7 +801,7 @@
     "description": "Gibt an, ob ein URL-Eingabeelement zum Einbetten von Videos erstellt werden soll.\n\nStandardwert: `true`. Immer `true`, wenn `createFileInput` gleich `false` ist."
   },
   "video_uploadUrl": {
-    "description": "Die URL-Endpunktadresse für Videodatei-Uploads."
+    "description": "Die URL-Endpunktadresse für Videodatei-Uploads.\n\n– Der Server muss Folgendes zurückgeben:"
   },
   "video_uploadHeaders": {
     "description": "Zusätzliche Header, die in die Video-Upload-Anfrage aufgenommen werden sollen."

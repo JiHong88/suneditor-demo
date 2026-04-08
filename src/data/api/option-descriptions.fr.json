@@ -360,7 +360,7 @@
     "description": "Données directes sans appel au serveur"
   },
   "audioGallery_url": {
-    "description": "URL de requête serveur"
+    "description": "URL de la requête serveur\n\n- Le serveur doit renvoyer :"
   },
   "audioGallery_headers": {
     "description": "En-têtes de requête serveur"
@@ -372,13 +372,16 @@
     "description": "Données directes sans appel serveur (contourne la récupération d'URL)."
   },
   "fileBrowser_url": {
-    "description": "URL de requête serveur"
+    "description": "URL de la requête serveur\n\n- Le serveur doit renvoyer une structure de dossiers imbriqués.\n\n- `_data` : tableau (en ligne) ou URL sous forme de chaîne (chargée à la demande lors du clic sur le dossier).\n\n- `\"default\": true` ​​définit le dossier initialement sélectionné."
   },
   "fileBrowser_headers": {
     "description": "En-têtes de requête serveur"
   },
   "fileBrowser_thumbnail": {
     "description": "URL par défaut de la miniature ou fonction renvoyant une URL de miniature par élément."
+  },
+  "fileBrowser_expand": {
+    "description": "Profondeur initiale d'expansion des dossiers. `1` développe le premier niveau, `Infinity` ​​développe tous les niveaux. Valeur par défaut : `1`."
   },
   "fileBrowser_props": {
     "description": "Noms de balises supplémentaires"
@@ -387,7 +390,7 @@
     "description": "Données directes sans appel au serveur"
   },
   "fileGallery_url": {
-    "description": "URL de requête serveur"
+    "description": "URL de la requête serveur\n\n- Le serveur doit renvoyer :"
   },
   "fileGallery_headers": {
     "description": "En-têtes de requête serveur"
@@ -399,7 +402,7 @@
     "description": "Données directes sans appel au serveur"
   },
   "imageGallery_url": {
-    "description": "URL de requête serveur"
+    "description": "URL de la requête serveur\n\n- Le serveur doit renvoyer :"
   },
   "imageGallery_headers": {
     "description": "En-têtes de requête serveur"
@@ -408,7 +411,7 @@
     "description": "Données directes sans appel au serveur"
   },
   "videoGallery_url": {
-    "description": "URL de requête serveur"
+    "description": "URL de la requête serveur\n\n- Le serveur doit renvoyer :"
   },
   "videoGallery_headers": {
     "description": "En-têtes de requête serveur"
@@ -426,7 +429,7 @@
     "description": "Nom du fichier PDF généré"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL de requête du serveur pour le téléchargement de fichiers"
+    "description": "URL de requête serveur pour le téléchargement de fichiers\n\n- Le serveur doit renvoyer :"
   },
   "fileUpload_uploadHeaders": {
     "description": "En-têtes de requête serveur"
@@ -564,7 +567,7 @@
     "description": "Indique s'il faut créer un élément d'entrée URL.\n\n- Par défaut : `true`. Toujours `true` ​​lorsque `createFileInput` est égal à `false`."
   },
   "audio_uploadUrl": {
-    "description": "L'URL vers laquelle les fichiers seront téléchargés."
+    "description": "URL de destination des fichiers.\n\n- Le serveur doit renvoyer :"
   },
   "audio_uploadHeaders": {
     "description": "En-têtes à inclure dans la requête de téléchargement de fichier."
@@ -636,7 +639,7 @@
     "description": "Faut-il autoriser uniquement le dimensionnement en pourcentage ?"
   },
   "embed_uploadUrl": {
-    "description": "L'URL pour le téléchargement de fichiers."
+    "description": "URL pour le téléchargement de fichiers.\n\n- Le serveur doit renvoyer :"
   },
   "embed_uploadHeaders": {
     "description": "En-têtes à inclure dans les requêtes de téléchargement de fichiers."
@@ -690,7 +693,7 @@
     "description": "Indique s'il faut créer un champ de saisie d'URL pour l'insertion d'image.\n\n- Par défaut : `true`. Toujours `true` ​​lorsque `createFileInput` est égal à `false`."
   },
   "image_uploadUrl": {
-    "description": "L'URL de destination pour le téléchargement de fichiers image."
+    "description": "URL du point de terminaison pour le téléchargement de fichiers image.\n\n- Le serveur doit renvoyer :"
   },
   "image_uploadHeaders": {
     "description": "En-têtes supplémentaires à inclure dans la requête de téléchargement de fichier."
@@ -726,7 +729,7 @@
     "description": "Comportement d'insertion des composants : sélection et positionnement du curseur.\n\n- [par défaut : `options.get('componentInsertBehavior')`]\n\n- Pour les composants en ligne : place le curseur près du composant, ou le sélectionne s'il n'y a pas de zone adjacente.\n\n- Pour les composants de type bloc : le comportement dépend de `selectMode` :\n\n- `auto` : déplace le curseur à la ligne suivante si possible, sinon sélectionne le composant.\n\n- `select` : sélectionne systématiquement le composant inséré.\n\n- `line` : déplace le curseur à la ligne suivante si possible, ou crée une nouvelle ligne et s'y déplace.\n\n- `none` : ne fait rien."
   },
   "link_uploadUrl": {
-    "description": "L'URL de destination pour le téléchargement de fichiers."
+    "description": "URL du point de terminaison pour le téléchargement de fichiers.\n\n- Le serveur doit renvoyer :"
   },
   "link_uploadHeaders": {
     "description": "En-têtes supplémentaires pour les requêtes de téléchargement de fichiers."
@@ -798,7 +801,7 @@
     "description": "Indique s'il faut créer un champ URL pour l'intégration vidéo.\n\n- Par défaut : `true`. Toujours `true` ​​si `createFileInput` est égal à `false`."
   },
   "video_uploadUrl": {
-    "description": "L'URL de destination pour le téléchargement de fichiers vidéo."
+    "description": "URL de destination pour le chargement des fichiers vidéo.\n\n- Le serveur doit renvoyer :"
   },
   "video_uploadHeaders": {
     "description": "En-têtes supplémentaires à inclure dans la requête de téléchargement vidéo."
@@ -849,6 +852,6 @@
     "description": "Contrôles de la figure."
   },
   "video_insertBehavior": {
-    "description": "Comportement d'insertion de composants : sélection et positionnement du curseur.\n\n- [par défaut : `options.get('componentInsertBehavior')`]\n\n- `auto` : Déplacer le curseur à la ligne suivante si possible, sinon sélectionner le composant.\n\n- `select` : Toujours sélectionner le composant inséré.\n\n- `line` : Déplacer le curseur à la ligne suivante si possible, ou créer une nouvelle ligne et y déplacer le curseur.\n\n- `none` : Ne rien faire."
+    "description": "Comportement d'insertion des composants : sélection et positionnement du curseur.\n\n- [par défaut : `options.get('componentInsertBehavior')`]\n\n- `auto` : Déplacer le curseur à la ligne suivante si possible, sinon sélectionner le composant.\n\n- `select` : Toujours sélectionner le composant inséré.\n\n- `line` : Déplacer le curseur à la ligne suivante si possible, ou créer une nouvelle ligne et y déplacer le curseur.\n\n- `none` : Ne rien faire."
   }
 }

@@ -220,7 +220,7 @@
     "default": "__defaultFormatClosureBrLine"
   },
   "formatBlock": {
-    "description": "Dodatkowo dozwolone są elementy `block` wykraczające poza domyślne.\n- Połączono z {@link PrivateBaseOptions.__defaultFormatBlock}, aby utworzyć ostateczną listę `block`.\n- `block` obejmuje `line` i `component`.",
+    "description": "Dodatkowo dozwolone są elementy `block` wykraczające poza ustawienia domyślne.\n- Połączono z {@link PrivateBaseOptions.__defaultFormatBlock}, aby utworzyć ostateczną listę `block`.\n- `block` obejmuje `line` i `component`.",
     "default": "__defaultFormatBlock"
   },
   "formatClosureBlock": {
@@ -285,7 +285,7 @@
     "default": "400"
   },
   "historyStackSize": {
-    "description": "Maksymalna liczba wpisów historii na ramkę główną. Najstarsze wpisy są odrzucane po przekroczeniu tej liczby.",
+    "description": "Maksymalna liczba wpisów historii na ramkę główną. Najstarsze wpisy są odrzucane po przekroczeniu.",
     "default": "100"
   },
   "printClass": {
@@ -360,7 +360,7 @@
     "description": "Bezpośrednie dane bez wywołań serwera"
   },
   "audioGallery_url": {
-    "description": "Adres URL żądania serwera"
+    "description": "Adres URL żądania serwera\n- Serwer musi zwrócić:"
   },
   "audioGallery_headers": {
     "description": "Nagłówki żądań serwera"
@@ -372,13 +372,16 @@
     "description": "Bezpośrednie przesyłanie danych bez wywoływania serwera (omijanie pobierania adresów URL)."
   },
   "fileBrowser_url": {
-    "description": "Adres URL żądania serwera"
+    "description": "Adres URL żądania serwera\n- Serwer musi zwrócić zagnieżdżoną strukturę folderów.\n- `_data`: tablica (inline) lub ciąg URL (wczytywany leniwie po kliknięciu folderu).\n- `\"default\": true` ​​ustawia początkowo wybrany folder."
   },
   "fileBrowser_headers": {
     "description": "Nagłówki żądań serwera"
   },
   "fileBrowser_thumbnail": {
     "description": "Domyślny adres URL miniatury lub funkcja zwracająca adres URL miniatury dla każdego elementu."
+  },
+  "fileBrowser_expand": {
+    "description": "Początkowy folder rozszerza się na głębokość. `1` rozszerza pierwszy poziom, `Infinity` ​​rozszerza wszystkie. Domyślnie: `1`."
   },
   "fileBrowser_props": {
     "description": "Dodatkowe nazwy tagów"
@@ -387,7 +390,7 @@
     "description": "Bezpośrednie dane bez wywołań serwera"
   },
   "fileGallery_url": {
-    "description": "Adres URL żądania serwera"
+    "description": "Adres URL żądania serwera\n- Serwer musi zwrócić:"
   },
   "fileGallery_headers": {
     "description": "Nagłówki żądań serwera"
@@ -396,10 +399,10 @@
     "description": "Domyślna miniatura"
   },
   "imageGallery_data": {
-    "description": "Bezpośrednie przesyłanie danych bez wywołań serwera"
+    "description": "Bezpośrednie dane bez wywołań serwera"
   },
   "imageGallery_url": {
-    "description": "Adres URL żądania serwera"
+    "description": "Adres URL żądania serwera\n- Serwer musi zwrócić:"
   },
   "imageGallery_headers": {
     "description": "Nagłówki żądań serwera"
@@ -408,7 +411,7 @@
     "description": "Bezpośrednie dane bez wywołań serwera"
   },
   "videoGallery_url": {
-    "description": "Adres URL żądania serwera"
+    "description": "Adres URL żądania serwera\n- Serwer musi zwrócić:"
   },
   "videoGallery_headers": {
     "description": "Nagłówki żądań serwera"
@@ -426,7 +429,7 @@
     "description": "Nazwa wygenerowanego pliku PDF"
   },
   "fileUpload_uploadUrl": {
-    "description": "Adres URL żądania serwera w celu przesłania pliku"
+    "description": "Adres URL żądania serwera w celu przesłania pliku\n- Serwer musi zwrócić:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Nagłówki żądań serwera"
@@ -564,7 +567,7 @@
     "description": "Czy utworzyć element wejściowy adresu URL.\n- Domyślnie `true`. Zawsze `true`, gdy `createFileInput` jest `false`."
   },
   "audio_uploadUrl": {
-    "description": "Adres URL, na który zostaną przesłane pliki."
+    "description": "Adres URL, na który zostaną przesłane pliki.\n- Serwer musi zwrócić:"
   },
   "audio_uploadHeaders": {
     "description": "Nagłówki, które należy uwzględnić w żądaniu przesłania pliku."
@@ -636,7 +639,7 @@
     "description": "Czy zezwolić wyłącznie na określanie rozmiarów na podstawie procentów."
   },
   "embed_uploadUrl": {
-    "description": "Adres URL umożliwiający przesyłanie plików."
+    "description": "Adres URL do przesyłania plików.\n- Serwer musi zwrócić:"
   },
   "embed_uploadHeaders": {
     "description": "Nagłówki, które należy uwzględnić w prośbach o przesłanie pliku."
@@ -690,7 +693,7 @@
     "description": "Czy utworzyć element wejściowy URL do wstawiania obrazu.\n- Domyślnie `true`. Zawsze `true`, gdy `createFileInput` jest `false`."
   },
   "image_uploadUrl": {
-    "description": "Punkt końcowy adresu URL do przesyłania plików graficznych."
+    "description": "Punkt końcowy adresu URL do przesyłania plików graficznych.\n- Serwer musi zwrócić:"
   },
   "image_uploadHeaders": {
     "description": "Dodatkowe nagłówki, które należy uwzględnić w żądaniu przesłania pliku."
@@ -726,7 +729,7 @@
     "description": "Zachowanie podczas wstawiania komponentów w celu zaznaczania i umieszczania kursora.\n- [domyślnie: `options.get('componentInsertBehavior')`]\n- Dla komponentów inline: umieszcza kursor w pobliżu komponentu lub zaznacza, jeśli nie ma pobliskiego zakresu.\n- Dla komponentów blokowych: wykonuje zachowanie na podstawie `selectMode`:\n- `auto`: Przenieś kursor do następnego wiersza, jeśli to możliwe, w przeciwnym razie zaznacz komponent.\n- `select`: Zawsze zaznaczaj wstawiany komponent.\n- `line`: Przenieś kursor do następnego wiersza, jeśli to możliwe, lub utwórz nowy wiersz i przenieś się tam.\n- `none`: Nic nie rób."
   },
   "link_uploadUrl": {
-    "description": "Punkt końcowy adresu URL do przesyłania plików."
+    "description": "Punkt końcowy adresu URL do przesyłania plików.\n- Serwer musi zwrócić:"
   },
   "link_uploadHeaders": {
     "description": "Dodatkowe nagłówki dla żądań przesłania pliku."
@@ -789,7 +792,7 @@
     "description": "Domyślna wysokość elementu wideo. Jeśli podano liczbę, zostanie do niej dodany `\"px\"`."
   },
   "video_percentageOnlySize": {
-    "description": "Czy zezwolić wyłącznie na określanie rozmiarów w oparciu o procenty."
+    "description": "Czy zezwolić wyłącznie na określanie rozmiarów na podstawie procentów."
   },
   "video_createFileInput": {
     "description": "Czy utworzyć element wejściowy pliku do przesyłania filmów wideo."
@@ -798,7 +801,7 @@
     "description": "Czy utworzyć element wejściowy URL do osadzania wideo.\n- Domyślnie `true`. Zawsze `true`, gdy `createFileInput` to `false`."
   },
   "video_uploadUrl": {
-    "description": "Punkt końcowy adresu URL do przesyłania plików wideo."
+    "description": "Punkt końcowy adresu URL do przesyłania plików wideo.\n- Serwer musi zwrócić:"
   },
   "video_uploadHeaders": {
     "description": "Dodatkowe nagłówki do uwzględnienia we wniosku o przesłanie filmu."

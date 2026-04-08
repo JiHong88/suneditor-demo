@@ -546,6 +546,7 @@ export default function OptionsPage() {
 	const [activeCategory, setActiveCategory] = useState(sections[0]?.children[0]?.id ?? "");
 	const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({ editor: true, frame: true, plugin: true });
 	const contentRef = useRef<HTMLDivElement>(null);
+	const sidebarRef = useRef<HTMLDivElement>(null);
 
 	const toggleSection = useCallback((id: string) => {
 		setExpandedSections((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -620,7 +621,7 @@ export default function OptionsPage() {
 				{/* Layout */}
 				<div className="flex gap-8">
 					<aside className="hidden lg:block w-60 shrink-0">
-						<div className={cn("sticky max-h-[calc(100vh-5rem)] overflow-y-auto pr-2", SIDEBAR_TOP)}>
+						<div ref={sidebarRef} className={cn("sticky max-h-[calc(100vh-5rem)] overflow-y-auto pr-2", SIDEBAR_TOP)}>
 							<Sidebar sections={filteredSections} activeId={activeCategory} onSelect={scrollTo} expandedSections={expandedSections} onToggleSection={toggleSection} />
 						</div>
 					</aside>
@@ -679,7 +680,7 @@ export default function OptionsPage() {
 					</main>
 				</div>
 			</section>
-			<ScrollToTop />
+			<ScrollToTop onScrollToTop={() => sidebarRef.current?.scrollTo({ top: 0, behavior: "smooth" })} />
 		</div>
 	);
 }

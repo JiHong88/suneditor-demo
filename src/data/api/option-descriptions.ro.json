@@ -188,7 +188,7 @@
     "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
-    "description": "Unități de dimensiune a fontului permise.\n- Valoarea implicită urmează {@link DEFAULTS.SIZE_UNITS}",
+    "description": "Unități de dimensiune a fontului permise.\n- Valoarea implicită urmează cu {@link DEFAULTS.SIZE_UNITS}",
     "default": "CONSTANTS.SIZE_UNITS"
   },
   "retainStyleMode": {
@@ -360,7 +360,7 @@
     "description": "Date directe fără apeluri la server"
   },
   "audioGallery_url": {
-    "description": "URL-ul solicitării serverului"
+    "description": "URL-ul solicitării serverului\n- Serverul trebuie să returneze:"
   },
   "audioGallery_headers": {
     "description": "Anteturile cererilor serverului"
@@ -372,13 +372,16 @@
     "description": "Date directe fără apeluri la server (evitează preluarea URL-ului)."
   },
   "fileBrowser_url": {
-    "description": "URL-ul solicitării serverului"
+    "description": "URL-ul solicitării serverului\n- Serverul trebuie să returneze o structură de foldere imbricată.\n- `_data`: matrice (inline) sau URL de tip șir (încărcare lentă la clic pe folder).\n- `\"default\": true` ​​definește folderul selectat inițial."
   },
   "fileBrowser_headers": {
     "description": "Anteturile cererilor serverului"
   },
   "fileBrowser_thumbnail": {
     "description": "Adresa URL implicită pentru miniatură sau o funcție care returnează o adresă URL pentru miniatură per element."
+  },
+  "fileBrowser_expand": {
+    "description": "Adâncimea inițială de extindere a folderului. `1` extinde primul nivel, `Infinity` ​​extinde totul. Implicit: `1`."
   },
   "fileBrowser_props": {
     "description": "Nume suplimentare de etichete"
@@ -387,7 +390,7 @@
     "description": "Date directe fără apeluri la server"
   },
   "fileGallery_url": {
-    "description": "URL-ul solicitării serverului"
+    "description": "URL-ul solicitării serverului\n- Serverul trebuie să returneze:"
   },
   "fileGallery_headers": {
     "description": "Anteturile cererilor serverului"
@@ -399,7 +402,7 @@
     "description": "Date directe fără apeluri la server"
   },
   "imageGallery_url": {
-    "description": "URL-ul solicitării serverului"
+    "description": "URL-ul solicitării serverului\n- Serverul trebuie să returneze:"
   },
   "imageGallery_headers": {
     "description": "Anteturile cererilor serverului"
@@ -408,7 +411,7 @@
     "description": "Date directe fără apeluri la server"
   },
   "videoGallery_url": {
-    "description": "URL-ul solicitării serverului"
+    "description": "URL-ul solicitării serverului\n- Serverul trebuie să returneze:"
   },
   "videoGallery_headers": {
     "description": "Anteturile cererilor serverului"
@@ -426,7 +429,7 @@
     "description": "Numele fișierului PDF generat"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL-ul solicitării serverului pentru încărcarea fișierului"
+    "description": "URL-ul solicitării serverului pentru încărcarea fișierului\n- Serverul trebuie să returneze:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Anteturile cererilor serverului"
@@ -534,7 +537,7 @@
     "description": "Dacă se vor salva în cache datele din lista de mențiuni"
   },
   "mention_useCachingFieldData": {
-    "description": "Dacă se vor memora în cache datele listei de mențiuni în câmp"
+    "description": "Dacă se vor memora în cache datele listei de mențiuni din câmp"
   },
   "fontSize_sizeUnit": {
     "description": "Unitatea pentru dimensiunea fontului.\n- Valorile acceptate includ: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` sau `'text'`.\n- Dacă se utilizează `'text'`, se aplică o listă de dimensiuni ale fontului bazată pe text."
@@ -564,7 +567,7 @@
     "description": "Dacă se creează un element de introducere URL.\n- Implicit este `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
   },
   "audio_uploadUrl": {
-    "description": "URL-ul la care vor fi încărcate fișierele."
+    "description": "URL-ul la care vor fi încărcate fișierele.\n- Serverul trebuie să returneze:"
   },
   "audio_uploadHeaders": {
     "description": "Anteturi de inclus în solicitarea de încărcare a fișierului."
@@ -636,7 +639,7 @@
     "description": "Dacă se permite doar dimensionarea bazată pe procente."
   },
   "embed_uploadUrl": {
-    "description": "Adresa URL pentru încărcarea fișierelor."
+    "description": "URL-ul pentru încărcarea fișierelor.\n- Serverul trebuie să returneze:"
   },
   "embed_uploadHeaders": {
     "description": "Anteturi de inclus în cererile de încărcare a fișierelor."
@@ -690,7 +693,7 @@
     "description": "Dacă se creează un element de introducere URL pentru inserarea imaginii.\n- Implicit se stabilește `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
   },
   "image_uploadUrl": {
-    "description": "Punctul final URL pentru încărcarea fișierelor imagine."
+    "description": "Punctul final URL pentru încărcarea fișierelor de imagine.\n- Serverul trebuie să returneze:"
   },
   "image_uploadHeaders": {
     "description": "Anteturi suplimentare de inclus în solicitarea de încărcare a fișierului."
@@ -726,7 +729,7 @@
     "description": "Comportamentul de inserare a componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- Pentru componentele inline: plasează cursorul lângă componentă sau selectează dacă nu există un interval în apropiere.\n- Pentru componentele bloc: execută comportamentul bazat pe `selectMode`:\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
   },
   "link_uploadUrl": {
-    "description": "Punctul final URL pentru încărcarea fișierelor."
+    "description": "Punctul final URL pentru încărcarea fișierelor.\n- Serverul trebuie să returneze:"
   },
   "link_uploadHeaders": {
     "description": "Anteturi suplimentare pentru solicitările de încărcare a fișierelor."
@@ -798,7 +801,7 @@
     "description": "Dacă se creează un element de introducere URL pentru încorporarea videoclipurilor.\n- Implicit se stabilește `true`. Întotdeauna `true` ​​când `createFileInput` este `false`."
   },
   "video_uploadUrl": {
-    "description": "Punctul final URL pentru încărcarea fișierelor video."
+    "description": "Punctul final URL pentru încărcarea fișierelor video.\n- Serverul trebuie să returneze:"
   },
   "video_uploadHeaders": {
     "description": "Anteturi suplimentare de inclus în solicitarea de încărcare a videoclipului."

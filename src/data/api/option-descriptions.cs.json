@@ -200,7 +200,7 @@
     "default": "\"p\""
   },
   "defaultLineBreakFormat": {
-    "description": "Určuje výchozí formát zalomení řádku.\n- [Doporučeno] `line`: Zalomení řádku je rozděleno na obecné tagy.\n- [Nedoporučeno] `br`: Zalomení řádku je na stejném řádku považováno za <br>. (jako shift+enter)\n- Zalomení řádku je v rámci `line` považováno za <br>.\n- Nový `line` můžete vytvořit zadáním zalomení řádku dvakrát za sebou.\n- Formáty, které obsahují `line`, například „Citace“, stále fungují na bázi `line`.\n- Procesy suneditor fungují v jednotkách `line`.\n- Při nastavení na `br` se může výkon snížit při úpravě velkého množství dat.",
+    "description": "Určuje výchozí formát zalomení řádku.\n- [Doporučeno] `line`: Zalomení řádku je rozděleno na obecné tagy.\n- [Nedoporučeno] `br`: Zalomení řádku se na stejném řádku považuje za <br>. (jako shift+enter)\n- Zalomení řádku se v rámci `line` zachází jako <br>.\n- Nový `line` můžete vytvořit zadáním zalomení řádku dvakrát za sebou.\n- Formáty, které obsahují `line`, například „Citace“, stále fungují na bázi `line`.\n- Procesy suneditor fungují v jednotkách `line`.\n- Při nastavení na `br` se může výkon snížit při úpravě velkého množství dat.",
     "default": "\"line\""
   },
   "lineAttrReset": {
@@ -262,7 +262,7 @@
     "description": "Kontejnerový element pro stavový řádek."
   },
   "shortcutsHint": {
-    "description": "Zobrazuje tipy ke zkratkám v popiscích.",
+    "description": "Zobrazuje nápovědy ke zkratkám v popiscích.",
     "default": "true"
   },
   "shortcutsDisable": {
@@ -305,7 +305,7 @@
     "default": "null"
   },
   "componentInsertBehavior": {
-    "description": "Umožňuje automatický výběr vložených komponent.\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Neprovede nic.",
+    "description": "Umožňuje automatický výběr vložených komponent.\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune se tam.\n- `none`: Nedělat nic.",
     "default": "\"auto\""
   },
   "defaultUrlProtocol": {
@@ -348,7 +348,7 @@
     "description": "Šířka dílčího panelu nástrojů."
   },
   "reverseCommands": {
-    "description": "Sloučené pole párů reverzních příkazů.\n- Obsahuje výchozí `indent-outdent` + uživatelský `reverseButtons`."
+    "description": "Sloučené pole párů reverzních příkazů.\n- Zahrnuje výchozí `indent-outdent` + uživatelský `reverseButtons`."
   },
   "codeMirror": {
     "description": "Konfigurační objekt CodeMirror z `externalLibs.codeMirror`."
@@ -360,7 +360,7 @@
     "description": "Přímá data bez volání serveru"
   },
   "audioGallery_url": {
-    "description": "URL požadavku serveru"
+    "description": "URL požadavku serveru\n- Server musí vrátit:"
   },
   "audioGallery_headers": {
     "description": "Záhlaví požadavků serveru"
@@ -372,13 +372,16 @@
     "description": "Přímá data bez volání serveru (obejde načítání URL)."
   },
   "fileBrowser_url": {
-    "description": "URL požadavku serveru"
+    "description": "URL požadavku serveru\n- Server musí vrátit vnořenou strukturu složek.\n- `_data`: URL pole (vložené) nebo řetězcové (líně načteno po kliknutí na složku).\n- `\"default\": true` ​​nastaví původně vybranou složku."
   },
   "fileBrowser_headers": {
     "description": "Záhlaví požadavků serveru"
   },
   "fileBrowser_thumbnail": {
     "description": "Výchozí URL miniatury nebo funkce, která vrací URL miniatury pro každou položku."
+  },
+  "fileBrowser_expand": {
+    "description": "Počáteční hloubka rozbalení složky. `1` rozbalí první úroveň, `Infinity` ​​rozbalí všechny. Výchozí: `1`."
   },
   "fileBrowser_props": {
     "description": "Další názvy tagů"
@@ -387,7 +390,7 @@
     "description": "Přímá data bez volání serveru"
   },
   "fileGallery_url": {
-    "description": "URL požadavku serveru"
+    "description": "URL požadavku serveru\n- Server musí vrátit:"
   },
   "fileGallery_headers": {
     "description": "Záhlaví požadavků serveru"
@@ -399,7 +402,7 @@
     "description": "Přímá data bez volání serveru"
   },
   "imageGallery_url": {
-    "description": "URL požadavku serveru"
+    "description": "URL požadavku serveru\n- Server musí vrátit:"
   },
   "imageGallery_headers": {
     "description": "Záhlaví požadavků serveru"
@@ -408,7 +411,7 @@
     "description": "Přímá data bez volání serveru"
   },
   "videoGallery_url": {
-    "description": "URL požadavku serveru"
+    "description": "URL požadavku serveru\n- Server musí vrátit:"
   },
   "videoGallery_headers": {
     "description": "Záhlaví požadavků serveru"
@@ -426,7 +429,7 @@
     "description": "Název vygenerovaného PDF souboru"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL požadavku serveru pro nahrání souboru"
+    "description": "URL požadavku serveru pro nahrání souboru\n- Server musí vrátit:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Záhlaví požadavků serveru"
@@ -564,7 +567,7 @@
     "description": "Zda vytvořit vstupní element URL. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
   },
   "audio_uploadUrl": {
-    "description": "URL adresa, na kterou budou soubory nahrány."
+    "description": "URL adresa, na kterou budou soubory nahrány. - Server musí vrátit:"
   },
   "audio_uploadHeaders": {
     "description": "Záhlaví, která mají být zahrnuta v požadavku na nahrání souboru."
@@ -636,7 +639,7 @@
     "description": "Zda povolit pouze změnu velikosti v procentech."
   },
   "embed_uploadUrl": {
-    "description": "URL adresa pro nahrávání souborů."
+    "description": "URL adresa pro nahrávání souborů.\n- Server musí vrátit:"
   },
   "embed_uploadHeaders": {
     "description": "Záhlaví, která mají být zahrnuta v požadavcích na nahrání souborů."
@@ -690,7 +693,7 @@
     "description": "Zda vytvořit vstupní element URL pro vložení obrázku. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
   },
   "image_uploadUrl": {
-    "description": "Koncový bod URL pro nahrávání obrazových souborů."
+    "description": "Koncový bod URL pro nahrávání obrazových souborů.\n- Server musí vrátit:"
   },
   "image_uploadHeaders": {
     "description": "Další záhlaví, která mají být zahrnuta v požadavku na nahrání souboru."
@@ -723,10 +726,10 @@
     "description": "Ovládací prvky obrázku."
   },
   "image_insertBehavior": {
-    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Neprovede nic."
+    "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Nedělat nic."
   },
   "link_uploadUrl": {
-    "description": "Koncový bod URL pro nahrávání souborů."
+    "description": "Koncový bod URL pro nahrávání souborů.\n- Server musí vrátit:"
   },
   "link_uploadHeaders": {
     "description": "Další hlavičky pro požadavky na nahrání souborů."
@@ -798,7 +801,7 @@
     "description": "Zda vytvořit vstupní element URL pro vkládání videa. - Výchozí hodnota je `true`. Vždy `true`, když `createFileInput` je `false`."
   },
   "video_uploadUrl": {
-    "description": "Koncový bod URL pro nahrávání videosouborů."
+    "description": "Koncový bod URL pro nahrávání video souborů.\n- Server musí vrátit:"
   },
   "video_uploadHeaders": {
     "description": "Další záhlaví, která mají být zahrnuta v požadavku na nahrání videa."

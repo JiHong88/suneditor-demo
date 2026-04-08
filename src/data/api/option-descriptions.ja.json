@@ -360,7 +360,7 @@
     "description": "サーバー呼び出しなしの直接データ"
   },
   "audioGallery_url": {
-    "description": "サーバーリクエストURL"
+    "description": "サーバーリクエストURL\n- サーバーは以下を返す必要があります："
   },
   "audioGallery_headers": {
     "description": "サーバーリクエストヘッダー"
@@ -372,13 +372,16 @@
     "description": "サーバー呼び出しなしの直接データ取得（URL取得をバイパス）。"
   },
   "fileBrowser_url": {
-    "description": "サーバーリクエストURL"
+    "description": "サーバーリクエストURL\n- サーバーはネストされたフォルダ構造を返す必要があります。\n\n- `_data`: 配列（インライン）または文字列URL（フォルダクリック時に遅延ロード）。\n\n- `\"default\": true`: 最初に選択されたフォルダを設定します。"
   },
   "fileBrowser_headers": {
     "description": "サーバーリクエストヘッダー"
   },
   "fileBrowser_thumbnail": {
     "description": "デフォルトのサムネイルURL、またはアイテムごとにサムネイルURLを返す関数。"
+  },
+  "fileBrowser_expand": {
+    "description": "初期フォルダの展開深度。`1` は最初のレベルを展開し、`Infinity` はすべてを展開します。デフォルト: `1`。"
   },
   "fileBrowser_props": {
     "description": "追加のタグ名"
@@ -387,7 +390,7 @@
     "description": "サーバー呼び出しなしの直接データ"
   },
   "fileGallery_url": {
-    "description": "サーバーリクエストURL"
+    "description": "サーバーリクエストURL\n- サーバーは以下を返す必要があります："
   },
   "fileGallery_headers": {
     "description": "サーバーリクエストヘッダー"
@@ -399,7 +402,7 @@
     "description": "サーバー呼び出しなしの直接データ"
   },
   "imageGallery_url": {
-    "description": "サーバーリクエストURL"
+    "description": "サーバーリクエストURL\n- サーバーは以下を返す必要があります："
   },
   "imageGallery_headers": {
     "description": "サーバーリクエストヘッダー"
@@ -408,7 +411,7 @@
     "description": "サーバー呼び出しなしの直接データ"
   },
   "videoGallery_url": {
-    "description": "サーバーリクエストURL"
+    "description": "サーバーリクエストURL\n- サーバーは以下を返す必要があります："
   },
   "videoGallery_headers": {
     "description": "サーバーリクエストヘッダー"
@@ -426,7 +429,7 @@
     "description": "生成されたPDFファイルの名前"
   },
   "fileUpload_uploadUrl": {
-    "description": "ファイルアップロード用のサーバーリクエストURL"
+    "description": "ファイルアップロード用のサーバーリクエストURL\n- サーバーは以下を返す必要があります："
   },
   "fileUpload_uploadHeaders": {
     "description": "サーバーリクエストヘッダー"
@@ -438,7 +441,7 @@
     "description": "単一ファイルのサイズ制限（バイト単位）"
   },
   "fileUpload_allowMultiple": {
-    "description": "複数のファイルアップロードを許可する"
+    "description": "複数のファイルのアップロードを許可する"
   },
   "fileUpload_acceptedFormats": {
     "description": "対応ファイル形式。"
@@ -501,7 +504,7 @@
     "description": "セルコントローラの位置（`cell`、`table`）"
   },
   "table_colorList": {
-    "description": "セル背景色選択ツールで使用する16進数カラーリスト。"
+    "description": "セル背景色選択ツール用のHEXカラーリスト。"
   },
   "template_items": {
     "description": "テンプレート一覧"
@@ -555,7 +558,7 @@
     "description": "`AUDIO`タグのデフォルトの幅。"
   },
   "audio_defaultHeight": {
-    "description": "`AUDIO` タグのデフォルトの高さ。"
+    "description": "`AUDIO`タグのデフォルトの高さ。"
   },
   "audio_createFileInput": {
     "description": "ファイル入力要素を作成するかどうか。"
@@ -564,7 +567,7 @@
     "description": "URL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
   },
   "audio_uploadUrl": {
-    "description": "ファイルがアップロードされるURL。"
+    "description": "ファイルのアップロード先URL。\n\n- サーバーは以下を返す必要があります。"
   },
   "audio_uploadHeaders": {
     "description": "ファイルアップロードリクエストに含めるヘッダー。"
@@ -636,7 +639,7 @@
     "description": "パーセンテージベースのサイズ指定のみを許可するかどうか。"
   },
   "embed_uploadUrl": {
-    "description": "ファイルアップロード用のURL。"
+    "description": "ファイルアップロード用のURL。\n\n- サーバーは以下を返す必要があります。"
   },
   "embed_uploadHeaders": {
     "description": "ファイルアップロードリクエストに含めるヘッダー。"
@@ -690,7 +693,7 @@
     "description": "画像挿入用のURL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
   },
   "image_uploadUrl": {
-    "description": "画像ファイルアップロード用のURLエンドポイント。"
+    "description": "画像ファイルアップロード用のURLエンドポイント。\n\n- サーバーは以下を返す必要があります。"
   },
   "image_uploadHeaders": {
     "description": "ファイルアップロードリクエストに含める追加ヘッダー。"
@@ -726,7 +729,7 @@
     "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- インラインコンポーネントの場合: コンポーネントの近くにカーソルを配置します。近くに範囲がない場合は選択します。\n\n- ブロックコンポーネントの場合: `selectMode` に基づいて動作を実行します。\n- `auto`: 可能であればカーソルを次の行に移動します。そうでない場合はコンポーネントを選択します。\n\n- `select`: 挿入されたコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。そうでない場合は新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
   },
   "link_uploadUrl": {
-    "description": "ファイルアップロード用のURLエンドポイント。"
+    "description": "ファイルアップロード用のURLエンドポイント。\n\n- サーバーは以下を返す必要があります。"
   },
   "link_uploadHeaders": {
     "description": "ファイルアップロードリクエスト用の追加ヘッダー。"
@@ -798,7 +801,7 @@
     "description": "動画埋め込み用のURL入力要素を作成するかどうか。\n\n- デフォルトは`true`。`createFileInput`が`false`の場合は常に`true`になります。"
   },
   "video_uploadUrl": {
-    "description": "動画ファイルアップロード用のURLエンドポイント。"
+    "description": "動画ファイルアップロード用のURLエンドポイント。\n\n- サーバーは以下を返す必要があります。"
   },
   "video_uploadHeaders": {
     "description": "動画アップロードリクエストに含める追加ヘッダー。"

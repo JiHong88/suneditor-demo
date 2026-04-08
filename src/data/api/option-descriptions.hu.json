@@ -325,7 +325,7 @@
     "default": "true"
   },
   "finder_liveSearch": {
-    "description": "Azonnal keres gépelés közben (visszapattanásmentes). Ha hamis, a keresés csak az Enter billentyű lenyomásával fut.",
+    "description": "Azonnal keres gépelés közben (visszapattanásmentes). Ha hamis, a keresés csak az Enter lenyomásával fut.",
     "default": "true"
   },
   "externalLibs": {
@@ -360,7 +360,7 @@
     "description": "Közvetlen adatok szerverhívások nélkül"
   },
   "audioGallery_url": {
-    "description": "Szerverkérelem URL-címe"
+    "description": "Szerver kérés URL-címe\n- A szervernek a következőt kell visszaadnia:"
   },
   "audioGallery_headers": {
     "description": "Szerverkérelem fejlécek"
@@ -372,13 +372,16 @@
     "description": "Közvetlen adatok szerverhívások nélkül (megkerüli az URL-lehívást)."
   },
   "fileBrowser_url": {
-    "description": "Szerverkérelem URL-címe"
+    "description": "Szerver kérés URL-címe\n- A szervernek beágyazott mappastruktúrát kell visszaadnia.\n- `_data`: tömb (beágyazott) vagy karakterlánc URL-cím (mappa kattintáskor lustán betöltődik).\n- `\"default\": true` ​​beállítja az eredetileg kiválasztott mappát."
   },
   "fileBrowser_headers": {
     "description": "Szerverkérelem fejlécek"
   },
   "fileBrowser_thumbnail": {
     "description": "Alapértelmezett bélyegkép URL-címe vagy egy függvény, amely elemenként bélyegkép URL-címet ad vissza."
+  },
+  "fileBrowser_expand": {
+    "description": "A mappa kezdeti kibontási mélysége. A `1` kibontja az első szintet, a `Infinity` ​​kibontja az egészet. Alapértelmezett: `1`."
   },
   "fileBrowser_props": {
     "description": "További címkenevek"
@@ -387,7 +390,7 @@
     "description": "Közvetlen adatok szerverhívások nélkül"
   },
   "fileGallery_url": {
-    "description": "Szerverkérelem URL-címe"
+    "description": "Szerver kérés URL-címe\n- A szervernek a következőt kell visszaadnia:"
   },
   "fileGallery_headers": {
     "description": "Szerverkérelem fejlécek"
@@ -399,7 +402,7 @@
     "description": "Közvetlen adatok szerverhívások nélkül"
   },
   "imageGallery_url": {
-    "description": "Szerverkérelem URL-címe"
+    "description": "Szerver kérés URL-címe\n- A szervernek a következőt kell visszaadnia:"
   },
   "imageGallery_headers": {
     "description": "Szerverkérelem fejlécek"
@@ -408,7 +411,7 @@
     "description": "Közvetlen adatok szerverhívások nélkül"
   },
   "videoGallery_url": {
-    "description": "Szerverkérelem URL-címe"
+    "description": "Szerver kérés URL-címe\n- A szervernek a következőt kell visszaadnia:"
   },
   "videoGallery_headers": {
     "description": "Szerverkérelem fejlécek"
@@ -426,7 +429,7 @@
     "description": "A létrehozott PDF fájl neve"
   },
   "fileUpload_uploadUrl": {
-    "description": "Szerverkérelem URL-címe fájlfeltöltéshez"
+    "description": "Fájlfeltöltéshez szükséges szerverkérés URL-címe\n- A szervernek a következőt kell visszaadnia:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Szerverkérelem fejlécek"
@@ -564,7 +567,7 @@
     "description": "Létre kell-e hozni egy URL bemeneti elemet.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
   },
   "audio_uploadUrl": {
-    "description": "Az URL, ahová a fájlok feltöltésre kerülnek."
+    "description": "Az URL, ahová a fájlok feltöltésre kerülnek.\n- A szervernek a következőt kell visszaadnia:"
   },
   "audio_uploadHeaders": {
     "description": "A fájlfeltöltési kérelemben szerepeltetendő fejlécek."
@@ -636,7 +639,7 @@
     "description": "Csak százalékos alapú méretezést engedélyezzen-e."
   },
   "embed_uploadUrl": {
-    "description": "A fájlfeltöltések URL-címe."
+    "description": "A fájlfeltöltések URL-címe.\n- A szervernek a következőt kell visszaadnia:"
   },
   "embed_uploadHeaders": {
     "description": "A fájlfeltöltési kérelmekben szerepeltetendő fejlécek."
@@ -690,7 +693,7 @@
     "description": "Létre kell-e hozni egy URL bemeneti elemet a kép beszúrásához.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
   },
   "image_uploadUrl": {
-    "description": "A képfájlok feltöltésének URL-végpontja."
+    "description": "A képfájlok feltöltésének URL-végpontja.\n- A szervernek a következőt kell visszaadnia:"
   },
   "image_uploadHeaders": {
     "description": "További fejlécek, amelyeket a fájlfeltöltési kérelemben szerepeltetni kell."
@@ -726,7 +729,7 @@
     "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- Beágyazott komponensek esetén: a kurzort a komponens közelébe helyezi, vagy kiválaszt, ha nincs közeli tartomány.\n- Blokk komponensek esetén: a `selectMode` ​​alapján végrehajtja a viselkedést:\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként a komponenst jelöli ki.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
   },
   "link_uploadUrl": {
-    "description": "A fájlfeltöltések URL-végpontja."
+    "description": "A fájlfeltöltések URL-végpontja.\n- A szervernek a következőt kell visszaadnia:"
   },
   "link_uploadHeaders": {
     "description": "További fejlécek a fájlfeltöltési kérelmekhez."
@@ -798,7 +801,7 @@
     "description": "Létre kell-e hozni egy URL bemeneti elemet a videó beágyazásához.\n- Alapértelmezés szerint `true`. Mindig `true`, ha `createFileInput` értéke `false`."
   },
   "video_uploadUrl": {
-    "description": "A videofájlok feltöltésének URL-végpontja."
+    "description": "A videofájlok feltöltésének URL-végpontja.\n- A szervernek a következőt kell visszaadnia:"
   },
   "video_uploadHeaders": {
     "description": "További fejlécek, amelyeket a videó feltöltési kérésében szerepeltetni kell."

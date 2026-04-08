@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function ScrollToTop() {
+export default function ScrollToTop({ onScrollToTop }: { onScrollToTop?: () => void } = {}) {
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
@@ -15,7 +15,7 @@ export default function ScrollToTop() {
 
 	return (
 		<button
-			onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+			onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); onScrollToTop?.(); }}
 			className={cn(
 				"fixed bottom-6 end-6 z-40 flex size-10 items-center justify-center rounded-full border bg-background/80 shadow-lg backdrop-blur-sm transition-all hover:bg-accent",
 				visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none",

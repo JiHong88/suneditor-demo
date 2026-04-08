@@ -360,7 +360,7 @@
     "description": "Direkte data uden serverkald"
   },
   "audioGallery_url": {
-    "description": "URL for serveranmodning"
+    "description": "Serveranmodnings-URL\n- Serveren skal returnere:"
   },
   "audioGallery_headers": {
     "description": "Serverforespørgselsheadere"
@@ -372,13 +372,16 @@
     "description": "Direkte data uden serverkald (omgår URL-hentning)."
   },
   "fileBrowser_url": {
-    "description": "URL for serveranmodning"
+    "description": "Serveranmodnings-URL\n- Serveren skal returnere en indlejret mappestruktur.\n- `_data`: array (inline) eller streng-URL (indlæses langsomt ved klik på mappen).\n- `\"default\": true` ​​angiver den oprindeligt valgte mappe."
   },
   "fileBrowser_headers": {
     "description": "Serverforespørgselsheadere"
   },
   "fileBrowser_thumbnail": {
     "description": "Standardminiature-URL eller en funktion, der returnerer en miniature-URL pr. element."
+  },
+  "fileBrowser_expand": {
+    "description": "Udvidelsesdybde for initial mappe. `1` udvider det første niveau, `Infinity` ​​udvider alt. Standard: `1`."
   },
   "fileBrowser_props": {
     "description": "Yderligere tagnavne"
@@ -387,7 +390,7 @@
     "description": "Direkte data uden serverkald"
   },
   "fileGallery_url": {
-    "description": "URL for serveranmodning"
+    "description": "Serveranmodnings-URL\n- Serveren skal returnere:"
   },
   "fileGallery_headers": {
     "description": "Serverforespørgselsheadere"
@@ -399,7 +402,7 @@
     "description": "Direkte data uden serverkald"
   },
   "imageGallery_url": {
-    "description": "URL for serveranmodning"
+    "description": "Serveranmodnings-URL\n- Serveren skal returnere:"
   },
   "imageGallery_headers": {
     "description": "Serverforespørgselsheadere"
@@ -408,7 +411,7 @@
     "description": "Direkte data uden serverkald"
   },
   "videoGallery_url": {
-    "description": "URL for serveranmodning"
+    "description": "Serveranmodnings-URL\n- Serveren skal returnere:"
   },
   "videoGallery_headers": {
     "description": "Serverforespørgselsheadere"
@@ -426,7 +429,7 @@
     "description": "Navn på den genererede PDF-fil"
   },
   "fileUpload_uploadUrl": {
-    "description": "Serveranmodnings-URL til filupload"
+    "description": "Serveranmodnings-URL til filupload\n- Serveren skal returnere:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Serverforespørgselsheadere"
@@ -564,7 +567,7 @@
     "description": "Om der skal oprettes et URL-inputelement.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
   },
   "audio_uploadUrl": {
-    "description": "URL'en, hvortil filerne uploades."
+    "description": "URL'en, hvortil filerne uploades.\n- Serveren skal returnere:"
   },
   "audio_uploadHeaders": {
     "description": "Overskrifter, der skal inkluderes i anmodningen om filupload."
@@ -606,7 +609,7 @@
     "description": "Om linjerne skal forbindes igen under tegning."
   },
   "drawing_lineCap": {
-    "description": "Stilen på linjekapslen (`\"butt\"`, `\"round\"` ​​eller `\"square\"`)."
+    "description": "Linjekapslens stil (`\"butt\"`, `\"round\"` ​​eller `\"square\"`)."
   },
   "drawing_lineColor": {
     "description": "Farven på tegnelinjen."
@@ -636,7 +639,7 @@
     "description": "Om kun procentbaseret størrelsesjustering skal tillades."
   },
   "embed_uploadUrl": {
-    "description": "URL'en til filuploads."
+    "description": "URL'en til filuploads.\n- Serveren skal returnere:"
   },
   "embed_uploadHeaders": {
     "description": "Overskrifter, der skal inkluderes i anmodninger om filupload."
@@ -657,7 +660,7 @@
     "description": "Vimeo-forespørgselsparameter tilføjet til indlejrings-URL'en."
   },
   "embed_urlPatterns": {
-    "description": "Yderligere URL-mønstre, der skal genkendes som integrerbart indhold."
+    "description": "Yderligere URL-mønstre, der skal genkendes som integrereligt indhold."
   },
   "embed_embedQuery": {
     "description": "Definitioner af brugerdefinerede indlejringstjenester."
@@ -690,7 +693,7 @@
     "description": "Om der skal oprettes et URL-inputelement til billedindsættelse.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
   },
   "image_uploadUrl": {
-    "description": "URL-slutpunktet for upload af billedfiler."
+    "description": "URL-slutpunktet for upload af billedfiler.\n- Serveren skal returnere:"
   },
   "image_uploadHeaders": {
     "description": "Yderligere overskrifter, der skal inkluderes i anmodningen om filupload."
@@ -726,7 +729,7 @@
     "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- For inline-komponenter: Placerer markøren i nærheden af ​​komponenten, eller vælger hvis der ikke er et nærliggende område.\n- For blokkomponenter: Udfører adfærd baseret på `selectMode`:\n- `auto`: Flyt markøren til den næste linje hvis muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje hvis muligt, eller opret en ny linje og flyt dertil.\n- `none`: Gør ingenting."
   },
   "link_uploadUrl": {
-    "description": "URL-slutpunktet for filuploads."
+    "description": "URL-slutpunktet for filuploads.\n- Serveren skal returnere:"
   },
   "link_uploadHeaders": {
     "description": "Yderligere overskrifter til anmodninger om filupload."
@@ -798,7 +801,7 @@
     "description": "Om der skal oprettes et URL-inputelement til videoindlejring.\n- Standardværdien er `true`. Altid `true`, når `createFileInput` er `false`."
   },
   "video_uploadUrl": {
-    "description": "URL-slutpunktet for upload af videofiler."
+    "description": "URL-slutpunktet for upload af videofiler.\n- Serveren skal returnere:"
   },
   "video_uploadHeaders": {
     "description": "Yderligere overskrifter, der skal inkluderes i anmodningen om videoupload."

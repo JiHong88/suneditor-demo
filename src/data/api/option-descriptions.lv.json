@@ -360,7 +360,7 @@
     "description": "Tiešie dati bez servera izsaukumiem"
   },
   "audioGallery_url": {
-    "description": "Servera pieprasījuma URL"
+    "description": "Servera pieprasījuma URL — serverim ir jāatgriež:"
   },
   "audioGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
@@ -372,13 +372,16 @@
     "description": "Tiešie dati bez servera izsaukumiem (apejot URL ielādi)."
   },
   "fileBrowser_url": {
-    "description": "Servera pieprasījuma URL"
+    "description": "Servera pieprasījuma URL\n- Serverim ir jāatgriež ligzdota mapju struktūra.\n- `_data`: masīvs (iekļauts rindā) vai virknes URL (slinki ielādēts, noklikšķinot uz mapes).\n- `\"default\": true` ​​iestata sākotnēji atlasīto mapi."
   },
   "fileBrowser_headers": {
     "description": "Servera pieprasījumu galvenes"
   },
   "fileBrowser_thumbnail": {
     "description": "Noklusējuma sīktēla URL vai funkcija, kas atgriež sīktēla URL katram vienumam."
+  },
+  "fileBrowser_expand": {
+    "description": "Sākotnējā mapes izvēršanas dziļums. `1` paplašina pirmo līmeni, `Infinity` ​​paplašina visus. Noklusējuma vērtība: `1`."
   },
   "fileBrowser_props": {
     "description": "Papildu tagu nosaukumi"
@@ -387,7 +390,7 @@
     "description": "Tiešie dati bez servera izsaukumiem"
   },
   "fileGallery_url": {
-    "description": "Servera pieprasījuma URL"
+    "description": "Servera pieprasījuma URL — serverim ir jāatgriež:"
   },
   "fileGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
@@ -399,7 +402,7 @@
     "description": "Tiešie dati bez servera izsaukumiem"
   },
   "imageGallery_url": {
-    "description": "Servera pieprasījuma URL"
+    "description": "Servera pieprasījuma URL — serverim ir jāatgriež:"
   },
   "imageGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
@@ -408,7 +411,7 @@
     "description": "Tiešie dati bez servera izsaukumiem"
   },
   "videoGallery_url": {
-    "description": "Servera pieprasījuma URL"
+    "description": "Servera pieprasījuma URL — serverim ir jāatgriež:"
   },
   "videoGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
@@ -426,7 +429,7 @@
     "description": "Ģenerētā PDF faila nosaukums"
   },
   "fileUpload_uploadUrl": {
-    "description": "Servera pieprasījuma URL faila augšupielādei"
+    "description": "Servera pieprasījuma URL faila augšupielādei\n— Serverim ir jāatgriež:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Servera pieprasījumu galvenes"
@@ -549,7 +552,7 @@
     "description": "Ja `true`, tiek atspējota tiešā fonta lieluma ievades lodziņa iestatīšana.\n- Noklusējuma iestatījums ir `true`, ja ​​`sizeUnit` ir `'text'`, pretējā gadījumā `false`."
   },
   "fontSize_unitMap": {
-    "description": "Pārrakstīt vai paplašināt fontu izmēru noklusējuma mērvienību kartējumu."
+    "description": "Pārrakstīt vai paplašināt noklusējuma vienību kartējumu fontu izmēriem."
   },
   "audio_defaultWidth": {
     "description": "`AUDIO` taga noklusējuma platums."
@@ -564,7 +567,7 @@
     "description": "Vai izveidot URL ievades elementu.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
   },
   "audio_uploadUrl": {
-    "description": "URL, kurā faili tiks augšupielādēti."
+    "description": "URL, kurā tiks augšupielādēti faili.\n- Serverim ir jāatgriež:"
   },
   "audio_uploadHeaders": {
     "description": "Galvenes, kas jāiekļauj faila augšupielādes pieprasījumā."
@@ -636,7 +639,7 @@
     "description": "Vai atļaut tikai procentuālu izmēru noteikšanu."
   },
   "embed_uploadUrl": {
-    "description": "Failu augšupielādes URL."
+    "description": "Failu augšupielādes URL.\n- Serverim ir jāatgriež:"
   },
   "embed_uploadHeaders": {
     "description": "Galvenes, kas jāiekļauj failu augšupielādes pieprasījumos."
@@ -690,7 +693,7 @@
     "description": "Vai attēla ievietošanai izveidot URL ievades elementu.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
   },
   "image_uploadUrl": {
-    "description": "Attēlu failu augšupielādes URL galapunkts."
+    "description": "Attēlu failu augšupielādes URL galapunkts.\n- Serverim ir jāatgriež:"
   },
   "image_uploadHeaders": {
     "description": "Papildu galvenes, kas jāiekļauj faila augšupielādes pieprasījumā."
@@ -726,7 +729,7 @@
     "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- Iekļautiem komponentiem: novieto kursoru komponenta tuvumā vai atlasa, ja tuvumā nav diapazona.\n- Bloku komponentiem: izpilda darbību, pamatojoties uz `selectMode`:\n- `auto`: Pārvieto kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasa komponentu.\n- `select`: Vienmēr atlasa ievietoto komponentu.\n- `line`: Pārvieto kursoru uz nākamo rindu, ja iespējams, vai izveido jaunu rindu un pārvietojas uz turieni.\n- `none`: Neko nedarīt."
   },
   "link_uploadUrl": {
-    "description": "Failu augšupielādes URL galapunkts."
+    "description": "Failu augšupielādes URL galapunkts.\n- Serverim ir jāatgriež:"
   },
   "link_uploadHeaders": {
     "description": "Papildu galvenes failu augšupielādes pieprasījumiem."
@@ -798,7 +801,7 @@
     "description": "Vai izveidot URL ievades elementu video iegulšanai.\n- Noklusējuma vērtība ir `true`. Vienmēr `true`, ja ​​`createFileInput` ir `false`."
   },
   "video_uploadUrl": {
-    "description": "Video failu augšupielādes URL galapunkts."
+    "description": "Video failu augšupielādes URL galapunkts.\n- Serverim ir jāatgriež:"
   },
   "video_uploadHeaders": {
     "description": "Papildu galvenes, kas jāiekļauj video augšupielādes pieprasījumā."
@@ -846,7 +849,7 @@
     "description": "Papildu failu paplašinājumi, kas jāatpazīst augšupielādētajiem video."
   },
   "video_controls": {
-    "description": "Figūras vadīklas."
+    "description": "Figūras vadība."
   },
   "video_insertBehavior": {
     "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- `auto`: Pārvietot kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasīt komponentu.\n- `select`: Vienmēr atlasīt ievietoto komponentu.\n- `line`: Pārvietot kursoru uz nākamo rindu, ja iespējams, vai izveidot jaunu rindu un pārvietot to uz turieni.\n- `none`: Nedarīt neko."

@@ -360,7 +360,7 @@
     "description": "서버 호출 없이 직접 데이터 전송"
   },
   "audioGallery_url": {
-    "description": "서버 요청 URL"
+    "description": "서버 요청 URL\n- 서버는 다음을 반환해야 합니다:"
   },
   "audioGallery_headers": {
     "description": "서버 요청 헤더"
@@ -372,13 +372,16 @@
     "description": "서버 호출 없이 직접 데이터 전송(URL 가져오기 우회)."
   },
   "fileBrowser_url": {
-    "description": "서버 요청 URL"
+    "description": "서버 요청 URL\n- 서버는 중첩된 폴더 구조를 반환해야 합니다.\n\n- `_data`: 배열(인라인) 또는 문자열 URL(폴더 클릭 시 지연 로드).\n\n- `\"default\": true`은 처음에 선택된 폴더를 설정합니다."
   },
   "fileBrowser_headers": {
     "description": "서버 요청 헤더"
   },
   "fileBrowser_thumbnail": {
     "description": "기본 썸네일 URL 또는 항목별 썸네일 URL을 반환하는 함수입니다."
+  },
+  "fileBrowser_expand": {
+    "description": "초기 폴더 확장 깊이. `1`은 첫 번째 레벨을 확장하고, `Infinity`은 모든 레벨을 확장합니다. 기본값: `1`."
   },
   "fileBrowser_props": {
     "description": "추가 태그 이름"
@@ -387,7 +390,7 @@
     "description": "서버 호출 없이 직접 데이터 전송"
   },
   "fileGallery_url": {
-    "description": "서버 요청 URL"
+    "description": "서버 요청 URL\n- 서버는 다음을 반환해야 합니다:"
   },
   "fileGallery_headers": {
     "description": "서버 요청 헤더"
@@ -399,7 +402,7 @@
     "description": "서버 호출 없이 직접 데이터 전송"
   },
   "imageGallery_url": {
-    "description": "서버 요청 URL"
+    "description": "서버 요청 URL\n- 서버는 다음을 반환해야 합니다:"
   },
   "imageGallery_headers": {
     "description": "서버 요청 헤더"
@@ -408,7 +411,7 @@
     "description": "서버 호출 없이 직접 데이터 전송"
   },
   "videoGallery_url": {
-    "description": "서버 요청 URL"
+    "description": "서버 요청 URL\n- 서버는 다음을 반환해야 합니다:"
   },
   "videoGallery_headers": {
     "description": "서버 요청 헤더"
@@ -426,7 +429,7 @@
     "description": "생성된 PDF 파일의 이름"
   },
   "fileUpload_uploadUrl": {
-    "description": "파일 업로드를 위한 서버 요청 URL"
+    "description": "파일 업로드를 위한 서버 요청 URL\n- 서버는 다음을 반환해야 합니다:"
   },
   "fileUpload_uploadHeaders": {
     "description": "서버 요청 헤더"
@@ -483,7 +486,7 @@
     "description": "인사 담당자 목록"
   },
   "layout_items": {
-    "description": "레이아웃 목록입니다. 각 항목은 원시 HTML을 포함하는 명명된 레이아웃 템플릿을 정의합니다."
+    "description": "레이아웃 목록입니다. 각 항목은 원시 HTML로 구성된 명명된 레이아웃 템플릿을 정의합니다."
   },
   "lineHeight_items": {
     "description": "줄 높이 목록"
@@ -564,7 +567,7 @@
     "description": "URL 입력 요소를 생성할지 여부입니다.\n- 기본값은 `true`입니다. `createFileInput`가 `false`인 경우에는 항상 `true`입니다."
   },
   "audio_uploadUrl": {
-    "description": "파일을 업로드할 URL입니다."
+    "description": "파일을 업로드할 URL입니다.\n- 서버는 다음을 반환해야 합니다."
   },
   "audio_uploadHeaders": {
     "description": "파일 업로드 요청에 포함할 헤더입니다."
@@ -636,7 +639,7 @@
     "description": "백분율 기반 크기 조정만 허용할지 여부."
   },
   "embed_uploadUrl": {
-    "description": "파일 업로드용 URL입니다."
+    "description": "파일 업로드용 URL입니다.\n\n서버는 다음을 반환해야 합니다."
   },
   "embed_uploadHeaders": {
     "description": "파일 업로드 요청에 포함할 헤더입니다."
@@ -690,7 +693,7 @@
     "description": "이미지 삽입을 위한 URL 입력 요소를 생성할지 여부입니다.\n- 기본값은 `true`입니다. `createFileInput`가 `false`인 경우에는 항상 `true`입니다."
   },
   "image_uploadUrl": {
-    "description": "이미지 파일 업로드를 위한 URL 엔드포인트입니다."
+    "description": "이미지 파일 업로드를 위한 URL 엔드포인트입니다.\n\n- 서버는 다음을 반환해야 합니다."
   },
   "image_uploadHeaders": {
     "description": "파일 업로드 요청에 포함할 추가 헤더입니다."
@@ -726,7 +729,7 @@
     "description": "구성요소 삽입 시 선택 및 커서 배치 동작.\n\n- [기본값: `options.get('componentInsertBehavior')`]\n- 인라인 구성요소의 경우: 구성요소 근처에 커서를 배치하거나, ​​근처에 선택 영역이 없으면 구성요소를 선택합니다.\n\n- 블록 구성요소의 경우: `selectMode`에 따라 다음 동작을 수행합니다.\n- `auto`: 가능하면 커서를 다음 줄로 이동하고, 그렇지 않으면 구성요소를 선택합니다.\n\n- `select`: 삽입된 구성요소를 항상 선택합니다.\n\n- `line`: 가능하면 커서를 다음 줄로 이동하고, 그렇지 않으면 새 줄을 만들고 해당 줄로 이동합니다.\n\n- `none`: 아무 작업도 수행하지 않습니다."
   },
   "link_uploadUrl": {
-    "description": "파일 업로드용 URL 엔드포인트입니다."
+    "description": "파일 업로드용 URL 엔드포인트입니다.\n\n- 서버는 다음을 반환해야 합니다."
   },
   "link_uploadHeaders": {
     "description": "파일 업로드 요청에 대한 추가 헤더입니다."
@@ -798,7 +801,7 @@
     "description": "동영상 삽입을 위한 URL 입력 요소를 생성할지 여부입니다.\n- 기본값은 `true`입니다. `createFileInput`가 `false`인 경우에는 항상 `true`입니다."
   },
   "video_uploadUrl": {
-    "description": "동영상 파일 업로드를 위한 URL 엔드포인트입니다."
+    "description": "동영상 파일 업로드를 위한 URL 엔드포인트입니다.\n\n- 서버는 다음을 반환해야 합니다."
   },
   "video_uploadHeaders": {
     "description": "동영상 업로드 요청에 포함할 추가 헤더입니다."

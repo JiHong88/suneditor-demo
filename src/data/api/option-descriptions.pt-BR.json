@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Permite a filtragem rigorosa de tags, atributos e estilos.\n- Use `true` para ativar todos os filtros (padrão) ou um objeto para controlar filtros individuais.\n- A configuração `false` ​​não é suportada; use o formato de objeto para desativar filtros específicos.\n- :descrição do filtro\n- `tagFilter`: Filtra tags HTML não permitidas (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtra elementos de formatação (`formatLine`/`formatBlock`)\n- `classFilter`: Filtra nomes de classes CSS não permitidos (`allowedClassName`)\n- `textStyleTagFilter`: Filtra tags de estilo de texto (b, i, u, span, etc.)\n- `attrFilter`: Filtra atributos HTML não permitidos (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtra estilos embutidos não permitidos (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Permite a filtragem rigorosa de tags, atributos e estilos.\n- Use `true` para ativar todos os filtros (padrão) ou um objeto para controlar filtros individuais.\n- A configuração `false` ​​não é suportada; use o formato de objeto para desativar filtros específicos.\n- :descrição do filtro\n- `tagFilter`: Filtra tags HTML não permitidas (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtra elementos de formatação (`formatLine`/`formatBlock`)\n- `classFilter`: Filtra nomes de classe CSS não permitidos (`allowedClassName`)\n- `textStyleTagFilter`: Filtra tags de estilo de texto (b, i, u, span, etc.)\n- `attrFilter`: Filtra atributos HTML não permitidos (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtra estilos embutidos não permitidos (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -360,7 +360,7 @@
     "description": "Dados diretos sem chamadas ao servidor"
   },
   "audioGallery_url": {
-    "description": "URL de solicitação do servidor"
+    "description": "URL da solicitação do servidor\n- O servidor deve retornar:"
   },
   "audioGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
@@ -372,13 +372,16 @@
     "description": "Dados diretos sem chamadas ao servidor (ignora a busca por URL)."
   },
   "fileBrowser_url": {
-    "description": "URL de solicitação do servidor"
+    "description": "URL da solicitação do servidor\n- O servidor deve retornar uma estrutura de pastas aninhadas.\n- `_data`: URL em formato de array (embutido) ou string (carregada sob demanda ao clicar na pasta).\n\n- `\"default\": true` ​​define a pasta selecionada inicialmente."
   },
   "fileBrowser_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
   },
   "fileBrowser_thumbnail": {
     "description": "URL padrão para miniaturas ou uma função que retorna uma URL para miniaturas por item."
+  },
+  "fileBrowser_expand": {
+    "description": "Profundidade inicial de expansão da pasta. `1` expande o primeiro nível, `Infinity` ​​expande todos. Padrão: `1`."
   },
   "fileBrowser_props": {
     "description": "Nomes de tags adicionais"
@@ -387,7 +390,7 @@
     "description": "Dados diretos sem chamadas ao servidor"
   },
   "fileGallery_url": {
-    "description": "URL de solicitação do servidor"
+    "description": "URL da solicitação do servidor\n- O servidor deve retornar:"
   },
   "fileGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
@@ -399,7 +402,7 @@
     "description": "Dados diretos sem chamadas ao servidor"
   },
   "imageGallery_url": {
-    "description": "URL de solicitação do servidor"
+    "description": "URL da solicitação do servidor\n- O servidor deve retornar:"
   },
   "imageGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
@@ -408,7 +411,7 @@
     "description": "Dados diretos sem chamadas ao servidor"
   },
   "videoGallery_url": {
-    "description": "URL de solicitação do servidor"
+    "description": "URL da solicitação do servidor\n- O servidor deve retornar:"
   },
   "videoGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
@@ -426,7 +429,7 @@
     "description": "Nome do arquivo PDF gerado"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL da solicitação do servidor para upload de arquivo"
+    "description": "URL da solicitação do servidor para upload de arquivo\n- O servidor deve retornar:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Cabeçalhos de solicitação do servidor"
@@ -564,7 +567,7 @@
     "description": "Indica se deve criar um elemento de entrada de URL.\n- O padrão é `true`. Sempre `true` ​​quando `createFileInput` for `false`."
   },
   "audio_uploadUrl": {
-    "description": "O endereço URL para o qual os arquivos serão enviados."
+    "description": "A URL para a qual os arquivos serão enviados.\n- O servidor deve retornar:"
   },
   "audio_uploadHeaders": {
     "description": "Cabeçalhos a serem incluídos na solicitação de upload de arquivo."
@@ -603,7 +606,7 @@
     "description": "A largura da linha de desenho."
   },
   "drawing_lineReconnect": {
-    "description": "Se é necessário reconectar as linhas ao desenhar."
+    "description": "Se deve ou não reconectar as linhas ao desenhar."
   },
   "drawing_lineCap": {
     "description": "O estilo da extremidade da linha (`\"butt\"`, `\"round\"` ​​ou `\"square\"`)."
@@ -615,7 +618,7 @@
     "description": "Se o formulário modal pode ser redimensionado."
   },
   "drawing_maintainRatio": {
-    "description": "Se deve manter a proporção da tela ao redimensionar."
+    "description": "Se deseja manter a proporção da tela ao redimensionar."
   },
   "drawing_formSize": {
     "description": "Configuração de tamanho para o formulário modal de desenho."
@@ -636,7 +639,7 @@
     "description": "Se deve ser permitido apenas dimensionamento baseado em porcentagem."
   },
   "embed_uploadUrl": {
-    "description": "O endereço URL para envio de arquivos."
+    "description": "A URL para upload de arquivos.\n- O servidor deve retornar:"
   },
   "embed_uploadHeaders": {
     "description": "Cabeçalhos a serem incluídos nas solicitações de upload de arquivos."
@@ -690,7 +693,7 @@
     "description": "Indica se deve ser criado um elemento de entrada de URL para inserção de imagem.\n- O padrão é `true`. Sempre `true` ​​quando `createFileInput` for `false`."
   },
   "image_uploadUrl": {
-    "description": "O endpoint da URL para upload de arquivos de imagem."
+    "description": "O endpoint da URL para uploads de arquivos de imagem.\n- O servidor deve retornar:"
   },
   "image_uploadHeaders": {
     "description": "Cabeçalhos adicionais a serem incluídos na solicitação de upload de arquivo."
@@ -726,7 +729,7 @@
     "description": "Comportamento de inserção de componentes para seleção e posicionamento do cursor.\n- [padrão: `options.get('componentInsertBehavior')`]\n- Para componentes em linha: posiciona o cursor próximo ao componente ou o seleciona se não houver um intervalo próximo.\n\n- Para componentes de bloco: executa o comportamento com base em `selectMode`:\n- `auto`: Move o cursor para a próxima linha, se possível; caso contrário, seleciona o componente.\n\n- `select`: Sempre seleciona o componente inserido.\n\n- `line`: Move o cursor para a próxima linha, se possível, ou cria uma nova linha e move o cursor para lá.\n\n- `none`: Não faz nada."
   },
   "link_uploadUrl": {
-    "description": "O endpoint da URL para upload de arquivos."
+    "description": "O endpoint da URL para uploads de arquivos.\n- O servidor deve retornar:"
   },
   "link_uploadHeaders": {
     "description": "Cabeçalhos adicionais para solicitações de upload de arquivos."
@@ -798,7 +801,7 @@
     "description": "Indica se deve ser criado um elemento de entrada de URL para incorporação de vídeo.\n- O padrão é `true`. Sempre `true` ​​quando `createFileInput` for `false`."
   },
   "video_uploadUrl": {
-    "description": "O endpoint da URL para upload de arquivos de vídeo."
+    "description": "O endpoint da URL para uploads de arquivos de vídeo.\n- O servidor deve retornar:"
   },
   "video_uploadHeaders": {
     "description": "Cabeçalhos adicionais a serem incluídos na solicitação de upload de vídeo."

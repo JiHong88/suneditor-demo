@@ -903,7 +903,6 @@ const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
 const PRESET_FIELD_OPTIONS: Partial<Record<ButtonListPreset, Partial<PlaygroundState>>> = {
 	full: {
 		mention_apiUrl: API_MENTION,
-		mention_data: ITEM_PRESETS.mention_data,
 	} as Partial<PlaygroundState>,
 };
 

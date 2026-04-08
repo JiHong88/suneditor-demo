@@ -270,7 +270,7 @@
     "default": "false"
   },
   "shortcuts": {
-    "description": "קיצורי מקלדת מותאמים אישית.\n- מקשים המתחילים ב-`_` הם קיצורי מקלדת מותאמים אישית המוגדרים על ידי המשתמש. כל ערך הוא מערך של זוגות `[keyCombo, hintLabel]`.\n- שילובי מקשים משתמשים בערכים `c` (Ctrl/Cmd), `s` (Shift), ו-`KeyEvent.code` המחוברים יחד על ידי `+`.\n- השתמש ב-`$~pluginName.method` כדי לקרוא לשיטת תוסף ספציפית.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "description": "קיצורי מקלדת מותאמים אישית.\n- מקשים המתחילים ב-`_` הם קיצורי מקלדת מותאמים אישית המוגדרים על ידי המשתמש. כל ערך הוא מערך של זוגות `[keyCombo, hintLabel]`.\n- שילובי מקשים משתמשים בערכים `c` (Ctrl/Cmd), `s` (Shift), ו-`KeyEvent.code` המחוברים על ידי `+`.\n- השתמש ב-`$~pluginName.method` כדי לקרוא לשיטת תוסף ספציפית.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
     "default": "{}"
   },
   "copyFormatKeepOn": {
@@ -360,7 +360,7 @@
     "description": "נתונים ישירים ללא קריאות לשרת"
   },
   "audioGallery_url": {
-    "description": "כתובת URL של בקשת שרת"
+    "description": "כתובת URL של בקשת שרת\n- השרת חייב להחזיר:"
   },
   "audioGallery_headers": {
     "description": "כותרות בקשות שרת"
@@ -372,13 +372,16 @@
     "description": "נתונים ישירים ללא קריאות לשרת (עוקף אחזור URL)."
   },
   "fileBrowser_url": {
-    "description": "כתובת URL של בקשת שרת"
+    "description": "כתובת URL של בקשת שרת\n- השרת חייב להחזיר מבנה תיקיות מקונן.\n- `_data`: כתובת URL של מערך (inline) או מחרוזת (טעינה עצלה בעת לחיצה על תיקייה).\n- `\"default\": true` ​​מגדיר את התיקייה שנבחרה בתחילה."
   },
   "fileBrowser_headers": {
     "description": "כותרות בקשות שרת"
   },
   "fileBrowser_thumbnail": {
     "description": "כתובת URL של תמונה ממוזערת המוגדרת כברירת מחדל או פונקציה שמחזירה כתובת URL של תמונה ממוזערת לכל פריט."
+  },
+  "fileBrowser_expand": {
+    "description": "עומק הרחבת תיקייה ראשוני. `1` מרחיב את הרמה הראשונה, `Infinity` ​​מרחיב את כולה. ברירת מחדל: `1`."
   },
   "fileBrowser_props": {
     "description": "שמות תגיות נוספות"
@@ -387,7 +390,7 @@
     "description": "נתונים ישירים ללא קריאות לשרת"
   },
   "fileGallery_url": {
-    "description": "כתובת URL של בקשת שרת"
+    "description": "כתובת URL של בקשת שרת\n- השרת חייב להחזיר:"
   },
   "fileGallery_headers": {
     "description": "כותרות בקשות שרת"
@@ -399,7 +402,7 @@
     "description": "נתונים ישירים ללא קריאות לשרת"
   },
   "imageGallery_url": {
-    "description": "כתובת URL של בקשת שרת"
+    "description": "כתובת URL של בקשת שרת\n- השרת חייב להחזיר:"
   },
   "imageGallery_headers": {
     "description": "כותרות בקשות שרת"
@@ -408,7 +411,7 @@
     "description": "נתונים ישירים ללא קריאות לשרת"
   },
   "videoGallery_url": {
-    "description": "כתובת URL של בקשת שרת"
+    "description": "כתובת URL של בקשת שרת\n- השרת חייב להחזיר:"
   },
   "videoGallery_headers": {
     "description": "כותרות בקשות שרת"
@@ -426,7 +429,7 @@
     "description": "שם קובץ ה-PDF שנוצר"
   },
   "fileUpload_uploadUrl": {
-    "description": "כתובת URL של בקשת שרת להעלאת קובץ"
+    "description": "כתובת URL של בקשת שרת להעלאת קובץ\n- השרת חייב להחזיר:"
   },
   "fileUpload_uploadHeaders": {
     "description": "כותרות בקשות שרת"
@@ -564,7 +567,7 @@
     "description": "האם ליצור אלמנט קלט URL.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
   },
   "audio_uploadUrl": {
-    "description": "כתובת ה-URL שאליה יועלו הקבצים."
+    "description": "כתובת ה-URL שאליה יועלו הקבצים.\n- השרת חייב להחזיר:"
   },
   "audio_uploadHeaders": {
     "description": "כותרות שיש לכלול בבקשת העלאת הקובץ."
@@ -636,7 +639,7 @@
     "description": "האם לאפשר רק שינוי גודל המבוסס על אחוזים."
   },
   "embed_uploadUrl": {
-    "description": "כתובת ה-URL להעלאות קבצים."
+    "description": "כתובת ה-URL להעלאות קבצים.\n- השרת חייב להחזיר:"
   },
   "embed_uploadHeaders": {
     "description": "כותרות שיש לכלול בבקשות העלאת קבצים."
@@ -684,13 +687,13 @@
     "description": "האם לאפשר רק שינוי גודל המבוסס על אחוזים."
   },
   "image_createFileInput": {
-    "description": "האם ליצור רכיב קלט קובץ עבור העלאות תמונות."
+    "description": "האם ליצור אלמנט קלט קובץ עבור העלאות תמונות."
   },
   "image_createUrlInput": {
     "description": "האם ליצור אלמנט קלט URL להכנסת תמונה.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
   },
   "image_uploadUrl": {
-    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצי תמונה."
+    "description": "נקודת הקצה של כתובת ה-URL עבור העלאות קבצי תמונה.\n- השרת חייב להחזיר:"
   },
   "image_uploadHeaders": {
     "description": "כותרות נוספות שיש לכלול בבקשת העלאת הקובץ."
@@ -726,7 +729,7 @@
     "description": "התנהגות הכנסת רכיבים לבחירה ומיקום סמן.\n- [ברירת מחדל: `options.get('componentInsertBehavior')`]\n- עבור רכיבים מוטבעים: ממקם את הסמן ליד הרכיב, או בוחר אם אין טווח קרוב.\n- עבור רכיבי בלוק: מבצע התנהגות המבוססת על `selectMode`:\n- `auto`: הזז את הסמן לשורה הבאה אם ​​אפשר, אחרת בחר את הרכיב.\n- `select`: בחר תמיד את הרכיב שהוכנס.\n- `line`: הזז את הסמן לשורה הבאה אם ​​אפשר, או צור שורה חדשה והעבר לשם.\n- `none`: אל תעשה דבר."
   },
   "link_uploadUrl": {
-    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצים."
+    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצים.\n- השרת חייב להחזיר:"
   },
   "link_uploadHeaders": {
     "description": "כותרות נוספות עבור בקשות העלאת קבצים."
@@ -798,7 +801,7 @@
     "description": "האם ליצור אלמנט קלט URL עבור הטמעת וידאו.\n- ברירת המחדל היא `true`. תמיד `true` ​​כאשר `createFileInput` הוא `false`."
   },
   "video_uploadUrl": {
-    "description": "נקודת הקצה של כתובת ה-URL להעלאות קבצי וידאו."
+    "description": "נקודת הקצה של כתובת ה-URL עבור העלאות קבצי וידאו.\n- השרת חייב להחזיר:"
   },
   "video_uploadHeaders": {
     "description": "כותרות נוספות שיש לכלול בבקשת העלאת הסרטון."
@@ -843,7 +846,7 @@
     "description": "תבניות URL נוספות להטמעת וידאו."
   },
   "video_extensions": {
-    "description": "סיומות קבצים נוספות שיזוהו עבור העלאות סרטונים."
+    "description": "סיומות קבצים נוספות שיזוהו בעת העלאת סרטונים."
   },
   "video_controls": {
     "description": "בקרות איור."

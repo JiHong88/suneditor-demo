@@ -247,7 +247,7 @@
     "description": "عنصر حاوية لشريط الأدوات."
   },
   "toolbar_sticky": {
-    "description": "تفعيل شريط الأدوات الثابت.\n\n- `number`: يُحدد موضع شريط الأدوات الثابت (بالبكسل). استخدم `-1` ​​لتعطيل خاصية التثبيت.\n\n- `{top, offset}`: `top` هو موضع التثبيت عندما يكون رأس الصفحة مرئيًا.\n\n- `offset` هو موضع التثبيت عندما تُغير لوحة المفاتيح الافتراضية نطاق العرض (مثلًا، على الأجهزة اللوحية، والأجهزة التي تعمل باللمس).\n\n- عند تفعيل لوحة المفاتيح الافتراضية، يحل `offset` محل `top` حتى لا يترك شريط الأدوات فراغًا.\n\n- لرأس الصفحة الذي تم تمريره خارج نطاق العرض. القيمة الافتراضية لـ `offset` هي `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "تفعيل شريط الأدوات الثابت.\n\n- `number`: يُحدد موضع شريط الأدوات الثابت (بالبكسل). استخدم `-1` ​​لتعطيل خاصية التثبيت.\n\n- `{top, offset}`: `top` هو موضع التثبيت عندما يكون رأس الصفحة مرئيًا.\n\n- `offset` هو موضع التثبيت عندما تُغير لوحة المفاتيح الافتراضية موضع العرض (مثلًا، على الأجهزة اللوحية، أو الأجهزة التي تعمل باللمس).\n\n- عند تفعيل لوحة المفاتيح الافتراضية، يحل `offset` محل `top` حتى لا يترك شريط الأدوات فراغًا.\n\n- لرأس الصفحة الذي تم تمريره خارج نطاق العرض. القيمة الافتراضية لـ `offset` هي `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {
@@ -332,7 +332,7 @@
     "description": "مكتبات خارجية مثل CodeMirror وKaTeX وMathJax.\n\n- راجع دليل المكتبات الخارجية على الرابط التالي: {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
-    "description": "يُحدد هذا الخيار علامات إضافية مسموح بها أو ممنوعة. استخدم `true` للسماح، و `false` ​​لمنعها.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "description": "يُحدد هذا الخيار علامات إضافية مسموح بها أو ممنوعة. استخدم `true` للسماح، و`false` ​​للمنع.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
@@ -360,7 +360,7 @@
     "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "audioGallery_url": {
-    "description": "عنوان URL لطلب الخادم"
+    "description": "عنوان URL لطلب الخادم\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "audioGallery_headers": {
     "description": "رؤوس طلب الخادم"
@@ -372,13 +372,16 @@
     "description": "بيانات مباشرة بدون استدعاءات للخادم (يتجاوز جلب عنوان URL)."
   },
   "fileBrowser_url": {
-    "description": "عنوان URL لطلب الخادم"
+    "description": "عنوان URL لطلب الخادم\n- يجب أن يُعيد الخادم بنية مجلدات متداخلة.\n\n- `_data`: مصفوفة (مضمنة) أو سلسلة نصية (يتم تحميلها عند النقر على المجلد).\n\n- `\"default\": true` ​​يُحدد المجلد المُختار مبدئيًا."
   },
   "fileBrowser_headers": {
     "description": "رؤوس طلب الخادم"
   },
   "fileBrowser_thumbnail": {
     "description": "عنوان URL للصورة المصغرة الافتراضي أو دالة تُرجع عنوان URL للصورة المصغرة لكل عنصر."
+  },
+  "fileBrowser_expand": {
+    "description": "عمق توسيع المجلد الأولي. `1` يوسع المستوى الأول، `Infinity` ​​يوسع جميع المستويات. القيمة الافتراضية: `1`."
   },
   "fileBrowser_props": {
     "description": "أسماء علامات إضافية"
@@ -387,7 +390,7 @@
     "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "fileGallery_url": {
-    "description": "عنوان URL لطلب الخادم"
+    "description": "عنوان URL لطلب الخادم\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "fileGallery_headers": {
     "description": "رؤوس طلب الخادم"
@@ -399,7 +402,7 @@
     "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "imageGallery_url": {
-    "description": "عنوان URL لطلب الخادم"
+    "description": "عنوان URL لطلب الخادم\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "imageGallery_headers": {
     "description": "رؤوس طلب الخادم"
@@ -408,7 +411,7 @@
     "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
   "videoGallery_url": {
-    "description": "عنوان URL لطلب الخادم"
+    "description": "عنوان URL لطلب الخادم\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "videoGallery_headers": {
     "description": "رؤوس طلب الخادم"
@@ -426,7 +429,7 @@
     "description": "اسم ملف PDF المُنشأ"
   },
   "fileUpload_uploadUrl": {
-    "description": "عنوان URL لطلب الخادم لتحميل الملفات"
+    "description": "عنوان URL لطلب الخادم لتحميل الملفات\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "fileUpload_uploadHeaders": {
     "description": "رؤوس طلب الخادم"
@@ -564,7 +567,7 @@
     "description": "إنشاء عنصر إدخال عنوان URL.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "audio_uploadUrl": {
-    "description": "عنوان URL الذي سيتم تحميل الملفات إليه."
+    "description": "عنوان URL الذي سيتم تحميل الملفات إليه.\n\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "audio_uploadHeaders": {
     "description": "العناوين التي يجب تضمينها في طلب تحميل الملف."
@@ -636,7 +639,7 @@
     "description": "ما إذا كان ينبغي السماح بتحديد الحجم بناءً على النسبة المئوية فقط."
   },
   "embed_uploadUrl": {
-    "description": "رابط تحميل الملفات."
+    "description": "رابط تحميل الملفات.\n\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "embed_uploadHeaders": {
     "description": "العناوين التي يجب تضمينها في طلبات تحميل الملفات."
@@ -690,7 +693,7 @@
     "description": "تحديد ما إذا كان سيتم إنشاء عنصر إدخال عنوان URL لإدراج الصور.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "image_uploadUrl": {
-    "description": "نقطة نهاية عنوان URL لتحميل ملفات الصور."
+    "description": "عنوان URL الخاص بتحميل ملفات الصور.\n\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "image_uploadHeaders": {
     "description": "رؤوس إضافية يجب تضمينها في طلب تحميل الملف."
@@ -726,7 +729,7 @@
     "description": "سلوك إدراج المكونات لتحديدها ووضع المؤشر.\n\n- [الافتراضي: `options.get('componentInsertBehavior')`]\n- بالنسبة للمكونات المضمنة: يضع المؤشر بالقرب من المكون، أو يحدده إذا لم يكن هناك نطاق قريب.\n\n- بالنسبة للمكونات الكتلية: ينفذ السلوك بناءً على `selectMode`:\n\n- `auto`: ينقل المؤشر إلى السطر التالي إن أمكن، وإلا يحدد المكون.\n\n- `select`: يحدد المكون المُدرج دائمًا.\n\n- `line`: ينقل المؤشر إلى السطر التالي إن أمكن، أو ينشئ سطرًا جديدًا وينقل المؤشر إليه.\n\n- `none`: لا يفعل شيئًا."
   },
   "link_uploadUrl": {
-    "description": "نقطة نهاية عنوان URL لتحميل الملفات."
+    "description": "عنوان URL الخاص بتحميل الملفات.\n\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "link_uploadHeaders": {
     "description": "رؤوس إضافية لطلبات تحميل الملفات."
@@ -762,7 +765,7 @@
     "description": "إذا كان `true`، فإنه يُمكّن تحميل الملفات."
   },
   "math_canResize": {
-    "description": "هل يمكن تغيير حجم نافذة الرياضيات؟"
+    "description": "ما إذا كان من الممكن تغيير حجم نافذة الرياضيات."
   },
   "math_autoHeight": {
     "description": "ما إذا كان سيتم ضبط ارتفاع النافذة المنبثقة تلقائيًا."
@@ -798,7 +801,7 @@
     "description": "تحديد ما إذا كان سيتم إنشاء عنصر إدخال عنوان URL لتضمين الفيديو.\n\n- القيمة الافتراضية هي `true`. دائمًا `true` ​​عندما تكون `createFileInput` هي `false`."
   },
   "video_uploadUrl": {
-    "description": "نقطة نهاية عنوان URL لتحميل ملفات الفيديو."
+    "description": "عنوان URL الخاص بتحميل ملفات الفيديو.\n\n- يجب أن يُعيد الخادم ما يلي:"
   },
   "video_uploadHeaders": {
     "description": "عناوين إضافية يجب تضمينها في طلب تحميل الفيديو."

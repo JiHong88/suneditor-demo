@@ -285,7 +285,7 @@
     "default": "400"
   },
   "historyStackSize": {
-    "description": "Numero massimo di voci di cronologia per frame radice. Le voci più vecchie vengono scartate al superamento di tale limite.",
+    "description": "Numero massimo di voci di cronologia per frame radice. Le voci più vecchie vengono scartate una volta superato tale limite.",
     "default": "100"
   },
   "printClass": {
@@ -360,7 +360,7 @@
     "description": "Dati diretti senza chiamate al server."
   },
   "audioGallery_url": {
-    "description": "URL della richiesta al server"
+    "description": "URL della richiesta al server\n- Il server deve restituire:"
   },
   "audioGallery_headers": {
     "description": "intestazioni della richiesta del server"
@@ -372,13 +372,16 @@
     "description": "Dati diretti senza chiamate al server (bypassa il recupero URL)."
   },
   "fileBrowser_url": {
-    "description": "URL della richiesta al server"
+    "description": "URL della richiesta al server\n- Il server deve restituire una struttura di cartelle annidate.\n\n- `_data`: array (inline) o URL stringa (caricato in modo differito al clic sulla cartella).\n\n- `\"default\": true` ​​imposta la cartella inizialmente selezionata."
   },
   "fileBrowser_headers": {
     "description": "intestazioni della richiesta del server"
   },
   "fileBrowser_thumbnail": {
     "description": "URL predefinito per le miniature o una funzione che restituisce l'URL di una miniatura per ogni elemento."
+  },
+  "fileBrowser_expand": {
+    "description": "Profondità di espansione iniziale della cartella. `1` espande il primo livello, `Infinity` ​​espande tutti. Predefinito: `1`."
   },
   "fileBrowser_props": {
     "description": "Nomi di tag aggiuntivi"
@@ -387,7 +390,7 @@
     "description": "Dati diretti senza chiamate al server."
   },
   "fileGallery_url": {
-    "description": "URL della richiesta al server"
+    "description": "URL della richiesta al server\n- Il server deve restituire:"
   },
   "fileGallery_headers": {
     "description": "intestazioni della richiesta del server"
@@ -399,7 +402,7 @@
     "description": "Dati diretti senza chiamate al server."
   },
   "imageGallery_url": {
-    "description": "URL della richiesta al server"
+    "description": "URL della richiesta al server\n- Il server deve restituire:"
   },
   "imageGallery_headers": {
     "description": "intestazioni della richiesta del server"
@@ -408,7 +411,7 @@
     "description": "Dati diretti senza chiamate al server."
   },
   "videoGallery_url": {
-    "description": "URL della richiesta al server"
+    "description": "URL della richiesta al server\n- Il server deve restituire:"
   },
   "videoGallery_headers": {
     "description": "intestazioni della richiesta del server"
@@ -426,7 +429,7 @@
     "description": "Nome del file PDF generato"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL di richiesta del server per il caricamento del file"
+    "description": "URL di richiesta del server per il caricamento del file\n- Il server deve restituire:"
   },
   "fileUpload_uploadHeaders": {
     "description": "intestazioni della richiesta del server"
@@ -564,7 +567,7 @@
     "description": "Indica se creare un elemento di input URL.\n\n- Il valore predefinito è `true`. Sempre `true` ​​quando `createFileInput` è `false`."
   },
   "audio_uploadUrl": {
-    "description": "L'URL a cui verranno caricati i file."
+    "description": "L'URL a cui verranno caricati i file.\n\n- Il server deve restituire:"
   },
   "audio_uploadHeaders": {
     "description": "Intestazioni da includere nella richiesta di caricamento del file."
@@ -636,7 +639,7 @@
     "description": "Se consentire o meno solo il dimensionamento basato su percentuali."
   },
   "embed_uploadUrl": {
-    "description": "L'URL per il caricamento dei file."
+    "description": "L'URL per il caricamento dei file.\n\n- Il server deve restituire:"
   },
   "embed_uploadHeaders": {
     "description": "Intestazioni da includere nelle richieste di caricamento file."
@@ -690,7 +693,7 @@
     "description": "Indica se creare un elemento di input URL per l'inserimento di immagini.\n\n- Il valore predefinito è `true`. Sempre `true` ​​quando `createFileInput` è `false`."
   },
   "image_uploadUrl": {
-    "description": "L'URL di fine per il caricamento dei file immagine."
+    "description": "L'URL di fine per il caricamento dei file immagine.\n\n- Il server deve restituire:"
   },
   "image_uploadHeaders": {
     "description": "Intestazioni aggiuntive da includere nella richiesta di caricamento del file."
@@ -726,7 +729,7 @@
     "description": "Comportamento di inserimento dei componenti per la selezione e il posizionamento del cursore.\n\n- [predefinito: `options.get('componentInsertBehavior')`]\n- Per i componenti in linea: posiziona il cursore vicino al componente, oppure lo seleziona se non c'è un intervallo nelle vicinanze.\n\n- Per i componenti a blocco: esegue il comportamento in base a `selectMode`:\n- `auto`: sposta il cursore alla riga successiva, se possibile, altrimenti seleziona il componente.\n\n- `select`: seleziona sempre il componente inserito.\n\n- `line`: sposta il cursore alla riga successiva, se possibile, oppure crea una nuova riga e spostati lì.\n\n- `none`: non fa nulla."
   },
   "link_uploadUrl": {
-    "description": "L'URL di fine per il caricamento dei file."
+    "description": "L'URL di fine per il caricamento dei file.\n\n- Il server deve restituire:"
   },
   "link_uploadHeaders": {
     "description": "Intestazioni aggiuntive per le richieste di caricamento file."
@@ -798,7 +801,7 @@
     "description": "Indica se creare un elemento di input URL per l'incorporamento di video.\n\n- Il valore predefinito è `true`. Sempre `true` ​​quando `createFileInput` è `false`."
   },
   "video_uploadUrl": {
-    "description": "L'URL di fine per il caricamento dei file video."
+    "description": "L'URL di fine per il caricamento dei file video.\n\n- Il server deve restituire:"
   },
   "video_uploadHeaders": {
     "description": "Intestazioni aggiuntive da includere nella richiesta di caricamento del video."

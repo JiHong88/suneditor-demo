@@ -1,854 +1,857 @@
 {
   "value": {
-    "description": "Álgoárvu redaktevrii.",
+    "description": "Initialt värde för redigeraren.",
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Báiketeaksta.",
+    "description": "Platshållartext.",
     "default": "\"\""
   },
   "editableFrameAttributes": {
-    "description": "Attributtat rievdaduvvon rámmas[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
+    "description": "Attribut för den redigerbara ramen[.sun-editor-editable].\n```js\n{ editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n```",
     "default": "{spellcheck: \"false\"}"
   },
   "width": {
-    "description": "Viidodat redaktevrra várás.",
+    "description": "Bredd för redigeraren.",
     "default": "\"100%\""
   },
   "minWidth": {
-    "description": "Min viidodat redaktevrii.",
+    "description": "Minsta bredd för redigeraren.",
     "default": "\"\""
   },
   "maxWidth": {
-    "description": "Alimus viidodat redaktevrra várás.",
+    "description": "Maxbredd för redigeraren.",
     "default": "\"\""
   },
   "height": {
-    "description": "Redaktevrra guhkkodat.",
+    "description": "Höjd för redaktören.",
     "default": "\"auto\""
   },
   "minHeight": {
-    "description": "Unnimus govdodat redaktevrra várás.",
+    "description": "Minsta höjd för redigeraren.",
     "default": "\"\""
   },
   "maxHeight": {
-    "description": "Redaktevrra alimus govdodat.",
+    "description": "Maxhöjd för redigeraren.",
     "default": "\"\""
   },
   "editorStyle": {
-    "description": "Stiilastreaŋga editora bajimus rámmas.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
+    "description": "Stilsträng för redigerarens översta ram.\n```js\n{ editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n```",
     "default": "\"\""
   },
   "iframe": {
-    "description": "Sisdoallu biddjojuvvo iframe:ii ja isolerejuvvo muđui siiddus.",
+    "description": "Innehållet placeras i en iframe och isoleras från resten av sidan.",
     "default": "false"
   },
   "iframe_fullPage": {
-    "description": "Láhčá dili geavahit HTML-, HEAD-, BODY-mearkkaid ja DOCTYPE-julggaštusa `iframe`:s.",
+    "description": "Tillåter användning av HTML-, HEAD-, BODY-taggar och DOCTYPE-deklaration på `iframe`.",
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe` iešvuođat.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attribut för `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
   "statusbar": {
-    "description": "Aktivere stáhtuslinnjá.",
+    "description": "Aktiverar statusfältet.",
     "default": "true"
   },
   "statusbar_showPathLabel": {
-    "description": "Čájeha dálá noddastruktuvrra stáhtuslinjjás.",
+    "description": "Visar den aktuella nodstrukturen i statusfältet.",
     "default": "true"
   },
   "statusbar_resizeEnable": {
-    "description": "Láhčá dili nuppástuhttit sturrodaga vuolimus stáhtuslinjjás.",
+    "description": "Aktiverar funktionen för att ändra storlek på den nedre statusfältet.",
     "default": "true"
   },
   "charCounter": {
-    "description": "Čájeha mearkkaid logu editoris.\n- Jus `maxCharCount`-válljejumis lea árvu, de šaddá `true`.",
+    "description": "Visar antalet tecken i editorn.\n- Om alternativet `maxCharCount` har ett värde blir det `true`.",
     "default": "false"
   },
   "charCounter_max": {
-    "description": "Eanemus čálamearkkaid lohku maid sáhttá bidjat redigerii.",
+    "description": "Det maximala antalet tecken som får infogas i redigeraren.",
     "default": "null"
   },
   "charCounter_label": {
-    "description": "Teaksta mii galgá čájehuvvot `charCounter` guovllus vuolimus čuoggás.\n```js\n{ charCounter_label: 'Characters :' }\n```",
+    "description": "Text som ska visas i `charCounter`-området i den nedre fältet.\n```js\n{ charCounter_label: 'Characters :' }\n```",
     "default": "null"
   },
   "charCounter_type": {
-    "description": "Definere `charCounter`-válljema rehkenastinvuogi.\n- `char`: Bustávaid guhkkodat.\n- `byte`: Binára diehtosturrodat čálamearkkain.\n- `byte-html`: Binára diehtosturrodat olles HTML-streaŋggas.",
+    "description": "Definierar beräkningsmetoden för alternativet `charCounter`.\n- `char`: Teckenlängd.\n- `byte`: Binär datastorlek för tecken.\n- `byte-html`: Binär datastorlek för hela HTML-strängen.",
     "default": "\"char\""
   },
   "wordCounter": {
-    "description": "Čájeha sániid logu doaimmaheaddjis.",
+    "description": "Visar antalet ord i editorn.",
     "default": "false"
   },
   "wordCounter_label": {
-    "description": "Teaksta mii galgá čájehuvvot `wordCounter` guovllus vuolimus čuoggás.\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "description": "Text som ska visas i `wordCounter`-området i den nedre fältet.\n```js\n{ wordCounter_label: 'Words :' }\n```",
     "default": "null"
   },
   "top": {
-    "description": "Stiillat mat leat biddjon bajimus konteinerii (omd. viidodat, z-indeaksa jna.)."
+    "description": "Stilar som tillämpats på den översta behållaren (t.ex. bredd, z-index, etc.)."
   },
   "frame": {
-    "description": "Stiillat mat leat biddjon iframe-konteavsttas (omd. govdodat, min-govdodat)."
+    "description": "Stilar som tillämpas på iframe-behållaren (t.ex. höjd, min-höjd)."
   },
   "editor": {
-    "description": "Stiillat mat leat heivehuvvon rievdaduvvon sisdoalloguovllus."
+    "description": "Stilar som tillämpats på det redigerbara innehållsområdet."
   },
   "codeMirrorEditor": {
-    "description": "CodeMirror-editora ovdamearka (rámmadásis). Ásahuvvon `_checkCodeMirror` maŋŋel álggaheami."
+    "description": "CodeMirror-redigerarinstans (frame-nivå). Ställs in av `_checkCodeMirror` efter initialisering."
   },
   "plugins": {
-    "description": "Plugina konfigureren. Bija plugin-luohkáid dahje objeavtta mii lea čállojuvvon plugin-namain.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
+    "description": "Plugin-konfiguration. Skicka en array av plugin-klasser eller ett objekt som är nyckelat efter plugin-namn."
   },
   "buttonList": {
-    "description": "Listu fierpmádaga nuppástusain, joavkkuhuvvon oassearrayid mielde.\n- Standárda čuovvu {@link DEFAULTS.BUTTON_LIST}",
+    "description": "Lista över verktygsfältsknappar, grupperade efter undermatriser.\n- Standardinställningen följer {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
   },
   "v2Migration": {
-    "description": "Aktivere sirdinmodealla SunEditor v2:i.",
+    "description": "Aktiverar migreringsläge för SunEditor v2.",
     "default": "false"
   },
   "mode": {
-    "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Bija `:bottom` vai bidjat fierpmádaga vuolábeallái (omd. `classic:bottom`, `inline:bottom`).",
+    "description": "Verktygsfältsläge: `classic`, `inline`, `balloon`, `balloon-always`. Lägg till `:bottom` för att placera verktygsfältet längst ner (t.ex. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
   },
   "type": {
-    "description": "Redaktevrašládja. Geavat `\"document\"` dokumeantastiila hábmemii, mas leat válljejuvvon oassetyppat maŋŋel `:`.\n```js\n// type\n'document:header,page'\n```",
+    "description": "Redigerartyp. Använd `\"document\"` för en layout i dokumentstil, med valfria undertyper efter `:`.\n```js\n// type\n'document:header,page'\n```",
     "default": "\"\""
   },
   "theme": {
-    "description": "Redaktevra fáddá.",
+    "description": "Redigerartema.",
     "default": "\"\""
   },
   "lang": {
-    "description": "Giellakonfigurašuvdna. default : EN"
+    "description": "Språkkonfiguration. standard: EN"
   },
   "icons": {
-    "description": "Heaittiha standárdaikonaid."
+    "description": "Åsidosätter standardikonerna."
   },
   "textDirection": {
-    "description": "Teakstačujuhus: `ltr` dahje `rtl`.",
+    "description": "Textriktning: `ltr` eller `rtl`.",
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Dahká vejolažžan garrasit filtrerema merkemiid, attributtaid ja stiillaid gaskkas.\n- Geavat `true` buot filteriid álggaheapmái (standárda), dahje objeavtta stivret sierra filteriid.\n- `false` ​​bidjan ii doarjjojuvvo; geavat objeaktahámi heaittihit dihto filteriid dan sadjái.\n- :filter čilgehus\n- `tagFilter`: Filterat eai dohkkehuvvon HTML-mearkkaid (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtere formáhttaelemeanttaid (`formatLine`/`formatBlock`)\n- `classFilter`: Filtere CSS-luohkkáid namaid mat eai leat dohkkehuvvon (`allowedClassName`)\n- `textStyleTagFilter`: Filtre teakstastiilamerkemiid (b, i, u, span jna.)\n- `attrFilter`: Filterat eai leat dohkkehuvvon HTML-attributtaid (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filterat eai dohkket sisačálihanstiillaid (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Aktiverar strikt filtrering av taggar, attribut och stilar.\n- Använd `true` för att aktivera alla filter (standard), eller ett objekt för att styra enskilda filter.\n- Inställningen av `false` ​​stöds inte; använd objektformuläret för att inaktivera specifika filter istället.\n- :filterbeskrivning\n- `tagFilter`: Filterar otillåtna HTML-taggar (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrerar formatelement (`formatLine`/`formatBlock`)\n- `classFilter`: Filterar otillåtna CSS-klassnamn (`allowedClassName`)\n- `textStyleTagFilter`: Filtrerar textstiltaggar (b, i, u, span, etc.)\n- `attrFilter`: Filterar otillåtna HTML-attribut (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filterar otillåtna inline-stilar (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
-    "description": "Merkemiid gieđahallet olles ovttadahkan go válljet buot sisdoalu.\n- Standárda čuovvu {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
+    "description": "Taggar behandlas som hela enheter när allt innehåll markeras.\n- Standardinställningen följer {@link DEFAULTS.SCOPE_SELECTION_TAGS}",
     "default": "CONSTANTS.SCOPE_SELECTION_TAGS"
   },
   "elementWhitelist": {
-    "description": "Deattuha HTML-elemeanttaid mat lassin dohkkehit standárda dohkkehanlisttu. Ráddjehus: `\"|\"`.\n- Lasihuvvon standárdalistui mii lea mearriduvvon {@link PrivateBaseOptions.__defaultElementWhitelist} bokte.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
+    "description": "Anger HTML-element som ska tillåtas utöver standardlistan för tillåtna element. Avgränsare: `\"|\"`.\n- Tillagd till standardlistan som bestäms av {@link PrivateBaseOptions.__defaultElementWhitelist}.\n```js\n{ elementWhitelist: 'mark|details|summary' }\n```",
     "default": "\"\""
   },
   "elementBlacklist": {
-    "description": "Deattuha HTML-elemeanttaid mat eai galgga geavahuvvot. Ráddjehus: `\"|\"`.\n- Dás meroštallojuvvon merkejumit váldojuvvojit loahpas eret, vaikko dat leat mielde eará čáhppeslisttuin.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
+    "description": "Anger HTML-element som inte ska användas. Avgränsare: `\"|\"`.\n- Taggar som anges här kommer så småningom att tas bort, även om de ingår i andra vitlistor.\n```js\n{ elementBlacklist: 'script|style|iframe' }\n```",
     "default": "\"\""
   },
   "allowedEmptyTags": {
-    "description": "Listu merkemiin maid sáhttá doallat vaikko daid árvvut leat guoros.\n- Default čuovvu {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- `ALLOWED_EMPTY_NODE_LIST` čatnon oktii vai šaddá loahpalaš `allowedEmptyTags`-listtu.",
+    "description": "En lista med taggar som får behållas även om deras värden är tomma.\n- Standardvärdet följer {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}\n- Sammanfogas med `ALLOWED_EMPTY_NODE_LIST` för att bilda den slutliga `allowedEmptyTags`-listan.",
     "default": "CONSTANTS.ALLOWED_EMPTY_NODE_LIST"
   },
   "allowedClassName": {
-    "description": "Dohkkehuvvon luohkkánamat.\n- Lassin standárdaárvu {@link DEFAULTS.CLASS_NAME}",
+    "description": "Tillåtna klassnamn.\n- Standardvärdet {@link DEFAULTS.CLASS_NAME} har lagts till.",
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Deattuha lassi iešvuođaid mat dohkkehit juohke mearkka. `\"*\"` guoská buot mearkkaide.\n- Dás meroštallojuvvon njuolggadusat ovttastuvvojit {@link PrivateBaseOptions.__defaultAttributeWhitelist}:ii.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Anger ytterligare attribut för att tillåta för varje tagg. `\"*\"` gäller för alla taggar.\n- Regler som anges här kommer att slås samman med {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {
-    "description": "Deattuha attributtaid maid ii galgga dohkkehit merkema mielde. `\"*\"` guoská buot mearkkaide.\n- Dás meroštallojuvvon iešvuođat váldojuvvojit loahpas eret vaikko eará heiveheamit dohkkehit daid.\n- Gáibiduvvon elemeanttaid listu, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, lea álo mielde.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
+    "description": "Anger attribut som inte ska tillåtas per tagg. `\"*\"` gäller för alla taggar.\n- Attribut som anges här kommer så småningom att tas bort även om de är tillåtna enligt andra inställningar.\n- En lista över obligatoriska element, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, ingår alltid.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
   },
   "textStyleTags": {
-    "description": "Lassi teakstastiilamearkkat.\n- Default čuovvu {@link PrivateBaseOptions.__textStyleTags}",
+    "description": "Ytterligare textstiltaggar.\n- Standardinställningen följer {@link PrivateBaseOptions.__textStyleTags}",
     "default": "__textStyleTags"
   },
   "convertTextTags": {
-    "description": "Kárte teakstastiillaid dihto HTML-mearkkaide.\n```js\n{\nconvertTextTags: {\nbold: 'b',\nitalic: 'i',\nunderline: 'u',\nstrike: 's'\n}\n}\n```",
+    "description": "Mappar textstilar till specifika HTML-taggar.",
     "default": "{bold: \"strong\", underline: \"u\", italic: \"em\", strike: \"del\", subscript: \"sub\", superscript: \"sup\"}"
   },
   "allUsedStyles": {
-    "description": "Deattuha lassi stiillaid dohkkehuvvon stiillaid listui. Ráddjehus: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
+    "description": "Anger ytterligare stilar till listan över tillåtna stilar. Avgränsare: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Deattuha dohkkehuvvon stiillaid HTML-mearkkaide. Nubbi lea merkejuvvon namma(t), árvu lea johtolatráddjejuvvon dohkkehuvvon stiillat.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Anger tillåtna stilar för HTML-taggar. Nyckeln är taggnamnet/taggnamnen, värdet är tillåtna stilar avgränsade med ett pipeline.",
     "default": "{}"
   },
   "spanStyles": {
-    "description": "Deattuha dohkkehuvvon stiillaid `span`-merkemii.\n- Default čuovvu {@link DEFAULTS.SPAN_STYLES}",
+    "description": "Anger tillåtna stilar för `span`-taggen.\n- Standardinställningen följer {@link DEFAULTS.SPAN_STYLES}",
     "default": "CONSTANTS.SPAN_STYLES"
   },
   "lineStyles": {
-    "description": "Deattuha dohkkehuvvon stiillaid `line`-elemeantta várás (s..).\n- Default čuovvu {@link DEFAULTS.LINE_STYLES}",
+    "description": "Anger tillåtna stilar för `line`-elementet (p..).\n- Standardinställningen följer {@link DEFAULTS.LINE_STYLES}",
     "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
-    "description": "Dohkkehuvvon čállinmeari sturrodat.\n- Standárda čuovvu {@link DEFAULTS.SIZE_UNITS}",
+    "description": "Tillåtna teckenstorleksenheter.\n- Standardvärdet följer {@link DEFAULTS.SIZE_UNITS}",
     "default": "CONSTANTS.SIZE_UNITS"
   },
   "retainStyleMode": {
-    "description": "Mearrida mo sisačálihuvvon elemeanttat (omd. `<span>`, `<strong>`) gieđahallojuvvojit go teavstta sihkkut.\n- `repeat`: Stiillat bisuhuvvojit jus ii máŋgii deaddilat maŋosguvlui.\n- Joatkkačuohppan loahpas váldá eret stiillaid.\n- `none`: Stiillat eai leat seailluhuvvon. Inline-elemeanttat váldojuvvojit dakkaviđe eret teavsttain.\n- `always`: Stiillat bissot mearreáigásaččat jus eai leat čielgasit váldon eret.\n- Vaikko buot teaksta sisáibmoelemeantta siskkobealde sihkkojuvvo, de elemeanta ieš bissu.",
+    "description": "Bestämmer hur inline-element (t.ex. `<span>`, `<strong>`) hanteras vid borttagning av text.\n- `repeat`: Stilar behålls om inte backsteg trycks upprepade gånger.\n- Kontinuerlig tryckning tar så småningom bort stilarna.\n- `none`: Stilar behålls inte. Inline-element tas omedelbart bort tillsammans med texten.\n- `always`: Stilar finns kvar på obestämd tid om de inte uttryckligen tas bort.\n- Även om all text i ett inline-element raderas, finns själva elementet kvar.",
     "default": "\"repeat\""
   },
   "defaultLine": {
-    "description": "Default `line` elemeanta go bidjá ođđa linjjáid.",
+    "description": "Standardelementet `line` vid infogning av nya rader.",
     "default": "\"p\""
   },
   "defaultLineBreakFormat": {
-    "description": "Deattuha standárda linnjáčuohppanhámi.\n- [Ávžžuhuvvon] `line` : Linjáčuohppan lea juhkkojuvvon oppalaš merkemiidda.\n- [Ii ávžžuhuvvo] `br` ​​: Linjáčuoggát gieđahallojuvvojit <br> seamma linjjás. (dego shift+enter)\n- Linjáčuoggát gieđahallojuvvojit <br> `line` siskkobealde.\n- Sáhtát ráhkadit ođđa `line` go čálát linnjáčuoggá guovtte geardde čuovvovaččat.\n- Formáhtat main lea `line`, nugo \"Sitašuvdna\", doibmet ain `line` vuođul.\n- suneditora proseassat doibmet `line` ovttadagain.\n- Go biddjojuvvo `br`, de sáhttá doaibma lassánit go rievdada ollu dieđuid.",
+    "description": "Anger standardformatet för radbrytning.\n- [Rekommenderas] `line` : Radbrytning är uppdelad i allmänna taggar.\n- [Rekommenderas inte] `br` ​​: Radbrytningar behandlas som <br> på samma rad. (som shift+enter)\n- Radbrytningar hanteras som <br> inom `line`.\n- Du kan skapa en ny `line` genom att ange en radbrytning två gånger i rad.\n- Format som inkluderar `line`, till exempel \"Citat\", fungerar fortfarande på en `line`-basis.\n- suneditor-processer arbetar i `line`-enheter.\n- När den är inställd på `br` kan prestandan minska vid redigering av mycket data.",
     "default": "\"line\""
   },
   "lineAttrReset": {
-    "description": "Linjá iešvuođat mat galget nuppástuhttojuvvot go rievdada linjjáid. Ráddjehus: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
+    "description": "Linjeegenskaper som ska återställas vid radbyte. Avgränsare: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
   },
   "formatLine": {
-    "description": "Dasa lassin dohkkehit `line` elemeanttaid olggobealde standárdda. Ráddjehus: `\"|\"`.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatLine}:in vai šaddá loahpalaš `line` listtu.\n- `line` elemeantta sisdoallá maiddái `brLine` elemeantta.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
+    "description": "Dessutom tillåts `line`-element utöver standardvärdet. Avgränsare: `\"|\"`.\n- Sammanfogad med {@link PrivateBaseOptions.__defaultFormatLine} för att bilda den slutliga `line`-listan.\n- `line`-elementet innehåller även `brLine`-elementet.\n```js\n{ formatLine: 'ARTICLE|SECTION' }\n```",
     "default": "__defaultFormatLine"
   },
   "formatBrLine": {
-    "description": "Dasa lassin dohkkehit `brLine` elemeanttaid olggobealde standárdda.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatBrLine}:in vai šaddá loahpalaš `brLine` ​​listtu.\n- `brLine` elemeanttat leat mielde `line` elemeanttas.\n- `brLine` elemeanttaid linnjáčuohppan lea `BR`-mearka.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
+    "description": "Dessutom tillåts `brLine`-element utöver standardvärdet.\n- Sammanfogad med {@link PrivateBaseOptions.__defaultFormatBrLine} för att bilda den slutliga `brLine`-listan.\n- `brLine`-element ingår i `line`-elementet.\n- `brLine`-elementens radbrytning är `BR`-taggen.\n```js\n{ formatBrLine: 'CODE' }\n```\n- ※ Entering the Enter key on the last line ends `brLine` and appends `line`.",
     "default": "__defaultFormatBrLine"
   },
   "formatClosureBrLine": {
-    "description": "Dasa lassin dohkkehit `closureBrLine` elemeanttaid olggobealde standárdda.\n- Loahpalaš `closureBrLine` ​​listui lea čadnojuvvon {@link PrivateBaseOptions.__defaultFormatClosureBrLine}:ii.\n- `closureBrLine` elemeanttat leat mielde `brLine`:s.\n- `closureBrLine` elemeanttaid linnjáčuohppan lea `BR`-mearka.\n- ※ Don it sáhte heaittihit dán formáhtta Enter-távvala dahje Backspace-távvala bokte.\n- ※ Geavat dan dušše erenoamáš dáhpáhusain. ([ex] tabeallaseallaid hápmi)",
+    "description": "Dessutom tillåts `closureBrLine`-element utöver standardvärdet.\n- Sammanfogad med {@link PrivateBaseOptions.__defaultFormatClosureBrLine} för den slutliga `closureBrLine`-listan.\n- `closureBrLine`-element ingår i `brLine`.\n- `closureBrLine`-elementens radbrytning är `BR`-taggen.\n- ※ Du kan inte avsluta detta format med Enter-tangenten eller Backspace-tangenten.\n- ※ Använd det endast i specialfall. ([t.ex.] format för tabellceller)",
     "default": "__defaultFormatClosureBrLine"
   },
   "formatBlock": {
-    "description": "Dasa lassin dohkkehit `block` elemeanttaid olggobealde standárdda.\n- Ovttastahttojuvvon {@link PrivateBaseOptions.__defaultFormatBlock}:in vai šaddá loahpalaš `block` ​​listtu.\n- `block` gokčá `line` ja `component`.",
+    "description": "Dessutom tillåts `block`-element utöver standardvärdet.\n- Sammanfogad med {@link PrivateBaseOptions.__defaultFormatBlock} för att bilda den slutliga `block`-listan.\n- `block` omsluter `line` och `component`.",
     "default": "__defaultFormatBlock"
   },
   "formatClosureBlock": {
-    "description": "Dasa lassin dohkkehit `closureBlock` elemeanttaid olggobealde standárdda.\n- Loahpalaš `closureBlock` ​​listui lea čadnojuvvon {@link PrivateBaseOptions.__defaultFormatClosureBlock}:ii.\n- `closureBlock` elemeanttat leat mielde `block`:s.\n- `closureBlock` elemeanta gokčá `line` ja `component`.\n- ※ Don it sáhte heaittihit dán formáhtta Enter-távvala dahje Backspace-távvala bokte.\n- ※ Geavat dan dušše erenoamáš dáhpáhusain. (omd. tabeallaseallaid hápmi)",
+    "description": "Dessutom tillåts `closureBlock`-element utöver standardvärdet.\n- Sammanfogat med {@link PrivateBaseOptions.__defaultFormatClosureBlock} för den slutliga `closureBlock`-listan.\n- `closureBlock`-element ingår i `block`.\n- `closureBlock`-elementet omsluter `line` och `component`.\n- ※ Du kan inte avsluta detta format med Enter-tangenten eller Backspace-tangenten.\n- ※ Använd det endast i specialfall. (t.ex. formatering av tabellceller)",
     "default": "__defaultFormatClosureBlock"
   },
   "closeModalOutsideClick": {
-    "description": "Gidde modalaid go deaddilat olggos.",
+    "description": "Stänger modalfält när man klickar utanför.",
     "default": "false"
   },
   "syncTabIndent": {
-    "description": "Synkronisere távvala sisačáliheami gaskkaiguin.",
+    "description": "Synkroniserar tabbindrag med mellanslag.",
     "default": "true"
   },
   "tabDisable": {
-    "description": "Deaktivere tab-távvala sisačáliheami.",
+    "description": "Inaktiverar inmatning med tabbtangenten.",
     "default": "false"
   },
   "toolbar_width": {
-    "description": "Bargoneavvu viidodat.",
+    "description": "Verktygsfältets bredd.",
     "default": "\"auto\""
   },
   "toolbar_container": {
-    "description": "Konteavstta elemeanta fierpmádatbáikái."
+    "description": "Containerelement för verktygsfältet."
   },
   "toolbar_sticky": {
-    "description": "Aktivere sticky toolbar.\n- `number`: Ásaha čáhppes bajimus saji (px). Geavat `-1` ​​deaktiveret sticky.\n- `{top, offset}`: `top` lea čáhppes sadji go siiddu bajilgovva lea oidnosis.\n- `offset` lea čáhppes sadji go virtuála tastatur sirdá geahččanbáikki (omd. neahttabreahtain, guoskkahanrusttegiin).\n- Go virtuála tastatur lea aktiiva, de `offset` sadjái boahtá `top` nu ahte fierpmádat ii šatta gaska\n- siiddu bajilčállosii mii ii leat čájehuvvon. Standárda `offset` lea `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Aktiverar fast verktygsfält.\n- `number`: Ställer in den fasta översta positionen (px). Använd `-1` ​​för att inaktivera fast verktygsfält.\n- `{top, offset}`: `top` är den fasta positionen när sidhuvudet är synligt.\n- `offset` är den fasta positionen när ett virtuellt tangentbord flyttar visningsområdet (t.ex. på surfplattor, pekskärmar).\n- När det virtuella tangentbordet är aktivt ersätter `offset` `top` så att verktygsfältet inte lämnar ett mellanrum\n- för en sidhuvud som har rullats ur sikte. Standardinställningen `offset` är `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
     "default": "0"
   },
   "toolbar_hide": {
-    "description": "Álggos čiegada fierpmádaga.",
+    "description": "Döljer verktygsfältet initialt.",
     "default": "false"
   },
   "subToolbar": {
-    "description": "Oassebargoneavvu konfigureren. Sekundára fierpmádat mii boahtá ovdan teakstaválljemis.",
+    "description": "Konfiguration av underverktygsfält. Ett sekundärt verktygsfält som visas vid textmarkering.",
     "default": "{}"
   },
   "statusbar_container": {
-    "description": "Konteavstta elemeanta stáhtuslinjái."
+    "description": "Containerelement för statusfältet."
   },
   "shortcutsHint": {
-    "description": "Čájeha čujuhusrávvagiid fierpmádagain.",
+    "description": "Visar genvägstips i verktygstips.",
     "default": "true"
   },
   "shortcutsDisable": {
-    "description": "Deaktivere tastaturčujuhusaid.",
+    "description": "Inaktiverar kortkommandon.",
     "default": "false"
   },
   "shortcuts": {
-    "description": "Eaktodáhtolaš tastaturčujuhusat.\n- Nuppit mat álget `_` leat geavaheaddji mearridan iešheanalaš čujuhusat. Juohke árvu lea `[keyCombo, hintLabel]` ​​páraid ráidu.\n- Nuppiid kombinašuvnnat geavahit `c` (Ctrl/Cmd), `s` (Shift) ja `KeyEvent.code` árvvuid mat leat ovttastuvvon `+`:in.\n- Geavat `$~pluginName.method` go galggat gohččut dihto plugin-vuogádaga.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
+    "description": "Anpassade tangentbordsgenvägar.\n- Tangenter som börjar med `_` är användardefinierade anpassade genvägar. Varje värde är en array av `[keyCombo, hintLabel]`-par.\n- Tangentkombinationer använder `c` (Ctrl/Cmd), `s` (Shift) och `KeyEvent.code`-värden sammanfogade med `+`.\n- Använd `$~pluginName.method` för att anropa en specifik plugin-metod.\n```js\n{\nshortcuts: {\nbold: ['c+KeyB', 'B'],\n_h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n}\n}\n```",
     "default": "{}"
   },
   "copyFormatKeepOn": {
-    "description": "Doallá kopierejuvvon sisdoalu hámi.",
+    "description": "Behåller formatet på det kopierade innehållet.",
     "default": "false"
   },
   "autoLinkify": {
-    "description": "Automáhtalaččat rievdada URL:aid hyperliŋkkaide. (`Link` plugin dárbbašuvvo)\n- Default: `Boolean(plugins.link)` ​​— mearriduvvo dan mielde lea go `link`-plugin aktiverejuvvon."
+    "description": "Konverterar automatiskt URL:er till hyperlänkar. (`Link`-plugin krävs)\n- Standard: `Boolean(plugins.link)` ​​— bestäms av om `link`-pluginet är aktiverat."
   },
   "historyStackDelayTime": {
-    "description": "Maŋiduvvon áigi historjástašuvnna ođasmahttimii (ms).",
+    "description": "Fördröjningstid för historikuppdateringar (ms).",
     "default": "400"
   },
   "historyStackSize": {
-    "description": "Eanemusat historjáčállosat juohke root-rámmas. Boarráseamos čállosat hilgojuvvojit go leat badjelmeare.",
+    "description": "Maximalt antal historikposter per rotbildruta. Äldsta poster kasseras när de överskrids.",
     "default": "100"
   },
   "printClass": {
-    "description": "Luohká namma prentemii.",
+    "description": "Klassnamn för utskrift.",
     "default": "\"\""
   },
   "fullScreenOffset": {
-    "description": "Offset biddjojuvvo go beasat olles čájáhusmodusii.",
+    "description": "Offset tillämpas vid ingång till helskärmsläge.",
     "default": "0"
   },
   "previewTemplate": {
-    "description": "Iešheanalaš HTML-málle ovdačájáhusmodealla várás. Geavat `{{ contents }}` sajádatčálli sisdollui.",
+    "description": "Anpassad HTML-mall för förhandsgranskningsläge. Använd `{{ contents }}` som platshållare för redigeringsinnehåll.",
     "default": "null"
   },
   "printTemplate": {
-    "description": "Iešheanalaš HTML-málle prentema modealla várás. Geavat `{{ contents }}` sajádatčálli sisdollui.\n```js\n{ previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n```",
+    "description": "Anpassad HTML-mall för utskriftsläge. Använd `{{ contents }}` som platshållare för redigeringsinnehåll.",
     "default": "null"
   },
   "componentInsertBehavior": {
-    "description": "Dahká vejolažžan automáhtalaččat válljet sisačálihuvvon komponeanttaid.\n- Inline-komponeanttaide: bidjá kursora komponeantta lahka, dahje vállje jus ii leat lahka rádji.\n- Lohkokomponeanttaide: čađaha doaibmabijuid mat vuođđuduvvet `selectMode`:\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege.",
+    "description": "Aktiverar automatiskt val av infogade komponenter.\n- För inline-komponenter: placerar markören nära komponenten, eller väljer om det inte finns något närliggande område.\n- För blockkomponenter: utför beteende baserat på `selectMode`:\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting.",
     "default": "\"auto\""
   },
   "defaultUrlProtocol": {
-    "description": "Default URL-protokolla liŋkkaide.",
+    "description": "Standard-URL-protokoll för länkar.",
     "default": "null"
   },
   "toastMessageTime": {
-    "description": "Áigodat čájehit toast-dieđuid (ms).",
+    "description": "Varaktighet för visning av toastmeddelanden (ms).",
     "default": "{copy: 1500}"
   },
   "freeCodeViewMode": {
-    "description": "Avžžuha friddja koda geahččanmodealla.",
+    "description": "Aktiverar fritt kodvisningsläge.",
     "default": "false"
   },
   "finder_panel": {
-    "description": "Čájeha sisačálihuvvon Find/Replace-panela UI.\n- Finder lea álo ráhkaduvvon siskkáldasat; dát válljenvejolašvuohta stivre leago panela oidnosis geavaheddjiide (Ctrl+F / Ctrl+H).",
+    "description": "Visar det inbyggda användargränssnittet för panelen Sök/Ersätt.\n- Sökaren skapas alltid internt; det här alternativet styr om panelen är synlig för användare (Ctrl+F / Ctrl+H).",
     "default": "true"
   },
   "finder_liveSearch": {
-    "description": "Ohcá dakkaviđe go čálát (heivehuvvon). Go lea boastut, de ohcan čađahuvvo dušše Enter bokte.",
+    "description": "Söker direkt medan du skriver (avbounced). Vid falskt värde körs sökningen endast med Enter.",
     "default": "true"
   },
   "externalLibs": {
-    "description": "Olggobeale girjerádjosat nugo CodeMirror, KaTeX dahje MathJax.\n- Geahča {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "Externa bibliotek som CodeMirror, KaTeX eller MathJax.\n- Se {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Guide för externa bibliotek}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
-    "description": "Deattuha lassi dohkkehuvvon dahje ii dohkkehuvvon merkemiid. `true` dohkkehit, `false` ​​ii dohkkehit.\n- Standárda čuovvu {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
+    "description": "Anger extra tillåtna eller otillåtna taggar. `true` för att tillåta, `false` ​​för att inte tillåta.\n- Standardinställningen följer {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
     "default": "CONSTANTS.EXTRA_TAG_MAP"
   },
   "events": {
-    "description": "Geavaheaddji dáhpáhusaid gieđahalli konfigurašuvdna.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
+    "description": "Konfiguration av användarhändelsehanterare.\n```js\n{\nevents: {\nonChange: (content) => console.log(content),\nonImageUploadBefore: (files, info) => true\n}\n}\n```"
   },
   "buttons": {
-    "description": "Dál geavahuvvon fierpmádatčuoggáid listu"
+    "description": "Lista över knappar i verktygsfältet som för närvarande används"
   },
   "buttons_sub": {
-    "description": "Dál geavahuvvon vuollebargoneavvuid listu"
+    "description": "Lista över knappar i underverktygsfältet som för närvarande används"
   },
   "toolbar_sub_width": {
-    "description": "Oassebargoneavvu viidodat."
+    "description": "Bredd på underverktygsfältet."
   },
   "reverseCommands": {
-    "description": "Ovttastuvvon nuppástuhttin gohččunpáraid ráidu.\n- Sisdoallá standárda `indent-outdent` + geavaheaddji `reverseButtons`."
+    "description": "Sammanfogad array med omvända kommandonpar.\n- Inkluderar standard `indent-outdent` + användarens `reverseButtons`."
   },
   "codeMirror": {
-    "description": "CodeMirror konfigurašuvdnaobjeakta `externalLibs.codeMirror`:s."
+    "description": "CodeMirror-konfigurationsobjekt från `externalLibs.codeMirror`."
   },
   "hasCodeMirror": {
-    "description": "Geavaha CodeMirror kodačájáhussii."
+    "description": "Använder CodeMirror för kodvy."
   },
   "audioGallery_data": {
-    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+    "description": "Direktdata utan serveranrop"
   },
   "audioGallery_url": {
-    "description": "Bálvaleaddji jearaldaga URL"
+    "description": "Serverförfrågans URL\n- Servern måste returnera:"
   },
   "audioGallery_headers": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "audioGallery_thumbnail": {
-    "description": "Dábálaš smávvagovva"
+    "description": "Standardminiatyrbild"
   },
   "fileBrowser_data": {
-    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga (URL-čujuhusaid viežžama birra)."
+    "description": "Direkta data utan serveranrop (kringgår URL-hämtning)."
   },
   "fileBrowser_url": {
-    "description": "Bálvaleaddji jearaldaga URL"
+    "description": "Serverförfrågan-URL\n- Servern måste returnera en kapslad mappstruktur.\n- `_data`: array (inline) eller sträng-URL (laddas in automatiskt vid mappklick).\n- `\"default\": true` ​​anger den ursprungligen valda mappen."
   },
   "fileBrowser_headers": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "fileBrowser_thumbnail": {
-    "description": "Dábálaš smávvagovva-URL dahje funkšuvdna mii máhcaha smávvagovva-URL juohke áššis."
+    "description": "Standardminiatyr-URL eller en funktion som returnerar en miniatyr-URL per objekt."
+  },
+  "fileBrowser_expand": {
+    "description": "Ursprungligt mapputökningsdjup. `1` expanderar den första nivån, `Infinity` ​​expanderar allt. Standard: `1`."
   },
   "fileBrowser_props": {
-    "description": "Lassi mearkanamat"
+    "description": "Ytterligare taggnamn"
   },
   "fileGallery_data": {
-    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+    "description": "Direktdata utan serveranrop"
   },
   "fileGallery_url": {
-    "description": "Bálvaleaddji jearaldaga URL"
+    "description": "Serverförfrågans URL\n- Servern måste returnera:"
   },
   "fileGallery_headers": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "fileGallery_thumbnail": {
-    "description": "Dábálaš smávvagovva"
+    "description": "Standardminiatyrbild"
   },
   "imageGallery_data": {
-    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+    "description": "Direktdata utan serveranrop"
   },
   "imageGallery_url": {
-    "description": "Bálvaleaddji jearaldaga URL"
+    "description": "Serverförfrågans URL\n- Servern måste returnera:"
   },
   "imageGallery_headers": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "videoGallery_data": {
-    "description": "Njuolggo dieđut bálvaleaddji riŋgemiid haga"
+    "description": "Direktdata utan serveranrop"
   },
   "videoGallery_url": {
-    "description": "Bálvaleaddji jearaldaga URL"
+    "description": "Serverförfrågans URL\n- Servern måste returnera:"
   },
   "videoGallery_headers": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "videoGallery_thumbnail": {
-    "description": "Dábálaš smávvagovva"
+    "description": "Standardminiatyrbild"
   },
   "codeBlock_langs": {
-    "description": "Listu válljejuvvon prográmmagielain kodalohkui.\n- Defaultat leat 21 dábálaš giela\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Bija empty-array `[]` vai giellaválljen UI áibbas deaktiverejuvvo."
+    "description": "Lista över valbara programmeringsspråk för kodblock.\n- Standardinställningen är 21 vanliga språk\n- [javascript, typescript, html, css, json, python, java, c, cpp, csharp, go, rust, ruby, php, swift, kotlin, sql, bash, markdown, xml, yaml].\n- Ställ in arrayen `[]` till en tom kod för att helt inaktivera språkvalsgränssnittet."
   },
   "exportPDF_apiUrl": {
-    "description": "Bálvaleaddji jearaldaga URL PDF-buvttadeapmái"
+    "description": "Serverförfrågnings-URL för PDF-generering"
   },
   "exportPDF_fileName": {
-    "description": "Ráhkaduvvon PDF-fiilla namma"
+    "description": "Namn på den genererade PDF-filen"
   },
   "fileUpload_uploadUrl": {
-    "description": "Bálvaleaddji gáibádusa URL fiillaid lasiheapmái"
+    "description": "Serverförfrågan-URL för filuppladdning\n- Servern måste returnera:"
   },
   "fileUpload_uploadHeaders": {
-    "description": "Bálvaleaddji jearaldagat"
+    "description": "Serverförfrågningsrubriker"
   },
   "fileUpload_uploadSizeLimit": {
-    "description": "Oktiibuot lasiheami sturrodaga rádji bytein"
+    "description": "Total uppladdningsstorleksgräns i byte"
   },
   "fileUpload_uploadSingleSizeLimit": {
-    "description": "Okta fiilla sturrodatrádji bytein"
+    "description": "Storleksgräns för enskilda filer i byte"
   },
   "fileUpload_allowMultiple": {
-    "description": "Dohkkehit máŋga fiilla lasiheami"
+    "description": "Tillåt uppladdning av flera filer"
   },
   "fileUpload_acceptedFormats": {
-    "description": "Dohkkehuvvon fiilahámit."
+    "description": "Godkända filformat."
   },
   "fileUpload_as": {
-    "description": "Deattuhit fiillaoasi standárdahámi `box` dahje `link`"
+    "description": "Ange standardformatet för filkomponenten som `box` eller `link`"
   },
   "fileUpload_controls": {
-    "description": "Lassi stivremat galget lasihuvvot govus"
+    "description": "Ytterligare kontroller som ska läggas till i figuren"
   },
   "fileUpload_insertBehavior": {
-    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+    "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   },
   "align_items": {
-    "description": "Heivehit áššiid"
+    "description": "Justera objekt"
   },
   "backgroundColor_items": {
-    "description": "Ivdnelistu."
+    "description": "Färglista."
   },
   "backgroundColor_splitNum": {
-    "description": "Ivnniid lohku juohke linjjás"
+    "description": "Antal färger per rad"
   },
   "backgroundColor_disableHEXInput": {
-    "description": "Heaittihit HEX-sisaboađu"
+    "description": "Inaktivera HEX-inmatning"
   },
   "blockStyle_items": {
-    "description": "Formáhtalisttu.\n- `command` — `\"line\"`: ovtta linjá lohku, `\"br-line\"`: br-sirrejuvvon lohku, `\"block\"`: gálvojoavku."
+    "description": "Formatlista.\n- `command` — `\"line\"`: block med en rad, `\"br-line\"`: block med br-separation, `\"block\"`: containerblock."
   },
   "font_items": {
-    "description": "Čállinlisttu"
+    "description": "Typsnittslista"
   },
   "fontColor_items": {
-    "description": "Ivdnelistu."
+    "description": "Färglista."
   },
   "fontColor_splitNum": {
-    "description": "Ivnniid lohku juohke linjjás"
+    "description": "Antal färger per rad"
   },
   "fontColor_disableHEXInput": {
-    "description": "Heaittihit HEX-sisaboađu"
+    "description": "Inaktivera HEX-inmatning"
   },
   "hR_items": {
-    "description": "HR-listu"
+    "description": "HR-lista"
   },
   "layout_items": {
-    "description": "Layout-listu. Juohke ávnnas definere nammaduvvon layout-málle mas lea ráfálaš HTML."
+    "description": "Layoutlista. Varje objekt definierar en namngiven layoutmall med rå HTML."
   },
   "lineHeight_items": {
-    "description": "Linjá govdodatlisttu"
+    "description": "Linjehöjdslista"
   },
   "paragraphStyle_items": {
-    "description": "Paragráfa áššiid listu"
+    "description": "Lista över styckeobjekt"
   },
   "table_scrollType": {
-    "description": "Rullašládja (`x`, `y`, `xy`)"
+    "description": "Rullningstyp (`x`, `y`, `xy`)"
   },
   "table_captionPosition": {
-    "description": "Teavstta sadji (`top`, `bottom`)"
+    "description": "Bildtextens position (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Seallastivrejeaddji sadji (`cell`, `table`)"
+    "description": "Cellkontrollens position (`cell`, `table`)"
   },
   "table_colorList": {
-    "description": "HEX-ivdnelistu seallaid duogášivdneválljejeaddji várás."
+    "description": "HEX-färglista för väljaren av cellbakgrundsfärg."
   },
   "template_items": {
-    "description": "Mállelistu"
+    "description": "Malllista"
   },
   "textStyle_items": {
-    "description": "Teakstastiila áššelistu."
+    "description": "Lista över textstilobjekt."
   },
   "mention_triggerText": {
-    "description": "Mearka mii álggaha namuhanlisttu."
+    "description": "Tecknet som utlöser omnämnandelistan."
   },
   "mention_limitSize": {
-    "description": "Man ollu áššit galget čájehuvvot namuhanlisttus"
+    "description": "Antalet objekt som ska visas i omnämnandelistan"
   },
   "mention_searchStartLength": {
-    "description": "Man ollu mearkkaid galgá álgit ohcat namuhanlisttus"
+    "description": "Antalet tecken som ska börja söka efter omnämnandelistan"
   },
   "mention_delayTime": {
-    "description": "Áigi vuordit ovdal go čájehuvvo namuhanlisttu"
+    "description": "Väntetiden innan listan med omnämnanden visas"
   },
   "mention_data": {
-    "description": "Statihkalaš namuhandieđut (geavahuvvojit API sadjái)."
+    "description": "Statisk omnämnandedata (används istället för API)."
   },
   "mention_apiUrl": {
-    "description": "URL-čujuhus man bokte gohččut namuhanlisttu"
+    "description": "URL:en för att anropa omnämnandelistan"
   },
   "mention_apiHeaders": {
-    "description": "Oaivvit mat galget sáddejuvvot API-čujuhusain"
+    "description": "Rubrikerna som ska skickas med API-anropet"
   },
   "mention_useCachingData": {
-    "description": "Galgá go vurket namuhanlisttu dieđuid"
+    "description": "Huruvida data från omnämnandelistor ska cachelagras"
   },
   "mention_useCachingFieldData": {
-    "description": "Galgá go vurket namuhanlisttu dieđuid suorgái"
+    "description": "Huruvida omnämnandelistdata ska cachelagras i fältet"
   },
   "fontSize_sizeUnit": {
-    "description": "Čállinmeari sturrodaga ovttadat.\n- Dohkkehuvvon árvvut leat: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` dahje `'text'`.\n- Jus geavahuvvo `'text'`, de biddjojuvvo teakstavuođđuduvvon čállinsturrodatlisttu."
+    "description": "Enheten för teckenstorleken.\n- Godkända värden inkluderar: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` eller `'text'`.\n- Om `'text'` används tillämpas en textbaserad lista över teckenstorlekar."
   },
   "fontSize_showDefaultSizeLabel": {
-    "description": "Mearrida čájehuvvo go standárdasturrodatmerkejuvvon čujuhuslisttus."
+    "description": "Avgör om standardstorleksetiketten visas i rullgardinsmenyn."
   },
   "fontSize_showIncDecControls": {
-    "description": "Go `true`, de čájehuvvo lasihit ja unnidit čuoggáid čállinmeari heiveheapmái.\n- Álgoálggus lea `false`. Álo `false` go `sizeUnit` lea `'text'` (ii váldojuvvon vuhtii)."
+    "description": "När `true` visas knappar för att öka och minska teckenstorleken.\n- Standardinställningen är `false`. Alltid `false` när `sizeUnit` är `'text'` (ignoreras)."
   },
   "fontSize_disableInput": {
-    "description": "Go `true`, de deaktivere njuolggo čállinsturrodaga sisačállinboksa.\n- Default lea `true` ​​go `sizeUnit` lea `'text'`, muđui `false`."
+    "description": "När `true` är inaktiveras rutan för direkt inmatning av teckenstorlek.\n- Standardinställningen är `true` ​​när `sizeUnit` är `'text'`, annars `false`."
   },
   "fontSize_unitMap": {
-    "description": "Váldde eret dahje viiddidit standárda ovttadatkártema čállinmeari sturrodagaide."
+    "description": "Åsidosätt eller utöka standardenhetsmappningen för teckenstorlekar."
   },
   "audio_defaultWidth": {
-    "description": "`AUDIO`-mearkka standárdaviidodat."
+    "description": "Standardbredden för `AUDIO`-taggen."
   },
   "audio_defaultHeight": {
-    "description": "`AUDIO`-mearkka standárda govdodat."
+    "description": "Standardhöjden för `AUDIO`-taggen."
   },
   "audio_createFileInput": {
-    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta."
+    "description": "Huruvida ett filinmatningselement ska skapas."
   },
   "audio_createUrlInput": {
-    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+    "description": "Huruvida ett URL-inmatningselement ska skapas.\n- Standardvärdet är `true`. Alltid `true` ​​när `createFileInput` är `false`."
   },
   "audio_uploadUrl": {
-    "description": "URL masa fiillat biddjojuvvojit."
+    "description": "URL:en dit filerna ska laddas upp.\n- Servern måste returnera:"
   },
   "audio_uploadHeaders": {
-    "description": "Oaiveskálžžut mat galget leat mielde fiillaid lasiheami gáibádusas."
+    "description": "Rubriker som ska inkluderas i filuppladdningsbegäran."
   },
   "audio_uploadSizeLimit": {
-    "description": "Ollislaš lasiheami sturrodatrádji bytein."
+    "description": "Den totala uppladdningsstorleksgränsen i byte."
   },
   "audio_uploadSingleSizeLimit": {
-    "description": "Ovtta fiilla sturrodaga rádji bytein."
+    "description": "Storleksgränsen för en enskild fil i byte."
   },
   "audio_allowMultiple": {
-    "description": "Galgá go dohkkehit máŋggaid fiillaid lasiheami."
+    "description": "Om flera filuppladdningar ska tillåtas."
   },
   "audio_acceptedFormats": {
-    "description": "Dohkkehuvvon fiilahámit (standárda lea `\"audio/*\"`)."
+    "description": "Godkända filformat (standard är `\"audio/*\"`)."
   },
   "audio_audioTagAttributes": {
-    "description": "Lassi attributtat maid galggat bidjat `AUDIO`-merkemii."
+    "description": "Ytterligare attribut att ställa in på `AUDIO`-taggen."
   },
   "audio_insertBehavior": {
-    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+    "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   },
   "drawing_outputFormat": {
-    "description": "Govvaráiddu olggosbuktinhápmi. Válljemat: `\"dataurl\"`, `\"svg\"`."
+    "description": "Ritningens utdataformat. Alternativ: `\"dataurl\"`, `\"svg\"`."
   },
   "drawing_useFormatType": {
-    "description": "Galgá go álggahit formáhttaválljema (`block` vs `inline`)."
+    "description": "Huruvida val av formattyp ska aktiveras (`block` vs `inline`)."
   },
   "drawing_defaultFormatType": {
-    "description": "Standárdahápmi, juogo `\"block\"` dahje `\"inline\"`."
+    "description": "Standardformattypen, antingen `\"block\"` eller `\"inline\"`."
   },
   "drawing_keepFormatType": {
-    "description": "Galgá go doalahit válljejuvvon hápmi maŋŋel govvema."
+    "description": "Om den valda formattypen ska behållas efter ritningen."
   },
   "drawing_lineWidth": {
-    "description": "Govvenlinjjá viidodat."
+    "description": "Bredden på ritlinjen."
   },
   "drawing_lineReconnect": {
-    "description": "Galgá go fas čatnat linjjáid go govve."
+    "description": "Om linjer ska återanslutas vid ritning."
   },
   "drawing_lineCap": {
-    "description": "Linjáhámi stiila (`\"butt\"`, `\"round\"`, dahje `\"square\"`)."
+    "description": "Stilen på linjekapseln (`\"butt\"`, `\"round\"` ​​eller `\"square\"`)."
   },
   "drawing_lineColor": {
-    "description": "Govvenlinjjá ivdni."
+    "description": "Färgen på ritlinjen."
   },
   "drawing_canResize": {
-    "description": "Sáhttá go modála hámi sturrodat rievdaduvvot."
+    "description": "Om modalformen kan ändras i storlek."
   },
   "drawing_maintainRatio": {
-    "description": "Galgá go doalahit govvenproporšuvnna go rievdada sturrodaga."
+    "description": "Om bildförhållandet ska bibehållas vid storleksändring."
   },
   "drawing_formSize": {
-    "description": "Govvenmodala hámi sturrodatkonfigurašuvdna."
+    "description": "Storlekskonfigurationen för ritningsmodalformuläret."
   },
   "embed_canResize": {
-    "description": "Sáhttá go sisabahkkenelemeantta sturrodat rievdaduvvot."
+    "description": "Om storleken på inbäddningselementet kan ändras."
   },
   "embed_showHeightInput": {
-    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+    "description": "Om inmatningsfältet för höjd ska visas."
   },
   "embed_defaultWidth": {
-    "description": "Sisáibmoelemeantta standárdaviidodat (numerála árvu dahje ovttadagain)."
+    "description": "Standardbredden för inbäddningselementet (numeriskt värde eller med enhet)."
   },
   "embed_defaultHeight": {
-    "description": "Sisáibmoelemeantta standárda govdodat (numerála árvu dahje ovttadagain)."
+    "description": "Standardhöjden för inbäddningselementet (numeriskt värde eller med enhet)."
   },
   "embed_percentageOnlySize": {
-    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+    "description": "Om endast procentbaserad storleksjustering ska tillåtas."
   },
   "embed_uploadUrl": {
-    "description": "URL-čujuhus fiillaid lasiheapmái."
+    "description": "URL:en för filuppladdningar.\n- Servern måste returnera:"
   },
   "embed_uploadHeaders": {
-    "description": "Oaivvit mat galget leat mielde fiillaid lasiheami jearaldagain."
+    "description": "Rubriker som ska inkluderas i filuppladdningsförfrågningar."
   },
   "embed_uploadSizeLimit": {
-    "description": "Ollislaš fiillaid lasiheami sturrodat rádji bytein."
+    "description": "Den totala storleksgränsen för filuppladdning i byte."
   },
   "embed_uploadSingleSizeLimit": {
-    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+    "description": "Storleksgränsen för uppladdning av enskilda filer i byte."
   },
   "embed_iframeTagAttributes": {
-    "description": "Lassi attributtat maid galggat bidjat `IFRAME`-merkemii."
+    "description": "Ytterligare attribut att ställa in på `IFRAME`-taggen."
   },
   "embed_query_youtube": {
-    "description": "YouTube-jearahallanparamehter lea lasihuvvon sisačálihan-URL:ii."
+    "description": "YouTube-frågeparameter tillagd till inbäddnings-URL:en."
   },
   "embed_query_vimeo": {
-    "description": "Vimeo jearahallanparamehter lea lasihuvvon sisačálihan-URL:ii."
+    "description": "Vimeo-frågeparametern har lagts till i den inbäddade URL:en."
   },
   "embed_urlPatterns": {
-    "description": "Lassi URL-mállet maid sáhttá dovdat sisačálihuvvon sisdoallun."
+    "description": "Ytterligare URL-mönster att känna igen som inbäddningsbart innehåll."
   },
   "embed_embedQuery": {
-    "description": "Eaktodáhtolaš sisačálihanbálvalusa definišuvnnat."
+    "description": "Definitioner av anpassade inbäddningstjänster."
   },
   "embed_controls": {
-    "description": "Govus stivremat."
+    "description": "Figurkontroller."
   },
   "embed_insertBehavior": {
-    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+    "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   },
   "image_canResize": {
-    "description": "Sáhttá go govvaelemeantta sturrodat rievdaduvvot."
+    "description": "Om bildelementet kan ändras i storlek."
   },
   "image_showHeightInput": {
-    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+    "description": "Om inmatningsfältet för höjd ska visas."
   },
   "image_defaultWidth": {
-    "description": "Govva standárdaviidodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+    "description": "Bildens standardbredd. Om ett tal anges kommer `\"px\"` att läggas till."
   },
   "image_defaultHeight": {
-    "description": "Govva standárda govdodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+    "description": "Bildens standardhöjd. Om ett tal anges kommer `\"px\"` att läggas till."
   },
   "image_percentageOnlySize": {
-    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+    "description": "Om endast procentbaserad storleksjustering ska tillåtas."
   },
   "image_createFileInput": {
-    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta govaid lasiheapmái."
+    "description": "Huruvida ett filinjematningselement ska skapas för bilduppladdningar."
   },
   "image_createUrlInput": {
-    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta gova sisačáliheapmái.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+    "description": "Huruvida ett URL-inmatningselement för bildinsättning ska skapas.\n- Standardinställningen är `true`. Alltid `true` ​​när `createFileInput` är `false`."
   },
   "image_uploadUrl": {
-    "description": "URL-loahppačuokkis govvafiillaid lasiheapmái."
+    "description": "URL-slutpunkten för uppladdning av bildfiler.\n- Servern måste returnera:"
   },
   "image_uploadHeaders": {
-    "description": "Lassi čállosat mat galget leat mielde fiillaid lasiheami gáibádusas."
+    "description": "Ytterligare rubriker att inkludera i filuppladdningsbegäran."
   },
   "image_uploadSizeLimit": {
-    "description": "Ollislaš lasiheami sturrodatrádji bytein."
+    "description": "Den totala uppladdningsstorleksgränsen i byte."
   },
   "image_uploadSingleSizeLimit": {
-    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+    "description": "Storleksgränsen för uppladdning av enskilda filer i byte."
   },
   "image_allowMultiple": {
-    "description": "Leago lohpi lasihit máŋga gova."
+    "description": "Om flera bilduppladdningar är tillåtna."
   },
   "image_acceptedFormats": {
-    "description": "Dohkkehuvvon fiilahámit govaid lasiheapmái."
+    "description": "Godkända filformat för bilduppladdningar."
   },
   "image_useFormatType": {
-    "description": "Galgá go álggahit formáhttaválljema (`block` dahje `inline`)."
+    "description": "Huruvida val av formattyp ska aktiveras (`block` eller `inline`)."
   },
   "image_defaultFormatType": {
-    "description": "Dábálaš govvahápmi (`\"block\"` dahje `\"inline\"`)."
+    "description": "Standardbildformattypen (`\"block\"` eller `\"inline\"`)."
   },
   "image_keepFormatType": {
-    "description": "Galgá go doalahit válljejuvvon formáhttašlája maŋŋel gova sisabidjama."
+    "description": "Om den valda formattypen ska behållas efter bildinsättning."
   },
   "image_linkEnableFileUpload": {
-    "description": "Galgá go álggahit fiillaid lasiheami čadnojuvvon govaide."
+    "description": "Huruvida filuppladdningar ska aktiveras för länkade bilder."
   },
   "image_controls": {
-    "description": "Govus stivremat."
+    "description": "Figurkontroller."
   },
   "image_insertBehavior": {
-    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- Inline-komponeanttaide: bidjá kursora komponeantta lahka, dahje vállje jus ii leat lahka rádji.\n- Lohkokomponeanttaide: čađaha doaibmabijuid mat vuođđuduvvet `selectMode`:\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdde dohko.\n- `none`: Ale daga maidege."
+    "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- För inline-komponenter: placerar markören nära komponenten, eller väljer om inget närliggande område finns.\n- För blockkomponenter: utför beteende baserat på `selectMode`:\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   },
   "link_uploadUrl": {
-    "description": "URL-loahppačuokkis fiillaid lasiheapmái."
+    "description": "URL-slutpunkten för filuppladdningar.\n- Servern måste returnera:"
   },
   "link_uploadHeaders": {
-    "description": "Lassi čállosat fiillaid lasiheami jearaldagaide."
+    "description": "Ytterligare rubriker för filuppladdningsförfrågningar."
   },
   "link_uploadSizeLimit": {
-    "description": "Ollislaš fiillaid lasiheami sturrodat rádji bytein."
+    "description": "Den totala storleksgränsen för filuppladdning i byte."
   },
   "link_uploadSingleSizeLimit": {
-    "description": "Ovtta fiilla lasiheami sturrodaga rádji bytein."
+    "description": "Storleksgränsen för uppladdning av enskilda filer i byte."
   },
   "link_acceptedFormats": {
-    "description": "Dohkkehuvvon fiilahámit liŋkkaid lasiheapmái."
+    "description": "Godkända filformat för länkuppladdningar."
   },
   "link_title": {
-    "description": "Modala nammačájáhus."
+    "description": "Modal titelvisning."
   },
   "link_textToDisplay": {
-    "description": "Luohte teavstta čájehit sisačáliheami."
+    "description": "Skapa text för att visa inmatning."
   },
   "link_openNewWindow": {
-    "description": "\"Rahpat ođđa uvssas\" merkenboksa standárdamerkejuvvon árvu."
+    "description": "Standardvärde för kryssrutan \"Öppna i nytt fönster\"."
   },
   "link_noAutoPrefix": {
-    "description": "Jus `true`, de deaktivere automáhtalaččat ovdačujuhusa vuostáiváldi URL:ii liŋkka árvui."
+    "description": "Om `true` inaktiveras det automatiska prefixet för värd-URL:en till länkens värde."
   },
   "link_relList": {
-    "description": "Gávdnomis `rel`-attribuhtaárvvut čájehuvvojit merkenboksain liŋkkamodalas."
+    "description": "Tillgängliga `rel`-attributvärden visas som kryssrutor i länkmodalen."
   },
   "link_defaultRel": {
-    "description": "Standárda `rel` árvvut heivehuvvojit automáhtalaččat eavttuid mielde."
+    "description": "Standardvärden `rel` tillämpas automatiskt efter villkor."
   },
   "link_enableFileUpload": {
-    "description": "Jus `true`, de álggaha fiillaid lasiheami."
+    "description": "Om `true` aktiveras filuppladdning."
   },
   "math_canResize": {
-    "description": "Sáhttá go matematihkkamodala rievdadit sturrodaga."
+    "description": "Om den matematiska modalen kan ändras i storlek."
   },
   "math_autoHeight": {
-    "description": "Galgá go automáhtalaččat heivehit modála govdodaga."
+    "description": "Om höjden på modalen ska justeras automatiskt."
   },
   "math_fontSizeList": {
-    "description": "Listu čállinmeari sturrodaga válljemiin matematihka ovdanbuktima sturrodaga válljemii."
+    "description": "En lista med alternativ för teckenstorlek för väljaren för matematiska uttryck."
   },
   "math_onPaste": {
-    "description": "Ruovttoluottačujuhusfunkšuvdna mii gieđahallá liibmendáhpáhusaid matematihka sisačálihanguovllus."
+    "description": "En återuppringningsfunktion för att hantera inklistringshändelser i matematiskt inmatningsområde."
   },
   "math_formSize": {
-    "description": "Objekta mii meroštallá matematihkkamodala dimenšuvnnaid."
+    "description": "Ett objekt som anger dimensionerna för den matematiska modalen."
   },
   "video_canResize": {
-    "description": "Sáhttá go videoelemeantta sturrodat rievdaduvvot."
+    "description": "Om videoelementet kan ändras i storlek."
   },
   "video_showHeightInput": {
-    "description": "Galgá go čájehit govdodaga sisačálihansuorggi."
+    "description": "Om inmatningsfältet för höjd ska visas."
   },
   "video_defaultWidth": {
-    "description": "Videoelemeantta standárdaviidodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+    "description": "Standardbredden för videoelementet. Om ett tal anges kommer `\"px\"` att läggas till."
   },
   "video_defaultHeight": {
-    "description": "Videoelemeantta standárda govdodat. Jus lea addojuvvon nummir, de lasihuvvo `\"px\"`."
+    "description": "Standardhöjden för videoelementet. Om ett tal anges kommer `\"px\"` att läggas till."
   },
   "video_percentageOnlySize": {
-    "description": "Galgá go dohkkehit dušše proseantavuođđuduvvon sturrodaga."
+    "description": "Om endast procentbaserad storleksjustering ska tillåtas."
   },
   "video_createFileInput": {
-    "description": "Galgá go ráhkadit fiilla sisačálihanelemeantta videoid lasiheapmái."
+    "description": "Huruvida ett filinjematningselement ska skapas för videouppladdningar."
   },
   "video_createUrlInput": {
-    "description": "Galgá go ráhkadit URL-sisdoalloelemeantta video sisabahkkemii.\n- Álgoálggus lea `true`. Álo `true` ​​go `createFileInput` lea `false`."
+    "description": "Huruvida ett URL-inmatningselement för videoinbäddning ska skapas.\n- Standardinställningen är `true`. Alltid `true` ​​när `createFileInput` är `false`."
   },
   "video_uploadUrl": {
-    "description": "URL-loahppačuokkis videofiillaid lasiheapmái."
+    "description": "URL-slutpunkten för uppladdning av videofiler.\n- Servern måste returnera:"
   },
   "video_uploadHeaders": {
-    "description": "Lassi čállosat mat galget leat mielde videoid lasiheami gáibádusas."
+    "description": "Ytterligare rubriker att inkludera i begäran om videouppladdning."
   },
   "video_uploadSizeLimit": {
-    "description": "Videoid ollislaš lasiheami sturrodat rádji bytein."
+    "description": "Den totala uppladdningsstorleksgränsen för videor i byte."
   },
   "video_uploadSingleSizeLimit": {
-    "description": "Ovtta fiilla lasiheami sturrodatrádji videoide bytein."
+    "description": "Storleksgränsen för uppladdning av enskilda filer för videor i byte."
   },
   "video_allowMultiple": {
-    "description": "Leago lohpi bidjat máŋga video."
+    "description": "Om flera videouppladdningar är tillåtna."
   },
   "video_acceptedFormats": {
-    "description": "Dohkkehuvvon fiilahámit videoid lasiheapmái (`\"video/*\"`)."
+    "description": "Godkända filformat för videouppladdningar (`\"video/*\"`)."
   },
   "video_defaultRatio": {
-    "description": "Video standárdagovva (govdodat/viidodat, omd. 16:9 → `9/16 = 0.5625`)."
+    "description": "Standardbildförhållandet för videon (höjd/bredd, t.ex. 16:9 → `9/16 = 0.5625`)."
   },
   "video_showRatioOption": {
-    "description": "Galgá go čájehit ratio-válljema modálas."
+    "description": "Huruvida förhållandealternativet ska visas i modalfönstret."
   },
   "video_ratioOptions": {
-    "description": "Eaktodáhtolaš gaskavuođaválljemat video sturrodaga rievdadeapmái (árvu = govdodat/viidodat)."
+    "description": "Anpassade förhållandealternativ för att ändra videostorlek (värde = höjd/bredd)."
   },
   "video_videoTagAttributes": {
-    "description": "Lassi attributtat maid galggat bidjat `VIDEO`-merkemii."
+    "description": "Ytterligare attribut att ställa in på `VIDEO`-taggen."
   },
   "video_iframeTagAttributes": {
-    "description": "Lassi attributtat maid galggat bidjat `IFRAME`-merkemii."
+    "description": "Ytterligare attribut att ställa in på `IFRAME`-taggen."
   },
   "video_query_youtube": {
-    "description": "Lassi jearahallanparamehterat YouTube-bidjamii."
+    "description": "Ytterligare frågeparametrar för YouTube-inbäddning."
   },
   "video_query_vimeo": {
-    "description": "Lassi jearahallanparamehterat Vimeo sisabahkkemii."
+    "description": "Ytterligare frågeparametrar för Vimeo-inbäddning."
   },
   "video_embedQuery": {
-    "description": "Eaktodáhtolaš sisačálihanbálvalusa definišuvnnat (gč. `EmbedPluginOptions.embedQuery`)."
+    "description": "Definitioner för anpassade inbäddningstjänster (se `EmbedPluginOptions.embedQuery`)."
   },
   "video_urlPatterns": {
-    "description": "Lassi URL-mállet videoid sisabahkkemii."
+    "description": "Ytterligare URL-mönster för videoinbäddning."
   },
   "video_extensions": {
-    "description": "Lassi fiillaviiddideamit galget dohkkehuvvot videoid lasiheami várás."
+    "description": "Ytterligare filändelser som ska kännas igen för videouppladdningar."
   },
   "video_controls": {
-    "description": "Govus stivremat."
+    "description": "Figurkontroller."
   },
   "video_insertBehavior": {
-    "description": "Komponeanttaid sisačáliheapmi válljemii ja kursora bidjama várás.\n- [standárda: `options.get('componentInsertBehavior')`]\n- `auto`: Sirdde kursora boahtte linjái jus lea vejolaš, muđui vállje komponeantta.\n- `select`: Vállje álo sisačálihuvvon komponeantta.\n- `line`: Sirdde kursora boahtte linjái jus lea vejolaš, dahje ráhkada ođđa linjá ja sirdá dohko.\n- `none`: Ale daga maidege."
+    "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   }
 }

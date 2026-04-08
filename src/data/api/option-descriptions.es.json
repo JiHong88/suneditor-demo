@@ -360,7 +360,7 @@
     "description": "Datos directos sin llamadas al servidor."
   },
   "audioGallery_url": {
-    "description": "URL de solicitud del servidor"
+    "description": "URL de la solicitud al servidor\n- El servidor debe devolver:"
   },
   "audioGallery_headers": {
     "description": "Encabezados de solicitud del servidor"
@@ -372,13 +372,16 @@
     "description": "Acceso directo a los datos sin necesidad de llamar al servidor (se omite la obtención de URL)."
   },
   "fileBrowser_url": {
-    "description": "URL de solicitud del servidor"
+    "description": "URL de la solicitud al servidor\n- El servidor debe devolver una estructura de carpetas anidadas.\n- `_data`: URL de matriz (en línea) o cadena (carga diferida al hacer clic en la carpeta).\n- `\"default\": true` ​​establece la carpeta seleccionada inicialmente."
   },
   "fileBrowser_headers": {
     "description": "Encabezados de solicitud del servidor"
   },
   "fileBrowser_thumbnail": {
     "description": "URL de miniatura predeterminada o una función que devuelva una URL de miniatura por cada elemento."
+  },
+  "fileBrowser_expand": {
+    "description": "Profundidad de expansión de la carpeta inicial. `1` expande el primer nivel, `Infinity` ​​expande todos. Predeterminado: `1`."
   },
   "fileBrowser_props": {
     "description": "Nombres de etiquetas adicionales"
@@ -387,7 +390,7 @@
     "description": "Datos directos sin llamadas al servidor."
   },
   "fileGallery_url": {
-    "description": "URL de solicitud del servidor"
+    "description": "URL de la solicitud al servidor\n- El servidor debe devolver:"
   },
   "fileGallery_headers": {
     "description": "Encabezados de solicitud del servidor"
@@ -399,7 +402,7 @@
     "description": "Datos directos sin llamadas al servidor."
   },
   "imageGallery_url": {
-    "description": "URL de solicitud del servidor"
+    "description": "URL de la solicitud al servidor\n- El servidor debe devolver:"
   },
   "imageGallery_headers": {
     "description": "Encabezados de solicitud del servidor"
@@ -408,7 +411,7 @@
     "description": "Datos directos sin llamadas al servidor."
   },
   "videoGallery_url": {
-    "description": "URL de solicitud del servidor"
+    "description": "URL de la solicitud al servidor\n- El servidor debe devolver:"
   },
   "videoGallery_headers": {
     "description": "Encabezados de solicitud del servidor"
@@ -426,7 +429,7 @@
     "description": "Nombre del archivo PDF generado"
   },
   "fileUpload_uploadUrl": {
-    "description": "URL de solicitud del servidor para la carga de archivos"
+    "description": "URL de solicitud del servidor para la carga de archivos\n- El servidor debe devolver:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Encabezados de solicitud del servidor"
@@ -564,7 +567,7 @@
     "description": "Indica si se debe crear un elemento de entrada de URL.\n\n- Por defecto es `true`. Siempre es `true` ​​cuando `createFileInput` es `false`."
   },
   "audio_uploadUrl": {
-    "description": "La URL a la que se subirán los archivos."
+    "description": "La URL a la que se subirán los archivos.\n\n- El servidor debe devolver:"
   },
   "audio_uploadHeaders": {
     "description": "Encabezados que deben incluirse en la solicitud de carga de archivos."
@@ -636,7 +639,7 @@
     "description": "Si se debe permitir únicamente el dimensionamiento basado en porcentajes."
   },
   "embed_uploadUrl": {
-    "description": "La URL para subir archivos."
+    "description": "La URL para subir archivos.\n\n- El servidor debe devolver:"
   },
   "embed_uploadHeaders": {
     "description": "Encabezados que deben incluirse en las solicitudes de carga de archivos."
@@ -690,7 +693,7 @@
     "description": "Indica si se debe crear un elemento de entrada URL para insertar imágenes.\n\n- Por defecto, se utiliza `true`. Siempre se utiliza `true` ​​cuando `createFileInput` es `false`."
   },
   "image_uploadUrl": {
-    "description": "El punto final URL para la carga de archivos de imagen."
+    "description": "El punto final URL para la carga de archivos de imagen.\n\n- El servidor debe devolver:"
   },
   "image_uploadHeaders": {
     "description": "Encabezados adicionales que deben incluirse en la solicitud de carga de archivos."
@@ -726,7 +729,7 @@
     "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- Para componentes en línea: coloca el cursor cerca del componente o lo selecciona si no hay un rango cercano.\n\n- Para componentes de bloque: ejecuta el comportamiento según `selectMode`:\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible; o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
   },
   "link_uploadUrl": {
-    "description": "El punto final URL para la carga de archivos."
+    "description": "El punto final URL para la carga de archivos.\n\n- El servidor debe devolver:"
   },
   "link_uploadHeaders": {
     "description": "Encabezados adicionales para las solicitudes de carga de archivos."
@@ -798,7 +801,7 @@
     "description": "Indica si se debe crear un elemento de entrada de URL para la inserción de vídeo.\n\n- Por defecto, se utiliza `true`. Siempre se utiliza `true` ​​cuando `createFileInput` es `false`."
   },
   "video_uploadUrl": {
-    "description": "El punto final URL para la carga de archivos de vídeo."
+    "description": "El punto final URL para la carga de archivos de vídeo.\n\n- El servidor debe devolver:"
   },
   "video_uploadHeaders": {
     "description": "Encabezados adicionales que deben incluirse en la solicitud de carga de vídeo."

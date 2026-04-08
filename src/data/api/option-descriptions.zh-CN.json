@@ -84,7 +84,7 @@
     "default": "false"
   },
   "wordCounter_label": {
-    "description": "显示在底部栏 `wordCounter` 区域的文本。\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
+    "description": "底部栏 `wordCounter` 区域将显示的文本。\n\n```js\n{ wordCounter_label: 'Words :' }\n```",
     "default": "null"
   },
   "top": {
@@ -97,7 +97,7 @@
     "description": "应用于可编辑内容区域的样式。"
   },
   "codeMirrorEditor": {
-    "description": "CodeMirror 编辑器实例（帧级别）。初始化后由 `_checkCodeMirror` 设置。"
+    "description": "CodeMirror 编辑器实例（帧级别）。由 `_checkCodeMirror` 在初始化后设置。"
   },
   "plugins": {
     "description": "插件配置。传递一个插件类数组或一个以插件名称为键的对象。\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
@@ -228,7 +228,7 @@
     "default": "__defaultFormatClosureBlock"
   },
   "closeModalOutsideClick": {
-    "description": "点击外部区域关闭模态框。",
+    "description": "点击外部区域时关闭模态框。",
     "default": "false"
   },
   "syncTabIndent": {
@@ -360,7 +360,7 @@
     "description": "无需服务器调用即可直接传输数据"
   },
   "audioGallery_url": {
-    "description": "服务器请求 URL"
+    "description": "服务器请求 URL\n\n- 服务器必须返回："
   },
   "audioGallery_headers": {
     "description": "服务器请求头"
@@ -372,13 +372,16 @@
     "description": "直接获取数据，无需调用服务器（绕过 URL 获取）。"
   },
   "fileBrowser_url": {
-    "description": "服务器请求 URL"
+    "description": "服务器请求 URL\n\n- 服务器必须返回嵌套文件夹结构。\n\n- `_data`：数组（内联）或字符串 URL（文件夹点击时延迟加载）。\n\n- `\"default\": true` 设置初始选中的文件夹。"
   },
   "fileBrowser_headers": {
     "description": "服务器请求头"
   },
   "fileBrowser_thumbnail": {
     "description": "默认缩略图 URL 或为每个项目返回缩略图 URL 的函数。"
+  },
+  "fileBrowser_expand": {
+    "description": "初始文件夹展开深度。`1` 展开第一级文件夹，`Infinity` 展开所有文件夹。默认值：`1`。"
   },
   "fileBrowser_props": {
     "description": "其他标签名称"
@@ -387,7 +390,7 @@
     "description": "无需服务器调用即可直接传输数据"
   },
   "fileGallery_url": {
-    "description": "服务器请求 URL"
+    "description": "服务器请求 URL\n\n- 服务器必须返回："
   },
   "fileGallery_headers": {
     "description": "服务器请求头"
@@ -399,7 +402,7 @@
     "description": "无需服务器调用即可直接传输数据"
   },
   "imageGallery_url": {
-    "description": "服务器请求 URL"
+    "description": "服务器请求 URL\n\n- 服务器必须返回："
   },
   "imageGallery_headers": {
     "description": "服务器请求头"
@@ -408,7 +411,7 @@
     "description": "无需服务器调用即可直接传输数据"
   },
   "videoGallery_url": {
-    "description": "服务器请求 URL"
+    "description": "服务器请求 URL\n\n- 服务器必须返回："
   },
   "videoGallery_headers": {
     "description": "服务器请求头"
@@ -426,7 +429,7 @@
     "description": "生成的PDF文件的名称"
   },
   "fileUpload_uploadUrl": {
-    "description": "用于文件上传的服务器请求 URL"
+    "description": "服务器请求文件上传 URL\n\n- 服务器必须返回："
   },
   "fileUpload_uploadHeaders": {
     "description": "服务器请求头"
@@ -501,7 +504,7 @@
     "description": "单元控制器位置（`cell`，`table`）"
   },
   "table_colorList": {
-    "description": "单元格背景颜色选择器的 HEX 颜色列表。"
+    "description": "单元格背景颜色选择器的十六进制颜色列表。"
   },
   "template_items": {
     "description": "模板列表"
@@ -564,7 +567,7 @@
     "description": "是否创建 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
   },
   "audio_uploadUrl": {
-    "description": "文件将上传到的网址。"
+    "description": "文件上传到的 URL。\n\n- 服务器必须返回："
   },
   "audio_uploadHeaders": {
     "description": "文件上传请求中要包含的标头。"
@@ -594,7 +597,7 @@
     "description": "是否启用格式类型选择（`block` 与 `inline`）。"
   },
   "drawing_defaultFormatType": {
-    "description": "默认格式类型，为`\"block\"`或`\"inline\"`。"
+    "description": "默认格式类型为`\"block\"`或`\"inline\"`。"
   },
   "drawing_keepFormatType": {
     "description": "绘制完成后是否保留所选格式类型。"
@@ -636,7 +639,7 @@
     "description": "是否只允许按百分比选择尺寸。"
   },
   "embed_uploadUrl": {
-    "description": "文件上传网址。"
+    "description": "文件上传的 URL。\n\n- 服务器必须返回："
   },
   "embed_uploadHeaders": {
     "description": "文件上传请求中要包含的头部信息。"
@@ -690,7 +693,7 @@
     "description": "是否创建用于插入图片的 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
   },
   "image_uploadUrl": {
-    "description": "图片文件上传的URL端点。"
+    "description": "用于上传图像文件的 URL 端点。\n\n- 服务器必须返回："
   },
   "image_uploadHeaders": {
     "description": "文件上传请求中要包含的其他标头。"
@@ -705,7 +708,7 @@
     "description": "是否允许上传多张图片。"
   },
   "image_acceptedFormats": {
-    "description": "支持的图片上传文件格式。"
+    "description": "可接受的图片上传文件格式。"
   },
   "image_useFormatType": {
     "description": "是否启用格式类型选择（`block` 或 `inline`）。"
@@ -726,7 +729,7 @@
     "description": "组件插入行为（选择和光标放置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- 对于行内组件：将光标放置在组件附近，如果没有附近范围则选中组件。\n\n- 对于块组件：根据 `selectMode` 执行相应的行为：\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
   },
   "link_uploadUrl": {
-    "description": "文件上传的URL端点。"
+    "description": "文件上传的 URL 端点。\n\n- 服务器必须返回："
   },
   "link_uploadHeaders": {
     "description": "文件上传请求的附加标头。"
@@ -798,7 +801,7 @@
     "description": "是否创建用于视频嵌入的 URL 输入元素。\n\n- 默认为 `true`。当 `createFileInput` 为 `false` 时，始终为 `true`。"
   },
   "video_uploadUrl": {
-    "description": "视频文件上传的URL端点。"
+    "description": "视频文件上传的 URL 端点。\n\n- 服务器必须返回："
   },
   "video_uploadHeaders": {
     "description": "视频上传请求中要包含的其他标头。"

@@ -360,7 +360,7 @@
     "description": "Sunucu çağrıları olmadan doğrudan veri"
   },
   "audioGallery_url": {
-    "description": "Sunucu isteği URL'si"
+    "description": "Sunucu isteği URL'si\n- Sunucunun döndürmesi gereken adres:"
   },
   "audioGallery_headers": {
     "description": "Sunucu isteği başlıkları"
@@ -372,13 +372,16 @@
     "description": "Sunucu çağrısı yapmadan doğrudan veri (URL alma işlemini atlar)."
   },
   "fileBrowser_url": {
-    "description": "Sunucu isteği URL'si"
+    "description": "Sunucu isteği URL'si\n- Sunucu iç içe klasör yapısı döndürmelidir.\n\n- `_data`: dizi (satır içi) veya dize URL'si (klasöre tıklandığında tembel yükleme).\n\n- `\"default\": true` ​​başlangıçta seçilen klasörü ayarlar."
   },
   "fileBrowser_headers": {
     "description": "Sunucu isteği başlıkları"
   },
   "fileBrowser_thumbnail": {
     "description": "Varsayılan küçük resim URL'si veya her öğe için küçük resim URL'si döndüren bir işlev."
+  },
+  "fileBrowser_expand": {
+    "description": "Başlangıç ​​klasör genişletme derinliği. `1` ilk seviyeyi, `Infinity` ​​tümünü genişletir. Varsayılan: `1`."
   },
   "fileBrowser_props": {
     "description": "Ek etiket adları"
@@ -387,7 +390,7 @@
     "description": "Sunucu çağrıları olmadan doğrudan veri"
   },
   "fileGallery_url": {
-    "description": "Sunucu isteği URL'si"
+    "description": "Sunucu isteği URL'si\n- Sunucunun döndürmesi gereken adres:"
   },
   "fileGallery_headers": {
     "description": "Sunucu isteği başlıkları"
@@ -399,7 +402,7 @@
     "description": "Sunucu çağrıları olmadan doğrudan veri"
   },
   "imageGallery_url": {
-    "description": "Sunucu isteği URL'si"
+    "description": "Sunucu isteği URL'si\n- Sunucunun döndürmesi gereken adres:"
   },
   "imageGallery_headers": {
     "description": "Sunucu isteği başlıkları"
@@ -408,7 +411,7 @@
     "description": "Sunucu çağrıları olmadan doğrudan veri"
   },
   "videoGallery_url": {
-    "description": "Sunucu isteği URL'si"
+    "description": "Sunucu isteği URL'si\n- Sunucunun döndürmesi gereken adres:"
   },
   "videoGallery_headers": {
     "description": "Sunucu isteği başlıkları"
@@ -426,7 +429,7 @@
     "description": "Oluşturulan PDF dosyasının adı"
   },
   "fileUpload_uploadUrl": {
-    "description": "Dosya yükleme için sunucu isteği URL'si"
+    "description": "Dosya yükleme için sunucu isteği URL'si\n- Sunucunun döndürmesi gerekenler:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Sunucu isteği başlıkları"
@@ -564,7 +567,7 @@
     "description": "URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
   },
   "audio_uploadUrl": {
-    "description": "Dosyaların yükleneceği URL adresi."
+    "description": "Dosyaların yükleneceği URL.\n\n- Sunucunun döndürmesi gereken yanıt:"
   },
   "audio_uploadHeaders": {
     "description": "Dosya yükleme isteğine eklenecek başlıklar."
@@ -636,7 +639,7 @@
     "description": "Sadece yüzdelik oranlı boyutlandırmaya izin verilip verilmeyeceği."
   },
   "embed_uploadUrl": {
-    "description": "Dosya yüklemeleri için URL."
+    "description": "Dosya yüklemeleri için URL.\n\n- Sunucunun döndürmesi gereken yanıt:"
   },
   "embed_uploadHeaders": {
     "description": "Dosya yükleme isteklerine eklenecek başlıklar."
@@ -690,7 +693,7 @@
     "description": "Resim eklemek için bir URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
   },
   "image_uploadUrl": {
-    "description": "Görüntü dosyası yüklemeleri için URL uç noktası."
+    "description": "Resim dosyası yüklemeleri için URL uç noktası.\n\n- Sunucunun döndürmesi gereken değer:"
   },
   "image_uploadHeaders": {
     "description": "Dosya yükleme isteğine eklenecek ek başlıklar."
@@ -726,7 +729,7 @@
     "description": "Bileşen ekleme davranışı (seçim ve imleç yerleştirme).\n\n- [varsayılan: `options.get('componentInsertBehavior')`]\n- Satır içi bileşenler için: imleci bileşenin yakınına yerleştirir veya yakınlarda aralık yoksa seçer.\n\n- Blok bileşenler için: `selectMode`'e göre davranışı yürütür:\n- `auto`: İmleci mümkünse bir sonraki satıra taşır, aksi takdirde bileşeni seçer.\n\n- `select`: Eklenen bileşeni her zaman seçer.\n\n- `line`: İmleci mümkünse bir sonraki satıra taşır veya yeni bir satır oluşturup oraya taşır.\n\n- `none`: Hiçbir şey yapmaz."
   },
   "link_uploadUrl": {
-    "description": "Dosya yüklemeleri için URL uç noktası."
+    "description": "Dosya yüklemeleri için URL uç noktası.\n\n- Sunucunun döndürmesi gereken değer:"
   },
   "link_uploadHeaders": {
     "description": "Dosya yükleme istekleri için ek başlıklar."
@@ -798,7 +801,7 @@
     "description": "Video yerleştirme için bir URL giriş öğesi oluşturulup oluşturulmayacağı.\n\n- Varsayılan değer `true`'dır. `createFileInput` `false` olduğunda her zaman `true` ​​kullanılır."
   },
   "video_uploadUrl": {
-    "description": "Video dosyası yüklemeleri için URL uç noktası."
+    "description": "Video dosyası yüklemeleri için URL uç noktası.\n\n- Sunucunun döndürmesi gereken yanıt:"
   },
   "video_uploadHeaders": {
     "description": "Video yükleme isteğine eklenecek ek başlıklar."

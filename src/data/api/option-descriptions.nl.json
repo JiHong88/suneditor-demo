@@ -360,7 +360,7 @@
     "description": "Directe gegevens zonder serveraanroepen"
   },
   "audioGallery_url": {
-    "description": "Serveraanvraag-URL"
+    "description": "Serververzoek-URL\n- De server moet het volgende retourneren:"
   },
   "audioGallery_headers": {
     "description": "Serveraanvraagheaders"
@@ -372,13 +372,16 @@
     "description": "Directe gegevensoverdracht zonder serveraanroepen (omzeilt het ophalen van URL's)."
   },
   "fileBrowser_url": {
-    "description": "Serveraanvraag-URL"
+    "description": "Serververzoek-URL\n- De server moet een geneste mapstructuur retourneren.\n\n- `_data`: array (inline) of string-URL (lazy-loaded bij het klikken op een map).\n\n- `\"default\": true` ​​stelt de initieel geselecteerde map in."
   },
   "fileBrowser_headers": {
     "description": "Serveraanvraagheaders"
   },
   "fileBrowser_thumbnail": {
     "description": "Standaard miniatuur-URL of een functie die per item een ​​miniatuur-URL retourneert."
+  },
+  "fileBrowser_expand": {
+    "description": "De initiële mapuitbreidingsdiepte wordt ingesteld op `1`, waarbij het eerste niveau wordt uitgebreid en `Infinity` ​​alle niveaus. Standaard: `1`."
   },
   "fileBrowser_props": {
     "description": "Aanvullende tagnamen"
@@ -387,7 +390,7 @@
     "description": "Directe gegevens zonder serveraanroepen"
   },
   "fileGallery_url": {
-    "description": "Serveraanvraag-URL"
+    "description": "Serververzoek-URL\n- De server moet het volgende retourneren:"
   },
   "fileGallery_headers": {
     "description": "Serveraanvraagheaders"
@@ -399,7 +402,7 @@
     "description": "Directe gegevens zonder serveraanroepen"
   },
   "imageGallery_url": {
-    "description": "Serveraanvraag-URL"
+    "description": "Serververzoek-URL\n- De server moet het volgende retourneren:"
   },
   "imageGallery_headers": {
     "description": "Serveraanvraagheaders"
@@ -408,7 +411,7 @@
     "description": "Directe gegevens zonder serveraanroepen"
   },
   "videoGallery_url": {
-    "description": "Serveraanvraag-URL"
+    "description": "Serververzoek-URL\n- De server moet het volgende retourneren:"
   },
   "videoGallery_headers": {
     "description": "Serveraanvraagheaders"
@@ -426,7 +429,7 @@
     "description": "Naam van het gegenereerde PDF-bestand"
   },
   "fileUpload_uploadUrl": {
-    "description": "Server-URL opgevraagd voor het uploaden van bestanden"
+    "description": "Serververzoek-URL voor bestandsupload\n- De server moet het volgende retourneren:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Serveraanvraagheaders"
@@ -564,7 +567,7 @@
     "description": "Of er een URL-invoerelement moet worden aangemaakt.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
   },
   "audio_uploadUrl": {
-    "description": "De URL waarnaar de bestanden worden geüpload."
+    "description": "De URL waarnaar de bestanden worden geüpload.\n\n- De server moet het volgende retourneren:"
   },
   "audio_uploadHeaders": {
     "description": "Headers die moeten worden opgenomen in het verzoek voor het uploaden van bestanden."
@@ -636,7 +639,7 @@
     "description": "Of alleen op percentages gebaseerde maataanduidingen toegestaan ​​moeten zijn."
   },
   "embed_uploadUrl": {
-    "description": "De URL voor het uploaden van bestanden."
+    "description": "De URL voor het uploaden van bestanden.\n\n- De server moet het volgende retourneren:"
   },
   "embed_uploadHeaders": {
     "description": "Headers die moeten worden opgenomen in verzoeken voor het uploaden van bestanden."
@@ -690,7 +693,7 @@
     "description": "Of er een URL-invoerelement moet worden aangemaakt voor het invoegen van een afbeelding.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
   },
   "image_uploadUrl": {
-    "description": "Het URL-eindpunt voor het uploaden van afbeeldingsbestanden."
+    "description": "Het URL-eindpunt voor het uploaden van afbeeldingsbestanden.\n\n- De server moet het volgende retourneren:"
   },
   "image_uploadHeaders": {
     "description": "Aanvullende headers die moeten worden opgenomen in het verzoek voor het uploaden van bestanden."
@@ -726,7 +729,7 @@
     "description": "Invoeggedrag van componenten voor selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- Voor inline componenten: plaatst de cursor in de buurt van de component, of selecteert deze als er geen nabijgelegen bereik is.\n\n- Voor blokcomponenten: voert gedrag uit op basis van `selectMode`:\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
   },
   "link_uploadUrl": {
-    "description": "Het URL-eindpunt voor het uploaden van bestanden."
+    "description": "Het URL-eindpunt voor het uploaden van bestanden.\n\n- De server moet het volgende retourneren:"
   },
   "link_uploadHeaders": {
     "description": "Extra headers voor verzoeken om bestanden te uploaden."
@@ -798,7 +801,7 @@
     "description": "Of er een URL-invoerelement moet worden aangemaakt voor het insluiten van video's.\n\n- Standaardwaarde is `true`. Altijd `true` ​​wanneer `createFileInput` gelijk is aan `false`."
   },
   "video_uploadUrl": {
-    "description": "Het URL-eindpunt voor het uploaden van videobestanden."
+    "description": "Het URL-eindpunt voor het uploaden van videobestanden.\n\n- De server moet het volgende retourneren:"
   },
   "video_uploadHeaders": {
     "description": "Extra headers die je kunt toevoegen aan het verzoek om de video te uploaden."

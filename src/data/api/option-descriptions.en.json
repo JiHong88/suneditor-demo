@@ -360,7 +360,7 @@
     "description": "Direct data without server calls"
   },
   "audioGallery_url": {
-    "description": "Server request URL"
+    "description": "Server request URL\n- The server must return:"
   },
   "audioGallery_headers": {
     "description": "Server request headers"
@@ -372,13 +372,16 @@
     "description": "Direct data without server calls (bypasses URL fetch)."
   },
   "fileBrowser_url": {
-    "description": "Server request URL"
+    "description": "Server request URL\n- The server must return a nested folder structure.\n- `_data`: array (inline) or string URL (lazy-loaded on folder click).\n- `\"default\": true` sets the initially selected folder."
   },
   "fileBrowser_headers": {
     "description": "Server request headers"
   },
   "fileBrowser_thumbnail": {
     "description": "Default thumbnail URL or a function that returns a thumbnail URL per item."
+  },
+  "fileBrowser_expand": {
+    "description": "Initial folder expand depth. `1` expands the first level, `Infinity` expands all. Default: `1`."
   },
   "fileBrowser_props": {
     "description": "Additional tag names"
@@ -387,7 +390,7 @@
     "description": "Direct data without server calls"
   },
   "fileGallery_url": {
-    "description": "Server request URL"
+    "description": "Server request URL\n- The server must return:"
   },
   "fileGallery_headers": {
     "description": "Server request headers"
@@ -399,7 +402,7 @@
     "description": "Direct data without server calls"
   },
   "imageGallery_url": {
-    "description": "Server request URL"
+    "description": "Server request URL\n- The server must return:"
   },
   "imageGallery_headers": {
     "description": "Server request headers"
@@ -408,7 +411,7 @@
     "description": "Direct data without server calls"
   },
   "videoGallery_url": {
-    "description": "Server request URL"
+    "description": "Server request URL\n- The server must return:"
   },
   "videoGallery_headers": {
     "description": "Server request headers"
@@ -426,7 +429,7 @@
     "description": "Name of the generated PDF file"
   },
   "fileUpload_uploadUrl": {
-    "description": "Server request URL for file upload"
+    "description": "Server request URL for file upload\n- The server must return:"
   },
   "fileUpload_uploadHeaders": {
     "description": "Server request headers"
@@ -564,7 +567,7 @@
     "description": "Whether to create a URL input element.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "audio_uploadUrl": {
-    "description": "The URL to which files will be uploaded."
+    "description": "The URL to which files will be uploaded.\n- The server must return:"
   },
   "audio_uploadHeaders": {
     "description": "Headers to include in the file upload request."
@@ -636,7 +639,7 @@
     "description": "Whether to allow only percentage-based sizing."
   },
   "embed_uploadUrl": {
-    "description": "The URL for file uploads."
+    "description": "The URL for file uploads.\n- The server must return:"
   },
   "embed_uploadHeaders": {
     "description": "Headers to include in file upload requests."
@@ -690,7 +693,7 @@
     "description": "Whether to create a URL input element for image insertion.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "image_uploadUrl": {
-    "description": "The URL endpoint for image file uploads."
+    "description": "The URL endpoint for image file uploads.\n- The server must return:"
   },
   "image_uploadHeaders": {
     "description": "Additional headers to include in the file upload request."
@@ -726,7 +729,7 @@
     "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
   },
   "link_uploadUrl": {
-    "description": "The URL endpoint for file uploads."
+    "description": "The URL endpoint for file uploads.\n- The server must return:"
   },
   "link_uploadHeaders": {
     "description": "Additional headers for file upload requests."
@@ -798,7 +801,7 @@
     "description": "Whether to create a URL input element for video embedding.\n- Defaults to `true`. Always `true` when `createFileInput` is `false`."
   },
   "video_uploadUrl": {
-    "description": "The URL endpoint for video file uploads."
+    "description": "The URL endpoint for video file uploads.\n- The server must return:"
   },
   "video_uploadHeaders": {
     "description": "Additional headers to include in the video upload request."
