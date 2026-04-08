@@ -3,11 +3,17 @@
 import { useEffect, useState } from "react";
 import AdSlot from "./AdSlot";
 
-/** Home page — horizontal banner below Hero */
+/** Home page — thin horizontal banner above CodeExamples */
 export function HomeHeroBelowBanner() {
 	return (
-		<div className="mx-auto w-full max-w-5xl px-6 py-4">
-			<AdSlot slotId="home-hero-below" className="flex items-center justify-center" />
+		<div className="mx-auto w-full max-w-5xl px-6 py-4 flex items-center justify-center">
+			<AdSlot
+				slotId="home-hero-below"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "728px", height: "90px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }

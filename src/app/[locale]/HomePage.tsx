@@ -8,13 +8,11 @@ import InteractiveDemo from "./_components/InteractiveDemo";
 import LiveStatsBadges from "./_components/LiveStatsBadges";
 import FeatureHighlights from "./_components/FeatureHighlights";
 import FinalCTA from "./_components/FinalCTA";
-import { HomeHeroBelowBanner } from "@/components/ad/AdBanner";
 
 export default function HomePage({ metric }: { metric: SiteMetricType | null }) {
 	return (
 		<div className='min-h-screen'>
 			<Hero />
-			<HomeHeroBelowBanner />
 			<InteractiveDemo />
 			{metric && <LiveStatsBadges stats={metric} />}
 			<FeatureHighlights />

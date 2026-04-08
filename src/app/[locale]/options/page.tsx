@@ -12,6 +12,7 @@ import ScrollToTop from "@/components/common/ScrollToTop";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
+import { DocsSidebarAd } from "@/components/ad/AdBanner";
 
 /* ── Constants ─────────────────────────────────────────── */
 // nav area = 92px (nav + breadcrumb/gap)
@@ -623,6 +624,9 @@ export default function OptionsPage() {
 					<aside className="hidden lg:block w-60 shrink-0">
 						<div ref={sidebarRef} className={cn("sticky max-h-[calc(100vh-5rem)] overflow-y-auto pr-2", SIDEBAR_TOP)}>
 							<Sidebar sections={filteredSections} activeId={activeCategory} onSelect={scrollTo} expandedSections={expandedSections} onToggleSection={toggleSection} />
+							<div className="border-t px-2">
+								<DocsSidebarAd />
+							</div>
 						</div>
 					</aside>
 
