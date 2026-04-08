@@ -2,13 +2,15 @@
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { Search, Copy, Check, ChevronRight, Link2, Settings2, Puzzle, Layers } from "lucide-react";
+import { Search, Copy, Check, ChevronRight, Link2, Settings2, Puzzle, Layers, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
 import { highlightInline } from "@/lib/highlightInline";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
 
 /* ── Constants ─────────────────────────────────────────── */
@@ -500,6 +502,39 @@ function Sidebar({
 	);
 }
 
+/* ── Mobile sidebar ────────────────────────────────────── */
+
+function MobileOptionsSidebar({
+	sections, activeId, onSelect, expandedSections, onToggleSection, title,
+}: {
+	sections: SidebarSection[];
+	activeId: string;
+	onSelect: (id: string) => void;
+	expandedSections: Record<string, boolean>;
+	onToggleSection: (id: string) => void;
+	title: string;
+}) {
+	const [open, setOpen] = useState(false);
+	const handleSelect = (id: string) => { onSelect(id); setOpen(false); };
+	return (
+		<Sheet open={open} onOpenChange={setOpen}>
+			<SheetTrigger asChild>
+				<Button variant="ghost" size="icon" className="lg:hidden shrink-0">
+					<Menu className="h-5 w-5" />
+				</Button>
+			</SheetTrigger>
+			<SheetContent side="left" className="w-[300px] p-0 overflow-y-auto">
+				<SheetHeader className="px-4 pt-4 pb-2">
+					<SheetTitle>{title}</SheetTitle>
+				</SheetHeader>
+				<div className="px-2 pb-4">
+					<Sidebar sections={sections} activeId={activeId} onSelect={handleSelect} expandedSections={expandedSections} onToggleSection={onToggleSection} />
+				</div>
+			</SheetContent>
+		</Sheet>
+	);
+}
+
 /* ── Main page ─────────────────────────────────────────── */
 
 export default function OptionsPage() {
@@ -571,12 +606,15 @@ export default function OptionsPage() {
 					</div>
 				</div>
 
-				{/* Search */}
-				<div className="relative mb-6 max-w-xl">
-					<Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-					<input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("searchPlaceholder")}
-						className="w-full h-10 rounded-lg border border-input bg-background pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-ring" />
-					{search && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">{totalFiltered} {t("results")}</span>}
+				{/* Search + Mobile menu */}
+				<div className="flex items-center gap-2 mb-6 max-w-xl">
+					<MobileOptionsSidebar sections={filteredSections} activeId={activeCategory} onSelect={(id) => { scrollTo(id); }} expandedSections={expandedSections} onToggleSection={toggleSection} title={t("title")} />
+					<div className="relative flex-1">
+						<Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+						<input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("searchPlaceholder")}
+							className="w-full h-10 rounded-lg border border-input bg-background pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-ring" />
+						{search && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">{totalFiltered} {t("results")}</span>}
+					</div>
 				</div>
 
 				{/* Layout */}

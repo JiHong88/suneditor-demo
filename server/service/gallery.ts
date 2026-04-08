@@ -66,43 +66,75 @@ const fileItems: BrowserFile[] = [
  * 각 폴더는 { name, _data: BrowserFile[], default? } + 하위 폴더 중첩
  */
 const fileBrowserItems: Record<string, unknown> = {
-	root: {
-		name: "All Files",
+	images: {
+		name: "Images",
 		default: true,
 		_data: [
-			{ src: `${S3}/sample_file_1.docx`, name: "sample_file_1.docx", tag: ["docx", "document"] },
-			{ src: `${S3}/sample_file_2.docx`, name: "sample_file_2.docx", tag: ["docx", "document"] },
-			{ src: `${S3}/sample_file_3.docx`, name: "sample_file_3.docx", tag: ["docx", "document"] },
-			{ src: `${S3}/sample_file_3.pdf`, name: "sample_file_3.pdf", tag: ["pdf", "document"] },
+			{ src: `${PICSUM}/all1/800/600`, name: "featured_1.jpg", thumbnail: `${PICSUM}/all1/200/150`, tag: ["featured", "image"] },
+			{ src: `${PICSUM}/all2/800/600`, name: "featured_2.jpg", thumbnail: `${PICSUM}/all2/200/150`, tag: ["featured", "image"] },
 		],
-		images: {
-			name: "Images",
-			_data: Array.from({ length: 8 }, (_, i) => ({
-				src: `${PICSUM}/browse${i + 1}/800/600`,
-				name: `photo_${i + 1}.jpg`,
-				thumbnail: `${PICSUM}/browse${i + 1}/200/150`,
-				tag: [i < 4 ? "landscape" : "portrait", "image"],
+		landscape: {
+			name: "Landscape",
+			_data: Array.from({ length: 6 }, (_, i) => ({
+				src: `${PICSUM}/land${i + 1}/800/500`,
+				name: `landscape_${i + 1}.jpg`,
+				thumbnail: `${PICSUM}/land${i + 1}/200/125`,
+				tag: ["landscape", "nature"],
 			})),
 		},
-		videos: {
-			name: "Videos",
+		portrait: {
+			name: "Portrait",
+			_data: Array.from({ length: 4 }, (_, i) => ({
+				src: `${PICSUM}/port${i + 1}/500/800`,
+				name: `portrait_${i + 1}.jpg`,
+				thumbnail: `${PICSUM}/port${i + 1}/125/200`,
+				tag: ["portrait", "people"],
+			})),
+		},
+		icons: {
+			name: "Icons & Logos",
+			_data: Array.from({ length: 4 }, (_, i) => ({
+				src: `${PICSUM}/icon${i + 1}/400/400`,
+				name: `icon_${i + 1}.png`,
+				thumbnail: `${PICSUM}/icon${i + 1}/150/150`,
+				tag: ["icon", "square"],
+			})),
+		},
+	},
+	videos: {
+		name: "Videos",
+		// 폴더 자체에 _data 없음 — 하위 폴더만
+		clips: {
+			name: "Clips",
 			_data: [
-				{ src: `${S3}/sample_video_1.mp4`, name: "sample_video_1.mp4", thumbnail: `${PICSUM}/bv1/200/150`, tag: ["mp4", "video"] },
-				{ src: `${S3}/sample_video_2.mp4`, name: "sample_video_2.mp4", thumbnail: `${PICSUM}/bv2/200/150`, tag: ["mp4", "video"] },
-				{ src: `${S3}/sample_video_3.mp4`, name: "sample_video_3.mp4", thumbnail: `${PICSUM}/bv3/200/150`, tag: ["mp4", "video"] },
+				{ src: `${S3}/sample_video_1.mp4`, name: "sample_video_1.mp4", thumbnail: `${PICSUM}/bv1/200/150`, tag: ["mp4", "clip"] },
+				{ src: `${S3}/sample_video_2.mp4`, name: "sample_video_2.mp4", thumbnail: `${PICSUM}/bv2/200/150`, tag: ["mp4", "clip"] },
 			],
 		},
-		audio: {
-			name: "Audio",
+		tutorials: {
+			name: "Tutorials",
 			_data: [
-				{ src: `${S3}/sample_audio_1.mp3`, name: "sample_audio_1.mp3", tag: ["mp3", "audio"] },
+				{ src: `${S3}/sample_video_3.mp4`, name: "sample_video_3.mp4", thumbnail: `${PICSUM}/bv3/200/150`, tag: ["mp4", "tutorial"] },
 			],
 		},
-		documents: {
-			name: "Documents",
+	},
+	audio: {
+		name: "Audio",
+		_data: [
+			{ src: `${S3}/sample_audio_1.mp3`, name: "sample_audio_1.mp3", tag: ["mp3", "audio"] },
+		],
+	},
+	documents: {
+		name: "Documents",
+		_data: [
+			{ src: `${S3}/sample_file_3.pdf`, name: "sample_file_3.pdf", tag: ["pdf", "document"] },
+		],
+		word: {
+			name: "Word",
 			_data: [
-				{ src: `${S3}/sample_file_1.docx`, name: "sample_file_1.docx", tag: ["docx", "document"] },
-				{ src: `${S3}/sample_file_3.pdf`, name: "sample_file_3.pdf", tag: ["pdf", "document"] },
+				{ src: `${S3}/sample_file_1.docx`, name: "sample_file_1.docx", tag: ["docx", "word"] },
+				{ src: `${S3}/sample_file_2.docx`, name: "sample_file_2.docx", tag: ["docx", "word"] },
+				{ src: `${S3}/sample_file_3.docx`, name: "sample_file_3.docx", tag: ["docx", "word"] },
 			],
 		},
 	},

@@ -816,7 +816,7 @@ export const GALLERY_DATA_PRESETS: Record<string, string> = {
 	videoGallery_data: '[\n  {"src": "{{videoGallery-source}}/1.mp4", "thumbnail": "{{videoGallery-source}}/thumb/1.jpg", "name": "Video 1"}\n]',
 	audioGallery_data: '[\n  {"src": "{{audioGallery-source}}/1.mp3", "name": "Audio 1"}\n]',
 	fileGallery_data: '[\n  {"src": "{{fileGallery-source}}/doc.pdf", "name": "Document.pdf", "size": "2.5MB"}\n]',
-	fileBrowser_data: '{\n  "root": {"name": "Root", "default": true, "_data": [{"src": "https://suneditor-files.s3.ap-northeast-2.amazonaws.com/sample/media/sample_file_1.docx", "name": "sample_file_1.docx"}], "media": {"name": "Media", "_data": [{"src": "https://suneditor-files.s3.ap-northeast-2.amazonaws.com/sample/media/sample_video_1.mp4", "name": "sample_video_1.mp4"}]}}\n}',
+	fileBrowser_data: '{\n  "images": {"name": "Images", "default": true, "_data": [{"src": "https://picsum.photos/seed/browse1/800/600", "name": "photo_1.jpg"}]},\n  "documents": {"name": "Documents", "_data": [{"src": "https://suneditor-files.s3.ap-northeast-2.amazonaws.com/sample/media/sample_file_1.docx", "name": "sample_file_1.docx"}]}\n}',
 	fileBrowser_props: '["href", "data-size", "data-name"]',
 };
 

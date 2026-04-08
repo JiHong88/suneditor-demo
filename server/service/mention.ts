@@ -64,5 +64,6 @@ const dummy = generateData();
 
 /** 이름 기반 멘션 데이터 검색 */
 export function getMentions(name: string, limit: number): MentionItem[] {
-	return dummy.filter((item) => item.key.toLowerCase().startsWith(name.toLowerCase())).slice(0, limit);
+	const q = name.toLowerCase();
+	return dummy.filter((item) => item.name.toLowerCase().includes(q) || item.key.toLowerCase().startsWith(q)).slice(0, limit);
 }

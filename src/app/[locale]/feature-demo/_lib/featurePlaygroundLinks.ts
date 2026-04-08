@@ -117,7 +117,9 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 
 	// ── Advanced ──
 	math: fl({ p: "full", val: DEMO_MATH }, [["math"], "|", ["bold", "italic"]]),
-	mention: fl({ p: "full", "mn.au": API_MENTION, val: DEMO_MENTION }, [["bold", "italic"]]),
+	mention: fl({ p: "full", "mn.au": API_MENTION, val: DEMO_MENTION }, [["bold", "italic"]], {
+		mention: { apiUrl: API_MENTION },
+	}),
 	links: fl({ p: "standard", val: DEMO_LINKS }, [["link", "anchor"], "|", ["bold", "italic"]]),
 	codeView: fl({ p: "standard", val: DEMO_CODE_VIEW }, [["codeView"], "|", ["bold", "italic", "underline"]]),
 	markdownView: fl({ p: "standard", val: DEMO_MARKDOWN_VIEW }, [["markdownView"], "|", ["bold", "italic", "underline"]]),

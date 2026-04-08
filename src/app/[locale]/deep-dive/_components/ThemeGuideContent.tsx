@@ -23,7 +23,7 @@ export default function ThemeGuideContent() {
 								{ name: "dark", label: "Dark", bg: "#282c34", fg: "#d7dae0", accent: "#56b6c2" },
 								{ name: "midnight", label: "Midnight", bg: "#212121", fg: "#e0e0e0", accent: "#bb86fc" },
 								{ name: "cobalt", label: "Cobalt", bg: "#0f1828", fg: "#e8eaed", accent: "#89ddff" },
-								{ name: "cream", label: "Cream", bg: "#efe7d3", fg: "#5c5040", accent: "#d4a06a" },
+								{ name: "cream", label: "Cream", bg: "#fffdf5", fg: "#2b2b2b", accent: "#0077cc" },
 							].map((theme) => (
 								<div
 									key={theme.name}
