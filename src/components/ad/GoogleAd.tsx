@@ -38,7 +38,7 @@ export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
 		<ins
 			ref={adRef}
 			className={`adsbygoogle ${className ?? ""}`}
-			style={{ display: "block" }}
+			style={{ display: "block", width: "100%" }}
 			data-ad-client={ADSENSE_CLIENT_ID}
 			data-ad-slot={adSlot}
 			data-ad-format='auto'

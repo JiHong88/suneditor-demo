@@ -17,7 +17,7 @@ export default function AdSlot({ slotId, className, fallback }: AdSlotProps) {
 		return fallback ? <>{fallback}</> : null;
 	}
 
-	const wrapperClass = `ad-slot ad-slot--${slotId} ${className ?? ""}`;
+	const wrapperClass = `ad-slot ad-slot--${slotId} w-full ${className ?? ""}`;
 
 	switch (config.type) {
 		case "google":
