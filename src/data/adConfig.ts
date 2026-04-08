@@ -22,6 +22,10 @@ export type AdSlotConfig = {
 export const AD_SLOTS: Record<string, AdSlotConfig[]> = {
 	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: "2985737129" }],
 	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: "2985737129" }],
+	"home-hero-below": [{ slotId: "home-hero-below", type: "google", googleAdSlot: "2985737129" }],
+	"getting-started-mid": [{ slotId: "getting-started-mid", type: "google", googleAdSlot: "2985737129" }],
+	"docs-sidebar": [{ slotId: "docs-sidebar", type: "google", googleAdSlot: "8028048925" }],
+	"feature-mid": [{ slotId: "feature-mid", type: "google", googleAdSlot: "2539344137" }],
 };
 
 /**

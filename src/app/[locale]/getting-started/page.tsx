@@ -10,6 +10,7 @@ import { DEFAULT_FRAMEWORK_KEY, type FrameworkKey } from "@/components/common/co
 import Step1_CodeExamples from "./_components/Step1_CodeExamples";
 import Step2_RenderHtml from "./_components/Step2_RenderHtml";
 import Step3_CoreApi from "./_components/Step3_CoreApi";
+import { GettingStartedMidBanner } from "@/components/ad/AdBanner";
 
 const pageVariants = {
 	hidden: {},
@@ -48,6 +49,9 @@ export default function GettingStartedPage() {
 			</motion.div>
 			<motion.div variants={sectionVariants}>
 				<Step2_RenderHtml framework={framework} />
+			</motion.div>
+			<motion.div variants={sectionVariants}>
+				<GettingStartedMidBanner />
 			</motion.div>
 			<motion.div variants={sectionVariants}>
 				<Step3_CoreApi />

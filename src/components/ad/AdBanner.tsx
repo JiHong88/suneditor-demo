@@ -3,6 +3,42 @@
 import { useEffect, useState } from "react";
 import AdSlot from "./AdSlot";
 
+/** Home page — horizontal banner below Hero */
+export function HomeHeroBelowBanner() {
+	return (
+		<div className="mx-auto w-full max-w-5xl px-6 py-4">
+			<AdSlot slotId="home-hero-below" className="flex items-center justify-center" />
+		</div>
+	);
+}
+
+/** Getting Started — horizontal banner between steps */
+export function GettingStartedMidBanner() {
+	return (
+		<div className="mx-auto w-full max-w-6xl px-6 py-4">
+			<AdSlot slotId="getting-started-mid" className="flex items-center justify-center" />
+		</div>
+	);
+}
+
+/** Feature Demo — square ad between catalog and CTA */
+export function FeatureMidAd() {
+	return (
+		<div className="mx-auto w-full max-w-md px-6 py-4">
+			<AdSlot slotId="feature-mid" adFormat="rectangle" fullWidthResponsive={false} className="flex items-center justify-center" />
+		</div>
+	);
+}
+
+/** Docs API — vertical ad in sidebar area */
+export function DocsSidebarAd() {
+	return (
+		<div className="w-full py-4">
+			<AdSlot slotId="docs-sidebar" adFormat="vertical" fullWidthResponsive={false} />
+		</div>
+	);
+}
+
 /** Footer banner — shown above footer on all pages */
 export function FooterBanner() {
 	return (

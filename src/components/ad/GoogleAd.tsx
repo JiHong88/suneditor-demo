@@ -5,6 +5,8 @@ import { ADSENSE_CLIENT_ID } from "@/data/adConfig";
 
 interface GoogleAdProps {
 	adSlot: string;
+	adFormat?: string;
+	fullWidthResponsive?: boolean;
 	className?: string;
 }
 
@@ -14,7 +16,7 @@ declare global {
 	}
 }
 
-export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
+export default function GoogleAd({ adSlot, adFormat = "auto", fullWidthResponsive = true, className }: GoogleAdProps) {
 	const adRef = useRef<HTMLModElement>(null);
 	const pushed = useRef(false);
 	const [isLocal, setIsLocal] = useState(false);
@@ -41,8 +43,8 @@ export default function GoogleAd({ adSlot, className }: GoogleAdProps) {
 			style={{ display: "block", width: "100%" }}
 			data-ad-client={ADSENSE_CLIENT_ID}
 			data-ad-slot={adSlot}
-			data-ad-format='auto'
-			data-full-width-responsive='true'
+			data-ad-format={adFormat}
+			{...(fullWidthResponsive ? { "data-full-width-responsive": "true" } : {})}
 		/>
 	);
 }

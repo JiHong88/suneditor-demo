@@ -59,6 +59,7 @@ import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
 import QuickTryModal from "@/components/common/QuickTryModal";
 import { FEATURE_CATEGORIES } from "@/data/snippets/featureDemoCategories";
+import { FeatureMidAd } from "@/components/ad/AdBanner";
 
 /* ── 아이콘 매핑 (JSX는 컴포넌트에서 관리) ──────────── */
 
@@ -202,6 +203,9 @@ export default function FeatureDemoPage() {
 						))}
 					</Tabs>
 				</motion.section>
+
+				{/* Ad */}
+				<FeatureMidAd />
 
 				{/* Playground CTA */}
 				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
