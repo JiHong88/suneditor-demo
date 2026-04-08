@@ -23,7 +23,7 @@ export function BuilderTopBanner() {
 	}, []);
 
 	return (
-		<div className="w-full px-2 py-1 h-[90px]">
+		<div className="w-full h-full px-2 flex items-center justify-center">
 			{ready && <AdSlot slotId="builder-top" className="flex items-center justify-center" />}
 		</div>
 	);
