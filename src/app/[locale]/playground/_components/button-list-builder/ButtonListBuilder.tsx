@@ -485,11 +485,13 @@ export default function ButtonListBuilder({
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
-			<SheetContent side='bottom' className='h-dvh flex flex-col p-0 gap-0' hideClose>
-				{/* Ad banner */}
-				<div className='shrink-0 h-[90px] w-full overflow-hidden bg-background border-b flex items-center justify-center'>
+			{/* Ad banner — fixed above sheet, outside SheetContent to avoid layout interference */}
+			{open && (
+				<div className='fixed inset-x-0 top-0 z-[51] h-[90px] pointer-events-auto bg-background border-b flex items-center justify-center overflow-hidden'>
 					<BuilderTopBanner />
 				</div>
+			)}
+			<SheetContent side='bottom' className='h-[calc(100dvh-90px)] flex flex-col p-0 gap-0' hideClose>
 				{/* Keyframe animation for button entry */}
 				<style>{`
 					@keyframes buttonPop {

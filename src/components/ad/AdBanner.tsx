@@ -59,8 +59,16 @@ export function BuilderTopBanner() {
 	}, []);
 
 	return (
-		<div className="w-full h-full max-h-[90px] px-2 flex items-center justify-center overflow-hidden">
-			{ready && <AdSlot slotId="builder-top" adFormat="horizontal" fullWidthResponsive={false} className="flex items-center justify-center" />}
+		<div className="w-full h-full px-2 flex items-center justify-center">
+			{ready && (
+				<AdSlot
+					slotId="builder-top"
+					adFormat="horizontal"
+					fullWidthResponsive={false}
+					adStyle={{ maxHeight: "90px", overflow: "hidden" }}
+					className="flex items-center justify-center"
+				/>
+			)}
 		</div>
 	);
 }

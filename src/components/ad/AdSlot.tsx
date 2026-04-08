@@ -8,11 +8,12 @@ interface AdSlotProps {
 	slotId: string;
 	adFormat?: string;
 	fullWidthResponsive?: boolean;
+	adStyle?: React.CSSProperties;
 	className?: string;
 	fallback?: React.ReactNode;
 }
 
-export default function AdSlot({ slotId, adFormat, fullWidthResponsive, className, fallback }: AdSlotProps) {
+export default function AdSlot({ slotId, adFormat, fullWidthResponsive, adStyle, className, fallback }: AdSlotProps) {
 	const config = getActiveAd(slotId);
 
 	if (!config) {
@@ -25,7 +26,7 @@ export default function AdSlot({ slotId, adFormat, fullWidthResponsive, classNam
 		case "google":
 			return (
 				<div className={wrapperClass}>
-					<GoogleAd adSlot={config.googleAdSlot!} adFormat={adFormat} fullWidthResponsive={fullWidthResponsive} />
+					<GoogleAd adSlot={config.googleAdSlot!} adFormat={adFormat} fullWidthResponsive={fullWidthResponsive} style={adStyle} />
 				</div>
 			);
 		case "custom":

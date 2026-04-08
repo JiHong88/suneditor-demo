@@ -7,6 +7,7 @@ interface GoogleAdProps {
 	adSlot: string;
 	adFormat?: string;
 	fullWidthResponsive?: boolean;
+	style?: React.CSSProperties;
 	className?: string;
 }
 
@@ -16,7 +17,7 @@ declare global {
 	}
 }
 
-export default function GoogleAd({ adSlot, adFormat = "auto", fullWidthResponsive = true, className }: GoogleAdProps) {
+export default function GoogleAd({ adSlot, adFormat = "auto", fullWidthResponsive = true, style, className }: GoogleAdProps) {
 	const adRef = useRef<HTMLModElement>(null);
 	const pushed = useRef(false);
 	const [isLocal, setIsLocal] = useState(false);
@@ -40,7 +41,7 @@ export default function GoogleAd({ adSlot, adFormat = "auto", fullWidthResponsiv
 		<ins
 			ref={adRef}
 			className={`adsbygoogle ${className ?? ""}`}
-			style={{ display: "block", width: "100%" }}
+			style={{ display: "block", width: "100%", ...style }}
 			data-ad-client={ADSENSE_CLIENT_ID}
 			data-ad-slot={adSlot}
 			data-ad-format={adFormat}
