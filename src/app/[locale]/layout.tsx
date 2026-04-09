@@ -68,11 +68,11 @@ export default async function RootLayout({
 					}}
 				/>
 				{/* Google Analytics */}
-				<script async src='https://www.googletagmanager.com/gtag/js?id=G-W0R51STQTY' />
+				<script async src='https://www.googletagmanager.com/gtag/js?id=G-46DGRE73QC' />
 				<script
 					id='ga-init'
 					dangerouslySetInnerHTML={{
-						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-W0R51STQTY');`,
+						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-46DGRE73QC');`,
 					}}
 				/>
 				{/* Google AdSense */}
