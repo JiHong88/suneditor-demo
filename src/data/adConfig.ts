@@ -37,9 +37,11 @@ export const AD_SLOTS: Record<string, AdSlotConfig[]> = {
 	"footer-banner": [{ slotId: "footer-banner", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL }],
 	"builder-top": [{ slotId: "builder-top", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL_FIXED }],
 	"home-hero-below": [{ slotId: "home-hero-below", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL_FIXED }],
-	"getting-started-mid": [{ slotId: "getting-started-mid", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL }],
+	"getting-started-mid": [{ slotId: "getting-started-mid", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL_FIXED }],
 	"docs-sidebar": [{ slotId: "docs-sidebar", type: "google", googleAdSlot: AD_UNIT.VERTICAL }],
 	"feature-mid": [{ slotId: "feature-mid", type: "google", googleAdSlot: AD_UNIT.RECTANGLE }],
+	"playground-mid": [{ slotId: "playground-mid", type: "google", googleAdSlot: AD_UNIT.HORIZONTAL_FIXED }],
+	"docs-toc": [{ slotId: "docs-toc", type: "google", googleAdSlot: AD_UNIT.RECTANGLE }],
 };
 
 /** Get the active config for a slot (first non-expired entry) */

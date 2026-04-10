@@ -35,7 +35,30 @@ export default function GoogleAd({ adSlot, adFormat = "auto", fullWidthResponsiv
 		}
 	}, []);
 
-	if (!ADSENSE_CLIENT_ID || isLocal) return null;
+	if (!ADSENSE_CLIENT_ID) return null;
+
+	if (isLocal) {
+		return (
+			<div
+				className={className}
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: "100%",
+					background: "repeating-linear-gradient(45deg, #e5e7eb, #e5e7eb 10px, #f3f4f6 10px, #f3f4f6 20px)",
+					border: "1px dashed #9ca3af",
+					borderRadius: 6,
+					color: "#6b7280",
+					fontSize: 13,
+					fontWeight: 500,
+					...style,
+				}}
+			>
+				AD {style?.maxWidth ? `${style.maxWidth} × ${style.height}` : adFormat || "auto"}
+			</div>
+		);
+	}
 
 	return (
 		<ins

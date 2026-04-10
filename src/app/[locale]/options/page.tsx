@@ -12,7 +12,7 @@ import ScrollToTop from "@/components/common/ScrollToTop";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
-import { DocsSidebarAd } from "@/components/ad/AdBanner";
+import { DocsSidebarAd, DocsTocAd } from "@/components/ad/AdBanner";
 
 /* ── Constants ─────────────────────────────────────────── */
 // nav area = 92px (nav + breadcrumb/gap)
@@ -536,6 +536,99 @@ function MobileOptionsSidebar({
 	);
 }
 
+/* ── Right TOC ─────────────────────────────────────────── */
+
+function OptionsToc({ sections, activeCategory }: { sections: SidebarSection[]; activeCategory: string }) {
+	const [activeOpt, setActiveOpt] = useState("");
+
+	// Find the options for the active category
+	const activeCatOptions = useMemo(() => {
+		for (const section of sections) {
+			for (const cat of section.children) {
+				if (cat.id === activeCategory) return cat.options;
+			}
+			if (section.frameChildren) {
+				for (const cat of section.frameChildren) {
+					if (cat.id === activeCategory) return cat.options;
+				}
+			}
+		}
+		return [];
+	}, [sections, activeCategory]);
+
+	// Find category label
+	const activeCatLabel = useMemo(() => {
+		for (const section of sections) {
+			for (const cat of section.children) {
+				if (cat.id === activeCategory) return cat.label;
+			}
+			if (section.frameChildren) {
+				for (const cat of section.frameChildren) {
+					if (cat.id === activeCategory) return cat.label;
+				}
+			}
+		}
+		return "";
+	}, [sections, activeCategory]);
+
+	// Intersection observer for active option
+	useEffect(() => {
+		if (activeCatOptions.length === 0) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						setActiveOpt(entry.target.id);
+						break;
+					}
+				}
+			},
+			{ rootMargin: "-140px 0px -60% 0px", threshold: 0 },
+		);
+		for (const opt of activeCatOptions) {
+			const el = document.getElementById(`opt-${opt.name}`);
+			if (el) observer.observe(el);
+		}
+		return () => observer.disconnect();
+	}, [activeCatOptions]);
+
+	if (activeCatOptions.length === 0) return null;
+
+	return (
+		<nav className="hidden xl:block w-48 shrink-0 sticky top-[92px] self-start max-h-[calc(100vh-120px)] overflow-y-auto">
+			<div className="px-3 pt-3 pb-2">
+				<div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.12em] mb-3 truncate" title={activeCatLabel}>
+					{activeCatLabel}
+				</div>
+				<ul className="space-y-px border-s border-border/40">
+					{activeCatOptions.map((opt) => {
+						const optId = `opt-${opt.name}`;
+						return (
+							<li key={opt.name}>
+								<button
+									onClick={() => document.getElementById(optId)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+									className={cn(
+										"block w-full text-start ps-3 pe-2 py-1 text-[11px] font-mono transition-colors truncate -ms-px border-s-2",
+										activeOpt === optId
+											? "text-primary border-primary font-medium"
+											: "text-muted-foreground/70 border-transparent hover:text-foreground hover:border-border",
+									)}
+									title={opt.displayName}
+								>
+									{opt.displayName}
+								</button>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+			<div className="border-t mt-2.5 px-2">
+				<DocsTocAd />
+			</div>
+		</nav>
+	);
+}
+
 /* ── Main page ─────────────────────────────────────────── */
 
 export default function OptionsPage() {
@@ -682,6 +775,9 @@ export default function OptionsPage() {
 							})
 						)}
 					</main>
+
+					{/* Right TOC + ad — xl only */}
+					<OptionsToc sections={filteredSections} activeCategory={activeCategory} />
 				</div>
 			</section>
 			<ScrollToTop onScrollToTop={() => sidebarRef.current?.scrollTo({ top: 0, behavior: "smooth" })} />

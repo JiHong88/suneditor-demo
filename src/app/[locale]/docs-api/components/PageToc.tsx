@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { DocsTocAd } from "@/components/ad/AdBanner";
 
 type TocItem = {
 	id: string;
@@ -72,6 +73,9 @@ export default function PageToc({ items, onItemClick }: PageTocProps) {
 						</li>
 					))}
 				</ul>
+			</div>
+			<div className='border-t mt-2.5 px-2'>
+				<DocsTocAd />
 			</div>
 		</nav>
 	);

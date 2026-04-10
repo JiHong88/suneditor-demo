@@ -21,8 +21,14 @@ export function HomeHeroBelowBanner() {
 /** Getting Started — horizontal banner between steps */
 export function GettingStartedMidBanner() {
 	return (
-		<div className="mx-auto w-full max-w-6xl px-6 py-4">
-			<AdSlot slotId="getting-started-mid" className="flex items-center justify-center" />
+		<div className="mx-auto w-full max-w-5xl px-6 py-4 flex items-center justify-center">
+			<AdSlot
+				slotId="getting-started-mid"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "728px", height: "90px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }
@@ -41,6 +47,36 @@ export function DocsSidebarAd() {
 	return (
 		<div className="w-full py-4">
 			<AdSlot slotId="docs-sidebar" adFormat="vertical" fullWidthResponsive={false} />
+		</div>
+	);
+}
+
+/** Docs API — small rectangle ad below PageToc */
+export function DocsTocAd() {
+	return (
+		<div className="w-full py-4">
+			<AdSlot
+				slotId="docs-toc"
+				adFormat="rectangle"
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "192px", height: "160px" }}
+				className="flex items-center justify-center"
+			/>
+		</div>
+	);
+}
+
+/** Playground — thin horizontal banner between editor and code panel */
+export function PlaygroundMidBanner() {
+	return (
+		<div className="mx-auto w-full max-w-5xl px-6 py-4 flex items-center justify-center">
+			<AdSlot
+				slotId="playground-mid"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "728px", height: "90px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }

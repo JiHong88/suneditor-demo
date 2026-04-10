@@ -33,6 +33,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
+import { GettingStartedMidBanner } from "@/components/ad/AdBanner";
 
 /* ── Plugin icon/config data (non-translatable) ──────── */
 
@@ -223,6 +224,8 @@ export default function PluginGuidePage() {
 						</CardContent>
 					</Card>
 				</motion.section>
+
+				<GettingStartedMidBanner />
 
 				{/* ── Custom Plugin Guide ─────────────────────── */}
 				<motion.section

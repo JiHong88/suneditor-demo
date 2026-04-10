@@ -10,6 +10,7 @@ import { getLocale } from "next-intl/server";
 import { FooterBanner } from "@/components/ad/AdBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -67,21 +68,7 @@ export default async function RootLayout({
 						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.classList.toggle('dark',t==='dark')}catch(_){}})()`,
 					}}
 				/>
-				{/* Google Analytics */}
-				<script async src='https://www.googletagmanager.com/gtag/js?id=G-46DGRE73QC' />
-				<script
-					id='ga-init'
-					dangerouslySetInnerHTML={{
-						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-46DGRE73QC');`,
-					}}
-				/>
-				{/* Google AdSense */}
-				<script
-					async
-					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933506635175446'
-					crossOrigin='anonymous'
-				></script>
-			</head>
+				</head>
 
 			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
 				<NextIntlClientProvider>
@@ -104,6 +91,17 @@ export default async function RootLayout({
 				</NextIntlClientProvider>
 				<Analytics />
 				<SpeedInsights />
+				{/* Google Analytics */}
+				<Script src='https://www.googletagmanager.com/gtag/js?id=G-46DGRE73QC' strategy='afterInteractive' />
+				<Script id='ga-init' strategy='afterInteractive'>
+					{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-46DGRE73QC');`}
+				</Script>
+				{/* Google AdSense */}
+				<Script
+					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933506635175446'
+					strategy='afterInteractive'
+					crossOrigin='anonymous'
+				/>
 			</body>
 		</html>
 	);

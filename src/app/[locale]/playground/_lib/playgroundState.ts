@@ -897,6 +897,8 @@ const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
 	audioGallery: { audioGallery_url: API_GALLERY_AUDIO } as Partial<PlaygroundState>,
 	fileGallery: { fileGallery_url: API_GALLERY_FILE } as Partial<PlaygroundState>,
 	fileBrowser: { fileBrowser_url: API_GALLERY_BROWSE } as Partial<PlaygroundState>,
+	template: { template_items: ITEM_PRESETS.template_items } as Partial<PlaygroundState>,
+	layout: { layout_items: ITEM_PRESETS.layout_items } as Partial<PlaygroundState>,
 };
 
 /** Field plugins (not button-based) auto-enabled per preset */

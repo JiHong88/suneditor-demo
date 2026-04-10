@@ -29,6 +29,7 @@ import PlaygroundEditor from "./_components/PlaygroundEditor";
 import PlaygroundCodePanel from "./_components/PlaygroundCodePanel";
 import { type AllLibs, loadAllExternalLibs } from "./_components/externalLibsLoader";
 import FileListPanel, { useFileList } from "@/components/editor/FileListPanel";
+import { PlaygroundMidBanner } from "@/components/ad/AdBanner";
 
 const PlaygroundMultiRootEditor = dynamic(() => import("./_components/PlaygroundMultiRootEditor"), { ssr: false });
 const ButtonListBuilder = dynamic(() => import("./_components/button-list-builder/ButtonListBuilder"), { ssr: false });
@@ -378,6 +379,9 @@ export default function PlaygroundPage() {
 
 						{/* File List Panel */}
 						<FileListPanel files={files} />
+
+						{/* Ad */}
+						<PlaygroundMidBanner />
 
 						{/* Code Panel */}
 						<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
