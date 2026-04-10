@@ -98,8 +98,15 @@ export default function MarkdownRenderer({ content, className }: Props) {
 						const resolvedSrc = s.startsWith("http")
 							? s
 							: `https://raw.githubusercontent.com/JiHong88/SunEditor/master/${s.replace(/^\.\//, "")}`;
-						// eslint-disable-next-line @next/next/no-img-element
-						return <img src={resolvedSrc} alt={alt ?? ""} loading='lazy' />;
+						return (
+							// eslint-disable-next-line @next/next/no-img-element
+							<img
+								src={resolvedSrc}
+								alt={alt ?? ""}
+								loading='lazy'
+								className='max-w-full h-auto [content-visibility:auto] [contain-intrinsic-size:0_300px]'
+							/>
+						);
 					},
 				}}
 			>

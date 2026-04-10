@@ -58,27 +58,18 @@ export default function CodeBlock({ code, lang = "javascript", className }: Code
 		}
 	}, []);
 
-	if (!html) {
-		return (
-			<pre
-				ref={ref as React.RefObject<HTMLPreElement>}
-				tabIndex={0}
-				onKeyDown={handleKeyDown}
-				className={className}
-				style={{ padding: "1rem", fontSize: "0.75rem", lineHeight: 1.7, overflow: "auto" }}
-			>
-				<code>{code}</code>
-			</pre>
-		);
-	}
-
 	return (
 		<div
 			ref={ref as React.RefObject<HTMLDivElement>}
 			tabIndex={0}
 			onKeyDown={handleKeyDown}
 			className={`[&_pre]:overflow-x-auto [&_pre]:p-4 [&_pre]:text-xs [&_pre]:leading-[1.7] ${className ?? ""}`}
-			dangerouslySetInnerHTML={{ __html: html }}
-		/>
+		>
+			{html ? (
+				<div dangerouslySetInnerHTML={{ __html: html }} />
+			) : (
+				<pre><code>{code}</code></pre>
+			)}
+		</div>
 	);
 }

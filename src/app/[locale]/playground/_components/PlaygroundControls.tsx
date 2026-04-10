@@ -1,8 +1,8 @@
 "use client";
 
-import { type Dispatch, useState, useEffect, useRef } from "react";
+import { type Dispatch, useState, useEffect, useRef, createContext, useContext } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronRight, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { ChevronRight, ChevronDown, SlidersHorizontal, Search, X } from "lucide-react";
 import LangDropdown, { type LangOption } from "@/components/common/LangDropdown";
 import FlagIcon from "@/components/common/FlagIcon";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -22,6 +22,15 @@ type Props = {
 	state: PlaygroundState;
 	dispatch: Dispatch<PlaygroundAction>;
 };
+
+/* ── Option search filter ─────────────────────────────── */
+const FilterCtx = createContext("");
+
+function useOptionFilter(label: string): boolean {
+	const q = useContext(FilterCtx);
+	if (!q) return true;
+	return label.toLowerCase().includes(q.toLowerCase());
+}
 
 /* ── Reusable field components ─────────────────────────── */
 
@@ -147,6 +156,8 @@ const MODES = [
 ] as const;
 
 function ModeSelector({ value, onChange, resettable }: { value: string; onChange: (v: string) => void; resettable?: boolean }) {
+	const visible = useOptionFilter("mode");
+	if (!visible) return null;
 	return (
 		<div className='flex flex-col gap-1.5'>
 			<FieldLabel label='mode' resettable={resettable} />
@@ -192,6 +203,8 @@ function SelectField({
 	onChange: (v: string) => void;
 	resettable?: boolean;
 }) {
+	const visible = useOptionFilter(label);
+	if (!visible) return null;
 	return (
 		<label className='flex flex-col gap-1'>
 			<FieldLabel label={label} resettable={resettable} />
@@ -223,11 +236,13 @@ function TextInput({
 	placeholder?: string;
 	resettable?: boolean;
 }) {
+	const visible = useOptionFilter(label);
 	const [local, setLocal] = useState(value);
 	const focusedRef = useRef(false);
 	useEffect(() => {
 		if (!focusedRef.current) setLocal(value);
 	}, [value]);
+	if (!visible) return null;
 	return (
 		<label className='flex flex-col gap-1'>
 			<FieldLabel label={label} resettable={resettable} />
@@ -262,11 +277,13 @@ function NumberInput({
 	placeholder?: string;
 	resettable?: boolean;
 }) {
+	const visible = useOptionFilter(label);
 	const [local, setLocal] = useState(value ?? "");
 	const focusedRef = useRef(false);
 	useEffect(() => {
 		if (!focusedRef.current) setLocal(value ?? "");
 	}, [value]);
+	if (!visible) return null;
 	return (
 		<label className='flex flex-col gap-1'>
 			<FieldLabel label={label} resettable={resettable} />
@@ -302,6 +319,8 @@ function SwitchField({
 	resettable?: boolean;
 	description?: string;
 }) {
+	const visible = useOptionFilter(label);
+	if (!visible) return null;
 	return (
 		<label className='flex items-start justify-between gap-2 py-0.5'>
 			<span className='min-w-0'>
@@ -339,11 +358,13 @@ function TextareaField({
 	resettable?: boolean;
 	description?: string;
 }) {
+	const visible = useOptionFilter(label);
 	const [local, setLocal] = useState(value);
 	const focusedRef = useRef(false);
 	useEffect(() => {
 		if (!focusedRef.current) setLocal(value);
 	}, [value]);
+	if (!visible) return null;
 	return (
 		<label className='flex flex-col gap-1'>
 			<FieldLabel label={label} resettable={resettable} description={description} />
@@ -383,6 +404,8 @@ function ContainerField({
 	disabled?: boolean;
 	disabledReason?: string;
 }) {
+	const visible = useOptionFilter(label);
+	if (!visible) return null;
 	return (
 		<div className={`flex flex-col gap-1.5 py-0.5 ${disabled ? "opacity-40" : ""}`}>
 			<div className='flex items-start justify-between gap-2'>
@@ -419,7 +442,9 @@ const SHORTCUTS_DEFAULT = '{"bold":["c+KeyB","B"],"_h1":["c+s+Digit1+$~blockStyl
 
 /** Toggle for shortcuts option — OFF clears value, ON auto-fills default JSON */
 function ShortcutsField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+	const visible = useOptionFilter("shortcuts");
 	const checked = !!value;
+	if (!visible) return null;
 	return (
 		<div className='flex flex-col gap-1.5 py-0.5'>
 			<div className='flex items-start justify-between gap-2'>
@@ -447,8 +472,10 @@ function ShortcutsField({ value, onChange }: { value: string; onChange: (v: stri
 
 /** Disabled option indicator — shown for options that can't be configured in playground */
 function DisabledField({ label, reason }: { label: string; reason?: string }) {
+	const visible = useOptionFilter(label);
 	const optDesc = useOptDesc();
 	const desc = optDesc[label]?.description;
+	if (!visible) return null;
 	return (
 		<div className='flex items-center justify-between gap-2 py-0.5 opacity-40'>
 			<span className='flex items-center gap-1.5 text-[11px] text-muted-foreground'>
@@ -488,8 +515,10 @@ function LangSelectField({
 	onChange: (v: string) => void;
 	resettable?: boolean;
 }) {
+	const visible = useOptionFilter("lang");
 	const current = LANG_OPTIONS.find((o) => o.value === value);
 
+	if (!visible) return null;
 	return (
 		<div className='flex flex-col gap-1'>
 			<FieldLabel label='lang' resettable={resettable} />
@@ -546,6 +575,8 @@ function TypeToggleField({
 	onChange: (v: string) => void;
 	resettable?: boolean;
 }) {
+	const visible = useOptionFilter("type");
+	if (!visible) return null;
 	// parse current value
 	const lower = value.toLowerCase();
 	const isDocument = lower.startsWith("document");
@@ -813,15 +844,59 @@ function useSet(dispatch: Dispatch<PlaygroundAction>) {
 
 /* ── Main component ────────────────────────────────────── */
 
+const ALL_SECTIONS = ["mode-theme", "layout", "toolbar", "statusbar", "content", "features", "filtering", "format-extensions"];
+
+const SECTION_LABELS: Record<string, string[]> = {
+	"mode-theme": ["mode", "buttonList", "theme", "lang", "textDirection", "type", "reverseButtons", "v2Migration", "icons", "iframe", "iframe_fullPage", "iframe_cssFileName", "iframe_attributes", "subToolbar", "subToolbar.buttonList", "subToolbar.mode", "subToolbar.width"],
+	layout: ["width", "height", "minWidth", "maxWidth", "minHeight", "maxHeight", "editorStyle"],
+	toolbar: ["toolbar_width", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
+	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "statusbar_container"],
+	content: ["placeholder", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
+	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
+	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "spanStyles", "lineStyles", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
+	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
+};
+
+function sectionHasMatch(query: string, sectionId: string): boolean {
+	if (!query) return true;
+	const labels = SECTION_LABELS[sectionId];
+	if (!labels) return true;
+	const q = query.toLowerCase();
+	return labels.some((l) => l.toLowerCase().includes(q));
+}
+
 export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: Props & { onOpenBuilder?: () => void }) {
 	const t = useTranslations("Playground");
 	const set = useSet(dispatch);
 	const isMultirootClassic = state.multiroot && state.mode === "classic";
+	const [filterQuery, setFilterQuery] = useState("");
+	const [openSections, setOpenSections] = useState<string[]>(["mode-theme"]);
+	const isFiltering = filterQuery.length > 0;
 
 	return (
-		<Accordion type='multiple' defaultValue={["mode-theme"]} className='w-full'>
+		<FilterCtx.Provider value={filterQuery}>
+		<div className='relative px-3 pt-3 pb-2'>
+			<Search className='absolute left-5 top-1/2 -translate-y-1/2 mt-0.5 h-3.5 w-3.5 text-muted-foreground' />
+			<input
+				type='text'
+				value={filterQuery}
+				onChange={(e) => setFilterQuery(e.target.value)}
+				placeholder={t("searchOptions")}
+				className='w-full h-9 rounded-lg border-2 border-muted-foreground/20 bg-muted/40 pl-8 pr-8 text-xs outline-none focus:border-primary focus:bg-background focus:ring-2 focus:ring-ring placeholder:text-muted-foreground/60 transition-colors'
+			/>
+			{filterQuery && (
+				<button
+					type='button'
+					onClick={() => setFilterQuery("")}
+					className='absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground cursor-pointer'
+				>
+					<X className='h-3.5 w-3.5' />
+				</button>
+			)}
+		</div>
+		<Accordion type='multiple' value={isFiltering ? ALL_SECTIONS.filter((s) => sectionHasMatch(filterQuery, s)) : openSections} onValueChange={isFiltering ? undefined : setOpenSections} className='w-full'>
 			{/* Mode & Theme */}
-			<AccordionItem value='mode-theme'>
+			{sectionHasMatch(filterQuery, "mode-theme") && <AccordionItem value='mode-theme'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-amber-700 dark:text-amber-400'>
 					{t("sections.modeTheme")}
 				</AccordionTrigger>
@@ -929,6 +1004,41 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							description={t("iconsDesc")}
 						/>
 					</div>
+					{/* iframe */}
+					<div className='mt-4 pt-3 border-t grid gap-2'>
+						<SwitchField
+							label='iframe'
+							checked={state.iframe}
+							onChange={set("iframe")}
+							resettable={!isFixedOption("iframe")}
+						/>
+						{state.iframe && (
+							<>
+								<SwitchField
+									label='iframe_fullPage'
+									checked={state.iframe_fullPage}
+									onChange={set("iframe_fullPage")}
+									resettable={!isFixedOption("iframe_fullPage")}
+								/>
+								<div className='grid grid-cols-2 gap-3'>
+									<TextInput
+										label='iframe_cssFileName'
+										value={state.iframe_cssFileName}
+										onChange={set("iframe_cssFileName")}
+										placeholder='suneditor'
+										resettable={!isFixedOption("iframe_cssFileName")}
+									/>
+									<TextInput
+										label='iframe_attributes'
+										value={state.iframe_attributes}
+										onChange={set("iframe_attributes")}
+										placeholder='{"key":"value"}'
+										resettable={!isFixedOption("iframe_attributes")}
+									/>
+								</div>
+							</>
+						)}
+					</div>
 					{/* Sub-Toolbar */}
 					<div className='mt-4 pt-3 border-t'>
 						<SwitchField
@@ -975,10 +1085,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						</div>
 					)}
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Layout & Sizing */}
-			<AccordionItem value='layout'>
+			{sectionHasMatch(filterQuery, "layout") && <AccordionItem value='layout'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-sky-700 dark:text-sky-400'>
 					{t("sections.layoutSizing")}
 				</AccordionTrigger>
@@ -1037,10 +1147,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Toolbar */}
-			<AccordionItem value='toolbar'>
+			{sectionHasMatch(filterQuery, "toolbar") && <AccordionItem value='toolbar'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-sky-700 dark:text-sky-400'>
 					{t("sections.toolbar")}
 				</AccordionTrigger>
@@ -1097,10 +1207,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Statusbar & Counter */}
-			<AccordionItem value='statusbar'>
+			{sectionHasMatch(filterQuery, "statusbar") && <AccordionItem value='statusbar'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-sky-700 dark:text-sky-400'>
 					{t("sections.statusbarCounter")}
 				</AccordionTrigger>
@@ -1171,10 +1281,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Content & Behavior */}
-			<AccordionItem value='content'>
+			{sectionHasMatch(filterQuery, "content") && <AccordionItem value='content'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-teal-700 dark:text-teal-400'>
 					{t("sections.contentBehavior")}
 				</AccordionTrigger>
@@ -1187,40 +1297,6 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							resettable={!isFixedOption("placeholder")}
 						/>
 					</div>
-					<div className='mt-3 grid gap-2'>
-						<SwitchField
-							label='iframe'
-							checked={state.iframe}
-							onChange={set("iframe")}
-							resettable={!isFixedOption("iframe")}
-						/>
-						{state.iframe && (
-							<SwitchField
-								label='iframe_fullPage'
-								checked={state.iframe_fullPage}
-								onChange={set("iframe_fullPage")}
-								resettable={!isFixedOption("iframe_fullPage")}
-							/>
-						)}
-					</div>
-					{state.iframe && (
-						<div className='mt-3 grid grid-cols-2 gap-3'>
-							<TextInput
-								label='iframe_cssFileName'
-								value={state.iframe_cssFileName}
-								onChange={set("iframe_cssFileName")}
-								placeholder='suneditor'
-								resettable={!isFixedOption("iframe_cssFileName")}
-							/>
-							<TextInput
-								label='iframe_attributes'
-								value={state.iframe_attributes}
-								onChange={set("iframe_attributes")}
-								placeholder='{"key":"value"}'
-								resettable={!isFixedOption("iframe_attributes")}
-							/>
-						</div>
-					)}
 					<div className='mt-3'>
 						<TextInput
 							label='editableFrameAttributes'
@@ -1273,10 +1349,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Features */}
-			<AccordionItem value='features'>
+			{sectionHasMatch(filterQuery, "features") && <AccordionItem value='features'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-teal-700 dark:text-teal-400'>
 					{t("sections.features")}
 				</AccordionTrigger>
@@ -1391,10 +1467,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Filtering (Advanced) */}
-			<AccordionItem value='filtering'>
+			{sectionHasMatch(filterQuery, "filtering") && <AccordionItem value='filtering'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-muted-foreground/60'>
 					{t("sections.filtering")}
 				</AccordionTrigger>
@@ -1597,10 +1673,10 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						<DisabledField label='allowedExtraTags' reason='Object' />
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 
 			{/* Format Extensions (Advanced) */}
-			<AccordionItem value='format-extensions'>
+			{sectionHasMatch(filterQuery, "format-extensions") && <AccordionItem value='format-extensions'>
 				<AccordionTrigger className='text-sm font-semibold px-3 text-muted-foreground/60'>
 					{t("sections.formatExtensions")}
 				</AccordionTrigger>
@@ -1651,8 +1727,9 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						<p className='text-[10px] text-muted-foreground/70'>{t("builtIn")} TH|TD</p>
 					</div>
 				</AccordionContent>
-			</AccordionItem>
+			</AccordionItem>}
 		</Accordion>
+		</FilterCtx.Provider>
 	);
 }
 

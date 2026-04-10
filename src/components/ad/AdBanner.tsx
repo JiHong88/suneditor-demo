@@ -36,8 +36,14 @@ export function GettingStartedMidBanner() {
 /** Feature Demo — square ad between catalog and CTA */
 export function FeatureMidAd() {
 	return (
-		<div className="mx-auto w-full max-w-md px-6 py-4">
-			<AdSlot slotId="feature-mid" adFormat="rectangle" fullWidthResponsive={false} className="flex items-center justify-center" />
+		<div className="mx-auto w-full max-w-md px-6 py-4 flex items-center justify-center">
+			<AdSlot
+				slotId="feature-mid"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "300px", height: "250px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }
@@ -45,8 +51,14 @@ export function FeatureMidAd() {
 /** Docs API — vertical ad in sidebar area */
 export function DocsSidebarAd() {
 	return (
-		<div className="w-full py-4">
-			<AdSlot slotId="docs-sidebar" adFormat="vertical" fullWidthResponsive={false} />
+		<div className="w-full py-4 flex items-center justify-center">
+			<AdSlot
+				slotId="docs-sidebar"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "160px", height: "600px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }
@@ -84,8 +96,14 @@ export function PlaygroundMidBanner() {
 /** Footer banner — shown above footer on all pages */
 export function FooterBanner() {
 	return (
-		<div className="mx-auto w-full max-w-5xl px-4 py-3">
-			<AdSlot slotId="footer-banner" className="flex items-center justify-center" />
+		<div className="mx-auto w-full max-w-5xl px-4 py-3 flex items-center justify-center">
+			<AdSlot
+				slotId="footer-banner"
+				adFormat=""
+				fullWidthResponsive={false}
+				adStyle={{ width: "100%", maxWidth: "970px", height: "90px" }}
+				className="flex items-center justify-center"
+			/>
 		</div>
 	);
 }

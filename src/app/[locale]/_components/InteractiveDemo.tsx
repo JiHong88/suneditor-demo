@@ -71,7 +71,7 @@ const presetDefs: { id: string; tKey: string; options: SunEditorType.InitOptions
 			type: "document:header,page",
 			toolbar_sticky: HEADER_HEIGHT,
 			buttonList: DocumentButtonList,
-			subToolbar: { mode: "balloon-always", buttonList: subButtonList },
+			subToolbar: { mode: "balloon", buttonList: subButtonList },
 		},
 	},
 ];

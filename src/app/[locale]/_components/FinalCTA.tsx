@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, Github } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 

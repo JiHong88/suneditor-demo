@@ -1,3 +1,5 @@
+"use client";
+
 import { Package, Puzzle, Languages, Blocks, FileCode } from "lucide-react";
 import { useTranslations } from "next-intl";
 
