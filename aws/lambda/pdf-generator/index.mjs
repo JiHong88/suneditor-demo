@@ -59,10 +59,16 @@ export async function handler(event) {
 		// Wait for network idle
 		await Promise.race([
 			new Promise((r) => setTimeout(r, 10000)),
-			(async () => { while (pendingRequests.size > 0) await new Promise((r) => setTimeout(r, 100)); })(),
+			(async () => {
+				while (pendingRequests.size > 0) await new Promise((r) => setTimeout(r, 100));
+			})(),
 		]);
 
-		try { await waitForMediaLoad(page); } catch (e) { console.error("media load error:", e); }
+		try {
+			await waitForMediaLoad(page);
+		} catch (e) {
+			console.error("media load error:", e);
+		}
 
 		await page.emulateMediaType("print");
 

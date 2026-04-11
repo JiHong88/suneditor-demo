@@ -2,8 +2,11 @@
 set -euo pipefail
 
 FUNCTION_NAME="suneditor-pdf-generator"
-REGION="${AWS_REGION:-us-east-1}"
+REGION="${AWS_REGION:-ap-northeast-2}"
 ROLE_NAME="${FUNCTION_NAME}-role"
+S3_BUCKET="suneditor-files"
+S3_KEY="lambda/function.zip"
+API_NAME="${FUNCTION_NAME}-api"
 MEMORY=1536
 TIMEOUT=60
 EPHEMERAL_STORAGE=1024
@@ -13,6 +16,9 @@ ARCHITECTURE="x86_64"
 echo "=== Building Lambda package ==="
 npm ci --omit=dev
 zip -r -q function.zip index.mjs node_modules package.json
+
+echo "=== Uploading to S3 ==="
+aws s3 cp function.zip "s3://${S3_BUCKET}/${S3_KEY}" --region "$REGION"
 
 echo "=== Checking IAM role ==="
 ROLE_ARN=$(aws iam get-role --role-name "$ROLE_NAME" --query 'Role.Arn' --output text 2>/dev/null || true)
@@ -50,14 +56,15 @@ if [ -z "$EXISTING" ]; then
     --memory-size "$MEMORY" \
     --timeout "$TIMEOUT" \
     --ephemeral-storage "Size=$EPHEMERAL_STORAGE" \
-    --zip-file fileb://function.zip \
+    --code S3Bucket="$S3_BUCKET",S3Key="$S3_KEY" \
     --role "$ROLE_ARN" \
     --region "$REGION"
 else
   echo "Updating function..."
   aws lambda update-function-code \
     --function-name "$FUNCTION_NAME" \
-    --zip-file fileb://function.zip \
+    --s3-bucket "$S3_BUCKET" \
+    --s3-key "$S3_KEY" \
     --region "$REGION"
 
   # Wait for update to complete before updating config
@@ -72,48 +79,68 @@ else
     --region "$REGION"
 fi
 
-echo "=== Configuring Function URL ==="
-FUNC_URL=$(aws lambda get-function-url-config --function-name "$FUNCTION_NAME" --region "$REGION" 2>/dev/null || true)
+echo "=== Configuring API Gateway ==="
+API_ID=$(aws apigatewayv2 get-apis --region "$REGION" \
+  --query "Items[?Name=='${API_NAME}'].ApiId" --output text 2>/dev/null || true)
 
-if [ -z "$FUNC_URL" ]; then
-  aws lambda add-permission \
-    --function-name "$FUNCTION_NAME" \
-    --statement-id "FunctionURLAllowPublicAccess" \
-    --action "lambda:InvokeFunctionUrl" \
-    --principal "*" \
-    --function-url-auth-type NONE \
-    --region "$REGION" 2>/dev/null || true
+LAMBDA_ARN="arn:aws:lambda:${REGION}:$(aws sts get-caller-identity --query Account --output text):function:${FUNCTION_NAME}"
 
-  FUNC_URL=$(aws lambda create-function-url-config \
-    --function-name "$FUNCTION_NAME" \
-    --auth-type NONE \
-    --cors '{
+if [ -z "$API_ID" ]; then
+  echo "Creating HTTP API..."
+  API_ID=$(aws apigatewayv2 create-api \
+    --name "$API_NAME" \
+    --protocol-type HTTP \
+    --cors-configuration '{
       "AllowOrigins": ["*"],
       "AllowMethods": ["POST"],
       "AllowHeaders": ["Content-Type"]
     }' \
     --region "$REGION" \
-    --query 'FunctionUrl' --output text)
-else
-  FUNC_URL=$(echo "$FUNC_URL" | python3 -c "import sys,json; print(json.load(sys.stdin)['FunctionUrl'])" 2>/dev/null || echo "$FUNC_URL")
+    --query 'ApiId' --output text)
 
-  aws lambda update-function-url-config \
-    --function-name "$FUNCTION_NAME" \
-    --auth-type NONE \
-    --cors '{
-      "AllowOrigins": ["*"],
-      "AllowMethods": ["POST"],
-      "AllowHeaders": ["Content-Type"]
-    }' \
+  # Create Lambda integration
+  INTEGRATION_ID=$(aws apigatewayv2 create-integration \
+    --api-id "$API_ID" \
+    --integration-type AWS_PROXY \
+    --integration-uri "$LAMBDA_ARN" \
+    --payload-format-version "2.0" \
+    --region "$REGION" \
+    --query 'IntegrationId' --output text)
+
+  # Create POST route
+  aws apigatewayv2 create-route \
+    --api-id "$API_ID" \
+    --route-key "POST /" \
+    --target "integrations/${INTEGRATION_ID}" \
     --region "$REGION" > /dev/null
+
+  # Create default stage with auto-deploy
+  aws apigatewayv2 create-stage \
+    --api-id "$API_ID" \
+    --stage-name '$default' \
+    --auto-deploy \
+    --region "$REGION" > /dev/null
+
+  # Grant API Gateway permission to invoke Lambda
+  aws lambda add-permission \
+    --function-name "$FUNCTION_NAME" \
+    --statement-id "ApiGatewayInvoke" \
+    --action "lambda:InvokeFunction" \
+    --principal apigateway.amazonaws.com \
+    --source-arn "arn:aws:execute-api:${REGION}:$(aws sts get-caller-identity --query Account --output text):${API_ID}/*" \
+    --region "$REGION" 2>/dev/null || true
+else
+  echo "API Gateway already exists: $API_ID"
 fi
+
+API_URL="https://${API_ID}.execute-api.${REGION}.amazonaws.com"
 
 # Cleanup
 rm -f function.zip
 
 echo ""
 echo "=== Done ==="
-echo "Function URL: $FUNC_URL"
+echo "API URL: $API_URL"
 echo ""
 echo "Add this to Vercel environment variables:"
-echo "  PDF_LAMBDA_URL=$FUNC_URL"
+echo "  PDF_LAMBDA_URL=$API_URL"
