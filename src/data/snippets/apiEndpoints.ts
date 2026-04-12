@@ -18,8 +18,8 @@ export const API_GALLERY_AUDIO = "/api/gallery/audio";
 export const API_GALLERY_FILE = "/api/gallery/file";
 export const API_GALLERY_BROWSE = "/api/gallery/browse";
 
-/** 멘션 API */
-export const API_MENTION = "/api/mention";
+/** 자동완성 API */
+export const API_AUTOCOMPLETE = "/api/autocomplete";
 
 /** 다운로드 API */
 export const API_DOWNLOAD_PDF = "/api/download/pdf";

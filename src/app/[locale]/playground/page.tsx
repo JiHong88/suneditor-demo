@@ -69,7 +69,7 @@ const FIXED_RESET_KEYS = new Set([
 	"backgroundColor",
 	"embed",
 	"drawing",
-	"mention",
+	"autocomplete",
 	"math",
 	"link",
 	"exportPDF",

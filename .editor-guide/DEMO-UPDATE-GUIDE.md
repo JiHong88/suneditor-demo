@@ -7,6 +7,7 @@
 
 ## 목차
 
+0. [릴리즈 노트 기반 업데이트 워크플로우](#0-릴리즈-노트-기반-업데이트-워크플로우)
 1. [수정 대상 파일 요약](#1-수정-대상-파일-요약)
 2. [시나리오별 수정 가이드](#2-시나리오별-수정-가이드)
 3. [핵심 개념](#3-핵심-개념)
@@ -15,6 +16,79 @@
 6. [URL 파라미터 시스템](#6-url-파라미터-시스템)
 7. [자동 생성 영역 (참고)](#7-자동-생성-영역-참고)
 8. [테스트](#8-테스트)
+
+---
+
+## 0. 릴리즈 노트 기반 업데이트 워크플로우
+
+suneditor를 업데이트할 때는 **릴리즈 노트를 먼저 확인**하고, 변경 유형별로 적절한 시나리오를 적용한다.
+
+### Step 1: 릴리즈 노트 확인
+
+```bash
+# npm에서 최신 버전 확인
+npm view suneditor version
+
+# 설치 후 GitHub releases에서 릴리즈 노트 확인
+gh api repos/JiHong88/SunEditor/releases --jq '.[] | "\(.tag_name)\n\(.body)\n---"' | head -100
+```
+
+node_modules에 릴리즈 노트 파일이 없으므로 **반드시 GitHub releases API**로 확인한다.
+
+### Step 2: 변경 유형 분류
+
+릴리즈 노트의 각 항목을 아래 유형으로 분류:
+
+| 유형 | 릴리즈 노트 키워드 | 데모 사이트 영향 | 적용 시나리오 |
+|------|-------------------|-----------------|-------------|
+| **Breaking Change** | `⚠️ Breaking`, rename, removed, replaced | 높음 — 즉시 반영 필수 | E (rename), 또는 복합 |
+| **New Option** | new option, added | 중간 — playground에 반영 | B (에디터 옵션) 또는 C (플러그인) |
+| **New Plugin** | new plugin | 높음 — 버튼+옵션+기능데모 | C (새 플러그인) |
+| **New Feature** | new feature (UI) | 중간 — 기능 데모 추가 고려 | A (새 기능) |
+| **Default Change** | default changed | 낮음 — DEFAULTS 값만 수정 | playgroundState.ts만 |
+| **Enhancement** | improve, enhance | 낮음 — 동작 변경 없으면 스킵 | — |
+| **Bugfix** | fix, fixed | 없음 — 데모 수정 불필요 | — |
+
+### Step 3: Breaking Changes 처리 (최우선)
+
+Breaking changes는 **반드시 먼저 처리**한다.
+
+**플러그인 이름 변경 (예: `mention` → `autocomplete`):**
+1. `grep -r "old_name" src/ server/ __tests__/` 로 모든 참조 찾기
+2. 시나리오 E (옵션 이름 변경) 체크리스트 전부 실행
+3. API 라우트, 서비스 파일, 테스트 파일도 리네임
+4. i18n 파일 (messages/*.json, option-descriptions.*.json, api-docs.*.json) 일괄 교체
+5. PARAM_MAP 단축키 변경 (기존 URL 호환 깨짐 — 의도적)
+
+**옵션 구조 변경 (예: flat → nested `triggers` 객체):**
+1. suneditor 소스 (node_modules/suneditor/src/) 또는 타입 정의 확인하여 새 구조 파악
+2. `playgroundState.ts`의 `stateToEditorOptions()` 변환 로직 수정
+3. `codeGenerator.ts`의 코드 생성 로직 수정
+
+**플러그인 삭제/병합:**
+1. editorPresets.ts에서 버튼 제거
+2. buttonCatalog.ts에서 팔레트 제거
+3. playgroundState.ts에서 관련 state/defaults/PARAM_MAP 제거
+4. PlaygroundPluginSidebar.tsx에서 UI 제거
+5. 기능 데모에서 제거
+
+### Step 4: 새 옵션/기능 추가
+
+릴리즈 노트에서 `new option`, `added` 키워드를 찾아 해당 시나리오 적용:
+- 에디터 기본 옵션 → 시나리오 B
+- 플러그인 옵션 → 시나리오 C
+- 새 기능 (데모 필요) → 시나리오 A
+
+### Step 5: 기본값 변경
+
+`default changed` 항목은 `playgroundState.ts`의 `DEFAULTS` 객체만 수정하면 된다.
+
+### Step 6: 테스트 및 검증
+
+```bash
+npm test                # integrity 테스트로 누락 감지
+npm run build:prod      # 빌드 확인 (docs 자동 생성 포함)
+```
 
 ---
 
@@ -43,7 +117,7 @@
 
 > **PlaygroundControls vs PlaygroundPluginSidebar**
 > - **Controls**: 모드, 레이아웃, 툴바, 상태바, 콘텐츠, 기능, 필터링 등 에디터 기본 옵션
-> - **PluginSidebar**: 플러그인별 옵션 (image, video, codeBlock, mention, math 등)
+> - **PluginSidebar**: 플러그인별 옵션 (image, video, codeBlock, autocomplete, math 등)
 
 ---
 
@@ -68,7 +142,7 @@
 export const DEMO_FINDER = `<p>Press <strong>Ctrl+F</strong>...</p>`;
 
 // 2. featureDemoCategories.ts — advanced 카테고리
-features: ["math", "mention", ..., "finder", "charCounter", "undoRedo"]
+features: ["math", "autocomplete", ..., "finder", "charCounter", "undoRedo"]
 
 // 3. featurePlaygroundLinks.ts
 import { ..., DEMO_FINDER } from "@/data/snippets/featureDemoSnippets";
@@ -109,7 +183,7 @@ toolbar, layout, content 등 에디터 기본 옵션을 추가할 때.
 
 // 플러그인 옵션 (nested object)
 { codeBlock: { langs: ["javascript", "python"] } }
-{ mention: { triggerText: "@", limitSize: 5 } }
+{ autocomplete: { limitSize: 5, triggers: { "@": { apiUrl: "..." } } } }
 ```
 
 **체크리스트:**
@@ -294,7 +368,7 @@ fl(
 - `cb.l` — codeBlock.langs
 - `i.uu` — image.uploadUrl
 - `fu.uu` — fileUpload.uploadUrl
-- `mn.au` — mention.apiUrl
+- `ac.au` — autocomplete.apiUrl
 - `ep.au` — exportPDF.apiUrl
 - `cc` — charCounter, `ccm` — charCounter_max
 - `sm` — strictMode
@@ -349,12 +423,12 @@ playground 상태 관리의 핵심.
 
 **옵션 네이밍 규칙:**
 - 에디터 기본 옵션: SunEditor API 그대로 (`toolbar_sticky`, `charCounter_max`)
-- 플러그인 옵션: `플러그인명_옵션명` (`codeBlock_langs`, `mention_triggerText`)
+- 플러그인 옵션: `플러그인명_옵션명` (`codeBlock_langs`, `autocomplete_triggerText`)
 - flat state → 중첩 객체 변환은 `stateToEditorOptions()`에서 처리
 
 **PARAM_MAP 단축키 규칙:**
 - 에디터 기본 옵션: 약어 (`ts` = toolbar_sticky, `m` = mode)
-- 플러그인 옵션: dot notation (`cb.l` = codeBlock_langs, `mn.au` = mention_apiUrl)
+- 플러그인 옵션: dot notation (`cb.l` = codeBlock_langs, `ac.au` = autocomplete_apiUrl)
 - **충돌 검사 필수**: PARAM_MAP 내 grep으로 기존 키 확인
 
 ### `codeGenerator.ts`
@@ -367,14 +441,14 @@ layout → toolbar → subToolbar → statusbar & counter →
 content & behavior → features → filtering →
 Plugin options (pLines[]):
   codeBlock, image, video, audio, embed, drawing,
-  link, mention, math, fileUpload, exportPDF,
+  link, autocomplete, math, fileUpload, exportPDF,
   table, template, layout, galleries
 ```
 
 **플러그인 코드 생성 패턴:**
-- 단순 값: `pluginLines("mention", [["key", value, default], ...])` → `mention: { key: "..." }`
+- 단순 값: `pluginLines("autocomplete", [["key", value, default], ...])` → `autocomplete: { key: "..." }`
 - 배열/복잡 값: 직접 `pLines.push([...])` → `codeBlock: { langs: [...] }`
-- JSON 값: `mergeJsonField(pLines, "mention", "data", rawJson)`
+- JSON 값: `mergeJsonField(pLines, "autocomplete", "data", rawJson)`
 
 **지원 프레임워크:**
 javascript-cdn, javascript-npm, react, vue, angular, svelte, webcomponents
@@ -498,7 +572,7 @@ npm run test:watch  # watch 모드
 __tests__/
 ├── server/
 │   ├── upload.test.ts        — 업로드 검증 (해시, MIME, 크기, 처리)
-│   ├── mention.test.ts       — 멘션 필터, limit
+│   ├── autocomplete.test.ts  — 자동완성 필터, limit
 │   └── download-file.test.ts — path traversal 차단
 ├── playground/
 │   ├── playgroundState.test.ts — URL↔state 변환, 옵션 변환, 프리셋

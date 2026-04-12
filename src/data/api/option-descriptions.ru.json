@@ -512,32 +512,23 @@
   "textStyle_items": {
     "description": "Список элементов текстового стиля."
   },
-  "mention_triggerText": {
-    "description": "Персонаж, который запускает список упоминаний."
+  "autocomplete_delayTime": {
+    "description": "Задержка устранения дребезга в мс перед обработкой ввода."
   },
-  "mention_limitSize": {
-    "description": "Количество элементов для отображения в списке упоминаний"
+  "autocomplete_limitSize": {
+    "description": "Максимальное количество элементов для отображения в раскрывающемся списке."
   },
-  "mention_searchStartLength": {
-    "description": "Количество символов, с которого начинается поиск в списке упоминаний."
+  "autocomplete_searchStartLength": {
+    "description": "Минимальная длина ввода перед запуском поиска."
   },
-  "mention_delayTime": {
-    "description": "Время ожидания перед отображением списка упоминаний"
+  "autocomplete_useCachingData": {
+    "description": "Кэшировать ли ответы на запросы для каждого триггера."
   },
-  "mention_data": {
-    "description": "Статические данные об упоминаниях (используются вместо API)."
+  "autocomplete_useCachingFieldData": {
+    "description": "Кэшировать ли выбранные элементы для приоритетного отображения."
   },
-  "mention_apiUrl": {
-    "description": "URL-адрес для вызова списка упоминаний"
-  },
-  "mention_apiHeaders": {
-    "description": "Заголовки, отправляемые вместе с вызовом API."
-  },
-  "mention_useCachingData": {
-    "description": "Следует ли кэшировать данные списка упоминаний"
-  },
-  "mention_useCachingFieldData": {
-    "description": "Следует ли кэшировать данные списка упоминаний в поле"
+  "autocomplete_triggers": {
+    "description": "Конфигурации для каждого триггера, определяемые символом триггера."
   },
   "fontSize_sizeUnit": {
     "description": "Единица измерения размера шрифта.\n\n- Допустимые значения: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` или `'text'`.\n\n- Если используется `'text'`, применяется список размеров шрифта, основанный на тексте."

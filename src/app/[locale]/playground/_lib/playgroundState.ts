@@ -1,6 +1,6 @@
 import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
 import { HEADER_HEIGHT } from "@/lib/constants";
-import { API_MENTION, API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_GALLERY_IMAGE, API_GALLERY_VIDEO, API_GALLERY_AUDIO, API_GALLERY_FILE, API_GALLERY_BROWSE } from "@/data/snippets/apiEndpoints";
+import { API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_GALLERY_IMAGE, API_GALLERY_VIDEO, API_GALLERY_AUDIO, API_GALLERY_FILE, API_GALLERY_BROWSE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
 
 /* ── Types ─────────────────────────────────────────────── */
@@ -55,6 +55,8 @@ export interface PlaygroundState {
 	charCounter_max: number | null;
 	charCounter_label: string;
 	charCounter_type: "char" | "byte" | "byte-html";
+	wordCounter: boolean;
+	wordCounter_label: string;
 
 	// — Content & Behavior —
 	placeholder: string;
@@ -192,13 +194,13 @@ export interface PlaygroundState {
 	drawing_lineColor: string;
 	drawing_lineReconnect: boolean;
 
-	// — Plugin: Mention —
-	mention_triggerText: string;
-	mention_limitSize: number;
-	mention_delayTime: number;
-	mention_searchStartLength: number;
-	mention_apiUrl: string;
-	mention_useCachingData: boolean;
+	// — Plugin: Autocomplete —
+	autocomplete_limitSize: number;
+	autocomplete_delayTime: number;
+	autocomplete_searchStartLength: number;
+	autocomplete_useCachingData: boolean;
+	autocomplete_useCachingFieldData: boolean;
+	autocomplete_triggers: string;
 
 	// — Plugin: CodeBlock —
 	codeBlock_langs: string;
@@ -258,9 +260,7 @@ export interface PlaygroundState {
 	drawing_maintainRatio: boolean;
 	drawing_formSize: string;
 
-	// — Plugin: Mention (extended) —
-	mention_apiHeaders: string;
-	mention_useCachingFieldData: boolean;
+	// (autocomplete extended fields merged into main section)
 
 	// — Plugin: FontColor (extended) —
 	fontColor_splitNum: number;
@@ -268,8 +268,7 @@ export interface PlaygroundState {
 	// — Plugin: BackgroundColor (extended) —
 	backgroundColor_splitNum: number;
 
-	// — Plugin: Mention (extended2) —
-	mention_data: string;
+	// (autocomplete data moved into triggers)
 
 	// — Plugin: Math (extended) —
 	math_fontSizeList: string;
@@ -346,6 +345,7 @@ export interface PlaygroundState {
 	fileBrowser_thumbnail: string;
 	fileBrowser_data: string;
 	fileBrowser_props: string;
+	fileBrowser_expand: number;
 
 	// — Multi-Root per-root overrides —
 	// Layout
@@ -445,6 +445,8 @@ export const DEFAULTS: PlaygroundState = {
 	charCounter_max: null,
 	charCounter_label: "",
 	charCounter_type: "char",
+	wordCounter: false,
+	wordCounter_label: "",
 
 	placeholder: "",
 	iframe: false,
@@ -577,13 +579,13 @@ export const DEFAULTS: PlaygroundState = {
 	drawing_lineColor: "",
 	drawing_lineReconnect: false,
 
-	// Plugin: Mention
-	mention_triggerText: "@",
-	mention_limitSize: 5,
-	mention_delayTime: 200,
-	mention_searchStartLength: 0,
-	mention_apiUrl: "",
-	mention_useCachingData: true,
+	// Plugin: Autocomplete
+	autocomplete_limitSize: 5,
+	autocomplete_delayTime: 120,
+	autocomplete_searchStartLength: 0,
+	autocomplete_useCachingData: true,
+	autocomplete_useCachingFieldData: true,
+	autocomplete_triggers: "",
 
 	// Plugin: Math
 	codeBlock_langs: "",
@@ -642,10 +644,7 @@ export const DEFAULTS: PlaygroundState = {
 	drawing_maintainRatio: true,
 	drawing_formSize: "",
 
-	// Plugin: Mention (extended)
-	mention_apiHeaders: "",
-	mention_useCachingFieldData: true,
-	mention_data: "",
+	// (autocomplete extended merged into main)
 
 	// Plugin: Math (extended)
 	math_fontSizeList: "",
@@ -728,6 +727,7 @@ export const DEFAULTS: PlaygroundState = {
 	fileBrowser_thumbnail: "",
 	fileBrowser_data: "",
 	fileBrowser_props: "",
+	fileBrowser_expand: 1,
 
 	// Multi-Root per-root overrides
 	root_header_height: "150px",
@@ -797,7 +797,90 @@ export const ITEM_PRESETS: Record<string, string> = {
 	video_ratioOptions: '[{"value":0.5625,"text":"16:9"},{"value":0.75,"text":"4:3"},{"value":1,"text":"1:1"}]',
 	embed_controls: '[["align","revert","edit","copy","remove"]]',
 	drawing_formSize: '{"width":"600px","height":"40vh","minWidth":"200px","minHeight":"150px"}',
-	mention_data: '[{"key":"john","name":"John Doe","url":"/users/john"},{"key":"jane","name":"Jane Smith","url":"/users/jane"}]',
+	autocomplete_triggers: `"@": {
+    limitSize: 5,
+    apiUrl: "/api/autocomplete?name={key}&limit={limitSize}",
+    renderItem: (item) =>
+        \`<div class="se-autocomplete-item">
+            <span>@\${item.key}</span>
+            <span>\${item.name}</span>
+        </div>\`,
+    onSelect: (item, t) => ({
+        tag: "a",
+        attrs: {
+            "data-se-autocomplete": t + item.key,
+            href: item.url,
+            title: item.name,
+            target: "_blank",
+        },
+        text: t + item.key,
+    }),
+},
+":": {
+    searchStartLength: 1,
+    limitSize: 10,
+    useCachingFieldData: false,
+    data: [
+        { key: "smile", value: "😊" },
+        { key: "laugh", value: "😂" },
+        { key: "heart", value: "❤️" },
+        { key: "thumbsup", value: "👍" },
+        { key: "thumbsdown", value: "👎" },
+        { key: "fire", value: "🔥" },
+        { key: "star", value: "⭐" },
+        { key: "check", value: "✅" },
+        { key: "cross", value: "❌" },
+        { key: "warning", value: "⚠️" },
+        { key: "rocket", value: "🚀" },
+        { key: "eyes", value: "👀" },
+        { key: "clap", value: "👏" },
+        { key: "thinking", value: "🤔" },
+        { key: "wave", value: "👋" },
+        { key: "party", value: "🎉" },
+        { key: "cry", value: "😢" },
+        { key: "angry", value: "😡" },
+        { key: "cool", value: "😎" },
+        { key: "sleep", value: "😴" },
+    ],
+    renderItem: (item) =>
+        \`<div class="se-autocomplete-item">
+            <span style="font-size:1.2em">\${item.value}</span>
+            <span>\${item.key}</span>
+        </div>\`,
+    onSelect: (item) => item.value,
+},
+"#": {
+    data: [
+        { key: "javascript", name: "JavaScript" },
+        { key: "typescript", name: "TypeScript" },
+        { key: "html", name: "HTML" },
+        { key: "css", name: "CSS" },
+        { key: "react", name: "React" },
+        { key: "vue", name: "Vue.js" },
+        { key: "angular", name: "Angular" },
+        { key: "nodejs", name: "Node.js" },
+        { key: "python", name: "Python" },
+        { key: "suneditor", name: "SunEditor" },
+        { key: "webdev", name: "Web Development" },
+        { key: "frontend", name: "Frontend" },
+        { key: "backend", name: "Backend" },
+        { key: "database", name: "Database" },
+        { key: "opensource", name: "Open Source" },
+    ],
+    renderItem: (item) =>
+        \`<div class="se-autocomplete-item">
+            <span>#\${item.key}</span>
+            <span>\${item.name}</span>
+        </div>\`,
+    onSelect: (item, t) => ({
+        tag: "span",
+        attrs: {
+            "data-se-autocomplete": t + item.key,
+            style: "color:#1a73e8;font-weight:500",
+        },
+        text: t + item.key,
+    }),
+}`,
 	math_fontSizeList: '[{"text":"1","value":"1em"},{"text":"2","value":"2em"}]',
 	math_formSize: '{"width":"460px","height":"14em","minWidth":"400px","minHeight":"40px"}',
 	link_relList: 'nofollow,noreferrer,noopener',
@@ -868,7 +951,7 @@ const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = [
 
 /** Plugin options are effectively fixed (plugins themselves are fixed) — all plugin-prefixed state keys */
 const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = (Object.keys(DEFAULTS) as (keyof PlaygroundState)[]).filter(
-	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|mention|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|codeBlock|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
+	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|autocomplete|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|codeBlock|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
 );
 
 const FIXED_KEYS = new Set<string>([...FIXED_BASE_KEYS, ...FIXED_FRAME_KEYS, ...FIXED_PLUGIN_KEYS]);
@@ -904,7 +987,7 @@ const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
 /** Field plugins (not button-based) auto-enabled per preset */
 const PRESET_FIELD_OPTIONS: Partial<Record<ButtonListPreset, Partial<PlaygroundState>>> = {
 	full: {
-		mention_apiUrl: API_MENTION,
+		autocomplete_triggers: ITEM_PRESETS.autocomplete_triggers,
 	} as Partial<PlaygroundState>,
 };
 
@@ -1170,6 +1253,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	opts.statusbar_resizeEnable = state.statusbar_resizeEnable;
 	opts.charCounter = state.charCounter;
 	opts.charCounter_type = state.charCounter_type;
+	opts.wordCounter = state.wordCounter;
 
 	// content
 	opts.defaultLineBreakFormat = state.defaultLineBreakFormat;
@@ -1232,6 +1316,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.defaultUrlProtocol) opts.defaultUrlProtocol = state.defaultUrlProtocol;
 	if (state.charCounter_max !== null) opts.charCounter_max = state.charCounter_max;
 	if (state.charCounter_label) opts.charCounter_label = state.charCounter_label;
+	if (state.wordCounter_label) opts.wordCounter_label = state.wordCounter_label;
 	if (state.printClass) opts.printClass = state.printClass;
 	if (state.lineAttrReset) opts.lineAttrReset = state.lineAttrReset;
 	if (state.previewTemplate) opts.previewTemplate = state.previewTemplate;
@@ -1439,17 +1524,23 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.drawing_formSize) { try { drw.formSize = JSON.parse(state.drawing_formSize); } catch { /* skip */ } }
 	if (Object.keys(drw).length) opts.drawing = drw;
 
-	const mnt: Record<string, unknown> = {};
-	if (state.mention_triggerText !== "@") mnt.triggerText = state.mention_triggerText;
-	if (state.mention_limitSize !== 5) mnt.limitSize = state.mention_limitSize;
-	if (state.mention_delayTime !== 200) mnt.delayTime = state.mention_delayTime;
-	if (state.mention_searchStartLength) mnt.searchStartLength = state.mention_searchStartLength;
-	if (state.mention_apiUrl) mnt.apiUrl = state.mention_apiUrl;
-	if (!state.mention_useCachingData) mnt.useCachingData = false;
-	if (state.mention_apiHeaders) { try { mnt.apiHeaders = JSON.parse(state.mention_apiHeaders); } catch { /* skip */ } }
-	if (!state.mention_useCachingFieldData) mnt.useCachingFieldData = false;
-	if (state.mention_data) { try { mnt.data = JSON.parse(state.mention_data); } catch { /* skip */ } }
-	if (Object.keys(mnt).length) opts.mention = mnt;
+	const ac: Record<string, unknown> = {};
+	if (state.autocomplete_limitSize !== 5) ac.limitSize = state.autocomplete_limitSize;
+	if (state.autocomplete_delayTime !== 120) ac.delayTime = state.autocomplete_delayTime;
+	if (state.autocomplete_searchStartLength) ac.searchStartLength = state.autocomplete_searchStartLength;
+	if (!state.autocomplete_useCachingData) ac.useCachingData = false;
+	if (!state.autocomplete_useCachingFieldData) ac.useCachingFieldData = false;
+	if (state.autocomplete_triggers) {
+		try {
+			// JS 객체 문자열 파싱 (함수 포함 가능)
+			const triggers = new Function("return ({" + state.autocomplete_triggers + "})")();
+			ac.triggers = triggers;
+		} catch {
+			// JSON fallback
+			try { ac.triggers = JSON.parse(state.autocomplete_triggers); } catch { /* skip */ }
+		}
+	}
+	if (Object.keys(ac).length) opts.autocomplete = ac;
 
 	const mth: Record<string, unknown> = {};
 	if (!state.math_canResize) mth.canResize = false;
@@ -1564,6 +1655,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.fileBrowser_thumbnail) fbr.thumbnail = state.fileBrowser_thumbnail;
 	if (state.fileBrowser_data) { try { fbr.data = JSON.parse(state.fileBrowser_data); } catch { /* skip */ } }
 	if (state.fileBrowser_props) { try { fbr.props = JSON.parse(state.fileBrowser_props); } catch { /* skip */ } }
+	if (state.fileBrowser_expand !== 1) fbr.expand = state.fileBrowser_expand;
 	if (Object.keys(fbr).length) opts.fileBrowser = fbr;
 
 	return opts;
@@ -1612,6 +1704,7 @@ function buildRootOptions(state: PlaygroundState, prefix: "root_header" | "root_
 		"iframe", "iframe_fullPage",
 		"statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable",
 		"charCounter",
+		"wordCounter",
 	];
 	for (const k of boolKeys) {
 		const v = s(k);
@@ -1721,6 +1814,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	ccm: "charCounter_max",
 	ccl: "charCounter_label",
 	cct: "charCounter_type",
+	wc: "wordCounter",
+	wcl: "wordCounter_label",
 	// Content
 	ph: "placeholder",
 	if: "iframe",
@@ -1843,13 +1938,13 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"dr.r": "drawing_canResize",
 	"dr.clr": "drawing_lineColor",
 	"dr.rc": "drawing_lineReconnect",
-	// Plugin: Mention
-	"mn.t": "mention_triggerText",
-	"mn.l": "mention_limitSize",
-	"mn.d": "mention_delayTime",
-	"mn.ssl": "mention_searchStartLength",
-	"mn.au": "mention_apiUrl",
-	"mn.uc": "mention_useCachingData",
+	// Plugin: Autocomplete
+	"ac.l": "autocomplete_limitSize",
+	"ac.d": "autocomplete_delayTime",
+	"ac.ssl": "autocomplete_searchStartLength",
+	"ac.uc": "autocomplete_useCachingData",
+	"ac.ucfd": "autocomplete_useCachingFieldData",
+	"ac.tr": "autocomplete_triggers",
 	// Plugin: Math
 	"mt.ml": "math_mathLib",
 	"mt.r": "math_canResize",
@@ -1899,10 +1994,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"dr.kft": "drawing_keepFormatType",
 	"dr.mr": "drawing_maintainRatio",
 	"dr.fs": "drawing_formSize",
-	// Plugin: Mention (extended)
-	"mn.ah": "mention_apiHeaders",
-	"mn.ucfd": "mention_useCachingFieldData",
-	"mn.dt": "mention_data",
+	// (autocomplete extended params merged into main section)
 	// Plugin: Math (extended)
 	"mt.fsl": "math_fontSizeList",
 	"mt.fs": "math_formSize",
@@ -1977,6 +2069,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"fb.th": "fileBrowser_thumbnail",
 	"fb.d": "fileBrowser_data",
 	"fb.p": "fileBrowser_props",
+	"fb.e": "fileBrowser_expand",
 };
 
 const REVERSE_PARAM_MAP: Record<string, string> = Object.fromEntries(Object.entries(PARAM_MAP).map(([k, v]) => [v, k]));

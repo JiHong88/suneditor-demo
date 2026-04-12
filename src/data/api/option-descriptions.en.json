@@ -512,32 +512,23 @@
   "textStyle_items": {
     "description": "Text style item list."
   },
-  "mention_triggerText": {
-    "description": "The character that triggers the mention list."
+  "autocomplete_delayTime": {
+    "description": "Debounce delay in ms before processing input."
   },
-  "mention_limitSize": {
-    "description": "The number of items to display in the mention list"
+  "autocomplete_limitSize": {
+    "description": "Maximum number of items to display in the dropdown."
   },
-  "mention_searchStartLength": {
-    "description": "The number of characters to start searching for the mention list"
+  "autocomplete_searchStartLength": {
+    "description": "Minimum input length before triggering search."
   },
-  "mention_delayTime": {
-    "description": "The time to wait before displaying the mention list"
+  "autocomplete_useCachingData": {
+    "description": "Whether to cache query responses per trigger."
   },
-  "mention_data": {
-    "description": "Static mention data (used instead of API)."
+  "autocomplete_useCachingFieldData": {
+    "description": "Whether to cache selected items for priority display."
   },
-  "mention_apiUrl": {
-    "description": "The URL to call the mention list"
-  },
-  "mention_apiHeaders": {
-    "description": "The headers to send with the API call"
-  },
-  "mention_useCachingData": {
-    "description": "Whether to cache the mention list data"
-  },
-  "mention_useCachingFieldData": {
-    "description": "Whether to cache the mention list data in the field"
+  "autocomplete_triggers": {
+    "description": "Per-trigger configurations keyed by trigger character."
   },
   "fontSize_sizeUnit": {
     "description": "The unit for the font size.\n- Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n- If `'text'` is used, a text-based font size list is applied."

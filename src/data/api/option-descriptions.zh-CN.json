@@ -512,32 +512,23 @@
   "textStyle_items": {
     "description": "文本样式项目列表。"
   },
-  "mention_triggerText": {
-    "description": "触发提及列表的角色。"
+  "autocomplete_delayTime": {
+    "description": "处理输入之前的去抖延迟（以毫秒为单位）。"
   },
-  "mention_limitSize": {
-    "description": "提及列表中要显示的项目数量"
+  "autocomplete_limitSize": {
+    "description": "下拉列表中显示的最大项目数。"
   },
-  "mention_searchStartLength": {
-    "description": "开始搜索提及列表的字符数"
+  "autocomplete_searchStartLength": {
+    "description": "触发搜索之前的最小输入长度。"
   },
-  "mention_delayTime": {
-    "description": "显示提及列表前需要等待的时间"
+  "autocomplete_useCachingData": {
+    "description": "是否缓存每个触发器的查询响应。"
   },
-  "mention_data": {
-    "description": "静态提及数据（代替 API 使用）。"
+  "autocomplete_useCachingFieldData": {
+    "description": "是否缓存所选项目以优先显示。"
   },
-  "mention_apiUrl": {
-    "description": "调用提及列表的 URL"
-  },
-  "mention_apiHeaders": {
-    "description": "API 调用中要发送的标头"
-  },
-  "mention_useCachingData": {
-    "description": "是否缓存提及列表数据"
-  },
-  "mention_useCachingFieldData": {
-    "description": "是否缓存字段中的提及列表数据"
+  "autocomplete_triggers": {
+    "description": "由触发字符键入的每触发配置。"
   },
   "fontSize_sizeUnit": {
     "description": "字体大小的单位。\n\n- 可接受的值包括：`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'` 或 `'text'`。\n\n- 如果使用 `'text'`，则应用基于文本的字体大小列表。"

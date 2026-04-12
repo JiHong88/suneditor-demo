@@ -34,7 +34,7 @@ export const FEATURE_CATEGORIES: FeatureCategoryDef[] = [
 	{
 		key: "advanced",
 		color: "text-amber-600 dark:text-amber-400",
-		features: ["math", "mention", "links", "codeView", "markdownView", "codeBlock", "finder", "charCounter", "undoRedo"],
+		features: ["math", "autocomplete", "links", "codeView", "markdownView", "codeBlock", "finder", "charCounter", "undoRedo"],
 	},
 	{
 		key: "modesLayout",

@@ -276,6 +276,9 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.charCounter_max !== null) add("charCounter_max", String(state.charCounter_max));
 	if (state.charCounter_label) add("charCounter_label", `"${state.charCounter_label}"`);
 	if (state.charCounter_type !== "char") add("charCounter_type", `"${state.charCounter_type}"`);
+	// wordCounter
+	if (state.wordCounter) add("wordCounter", "true");
+	if (state.wordCounter_label) add("wordCounter_label", `"${state.wordCounter_label}"`);
 
 	// content
 	if (state.placeholder) add("placeholder", `"${state.placeholder}"`);
@@ -502,18 +505,29 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 		]),
 	);
 	if (state.drawing_formSize) mergeJsonField(pLines, "drawing", "formSize", state.drawing_formSize);
-	pLines.push(
-		pluginLines("mention", [
-			["triggerText", state.mention_triggerText, DEFAULTS.mention_triggerText],
-			["limitSize", state.mention_limitSize, DEFAULTS.mention_limitSize],
-			["delayTime", state.mention_delayTime, DEFAULTS.mention_delayTime],
-			["searchStartLength", state.mention_searchStartLength, DEFAULTS.mention_searchStartLength],
-			["apiUrl", state.mention_apiUrl, DEFAULTS.mention_apiUrl],
-			["useCachingData", state.mention_useCachingData, DEFAULTS.mention_useCachingData],
-			["useCachingFieldData", state.mention_useCachingFieldData, DEFAULTS.mention_useCachingFieldData],
-		]),
-	);
-	if (state.mention_data) mergeJsonField(pLines, "mention", "data", state.mention_data);
+	{
+		const globalLines: string[] = [];
+		if (state.autocomplete_limitSize !== DEFAULTS.autocomplete_limitSize) globalLines.push(`  limitSize: ${state.autocomplete_limitSize},`);
+		if (state.autocomplete_delayTime !== DEFAULTS.autocomplete_delayTime) globalLines.push(`  delayTime: ${state.autocomplete_delayTime},`);
+		if (state.autocomplete_searchStartLength !== DEFAULTS.autocomplete_searchStartLength) globalLines.push(`  searchStartLength: ${state.autocomplete_searchStartLength},`);
+		if (state.autocomplete_useCachingData !== DEFAULTS.autocomplete_useCachingData) globalLines.push(`  useCachingData: ${state.autocomplete_useCachingData},`);
+		if (state.autocomplete_useCachingFieldData !== DEFAULTS.autocomplete_useCachingFieldData) globalLines.push(`  useCachingFieldData: ${state.autocomplete_useCachingFieldData},`);
+		let triggersStr = "";
+		if (state.autocomplete_triggers) {
+			try {
+				const parsed = JSON.parse(state.autocomplete_triggers);
+				triggersStr = JSON.stringify(parsed, null, 6);
+			} catch { /* skip */ }
+		}
+		if (globalLines.length || triggersStr) {
+			const lines = [`autocomplete: {`, ...globalLines];
+			if (triggersStr) {
+				lines.push(`  triggers: ${triggersStr.replace(/\n/g, "\n  ")},`);
+			}
+			lines.push(`},`);
+			pLines.push(lines);
+		}
+	}
 	pLines.push(
 		pluginLines("math", [
 			["canResize", state.math_canResize, DEFAULTS.math_canResize],
@@ -634,6 +648,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			entries: [
 				["url", state.fileBrowser_url, DEFAULTS.fileBrowser_url],
 				["thumbnail", state.fileBrowser_thumbnail, DEFAULTS.fileBrowser_thumbnail],
+				["expand", state.fileBrowser_expand, DEFAULTS.fileBrowser_expand],
 			],
 			jsonFields: [
 				...(state.fileBrowser_data ? [{ key: "data", value: state.fileBrowser_data }] : []),

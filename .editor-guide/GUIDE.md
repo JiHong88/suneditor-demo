@@ -37,7 +37,7 @@ The editor supports a modular plugin architecture where features can be enabled/
 - **Config**: Context providers, option providers, event management
 - **Logic**: DOM operations (selection, format, inline), shell operations (component, history, focus), panel UI (toolbar, menu, viewer)
 - **Event**: Redux-like event orchestration (handlers, reducers, effects)
-- **Plugins**: image, video, link, table, mention, etc.
+- **Plugins**: image, video, link, table, autocomplete, etc.
 - **Modules**: Modal, Controller, Figure, ColorPicker, etc.
 - **Helpers**: DOM utilities, converters, env detection
 
@@ -114,7 +114,7 @@ suneditor/
 │   │   ├── dropdown/        # Dropdown menus (align, font, fontColor, backgroundColor, blockStyle, textStyle, paragraphStyle, lineHeight, hr, layout, list, table/, template)
 │   │   ├── modal/           # Dialog plugins (image/, video/, link, math, audio, drawing, embed)
 │   │   ├── browser/         # Gallery plugins (imageGallery, videoGallery, audioGallery, fileGallery, fileBrowser)
-│   │   ├── field/           # Autocomplete (mention)
+│   │   ├── field/           # Autocomplete (autocomplete)
 │   │   ├── input/           # Toolbar inputs (fontSize, pageNavigator)
 │   │   └── popup/           # Inline controllers (anchor)
 │   ├── modules/             # UI components
@@ -229,7 +229,7 @@ KernelInjector → Base → PluginCommand/PluginModal/PluginDropdown/...
 | **`PluginDropdownFree`** | `dropdown-free` | (none)              | table, fontColor, backgroundColor                     |
 | **`PluginModal`**        | `modal`         | `open()`            | image, video, link, math, audio, drawing, embed       |
 | **`PluginBrowser`**      | `browser`       | `open()`, `close()` | imageGallery, videoGallery, audioGallery, fileGallery |
-| **`PluginField`**        | `field`         | (none)              | mention                                               |
+| **`PluginField`**        | `field`         | (none)              | autocomplete                                          |
 | **`PluginInput`**        | `input`         | (none)              | fontSize, pageNavigator                               |
 | **`PluginPopup`**        | `popup`         | `show()`            | anchor                                                |
 

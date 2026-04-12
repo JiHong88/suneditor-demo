@@ -1,13 +1,14 @@
 /**
- * @fileoverview Mention 플러그인 더미 데이터 생성 및 검색
+ * @fileoverview Autocomplete 플러그인 더미 데이터 생성 및 검색
  *
  * A-Z 알파벳별로 고르게 분포된 사용자 데이터를 생성하고, 이름 기반 검색 제공
  */
 
-interface MentionItem {
+interface AutocompleteItem {
 	key: string;
 	name: string;
 	desc: string;
+	url: string;
 }
 
 const positions = ["Software Engineer", "Project Manager", "Data Scientist", "UX Designer", "Product Manager", "DevOps Engineer", "Frontend Developer", "Backend Developer"];
@@ -46,14 +47,16 @@ function generateKey(name: string): string {
 	return name.toLowerCase().replace(/\s+/g, ".");
 }
 
-function generateData(): MentionItem[] {
-	const data: MentionItem[] = [];
+function generateData(): AutocompleteItem[] {
+	const data: AutocompleteItem[] = [];
 	for (const names of Object.values(namesByLetter)) {
 		for (const name of names) {
+			const key = generateKey(name);
 			data.push({
-				key: generateKey(name),
+				key,
 				name,
 				desc: positions[data.length % positions.length],
+				url: `/usr/${key}`,
 			});
 		}
 	}
@@ -62,8 +65,8 @@ function generateData(): MentionItem[] {
 
 const dummy = generateData();
 
-/** 이름 기반 멘션 데이터 검색 */
-export function getMentions(name: string, limit: number): MentionItem[] {
+/** 이름 기반 자동완성 데이터 검색 */
+export function getAutocompleteSuggestions(name: string, limit: number): AutocompleteItem[] {
 	const q = name.toLowerCase();
 	return dummy.filter((item) => item.name.toLowerCase().includes(q) || item.key.startsWith(q)).slice(0, limit);
 }

@@ -770,6 +770,19 @@ function PerRootFields({
 					onChange={setK("charCounter_type")}
 					resettable={isFixed("charCounter_type")}
 				/>
+				<TriStateField
+					label='wordCounter'
+					value={s("wordCounter")}
+					onChange={setK("wordCounter")}
+					resettable={isFixed("wordCounter")}
+				/>
+				<TextInput
+					label='wordCounter_label'
+					value={s("wordCounter_label")}
+					onChange={setK("wordCounter_label")}
+					placeholder='(inherit)'
+					resettable={isFixed("wordCounter_label")}
+				/>
 			</div>
 			{/* Advanced (collapsible, gray section) */}
 			<details className='mt-4 pt-3 border-t border-dashed border-muted-foreground/20'>
@@ -850,7 +863,7 @@ const SECTION_LABELS: Record<string, string[]> = {
 	"mode-theme": ["mode", "buttonList", "theme", "lang", "textDirection", "type", "reverseButtons", "v2Migration", "icons", "iframe", "iframe_fullPage", "iframe_cssFileName", "iframe_attributes", "subToolbar", "subToolbar.buttonList", "subToolbar.mode", "subToolbar.width"],
 	layout: ["width", "height", "minWidth", "maxWidth", "minHeight", "maxHeight", "editorStyle"],
 	toolbar: ["toolbar_width", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
-	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "statusbar_container"],
+	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
 	content: ["placeholder", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
 	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "spanStyles", "lineStyles", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
@@ -1271,6 +1284,21 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							onChange={(v) => set("charCounter_type")(v as PlaygroundState["charCounter_type"])}
 							resettable={!isFixedOption("charCounter_type")}
 						/>
+						<SwitchField
+							label='wordCounter'
+							checked={state.wordCounter}
+							onChange={set("wordCounter")}
+							resettable={!isFixedOption("wordCounter")}
+						/>
+						{state.wordCounter && (
+							<TextInput
+								label='wordCounter_label'
+								value={state.wordCounter_label}
+								onChange={set("wordCounter_label")}
+								placeholder=''
+								resettable={!isFixedOption("wordCounter_label")}
+							/>
+						)}
 					</div>
 					<div className='mt-3 pt-3 border-t border-dashed border-muted-foreground/20'>
 						<ContainerField

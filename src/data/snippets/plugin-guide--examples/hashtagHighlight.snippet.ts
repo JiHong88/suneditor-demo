@@ -6,7 +6,7 @@ const { converter } = helper;
 /**
  * @class
  * @description PluginField — Responds to editor input events. No toolbar button.
- * Pattern: mention
+ * Pattern: autocomplete
  */
 class HashtagHighlight extends interfaces.PluginField {
   static key = "hashtagHighlight";

@@ -512,32 +512,23 @@
   "textStyle_items": {
     "description": "Liste over tekststilelementer."
   },
-  "mention_triggerText": {
-    "description": "Det tegn, der udløser omtalelisten."
+  "autocomplete_delayTime": {
+    "description": "Debounce forsinkelse i ms før behandling af input."
   },
-  "mention_limitSize": {
-    "description": "Antallet af elementer, der skal vises på omtalelisten"
+  "autocomplete_limitSize": {
+    "description": "Maksimalt antal elementer, der skal vises i rullemenuen."
   },
-  "mention_searchStartLength": {
-    "description": "Antallet af tegn, der skal bruges til at starte søgningen efter omtalelisten"
+  "autocomplete_searchStartLength": {
+    "description": "Minimum inputlængde før udløsning af søgning."
   },
-  "mention_delayTime": {
-    "description": "Ventetiden før visning af omtalelisten"
+  "autocomplete_useCachingData": {
+    "description": "Om forespørgselssvar skal cachelagres pr. trigger."
   },
-  "mention_data": {
-    "description": "Statiske omtaledata (bruges i stedet for API)."
+  "autocomplete_useCachingFieldData": {
+    "description": "Om valgte elementer skal cachelagres til prioritetsvisning."
   },
-  "mention_apiUrl": {
-    "description": "URL'en til at kalde omtalelisten"
-  },
-  "mention_apiHeaders": {
-    "description": "De headere, der skal sendes med API-kaldet"
-  },
-  "mention_useCachingData": {
-    "description": "Om dataene fra omtalelisten skal cache"
-  },
-  "mention_useCachingFieldData": {
-    "description": "Om dataene fra omtalelisten skal cachelagres i feltet"
+  "autocomplete_triggers": {
+    "description": "Per-trigger-konfigurationer tastet af trigger-tegn."
   },
   "fontSize_sizeUnit": {
     "description": "Enheden for skriftstørrelsen.\n- Accepterede værdier inkluderer: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` eller `'text'`.\n- Hvis `'text'` bruges, anvendes en tekstbaseret liste over skriftstørrelser."

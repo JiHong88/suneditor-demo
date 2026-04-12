@@ -95,7 +95,7 @@ const displayGroupDefs: Record<string, DisplayGroupDef> = {
 	},
 	field: {
 		color: "text-rose-600 dark:text-rose-400",
-		plugins: [{ name: "mention", icon: <AtSign className={ICON} />, configurable: true }],
+		plugins: [{ name: "autocomplete", icon: <AtSign className={ICON} />, configurable: true }],
 	},
 };
 

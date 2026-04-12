@@ -512,32 +512,23 @@
   "textStyle_items": {
     "description": "テキスト形式のアイテムリスト。"
   },
-  "mention_triggerText": {
-    "description": "メンションリストのトリガーとなるキャラクター。"
+  "autocomplete_delayTime": {
+    "description": "入力を処理する前のデバウンス遅延 (ミリ秒単位)。"
   },
-  "mention_limitSize": {
-    "description": "メンションリストに表示する項目の数"
+  "autocomplete_limitSize": {
+    "description": "ドロップダウンに表示する項目の最大数。"
   },
-  "mention_searchStartLength": {
-    "description": "メンションリストの検索を開始する文字数"
+  "autocomplete_searchStartLength": {
+    "description": "検索をトリガーする前の最小入力長。"
   },
-  "mention_delayTime": {
-    "description": "メンションリストを表示するまでの待機時間"
+  "autocomplete_useCachingData": {
+    "description": "トリガーごとにクエリ応答をキャッシュするかどうか。"
   },
-  "mention_data": {
-    "description": "静的なメンションデータ（APIの代わりに使用）。"
+  "autocomplete_useCachingFieldData": {
+    "description": "選択したアイテムを優先表示用にキャッシュするかどうか。"
   },
-  "mention_apiUrl": {
-    "description": "メンションリストを呼び出すためのURL"
-  },
-  "mention_apiHeaders": {
-    "description": "API呼び出しで送信するヘッダー"
-  },
-  "mention_useCachingData": {
-    "description": "メンションリストデータをキャッシュするかどうか"
-  },
-  "mention_useCachingFieldData": {
-    "description": "メンションリストデータをフィールドにキャッシュするかどうか"
+  "autocomplete_triggers": {
+    "description": "トリガー文字をキーとしたトリガーごとの設定。"
   },
   "fontSize_sizeUnit": {
     "description": "フォントサイズの単位。\n\n- 指定可能な値は、`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'`、`'text'`です。\n\n- `'text'`を指定した場合、テキストベースのフォントサイズリストが適用されます。"

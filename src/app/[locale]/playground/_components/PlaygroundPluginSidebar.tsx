@@ -11,7 +11,6 @@ import {
 	API_UPLOAD_VIDEO,
 	API_UPLOAD_AUDIO,
 	API_UPLOAD_FILE,
-	API_MENTION,
 	API_DOWNLOAD_PDF,
 } from "@/data/snippets/apiEndpoints";
 
@@ -1573,74 +1572,50 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 					<span className='inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-bold uppercase tracking-widest bg-rose-500/10 text-rose-600 dark:bg-rose-400/15 dark:text-rose-400 border border-rose-300/30 dark:border-rose-400/20 mb-1.5 mt-0.5 select-none'>
 						field
 					</span>
-					{/* Mention */}
-					<AccordionItem value='mention'>
-						<AccordionTrigger className='text-xs font-semibold py-2'>Mention</AccordionTrigger>
+					{/* Autocomplete */}
+					<AccordionItem value='autocomplete'>
+						<AccordionTrigger className='text-xs font-semibold py-2'>Autocomplete</AccordionTrigger>
 						<AccordionContent className='px-1 pb-3'>
 							<div className='space-y-3'>
-								<TextInput
-									label='triggerText'
-									value={state.mention_triggerText}
-									onChange={set("mention_triggerText")}
-									placeholder='@'
-									optionKey='mention_triggerText'
-								/>
 								<NumberInput
 									label='limitSize'
-									value={state.mention_limitSize}
-									onChange={set("mention_limitSize")}
-									optionKey='mention_limitSize'
+									value={state.autocomplete_limitSize}
+									onChange={set("autocomplete_limitSize")}
+									optionKey='autocomplete_limitSize'
 								/>
 								<NumberInput
 									label='delayTime'
-									value={state.mention_delayTime}
-									onChange={set("mention_delayTime")}
-									optionKey='mention_delayTime'
+									value={state.autocomplete_delayTime}
+									onChange={set("autocomplete_delayTime")}
+									optionKey='autocomplete_delayTime'
+								/>
+								<NumberInput
+									label='searchStartLength'
+									value={state.autocomplete_searchStartLength}
+									onChange={set("autocomplete_searchStartLength")}
+									optionKey='autocomplete_searchStartLength'
+								/>
+								<SwitchField
+									label='useCachingData'
+									checked={state.autocomplete_useCachingData}
+									onChange={set("autocomplete_useCachingData")}
+									optionKey='autocomplete_useCachingData'
 								/>
 								<SwitchField
 									label='useCachingFieldData'
-									checked={state.mention_useCachingFieldData}
-									onChange={set("mention_useCachingFieldData")}
-									optionKey='mention_useCachingFieldData'
-								/>
-								<ToggleableTextInput
-									label='apiUrl'
-									value={state.mention_apiUrl}
-									preset={API_MENTION}
-									onChange={set("mention_apiUrl")}
-									placeholder={API_MENTION}
-									optionKey='mention_apiUrl'
+									checked={state.autocomplete_useCachingFieldData}
+									onChange={set("autocomplete_useCachingFieldData")}
+									optionKey='autocomplete_useCachingFieldData'
 								/>
 								<ToggleableTextarea
-									label='data (JSON)'
-									value={state.mention_data}
-									preset={ITEM_PRESETS.mention_data}
-									onChange={set("mention_data")}
-									placeholder='[{"key":"john","name":"John","url":"/users/john"}]'
-									rows={3}
-									optionKey='mention_data'
+									label='triggers (JSON)'
+									value={state.autocomplete_triggers}
+									preset={ITEM_PRESETS.autocomplete_triggers}
+									onChange={set("autocomplete_triggers")}
+									placeholder='{"@":{"apiUrl":"/api/..."}}'
+									rows={6}
+									optionKey='autocomplete_triggers'
 								/>
-								<AdvancedSection label={advLabel}>
-									<NumberInput
-										label='searchStartLength'
-										value={state.mention_searchStartLength}
-										onChange={set("mention_searchStartLength")}
-										optionKey='mention_searchStartLength'
-									/>
-									<TextInput
-										label='apiHeaders'
-										value={state.mention_apiHeaders}
-										onChange={set("mention_apiHeaders")}
-										placeholder='{"Authorization":"..."}'
-										optionKey='mention_apiHeaders'
-									/>
-									<SwitchField
-										label='useCachingData'
-										checked={state.mention_useCachingData}
-										onChange={set("mention_useCachingData")}
-										optionKey='mention_useCachingData'
-									/>
-								</AdvancedSection>
 							</div>
 						</AccordionContent>
 					</AccordionItem>
@@ -1845,6 +1820,12 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									placeholder='["href","data-size","data-name"]'
 									rows={2}
 									optionKey='fileBrowser_props'
+								/>
+								<NumberInput
+									label='expand'
+									value={state.fileBrowser_expand}
+									onChange={set("fileBrowser_expand")}
+									optionKey='fileBrowser_expand'
 								/>
 							</div>
 						</AccordionContent>

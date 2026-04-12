@@ -118,7 +118,7 @@ const PLUGIN_PREFIXES = [
 	{ prefix: "lineHeight_", label: "LineHeight", name: "lineHeight" },
 	{ prefix: "link_", label: "Link", name: "link" },
 	{ prefix: "math_", label: "Math", name: "math" },
-	{ prefix: "mention_", label: "Mention", name: "mention" },
+	{ prefix: "autocomplete_", label: "Autocomplete", name: "autocomplete" },
 	{ prefix: "paragraphStyle_", label: "ParagraphStyle", name: "paragraphStyle" },
 	{ prefix: "table_", label: "Table", name: "table" },
 	{ prefix: "template_", label: "Template", name: "template" },

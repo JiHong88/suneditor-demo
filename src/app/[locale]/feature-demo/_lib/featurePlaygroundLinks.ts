@@ -29,7 +29,7 @@ import {
 	DEMO_BLOCKQUOTE,
 	DEMO_HR,
 	DEMO_MATH,
-	DEMO_MENTION,
+	DEMO_AUTOCOMPLETE,
 	DEMO_LINKS,
 	DEMO_CODE_VIEW,
 	DEMO_MARKDOWN_VIEW,
@@ -50,7 +50,7 @@ import {
 	DEMO_EXPORT_PDF,
 	DEMO_KEYBOARD,
 } from "@/data/snippets/featureDemoSnippets";
-import { API_UPLOAD_IMAGE, API_UPLOAD_FILE, API_MENTION, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
+import { API_UPLOAD_IMAGE, API_UPLOAD_FILE, API_DOWNLOAD_PDF } from "@/data/snippets/apiEndpoints";
 
 export type FeatureLink = {
 	/** URL query string (without leading ?) */
@@ -117,8 +117,56 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 
 	// ── Advanced ──
 	math: fl({ p: "full", val: DEMO_MATH }, [["math"], "|", ["bold", "italic"]]),
-	mention: fl({ p: "full", "mn.au": API_MENTION, val: DEMO_MENTION }, [["bold", "italic"]], {
-		mention: { apiUrl: API_MENTION },
+	autocomplete: fl({ p: "full", val: DEMO_AUTOCOMPLETE }, [["bold", "italic"]], {
+		autocomplete: {
+			triggers: {
+				"@": {
+					limitSize: 5,
+					apiUrl: "/api/autocomplete?name={key}&limit={limitSize}",
+					renderItem: (item: { key: string; name: string }) =>
+						`<div class="se-autocomplete-item">
+							<span>@${item.key}</span>
+							<span>${item.name}</span>
+						</div>`,
+					onSelect: (item: { key: string; name: string; url: string }, t: string) => ({
+						tag: "a",
+						attrs: {
+							"data-se-autocomplete": t + item.key,
+							href: item.url,
+							title: item.name,
+							target: "_blank",
+						},
+						text: t + item.key,
+					}),
+				},
+				":": {
+					searchStartLength: 1,
+					limitSize: 10,
+					useCachingFieldData: false,
+					data: [
+						{ key: "smile", value: "😊" }, { key: "laugh", value: "😂" }, { key: "heart", value: "❤️" },
+						{ key: "thumbsup", value: "👍" }, { key: "fire", value: "🔥" }, { key: "star", value: "⭐" },
+						{ key: "rocket", value: "🚀" }, { key: "party", value: "🎉" }, { key: "thinking", value: "🤔" },
+					],
+					renderItem: (item: { key: string; value: string }) =>
+						`<div class="se-autocomplete-item"><span style="font-size:1.2em">${item.value}</span><span>${item.key}</span></div>`,
+					onSelect: (item: { value: string }) => item.value,
+				},
+				"#": {
+					data: [
+						{ key: "javascript", name: "JavaScript" }, { key: "typescript", name: "TypeScript" },
+						{ key: "react", name: "React" }, { key: "suneditor", name: "SunEditor" },
+					],
+					renderItem: (item: { key: string; name: string }) =>
+						`<div class="se-autocomplete-item"><span>#${item.key}</span><span>${item.name}</span></div>`,
+					onSelect: (item: { key: string }, t: string) => ({
+						tag: "span",
+						attrs: { "data-se-autocomplete": t + item.key, style: "color:#1a73e8;font-weight:500" },
+						text: t + item.key,
+					}),
+				},
+			},
+		},
 	}),
 	links: fl({ p: "standard", val: DEMO_LINKS }, [["link", "anchor"], "|", ["bold", "italic"]]),
 	codeView: fl({ p: "standard", val: DEMO_CODE_VIEW }, [["codeView"], "|", ["bold", "italic", "underline"]]),

@@ -95,8 +95,8 @@ export const DEMO_HR = `<p>Content above the horizontal rule.</p><hr/><p>Content
 /** 수학 공식 (KaTeX) 데모 */
 export const DEMO_MATH = `<p>Click the math button to insert mathematical formulas using KaTeX notation.</p><p>Example: Try inserting a formula like E = mc²</p>`;
 
-/** 멘션(@) 팝업 데모 */
-export const DEMO_MENTION = `<p>Type @ to trigger the mention popup and select a user.</p>`;
+/** 자동완성(@, :, #) 팝업 데모 */
+export const DEMO_AUTOCOMPLETE = `<p>Type <strong>@</strong> to mention a user, <strong>:</strong> to insert an emoji, or <strong>#</strong> to add a hashtag.</p>`;
 
 /** 링크 삽입 데모 */
 export const DEMO_LINKS = `<p>Select text and click the link button: <a href="https://example.com">Example Link</a></p><p>Try creating a new link by selecting this text.</p>`;

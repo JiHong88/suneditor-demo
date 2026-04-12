@@ -104,10 +104,10 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		color: "rose",
 		required: [],
 		uiBehavior: "Responds to editor input events",
-		examples: "mention",
+		examples: "autocomplete",
 		code: CODE_FIELD,
 		demoButtons: ["bold", "italic"],
-		demoHtml: "<p>Field plugins respond to editor input events. Type <strong>@</strong> to trigger mention detection (mention plugin example).</p>",
+		demoHtml: "<p>Field plugins respond to editor input events. Type <strong>@</strong> to trigger autocomplete detection (autocomplete plugin example).</p>",
 	},
 	{
 		className: "PluginInput",
@@ -1902,7 +1902,7 @@ function ExamplesTab({ t, onTryExample }: { t: ReturnType<typeof useTranslations
 							</code>,
 						],
 						[
-							<code key='c0'>mention</code>,
+							<code key='c0'>autocomplete</code>,
 							"Field",
 							<Badge
 								key='b'
@@ -1912,7 +1912,7 @@ function ExamplesTab({ t, onTryExample }: { t: ReturnType<typeof useTranslations
 								Medium
 							</Badge>,
 							<code key='c1' className='text-[11px]'>
-								plugins/field/mention.js
+								plugins/field/autocomplete.js
 							</code>,
 						],
 						[
