@@ -10,7 +10,8 @@ import "suneditor/src/themes/cream.css";
 import dynamic from "next/dynamic";
 import { localeCodes, toEditorCode } from "@/i18n/languages";
 
-const Editor = dynamic(() => import("./_editor"), { ssr: false });
+const EditorPlaceholder = () => <div className="min-h-[200px] rounded-lg bg-muted/40" />;
+const Editor = dynamic(() => import("./_editor"), { ssr: false, loading: EditorPlaceholder });
 
 /** Dynamic import for SunEditor lang packs (accepts BCP 47 locale or editor code) */
 async function loadLangPack(locale: string): Promise<Record<string, string> | undefined> {
@@ -84,7 +85,7 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp,
 		return () => window.removeEventListener("themechange", handler);
 	}, [themeProp]);
 
-	if (!langReady) return null;
+	if (!langReady) return <EditorPlaceholder />;
 
 	return <Editor value={value} options={finalOptions} theme={themeProp ?? autoTheme} onInstance={onInstance} toolbarContainerRef={toolbarContainerRef} statusbarContainerRef={statusbarContainerRef} />;
 };

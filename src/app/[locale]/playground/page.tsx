@@ -354,7 +354,7 @@ export default function PlaygroundPage() {
 						</div>
 
 						{/* Editor — wait until URL params are applied to avoid double creation */}
-						<motion.div id='editor' initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+						<motion.div id='editor' initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ minHeight: 182 }}>
 							{ready &&
 								allLibs &&
 								(state.multiroot ? (

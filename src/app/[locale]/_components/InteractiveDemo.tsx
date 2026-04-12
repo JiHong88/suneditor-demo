@@ -113,7 +113,9 @@ export default function InteractiveDemo() {
 						</button>
 					))}
 				</div>
-				<SunEditor key={activePreset} value={sampleValue} options={preset.options} />
+				<div style={{ minHeight: 258 }}>
+					<SunEditor key={activePreset} value={sampleValue} options={preset.options} />
+				</div>
 			</motion.div>
 		</section>
 	);
