@@ -20,6 +20,20 @@ npm i suneditor@latest
 
 설치 후 현재 버전과 새 버전을 기록한다.
 
+**버전 적용 여부 확인:**
+사용자가 이미 버전 업데이트 후 이 스킬을 호출하는 경우가 있다. 에디터 버전이 데모에 반영됐는지 확인하려면 `api-docs.en.json`의 `version` 필드와 `node_modules/suneditor/package.json`의 `version`을 비교한다:
+
+```bash
+# 데모에 반영된 버전 (api-docs 기준)
+node -e "console.log(require('./src/data/api/api-docs.en.json').version)"
+
+# 실제 설치된 suneditor 버전
+node -e "console.log(require('./node_modules/suneditor/package.json').version)"
+```
+
+- 두 버전이 **같으면**: 이미 docs:generate까지 완료된 상태. 릴리즈 노트 분석부터 진행.
+- 두 버전이 **다르면**: npm 업데이트는 됐지만 문서 반영이 안 된 상태. Step 8(docs:generate)을 반드시 실행해야 한다.
+
 ### 2. 릴리즈 노트 확인
 
 GitHub releases API로 현재 버전 이후의 모든 릴리즈 노트를 확인한다:
@@ -89,14 +103,22 @@ npm test                # integrity 테스트로 누락 감지
 
 모든 코드 변경이 끝난 후 마지막에 실행한다.
 
+**`docs:generate`는 버전 업데이트 시 내용에 상관없이 반드시 실행한다.**
+
 ```bash
-# API 문서 재생성 (suneditor 타입에서 추출)
+# 1) API 문서 재생성 (suneditor 타입에서 추출) — 항상 실행
 npm run docs:generate
+```
 
-# API 문서 번역 (option-descriptions + api-docs)
+실행 후 `git diff`로 변경사항을 확인한다. **변경사항이 있으면** 번역을 실행:
+
+```bash
+# 2) docs:generate에서 변경사항이 있는 경우에만 실행
 npm run docs:translate
+```
 
-# messages/*.json 변경이 있는 경우에만 실행 (i18n 키 추가/변경/삭제 시)
+```bash
+# 3) messages/*.json 변경이 있는 경우에만 실행 (i18n 키 추가/변경/삭제 시)
 npm run messages:translate
 ```
 

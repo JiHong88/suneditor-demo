@@ -1,6 +1,6 @@
 {
-  "version": "3.1.0",
-  "generatedAt": "2026-04-12T04:40:23.317Z",
+  "version": "3.1.1",
+  "generatedAt": "2026-04-14T14:25:35.485Z",
   "structure": {
     "editor": {
       "title": "Editor Instance",
@@ -9721,7 +9721,7 @@
         },
         {
           "name": "AutocompletePluginOptions",
-          "definition": "{\n\t/**\n\t * - Debounce delay in ms before processing input.\n\t */\n\tdelayTime?: number;\n\t/**\n\t * - Maximum number of items to display in the dropdown.\n\t */\n\tlimitSize?: number;\n\t/**\n\t * - Minimum input length before triggering search.\n\t */\n\tsearchStartLength?: number;\n\t/**\n\t * - Whether to cache query responses per trigger.\n\t */\n\tuseCachingData?: boolean;\n\t/**\n\t * - Whether to cache selected items for priority display.\n\t */\n\tuseCachingFieldData?: boolean;\n\t/**\n\t * - Per-trigger configurations keyed by trigger character.\n\t * ```js\n\t * // triggers\n\t * {\n\t * '@': { data: [...], renderItem: (item) => `...` },\n\t * '#': { apiUrl: '/api/tags?q={key}' }\n\t * }\n\t * ```\n\t */\n\ttriggers: {\n\t\t[x: string]: AutocompleteTriggerConfig;\n\t};\n}",
+          "definition": "{\n\t/**\n\t * - Debounce delay in ms before processing input.\n\t */\n\tdelayTime?: number;\n\t/**\n\t * - Maximum number of items to display in the dropdown.\n\t */\n\tlimitSize?: number;\n\t/**\n\t * - Minimum input length before triggering search.\n\t */\n\tsearchStartLength?: number;\n\t/**\n\t * - Whether to cache query responses per trigger.\n\t */\n\tuseCachingData?: boolean;\n\t/**\n\t * - Whether to cache selected items for priority display.\n\t */\n\tuseCachingFieldData?: boolean;\n\t/**\n\t * - Per-trigger configurations keyed by trigger character.\n\t * ```js\n\t * // Basic usage with static data — mention trigger\n\t * const editor = SUNEDITOR.create('#editor', {\n\t * plugins: [autocomplete],\n\t * autocomplete: {\n\t * triggers: {\n\t * '@': {\n\t * data: [\n\t * { key: 'john', name: 'John Doe' },\n\t * { key: 'jane', name: 'Jane Smith' },\n\t * ],\n\t * },\n\t * },\n\t * },\n\t * });\n\t *\n\t * // API-based trigger with custom rendering and selection\n\t * const editor = SUNEDITOR.create('#editor', {\n\t * plugins: [autocomplete],\n\t * autocomplete: {\n\t * delayTime: 200,\n\t * limitSize: 10,\n\t * triggers: {\n\t * '@': {\n\t * apiUrl: '/api/users?q={key}&limit={limitSize}',\n\t * apiHeaders: { Authorization: 'Bearer TOKEN' },\n\t * transformResponse: (json) => json.data.map((u) => ({ key: u.username, name: u.displayName, id: u.id })),\n\t * renderItem: (item) => `<div class=\"user-item\"><strong>${item.key}</strong> <span>${item.name}</span></div>`,\n\t * onSelect: (item, trigger) => ({\n\t * tag: 'a',\n\t * attrs: { href: `/users/${item.id}`, 'data-se-autocomplete': trigger + item.key },\n\t * text: trigger + item.key,\n\t * }),\n\t * },\n\t * '#': {\n\t * apiUrl: '/api/tags?q={key}',\n\t * transformResponse: (json) => json.tags,\n\t * searchStartLength: 2,\n\t * useCachingData: false,\n\t * },\n\t * },\n\t * },\n\t * });\n\t * ```\n\t */\n\ttriggers: {\n\t\t[x: string]: AutocompleteTriggerConfig;\n\t};\n}",
           "kind": "type",
           "memberDescriptions": {
             "delayTime": "- Debounce delay in ms before processing input.",
@@ -9729,7 +9729,7 @@
             "searchStartLength": "- Minimum input length before triggering search.",
             "useCachingData": "- Whether to cache query responses per trigger.",
             "useCachingFieldData": "- Whether to cache selected items for priority display.",
-            "triggers": "- Per-trigger configurations keyed by trigger character. ```js // triggers { '@': { data: [...], renderItem: (item) => `...` }, '#': { apiUrl: '/api/tags?q={key}' } } ```"
+            "triggers": "- Per-trigger configurations keyed by trigger character. ```js // Basic usage with static data — mention trigger const editor = SUNEDITOR.create('#editor', { plugins: [autocomplete], autocomplete: { triggers: { '@': { data: [ { key: 'john', name: 'John Doe' }, { key: 'jane', name: 'Jane Smith' }, ], }, }, }, }); // API-based trigger with custom rendering and selection const editor = SUNEDITOR.create('#editor', { plugins: [autocomplete], autocomplete: { delayTime: 200, limitSize: 10, triggers: { '@': { apiUrl: '/api/users?q={key}&limit={limitSize}', apiHeaders: { Authorization: 'Bearer TOKEN' }, transformResponse: (json) => json.data.map((u) => ({ key: u.username, name: u.displayName, id: u.id })), renderItem: (item) => `<div class=\"user-item\"><strong>${item.key}</strong> <span>${item.name}</span></div>`, onSelect: (item, trigger) => ({ tag: 'a', attrs: { href: `/users/${item.id}`, 'data-se-autocomplete': trigger + item.key }, text: trigger + item.key, }), }, '#': { apiUrl: '/api/tags?q={key}', transformResponse: (json) => json.tags, searchStartLength: 2, useCachingData: false, }, }, }, }); ```"
           },
           "source": "plugins/field/autocomplete.d.ts"
         },
