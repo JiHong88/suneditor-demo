@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Meghatározza az egyes címkékhez engedélyezendő további attribútumokat. A `\"*\"` minden címkére vonatkozik.\n\n- Az itt megadott szabályok a {@link PrivateBaseOptions.__defaultAttributeWhitelist} listába lesznek egyesítve.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "További attribútumokat határoz meg az egyes címkék számára. A `\"*\"` minden címkére vonatkozik. \n- Az itt megadott szabályok össze lesznek vonva a {@link PrivateBaseOptions.__defaultAttributeWhitelist} rendszerrel. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

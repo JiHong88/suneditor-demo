@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Spécifie les attributs supplémentaires autorisés pour chaque balise. `\"*\"` s'applique à toutes les balises.\n\n- Les règles spécifiées ici seront fusionnées dans {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Spécifie des attributs supplémentaires à autoriser pour chaque balise. `\"*\"` s'applique à toutes les balises. \n- Les règles spécifiées ici seront fusionnées dans {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

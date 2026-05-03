@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Her etiket için izin verilecek ek öznitelikleri belirtir. `\"*\"` tüm etiketler için geçerlidir.\n\n- Burada belirtilen kurallar {@link PrivateBaseOptions.__defaultAttributeWhitelist} içine entegre edilecektir.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Her etikete izin verilecek ek nitelikleri belirtir. `\"*\"` tüm etiketler için geçerlidir. \n- Burada belirtilen kurallar {@link PrivateBaseOptions.__defaultAttributeWhitelist} ile birleştirilecektir. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

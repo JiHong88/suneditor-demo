@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "מציין מאפיינים נוספים שיאפשרו לכל תג. `\"*\"` חל על כל התגים.\n- הכללים שצוינו כאן ימוזגו לתוך {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "מציין תכונות נוספות שיאפשרו לכל תג. `\"*\"` חל על כל התגים. \n- הכללים המצוינים כאן ימוזגו לתוך {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

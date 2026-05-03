@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Указывает дополнительные атрибуты для каждого тега. `\"*\"` применяется ко всем тегам.\n\n— Правила, указанные здесь, будут объединены в {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n``js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Указывает дополнительные атрибуты, которые разрешены для каждого тега. `\"*\"` применяется ко всем тегам. \n– Указанные здесь правила будут объединены в {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

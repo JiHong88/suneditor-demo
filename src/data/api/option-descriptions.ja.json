@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "各タグに許可する追加属性を指定します。`\"*\"` はすべてのタグに適用されます。\n\n- ここで指定されたルールは {@link PrivateBaseOptions.__defaultAttributeWhitelist} にマージされます。\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "各タグに許可する追加の属性を指定します。 `\"*\"` はすべてのタグに適用されます。 \n- ここで指定したルールは、{@link PrivateBaseOptions.__defaultAttributeWhitelist} にマージされます。 \n「`js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n`」",
     "default": "null"
   },
   "attributeBlacklist": {

@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Určuje další atributy, které je možné povolit pro každou značku. `\"*\"` platí pro všechny značky.\n- Pravidla uvedená zde budou sloučena do {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Určuje další atributy, které se povolí pro každou značku. `\"*\"` platí pro všechny značky. \n- Pravidla zde specifikovaná budou sloučena do {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

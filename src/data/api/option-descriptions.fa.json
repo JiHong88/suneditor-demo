@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "ویژگی‌های اضافی را برای هر برچسب مشخص می‌کند. `\"*\"` برای همه برچسب‌ها اعمال می‌شود.\n- قوانین مشخص شده در اینجا در {@link PrivateBaseOptions.__defaultAttributeWhitelist} ادغام می‌شوند.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "ویژگی های اضافی را برای اجازه دادن به هر تگ مشخص می کند. `\"*\"` برای همه برچسب ها اعمال می شود. \n- قوانین مشخص شده در اینجا در {@link PrivateBaseOptions.__defaultAttributeWhitelist} ادغام خواهند شد. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

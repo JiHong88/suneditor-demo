@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Specifică atribute suplimentare permise pentru fiecare etichetă. `\"*\"` se aplică tuturor etichetelor.\n- Regulile specificate aici vor fi îmbinate în {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Specifică atribute suplimentare pentru a permite fiecare etichetă. `\"*\"` se aplică tuturor etichetelor. \n- Regulile specificate aici vor fi îmbinate în {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

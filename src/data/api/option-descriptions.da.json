@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Angiver yderligere attributter, der skal tillades for hvert tag. `\"*\"` gælder for alle tags.\n- Regler angivet her vil blive flettet ind i {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Angiver yderligere attributter for at tillade hvert tag. `\"*\"` gælder for alle tags. \n- Regler specificeret her vil blive flettet ind i {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

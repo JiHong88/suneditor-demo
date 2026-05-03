@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Norāda papildu atribūtus, kas jāatļauj katram tagam. `\"*\"` attiecas uz visiem tagiem.\n\n- Šeit norādītie noteikumi tiks apvienoti ar {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Norāda papildu atribūtus, ko atļaut katram tagam. `\"*\"` attiecas uz visiem tagiem. \n- Šeit norādītās kārtulas tiks apvienotas pakalpojumā {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

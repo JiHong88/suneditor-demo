@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "指定每个标签允许的附加属性。`\"*\"` 适用于所有标签。\n\n- 此处指定的规则将合并到 {@link PrivateBaseOptions.__defaultAttributeWhitelist} 中。\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "指定每个标签允许的附加属性。 `\"*\"` 适用于所有标签。 \n- 此处指定的规则将合并到 {@link PrivateBaseOptions.__defaultAttributeWhitelist} 中。 \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "يُحدد هذا الخيار سمات إضافية لكل وسم. ينطبق `\"*\"` على جميع الوسوم.\n\n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "يحدد سمات إضافية للسماح بكل علامة. ينطبق `\"*\"` على جميع العلامات. \n- سيتم دمج القواعد المحددة هنا في {@link PrivateBaseOptions.__defaultAttributeWhitelist}. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

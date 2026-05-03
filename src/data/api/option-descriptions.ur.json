@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "ہر ٹیگ کی اجازت دینے کے لیے اضافی صفات کا تعین کرتا ہے۔ `\"*\"` تمام ٹیگز پر لاگو ہوتا ہے۔\n- یہاں بیان کردہ قواعد کو {@link PrivateBaseOptions.__defaultAttributeWhitelist} میں ضم کر دیا جائے گا۔\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "ہر ٹیگ کی اجازت دینے کے لیے اضافی صفات کا تعین کرتا ہے۔ `\"*\"` تمام ٹیگز پر لاگو ہوتا ہے۔ \n- یہاں بیان کردہ قواعد کو {@link PrivateBaseOptions.__defaultAttributeWhitelist} میں ضم کر دیا جائے گا۔ \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {

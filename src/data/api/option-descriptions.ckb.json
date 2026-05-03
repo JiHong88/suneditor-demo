@@ -157,7 +157,7 @@
     "default": "\"\""
   },
   "attributeWhitelist": {
-    "description": "Taybetmendiyên zêde ji bo her tagê destnîşan dike. `\"*\"` ji bo hemî tagan derbas dibe.\n- Rêgezên ku li vir hatine destnîşankirin dê di nav {@link PrivateBaseOptions.__defaultAttributeWhitelist} de werin yek kirin.\n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-*'\n}\n}\n```",
+    "description": "Taybetmendiyên din diyar dike ku ji bo her etîketê destûr bide. `\"*\"` ji bo hemî nîşanan derbas dibe. \n- Rêzikên ku li vir hatine destnîşan kirin dê di {@link PrivateBaseOptions.__defaultAttributeWhitelist} de werin yek kirin. \n```js\n{\nattributeWhitelist: {\na: 'href|target',\nimg: 'src|alt',\n'*': 'id|data-[^\\s]+'\n}\n}\n```",
     "default": "null"
   },
   "attributeBlacklist": {
