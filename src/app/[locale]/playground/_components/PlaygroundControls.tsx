@@ -713,6 +713,15 @@ function PerRootFields({
 					resettable={isFixed("placeholder")}
 				/>
 			</div>
+			<div className='mt-3'>
+				<TextareaField
+					label='value'
+					value={s("value")}
+					onChange={setK("value")}
+					placeholder='(inherit)'
+					resettable={isFixed("value")}
+				/>
+			</div>
 			{/* Statusbar */}
 			<div className='mt-3 grid gap-2'>
 				<TriStateField
@@ -864,7 +873,7 @@ const SECTION_LABELS: Record<string, string[]> = {
 	layout: ["width", "height", "minWidth", "maxWidth", "minHeight", "maxHeight", "editorStyle"],
 	toolbar: ["toolbar_width", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
-	content: ["placeholder", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
+	content: ["placeholder", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
 	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "spanStyles", "lineStyles", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
@@ -1323,6 +1332,15 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							value={state.placeholder}
 							onChange={set("placeholder")}
 							resettable={!isFixedOption("placeholder")}
+						/>
+					</div>
+					<div className='mt-3'>
+						<TextareaField
+							label='value'
+							value={state.value}
+							onChange={set("value")}
+							placeholder='<p>Initial HTML content</p>'
+							resettable={!isFixedOption("value")}
 						/>
 					</div>
 					<div className='mt-3'>

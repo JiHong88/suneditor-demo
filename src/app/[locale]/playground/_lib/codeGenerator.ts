@@ -282,6 +282,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// content
 	if (state.placeholder) add("placeholder", `"${state.placeholder}"`);
+	if (state.value) add("value", JSON.stringify(state.value));
 	if (state.iframe) add("iframe", "true");
 	if (state.iframe_fullPage) add("iframe_fullPage", "true");
 	if (state.defaultLine !== "p") add("defaultLine", `"${state.defaultLine}"`);

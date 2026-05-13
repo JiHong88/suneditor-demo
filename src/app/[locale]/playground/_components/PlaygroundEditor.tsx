@@ -79,9 +79,16 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 
 	const handleInstance = useCallback(
 		(instance: SunEditor.Instance) => {
-			// Save content from outgoing instance so it survives key-based remount
+			// Save content from outgoing instance so it survives key-based remount,
+			// but only if the parent hasn't externally synced contentRef (e.g. value-option change).
+			let oldContent = "";
 			if (editorRef.current) {
-				try { contentRef.current = editorRef.current.$.html.get() as string; } catch { /* ignore */ }
+				try { oldContent = editorRef.current.$.html.get() as string; } catch { /* ignore */ }
+				if (oldContent === contentRef.current || contentRef.current === "") {
+					// No external sync → preserve current editor content across remount
+					contentRef.current = oldContent;
+				}
+				// else: parent overwrote contentRef (value option changed) → keep parent's value
 			}
 			editorRef.current = instance;
 			// Restore saved content — guard against rootStack not yet initialized (e.g. document type)
@@ -101,16 +108,19 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 		[editorRef, contentRef],
 	);
 
-	// Save content on unmount so it survives remount
+	// Save content on unmount so it survives remount — but only if contentRef hasn't been
+	// externally synced by the parent (e.g. value-option change).
 	useEffect(() => {
 		return () => {
 			const instance = editorRef.current;
-			if (instance) {
-				try {
-					contentRef.current = instance.$.html.get() as string;
-				} catch {
-					/* ignore */
+			if (!instance) return;
+			try {
+				const current = instance.$.html.get() as string;
+				if (current === contentRef.current || contentRef.current === "") {
+					contentRef.current = current;
 				}
+			} catch {
+				/* ignore */
 			}
 		};
 	}, [editorRef, contentRef]);

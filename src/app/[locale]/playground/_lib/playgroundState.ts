@@ -1,4 +1,4 @@
-import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST } from "@/data/snippets/editorPresets";
+import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST, PLAYGROUND_VALUE } from "@/data/snippets/editorPresets";
 import { HEADER_HEIGHT } from "@/lib/constants";
 import { API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_GALLERY_IMAGE, API_GALLERY_VIDEO, API_GALLERY_AUDIO, API_GALLERY_FILE, API_GALLERY_BROWSE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
@@ -60,6 +60,7 @@ export interface PlaygroundState {
 
 	// — Content & Behavior —
 	placeholder: string;
+	value: string;
 	iframe: boolean;
 	iframe_fullPage: boolean;
 	iframe_attributes: string;
@@ -449,6 +450,7 @@ export const DEFAULTS: PlaygroundState = {
 	wordCounter_label: "",
 
 	placeholder: "",
+	value: PLAYGROUND_VALUE,
 	iframe: false,
 	iframe_fullPage: false,
 	iframe_attributes: "",
@@ -1312,6 +1314,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.editorStyle) opts.editorStyle = state.editorStyle;
 	if (state.toolbar_width !== "auto") opts.toolbar_width = state.toolbar_width;
 	if (state.placeholder) opts.placeholder = state.placeholder;
+	if (state.value) opts.value = state.value;
 	if (state.defaultLine !== "p") opts.defaultLine = state.defaultLine;
 	if (state.defaultUrlProtocol) opts.defaultUrlProtocol = state.defaultUrlProtocol;
 	if (state.charCounter_max !== null) opts.charCounter_max = state.charCounter_max;
@@ -1818,6 +1821,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	wcl: "wordCounter_label",
 	// Content
 	ph: "placeholder",
+	val: "value",
 	if: "iframe",
 	ifp: "iframe_fullPage",
 	ifa: "iframe_attributes",

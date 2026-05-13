@@ -187,6 +187,25 @@ export default function PlaygroundPage() {
 		instance.resetOptions(opts);
 	}, [state]);
 
+	// `value` is a fixed (init-only) frame option in suneditor — changing it forces
+	// a remount via editorKey. Sync the saved-content refs to the new value during
+	// render so the remount's handleInstance replays the new content (not the stale one).
+	const prevValueRef = useRef(state.value);
+	if (prevValueRef.current !== state.value) {
+		prevValueRef.current = state.value;
+		contentRef.current = state.value;
+	}
+	const prevRootHeaderValueRef = useRef(state.root_header_value);
+	const prevRootBodyValueRef = useRef(state.root_body_value);
+	if (prevRootHeaderValueRef.current !== state.root_header_value) {
+		prevRootHeaderValueRef.current = state.root_header_value;
+		multiRootContentRef.current.header = state.root_header_value;
+	}
+	if (prevRootBodyValueRef.current !== state.root_body_value) {
+		prevRootBodyValueRef.current = state.root_body_value;
+		multiRootContentRef.current.body = state.root_body_value;
+	}
+
 	// Sync URL
 	useEffect(() => {
 		const qs = stateToUrl(state);

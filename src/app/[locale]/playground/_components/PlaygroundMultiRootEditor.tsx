@@ -121,11 +121,14 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		}
 
 		return () => {
-			// Save content before destroy
+			// Save content before destroy — skip roots whose contentRef was externally synced
+			// by the parent (e.g. value-option change), so the new mount picks up the new value.
 			for (const root of roots) {
 				try {
 					const html = instance.$.html.get({ rootKey: root.key as unknown as number });
-					if (typeof html === "string") {
+					if (typeof html !== "string") continue;
+					const saved = contentRef.current[root.key];
+					if (html === saved || !saved) {
 						contentRef.current[root.key] = html;
 					}
 				} catch {

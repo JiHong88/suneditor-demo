@@ -20,9 +20,10 @@ export interface UseFileListReturn {
 	files: FileEntry[];
 	/** Pass this as onFileManagerAction event handler */
 	handleFileManagerAction: (params: {
-		info: { src: string; index: number; name: string; size: number; delete: () => void; select: () => void };
+		info: { src: string; index: number; name: string; size: number; delete: () => void; select: () => void } | null;
 		state: "create" | "update" | "delete";
 		pluginName: string;
+		index?: number;
 	}) => void;
 	/** Call when editor is remounted (key change) to prevent stale closures */
 	clearFiles: () => void;
@@ -36,11 +37,29 @@ export function useFileList(): UseFileListReturn {
 
 	const handleFileManagerAction = useCallback(
 		(params: {
-			info: { src: string; index: number; name: string; size: number; delete: () => void; select: () => void };
+			info: { src: string; index: number; name: string; size: number; delete: () => void; select: () => void } | null;
 			state: "create" | "update" | "delete";
 			pluginName: string;
+			index?: number;
 		}) => {
-			const { info, state, pluginName } = params;
+			const { info, state, pluginName, index } = params;
+
+			// suneditor sends info=null with state='delete' when a file component is removed
+			if (state === "delete") {
+				const delIndex = info?.index ?? index;
+				const delSrc = info?.src;
+				setFiles((prev) =>
+					prev.filter((f) => {
+						if (f.pluginName !== pluginName) return true;
+						if (delSrc !== undefined) return f.src !== delSrc;
+						if (delIndex !== undefined) return f.index !== delIndex;
+						return true;
+					}),
+				);
+				return;
+			}
+
+			if (!info) return;
 			const entry: FileEntry = {
 				src: info.src,
 				index: info.index,
@@ -61,9 +80,6 @@ export function useFileList(): UseFileListReturn {
 				}
 				if (state === "update") {
 					return prev.map((f) => (f.src === entry.src && f.pluginName === entry.pluginName ? entry : f));
-				}
-				if (state === "delete") {
-					return prev.filter((f) => !(f.src === entry.src && f.pluginName === entry.pluginName));
 				}
 				return prev;
 			});
