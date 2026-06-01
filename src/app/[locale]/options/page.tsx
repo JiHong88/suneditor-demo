@@ -180,7 +180,7 @@ function buildSections(optDesc: OptDesc): SidebarSection[] {
 				"strictMode", "scopeSelectionTags", "elementWhitelist", "elementBlacklist",
 				"allowedEmptyTags", "allowedClassName", "attributeWhitelist", "attributeBlacklist",
 				"textStyleTags", "convertTextTags", "allUsedStyles", "tagStyles",
-				"spanStyles", "lineStyles", "fontSizeUnits", "retainStyleMode",
+				"fontSizeUnits", "retainStyleMode",
 				"lineAttrReset", "formatLine", "formatBrLine", "formatClosureBrLine",
 				"formatBlock", "formatClosureBlock", "defaultLine", "defaultLineBreakFormat",
 				"allowedExtraTags",

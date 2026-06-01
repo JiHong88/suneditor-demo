@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Hiermee kunt u tags, attributen en stijlen strikt filteren.\n\n- Gebruik `true` om alle filters in te schakelen (standaard), of een object om individuele filters te beheren.\n\n- Het instellen van `false` ​​wordt niet ondersteund; gebruik in plaats daarvan de objectvorm om specifieke filters uit te schakelen.\n\n- :filterbeschrijving\n- `tagFilter`: Filtert niet-toegestane HTML-tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtert opmaakelementen (`formatLine`/`formatBlock`)\n- `classFilter`: Filtert niet-toegestane CSS-klassenamen (`allowedClassName`)\n- `textStyleTagFilter`: Filtert tekststijltags (b, i, u, span, enz.)\n- `attrFilter`: Filtert niet-toegestane HTML-attributen (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtert niet-toegestane inline stijlen (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Maakt strikte filtering van tags, attributen en stijlen mogelijk. \n- Gebruik `true` om alle filters in te schakelen (standaard), of een object om individuele filters te besturen. \n- Instelling `false` ​​wordt niet ondersteund; gebruik in plaats daarvan het objectformulier om specifieke filters uit te schakelen. \n- :filterbeschrijving \n- `tagFilter`: filtert niet-toegestane HTML-tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtert formaatelementen (`formatLine`/`formatBlock`) \n- `classFilter`: Filtert niet-toegestane CSS-klassenamen (`allowedClassName`) \n- `textStyleTagFilter`: Filtert tekststijltags (b, i, u, span, etc.) \n- `attrFilter`: Filtert niet-toegestane HTML-kenmerken (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtert niet-toegestane inlinestijlen (per tag vanaf `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Hiermee kunt u extra stijlen toevoegen aan de lijst met toegestane stijlen. Scheidingsteken: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Specificeert toegestane stijlen voor HTML-tags. De sleutel is de tagnaam/namen, de waarde zijn de toegestane stijlen, gescheiden door een verticale streep.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Specificeert toegestane CSS-stijlen per HTML-tag. \n- Sleutel is een tagnaam, meerdere tags samengevoegd met `|`, of een categoriewachter (`@text`, `@line`). \n- Waarde is een door sluistekens gescheiden lijst met toegestane stijlnamen. \n- Resolutievolgorde bij het filteren van een element: expliciete taginvoer → `@line` (voor formatLine-elementen) → `@text` (voor textStyleTags). \n- Een expliciete tag-invoer **vervangt** de standaardcategorie: neem categoriestijlen op in de waarde als u beide wilt. \n- Samengevoegd met {@link DEFAULTS.TAG_STYLES}; door de gebruiker geleverde sleutels winnen. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@lijn` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Specificeert de toegestane stijlen voor de `span`-tag.\n\n- De standaardstijl volgt {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Specificeert de toegestane stijlen voor het `line` element (p..).\n\n- De standaardstijl volgt {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Toegestane eenheden voor lettergrootte.\n\n- De standaardwaarde volgt {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Serveraanvraagheaders"
   },
+  "audioGallery_searchUrl": {
+    "description": "Zoek-URL aan serverzijde. Indien ingesteld, wordt het trefwoord naar deze URL verzonden"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Headers voor zoekverzoeken aan de serverzijde"
+  },
   "audioGallery_thumbnail": {
     "description": "Standaard miniatuurafbeelding"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Serveraanvraagheaders"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Zoek-URL aan serverzijde. Indien ingesteld, wordt het trefwoord naar deze URL verzonden"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Headers voor zoekverzoeken aan de serverzijde"
   },
   "fileBrowser_thumbnail": {
     "description": "Standaard miniatuur-URL of een functie die per item een ​​miniatuur-URL retourneert."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Serveraanvraagheaders"
   },
+  "fileGallery_searchUrl": {
+    "description": "Zoek-URL aan serverzijde. Indien ingesteld, wordt het trefwoord naar deze URL verzonden"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Headers voor zoekverzoeken aan de serverzijde"
+  },
   "fileGallery_thumbnail": {
     "description": "Standaard miniatuurafbeelding"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Serveraanvraagheaders"
   },
+  "imageGallery_searchUrl": {
+    "description": "Zoek-URL aan serverzijde. Indien ingesteld, wordt het trefwoord naar deze URL verzonden"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Headers voor zoekverzoeken aan de serverzijde"
+  },
   "videoGallery_data": {
     "description": "Directe gegevens zonder serveraanroepen"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Serveraanvraagheaders"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Zoek-URL aan serverzijde. Indien ingesteld, wordt het trefwoord naar deze URL verzonden"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Headers voor zoekverzoeken aan de serverzijde"
   },
   "videoGallery_thumbnail": {
     "description": "Standaard miniatuurafbeelding"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Aanvullende URL-patronen die als insluitbare inhoud herkend moeten worden."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Toegestane `<script src=...>`-patronen voor onbewerkte ingesloten HTML \n- (bijvoorbeeld Twitter-blockquote + `widgets.js`). Elke inzending is een `RegExp` (getoetst aan de volledige src) of een `string` (gekoppeld via `startsWith`). \n- Standaard ingesteld op `[]`: alle scripttags worden afgewezen.** Inline-scripts (geen `src`) worden altijd afgewezen."
   },
   "embed_embedQuery": {
     "description": "Aangepaste definities voor ingebedde services."

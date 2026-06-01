@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Вмикає сувору фільтрацію тегів, атрибутів та стилів.\n- Використовуйте `true` для ввімкнення всіх фільтрів (за замовчуванням) або об'єкт для керування окремими фільтрами.\n- Налаштування `false` ​​не підтримується; використовуйте форму об'єкта, щоб вимкнути певні фільтри.\n- :filter description\n- `tagFilter`: Фільтрує заборонені теги HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Фільтрує елементи форматування (`formatLine`/`formatBlock`)\n- `classFilter`: Фільтрує заборонені назви класів CSS (`allowedClassName`)\n- `textStyleTagFilter`: Фільтрує теги стилів тексту (b, i, u, span тощо)\n- `attrFilter`: Фільтрує заборонені атрибути HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Фільтрує заборонені вбудовані стилі (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Вмикає сувору фільтрацію тегів, атрибутів і стилів. \n- Використовуйте `true`, щоб увімкнути всі фільтри (за замовчуванням), або об’єкт для керування окремими фільтрами. \n- Налаштування `false` ​​не підтримується; замість цього використовуйте форму об’єкта, щоб вимкнути певні фільтри. \n- :опис фільтра \n- `tagFilter`: фільтри заборонили теги HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Фільтри елементів формату (`formatLine`/`formatBlock`) \n- `classFilter`: фільтри заборонили імена класів CSS (`allowedClassName`) \n- `textStyleTagFilter`: фільтрує теги стилю тексту (b, i, u, span тощо) \n- `attrFilter`: фільтри заборонили атрибути HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: фільтри заборонені вбудовані стилі (на тег з `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Вказує додаткові стилі до списку дозволених стилів. Роздільник: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Визначає дозволені стилі для тегів HTML. Ключ – це назва(и) тегу(ів), значення – дозволені стилі, розділені вертикальними рисками.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Визначає дозволені стилі CSS для кожного тегу HTML. \n- Ключ – це ім’я тегу, кілька тегів, об’єднаних за допомогою `|`, або категорія sentinel (`@text`, `@line`). \n- Значення - це розділений вертикальною рискою список дозволених імен стилів. \n— Порядок вирішення під час фільтрації елемента: явний запис тегу → `@line` (для елементів formatLine) → `@text` (для textStyleTags). \n- Явний запис тегу **замінює** категорію за замовчуванням — додайте стилі категорії до значення, якщо ви хочете обидва. \n- Об’єднано з {@link DEFAULTS.TAG_STYLES}; ключі, надані користувачем, виграють. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Визначає дозволені стилі для тегу `span`.\n- Значення за замовчуванням дотримується {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Визначає дозволені стилі для елемента `line` (p..).\n- Значення за замовчуванням дотримується {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Дозволені одиниці розміру шрифту.\n- Значення за замовчуванням: {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Заголовки запитів сервера"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL-адреса пошуку на стороні сервера. Якщо встановлено, ключове слово надсилається на цю URL-адресу"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Заголовки запитів на пошук на стороні сервера"
+  },
   "audioGallery_thumbnail": {
     "description": "Мініатюра за замовчуванням"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Заголовки запитів сервера"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL-адреса пошуку на стороні сервера. Якщо встановлено, ключове слово надсилається на цю URL-адресу"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Заголовки запитів на пошук на стороні сервера"
   },
   "fileBrowser_thumbnail": {
     "description": "URL-адреса мініатюри за замовчуванням або функція, яка повертає URL-адресу мініатюри для кожного елемента."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Заголовки запитів сервера"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL-адреса пошуку на стороні сервера. Якщо встановлено, ключове слово надсилається на цю URL-адресу"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Заголовки запитів на пошук на стороні сервера"
+  },
   "fileGallery_thumbnail": {
     "description": "Мініатюра за замовчуванням"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Заголовки запитів сервера"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL-адреса пошуку на стороні сервера. Якщо встановлено, ключове слово надсилається на цю URL-адресу"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Заголовки запитів на пошук на стороні сервера"
+  },
   "videoGallery_data": {
     "description": "Прямі дані без звернень до сервера"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Заголовки запитів сервера"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL-адреса пошуку на стороні сервера. Якщо встановлено, ключове слово надсилається на цю URL-адресу"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Заголовки запитів на пошук на стороні сервера"
   },
   "videoGallery_thumbnail": {
     "description": "Мініатюра за замовчуванням"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Додаткові шаблони URL-адрес, які потрібно розпізнати як вміст, що вбудовується."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Дозволені шаблони `<script src=...>` для необробленого вбудованого HTML \n- (наприклад, цитата Twitter + `widgets.js`). Кожен запис є `RegExp` (перевірено на повний src) або `string` (зіставляється через `startsWith`). \n- За замовчуванням `[]` — усі теги сценаріїв відхиляються.** Вбудовані сценарії (без `src`) завжди відхиляються."
   },
   "embed_embedQuery": {
     "description": "Визначення власних служб вбудовування."

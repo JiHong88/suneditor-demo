@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Etiketlerin, özniteliklerin ve stillerin sıkı bir şekilde filtrelenmesini sağlar.\n\n- Tüm filtreleri etkinleştirmek için `true` kullanın (varsayılan) veya tek tek filtreleri kontrol etmek için bir nesne kullanın.\n\n- `false` ​​ayarı desteklenmiyor; bunun yerine belirli filtreleri devre dışı bırakmak için nesne biçimini kullanın.\n\n- :filtre açıklaması\n- `tagFilter`: İzin verilmeyen HTML etiketlerini filtreler (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Biçim öğelerini filtreler (`formatLine`/`formatBlock`)\n- `classFilter`: İzin verilmeyen CSS sınıf adlarını filtreler (`allowedClassName`)\n- `textStyleTagFilter`: Metin stili etiketlerini filtreler (b, i, u, span, vb.)\n- `attrFilter`: İzin verilmeyen HTML özniteliklerini filtreler (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: İzin verilmeyen satır içi stilleri filtreler (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Etiketlerin, niteliklerin ve stillerin sıkı bir şekilde filtrelenmesini sağlar. \n- Tüm filtreleri (varsayılan) etkinleştirmek için `true` kullanın veya tek tek filtreleri kontrol etmek için bir nesne kullanın. \n- `false` ​​ayarı desteklenmez; bunun yerine belirli filtreleri devre dışı bırakmak için nesne formunu kullanın. \n- :filtre açıklaması \n- `tagFilter`: İzin verilmeyen HTML etiketlerini filtreler (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Biçim öğelerini filtreler (`formatLine`/`formatBlock`) \n- `classFilter`: İzin verilmeyen CSS sınıfı adlarını filtreler (`allowedClassName`) \n- `textStyleTagFilter`: Metin stili etiketlerini filtreler (b, i, u, span vb.) \n- `attrFilter`: İzin verilmeyen HTML niteliklerini filtreler (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: İzin verilmeyen satır içi stilleri filtreler (`tagStyles`'den etiket başına) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "İzin verilen stiller listesine ek stiller belirtir. Ayırıcı: `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "HTML etiketleri için izin verilen stilleri belirtir. Anahtar etiket adı(ları), değer ise boru işaretiyle ayrılmış izin verilen stillerdir.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "HTML etiketi başına izin verilen CSS stillerini belirtir. \n- Anahtar bir etiket adı, `|` ile birleştirilmiş birden fazla etiket veya bir kategori sentinel'idir (`@text`, `@line`). \n- Değer, izin verilen stil adlarının dikey çizgiyle ayrılmış bir listesidir. \n- Bir öğeyi filtrelerken çözünürlük sırası: açık etiket girişi → `@line` (formatLine öğeleri için) → `@text` (textStyleTags için). \n- Açık bir etiket girişi, varsayılan kategorinin **yerini alır**; her ikisini de istiyorsanız değere kategori stillerini ekleyin. \n- {@link DEFAULTS.TAG_STYLES} ile birleştirildi; Kullanıcı tarafından sağlanan anahtarlar kazanır. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "`span` etiketi için izin verilen stilleri belirtir.\n\n- Varsayılan değer {@link DEFAULTS.SPAN_STYLES}'ı takip eder.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "`line` öğesi için izin verilen stilleri belirtir (s..).\n\n- Varsayılan değer {@link DEFAULTS.LINE_STYLES}'ı takip eder.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "İzin verilen yazı tipi boyutu birimleri.\n\n- Varsayılan değer {@link DEFAULTS.SIZE_UNITS} değerini takip eder.",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Sunucu isteği başlıkları"
   },
+  "audioGallery_searchUrl": {
+    "description": "Sunucu tarafı arama URL'si. Ayarlandığında anahtar kelime bu URL'ye gönderilir"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Sunucu tarafı arama isteği başlıkları"
+  },
   "audioGallery_thumbnail": {
     "description": "Varsayılan küçük resim"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Sunucu isteği başlıkları"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Sunucu tarafı arama URL'si. Ayarlandığında anahtar kelime bu URL'ye gönderilir"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Sunucu tarafı arama isteği başlıkları"
   },
   "fileBrowser_thumbnail": {
     "description": "Varsayılan küçük resim URL'si veya her öğe için küçük resim URL'si döndüren bir işlev."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Sunucu isteği başlıkları"
   },
+  "fileGallery_searchUrl": {
+    "description": "Sunucu tarafı arama URL'si. Ayarlandığında anahtar kelime bu URL'ye gönderilir"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Sunucu tarafı arama isteği başlıkları"
+  },
   "fileGallery_thumbnail": {
     "description": "Varsayılan küçük resim"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Sunucu isteği başlıkları"
   },
+  "imageGallery_searchUrl": {
+    "description": "Sunucu tarafı arama URL'si. Ayarlandığında anahtar kelime bu URL'ye gönderilir"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Sunucu tarafı arama isteği başlıkları"
+  },
   "videoGallery_data": {
     "description": "Sunucu çağrıları olmadan doğrudan veri"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Sunucu isteği başlıkları"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Sunucu tarafı arama URL'si. Ayarlandığında anahtar kelime bu URL'ye gönderilir"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Sunucu tarafı arama isteği başlıkları"
   },
   "videoGallery_thumbnail": {
     "description": "Varsayılan küçük resim"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Gömülebilir içerik olarak tanınacak ek URL kalıpları."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Ham HTML yerleştirme için izin verilen `<script src=...>` kalıpları \n- (örneğin, Twitter blok alıntısı + `widgets.js`). Her giriş bir `RegExp`'dir (tam kaynakla test edilmiştir) veya bir `string`'dir (`startsWith` aracılığıyla eşleştirilmiştir). \n- Varsayılan olarak `[]` — tüm komut dosyası etiketleri reddedilir.** Satır içi komut dosyaları (`src` yok) her zaman reddedilir."
   },
   "embed_embedQuery": {
     "description": "Özel gömme servis tanımları."

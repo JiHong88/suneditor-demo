@@ -875,7 +875,7 @@ const SECTION_LABELS: Record<string, string[]> = {
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
 	content: ["placeholder", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
-	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "spanStyles", "lineStyles", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
+	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
 };
 
@@ -1643,22 +1643,6 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							onChange={set("textStyleTags")}
 							resettable={!isFixedOption("textStyleTags")}
 							placeholder='e.g. mark|cite'
-						/>
-					</div>
-					<div className='mt-3'>
-						<TextInput
-							label='spanStyles'
-							value={state.spanStyles}
-							onChange={set("spanStyles")}
-							resettable={!isFixedOption("spanStyles")}
-						/>
-					</div>
-					<div className='mt-3'>
-						<TextInput
-							label='lineStyles'
-							value={state.lineStyles}
-							onChange={set("lineStyles")}
-							resettable={!isFixedOption("lineStyles")}
 						/>
 					</div>
 					<div className='mt-3 grid gap-3'>

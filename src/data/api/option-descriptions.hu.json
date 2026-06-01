@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Lehetővé teszi a címkék, attribútumok és stílusok szigorú szűrését.\n\n- A `true` paraméterrel engedélyezheti az összes szűrőt (alapértelmezett), vagy egy objektummal vezérelheti az egyes szűrőket.\n\n- A `false` ​​beállítása nem támogatott; ehelyett az objektuműrlapot használja az egyes szűrők letiltásához.\n- :filter leírása\n- `tagFilter`: HTML címkék szűrése letiltva (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Formátumelemek szűrése letiltva (`formatLine`/`formatBlock`)\n- `classFilter`: CSS osztálynevek szűrése letiltva (`allowedClassName`)\n- `textStyleTagFilter`: Szövegstílus címkék szűrése (b, i, u, span stb.)\n- `attrFilter`: HTML attribútumok szűrése letiltva (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Beágyazott stílusok szűrése letiltva (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Lehetővé teszi a címkék, attribútumok és stílusok szigorú szűrését. \n- A `true` használatával engedélyezheti az összes szűrőt (alapértelmezett), vagy egy objektumot az egyes szűrők vezérléséhez. \n- A `false` ​​beállítás nem támogatott; használja az objektum űrlapot bizonyos szűrők letiltásához. \n- :szűrő leírása \n- `tagFilter`: Szűri a nem engedélyezett HTML-címkéket (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Szűri a formátumelemeket (`formatLine`/`formatBlock`) \n- `classFilter`: Szűri a nem engedélyezett CSS-osztályneveket (`allowedClassName`) \n- `textStyleTagFilter`: Szűri a szövegstílus-címkéket (b, i, u, span stb.) \n- `attrFilter`: Szűri a nem engedélyezett HTML-attribútumokat (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Szűri a nem engedélyezett beépített stílusokat (címkénként a `tagStyles`-ból) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "További stílusokat ad meg az engedélyezett stílusok listájához. Elválasztó: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Meghatározza a HTML-címkékhez engedélyezett stílusokat. A kulcs a címke(k) neve, az érték pedig a függőleges vonallal elválasztott engedélyezett stílusok.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Meghatározza az engedélyezett CSS-stílusokat HTML-címkénként. \n- A kulcs egy címkenév, több `|`-vel összekapcsolt címke vagy egy kategóriaőrző (`@text`, `@line`). \n- Az érték az engedélyezett stílusnevek csővel tagolt listája. \n- Felbontási sorrend elem szűrésekor: explicit címkebevitel → `@line` (formatLine elemekhez) → `@text` (textStyleTags esetén). \n- Egy explicit címkebejegyzés **helyettesíti** a kategória alapértelmezett értékét – ha mindkettőt szeretné, vegye be az értékbe a kategóriastílusokat. \n- Egyesítve a következővel: {@link DEFAULTS.TAG_STYLES}; a felhasználó által biztosított kulcsok nyernek. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Meghatározza a `span` tag megengedett stílusait.\n\n- Az alapértelmezett érték a {@link DEFAULTS.SPAN_STYLES} stílust követi.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Meghatározza a `line` elemhez engedélyezett stílusokat (p..).\n- Az alapértelmezett érték a {@link DEFAULTS.LINE_STYLES} stílust követi.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Megengedett betűméret-egységek.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Szerverkérelem fejlécek"
   },
+  "audioGallery_searchUrl": {
+    "description": "Szerveroldali keresési URL. Ha be van állítva, a kulcsszó erre az URL-re kerül elküldésre"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Szerveroldali keresési kérés fejlécek"
+  },
   "audioGallery_thumbnail": {
     "description": "Alapértelmezett bélyegkép"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Szerverkérelem fejlécek"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Szerveroldali keresési URL. Ha be van állítva, a kulcsszó erre az URL-re kerül elküldésre"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Szerveroldali keresési kérés fejlécek"
   },
   "fileBrowser_thumbnail": {
     "description": "Alapértelmezett bélyegkép URL-címe vagy egy függvény, amely elemenként bélyegkép URL-címet ad vissza."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Szerverkérelem fejlécek"
   },
+  "fileGallery_searchUrl": {
+    "description": "Szerveroldali keresési URL. Ha be van állítva, a kulcsszó erre az URL-re kerül elküldésre"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Szerveroldali keresési kérés fejlécek"
+  },
   "fileGallery_thumbnail": {
     "description": "Alapértelmezett bélyegkép"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Szerverkérelem fejlécek"
   },
+  "imageGallery_searchUrl": {
+    "description": "Szerveroldali keresési URL. Ha be van állítva, a kulcsszó erre az URL-re kerül elküldésre"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Szerveroldali keresési kérés fejlécek"
+  },
   "videoGallery_data": {
     "description": "Közvetlen adatok szerverhívások nélkül"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Szerverkérelem fejlécek"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Szerveroldali keresési URL. Ha be van állítva, a kulcsszó erre az URL-re kerül elküldésre"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Szerveroldali keresési kérés fejlécek"
   },
   "videoGallery_thumbnail": {
     "description": "Alapértelmezett bélyegkép"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "További URL-minták, amelyeket beágyazható tartalomként kell felismerni."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Engedélyezett `<script src=...>` minták a nyers beágyazott HTML-hez \n- (pl. Twitter blokk idézőjel + `widgets.js`). Minden bejegyzés egy `RegExp` (a teljes src-hez képest tesztelve) vagy egy `string` (egyezik a `startsWith`-val). \n- Alapértelmezésben `[]` – minden szkriptcímke elutasítva.** A beágyazott szkriptek (nincs `src`) mindig elutasításra kerülnek."
   },
   "embed_embedQuery": {
     "description": "Egyéni beágyazási szolgáltatásdefiníciók."

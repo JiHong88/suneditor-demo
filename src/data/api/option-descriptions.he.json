@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "מאפשר סינון קפדני של תגיות, תכונות וסגנונות.\n- השתמש ב-`true` כדי להפעיל את כל המסננים (ברירת מחדל), או באובייקט כדי לשלוט במסננים בודדים.\n- הגדרת `false` ​​אינה נתמכת; השתמש בצורת האובייקט כדי להשבית מסננים ספציפיים במקום זאת.\n- :תיאור מסנן\n- `tagFilter`: מסננים תגי HTML אסורים (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: מסננים אלמנטים של עיצוב (`formatLine`/`formatBlock`)\n- `classFilter`: מסננים שמות מחלקות CSS אסורים (`allowedClassName`)\n- `textStyleTagFilter`: מסננים תגי סגנון טקסט (b, i, u, span וכו')\n- `attrFilter`: מסננים תכונות HTML אסורות (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: מסננים סגנונות מוטבעים אסורים (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "מאפשר סינון קפדני של תגים, תכונות וסגנונות. \n- השתמש ב-`true` כדי להפעיל את כל המסננים (ברירת מחדל), או באובייקט כדי לשלוט במסננים בודדים. \n- הגדרה `false` ​​אינה נתמכת; השתמש בטופס האובייקט כדי להשבית מסננים ספציפיים במקום זאת. \n- :תיאור מסנן \n- `tagFilter`: מסננים תגי HTML אסורים (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: מסנן רכיבי פורמט (`formatLine`/`formatBlock`) \n- `classFilter`: מסנן שמות מחלקות CSS אסורות (`allowedClassName`) \n- `textStyleTagFilter`: מסנן תגיות בסגנון טקסט (b, i, u, span וכו') \n- `attrFilter`: מסנן תכונות HTML אסורות (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: מסננים סגנונות מוטבעים אסורים (לכל תג מ-`tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "מציין סגנונות נוספים לרשימת הסגנונות המותרים. מפריד: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "מציין סגנונות מותרים עבור תגי HTML. המפתח הוא שם/שמות התגיות, הערך הוא סגנונות מותרים המופרדים באמצעות צינור.",
+    "description": "מציין סגנונות CSS מותרים לכל תג HTML. \n- מפתח הוא שם תג, תגים מרובים שהצטרפו עם `|`, או זקיף קטגוריה (`@text`, `@line`). \n- ערך הוא רשימה מופרדת בצינור של שמות סגנונות מותרים. \n- סדר רזולוציה בעת סינון אלמנט: הזנת תג מפורשת → `@line` (עבור רכיבי formatLine) → `@text` (עבור textStyleTags). \n- ערך תג מפורש **מחליף** את ברירת המחדל של הקטגוריה - כלול סגנונות קטגוריות בערך אם אתה רוצה את שניהם. \n- מוזג עם {@link DEFAULTS.TAG_STYLES}; מפתחות שסופקו על ידי המשתמש מנצחים. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "מציין סגנונות מותרים עבור התג `span`.\n- ברירת המחדל היא {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "מציין סגנונות מותרים עבור אלמנט `line` (p..).\n- ברירת המחדל היא {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "יחידות גודל גופן מותרות.\n- ברירת המחדל היא {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "כותרות בקשות שרת"
   },
+  "audioGallery_searchUrl": {
+    "description": "כתובת אתר לחיפוש בצד השרת. כאשר מוגדרת, מילת המפתח נשלחת לכתובת האתר הזו"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "כותרות בקשת חיפוש בצד השרת"
+  },
   "audioGallery_thumbnail": {
     "description": "תמונה ממוזערת ברירת מחדל"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "כותרות בקשות שרת"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "כתובת אתר לחיפוש בצד השרת. כאשר מוגדרת, מילת המפתח נשלחת לכתובת האתר הזו"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "כותרות בקשת חיפוש בצד השרת"
   },
   "fileBrowser_thumbnail": {
     "description": "כתובת URL של תמונה ממוזערת המוגדרת כברירת מחדל או פונקציה שמחזירה כתובת URL של תמונה ממוזערת לכל פריט."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "כותרות בקשות שרת"
   },
+  "fileGallery_searchUrl": {
+    "description": "כתובת אתר לחיפוש בצד השרת. כאשר מוגדרת, מילת המפתח נשלחת לכתובת האתר הזו"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "כותרות בקשת חיפוש בצד השרת"
+  },
   "fileGallery_thumbnail": {
     "description": "תמונה ממוזערת ברירת מחדל"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "כותרות בקשות שרת"
   },
+  "imageGallery_searchUrl": {
+    "description": "כתובת אתר לחיפוש בצד השרת. כאשר מוגדרת, מילת המפתח נשלחת לכתובת האתר הזו"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "כותרות בקשת חיפוש בצד השרת"
+  },
   "videoGallery_data": {
     "description": "נתונים ישירים ללא קריאות לשרת"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "כותרות בקשות שרת"
+  },
+  "videoGallery_searchUrl": {
+    "description": "כתובת אתר לחיפוש בצד השרת. כאשר מוגדרת, מילת המפתח נשלחת לכתובת האתר הזו"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "כותרות בקשת חיפוש בצד השרת"
   },
   "videoGallery_thumbnail": {
     "description": "תמונה ממוזערת ברירת מחדל"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "תבניות URL נוספות לזיהוי כתוכן הניתן להטמעה."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "דפוסי `<script src=...>` מותרים עבור HTML הטבעה גולמי \n- (למשל ציטוט בלוק טוויטר + `widgets.js`). כל ערך הוא `RegExp` (נבדק מול ה-src המלא) או `string` (התאמת דרך `startsWith`). \n- ברירת המחדל היא `[]` — כל תגי הסקריפט נדחים.** סקריפטים מוטבעים (ללא `src`) נדחים תמיד."
   },
   "embed_embedQuery": {
     "description": "הגדרות שירות הטמעה מותאמות אישית."

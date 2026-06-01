@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Permite filtrarea strictă a etichetelor, atributelor și stilurilor.\n- Folosește `true` pentru a activa toate filtrele (implicit) sau un obiect pentru a controla filtrele individuale.\n- Setarea `false` ​​nu este acceptată; folosește formularul obiectului pentru a dezactiva anumite filtre.\n- :descrierea filtrului\n- `tagFilter`: Filtrează etichetele HTML nepermise (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrează elementele de formatare (`formatLine`/`formatBlock`)\n- `classFilter`: Filtrează numele claselor CSS nepermise (`allowedClassName`)\n- `textStyleTagFilter`: Filtrează etichetele de stil text (b, i, u, span, etc.)\n- `attrFilter`: Filtrează atributele HTML nepermise (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtrează stilurile inline nepermise (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Permite filtrarea strictă a etichetelor, atributelor și stilurilor. \n- Utilizați `true` pentru a activa toate filtrele (implicit) sau un obiect pentru a controla filtrele individuale. \n- Setarea `false` ​​nu este acceptată; utilizați în schimb formularul de obiect pentru a dezactiva anumite filtre. \n- :descrierea filtrului \n- `tagFilter`: filtrează etichetele HTML nepermise (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtrează elementele de format (`formatLine`/`formatBlock`) \n- `classFilter`: filtrează numele claselor CSS nepermise (`allowedClassName`) \n- `textStyleTagFilter`: filtrează etichetele de stil de text (b, i, u, span etc.) \n- `attrFilter`: filtrează atributele HTML nepermise (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: filtrează stilurile inline nepermise (pe etichetă din `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Specifică stiluri suplimentare la lista de stiluri permise. Delimitator: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Specifică stilurile permise pentru etichetele HTML. Cheia este numele etichetei (etichetele), valoarea este stilurile permise delimitate prin viraje verticale.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Specifică stilurile CSS permise pentru fiecare etichetă HTML. \n- Cheia este un nume de etichetă, mai multe etichete unite cu `|` sau o sentinelă de categorie (`@text`, `@line`). \n- Value este o listă delimitată de țevi de nume de stiluri permise. \n- Ordinea rezoluției la filtrarea unui element: introducerea explicită a etichetei → `@line` (pentru elemente formatLine) → `@text` (pentru textStyleTags). \n- O intrare de etichetă explicită **înlocuiește** categoria prestabilită - includeți stilurile categoriei în valoare dacă doriți ambele. \n- Îmbinat cu {@link DEFAULTS.TAG_STYLES}; cheile furnizate de utilizator câștigă. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Specifică stilurile permise pentru eticheta `span`.\n- Valoarea implicită urmează după {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Specifică stilurile permise pentru elementul `line` (p..).\n- Valoarea implicită urmează după {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Unități de dimensiune a fontului permise.\n- Valoarea implicită urmează cu {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Anteturile cererilor serverului"
   },
+  "audioGallery_searchUrl": {
+    "description": "Adresa URL de căutare pe partea serverului. Când este setat, cuvântul cheie este trimis la această adresă URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Antetele cererii de căutare pe server"
+  },
   "audioGallery_thumbnail": {
     "description": "Miniatură implicită"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Anteturile cererilor serverului"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Adresa URL de căutare pe partea serverului. Când este setat, cuvântul cheie este trimis la această adresă URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Antetele cererii de căutare pe server"
   },
   "fileBrowser_thumbnail": {
     "description": "Adresa URL implicită pentru miniatură sau o funcție care returnează o adresă URL pentru miniatură per element."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Anteturile cererilor serverului"
   },
+  "fileGallery_searchUrl": {
+    "description": "Adresa URL de căutare pe partea serverului. Când este setat, cuvântul cheie este trimis la această adresă URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Antetele cererii de căutare pe server"
+  },
   "fileGallery_thumbnail": {
     "description": "Miniatură implicită"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Anteturile cererilor serverului"
   },
+  "imageGallery_searchUrl": {
+    "description": "Adresa URL de căutare pe partea serverului. Când este setat, cuvântul cheie este trimis la această adresă URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Antetele cererii de căutare pe server"
+  },
   "videoGallery_data": {
     "description": "Date directe fără apeluri la server"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Anteturile cererilor serverului"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Adresa URL de căutare pe partea serverului. Când este setat, cuvântul cheie este trimis la această adresă URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Antetele cererii de căutare pe server"
   },
   "videoGallery_thumbnail": {
     "description": "Miniatură implicită"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Modele URL suplimentare de recunoscut ca și conținut încorporat."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Modele `<script src=...>` permise pentru HTML încorporat brut \n- (de exemplu, citatul blocat Twitter + `widgets.js`). Fiecare intrare este un `RegExp` (testat cu src complet) sau un `string` (potrivit prin `startsWith`). \n- Setarea implicită la `[]` — toate etichetele de script sunt respinse.** Scripturile inline (fără `src`) sunt întotdeauna respinse."
   },
   "embed_embedQuery": {
     "description": "Definiții personalizate ale serviciilor de încorporare."

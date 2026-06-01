@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "فیلترینگ دقیق برچسب‌ها، ویژگی‌ها و سبک‌ها را فعال می‌کند.\n- از `true` برای فعال کردن همه فیلترها (پیش‌فرض) یا از یک شیء برای کنترل فیلترهای منفرد استفاده کنید.\n- تنظیم `false` ​​پشتیبانی نمی‌شود؛ به جای آن از فرم شیء برای غیرفعال کردن فیلترهای خاص استفاده کنید.\n- :filter description\n- `tagFilter`: فیلترهایی که تگ‌های HTML را مجاز نمی‌دانند (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: فیلترهایی که عناصر قالب را مجاز نمی‌دانند (`formatLine`/`formatBlock`)\n- `classFilter`: فیلترهایی که نام کلاس CSS را مجاز نمی‌دانند (`allowedClassName`)\n- `textStyleTagFilter`: فیلترهایی که تگ‌های سبک متن (b، i، u، span و غیره) را مجاز نمی‌دانند\n- `attrFilter`: فیلترهایی که ویژگی‌های HTML را مجاز نمی‌دانند (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: فیلترهایی که سبک‌های درون‌خطی را مجاز نمی‌دانند (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "فیلتر کردن دقیق برچسب ها، ویژگی ها و سبک ها را فعال می کند. \n- از `true` برای فعال کردن همه فیلترها (پیش‌فرض)، یا یک شی برای کنترل فیلترهای جداگانه استفاده کنید. \n- تنظیم `false` ​​پشتیبانی نمی شود. به جای آن از فرم شی برای غیرفعال کردن فیلترهای خاص استفاده کنید. \n- :شرح فیلتر \n- `tagFilter`: برچسب‌های HTML غیرمجاز را فیلتر می‌کند (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر قالب را فیلتر می کند (`formatLine`/`formatBlock`) \n- `classFilter`: نام‌های کلاس CSS مجاز را فیلتر می‌کند (`allowedClassName`) \n- `textStyleTagFilter`: برچسب های سبک متن را فیلتر می کند (b، i، u، span، و غیره) \n- `attrFilter`: ویژگی های HTML غیر مجاز را فیلتر می کند (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: سبک های درون خطی غیرمجاز را فیلتر می کند (به ازای هر برچسب از `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "سبک‌های اضافی را به لیست سبک‌های مجاز مشخص می‌کند. جداکننده: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "سبک‌های مجاز برای تگ‌های HTML را مشخص می‌کند. کلید، نام(های) تگ و مقدار، سبک‌های مجازِ جدا شده از خط لوله است.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "سبک های مجاز CSS را در هر تگ HTML مشخص می کند. \n- کلید یک نام برچسب، چندین برچسب است که با `|` به هم پیوسته اند، یا یک نگهبان دسته (`@text`، `@line`). \n- مقدار یک لیست محدود شده از نام های سبک مجاز است. \n- ترتیب وضوح هنگام فیلتر کردن یک عنصر: ورودی برچسب صریح → `@line` (برای عناصر formatLine) → `@text` (برای textStyleTags). \n- یک ورودی تگ صریح **جایگزین** پیش فرض دسته می شود - اگر هر دو را می خواهید، سبک های دسته را در مقدار اضافه کنید. \n- با {@link DEFAULTS.TAG_STYLES} ادغام شد. کلیدهای ارائه شده توسط کاربر برنده می شوند. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "استایل‌های مجاز برای تگ `span` را مشخص می‌کند.\n- پیش‌فرض از {@link DEFAULTS.SPAN_STYLES} پیروی می‌کند.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "استایل‌های مجاز برای عنصر `line` (p..) را مشخص می‌کند.\n- پیش‌فرض از {@link DEFAULTS.LINE_STYLES} پیروی می‌کند.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "واحدهای اندازه فونت مجاز.\n- مقدار پیش‌فرض از {@link DEFAULTS.SIZE_UNITS} پیروی می‌کند.",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "هدرهای درخواست سرور"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL جستجوی سمت سرور پس از تنظیم، کلمه کلیدی به این URL ارسال می شود"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "سرصفحه های درخواست جستجوی سمت سرور"
+  },
   "audioGallery_thumbnail": {
     "description": "تصویر بندانگشتی پیش‌فرض"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "هدرهای درخواست سرور"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL جستجوی سمت سرور پس از تنظیم، کلمه کلیدی به این URL ارسال می شود"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "سرصفحه های درخواست جستجوی سمت سرور"
   },
   "fileBrowser_thumbnail": {
     "description": "آدرس پیش‌فرض تصویر بندانگشتی یا تابعی که برای هر آیتم، یک آدرس تصویر بندانگشتی برمی‌گرداند."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "هدرهای درخواست سرور"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL جستجوی سمت سرور پس از تنظیم، کلمه کلیدی به این URL ارسال می شود"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "سرصفحه های درخواست جستجوی سمت سرور"
+  },
   "fileGallery_thumbnail": {
     "description": "تصویر بندانگشتی پیش‌فرض"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "هدرهای درخواست سرور"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL جستجوی سمت سرور پس از تنظیم، کلمه کلیدی به این URL ارسال می شود"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "سرصفحه های درخواست جستجوی سمت سرور"
+  },
   "videoGallery_data": {
     "description": "داده مستقیم بدون فراخوانی سرور"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "هدرهای درخواست سرور"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL جستجوی سمت سرور پس از تنظیم، کلمه کلیدی به این URL ارسال می شود"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "سرصفحه های درخواست جستجوی سمت سرور"
   },
   "videoGallery_thumbnail": {
     "description": "تصویر بندانگشتی پیش‌فرض"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "الگوهای URL اضافی برای تشخیص به عنوان محتوای قابل جاسازی."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "الگوهای `<script src=...>` مجاز برای HTML جاسازی شده خام \n- (مثلاً نقل قول بلوک توییتر + `widgets.js`). هر ورودی یک `RegExp` (تست شده در برابر src کامل) یا یک `string` (منطبق با `startsWith`) است. \n- پیش فرض های `[]` - همه تگ های اسکریپت رد می شوند. ** اسکریپت های درون خطی (بدون `src`) همیشه رد می شوند."
   },
   "embed_embedQuery": {
     "description": "تعاریف سفارشی سرویس جاسازی."

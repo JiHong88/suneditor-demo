@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Aktiverar strikt filtrering av taggar, attribut och stilar.\n- Använd `true` för att aktivera alla filter (standard), eller ett objekt för att styra enskilda filter.\n- Inställningen av `false` ​​stöds inte; använd objektformuläret för att inaktivera specifika filter istället.\n- :filterbeskrivning\n- `tagFilter`: Filterar otillåtna HTML-taggar (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrerar formatelement (`formatLine`/`formatBlock`)\n- `classFilter`: Filterar otillåtna CSS-klassnamn (`allowedClassName`)\n- `textStyleTagFilter`: Filtrerar textstiltaggar (b, i, u, span, etc.)\n- `attrFilter`: Filterar otillåtna HTML-attribut (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filterar otillåtna inline-stilar (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Möjliggör strikt filtrering av taggar, attribut och stilar. \n- Använd `true` för att aktivera alla filter (standard), eller ett objekt för att styra enskilda filter. \n- Inställning `false` ​​stöds inte; använd objektformuläret för att inaktivera specifika filter istället. \n- :filterbeskrivning \n- `tagFilter`: Filtrerar otillåtna HTML-taggar (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtrerar formatelement (`formatLine`/`formatBlock`) \n- `classFilter`: Filtrerar otillåtna CSS-klassnamn (`allowedClassName`) \n- `textStyleTagFilter`: Filtrerar textstiltaggar (b, i, u, span, etc.) \n- `attrFilter`: Filtrerar otillåtna HTML-attribut (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtrerar otillåtna inline-stilar (per-tagg från `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Anger ytterligare stilar till listan över tillåtna stilar. Avgränsare: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Anger tillåtna stilar för HTML-taggar. Nyckeln är taggnamnet/taggnamnen, värdet är tillåtna stilar avgränsade med ett pipeline.",
+    "description": "Anger tillåtna CSS-stilar per HTML-tagg. \n- Nyckel är ett taggnamn, flera taggar sammanfogade med `|`, eller en kategorivakt (`@text`, `@line`). \n- Värde är en pipavgränsad lista över tillåtna stilnamn. \n- Upplösningsordning vid filtrering av ett element: explicit taggpost → `@line` (för formatLine-element) → `@text` (för textStyleTags). \n- En explicit tagg-post **ersätter** kategorins standard - inkludera kategoristilar i värdet om du vill ha båda. \n- Sammanfogat med {@link DEFAULTS.TAG_STYLES}; användarlevererade nycklar vinner. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Anger tillåtna stilar för `span`-taggen.\n- Standardinställningen följer {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Anger tillåtna stilar för `line`-elementet (p..).\n- Standardinställningen följer {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Tillåtna teckenstorleksenheter.\n- Standardvärdet följer {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Serverförfrågningsrubriker"
   },
+  "audioGallery_searchUrl": {
+    "description": "Sök-URL på serversidan. När det är inställt skickas nyckelordet till denna URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Sökbegäran på serversidans rubriker"
+  },
   "audioGallery_thumbnail": {
     "description": "Standardminiatyrbild"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Serverförfrågningsrubriker"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Sök-URL på serversidan. När det är inställt skickas nyckelordet till denna URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Sökbegäran på serversidans rubriker"
   },
   "fileBrowser_thumbnail": {
     "description": "Standardminiatyr-URL eller en funktion som returnerar en miniatyr-URL per objekt."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Serverförfrågningsrubriker"
   },
+  "fileGallery_searchUrl": {
+    "description": "Sök-URL på serversidan. När det är inställt skickas nyckelordet till denna URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Sökbegäran på serversidans rubriker"
+  },
   "fileGallery_thumbnail": {
     "description": "Standardminiatyrbild"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Serverförfrågningsrubriker"
   },
+  "imageGallery_searchUrl": {
+    "description": "Sök-URL på serversidan. När det är inställt skickas nyckelordet till denna URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Sökbegäran på serversidans rubriker"
+  },
   "videoGallery_data": {
     "description": "Direktdata utan serveranrop"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Serverförfrågningsrubriker"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Sök-URL på serversidan. När det är inställt skickas nyckelordet till denna URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Sökbegäran på serversidans rubriker"
   },
   "videoGallery_thumbnail": {
     "description": "Standardminiatyrbild"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Ytterligare URL-mönster att känna igen som inbäddningsbart innehåll."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Tillåtna `<script src=...>`-mönster för rå inbäddad HTML \n- (t.ex. Twitter blockquote + `widgets.js`). Varje post är en `RegExp` (testad mot hela källan) eller en `string` (matchad via `startsWith`). \n- Standard är `[]` — alla skripttaggar avvisas.** Inline-skript (inga `src`) avvisas alltid."
   },
   "embed_embedQuery": {
     "description": "Definitioner av anpassade inbäddningstjänster."

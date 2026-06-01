@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Ermöglicht die strenge Filterung von Tags, Attributen und Stilen.\n\n- Verwenden Sie `true`, um alle Filter zu aktivieren (Standard), oder ein Objekt, um einzelne Filter zu steuern.\n\n- Die Einstellung `false` ​​wird nicht unterstützt; verwenden Sie stattdessen die Objektform, um bestimmte Filter zu deaktivieren.\n\n- :Filterbeschreibung\n\n- `tagFilter`: Filtert unzulässige HTML-Tags (`elementWhitelist`/`elementBlacklist`)\n\n- `formatFilter`: Filtert Formatierungselemente (`formatLine`/`formatBlock`)\n\n- `classFilter`: Filtert unzulässige CSS-Klassennamen (`allowedClassName`)\n\n- `textStyleTagFilter`: Filtert Textstil-Tags (b, i, u, span usw.)\n\n- `attrFilter`: Filtert unzulässige HTML-Attribute (`attributeWhitelist`/`attributeBlacklist`)\n\n- `styleFilter`: Filtert unzulässige Inline-Stile (`spanStyles`/`lineStyles`/`allUsedStyles`)\n\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Ermöglicht eine strikte Filterung von Tags, Attributen und Stilen. \n- Verwenden Sie `true`, um alle Filter zu aktivieren (Standard), oder ein Objekt, um einzelne Filter zu steuern. \n- Die Einstellung `false` ​​wird nicht unterstützt; Verwenden Sie stattdessen das Objektformular, um bestimmte Filter zu deaktivieren. \n- :Filterbeschreibung \n- `tagFilter`: Filtert unzulässige HTML-Tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtert Formatelemente (`formatLine`/`formatBlock`) \n- `classFilter`: Filtert unzulässige CSS-Klassennamen (`allowedClassName`) \n- `textStyleTagFilter`: Filtert Textstil-Tags (b, i, u, span usw.) \n- `attrFilter`: Filtert unzulässige HTML-Attribute (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtert unzulässige Inline-Stile (pro Tag aus `tagStyles`) \n„`js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n`“.",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Gibt zusätzliche Stile für die Liste der zulässigen Stile an. Trennzeichen: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Legt zulässige Stile für HTML-Tags fest. Der Schlüssel ist der/die Tag-Name(n), der Wert sind die durch Pipe-Zeichen getrennten zulässigen Stile.\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Gibt zulässige CSS-Stile pro HTML-Tag an. \n- Der Schlüssel ist ein Tag-Name, mehrere mit `|` verbundene Tags oder ein Kategorie-Sentinel (`@text`, `@line`). \n– Wert ist eine durch Pipes getrennte Liste zulässiger Stilnamen. \n– Auflösungsreihenfolge beim Filtern eines Elements: expliziter Tag-Eintrag → `@line` (für formatLine-Elemente) → `@text` (für textStyleTags). \n- Ein expliziter Tag-Eintrag **ersetzt** den Kategoriestandard – schließen Sie Kategoriestile in den Wert ein, wenn Sie beides wünschen. \n- Zusammengeführt mit {@link DEFAULTS.TAG_STYLES}; Vom Benutzer bereitgestellte Schlüssel gewinnen. \n„`js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n`“.",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Legt zulässige Stile für das `span`-Tag fest.\n\n– Der Standardwert entspricht {@link DEFAULTS.SPAN_STYLES}.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Legt zulässige Stile für das `line`-Element fest (p..).\n\n– Der Standardwert entspricht {@link DEFAULTS.LINE_STYLES}.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Zulässige Schriftgrößeneinheiten.\n\n– Standardmäßig werden die Einheiten {@link DEFAULTS.SIZE_UNITS} verwendet.",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Server-Anfrageheader"
   },
+  "audioGallery_searchUrl": {
+    "description": "Serverseitige Such-URL. Wenn es festgelegt ist, wird das Schlüsselwort an diese URL gesendet"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Serverseitige Suchanforderungsheader"
+  },
   "audioGallery_thumbnail": {
     "description": "Standard-Miniaturansicht"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Server-Anfrageheader"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Serverseitige Such-URL. Wenn es festgelegt ist, wird das Schlüsselwort an diese URL gesendet"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Serverseitige Suchanforderungsheader"
   },
   "fileBrowser_thumbnail": {
     "description": "Standardmäßige Miniaturansicht-URL oder eine Funktion, die pro Element eine Miniaturansicht-URL zurückgibt."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Server-Anfrageheader"
   },
+  "fileGallery_searchUrl": {
+    "description": "Serverseitige Such-URL. Wenn es festgelegt ist, wird das Schlüsselwort an diese URL gesendet"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Serverseitige Suchanforderungsheader"
+  },
   "fileGallery_thumbnail": {
     "description": "Standard-Miniaturansicht"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Server-Anfrageheader"
   },
+  "imageGallery_searchUrl": {
+    "description": "Serverseitige Such-URL. Wenn es festgelegt ist, wird das Schlüsselwort an diese URL gesendet"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Serverseitige Suchanforderungsheader"
+  },
   "videoGallery_data": {
     "description": "Direkte Datenübertragung ohne Serveraufrufe"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Server-Anfrageheader"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Serverseitige Such-URL. Wenn es festgelegt ist, wird das Schlüsselwort an diese URL gesendet"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Serverseitige Suchanforderungsheader"
   },
   "videoGallery_thumbnail": {
     "description": "Standard-Miniaturansicht"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Zusätzliche URL-Muster, die als einbettbare Inhalte erkannt werden sollen."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Zulässige `<script src=...>`-Muster für rohes eingebettetes HTML \n- (z. B. Twitter-Blockquote + `widgets.js`). Jeder Eintrag ist ein `RegExp` (getestet gegen die vollständige Quelle) oder ein `string` (abgeglichen über `startsWith`). \n- Standardmäßig ist `[]` – alle Skript-Tags werden abgelehnt.** Inline-Skripte (kein `src`) werden immer abgelehnt."
   },
   "embed_embedQuery": {
     "description": "Benutzerdefinierte Einbettungsdienstedefinitionen."

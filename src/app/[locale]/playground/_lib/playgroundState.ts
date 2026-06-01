@@ -106,8 +106,6 @@ export interface PlaygroundState {
 	formatClosureBrLine: string;
 	formatBlock: string;
 	formatClosureBlock: string;
-	spanStyles: string;
-	lineStyles: string;
 	textStyleTags: string;
 	allowedEmptyTags: string;
 	allowedClassName: string;
@@ -253,6 +251,7 @@ export interface PlaygroundState {
 	embed_controls: string;
 	embed_urlPatterns: string;
 	embed_embedQuery: string;
+	embed_scriptSrcWhitelist: string;
 
 	// — Plugin: Drawing (extended) —
 	drawing_useFormatType: boolean;
@@ -324,25 +323,35 @@ export interface PlaygroundState {
 	// — Plugin: ImageGallery —
 	imageGallery_url: string;
 	imageGallery_headers: string;
+	imageGallery_searchUrl: string;
+	imageGallery_searchHeaders: string;
 	imageGallery_data: string;
 	// — Plugin: VideoGallery —
 	videoGallery_url: string;
 	videoGallery_headers: string;
+	videoGallery_searchUrl: string;
+	videoGallery_searchHeaders: string;
 	videoGallery_thumbnail: string;
 	videoGallery_data: string;
 	// — Plugin: AudioGallery —
 	audioGallery_url: string;
 	audioGallery_headers: string;
+	audioGallery_searchUrl: string;
+	audioGallery_searchHeaders: string;
 	audioGallery_thumbnail: string;
 	audioGallery_data: string;
 	// — Plugin: FileGallery —
 	fileGallery_url: string;
 	fileGallery_headers: string;
+	fileGallery_searchUrl: string;
+	fileGallery_searchHeaders: string;
 	fileGallery_thumbnail: string;
 	fileGallery_data: string;
 	// — Plugin: FileBrowser —
 	fileBrowser_url: string;
 	fileBrowser_headers: string;
+	fileBrowser_searchUrl: string;
+	fileBrowser_searchHeaders: string;
 	fileBrowser_thumbnail: string;
 	fileBrowser_data: string;
 	fileBrowser_props: string;
@@ -494,8 +503,6 @@ export const DEFAULTS: PlaygroundState = {
 	formatClosureBrLine: "",
 	formatBlock: "",
 	formatClosureBlock: "",
-	spanStyles: "font-family|font-size|color|background-color|width|height",
-	lineStyles: "text-align|margin|margin-left|margin-right|line-height",
 	textStyleTags: "",
 	allowedEmptyTags: "",
 	allowedClassName: "",
@@ -638,6 +645,7 @@ export const DEFAULTS: PlaygroundState = {
 	embed_controls: "",
 	embed_urlPatterns: "",
 	embed_embedQuery: "",
+	embed_scriptSrcWhitelist: "",
 
 	// Plugin: Drawing (extended)
 	drawing_useFormatType: false,
@@ -707,25 +715,35 @@ export const DEFAULTS: PlaygroundState = {
 	// Plugin: ImageGallery
 	imageGallery_url: "",
 	imageGallery_headers: "",
+	imageGallery_searchUrl: "",
+	imageGallery_searchHeaders: "",
 	imageGallery_data: "",
 	// Plugin: VideoGallery
 	videoGallery_url: "",
 	videoGallery_headers: "",
+	videoGallery_searchUrl: "",
+	videoGallery_searchHeaders: "",
 	videoGallery_thumbnail: "",
 	videoGallery_data: "",
 	// Plugin: AudioGallery
 	audioGallery_url: "",
 	audioGallery_headers: "",
+	audioGallery_searchUrl: "",
+	audioGallery_searchHeaders: "",
 	audioGallery_thumbnail: "",
 	audioGallery_data: "",
 	// Plugin: FileGallery
 	fileGallery_url: "",
 	fileGallery_headers: "",
+	fileGallery_searchUrl: "",
+	fileGallery_searchHeaders: "",
 	fileGallery_thumbnail: "",
 	fileGallery_data: "",
 	// Plugin: FileBrowser
 	fileBrowser_url: "",
 	fileBrowser_headers: "",
+	fileBrowser_searchUrl: "",
+	fileBrowser_searchHeaders: "",
 	fileBrowser_thumbnail: "",
 	fileBrowser_data: "",
 	fileBrowser_props: "",
@@ -892,6 +910,7 @@ export const ITEM_PRESETS: Record<string, string> = {
 	video_embedQuery: '{"dailymotion":{"pattern":"/dailymotion\\\\.com\\\\/video\\\\/(\\\\w+)/i","action":"https://www.dailymotion.com/embed/video/$1","tag":"iframe"}}',
 	embed_urlPatterns: '/reddit\\.com\\/r\\//,/github\\.com\\/.+\\/issues\\//,/stackoverflow\\.com\\/questions\\//',
 	embed_embedQuery: '{"reddit":{"pattern":"/reddit\\\\.com\\\\/r\\\\/(\\\\w+)\\\\/comments\\\\/(\\\\w+)/i","action":"https://www.redditmedia.com/r/$1/comments/$2?embed=true","tag":"iframe"}}',
+	embed_scriptSrcWhitelist: '/^https:\\/\\/platform\\.twitter\\.com\\/widgets\\.js$/',
 	fontSize_unitMap: '{"px":{"default":16,"inc":1,"min":8,"max":72,"list":[8,10,12,14,16,18,20,24,28,32,36,48,72]},"pt":{"default":12,"inc":1,"min":6,"max":72,"list":[6,8,10,12,14,18,24,36]},"em":{"default":1,"inc":0.1,"min":0.5,"max":5,"list":[0.5,0.75,1,1.25,1.5,2,2.5,3]},"rem":{"default":1,"inc":0.1,"min":0.5,"max":5,"list":[0.5,0.75,1,1.25,1.5,2,2.5,3]}}',
 	math_onPaste: 'function(e) {\n  const text = e.clipboardData.getData("text/plain");\n  e.preventDefault();\n  document.execCommand("insertText", false, text);\n}',
 };
@@ -1361,8 +1380,6 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.formatClosureBrLine) opts.formatClosureBrLine = state.formatClosureBrLine;
 	if (state.formatBlock) opts.formatBlock = state.formatBlock;
 	if (state.formatClosureBlock) opts.formatClosureBlock = state.formatClosureBlock;
-	if (state.spanStyles && state.spanStyles !== DEFAULTS.spanStyles) opts.spanStyles = state.spanStyles;
-	if (state.lineStyles && state.lineStyles !== DEFAULTS.lineStyles) opts.lineStyles = state.lineStyles;
 	if (state.textStyleTags) opts.textStyleTags = state.textStyleTags;
 	if (state.allowedEmptyTags) opts.allowedEmptyTags = state.allowedEmptyTags;
 	if (state.allowedClassName) opts.allowedClassName = state.allowedClassName;
@@ -1511,6 +1528,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.embed_controls) { try { emb.controls = JSON.parse(state.embed_controls); } catch { /* skip */ } }
 	if (state.embed_urlPatterns) { try { emb.urlPatterns = parseRegExpList(state.embed_urlPatterns); } catch { /* skip */ } }
 	if (state.embed_embedQuery) { try { emb.embedQuery = parseEmbedQuery(state.embed_embedQuery); } catch { /* skip */ } }
+	if (state.embed_scriptSrcWhitelist) { try { emb.scriptSrcWhitelist = parseRegExpList(state.embed_scriptSrcWhitelist); } catch { /* skip */ } }
 	if (Object.keys(emb).length) opts.embed = emb;
 
 	const drw: Record<string, unknown> = {};
@@ -1624,6 +1642,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const ig: Record<string, unknown> = {};
 	if (state.imageGallery_url) ig.url = state.imageGallery_url;
 	if (state.imageGallery_headers) { try { ig.headers = JSON.parse(state.imageGallery_headers); } catch { /* skip */ } }
+	if (state.imageGallery_searchUrl) ig.searchUrl = state.imageGallery_searchUrl;
+	if (state.imageGallery_searchHeaders) { try { ig.searchHeaders = JSON.parse(state.imageGallery_searchHeaders); } catch { /* skip */ } }
 	if (state.imageGallery_data) { try { ig.data = JSON.parse(state.imageGallery_data); } catch { /* skip */ } }
 	if (Object.keys(ig).length) opts.imageGallery = ig;
 
@@ -1631,6 +1651,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const vg: Record<string, unknown> = {};
 	if (state.videoGallery_url) vg.url = state.videoGallery_url;
 	if (state.videoGallery_headers) { try { vg.headers = JSON.parse(state.videoGallery_headers); } catch { /* skip */ } }
+	if (state.videoGallery_searchUrl) vg.searchUrl = state.videoGallery_searchUrl;
+	if (state.videoGallery_searchHeaders) { try { vg.searchHeaders = JSON.parse(state.videoGallery_searchHeaders); } catch { /* skip */ } }
 	if (state.videoGallery_thumbnail) vg.thumbnail = state.videoGallery_thumbnail;
 	if (state.videoGallery_data) { try { vg.data = JSON.parse(state.videoGallery_data); } catch { /* skip */ } }
 	if (Object.keys(vg).length) opts.videoGallery = vg;
@@ -1639,6 +1661,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const ag: Record<string, unknown> = {};
 	if (state.audioGallery_url) ag.url = state.audioGallery_url;
 	if (state.audioGallery_headers) { try { ag.headers = JSON.parse(state.audioGallery_headers); } catch { /* skip */ } }
+	if (state.audioGallery_searchUrl) ag.searchUrl = state.audioGallery_searchUrl;
+	if (state.audioGallery_searchHeaders) { try { ag.searchHeaders = JSON.parse(state.audioGallery_searchHeaders); } catch { /* skip */ } }
 	if (state.audioGallery_thumbnail) ag.thumbnail = state.audioGallery_thumbnail;
 	if (state.audioGallery_data) { try { ag.data = JSON.parse(state.audioGallery_data); } catch { /* skip */ } }
 	if (Object.keys(ag).length) opts.audioGallery = ag;
@@ -1647,6 +1671,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const fg: Record<string, unknown> = {};
 	if (state.fileGallery_url) fg.url = state.fileGallery_url;
 	if (state.fileGallery_headers) { try { fg.headers = JSON.parse(state.fileGallery_headers); } catch { /* skip */ } }
+	if (state.fileGallery_searchUrl) fg.searchUrl = state.fileGallery_searchUrl;
+	if (state.fileGallery_searchHeaders) { try { fg.searchHeaders = JSON.parse(state.fileGallery_searchHeaders); } catch { /* skip */ } }
 	if (state.fileGallery_thumbnail) fg.thumbnail = state.fileGallery_thumbnail;
 	if (state.fileGallery_data) { try { fg.data = JSON.parse(state.fileGallery_data); } catch { /* skip */ } }
 	if (Object.keys(fg).length) opts.fileGallery = fg;
@@ -1655,6 +1681,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const fbr: Record<string, unknown> = {};
 	if (state.fileBrowser_url) fbr.url = state.fileBrowser_url;
 	if (state.fileBrowser_headers) { try { fbr.headers = JSON.parse(state.fileBrowser_headers); } catch { /* skip */ } }
+	if (state.fileBrowser_searchUrl) fbr.searchUrl = state.fileBrowser_searchUrl;
+	if (state.fileBrowser_searchHeaders) { try { fbr.searchHeaders = JSON.parse(state.fileBrowser_searchHeaders); } catch { /* skip */ } }
 	if (state.fileBrowser_thumbnail) fbr.thumbnail = state.fileBrowser_thumbnail;
 	if (state.fileBrowser_data) { try { fbr.data = JSON.parse(state.fileBrowser_data); } catch { /* skip */ } }
 	if (state.fileBrowser_props) { try { fbr.props = JSON.parse(state.fileBrowser_props); } catch { /* skip */ } }
@@ -1866,8 +1894,6 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	fcbl: "formatClosureBrLine",
 	fb: "formatBlock",
 	fcb: "formatClosureBlock",
-	ss: "spanStyles",
-	ls: "lineStyles",
 	tst: "textStyleTags",
 	aet: "allowedEmptyTags",
 	acn: "allowedClassName",
@@ -1992,6 +2018,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"em.ct": "embed_controls",
 	"em.up": "embed_urlPatterns",
 	"em.eq": "embed_embedQuery",
+	"em.ssw": "embed_scriptSrcWhitelist",
 	// Plugin: Drawing (extended)
 	"dr.uft": "drawing_useFormatType",
 	"dr.dft": "drawing_defaultFormatType",
@@ -2051,25 +2078,35 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	// Plugin: ImageGallery
 	"ig.u": "imageGallery_url",
 	"ig.h": "imageGallery_headers",
+	"ig.su": "imageGallery_searchUrl",
+	"ig.sh": "imageGallery_searchHeaders",
 	"ig.d": "imageGallery_data",
 	// Plugin: VideoGallery
 	"vg.u": "videoGallery_url",
 	"vg.h": "videoGallery_headers",
+	"vg.su": "videoGallery_searchUrl",
+	"vg.sh": "videoGallery_searchHeaders",
 	"vg.th": "videoGallery_thumbnail",
 	"vg.d": "videoGallery_data",
 	// Plugin: AudioGallery
 	"ag.u": "audioGallery_url",
 	"ag.h": "audioGallery_headers",
+	"ag.su": "audioGallery_searchUrl",
+	"ag.sh": "audioGallery_searchHeaders",
 	"ag.th": "audioGallery_thumbnail",
 	"ag.d": "audioGallery_data",
 	// Plugin: FileGallery
 	"fg.u": "fileGallery_url",
 	"fg.h": "fileGallery_headers",
+	"fg.su": "fileGallery_searchUrl",
+	"fg.sh": "fileGallery_searchHeaders",
 	"fg.th": "fileGallery_thumbnail",
 	"fg.d": "fileGallery_data",
 	// Plugin: FileBrowser
 	"fb.u": "fileBrowser_url",
 	"fb.h": "fileBrowser_headers",
+	"fb.su": "fileBrowser_searchUrl",
+	"fb.sh": "fileBrowser_searchHeaders",
 	"fb.th": "fileBrowser_thumbnail",
 	"fb.d": "fileBrowser_data",
 	"fb.p": "fileBrowser_props",

@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Consente di applicare filtri rigorosi a tag, attributi e stili.\n\n- Utilizzare `true` per abilitare tutti i filtri (impostazione predefinita) o un oggetto per controllare i singoli filtri.\n\n- L'impostazione di `false` ​​non è supportata; utilizzare invece la forma oggetto per disabilitare filtri specifici.\n\n- :descrizione del filtro\n- `tagFilter`: Filtra i tag HTML non consentiti (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtra gli elementi di formattazione (`formatLine`/`formatBlock`)\n- `classFilter`: Filtra i nomi delle classi CSS non consentiti (`allowedClassName`)\n- `textStyleTagFilter`: Filtra i tag di stile del testo (b, i, u, span, ecc.)\n- `attrFilter`: Filtra gli attributi HTML non consentiti (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtra gli stili in linea non consentiti (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Abilita il filtraggio rigoroso di tag, attributi e stili. \n- Utilizzare `true` per abilitare tutti i filtri (impostazione predefinita) o un oggetto per controllare i singoli filtri. \n- L'impostazione `false` ​​non è supportata; utilizzare invece il modulo oggetto per disabilitare filtri specifici. \n- :descrizione del filtro \n- `tagFilter`: filtra i tag HTML non consentiti (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtra gli elementi del formato (`formatLine`/`formatBlock`) \n- `classFilter`: filtra i nomi delle classi CSS non consentite (`allowedClassName`) \n- `textStyleTagFilter`: filtra i tag di stile testo (b, i, u, span, ecc.) \n- `attrFilter`: filtra gli attributi HTML non consentiti (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: filtra gli stili in linea non consentiti (per tag da `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Specifica stili aggiuntivi all'elenco degli stili consentiti. Delimitatore: `\"|\"`.\n\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Specifica gli stili consentiti per i tag HTML. La chiave è il nome (o i nomi) del tag, il valore è l'insieme degli stili consentiti separati da pipe.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Specifica gli stili CSS consentiti per tag HTML. \n- La chiave è il nome di un tag, più tag uniti con `|` o una sentinella di categoria (`@text`, `@line`). \n- Il valore è un elenco delimitato da barre verticali di nomi di stili consentiti. \n- Ordine di risoluzione durante il filtraggio di un elemento: voce tag esplicita → `@line` (per elementi formatLine) → `@text` (per textStyleTags). \n- Una voce di tag esplicita **sostituisce** la categoria predefinita: includi gli stili di categoria nel valore se li desideri entrambi. \n- Unito a {@link DEFAULTS.TAG_STYLES}; vincono le chiavi fornite dall'utente. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Specifica gli stili consentiti per il tag `span`.\n\n- L'impostazione predefinita segue {@link DEFAULTS.SPAN_STYLES}.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Specifica gli stili consentiti per l'elemento `line` (p..).\n\n- Il valore predefinito segue {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Unità di misura consentite per la dimensione del carattere.\n\n- Il valore predefinito segue {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "intestazioni della richiesta del server"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL di ricerca lato server. Una volta impostata, la parola chiave viene inviata a questo URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Intestazioni delle richieste di ricerca lato server"
+  },
   "audioGallery_thumbnail": {
     "description": "Miniatura predefinita"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "intestazioni della richiesta del server"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL di ricerca lato server. Una volta impostata, la parola chiave viene inviata a questo URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Intestazioni delle richieste di ricerca lato server"
   },
   "fileBrowser_thumbnail": {
     "description": "URL predefinito per le miniature o una funzione che restituisce l'URL di una miniatura per ogni elemento."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "intestazioni della richiesta del server"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL di ricerca lato server. Una volta impostata, la parola chiave viene inviata a questo URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Intestazioni delle richieste di ricerca lato server"
+  },
   "fileGallery_thumbnail": {
     "description": "Miniatura predefinita"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "intestazioni della richiesta del server"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL di ricerca lato server. Una volta impostata, la parola chiave viene inviata a questo URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Intestazioni delle richieste di ricerca lato server"
+  },
   "videoGallery_data": {
     "description": "Dati diretti senza chiamate al server."
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "intestazioni della richiesta del server"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL di ricerca lato server. Una volta impostata, la parola chiave viene inviata a questo URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Intestazioni delle richieste di ricerca lato server"
   },
   "videoGallery_thumbnail": {
     "description": "Miniatura predefinita"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Ulteriori modelli di URL da riconoscere come contenuti incorporabili."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Modelli `<script src=...>` consentiti per HTML incorporato non elaborato \n- (ad esempio citazione di Twitter + `widgets.js`). Ogni voce è un `RegExp` (testato rispetto all'intero src) o un `string` (corrispondente tramite `startsWith`). \n- Il valore predefinito è `[]`: tutti i tag di script vengono rifiutati.** Gli script in linea (no `src`) vengono sempre rifiutati."
   },
   "embed_embedQuery": {
     "description": "Definizioni personalizzate per i servizi di incorporamento."

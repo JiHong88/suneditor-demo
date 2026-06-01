@@ -347,8 +347,6 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.formatClosureBrLine) add("formatClosureBrLine", `"${state.formatClosureBrLine}"`);
 	if (state.formatBlock) add("formatBlock", `"${state.formatBlock}"`);
 	if (state.formatClosureBlock) add("formatClosureBlock", `"${state.formatClosureBlock}"`);
-	if (state.spanStyles && state.spanStyles !== DEFAULTS.spanStyles) add("spanStyles", `"${state.spanStyles}"`);
-	if (state.lineStyles && state.lineStyles !== DEFAULTS.lineStyles) add("lineStyles", `"${state.lineStyles}"`);
 	if (state.textStyleTags) add("textStyleTags", `"${state.textStyleTags}"`);
 	if (state.allowedEmptyTags) add("allowedEmptyTags", `"${state.allowedEmptyTags}"`);
 	if (state.allowedClassName) add("allowedClassName", `"${state.allowedClassName}"`);
@@ -491,6 +489,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.embed_controls) mergeJsonField(pLines, "embed", "controls", state.embed_controls);
 	if (state.embed_urlPatterns) mergeJsonField(pLines, "embed", "urlPatterns", fmtRegExpList(state.embed_urlPatterns));
 	if (state.embed_embedQuery) mergeJsonField(pLines, "embed", "embedQuery", fmtEmbedQuery(state.embed_embedQuery));
+	if (state.embed_scriptSrcWhitelist) mergeJsonField(pLines, "embed", "scriptSrcWhitelist", fmtRegExpList(state.embed_scriptSrcWhitelist));
 	pLines.push(
 		pluginLines("drawing", [
 			["outputFormat", state.drawing_outputFormat, DEFAULTS.drawing_outputFormat],
@@ -617,41 +616,61 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	}[] = [
 		{
 			prefix: "imageGallery",
-			entries: [["url", state.imageGallery_url, DEFAULTS.imageGallery_url]],
-			jsonFields: state.imageGallery_data ? [{ key: "data", value: state.imageGallery_data }] : [],
+			entries: [
+				["url", state.imageGallery_url, DEFAULTS.imageGallery_url],
+				["searchUrl", state.imageGallery_searchUrl, DEFAULTS.imageGallery_searchUrl],
+			],
+			jsonFields: [
+				...(state.imageGallery_searchHeaders ? [{ key: "searchHeaders", value: state.imageGallery_searchHeaders }] : []),
+				...(state.imageGallery_data ? [{ key: "data", value: state.imageGallery_data }] : []),
+			],
 		},
 		{
 			prefix: "videoGallery",
 			entries: [
 				["url", state.videoGallery_url, DEFAULTS.videoGallery_url],
+				["searchUrl", state.videoGallery_searchUrl, DEFAULTS.videoGallery_searchUrl],
 				["thumbnail", state.videoGallery_thumbnail, DEFAULTS.videoGallery_thumbnail],
 			],
-			jsonFields: state.videoGallery_data ? [{ key: "data", value: state.videoGallery_data }] : [],
+			jsonFields: [
+				...(state.videoGallery_searchHeaders ? [{ key: "searchHeaders", value: state.videoGallery_searchHeaders }] : []),
+				...(state.videoGallery_data ? [{ key: "data", value: state.videoGallery_data }] : []),
+			],
 		},
 		{
 			prefix: "audioGallery",
 			entries: [
 				["url", state.audioGallery_url, DEFAULTS.audioGallery_url],
+				["searchUrl", state.audioGallery_searchUrl, DEFAULTS.audioGallery_searchUrl],
 				["thumbnail", state.audioGallery_thumbnail, DEFAULTS.audioGallery_thumbnail],
 			],
-			jsonFields: state.audioGallery_data ? [{ key: "data", value: state.audioGallery_data }] : [],
+			jsonFields: [
+				...(state.audioGallery_searchHeaders ? [{ key: "searchHeaders", value: state.audioGallery_searchHeaders }] : []),
+				...(state.audioGallery_data ? [{ key: "data", value: state.audioGallery_data }] : []),
+			],
 		},
 		{
 			prefix: "fileGallery",
 			entries: [
 				["url", state.fileGallery_url, DEFAULTS.fileGallery_url],
+				["searchUrl", state.fileGallery_searchUrl, DEFAULTS.fileGallery_searchUrl],
 				["thumbnail", state.fileGallery_thumbnail, DEFAULTS.fileGallery_thumbnail],
 			],
-			jsonFields: state.fileGallery_data ? [{ key: "data", value: state.fileGallery_data }] : [],
+			jsonFields: [
+				...(state.fileGallery_searchHeaders ? [{ key: "searchHeaders", value: state.fileGallery_searchHeaders }] : []),
+				...(state.fileGallery_data ? [{ key: "data", value: state.fileGallery_data }] : []),
+			],
 		},
 		{
 			prefix: "fileBrowser",
 			entries: [
 				["url", state.fileBrowser_url, DEFAULTS.fileBrowser_url],
+				["searchUrl", state.fileBrowser_searchUrl, DEFAULTS.fileBrowser_searchUrl],
 				["thumbnail", state.fileBrowser_thumbnail, DEFAULTS.fileBrowser_thumbnail],
 				["expand", state.fileBrowser_expand, DEFAULTS.fileBrowser_expand],
 			],
 			jsonFields: [
+				...(state.fileBrowser_searchHeaders ? [{ key: "searchHeaders", value: state.fileBrowser_searchHeaders }] : []),
 				...(state.fileBrowser_data ? [{ key: "data", value: state.fileBrowser_data }] : []),
 				...(state.fileBrowser_props ? [{ key: "props", value: state.fileBrowser_props }] : []),
 			],

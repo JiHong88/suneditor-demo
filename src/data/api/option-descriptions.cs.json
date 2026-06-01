@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Umožňuje striktní filtrování tagů, atributů a stylů.\n- Použijte `true` k povolení všech filtrů (výchozí) nebo objekt k ovládání jednotlivých filtrů.\n- Nastavení `false` ​​není podporováno; k zakázání konkrétních filtrů použijte formulář objektu.\n- :popis filtru\n- `tagFilter`: Filtruje zakázané tagy HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtruje prvky formátu (`formatLine`/`formatBlock`)\n- `classFilter`: Filtruje zakázané názvy tříd CSS (`allowedClassName`)\n- `textStyleTagFilter`: Filtruje tagy stylů textu (b, i, u, span atd.)\n- `attrFilter`: Filtruje zakázané atributy HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtruje zakázané inline styly (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Umožňuje přísné filtrování značek, atributů a stylů. \n- Použijte `true` k povolení všech filtrů (výchozí) nebo objektu k ovládání jednotlivých filtrů. \n- Nastavení `false` ​​není podporováno; místo toho použijte formulář objektu k deaktivaci konkrétních filtrů. \n- :popis filtru \n- `tagFilter`: Filtruje nepovolené značky HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtruje prvky formátu (`formatLine`/`formatBlock`) \n- `classFilter`: Filtruje nepovolené názvy tříd CSS (`allowedClassName`) \n- `textStyleTagFilter`: Filtruje značky stylu textu (b, i, u, span atd.) \n- `attrFilter`: Filtruje nepovolené atributy HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtry nepovolené vložené styly (na značku z `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Určuje další styly do seznamu povolených stylů. Oddělovač: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Určuje povolené styly pro HTML tagy. Klíč je název(y) tagu(ů), hodnota je povolený styl oddělený svislými čarami.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Určuje povolené styly CSS na značku HTML. \n- Klíč je název značky, více značek spojených s `|` nebo hlídač kategorie (`@text`, `@line`). \n- Hodnota je svisle oddělený seznam povolených názvů stylů. \n- Pořadí rozlišení při filtrování prvku: explicitní záznam tagu → `@line` (pro elementy formatLine) → `@text` (pro textStyleTags). \n- Explicitní položka tagu **nahrazuje** výchozí kategorii – zahrňte do hodnoty styly kategorií, pokud chcete obojí. \n– Sloučeno s {@link DEFAULTS.TAG_STYLES}; vyhrávají klíče dodané uživatelem. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Určuje povolené styly pro tag `span`.\n- Výchozí hodnota je {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Určuje povolené styly pro element `line` (p..).\n- Výchozí hodnota je {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Povolené jednotky velikosti písma.\n- Výchozí hodnota je {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Záhlaví požadavků serveru"
   },
+  "audioGallery_searchUrl": {
+    "description": "Adresa URL vyhledávání na straně serveru. Po nastavení je klíčové slovo odesláno na tuto adresu URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Záhlaví požadavku na vyhledávání na straně serveru"
+  },
   "audioGallery_thumbnail": {
     "description": "Výchozí miniatura"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Záhlaví požadavků serveru"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Adresa URL vyhledávání na straně serveru. Po nastavení je klíčové slovo odesláno na tuto adresu URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Záhlaví požadavku na vyhledávání na straně serveru"
   },
   "fileBrowser_thumbnail": {
     "description": "Výchozí URL miniatury nebo funkce, která vrací URL miniatury pro každou položku."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Záhlaví požadavků serveru"
   },
+  "fileGallery_searchUrl": {
+    "description": "Adresa URL vyhledávání na straně serveru. Po nastavení je klíčové slovo odesláno na tuto adresu URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Záhlaví požadavku na vyhledávání na straně serveru"
+  },
   "fileGallery_thumbnail": {
     "description": "Výchozí miniatura"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Záhlaví požadavků serveru"
   },
+  "imageGallery_searchUrl": {
+    "description": "Adresa URL vyhledávání na straně serveru. Po nastavení je klíčové slovo odesláno na tuto adresu URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Záhlaví požadavku na vyhledávání na straně serveru"
+  },
   "videoGallery_data": {
     "description": "Přímá data bez volání serveru"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Záhlaví požadavků serveru"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Adresa URL vyhledávání na straně serveru. Po nastavení je klíčové slovo odesláno na tuto adresu URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Záhlaví požadavku na vyhledávání na straně serveru"
   },
   "videoGallery_thumbnail": {
     "description": "Výchozí miniatura"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Další vzory URL, které mají být rozpoznány jako vložitelný obsah."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Povolené vzory `<script src=...>` pro nezpracovaný kód HTML pro vložení \n- (např. Twitter blockquote + `widgets.js`). Každý záznam je `RegExp` (testováno proti úplnému src) nebo `string` (porovnané přes `startsWith`). \n- Výchozí hodnota je `[]` – všechny značky skriptu jsou odmítnuty.** Vložené skripty (bez `src`) jsou vždy odmítnuty."
   },
   "embed_embedQuery": {
     "description": "Definice vlastních vkládacích služeb."

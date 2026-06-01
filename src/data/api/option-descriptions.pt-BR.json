@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Permite a filtragem rigorosa de tags, atributos e estilos.\n- Use `true` para ativar todos os filtros (padrão) ou um objeto para controlar filtros individuais.\n- A configuração `false` ​​não é suportada; use o formato de objeto para desativar filtros específicos.\n- :descrição do filtro\n- `tagFilter`: Filtra tags HTML não permitidas (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtra elementos de formatação (`formatLine`/`formatBlock`)\n- `classFilter`: Filtra nomes de classe CSS não permitidos (`allowedClassName`)\n- `textStyleTagFilter`: Filtra tags de estilo de texto (b, i, u, span, etc.)\n- `attrFilter`: Filtra atributos HTML não permitidos (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtra estilos embutidos não permitidos (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Permite filtragem rigorosa de tags, atributos e estilos. \n- Use `true` para ativar todos os filtros (padrão) ou um objeto para controlar filtros individuais. \n- A configuração `false` ​​não é suportada; use o formulário de objeto para desabilitar filtros específicos. \n-: descrição do filtro \n- `tagFilter`: Filtra tags HTML não permitidas (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtra elementos de formato (`formatLine`/`formatBlock`) \n- `classFilter`: Filtra nomes de classes CSS não permitidos (`allowedClassName`) \n- `textStyleTagFilter`: Filtra tags de estilo de texto (b, i, u, span, etc.) \n- `attrFilter`: Filtra atributos HTML não permitidos (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtra estilos inline não permitidos (por tag de `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Especifica estilos adicionais à lista de estilos permitidos. Delimitador: `\"|\"`.\n``js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Especifica os estilos permitidos para tags HTML. A chave é o(s) nome(s) da(s) tag(s), o valor é o conjunto de estilos permitidos separados por pipe.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Especifica estilos CSS permitidos por tag HTML. \n- Chave é um nome de tag, múltiplas tags unidas com `|` ou um sentinela de categoria (`@text`, `@line`). \n- Valor é uma lista delimitada por barras verticais de nomes de estilos permitidos. \n- Ordem de resolução ao filtrar um elemento: entrada explícita da tag → `@line` (para elementos formatLine) → `@text` (para textStyleTags). \n- Uma entrada de tag explícita **substitui** o padrão da categoria — inclua estilos de categoria no valor se desejar ambos. \n- Mesclado com {@link DEFAULTS.TAG_STYLES}; as chaves fornecidas pelo usuário vencem. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Especifica os estilos permitidos para a tag `span`.\n- O padrão segue {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Especifica os estilos permitidos para o elemento `line` (p..).\n- O padrão segue {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Unidades de tamanho de fonte permitidas.\n- O padrão segue {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL de pesquisa do lado do servidor. Quando definida, a palavra-chave é enviada para este URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Cabeçalhos de solicitação de pesquisa do lado do servidor"
+  },
   "audioGallery_thumbnail": {
     "description": "Miniatura padrão"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL de pesquisa do lado do servidor. Quando definida, a palavra-chave é enviada para este URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Cabeçalhos de solicitação de pesquisa do lado do servidor"
   },
   "fileBrowser_thumbnail": {
     "description": "URL padrão para miniaturas ou uma função que retorna uma URL para miniaturas por item."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL de pesquisa do lado do servidor. Quando definida, a palavra-chave é enviada para este URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Cabeçalhos de solicitação de pesquisa do lado do servidor"
+  },
   "fileGallery_thumbnail": {
     "description": "Miniatura padrão"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL de pesquisa do lado do servidor. Quando definida, a palavra-chave é enviada para este URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Cabeçalhos de solicitação de pesquisa do lado do servidor"
+  },
   "videoGallery_data": {
     "description": "Dados diretos sem chamadas ao servidor"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Cabeçalhos de solicitação do servidor"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL de pesquisa do lado do servidor. Quando definida, a palavra-chave é enviada para este URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Cabeçalhos de solicitação de pesquisa do lado do servidor"
   },
   "videoGallery_thumbnail": {
     "description": "Miniatura padrão"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Padrões de URL adicionais para reconhecer como conteúdo incorporável."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Padrões `<script src=...>` permitidos para HTML incorporado bruto \n- (por exemplo, citação de bloco do Twitter + `widgets.js`). Cada entrada é um `RegExp` (testado em relação ao src completo) ou um `string` (correspondido por meio de `startsWith`). \n- O padrão é `[]` — todas as tags de script são rejeitadas.** Scripts embutidos (sem `src`) são sempre rejeitados."
   },
   "embed_embedQuery": {
     "description": "Definições de serviço de incorporação personalizadas."

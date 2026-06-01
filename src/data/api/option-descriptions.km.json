@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "អនុញ្ញាតឱ្យមានការច្រោះយ៉ាងតឹងរ៉ឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។\n- ប្រើ `true` ដើម្បីបើកដំណើរការតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុមួយដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។\n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ - :filter description\n- `tagFilter`: តម្រង​មិន​អនុញ្ញាត​ស្លាក HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: តម្រង​ធាតុ​ទ្រង់ទ្រាយ (`formatLine`/`formatBlock`)\n- `classFilter`: តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`)\n- `textStyleTagFilter`: តម្រង​ស្លាក​រចនាប័ទ្ម​អត្ថបទ (b, i, u, span, ។ល។)\n- `attrFilter`: តម្រង​មិន​អនុញ្ញាត​គុណលក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: តម្រង​មិន​អនុញ្ញាត​រចនាប័ទ្ម​ក្នុង​ជួរ (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "បើកការត្រងតឹងរឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។ \n- ប្រើ `true` ដើម្បីបើកតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។ \n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ \n-: ការពិពណ៌នាតម្រង \n- `tagFilter`៖ តម្រងមិនអនុញ្ញាតស្លាក HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`៖ ធាតុទម្រង់តម្រង (`formatLine`/`formatBlock`) \n- `classFilter`៖ តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`) \n- `textStyleTagFilter`៖ ត្រងស្លាករចនាប័ទ្មអត្ថបទ (b, i, u, span ។ល។) \n- `attrFilter`៖ តម្រង​មិន​អនុញ្ញាត​លក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`៖ តម្រងមិនអនុញ្ញាតរចនាប័ទ្មក្នុងជួរ (ក្នុងមួយស្លាកពី `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "បញ្ជាក់​រចនាប័ទ្ម​បន្ថែម​ទៅ​ក្នុង​បញ្ជី​រចនាប័ទ្ម​ដែល​អនុញ្ញាត។ សញ្ញា​កំណត់៖ `\"|\"`។\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ស្លាក HTML។ សោគឺជាឈ្មោះស្លាក តម្លៃគឺជារចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតដោយសញ្ញាបំបែក។\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "បញ្ជាក់រចនាប័ទ្ម CSS ដែលអនុញ្ញាតក្នុងមួយស្លាក HTML ។ \n- កូនសោគឺជាឈ្មោះស្លាក ស្លាកច្រើនដែលភ្ជាប់ជាមួយ `|` ឬក្រុមផ្ញើ (`@text`, `@line`) ។ \n- តម្លៃ​គឺ​ជា​បញ្ជី​កំណត់​បំពង់​នៃ​ឈ្មោះ​រចនាប័ទ្ម​ដែល​បាន​អនុញ្ញាត។ \n- លំដាប់នៃដំណោះស្រាយនៅពេលត្រងធាតុ៖ ធាតុស្លាកច្បាស់លាស់ → `@line` (សម្រាប់ធាតុទម្រង់បន្ទាត់) → `@text` (សម្រាប់ textStyleTags) ។ \n- ការបញ្ចូលស្លាកច្បាស់លាស់ **ជំនួស** ប្រភេទលំនាំដើម — រួមបញ្ចូលរចនាប័ទ្មប្រភេទក្នុងតម្លៃប្រសិនបើអ្នកចង់បានទាំងពីរ។ \n- រួមបញ្ចូលគ្នាជាមួយ {@link DEFAULTS.TAG_STYLES}; សោដែលផ្គត់ផ្គង់ដោយអ្នកប្រើប្រាស់ឈ្នះ។ \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ស្លាក `span`។ - លំនាំដើមធ្វើតាម {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "បញ្ជាក់រចនាប័ទ្មដែលត្រូវបានអនុញ្ញាតសម្រាប់ធាតុ `line` (p..)។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "ឯកតាទំហំពុម្ពអក្សរដែលត្រូវបានអនុញ្ញាត។\n- លំនាំដើមគឺ {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL ស្វែងរកខាងម៉ាស៊ីនមេ។ នៅពេលកំណត់ ពាក្យគន្លឹះត្រូវបានផ្ញើទៅកាន់ URL នេះ។"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "បឋមកថាសំណើស្វែងរកខាងម៉ាស៊ីនមេ"
+  },
   "audioGallery_thumbnail": {
     "description": "រូបភាពតូចលំនាំដើម"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL ស្វែងរកខាងម៉ាស៊ីនមេ។ នៅពេលកំណត់ ពាក្យគន្លឹះត្រូវបានផ្ញើទៅកាន់ URL នេះ។"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "បឋមកថាសំណើស្វែងរកខាងម៉ាស៊ីនមេ"
   },
   "fileBrowser_thumbnail": {
     "description": "URL រូបភាពតូចៗលំនាំដើម ឬអនុគមន៍ដែលប្រគល់ URL រូបភាពតូចៗក្នុងមួយធាតុ។"
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL ស្វែងរកខាងម៉ាស៊ីនមេ។ នៅពេលកំណត់ ពាក្យគន្លឹះត្រូវបានផ្ញើទៅកាន់ URL នេះ។"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "បឋមកថាសំណើស្វែងរកខាងម៉ាស៊ីនមេ"
+  },
   "fileGallery_thumbnail": {
     "description": "រូបភាពតូចលំនាំដើម"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL ស្វែងរកខាងម៉ាស៊ីនមេ។ នៅពេលកំណត់ ពាក្យគន្លឹះត្រូវបានផ្ញើទៅកាន់ URL នេះ។"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "បឋមកថាសំណើស្វែងរកខាងម៉ាស៊ីនមេ"
+  },
   "videoGallery_data": {
     "description": "ទិន្នន័យដោយផ្ទាល់ដោយមិនចាំបាច់ហៅម៉ាស៊ីនមេ"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "បឋមកថាសំណើរបស់ម៉ាស៊ីនបម្រើ"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL ស្វែងរកខាងម៉ាស៊ីនមេ។ នៅពេលកំណត់ ពាក្យគន្លឹះត្រូវបានផ្ញើទៅកាន់ URL នេះ។"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "បឋមកថាសំណើស្វែងរកខាងម៉ាស៊ីនមេ"
   },
   "videoGallery_thumbnail": {
     "description": "រូបភាពតូចលំនាំដើម"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "លំនាំ URL បន្ថែមដើម្បីសម្គាល់ថាជាខ្លឹមសារដែលអាចបង្កប់បាន។"
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "បានអនុញ្ញាតលំនាំ `<script src=...>` សម្រាប់ HTML ដែលបង្កប់ឆៅ \n- (ឧ. Twitter blockquote + `widgets.js`)។ ធាតុនីមួយៗគឺ `RegExp` (សាកល្បងប្រឆាំងនឹង src ពេញលេញ) ឬ `string` (ត្រូវគ្នាតាមរយៈ `startsWith`)។ \n- លំនាំដើមចំពោះ `[]` — ស្លាកស្គ្រីបទាំងអស់ត្រូវបានបដិសេធ។** ស្គ្រីបក្នុងជួរ (គ្មាន `src`) តែងតែត្រូវបានបដិសេធ។"
   },
   "embed_embedQuery": {
     "description": "និយមន័យសេវាកម្មបង្កប់ផ្ទាល់ខ្លួន។"

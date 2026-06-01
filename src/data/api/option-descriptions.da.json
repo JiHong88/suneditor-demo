@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Aktiverer streng filtrering af tags, attributter og stilarter.\n- Brug `true` til at aktivere alle filtre (standard), eller et objekt til at styre individuelle filtre.\n- Indstilling af `false` ​​understøttes ikke; brug objektformularen til at deaktivere specifikke filtre i stedet.\n- :filterbeskrivelse\n- `tagFilter`: Filtrerer ikke tilladte HTML-tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtrerer formatelementer (`formatLine`/`formatBlock`)\n- `classFilter`: Filtrerer ikke tilladte CSS-klassenavne (`allowedClassName`)\n- `textStyleTagFilter`: Filtrerer tekststiltag (b, i, u, span osv.)\n- `attrFilter`: Filtrerer ikke tilladte HTML-attributter (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtrerer ikke tilladte inline-stilarter (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Aktiverer streng filtrering af tags, attributter og typografier. \n- Brug `true` til at aktivere alle filtre (standard), eller et objekt til at styre individuelle filtre. \n- Indstilling `false` ​​er ikke understøttet; brug objektformularen til at deaktivere specifikke filtre i stedet. \n- :filterbeskrivelse \n- `tagFilter`: Filtrerer ikke-tilladte HTML-tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtrerer formatelementer (`formatLine`/`formatBlock`) \n- `classFilter`: Filtrerer ikke-tilladte CSS-klassenavne (`allowedClassName`) \n- `textStyleTagFilter`: Filtrerer tekststiltags (b, i, u, span osv.) \n- `attrFilter`: Filtrerer ikke-tilladte HTML-attributter (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtrerer ikke-tilladte inline-stile (pr. tag fra `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Angiver yderligere stilarter til listen over tilladte stilarter. Afgrænsningstegn: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Angiver tilladte stilarter for HTML-tags. Nøglen er tagnavn(e), værdien er tilladte stilarter adskilt af lodret linjeafgrænsede ...",
+    "description": "Angiver tilladte CSS-stile pr. HTML-tag. \n- Nøglen er et tagnavn, flere tags forbundet med `|` eller en kategori-vagtpost (`@text`, `@line`). \n- Værdi er en rørsepareret liste over tilladte stilnavne. \n- Opløsningsrækkefølge ved filtrering af et element: eksplicit tag-indtastning → `@line` (for formatLine-elementer) → `@text` (for textStyleTags). \n- En eksplicit tag-indgang **erstatter** kategoriens standard — inkluder kategoristile i værdien, hvis du ønsker begge dele. \n- Slået sammen med {@link DEFAULTS.TAG_STYLES}; brugerleverede nøgler vinder. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Angiver tilladte stilarter for `span`-tagget.\n- Standarden følger {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Angiver tilladte stilarter for `line`-elementet (p..).\n- Standardindstillingen følger {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Tilladte skriftstørrelsesenheder.\n- Standarden følger {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Serverforespørgselsheadere"
   },
+  "audioGallery_searchUrl": {
+    "description": "Søge-URL på serversiden. Når det er indstillet, sendes søgeordet til denne URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Søgeanmodningsoverskrifter på serversiden"
+  },
   "audioGallery_thumbnail": {
     "description": "Standardminiaturebillede"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Serverforespørgselsheadere"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Søge-URL på serversiden. Når det er indstillet, sendes søgeordet til denne URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Søgeanmodningsoverskrifter på serversiden"
   },
   "fileBrowser_thumbnail": {
     "description": "Standardminiature-URL eller en funktion, der returnerer en miniature-URL pr. element."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Serverforespørgselsheadere"
   },
+  "fileGallery_searchUrl": {
+    "description": "Søge-URL på serversiden. Når det er indstillet, sendes søgeordet til denne URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Søgeanmodningsoverskrifter på serversiden"
+  },
   "fileGallery_thumbnail": {
     "description": "Standardminiaturebillede"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Serverforespørgselsheadere"
   },
+  "imageGallery_searchUrl": {
+    "description": "Søge-URL på serversiden. Når det er indstillet, sendes søgeordet til denne URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Søgeanmodningsoverskrifter på serversiden"
+  },
   "videoGallery_data": {
     "description": "Direkte data uden serverkald"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Serverforespørgselsheadere"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Søge-URL på serversiden. Når det er indstillet, sendes søgeordet til denne URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Søgeanmodningsoverskrifter på serversiden"
   },
   "videoGallery_thumbnail": {
     "description": "Standardminiaturebillede"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Yderligere URL-mønstre, der skal genkendes som integrereligt indhold."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Tilladte `<script src=...>` mønstre for rå indlejret HTML \n- (f.eks. Twitter blockquote + `widgets.js`). Hver post er en `RegExp` (testet mod den fulde src) eller en `string` (matchet via `startsWith`). \n- Standard er `[]` — alle script-tags afvises.** Inline-scripts (ingen `src`) afvises altid."
   },
   "embed_embedQuery": {
     "description": "Definitioner af brugerdefinerede indlejringstjenester."

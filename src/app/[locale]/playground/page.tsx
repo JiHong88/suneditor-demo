@@ -51,8 +51,6 @@ const FIXED_RESET_KEYS = new Set([
 	"formatClosureBrLine",
 	"formatBlock",
 	"formatClosureBlock",
-	"spanStyles",
-	"lineStyles",
 	"textStyleTags",
 	"allowedClassName",
 	"allUsedStyles",

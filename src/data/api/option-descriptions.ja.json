@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "タグ、属性、スタイルの厳密なフィルタリングを有効にします。\n\n- すべてのフィルタを有効にするには `true` を使用します（デフォルト）。個々のフィルタを制御するにはオブジェクトを使用します。\n\n- `false` の設定はサポートされていません。特定のフィルタを無効にするには、オブジェクト形式を使用してください。\n\n- :フィルタの説明\n- `tagFilter`: 許可されていない HTML タグ (`elementWhitelist`/`elementBlacklist`) をフィルタリングします\n- `formatFilter`: 書式要素 (`formatLine`/`formatBlock`) をフィルタリングします\n- `classFilter`: 許可されていない CSS クラス名 (`allowedClassName`) をフィルタリングします\n- `textStyleTagFilter`: テキストスタイルタグ (b、i、u、span など) をフィルタリングします\n- `attrFilter`: 許可されていない HTML 属性 (`attributeWhitelist`/`attributeBlacklist`) をフィルタリングします\n- `styleFilter`: 許可されていないインラインスタイル (`spanStyles`/`lineStyles`/`allUsedStyles`) をフィルタリングします\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "タグ、属性、スタイルの厳密なフィルタリングを有効にします。 \n- `true` を使用してすべてのフィルター (デフォルト) を有効にするか、オブジェクトを使用して個々のフィルターを制御します。 \n- `false` の設定はサポートされていません。 代わりにオブジェクト フォームを使用して、特定のフィルターを無効にします。 \n- :フィルターの説明\n - `tagFilter`: 許可されていない HTML タグをフィルターします (`elementWhitelist`/`elementBlacklist`)\n - `formatFilter`: フィルター形式要素 (`formatLine`/`formatBlock`)\n - `classFilter`: 許可されていない CSS クラス名をフィルターします (`allowedClassName`)\n - `textStyleTagFilter`: テキスト スタイル タグ (b、i、u、span など) をフィルターします。 \n- `attrFilter`: 許可されていない HTML 属性をフィルターします (`attributeWhitelist`/`attributeBlacklist`)\n - `styleFilter`: 許可されていないインライン スタイルをフィルターします (`tagStyles` のタグごと)\n 「`js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n`」",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "許可されたスタイルリストに追加のスタイルを指定します。区切り文字：`\"|\"`。\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "HTMLタグに許可されるスタイルを指定します。キーはタグ名、値はパイプ区切りの許可スタイルです。\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "HTML タグごとに許可される CSS スタイルを指定します。 \n- キーはタグ名、`|` で結合された複数のタグ、またはカテゴリ センチネル (`@text`、`@line`) です。 \n- 値は、許可されるスタイル名のパイプ区切りのリストです。 \n- 要素をフィルタリングするときの解決順序: 明示的なタグ エントリ → `@line` (formatLine 要素の場合) → `@text` (textStyleTags の場合)。 \n- 明示的なタグ エントリはカテゴリのデフォルトを**置き換えます**。両方必要な場合は、値にカテゴリ スタイルを含めます。 \n- {@link DEFAULTS.TAG_STYLES} と統合されました。 ユーザーが指定したキーが優先されます。 \n「`js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n`」",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "`span` タグに許可されるスタイルを指定します。\n\n- デフォルトは {@link DEFAULTS.SPAN_STYLES} に従います。",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "`line`要素（p..）に許可されるスタイルを指定します。\n\n- デフォルトは{@link DEFAULTS.LINE_STYLES}に従います。",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "使用可能なフォントサイズ単位。\n\n- デフォルト値は {@link DEFAULTS.SIZE_UNITS} に従います。",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "サーバーリクエストヘッダー"
   },
+  "audioGallery_searchUrl": {
+    "description": "サーバー側の検索 URL。 設定すると、キーワードがこの URL に送信されます"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "サーバー側の検索リクエストヘッダー"
+  },
   "audioGallery_thumbnail": {
     "description": "デフォルトのサムネイル"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "サーバーリクエストヘッダー"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "サーバー側の検索 URL。 設定すると、キーワードがこの URL に送信されます"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "サーバー側の検索リクエストヘッダー"
   },
   "fileBrowser_thumbnail": {
     "description": "デフォルトのサムネイルURL、またはアイテムごとにサムネイルURLを返す関数。"
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "サーバーリクエストヘッダー"
   },
+  "fileGallery_searchUrl": {
+    "description": "サーバー側の検索 URL。 設定すると、キーワードがこの URL に送信されます"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "サーバー側の検索リクエストヘッダー"
+  },
   "fileGallery_thumbnail": {
     "description": "デフォルトのサムネイル"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "サーバーリクエストヘッダー"
   },
+  "imageGallery_searchUrl": {
+    "description": "サーバー側の検索 URL。 設定すると、キーワードがこの URL に送信されます"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "サーバー側の検索リクエストヘッダー"
+  },
   "videoGallery_data": {
     "description": "サーバー呼び出しなしの直接データ"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "サーバーリクエストヘッダー"
+  },
+  "videoGallery_searchUrl": {
+    "description": "サーバー側の検索 URL。 設定すると、キーワードがこの URL に送信されます"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "サーバー側の検索リクエストヘッダー"
   },
   "videoGallery_thumbnail": {
     "description": "デフォルトのサムネイル"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "埋め込み可能なコンテンツとして認識される追加のURLパターン。"
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "未加工の埋め込み HTML に許可される `<script src=...>` パターン\n - (例: Twitter のブロック引用 + `widgets.js`)。 各エントリは、`RegExp` (完全な src に対してテストされる) または `string` (`startsWith` を介して照合される) です。 \n- デフォルトは `[]` — すべてのスクリプト タグが拒否されます。** インライン スクリプト (`src` 以外) は常に拒否されます。"
   },
   "embed_embedQuery": {
     "description": "カスタム埋め込みサービス定義。"

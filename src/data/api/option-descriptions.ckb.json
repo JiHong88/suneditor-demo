@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Fîlterkirina hişk a etîket, taybetmendî û şêwazan çalak dike.\n- Ji bo çalakkirina hemî fîlteran `true` bikar bînin (xwerû), an jî tiştek ji bo kontrolkirina fîlterên takekesî.\n- Danîna `false` ​​nayê piştgirî kirin; li şûna wê, forma objektê bikar bînin da ku fîlterên taybetî neçalak bikin.\n- :danasîna fîlterê\n- `tagFilter`: Fîlterên etîketên HTML-ê yên qedexekirî (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Fîlter hêmanên formatkirinê (`formatLine`/`formatBlock`)\n- `classFilter`: Fîlterên navên pola CSS-ê yên qedexekirî (`allowedClassName`)\n- `textStyleTagFilter`: Etîketên şêwaza nivîsê (b, i, u, span, hwd.) fîlter dike\n- `attrFilter`: Fîlterên taybetmendiyên HTML-ê yên qedexekirî (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Fîlterên şêwazên hundirîn ên qedexekirî (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Parzûnkirina hişk a tag, taybetmendî û şêwazan çalak dike. \n- `true` bikar bînin da ku hemî fîlteran çalak bikin (xweserî), an jî tiştek ku fîlterên kesane kontrol bikin. \n- Sazkirina `false` ​​nayê piştgirî kirin; forma objektê bikar bînin da ku li şûna fîlterên taybetî neçalak bikin. \n- : şirovekirina parzûnê \n- `tagFilter`: Parzûnên etîketên HTML-ê yên qedexekirî (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Hêmanên formatê parzûn dike (`formatLine`/`formatBlock`) \n- `classFilter`: Parzûnên navên pola CSS-ê qedexe nekirin (`allowedClassName`) \n- `textStyleTagFilter`: Etîketên şêwaza nivîsê parzûn dike (b, i, u, span, hwd.) \n- `attrFilter`: Parzûnên taybetiyên HTML-ê nepejirandin (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Parzûnên şêwazên xêzkirî yên destûr nedane (per-tag ji `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Şêwazên zêde li lîsteya şêwazên destûrdayî diyar dike. Cihêker: `\"|\"`. ```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Şêwazên destûrdayî ji bo etîketên HTML diyar dike. Kilît navê(ên) etîketê ye, nirx jî şêwazên destûrdayî yên bi xêzên xêzkirî ne.\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Li ser etîketa HTML-ê şêwazên destûr ên CSS-ê diyar dike. \n- Key navek etîketê ye, gelek etîketên ku bi `|` ve hatine girêdan, an parêzek kategoriyê ye (`@text`, `@line`). \n- Nirx navnîşek bi boriyek veqetandî ya navên şêwazê destûr e. \n- Rêza çareseriyê dema fîlterkirina hêmanekê: ketina tagê ya eşkere → `@line` (ji bo hêmanên rêzika formatê) → `@text` (ji bo textStyleTags). \n- Danûstandinek etîketek eşkere ** li şûna ** kategoriya xwerû - heke hûn herduyan dixwazin, şêwazên kategoriyê di nirxê de bicîh bikin. \n- Bi {@link DEFAULTS.TAG_STYLES} re hat girêdan; keys-bikarhêner dabînkirî win. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Şêwazên destûrdayî ji bo taga `span` diyar dike.\n- Xala xwerû li pey {@link DEFAULTS.SPAN_STYLES} tê.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Şêwazên destûrdayî ji bo hêmana `line` (p..) diyar dike.\n- Xala xwerû li pey {@link DEFAULTS.LINE_STYLES} tê.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Yekîneyên mezinahiya tîpan ên destûrdayî.\n- Mezinahiya xwerû li gorî {@link DEFAULTS.SIZE_UNITS} tê.",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Sernivîsên daxwaza serverê"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL-ya lêgerîna server-side. Dema ku were danîn, keyword ji vê URLê re tê şandin"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Sernavên daxwaza lêgerîna server-side"
+  },
   "audioGallery_thumbnail": {
     "description": "Wêneya xwerû"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Sernivîsên daxwaza serverê"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL-ya lêgerîna server-side. Dema ku were danîn, keyword ji vê URLê re tê şandin"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Sernavên daxwaza lêgerîna server-side"
   },
   "fileBrowser_thumbnail": {
     "description": "URL-ya wênekêşiya xwerû an fonksiyonek ku ji bo her babetî URL-ya wênekêşiyê vedigerîne."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Sernivîsên daxwaza serverê"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL-ya lêgerîna server-side. Dema ku were danîn, keyword ji vê URLê re tê şandin"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Sernavên daxwaza lêgerîna server-side"
+  },
   "fileGallery_thumbnail": {
     "description": "Wêneya xwerû"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Sernivîsên daxwaza serverê"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL-ya lêgerîna server-side. Dema ku were danîn, keyword ji vê URLê re tê şandin"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Sernavên daxwaza lêgerîna server-side"
+  },
   "videoGallery_data": {
     "description": "Daneyên rasterast bêyî bangên serverê"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Sernivîsên daxwaza serverê"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL-ya lêgerîna server-side. Dema ku were danîn, keyword ji vê URLê re tê şandin"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Sernavên daxwaza lêgerîna server-side"
   },
   "videoGallery_thumbnail": {
     "description": "Wêneya xwerû"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Şablonên URL-ên zêde ji bo naskirina naveroka ku dikare were çespandin."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Nimûneyên `<script src=...>` yên destûr ji bo HTML-ya xav emel kirin \n- (mînak bloka Twitter + `widgets.js`). Her navnîşek `RegExp` ye (li hember src-ya tevahî ceribandin) an `string` (bi navgîniya `startsWith` ve hatî hevber kirin). \n- Pêşniyarên `[]` - hemî etîketên skrîptê têne red kirin.** Nivîsarên xêzkirî (ne `src`) her gav têne red kirin."
   },
   "embed_embedQuery": {
     "description": "Pênasînên xizmeta bicihkirinê yên xwerû."

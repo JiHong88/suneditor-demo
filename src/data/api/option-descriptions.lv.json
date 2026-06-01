@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Iespējo stingru tagu, atribūtu un stilu filtrēšanu.\n- Izmantojiet `true`, lai iespējotu visus filtrus (pēc noklusējuma), vai objektu, lai kontrolētu atsevišķus filtrus.\n- `false` ​​iestatīšana netiek atbalstīta; tā vietā izmantojiet objekta formu, lai atspējotu konkrētus filtrus.\n- :filtra apraksts\n- `tagFilter`: Filtri neatļauj HTML tagus (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtri formāta elementus (`formatLine`/`formatBlock`)\n- `classFilter`: Filtri neatļauj CSS klašu nosaukumus (`allowedClassName`)\n- `textStyleTagFilter`: Filtri teksta stila tagus (b, i, u, span utt.)\n- `attrFilter`: Filtri neatļauj HTML atribūtus (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtri neatļauj iekļautos stilus (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Iespējo stingru tagu, atribūtu un stilu filtrēšanu. \n- Izmantojiet `true`, lai iespējotu visus filtrus (noklusējums), vai objektu, lai kontrolētu atsevišķus filtrus. \n- Iestatījums `false` ​​netiek atbalstīts; tā vietā izmantojiet objekta formu, lai atspējotu konkrētus filtrus. \n- :filtra apraksts \n- `tagFilter`: filtrē neatļautos HTML tagus (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtrē formāta elementus (`formatLine`/`formatBlock`) \n- `classFilter`: filtrē neatļautos CSS klašu nosaukumus (`allowedClassName`) \n- `textStyleTagFilter`: filtrē teksta stila tagus (b, i, u, span utt.) \n- `attrFilter`: filtrē neatļautos HTML atribūtus (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: filtrē neatļautos iekļautos stilus (par katru tagu no `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Norāda papildu stilus atļauto stilu sarakstam. Atdalītājs: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Norāda atļautos HTML tagu stilus. Atslēga ir taga(-u) nosaukums(-i), vērtība ir ar vertikālo svītru atdalīti atļautie stili.\n\n``js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Norāda atļautos CSS stilus katram HTML tagam. \n- Atslēga ir taga nosaukums, vairāki tagi, kas savienoti ar `|`, vai kategorijas uzraugs (`@text`, `@line`). \n- Vērtība ir ar caurulēm atdalīts atļauto stilu nosaukumu saraksts. \n- Izšķirtspējas secība, filtrējot elementu: precīza taga ievade → `@line` (formatLine elementiem) → `@text` (textStyleTags). \n- Skaidrs taga ieraksts **aizstāj** kategorijas noklusējuma vērtību — iekļaujiet kategoriju stilus vērtībā, ja vēlaties abus. \n- Apvienots ar {@link DEFAULTS.TAG_STYLES}; uzvar lietotāja nodrošinātās atslēgas. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Norāda atļautos stilus `span` tagam.\n- Noklusējuma stils seko {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Norāda atļautos stilus `line` elementam (p..).\n- Noklusējuma iestatījums atbilst {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Atļautās fonta lieluma vienības.\n- Noklusējuma vērtība ir šāda: {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
   },
+  "audioGallery_searchUrl": {
+    "description": "Servera puses meklēšanas URL. Ja tas ir iestatīts, atslēgvārds tiek nosūtīts uz šo URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Servera puses meklēšanas pieprasījumu galvenes"
+  },
   "audioGallery_thumbnail": {
     "description": "Noklusējuma sīktēls"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Servera pieprasījumu galvenes"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Servera puses meklēšanas URL. Ja tas ir iestatīts, atslēgvārds tiek nosūtīts uz šo URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Servera puses meklēšanas pieprasījumu galvenes"
   },
   "fileBrowser_thumbnail": {
     "description": "Noklusējuma sīktēla URL vai funkcija, kas atgriež sīktēla URL katram vienumam."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
   },
+  "fileGallery_searchUrl": {
+    "description": "Servera puses meklēšanas URL. Ja tas ir iestatīts, atslēgvārds tiek nosūtīts uz šo URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Servera puses meklēšanas pieprasījumu galvenes"
+  },
   "fileGallery_thumbnail": {
     "description": "Noklusējuma sīktēls"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
   },
+  "imageGallery_searchUrl": {
+    "description": "Servera puses meklēšanas URL. Ja tas ir iestatīts, atslēgvārds tiek nosūtīts uz šo URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Servera puses meklēšanas pieprasījumu galvenes"
+  },
   "videoGallery_data": {
     "description": "Tiešie dati bez servera izsaukumiem"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Servera pieprasījumu galvenes"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Servera puses meklēšanas URL. Ja tas ir iestatīts, atslēgvārds tiek nosūtīts uz šo URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Servera puses meklēšanas pieprasījumu galvenes"
   },
   "videoGallery_thumbnail": {
     "description": "Noklusējuma sīktēls"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Papildu URL raksti, kas jāatpazīst kā ieguldāms saturs."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Atļauti `<script src=...>` modeļi neapstrādātam HTML iegulšanai \n- (piemēram, Twitter bloka citāts + `widgets.js`). Katrs ieraksts ir `RegExp` (pārbaudīts pret pilnu src) vai `string` (saskaņots, izmantojot `startsWith`). \n- Noklusējuma vērtība ir `[]` — visi skripta tagi tiek noraidīti.** Iekļautie skripti (nav `src`) vienmēr tiek noraidīti."
   },
   "embed_embedQuery": {
     "description": "Pielāgotas iegulšanas pakalpojumu definīcijas."

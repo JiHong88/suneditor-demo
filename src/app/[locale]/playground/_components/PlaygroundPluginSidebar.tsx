@@ -832,6 +832,14 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 										rows={3}
 										optionKey='embed_embedQuery'
 									/>
+									<ToggleableTextInput
+										label='scriptSrcWhitelist (RegExp[])'
+										value={state.embed_scriptSrcWhitelist}
+										preset={ITEM_PRESETS.embed_scriptSrcWhitelist}
+										onChange={set("embed_scriptSrcWhitelist")}
+										placeholder='/^https:\/\/platform\.twitter\.com\/widgets\.js$/'
+										optionKey='embed_scriptSrcWhitelist'
+									/>
 								</AdvancedSection>
 							</div>
 						</AccordionContent>
@@ -1647,6 +1655,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									placeholder='{"Authorization":"..."}'
 									optionKey='imageGallery_headers'
 								/>
+								<TextInput
+									label='searchUrl'
+									value={state.imageGallery_searchUrl}
+									onChange={set("imageGallery_searchUrl")}
+									placeholder='/api/images/search'
+									optionKey='imageGallery_searchUrl'
+								/>
+								<TextInput
+									label='searchHeaders'
+									value={state.imageGallery_searchHeaders}
+									onChange={set("imageGallery_searchHeaders")}
+									placeholder='{"Authorization":"..."}'
+									optionKey='imageGallery_searchHeaders'
+								/>
 								<ToggleableTextarea
 									label='data'
 									value={state.imageGallery_data}
@@ -1678,6 +1700,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("videoGallery_headers")}
 									placeholder='{"Authorization":"..."}'
 									optionKey='videoGallery_headers'
+								/>
+								<TextInput
+									label='searchUrl'
+									value={state.videoGallery_searchUrl}
+									onChange={set("videoGallery_searchUrl")}
+									placeholder='/api/videos/search'
+									optionKey='videoGallery_searchUrl'
+								/>
+								<TextInput
+									label='searchHeaders'
+									value={state.videoGallery_searchHeaders}
+									onChange={set("videoGallery_searchHeaders")}
+									placeholder='{"Authorization":"..."}'
+									optionKey='videoGallery_searchHeaders'
 								/>
 								<TextInput
 									label='thumbnail'
@@ -1719,6 +1755,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									optionKey='audioGallery_headers'
 								/>
 								<TextInput
+									label='searchUrl'
+									value={state.audioGallery_searchUrl}
+									onChange={set("audioGallery_searchUrl")}
+									placeholder='/api/audio/search'
+									optionKey='audioGallery_searchUrl'
+								/>
+								<TextInput
+									label='searchHeaders'
+									value={state.audioGallery_searchHeaders}
+									onChange={set("audioGallery_searchHeaders")}
+									placeholder='{"Authorization":"..."}'
+									optionKey='audioGallery_searchHeaders'
+								/>
+								<TextInput
 									label='thumbnail'
 									value={state.audioGallery_thumbnail}
 									onChange={set("audioGallery_thumbnail")}
@@ -1758,6 +1808,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									optionKey='fileGallery_headers'
 								/>
 								<TextInput
+									label='searchUrl'
+									value={state.fileGallery_searchUrl}
+									onChange={set("fileGallery_searchUrl")}
+									placeholder='/api/files/search'
+									optionKey='fileGallery_searchUrl'
+								/>
+								<TextInput
+									label='searchHeaders'
+									value={state.fileGallery_searchHeaders}
+									onChange={set("fileGallery_searchHeaders")}
+									placeholder='{"Authorization":"..."}'
+									optionKey='fileGallery_searchHeaders'
+								/>
+								<TextInput
 									label='thumbnail'
 									value={state.fileGallery_thumbnail}
 									onChange={set("fileGallery_thumbnail")}
@@ -1795,6 +1859,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									onChange={set("fileBrowser_headers")}
 									placeholder='{"Authorization":"..."}'
 									optionKey='fileBrowser_headers'
+								/>
+								<TextInput
+									label='searchUrl'
+									value={state.fileBrowser_searchUrl}
+									onChange={set("fileBrowser_searchUrl")}
+									placeholder='/api/browse/search'
+									optionKey='fileBrowser_searchUrl'
+								/>
+								<TextInput
+									label='searchHeaders'
+									value={state.fileBrowser_searchHeaders}
+									onChange={set("fileBrowser_searchHeaders")}
+									placeholder='{"Authorization":"..."}'
+									optionKey='fileBrowser_searchHeaders'
 								/>
 								<TextInput
 									label='thumbnail'

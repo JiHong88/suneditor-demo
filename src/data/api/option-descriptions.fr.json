@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Permet un filtrage strict des balises, attributs et styles.\n\n- Utilisez `true` pour activer tous les filtres (par défaut), ou un objet pour contrôler des filtres individuels.\n\n- La configuration de `false` ​​n'est pas prise en charge ; utilisez plutôt la forme objet pour désactiver des filtres spécifiques.\n\n- :filter description\n- `tagFilter` : Filtre les balises HTML interdites (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter` : Filtre les éléments de format (`formatLine`/`formatBlock`)\n- `classFilter` : Filtre les noms de classes CSS interdits (`allowedClassName`)\n- `textStyleTagFilter` : Filtre les balises de style de texte (b, i, u, span, etc.)\n- `attrFilter` : Filtre les attributs HTML interdits (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter` : Filtre les styles en ligne interdits (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Permet un filtrage strict des balises, des attributs et des styles. \n- Utilisez `true` pour activer tous les filtres (par défaut) ou un objet pour contrôler les filtres individuels. \n- Le paramètre `false` ​​n'est pas pris en charge ; utilisez plutôt le formulaire d’objet pour désactiver des filtres spécifiques. \n- :description du filtre \n- `tagFilter` : filtre les balises HTML interdites (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter` : Filtre les éléments de format (`formatLine`/`formatBlock`) \n- `classFilter` : filtre les noms de classes CSS interdits (`allowedClassName`) \n- `textStyleTagFilter` : filtre les balises de style de texte (b, i, u, span, etc.) \n- `attrFilter` : filtre les attributs HTML non autorisés (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter` : filtres non autorisés pour les styles en ligne (par balise à partir de `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Spécifie des styles supplémentaires à la liste des styles autorisés. Délimiteur : `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Spécifie les styles autorisés pour les balises HTML. La clé correspond au(x) nom(s) de la ou des balises, la valeur aux styles autorisés séparés par des barres verticales.\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Spécifie les styles CSS autorisés par balise HTML. \n- La clé est un nom de balise, plusieurs balises jointes à `|` ou une catégorie sentinelle (`@text`, `@line`). \n- La valeur est une liste de noms de styles autorisés, délimités par des barres. \n- Ordre de résolution lors du filtrage d'un élément : entrée de balise explicite → `@line` (pour les éléments formatLine) → `@text` (pour textStyleTags). \n- Une entrée de balise explicite **remplace** la valeur par défaut de la catégorie : incluez les styles de catégorie dans la valeur si vous souhaitez les deux. \n- Fusionné avec {@link DEFAULTS.TAG_STYLES} ; les clés fournies par l'utilisateur gagnent. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Spécifie les styles autorisés pour la balise `span`.\n\n- La valeur par défaut est définie par {@link DEFAULTS.SPAN_STYLES}.",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Spécifie les styles autorisés pour l'élément `line` (p..).\n\n- La valeur par défaut est définie par {@link DEFAULTS.LINE_STYLES}.",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Unités de taille de police autorisées.\n\n- La valeur par défaut est celle de {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "En-têtes de requête serveur"
   },
+  "audioGallery_searchUrl": {
+    "description": "URL de recherche côté serveur. Lorsqu'il est défini, le mot-clé est envoyé à cette URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "En-têtes de requête de recherche côté serveur"
+  },
   "audioGallery_thumbnail": {
     "description": "vignette par défaut"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "En-têtes de requête serveur"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "URL de recherche côté serveur. Lorsqu'il est défini, le mot-clé est envoyé à cette URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "En-têtes de requête de recherche côté serveur"
   },
   "fileBrowser_thumbnail": {
     "description": "URL par défaut de la miniature ou fonction renvoyant une URL de miniature par élément."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "En-têtes de requête serveur"
   },
+  "fileGallery_searchUrl": {
+    "description": "URL de recherche côté serveur. Lorsqu'il est défini, le mot-clé est envoyé à cette URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "En-têtes de requête de recherche côté serveur"
+  },
   "fileGallery_thumbnail": {
     "description": "vignette par défaut"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "En-têtes de requête serveur"
   },
+  "imageGallery_searchUrl": {
+    "description": "URL de recherche côté serveur. Lorsqu'il est défini, le mot-clé est envoyé à cette URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "En-têtes de requête de recherche côté serveur"
+  },
   "videoGallery_data": {
     "description": "Données directes sans appel au serveur"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "En-têtes de requête serveur"
+  },
+  "videoGallery_searchUrl": {
+    "description": "URL de recherche côté serveur. Lorsqu'il est défini, le mot-clé est envoyé à cette URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "En-têtes de requête de recherche côté serveur"
   },
   "videoGallery_thumbnail": {
     "description": "vignette par défaut"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Modèles d'URL supplémentaires à reconnaître comme contenu intégrable."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Modèles `<script src=...>` autorisés pour le HTML intégré brut \n- (par exemple, blockquote Twitter + `widgets.js`). Chaque entrée est un `RegExp` (testé par rapport au src complet) ou un `string` (correspondant via `startsWith`). \n- La valeur par défaut est `[]` — toutes les balises de script sont rejetées.** Les scripts en ligne (pas de `src`) sont toujours rejetés."
   },
   "embed_embedQuery": {
     "description": "Définitions de services d'intégration personnalisés."

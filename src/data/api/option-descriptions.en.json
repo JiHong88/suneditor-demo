@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Specifies allowed styles for HTML tags. Key is tag name(s), value is pipe-delimited allowed styles.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Specifies allowed CSS styles per HTML tag.\n- Key is a tag name, multiple tags joined with `|`, or a category sentinel (`@text`, `@line`).\n- Value is a pipe-delimited list of allowed style names.\n- Resolution order when filtering an element: explicit tag entry → `@line` (for formatLine elements) → `@text` (for textStyleTags).\n- An explicit tag entry **replaces** the category default — include category styles in the value if you want both.\n- Merged with {@link DEFAULTS.TAG_STYLES}; user-supplied keys win.\n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Specifies allowed styles for the `span` tag.\n- The default follows {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Specifies allowed styles for the `line` element (p..).\n- The default follows {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Allowed font size units.\n- The default follows {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Server request headers"
   },
+  "audioGallery_searchUrl": {
+    "description": "Server-side search URL. When set, the keyword is sent to this URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Server-side search request headers"
+  },
   "audioGallery_thumbnail": {
     "description": "Default thumbnail"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Server request headers"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Server-side search URL. When set, the keyword is sent to this URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Server-side search request headers"
   },
   "fileBrowser_thumbnail": {
     "description": "Default thumbnail URL or a function that returns a thumbnail URL per item."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Server request headers"
   },
+  "fileGallery_searchUrl": {
+    "description": "Server-side search URL. When set, the keyword is sent to this URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Server-side search request headers"
+  },
   "fileGallery_thumbnail": {
     "description": "Default thumbnail"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Server request headers"
   },
+  "imageGallery_searchUrl": {
+    "description": "Server-side search URL. When set, the keyword is sent to this URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Server-side search request headers"
+  },
   "videoGallery_data": {
     "description": "Direct data without server calls"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Server request headers"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Server-side search URL. When set, the keyword is sent to this URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Server-side search request headers"
   },
   "videoGallery_thumbnail": {
     "description": "Default thumbnail"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Additional URL patterns to recognize as embeddable content."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Allowed `<script src=...>` patterns for raw embed HTML\n- (e.g. Twitter blockquote + `widgets.js`). Each entry is a `RegExp` (tested against the full src) or a `string` (matched via `startsWith`).\n- Defaults to `[]` — all script tags are rejected.** Inline scripts (no `src`) are always rejected."
   },
   "embed_embedQuery": {
     "description": "Custom embed service definitions."

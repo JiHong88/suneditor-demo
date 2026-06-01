@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "يُتيح هذا الخيار تصفية دقيقة للوسوم والخصائص والأنماط.\n\n- استخدم `true` لتفعيل جميع عوامل التصفية (الوضع الافتراضي)، أو استخدم كائنًا للتحكم في عوامل تصفية مُحددة.\n\n- لا يدعم هذا الخيار تعيين `false`؛ استخدم صيغة الكائن لتعطيل عوامل تصفية مُحددة.\n... - :filter description\n- `tagFilter`: تصفية وسوم HTML غير المسموح بها (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: تصفية عناصر التنسيق (`formatLine`/`formatBlock`)\n- `classFilter`: تصفية أسماء فئات CSS غير المسموح بها (`allowedClassName`)\n- `textStyleTagFilter`: تصفية وسوم أنماط النصوص (b، i، u، span، إلخ)\n- `attrFilter`: تصفية سمات HTML غير المسموح بها (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: تصفية الأنماط المضمنة غير المسموح بها (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (لكل علامة من `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "يُحدد أنماطًا إضافية إلى قائمة الأنماط المسموح بها. الفاصل: `\"|\"`.\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "يُحدد هذا الخيار الأنماط المسموح بها لعلامات HTML. المفتاح هو اسم (أسماء) العلامة، والقيمة هي الأنماط المسموح بها مفصولة بعلامة الأنبوب (|).\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "يحدد أنماط CSS المسموح بها لكل علامة HTML. \n- المفتاح هو اسم علامة، أو علامات متعددة مرتبطة بـ `|`، أو فئة حارس (`@text`، `@line`). \n- القيمة عبارة عن قائمة بأسماء الأنماط المسموح بها، مفصولة بشُرط رأسية. \n- ترتيب الدقة عند تصفية عنصر: إدخال علامة صريحة → `@line` (لعناصر formatLine) → `@text` (لـ textStyleTags). \n- إدخال علامة صريحة **يستبدل** الفئة الافتراضية — قم بتضمين أنماط الفئة في القيمة إذا كنت تريد كليهما. \n- تم الدمج مع {@link DEFAULTS.TAG_STYLES}؛ الفوز بالمفاتيح المقدمة من قبل المستخدم. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "يُحدد هذا الخيار الأنماط المسموح بها لوسم `span`.\n\n- النمط الافتراضي هو {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "يُحدد هذا الخيار الأنماط المسموح بها لعنصر `line` (p..).\n\n- النمط الافتراضي هو {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "وحدات حجم الخط المسموح بها.\n\n- القيمة الافتراضية هي {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "رؤوس طلب الخادم"
   },
+  "audioGallery_searchUrl": {
+    "description": "عنوان URL للبحث من جانب الخادم. عند التعيين، يتم إرسال الكلمة الأساسية إلى عنوان URL هذا"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "رؤوس طلب البحث من جانب الخادم"
+  },
   "audioGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "رؤوس طلب الخادم"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "عنوان URL للبحث من جانب الخادم. عند التعيين، يتم إرسال الكلمة الأساسية إلى عنوان URL هذا"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "رؤوس طلب البحث من جانب الخادم"
   },
   "fileBrowser_thumbnail": {
     "description": "عنوان URL للصورة المصغرة الافتراضي أو دالة تُرجع عنوان URL للصورة المصغرة لكل عنصر."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "رؤوس طلب الخادم"
   },
+  "fileGallery_searchUrl": {
+    "description": "عنوان URL للبحث من جانب الخادم. عند التعيين، يتم إرسال الكلمة الأساسية إلى عنوان URL هذا"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "رؤوس طلب البحث من جانب الخادم"
+  },
   "fileGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "رؤوس طلب الخادم"
   },
+  "imageGallery_searchUrl": {
+    "description": "عنوان URL للبحث من جانب الخادم. عند التعيين، يتم إرسال الكلمة الأساسية إلى عنوان URL هذا"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "رؤوس طلب البحث من جانب الخادم"
+  },
   "videoGallery_data": {
     "description": "بيانات مباشرة بدون استدعاءات للخادم"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "رؤوس طلب الخادم"
+  },
+  "videoGallery_searchUrl": {
+    "description": "عنوان URL للبحث من جانب الخادم. عند التعيين، يتم إرسال الكلمة الأساسية إلى عنوان URL هذا"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "رؤوس طلب البحث من جانب الخادم"
   },
   "videoGallery_thumbnail": {
     "description": "الصورة المصغرة الافتراضية"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "أنماط عناوين URL إضافية للتعرف عليها كمحتوى قابل للتضمين."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "أنماط `<script src=...>` المسموح بها لتضمين HTML الأولي \n- (على سبيل المثال، اقتباس تويتر + `widgets.js`). كل إدخال هو `RegExp` (تم اختباره مقابل src الكامل) أو `string` (مطابق عبر `startsWith`). \n- الإعدادات الافتراضية هي `[]` - يتم رفض كافة علامات البرنامج النصي. ** يتم رفض البرامج النصية المضمنة (بدون `src`) دائمًا."
   },
   "embed_embedQuery": {
     "description": "تعريفات خدمة التضمين المخصصة."

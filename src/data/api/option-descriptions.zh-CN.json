@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "启用对标签、属性和样式的严格过滤。\n\n- 使用 `true` 启用所有过滤器（默认），或使用对象控制单个过滤器。\n\n- 不支持设置 `false`；请改用对象形式禁用特定过滤器。\n\n- :filter description\n\n- `tagFilter`：过滤不允许的 HTML 标签（`elementWhitelist`/`elementBlacklist`）\n\n- `formatFilter`：过滤格式元素（`formatLine`/`formatBlock`）\n\n- `classFilter`：过滤不允许的 CSS 类名（`allowedClassName`）\n\n- `textStyleTagFilter`：过滤文本样式标签（b、i、u、span 等）\n\n- `attrFilter`：过滤不允许的 HTML 属性（`attributeWhitelist`/`attributeBlacklist`）\n\n- `styleFilter`：过滤不允许的内联样式（`spanStyles`/`lineStyles`/`allUsedStyles`）\n\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "启用对标签、属性和样式的严格过滤。 \n- 使用 `true` 启用所有过滤器（默认），或使用对象来控制单个过滤器。 \n- 不支持设置`false`； 使用对象形式来禁用特定过滤器。 \n- ：过滤器描述\n - `tagFilter`：过滤不允许的 HTML 标签 (`elementWhitelist`/`elementBlacklist`)\n - `formatFilter`：过滤格式元素 (`formatLine`/`formatBlock`)\n - `classFilter`：过滤不允许的 CSS 类名 (`allowedClassName`)\n - `textStyleTagFilter`：过滤文本样式标签（b、i、u、span 等）\n - `attrFilter`：过滤不允许的 HTML 属性 (`attributeWhitelist`/`attributeBlacklist`)\n - `styleFilter`：过滤器不允许内联样式（来自 `tagStyles` 的每个标签）\n ```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "指定要添加到允许样式列表中的其他样式。分隔符：`\"|\"`。\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "指定 HTML 标签允许的样式。键是标签名称，值是以竖线分隔的允许样式。\n\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "指定每个 HTML 标记允许的 CSS 样式。 \n- Key 是标签名称、用 `|` 连接的多个标签或类别哨兵（`@text`、`@line`）。 \n- 值是以竖线分隔的允许的样式名称列表。 \n- 过滤元素时的解析顺序：显式标记条目 → `@line`（对于 formatLine 元素）→ `@text` （对于 textStyleTags）。 \n- 显式标签条目**替换**类别默认值 - 如果您需要两者，则在值中包含类别样式。 \n- 与{@link DEFAULTS.TAG_STYLES}合并； 用户提供的密钥获胜。 \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "指定 `span` 标签允许的样式。\n\n- 默认样式遵循 {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "指定 `line` 元素（p..）允许的样式。\n\n- 默认值遵循 {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "允许的字体大小单位。\n\n- 默认值遵循 {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "服务器请求头"
   },
+  "audioGallery_searchUrl": {
+    "description": "服务器端搜索 URL。 设置后，关键字将发送到此 URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "服务器端搜索请求标头"
+  },
   "audioGallery_thumbnail": {
     "description": "默认缩略图"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "服务器请求头"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "服务器端搜索 URL。 设置后，关键字将发送到此 URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "服务器端搜索请求标头"
   },
   "fileBrowser_thumbnail": {
     "description": "默认缩略图 URL 或为每个项目返回缩略图 URL 的函数。"
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "服务器请求头"
   },
+  "fileGallery_searchUrl": {
+    "description": "服务器端搜索 URL。 设置后，关键字将发送到此 URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "服务器端搜索请求标头"
+  },
   "fileGallery_thumbnail": {
     "description": "默认缩略图"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "服务器请求头"
   },
+  "imageGallery_searchUrl": {
+    "description": "服务器端搜索 URL。 设置后，关键字将发送到此 URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "服务器端搜索请求标头"
+  },
   "videoGallery_data": {
     "description": "无需服务器调用即可直接传输数据"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "服务器请求头"
+  },
+  "videoGallery_searchUrl": {
+    "description": "服务器端搜索 URL。 设置后，关键字将发送到此 URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "服务器端搜索请求标头"
   },
   "videoGallery_thumbnail": {
     "description": "默认缩略图"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "可识别为可嵌入内容的其他 URL 模式。"
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "允许原始嵌入 HTML 的 `<script src=...>` 模式\n -（例如 Twitter 块引用 + `widgets.js`）。 每个条目都是 `RegExp` （针对完整的 src 进行测试）或 `string` （通过 `startsWith` 匹配）。 \n- 默认为 `[]` — 所有脚本标签都被拒绝。** 内联脚本（无 `src`）始终被拒绝。"
   },
   "embed_embedQuery": {
     "description": "自定义嵌入服务定义。"

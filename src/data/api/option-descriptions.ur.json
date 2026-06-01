@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "ٹیگز، اوصاف، اور طرزوں کی سخت فلٹرنگ کو فعال کرتا ہے۔\n- تمام فلٹرز (پہلے سے طے شدہ) کو فعال کرنے کے لیے `true` کا استعمال کریں، یا انفرادی فلٹرز کو کنٹرول کرنے کے لیے کوئی چیز استعمال کریں۔\n- سیٹنگ `false` ​​تعاون یافتہ نہیں ہے۔ اس کے بجائے مخصوص فلٹرز کو غیر فعال کرنے کے لیے آبجیکٹ فارم کا استعمال کریں۔\n- : فلٹر کی تفصیل\n- `tagFilter`: فلٹرز نامنظور HTML ٹیگز (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: فلٹرز فارمیٹ عناصر (`formatLine`/`formatBlock`)\n- `classFilter`: فلٹرز نامنظور CSS کلاس کے نام (`allowedClassName`)\n- `textStyleTagFilter`: ٹیکسٹ اسٹائل ٹیگز کو فلٹر کرتا ہے (b، i، u، span، وغیرہ)\n- `attrFilter`: فلٹرز نامنظور HTML صفات (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: فلٹرز کی اجازت نہیں دی گئی ان لائن طرزیں (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "ٹیگز، اوصاف، اور طرزوں کی سخت فلٹرنگ کو فعال کرتا ہے۔ \n- تمام فلٹرز (پہلے سے طے شدہ) کو فعال کرنے کے لیے `true` کا استعمال کریں، یا انفرادی فلٹرز کو کنٹرول کرنے کے لیے کوئی چیز استعمال کریں۔ \n- سیٹنگ `false` ​​تعاون یافتہ نہیں ہے۔ اس کے بجائے مخصوص فلٹرز کو غیر فعال کرنے کے لیے آبجیکٹ فارم کا استعمال کریں۔ \n- : فلٹر کی تفصیل \n- `tagFilter`: فلٹرز نامنظور HTML ٹیگز (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: فلٹرز فارمیٹ عناصر (`formatLine`/`formatBlock`) \n- `classFilter`: فلٹرز نامنظور CSS کلاس کے نام (`allowedClassName`) \n- `textStyleTagFilter`: ٹیکسٹ اسٹائل ٹیگز کو فلٹر کرتا ہے (b، i، u، span، وغیرہ) \n- `attrFilter`: فلٹرز نامنظور HTML صفات (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: فلٹرز کی اجازت نہیں دی گئی ان لائن طرزیں (`tagStyles` سے فی ٹیگ) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "اجازت شدہ شیلیوں کی فہرست میں اضافی شیلیوں کی وضاحت کرتا ہے۔ حد بندی: `\"|\"`۔\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "ایچ ٹی ایم ایل ٹیگز کے لیے اجازت شدہ اسٹائل بتاتا ہے۔ کلید ٹیگ کے نام (ناموں) ہے، قدر پائپ کی حد بندی کی اجازت شدہ طرز ہے۔\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "فی ایچ ٹی ایم ایل ٹیگ کے لیے اجازت شدہ CSS اسٹائلز کی وضاحت کرتا ہے۔ \n- کلید ایک ٹیگ کا نام ہے، ایک سے زیادہ ٹیگز `|` کے ساتھ جڑے ہوئے ہیں، یا ایک زمرہ سینٹینل (`@text`, `@line`)۔ \n- قدر اجازت شدہ طرز کے ناموں کی پائپ سے محدود کردہ فہرست ہے۔ \n- کسی عنصر کو فلٹر کرتے وقت ریزولوشن آرڈر: واضح ٹیگ انٹری → `@line` (فارمیٹ لائن عناصر کے لیے) → `@text` (ٹیکسٹ اسٹائل ٹیگز کے لیے)۔ \n- ایک واضح ٹیگ کا اندراج **کیٹگری ڈیفالٹ کو بدل دیتا ہے — اگر آپ دونوں چاہتے ہیں تو قدر میں زمرہ کی طرزیں شامل کریں۔ \n- {@link DEFAULTS.TAG_STYLES} کے ساتھ ضم کر دیا گیا؛ صارف کی فراہم کردہ چابیاں جیتیں۔ \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "`span` ٹیگ کے لیے اجازت شدہ طرزیں بتاتا ہے۔\n- ڈیفالٹ {@link DEFAULTS.SPAN_STYLES} کی پیروی کرتا ہے",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "`line` عنصر (p..) کے لیے اجازت شدہ طرزیں بتاتا ہے۔\n- ڈیفالٹ {@link DEFAULTS.LINE_STYLES} کی پیروی کرتا ہے",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "اجازت شدہ فونٹ سائز یونٹس۔\n- ڈیفالٹ {@link DEFAULTS.SIZE_UNITS} کی پیروی کرتا ہے",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "سرور کی درخواست کے ہیڈر"
   },
+  "audioGallery_searchUrl": {
+    "description": "سرور سائیڈ سرچ URL۔ سیٹ ہونے پر کلیدی لفظ اس URL پر بھیج دیا جاتا ہے۔"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "سرور سائیڈ تلاش کی درخواست کے ہیڈر"
+  },
   "audioGallery_thumbnail": {
     "description": "ڈیفالٹ تھمب نیل"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "سرور سائیڈ سرچ URL۔ سیٹ ہونے پر کلیدی لفظ اس URL پر بھیج دیا جاتا ہے۔"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "سرور سائیڈ تلاش کی درخواست کے ہیڈر"
   },
   "fileBrowser_thumbnail": {
     "description": "ڈیفالٹ تھمب نیل یو آر ایل یا ایک فنکشن جو فی آئٹم تھمب نیل یو آر ایل لوٹاتا ہے۔"
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "سرور کی درخواست کے ہیڈر"
   },
+  "fileGallery_searchUrl": {
+    "description": "سرور سائیڈ سرچ URL۔ سیٹ ہونے پر کلیدی لفظ اس URL پر بھیج دیا جاتا ہے۔"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "سرور سائیڈ تلاش کی درخواست کے ہیڈر"
+  },
   "fileGallery_thumbnail": {
     "description": "ڈیفالٹ تھمب نیل"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "سرور کی درخواست کے ہیڈر"
   },
+  "imageGallery_searchUrl": {
+    "description": "سرور سائیڈ سرچ URL۔ سیٹ ہونے پر کلیدی لفظ اس URL پر بھیج دیا جاتا ہے۔"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "سرور سائیڈ تلاش کی درخواست کے ہیڈر"
+  },
   "videoGallery_data": {
     "description": "سرور کالوں کے بغیر براہ راست ڈیٹا"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "سرور کی درخواست کے ہیڈر"
+  },
+  "videoGallery_searchUrl": {
+    "description": "سرور سائیڈ سرچ URL۔ سیٹ ہونے پر کلیدی لفظ اس URL پر بھیج دیا جاتا ہے۔"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "سرور سائیڈ تلاش کی درخواست کے ہیڈر"
   },
   "videoGallery_thumbnail": {
     "description": "ڈیفالٹ تھمب نیل"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "سرایت کے قابل مواد کے طور پر پہچاننے کے لیے اضافی URL پیٹرن۔"
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "خام ایمبیڈ HTML کے لیے `<script src=...>` پیٹرن کی اجازت ہے۔ \n- (جیسے ٹویٹر بلاک کوٹ + `widgets.js`)۔ ہر اندراج ایک `RegExp` (مکمل src کے خلاف ٹیسٹ کیا گیا) یا `string` (`startsWith` کے ذریعے مماثل) ہے۔ \n- پہلے سے طے شدہ `[]` - تمام اسکرپٹ ٹیگز مسترد کردیئے جاتے ہیں۔ ** ان لائن اسکرپٹ (کوئی `src`) ہمیشہ مسترد کردیئے جاتے ہیں۔"
   },
   "embed_embedQuery": {
     "description": "حسب ضرورت ایمبیڈ سروس کی تعریفیں۔"

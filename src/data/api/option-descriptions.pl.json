@@ -133,7 +133,7 @@
     "default": "\"ltr\""
   },
   "strictMode": {
-    "description": "Włącza ścisłe filtrowanie tagów, atrybutów i stylów.\n- Użyj `true`, aby włączyć wszystkie filtry (domyślnie) lub obiektu, aby kontrolować poszczególne filtry.\n- Ustawienie `false` ​​nie jest obsługiwane; zamiast tego użyj formularza obiektu, aby wyłączyć określone filtry.\n- :opis filtra\n- `tagFilter`: Filtruje niedozwolone znaczniki HTML (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filtruje elementy formatu (`formatLine`/`formatBlock`)\n- `classFilter`: Filtruje niedozwolone nazwy klas CSS (`allowedClassName`)\n- `textStyleTagFilter`: Filtruje znaczniki stylów tekstu (b, i, u, span itd.)\n- `attrFilter`: Filtruje niedozwolone atrybuty HTML (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filtruje niedozwolone style inline (`spanStyles`/`lineStyles`/`allUsedStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
+    "description": "Umożliwia ścisłe filtrowanie tagów, atrybutów i stylów. \n- Użyj `true`, aby włączyć wszystkie filtry (domyślnie) lub obiektu do kontrolowania poszczególnych filtrów. \n- Ustawienie `false` ​​nie jest obsługiwane; zamiast tego użyj formularza obiektu, aby wyłączyć określone filtry. \n- :opis filtra \n- `tagFilter`: Filtruje niedozwolone tagi HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtruje elementy formatu (`formatLine`/`formatBlock`) \n- `classFilter`: Filtruje niedozwolone nazwy klas CSS (`allowedClassName`) \n- `textStyleTagFilter`: Filtruje znaczniki stylu tekstu (b, i, u, span itp.) \n- `attrFilter`: Filtruje niedozwolone atrybuty HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtruje niedozwolone style wbudowane (na tag od `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
   },
   "scopeSelectionTags": {
@@ -176,16 +176,8 @@
     "description": "Określa dodatkowe style do listy dozwolonych stylów. Ogranicznik: `\"|\"`.\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "Określa dozwolone style dla tagów HTML. Kluczem są nazwy tagów, a wartością są dozwolone style rozdzielone pionową kreską.\n```js\n{\ntagStyles: {\n'table|td': 'border|color|background-color',\nhr: 'border-top'\n}\n}\n```",
+    "description": "Określa dozwolone style CSS na tag HTML. \n- Klucz to nazwa tagu, wiele tagów połączonych za pomocą `|` lub wskaźnik kategorii (`@text`, `@line`). \n- Wartość to lista dozwolonych nazw stylów rozdzielana pionową pionową kreską. \n- Kolejność rozstrzygania podczas filtrowania elementu: jawny wpis tagu → `@line` (dla elementów formatLine) → `@text` (dla textStyleTags). \n- Wyraźny wpis tagu **zastępuje** domyślną kategorię — uwzględnij style kategorii w wartości, jeśli chcesz oba. \n- Połączono z {@link DEFAULTS.TAG_STYLES}; klucze dostarczone przez użytkownika wygrywają. \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@linia` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
-  },
-  "spanStyles": {
-    "description": "Określa dozwolone style dla znacznika `span`.\n- Domyślny styl jest zgodny ze stylem {@link DEFAULTS.SPAN_STYLES}",
-    "default": "CONSTANTS.SPAN_STYLES"
-  },
-  "lineStyles": {
-    "description": "Określa dozwolone style dla elementu `line` (str..).\n- Domyślny styl jest zgodny z {@link DEFAULTS.LINE_STYLES}",
-    "default": "CONSTANTS.LINE_STYLES"
   },
   "fontSizeUnits": {
     "description": "Dozwolone jednostki rozmiaru czcionki.\n- Wartość domyślna jest zgodna z {@link DEFAULTS.SIZE_UNITS}",
@@ -365,6 +357,12 @@
   "audioGallery_headers": {
     "description": "Nagłówki żądań serwera"
   },
+  "audioGallery_searchUrl": {
+    "description": "Adres URL wyszukiwania po stronie serwera. Po ustawieniu słowo kluczowe jest wysyłane na ten adres URL"
+  },
+  "audioGallery_searchHeaders": {
+    "description": "Nagłówki żądań wyszukiwania po stronie serwera"
+  },
   "audioGallery_thumbnail": {
     "description": "Domyślna miniatura"
   },
@@ -376,6 +374,12 @@
   },
   "fileBrowser_headers": {
     "description": "Nagłówki żądań serwera"
+  },
+  "fileBrowser_searchUrl": {
+    "description": "Adres URL wyszukiwania po stronie serwera. Po ustawieniu słowo kluczowe jest wysyłane na ten adres URL"
+  },
+  "fileBrowser_searchHeaders": {
+    "description": "Nagłówki żądań wyszukiwania po stronie serwera"
   },
   "fileBrowser_thumbnail": {
     "description": "Domyślny adres URL miniatury lub funkcja zwracająca adres URL miniatury dla każdego elementu."
@@ -395,6 +399,12 @@
   "fileGallery_headers": {
     "description": "Nagłówki żądań serwera"
   },
+  "fileGallery_searchUrl": {
+    "description": "Adres URL wyszukiwania po stronie serwera. Po ustawieniu słowo kluczowe jest wysyłane na ten adres URL"
+  },
+  "fileGallery_searchHeaders": {
+    "description": "Nagłówki żądań wyszukiwania po stronie serwera"
+  },
   "fileGallery_thumbnail": {
     "description": "Domyślna miniatura"
   },
@@ -407,6 +417,12 @@
   "imageGallery_headers": {
     "description": "Nagłówki żądań serwera"
   },
+  "imageGallery_searchUrl": {
+    "description": "Adres URL wyszukiwania po stronie serwera. Po ustawieniu słowo kluczowe jest wysyłane na ten adres URL"
+  },
+  "imageGallery_searchHeaders": {
+    "description": "Nagłówki żądań wyszukiwania po stronie serwera"
+  },
   "videoGallery_data": {
     "description": "Bezpośrednie dane bez wywołań serwera"
   },
@@ -415,6 +431,12 @@
   },
   "videoGallery_headers": {
     "description": "Nagłówki żądań serwera"
+  },
+  "videoGallery_searchUrl": {
+    "description": "Adres URL wyszukiwania po stronie serwera. Po ustawieniu słowo kluczowe jest wysyłane na ten adres URL"
+  },
+  "videoGallery_searchHeaders": {
+    "description": "Nagłówki żądań wyszukiwania po stronie serwera"
   },
   "videoGallery_thumbnail": {
     "description": "Domyślna miniatura"
@@ -652,6 +674,9 @@
   },
   "embed_urlPatterns": {
     "description": "Dodatkowe wzorce adresów URL rozpoznawane jako treść do osadzenia."
+  },
+  "embed_scriptSrcWhitelist": {
+    "description": "Dozwolone wzorce `<script src=...>` dla surowego osadzanego kodu HTML \n- (np. cytat blokowy na Twitterze + `widgets.js`). Każdy wpis to `RegExp` (testowany względem pełnego źródła) lub `string` (dopasowany poprzez `startsWith`). \n- Wartość domyślna to `[]` — wszystkie znaczniki skryptów są odrzucane.** Skrypty wbudowane (bez `src`) są zawsze odrzucane."
   },
   "embed_embedQuery": {
     "description": "Definicje niestandardowych usług osadzania."
