@@ -20,14 +20,14 @@ export type MigrationEntry = {
 export const OPTION_MAP: MigrationEntry[] = [
 	// ── Values ──
 	{ v2: "strictMode", v3: "strictMode" },
-	{ v2: "strictHTMLValidation", v3: "strictHTMLValidation" },
+	{ v2: "strictHTMLValidation", v3: null, note: "Removed in v3. Use the structured `strictMode` object (e.g. strictMode: { tags: true, attrs: true, styles: true })" },
 	{ v2: "lang", v3: "lang" },
 	{ v2: "defaultTag", v3: "defaultLine", note: "Renamed" },
-	{ v2: "textTags", v3: "textTags" },
+	{ v2: "textTags", v3: "textStyleTags", note: "Renamed" },
 	{ v2: "value", v3: "value" },
 	{ v2: "allowedClassNames", v3: "allowedClassName", note: "Renamed (singular)" },
 	{ v2: "historyStackDelayTime", v3: "historyStackDelayTime" },
-	{ v2: "frameAttrbutes", v3: "frameAttributes", note: "Typo fixed in v3" },
+	{ v2: "frameAttrbutes", v3: "editableFrameAttributes", note: "Typo fixed + renamed to editableFrameAttributes" },
 
 	// ── Whitelist / Blacklist ──
 	{ v2: "addTagsWhitelist", v3: "elementWhitelist", note: "Renamed" },
@@ -39,7 +39,7 @@ export const OPTION_MAP: MigrationEntry[] = [
 
 	// ── Layout ──
 	{ v2: "mode", v3: "mode" },
-	{ v2: "rtl", v3: "rtl" },
+	{ v2: "rtl", v3: "textDirection", note: "Renamed. rtl: true → textDirection: 'rtl'" },
 	{ v2: "lineAttrReset", v3: "lineAttrReset" },
 	{ v2: "toolbarWidth", v3: "toolbar_width", note: "Renamed (underscore)" },
 	{ v2: "toolbarContainer", v3: "toolbar_container", note: "Renamed (underscore)" },
@@ -59,7 +59,7 @@ export const OPTION_MAP: MigrationEntry[] = [
 	// ── Display ──
 	{ v2: "position", v3: null, note: "Removed in v3" },
 	{ v2: "display", v3: null, note: "Removed in v3" },
-	{ v2: "popupDisplay", v3: "popupDisplay" },
+	{ v2: "popupDisplay", v3: null, note: "Removed in v3" },
 
 	// ── Resizing bar ──
 	{ v2: "resizingBar", v3: "statusbar", note: "Renamed" },
@@ -69,9 +69,9 @@ export const OPTION_MAP: MigrationEntry[] = [
 
 	// ── Character count ──
 	{ v2: "charCounter", v3: "charCounter" },
-	{ v2: "charCounterType", v3: "charCounterType" },
-	{ v2: "charCounterLabel", v3: "charCounterLabel" },
-	{ v2: "maxCharCount", v3: "maxCharCount" },
+	{ v2: "charCounterType", v3: "charCounter_type", note: "Renamed (underscore)" },
+	{ v2: "charCounterLabel", v3: "charCounter_label", note: "Renamed (underscore)" },
+	{ v2: "maxCharCount", v3: "charCounter_max", note: "Renamed" },
 
 	// ── Size ──
 	{ v2: "width", v3: "width" },
@@ -82,8 +82,8 @@ export const OPTION_MAP: MigrationEntry[] = [
 	{ v2: "maxHeight", v3: "maxHeight" },
 
 	// ── Editing area ──
-	{ v2: "className", v3: "className" },
-	{ v2: "defaultStyle", v3: "defaultStyle" },
+	{ v2: "className", v3: null, note: "Removed in v3" },
+	{ v2: "defaultStyle", v3: "editorStyle", note: "Renamed" },
 
 	// ── Menu items ──
 	{ v2: "font", v3: "font.items", note: "Moved to plugin option" },
@@ -209,7 +209,7 @@ export const EVENT_MAP: Record<string, string | null> = {
 	onSetToolbarButtons: null, // removed
 	showInline: null, // removed
 	showController: null, // removed
-	imageUploadHandler: "image.uploadHandler",
+	imageUploadHandler: "imageUploadHandler",
 	onImageUploadBefore: "onImageUploadBefore",
 	onImageUpload: "onImageLoad",
 	onImageUploadError: "onImageUploadError",
