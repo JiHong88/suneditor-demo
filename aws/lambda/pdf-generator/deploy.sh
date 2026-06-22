@@ -15,7 +15,9 @@ ARCHITECTURE="x86_64"
 
 echo "=== Building Lambda package ==="
 npm ci --omit=dev
-zip -r -q function.zip index.mjs node_modules package.json
+# fonts/ 는 @sparticuz/chromium의 기본 fontconfig 경로(/var/task/fonts)로 배포되어
+# 한글(CJK) 글리프 렌더링에 사용된다. 누락 시 한글이 빈칸으로 출력된다.
+zip -r -q function.zip index.mjs node_modules package.json fonts
 
 echo "=== Uploading to S3 ==="
 aws s3 cp function.zip "s3://${S3_BUCKET}/${S3_KEY}" --region "$REGION"
