@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Eastada `Enter`-távvala standárda doaibmama ja ođđasit fokusere editora.",
+							"description": "Förhindrar standardbeteendet för `Enter`-nyckeln. Enter körs nu från `beforeinput` ​​(post-IME-commit), så den tidigare mobilfokus-shuffle (temp-fokus → omfokusering, för att tvinga avsluta en virtuell tangentbords IME-session) är onödig.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "Tastaturdáhpáhus"
+								"e": "Tangentbords-/inmatningshändelsen"
 							}
 						}
 					]

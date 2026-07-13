@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Novērš taustiņa `Enter` noklusējuma darbību un pārfokusē redaktoru.",
+							"description": "Novērš atslēgas `Enter` noklusējuma darbību. Enter tagad darbojas no `beforeinput` ​​(post-IME-commit), tāpēc iepriekšējā mobilā fokusa jaukšana (temp-focus → pārfokusēt, lai piespiedu kārtā pārtrauktu virtuālās tastatūras IME sesiju) nav nepieciešama.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "Klaviatūras notikums"
+								"e": "Tastatūras/ievades notikums"
 							}
 						}
 					]

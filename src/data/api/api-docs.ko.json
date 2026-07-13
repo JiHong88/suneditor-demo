@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "`Enter` 키의 기본 동작을 방지하고 편집기에 다시 초점을 맞춥니다.",
+							"description": "`Enter` 키의 기본 동작을 방지합니다. Enter는 이제 `beforeinput`(IME 커밋 후)에서 실행되므로 이전 모바일 포커스 셔플(임시 포커스 → 재포커스, 가상 키보드 IME 세션 강제 종료)이 필요하지 않습니다.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "키보드 이벤트"
+								"e": "키보드/입력 이벤트"
 							}
 						}
 					]

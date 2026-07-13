@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Zabraňuje výchozímu chování klávesy `Enter` a znovu zaostřuje editor.",
+							"description": "Zabraňuje výchozímu chování klíče `Enter`. Enter se nyní spouští od `beforeinput` ​​(po potvrzení IME), takže dřívější přesun zaměření na mobil (temp-focus → refocus, pro vynucení ukončení relace IME s virtuální klávesnicí) je zbytečné.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "Událost s klávesnicí"
+								"e": "Událost klávesnice/vstupu"
 							}
 						}
 					]

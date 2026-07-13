@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Forhindrer standardadfærden for `Enter`-tasten og omfokuserer editoren.",
+							"description": "Forhindrer standardadfærden for `Enter`-nøglen. Enter kører nu fra `beforeinput` ​​(post-IME-commit), så den tidligere mobile fokus-shuffle (temp-fokus → refokus, for at tvinge en virtuelt tastatur IME-session) er unødvendig.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "Tastaturhændelsen"
+								"e": "Tastatur-/inputhændelsen"
 							}
 						}
 					]

@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "מונע את התנהגות ברירת המחדל של המקש `Enter` וממקד מחדש את העורך.",
+							"description": "מונע את התנהגות ברירת המחדל של מקש `Enter`. Enter פועל כעת מ-`beforeinput` ​​(פוסט-IME-commit), כך ש-shuffle המיקוד הנייד לשעבר (התמקדות זמנית → מיקוד מחדש, כדי לאלץ סיום הפעלת IME של מקלדת וירטואלית) הוא מיותר.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "אירוע המקלדת"
+								"e": "אירוע המקלדת/קלט"
 							}
 						}
 					]

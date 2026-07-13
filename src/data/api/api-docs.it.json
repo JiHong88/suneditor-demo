@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Impedisce il comportamento predefinito del tasto `Enter` e riporta l'editor al focus.",
+							"description": "Impedisce il comportamento predefinito della chiave `Enter`. L'invio ora viene eseguito da `beforeinput` ​​(post-IME-commit), quindi il precedente focus-shuffle mobile (temp-focus → refocus, per forzare la fine di una sessione IME con tastiera virtuale) non è necessario.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "L'evento della tastiera"
+								"e": "L'evento tastiera/input"
 							}
 						}
 					]

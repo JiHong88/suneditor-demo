@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Verhindert das Standardverhalten der Taste `Enter` und fokussiert den Editor neu.",
+							"description": "Verhindert das Standardverhalten der Taste `Enter`. Enter wird jetzt ab `beforeinput` ​​(Post-IME-Commit) ausgeführt, sodass der frühere mobile Fokus-Shuffle (Temp-Fokus → Neufokus, um das Beenden einer IME-Sitzung mit einer virtuellen Tastatur zu erzwingen) nicht mehr erforderlich ist.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "Das Tastaturereignis"
+								"e": "Das Tastatur-/Eingabeereignis"
 							}
 						}
 					]

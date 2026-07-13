@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Megakadályozza a `Enter` billentyű alapértelmezett viselkedését és újrafókuszálja a szerkesztőt.",
+							"description": "Megakadályozza a `Enter` kulcs alapértelmezett viselkedését. Az Enter mostantól a `beforeinput`-ból fut (post-IME-commit), így a korábbi mobil fókusz-keverés (temp-focus → újrafókusz, a virtuális billentyűzetes IME-munkamenet kényszerített befejezéséhez) szükségtelen.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "A billentyűzetes esemény"
+								"e": "A billentyűzet/beviteli esemény"
 							}
 						}
 					]

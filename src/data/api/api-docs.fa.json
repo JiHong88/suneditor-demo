@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "از رفتار پیش‌فرض کلید `Enter` جلوگیری می‌کند و تمرکز ویرایشگر را تغییر می‌دهد.",
+							"description": "از رفتار پیش فرض کلید `Enter` جلوگیری می کند. اکنون Enter از `beforeinput` ​​(بعد از تعهد IME) اجرا می شود، بنابراین تغییر فوکوس موبایل قبلی (تمپ-فوکوس → فوکوس مجدد، برای پایان دادن به جلسه IME صفحه کلید مجازی) غیر ضروری است.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "رویداد صفحه کلید"
+								"e": "رویداد صفحه کلید/ورودی"
 							}
 						}
 					]

@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "阻止 `Enter` 键的默认行为，并重新聚焦编辑器。",
+							"description": "防止 `Enter` 键的默认行为。 Enter 现在从 `beforeinput` （IME 提交后）运行，因此以前的移动焦点洗牌（临时焦点→重新焦点，以强制结束虚拟键盘 IME 会话）是不必要的。",
 							"example": "",
 							"paramDescriptions": {
-								"e": "键盘事件"
+								"e": "键盘/输入事件"
 							}
 						}
 					]

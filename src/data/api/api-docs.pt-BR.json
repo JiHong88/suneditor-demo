@@ -1,6 +1,6 @@
 {
-	"version": "3.2.0",
-	"generatedAt": "2026-07-13T10:21:03.878Z",
+	"version": "3.2.2",
+	"generatedAt": "2026-07-13T16:27:08.443Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -210,10 +210,10 @@
 							"name": "enterPrevent",
 							"params": "e: Event",
 							"returns": "void",
-							"description": "Impede o comportamento padrão da tecla `Enter` e refocaliza o editor.",
+							"description": "Impede o comportamento padrão da chave `Enter`. Enter agora é executado a partir de `beforeinput` ​​(pós-confirmação do IME), portanto, o antigo embaralhamento de foco móvel (foco temporário → refocagem, para forçar o encerramento de uma sessão IME de teclado virtual) é desnecessário.",
 							"example": "",
 							"paramDescriptions": {
-								"e": "O evento do teclado"
+								"e": "O evento de teclado/entrada"
 							}
 						}
 					]
