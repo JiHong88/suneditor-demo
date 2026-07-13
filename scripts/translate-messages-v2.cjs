@@ -100,7 +100,9 @@ function setBySegments(obj, segments, value) {
 }
 
 // ── Protect placeholders from translation ─────────────────
-// next-intl uses {variable} and <tag>...</tag> syntax
+// next-intl uses {variable} and <tag>...</tag> syntax.
+// Brand / product names must never be translated (e.g. "Notion", "SunEditor").
+const BRAND_TERMS = /\b(?:SunEditor|Notion)\b/g;
 function protectPlaceholders(text) {
 	const tokens = [];
 	const p = text
@@ -109,6 +111,10 @@ function protectPlaceholders(text) {
 			return `__PH${tokens.length - 1}__`;
 		})
 		.replace(/<\/?[a-zA-Z][^>]*>/g, (match) => {
+			tokens.push(match);
+			return `__PH${tokens.length - 1}__`;
+		})
+		.replace(BRAND_TERMS, (match) => {
 			tokens.push(match);
 			return `__PH${tokens.length - 1}__`;
 		});

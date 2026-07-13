@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Platshållartext.",
+    "description": "Platshållartext visas när hela editorn är tom.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "platshållare per rad som visas på den fokuserade",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Maxbredd för redigeraren.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Valfri maxbredd för redaktörens kropp (`.se-wrapper`). \n- **CSS-längd** (`\"740px\"`, `\"60ch\"`): redaktörens innehåll är fastspänt till denna bredd och centrerat horisontellt; rullningsbehållaren förblir full bredd (rullningslisten i ytterkanten, hjul/touch aktiv över hela området). \n- **`\"auto\"`** eller **tom sträng** (standard): ingen begränsning — naturlig fullbreddslayout med standardinnehållsutfyllnad. \n- I läget `blockHandle` spårar rännhandtaget det centrerade textbandet. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Verktygsfältsläge: `classic`, `inline`, `balloon`, `balloon-always`. Lägg till `:bottom` för att placera verktygsfältet längst ner (t.ex. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Blockhandtagskonfiguration. När det tillhandahålls visas ett gränssnitt för blockhandtag per rad. Fungerar oberoende av `mode`."
+  },
+  "menu": {
+    "description": "Menyposter. \n- **Strängposter** — lösts via `ResolveButton`. Accepterar samma värden som verktygsfältet `buttonList`: \n- **Blockformatnycklar**: `p`, `h1`-`h6`, `heading` (H1-H6 undermeny), `ul`, `ol`, `list` (UL/OL undermeny), `blockquote`, `pre`. \n- **Pluginnamn**: Alla registrerade pluginnamn (t.ex. `blockStyle`, `align`, `image`, `link`). Dropdown-plugins visar sina objekt som en undermeny. Modal plugins öppnar modalen vid klick. \n- **Inbyggda kommandon**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Anpassade objektobjekt** — `{ title, icon?, action }`. `icon` är en ikonnyckel från `$.icons` eller en rå `<svg>` HTML-sträng; `action` anropas med `($, { block })`. \n- Standard är `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Redigerartyp. Använd `\"document\"` för en layout i dokumentstil, med valfria undertyper efter `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Verktygsfältets bredd.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centrera verktygsfältets knapprad (`.se-btn-tray`) horisontellt. \n- **CSS-längd** (t.ex. `\"500px\"`, `\"740px\"`, `\"60ch\"`): Verktygsfältets bakgrund spänner över hela bredden medan knappraden är begränsad till den bredden och centrerad. Om knappar passar, stannar raden på en enda rad; om de överskrider locket, lindas de inuti det. \n- **`\"auto\"`**: inget lock — raden är storleksanpassad efter innehållet och helt enkelt centrerad. \n- **Tom sträng** (standard): ingen begränsning. \n- **Anmärkning om `responsiveButtonList`**: tröskelvärden jämförs med verktygsfältets fulla bredd, inte bandet. När det här alternativet är inställt, kalibrera `responsiveButtonList`-tangenterna runt storleken på verktygsfältet som du faktiskt vill att varje knappsats ska slå in på. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Containerelement för verktygsfältet."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Per-trigger-konfigurationer knappade av trigger-tecken."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Tecken som öppnar kommandomenyn. Enstaka tecken rekommenderas."
+  },
+  "slashCommand_items": {
+    "description": "Menyposter. Strängar löser sig via `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Debounce delay (ms) innan ingången inspekteras för triggern."
+  },
+  "slashCommand_limitSize": {
+    "description": "Maximalt antal objekt som visas i rullgardinsmenyn."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Meddelande visas när inga objekt matchar frågan. Om den inte är inställd stängs menyn vid ingen matchning."
+  },
+  "slashCommand_renderItem": {
+    "description": "HTML-renderare för anpassade objekt."
   },
   "fontSize_sizeUnit": {
     "description": "Enheten för teckenstorleken.\n- Godkända värden inkluderar: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` eller `'text'`.\n- Om `'text'` används tillämpas en textbaserad lista över teckenstorlekar."

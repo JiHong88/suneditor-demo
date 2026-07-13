@@ -26,6 +26,7 @@ export interface PlaygroundState {
 	width: string;
 	minWidth: string;
 	maxWidth: string;
+	innerWidth: string;
 	height: string;
 	minHeight: string;
 	maxHeight: string;
@@ -33,6 +34,7 @@ export interface PlaygroundState {
 
 	// — Toolbar —
 	toolbar_width: string;
+	toolbar_innerWidth: string;
 	toolbar_sticky: number;
 	toolbar_hide: boolean;
 	toolbar_container_enabled: boolean;
@@ -60,6 +62,9 @@ export interface PlaygroundState {
 
 	// — Content & Behavior —
 	placeholder: string;
+	placeholder_line: string;
+	blockHandle_enabled: boolean;
+	blockHandle_menu: string;
 	value: string;
 	iframe: boolean;
 	iframe_fullPage: boolean;
@@ -200,6 +205,13 @@ export interface PlaygroundState {
 	autocomplete_useCachingData: boolean;
 	autocomplete_useCachingFieldData: boolean;
 	autocomplete_triggers: string;
+
+	// — Plugin: SlashCommand (field) —
+	slashCommand_triggerChar: string;
+	slashCommand_items: string;
+	slashCommand_delayTime: number;
+	slashCommand_limitSize: number;
+	slashCommand_emptyMessage: string;
 
 	// — Plugin: CodeBlock —
 	codeBlock_langs: string;
@@ -427,6 +439,7 @@ export const DEFAULTS: PlaygroundState = {
 	icons: "",
 
 	width: "100%",
+	innerWidth: "",
 	minWidth: "",
 	maxWidth: "",
 	height: "auto",
@@ -435,6 +448,7 @@ export const DEFAULTS: PlaygroundState = {
 	editorStyle: "",
 
 	toolbar_width: "auto",
+	toolbar_innerWidth: "",
 	toolbar_sticky: 0,
 	toolbar_hide: false,
 	toolbar_container_enabled: false,
@@ -459,6 +473,9 @@ export const DEFAULTS: PlaygroundState = {
 	wordCounter_label: "",
 
 	placeholder: "",
+	placeholder_line: "",
+	blockHandle_enabled: false,
+	blockHandle_menu: "",
 	value: PLAYGROUND_VALUE,
 	iframe: false,
 	iframe_fullPage: false,
@@ -595,6 +612,13 @@ export const DEFAULTS: PlaygroundState = {
 	autocomplete_useCachingData: true,
 	autocomplete_useCachingFieldData: true,
 	autocomplete_triggers: "",
+
+	// Plugin: SlashCommand
+	slashCommand_triggerChar: "/",
+	slashCommand_items: "",
+	slashCommand_delayTime: 120,
+	slashCommand_limitSize: 10,
+	slashCommand_emptyMessage: "",
 
 	// Plugin: Math
 	codeBlock_langs: "",
@@ -800,6 +824,8 @@ export const DEFAULTS: PlaygroundState = {
 /* ── Preset values for toggleable plugin options ───────── */
 
 export const ITEM_PRESETS: Record<string, string> = {
+	slashCommand_items: "heading, list, blockquote, pre, bold, italic, image, table, link",
+	blockHandle_menu: "p, heading, list, blockquote, pre",
 	align_items: "left,center,right",
 	font_items: "Roboto,Open Sans,Lato,Montserrat,Playfair Display,Noto Sans KR",
 	blockStyle_items: "p,blockquote,h1,h2,h3",
@@ -935,6 +961,9 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	"multiroot",
 	"buttonListPreset",
 	"customButtonList",
+	// blockHandle (base option, no direct 1:1 suneditor state key — playground uses enable + menu)
+	"blockHandle_enabled",
+	"blockHandle_menu",
 	"toolbar_container_enabled",
 	"statusbar_container_enabled",
 	"subToolbar_enabled",
@@ -972,7 +1001,7 @@ const FIXED_FRAME_KEYS: (keyof PlaygroundState)[] = [
 
 /** Plugin options are effectively fixed (plugins themselves are fixed) — all plugin-prefixed state keys */
 const FIXED_PLUGIN_KEYS: (keyof PlaygroundState)[] = (Object.keys(DEFAULTS) as (keyof PlaygroundState)[]).filter(
-	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|autocomplete|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|codeBlock|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
+	(k) => /^(image|video|audio|hr|table|fontSize|fontColor|backgroundColor|embed|drawing|autocomplete|slashCommand|math|link|exportPDF|fileUpload|align|font|blockStyle|lineHeight|paragraphStyle|textStyle|template|layout|codeBlock|imageGallery|videoGallery|audioGallery|fileGallery|fileBrowser)_/.test(k),
 );
 
 const FIXED_KEYS = new Set<string>([...FIXED_BASE_KEYS, ...FIXED_FRAME_KEYS, ...FIXED_PLUGIN_KEYS]);
@@ -1009,6 +1038,7 @@ const BUTTON_REQUIRED_OPTIONS: Record<string, Partial<PlaygroundState>> = {
 const PRESET_FIELD_OPTIONS: Partial<Record<ButtonListPreset, Partial<PlaygroundState>>> = {
 	full: {
 		autocomplete_triggers: ITEM_PRESETS.autocomplete_triggers,
+		slashCommand_items: ITEM_PRESETS.slashCommand_items,
 	} as Partial<PlaygroundState>,
 };
 
@@ -1328,11 +1358,21 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	// optional strings (only set if non-empty / non-default)
 	if (state.minWidth) opts.minWidth = state.minWidth;
 	if (state.maxWidth) opts.maxWidth = state.maxWidth;
+	if (state.innerWidth) opts.innerWidth = state.innerWidth;
 	if (state.minHeight) opts.minHeight = state.minHeight;
 	if (state.maxHeight) opts.maxHeight = state.maxHeight;
 	if (state.editorStyle) opts.editorStyle = state.editorStyle;
 	if (state.toolbar_width !== "auto") opts.toolbar_width = state.toolbar_width;
+	if (state.toolbar_innerWidth) opts.toolbar_innerWidth = state.toolbar_innerWidth;
 	if (state.placeholder) opts.placeholder = state.placeholder;
+	if (state.placeholder_line) opts.placeholder_line = state.placeholder_line;
+	if (state.blockHandle_enabled) {
+		const menu = state.blockHandle_menu
+			.split(",")
+			.map((s) => s.trim())
+			.filter(Boolean);
+		opts.blockHandle = menu.length ? { menu } : {};
+	}
 	if (state.value) opts.value = state.value;
 	if (state.defaultLine !== "p") opts.defaultLine = state.defaultLine;
 	if (state.defaultUrlProtocol) opts.defaultUrlProtocol = state.defaultUrlProtocol;
@@ -1563,6 +1603,23 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	}
 	if (Object.keys(ac).length) opts.autocomplete = ac;
 
+	// SlashCommand (field plugin) — activated when items are provided
+	const sc: Record<string, unknown> = {};
+	if (state.slashCommand_items) {
+		const items = state.slashCommand_items
+			.split(",")
+			.map((s) => s.trim())
+			.filter(Boolean);
+		if (items.length) {
+			sc.items = items;
+			if (state.slashCommand_triggerChar && state.slashCommand_triggerChar !== "/") sc.triggerChar = state.slashCommand_triggerChar;
+			if (state.slashCommand_delayTime !== DEFAULTS.slashCommand_delayTime) sc.delayTime = state.slashCommand_delayTime;
+			if (state.slashCommand_limitSize !== DEFAULTS.slashCommand_limitSize) sc.limitSize = state.slashCommand_limitSize;
+			if (state.slashCommand_emptyMessage) sc.emptyMessage = state.slashCommand_emptyMessage;
+		}
+	}
+	if (Object.keys(sc).length) opts.slashCommand = sc;
+
 	const mth: Record<string, unknown> = {};
 	if (!state.math_canResize) mth.canResize = false;
 	if (state.math_autoHeight) mth.autoHeight = true;
@@ -1772,12 +1829,14 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	w: "width",
 	minw: "minWidth",
 	maxw: "maxWidth",
+	iw: "innerWidth",
 	h: "height",
 	minh: "minHeight",
 	maxh: "maxHeight",
 	es: "editorStyle",
 	// Toolbar
 	tw: "toolbar_width",
+	tiw: "toolbar_innerWidth",
 	ts: "toolbar_sticky",
 	th: "toolbar_hide",
 	tce: "toolbar_container_enabled",
@@ -1849,6 +1908,9 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	wcl: "wordCounter_label",
 	// Content
 	ph: "placeholder",
+	phl: "placeholder_line",
+	bhe: "blockHandle_enabled",
+	bhm: "blockHandle_menu",
 	val: "value",
 	if: "iframe",
 	ifp: "iframe_fullPage",
@@ -1975,6 +2037,12 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"ac.uc": "autocomplete_useCachingData",
 	"ac.ucfd": "autocomplete_useCachingFieldData",
 	"ac.tr": "autocomplete_triggers",
+	// Plugin: SlashCommand
+	"sc.tc": "slashCommand_triggerChar",
+	"sc.it": "slashCommand_items",
+	"sc.d": "slashCommand_delayTime",
+	"sc.l": "slashCommand_limitSize",
+	"sc.em": "slashCommand_emptyMessage",
 	// Plugin: Math
 	"mt.ml": "math_mathLib",
 	"mt.r": "math_canResize",

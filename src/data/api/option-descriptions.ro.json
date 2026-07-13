@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Text substituent.",
+    "description": "Textul substituent este afișat când întregul editor este gol.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "substituent pe linie afișat pe focalizat",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Lățime maximă pentru editor.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Lățimea maximă opțională pentru corpul editorului (`.se-wrapper`). \n- **Lungime CSS** (`\"740px\"`, `\"60ch\"`): conținutul corpului editorului este fixat la această lățime și centrat orizontal; containerul de defilare rămâne pe toată lățimea (bara de defilare la marginea exterioară, roata/touch activă pe toată zona). \n- **`\"auto\"`** sau **șir gol** (implicit): fără constrângere — aspect natural pe lățime completă cu umplutură implicită de conținut. \n- În modul `blockHandle`, mânerul jgheab urmărește banda de text centrată. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Mod bară de instrumente: `classic`, `inline`, `balloon`, `balloon-always`. Adăugați `:bottom` pentru a plasa bara de instrumente în partea de jos (de exemplu, `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Configurarea mânerului bloc. Când este furnizat, este afișată o interfață de utilizare pentru blocuri pe linie. Funcționează independent de `mode`."
+  },
+  "menu": {
+    "description": "Intrări din meniu. \n- **Intrări șir** — rezolvate prin `ResolveButton`. Acceptă aceleași valori ca și bara de instrumente `buttonList`: \n- **Blocați tastele de format**: `p`, `h1`-`h6`, `heading` (submeniu H1-H6), `ul`, `ol`, `list` (submeniu UL/OL), `blockquote`, `pre`. \n- **Nume de plugin**: orice nume de plugin înregistrat (de exemplu, `blockStyle`, `align`, `image`, `link`). Pluginurile drop-down își afișează articolele ca submeniu. Pluginurile modale deschid modulul la clic. \n- **Comenzi încorporate**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` etc. \n- **Obiecte cu articole personalizate** — `{ title, icon?, action }`. `icon` este o cheie pictogramă de la `$.icons` sau un șir HTML brut `<svg>`; `action` este invocat cu `($, { block })`. \n- Implicit la `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Tip editor. Folosește `\"document\"` pentru un layout în stil document, cu subtipuri opționale după `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Lățimea barei de instrumente.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centrați rândul de butoane al barei de instrumente (`.se-btn-tray`) pe orizontală. \n- **Lungimea CSS** (de exemplu, `\"500px\"`, `\"740px\"`, `\"60ch\"`): fundalul barei de instrumente se întinde pe toată lățimea, în timp ce rândul de butoane este limitat la acea lățime și centrat. Dacă butoanele se potrivesc, rândul rămâne pe o singură linie; dacă depășesc capacul, se înfășoară în interiorul acestuia. \n- **`\"auto\"`**: fără capac — rândul este dimensionat conform conținutului său și pur și simplu centrat. \n- **Șir gol** (implicit): fără constrângere. \n- **Notă despre `responsiveButtonList`**: pragurile se compară cu lățimea completă a barei de instrumente, nu cu banda. Când această opțiune este setată, calibrați tastele `responsiveButtonList` în jurul dimensiunii barei de instrumente la care doriți să activați fiecare buton setat. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Element container pentru bara de instrumente."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Configurații per declanșare tastate de caracterul declanșator."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Personaj care deschide meniul de comandă. Se recomandă un singur caracter."
+  },
+  "slashCommand_items": {
+    "description": "Intrări din meniu. Șirurile se rezolvă prin `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Întârziere de deblocare (ms) înainte ca intrarea să fie inspectată pentru declanșare."
+  },
+  "slashCommand_limitSize": {
+    "description": "Numărul maxim de articole afișate în meniul drop-down."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Mesaj afișat când niciun element nu corespunde interogării. Dacă nu este setat, meniul se închide fără potrivire."
+  },
+  "slashCommand_renderItem": {
+    "description": "Element personalizat de redare HTML."
   },
   "fontSize_sizeUnit": {
     "description": "Unitatea pentru dimensiunea fontului.\n- Valorile acceptate includ: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` sau `'text'`.\n- Dacă se utilizează `'text'`, se aplică o listă de dimensiuni ale fontului bazată pe text."

@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Texto de marcador de posición.",
+    "description": "Texto de marcador de posición que se muestra cuando todo el editor está vacío.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "marcador de posición por línea que se muestra en el foco",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Ancho máximo para el editor.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Ancho máximo opcional para el cuerpo del editor (`.se-wrapper`). \n- **Longitud de CSS** (`\"740px\"`, `\"60ch\"`): el contenido del cuerpo del editor se sujeta a este ancho y se centra horizontalmente; el contenedor de desplazamiento permanece en todo su ancho (barra de desplazamiento en el borde exterior, rueda/táctil activo en toda el área). \n- **`\"auto\"`** o **cadena vacía** (predeterminado): sin restricciones: diseño natural de ancho completo con relleno de contenido predeterminado. \n- En el modo `blockHandle`, el controlador del medianil sigue la banda de texto centrada. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Modo de barra de herramientas: `classic`, `inline`, `balloon`, `balloon-always`. Añada `:bottom` para colocar la barra de herramientas en la parte inferior (por ejemplo, `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Configuración del mango del bloque. Cuando se proporciona, se muestra una interfaz de usuario de identificador de bloque por línea. Funciona independientemente de `mode`."
+  },
+  "menu": {
+    "description": "Entradas de menú. \n- **Entradas de cadena**: resueltas mediante `ResolveButton`. Acepta los mismos valores que la barra de herramientas `buttonList`: \n- **Teclas de formato de bloque**: `p`, `h1`-`h6`, `heading` (submenú H1-H6), `ul`, `ol`, `list` (submenú UL/OL), `blockquote`, `pre`. \n- **Nombres de complementos**: cualquier nombre de complemento registrado (por ejemplo, `blockStyle`, `align`, `image`, `link`). Los complementos desplegables muestran sus elementos como un submenú. Los complementos modales abren el modal al hacer clic. \n- **Comandos incorporados**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objetos de artículos personalizados** — `{ title, icon?, action }`. `icon` es una clave de icono de `$.icons` o una cadena HTML sin formato `<svg>`; `action` se invoca con `($, { block })`. \n- El valor predeterminado es `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Tipo de editor. Use `\"document\"` para un diseño de estilo de documento, con subtipos opcionales después de `:`.\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Ancho de la barra de herramientas.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centre la fila de botones de la barra de herramientas (`.se-btn-tray`) horizontalmente. \n- **Longitud de CSS** (por ejemplo, `\"500px\"`, `\"740px\"`, `\"60ch\"`): el fondo de la barra de herramientas ocupa todo el ancho mientras que la fila del botón está limitada a ese ancho y centrada. Si los botones encajan, la fila permanece en una sola línea; si exceden la tapa, se envuelven dentro de ella. \n- **`\"auto\"`**: sin límite: la fila tiene el tamaño adecuado a su contenido y simplemente se centra. \n- **Cadena vacía** (predeterminado): sin restricción. \n- **Nota sobre `responsiveButtonList`**: los umbrales se comparan con el ancho completo de la barra de herramientas, no con la banda. Cuando esta opción esté configurada, calibre las teclas `responsiveButtonList` alrededor del tamaño de la barra de herramientas en el que realmente desea que se active cada botón. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Elemento contenedor para la barra de herramientas."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Configuraciones por activador codificadas por carácter de activador."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Carácter que abre el menú de comandos. Se recomienda un solo carácter."
+  },
+  "slashCommand_items": {
+    "description": "Entradas de menú. Las cadenas se resuelven mediante `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Retraso de rebote (ms) antes de que se inspeccione la entrada para detectar el disparador."
+  },
+  "slashCommand_limitSize": {
+    "description": "Número máximo de elementos que se muestran en el menú desplegable."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Mensaje que se muestra cuando ningún elemento coincide con la consulta. Si no está configurado, el menú se cierra si no hay coincidencias."
+  },
+  "slashCommand_renderItem": {
+    "description": "Representador HTML de elementos personalizados."
   },
   "fontSize_sizeUnit": {
     "description": "Unidad de medida para el tamaño de fuente.\n\n- Los valores aceptados incluyen: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` o `'text'`.\n\n- Si se utiliza `'text'`, se aplica una lista de tamaños de fuente basada en texto."

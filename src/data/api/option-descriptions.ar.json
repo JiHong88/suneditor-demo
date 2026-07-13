@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "نص توضيحي.",
+    "description": "يظهر نص العنصر النائب عندما يكون المحرر بأكمله فارغًا.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "يظهر العنصر النائب لكل سطر على موضع التركيز",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "الحد الأقصى لعرض المحرر.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "أقصى عرض اختياري لنص المحرر (`.se-wrapper`). \n- **طول CSS** (`\"740px\"`, `\"60ch\"`): يتم تثبيت محتوى نص المحرر على هذا العرض ويتم توسيطه أفقيًا؛ تظل حاوية التمرير بعرض كامل (شريط التمرير عند الحافة الخارجية، والعجلة/اللمس نشط على المنطقة بأكملها). \n- **`\"auto\"`** أو **سلسلة فارغة** (افتراضي): بلا قيود — تخطيط طبيعي كامل العرض مع حشوة المحتوى الافتراضية. \n- في الوضع `blockHandle`، يتتبع مقبض التوثيق نطاق النص المركزي. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "وضع شريط الأدوات: `classic`, `inline`, `balloon`, `balloon-always`. أضف `:bottom` لوضع شريط الأدوات في الأسفل (على سبيل المثال `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "تكوين مقبض الكتلة. عند توفيره، يتم عرض واجهة مستخدم لمقبض الكتلة لكل سطر. يعمل بشكل مستقل عن `mode`."
+  },
+  "menu": {
+    "description": "إدخالات القائمة. \n- **إدخالات السلسلة** — يتم حلها عبر `ResolveButton`. يقبل نفس قيم شريط الأدوات `buttonList`: \n- **مفاتيح تنسيق الكتلة**: `p`، `h1`-`h6`، `heading` (القائمة الفرعية H1-H6)، `ul`، `ol`، `list` (قائمة UL/OL الفرعية)، `blockquote`، `pre`. \n- **أسماء المكونات الإضافية**: أي اسم مكون إضافي مسجل (مثل `blockStyle`، `align`، `image`، `link`). تعرض المكونات الإضافية المنسدلة عناصرها كقائمة فرعية. تفتح المكونات الإضافية المشروطة المشروط عند النقر. \n- **الأوامر المضمنة**: `bold`، `italic`، `underline`، `strike`، `undo`، `redo`، إلخ. \n- **كائنات العناصر المخصصة** — `{ title, icon?, action }`. `icon` هو مفتاح رمز من `$.icons` أو سلسلة HTML `<svg>` خام؛ يتم استدعاء `action` باستخدام `($, { block })`. \n- الإعدادات الافتراضية هي `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "نوع المحرر. استخدم `\"document\"` لتنسيق المستند، مع إمكانية إضافة أنواع فرعية بعد `:`.\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "عرض شريط الأدوات.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "قم بتوسيط صف أزرار شريط الأدوات (`.se-btn-tray`) أفقيًا. \n- **طول CSS** (على سبيل المثال `\"500px\"`، `\"740px\"`، `\"60ch\"`): تمتد خلفية شريط الأدوات بالعرض الكامل بينما يتم تغطية صف الزر بهذا العرض ويتم توسيطه. إذا كانت الأزرار ملائمة، فسيظل الصف في سطر واحد؛ إذا تجاوزت الغطاء، فإنها تلتف بداخله. \n- **`\"auto\"`**: بدون حد أقصى — يتم تحديد حجم الصف وفقًا لمحتواه ويتم توسيطه ببساطة. \n- **سلسلة فارغة** (افتراضي): لا يوجد قيد. \n- **ملاحظة على `responsiveButtonList`**: تتم مقارنة الحدود مع العرض الكامل لشريط الأدوات، وليس النطاق. عند تعيين هذا الخيار، قم بمعايرة مفاتيح `responsiveButtonList` حول حجم شريط الأدوات الذي تريد بالفعل تعيين كل زر فيه. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "عنصر حاوية لشريط الأدوات."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "تكوينات لكل مشغل يتم تحديدها بواسطة حرف المشغل."
+  },
+  "slashCommand_triggerChar": {
+    "description": "الحرف الذي يفتح قائمة الأوامر. يوصى باستخدام حرف واحد."
+  },
+  "slashCommand_items": {
+    "description": "إدخالات القائمة. يتم حل السلاسل عبر `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "تأخير الارتداد (مللي ثانية) قبل فحص الإدخال للمشغل."
+  },
+  "slashCommand_limitSize": {
+    "description": "الحد الأقصى لعدد العناصر المعروضة في القائمة المنسدلة."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "تظهر الرسالة عند عدم تطابق أي عناصر مع الاستعلام. إذا لم يتم تعيينه، فسيتم إغلاق القائمة في حالة عدم وجود تطابق."
+  },
+  "slashCommand_renderItem": {
+    "description": "عارض HTML للعنصر المخصص."
   },
   "fontSize_sizeUnit": {
     "description": "وحدة قياس حجم الخط.\n\n- القيم المقبولة: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` أو `'text'`.\n\n- في حال استخدام `'text'`، يتم تطبيق قائمة أحجام الخطوط النصية."

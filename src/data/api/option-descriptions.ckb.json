@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Nivîsa cihgir.",
+    "description": "Dema ku edîtorê tevahî vala ye, nivîsa cîhê tê xuyang kirin.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "cîhgira per-xêz li ser baldar tê xuyang kirin",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Firehiya herî zêde ji bo edîtorê.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Ji bo laşê edîtorê (`.se-wrapper`) firehiya herî zêde ya vebijarkî. \n- **Dirêjahiya CSS** (`\"740px\"`, `\"60ch\"`): Naveroka laşê edîtorê bi vê firehiyê ve tê girêdan û navendek horizontal; konteynera gerguhêz bi tevahî fireh dimîne (bara gerokê li qiraxa derve, çerx / pêçek li seranserê deverê çalak e). \n- **`\"auto\"`** an ** rêzika vala ** (pêşniyaz): bê asteng - xêzkirina tev-firehiya xwezayî ya bi lêdana naverokê ya xwerû. \n- Di moda `blockHandle` de, destika gutterê bendika nivîsê ya navend dişopîne. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Moda darika amûran: `classic`, `inline`, `balloon`, `balloon-always`. `:bottom` lê zêde bike da ku darika amûran li binî bicîh bibe (mînak `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Veavakirina destikê asteng bike. Dema ku tê peyda kirin, UI-ya bloka per-xetê tê xuyang kirin. Ji `mode` serbixwe dixebite."
+  },
+  "menu": {
+    "description": "navnîşên menu. \n- ** Têketinên rêzê ** - bi rêya `ResolveButton` ve têne çareser kirin. Heman nirxan wekî toolbar `buttonList` qebûl dike: \n- **Bişkojkên formatê asteng bikin**: `p`, `h1`-`h6`, `heading` (binnûka H1-H6), `ul`, `ol`, `list` (UL/OL jêrmenu), `blockquote`, __BT10. \n- ** Navên pêvekê **: Navê pêveka qeydkirî (mînak `blockStyle`, `align`, `image`, `link`). Pêvekên dakêşanê hêmanên xwe wekî binemenû nîşan didin. Pêvekên modal bi klîk modalê vedikin. \n- ** Fermanên çêkirî **: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, hwd. \n- **Tiştên tiştên xwerû ** — `{ title, icon?, action }`. `icon` mifteyek îkonê ya `$.icons` an jî rêzika HTML ya xav `<svg>` ye; `action` bi `($, { block })` ve tê gazî kirin. \n- Pêşniyarên `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Cureyê Edîtor. Ji bo sêwirana bi şêwaza belgeyê `\"document\"` bikar bînin, bi jêr-cureyên bijarte piştî `:`. ```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Firehiya darika amûran.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Rêzika bişkokê ya toolbarê (`.se-btn-tray`) bi awayekî horizontî navendî bikin. \n- ** Dirêjahiya CSS** (mînak. `\"500px\"`, `\"740px\"`, `\"60ch\"`): paşxaneya barika amûran bi tevahî firehiya xwe digire dema ku rêza bişkojkê li wê firehiyê tê girtin û navendê ye. Ger bişkok bikevin, rêz li ser yek rêzek dimîne; heke ji qapaxê derbas bibin, di hundurê wê de dipêçin. \n- **`\"auto\"`**: bê kap - rêz li gorî naveroka xwe mezin dibe û bi tenê navend e. \n- **Rêza vala ** (pêşniyaz): bê astengî. \n- **Têbînî li ser `responsiveButtonList`**: tixûb li hember firehiya tam a toolbarê, ne bandê, didin ber hev. Dema ku ev vebijark were danîn, bişkokên `responsiveButtonList` li dora mezinahiya darikê amûrê ku hûn bi rastî dixwazin ku her bişkokek tê de were danîn, kalibr bikin. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Elementa konteynerê ji bo barika amûran."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Veavakirinên per-tetikanê bi karakterê tetikê hatine kilît kirin."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Karaktera ku menuya fermanê vedike. Karaktera yekane tê pêşniyar kirin."
+  },
+  "slashCommand_items": {
+    "description": "navnîşên menu. Strings bi rêya `ResolveButton` çareser dibin"
+  },
+  "slashCommand_delayTime": {
+    "description": "Beriya ku têketin ji bo tetikê were kontrol kirin, dereng dereng bike (ms)."
+  },
+  "slashCommand_limitSize": {
+    "description": "Hejmara herî zêde ya hêmanên ku di peldankê de têne xuyang kirin."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Dema ku tu tişt bi pirsê re li hev nakin peyam tê nîşandan. Ger neyê danîn, pêşek li ser hev nayê girtin."
+  },
+  "slashCommand_renderItem": {
+    "description": "Mijara xwerû ya HTML renderer."
   },
   "fontSize_sizeUnit": {
     "description": "Yekîneya mezinahiya tîpan.\n- Nirxên pejirandî ev in: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` an `'text'`.\n- Heke `'text'` were bikar anîn, navnîşek mezinahiya tîpan a li ser bingeha nivîsê tê sepandin."

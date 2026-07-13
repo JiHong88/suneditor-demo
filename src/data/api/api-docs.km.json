@@ -1,6 +1,6 @@
 {
-	"version": "3.1.4",
-	"generatedAt": "2026-06-01T16:50:08.537Z",
+	"version": "3.2.0",
+	"generatedAt": "2026-07-13T10:21:03.878Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -203,7 +203,7 @@
 							"description": "រំកិល​ទិដ្ឋភាព​កម្មវិធី​និពន្ធ​ទៅ​ទីតាំង​សញ្ញា​កាតារ៉េ​បន្ទាប់​ពី​ចុច `Enter`។",
 							"example": "",
 							"paramDescriptions": {
-								"range": "វត្ថុ​ជួរ"
+								"range": "បញ្ចូល​ជួរ​រូបថត​ជាមុន (តែ​ត្រឡប់​ក្រោយ​ប៉ុណ្ណោះ)។"
 							}
 						},
 						{
@@ -265,7 +265,7 @@
 						},
 						{
 							"name": "applyToRoots",
-							"params": "f: (frameContext: SunEditor.FrameContext, rootKey: string | null, frameRoots: Map<string | null, SunEditor.FrameContext>) => void",
+							"params": "f: (\n\t\t\tframeContext: SunEditor.FrameContext,\n\t\t\trootKey: string | null,\n\t\t\tframeRoots: Map<string | null, SunEditor.FrameContext>,\n\t\t) => void",
 							"returns": "void",
 							"description": "ប្រតិបត្តិមុខងារដោយឆ្លងកាត់គោលដៅ root ទាំងអស់។",
 							"example": "",
@@ -280,16 +280,23 @@
 					"description": "វិធីសាស្ត្រ eventManager",
 					"methods": [
 						{
+							"name": "applyTagEffect",
+							"params": "selectionNode?: Node | null",
+							"returns": "Node | undefined",
+							"description": "ដំណើរការរបារឧបករណ៍/ម៉ឺនុយឡើងវិញ ឆ្លងស្ថានភាពសកម្មប្រឆាំងនឹងថ្នាំងជម្រើសដែលបានផ្តល់ឱ្យ (ឬជម្រើសបច្ចុប្បន្នប្រសិនបើ `null`) ។ ផ្លូវកាត់ស្តើងទៅ {",
+							"example": ""
+						},
+						{
 							"name": "addEvent",
 							"params": "target: any, type: string, listener: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "SunEditor.Event.Info | null",
-							"description": "ចុះឈ្មោះសម្រាប់ព្រឹត្តិការណ៍មួយ។ - មានតែព្រឹត្តិការណ៍ដែលបានចុះឈ្មោះជាមួយវិធីសាស្ត្រនេះទេដែលមិនត្រូវបានចុះឈ្មោះ ឬចុះឈ្មោះឡើងវិញ នៅពេលដែលវិធីសាស្ត្រដូចជា 'setOptions', 'destroy' ត្រូវបានហៅ។",
+							"description": "ចុះឈ្មោះសម្រាប់ព្រឹត្តិការណ៍មួយ។ - មានតែព្រឹត្តិការណ៍ដែលបានចុះឈ្មោះជាមួយវិធីសាស្ត្រនេះប៉ុណ្ណោះដែលមិនត្រូវបានចុះឈ្មោះ ឬចុះឈ្មោះឡើងវិញ នៅពេលដែលវិធីសាស្ត្រដូចជា 'setOptions', 'destroy' ត្រូវបានហៅ។",
 							"example": "",
 							"paramDescriptions": {
 								"target": "ធាតុគោលដៅ",
 								"type": "ប្រភេទព្រឹត្តិការណ៍",
 								"listener": "អ្នកដោះស្រាយព្រឹត្តិការណ៍",
-								"useCapture?": "ជម្រើសប្រើប្រាស់ព្រឹត្តិការណ៍ចាប់យក"
+								"useCapture?": "ជម្រើសចាប់យកព្រឹត្តិការណ៍"
 							},
 							"returnsDescription": "ព័ត៌មានព្រឹត្តិការណ៍ដែលបានចុះឈ្មោះ"
 						},
@@ -297,22 +304,22 @@
 							"name": "removeEvent",
 							"params": "params: SunEditor.Event.Info",
 							"returns": "undefined | null",
-							"description": "លុបព្រឹត្តិការណ៍ចេញ",
+							"description": "លុបព្រឹត្តិការណ៍",
 							"example": "",
 							"paramDescriptions": {
 								"params": "ព័ត៌មានព្រឹត្តិការណ៍ = this.addEvent()"
 							},
-							"returnsDescription": "ជោគជ័យ៖ `null`, រកមិនឃើញ៖ `undefined`"
+							"returnsDescription": "ជោគជ័យ៖ `null` រកមិនឃើញ៖ `undefined`"
 						},
 						{
 							"name": "addGlobalEvent",
 							"params": "type: string, listener: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "SunEditor.Event.GlobalInfo",
-							"description": "បន្ថែមព្រឹត្តិការណ៍ទៅក្នុងឯកសារ។ - នៅពេលបង្កើតជា Iframe ព្រឹត្តិការណ៍ដូចគ្នានឹងត្រូវបានបន្ថែមទៅក្នុងឯកសារនៅក្នុង Iframe។",
+							"description": "បន្ថែមព្រឹត្តិការណ៍ទៅឯកសារ។ - នៅពេលបង្កើតជា Iframe ព្រឹត្តិការណ៍ដូចគ្នាត្រូវបានបន្ថែមទៅឯកសារក្នុង Iframe ។",
 							"example": "",
 							"paramDescriptions": {
 								"type": "ប្រភេទព្រឹត្តិការណ៍",
-								"listener": "កម្មវិធីស្តាប់ព្រឹត្តិការណ៍",
+								"listener": "អ្នកស្តាប់ព្រឹត្តិការណ៍",
 								"useCapture?": "ប្រើការចាប់យកព្រឹត្តិការណ៍"
 							},
 							"returnsDescription": "ព័ត៌មានព្រឹត្តិការណ៍ដែលបានចុះឈ្មោះ"
@@ -321,14 +328,14 @@
 							"name": "removeGlobalEvent",
 							"params": "type: string | SunEditor.Event.GlobalInfo, listener?: any, useCapture?: boolean | AddEventListenerOptions",
 							"returns": "undefined | null",
-							"description": "លុបព្រឹត្តិការណ៍ចេញពីឯកសារ។ - នៅពេលបង្កើតជា Iframe ព្រឹត្តិការណ៍នៃឯកសារនៅខាងក្នុង Iframe ក៏ត្រូវបានលុបចេញផងដែរ។",
+							"description": "យកព្រឹត្តិការណ៍ចេញពីឯកសារ។ - នៅពេលបង្កើតជា Iframe ព្រឹត្តិការណ៍នៃឯកសារនៅខាងក្នុង Iframe ក៏ត្រូវបានដកចេញផងដែរ។",
 							"example": "",
 							"paramDescriptions": {
 								"type": "ប្រភេទព្រឹត្តិការណ៍ ឬ (ព័ត៌មានព្រឹត្តិការណ៍ = this.addGlobalEvent())",
-								"listener?": "កម្មវិធីស្តាប់ព្រឹត្តិការណ៍",
+								"listener?": "អ្នកស្តាប់ព្រឹត្តិការណ៍",
 								"useCapture?": "ប្រើការចាប់យកព្រឹត្តិការណ៍"
 							},
-							"returnsDescription": "ជោគជ័យ៖ `null`, រកមិនឃើញ៖ `undefined`"
+							"returnsDescription": "ជោគជ័យ៖ `null` រកមិនឃើញ៖ `undefined`"
 						}
 					]
 				},
@@ -525,7 +532,7 @@
 						},
 						{
 							"name": "getLine",
-							"params": "node: Node, validation?: ((current: Node) => boolean) | null",
+							"params": "node: Node, validation?: ((current: any) => boolean) | null",
 							"returns": "HTMLElement | null",
 							"description": "ប្រសិនបើ​ណូត​មេ​ដែល​មាន​ណូត​អាគុយម៉ង់​រក​ឃើញ​ណូត​ទ្រង់ទ្រាយ (`format.isLine`) វា​នឹង​ប្រគល់​ណូត​នោះ។",
 							"example": "const line = editor.$.format.getLine(editor.$.selection.getNode());\nconst lineWithFilter = editor.$.format.getLine(node, (el) => el.nodeName !== 'LI');",
@@ -546,7 +553,7 @@
 						},
 						{
 							"name": "getBrLine",
-							"params": "element: Node, validation?: ((current: Node) => boolean) | null",
+							"params": "element: Node, validation?: ((current: any) => boolean) | null",
 							"returns": "HTMLBRElement | null",
 							"description": "ប្រសិនបើ​ណូត​មេ​ដែល​មាន​ណូត​អាគុយម៉ង់​មួយ​រក​ឃើញ `brLine` (`format.isBrLine`) វា​នឹង​ប្រគល់​ណូត​នោះ​វិញ។",
 							"example": "const brLine = editor.$.format.getBrLine(editor.$.selection.getNode());",
@@ -559,74 +566,86 @@
 							"name": "addLine",
 							"params": "element: Node, lineNode?: (string | Node) | null",
 							"returns": "HTMLElement",
-							"description": "បន្ថែមធាតុ `line` ទៅណូតបងប្អូននៃធាតុអាគុយម៉ង់។ - ប្រសិនបើតម្លៃអាគុយម៉ង់ `lineNode` ​​មានវត្តមាន ស្លាកនៃតម្លៃអាគុយម៉ង់នោះនឹងត្រូវបានបញ្ចូល - ប្រសិនបើមិនមានទេ ស្លាកទ្រង់ទ្រាយដែលបានជ្រើសរើសបច្ចុប្បន្ននឹងត្រូវបានបញ្ចូល។",
+							"description": "បញ្ចូលបន្ទាត់ថ្មីជាបងប្អូនបង្កើតបន្ទាប់របស់ `element`។ - Selection-aware — ស្លាក/គុណលក្ខណៈលំនាំដើមចំពោះបន្ទាត់ **ដែលបានជ្រើសរើសបច្ចុប្បន្ន** មិនមែន - ស្លាករបស់ `element`។ ប្រើ {",
 							"example": "",
 							"paramDescriptions": {
-								"element": "បញ្ចូលជាបងប្អូនបង្កើតនៃធាតុនោះ",
-								"lineNode?": "ឈ្មោះណូត ឬវត្ថុណូតដែលត្រូវបញ្ចូល"
-							}
+								"element": "ធាតុយោង — បន្ទាត់ថ្មីត្រូវបានបញ្ចូលភ្លាមៗបន្ទាប់ពីវា។",
+								"lineNode?": "បដិសេធ៖ ឈ្មោះស្លាកខ្សែអក្សរ ឬ Node ដែលស្លាក"
+							},
+							"returnsDescription": "បន្ទាត់ថ្មី ឬ `<br>` នៅក្នុងបរិបទ brLine"
+						},
+						{
+							"name": "addLineAfter",
+							"params": "element: HTMLElement",
+							"returns": "HTMLElement | null",
+							"description": "បញ្ចូលបន្ទាត់ថ្មីបន្ទាប់ពីធាតុប្លុកដែលបានផ្តល់ឱ្យ។ ការជ្រើសរើស-ឯករាជ្យ — កំណត់ស្លាក/គុណលក្ខណៈពីធាតុខ្លួនឯង។ - ចំណងជើង (H1-H6), HR → បន្ទាត់លំនាំដើមថ្មី - LI → LI ថ្មីជាមួយនឹងគុណលក្ខណៈដែលបានចម្លង - PRE / brLine → បន្ទាត់លំនាំដើមថ្មី (ចេញ brLine) - បន្ទាត់ធម្មតា → ស្លាកដូចគ្នាជាមួយនឹងគុណលក្ខណៈដែលបានចម្លង",
+							"example": "",
+							"paramDescriptions": {
+								"element": "ធាតុប្លុកដែលត្រូវបញ្ចូលបន្ទាប់ពី"
+							},
+							"returnsDescription": "ធាតុដែលបានបង្កើតថ្មី។"
 						},
 						{
 							"name": "getBlock",
-							"params": "element: Node, validation?: ((current: Node) => boolean) | null",
+							"params": "element: Node, validation?: ((current: any) => boolean) | null",
 							"returns": "HTMLElement | null",
-							"description": "ប្រសិនបើ​ណូត​មេ​ដែល​មាន​ណូត​អាគុយម៉ង់​រក​ឃើញ​ណូត​ទ្រង់ទ្រាយ (`format.isBlock`) វា​នឹង​ប្រគល់​ណូត​នោះ។",
+							"description": "ប្រសិនបើថ្នាំងមេដែលមានថ្នាំងអាគុយម៉ង់រកឃើញថ្នាំងទ្រង់ទ្រាយ (`format.isBlock`) វាត្រឡប់ថ្នាំងនោះ។",
 							"example": "const block = editor.$.format.getBlock(editor.$.selection.getNode());",
 							"paramDescriptions": {
-								"element": "ណូតយោង។",
-								"validation?": "មុខងារផ្ទៀងផ្ទាត់បន្ថែម។"
+								"element": "ថ្នាំងយោង។",
+								"validation?": "មុខងារបញ្ជាក់បន្ថែម។"
 							}
 						},
 						{
 							"name": "applyBlock",
 							"params": "blockElement: Node",
 							"returns": "void",
-							"description": "បានបន្ថែមធាតុ `line` ដែលបានជ្រើសរើសទាំងអស់ទៅធាតុអាគុយម៉ង់ (`block`) ហើយបញ្ចូល",
+							"description": "បន្ថែមធាតុ `line` ដែលបានជ្រើសរើសទាំងអស់ទៅធាតុអាគុយម៉ង់ (`block`) ហើយបញ្ចូល",
 							"example": "// Wrap selected lines in a blockquote\nconst blockquote = document.createElement('blockquote');\neditor.format.applyBlock(blockquote);",
 							"paramDescriptions": {
-								"blockElement": "ធាតុ​នៃ​រុំ​អាគុយម៉ង់ (សម្រង់​អក្សរ​ធំ...)"
+								"blockElement": "ធាតុ​នៃ​ការ​រុំ​អាគុយម៉ង់ (BLOCKQUOTE...)"
 							}
 						},
 						{
 							"name": "removeBlock",
 							"params": "blockElement: Node, {\n\t\t\tselectedFormats,\n\t\t\tnewBlockElement,\n\t\t\tshouldDelete,\n\t\t\tskipHistory,\n\t\t}?: {\n\t\t\tselectedFormats?: Array<Node>;\n\t\t\tnewBlockElement?: Node;\n\t\t\tshouldDelete?: boolean;\n\t\t\tskipHistory?: boolean;\n\t\t}",
 							"returns": "{\n\t\tcc: Node;\n\t\tsc: Node;\n\t\tso: number;\n\t\tec: Node;\n\t\teo: number;\n\t\tremoveArray: Array<Node> | null;\n\t}",
-							"description": "ធាតុនៃអារេ `selectedFormats` ត្រូវបានផ្ដាច់ចេញពីធាតុ `blockElement`។ (ស្លាក `LI` ត្រូវបានបំប្លែងទៅជាស្លាក `P`) - នៅពេលដែល `selectedFormats` គឺ `null` ធាតុទាំងអស់ត្រូវបានផ្ដាច់ ហើយត្រឡប់ {cc: parentNode, sc: nextSibling, ec: previousSibling, removeArray: [អារេនៃធាតុដែលបានដកចេញ]}។",
+							"description": "ធាតុនៃអារេ `selectedFormats` ត្រូវបានផ្ដាច់ចេញពីធាតុ `blockElement` ​​។ (`LI` ស្លាកត្រូវបានបំប្លែងទៅជា `P` tags) - នៅពេលដែល `selectedFormats` គឺ `null` ធាតុទាំងអស់ត្រូវបានផ្ដាច់ ហើយត្រឡប់ {cc: parentNode, sc: nextSibling, ec: PreviousSibling, removeArray: [Array of deleted element]}។",
 							"example": "// Remove all list items from a list\nconst listElement = editor.selection.getNode().closest('ul');\neditor.format.removeBlock(listElement);\n// Remove specific list items only\nconst selectedItems = [liElement1, liElement2];\neditor.format.removeBlock(listElement, { selectedFormats: selectedItems });\n// Replace blockquote with div\nconst blockquote = editor.selection.getNode().closest('blockquote');\nconst newDiv = document.createElement('div');\neditor.format.removeBlock(blockquote, { newBlockElement: newDiv });",
 							"paramDescriptions": {
 								"blockElement": "ធាតុ `block` (PRE, BLOCKQUOTE, OL, UL...)",
 								"options?": "ជម្រើស",
-								"options.selectedFormats?=null": "អារេនៃធាតុ `line` (P, DIV, LI...) ដើម្បីដកចេញ។",
-								"options.newBlockElement?=null": "node(`blockElement`) ដើម្បីជំនួស node ដែលរុំរួច។",
-								"options.shouldDelete?=false": "ប្រសិនបើ `true` ត្រូវបានលុបដោយមិនចាំបាច់ផ្ដាច់។",
-								"options.skipHistory?=false": "នៅពេល `true` វាមិនធ្វើបច្ចុប្បន្នភាពជង់ប្រវត្តិ និងវត្ថុជ្រើសរើសទេ ហើយត្រឡប់ `EdgeNodes` ​​(dom-query-GetEdgeChildNodes)។"
+								"options.selectedFormats?=null": "អារេនៃធាតុ `line` (P, DIV, LI...) ដើម្បីលុបចេញ។",
+								"options.newBlockElement?=null": "ថ្នាំង (`blockElement`) ដើម្បីជំនួសថ្នាំងដែលរុំបច្ចុប្បន្ន។",
+								"options.shouldDelete?=false": "ប្រសិនបើ `true` លុបដោយមិនបានផ្ដាច់។",
+								"options.skipHistory?=false": "នៅពេល `true` វាមិនធ្វើបច្ចុប្បន្នភាពជង់ប្រវត្តិ និងវត្ថុជ្រើសរើស ហើយត្រឡប់ `EdgeNodes` ​​(dom-query-GetEdgeChildNodes)"
 							},
-							"returnsDescription": "ព័ត៌មានណូតបន្ទាប់ពីការលុប\n- cc: ណូតកុងតឺន័រមេទូទៅ\n- sc: ចាប់ផ្តើមណូតកុងតឺន័រ\n- so: ចាប់ផ្តើមអុហ្វសិត\n- ec: បញ្ចប់ណូតកុងតឺន័រ\n- eo: បញ្ចប់អុហ្វសិត\n- removeArray: អារេនៃធាតុដែលបានដកចេញ"
+							"returnsDescription": "ព័ត៌មានអំពីថ្នាំងបន្ទាប់ពីការលុប \n- cc ៖ ថ្នាំងកុងតឺន័រមេទូទៅ \n- sc: ចាប់ផ្តើមថ្នាំងកុងតឺន័រ \n- ដូច្នេះ៖ ចាប់ផ្តើមអុហ្វសិត \n- អេក៖ ថ្នាំងកុងតឺន័របញ្ចប់ \n- អ៊ី : បញ្ចប់អុហ្វសិត \n- removeArray: អារេនៃធាតុដែលបានដកចេញ"
 						},
 						{
 							"name": "indent",
 							"params": "",
 							"returns": "void",
-							"description": "ចូល​បន្ទាត់​ដែល​បាន​ជ្រើសរើស​បន្ថែម។ - ទំហំ​រឹម៖ `store.get('indentSize')`",
+							"description": "ចូលបន្ទាត់បន្ថែមទៀតលើបន្ទាត់ដែលបានជ្រើសរើស។ - ទំហំរឹម៖ `store.get('indentSize')`",
 							"example": ""
 						},
 						{
 							"name": "outdent",
 							"params": "",
 							"returns": "void",
-							"description": "ចូល​បន្ទាត់​ដែល​បាន​ជ្រើសរើស​ឲ្យ​តិច​ជាង​នេះ។ - ទំហំ​រឹម - `store.get('indentSize')`",
+							"description": "ចូលបន្ទាត់តិចជាងបន្ទាត់ដែលបានជ្រើសរើស។ - ទំហំរឹម - `store.get('indentSize')`",
 							"example": ""
 						},
 						{
 							"name": "isEdgeLine",
 							"params": "node: Node, offset: number, dir: 'front' | 'end'",
 							"returns": "node is HTMLElement",
-							"description": "ពិនិត្យមើលថាតើតម្លៃកុងតឺន័រ និងអុហ្វសិតជាគែមរបស់ `line` ដែរឬទេ",
+							"description": "ពិនិត្យមើលថាតើតម្លៃកុងតឺន័រ និងអុហ្វសិតគឺជាគែមនៃ `line`",
 							"example": "",
 							"paramDescriptions": {
-								"node": "ណូត​នៃ​វត្ថុ​ជ្រើសរើស។ (range.startContainer..)",
-								"offset": "អុហ្វសិត​នៃ​វត្ថុ​ជ្រើសរើស។ (selection.getRange().startOffset...)",
-								"dir": "ជ្រើសរើសចំណុចត្រួតពិនិត្យ - `front`: គែមខាងមុខ, `end`: គែមចុង, `undefined`: គែមទាំងពីរ។"
+								"node": "ថ្នាំងនៃវត្ថុជ្រើសរើស។ (range.startContainer..)",
+								"offset": "អុហ្វសិតនៃវត្ថុជ្រើសរើស។ (selection.getRange().startOffset...)",
+								"dir": "ជ្រើសរើសចំណុចពិនិត្យ - `front`: គែមខាងមុខ, `end`: គែមចុង, `undefined`: គែមទាំងពីរ។"
 							}
 						},
 						{
@@ -653,7 +672,7 @@
 							"name": "isNormalLine",
 							"params": "element: Node | string",
 							"returns": "element is HTMLElement",
-							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `line` តែមួយគត់ឬអត់។",
+							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `line` តែមួយគត់។",
 							"example": "",
 							"paramDescriptions": {
 								"element": "ណូដដែលត្រូវពិនិត្យ"
@@ -663,7 +682,7 @@
 							"name": "isBrLine",
 							"params": "element: Node | string",
 							"returns": "element is HTMLElement",
-							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `brLine` ដែរឬទេ។ - (PRE | class=`__se__format__br_line_xxx`) - ធាតុ `brLine` ត្រូវបានរួមបញ្ចូលនៅក្នុងធាតុ `line`។ - ការបំបែកបន្ទាត់របស់ធាតុ `brLine` គឺ `BR` ស្លាក។ ※ ការបញ្ចូលគ្រាប់ចុច Enter ក្នុងចន្លោះនៅលើបន្ទាត់ចុងក្រោយបញ្ចប់ `brLine` ហើយបន្ថែម `line`។",
+							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `brLine` ដែរឬទេ។ - (PRE | class=`__se__format__br_line_xxx`) - ធាតុ `brLine` ត្រូវបានរួមបញ្ចូលក្នុងធាតុ `line`។ - ការបំបែកបន្ទាត់របស់ធាតុ `brLine` គឺស្លាក `BR` ។ ※ការបញ្ចូលគ្រាប់ចុចបញ្ចូលក្នុងចន្លោះនៅលើបន្ទាត់ចុងក្រោយបញ្ចប់ `brLine` ហើយបន្ថែម `line` ។",
 							"example": "editor.$.format.isBrLine(document.createElement('pre')); // true",
 							"paramDescriptions": {
 								"element": "ណូដដែលត្រូវពិនិត្យ"
@@ -673,7 +692,7 @@
 							"name": "isBlock",
 							"params": "element: Node | string",
 							"returns": "element is HTMLElement",
-							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `block` ដែរឬទេ។ - (BLOCKQUOTE, OL, UL, FIGCAPTION, TABLE, THEAD, TBODY, TR, TH, TD | class=`__se__format__block_xxx`) - `block` ត្រូវបានរុំដោយ `line` និង `component`។",
+							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `block` ដែរឬទេ។ - (BLOCKQUOTE, OL, UL, FIGCAPTION, TABLE, THEAD, TBODY, TR, TH, TD | class=`__se__format__block_xxx`) - `block` ត្រូវបានរុំ `line` និង `component`",
 							"example": "editor.$.format.isBlock(document.createElement('blockquote')); // true\neditor.$.format.isBlock(document.createElement('ul')); // true",
 							"paramDescriptions": {
 								"element": "ណូដដែលត្រូវពិនិត្យ"
@@ -683,7 +702,7 @@
 							"name": "isClosureBlock",
 							"params": "element: Node | string",
 							"returns": "element is HTMLElement",
-							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `closureBlock` ដែរឬទេ។ - (TH, TD | class=`__se__format__block_closure_xxx`) - ធាតុ `closureBlock` ត្រូវបានរួមបញ្ចូលនៅក្នុង `block`។ - ធាតុ `closureBlock` ត្រូវបានរុំ `line` និង `component` - ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុច Enter ឬគ្រាប់ចុច Backspace បានទេ។ - ※ ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ ([ឧទាហរណ៍] ទម្រង់នៃក្រឡាតារាង)",
+							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `closureBlock` ដែរឬទេ។ - (TH, TD | class=`__se__format__block_closure_xxx`) - ធាតុ `closureBlock` ត្រូវបានរួមបញ្ចូលក្នុង `block`។ - ធាតុ `closureBlock` ត្រូវបានរុំ `line` និង `component` - ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុចបញ្ចូល ឬគ្រាប់ចុច Backspace បានទេ។ - ※ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ ([ឧ.] ទម្រង់​ក្រឡាតារាង)",
 							"example": "",
 							"paramDescriptions": {
 								"element": "ណូដដែលត្រូវពិនិត្យ"
@@ -693,30 +712,30 @@
 							"name": "isClosureBrLine",
 							"params": "element: Node | string",
 							"returns": "element is HTMLElement",
-							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `closureBrLine` ដែរឬទេ។ - (class=`__se__format__br_line__closure_xxx`) - ធាតុ `closureBrLine` ត្រូវបានរួមបញ្ចូលនៅក្នុង `brLine`។ - ការចុះបន្ទាត់របស់ធាតុ `closureBrLine` គឺ `BR` ស្លាក។ - ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុច Enter ឬគ្រាប់ចុច Backspace បានទេ។ - ※ ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ ([ឧទាហរណ៍] ទម្រង់នៃក្រឡាតារាង)",
+							"description": "វាត្រូវបានវិនិច្ឆ័យថាតើវាជាធាតុ `closureBrLine` ដែរឬទេ។ - (ថ្នាក់=`__se__format__br_line__closure_xxx`) - ធាតុ `closureBrLine` ត្រូវបានរួមបញ្ចូលក្នុង `brLine` ។ - ការបំបែកបន្ទាត់របស់ធាតុ `closureBrLine` គឺស្លាក `BR` ។ - ※ អ្នកមិនអាចចេញពីទម្រង់នេះដោយប្រើគ្រាប់ចុច Enter ឬ Backspace បានទេ។ - ※ប្រើវាតែក្នុងករណីពិសេសប៉ុណ្ណោះ។ ([ឧ.] ទម្រង់​ក្រឡាតារាង)",
 							"example": "",
 							"paramDescriptions": {
-								"element": "ណូដដែលត្រូវពិនិត្យ"
+								"element": "ថ្នាំងដែលត្រូវពិនិត្យ"
 							}
 						},
 						{
 							"name": "getLines",
-							"params": "validation?: ((current: Node) => boolean) | null",
+							"params": "validation?: ((current: any) => boolean) | null",
 							"returns": "Array<HTMLElement>",
-							"description": "ត្រឡប់​អារេ `line` ពី​ជួរ​ដែល​បាន​ជ្រើសរើស។",
+							"description": "ត្រឡប់អារេ `line` ពីជួរដែលបានជ្រើសរើស។",
 							"example": "const selectedLines = editor.$.format.getLines();",
 							"paramDescriptions": {
-								"validation?": "អនុគមន៍​ផ្ទៀងផ្ទាត់។ (ជំនួស​ការផ្ទៀងផ្ទាត់​លំនាំដើម `format.isLine(current)`)"
+								"validation?": "មុខងារផ្ទៀងផ្ទាត់។ (ជំនួសសុពលភាពលំនាំដើម `format.isLine(current)`)"
 							}
 						},
 						{
 							"name": "getLinesAndComponents",
 							"params": "removeDuplicate: boolean",
 							"returns": "Array<HTMLElement>",
-							"description": "ទទួលបានបន្ទាត់ និងសមាសភាគពីជួរដែលបានជ្រើសរើស។ (P, DIV, H[1-6], OL, UL, TABLE..) - ប្រសិនបើសមាសភាគមួយចំនួនត្រូវបានរួមបញ្ចូលនៅក្នុងការជ្រើសរើស សូមទទួលបានសមាសភាគទាំងមូលនោះ។",
+							"description": "ទទួលបានបន្ទាត់ និងសមាសធាតុពីជួរដែលបានជ្រើសរើស។ (P, DIV, H[1-6], OL, UL, TABLE..) - ប្រសិនបើសមាសធាតុមួយចំនួនត្រូវបានរួមបញ្ចូលក្នុងការជ្រើសរើស យកសមាសធាតុនោះទាំងមូល។",
 							"example": "",
 							"paramDescriptions": {
-								"removeDuplicate": "ប្រសិនបើ `true` ប្រសិនបើមានស្លាកមេ និងស្លាកកូនក្នុងចំណោមធាតុដែលបានជ្រើសរើស ស្លាកកូននឹងត្រូវបានដកចេញ។"
+								"removeDuplicate": "ប្រសិនបើ `true` ប្រសិនបើមានស្លាកមេ និងកូនក្នុងចំណោមធាតុដែលបានជ្រើសរើសនោះ ស្លាកកូននឹងត្រូវបានដកចេញ។"
 							}
 						}
 					]
@@ -727,7 +746,7 @@
 					"methods": [
 						{
 							"name": "filter",
-							"params": "html: string, {\n\t\t\ttagWhitelist,\n\t\t\ttagBlacklist,\n\t\t\tvalidate,\n\t\t\tvalidateAll,\n\t\t}: {\n\t\t\ttagWhitelist?: string;\n\t\t\ttagBlacklist?: string;\n\t\t\tvalidate?: (node: Node) => Node | string | null;\n\t\t\tvalidateAll?: boolean;\n\t\t}",
+							"params": "html: string, {\n\t\t\ttagWhitelist,\n\t\t\ttagBlacklist,\n\t\t\tvalidate,\n\t\t\tvalidateAll,\n\t\t}: {\n\t\t\ttagWhitelist?: string;\n\t\t\ttagBlacklist?: string;\n\t\t\tvalidate?: (node: any) => Node | string | null;\n\t\t\tvalidateAll?: boolean;\n\t\t}",
 							"returns": "string",
 							"description": "ត្រង​ខ្សែអក្សរ HTML ដោយផ្អែកលើស្លាកដែលត្រូវបានអនុញ្ញាត និងមិនអនុញ្ញាត ជាមួយនឹងការផ្ទៀងផ្ទាត់ផ្ទាល់ខ្លួនជាជម្រើស។ - លុបស្លាកដែលដាក់ក្នុងបញ្ជីខ្មៅ ហើយរក្សាទុកតែស្លាកដែលបានដាក់ក្នុងបញ្ជីសប៉ុណ្ណោះ។ - អនុញ្ញាតឱ្យមុខងារផ្ទៀងផ្ទាត់ផ្ទាល់ខ្លួនជំនួស កែប្រែ ឬលុបធាតុចេញ។",
 							"example": "// Remove script and iframe tags using blacklist\nconst filtered = editor.html.filter('<div>Content<script>alert(\"xss\")</script></div>', {\ntagBlacklist: 'script|iframe'\n});\n// Keep only specific tags using whitelist\nconst filtered = editor.html.filter('<div><span>Text</span><img src=\"x\"></div>', {\ntagWhitelist: 'div|span'\n});\n// Custom validation to modify nodes\nconst filtered = editor.html.filter('<div class=\"test\"><a href=\"#\">Link</a></div>', {\nvalidate: (node) => {\nif (node.tagName === 'A') {\nnode.setAttribute('target', '_blank');\nreturn node;\n}\n}\n});",
@@ -795,7 +814,7 @@
 						},
 						{
 							"name": "get",
-							"params": "{ withFrame, includeFullPage, rootKey }?: { withFrame?: boolean; includeFullPage?: boolean; rootKey?: number | Array<number> }",
+							"params": "{\n\t\twithFrame,\n\t\tincludeFullPage,\n\t\trootKey,\n\t}?: {\n\t\twithFrame?: boolean;\n\t\tincludeFullPage?: boolean;\n\t\trootKey?: number | Array<number>;\n\t}",
 							"returns": "string | any",
 							"description": "ទទួលបានខ្លឹមសារបច្ចុប្បន្ន",
 							"example": "const html = editor.$.html.get();\nconst htmlWithFrame = editor.$.html.get({ withFrame: true });",
@@ -1004,7 +1023,7 @@
 						},
 						{
 							"name": "mergeNestedTags",
-							"params": "element: Node, validation?: (((current: Node) => boolean) | string) | null",
+							"params": "element: Node, validation?: (((current: any) => boolean) | string) | null",
 							"returns": "void",
 							"description": "លុបស្លាកដែលដាក់ចូលគ្នាដោយគ្មានណូតកូនផ្សេងទៀត។",
 							"example": "editor.$.nodeTransform.mergeNestedTags(parentElement, (current) => current.nodeName === 'SPAN');",
@@ -1015,7 +1034,7 @@
 						},
 						{
 							"name": "removeAllParents",
-							"params": "item: Node, validation?: ((current: Node) => boolean) | null, stopParent?: Node | null",
+							"params": "item: Node, validation?: ((current: any) => boolean) | null, stopParent?: Node | null",
 							"returns": "{\n\t\tsc: Node | null;\n\t\tec: Node | null;\n\t} | null",
 							"description": "លុប​ខ្លួន​វា​ចេញ និង​ណូត​មេ​ទាំងអស់​ដែល​ត្រូវ​នឹង​លក្ខខណ្ឌ។ - ត្រឡប់ {sc: previousSibling, ec: nextSibling}(ឯកសារយោង​ណូត​ដែល​បាន​លុប) ឬ `null`។",
 							"example": "// Remove empty parent elements recursively\nconst emptySpan = document.querySelector('span:empty');\nconst result = editor.nodeTransform.removeAllParents(emptySpan, null, null);\n// Remove with custom validation\neditor.nodeTransform.removeAllParents(node, (current) => {\nreturn current.textContent.trim().length === 0;\n}, null);\n// Remove up to specific parent\nconst stopAt = editor.selection.getNode().closest('.container');\neditor.nodeTransform.removeAllParents(childNode, null, stopAt);",
@@ -1040,7 +1059,7 @@
 						},
 						{
 							"name": "createNestedNode",
-							"params": "nodeArray: SunEditor.NodeCollection, validate?: ((current: Node) => boolean) | null",
+							"params": "nodeArray: SunEditor.NodeCollection, validate?: ((current: any) => boolean) | null",
 							"returns": "{\n\t\tparent: Node;\n\t\tinner: Node;\n\t}",
 							"description": "បង្កើតរចនាសម្ព័ន្ធណូតដែលដាក់ជាស្រទាប់ៗពីអារេណូតដែលបានផ្តល់ឱ្យ។",
 							"example": "// [div, span, em] → <div><span><em></em></span></div> (cloned)\nconst { parent, inner } = editor.$.nodeTransform.createNestedNode([div, span, em]);\n// parent = div (top), inner = em (innermost)\n// validate: skip nodes that fail the condition\nconst { parent, inner } = editor.$.nodeTransform.createNestedNode(\n[div, span, em],\n(node) => node.nodeName !== 'SPAN'\n);\n// Result: <div><em></em></div> (SPAN excluded)",
@@ -1286,6 +1305,74 @@
 						}
 					]
 				},
+				"blockHandle": {
+					"title": "editor.blockHandle",
+					"description": "វិធីសាស្រ្តទប់ស្កាត់",
+					"methods": [
+						{
+							"name": "positionForTarget",
+							"params": "eventTarget: Node, mouseY?: number",
+							"returns": "void",
+							"description": "ដាក់ចំណុចទាញប្លុកសម្រាប់គោលដៅកណ្តុរដែលបានផ្តល់ឱ្យ។ ប្រើ rAF បិទបើក។ ហៅ​មក​ពី wysiwyg mousemove។",
+							"example": "",
+							"paramDescriptions": {
+								"eventTarget": "ធាតុនៅក្រោមទស្សន៍ទ្រនិចកណ្ដុរ",
+								"mouseY?": "Mouse clientY សម្រាប់ដំណោះស្រាយបញ្ជីដែលជាប់"
+							}
+						},
+						{
+							"name": "hide",
+							"params": "e: MouseEvent",
+							"returns": "void",
+							"description": "កំណត់ពេលលាក់ចំណុចទាញប្លុកជាមួយនឹងការពន្យាពេលខ្លី។",
+							"example": "",
+							"paramDescriptions": {
+								"e": "ព្រឹត្តិការណ៍កណ្តុរ"
+							}
+						},
+						{
+							"name": "hideNow",
+							"params": "",
+							"returns": "void",
+							"description": "លាក់ចំណុចទាញប្លុកភ្លាមៗ (មិនពន្យារពេល) ។",
+							"example": ""
+						},
+						{
+							"name": "syncScroll",
+							"params": "",
+							"returns": "void",
+							"description": "ទីតាំងចំណុចទាញធ្វើសមកាលកម្មនៅលើរមូរកម្មវិធីនិពន្ធ។ បិទម៉ឺនុយប្រសិនបើបើក។",
+							"example": ""
+						},
+						{
+							"name": "destroy",
+							"params": "",
+							"returns": "void",
+							"description": "សម្អាត - លុបអ្នកស្តាប់ បំផ្លាញម៉ឺនុយ ឯកសារយោងទុកជាមោឃៈ។",
+							"example": ""
+						}
+					]
+				},
+				"blockResolver": {
+					"title": "editor.blockResolver",
+					"description": "វិធីសាស្រ្ត blockResolver",
+					"methods": [
+						{
+							"name": "resolveBlock",
+							"params": "node: Node | null, format: FormatAPI, wysiwygFrame: HTMLElement, mouseY?: number",
+							"returns": "BlockInfo | null",
+							"description": "ដោះស្រាយថ្នាំង DOM ណាមួយនៅខាងក្នុងកម្មវិធីនិពន្ធទៅជាធាតុកម្រិតប្លុកផ្ទាល់ខ្លួនរបស់វា។",
+							"example": "",
+							"paramDescriptions": {
+								"node": "ថ្នាំង DOM ណាមួយនៅខាងក្នុងកម្មវិធីនិពន្ធ",
+								"format": "វិធីសាស្ត្រទម្រង់ចាក់ (getLine, getBlock, isLine, isBlock)",
+								"wysiwygFrame": "ធាតុឫស wysiwyg",
+								"mouseY?": "Mouse clientY សម្រាប់ដំណោះស្រាយបញ្ជីដែលជាប់"
+							},
+							"returnsDescription": "ទប់ស្កាត់ព័ត៌មាន ឬទុកជាមោឃៈ ប្រសិនបើថ្នាំងស្ថិតនៅខាងក្រៅតំបន់ដែលអាចកែសម្រួលបាន។"
+						}
+					]
+				},
 				"finder": {
 					"title": "editor.finder",
 					"description": "វិធីសាស្ត្រស្វែងរក",
@@ -1395,14 +1482,18 @@
 					"methods": [
 						{
 							"name": "initDropdownTarget",
-							"params": "{\n\t\t\tkey,\n\t\t\ttype,\n\t\t}: {\n\t\t\tkey: string;\n\t\t\ttype: string;\n\t\t}, menu: Node",
-							"returns": "void",
+							"params": "{\n\t\t\tkey,\n\t\t\ttype,\n\t\t}: {\n\t\t\tkey: string;\n\t\t\ttype: string;\n\t\t}, menuOrItems: Node | Array<DropdownItem>, options?: {\n\t\t\tclassName?: string;\n\t\t\tprependHTML?: string;\n\t\t}",
+							"returns": "HTMLElement",
 							"description": "វិធីសាស្ត្រ​សម្រាប់​គ្រប់គ្រង​ធាតុ​ទម្លាក់ចុះ។ - អ្នក​ត្រូវតែ​បន្ថែម​ធាតុ `dropdown` ដោយ​ប្រើ​វិធីសាស្ត្រ​នេះ​នៅ​កម្មវិធី​ជំនួយ​ផ្ទាល់ខ្លួន។",
 							"example": "",
 							"paramDescriptions": {
 								"classObj": "វត្ថុថ្នាក់",
-								"menu": "ធាតុ​ទម្លាក់ចុះ"
-							}
+								"menuOrItems": "ធាតុទម្លាក់ចុះ ឬអារេនៃធាតុស្តង់ដារ",
+								"options?": "ជម្រើសនៅពេលឆ្លងកាត់អារេធាតុ",
+								"options.className?": "ថ្នាក់ CSS បន្ថែមសម្រាប់ធាតុរុំ",
+								"options.prependHTML?": "HTML ដើម្បី​ដាក់​ខាង​មុខ​ក្នុង `<ul>` (ឧ. លំនាំដើម/បញ្ជី​រង)"
+							},
+							"returnsDescription": "ធាតុម៉ឺនុយដែលបានចុះឈ្មោះ"
 						},
 						{
 							"name": "dropdownOn",
@@ -1643,6 +1734,17 @@
 							"paramDescriptions": {
 								"cmd": "ឧបករណ៍កំណត់អត្តសញ្ញាណពាក្យបញ្ជា។",
 								"target": "ប៊ូតុងបញ្ជាដែលពាក់ព័ន្ធ។"
+							}
+						},
+						{
+							"name": "unregisterTargets",
+							"params": "cmd: string, target: HTMLElement",
+							"returns": "void",
+							"description": "បញ្ច្រាសនៃ {@link registerTargets}។ ដកគោលដៅដែលបានចុះឈ្មោះពីមុនចេញ ដូច្នេះអ្នកចូលរួមដែលមិនមានភាពស្មុគស្មាញ (ឧ. CommandMenu rows) អាចដកខ្លួនចេញពីការបិទបិទដំណើរការ។ ទម្លាក់ធាតុពាក្យបញ្ជា នៅពេលដែលអារេគោលដៅរបស់វាទទេ។",
+							"example": "",
+							"paramDescriptions": {
+								"cmd": "ការកំណត់អត្តសញ្ញាណពាក្យបញ្ជា។",
+								"target": "គោលដៅដែលបានចុះបញ្ជីពីមុន។"
 							}
 						},
 						{
@@ -2294,20 +2396,25 @@
 							"memberKind": "getter"
 						},
 						{
+							"name": "blockHandle",
+							"params": "",
+							"returns": "BlockHandle",
+							"description": "ទប់ស្កាត់ចំណុចទាញឧទាហរណ៍សម្រាប់ការចូលប្រើខាងក្រៅ។",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "reset",
-							"params": "rt: SunEditor.FrameContext",
+							"params": "rt: any",
 							"returns": "void",
 							"description": "",
-							"example": "",
-							"paramDescriptions": {
-								"rt": "គោលដៅ​ជា​ root[គន្លឹះ] FrameContext"
-							}
+							"example": ""
 						},
 						{
 							"name": "isButtonDisabled",
 							"params": "button: Node",
 							"returns": "boolean",
-							"description": "ពិនិត្យមើលថាតើប៊ូតុងអាចត្រូវបានប្រតិបត្តិក្នុងស្ថានភាពបច្ចុប្បន្ន (អានបានតែ។ល។) ដែរឬទេ។",
+							"description": "ពិនិត្យមើលថាតើប៊ូតុងអាចត្រូវបានប្រតិបត្តិក្នុងស្ថានភាពបច្ចុប្បន្ន (ReadOnly ។ល។)",
 							"example": ""
 						},
 						{
@@ -2783,16 +2890,22 @@
 							"description": "- ធាតុ​កន្លែង​ដាក់​បង្ហាញ​នៅ​ពេល​ដែល​កម្មវិធី​និពន្ធ​ទទេ។"
 						},
 						{
+							"name": "placeholder_line",
+							"params": "",
+							"returns": "string",
+							"description": "- អត្ថបទកន្លែងដាក់ក្នុងមួយជួរ បង្ហាញតាមរយៈ `::before` នៅលើបន្ទាត់ទទេដែលផ្តោត។"
+						},
+						{
 							"name": "statusbar",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុរបារស្ថានភាពកម្មវិធីនិពន្ធ (សម្រាប់ការផ្លាស់ប្តូរទំហំ ព័ត៌មាន។ល។)"
+							"description": "- ធាតុរបារស្ថានភាពកម្មវិធីនិពន្ធ (សម្រាប់ផ្លាស់ប្តូរទំហំ ព័ត៌មាន។ល។)"
 						},
 						{
 							"name": "navigation",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុរុករក (ឧទាហរណ៍ សម្រាប់គ្រោង ឬចំណាំ)។"
+							"description": "- ធាតុរុករក (ឧ. សម្រាប់គ្រោង ឬចំណាំ)។"
 						},
 						{
 							"name": "charWrapper",
@@ -2804,7 +2917,7 @@
 							"name": "charCounter",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុដែលបង្ហាញចំនួនតួអក្សរ។"
+							"description": "- ធាតុដែលបង្ហាញពីការរាប់តួអក្សរ។"
 						},
 						{
 							"name": "wordWrapper",
@@ -2816,49 +2929,73 @@
 							"name": "wordCounter",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុដែលបង្ហាញការរាប់ពាក្យ។"
+							"description": "- ធាតុដែលបង្ហាញពីការរាប់ពាក្យ។"
 						},
 						{
 							"name": "lineBreaker_t",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុ UI ឧបករណ៍បំបែកបន្ទាត់អណ្តែតខាងលើ (សម្រាប់បញ្ចូលបន្ទាត់)។"
+							"description": "- ធាតុ UI បំលែងបន្ទាត់អណ្តែតលើកំពូល (សម្រាប់ការបញ្ចូលបន្ទាត់) ។"
 						},
 						{
 							"name": "lineBreaker_b",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុ UI បំបែកបន្ទាត់អណ្តែតខាងក្រោម (សម្រាប់បញ្ចូលបន្ទាត់)។"
+							"description": "- ធាតុ UI បំបែកបន្ទាត់អណ្តែតបាត (សម្រាប់ការបញ្ចូលបន្ទាត់) ។"
+						},
+						{
+							"name": "blockHandleArea",
+							"params": "",
+							"returns": "HTMLElement | null",
+							"description": "- ធុងទឹកស្អុយ (`.se-block-handle-area`) កាន់ចំណុចទាញប្លុកក្នុងមួយជួរ។ `null` ​​នៅពេលដែលជម្រើស `blockHandle` ត្រូវបានបិទ។"
+						},
+						{
+							"name": "blockHandle",
+							"params": "",
+							"returns": "HTMLElement | null",
+							"description": "- ប្លុកចំណុចទាញក្រុម (`.se-block-handle`) ដែលមានប៊ូតុងបូក និងអូស។ `null` ​​ពេលបិទ។"
+						},
+						{
+							"name": "blockHandlePlus",
+							"params": "",
+							"returns": "HTMLElement | null",
+							"description": "- ប៊ូតុងបូក (`.se-block-handle-plus`) — បញ្ចូលបន្ទាត់ថ្មីបន្ទាប់ពីប្លុកបច្ចុប្បន្ន។ `null` ​​ពេលបិទ។"
+						},
+						{
+							"name": "blockHandleDrag",
+							"params": "",
+							"returns": "HTMLElement | null",
+							"description": "- ប៊ូតុងអូស (`.se-block-handle-drag`) — បើកម៉ឺនុយសកម្មភាព / ចាប់ផ្តើមអូសដើម្បីតម្រៀបឡើងវិញ។ `null` ​​ពេលបិទ។"
 						},
 						{
 							"name": "isCodeView",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើកម្មវិធីនិពន្ធកំពុងស្ថិតក្នុងរបៀបមើលកូដឬអត់។"
+							"description": "- ថាតើអ្នកកែសម្រួលបច្ចុប្បន្នស្ថិតនៅក្នុងរបៀបមើលកូដឬអត់។"
 						},
 						{
 							"name": "isMarkdownView",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើកម្មវិធីនិពន្ធកំពុងស្ថិតក្នុងរបៀបមើល markdown ដែរឬទេ។"
+							"description": "- ថាតើអ្នកកែសំរួលបច្ចុប្បន្នស្ថិតនៅក្នុងរបៀបមើលសញ្ញាចុះក្រោមឬអត់។"
 						},
 						{
 							"name": "isFullScreen",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើកម្មវិធីនិពន្ធកំពុងស្ថិតក្នុងរបៀបពេញអេក្រង់ឬអត់។"
+							"description": "- ថាតើបច្ចុប្បន្នកម្មវិធីនិពន្ធស្ថិតនៅក្នុងរបៀបពេញអេក្រង់ឬអត់។"
 						},
 						{
 							"name": "isReadOnly",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើកម្មវិធីនិពន្ធត្រូវបានកំណត់ទៅជារបៀបអានតែប៉ុណ្ណោះឬអត់។"
+							"description": "- ថាតើកម្មវិធីនិពន្ធត្រូវបានកំណត់ទៅជារបៀបអានតែប៉ុណ្ណោះ។"
 						},
 						{
 							"name": "isDisabled",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើកម្មវិធីនិពន្ធត្រូវបានបិទដំណើរការឬអត់។"
+							"description": "- ថាតើអ្នកកែសម្រួលបច្ចុប្បន្នត្រូវបានបិទឬអត់។"
 						},
 						{
 							"name": "isShowBlocks",
@@ -2870,19 +3007,19 @@
 							"name": "isChanged",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើខ្លឹមសារត្រូវបានផ្លាស់ប្តូរឬអត់ (-1 មានន័យថាស្ថានភាពដំបូង)។ === ការតាមដានប្រវត្តិ ==="
+							"description": "- ថាតើមាតិកាត្រូវបានផ្លាស់ប្តូរ (-1 មានន័យថាស្ថានភាពដំបូង) ។ === តាមដានប្រវត្តិ ==="
 						},
 						{
 							"name": "historyIndex",
 							"params": "",
 							"returns": "number",
-							"description": "- លិបិក្រមបច្ចុប្បន្ននៅក្នុងជង់ប្រវត្តិ (មិនធ្វើវិញ/ធ្វើវិញ)។"
+							"description": "- សន្ទស្សន៍បច្ចុប្បន្ននៅក្នុងជង់ប្រវត្តិ (មិនធ្វើវិញ/ធ្វើវិញ)។"
 						},
 						{
 							"name": "savedIndex",
 							"params": "",
 							"returns": "number",
-							"description": "- លិបិក្រមដែលបានរក្សាទុកចុងក្រោយនៅក្នុងជង់ប្រវត្តិ។ === ការកែសម្រួលប្រភេទឯកសារ (ស្រេចចិត្ត) ==="
+							"description": "- សន្ទស្សន៍ដែលបានរក្សាទុកចុងក្រោយនៅក្នុងជង់ប្រវត្តិ។ === ការកែសម្រួលប្រភេទឯកសារ (ស្រេចចិត្ត) ==="
 						},
 						{
 							"name": "documentType",
@@ -2894,37 +3031,37 @@
 							"name": "documentTypeInner",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- កុងតឺន័រខាងក្នុងសម្រាប់កម្មវិធីនិពន្ធប្រភេទឯកសារ។"
+							"description": "- ធុងខាងក្នុងសម្រាប់កម្មវិធីនិពន្ធប្រភេទឯកសារ។"
 						},
 						{
 							"name": "documentTypePage",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ការរុំទំព័រសម្រាប់របៀបកែសម្រួលដែលមានទំព័រ។"
+							"description": "- រុំទំព័រសម្រាប់របៀបកែសម្រួលទំព័រ។"
 						},
 						{
 							"name": "documentTypePageMirror",
 							"params": "",
 							"returns": "HTMLElement",
-							"description": "- ធាតុ​ទំព័រ​ឆ្លុះ​ដែល​ប្រើ​សម្រាប់​ការ​ជ្រើសរើស/ការ​កែ​សម្រួល​ប្លង់។"
+							"description": "- ធាតុ​ទំព័រ​កញ្ចក់​ប្រើ​សម្រាប់​ការ​ជ្រើសរើស​/ការ​កែ​សម្រួល​ប្លង់។"
 						},
 						{
 							"name": "documentType_use_header",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើ​បឋមកថា​ត្រូវ​បាន​ប្រើ​ក្នុង​របៀប​ប្រភេទ​ឯកសារ​ឬ​អត់។"
+							"description": "- ថាតើក្បាលក្បាលត្រូវបានប្រើនៅក្នុងរបៀបប្រភេទឯកសារឬអត់។"
 						},
 						{
 							"name": "documentType_use_page",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ថាតើប្លង់ទំព័រត្រូវបានបើកក្នុងរបៀបប្រភេទឯកសារឬអត់។ === ពេលដំណើរការ / តម្លៃដែលបានគណនា ==="
+							"description": "- ថាតើប្លង់ទំព័រត្រូវបានបើកនៅក្នុងរបៀបប្រភេទឯកសារ។ === ពេលវេលាដំណើរការ / តម្លៃគណនា ==="
 						},
 						{
 							"name": "wwComputedStyle",
 							"params": "",
 							"returns": "CSSStyleDeclaration",
-							"description": "- រចនាប័ទ្មដែលបានគណនាដែលបានរក្សាទុកក្នុងឃ្លាំងសម្ងាត់សម្រាប់ធាតុ wysiwyg។\n- កំណត់កំឡុងពេលចាប់ផ្តើមកម្មវិធីនិពន្ធតាមរយៈ `window.getComputedStyle(wysiwyg)`។\n- ប្រើសម្រាប់ទាញយកតម្លៃ CSS ពេលដំណើរការ (padding, margins, font-family, ជាដើម)។\n- ធ្វើអោយប្រសើរឡើងនូវដំណើរការដោយជៀសវាងការហៅ `getComputedStyle()` ​​ម្តងហើយម្តងទៀត។"
+							"description": "- រចនាប័ទ្មដែលបានគណនាក្នុងឃ្លាំងសម្ងាត់សម្រាប់ធាតុ wysiwyg ។ \n- កំណត់កំឡុងពេលចាប់ផ្តើមកម្មវិធីនិពន្ធតាមរយៈ `window.getComputedStyle(wysiwyg)` ។ \n- ប្រើសម្រាប់ការទាញយកតម្លៃ CSS ពេលដំណើរការ (padding, margin, font-family ។ល។)។ \n- ធ្វើឱ្យប្រសើរឡើងនូវការអនុវត្តដោយជៀសវាងការហៅម្តងហើយម្តងទៀត `getComputedStyle()` ​​។"
 						}
 					]
 				},
@@ -2963,16 +3100,22 @@
 							"description": "- របៀបរបារឧបករណ៍៖ `classic`, `inline`, `balloon`, `balloon-always`។ បន្ថែម `:bottom` ដើម្បីដាក់របារឧបករណ៍នៅខាងក្រោម (ឧទាហរណ៍ `classic:bottom`, `inline:bottom`)។"
 						},
 						{
+							"name": "blockHandle",
+							"params": "",
+							"returns": "{\n\t\tmenu?: Array<\n\t\t\t| string\n\t\t\t| {\n\t\t\t\t\ttitle: string;\n\t\t\t\t\ticon?: string;\n\t\t\t\t\taction: (\n\t\t\t\t\t\tdeps: SunEditor.Deps,\n\t\t\t\t\t\tctx: {\n\t\t\t\t\t\t\tblock: HTMLElement;\n\t\t\t\t\t\t},\n\t\t\t\t\t) => void;\n\t\t\t  }\n\t\t>;\n\t}",
+							"description": "- ការកំណត់រចនាសម្ព័ន្ធចំណុចទាញ។ នៅពេលផ្តល់ជូន ចំណុចទាញប្លុកក្នុងមួយជួរ UI ត្រូវបានបង្ហាញ។ ធ្វើការដោយឯករាជ្យពី `mode` ។"
+						},
+						{
 							"name": "type",
 							"params": "",
 							"returns": "string",
-							"description": "- ប្រភេទ​កម្មវិធី​និពន្ធ។ ប្រើ `\"document\"` សម្រាប់​ប្លង់​រចនាប័ទ្ម​ឯកសារ ជាមួយ​ប្រភេទ​រង​ជា​ជម្រើស​បន្ទាប់​ពី `:`។ ```js // type 'document:header,page' ```"
+							"description": "- ប្រភេទកម្មវិធីនិពន្ធ។ ប្រើ `\"document\"` សម្រាប់ប្លង់រចនាប័ទ្មឯកសារ ដោយមានប្រភេទរងជាជម្រើសបន្ទាប់ពី `:`។ ``js // type 'document:header,page' ```"
 						},
 						{
 							"name": "theme",
 							"params": "",
 							"returns": "string",
-							"description": "- ប្រធានបទអ្នកកែសម្រួល។"
+							"description": "- ប្រធានបទកម្មវិធីនិពន្ធ។"
 						},
 						{
 							"name": "lang",
@@ -2984,55 +3127,55 @@
 							"name": "icons",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- ជំនួស​រូបតំណាង​លំនាំដើម។"
+							"description": "- បដិសេធរូបតំណាងលំនាំដើម។"
 						},
 						{
 							"name": "textDirection",
 							"params": "",
 							"returns": "'ltr' | 'rtl'",
-							"description": "- ទិសដៅអត្ថបទ៖ `ltr` ឬ `rtl`។"
+							"description": "- ទិសដៅអត្ថបទ៖ `ltr` ឬ `rtl` ​​។"
 						},
 						{
 							"name": "reverseButtons",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- អារេនៃគូពាក្យបញ្ជាដែលរូបតំណាងផ្លូវកាត់របស់វាគួរតែនៅទល់មុខគ្នា។\n- អាស្រ័យលើរបៀប `textDirection`។ /// === ការច្រោះយ៉ាងតឹងរ៉ឹង និងកម្រិតខ្ពស់ ==="
+							"description": "- អារេនៃពាក្យបញ្ជាគូដែលរូបតំណាងផ្លូវកាត់គួរតែនៅទល់មុខគ្នា។ \n- អាស្រ័យលើរបៀប `textDirection` ។ /// === តឹងរឹង & តម្រងកម្រិតខ្ពស់ ==="
 						},
 						{
 							"name": "strictMode",
 							"params": "",
 							"returns": "| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  }",
-							"description": "- បើកដំណើរការតម្រងយ៉ាងតឹងរឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។ \n- ប្រើ `true` ដើម្បីបើកតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។ \n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ \n-: ការពិពណ៌នាតម្រង \n- `tagFilter`៖ តម្រងមិនអនុញ្ញាតស្លាក HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`៖ ធាតុទម្រង់តម្រង (`formatLine`/`formatBlock`) \n- `classFilter`៖ តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`) \n- `textStyleTagFilter`៖ ត្រងស្លាករចនាប័ទ្មអត្ថបទ (b, i, u, span ។ល។) \n- `attrFilter`៖ តម្រង​មិន​អនុញ្ញាត​លក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`៖ តម្រងមិនអនុញ្ញាតរចនាប័ទ្មក្នុងជួរ (ក្នុងមួយស្លាកពី `tagStyles`) ```js // disable only attribute and style filters { strictMode: { tagFilter: true, formatFilter: true, classFilter: true, textStyleTagFilter: true, attrFilter: false, styleFilter: false } } ```"
+							"description": "- បើកដំណើរការតម្រងយ៉ាងតឹងរឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។ \n- ប្រើ `true` ដើម្បីបើកតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។ \n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ \n-: ការពិពណ៌នាអំពីតម្រង \n- `tagFilter`៖ តម្រងមិនអនុញ្ញាតស្លាក HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`៖ ធាតុទម្រង់តម្រង (`formatLine`/`formatBlock`) \n- `classFilter`៖ តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`) \n- `textStyleTagFilter`៖ ត្រងស្លាករចនាប័ទ្មអត្ថបទ (b, i, u, span ។ល។) \n- `attrFilter`៖ តម្រង​មិន​អនុញ្ញាត​លក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`៖ តម្រងមិនអនុញ្ញាតរចនាប័ទ្មក្នុងជួរ (ក្នុងមួយស្លាកពី `tagStyles`) ```js // disable only attribute and style filters { strictMode: { tagFilter: true, formatFilter: true, classFilter: true, textStyleTagFilter: true, attrFilter: false, styleFilter: false } } ```"
 						},
 						{
 							"name": "scopeSelectionTags",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- ស្លាកត្រូវបានចាត់ទុកជាឯកតាទាំងមូលនៅពេលជ្រើសរើសខ្លឹមសារទាំងអស់។ - លំនាំដើមធ្វើតាម {@link DEFAULTS.SCOPE_SELECTION_TAGS}/// === ការត្រង និងការធ្វើទ្រង់ទ្រាយខ្លឹមសារ === == #### ១) ការគ្រប់គ្រងស្លាក និងធាតុ"
+							"description": "- ស្លាកត្រូវបានចាត់ទុកជាឯកតាទាំងមូល នៅពេលជ្រើសរើសមាតិកាទាំងអស់។ \n- លំនាំដើមធ្វើតាម {@link DEFAULTS.SCOPE_SELECTION_TAGS}/// === ត្រង និងការធ្វើទ្រង់ទ្រាយមាតិកា === == #### 1) ការគ្រប់គ្រងស្លាក & ធាតុ"
 						},
 						{
 							"name": "elementWhitelist",
 							"params": "",
 							"returns": "string",
-							"description": "- បញ្ជាក់ធាតុ HTML ដើម្បីអនុញ្ញាតបន្ថែមលើសពីបញ្ជីអនុញ្ញាតលំនាំដើម។ សញ្ញាកំណត់៖ `\"|\"`។\n- បានបន្ថែមទៅក្នុងបញ្ជីលំនាំដើមដែលកំណត់ដោយ {@link PrivateBaseOptions.__defaultElementWhitelist}។ ```js { elementWhitelist: 'mark|details|summary' } ```"
+							"description": "- បញ្ជាក់ធាតុ HTML ដើម្បីបន្ថែមលើសពីបញ្ជីអនុញ្ញាតលំនាំដើម។ កំណត់ព្រំដែន៖ `\"|\"`។ \n- បានបន្ថែមទៅបញ្ជីលំនាំដើមដែលកំណត់ដោយ {@link PrivateBaseOptions.__defaultElementWhitelist} ។ ``js { elementWhitelist: 'mark|details|summary' } ```"
 						},
 						{
 							"name": "elementBlacklist",
 							"params": "",
 							"returns": "string",
-							"description": "- បញ្ជាក់ធាតុ HTML ដែលមិនគួរប្រើ។ សញ្ញាកំណត់៖ `\"|\"`។\n- ស្លាកដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានដកចេញនៅទីបំផុត ទោះបីជាពួកវាត្រូវបានរួមបញ្ចូលនៅក្នុងបញ្ជីសផ្សេងទៀតក៏ដោយ។ ```js { elementBlacklist: 'script|style|iframe' } ```"
+							"description": "- បញ្ជាក់ធាតុ HTML ដែលមិនគួរប្រើ។ កំណត់ព្រំដែន៖ `\"|\"`។ \n- ស្លាកដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានយកចេញជាយថាហេតុ ទោះបីជាពួកគេត្រូវបានបញ្ចូលក្នុងបញ្ជីសផ្សេងទៀតក៏ដោយ។ ``js { elementBlacklist: 'script|style|iframe' } ```"
 						},
 						{
 							"name": "allowedEmptyTags",
 							"params": "",
 							"returns": "string",
-							"description": "- បញ្ជីស្លាកដែលត្រូវបានអនុញ្ញាតឱ្យរក្សាទុកទោះបីជាតម្លៃរបស់វាទទេក៏ដោយ។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST} - ភ្ជាប់ជាមួយ `ALLOWED_EMPTY_NODE_LIST` ដើម្បីបង្កើតបញ្ជី `allowedEmptyTags` ​​ចុងក្រោយ។"
+							"description": "- បញ្ជីស្លាកដែលត្រូវបានអនុញ្ញាតឱ្យរក្សាទុកទោះបីជាតម្លៃរបស់វាទទេក៏ដោយ។ \n- លំនាំដើមធ្វើតាម {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- ភ្ជាប់ជាមួយ `ALLOWED_EMPTY_NODE_LIST` ដើម្បីបង្កើតបញ្ជី `allowedEmptyTags` ​​ចុងក្រោយ។"
 						},
 						{
 							"name": "allowedClassName",
 							"params": "",
 							"returns": "string",
-							"description": "- ឈ្មោះថ្នាក់ដែលអនុញ្ញាត។ - បានបន្ថែមតម្លៃលំនាំដើម {@link DEFAULTS.CLASS_NAME}/// #### 2) ការគ្រប់គ្រងគុណលក្ខណៈ"
+							"description": "- ឈ្មោះថ្នាក់ដែលបានអនុញ្ញាត។ \n- បានបន្ថែមតម្លៃលំនាំដើម {@link DEFAULTS.CLASS_NAME}/// #### 2) ការគ្រប់គ្រងគុណលក្ខណៈ"
 						},
 						{
 							"name": "attributeWhitelist",
@@ -3044,25 +3187,25 @@
 							"name": "attributeBlacklist",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-							"description": "- បញ្ជាក់គុណលក្ខណៈដែលមិនអនុញ្ញាតដោយស្លាក។ `\"*\"` អនុវត្តចំពោះស្លាកទាំងអស់។\n- គុណលក្ខណៈដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានដកចេញនៅទីបំផុត ទោះបីជាពួកវាត្រូវបានអនុញ្ញាតដោយការកំណត់ផ្សេងទៀតក៏ដោយ។\n- បញ្ជីនៃធាតុដែលត្រូវការ {@link DEFAULTS.REQUIRED_FORMAT_LINE} តែងតែត្រូវបានរួមបញ្ចូល។ ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) ការគ្រប់គ្រងអត្ថបទ និងរចនាប័ទ្មក្នុងបន្ទាត់"
+							"description": "- បញ្ជាក់គុណលក្ខណៈដើម្បីមិនអនុញ្ញាតដោយស្លាក។ `\"*\"` អនុវត្តចំពោះស្លាកទាំងអស់។ \n- គុណលក្ខណៈដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានយកចេញជាយថាហេតុ ទោះបីជាពួកគេត្រូវបានអនុញ្ញាតដោយការកំណត់ផ្សេងទៀតក៏ដោយ។ \n- បញ្ជីនៃធាតុដែលត្រូវការ {@link DEFAULTS.REQUIRED_FORMAT_LINE} តែងតែត្រូវបានរួមបញ្ចូល។ ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) អត្ថបទ & ការគ្រប់គ្រងរចនាប័ទ្មក្នុងបន្ទាត់"
 						},
 						{
 							"name": "textStyleTags",
 							"params": "",
 							"returns": "string",
-							"description": "- ស្លាករចនាប័ទ្មអត្ថបទបន្ថែម។\n- លំនាំដើមធ្វើតាម {@link PrivateBaseOptions.__textStyleTags}"
+							"description": "- ស្លាករចនាប័ទ្មអត្ថបទបន្ថែម។ \n- លំនាំដើមធ្វើតាម {@link PrivateBaseOptions.__textStyleTags}"
 						},
 						{
 							"name": "convertTextTags",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- ផ្គូផ្គងរចនាប័ទ្មអត្ថបទទៅកាន់ស្លាក HTML ជាក់លាក់។ ```js { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } } ```"
+							"description": "- រចនាប័ទ្មអត្ថបទផែនទីទៅស្លាក HTML ជាក់លាក់។ ``js { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } } ```"
 						},
 						{
 							"name": "allUsedStyles",
 							"params": "",
 							"returns": "string",
-							"description": "- បញ្ជាក់​រចនាប័ទ្ម​បន្ថែម​ទៅ​ក្នុង​បញ្ជី​រចនាប័ទ្ម​ដែល​ត្រូវ​បាន​អនុញ្ញាត។ សញ្ញា​កំណត់៖ `\"|\"`។ ```js { allUsedStyles: 'color|background-color|text-shadow' } ```"
+							"description": "- បញ្ជាក់រចនាប័ទ្មបន្ថែមទៅក្នុងបញ្ជីរចនាប័ទ្មដែលបានអនុញ្ញាត។ កំណត់ព្រំដែន៖ `\"|\"`។ ``js { allUsedStyles: 'color|background-color|text-shadow' } ```"
 						},
 						{
 							"name": "tagStyles",
@@ -3104,7 +3247,7 @@
 							"name": "formatLine",
 							"params": "",
 							"returns": "string",
-							"description": "- បានអនុញ្ញាតបន្ថែម `line` ធាតុលើសពីលំនាំដើម។ កំណត់ព្រំដែន៖ `\"|\"`។ \n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatLine} ដើម្បីបង្កើតបញ្ជី `line` ចុងក្រោយ។ \n- ធាតុ `line` ក៏មានធាតុ `brLine` ផងដែរ។ ``js { formatLine: 'ARTICLE|SECTION' } ```"
+							"description": "- បានអនុញ្ញាតបន្ថែម `line` ធាតុលើសពីលំនាំដើម។ កំណត់ព្រំដែន៖ `\"|\"`។ \n- ភ្ជាប់ជាមួយ {@link PrivateBaseOptions.__defaultFormatLine} ដើម្បីបង្កើតបញ្ជី `line` ចុងក្រោយ។ \n- ធាតុ `line` ក៏មានធាតុ `brLine` ផងដែរ។ ```js { formatLine: 'ARTICLE|SECTION' } ```"
 						},
 						{
 							"name": "formatBrLine",
@@ -3155,6 +3298,12 @@
 							"description": "- ទទឹងរបារឧបករណ៍។"
 						},
 						{
+							"name": "toolbar_innerWidth",
+							"params": "",
+							"returns": "string",
+							"description": "- ដាក់ជួរប៊ូតុងរបស់របារឧបករណ៍ (`.se-btn-tray`) ផ្ដេក។ \n- **ប្រវែង CSS** (ឧ. `\"500px\"`, `\"740px\"`, `\"60ch\"`)៖ ផ្ទៃខាងក្រោយរបារឧបករណ៍លាតសន្ធឹងពេញទទឹង ខណៈដែលជួរប៊ូតុងត្រូវបានបិទនៅទទឹងនោះ ហើយដាក់កណ្តាល។ ប្រសិនបើប៊ូតុងសម ជួរដេកស្ថិតនៅលើបន្ទាត់តែមួយ។ ប្រសិនបើពួកគេលើសពីមួកពួកគេរុំនៅខាងក្នុង។ \n- ** `\"auto\"`**៖ គ្មាន​មួក — ជួរ​ដេក​ត្រូវ​បាន​កំណត់​ទំហំ​ទៅ​នឹង​មាតិកា​របស់​វា ហើយ​ដាក់​នៅ​កណ្តាល​យ៉ាង​សាមញ្ញ។ \n- ** ខ្សែអក្សរទទេ ** (លំនាំដើម)៖ គ្មានដែនកំណត់។ \n- **ចំណាំនៅលើ `responsiveButtonList`**៖ កម្រិតចាប់ផ្ដើមប្រៀបធៀបជាមួយនឹងទទឹងពេញរបស់របារឧបករណ៍ មិនមែនក្រុមនោះទេ។ នៅពេលជម្រើសនេះត្រូវបានកំណត់ សូមក្រិតតាមខ្នាត `responsiveButtonList` គ្រាប់ចុចជុំវិញទំហំរបារឧបករណ៍ដែលអ្នកពិតជាចង់ឱ្យប៊ូតុងនីមួយៗកំណត់ឱ្យចូល។ ```js { toolbar_innerWidth: '740px' } { toolbar_innerWidth: 'auto' } ```"
+						},
+						{
 							"name": "toolbar_container",
 							"params": "",
 							"returns": "HTMLElement | null",
@@ -3164,7 +3313,7 @@
 							"name": "toolbar_sticky",
 							"params": "",
 							"returns": "| number\n\t\t| {\n\t\t\t\ttop: number;\n\t\t\t\toffset: number;\n\t\t  }",
-							"description": "- បើករបារឧបករណ៍ស្អិត។ \n- `number`៖ កំណត់ទីតាំងកំពូលស្អិត (px)។ ប្រើ `-1` ​​ដើម្បីបិទស្អិត។ \n- `{top, offset}`៖ `top` គឺជាទីតាំងស្អិត នៅពេលដែលក្បាលទំព័រអាចមើលឃើញ។ \n- `offset` គឺជាទីតាំងស្អិត នៅពេលដែលក្តារចុចនិម្មិតផ្លាស់ប្តូរច្រកមើល (ឧ. នៅលើថេប្លេត ឧបករណ៍ប៉ះ)។ \n- នៅពេលក្តារចុចនិម្មិតសកម្ម `offset` ជំនួស `top` ដូច្នេះរបារឧបករណ៍មិនទុកចន្លោះទេ។ \n- សម្រាប់បឋមកថាទំព័រដែលបានរមូរចេញពីទិដ្ឋភាព។ លំនាំដើម `offset` គឺ `0` ។ ``js // Basic usage — sticky at top with 0px offset toolbar_sticky: 0 // Account for a 92px fixed/sticky site header toolbar_sticky: 92 // 92px header on desktop, but 0px when virtual keyboard pushes the viewport toolbar_sticky: { top: 92, offset: 0 } ```"
+							"description": "- បើករបារឧបករណ៍ស្អិត។ \n- `number`៖ កំណត់ទីតាំងកំពូលស្អិត (px)។ ប្រើ `-1` ​​ដើម្បីបិទស្អិត។ \n- `{top, offset}`៖ `top` គឺជាទីតាំងស្អិត នៅពេលដែលក្បាលទំព័រអាចមើលឃើញ។ \n- `offset` គឺជាទីតាំងស្អិត នៅពេលដែលក្តារចុចនិម្មិតផ្លាស់ប្តូរច្រកមើល (ឧ. នៅលើថេប្លេត ឧបករណ៍ប៉ះ)។ \n- នៅពេលដែលក្តារចុចនិម្មិតសកម្ម `offset` ជំនួស `top` ដូច្នេះរបារឧបករណ៍មិនទុកចន្លោះទេ។ \n- សម្រាប់បឋមកថាទំព័រដែលបានរមូរចេញពីទិដ្ឋភាព។ លំនាំដើម `offset` គឺ `0` ។ ``js // Basic usage — sticky at top with 0px offset toolbar_sticky: 0 // Account for a 92px fixed/sticky site header toolbar_sticky: 92 // 92px header on desktop, but 0px when virtual keyboard pushes the viewport toolbar_sticky: { top: 92, offset: 0 } ```"
 						},
 						{
 							"name": "toolbar_hide",
@@ -3230,7 +3379,7 @@
 							"name": "historyStackSize",
 							"params": "",
 							"returns": "number",
-							"description": "- ចំនួនអតិបរមានៃធាតុប្រវត្តិក្នុងមួយស៊ុមឫស។ ធាតុចាស់បំផុតត្រូវបានលុបចោលនៅពេលដែលលើស។"
+							"description": "- ចំនួនអតិបរមានៃធាតុប្រវត្តិសាស្រ្តក្នុងមួយស៊ុមឫស។ ធាតុចាស់បំផុតត្រូវបានលុបចោលនៅពេលដែលលើស។"
 						},
 						{
 							"name": "printClass",
@@ -3455,6 +3604,12 @@
 							"description": ""
 						},
 						{
+							"name": "slashCommand",
+							"params": "",
+							"returns": "import('../../plugins/field/slashCommand.js').SlashCommandPluginOptions",
+							"description": ""
+						},
+						{
 							"name": "table",
 							"params": "",
 							"returns": "import('../../plugins/dropdown/table/index.js').TablePluginOptions",
@@ -3500,25 +3655,31 @@
 							"name": "placeholder",
 							"params": "",
 							"returns": "string",
-							"description": "- អត្ថបទជំនួសកន្លែង។"
+							"description": "- អត្ថបទកន្លែងដាក់បង្ហាញនៅពេលកម្មវិធីនិពន្ធទាំងមូលទទេ។"
+						},
+						{
+							"name": "placeholder_line",
+							"params": "",
+							"returns": "string",
+							"description": "- កន្លែងដាក់ក្នុងមួយជួរដែលបង្ហាញនៅលើបន្ទាត់ផ្តោតនៅពេលដែលបន្ទាត់នោះទទេ។ យកអាទិភាពជាង `placeholder` ខណៈពេលដែលបន្ទាត់មួយត្រូវបានផ្តោត។"
 						},
 						{
 							"name": "editableFrameAttributes",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- គុណលក្ខណៈសម្រាប់ស៊ុមដែលអាចកែសម្រួលបាន[.sun-editor-editable]។ ```js { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } } ``` /// === ប្លង់ និងទំហំ ==="
+							"description": "- គុណលក្ខណៈសម្រាប់ស៊ុមដែលអាចកែសម្រួលបាន[.sun-editor-editable]។ ``js { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } } ``` /// === ប្លង់ & ទំហំ ==="
 						},
 						{
 							"name": "width",
 							"params": "",
 							"returns": "string | number",
-							"description": "- ទទឹងសម្រាប់កម្មវិធីនិពន្ធ។"
+							"description": "- ទទឹងសម្រាប់អ្នកកែសម្រួល។"
 						},
 						{
 							"name": "minWidth",
 							"params": "",
 							"returns": "string | number",
-							"description": "- ទទឹងអប្បបរមាសម្រាប់កម្មវិធីនិពន្ធ។"
+							"description": "- ទទឹងអប្បបរមាសម្រាប់អ្នកកែសម្រួល។"
 						},
 						{
 							"name": "maxWidth",
@@ -3527,10 +3688,16 @@
 							"description": "- ទទឹងអតិបរមាសម្រាប់កម្មវិធីនិពន្ធ។"
 						},
 						{
+							"name": "innerWidth",
+							"params": "",
+							"returns": "string",
+							"description": "- ទទឹងអតិបរមាស្រេចចិត្តសម្រាប់តួកម្មវិធីនិពន្ធ (`.se-wrapper`)។ \n- **ប្រវែង CSS** (`\"740px\"`, `\"60ch\"`)៖ ខ្លឹមសាររបស់កម្មវិធីនិពន្ធត្រូវបានតោងជាប់នឹងទទឹងនេះ ហើយដាក់កណ្តាលផ្ដេក។ រមូរកុងតឺន័ររក្សាទទឹងពេញ (របាររមូរនៅគែមខាងក្រៅ កង់/ប៉ះ សកម្មលើផ្ទៃទាំងមូល)។ \n- **`\"auto\"`** ឬ **ខ្សែអក្សរទទេ** (លំនាំដើម)៖ គ្មានការរឹតត្បិត — ប្លង់ពេញទទឹងធម្មជាតិជាមួយនឹងផ្ទាំងមាតិកាលំនាំដើម។ \n- នៅក្នុងរបៀប `blockHandle` ចំណុចទាញ gutter តាមដានក្រុមអត្ថបទកណ្តាល។ ```js { innerWidth: '740px' } ```"
+						},
+						{
 							"name": "height",
 							"params": "",
 							"returns": "string | number",
-							"description": "- កម្ពស់សម្រាប់កម្មវិធីនិពន្ធ។"
+							"description": "- កម្ពស់សម្រាប់អ្នកកែសម្រួល។"
 						},
 						{
 							"name": "minHeight",
@@ -3542,79 +3709,79 @@
 							"name": "maxHeight",
 							"params": "",
 							"returns": "string | number",
-							"description": "- កម្ពស់អតិបរមាសម្រាប់កម្មវិធីនិពន្ធ។"
+							"description": "- កម្ពស់អតិបរមាសម្រាប់អ្នកកែសម្រួល។"
 						},
 						{
 							"name": "editorStyle",
 							"params": "",
 							"returns": "string",
-							"description": "- ខ្សែអក្សររចនាប័ទ្មនៃស៊ុមខាងលើនៃកម្មវិធីនិពន្ធ។ ```js { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' } ``` /// === របៀប Iframe ==="
+							"description": "- ខ្សែអក្សររចនាប័ទ្មនៃស៊ុមកំពូលនៃកម្មវិធីនិពន្ធ។ ```js { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' } ``` /// === របៀប iframe ==="
 						},
 						{
 							"name": "iframe",
 							"params": "",
 							"returns": "boolean",
-							"description": "- ខ្លឹមសារនឹងត្រូវបានដាក់ក្នុង iframe ហើយញែកដាច់ពីផ្នែកដែលនៅសល់នៃទំព័រ។"
+							"description": "- មាតិកានឹងត្រូវបានដាក់ក្នុង iframe និងដាច់ដោយឡែកពីទំព័រដែលនៅសល់។"
 						},
 						{
 							"name": "iframe_fullPage",
 							"params": "",
 							"returns": "boolean",
-							"description": "- អនុញ្ញាតឱ្យប្រើប្រាស់ស្លាក HTML, HEAD, BODY និងការប្រកាស DOCTYPE នៅលើ `iframe`។"
+							"description": "- អនុញ្ញាតឱ្យប្រើប្រាស់ស្លាក HTML, HEAD, BODY និងការប្រកាស DOCTYPE នៅលើ `iframe` ។"
 						},
 						{
 							"name": "iframe_attributes",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- គុណលក្ខណៈនៃ `iframe`. ```js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```"
+							"description": "- លក្ខណៈនៃ `iframe` ។ ``js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```"
 						},
 						{
 							"name": "iframe_cssFileName",
 							"params": "",
 							"returns": "Array<string>",
-							"description": "- ឯកសារ CSS ដើម្បីអនុវត្តនៅខាងក្នុង iframe។\n- String៖ លំនាំឈ្មោះឯកសារដើម្បីស្វែងរកនៅក្នុងស្លាក `<link>` ឯកសារ។\n- `\"*\"`៖ Wildcard ដើម្បីរួមបញ្ចូលសន្លឹករចនាប័ទ្មទាំងអស់ពីទំព័រ។\n- URL ដាច់ខាត និង URL ទិន្នន័យ (`data:text/css,`) ក៏ត្រូវបានគាំទ្រផងដែរ។ ```js { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] } ``` /// === របារស្ថានភាព និងចំនួនតួអក្សរ ==="
+							"description": "- ឯកសារ CSS ដើម្បីអនុវត្តនៅខាងក្នុង iframe ។ \n- ខ្សែអក្សរ៖ គំរូឈ្មោះឯកសារដើម្បីស្វែងរកក្នុងឯកសារ `<link>` ស្លាក។ \n- `\"*\"`៖ អក្សរជំនួសដើម្បីរួមបញ្ចូលសន្លឹករចនាប័ទ្មទាំងអស់ពីទំព័រ។ \n- URLs ដាច់ខាត និង URLs ទិន្នន័យ (`data:text/css,`) ក៏ត្រូវបានគាំទ្រផងដែរ។ ```js { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] } ``` /// === របារស្ថានភាព & តួតួអក្សរ ==="
 						},
 						{
 							"name": "statusbar",
 							"params": "",
 							"returns": "boolean",
-							"description": "- បើកដំណើរការរបារស្ថានភាព។"
+							"description": "- បើករបារស្ថានភាព។"
 						},
 						{
 							"name": "statusbar_showPathLabel",
 							"params": "",
 							"returns": "boolean",
-							"description": "- បង្ហាញរចនាសម្ព័ន្ធណូតបច្ចុប្បន្ននៅក្នុងរបារស្ថានភាព។"
+							"description": "- បង្ហាញរចនាសម្ព័ន្ធថ្នាំងបច្ចុប្បន្ននៅក្នុងរបារស្ថានភាព។"
 						},
 						{
 							"name": "statusbar_resizeEnable",
 							"params": "",
 							"returns": "boolean",
-							"description": "- បើកមុខងារប្ដូរទំហំនៃរបារស្ថានភាពខាងក្រោម។"
+							"description": "- បើកមុខងារផ្លាស់ប្តូរទំហំរបស់របារស្ថានភាពខាងក្រោម។"
 						},
 						{
 							"name": "charCounter",
 							"params": "",
 							"returns": "boolean",
-							"description": "- បង្ហាញចំនួនតួអក្សរនៅក្នុងកម្មវិធីនិពន្ធ។\n- ប្រសិនបើជម្រើស `maxCharCount` មានតម្លៃ វានឹងក្លាយជា `true`។"
+							"description": "- បង្ហាញចំនួនតួអក្សរនៅក្នុងកម្មវិធីនិពន្ធ។ \n- ប្រសិនបើជម្រើស `maxCharCount` មានតម្លៃ វាក្លាយជា `true` ​​។"
 						},
 						{
 							"name": "charCounter_max",
 							"params": "",
 							"returns": "number | null",
-							"description": "- ចំនួនតួអក្សរអតិបរមាដែលត្រូវបានអនុញ្ញាតឱ្យបញ្ចូលទៅក្នុងកម្មវិធីនិពន្ធ។"
+							"description": "- ចំនួនតួអក្សរអតិបរមាដែលអនុញ្ញាតឱ្យបញ្ចូលទៅក្នុងកម្មវិធីនិពន្ធ។"
 						},
 						{
 							"name": "charCounter_label",
 							"params": "",
 							"returns": "string | null",
-							"description": "- អត្ថបទ​ដែល​ត្រូវ​បង្ហាញ​នៅ​ក្នុង​តំបន់ `charCounter` នៃ​របារ​ខាងក្រោម។ ```js { charCounter_label: 'Characters :' } ```"
+							"description": "- អត្ថបទដែលត្រូវបង្ហាញនៅក្នុងតំបន់ `charCounter` នៃរបារខាងក្រោម។ ``js { charCounter_label: 'Characters :' } ```"
 						},
 						{
 							"name": "charCounter_type",
 							"params": "",
 							"returns": "'char' | 'byte' | 'byte-html'",
-							"description": "- កំណត់វិធីសាស្ត្រគណនានៃជម្រើស `charCounter`។\n- `char`: ប្រវែងតួអក្សរ។\n- `byte`: ទំហំទិន្នន័យគោលពីរនៃតួអក្សរ។\n- `byte-html`: ទំហំទិន្នន័យគោលពីរនៃខ្សែអក្សរ HTML ពេញលេញ។ === ចំនួនពាក្យ ==="
+							"description": "- កំណត់វិធីសាស្រ្តគណនានៃជម្រើស `charCounter` ។ \n- `char`៖ ប្រវែងតួអក្សរ។ \n- `byte`៖ ទំហំទិន្នន័យគោលពីរនៃតួអក្សរ។ \n- `byte-html`៖ ទំហំទិន្នន័យគោលពីរនៃខ្សែអក្សរ HTML ពេញលេញ។ === ពាក្យប្រឆាំង ==="
 						},
 						{
 							"name": "wordCounter",
@@ -3626,7 +3793,7 @@
 							"name": "wordCounter_label",
 							"params": "",
 							"returns": "string | null",
-							"description": "- អត្ថបទ​ដែល​ត្រូវ​បង្ហាញ​នៅ​ក្នុង​តំបន់ `wordCounter` នៃ​របារ​ខាងក្រោម។ ```js { wordCounter_label: 'Words :' } ```"
+							"description": "- អត្ថបទដែលត្រូវបង្ហាញនៅក្នុងតំបន់ `wordCounter` នៃរបារខាងក្រោម។ ``js { wordCounter_label: 'Words :' } ```"
 						}
 					]
 				},
@@ -4342,6 +4509,26 @@
 							"name": "onInput",
 							"params": "params: SunEditor.HookParams.InputWithData",
 							"returns": "Promise<void>",
+							"description": "",
+							"example": ""
+						}
+					]
+				},
+				"slashCommand": {
+					"title": "Slash Command",
+					"type": "field",
+					"methods": [
+						{
+							"name": "onInput",
+							"params": "params: SunEditor.HookParams.InputWithData",
+							"returns": "void",
+							"description": "",
+							"example": ""
+						},
+						{
+							"name": "onKeyDown",
+							"params": "params: SunEditor.HookParams.KeyEvent",
+							"returns": "void | boolean",
 							"description": "",
 							"example": ""
 						}
@@ -5196,7 +5383,7 @@
 					"methods": [
 						{
 							"name": "init",
-							"params": "nodeOrColor: Node | string, target: Node, stopCondition?: ((current: Node) => boolean) | null",
+							"params": "nodeOrColor: Node | string, target: Node, stopCondition?: ((current: any) => boolean) | null",
 							"returns": "void",
 							"description": "បង្ហាញ ឬកំណត់ពណ៌ដែលបានជ្រើសរើសបច្ចុប្បន្នឡើងវិញនៅក្នុងបញ្ជីពណ៌។",
 							"example": "// Initialize with a selected node and stop traversal at line-level elements\nthis.colorPicker.init(this.$.selection.getNode(), target, (current) => this.$.format.isLine(current));\n// Initialize with a color string directly (e.g., from a table cell style)\nthis.colorPicker.init(color?.value || '', button);",
@@ -5735,6 +5922,110 @@
 						}
 					]
 				},
+				"CommandMenu": {
+					"title": "Command Menu",
+					"methods": [
+						{
+							"name": "attach",
+							"params": "referElement: HTMLElement, onSelect: (item: ResolvedItem | null) => void, attr?: {\n\t\t\tclass?: string;\n\t\t\tstyle?: string;\n\t\t}",
+							"returns": "void",
+							"description": "ចងម៉ឺនុយទៅនឹងធាតុយោង ហើយចុះឈ្មោះកម្មវិធីដោះស្រាយការចុច។",
+							"example": "",
+							"paramDescriptions": {
+								"onSelect": "បានហៅជាមួយធាតុដែលបានដោះស្រាយដែលបានជ្រើសរើសដោយអ្នកប្រើប្រាស់។"
+							}
+						},
+						{
+							"name": "setItems",
+							"params": "items: Array<string | CommandMenuItem>",
+							"returns": "void",
+							"description": "ជំនួសបញ្ជីធាតុ (ឧ. នៅពេលដែលជម្រើសម៉ាស៊ីនផ្លាស់ប្តូរ)។ ធ្វើឱ្យឃ្លាំងសម្ងាត់ដែលបានដោះស្រាយមិនត្រឹមត្រូវ។",
+							"example": ""
+						},
+						{
+							"name": "getItems",
+							"params": "",
+							"returns": "ResolvedItem[]",
+							"description": "ខ្ជិលធ្វើឱ្យធាតុឆៅធម្មតា។ ខ្ជិល​ព្រោះ​កម្មវិធី​ជំនួយ (`$.plugins`) អាច​នឹង​មិន​មាន​ក្នុង​កំឡុង​ពេល​អ្នក​បង្កើត​ម៉ាស៊ីន។",
+							"example": ""
+						},
+						{
+							"name": "filter",
+							"params": "query: string, limit?: number",
+							"returns": "ResolvedItem[]",
+							"description": "តម្រងខ្សែអក្សររងដែលមិនប្រកាន់អក្សរតូចធំនៅលើ `title + keywords + plugin name` ។ សំណួរទទេ ត្រឡប់ធាតុទាំងអស់ (រហូតដល់ `limit`)។",
+							"example": ""
+						},
+						{
+							"name": "renderRows",
+							"params": "items: ResolvedItem[]",
+							"returns": "string[]",
+							"description": "បង្កើតជួរដេក HTML សម្រាប់បញ្ជីនៃធាតុដែលបានដោះស្រាយ។",
+							"example": ""
+						},
+						{
+							"name": "createRows",
+							"params": "items: ResolvedItem[]",
+							"returns": "void",
+							"description": "បញ្ចូលជួរដេក SelectMenu ។",
+							"example": ""
+						},
+						{
+							"name": "open",
+							"params": "position?: string",
+							"returns": "void",
+							"description": "បើកម៉ឺនុយជ្រើសរើស។ Lazily (ឡើងវិញ) ចុះឈ្មោះជួរម៉ឺនុយទៅក្នុង `commandDispatcher.targets` ដូច្នេះ `selectionState.update` ​​គូរថ្នាក់ `active` លើពួកវាតាមរយៈ",
+							"example": ""
+						},
+						{
+							"name": "close",
+							"params": "",
+							"returns": "void",
+							"description": "បិទ SelectMenu ។ ក៏​មិន​ចុះ​ឈ្មោះ​ជួរ​ម៉ឺនុយ​ពី `commandDispatcher.targets`",
+							"example": ""
+						},
+						{
+							"name": "hasOpenSubPanel",
+							"params": "",
+							"returns": "boolean",
+							"description": "ថាតើបន្ទះរង (ម៉ឺនុយរងដើម ឬការហោះហើរដោយគ្មានទម្លាក់ចុះ) បច្ចុប្បន្នត្រូវបានបើក។ អនុញ្ញាតឱ្យឧបករណ៍បញ្ជាដែលមានកម្មសិទ្ធិរក្សាម៉ឺនុយបើកនៅលើ ESC ហើយបិទតែបន្ទះរងប៉ុណ្ណោះ។",
+							"example": ""
+						},
+						{
+							"name": "setItem",
+							"params": "index: number",
+							"returns": "void",
+							"description": "បន្លិចមួយជួរ។",
+							"example": ""
+						},
+						{
+							"name": "setHidden",
+							"params": "hidden: boolean",
+							"returns": "void",
+							"description": "Soft-hide/soft-show ដោយមិនផ្លាស់ប្តូរស្ថានភាពបើកចំហ។ ឆ្លងកាត់។",
+							"example": ""
+						},
+						{
+							"name": "isOpen",
+							"params": "",
+							"returns": "boolean",
+							"description": "",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
+							"name": "dispatch",
+							"params": "item: ResolvedItem | SubmenuChild | null, ctx?: any",
+							"returns": "boolean",
+							"description": "បញ្ជូនធាតុដែលបានដោះស្រាយ។ សម្រាប់ធាតុផ្ទាល់ខ្លួន សូមទូរស័ព្ទទៅ `raw.action($, ctx)` ។ សម្រាប់ធាតុកម្មវិធីជំនួយ ផ្លូវទៅកាន់ `plugin.open/show/action` ​​ឬ `commandDispatcher.run` (មានភ្ជាប់មកជាមួយ)។ សម្រាប់ធាតុដែលមិនមានទម្លាក់ចុះ សូមបិទបើកការហោះហើរលើទីតាំង",
+							"example": "",
+							"paramDescriptions": {
+								"ctx?": "បរិបទបានបញ្ជូនទៅធាតុផ្ទាល់ខ្លួន `action` (រូបរាងជាក់លាក់របស់ម៉ាស៊ីន)។"
+							},
+							"returnsDescription": "`true` ប្រសិនបើកម្មវិធីជំនួយត្រូវបានបញ្ជូន"
+						}
+					]
+				},
 				"ModalAnchorEditor": {
 					"title": "Modal Anchor Editor",
 					"methods": [
@@ -5784,13 +6075,13 @@
 					"methods": [
 						{
 							"name": "create",
-							"params": "items: Array<string> | SunEditor.NodeCollection, menus?: Array<string> | SunEditor.NodeCollection",
+							"params": "items: Array<any>, menus?: Array<string> | SunEditor.NodeCollection",
 							"returns": "void",
 							"description": "បង្កើតធាតុម៉ឺនុយដែលបានជ្រើសរើស។",
-							"example": "",
+							"example": "// Submenu — \"List\" opens a hover submenu of UL/OL options\nselectMenu.create(\n[{ children: ['ul', 'ol'], childMenus: ['<i>•</i> Bulleted', '<i>1.</i> Numbered'] }],\n['List']\n);",
 							"paramDescriptions": {
-								"items": "បញ្ជីពាក្យបញ្ជានៃធាតុដែលអាចជ្រើសរើសបាន។",
-								"menus?": "បញ្ជី​ធាតុ​បង្ហាញ​ម៉ឺនុយ​ជា​ជម្រើស; កំណត់​តាម​លំនាំដើម​ទៅ `items`។"
+								"items": "ធាតុដែលអាចជ្រើសរើសបាន។ \n- ធាតុធម្មតា៖ តម្លៃណាមួយ (ខ្សែអក្សរ/វត្ថុ); បានឆ្លងទៅ `selectMethod` ហៅត្រឡប់មកវិញនៅពេលជ្រើសរើស។ \n- ធាតុម៉ឺនុយរង៖ `{ children: Array<*>, childMenus?: Array<string|HTMLElement> }` ​​—",
+								"menus?": "បញ្ជីជម្រើសនៃធាតុបង្ហាញ"
 							}
 						},
 						{
@@ -5817,10 +6108,24 @@
 							}
 						},
 						{
+							"name": "reposition",
+							"params": "",
+							"returns": "void",
+							"description": "ដំណើរការទីតាំងឡើងវិញដោយប្រើទិសដៅដូចគ្នាដែលម៉ឺនុយត្រូវបានបើក។ ប្រើនៅពេលដែលធាតុយោងបានផ្លាស់ទី (ឧ. រមូរកំណត់ទីតាំងកេះឡើងវិញ) ប៉ុន្តែម៉ឺនុយគួរតែនៅបើកចំហ និងធ្វើតាម។",
+							"example": ""
+						},
+						{
+							"name": "setHidden",
+							"params": "hidden: any",
+							"returns": "void",
+							"description": "Soft-hide/soft-show ដោយមិនផ្លាស់ប្តូរស្ថានភាពបើកចំហ។ អ្នកស្តាប់ជិតស្និទ្ធ (ចុចនៅខាងក្រៅ ESC) បន្តដំណើរការ ប៉ុន្តែត្រូវបានលាក់ដោយមើលឃើញរហូតដល់គន្លឹះត្រឡប់មកវិញ។",
+							"example": ""
+						},
+						{
 							"name": "close",
 							"params": "",
 							"returns": "void",
-							"description": "ជ្រើសរើសម៉ឺនុយ បិទ",
+							"description": "ជ្រើសរើសម៉ឺនុយបិទ",
 							"example": ""
 						},
 						{
@@ -5830,18 +6135,25 @@
 							"description": "ទទួលបានលិបិក្រមនៃធាតុដែលបានជ្រើសរើស",
 							"example": "",
 							"paramDescriptions": {
-								"index": "សន្ទស្សន៍​ទំនិញ"
+								"index": "សន្ទស្សន៍ធាតុ"
 							}
 						},
 						{
 							"name": "setItem",
 							"params": "index: number",
 							"returns": "void",
-							"description": "កំណត់សន្ទស្សន៍នៃធាតុដែលបានជ្រើសរើស",
+							"description": "កំណត់លិបិក្រមនៃធាតុដែលបានជ្រើសរើស",
 							"example": "",
 							"paramDescriptions": {
-								"index": "សន្ទស្សន៍​ទំនិញ"
+								"index": "សន្ទស្សន៍ធាតុ"
 							}
+						},
+						{
+							"name": "hasOpenSubmenu",
+							"params": "",
+							"returns": "boolean",
+							"description": "ថាតើបច្ចុប្បន្នម៉ឺនុយរងដើមត្រូវបានបើកឬអត់។ ប្រើដោយម្ចាស់ (ឧ. ឧបករណ៍បញ្ជា) ដើម្បីអនុញ្ញាតឱ្យ ESC ច្រានចោលតែម៉ឺនុយរងដែលបើកជំនួសឱ្យម៉ឺនុយទាំងមូល។",
+							"example": ""
 						}
 					]
 				}
@@ -5914,13 +6226,13 @@
 							"name": "debounce",
 							"params": "func: (...args: any) => void, wait: number",
 							"returns": "any",
-							"description": "អនុគមន៍បដិសេធ",
-							"example": "const debouncedSave = converter.debounce(() => save(), 300);\ninput.addEventListener('input', debouncedSave);",
+							"description": "មុខងារបំបាត់កំហុស។ មុខងារដែលបានត្រឡប់មកវិញបង្ហាញវិធីសាស្ត្រ `cancel()` ដែលជម្រះការហៅដែលមិនទាន់សម្រេចណាមួយ (មានប្រយោជន៍នៅពេលព្រឹត្តិការណ៍ — ឧ. ESC — គួរតែបោះបង់ការហៅត្រឡប់មកវិញដែលបានកំណត់ពេល)។",
+							"example": "const debouncedSave = converter.debounce(() => save(), 300);\ninput.addEventListener('input', debouncedSave);\n// later: debouncedSave.cancel();",
 							"paramDescriptions": {
 								"func": "មុខងារ",
 								"wait": "ពន្យារពេល ms"
 							},
-							"returnsDescription": "អនុគមន៍ដែលបានប្រតិបត្តិ"
+							"returnsDescription": "executedFunction — មុខងារ​ដែល​បាន​ប្រកាស​ដោយ​មាន​ភ្ជាប់​ជាមួយ​វិធីសាស្ត្រ `cancel()`"
 						},
 						{
 							"name": "syncMaps",
@@ -6550,7 +6862,7 @@
 						{
 							"name": "isTableElements",
 							"params": "node: (Node | string) | null",
-							"returns": "node is HTMLTableElement | HTMLTableSectionElement | HTMLTableRowElement | HTMLTableCellElement | HTMLTableColElement | HTMLTableColElement",
+							"returns": "node is\n\t| HTMLTableElement\n\t| HTMLTableSectionElement\n\t| HTMLTableRowElement\n\t| HTMLTableCellElement\n\t| HTMLTableColElement\n\t| HTMLTableColElement",
 							"description": "ពិនិត្យមើលថាណូតជាធាតុតារាង។ (table, thead, tbody, tr, th, td)",
 							"example": "",
 							"paramDescriptions": {
@@ -7433,7 +7745,7 @@
 				},
 				{
 					"name": "onCopy",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; event: Event; clipboardData: Event }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tevent: Event;\n\tclipboardData: Event;\n}",
 					"returns": "void",
 					"description": "បាន​ដំណើរការ​នៅពេល​ដែល​អ្នកប្រើប្រាស់​ព្យាយាម​ចម្លង​ខ្លឹមសារ​ពី​កម្មវិធី​និពន្ធ។ បាន​ដំណើរការ​មុនពេល​ចម្លង​ទៅ​ក្ដារ​តម្បៀត​ខ្ទាស់។ ត្រឡប់ `false` ដើម្បី​ទប់ស្កាត់​ប្រតិបត្តិការ​ចម្លង។",
 					"example": "",
@@ -7444,7 +7756,7 @@
 				},
 				{
 					"name": "onCut",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; event: Event; clipboardData: Event }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tevent: Event;\n\tclipboardData: Event;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលអ្នកប្រើប្រាស់ព្យាយាមកាត់ខ្លឹមសារពីកម្មវិធីនិពន្ធ។ ត្រូវបានបង្កឡើងមុនពេលកាត់ទៅក្ដារតម្បៀតខ្ទាស់។ ត្រឡប់ `false` ដើម្បីការពារប្រតិបត្តិការកាត់ និងការរុញប្រវត្តិ។",
 					"example": "",
@@ -7466,7 +7778,7 @@
 				},
 				{
 					"name": "onShowToolbar",
-					"params": "params: { $: SunEditor.Deps; toolbar: HTMLElement; mode: string; frameContext: SunEditor.FrameContext }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\ttoolbar: HTMLElement;\n\tmode: string;\n\tframeContext: SunEditor.FrameContext;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលរបារឧបករណ៍អាចមើលឃើញ។ បង្កឡើងសម្រាប់របៀបប៉េងប៉ោង និងរបារឧបករណ៍របៀបក្នុងជួរ។ ប៉ារ៉ាម៉ែត្រ `mode` បង្ហាញពីប្រភេទរបារឧបករណ៍ (`balloon` ​​ឬ `inline`)។",
 					"example": "",
@@ -7478,7 +7790,7 @@
 				},
 				{
 					"name": "onShowController",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; caller: string; info: SunEditor.Module.Controller.Info }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tcaller: string;\n\tinfo: SunEditor.Module.Controller.Info;\n}",
 					"returns": "void",
 					"description": "បានដំណើរការបន្ទាប់ពីឧបករណ៍បញ្ជាសមាសភាគ (របារឧបករណ៍អណ្តែត) ត្រូវបានបង្ហាញ។ បានដំណើរការនៅពេលដែលសមាសភាគ (រូបភាព វីដេអូ តារាង) ត្រូវបានជ្រើសរើស។ ប៉ារ៉ាម៉ែត្រ `caller` បង្ហាញពីកម្មវិធីជំនួយណាដែលបានដំណើរការឧបករណ៍បញ្ជា។",
 					"example": "",
@@ -7490,7 +7802,7 @@
 				},
 				{
 					"name": "onBeforeShowController",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; caller: string; info: SunEditor.Module.Controller.Info }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tcaller: string;\n\tinfo: SunEditor.Module.Controller.Info;\n}",
 					"returns": "void",
 					"description": "បានដំណើរការមុនពេលដែលឧបករណ៍បញ្ជាសមាសភាគ (របារឧបករណ៍អណ្តែត) ត្រូវបានបង្ហាញ។ បានដំណើរការនៅពេលដែលសមាសភាគ (រូបភាព វីដេអូ តារាង) ហៀបនឹងត្រូវបានជ្រើសរើស។ ត្រឡប់ `false` ដើម្បីការពារឧបករណ៍បញ្ជាមិនឱ្យបង្ហាញ។",
 					"example": "",
@@ -7502,7 +7814,7 @@
 				},
 				{
 					"name": "onToggleCodeView",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; is: boolean }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tis: boolean;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះ​នៅពេល​ដែល​កម្មវិធី​និពន្ធ​ប្តូរ​រវាង​ទិដ្ឋភាព WYSIWYG និង​ទិដ្ឋភាព​កូដ។ ប៉ារ៉ាម៉ែត្រ `is` បង្ហាញ​ថាតើ​ទិដ្ឋភាព​កូដ​ឥឡូវនេះ​សកម្ម (`true`) ឬ​ទិដ្ឋភាព WYSIWYG សកម្ម (`false`)។",
 					"example": "",
@@ -7513,7 +7825,7 @@
 				},
 				{
 					"name": "onToggleMarkdownView",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; is: boolean }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tis: boolean;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះ​នៅពេល​ដែល​កម្មវិធី​និពន្ធ​ប្តូរ​រវាង​ទិដ្ឋភាព WYSIWYG និង​ទិដ្ឋភាព markdown។ ប៉ារ៉ាម៉ែត្រ `is` បង្ហាញ​ថាតើ​ទិដ្ឋភាព markdown ឥឡូវ​សកម្ម (`true`) ឬ​ទិដ្ឋភាព WYSIWYG សកម្ម (`false`)។",
 					"example": "",
@@ -7524,7 +7836,7 @@
 				},
 				{
 					"name": "onToggleFullScreen",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; is: boolean }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tis: boolean;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះ​នៅពេល​ដែល​កម្មវិធី​និពន្ធ​ចូល ឬ​ចេញពី​របៀប​ពេញ​អេក្រង់។ ប៉ារ៉ាម៉ែត្រ `is` បង្ហាញ​ថាតើ​របៀប​ពេញ​អេក្រង់​ឥឡូវនេះ​សកម្ម (`true`) ឬ​របៀប​ធម្មតា​សកម្ម (`false`)។",
 					"example": "",
@@ -7535,7 +7847,7 @@
 				},
 				{
 					"name": "onResizeEditor",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; height: number; prevHeight: boolean; observerEntry: ResizeObserverEntry }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\theight: number;\n\tprevHeight: boolean;\n\tobserverEntry: ResizeObserverEntry;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលកម្ពស់ផ្ទៃ wysiwyg របស់អ្នកកែសម្រួលផ្លាស់ប្តូរ។ ត្រូវបានបង្កឡើងដោយ `ResizeObserver`។ ប្រើវាដើម្បីធ្វើសមកាលកម្មធាតុ UI ខាងក្រៅ ឬអនុវត្តឥរិយាបថផ្លាស់ប្តូរទំហំផ្ទាល់ខ្លួន។ ប៉ារ៉ាម៉ែត្ររួមមានកម្ពស់បច្ចុប្បន្ន កម្ពស់មុន និង `ResizeObserverEntry`។",
 					"example": "",
@@ -7548,7 +7860,7 @@
 				},
 				{
 					"name": "onSetToolbarButtons",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; buttonTray: HTMLElement }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tbuttonTray: HTMLElement;\n}",
 					"returns": "void",
 					"description": "បានដំណើរការបន្ទាប់ពីប៊ូតុងរបារឧបករណ៍ត្រូវបានបង្កើត និងបង្ហាញ។ បានដំណើរការកំឡុងពេលចាប់ផ្តើមរបារឧបករណ៍ និង `resetToolbarButtons()`។ ប្រើវាដើម្បីប្ដូរ DOM របារឧបករណ៍តាមបំណង ឬបន្ថែមធាតុផ្ទាល់ខ្លួនទៅ `buttonTray`។",
 					"example": "",
@@ -7559,7 +7871,7 @@
 				},
 				{
 					"name": "onSave",
-					"params": "params: { $: SunEditor.Deps; frameContext: SunEditor.FrameContext; data: Event }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tframeContext: SunEditor.FrameContext;\n\tdata: Event;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "ចាប់ផ្ដើមដំណើរការនៅពេលដែលពាក្យបញ្ជារក្សាទុកត្រូវបានប្រតិបត្តិ (Ctrl+S ឬប៊ូតុងរក្សាទុក)។ ប្រើវាដើម្បីផ្ញើខ្លឹមសារកម្មវិធីនិពន្ធទៅម៉ាស៊ីនមេ ឬអនុវត្តតក្កវិជ្ជារក្សាទុកផ្ទាល់ខ្លួន។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅ `false` ដើម្បីការពារប្រតិបត្តិការរក្សាទុកពីការបញ្ចប់។",
 					"example": "",
@@ -7606,7 +7918,7 @@
 				},
 				{
 					"name": "imageUploadHandler",
-					"params": "params: { $: SunEditor.Deps; xmlHttp: XMLHttpRequest; info: ImageInfo }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\txmlHttp: XMLHttpRequest;\n\tinfo: ImageInfo;\n}",
 					"returns": "PromiseLike<boolean | void>",
 					"description": "កម្មវិធីដោះស្រាយផ្ទាល់ខ្លួនសម្រាប់សំណើផ្ទុកឡើងរូបភាព។ ត្រូវបានបញ្ឈប់បន្ទាប់ពី `XMLHttpRequest` ត្រូវបានផ្ញើ ប៉ុន្តែមុនពេលដំណើរការឆ្លើយតបលំនាំដើម។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅ `true` ​​ប្រសិនបើអ្នកដោះស្រាយការឆ្លើយតបផ្ទុកឡើងដោយខ្លួនឯង ឬ `false` ដើម្បីប្រើដំណើរការលំនាំដើម។ ប៉ារ៉ាម៉ែត្រ `xmlHttp` ផ្តល់នូវសិទ្ធិចូលប្រើវត្ថុ `XMLHttpRequest`។",
 					"example": "",
@@ -7618,7 +7930,7 @@
 				},
 				{
 					"name": "onImageUploadBefore",
-					"params": "params: { $: SunEditor.Deps; info: ImageInfo; handler: (newInfo?: ImageInfo | null) => void }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: ImageInfo;\n\thandler: (newInfo?: ImageInfo | null) => void;\n}",
 					"returns": "PromiseLike<boolean | ImageInfo | void>",
 					"description": "បាន​ដំណើរការ​មុន​ពេល​រូបភាព​ត្រូវ​បាន​ផ្ទុក​ឡើង​ទៅ​ម៉ាស៊ីន​បម្រើ។ ប្រើ​វា​ដើម្បី​ផ្ទៀងផ្ទាត់ ប្ដូរ​ទំហំ ឬ​កែប្រែ​ទិន្នន័យ​រូបភាព​មុន​ពេល​ផ្ទុក​ឡើង។ ត្រឡប់ `false` ដើម្បី​បោះបង់​ការ​ផ្ទុក​ឡើង ត្រឡប់​វត្ថុ `ImageInfo` ​​ដើម្បី​កែប្រែ​ទិន្នន័យ​ផ្ទុក​ឡើង ឬ​ហៅ​ប៉ារ៉ាម៉ែត្រ `handler` ដើម្បី​បន្ត​ជាមួយ​ទិន្នន័យ​ដែល​បាន​កែប្រែ។",
 					"example": "",
@@ -7641,7 +7953,7 @@
 				},
 				{
 					"name": "onImageAction",
-					"params": "params: { $: SunEditor.Deps; info: FileManagementInfo; element: HTMLElement | null; state: 'create' | 'update' | 'delete'; index: number; remainingFilesCount: number; pluginName: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileManagementInfo;\n\telement: HTMLElement | null;\n\tstate: 'create' | 'update' | 'delete';\n\tindex: number;\n\tremainingFilesCount: number;\n\tpluginName: string;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលរូបភាពត្រូវបានបង្កើត ធ្វើបច្ចុប្បន្នភាព ឬលុបនៅក្នុងកម្មវិធីនិពន្ធ។ ប៉ារ៉ាម៉ែត្រ `state` បង្ហាញពីប្រភេទសកម្មភាព (`create`, `update` ឬ `delete`)។ ប្រើវាដើម្បីធ្វើសមកាលកម្មស្ថានភាពរូបភាពជាមួយប្រព័ន្ធខាងក្រៅ ឬតាមដានការកែប្រែរូបភាព។",
 					"example": "",
@@ -7657,7 +7969,7 @@
 				},
 				{
 					"name": "onImageUploadError",
-					"params": "params: { $: SunEditor.Deps; error: string; limitSize?: number; uploadSize?: number; currentSize?: number; file?: File }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\terror: string;\n\tlimitSize?: number;\n\tuploadSize?: number;\n\tcurrentSize?: number;\n\tfile?: File;\n}",
 					"returns": "PromiseLike<string | void>",
 					"description": "បញ្ឈប់ដំណើរការនៅពេលដែលការផ្ទុកឡើងរូបភាពបរាជ័យដោយសារតែដែនកំណត់ទំហំ កំហុសម៉ាស៊ីនមេ ឬបញ្ហាផ្សេងៗទៀត។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅជាខ្សែអក្សរសារកំហុសផ្ទាល់ខ្លួនដើម្បីជំនួសសារកំហុសលំនាំដើម ឬ `undefined` ដើម្បីប្រើសារលំនាំដើម។",
 					"example": "",
@@ -7672,7 +7984,7 @@
 				},
 				{
 					"name": "onImageDeleteBefore",
-					"params": "params: { $: SunEditor.Deps; element: HTMLElement; container: HTMLElement; align: string; alt: string; url: string | null }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\telement: HTMLElement;\n\tcontainer: HTMLElement;\n\talign: string;\n\talt: string;\n\turl: string | null;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "បាន​ចាប់ផ្ដើម​ដំណើរការ​មុនពេល​រូបភាព​ត្រូវបាន​លុបចេញពី​កម្មវិធីនិពន្ធ។ ប្រើវា​ដើម្បីបញ្ជាក់​ការលុប ជូនដំណឹង​ដល់​ម៉ាស៊ីនមេ ឬ​អនុវត្ត​ការសម្អាត។ ប្រគល់​ការសន្យា​ដែល​ដោះស្រាយ​ទៅ `false` ដើម្បី​ការពារ​រូបភាព​ពី​ការត្រូវបាន​លុប។",
 					"example": "",
@@ -7687,7 +7999,7 @@
 				},
 				{
 					"name": "videoUploadHandler",
-					"params": "params: { $: SunEditor.Deps; xmlHttp: XMLHttpRequest; info: VideoInfo }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\txmlHttp: XMLHttpRequest;\n\tinfo: VideoInfo;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "កម្មវិធីដោះស្រាយផ្ទាល់ខ្លួនសម្រាប់សំណើបង្ហោះវីដេអូ។ ត្រូវបានបញ្ឈប់បន្ទាប់ពី `XMLHttpRequest` ត្រូវបានផ្ញើ ប៉ុន្តែមុនពេលដំណើរការឆ្លើយតបលំនាំដើម។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅ `true` ​​ប្រសិនបើអ្នកដោះស្រាយការឆ្លើយតបបង្ហោះដោយខ្លួនឯង ឬ `false` ដើម្បីប្រើដំណើរការលំនាំដើម។ ប៉ារ៉ាម៉ែត្រ `xmlHttp` ផ្តល់នូវសិទ្ធិចូលប្រើវត្ថុ `XMLHttpRequest`។",
 					"example": "",
@@ -7699,7 +8011,7 @@
 				},
 				{
 					"name": "onVideoUploadBefore",
-					"params": "params: { $: SunEditor.Deps; info: VideoInfo; handler: (newInfo?: VideoInfo | null) => void }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: VideoInfo;\n\thandler: (newInfo?: VideoInfo | null) => void;\n}",
 					"returns": "PromiseLike<boolean | VideoInfo | void>",
 					"description": "បាន​ដំណើរការ​មុន​ពេល​វីដេអូ​ត្រូវ​បាន​ផ្ទុក​ឡើង​ទៅ​កាន់​ម៉ាស៊ីន​បម្រើ។ ប្រើ​វា​ដើម្បី​ផ្ទៀងផ្ទាត់ បម្លែង​កូដ ឬ​កែប្រែ​ទិន្នន័យ​វីដេអូ​មុន​ពេល​ផ្ទុក​ឡើង។ ត្រឡប់ `false` ដើម្បី​បោះបង់​ការ​ផ្ទុក​ឡើង ត្រឡប់​វត្ថុ `VideoInfo` ​​ដើម្បី​កែប្រែ​ទិន្នន័យ​ផ្ទុក​ឡើង ឬ​ហៅ​ប៉ារ៉ាម៉ែត្រ `handler` ដើម្បី​បន្ត​ជាមួយ​ទិន្នន័យ​ដែល​បាន​កែប្រែ។",
 					"example": "",
@@ -7722,7 +8034,7 @@
 				},
 				{
 					"name": "onVideoAction",
-					"params": "params: { $: SunEditor.Deps; info: FileManagementInfo; element: HTMLElement | null; state: 'create' | 'update' | 'delete'; index: number; remainingFilesCount: number; pluginName: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileManagementInfo;\n\telement: HTMLElement | null;\n\tstate: 'create' | 'update' | 'delete';\n\tindex: number;\n\tremainingFilesCount: number;\n\tpluginName: string;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលវីដេអូត្រូវបានបង្កើត ធ្វើបច្ចុប្បន្នភាព ឬលុបនៅក្នុងកម្មវិធីនិពន្ធ។ ប៉ារ៉ាម៉ែត្រ `state` បង្ហាញពីប្រភេទសកម្មភាព (`create`, `update` ឬ `delete`)។ ប្រើវាដើម្បីធ្វើសមកាលកម្មស្ថានភាពវីដេអូជាមួយប្រព័ន្ធខាងក្រៅ ឬតាមដានការកែប្រែវីដេអូ។",
 					"example": "",
@@ -7738,7 +8050,7 @@
 				},
 				{
 					"name": "onVideoUploadError",
-					"params": "params: { $: SunEditor.Deps; error: string; limitSize?: number; uploadSize?: number; currentSize?: number; file?: File }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\terror: string;\n\tlimitSize?: number;\n\tuploadSize?: number;\n\tcurrentSize?: number;\n\tfile?: File;\n}",
 					"returns": "PromiseLike<string | void>",
 					"description": "បញ្ឈប់ដំណើរការនៅពេលដែលការផ្ទុកឡើងវីដេអូបរាជ័យដោយសារតែដែនកំណត់ទំហំ កំហុសម៉ាស៊ីនមេ ឬបញ្ហាផ្សេងៗទៀត។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅជាខ្សែអក្សរសារកំហុសផ្ទាល់ខ្លួនដើម្បីជំនួសសារកំហុសលំនាំដើម ឬ `undefined` ដើម្បីប្រើសារលំនាំដើម។",
 					"example": "",
@@ -7753,7 +8065,7 @@
 				},
 				{
 					"name": "onVideoDeleteBefore",
-					"params": "params: { $: SunEditor.Deps; element: HTMLElement; container: HTMLElement; align: string; url: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\telement: HTMLElement;\n\tcontainer: HTMLElement;\n\talign: string;\n\turl: string;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "បាន​បញ្ឈប់​មុន​ពេល​វីដេអូ​ត្រូវ​បាន​លុប​ចេញ​ពី​កម្មវិធី​និពន្ធ។ ប្រើ​វា​ដើម្បី​បញ្ជាក់​ការ​លុប ជូន​ដំណឹង​ដល់​ម៉ាស៊ីន​បម្រើ ឬ​អនុវត្ត​ការ​សម្អាត។ ត្រឡប់​ការ​សន្យា​ដែល​ដោះស្រាយ​ទៅ `false` ដើម្បី​ការពារ​វីដេអូ​ពី​ការ​ត្រូវ​បាន​លុប។",
 					"example": "",
@@ -7767,7 +8079,7 @@
 				},
 				{
 					"name": "audioUploadHandler",
-					"params": "params: { $: SunEditor.Deps; xmlHttp: XMLHttpRequest; info: AudioInfo }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\txmlHttp: XMLHttpRequest;\n\tinfo: AudioInfo;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "កម្មវិធីដោះស្រាយផ្ទាល់ខ្លួនសម្រាប់សំណើផ្ទុកឡើងសំឡេង។ ត្រូវបានបញ្ឈប់បន្ទាប់ពី `XMLHttpRequest` ត្រូវបានផ្ញើ ប៉ុន្តែមុនពេលដំណើរការឆ្លើយតបលំនាំដើម។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅ `true` ​​ប្រសិនបើអ្នកដោះស្រាយការឆ្លើយតបផ្ទុកឡើងដោយខ្លួនឯង ឬ `false` ដើម្បីប្រើដំណើរការលំនាំដើម។ ប៉ារ៉ាម៉ែត្រ `xmlHttp` ផ្តល់នូវសិទ្ធិចូលប្រើវត្ថុ `XMLHttpRequest`។",
 					"example": "",
@@ -7779,7 +8091,7 @@
 				},
 				{
 					"name": "onAudioUploadBefore",
-					"params": "params: { $: SunEditor.Deps; info: AudioInfo; handler: (newInfo?: AudioInfo | null) => void }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: AudioInfo;\n\thandler: (newInfo?: AudioInfo | null) => void;\n}",
 					"returns": "PromiseLike<boolean | AudioInfo | void>",
 					"description": "បាន​ដំណើរការ​មុន​ពេល​ឯកសារ​អូឌីយ៉ូ​ត្រូវ​បាន​ផ្ទុក​ឡើង​ទៅ​ម៉ាស៊ីន​បម្រើ។ ប្រើ​វា​ដើម្បី​ផ្ទៀងផ្ទាត់ បម្លែង​កូដ ឬ​កែប្រែ​ទិន្នន័យ​អូឌីយ៉ូ​មុន​ពេល​ផ្ទុក​ឡើង។ ត្រឡប់ `false` ដើម្បី​បោះបង់​ការ​ផ្ទុក​ឡើង ត្រឡប់​វត្ថុ `AudioInfo` ​​ដើម្បី​កែប្រែ​ទិន្នន័យ​ផ្ទុក​ឡើង ឬ​ហៅ​ប៉ារ៉ាម៉ែត្រ `handler` ដើម្បី​បន្ត​ជាមួយ​ទិន្នន័យ​ដែល​បាន​កែប្រែ។",
 					"example": "",
@@ -7791,7 +8103,7 @@
 				},
 				{
 					"name": "onAudioUploadError",
-					"params": "params: { $: SunEditor.Deps; error: string; limitSize?: number; uploadSize?: number; currentSize?: number; file?: File }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\terror: string;\n\tlimitSize?: number;\n\tuploadSize?: number;\n\tcurrentSize?: number;\n\tfile?: File;\n}",
 					"returns": "PromiseLike<string | void>",
 					"description": "បញ្ឈប់ដំណើរការនៅពេលដែលការផ្ទុកឡើងសំឡេងបរាជ័យដោយសារតែដែនកំណត់ទំហំ កំហុសម៉ាស៊ីនមេ ឬបញ្ហាផ្សេងៗទៀត។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅជាខ្សែអក្សរសារកំហុសផ្ទាល់ខ្លួនដើម្បីជំនួសសារកំហុសលំនាំដើម ឬ `undefined` ដើម្បីប្រើសារលំនាំដើម។",
 					"example": "",
@@ -7817,7 +8129,7 @@
 				},
 				{
 					"name": "onAudioAction",
-					"params": "params: { $: SunEditor.Deps; info: FileManagementInfo; element: HTMLElement | null; state: 'create' | 'update' | 'delete'; index: number; remainingFilesCount: number; pluginName: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileManagementInfo;\n\telement: HTMLElement | null;\n\tstate: 'create' | 'update' | 'delete';\n\tindex: number;\n\tremainingFilesCount: number;\n\tpluginName: string;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលធាតុអូឌីយ៉ូត្រូវបានបង្កើត ធ្វើបច្ចុប្បន្នភាព ឬលុបនៅក្នុងកម្មវិធីនិពន្ធ។ ប៉ារ៉ាម៉ែត្រ `state` បង្ហាញពីប្រភេទសកម្មភាព (`create`, `update` ឬ `delete`)។ ប្រើវាដើម្បីធ្វើសមកាលកម្មស្ថានភាពអូឌីយ៉ូជាមួយប្រព័ន្ធខាងក្រៅ ឬតាមដានការកែប្រែអូឌីយ៉ូ។",
 					"example": "",
@@ -7833,7 +8145,7 @@
 				},
 				{
 					"name": "onAudioDeleteBefore",
-					"params": "params: { $: SunEditor.Deps; element: HTMLElement; container: HTMLElement; url: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\telement: HTMLElement;\n\tcontainer: HTMLElement;\n\turl: string;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "បាន​ចាប់ផ្ដើម​ដំណើរការ​មុនពេល​ធាតុ​អូឌីយ៉ូ​ត្រូវបាន​លុបចេញពី​កម្មវិធីនិពន្ធ។ ប្រើវា​ដើម្បីបញ្ជាក់​ការលុប ជូនដំណឹង​ដល់​ម៉ាស៊ីនមេ ឬ​អនុវត្ត​ការសម្អាត។ ត្រឡប់​ការសន្យា​ដែល​ដោះស្រាយ​ទៅ `false` ដើម្បី​ការពារ​អូឌីយ៉ូ​ពី​ការត្រូវបាន​លុប។",
 					"example": "",
@@ -7846,7 +8158,7 @@
 				},
 				{
 					"name": "onFileUploadBefore",
-					"params": "params: { $: SunEditor.Deps; info: FileInfo; handler: (newInfo?: FileInfo | null) => void }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileInfo;\n\thandler: (newInfo?: FileInfo | null) => void;\n}",
 					"returns": "PromiseLike<boolean | FileInfo | void>",
 					"description": "បាន​ដំណើរការ​មុន​ពេល​ឯកសារ​ត្រូវ​បាន​ផ្ទុក​ឡើង​ទៅ​ម៉ាស៊ីន​បម្រើ (តាមរយៈ​កម្មវិធី​ជំនួយ `fileUpload`)។ ប្រើ​វា​ដើម្បី​ផ្ទៀងផ្ទាត់ ឬ​កែប្រែ​ទិន្នន័យ​ឯកសារ​មុន​ពេល​ផ្ទុក​ឡើង។ ត្រឡប់ `false` ​​ដើម្បី​បោះបង់​ការ​ផ្ទុក​ឡើង ត្រឡប់​វត្ថុ `FileInfo` ដើម្បី​កែប្រែ​ទិន្នន័យ​ផ្ទុក​ឡើង ឬ​ហៅ​ប៉ារ៉ាម៉ែត្រ `handler` ដើម្បី​បន្ត​ជាមួយ​ទិន្នន័យ​ដែល​បាន​កែប្រែ។",
 					"example": "",
@@ -7869,7 +8181,7 @@
 				},
 				{
 					"name": "onFileAction",
-					"params": "params: { $: SunEditor.Deps; info: FileManagementInfo; element: HTMLElement | null; state: 'create' | 'update' | 'delete'; index: number; remainingFilesCount: number; pluginName: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileManagementInfo;\n\telement: HTMLElement | null;\n\tstate: 'create' | 'update' | 'delete';\n\tindex: number;\n\tremainingFilesCount: number;\n\tpluginName: string;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលតំណភ្ជាប់ឯកសារត្រូវបានបង្កើត ធ្វើបច្ចុប្បន្នភាព ឬលុបនៅក្នុងកម្មវិធីនិពន្ធ។ ប៉ារ៉ាម៉ែត្រ `state` បង្ហាញពីប្រភេទសកម្មភាព (`create`, `update` ឬ `delete`)។ ប្រើវាដើម្បីធ្វើសមកាលកម្មស្ថានភាពឯកសារជាមួយប្រព័ន្ធខាងក្រៅ ឬតាមដានការកែប្រែឯកសារ។",
 					"example": "",
@@ -7885,7 +8197,7 @@
 				},
 				{
 					"name": "onFileUploadError",
-					"params": "params: { $: SunEditor.Deps; error: string; limitSize?: number; uploadSize?: number; currentSize?: number; file?: File }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\terror: string;\n\tlimitSize?: number;\n\tuploadSize?: number;\n\tcurrentSize?: number;\n\tfile?: File;\n}",
 					"returns": "PromiseLike<string | void>",
 					"description": "ត្រូវបានបញ្ឈប់នៅពេលដែលការផ្ទុកឡើងឯកសារបរាជ័យដោយសារតែដែនកំណត់ទំហំ កំហុសម៉ាស៊ីនមេ ឬបញ្ហាផ្សេងៗទៀត។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅជាខ្សែអក្សរសារកំហុសផ្ទាល់ខ្លួនដើម្បីជំនួសសារកំហុសលំនាំដើម ឬ `undefined` ដើម្បីប្រើសារលំនាំដើម។",
 					"example": "",
@@ -7900,7 +8212,7 @@
 				},
 				{
 					"name": "onFileDeleteBefore",
-					"params": "params: { $: SunEditor.Deps; element: HTMLElement; container: HTMLElement; url: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\telement: HTMLElement;\n\tcontainer: HTMLElement;\n\turl: string;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "ត្រូវបានបញ្ឈប់មុនពេលដែលតំណភ្ជាប់ឯកសារត្រូវបានលុបចេញពីកម្មវិធីនិពន្ធ។ ប្រើវាដើម្បីបញ្ជាក់ការលុប ជូនដំណឹងដល់ម៉ាស៊ីនមេ ឬអនុវត្តការសម្អាត។ ត្រឡប់ការសន្យាដែលដោះស្រាយទៅ `false` ដើម្បីការពារតំណភ្ជាប់ឯកសារពីការត្រូវបានលុប។",
 					"example": "",
@@ -7924,7 +8236,7 @@
 				},
 				{
 					"name": "onFileManagerAction",
-					"params": "params: { $: SunEditor.Deps; info: FileManagementInfo; element: HTMLElement | null; state: 'create' | 'update' | 'delete'; index: number; remainingFilesCount: number; pluginName: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\tinfo: FileManagementInfo;\n\telement: HTMLElement | null;\n\tstate: 'create' | 'update' | 'delete';\n\tindex: number;\n\tremainingFilesCount: number;\n\tpluginName: string;\n}",
 					"returns": "void",
 					"description": "បញ្ឆេះនៅពេលដែលធាតុមេឌៀណាមួយ (រូបភាព វីដេអូ អូឌីយ៉ូ ឯកសារ) ត្រូវបានបង្កើត ធ្វើបច្ចុប្បន្នភាព ឬលុប។ នេះគឺជាព្រឹត្តិការណ៍បង្រួបបង្រួមដែលបង្កឱ្យដំណើរការសម្រាប់ប្រភេទមេឌៀទាំងអស់។ ប៉ារ៉ាម៉ែត្រ `pluginName` បង្ហាញថាកម្មវិធីជំនួយណាដែលបានបង្កឱ្យដំណើរការ (`image`, `video`, `audio` ឬ `file`)។",
 					"example": "",
@@ -7947,7 +8259,7 @@
 				},
 				{
 					"name": "onEmbedDeleteBefore",
-					"params": "params: { $: SunEditor.Deps; element: HTMLElement; container: HTMLElement; align: string; url: string }",
+					"params": "params: {\n\t$: SunEditor.Deps;\n\telement: HTMLElement;\n\tcontainer: HTMLElement;\n\talign: string;\n\turl: string;\n}",
 					"returns": "PromiseLike<boolean>",
 					"description": "បាន​ដំណើរការ​មុន​ពេល​ធាតុ​ដែល​បាន​បង្កប់ (iframe, custom embed) ត្រូវ​បាន​លុប​ចេញ​ពី​កម្មវិធី​និពន្ធ។ ប្រើ​វា​ដើម្បី​បញ្ជាក់​ការ​លុប ឬ​អនុវត្ត​ការ​សម្អាត។ ត្រឡប់ Promise ដែល​ដោះស្រាយ​ទៅ `false` ដើម្បី​ការពារ​ការ​លុប​ដែល​បាន​បង្កប់។",
 					"example": "",
@@ -8632,8 +8944,19 @@
 					"source": "typedef.d.ts"
 				},
 				{
+					"name": "ComponentLauncher",
+					"definition": "{\n\t\t\t/**\n\t\t\t * - Delete hook (invoked by the selected-component keydown handler).\n\t\t\t */\n\t\t\tcomponentDestroy?: (target: any) => void | Promise<void>;\n\t\t\t/**\n\t\t\t * - Optional select hook.\n\t\t\t */\n\t\t\tcomponentSelect?: (target: any) => boolean | void;\n\t\t\t/**\n\t\t\t * - Optional deselect hook.\n\t\t\t */\n\t\t\tcomponentDeselect?: (target: any) => void;\n\t\t}",
+					"kind": "type",
+					"memberDescriptions": {
+						"componentDestroy": "- Delete hook (invoked by the selected-component keydown handler).",
+						"componentSelect": "- Optional select hook.",
+						"componentDeselect": "- Optional deselect hook."
+					},
+					"source": "typedef.d.ts"
+				},
+				{
 					"name": "ComponentInfo",
-					"definition": "{\n\t\t\t/**\n\t\t\t * - The target element associated with the component.\n\t\t\t */\n\t\t\ttarget: HTMLElement;\n\t\t\t/**\n\t\t\t * - The name of the plugin related to the component.\n\t\t\t */\n\t\t\tpluginName: string;\n\t\t\t/**\n\t\t\t * - Options related to the component.\n\t\t\t */\n\t\t\toptions: {\n\t\t\t\t[x: string]: any;\n\t\t\t};\n\t\t\t/**\n\t\t\t * - The main container element for the component.\n\t\t\t */\n\t\t\tcontainer: HTMLElement;\n\t\t\t/**\n\t\t\t * - The cover element, if applicable.\n\t\t\t */\n\t\t\tcover: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - The inline cover element, if applicable.\n\t\t\t */\n\t\t\tinlineCover: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - The caption element, if applicable.\n\t\t\t */\n\t\t\tcaption: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - Whether the component is a file-related component.\n\t\t\t */\n\t\t\tisFile: boolean;\n\t\t\t/**\n\t\t\t * - The element that triggered the component, if applicable.\n\t\t\t */\n\t\t\tlauncher: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - Whether the component is an input component (e.g., table).\n\t\t\t */\n\t\t\tisInputType: boolean;\n\t\t}",
+					"definition": "{\n\t\t\t/**\n\t\t\t * - The target element associated with the component.\n\t\t\t */\n\t\t\ttarget: HTMLElement;\n\t\t\t/**\n\t\t\t * - The name of the plugin related to the component.\n\t\t\t */\n\t\t\tpluginName: string;\n\t\t\t/**\n\t\t\t * - Options related to the component.\n\t\t\t */\n\t\t\toptions: {\n\t\t\t\t[x: string]: any;\n\t\t\t};\n\t\t\t/**\n\t\t\t * - The main container element for the component.\n\t\t\t */\n\t\t\tcontainer: HTMLElement;\n\t\t\t/**\n\t\t\t * - The cover element, if applicable.\n\t\t\t */\n\t\t\tcover: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - The inline cover element, if applicable.\n\t\t\t */\n\t\t\tinlineCover: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - The caption element, if applicable.\n\t\t\t */\n\t\t\tcaption: HTMLElement | null;\n\t\t\t/**\n\t\t\t * - Whether the component is a file-related component.\n\t\t\t */\n\t\t\tisFile: boolean;\n\t\t\t/**\n\t\t\t * - Hook object for non-plugin components (e.g. `pageBreak`), if applicable.\n\t\t\t */\n\t\t\tlauncher: SunEditor.ComponentLauncher | null;\n\t\t\t/**\n\t\t\t * - Whether the component is an input component (e.g., table).\n\t\t\t */\n\t\t\tisInputType: boolean;\n\t\t}",
 					"kind": "type",
 					"memberDescriptions": {
 						"target": "- The target element associated with the component.",
@@ -8644,7 +8967,7 @@
 						"inlineCover": "- The inline cover element, if applicable.",
 						"caption": "- The caption element, if applicable.",
 						"isFile": "- Whether the component is a file-related component.",
-						"launcher": "- The element that triggered the component, if applicable.",
+						"launcher": "- Hook object for non-plugin components (e.g. `pageBreak`), if applicable.",
 						"isInputType": "- Whether the component is an input component (e.g., table)."
 					},
 					"source": "typedef.d.ts"
@@ -8885,79 +9208,79 @@
 				},
 				{
 					"name": "Select",
-					"definition": "typeof import('./interfaces/contracts').EditorComponent.prototype.componentSelect",
+					"definition": "import('./interfaces/contracts').EditorComponent['componentSelect']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Deselect",
-					"definition": "typeof import('./interfaces/contracts').EditorComponent.prototype.componentDeselect",
+					"definition": "import('./interfaces/contracts').EditorComponent['componentDeselect']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Edit",
-					"definition": "typeof import('./interfaces/contracts').EditorComponent.prototype.componentEdit",
+					"definition": "import('./interfaces/contracts').EditorComponent['componentEdit']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Destroy",
-					"definition": "typeof import('./interfaces/contracts').EditorComponent.prototype.componentDestroy",
+					"definition": "import('./interfaces/contracts').EditorComponent['componentDestroy']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Copy",
-					"definition": "typeof import('./interfaces/contracts').EditorComponent.prototype.componentCopy",
+					"definition": "import('./interfaces/contracts').EditorComponent['componentCopy']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Action",
-					"definition": "typeof import('./interfaces/contracts').ModuleModal.prototype.modalAction",
+					"definition": "import('./interfaces/contracts').ModuleModal['modalAction']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "On",
-					"definition": "typeof import('./interfaces/contracts').ModuleModal.prototype.modalOn",
+					"definition": "import('./interfaces/contracts').ModuleModal['modalOn']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Off",
-					"definition": "typeof import('./interfaces/contracts').ModuleModal.prototype.modalOff",
+					"definition": "import('./interfaces/contracts').ModuleModal['modalOff']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Resize",
-					"definition": "typeof import('./interfaces/contracts').ModuleModal.prototype.modalResize",
+					"definition": "import('./interfaces/contracts').ModuleModal['modalResize']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "Close",
-					"definition": "typeof import('./interfaces/contracts').ModuleController.prototype.controllerClose",
+					"definition": "import('./interfaces/contracts').ModuleController['controllerClose']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "HueSliderOpen",
-					"definition": "typeof import('./interfaces/contracts').ModuleColorPicker.prototype.colorPickerHueSliderOpen",
+					"definition": "import('./interfaces/contracts').ModuleColorPicker['colorPickerHueSliderOpen']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "HueSliderClose",
-					"definition": "typeof import('./interfaces/contracts').ModuleColorPicker.prototype.colorPickerHueSliderClose",
+					"definition": "import('./interfaces/contracts').ModuleColorPicker['colorPickerHueSliderClose']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "CancelAction",
-					"definition": "typeof import('./interfaces/contracts').ModuleHueSlider.prototype.hueSliderCancelAction",
+					"definition": "import('./interfaces/contracts').ModuleHueSlider['hueSliderCancelAction']",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
@@ -9112,7 +9435,7 @@
 				},
 				{
 					"name": "ButtonSpecial",
-					"definition": "'|' | '/' | `-${'left' | 'right' | 'center'}` | '#fix' | `:${string}-${string}` | `%${number}`",
+					"definition": "| '|'\n\t\t\t\t| '/'\n\t\t\t\t| `-${'left' | 'right' | 'center'}`\n\t\t\t\t| '#fix'\n\t\t\t\t| `:${string}-${string}`\n\t\t\t\t| `%${number}`",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
@@ -9124,13 +9447,13 @@
 				},
 				{
 					"name": "ButtonPlugin",
-					"definition": "| 'blockquote'\n\t\t\t\t| 'codeBlock'\n\t\t\t\t| 'exportPDF'\n\t\t\t\t| 'fileUpload'\n\t\t\t\t| 'list_bulleted'\n\t\t\t\t| 'list_numbered'\n\t\t\t\t| 'autocomplete'\n\t\t\t\t| 'align'\n\t\t\t\t| 'font'\n\t\t\t\t| 'fontColor'\n\t\t\t\t| 'backgroundColor'\n\t\t\t\t| 'list'\n\t\t\t\t| 'table'\n\t\t\t\t| 'blockStyle'\n\t\t\t\t| 'hr'\n\t\t\t\t| 'layout'\n\t\t\t\t| 'lineHeight'\n\t\t\t\t| 'template'\n\t\t\t\t| 'paragraphStyle'\n\t\t\t\t| 'textStyle'\n\t\t\t\t| 'link'\n\t\t\t\t| 'image'\n\t\t\t\t| 'video'\n\t\t\t\t| 'audio'\n\t\t\t\t| 'embed'\n\t\t\t\t| 'math'\n\t\t\t\t| 'drawing'\n\t\t\t\t| 'imageGallery'\n\t\t\t\t| 'videoGallery'\n\t\t\t\t| 'audioGallery'\n\t\t\t\t| 'fileGallery'\n\t\t\t\t| 'fileBrowser'\n\t\t\t\t| 'fontSize'\n\t\t\t\t| 'pageNavigator'\n\t\t\t\t| 'anchor'",
+					"definition": "| 'blockquote'\n\t\t\t\t| 'codeBlock'\n\t\t\t\t| 'exportPDF'\n\t\t\t\t| 'fileUpload'\n\t\t\t\t| 'list_bulleted'\n\t\t\t\t| 'list_numbered'\n\t\t\t\t| 'autocomplete'\n\t\t\t\t| 'slashCommand'\n\t\t\t\t| 'align'\n\t\t\t\t| 'font'\n\t\t\t\t| 'fontColor'\n\t\t\t\t| 'backgroundColor'\n\t\t\t\t| 'list'\n\t\t\t\t| 'table'\n\t\t\t\t| 'blockStyle'\n\t\t\t\t| 'hr'\n\t\t\t\t| 'layout'\n\t\t\t\t| 'lineHeight'\n\t\t\t\t| 'template'\n\t\t\t\t| 'paragraphStyle'\n\t\t\t\t| 'textStyle'\n\t\t\t\t| 'link'\n\t\t\t\t| 'image'\n\t\t\t\t| 'video'\n\t\t\t\t| 'audio'\n\t\t\t\t| 'embed'\n\t\t\t\t| 'math'\n\t\t\t\t| 'drawing'\n\t\t\t\t| 'imageGallery'\n\t\t\t\t| 'videoGallery'\n\t\t\t\t| 'audioGallery'\n\t\t\t\t| 'fileGallery'\n\t\t\t\t| 'fileBrowser'\n\t\t\t\t| 'fontSize'\n\t\t\t\t| 'pageNavigator'\n\t\t\t\t| 'anchor'",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
 				{
 					"name": "ButtonItem",
-					"definition": "SunEditor.UI.ButtonCommand | SunEditor.UI.ButtonPlugin | SunEditor.UI.ButtonSpecial | string",
+					"definition": "| SunEditor.UI.ButtonCommand\n\t\t\t\t| SunEditor.UI.ButtonPlugin\n\t\t\t\t| SunEditor.UI.ButtonSpecial\n\t\t\t\t| string",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
@@ -9142,15 +9465,17 @@
 				},
 				{
 					"name": "EditorFrameOptions",
-					"definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable].\n\t * ```js\n\t * { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n\t * ```\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor.\n\t * ```js\n\t * { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n\t * ```\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`.\n\t * ```js\n\t * { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n\t * ```\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - `\"*\"`: Wildcard to include ALL stylesheets from the page.\n\t * - Absolute URLs and data URLs (`data:text/css,`) are also supported.\n\t * ```js\n\t * { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n\t * ```\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar.\n\t * ```js\n\t * { charCounter_label: 'Characters :' }\n\t * ```\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t *\n\t * === Word Counter ===\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n\t/**\n\t * - Shows the number of words in the editor.\n\t */\n\twordCounter?: boolean;\n\t/**\n\t * - Text to be displayed in the `wordCounter` area of the bottom bar.\n\t * ```js\n\t * { wordCounter_label: 'Words :' }\n\t * ```\n\t */\n\twordCounter_label?: string | null;\n}",
+					"definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text shown when the whole editor is empty.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - per-line placeholder shown on the focused\n\t * line when that line is empty. Takes priority over `placeholder` while a line is focused.\n\t */\n\tplaceholder_line?: string;\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable].\n\t * ```js\n\t * { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n\t * ```\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Optional max-width for the editor body (`.se-wrapper`).\n\t * - **CSS length** (`\"740px\"`, `\"60ch\"`): editor body's content is clamped to this width and centered horizontally; scroll container stays full width (scrollbar at the outer edge, wheel/touch active over the whole area).\n\t * - **`\"auto\"`** or **empty string** (default): no constraint — natural full-width layout with default content padding.\n\t * - In `blockHandle` mode, the gutter handle tracks the centered text band.\n\t * ```js\n\t * { innerWidth: '740px' }\n\t * ```\n\t */\n\tinnerWidth?: string;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor.\n\t * ```js\n\t * { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n\t * ```\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`.\n\t * ```js\n\t * { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n\t * ```\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - `\"*\"`: Wildcard to include ALL stylesheets from the page.\n\t * - Absolute URLs and data URLs (`data:text/css,`) are also supported.\n\t * ```js\n\t * { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n\t * ```\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar.\n\t * ```js\n\t * { charCounter_label: 'Characters :' }\n\t * ```\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t *\n\t * === Word Counter ===\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n\t/**\n\t * - Shows the number of words in the editor.\n\t */\n\twordCounter?: boolean;\n\t/**\n\t * - Text to be displayed in the `wordCounter` area of the bottom bar.\n\t * ```js\n\t * { wordCounter_label: 'Words :' }\n\t * ```\n\t */\n\twordCounter_label?: string | null;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"value": "- Initial value for the editor.",
-						"placeholder": "- Placeholder text.",
+						"placeholder": "- Placeholder text shown when the whole editor is empty.",
+						"placeholder_line": "- per-line placeholder shown on the focused line when that line is empty. Takes priority over `placeholder` while a line is focused.",
 						"editableFrameAttributes": "- Attributes for the editable frame[.sun-editor-editable]. ```js { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } } ``` /// === Layout & Sizing ===",
 						"width": "- Width for the editor.",
 						"minWidth": "- Min width for the editor.",
 						"maxWidth": "- Max width for the editor.",
+						"innerWidth": "- Optional max-width for the editor body (`.se-wrapper`).\n- **CSS length** (`\"740px\"`, `\"60ch\"`): editor body's content is clamped to this width and centered horizontally; scroll container stays full width (scrollbar at the outer edge, wheel/touch active over the whole area).\n- **`\"auto\"`** or **empty string** (default): no constraint — natural full-width layout with default content padding.\n- In `blockHandle` mode, the gutter handle tracks the centered text band. ```js { innerWidth: '740px' } ```",
 						"height": "- Height for the editor.",
 						"minHeight": "- Min height for the editor.",
 						"maxHeight": "- Max height for the editor.",
@@ -9240,7 +9565,7 @@
 				},
 				{
 					"name": "EditorBaseOptions",
-					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom';\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-[^\\s]+'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed CSS styles per HTML tag.\n\t * - Key is a tag name, multiple tags joined with `|`, or a category sentinel (`@text`, `@line`).\n\t * - Value is a pipe-delimited list of allowed style names.\n\t * - Resolution order when filtering an element: explicit tag entry → `@line` (for formatLine elements) → `@text` (for textStyleTags).\n\t * - An explicit tag entry **replaces** the category default — include category styles in the value if you want both.\n\t * - Merged with {@link DEFAULTS.TAG_STYLES}; user-supplied keys win.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * '@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n\t * '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n\t * 'table|td': 'border|color|background-color',  // per-tag whitelist\n\t * div: 'color',                                   // explicit override; ignores `@line` default\n\t * hr: 'border-top',\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar.\n\t * - `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n\t * - `{top, offset}`: `top` is the sticky position when the page header is visible.\n\t * - `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n\t * - When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n\t * - for a page header that has scrolled out of view. Default `offset` is `0`.\n\t * ```js\n\t * // Basic usage — sticky at top with 0px offset\n\t * toolbar_sticky: 0\n\t *\n\t * // Account for a 92px fixed/sticky site header\n\t * toolbar_sticky: 92\n\t *\n\t * // 92px header on desktop, but 0px when virtual keyboard pushes the viewport\n\t * toolbar_sticky: { top: 92, offset: 0 }\n\t * ```\n\t */\n\ttoolbar_sticky?:\n\t\t| number\n\t\t| {\n\t\t\t\ttop: number;\n\t\t\t\toffset: number;\n\t\t  };\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.\n\t */\n\thistoryStackSize?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - Shows the built-in Find/Replace panel UI.\n\t * - The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).\n\t */\n\tfinder_panel?: boolean;\n\t/**\n\t * - Searches instantly as you type (debounced). When false, search runs only on Enter.\n\t *\n\t * ///\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfinder_liveSearch?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tautocomplete?: import('../../plugins/field/autocomplete.js').AutocompletePluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tcodeBlock?: import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
+					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom';\n\t/**\n\t * - Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`.\n\t */\n\tblockHandle?: {\n\t\tmenu?: Array<\n\t\t\t| string\n\t\t\t| {\n\t\t\t\t\ttitle: string;\n\t\t\t\t\ticon?: string;\n\t\t\t\t\taction: (\n\t\t\t\t\t\tdeps: SunEditor.Deps,\n\t\t\t\t\t\tctx: {\n\t\t\t\t\t\t\tblock: HTMLElement;\n\t\t\t\t\t\t},\n\t\t\t\t\t) => void;\n\t\t\t  }\n\t\t>;\n\t};\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-[^\\s]+'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed CSS styles per HTML tag.\n\t * - Key is a tag name, multiple tags joined with `|`, or a category sentinel (`@text`, `@line`).\n\t * - Value is a pipe-delimited list of allowed style names.\n\t * - Resolution order when filtering an element: explicit tag entry → `@line` (for formatLine elements) → `@text` (for textStyleTags).\n\t * - An explicit tag entry **replaces** the category default — include category styles in the value if you want both.\n\t * - Merged with {@link DEFAULTS.TAG_STYLES}; user-supplied keys win.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * '@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n\t * '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n\t * 'table|td': 'border|color|background-color',  // per-tag whitelist\n\t * div: 'color',                                   // explicit override; ignores `@line` default\n\t * hr: 'border-top',\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Center the toolbar's button row (`.se-btn-tray`) horizontally.\n\t * - **CSS length** (e.g. `\"500px\"`, `\"740px\"`, `\"60ch\"`): toolbar background spans full width while the button row is capped at that width and centered. If buttons fit, the row stays on a single line; if they exceed the cap, they wrap inside it.\n\t * - **`\"auto\"`**: no cap — the row is sized to its content and simply centered.\n\t * - **Empty string** (default): no constraint.\n\t * - **Note on `responsiveButtonList`**: thresholds compare against the toolbar's full width, not the band. When this option is set, calibrate `responsiveButtonList` keys around the toolbar size you actually want each button set to kick in at.\n\t * ```js\n\t * { toolbar_innerWidth: '740px' }\n\t * { toolbar_innerWidth: 'auto' }\n\t * ```\n\t */\n\ttoolbar_innerWidth?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar.\n\t * - `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n\t * - `{top, offset}`: `top` is the sticky position when the page header is visible.\n\t * - `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n\t * - When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n\t * - for a page header that has scrolled out of view. Default `offset` is `0`.\n\t * ```js\n\t * // Basic usage — sticky at top with 0px offset\n\t * toolbar_sticky: 0\n\t *\n\t * // Account for a 92px fixed/sticky site header\n\t * toolbar_sticky: 92\n\t *\n\t * // 92px header on desktop, but 0px when virtual keyboard pushes the viewport\n\t * toolbar_sticky: { top: 92, offset: 0 }\n\t * ```\n\t */\n\ttoolbar_sticky?:\n\t\t| number\n\t\t| {\n\t\t\t\ttop: number;\n\t\t\t\toffset: number;\n\t\t  };\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.\n\t */\n\thistoryStackSize?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - Shows the built-in Find/Replace panel UI.\n\t * - The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).\n\t */\n\tfinder_panel?: boolean;\n\t/**\n\t * - Searches instantly as you type (debounced). When false, search runs only on Enter.\n\t *\n\t * ///\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfinder_liveSearch?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tautocomplete?: import('../../plugins/field/autocomplete.js').AutocompletePluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tcodeBlock?: import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\tslashCommand?: import('../../plugins/field/slashCommand.js').SlashCommandPluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"plugins": "- Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name. ```js import plugins, { image, link, table } from 'suneditor/src/plugins'; { plugins: plugins, plugins: [image, link, table], plugins: { image, link, table } } ```",
@@ -9248,6 +9573,7 @@
 						"buttonList": "- List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}/// === Modes & Themes ===",
 						"v2Migration": "- Enables migration mode for SunEditor v2.",
 						"mode": "- Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).",
+						"blockHandle": "- Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`.",
 						"type": "- Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`. ```js // type 'document:header,page' ```",
 						"theme": "- Editor theme.",
 						"lang": "- Language configuration. default : EN",
@@ -9280,6 +9606,7 @@
 						"syncTabIndent": "- Synchronizes tab indent with spaces.",
 						"tabDisable": "- Disables tab key input.",
 						"toolbar_width": "- Toolbar width.",
+						"toolbar_innerWidth": "- Center the toolbar's button row (`.se-btn-tray`) horizontally.\n- **CSS length** (e.g. `\"500px\"`, `\"740px\"`, `\"60ch\"`): toolbar background spans full width while the button row is capped at that width and centered. If buttons fit, the row stays on a single line; if they exceed the cap, they wrap inside it.\n- **`\"auto\"`**: no cap — the row is sized to its content and simply centered.\n- **Empty string** (default): no constraint.\n- **Note on `responsiveButtonList`**: thresholds compare against the toolbar's full width, not the band. When this option is set, calibrate `responsiveButtonList` keys around the toolbar size you actually want each button set to kick in at. ```js { toolbar_innerWidth: '740px' } { toolbar_innerWidth: 'auto' } ```",
 						"toolbar_container": "- Container element for the toolbar.",
 						"toolbar_sticky": "- Enables sticky toolbar.\n- `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n- `{top, offset}`: `top` is the sticky position when the page header is visible.\n- `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n- When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n- for a page header that has scrolled out of view. Default `offset` is `0`. ```js // Basic usage — sticky at top with 0px offset toolbar_sticky: 0 // Account for a 92px fixed/sticky site header toolbar_sticky: 92 // 92px header on desktop, but 0px when virtual keyboard pushes the viewport toolbar_sticky: { top: 92, offset: 0 } ```",
 						"toolbar_hide": "- Hides toolbar initially.",
@@ -9404,7 +9731,7 @@
 				},
 				{
 					"name": "FrameContextStore",
-					"definition": "{\n\t/**\n\t * - Unique key identifying this editor instance (useful for multi-root editors).\n\t */\n\tkey: any;\n\t/**\n\t * - Frame-specific options (toolbar, plugins, behaviors, etc.).\n\t *\n\t * === Core DOM References ===\n\t */\n\toptions: SunEditor.FrameOptions;\n\t/**\n\t * - The original source element (usually a <textarea> or target element).\n\t */\n\toriginElement: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - The outermost container wrapping the entire editor (toolbar + editor + status bar).\n\t */\n\ttopArea: HTMLElement;\n\t/**\n\t * - The `.se-container` element that holds the editor's UI.\n\t */\n\tcontainer: HTMLElement;\n\t/**\n\t * - The `.se-wrapper` element containing the editable area and internal components.\n\t */\n\twrapper: HTMLElement;\n\t/**\n\t * - The WYSIWYG frame element (either an <iframe> or a div in inline mode).\n\t */\n\twysiwygFrame: SunEditor.WysiwygFrame;\n\t/**\n\t * - The actual editable content area (usually the iframe’s <body> or a contentEditable div).\n\t */\n\twysiwyg: HTMLElement;\n\t/**\n\t * - Internal reference for wysiwyg events (set on initialization).\n\t */\n\teventWysiwyg: SunEditor.EventWysiwyg;\n\t/**\n\t * - Wrapper element for the code-view mode.\n\t */\n\tcodeWrapper: HTMLElement;\n\t/**\n\t * - Code view editing element (a <textarea> or <pre>).\n\t */\n\tcode: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in code view mode.\n\t */\n\tcodeNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Wrapper element for the markdown-view mode.\n\t */\n\tmarkdownWrapper: HTMLElement;\n\t/**\n\t * - Markdown view editing element (a <textarea>).\n\t */\n\tmarkdown: HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in markdown view mode.\n\t */\n\tmarkdownNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Placeholder element shown when the editor is empty.\n\t */\n\tplaceholder: HTMLElement;\n\t/**\n\t * - Editor status bar element (for resizing, info, etc.).\n\t */\n\tstatusbar: HTMLElement;\n\t/**\n\t * - Navigation element (e.g., for outline or bookmarks).\n\t */\n\tnavigation: HTMLElement;\n\t/**\n\t * - Wrapper for the character counter element.\n\t */\n\tcharWrapper: HTMLElement;\n\t/**\n\t * - Element showing the character counter.\n\t */\n\tcharCounter: HTMLElement;\n\t/**\n\t * - Wrapper for the word counter element.\n\t */\n\twordWrapper: HTMLElement;\n\t/**\n\t * - Element showing the word counter.\n\t */\n\twordCounter: HTMLElement;\n\t/**\n\t * - The window object of the WYSIWYG frame (iframe window).\n\t */\n\t_ww?: Window;\n\t/**\n\t * - The document object of the WYSIWYG frame (iframe document).\n\t *\n\t * === UI Utilities & Visual Components ===\n\t */\n\t_wd?: Document;\n\t/**\n\t * - Top floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_t: HTMLElement;\n\t/**\n\t * - Bottom floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_b: HTMLElement;\n\t/**\n\t * - Placeholder element used for sticky toolbar behavior.\n\t */\n\t_stickyDummy?: HTMLElement;\n\t/**\n\t * - Shadow element below the toolbar for visual effects.\n\t */\n\t_toolbarShadow?: HTMLElement;\n\t/**\n\t * - Current active figure component (image, table, etc.).\n\t *\n\t * === State Flags ===\n\t */\n\t_figure?: {\n\t\tmain: HTMLElement;\n\t\tborder: HTMLElement;\n\t\tdisplay: HTMLElement;\n\t\thandles: HTMLElement[];\n\t};\n\t/**\n\t * - Whether the editor is currently in code view mode.\n\t */\n\tisCodeView: boolean;\n\t/**\n\t * - Whether the editor is currently in markdown view mode.\n\t */\n\tisMarkdownView: boolean;\n\t/**\n\t * - Whether the editor is currently in fullscreen mode.\n\t */\n\tisFullScreen: boolean;\n\t/**\n\t * - Whether the editor is set to readonly mode.\n\t */\n\tisReadOnly: boolean;\n\t/**\n\t * - Whether the editor is currently disabled.\n\t */\n\tisDisabled: boolean;\n\t/**\n\t * - Whether block structure visualization is enabled.\n\t */\n\tisShowBlocks?: boolean;\n\t/**\n\t * - Whether the content has been changed (-1 means initial state).\n\t *\n\t * === History Tracking ===\n\t */\n\tisChanged: boolean;\n\t/**\n\t * - Current index in the history stack (undo/redo).\n\t */\n\thistoryIndex: number;\n\t/**\n\t * - Last saved index in the history stack.\n\t *\n\t * === DocumentType Editing (Optional) ===\n\t */\n\tsavedIndex: number;\n\t/**\n\t * - Document-type specific configuration or module reference.\n\t */\n\tdocumentType?: any;\n\t/**\n\t * - Inner container for document-type editors.\n\t */\n\tdocumentTypeInner?: HTMLElement;\n\t/**\n\t * - Page wrapper for paginated editing mode.\n\t */\n\tdocumentTypePage?: HTMLElement;\n\t/**\n\t * - Mirror page element used for selection/layout adjustments.\n\t */\n\tdocumentTypePageMirror?: HTMLElement;\n\t/**\n\t * - Whether headers are used in document-type mode.\n\t */\n\tdocumentType_use_header?: boolean;\n\t/**\n\t * - Whether page layout is enabled in document-type mode.\n\t *\n\t * === Runtime / Computed Values ===\n\t */\n\tdocumentType_use_page?: boolean;\n\t/**\n\t * - Minimum height of the wysiwyg area (parsed from inline style or options).\n\t */\n\t_minHeight: number;\n\t/**\n\t * - Cached computed styles for the wysiwyg element.\n\t * - Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n\t * - Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n\t * - Improves performance by avoiding repeated `getComputedStyle()` calls.\n\t */\n\twwComputedStyle?: CSSStyleDeclaration;\n\t/**\n\t * - Auto-resizing helper iframe (used for dynamic sizing).\n\t */\n\t_iframeAuto?: HTMLElement;\n\t/**\n\t * - Current height of the editor.\n\t * ================================================================================================================================\n\t */\n\t_editorHeight?: number;\n}",
+					"definition": "{\n\t/**\n\t * - Unique key identifying this editor instance (useful for multi-root editors).\n\t */\n\tkey: any;\n\t/**\n\t * - Frame-specific options (toolbar, plugins, behaviors, etc.).\n\t *\n\t * === Core DOM References ===\n\t */\n\toptions: SunEditor.FrameOptions;\n\t/**\n\t * - The original source element (usually a <textarea> or target element).\n\t */\n\toriginElement: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - The outermost container wrapping the entire editor (toolbar + editor + status bar).\n\t */\n\ttopArea: HTMLElement;\n\t/**\n\t * - The `.se-container` element that holds the editor's UI.\n\t */\n\tcontainer: HTMLElement;\n\t/**\n\t * - The `.se-wrapper` element containing the editable area and internal components.\n\t */\n\twrapper: HTMLElement;\n\t/**\n\t * - The WYSIWYG frame element (either an <iframe> or a div in inline mode).\n\t */\n\twysiwygFrame: SunEditor.WysiwygFrame;\n\t/**\n\t * - The actual editable content area (usually the iframe’s <body> or a contentEditable div).\n\t */\n\twysiwyg: HTMLElement;\n\t/**\n\t * - Internal reference for wysiwyg events (set on initialization).\n\t */\n\teventWysiwyg: SunEditor.EventWysiwyg;\n\t/**\n\t * - Wrapper element for the code-view mode.\n\t */\n\tcodeWrapper: HTMLElement;\n\t/**\n\t * - Code view editing element (a <textarea> or <pre>).\n\t */\n\tcode: HTMLElement & HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in code view mode.\n\t */\n\tcodeNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Wrapper element for the markdown-view mode.\n\t */\n\tmarkdownWrapper: HTMLElement;\n\t/**\n\t * - Markdown view editing element (a <textarea>).\n\t */\n\tmarkdown: HTMLTextAreaElement;\n\t/**\n\t * - Element displaying line numbers in markdown view mode.\n\t */\n\tmarkdownNumbers: HTMLTextAreaElement;\n\t/**\n\t * - Placeholder element shown when the editor is empty.\n\t */\n\tplaceholder: HTMLElement;\n\t/**\n\t * - Per-line placeholder text, rendered via a `::before` on the focused empty line.\n\t */\n\tplaceholder_line: string;\n\t/**\n\t * - Editor status bar element (for resizing, info, etc.).\n\t */\n\tstatusbar: HTMLElement;\n\t/**\n\t * - Navigation element (e.g., for outline or bookmarks).\n\t */\n\tnavigation: HTMLElement;\n\t/**\n\t * - Wrapper for the character counter element.\n\t */\n\tcharWrapper: HTMLElement;\n\t/**\n\t * - Element showing the character counter.\n\t */\n\tcharCounter: HTMLElement;\n\t/**\n\t * - Wrapper for the word counter element.\n\t */\n\twordWrapper: HTMLElement;\n\t/**\n\t * - Element showing the word counter.\n\t */\n\twordCounter: HTMLElement;\n\t/**\n\t * - The window object of the WYSIWYG frame (iframe window).\n\t */\n\t_ww?: Window;\n\t/**\n\t * - The document object of the WYSIWYG frame (iframe document).\n\t *\n\t * === UI Utilities & Visual Components ===\n\t */\n\t_wd?: Document;\n\t/**\n\t * - Top floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_t: HTMLElement;\n\t/**\n\t * - Bottom floating line-breaker UI element (for line insertion).\n\t */\n\tlineBreaker_b: HTMLElement;\n\t/**\n\t * - Gutter container (`.se-block-handle-area`) holding the per-line block handle. `null` when the `blockHandle` option is disabled.\n\t */\n\tblockHandleArea: HTMLElement | null;\n\t/**\n\t * - Block handle group (`.se-block-handle`) containing the plus and drag buttons. `null` when disabled.\n\t */\n\tblockHandle: HTMLElement | null;\n\t/**\n\t * - Plus button (`.se-block-handle-plus`) — inserts a new line after the current block. `null` when disabled.\n\t */\n\tblockHandlePlus: HTMLElement | null;\n\t/**\n\t * - Drag button (`.se-block-handle-drag`) — opens the action menu / starts drag-to-reorder. `null` when disabled.\n\t */\n\tblockHandleDrag: HTMLElement | null;\n\t/**\n\t * - Placeholder element used for sticky toolbar behavior.\n\t */\n\t_stickyDummy?: HTMLElement;\n\t/**\n\t * - Shadow element below the toolbar for visual effects.\n\t */\n\t_toolbarShadow?: HTMLElement;\n\t/**\n\t * - Current active figure component (image, table, etc.).\n\t *\n\t * === State Flags ===\n\t */\n\t_figure?: {\n\t\tmain: HTMLElement;\n\t\tborder: HTMLElement;\n\t\tdisplay: HTMLElement;\n\t\thandles: HTMLElement[];\n\t};\n\t/**\n\t * - Whether the editor is currently in code view mode.\n\t */\n\tisCodeView: boolean;\n\t/**\n\t * - Whether the editor is currently in markdown view mode.\n\t */\n\tisMarkdownView: boolean;\n\t/**\n\t * - Whether the editor is currently in fullscreen mode.\n\t */\n\tisFullScreen: boolean;\n\t/**\n\t * - Whether the editor is set to readonly mode.\n\t */\n\tisReadOnly: boolean;\n\t/**\n\t * - Whether the editor is currently disabled.\n\t */\n\tisDisabled: boolean;\n\t/**\n\t * - Whether block structure visualization is enabled.\n\t */\n\tisShowBlocks?: boolean;\n\t/**\n\t * - Whether the content has been changed (-1 means initial state).\n\t *\n\t * === History Tracking ===\n\t */\n\tisChanged: boolean;\n\t/**\n\t * - Current index in the history stack (undo/redo).\n\t */\n\thistoryIndex: number;\n\t/**\n\t * - Last saved index in the history stack.\n\t *\n\t * === DocumentType Editing (Optional) ===\n\t */\n\tsavedIndex: number;\n\t/**\n\t * - Document-type specific configuration or module reference.\n\t */\n\tdocumentType?: any;\n\t/**\n\t * - Inner container for document-type editors.\n\t */\n\tdocumentTypeInner?: HTMLElement;\n\t/**\n\t * - Page wrapper for paginated editing mode.\n\t */\n\tdocumentTypePage?: HTMLElement;\n\t/**\n\t * - Mirror page element used for selection/layout adjustments.\n\t */\n\tdocumentTypePageMirror?: HTMLElement;\n\t/**\n\t * - Whether headers are used in document-type mode.\n\t */\n\tdocumentType_use_header?: boolean;\n\t/**\n\t * - Whether page layout is enabled in document-type mode.\n\t *\n\t * === Runtime / Computed Values ===\n\t */\n\tdocumentType_use_page?: boolean;\n\t/**\n\t * - Minimum height of the wysiwyg area (parsed from inline style or options).\n\t */\n\t_minHeight: number;\n\t/**\n\t * - Cached computed styles for the wysiwyg element.\n\t * - Set during editor initialization via `window.getComputedStyle(wysiwyg)`.\n\t * - Used for retrieving runtime CSS values (padding, margins, font-family, etc.).\n\t * - Improves performance by avoiding repeated `getComputedStyle()` calls.\n\t */\n\twwComputedStyle?: CSSStyleDeclaration;\n\t/**\n\t * - Auto-resizing helper iframe (used for dynamic sizing).\n\t */\n\t_iframeAuto?: HTMLElement;\n\t/**\n\t * - Current height of the editor.\n\t * ================================================================================================================================\n\t */\n\t_editorHeight?: number;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"key": "- Unique key identifying this editor instance (useful for multi-root editors).",
@@ -9423,6 +9750,7 @@
 						"markdown": "- Markdown view editing element (a <textarea>).",
 						"markdownNumbers": "- Element displaying line numbers in markdown view mode.",
 						"placeholder": "- Placeholder element shown when the editor is empty.",
+						"placeholder_line": "- Per-line placeholder text, rendered via a `::before` on the focused empty line.",
 						"statusbar": "- Editor status bar element (for resizing, info, etc.).",
 						"navigation": "- Navigation element (e.g., for outline or bookmarks).",
 						"charWrapper": "- Wrapper for the character counter element.",
@@ -9433,6 +9761,10 @@
 						"_wd": "- The document object of the WYSIWYG frame (iframe document). === UI Utilities & Visual Components ===",
 						"lineBreaker_t": "- Top floating line-breaker UI element (for line insertion).",
 						"lineBreaker_b": "- Bottom floating line-breaker UI element (for line insertion).",
+						"blockHandleArea": "- Gutter container (`.se-block-handle-area`) holding the per-line block handle. `null` when the `blockHandle` option is disabled.",
+						"blockHandle": "- Block handle group (`.se-block-handle`) containing the plus and drag buttons. `null` when disabled.",
+						"blockHandlePlus": "- Plus button (`.se-block-handle-plus`) — inserts a new line after the current block. `null` when disabled.",
+						"blockHandleDrag": "- Drag button (`.se-block-handle-drag`) — opens the action menu / starts drag-to-reorder. `null` when disabled.",
 						"_stickyDummy": "- Placeholder element used for sticky toolbar behavior.",
 						"_toolbarShadow": "- Shadow element below the toolbar for visual effects.",
 						"_figure": "- Current active figure component (image, table, etc.). === State Flags ===",
@@ -9605,7 +9937,7 @@
 				},
 				{
 					"name": "BlockStylePluginOptions",
-					"definition": "{\n\t/**\n\t * - Format list.\n\t * Use string shortcuts for built-in tags, or `BlockStyleItem` objects for custom block styles.\n\t * - `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block.\n\t * ```js\n\t * // string shortcuts + custom item\n\t * ['p', 'h1', 'h2', 'blockquote', { tag: 'div', command: 'block', name: 'Custom Block', class: 'my-block' }]\n\t * ```\n\t */\n\titems?: Array<'p' | 'div' | 'blockquote' | 'pre' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | string | BlockStyleItem>;\n}",
+					"definition": "{\n\t/**\n\t * - Format list.\n\t * Use string shortcuts for built-in tags, or `BlockStyleItem` objects for custom block styles.\n\t * - `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block.\n\t * ```js\n\t * // string shortcuts + custom item\n\t * ['p', 'h1', 'h2', 'blockquote', { tag: 'div', command: 'block', name: 'Custom Block', class: 'my-block' }]\n\t * ```\n\t */\n\titems?: Array<\n\t\t'p' | 'div' | 'blockquote' | 'pre' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | string | BlockStyleItem\n\t>;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"items": "- Format list. Use string shortcuts for built-in tags, or `BlockStyleItem` objects for custom block styles.\n- `command` — `\"line\"`: single line block, `\"br-line\"`: br-separated block, `\"block\"`: container block. ```js // string shortcuts + custom item ['p', 'h1', 'h2', 'blockquote', { tag: 'div', command: 'block', name: 'Custom Block', class: 'my-block' }] ```"
@@ -9737,6 +10069,44 @@
 					"source": "plugins/field/autocomplete.d.ts"
 				},
 				{
+					"name": "SlashCommandItem",
+					"definition": "{\n\t/**\n\t * - Unique identifier for the item.\n\t */\n\tkey: string;\n\t/**\n\t * - Display label.\n\t */\n\ttitle: string;\n\t/**\n\t * - Icon key from `$.icons` (e.g. `'h1'`) or a raw HTML string (e.g. `'<svg>...</svg>'`).\n\t */\n\ticon?: string;\n\t/**\n\t * - Extra search terms used in addition to the title.\n\t */\n\tkeywords?: string[];\n\t/**\n\t * - Invoked when the item is selected.\n\t * The trigger string (e.g. `/hea`) is already removed from the editor and the caret restored to that position before `action` runs.\n\t * The action owns its history entry — calling an L3 wrapper (`$.html.*`, `$.format.*`, `$.inline.apply`) auto-pushes; otherwise call `$.history.push(false)` manually.\n\t */\n\taction: (arg0: SunEditor.Deps, arg1: SlashCommandActionContext) => void | Promise<void>;\n}",
+					"kind": "type",
+					"memberDescriptions": {
+						"key": "- Unique identifier for the item.",
+						"title": "- Display label.",
+						"icon": "- Icon key from `$.icons` (e.g. `'h1'`) or a raw HTML string (e.g. `'<svg>...</svg>'`).",
+						"keywords": "- Extra search terms used in addition to the title.",
+						"action": "- Invoked when the item is selected. The trigger string (e.g. `/hea`) is already removed from the editor and the caret restored to that position before `action` runs. The action owns its history entry — calling an L3 wrapper (`$.html.*`, `$.format.*`, `$.inline.apply`) auto-pushes; otherwise call `$.history.push(false)` manually."
+					},
+					"source": "plugins/field/slashCommand.d.ts"
+				},
+				{
+					"name": "SlashCommandActionContext",
+					"definition": "{\n\t/**\n\t * - The configured trigger character (e.g. `'/'`).\n\t */\n\ttriggerChar: string;\n\t/**\n\t * - The text the user typed after the trigger (e.g. `'hea'`).\n\t */\n\tquery: string;\n\t/**\n\t * - The selected item.\n\t */\n\titem: SlashCommandItem;\n}",
+					"kind": "type",
+					"memberDescriptions": {
+						"triggerChar": "- The configured trigger character (e.g. `'/'`).",
+						"query": "- The text the user typed after the trigger (e.g. `'hea'`).",
+						"item": "- The selected item."
+					},
+					"source": "plugins/field/slashCommand.d.ts"
+				},
+				{
+					"name": "SlashCommandPluginOptions",
+					"definition": "{\n\t/**\n\t * - Character that opens the command menu. Single character recommended.\n\t */\n\ttriggerChar?: string;\n\t/**\n\t * - Menu entries. Strings resolve via `ResolveButton`\n\t * (plugin names, built-in commands like `'bold'`); objects are custom items with their own `action`.\n\t * Required.\n\t */\n\titems: Array<SlashCommandItem | string>;\n\t/**\n\t * - Debounce delay (ms) before the input is inspected for the trigger.\n\t */\n\tdelayTime?: number;\n\t/**\n\t * - Maximum number of items shown in the dropdown.\n\t */\n\tlimitSize?: number;\n\t/**\n\t * - Message shown when no items match the query. If unset, the menu closes on no match.\n\t */\n\temptyMessage?: string;\n\t/**\n\t * - Custom item HTML renderer.\n\t * Applied only to custom item objects; plugin-name entries always render with the canonical BlockHandle row.\n\t * ```js\n\t * SUNEDITOR.create('#editor', {\n\t * plugins: [slashCommand],\n\t * slashCommand: {\n\t * triggerChar: '/',\n\t * items: [\n\t * {\n\t * key: 'h1',\n\t * title: 'Heading 1',\n\t * icon: 'h1',\n\t * keywords: ['header', 'title'],\n\t * action: ($) => $.format.applyBlock(document.createElement('H1')),\n\t * },\n\t * 'bold',\n\t * 'image',\n\t * 'blockStyle',\n\t * ],\n\t * },\n\t * });\n\t * ```\n\t */\n\trenderItem?: (\n\t\targ0: SlashCommandItem,\n\t\targ1: {\n\t\t\ticons: any;\n\t\t},\n\t) => string;\n}",
+					"kind": "type",
+					"memberDescriptions": {
+						"triggerChar": "- Character that opens the command menu. Single character recommended.",
+						"items": "- Menu entries. Strings resolve via `ResolveButton` (plugin names, built-in commands like `'bold'`); objects are custom items with their own `action`. Required.",
+						"delayTime": "- Debounce delay (ms) before the input is inspected for the trigger.",
+						"limitSize": "- Maximum number of items shown in the dropdown.",
+						"emptyMessage": "- Message shown when no items match the query. If unset, the menu closes on no match.",
+						"renderItem": "- Custom item HTML renderer. Applied only to custom item objects; plugin-name entries always render with the canonical BlockHandle row. ```js SUNEDITOR.create('#editor', { plugins: [slashCommand], slashCommand: { triggerChar: '/', items: [ { key: 'h1', title: 'Heading 1', icon: 'h1', keywords: ['header', 'title'], action: ($) => $.format.applyBlock(document.createElement('H1')), }, 'bold', 'image', 'blockStyle', ], }, }); ```"
+					},
+					"source": "plugins/field/slashCommand.d.ts"
+				},
+				{
 					"name": "FontSizePluginOptions",
 					"definition": "{\n\t/**\n\t * - The unit for the font size.\n\t * - Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n\t * - If `'text'` is used, a text-based font size list is applied.\n\t */\n\tsizeUnit?: string;\n\t/**\n\t * - Determines whether the default size label is displayed in the dropdown menu.\n\t */\n\tshowDefaultSizeLabel?: boolean;\n\t/**\n\t * - When `true`, displays increase and decrease buttons for font size adjustments.\n\t * - Defaults to `false`. Always `false` when `sizeUnit` is `'text'` (ignored).\n\t */\n\tshowIncDecControls?: boolean;\n\t/**\n\t * - When `true`, disables the direct font size input box.\n\t * - Defaults to `true` when `sizeUnit` is `'text'`, otherwise `false`.\n\t */\n\tdisableInput?: boolean;\n\t/**\n\t * - Override or extend the default unit mapping for font sizes.\n\t * Each key is a unit name (e.g., `'px'`, `'em'`). `default`: initial size, `inc`: step for inc/dec buttons, `min`/`max`: range limits, `list`: dropdown values.\n\t * When `sizeUnit` is `'text'`, list items use `{title: string, size: string}` instead of numbers.\n\t * ```js\n\t * { unitMap: { px: { default: 16, inc: 1, min: 8, max: 72, list: [8, 12, 16, 20, 24, 32, 48] } } }\n\t * ```\n\t */\n\tunitMap?: {\n\t\t[x: string]: {\n\t\t\tdefault: number;\n\t\t\tinc: number;\n\t\t\tmin: number;\n\t\t\tmax: number;\n\t\t\tlist: Array<number>;\n\t\t};\n\t};\n}",
 					"kind": "type",
@@ -9866,7 +10236,7 @@
 				},
 				{
 					"name": "LinkPluginOptions",
-					"definition": "Omit<LinkOptions & import('../../modules/ui/ModalAnchorEditor').ModalAnchorEditorParams, ''>",
+					"definition": "Omit<\n\tLinkOptions & import('../../modules/ui/ModalAnchorEditor').ModalAnchorEditorParams,\n\t''\n>",
 					"kind": "type",
 					"source": "plugins/modal/link.d.ts"
 				},

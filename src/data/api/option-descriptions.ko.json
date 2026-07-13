@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "자리 표시자 텍스트입니다.",
+    "description": "전체 편집기가 비어 있을 때 표시되는 자리 표시자 텍스트입니다.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "초점이 맞춰진 부분에 표시되는 줄당 자리 표시자",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "편집기의 최대 너비입니다.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "편집기 본문의 선택적 최대 너비(`.se-wrapper`). \n- **CSS 길이** (`\"740px\"`, `\"60ch\"`): 편집기 본문의 내용은 이 너비로 고정되고 수평 중앙에 배치됩니다. 스크롤 컨테이너는 전체 너비를 유지합니다(바깥쪽 가장자리의 스크롤바, 전체 영역에서 휠/터치 활성화). \n- **`\"auto\"`** 또는 **빈 문자열**(기본값): 제약 없음 — 기본 콘텐츠 패딩이 포함된 자연스러운 전체 너비 레이아웃입니다. \n- `blockHandle` 모드에서는 여백 핸들이 중앙에 있는 텍스트 밴드를 추적합니다. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "툴바 모드: `classic`, `inline`, `balloon`, `balloon-always`. 툴바를 하단에 배치하려면 `:bottom`를 추가하세요(예: `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "블록 핸들 구성. 제공되면 줄당 블록 핸들 UI가 표시됩니다. `mode`과 독립적으로 작동합니다."
+  },
+  "menu": {
+    "description": "메뉴 항목. \n- **문자열 항목** — `ResolveButton`을 통해 해결됩니다. 도구 모음 `buttonList`과 동일한 값을 허용합니다. \n- **블록 형식 키**: `p`, `h1`-`h6`, `heading`(H1-H6 하위 메뉴), `ul`, `ol`, `list`(UL/OL 하위 메뉴), `blockquote`, `pre`. \n- **플러그인 이름**: 등록된 모든 플러그인 이름(예: `blockStyle`, `align`, `image`, `link`). 드롭다운 플러그인은 해당 항목을 하위 메뉴로 표시합니다. 모달 플러그인은 클릭 시 모달을 엽니다. \n- **내장 명령**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` 등 \n- **사용자 정의 항목 개체** — `{ title, icon?, action }`. `icon`는 `$.icons`의 아이콘 키 또는 원시 `<svg>` HTML 문자열입니다. `action`은 `($, { block })`으로 호출됩니다. \n- 기본값은 `['p', 'heading', 'list', 'blockquote', 'pre']`입니다. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "편집기 유형. 문서 스타일 레이아웃에는 `\"document\"`을 사용하고, `:` ​​뒤에 선택적으로 하위 유형을 추가할 수 있습니다.\n``js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "툴바 너비.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "도구 모음의 버튼 행(`.se-btn-tray`)을 수평 중앙에 배치합니다. \n- **CSS 길이**(예: `\"500px\"`, `\"740px\"`, `\"60ch\"`): 도구 모음 배경은 전체 너비에 걸쳐 있고 버튼 행은 해당 너비로 제한되고 중앙에 배치됩니다. 버튼이 맞으면 행은 한 줄에 유지됩니다. 캡을 초과하면 내부에 포장됩니다. \n- **`\"auto\"`**: 캡 없음 — 행의 크기가 내용에 맞게 조정되고 중앙에 배치됩니다. \n- **빈 문자열**(기본값): 제약이 없습니다. \n- **`responsiveButtonList`에 대한 참고**: 임계값은 밴드가 아닌 도구 모음의 전체 너비와 비교됩니다. 이 옵션이 설정되면 실제로 각 버튼 설정을 시작하려는 도구 모음 크기에 맞게 `responsiveButtonList` 키를 보정하세요. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "툴바를 담는 컨테이너 요소입니다."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "트리거 문자를 기준으로 하는 트리거별 구성입니다."
+  },
+  "slashCommand_triggerChar": {
+    "description": "명령 메뉴를 여는 캐릭터입니다. 단일 문자를 권장합니다."
+  },
+  "slashCommand_items": {
+    "description": "메뉴 항목. 문자열은 `ResolveButton`을 통해 확인됩니다."
+  },
+  "slashCommand_delayTime": {
+    "description": "트리거에 대해 입력을 검사하기 전의 디바운스 지연(ms)입니다."
+  },
+  "slashCommand_limitSize": {
+    "description": "드롭다운에 표시되는 최대 항목 수입니다."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "쿼리와 일치하는 항목이 없을 때 표시되는 메시지입니다. 설정하지 않으면 일치 항목이 없으면 메뉴가 닫힙니다."
+  },
+  "slashCommand_renderItem": {
+    "description": "사용자 정의 항목 HTML 렌더러."
   },
   "fontSize_sizeUnit": {
     "description": "글꼴 크기의 단위입니다.\n\n- 허용되는 값은 `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` 또는 `'text'`입니다.\n\n- `'text'`을 사용하는 경우 텍스트 기반 글꼴 크기 목록이 적용됩니다."

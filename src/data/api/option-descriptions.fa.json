@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "متن جایگزین.",
+    "description": "زمانی که کل ویرایشگر خالی باشد، متن مکان‌نما نشان داده می‌شود.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "جای جای هر خط نشان داده شده در مورد متمرکز",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "حداکثر عرض برای ویرایشگر",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "حداکثر عرض اختیاری برای بدنه ویرایشگر (`.se-wrapper`). \n- **طول CSS** (`\"740px\"`، `\"60ch\"`): محتوای بدنه ویرایشگر به این عرض بسته شده و به صورت افقی در مرکز قرار می گیرد. ظرف اسکرول تمام عرض باقی می ماند (نوار پیمایش در لبه بیرونی، چرخ/لمس در کل منطقه فعال است). \n- **`\"auto\"`** یا **رشته خالی** (پیش‌فرض): بدون محدودیت - طرح‌بندی طبیعی با عرض کامل با محتوای پیش‌فرض. \n- در حالت `blockHandle`، دسته ناودان نوار متن مرکزی را ردیابی می کند. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "حالت نوار ابزار: `classic`، `inline`، `balloon`، `balloon-always`. برای قرار دادن نوار ابزار در پایین، `:bottom` را اضافه کنید (مثلاً `classic:bottom`، `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "پیکربندی دسته بلوک در صورت ارائه، یک رابط کاربری دسته بلوک در هر خط نشان داده می شود. مستقل از `mode` کار می کند."
+  },
+  "menu": {
+    "description": "ورودی های منو \n- ** ورودی های رشته ** - از طریق `ResolveButton` حل شد. مقادیر مشابه نوار ابزار `buttonList` را می پذیرد: \n- **کلیدهای قالب بلوک**: `p`، `h1`-`h6`، `heading` (زیر منوی H1-H6)، `ul`، `ol`، `list` (زیر منوی UL/OL)، `blockquote`، __BT10. \n- **نام افزونه**: هر نام افزونه ثبت شده (به عنوان مثال `blockStyle`، `align`، `image`، `link`). افزونه های کشویی آیتم های خود را به عنوان یک زیر منو نمایش می دهند. پلاگین های Modal با کلیک کردن، مودال را باز می کنند. \n- **دستورات داخلی**: `bold`، `italic`، `underline`، `strike`، `undo`، `redo`، و غیره. \n- **اشیاء مورد سفارشی** — `{ title, icon?, action }`. `icon` یک کلید نماد از `$.icons` یا یک رشته خام `<svg>` HTML است. `action` با `($, { block })` فراخوانی می شود. \n- پیش فرض روی `['p', 'heading', 'list', 'blockquote', 'pre']` است. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "نوع ویرایشگر. برای طرح‌بندی به سبک سند از `\"document\"` استفاده کنید، و زیرنوع‌های اختیاری بعد از `:` ​​قرار می‌گیرند.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "عرض نوار ابزار.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "ردیف دکمه نوار ابزار (`.se-btn-tray`) را به صورت افقی وسط قرار دهید. \n- **طول CSS** (به عنوان مثال `\"500px\"`، `\"740px\"`، `\"60ch\"`): پس‌زمینه نوار ابزار تمام عرض را در بر می‌گیرد در حالی که ردیف دکمه در آن عرض و در مرکز قرار دارد. اگر دکمه‌ها مناسب باشند، ردیف روی یک خط باقی می‌ماند. اگر از کلاهک فراتر رود، داخل آن می پیچند. \n- **`\"auto\"`**: بدون سرپوش - اندازه ردیف به محتوای آن است و به سادگی در مرکز قرار دارد. \n- **رشته خالی ** (پیش فرض): بدون محدودیت. \n- **توجه به `responsiveButtonList`**: آستانه ها با عرض کامل نوار ابزار مقایسه می شوند، نه باند. وقتی این گزینه تنظیم شد، کلیدهای `responsiveButtonList` را در اندازه نوار ابزاری که واقعاً می‌خواهید هر دکمه تنظیم شود، کالیبره کنید. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "عنصر نگهدارنده برای نوار ابزار."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "پیکربندی‌های هر ماشه با نویسه ماشه کلید می‌زنند."
+  },
+  "slashCommand_triggerChar": {
+    "description": "کاراکتری که منوی فرمان را باز می کند. تک شخصیت توصیه می شود."
+  },
+  "slashCommand_items": {
+    "description": "ورودی های منو رشته ها از طریق `ResolveButton` حل می شوند"
+  },
+  "slashCommand_delayTime": {
+    "description": "تاخیر برگشت (ms) قبل از اینکه ورودی برای ماشه بررسی شود."
+  },
+  "slashCommand_limitSize": {
+    "description": "حداکثر تعداد موارد نشان داده شده در منوی کشویی."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "وقتی هیچ موردی با پرس و جو مطابقت نداشته باشد، پیام نشان داده می شود. در صورت تنظیم نشدن، منو در صورت عدم تطابق بسته می شود."
+  },
+  "slashCommand_renderItem": {
+    "description": "ارائه دهنده HTML مورد سفارشی."
   },
   "fontSize_sizeUnit": {
     "description": "واحد اندازه فونت.\n- مقادیر پذیرفته شده عبارتند از: `'px'`، `'pt'`، `'em'`، `'rem'`، `'vw'`، `'vh'`، `'%'` یا `'text'`.\n- در صورت استفاده از `'text'`، یک لیست اندازه فونت مبتنی بر متن اعمال می‌شود."

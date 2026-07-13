@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "טקסט מציין מיקום.",
+    "description": "טקסט מציין מיקום מוצג כאשר כל העורך ריק.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "מציין מיקום לכל שורה מוצג על הממוקד",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "רוחב מקסימלי עבור העורך.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "רוחב מקסימלי אופציונלי עבור גוף העורך (`.se-wrapper`). \n- **אורך CSS** (`\"740px\"`, `\"60ch\"`): תוכן גוף העורך מהודק לרוחב זה וממורכז אופקית; מיכל הגלילה נשאר ברוחב מלא (פס גלילה בקצה החיצוני, גלגל/מגע פעיל על כל האזור). \n- **`\"auto\"`** או **מחרוזת ריקה** (ברירת מחדל): ללא הגבלה - פריסה טבעית ברוחב מלא עם ריפוד תוכן ברירת מחדל. \n- במצב `blockHandle`, ידית המרזב עוקבת אחר פס הטקסט הממורכז. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "מצב סרגל כלים: `classic`, `inline`, `balloon`, `balloon-always`. הוסף `:bottom` כדי למקם את סרגל הכלים בתחתית (לדוגמה `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "תצורת ידית חסימה. כאשר מסופק, מוצג ממשק המשתמש של בלוק לכל שורה. עובד ללא תלות ב-`mode`."
+  },
+  "menu": {
+    "description": "ערכים בתפריט. \n- **ערכי מחרוזת** - נפתרו באמצעות `ResolveButton`. מקבל את אותם ערכים כמו סרגל הכלים `buttonList`: \n- **מפתחות פורמט חסימה**: `p`, `h1`-`h6`, `heading` (תפריט משנה H1-H6), `ul`, `ol`, `list` (תפריט משנה UL/OL), `blockquote`, `pre`. \n- **שמות פלאגין**: כל שם פלאגין רשום (למשל `blockStyle`, `align`, `image`, `link`). תוספים נפתחים מציגים את הפריטים שלהם כתפריט משנה. תוספים מודאליים פותחים את המודאל בלחיצה. \n- **פקודות מובנות**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` וכו'. \n- **אובייקטי פריט מותאמים אישית** — `{ title, icon?, action }`. `icon` הוא מפתח אייקון מ-`$.icons` או מחרוזת HTML גולמית `<svg>`; `action` מופעל עם `($, { block })`. \n- ברירת המחדל היא `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "סוג עורך. השתמש ב-`\"document\"` עבור פריסה בסגנון מסמך, עם תת-סוגים אופציונליים לאחר `:`. ```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "רוחב סרגל הכלים.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "מרכז את שורת הכפתורים של סרגל הכלים (`.se-btn-tray`) אופקית. \n- **אורך CSS** (למשל `\"500px\"`, `\"740px\"`, `\"60ch\"`): רקע סרגל הכלים משתרע ברוחב מלא בעוד שורת הלחצנים מוגבלת ברוחב זה וממורכזת. אם הכפתורים מתאימים, השורה נשארת על שורה אחת; אם הם חורגים מהכובע, הם עוטפים בתוכו. \n- **`\"auto\"`**: ללא מכסה - גודל השורה בהתאם לתוכן שלה ומרוכז בפשטות. \n- **מחרוזת ריקה** (ברירת מחדל): ללא אילוץ. \n- **הערה לגבי `responsiveButtonList`**: ערכי הסף משתווים לרוחב המלא של סרגל הכלים, לא לפס. כאשר אפשרות זו מוגדרת, כייל מקשי `responsiveButtonList` סביב גודל סרגל הכלים שבו אתה באמת רוצה שכל כפתור יפעל. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "רכיב מיכל עבור סרגל הכלים."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "תצורות לכל טריגר ממוקמות על ידי תו טריגר."
+  },
+  "slashCommand_triggerChar": {
+    "description": "דמות שפותחת את תפריט הפקודות. דמות בודדת מומלצת."
+  },
+  "slashCommand_items": {
+    "description": "ערכים בתפריט. פתרון מחרוזות באמצעות `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Debounce delay (ms) לפני שהקלט נבדק עבור הדק."
+  },
+  "slashCommand_limitSize": {
+    "description": "מספר פריטים מקסימלי המוצג בתפריט הנפתח."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "הודעה מוצגת כאשר אין פריטים תואמים לשאילתה. אם לא מוגדר, התפריט נסגר ללא התאמה."
+  },
+  "slashCommand_renderItem": {
+    "description": "מעבד HTML של פריט מותאם אישית."
   },
   "fontSize_sizeUnit": {
     "description": "יחידת גודל הגופן.\n- ערכים מקובלים כוללים: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` או `'text'`.\n- אם נעשה שימוש ב-`'text'`, מוחל רשימת גודלי גופנים מבוססת טקסט."

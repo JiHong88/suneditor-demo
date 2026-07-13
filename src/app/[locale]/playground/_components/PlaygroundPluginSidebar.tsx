@@ -1627,6 +1627,50 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 							</div>
 						</AccordionContent>
 					</AccordionItem>
+
+					{/* SlashCommand */}
+					<AccordionItem value='slashCommand'>
+						<AccordionTrigger className='text-xs font-semibold py-2'>SlashCommand</AccordionTrigger>
+						<AccordionContent className='px-1 pb-3'>
+							<div className='space-y-3'>
+								<ToggleableTextarea
+									label='items'
+									value={state.slashCommand_items}
+									preset={ITEM_PRESETS.slashCommand_items}
+									onChange={set("slashCommand_items")}
+									placeholder='heading, list, blockquote, pre, bold, image, table'
+									rows={3}
+									optionKey='slashCommand_items'
+								/>
+								<TextInput
+									label='triggerChar'
+									value={state.slashCommand_triggerChar}
+									onChange={set("slashCommand_triggerChar")}
+									placeholder='/'
+									optionKey='slashCommand_triggerChar'
+								/>
+								<NumberInput
+									label='delayTime'
+									value={state.slashCommand_delayTime}
+									onChange={set("slashCommand_delayTime")}
+									optionKey='slashCommand_delayTime'
+								/>
+								<NumberInput
+									label='limitSize'
+									value={state.slashCommand_limitSize}
+									onChange={set("slashCommand_limitSize")}
+									optionKey='slashCommand_limitSize'
+								/>
+								<TextInput
+									label='emptyMessage'
+									value={state.slashCommand_emptyMessage}
+									onChange={set("slashCommand_emptyMessage")}
+									placeholder='No results'
+									optionKey='slashCommand_emptyMessage'
+								/>
+							</div>
+						</AccordionContent>
+					</AccordionItem>
 				</div>
 				{/* end field group */}
 

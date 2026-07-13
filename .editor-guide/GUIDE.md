@@ -12,14 +12,26 @@
 - [Directory Structure](#directory-structure)
 - [Technical Requirements](#technical-requirements)
 - [Architecture](#architecture) (overview) | [ARCHITECTURE.md](./ARCHITECTURE.md) (deep dive)
-- [Plugin System](#plugin-system-srcplugins)
-- [Modules](#modules-srcmodules)
+    - [Plugin System](#plugin-system-srcplugins)
+    - [Modules](#modules-srcmodules)
 - [Essential Commands](#essential-commands)
+    - [Claude Code Skills](#claude-code-skills-claudeskills)
+- [Naming Conventions](#naming-conventions)
+- [Common Pitfalls](#common-pitfalls)
+- [Plugin Registration Flow](#plugin-registration-flow)
+- [Example Implementations](#example-implementations)
 - [Testing Strategy](#testing-strategy)
+- [Initialization: `onload` Event](#initialization-onload-event)
+- [iframe Mode](#iframe-mode)
 - [Markdown View](#markdown-view)
-- [Code Language Selector](#code-language-selector)
-- Supplementary Guides
+- [Build System](#build-system)
+- [Changes Log](#changes-log)
+- [Supplementary Guides](#supplementary-guides)
+    - [Coding Rules](./prompts/coding-rules.md) - Enforceable conventions for `src/*.js`
+    - [Editing Rules](./prompts/editing-rules.md) - File-level edit restrictions
+    - [Custom Plugin Guide](./guide/custom-plugin.md) - Creating custom plugins
     - [External Libraries](./guide/external-libraries.md) - CodeMirror, KaTeX, MathJax
+    - [Type Definitions](./guide/typedef-guide.md) - SunEditor namespace types
 
 ---
 
@@ -37,7 +49,7 @@ The editor supports a modular plugin architecture where features can be enabled/
 - **Config**: Context providers, option providers, event management
 - **Logic**: DOM operations (selection, format, inline), shell operations (component, history, focus), panel UI (toolbar, menu, viewer)
 - **Event**: Redux-like event orchestration (handlers, reducers, effects)
-- **Plugins**: image, video, link, table, autocomplete, etc.
+- **Plugins**: image, video, link, table, mention, etc.
 - **Modules**: Modal, Controller, Figure, ColorPicker, etc.
 - **Helpers**: DOM utilities, converters, env detection
 
@@ -53,96 +65,46 @@ The editor supports a modular plugin architecture where features can be enabled/
 
 ```
 suneditor/
-├── src/                      # Source code
-│   ├── suneditor.js         # Factory entry point (create, init)
-│   ├── events.js            # User event definitions (onChange, onImageUpload, etc.)
-│   ├── typedef.js           # JSDoc type definitions
-│   ├── core/                # Editor core
-│   │   ├── editor.js        # Main Editor class (public API, plugin lifecycle, multi-root)
+├── src/
+│   ├── core/
 │   │   ├── kernel/          # L1: Dependency container & state
-│   │   │   ├── coreKernel.js    # CoreKernel - dependency container, orchestrates initialization
-│   │   │   ├── store.js         # Store - central runtime state (#state, mode)
-│   │   │   └── kernelInjector.js # KernelInjector - base class for kernel consumers
 │   │   ├── config/          # L2: Configuration & providers
-│   │   │   ├── contextProvider.js   # Context/FrameContext Map management
-│   │   │   ├── optionProvider.js    # Options/FrameOptions Map management
-│   │   │   ├── instanceCheck.js     # Iframe-safe instanceof checks
-│   │   │   └── eventManager.js      # Public event API (addEvent, removeEvent, triggerEvent)
-│   │   ├── logic/           # L3: Business logic
-│   │   │   ├── dom/         # DOM manipulation classes
-│   │   │   │   ├── selection.js     # Selection & range manipulation
-│   │   │   │   ├── html.js          # HTML get/set & sanitization
-│   │   │   │   ├── format.js        # Block-level formatting
-│   │   │   │   ├── inline.js        # Inline formatting (bold, italic, styles)
-│   │   │   │   ├── listFormat.js    # List operations (create, edit, nested)
-│   │   │   │   ├── nodeTransform.js # DOM node transformations
-│   │   │   │   ├── char.js          # Character counting & limits
-│   │   │   │   └── offset.js        # Position calculations
-│   │   │   ├── shell/       # Editor operations
-│   │   │   │   ├── component.js     # Component lifecycle (images, videos, etc.)
-│   │   │   │   ├── focusManager.js  # Focus/blur management
-│   │   │   │   ├── pluginManager.js # Plugin registry & lifecycle
-│   │   │   │   ├── ui.js            # UI state (loading, alerts, theme)
-│   │   │   │   ├── commandDispatcher.js # Command routing
-│   │   │   │   ├── _commandExecutor.js  # Command execution
-│   │   │   │   ├── history.js       # Undo/redo stack
-│   │   │   │   └── shortcuts.js     # Keyboard shortcut mapping
-│   │   │   └── panel/       # Panel UI
-│   │   │       ├── toolbar.js       # Toolbar rendering & positioning
-│   │   │       ├── menu.js          # Dropdown menu management
-│   │   │       └── viewer.js        # View modes (code view, markdown view, fullscreen, preview)
+│   │   ├── logic/
+│   │   │   ├── dom/         # DOM manipulation (selection, format, inline, html, ...)
+│   │   │   ├── shell/       # Editor operations (component, history, focus, ...)
+│   │   │   └── panel/       # Panel UI (toolbar, menu, viewer)
 │   │   ├── event/           # L4: Event orchestration (Redux-like)
-│   │   │   ├── eventOrchestrator.js # Internal DOM event processing, handler binding
-│   │   │   ├── executor.js          # Action dispatcher → maps actions to effects
-│   │   │   ├── ports.js             # Event type definitions and constants
-│   │   │   ├── actions/             # Action type definitions and creators
-│   │   │   ├── handlers/            # DOM event listeners
-│   │   │   ├── reducers/            # Event analyzers → return action lists
-│   │   │   ├── rules/               # Granular key rules (enter, backspace, delete, arrow, tab)
-│   │   │   ├── effects/             # Effect registries (common, keydown, ruleHelpers)
-│   │   │   └── support/             # Support classes (selectionState, defaultLineManager)
-│   │   ├── schema/          # Data definitions
-│   │   │   ├── context.js       # Global context schema
-│   │   │   ├── frameContext.js  # Per-frame context schema
-│   │   │   └── options.js       # Options schema (base + frame)
+│   │   │   ├── actions/
+│   │   │   ├── handlers/
+│   │   │   ├── reducers/
+│   │   │   ├── rules/
+│   │   │   ├── effects/
+│   │   │   └── support/
+│   │   ├── schema/          # Data definitions (context, options)
 │   │   └── section/         # DOM construction
-│   │       ├── constructor.js   # Editor DOM structure builder
-│   │       ├── codeLang.js      # Code language selector UI for <pre> blocks
-│   │       └── documentType.js  # Document type handler (pagination)
-│   ├── plugins/             # Modular features
-│   │   ├── command/         # Direct actions (blockquote, list_bulleted, list_numbered, exportPDF, fileUpload)
-│   │   ├── dropdown/        # Dropdown menus (align, font, fontColor, backgroundColor, blockStyle, textStyle, paragraphStyle, lineHeight, hr, layout, list, table/, template)
-│   │   ├── modal/           # Dialog plugins (image/, video/, link, math, audio, drawing, embed)
-│   │   ├── browser/         # Gallery plugins (imageGallery, videoGallery, audioGallery, fileGallery, fileBrowser)
-│   │   ├── field/           # Autocomplete (autocomplete)
-│   │   ├── input/           # Toolbar inputs (fontSize, pageNavigator)
-│   │   └── popup/           # Inline controllers (anchor)
-│   ├── modules/             # UI components
-│   │   ├── contract/        # Module contracts (Modal, Controller, Figure, etc.)
+│   ├── plugins/
+│   │   ├── command/         # Direct actions
+│   │   ├── dropdown/        # Dropdown menus
+│   │   ├── modal/           # Dialog plugins
+│   │   ├── browser/         # Gallery plugins
+│   │   ├── field/           # Autocomplete
+│   │   ├── input/           # Toolbar inputs
+│   │   └── popup/           # Inline controllers
+│   ├── modules/
+│   │   ├── contract/        # Module contracts (Modal, Controller, Figure, ...)
 │   │   ├── manager/         # Managers (FileManager, ApiManager)
 │   │   └── ui/              # UI utilities (SelectMenu, ModalAnchorEditor)
 │   ├── hooks/               # Hook interface definitions
-│   │   ├── base.js          # Base hooks (Event, Component, Core)
-│   │   └── params.js        # Hook parameter type definitions
 │   ├── interfaces/          # Plugin base classes & contracts
-│   │   ├── plugins.js       # Plugin type classes (PluginCommand, PluginModal, etc.)
-│   │   ├── contracts.js     # Contract interfaces (ModuleModal, EditorComponent, etc.)
-│   │   └── index.js         # Interface exports
 │   ├── helper/              # Pure utility functions
-│   │   ├── converter.js     # String/HTML conversion
-│   │   ├── env.js           # Browser/device detection
-│   │   ├── keyCodeMap.js    # Keyboard event checking
-│   │   ├── numbers.js       # Number validation
-│   │   ├── unicode.js       # Special characters
-│   │   ├── clipboard.js     # Clipboard API
-│   │   └── dom/             # DOM utilities (check, query, utils)
+│   │   └── dom/             # DOM utilities
 │   ├── assets/              # Static assets (icons, CSS, design)
 │   ├── langs/               # i18n language files
 │   └── themes/              # CSS theme files
-├── test/                    # Test suites
-│   ├── unit/                # Jest unit tests
-│   ├── integration/         # Jest integration tests
-│   └── e2e/                 # Playwright E2E tests
+├── test/
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
 ├── types/                   # Generated TypeScript definitions
 ├── webpack/                 # Build configuration
 └── dist/                    # Built bundles (not tracked in git)
@@ -229,7 +191,7 @@ KernelInjector → Base → PluginCommand/PluginModal/PluginDropdown/...
 | **`PluginDropdownFree`** | `dropdown-free` | (none)              | table, fontColor, backgroundColor                     |
 | **`PluginModal`**        | `modal`         | `open()`            | image, video, link, math, audio, drawing, embed       |
 | **`PluginBrowser`**      | `browser`       | `open()`, `close()` | imageGallery, videoGallery, audioGallery, fileGallery |
-| **`PluginField`**        | `field`         | (none)              | autocomplete                                          |
+| **`PluginField`**        | `field`         | (none)              | mention                                               |
 | **`PluginInput`**        | `input`         | (none)              | fontSize, pageNavigator                               |
 | **`PluginPopup`**        | `popup`         | `show()`            | anchor                                                |
 
@@ -238,11 +200,11 @@ KernelInjector → Base → PluginCommand/PluginModal/PluginDropdown/...
 All plugins access dependencies through `this.$`:
 
 ```javascript
-import { PluginModal } from "../../interfaces";
+import { PluginModal } from '../../interfaces';
 
 class MyPlugin extends PluginModal {
-	static key = "myPlugin";
-	static className = "se-btn-my-plugin";
+	static key = 'myPlugin';
+	static className = 'se-btn-my-plugin';
 
 	/**
 	 * @constructor
@@ -251,14 +213,14 @@ class MyPlugin extends PluginModal {
 	constructor(kernel, pluginOptions) {
 		super(kernel); // KernelInjector → this.$ = kernel.$ (Deps bag)
 		this.title = this.$.lang.myPlugin; // access via Deps
-		this.icon = "myPlugin";
+		this.icon = 'myPlugin';
 	}
 
 	open(target) {
 		const range = this.$.selection.get();
-		const wysiwyg = this.$.frameContext.get("wysiwyg");
-		const height = this.$.frameOptions.get("height");
-		this.$.html.insert("<p>content</p>");
+		const wysiwyg = this.$.frameContext.get('wysiwyg');
+		const height = this.$.frameOptions.get('height');
+		this.$.html.insert('<p>content</p>');
 		this.$.history.push(false);
 	}
 }
@@ -373,18 +335,18 @@ Plugin hooks are organized into four categories:
 
 **Helper Modules:**
 
-| Module                | Key Functions                                                     | Purpose                          |
-| --------------------- | ----------------------------------------------------------------- | -------------------------------- |
+| Module                | Key Functions                                                     | Purpose                           |
+| --------------------- | ----------------------------------------------------------------- | --------------------------------- |
 | **`markdown.js`**     | `jsonToMarkdown`, `markdownToHtml`                                | Markdown ↔ HTML conversion (GFM) |
-| **`converter.js`**    | `htmlToEntity`, `htmlToJson`, `debounce`, `toFontUnit`, `rgb2hex` | String/HTML conversion           |
-| **`env.js`**          | `isMobile`, `isOSX_IOS`, `isClipboardSupported`, `_w`, `_d`       | Browser/device detection         |
-| **`keyCodeMap.js`**   | `isEnter`, `isCtrl`, `isArrow`, `isComposing`                     | Keyboard event checking          |
-| **`numbers.js`**      | `is`, `get`, `isEven`, `isOdd`                                    | Number validation                |
-| **`unicode.js`**      | `zeroWidthSpace`, `escapeStringRegexp`                            | Special characters               |
-| **`clipboard.js`**    | `write`                                                           | Clipboard with iframe handling   |
-| **`dom/domCheck.js`** | `isElement`, `isText`, `isWysiwygFrame`, `isComponentContainer`   | Node type checking               |
-| **`dom/domQuery.js`** | `getParentElement`, `getChildNode`, `getNodePath`                 | DOM tree navigation              |
-| **`dom/domUtils.js`** | `addClass`, `createElement`, `setStyle`, `removeItem`             | DOM operations                   |
+| **`converter.js`**    | `htmlToEntity`, `htmlToJson`, `debounce`, `toFontUnit`, `rgb2hex` | String/HTML conversion            |
+| **`env.js`**          | `isMobile`, `isOSX_IOS`, `isClipboardSupported`, `_w`, `_d`       | Browser/device detection          |
+| **`keyCodeMap.js`**   | `isEnter`, `isCtrl`, `isArrow`, `isComposing`                     | Keyboard event checking           |
+| **`numbers.js`**      | `is`, `get`, `isEven`, `isOdd`                                    | Number validation                 |
+| **`unicode.js`**      | `zeroWidthSpace`, `escapeStringRegexp`                            | Special characters                |
+| **`clipboard.js`**    | `write`                                                           | Clipboard with iframe handling    |
+| **`dom/domCheck.js`** | `isElement`, `isText`, `isWysiwygFrame`, `isComponentContainer`   | Node type checking                |
+| **`dom/domQuery.js`** | `getParentElement`, `getChildNode`, `getNodePath`                 | DOM tree navigation               |
+| **`dom/domUtils.js`** | `addClass`, `createElement`, `setStyle`, `removeItem`             | DOM operations                    |
 
 ---
 
@@ -469,6 +431,17 @@ npm run check:langs     # Sync language files (requires Google API credentials)
 npm run check:inject    # Inject plugin JSDoc types into options.js
 ```
 
+### Claude Code Skills (`.claude/skills/`)
+
+Project-specific slash commands for [Claude Code](https://claude.ai/claude-code). Type `/` to see the list.
+
+| Command         | Description                                                                              |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| `/post-edit`    | Post-edit pipeline: `lint:fix-js` → `ts-build` → `check:arch` → `check:exports` → `test` |
+| `/review`       | Code review for bugs, logic errors, and dead code (report only, no fixes)                |
+| `/changes`      | Analyze git diff and update `changes.md` (for manual edits only)                         |
+| `/release-note` | Convert `changes.md` to release note format                                              |
+
 ---
 
 ## Naming Conventions
@@ -520,6 +493,7 @@ npm run check:inject    # Inject plugin JSDoc types into options.js
 - Check element types with `dom.check` methods (iframe-safe)
 - Follow the Redux pattern for event handling (Handler → Reducer → Actions → Effects)
 - Use specific JSDoc types (`SunEditor.Kernel` for constructors, `SunEditor.Deps` for deps)
+- **Any UI handler that mutates persisted wysiwyg DOM must end its chain with `this.$.history.push(false)`** — this is what triggers the public `onChange` event. If you call a wrapper that already pushes (e.g., `this.$.inline.apply`, `this.$.format.setLine`), don't push again. When in doubt, check the wrapper's implementation.
 
 ---
 
@@ -648,15 +622,15 @@ Editor initialization completes **asynchronously**. Use `onload` for operations 
 
 ```javascript
 // Wrong - may fail
-const editor = SUNEDITOR.create("#editor");
+const editor = SUNEDITOR.create('#editor');
 editor.focusManager.focus();
 
 // Correct
-SUNEDITOR.create("#editor", {
+SUNEDITOR.create('#editor', {
 	events: {
 		onload: ({ $ }) => {
 			$.focusManager.focus();
-			$.html.set("<p>Initial content</p>");
+			$.html.set('<p>Initial content</p>');
 		},
 	},
 });
@@ -671,10 +645,10 @@ SUNEDITOR.create("#editor", {
 SunEditor supports **DIV mode** (default) and **iframe mode** (`iframe: true`).
 
 ```javascript
-SUNEDITOR.create("#editor", {
+SUNEDITOR.create('#editor', {
 	iframe: true,
 	iframe_attributes: {
-		sandbox: "allow-downloads", // allow-same-origin is auto-added
+		sandbox: 'allow-downloads', // allow-same-origin is auto-added
 	},
 });
 ```
@@ -780,6 +754,8 @@ This file is used to generate the demo site's changelog. Keep entries concise an
 
 ## Supplementary Guides
 
+- [Coding Rules](./prompts/coding-rules.md) - Enforceable conventions for `src/*.js` (events, DOM, state, history, plugin shape)
+- [Editing Rules](./prompts/editing-rules.md) - File-level edit restrictions (generated files, lang files, sync rules)
 - [Custom Plugin Guide](./guide/custom-plugin.md) - Creating custom plugins
 - [External Libraries](./guide/external-libraries.md) - CodeMirror, KaTeX, MathJax integration
 - [Type Definitions](./guide/typedef-guide.md) - SunEditor namespace types reference

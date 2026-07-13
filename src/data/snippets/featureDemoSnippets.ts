@@ -119,6 +119,15 @@ export const DEMO_CHAR_COUNTER = `<p>Check the character counter in the statusba
 /** 실행취소/다시실행 데모 */
 export const DEMO_UNDO_REDO = `<p>Make some edits, then use Ctrl+Z (undo) and Ctrl+Y (redo) or the toolbar buttons.</p>`;
 
+/** Slash command 데모 (Notion/Tiptap 스타일 "/" 커맨드 메뉴) */
+export const DEMO_SLASH_COMMAND = `<p>Notion-style commands. On an empty line, press <strong>/</strong> to open the menu.</p><p>Try <em>/heading</em>, <em>/quote</em>, <em>/code</em>, <em>/table</em> or <em>/image</em>.</p><p></p>`;
+
+/** Block handle 데모 (라인별 블록 핸들 — hover/drag/action menu) */
+export const DEMO_BLOCK_HANDLE = `<h3>Block handle</h3><p>Hover the left gutter to reveal the <strong>⠿ handle</strong>.</p><p>Drag it to reorder a block, or click <strong>+</strong> to add one below. Click the handle for an action menu.</p><blockquote>Every block is draggable.</blockquote>`;
+
+/** placeholder_line 데모 (Notion 스타일 라인별 placeholder) */
+export const DEMO_PLACEHOLDER_LINE = `<p>The focused empty line shows its own placeholder — Notion-style.</p><p></p>`;
+
 /* ══ 모드 & 레이아웃 ═══════════════════════════════════ */
 
 /** Classic 모드 데모 (상단 고정 툴바) */

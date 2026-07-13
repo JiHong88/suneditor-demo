@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Texte d'espace réservé.",
+    "description": "Texte d'espace réservé affiché lorsque l'ensemble de l'éditeur est vide.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "espace réservé par ligne affiché sur le focus",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Largeur maximale de l'éditeur.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Largeur maximale facultative pour le corps de l'éditeur (`.se-wrapper`). \n- **Longueur CSS** (`\"740px\"`, `\"60ch\"`) : le contenu du corps de l'éditeur est limité à cette largeur et centré horizontalement ; le conteneur de défilement reste pleine largeur (barre de défilement sur le bord extérieur, molette/toucher actif sur toute la zone). \n- **`\"auto\"`** ou **chaîne vide** (par défaut) : aucune contrainte — mise en page naturelle pleine largeur avec remplissage de contenu par défaut. \n- En mode `blockHandle`, la poignée de gouttière suit la bande de texte centrée. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Mode barre d'outils : `classic`, `inline`, `balloon`, `balloon-always`. Ajoutez `:bottom` pour placer la barre d'outils en bas (par exemple `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Configuration de la poignée de bloc. Lorsqu’elle est fournie, une interface utilisateur de gestion de bloc par ligne est affichée. Fonctionne indépendamment de `mode`."
+  },
+  "menu": {
+    "description": "Entrées de menu. \n- **Entrées de chaîne** — résolues via `ResolveButton`. Accepte les mêmes valeurs que la barre d'outils `buttonList` : \n- **Touches de format de bloc** : `p`, `h1`-`h6`, `heading` (sous-menu H1-H6), `ul`, `ol`, `list` (sous-menu UL/OL), `blockquote`, `pre`. \n- **Noms de plugin** : tout nom de plugin enregistré (par exemple `blockStyle`, `align`, `image`, `link`). Les plugins déroulants affichent leurs éléments sous forme de sous-menu. Les plugins modaux ouvrent le modal en un clic. \n- **Commandes intégrées** : `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objets d'éléments personnalisés** — `{ title, icon?, action }`. `icon` est une clé d'icône de `$.icons` ou une chaîne HTML brute `<svg>` ; `action` est invoqué avec `($, { block })`. \n- La valeur par défaut est `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Type d'éditeur. Utilisez `\"document\"` pour une mise en page de type document, avec des sous-types optionnels après `:`.\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Largeur de la barre d'outils.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centrez la rangée de boutons de la barre d'outils (`.se-btn-tray`) horizontalement. \n- **Longueur CSS** (par exemple `\"500px\"`, `\"740px\"`, `\"60ch\"`) : l'arrière-plan de la barre d'outils s'étend sur toute la largeur tandis que la rangée de boutons est plafonnée à cette largeur et centrée. Si les boutons s'ajustent, la ligne reste sur une seule ligne ; s'ils dépassent le capuchon, ils s'enroulent à l'intérieur. \n- **`\"auto\"`** : pas de majuscule — la ligne est dimensionnée à son contenu et simplement centrée. \n- **Chaîne vide** (par défaut) : aucune contrainte. \n- **Remarque sur `responsiveButtonList`** : les seuils se comparent à la pleine largeur de la barre d'outils, pas à la bande. Lorsque cette option est définie, calibrez les touches `responsiveButtonList` en fonction de la taille de la barre d'outils à laquelle vous souhaitez réellement que chaque jeu de boutons s'active.\n ```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Élément conteneur pour la barre d'outils."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Configurations par déclencheur saisies par caractère de déclenchement."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Caractère qui ouvre le menu de commande. Caractère unique recommandé."
+  },
+  "slashCommand_items": {
+    "description": "Entrées de menu. Les chaînes sont résolues via `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Délai anti-rebond (ms) avant que l'entrée ne soit inspectée pour le déclencheur."
+  },
+  "slashCommand_limitSize": {
+    "description": "Nombre maximum d'éléments affichés dans la liste déroulante."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Message affiché lorsqu'aucun élément ne correspond à la requête. S'il n'est pas défini, le menu se ferme en cas d'absence de correspondance."
+  },
+  "slashCommand_renderItem": {
+    "description": "Rendu HTML d’éléments personnalisés."
   },
   "fontSize_sizeUnit": {
     "description": "Unité de la taille de police.\n\n- Valeurs acceptées : `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` ou `'text'`.\n\n- Si `'text'` est utilisé, une liste de tailles de police basée sur le texte est appliquée."

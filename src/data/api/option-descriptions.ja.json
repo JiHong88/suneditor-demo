@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "プレースホルダーテキスト。",
+    "description": "エディター全体が空の場合に表示されるプレースホルダー テキスト。",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "行ごとのプレースホルダーがフォーカスされた領域に表示されます",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "エディタの最大幅。",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "エディタ本体のオプションの最大幅 (`.se-wrapper`)。 \n- **CSS 長さ** (`\"740px\"`、`\"60ch\"`): エディター本体のコンテンツはこの幅に固定され、水平方向の中央に配置されます。 スクロール コンテナは全幅のままです (スクロールバーは外端にあり、ホイール/タッチは領域全体でアクティブになります)。 \n- **`\"auto\"`** または **空の文字列** (デフォルト): 制約なし - デフォルトのコンテンツ パディングを使用した自然な全幅レイアウト。 \n- `blockHandle` モードでは、ガター ハンドルは中央のテキスト バンドを追跡します。 \n「`js\n{ innerWidth: '740px' }\n`」",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "ツールバーモード：`classic`、`inline`、`balloon`、`balloon-always`。ツールバーを下部に配置するには、`:bottom`を追加します（例：`classic:bottom`、`inline:bottom`）。",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "ブロックハンドルの設定。 指定すると、行ごとのブロック ハンドル UI が表示されます。 `mode` とは独立して動作します。"
+  },
+  "menu": {
+    "description": "メニューエントリ。 \n- **文字列エントリ** — `ResolveButton` によって解決されます。 ツールバー `buttonList` と同じ値を受け入れます。 \n- **ブロック形式キー**: `p`、`h1`-`h6`、`heading` (H1-H6 サブメニュー)、`ul`、`ol`、`list` (UL/OL サブメニュー)、`blockquote`、`pre`。 \n- **プラグイン名**: 登録されているプラ​​グイン名 (例: `blockStyle`、`align`、`image`、`link`)。 ドロップダウン プラグインは項目をサブメニューとして表示します。 モーダル プラグインはクリックするとモーダルを開きます。 \n- **組み込みコマンド**: `bold`、`italic`、`underline`、`strike`、`undo`、`redo` など。 \n- **カスタム項目オブジェクト** — `{ title, icon?, action }`。 `icon` は、`$.icons` のアイコン キー、または生の `<svg>` HTML 文字列です。 `action` は `($, { block })` で呼び出されます。 \n- デフォルトは `['p', 'heading', 'list', 'blockquote', 'pre']` です。 \n「`js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n`」"
   },
   "type": {
     "description": "エディタの種類。ドキュメントスタイルのレイアウトには `\"document\"` を使用し、`:` の後にオプションのサブタイプを指定できます。\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "ツールバーの幅。",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "ツールバーのボタン行 (`.se-btn-tray`) を水平方向の中央に配置します。 \n- **CSS 長さ** (例: `\"500px\"`、`\"740px\"`、`\"60ch\"`): ツールバーの背景は全幅に広がりますが、ボタン行はその幅でキャップされて中央に配置されます。 ボタンが収まる場合、行は 1 行のままになります。 キャップを超える場合は、キャップの内側に回り込みます。 \n- **`\"auto\"`**: キャップなし — 行は内容に合わせてサイズ変更され、単純に中央に配置されます。 \n- **空の文字列** (デフォルト): 制約なし。 \n- **`responsiveButtonList`** に関する注意: しきい値は、バンドではなくツールバーの全幅と比較されます。 このオプションを設定すると、実際に各ボタンを開始する設定にしたいツールバー サイズに合わせて `responsiveButtonList` キーを調整します。 \n「`js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n`」",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "ツールバーのコンテナ要素。"
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "トリガー文字をキーとしたトリガーごとの設定。"
+  },
+  "slashCommand_triggerChar": {
+    "description": "コマンドメニューを開くキャラクター。 単体キャラ推奨。"
+  },
+  "slashCommand_items": {
+    "description": "メニューエントリ。 文字列は `ResolveButton` 経由で解決されます"
+  },
+  "slashCommand_delayTime": {
+    "description": "トリガーの入力が検査される前のデバウンス遅延 (ミリ秒)。"
+  },
+  "slashCommand_limitSize": {
+    "description": "ドロップダウンに表示される項目の最大数。"
+  },
+  "slashCommand_emptyMessage": {
+    "description": "クエリに一致する項目がない場合に表示されるメッセージ。 設定しない場合、一致しない場合にメニューが閉じます。"
+  },
+  "slashCommand_renderItem": {
+    "description": "カスタムアイテムのHTMLレンダラー。"
   },
   "fontSize_sizeUnit": {
     "description": "フォントサイズの単位。\n\n- 指定可能な値は、`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'`、`'text'`です。\n\n- `'text'`を指定した場合、テキストベースのフォントサイズリストが適用されます。"

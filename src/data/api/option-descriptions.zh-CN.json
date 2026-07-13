@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "占位符文本。",
+    "description": "当整个编辑器为空时显示的占位符文本。",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "每行占位符显示在焦点上",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "编辑器最大宽度。",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "编辑器主体的可选最大宽度 (`.se-wrapper`)。 \n- **CSS 长度** (`\"740px\"`, `\"60ch\"`)：编辑器主体的内容被限制在此宽度并水平居中； 滚动容器保持全宽（滚动条位于外边缘，滚轮/触摸在整个区域处于活动状态）。 \n- **`\"auto\"`** 或 **空字符串**（默认）：无限制 — 具有默认内容填充的自然全角布局。 \n- 在 `blockHandle` 模式下，装订线手柄跟踪居中的文本带。 \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "工具栏模式：`classic`、`inline`、`balloon`、`balloon-always`。附加`:bottom`可将工具栏放置在底部（例如`classic:bottom`、`inline:bottom`）。",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "块句柄配置。 提供后，会显示每行块句柄 UI。 独立于 `mode` 工作。"
+  },
+  "menu": {
+    "description": "菜单条目。 \n- **字符串条目** — 通过 `ResolveButton` 解析。 接受与工具栏 `buttonList` 相同的值：\n - **块格式键**：`p`、`h1`-`h6`、`heading`（H1-H6 子菜单）、`ul`、`ol`、`list`（UL/OL 子菜单）、`blockquote`、`pre`。 \n- **插件名称**：任何注册的插件名称（例如 `blockStyle`、`align`、`image`、`link`）。 下拉插件将其项目显示为子菜单。 模态插件单击时打开模态。 \n- **内置命令**：`bold`、`italic`、`underline`、`strike`、`undo`、`redo` 等。 \n- **自定义项目对象** — `{ title, icon?, action }`。 `icon` 是来自 `$.icons` 的图标键或原始 `<svg>` HTML 字符串； `action` 通过 `($, { block })` 调用。 \n- 默认为 `['p', 'heading', 'list', 'blockquote', 'pre']`。 \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "编辑器类型。使用 `\"document\"` 表示文档样式布局，`:` 之后可添加可选子类型。\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "工具栏宽度。",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "将工具栏的按钮行 (`.se-btn-tray`) 水平居中。 \n- **CSS 长度**（例如 `\"500px\"`、`\"740px\"`、`\"60ch\"`）：工具栏背景跨越整个宽度，而按钮行则以该宽度为上限并居中。 如果按钮合适，则该行保持在一行上； 如果它们超出了盖子，它们就会包裹在里面。 \n- **`\"auto\"`**：无上限 - 行的大小根据其内容调整，并且简单地居中。 \n- **空字符串**（默认）：无限制。 \n- **关于 `responsiveButtonList`** 的注意事项：阈值与工具栏的全宽度而不是带区进行比较。 设置此选项后，围绕您实际希望每个按钮设置启动的工具栏大小校准 `responsiveButtonList` 键。 \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "工具栏的容器元素。"
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "由触发字符键入的每触发配置。"
+  },
+  "slashCommand_triggerChar": {
+    "description": "打开命令菜单的字符。 推荐单角色。"
+  },
+  "slashCommand_items": {
+    "description": "菜单条目。 字符串通过 `ResolveButton` 解析"
+  },
+  "slashCommand_delayTime": {
+    "description": "检查输入是否有触发之前的去抖延迟（毫秒）。"
+  },
+  "slashCommand_limitSize": {
+    "description": "下拉列表中显示的最大项目数。"
+  },
+  "slashCommand_emptyMessage": {
+    "description": "当没有项目与查询匹配时显示消息。 如果未设置，菜单将在不匹配时关闭。"
+  },
+  "slashCommand_renderItem": {
+    "description": "自定义项目 HTML 渲染器。"
   },
   "fontSize_sizeUnit": {
     "description": "字体大小的单位。\n\n- 可接受的值包括：`'px'`、`'pt'`、`'em'`、`'rem'`、`'vw'`、`'vh'`、`'%'` 或 `'text'`。\n\n- 如果使用 `'text'`，则应用基于文本的字体大小列表。"

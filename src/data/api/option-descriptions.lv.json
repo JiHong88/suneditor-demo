@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Viettura teksts.",
+    "description": "Viettura teksts tiek rādīts, kad viss redaktors ir tukšs.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "pa rindiņu vietturis, kas tiek rādīts fokusētajā",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Redaktora maksimālais platums.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Izvēles maksimālais platums redaktora pamattekstam (`.se-wrapper`). \n- **CSS garums** (`\"740px\"`, `\"60ch\"`): redaktora pamatteksta saturs ir piestiprināts šim platumam un centrēts horizontāli; ritināšanas konteiners paliek pilnā platumā (ritjosla ārējā malā, ritenis/skāriens ir aktīvs visā apgabalā). \n- **`\"auto\"`** vai **tukša virkne** (noklusējums): bez ierobežojumiem — dabisks pilna platuma izkārtojums ar noklusējuma satura pildījumu. \n- `blockHandle` režīmā notekas rokturis izseko centrēto teksta joslu. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Rīkjoslas režīms: `classic`, `inline`, `balloon`, `balloon-always`. Pievienojiet `:bottom`, lai rīkjoslu novietotu apakšā (piemēram, `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Bloka roktura konfigurācija. Ja tas ir nodrošināts, tiek parādīts katras rindiņas bloka roktura lietotāja interfeiss. Darbojas neatkarīgi no `mode`."
+  },
+  "menu": {
+    "description": "Izvēlnes ieraksti. \n- **Virknes ieraksti** — atrisināti, izmantojot `ResolveButton`. Pieņem tādas pašas vērtības kā rīkjosla `buttonList`: \n- **Bloka formāta taustiņi**: `p`, `h1`-`h6`, `heading` (apakšizvēlne H1-H6), `ul`, `ol`, `list` (UL/OL apakšizvēlne), `blockquote`, `pre`. \n- **Spraudņu nosaukumi**: jebkurš reģistrēts spraudņa nosaukums (piemēram, `blockStyle`, `align`, `image`, `link`). Nolaižamie spraudņi parāda vienumus kā apakšizvēlni. Modālie spraudņi atver modālu, noklikšķinot. \n- **Iebūvētās komandas**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` utt. \n- **Pielāgotu preču objekti** — `{ title, icon?, action }`. `icon` ir ikonas atslēga no `$.icons` vai neapstrādāta `<svg>` HTML virkne; `action` tiek izsaukts ar `($, { block })`. \n- Noklusējums ir `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Redaktora tips. Izmantojiet `\"document\"` dokumenta stila izkārtojumam, ar papildu apakštipiem aiz `:`.\n\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Rīkjoslas platums.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centrējiet rīkjoslas pogu rindu (`.se-btn-tray`) horizontāli. \n- **CSS garums** (piemēram, `\"500px\"`, `\"740px\"`, `\"60ch\"`): rīkjoslas fons aptver visu platumu, kamēr pogu rinda ir ierobežota šajā platumā un centrēta. Ja pogas ir piemērotas, rinda paliek vienā rindā; ja tie pārsniedz vāciņu, tie ietinās tajā. \n- **`\"auto\"`**: bez ierobežojuma — rindas izmērs tiek pielāgots tās saturam un vienkārši centrēts. \n- **Tukša virkne** (noklusējums): nav ierobežojumu. \n- **Piezīme par `responsiveButtonList`**: sliekšņi tiek salīdzināti ar rīkjoslas pilno platumu, nevis joslu. Kad šī opcija ir iestatīta, kalibrējiet `responsiveButtonList` taustiņus atbilstoši tādam rīkjoslas izmēram, kādu vēlaties iestatīt katrai pogai. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Rīkjoslas konteinera elements."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Katra trigera konfigurācijas, ko ievada trigera rakstzīme."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Rakstzīme, kas atver komandu izvēlni. Ieteicams izmantot vienu rakstzīmi."
+  },
+  "slashCommand_items": {
+    "description": "Izvēlnes ieraksti. Virknes tiek atrisinātas, izmantojot `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Atkāpšanās aizkave (ms), pirms tiek pārbaudīts, vai ievade ir aktivizēta."
+  },
+  "slashCommand_limitSize": {
+    "description": "Nolaižamajā izvēlnē parādītais maksimālais vienumu skaits."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Ziņojums tiek parādīts, ja vaicājumam neatbilst neviens vienums. Ja nav iestatīts, izvēlne tiek aizvērta, ja nav atbilstības."
+  },
+  "slashCommand_renderItem": {
+    "description": "Pielāgots vienuma HTML renderētājs."
   },
   "fontSize_sizeUnit": {
     "description": "Fonta lieluma mērvienība.\n- Pieņemtās vērtības ir: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` vai `'text'`.\n- Ja tiek izmantots `'text'`, tiek lietots uz tekstu balstīts fonta lieluma saraksts."

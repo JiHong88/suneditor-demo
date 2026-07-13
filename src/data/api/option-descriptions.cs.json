@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Zástupný text.",
+    "description": "Zástupný text se zobrazí, když je celý editor prázdný.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "zástupný symbol na řádek zobrazený na zaostřeném místě",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Maximální šířka editoru.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Volitelná maximální šířka těla editoru (`.se-wrapper`). \n- **délka CSS** (`\"740px\"`, `\"60ch\"`): obsah těla editoru je upnut na tuto šířku a vodorovně vycentrován; rolovací kontejner zůstane v celé šířce (posuvník na vnějším okraji, kolečko/dotek aktivní po celé ploše). \n- **`\"auto\"`** nebo **prázdný řetězec** (výchozí): bez omezení – přirozené rozvržení na celou šířku s výchozím odsazením obsahu. \n- V režimu `blockHandle` rukojeť okapového kanálu sleduje středový textový pás. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Režim panelu nástrojů: `classic`, `inline`, `balloon`, `balloon-always`. Přidáním `:bottom` umístěte panel nástrojů dole (např. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Konfigurace rukojeti bloku. Je-li k dispozici, zobrazí se uživatelské rozhraní úchytu bloku pro každý řádek. Funguje nezávisle na `mode`."
+  },
+  "menu": {
+    "description": "Položky nabídky. \n- **Položky řetězce** – vyřešeno pomocí `ResolveButton`. Přijímá stejné hodnoty jako panel nástrojů `buttonList`: \n- **Klíče formátu blokování**: `p`, `h1`-`h6`, `heading` (podnabídka H1-H6), `ul`, `ol`, `list` (podnabídka UL/OL), `blockquote`, `pre`. \n- **Názvy pluginů**: Jakýkoli registrovaný název pluginu (např. `blockStyle`, `align`, `image`, `link`). Rozbalovací pluginy zobrazují své položky jako podnabídku. Modální pluginy otevřou modal kliknutím. \n- **Vestavěné příkazy**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` atd. \n- **Vlastní objekty položek** — `{ title, icon?, action }`. `icon` je klíč ikony z `$.icons` nebo nezpracovaný řetězec HTML `<svg>`; `action` se vyvolá s `($, { block })`. \n- Výchozí nastavení je `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Typ editoru. Pro rozvržení ve stylu dokumentu použijte `\"document\"` s volitelnými podtypy po `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Šířka panelu nástrojů.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Vodorovně vycentrujte řádek tlačítek panelu nástrojů (`.se-btn-tray`). \n- **Délka CSS** (např. `\"500px\"`, `\"740px\"`, `\"60ch\"`): pozadí panelu nástrojů se rozprostírá po celé šířce, zatímco řada tlačítek je v této šířce ohraničena a vycentrována. Pokud se tlačítka vejdou, řádek zůstane na jednom řádku; pokud přesahují uzávěr, zabalí se dovnitř. \n- **`\"auto\"`**: bez omezení – řádek je přizpůsoben obsahu a jednoduše vycentrován. \n- **Prázdný řetězec** (výchozí): bez omezení. \n- **Poznámka k `responsiveButtonList`**: prahové hodnoty se porovnávají s plnou šířkou panelu nástrojů, nikoli s pásem. Když je tato možnost nastavena, zkalibrujte `responsiveButtonList` klávesy kolem velikosti panelu nástrojů, na kterou skutečně chcete, aby každé nastavené tlačítko zasahovalo. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Kontejnerový prvek pro panel nástrojů."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Konfigurace jednotlivých spouštěčů zadané podle spouštěcího znaku."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Znak, který otevře nabídku příkazů. Doporučuje se jeden znak."
+  },
+  "slashCommand_items": {
+    "description": "Položky nabídky. Řetězce se řeší přes `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Zpoždění odrazu (ms), než je vstup zkontrolován na spouštění."
+  },
+  "slashCommand_limitSize": {
+    "description": "Maximální počet položek zobrazených v rozbalovací nabídce."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Zpráva se zobrazí, když dotazu neodpovídají žádné položky. Pokud není nastaveno, nabídka se zavře, pokud se nenajde žádná shoda."
+  },
+  "slashCommand_renderItem": {
+    "description": "Vlastní vykreslování HTML položek."
   },
   "fontSize_sizeUnit": {
     "description": "Jednotka pro velikost písma.\n- Přijatelné hodnoty zahrnují: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` nebo `'text'`.\n- Pokud se použije `'text'`, použije se textový seznam velikostí písma."

@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Yer tutucu metin.",
+    "description": "Düzenleyicinin tamamı boş olduğunda gösterilen yer tutucu metin.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "odaklanılan alanda gösterilen satır başına yer tutucu",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Editör için maksimum genişlik.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Düzenleyici gövdesi için isteğe bağlı maksimum genişlik (`.se-wrapper`). \n- **CSS uzunluğu** (`\"740px\"`, `\"60ch\"`): Düzenleyici gövdesinin içeriği bu genişliğe sıkıştırılır ve yatay olarak ortalanır; kaydırma kabı tam genişlikte kalır (kaydırma çubuğu dış kenardadır, tekerlek/dokunma tüm alan üzerinde etkindir). \n- **`\"auto\"`** veya **boş dize** (varsayılan): kısıtlama yok — varsayılan içerik dolgulu doğal tam genişlikli düzen. \n- `blockHandle` modunda, cilt payı tutamacı ortalanmış metin bandını izler. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Araç çubuğu modu: `classic`, `inline`, `balloon`, `balloon-always`. Araç çubuğunu alta yerleştirmek için `:bottom` ekleyin (örneğin `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Blok tanıtıcı yapılandırması. Sağlandığında, satır başına blok tanıtıcısı kullanıcı arayüzü gösterilir. `mode`'dan bağımsız olarak çalışır."
+  },
+  "menu": {
+    "description": "Menü girişleri. \n- **Dize girişleri** — `ResolveButton` aracılığıyla çözümlendi. `buttonList` araç çubuğuyla aynı değerleri kabul eder: \n- **Blok format tuşları**: `p`, `h1`-`h6`, `heading` (H1-H6 alt menüsü), `ul`, `ol`, `list` (UL/OL alt menüsü), `blockquote`, `pre`. \n- **Eklenti adları**: Herhangi bir kayıtlı eklenti adı (ör. `blockStyle`, `align`, `image`, `link`). Açılır eklentiler, öğelerini bir alt menü olarak görüntüler. Modal eklentileri tıklamayla modeli açar. \n- **Yerleşik komutlar**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, vb. \n- **Özel öğe nesneleri** — `{ title, icon?, action }`. `icon`, `$.icons`'den bir simge anahtarıdır veya ham bir `<svg>` HTML dizesidir; `action`, `($, { block })` ile çağrılır. \n- Varsayılan olarak `['p', 'heading', 'list', 'blockquote', 'pre']` şeklindedir. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Editör tipi. Belge stili düzeni için `\"document\"` kullanın, `:`'den sonra isteğe bağlı alt tipler ekleyin.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Araç çubuğunun genişliği.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Araç çubuğunun düğme satırını (`.se-btn-tray`) yatay olarak ortalayın. \n- **CSS uzunluğu** (ör. `\"500px\"`, `\"740px\"`, `\"60ch\"`): araç çubuğu arka planı tam genişliğe yayılırken düğme satırı bu genişlikte sınırlanır ve ortalanır. Düğmeler uygunsa sıra tek satırda kalır; eğer kapağı aşarlarsa içine sarılırlar. \n- **`\"auto\"`**: sınır yok — satır, içeriğine göre boyutlandırılır ve basitçe ortalanır. \n- **Boş dize** (varsayılan): kısıtlama yok. \n- **`responsiveButtonList`** ile ilgili not: eşikler bantla değil araç çubuğunun tam genişliğiyle karşılaştırılır. Bu seçenek ayarlandığında, `responsiveButtonList` tuşlarını, her bir düğmenin gerçekte devreye girmesini istediğiniz araç çubuğu boyutuna göre kalibre edin. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Araç çubuğu için kapsayıcı öğe."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Tetikleyici karaktere göre anahtarlanan tetikleyici başına yapılandırmalar."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Komut menüsünü açan karakter. Tek karakter önerilir."
+  },
+  "slashCommand_items": {
+    "description": "Menü girişleri. Dizeler `ResolveButton` aracılığıyla çözümlenir"
+  },
+  "slashCommand_delayTime": {
+    "description": "Giriş tetikleyici açısından incelenmeden önce geri dönme gecikmesi (ms)."
+  },
+  "slashCommand_limitSize": {
+    "description": "Açılır menüde gösterilen maksimum öğe sayısı."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Sorguyla eşleşen hiçbir öğe olmadığında gösterilen mesaj. Ayarlanmadığı takdirde eşleşme olmadığında menü kapanır."
+  },
+  "slashCommand_renderItem": {
+    "description": "Özel öğe HTML oluşturucusu."
   },
   "fontSize_sizeUnit": {
     "description": "Yazı tipi boyutu için birim.\n\n- Kabul edilen değerler şunlardır: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` veya `'text'`.\n\n- `'text'` kullanılırsa, metne dayalı bir yazı tipi boyutu listesi uygulanır."

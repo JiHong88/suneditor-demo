@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Testo segnaposto.",
+    "description": "Testo segnaposto mostrato quando l'intero editor è vuoto.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "segnaposto per riga mostrato sul focus",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Larghezza massima per l'editor.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Larghezza massima opzionale per il corpo dell'editor (`.se-wrapper`). \n- **Lunghezza CSS** (`\"740px\"`, `\"60ch\"`): il contenuto del corpo dell'editor è limitato a questa larghezza e centrato orizzontalmente; il contenitore di scorrimento rimane a larghezza intera (barra di scorrimento sul bordo esterno, rotella/tocco attivo su tutta l'area). \n- **`\"auto\"`** o **stringa vuota** (impostazione predefinita): nessun vincolo: layout naturale a larghezza intera con riempimento del contenuto predefinito. \n- In modalità `blockHandle`, la maniglia del margine segue la banda di testo centrata. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Modalità barra degli strumenti: `classic`, `inline`, `balloon`, `balloon-always`. Aggiungere `:bottom` per posizionare la barra degli strumenti in basso (ad esempio `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Configurazione dell'handle del blocco. Se fornita, viene visualizzata l'interfaccia utente dell'handle del blocco per riga. Funziona indipendentemente da `mode`."
+  },
+  "menu": {
+    "description": "Voci del menu. \n- **Voci stringa**: risolte tramite `ResolveButton`. Accetta gli stessi valori della barra degli strumenti `buttonList`: \n- **Tasti formato blocco**: `p`, `h1`-`h6`, `heading` (sottomenu H1-H6), `ul`, `ol`, `list` (sottomenu UL/OL), `blockquote`, `pre`. \n- **Nomi plugin**: qualsiasi nome plugin registrato (ad esempio `blockStyle`, `align`, `image`, `link`). I plugin a discesa mostrano i loro elementi come un sottomenu. I plugin modali aprono il modale al clic. \n- **Comandi integrati**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, ecc. \n- **Oggetti articolo personalizzato** — `{ title, icon?, action }`. `icon` è una chiave icona da `$.icons` o una stringa HTML `<svg>` non elaborata; `action` viene richiamato con `($, { block })`. \n- Il valore predefinito è `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Tipo di editor. Utilizzare `\"document\"` per un layout in stile documento, con sottotipi opzionali dopo `:`.\n\n``js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Larghezza della barra degli strumenti.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Centrare orizzontalmente la riga dei pulsanti della barra degli strumenti (`.se-btn-tray`). \n- **Lunghezza CSS** (ad esempio `\"500px\"`, `\"740px\"`, `\"60ch\"`): lo sfondo della barra degli strumenti si estende per l'intera larghezza mentre la riga del pulsante è limitata a quella larghezza e centrata. Se i pulsanti si adattano, la riga rimane su un'unica riga; se superano il cappello, si avvolgono al suo interno. \n- **`\"auto\"`**: nessun limite: la riga è dimensionata in base al suo contenuto e semplicemente centrata. \n- **Stringa vuota** (default): nessun vincolo. \n- **Nota su `responsiveButtonList`**: le soglie vengono confrontate con l'intera larghezza della barra degli strumenti, non con la banda. Quando questa opzione è impostata, calibra i tasti `responsiveButtonList` attorno alla dimensione della barra degli strumenti alla quale desideri effettivamente che ciascun pulsante venga attivato. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Elemento contenitore per la barra degli strumenti."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Configurazioni per trigger digitate in base al carattere di trigger."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Carattere che apre il menu dei comandi. Si consiglia un singolo carattere."
+  },
+  "slashCommand_items": {
+    "description": "Voci del menu. Le stringhe si risolvono tramite `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Ritardo antirimbalzo (ms) prima che l'ingresso venga controllato per il trigger."
+  },
+  "slashCommand_limitSize": {
+    "description": "Numero massimo di elementi visualizzati nel menu a discesa."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Messaggio visualizzato quando nessun elemento corrisponde alla query. Se non impostato, il menu si chiude in assenza di corrispondenza."
+  },
+  "slashCommand_renderItem": {
+    "description": "Render HTML di elementi personalizzati."
   },
   "fontSize_sizeUnit": {
     "description": "Unità di misura per la dimensione del carattere.\n\n- I valori accettati includono: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` o `'text'`.\n\n- Se si utilizza `'text'`, viene applicato un elenco di dimensioni dei caratteri basato sul testo."

@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Placeholder text.",
+    "description": "Placeholder text shown when the whole editor is empty.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "per-line placeholder shown on the focused",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Max width for the editor.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Optional max-width for the editor body (`.se-wrapper`).\n- **CSS length** (`\"740px\"`, `\"60ch\"`): editor body's content is clamped to this width and centered horizontally; scroll container stays full width (scrollbar at the outer edge, wheel/touch active over the whole area).\n- **`\"auto\"`** or **empty string** (default): no constraint — natural full-width layout with default content padding.\n- In `blockHandle` mode, the gutter handle tracks the centered text band.\n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`."
+  },
+  "menu": {
+    "description": "Menu entries.\n- **String entries** — resolved via `ResolveButton`. Accepts the same values as toolbar `buttonList`:\n- **Block format keys**: `p`, `h1`-`h6`, `heading` (H1-H6 submenu), `ul`, `ol`, `list` (UL/OL submenu), `blockquote`, `pre`.\n- **Plugin names**: Any registered plugin name (e.g. `blockStyle`, `align`, `image`, `link`). Dropdown plugins display their items as a submenu. Modal plugins open the modal on click.\n- **Built-in commands**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc.\n- **Custom item objects** — `{ title, icon?, action }`. `icon` is an icon key from `$.icons` or a raw `<svg>` HTML string; `action` is invoked with `($, { block })`.\n- Defaults to `['p', 'heading', 'list', 'blockquote', 'pre']`.\n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Toolbar width.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Center the toolbar's button row (`.se-btn-tray`) horizontally.\n- **CSS length** (e.g. `\"500px\"`, `\"740px\"`, `\"60ch\"`): toolbar background spans full width while the button row is capped at that width and centered. If buttons fit, the row stays on a single line; if they exceed the cap, they wrap inside it.\n- **`\"auto\"`**: no cap — the row is sized to its content and simply centered.\n- **Empty string** (default): no constraint.\n- **Note on `responsiveButtonList`**: thresholds compare against the toolbar's full width, not the band. When this option is set, calibrate `responsiveButtonList` keys around the toolbar size you actually want each button set to kick in at.\n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Container element for the toolbar."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Per-trigger configurations keyed by trigger character."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Character that opens the command menu. Single character recommended."
+  },
+  "slashCommand_items": {
+    "description": "Menu entries. Strings resolve via `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Debounce delay (ms) before the input is inspected for the trigger."
+  },
+  "slashCommand_limitSize": {
+    "description": "Maximum number of items shown in the dropdown."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Message shown when no items match the query. If unset, the menu closes on no match."
+  },
+  "slashCommand_renderItem": {
+    "description": "Custom item HTML renderer."
   },
   "fontSize_sizeUnit": {
     "description": "The unit for the font size.\n- Accepted values include: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` or `'text'`.\n- If `'text'` is used, a text-based font size list is applied."

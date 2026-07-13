@@ -30,6 +30,9 @@ import {
 	DEMO_HR,
 	DEMO_MATH,
 	DEMO_AUTOCOMPLETE,
+	DEMO_SLASH_COMMAND,
+	DEMO_BLOCK_HANDLE,
+	DEMO_PLACEHOLDER_LINE,
 	DEMO_LINKS,
 	DEMO_CODE_VIEW,
 	DEMO_MARKDOWN_VIEW,
@@ -167,6 +170,24 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 				},
 			},
 		},
+	}),
+	slashCommand: fl(
+		{ p: "full", "sc.it": "heading,list,blockquote,pre,bold,italic,image,table,link", phl: "Type '/' for commands", val: DEMO_SLASH_COMMAND },
+		[["undo", "redo"]],
+		{
+			slashCommand: {
+				triggerChar: "/",
+				items: ["heading", "list", "blockquote", "pre", "bold", "italic", "image", "table", "link"],
+				limitSize: 12,
+			},
+			placeholder_line: "Type '/' for commands",
+		},
+	),
+	blockHandle: fl({ p: "standard", bhe: "1", bhm: "p,heading,list,blockquote,pre,align", val: DEMO_BLOCK_HANDLE }, [["undo", "redo"]], {
+		blockHandle: { menu: ["p", "heading", "list", "blockquote", "pre", "align"] },
+	}),
+	placeholderLine: fl({ p: "standard", phl: "This empty line has its own placeholder", val: DEMO_PLACEHOLDER_LINE }, [["bold", "italic", "underline"]], {
+		placeholder_line: "This empty line has its own placeholder",
 	}),
 	links: fl({ p: "standard", val: DEMO_LINKS }, [["link", "anchor"], "|", ["bold", "italic"]]),
 	codeView: fl({ p: "standard", val: DEMO_CODE_VIEW }, [["codeView"], "|", ["bold", "italic", "underline"]]),

@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Tekst zastępczy.",
+    "description": "Tekst zastępczy wyświetlany, gdy cały edytor jest pusty.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "symbol zastępczy dla linii pokazany na fokusie",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Maksymalna szerokość edytora.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Opcjonalna maksymalna szerokość treści edytora (`.se-wrapper`). \n- **Długość CSS** (`\"740px\"`, `\"60ch\"`): treść edytora jest przycięta do tej szerokości i wyśrodkowana w poziomie; kontener przewijania pozostaje na całej szerokości (pasek przewijania na zewnętrznej krawędzi, kółko/dotyk aktywne na całym obszarze). \n- **`\"auto\"`** lub **pusty ciąg** (domyślnie): brak ograniczeń — naturalny układ o pełnej szerokości z domyślnym dopełnieniem treści. \n- W trybie `blockHandle` uchwyt rynny śledzi wyśrodkowany pasek tekstu. \n```js\n{ innerWidth: '740px' }\n```",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Tryb paska narzędzi: `classic`, `inline`, `balloon`, `balloon-always`. Dodaj `:bottom`, aby umieścić pasek narzędzi na dole (np. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Konfiguracja uchwytu bloku. Jeśli jest podany, wyświetlany jest interfejs użytkownika uchwytu bloku dla poszczególnych linii. Działa niezależnie od `mode`."
+  },
+  "menu": {
+    "description": "Pozycje menu. \n- **Wpisy ciągu** — rozwiązane poprzez `ResolveButton`. Akceptuje te same wartości, co pasek narzędzi `buttonList`: \n- **Klawisze formatu blokowego**: `p`, `h1`-`h6`, `heading` (podmenu H1-H6), `ul`, `ol`, `list` (podmenu UL/OL), `blockquote`, `pre`. \n- **Nazwy wtyczek**: dowolna zarejestrowana nazwa wtyczki (np. `blockStyle`, `align`, `image`, `link`). Wtyczki rozwijane wyświetlają swoje elementy jako podmenu. Wtyczki modalne otwierają moduł po kliknięciu. \n- **Wbudowane polecenia**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` itd. \n- **Niestandardowe przedmioty** — `{ title, icon?, action }`. `icon` to klucz ikony z `$.icons` lub surowy ciąg HTML `<svg>`; `action` jest wywoływany z `($, { block })`. \n- Wartość domyślna to `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
   },
   "type": {
     "description": "Typ edytora. Użyj `\"document\"` dla układu w stylu dokumentu, z opcjonalnymi podtypami po `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Szerokość paska narzędzi.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Wyśrodkuj rząd przycisków paska narzędzi (`.se-btn-tray`) w poziomie. \n- **Długość CSS** (np. `\"500px\"`, `\"740px\"`, `\"60ch\"`): tło paska narzędzi rozciąga się na całą szerokość, podczas gdy rząd przycisków jest ograniczony do tej szerokości i wyśrodkowany. Jeśli przyciski pasują, rząd pozostaje w jednej linii; jeśli przekraczają czapkę, zawijają się w nią. \n- **`\"auto\"`**: bez czapki — rozmiar wiersza jest dostosowany do jego zawartości i po prostu wyśrodkowany. \n- **Pusty ciąg** (domyślnie): brak ograniczeń. \n- **Uwaga do `responsiveButtonList`**: progi porównuje się z pełną szerokością paska narzędzi, a nie z pasmem. Gdy ta opcja jest ustawiona, skalibruj klawisze `responsiveButtonList` wokół rozmiaru paska narzędzi, przy którym faktycznie chcesz ustawić każdy przycisk. \n```js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n```",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Element kontenera dla paska narzędzi."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Konfiguracje poszczególnych wyzwalaczy oznaczone znakiem wyzwalacza."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Znak otwierający menu poleceń. Zalecany pojedynczy znak."
+  },
+  "slashCommand_items": {
+    "description": "Pozycje menu. Ciągi są rozpoznawane poprzez `ResolveButton`"
+  },
+  "slashCommand_delayTime": {
+    "description": "Opóźnienie odbicia (ms) przed sprawdzeniem wejścia pod kątem wyzwalania."
+  },
+  "slashCommand_limitSize": {
+    "description": "Maksymalna liczba elementów wyświetlana na liście rozwijanej."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Komunikat wyświetlany, gdy żaden element nie pasuje do zapytania. Jeśli nieustawione, menu zamyka się w przypadku braku dopasowania."
+  },
+  "slashCommand_renderItem": {
+    "description": "Moduł renderowania HTML elementu niestandardowego."
   },
   "fontSize_sizeUnit": {
     "description": "Jednostka rozmiaru czcionki.\n- Akceptowane wartości to: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` lub `'text'`.\n- Jeśli użyto `'text'`, stosowana jest lista rozmiarów czcionek oparta na tekście."

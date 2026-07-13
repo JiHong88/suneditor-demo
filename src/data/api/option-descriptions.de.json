@@ -4,7 +4,11 @@
     "default": "\"\""
   },
   "placeholder": {
-    "description": "Platzhaltertext.",
+    "description": "Platzhaltertext, der angezeigt wird, wenn der gesamte Editor leer ist.",
+    "default": "\"\""
+  },
+  "placeholder_line": {
+    "description": "Platzhalter pro Zeile, der im Fokus angezeigt wird",
     "default": "\"\""
   },
   "editableFrameAttributes": {
@@ -21,6 +25,10 @@
   },
   "maxWidth": {
     "description": "Maximale Breite für den Editor.",
+    "default": "\"\""
+  },
+  "innerWidth": {
+    "description": "Optionale maximale Breite für den Editortext (`.se-wrapper`). \n- **CSS-Länge** (`\"740px\"`, `\"60ch\"`): Der Inhalt des Editorkörpers wird auf diese Breite beschränkt und horizontal zentriert; Scroll-Container bleibt in voller Breite (Scrollbar am äußeren Rand, Rad/Touch aktiv im gesamten Bereich). \n- **`\"auto\"`** oder **leerer String** (Standard): keine Einschränkung – natürliches Layout in voller Breite mit standardmäßiger Inhaltsauffüllung. \n- Im `blockHandle`-Modus verfolgt der Bundsteggriff das zentrierte Textband. \n„`js\n{ innerWidth: '740px' }\n`“.",
     "default": "\"\""
   },
   "height": {
@@ -113,6 +121,12 @@
   "mode": {
     "description": "Symbolleistenmodus: `classic`, `inline`, `balloon`, `balloon-always`. Hängen Sie `:bottom` an, um die Symbolleiste unten zu platzieren (z. B. `classic:bottom`, `inline:bottom`).",
     "default": "\"classic\""
+  },
+  "blockHandle": {
+    "description": "Block-Handle-Konfiguration. Sofern bereitgestellt, wird eine zeilenweise Block-Handle-Benutzeroberfläche angezeigt. Funktioniert unabhängig von `mode`."
+  },
+  "menu": {
+    "description": "Menüeinträge. \n- **String-Einträge** – gelöst über `ResolveButton`. Akzeptiert die gleichen Werte wie Symbolleiste `buttonList`: \n- **Blockformattasten**: `p`, `h1`-`h6`, `heading` (Untermenü H1-H6), `ul`, `ol`, `list` (Untermenü UL/OL), `blockquote`, `pre`. \n- **Plugin-Namen**: Jeder registrierte Plugin-Name (z. B. `blockStyle`, `align`, `image`, `link`). Dropdown-Plugins zeigen ihre Elemente als Untermenü an. Modal-Plugins öffnen das Modal per Klick. \n- **Eingebaute Befehle**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` usw. \n- **Benutzerdefinierte Elementobjekte** – `{ title, icon?, action }`. `icon` ist ein Symbolschlüssel aus `$.icons` oder eine rohe `<svg>`-HTML-Zeichenfolge; `action` wird mit `($, { block })` aufgerufen. \n- Standardmäßig ist `['p', 'heading', 'list', 'blockquote', 'pre']`. \n„`js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n`“."
   },
   "type": {
     "description": "Editor-Typ. Verwenden Sie `\"document\"` für ein Dokumentlayout mit optionalen Untertypen nach `:`.\n\n``js\n// type\n'document:header,page'\n```",
@@ -234,6 +248,10 @@
   "toolbar_width": {
     "description": "Breite der Symbolleiste.",
     "default": "\"auto\""
+  },
+  "toolbar_innerWidth": {
+    "description": "Zentrieren Sie die Schaltflächenreihe (`.se-btn-tray`) der Symbolleiste horizontal. \n- **CSS-Länge** (z. B. `\"500px\"`, `\"740px\"`, `\"60ch\"`): Der Hintergrund der Symbolleiste erstreckt sich über die gesamte Breite, während die Schaltflächenreihe auf diese Breite begrenzt und zentriert ist. Wenn die Schaltflächen passen, bleibt die Zeile in einer einzelnen Zeile. Wenn sie über die Kappe hinausgehen, wickeln sie sich darin ein. \n- **`\"auto\"`**: keine Obergrenze – die Zeile wird an ihren Inhalt angepasst und einfach zentriert. \n- **Leere Zeichenfolge** (Standard): keine Einschränkung. \n- **Hinweis zu `responsiveButtonList`**: Schwellenwerte werden mit der gesamten Breite der Symbolleiste verglichen, nicht mit dem Band. Wenn diese Option festgelegt ist, kalibrieren Sie die `responsiveButtonList`-Tasten auf die Symbolleistengröße, bei der jeder Tastensatz tatsächlich aktiviert werden soll. \n„`js\n{ toolbar_innerWidth: '740px' }\n{ toolbar_innerWidth: 'auto' }\n`“.",
+    "default": "\"\""
   },
   "toolbar_container": {
     "description": "Container-Element für die Symbolleiste."
@@ -551,6 +569,24 @@
   },
   "autocomplete_triggers": {
     "description": "Konfigurationen pro Auslöser, kodiert nach Auslöserzeichen."
+  },
+  "slashCommand_triggerChar": {
+    "description": "Zeichen, das das Befehlsmenü öffnet. Einzelzeichen empfohlen."
+  },
+  "slashCommand_items": {
+    "description": "Menüeinträge. Strings werden über `ResolveButton` aufgelöst"
+  },
+  "slashCommand_delayTime": {
+    "description": "Entprellverzögerung (ms), bevor der Eingang auf den Trigger überprüft wird."
+  },
+  "slashCommand_limitSize": {
+    "description": "Maximale Anzahl der im Dropdown angezeigten Elemente."
+  },
+  "slashCommand_emptyMessage": {
+    "description": "Meldung wird angezeigt, wenn keine Elemente mit der Abfrage übereinstimmen. Wenn diese Option nicht festgelegt ist, wird das Menü geschlossen, wenn keine Übereinstimmung vorliegt."
+  },
+  "slashCommand_renderItem": {
+    "description": "Benutzerdefinierter HTML-Renderer für Elemente."
   },
   "fontSize_sizeUnit": {
     "description": "Die Einheit für die Schriftgröße.\n\n– Zulässige Werte: `'px'`, `'pt'`, `'em'`, `'rem'`, `'vw'`, `'vh'`, `'%'` oder `'text'`.\n\n– Bei Verwendung von `'text'` wird eine textbasierte Schriftgrößenliste verwendet."

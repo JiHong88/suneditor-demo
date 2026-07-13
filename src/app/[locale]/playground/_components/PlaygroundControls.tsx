@@ -6,7 +6,7 @@ import { ChevronRight, ChevronDown, SlidersHorizontal, Search, X } from "lucide-
 import LangDropdown, { type LangOption } from "@/components/common/LangDropdown";
 import FlagIcon from "@/components/common/FlagIcon";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { type PlaygroundState, type PlaygroundAction, isFixedOption } from "../_lib/playgroundState";
+import { type PlaygroundState, type PlaygroundAction, isFixedOption, ITEM_PRESETS } from "../_lib/playgroundState";
 import { OptionInfo } from "./OptionInfo";
 import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
@@ -870,10 +870,10 @@ const ALL_SECTIONS = ["mode-theme", "layout", "toolbar", "statusbar", "content",
 
 const SECTION_LABELS: Record<string, string[]> = {
 	"mode-theme": ["mode", "buttonList", "theme", "lang", "textDirection", "type", "reverseButtons", "v2Migration", "icons", "iframe", "iframe_fullPage", "iframe_cssFileName", "iframe_attributes", "subToolbar", "subToolbar.buttonList", "subToolbar.mode", "subToolbar.width"],
-	layout: ["width", "height", "minWidth", "maxWidth", "minHeight", "maxHeight", "editorStyle"],
-	toolbar: ["toolbar_width", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
+	layout: ["width", "height", "minWidth", "maxWidth", "innerWidth", "minHeight", "maxHeight", "editorStyle"],
+	toolbar: ["toolbar_width", "toolbar_innerWidth", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
-	content: ["placeholder", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
+	content: ["placeholder", "placeholder_line", "blockHandle", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
 	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
@@ -1145,6 +1145,13 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							resettable={!isFixedOption("maxWidth")}
 						/>
 						<TextInput
+							label='innerWidth'
+							value={state.innerWidth}
+							onChange={set("innerWidth")}
+							placeholder='e.g. 740px (Notion-like)'
+							resettable={!isFixedOption("innerWidth")}
+						/>
+						<TextInput
 							label='minHeight'
 							value={state.minHeight}
 							onChange={set("minHeight")}
@@ -1184,6 +1191,13 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							onChange={set("toolbar_width")}
 							placeholder='auto'
 							resettable={!isFixedOption("toolbar_width")}
+						/>
+						<TextInput
+							label='toolbar_innerWidth'
+							value={state.toolbar_innerWidth}
+							onChange={set("toolbar_innerWidth")}
+							placeholder='e.g. 740px'
+							resettable={!isFixedOption("toolbar_innerWidth")}
 						/>
 						<NumberInput
 							label='toolbar_sticky'
@@ -1334,6 +1348,38 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							resettable={!isFixedOption("placeholder")}
 						/>
 					</div>
+					<div className='mt-3'>
+						<TextInput
+							label='placeholder_line'
+							value={state.placeholder_line}
+							onChange={set("placeholder_line")}
+							placeholder="Notion-style per-line hint, e.g. Type '/' for commands"
+							resettable={!isFixedOption("placeholder_line")}
+						/>
+					</div>
+					<div className='mt-3'>
+						<SwitchField
+							label='blockHandle (Block handle gutter)'
+							description='Notion-style per-line handle: hover, drag to reorder, click for a block action menu.'
+							checked={state.blockHandle_enabled}
+							onChange={(v) => {
+								set("blockHandle_enabled")(v);
+								// Fill a ready-to-try default menu on enable (like slashCommand / autocomplete presets)
+								if (v && !state.blockHandle_menu) set("blockHandle_menu")(ITEM_PRESETS.blockHandle_menu);
+							}}
+						/>
+					</div>
+					{state.blockHandle_enabled && (
+						<div className='mt-3'>
+							<TextInput
+								label='blockHandle.menu'
+								value={state.blockHandle_menu}
+								onChange={set("blockHandle_menu")}
+								placeholder='p, heading, list, blockquote, pre (empty = editor default)'
+								resettable={!isFixedOption("blockHandle_menu")}
+							/>
+						</div>
+					)}
 					<div className='mt-3'>
 						<TextareaField
 							label='value'

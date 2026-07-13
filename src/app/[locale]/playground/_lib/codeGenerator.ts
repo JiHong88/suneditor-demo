@@ -244,12 +244,14 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.height !== "auto") add("height", `"${state.height}"`);
 	if (state.minWidth) add("minWidth", `"${state.minWidth}"`);
 	if (state.maxWidth) add("maxWidth", `"${state.maxWidth}"`);
+	if (state.innerWidth) add("innerWidth", `"${state.innerWidth}"`);
 	if (state.minHeight) add("minHeight", `"${state.minHeight}"`);
 	if (state.maxHeight) add("maxHeight", `"${state.maxHeight}"`);
 	if (state.editorStyle) add("editorStyle", `"${state.editorStyle}"`);
 
 	// toolbar
 	if (state.toolbar_width !== "auto") add("toolbar_width", `"${state.toolbar_width}"`);
+	if (state.toolbar_innerWidth) add("toolbar_innerWidth", `"${state.toolbar_innerWidth}"`);
 	if (state.toolbar_sticky !== 0) add("toolbar_sticky", String(state.toolbar_sticky));
 	if (state.toolbar_hide) add("toolbar_hide", "true");
 	if (!state.shortcutsHint) add("shortcutsHint", "false");
@@ -282,6 +284,18 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// content
 	if (state.placeholder) add("placeholder", `"${state.placeholder}"`);
+	if (state.placeholder_line) add("placeholder_line", `"${state.placeholder_line}"`);
+	if (state.blockHandle_enabled) {
+		const menu = state.blockHandle_menu
+			.split(",")
+			.map((s) => s.trim())
+			.filter(Boolean);
+		if (menu.length) {
+			lines.push(`blockHandle: {\n  menu: [${menu.map((m) => `"${m}"`).join(", ")}],\n},`);
+		} else {
+			add("blockHandle", "{}");
+		}
+	}
 	if (state.value) add("value", JSON.stringify(state.value));
 	if (state.iframe) add("iframe", "true");
 	if (state.iframe_fullPage) add("iframe_fullPage", "true");
@@ -526,6 +540,23 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			}
 			lines.push(`},`);
 			pLines.push(lines);
+		}
+	}
+	{
+		const items = state.slashCommand_items
+			.split(",")
+			.map((s) => s.trim())
+			.filter(Boolean);
+		if (items.length) {
+			const scLines = [`slashCommand: {`];
+			scLines.push(`  items: [${items.map((i) => `"${i}"`).join(", ")}],`);
+			if (state.slashCommand_triggerChar && state.slashCommand_triggerChar !== DEFAULTS.slashCommand_triggerChar)
+				scLines.push(`  triggerChar: "${state.slashCommand_triggerChar}",`);
+			if (state.slashCommand_delayTime !== DEFAULTS.slashCommand_delayTime) scLines.push(`  delayTime: ${state.slashCommand_delayTime},`);
+			if (state.slashCommand_limitSize !== DEFAULTS.slashCommand_limitSize) scLines.push(`  limitSize: ${state.slashCommand_limitSize},`);
+			if (state.slashCommand_emptyMessage) scLines.push(`  emptyMessage: "${state.slashCommand_emptyMessage}",`);
+			scLines.push(`},`);
+			pLines.push(scLines);
 		}
 	}
 	pLines.push(
