@@ -151,6 +151,21 @@ npm test                # integrity 테스트로 누락 감지
 
 3. **링크된 문서 본문 점검** — 새 옵션/플러그인이 추가됐거나 Breaking Change가 있었다면, 링크된 하위 md 파일(특히 custom-plugin.md, typedef-guide.md, external-libraries.md 등) 내부도 갱신 대상이다. 단순히 GUIDE.md만 보지 말고 **링크 타고 들어가서 내용까지 검토**한다.
 
+4. **⚠️ 데모 사이트 렌더링 레지스트리 동기화 (500 에러 방지)** — 데모의 Deep Dive 가이드 페이지(`/deep-dive/guide/*`)는 GitHub raw에서 md를 받아 렌더링한다. **GUIDE.md에서 링크로 참조되는 md 파일은 반드시 아래 두 곳에 등록**되어야 하며, 누락되면 링크 클릭 시 500/notFound가 발생한다:
+
+   - `src/lib/git/githubMarkdown.ts` → `GUIDE_FILES` 맵에 `slug → GitHub 파일 경로` 추가 (예: `"coding-rules": "prompts/coding-rules.md"`). slug은 URL 세그먼트(`/deep-dive/guide/coding-rules`)가 된다.
+   - `src/app/[locale]/deep-dive/guide/[...slug]/page.tsx` → `TITLES` 맵에 동일 slug의 표시용 제목 추가.
+
+   링크 렌더링(`src/components/common/MarkdownRenderer.tsx`의 `resolveHref`)은 **파일명(basename) 기준**으로 매칭하므로 `./x.md`, `../x.md`, `../guide/x.md`, `prompts/x.md` 등 상대경로 형태는 자동 대응된다. 단 매칭 대상이 `GUIDE_FILES`에 등록돼 있어야 한다.
+
+   검증 체크리스트:
+
+   - [ ] Step 7-1에서 추출한 링크 대상 md 파일이 전부 `GUIDE_FILES`에 있는가? (`grep -oE '\([^)]+\.md' .editor-guide/GUIDE.md` 결과와 `GUIDE_FILES` 값 비교)
+   - [ ] 새로 등록한 slug이 `TITLES`에도 있는가?
+   - [ ] 등록한 GitHub 경로가 실제로 존재하는가? (`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/JiHong88/SunEditor/master/<경로>` → 200)
+   - [ ] 파일이 rename/삭제됐다면 `GUIDE_FILES`/`TITLES`에서도 함께 갱신/제거했는가?
+   - [ ] `npx tsc --noEmit` 통과하는가?
+
 ### 8. 문서 자동 생성 및 번역
 
 모든 코드 변경이 끝난 후 마지막에 실행한다.

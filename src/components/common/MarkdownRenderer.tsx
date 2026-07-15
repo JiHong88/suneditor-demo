@@ -14,29 +14,33 @@ type Props = {
 	className?: string;
 };
 
-/** Map relative .md paths to internal slugs */
-function resolveHref(href: string): { internal: boolean; resolved: string } {
-	// Remove leading ./ and trailing anchors for matching
-	const clean = href.replace(/^\.\//, "");
-	const [pathPart, hash] = clean.split("#");
+/** filename without directory or .md extension */
+function baseName(p: string): string {
+	return (
+		p
+			.replace(/\.md$/i, "")
+			.split("/")
+			.pop() ?? ""
+	);
+}
 
-	// Check if it maps to a known guide slug
-	// .md 확장자 유무, guide/ 접두사 유무 모두 대응
-	const bare = pathPart.replace(/\.md$/i, "");
-	for (const [slug, filePath] of Object.entries(GUIDE_FILES)) {
-		const fp = filePath.replace(/\.md$/i, "");
-		const fpShort = fp.replace(/^guide\//, "");
-		if (bare === fp || bare === fpShort || pathPart === filePath || pathPart === filePath.replace(/^guide\//, "")) {
-			const route = slug === "" ? "/deep-dive/guide" : `/deep-dive/guide/${slug}`;
-			return { internal: true, resolved: `${route}${hash ? `#${hash}` : ""}` };
+/** Map relative .md paths to internal guide slugs */
+function resolveHref(href: string): { internal: boolean; resolved: string } {
+	const [pathPart, hash] = href.split("#");
+
+	// Only relative .md doc links are candidates for internal mapping.
+	// Handles ./x.md, ../x.md, ../guide/x.md, prompts/x.md, etc. by comparing basenames.
+	if (/\.md$/i.test(pathPart)) {
+		const bare = baseName(pathPart);
+		for (const [slug, filePath] of Object.entries(GUIDE_FILES)) {
+			if (bare === baseName(filePath)) {
+				const route = slug === "" ? "/deep-dive/guide" : `/deep-dive/guide/${slug}`;
+				return { internal: true, resolved: `${route}${hash ? `#${hash}` : ""}` };
+			}
 		}
 	}
 
-	// Anchor-only links
-	if (href.startsWith("#")) {
-		return { internal: false, resolved: href };
-	}
-
+	// Anchor-only or external links pass through unchanged
 	return { internal: false, resolved: href };
 }
 

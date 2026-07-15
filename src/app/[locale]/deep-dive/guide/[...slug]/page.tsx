@@ -12,6 +12,9 @@ const TITLES: Record<string, string> = {
 	"changes-guide": "Changes Guide",
 	"custom-plugin": "Custom Plugin",
 	"typedef-guide": "TypeDef Guide",
+	"commit-types": "Commit Types",
+	"coding-rules": "Coding Rules",
+	"editing-rules": "Editing Rules",
 };
 
 type Props = {

@@ -8,6 +8,9 @@ export const GUIDE_FILES: Record<string, string> = {
 	"external-libraries": "guide/external-libraries.md",
 	"custom-plugin": "guide/custom-plugin.md",
 	"typedef-guide": "guide/typedef-guide.md",
+	"commit-types": "guide/commit-types.md",
+	"coding-rules": "prompts/coding-rules.md",
+	"editing-rules": "prompts/editing-rules.md",
 };
 
 /** generateStaticParams 용 slug 배열 (빈 문자열 = index) */
