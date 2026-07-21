@@ -22,6 +22,7 @@ import {
 	getButtonList,
 } from "./_lib/playgroundState";
 import { localeCodes, toEditorCode } from "@/i18n/languages";
+import { isRtlLocale } from "@/i18n/lang";
 import PlaygroundControls, { PlaygroundPerRootPanel } from "./_components/PlaygroundControls";
 import PlaygroundPluginSidebar from "./_components/PlaygroundPluginSidebar";
 import dynamic from "next/dynamic";
@@ -92,11 +93,22 @@ export default function PlaygroundPage() {
 	const tc = useTranslations("Common");
 	const locale = useLocale();
 	const initialLang = locale !== "en" && localeCodes.includes(locale) ? toEditorCode(locale) : "";
-	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, toolbar_sticky: HEADER_HEIGHT });
+	const initialDir = isRtlLocale(locale) ? "rtl" : "ltr";
+	const [state, dispatch] = useReducer(playgroundReducer, { ...DEFAULTS, lang: initialLang, textDirection: initialDir, toolbar_sticky: HEADER_HEIGHT });
 	const editorRef = useRef<SunEditor.Instance | null>(null);
 	const contentRef = useRef(PLAYGROUND_VALUE);
 	const multiRootContentRef = useRef<Record<string, string>>({ header: "", body: "" });
 	const prevStateRef = useRef<PlaygroundState>(DEFAULTS);
+	// Follow the site language: when the user switches the UI locale, update the
+	// editor's lang + text direction to match. Skips the initial render (already seeded).
+	const prevLocaleRef = useRef(locale);
+	useEffect(() => {
+		if (prevLocaleRef.current === locale) return;
+		prevLocaleRef.current = locale;
+		const nextLang = locale !== "en" && localeCodes.includes(locale) ? toEditorCode(locale) : "";
+		dispatch({ type: "SET", key: "lang", value: nextLang });
+		dispatch({ type: "SET", key: "textDirection", value: isRtlLocale(locale) ? "rtl" : "ltr" });
+	}, [locale]);
 	const [allLibs, setAllLibs] = useState<AllLibs | null>(null);
 	const [urlCopied, setUrlCopied] = useState(false);
 	const [ready, setReady] = useState(false);

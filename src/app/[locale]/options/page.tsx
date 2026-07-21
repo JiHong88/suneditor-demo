@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useOptDesc } from "@/hooks/useOptDesc";
 import apiDocsEn from "@/data/api/api-docs.en.json";
-import { highlightInline } from "@/lib/highlightInline";
+import { DocDescription } from "@/lib/docDescription";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -289,28 +289,7 @@ function OptionCard({ item, pluginName }: { item: OptionItem; pluginName?: strin
 	const cardId = `opt-${item.name}`;
 	const typeStr = formatType(item.type);
 
-	const formatDescription = (desc: string) => {
-		if (!desc) return null;
-		const cleaned = desc.replace(/^-\s*/, "").trim();
-		if (!cleaned) return null;
-		const parts = cleaned.split(/\n\s*-\s+/);
-		if (parts.length > 1) {
-			return (
-				<div className="text-sm text-muted-foreground leading-relaxed space-y-1">
-					{parts.map((part, idx) => {
-						if (!part.trim()) return null;
-						return (
-							<div key={idx} className="flex gap-2">
-								{idx > 0 && <span className="text-primary mt-0.5 shrink-0">&#x2022;</span>}
-								<span className={idx === 0 ? "" : "flex-1"}>{highlightInline(part.trim())}</span>
-							</div>
-						);
-					})}
-				</div>
-			);
-		}
-		return <p className="text-sm text-muted-foreground leading-relaxed">{highlightInline(cleaned)}</p>;
-	};
+	const formatDescription = (desc: string) => <DocDescription desc={desc} />;
 
 	return (
 		<div id={cardId} className={cn("group/card border rounded-lg p-5 hover:shadow-sm transition-all", SCROLL_MT, "hover:border-primary/30")}>

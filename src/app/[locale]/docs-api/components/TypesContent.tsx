@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Search, Link2, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import CodeBlock from "@/components/common/CodeBlock";
-import { highlightInline } from "@/lib/highlightInline";
+import { DocDescription } from "@/lib/docDescription";
 import type { TypeDefinition } from "../_lib/types";
 
 type TypesContentProps = {
@@ -76,7 +76,7 @@ function TypeCard({ type }: { type: TypeDefinition }) {
                 <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
                   {name}
                 </code>
-                <span className="text-muted-foreground text-xs leading-relaxed">{highlightInline(desc.replace(/^-\s*/, ""))}</span>
+                <div className="text-xs"><DocDescription desc={desc} textClass="text-xs" /></div>
               </div>
             ))}
           </div>

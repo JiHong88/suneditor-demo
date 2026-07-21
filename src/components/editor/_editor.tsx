@@ -113,6 +113,28 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 		}
 	}, [theme]);
 
+	// Language — apply lang changes at runtime (e.g. site locale switch) without
+	// recreating the editor. The initial lang is already applied at create().
+	const langInitRef = useRef(true);
+	useEffect(() => {
+		const instance = instanceRef.current;
+		if (!instance) return;
+		if (langInitRef.current) {
+			langInitRef.current = false;
+			return;
+		}
+		const lang = options.lang;
+		if (lang) {
+			instance.resetOptions({ lang: lang as SunEditor.InitOptions["lang"] });
+		} else {
+			// No pack (English / null sentinel) → reset to the built-in default pack
+			import("suneditor/langs/en").then((m) => {
+				const inst = instanceRef.current;
+				if (inst) inst.resetOptions({ lang: ((m as { default?: unknown }).default ?? m) as SunEditor.InitOptions["lang"] });
+			});
+		}
+	}, [options.lang]);
+
 	return <div ref={containerRef} />;
 };
 

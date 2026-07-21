@@ -7,6 +7,25 @@ import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
 import { DocumentButtonList } from "@/components/editor/buttonList";
 import { HEADER_HEIGHT } from "@/lib/constants";
+import {
+	API_DOWNLOAD_PDF,
+	API_GALLERY_IMAGE,
+	API_GALLERY_VIDEO,
+	API_GALLERY_AUDIO,
+	API_GALLERY_FILE,
+	API_GALLERY_BROWSE,
+} from "@/data/snippets/apiEndpoints";
+
+// Demo backend wiring so the full-toolbar presets have working PDF export and
+// gallery/browser buttons (same endpoints the playground uses).
+const demoApiOptions: SunEditorType.InitOptions = {
+	exportPDF: { apiUrl: API_DOWNLOAD_PDF },
+	imageGallery: { url: API_GALLERY_IMAGE },
+	videoGallery: { url: API_GALLERY_VIDEO },
+	audioGallery: { url: API_GALLERY_AUDIO },
+	fileGallery: { url: API_GALLERY_FILE },
+	fileBrowser: { url: API_GALLERY_BROWSE },
+};
 
 const subButtonList = [
 	["bold", "underline", "italic", "strike", "subscript", "superscript"],
@@ -184,7 +203,7 @@ export default function InteractiveDemo() {
 					))}
 				</div>
 				<div style={{ minHeight: 258 }}>
-					<SunEditor key={activePreset} value={preset.value ?? sampleValue} options={preset.options} />
+					<SunEditor key={activePreset} value={preset.value ?? sampleValue} options={{ ...demoApiOptions, ...preset.options }} />
 				</div>
 			</motion.div>
 		</section>

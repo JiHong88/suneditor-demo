@@ -41,7 +41,11 @@ export default function LangDropdown({ value, options, onChange, trigger, align 
 					</button>
 				)}
 			</PopoverTrigger>
-			<PopoverContent className='w-56 p-1 max-h-72 overflow-y-auto' align={align}>
+			<PopoverContent
+				className='w-56 p-1 max-h-72 overflow-y-auto'
+				align={align}
+				onCloseAutoFocus={(e) => e.preventDefault()}
+			>
 				{options.map((opt) => {
 					const isRtl = getDir(opt.locale) === "rtl";
 					const selected = opt.value === value;
@@ -54,6 +58,9 @@ export default function LangDropdown({ value, options, onChange, trigger, align 
 						>
 							<FlagIcon locale={opt.locale} className='text-base shrink-0' />
 							<span className='flex-1 text-start truncate'>{opt.label}</span>
+							<span className='shrink-0 font-mono text-[9px] uppercase tracking-wide text-muted-foreground/70'>
+								{opt.locale}
+							</span>
 							{isRtl && (
 								<span className='shrink-0 text-[9px] font-medium px-1 py-0.5 rounded bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400'>
 									RTL

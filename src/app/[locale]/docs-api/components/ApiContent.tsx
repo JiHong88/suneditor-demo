@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import CodeBlock from "@/components/common/CodeBlock";
 import { highlightInline } from "@/lib/highlightInline";
+import { DocDescription } from "@/lib/docDescription";
 import type { Method, Getter } from "../_lib/types";
 
 /** Convert linkedAs display text → sidebar section ID */
@@ -117,32 +118,9 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
     );
   };
 
-  // Format description
-  const formatDescription = (desc: string) => {
-    if (!desc || desc === "/") return null;
-
-    const parts = desc.split(/\s+-\s+|\s+\*\s+/);
-
-    if (parts.length > 1) {
-      return (
-        <div className="text-sm text-muted-foreground leading-relaxed space-y-1">
-          {parts.map((part, idx) => {
-            if (!part.trim()) return null;
-            return (
-              <div key={idx} className="flex gap-2">
-                {idx > 0 && <span className="text-primary mt-0.5">&#x2022;</span>}
-                <span className={idx === 0 ? "" : "flex-1"}>{highlightInline(part.trim())}</span>
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-
-    return (
-      <p className="text-sm text-muted-foreground leading-relaxed">{highlightInline(desc)}</p>
-    );
-  };
+  // Format description — split on the " - " / "\n- " convention into bullet lines.
+  // textClass lets callers reuse this for smaller param/returns text.
+  const formatDescription = (desc: string, textClass = "text-sm") => <DocDescription desc={desc} textClass={textClass} />;
 
   return (
     <div
@@ -228,7 +206,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
                       </span>
                     )}
                   </span>
-                  <span className="text-muted-foreground text-xs leading-relaxed">{highlightInline(desc.replace(/^-\s*/, ""))}</span>
+                  <div className="text-xs">{formatDescription(desc, "text-xs")}</div>
                 </div>
               );
             })}
@@ -244,7 +222,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
             {method.returns || "void"}
           </code>
           {method.returnsDescription && (
-            <p className="text-xs text-muted-foreground mt-1">{highlightInline(method.returnsDescription.replace(/^-\s*/, ""))}</p>
+            <div className="mt-1">{formatDescription(method.returnsDescription, "text-xs")}</div>
           )}
         </div>
       </div>

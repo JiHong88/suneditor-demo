@@ -494,6 +494,7 @@ function DisabledField({ label, reason }: { label: string; reason?: string }) {
  */
 
 import { languages } from "@/i18n/languages";
+import { isRtlLocale } from "@/i18n/lang";
 
 const LANG_OPTIONS: LangOption[] = languages
 	.filter((l) => l.editorLang)
@@ -977,7 +978,12 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 					<div className='mt-3 grid grid-cols-2 gap-3'>
 						<LangSelectField
 							value={state.lang}
-							onChange={set("lang")}
+							onChange={(v) => {
+								set("lang")(v);
+								// Auto-switch text direction to match the chosen language.
+								const locale = LANG_OPTIONS.find((o) => o.value === v)?.locale ?? v ?? "en";
+								set("textDirection")(isRtlLocale(locale || "en") ? "rtl" : "ltr");
+							}}
 							resettable={!isFixedOption("lang")}
 						/>
 						<SelectField
