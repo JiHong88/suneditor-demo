@@ -190,7 +190,7 @@
     "description": "指定要添加到允许样式列表中的其他样式。分隔符：`\"|\"`。\n\n```js\n{ allUsedStyles: 'color|background-color|text-shadow' }\n```"
   },
   "tagStyles": {
-    "description": "指定每个 HTML 标记允许的 CSS 样式。 \n- Key 是标签名称、用 `|` 连接的多个标签或类别哨兵（`@text`、`@line`）。 \n- 值是以竖线分隔的允许的样式名称列表。 \n- 过滤元素时的解析顺序：显式标记条目 → `@line`（对于 formatLine 元素）→ `@text` （对于 textStyleTags）。 \n- 显式标签条目**替换**类别默认值 - 如果您需要两者，则在值中包含类别样式。 \n- 与{@link DEFAULTS.TAG_STYLES}合并； 用户提供的密钥获胜。 \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
+    "description": "指定每个 HTML 标记允许的 CSS 样式。 \n- Key 是标签名称、用 `|` 连接的多个标签或类别哨兵（`@text`、`@line`、`@component`）。 \n- 值是以竖线分隔的允许的样式名称列表。 \n- 过滤元素时的解析顺序：`@component`（对于 `.se-component` 容器）→ 显式标记条目→ `@line`（对于 formatLine 元素）→ `@text`（对于 textStyleTags）。 \n- `@component` 保护编辑器在媒体组件的容器上写入的基于百分比的大小的内联大小调整 (`width`/`height`/`min-width`)； 保留这些，以便 clean() 往返不会将组件重置为全宽度。 \n- 显式标签条目**替换**类别默认值 - 如果您需要两者，则在值中包含类别样式。 \n- 与{@link DEFAULTS.TAG_STYLES}合并； 用户提供的密钥获胜。 \n```js\n{\ntagStyles: {\n'@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n'@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n'table|td': 'border|color|background-color',  // per-tag whitelist\ndiv: 'color',                                   // explicit override; ignores `@line` default\nhr: 'border-top',\n}\n}\n```",
     "default": "{}"
   },
   "fontSizeUnits": {
