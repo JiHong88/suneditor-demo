@@ -1,6 +1,6 @@
 {
-	"version": "3.2.3",
-	"generatedAt": "2026-07-22T16:04:19.900Z",
+	"version": "3.2.4",
+	"generatedAt": "2026-07-23T15:03:29.723Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -197,13 +197,13 @@
 							"example": ""
 						},
 						{
-							"name": "enterScrollTo",
+							"name": "caretScrollTo",
 							"params": "range: Range",
 							"returns": "void",
-							"description": "Scorri la visualizzazione dell'editor fino alla posizione del cursore dopo aver premuto `Enter`.",
+							"description": "Scorre la vista dell'editor fino alla posizione del cursore dopo una modifica (Invio, Backspace, ...).",
 							"example": "",
 							"paramDescriptions": {
-								"range": "Intervallo di snapshot pre-immissione (solo fallback)."
+								"range": "Intervallo di snapshot pre-modifica (solo fallback)."
 							}
 						},
 						{

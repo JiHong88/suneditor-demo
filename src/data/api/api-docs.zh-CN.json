@@ -1,6 +1,6 @@
 {
-	"version": "3.2.3",
-	"generatedAt": "2026-07-22T16:04:19.900Z",
+	"version": "3.2.4",
+	"generatedAt": "2026-07-23T15:03:29.723Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -197,13 +197,13 @@
 							"example": ""
 						},
 						{
-							"name": "enterScrollTo",
+							"name": "caretScrollTo",
 							"params": "range: Range",
 							"returns": "void",
-							"description": "按下`Enter`后，将编辑器视图滚动到光标位置。",
+							"description": "编辑后将编辑器视图滚动到插入符号位置（Enter、Backspace、...）。",
 							"example": "",
 							"paramDescriptions": {
-								"range": "预输入快照范围（仅后备）。"
+								"range": "预编辑快照范围（仅限后备）。"
 							}
 						},
 						{
