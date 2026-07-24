@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { localeCodes } from "@/i18n/languages";
 import { defaultLocale } from "@/i18n/routing";
 import { GUIDE_SUB_SLUGS } from "@/lib/git/githubMarkdown";
+import { languageAlternates } from "@/lib/seo/metadata";
 
 const BASE_URL = "https://suneditor.com";
 
@@ -24,16 +24,6 @@ const STATIC_PATHS = [
 function localizedUrl(locale: string, path: string): string {
 	const prefix = locale === defaultLocale ? "" : `/${locale}`;
 	return `${BASE_URL}${prefix}${path}`;
-}
-
-/** hreflang alternates for a given path across every site locale (+ x-default). */
-function languageAlternates(path: string): Record<string, string> {
-	const languages: Record<string, string> = {};
-	for (const locale of localeCodes) {
-		languages[locale] = localizedUrl(locale, path);
-	}
-	languages["x-default"] = localizedUrl(defaultLocale, path);
-	return languages;
 }
 
 function priorityFor(path: string): number {

@@ -5,11 +5,17 @@ import { fetchGitHubMarkdown } from "@/lib/git/githubMarkdown";
 import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-	title: "Guide — Deep Dive",
-	description: "SunEditor technical guide — architecture, conventions, and development workflow.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+	const { locale } = await params;
+	return buildPageMetadata({
+		locale,
+		path: "/deep-dive/guide",
+		title: "Guide — Deep Dive",
+		description: "SunEditor technical guide — architecture, conventions, and development workflow.",
+	});
+}
 
 type Props = {
 	params: Promise<{ locale: string }>;

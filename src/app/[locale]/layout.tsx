@@ -11,7 +11,12 @@ import { FooterBanner } from "@/components/ad/AdBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import { ogImageUrl } from "@/lib/seo/metadata";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationSchema, webSiteSchema } from "@/lib/seo/jsonld";
 import "../globals.css";
+
+const DEFAULT_OG_IMAGE = ogImageUrl("SunEditor", "Lightweight WYSIWYG editor — zero dependencies, 30+ plugins, TypeScript support.");
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://suneditor.com"),
@@ -31,18 +36,17 @@ export const metadata: Metadata = {
 		description:
 			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
 		url: "https://suneditor.com",
-		images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SunEditor" }],
+		images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "SunEditor" }],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "SunEditor — Lightweight WYSIWYG Editor",
 		description:
 			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
-		images: ["/og-image.png"],
+		images: [DEFAULT_OG_IMAGE],
 	},
 	icons: {
 		icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-		apple: "/apple-touch-icon.png",
 	},
 	manifest: "/site.webmanifest",
 };
@@ -68,6 +72,7 @@ export default async function RootLayout({
 						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.classList.toggle('dark',t==='dark')}catch(_){}})()`,
 					}}
 				/>
+					<JsonLd data={[organizationSchema(), webSiteSchema()]} />
 				</head>
 
 			<body style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>

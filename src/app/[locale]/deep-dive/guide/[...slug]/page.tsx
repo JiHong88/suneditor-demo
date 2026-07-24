@@ -5,6 +5,7 @@ import { fetchGitHubMarkdown, resolveGuideSlug, GUIDE_FILES } from "@/lib/git/gi
 import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 const TITLES: Record<string, string> = {
 	architecture: "Architecture",
@@ -22,13 +23,15 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { slug } = await params;
+	const { locale, slug } = await params;
 	const key = slug.join("/");
 	const title = TITLES[key] ?? key;
-	return {
+	return buildPageMetadata({
+		locale,
+		path: `/deep-dive/guide/${key}`,
 		title: `${title} — Deep Dive`,
 		description: `SunEditor ${title} — technical reference from the official repository.`,
-	};
+	});
 }
 
 export default async function GuideSubPage({ params }: Props) {
