@@ -1,4 +1,5 @@
 import { SUNEDITOR_VERSION } from "@/store/version";
+import { pageUrl } from "@/lib/seo/metadata";
 
 const BASE_URL = "https://suneditor.com";
 const GITHUB_URL = "https://github.com/JiHong88/SunEditor";
@@ -39,6 +40,24 @@ export function webSiteSchema() {
 		description: DESCRIPTION,
 		inLanguage: "en",
 		publisher: { "@id": ORG_ID },
+	};
+}
+
+/**
+ * Breadcrumb trail for a sub-page. Pass the trail *after* Home (e.g. Deep Dive → Guide →
+ * Architecture); "Home" is prepended automatically. URLs are locale-aware.
+ */
+export function breadcrumbSchema(locale: string, trail: { name: string; path: string }[]) {
+	const crumbs = [{ name: "Home", path: "" }, ...trail];
+	return {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: crumbs.map((c, i) => ({
+			"@type": "ListItem",
+			position: i + 1,
+			name: c.name,
+			item: pageUrl(locale, c.path),
+		})),
 	};
 }
 

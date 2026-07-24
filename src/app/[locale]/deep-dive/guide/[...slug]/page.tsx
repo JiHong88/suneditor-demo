@@ -6,6 +6,7 @@ import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 const TITLES: Record<string, string> = {
 	architecture: "Architecture",
@@ -47,6 +48,14 @@ export default async function GuideSubPage({ params }: Props) {
 
 	return (
 		<div className='min-h-screen'>
+			<Breadcrumbs
+				locale={locale}
+				trail={[
+					{ name: "Deep Dive", path: "/deep-dive" },
+					{ name: "Guide", path: "/deep-dive/guide" },
+					{ name: title, path: `/deep-dive/guide/${key}` },
+				]}
+			/>
 			<div className='container mx-auto max-w-4xl px-6 py-10'>
 				<div className='flex items-center justify-between mb-8'>
 					<Link

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Upload, Palette, Zap, ArrowRight, ExternalLink, Github } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,10 +17,12 @@ import UploadGuideContent from "./_components/UploadGuideContent";
 
 export default function DeepDivePage() {
 	const t = useTranslations("DeepDive");
+	const locale = useLocale();
 	const [activeTab, setActiveTab] = useState("theme");
 
 	return (
 		<div className='min-h-screen'>
+			<Breadcrumbs locale={locale} trail={[{ name: "Deep Dive", path: "/deep-dive" }]} />
 			{/* Hero */}
 			<section className='container mx-auto px-6 py-12'>
 				<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className='text-center max-w-3xl mx-auto'>

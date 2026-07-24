@@ -6,7 +6,7 @@ const BASE_URL = "https://suneditor.com";
 const SITE_NAME = "SunEditor";
 
 /** Fully-qualified page URL honoring the `as-needed` locale prefix (default locale has no prefix). */
-function pageUrl(locale: string, path: string): string {
+export function pageUrl(locale: string, path: string): string {
 	const prefix = locale === defaultLocale ? "" : `/${locale}`;
 	return `${BASE_URL}${prefix}${path}`;
 }
