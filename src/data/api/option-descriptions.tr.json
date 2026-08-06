@@ -209,6 +209,10 @@
     "description": "Varsayılan satır sonu biçimini belirtir.\n\n- [Önerilen] `line`: Satır sonu genel etiketlere bölünür.\n\n- [Önerilmeyen] `br`: Satır sonları aynı satırda <br> olarak ele alınır. (Shift+Enter gibi)\n- Satır sonları `line` içinde <br> olarak ele alınır.\n\n- Art arda iki kez satır sonu girerek yeni bir `line` oluşturabilirsiniz.\n\n- \"Alıntı\" gibi `line` içeren biçimler hala `line` temelinde çalışır.\n\n- suneditor işlemleri `line` birimlerinde çalışır.\n\n- `br` olarak ayarlandığında, çok fazla veri düzenlenirken performans düşebilir.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "`true` olduğunda, satırın **sonunda** Enter'a basmak",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Satırları değiştirirken sıfırlanması gereken satır özellikleri. Ayırıcı: `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Araç çubuğu için kapsayıcı öğe."
   },
   "toolbar_sticky": {
-    "description": "Sabit araç çubuğunu etkinleştirir.\n\n- `number`: Sabit üst konumu (piksel) ayarlar. Sabitliği devre dışı bırakmak için `-1` ​​kullanın.\n\n- `{top, offset}`: Sayfa başlığı görünür olduğunda sabit konum `top`'tür.\n\n- Sanal klavye görünüm alanını kaydırdığında (örneğin, tabletlerde, dokunmatik cihazlarda) sabit konum `offset`'tür.\n\n- Sanal klavye etkin olduğunda, araç çubuğunun görünümden kaydırılmış bir sayfa başlığı için boşluk bırakmaması için `offset`, `top`'nın yerini alır.\n\nVarsayılan `offset`, `0`'dir.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Yapışkan araç çubuğunu etkinleştirir. \n- `number`: Yapışkan üst konumu (px) ayarlar. Yapışkanlığı devre dışı bırakmak için `-1` ​​kullanın. \n- `{top, offset}`: `top` sayfa başlığının görünür olduğu yapışkan konumdur. \n- `offset`, sanal bir klavyenin görünüm penceresini kaydırdığı zamanki yapışkan konumdur (ör. tabletlerde, dokunmatik cihazlarda). \n- Sanal klavye aktif olduğunda, araç çubuğunun boşluk bırakmaması için `offset`, `top`'nın yerini alır \n- görünümden çıkan bir sayfa başlığı için. Varsayılan `offset` `0`'dir. \n- `position` (varsayılan `\"sticky\"`): konumlandırma motoru. \n- `\"sticky\"` yerel CSS `position: sticky` kullanır (desteklenmediği durumlarda JS `position: fixed` geri dönüşüyle).",
     "default": "0"
   },
   "toolbar_hide": {

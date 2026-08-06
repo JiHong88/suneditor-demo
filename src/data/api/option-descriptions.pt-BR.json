@@ -209,6 +209,10 @@
     "description": "Especifica o formato padrão de quebra de linha.\n- [Recomendado] `line`: A quebra de linha é dividida em tags gerais.\n- [Não recomendado] `br`: As quebras de linha são tratadas como <br> na mesma linha (como Shift+Enter).\n- As quebras de linha são tratadas como <br> dentro de `line`.\n- Você pode criar um novo `line` inserindo uma quebra de linha duas vezes seguidas.\n\n- Os formatos que incluem `line`, como \"Aspas\", ainda operam com base em `line`.\n\n- Os processos do suneditor funcionam em unidades de `line`.\n- Quando definido como `br`, o desempenho pode diminuir ao editar muitos dados.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Quando `true`, pressionando Enter no **final** de uma linha",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Propriedades da linha que devem ser redefinidas ao mudar de linha. Delimitador: `\"|\"`.\n``js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Elemento contêiner para a barra de ferramentas."
   },
   "toolbar_sticky": {
-    "description": "Ativa a barra de ferramentas fixa.\n- `number`: Define a posição superior fixa (px). Use `-1` ​​para desativar a fixação.\n- `{top, offset}`: `top` é a posição fixa quando o cabeçalho da página está visível.\n- `offset` é a posição fixa quando um teclado virtual desloca a área visível (por exemplo, em tablets e dispositivos com tela sensível ao toque).\n\n- Quando o teclado virtual está ativo, `offset` substitui `top` para que a barra de ferramentas não deixe um espaço\n- para um cabeçalho de página que saiu da área visível. O valor padrão de `offset` é `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Ativa a barra de ferramentas fixa. \n- `number`: Define a posição superior fixa (px). Use `-1` ​​para desativar o sticky. \n- `{top, offset}`: `top` é a posição fixa quando o cabeçalho da página está visível. \n- `offset` é a posição fixa quando um teclado virtual muda a janela de visualização (por exemplo, em tablets, dispositivos sensíveis ao toque). \n- Quando o teclado virtual está ativo, `offset` substitui `top` para que a barra de ferramentas não deixe lacunas \n- para um cabeçalho de página que saiu da visualização. O padrão `offset` é `0`. \n- `position` (padrão `\"sticky\"`): o mecanismo de posicionamento. \n- `\"sticky\"` usa CSS nativo `position: sticky` (com um substituto JS `position: fixed` quando não há suporte).",
     "default": "0"
   },
   "toolbar_hide": {

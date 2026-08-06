@@ -252,7 +252,11 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	// toolbar
 	if (state.toolbar_width !== "auto") add("toolbar_width", `"${state.toolbar_width}"`);
 	if (state.toolbar_innerWidth) add("toolbar_innerWidth", `"${state.toolbar_innerWidth}"`);
-	if (state.toolbar_sticky !== 0) add("toolbar_sticky", String(state.toolbar_sticky));
+	if (state.toolbar_sticky_position === "fixed") {
+		add("toolbar_sticky", `{ top: ${state.toolbar_sticky}, position: "fixed" }`);
+	} else if (state.toolbar_sticky !== 0) {
+		add("toolbar_sticky", String(state.toolbar_sticky));
+	}
 	if (state.toolbar_hide) add("toolbar_hide", "true");
 	if (!state.shortcutsHint) add("shortcutsHint", "false");
 	if (state.shortcutsDisable) add("shortcutsDisable", "true");
@@ -284,7 +288,19 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 
 	// content
 	if (state.placeholder) add("placeholder", `"${state.placeholder}"`);
-	if (state.placeholder_line) add("placeholder_line", `"${state.placeholder_line}"`);
+	if (state.placeholder_line) {
+		// string, or per-type object keyed by tag/category sentinel (`{"@list":"…","pre":"…"}`)
+		const rawPL = state.placeholder_line.trim();
+		if (rawPL.startsWith("{")) {
+			try {
+				add("placeholder_line", JSON.stringify(JSON.parse(rawPL)));
+			} catch {
+				add("placeholder_line", `"${state.placeholder_line}"`);
+			}
+		} else {
+			add("placeholder_line", `"${state.placeholder_line}"`);
+		}
+	}
 	if (state.blockHandle_enabled) {
 		const menu = state.blockHandle_menu
 			.split(",")
@@ -301,6 +317,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.iframe_fullPage) add("iframe_fullPage", "true");
 	if (state.defaultLine !== "p") add("defaultLine", `"${state.defaultLine}"`);
 	if (state.defaultLineBreakFormat !== "line") add("defaultLineBreakFormat", `"${state.defaultLineBreakFormat}"`);
+	if (state.lineBreakClearStyle) add("lineBreakClearStyle", "true");
 	if (state.retainStyleMode !== "repeat") add("retainStyleMode", `"${state.retainStyleMode}"`);
 	if (state.freeCodeViewMode) add("freeCodeViewMode", "true");
 

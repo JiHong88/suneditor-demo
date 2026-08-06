@@ -209,6 +209,10 @@
     "description": "デフォルトの改行形式を指定します。\n\n- [推奨] `line`：改行は一般的なタグに分割されます。\n\n- [非推奨] `br`：改行は同じ行内の<br>として扱われます（Shift+Enterと同様）。\n- `line`内では、改行は<br>として扱われます。\n\n- 改行を2回連続して入力すると、新しい`line`を作成できます。\n\n- 「引用」など、`line`を含む形式は、引き続き`line`に基づいて動作します。\n\n- suneditorプロセスは`line`単位で動作します。\n\n- `br`に設定すると、大量のデータを編集する際にパフォーマンスが低下する場合があります。",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "`true` の場合、行の **末尾** で Enter キーを押す",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "行を変更する際にリセットする必要のある行プロパティ。区切り文字：`\"|\"`。\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "ツールバーのコンテナ要素。"
   },
   "toolbar_sticky": {
-    "description": "ツールバーを固定表示します。\n\n- `number`: 固定表示の上端位置 (px) を設定します。固定表示を無効にするには `-1` を使用します。\n\n- `{top, offset}`: `top` は、ページヘッダーが表示されているときの固定位置です。\n\n- `offset` は、仮想キーボードによってビューポートが移動したとき (タブレットやタッチデバイスなど) の固定位置です。\n\n- 仮想キーボードがアクティブな場合、`offset` が `top` に置き換わり、ツールバーに隙間ができないようにします。\n- ページヘッダーが画面外にスクロールアウトした場合。デフォルトの `offset` は `0` です。\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "スティッキーツールバーを有効にします。 \n- `number`: スティッキー上部の位置 (px) を設定します。 `-1` を使用してスティッキーを無効にします。 \n- `{top, offset}`: `top` は、ページ ヘッダーが表示されている場合のスティッキー位置です。 \n- `offset` は、仮想キーボードがビューポートを移動するときのスティッキー位置です (タブレット、タッチ デバイスなど)。 \n- 仮想キーボードがアクティブな場合、ツールバーに隙間が残らないように、`offset` が `top` に置き換わります。 \n- スクロールして表示されなくなったページ ヘッダーの場合。 デフォルトの `offset` は `0` です。 \n- `position` (デフォルト `\"sticky\"`): 測位エンジン。 \n- `\"sticky\"` はネイティブ CSS `position: sticky` を使用します (サポートされていない場合は JS `position: fixed` フォールバックを使用します)。",
     "default": "0"
   },
   "toolbar_hide": {

@@ -209,6 +209,10 @@
     "description": "Norāda noklusējuma rindiņas pārtraukuma formātu.\n- [Ieteicams] `line` : Rindiņas pārtraukums ir sadalīts vispārīgās birkās.\n- [Nav ieteicams] `br` ​​: Rindiņas pārtraukumi tiek apstrādāti kā <br> tajā pašā rindā. (līdzīgi kā shift+enter)\n- Rindiņas pārtraukumi tiek apstrādāti kā <br> iekš `line`.\n- Varat izveidot jaunu `line`, divreiz pēc kārtas ievadot rindiņas pārtraukumu.\n- Formāti, kas ietver `line`, piemēram, \"Citāts\", joprojām darbojas, pamatojoties uz `line`.\n- suneditor procesi darbojas `line` vienībās.\n- Ja iestatīts uz `br`, veiktspēja var samazināties, rediģējot lielu datu apjomu.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Ja ir `true`, rindas **beigās** nospiediet taustiņu Enter",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Līniju īpašības, kas jāatiestata, mainot līnijas. Atdalītājs: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Rīkjoslas konteinera elements."
   },
   "toolbar_sticky": {
-    "description": "Iespējo fiksēto rīkjoslu.\n- `number`: Iestata fiksēto augšējo pozīciju (pikseļos). Izmantojiet `-1`, lai atspējotu fiksēto pozīciju.\n- `{top, offset}`: `top` ir fiksētā pozīcija, kad ir redzama lapas galvene.\n- `offset` ir fiksētā pozīcija, kad virtuālā tastatūra pārvieto skata logu (piemēram, planšetdatoros, skārienekrānos).\n- Kad virtuālā tastatūra ir aktīva, `offset` aizstāj `top`, lai rīkjosla neatstātu atstarpi\n- lapas galvenei, kas ir izritināta ārpus skata. Noklusējuma `offset` ir `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Iespējo lipīgo rīkjoslu. \n- `number`: iestata lipīgo augšējo pozīciju (px). Izmantojiet `-1`, lai atspējotu uzlīmēšanu. \n- `{top, offset}`: `top` ir lipīga pozīcija, kad ir redzama lapas galvene. \n- `offset` ir lipīga pozīcija, kad virtuālā tastatūra maina skata logu (piem., planšetdatoros, skārienierīcēs). \n- Kad virtuālā tastatūra ir aktīva, `offset` aizstāj `top`, lai rīkjosla neatstātu atstarpi \n- lapas galvenei, kas ir izritināta ārpus skata. Noklusējums `offset` ir `0`. \n- `position` (noklusējums `\"sticky\"`): pozicionēšanas programma. \n- `\"sticky\"` izmanto vietējo CSS `position: sticky` (ar JS `position: fixed` atkāpšanos, ja tas netiek atbalstīts).",
     "default": "0"
   },
   "toolbar_hide": {

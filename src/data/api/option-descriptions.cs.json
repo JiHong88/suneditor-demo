@@ -209,6 +209,10 @@
     "description": "Určuje výchozí formát zalomení řádku.\n- [Doporučeno] `line`: Zalomení řádku je rozděleno na obecné tagy.\n- [Nedoporučeno] `br`: Zalomení řádku se na stejném řádku považuje za <br>. (jako shift+enter)\n- Zalomení řádku se v rámci `line` zachází jako <br>.\n- Nový `line` můžete vytvořit zadáním zalomení řádku dvakrát za sebou.\n- Formáty, které obsahují `line`, například „Citace“, stále fungují na bázi `line`.\n- Procesy suneditor fungují v jednotkách `line`.\n- Při nastavení na `br` se může výkon snížit při úpravě velkého množství dat.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Když `true`, stiskněte Enter na **konci** řádku",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Vlastnosti čáry, které by se měly resetovat při změně čáry. Oddělovač: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Kontejnerový prvek pro panel nástrojů."
   },
   "toolbar_sticky": {
-    "description": "Povolí lepivý panel nástrojů.\n- `number`: Nastaví lepivou horní pozici (px). Pro zakázání lepivosti použijte `-1`.\n- `{top, offset}`: `top` je lepivá pozice, když je viditelná záhlaví stránky.\n- `offset` je lepivá pozice, když virtuální klávesnice posune zobrazovanou oblast (např. na tabletech, dotykových zařízeních).\n- Když je virtuální klávesnice aktivní, `offset` nahradí `top`, aby panel nástrojů nezanechával mezeru\n- pro záhlaví stránky, které se posunulo mimo zobrazení. Výchozí `offset` je `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Povolí lepivý panel nástrojů. \n- `number`: Nastaví horní pozici (px). Pomocí `-1` ​​deaktivujte sticky. \n- `{top, offset}`: `top` je lepící pozice, když je viditelné záhlaví stránky. \n- `offset` je lepící pozice, když virtuální klávesnice posouvá výřez (např. na tabletech, dotykových zařízeních). \n- Když je aktivní virtuální klávesnice, `offset` nahrazuje `top`, takže panel nástrojů nezanechává mezeru \n- pro záhlaví stránky, které se posunulo mimo zobrazení. Výchozí `offset` je `0`. \n- `position` (výchozí `\"sticky\"`): polohovací stroj. \n- `\"sticky\"` používá nativní CSS `position: sticky` (s záložním JS `position: fixed` tam, kde není podporováno).",
     "default": "0"
   },
   "toolbar_hide": {

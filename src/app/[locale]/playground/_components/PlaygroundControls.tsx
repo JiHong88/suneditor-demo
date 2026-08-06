@@ -872,9 +872,9 @@ const ALL_SECTIONS = ["mode-theme", "layout", "toolbar", "statusbar", "content",
 const SECTION_LABELS: Record<string, string[]> = {
 	"mode-theme": ["mode", "buttonList", "theme", "lang", "textDirection", "type", "reverseButtons", "v2Migration", "icons", "iframe", "iframe_fullPage", "iframe_cssFileName", "iframe_attributes", "subToolbar", "subToolbar.buttonList", "subToolbar.mode", "subToolbar.width"],
 	layout: ["width", "height", "minWidth", "maxWidth", "innerWidth", "minHeight", "maxHeight", "editorStyle"],
-	toolbar: ["toolbar_width", "toolbar_innerWidth", "toolbar_sticky", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
+	toolbar: ["toolbar_width", "toolbar_innerWidth", "toolbar_sticky", "toolbar_sticky_position", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
-	content: ["placeholder", "placeholder_line", "blockHandle", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "retainStyleMode", "freeCodeViewMode"],
+	content: ["placeholder", "placeholder_line", "blockHandle", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "lineBreakClearStyle", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
 	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
@@ -1212,6 +1212,18 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							placeholder='0'
 							resettable={!isFixedOption("toolbar_sticky")}
 						/>
+						<SelectField
+							label='toolbar_sticky.position'
+							value={state.toolbar_sticky_position}
+							options={[
+								{ value: "sticky", label: "sticky" },
+								{ value: "fixed", label: "fixed" },
+							]}
+							onChange={(v) =>
+								set("toolbar_sticky_position")(v as PlaygroundState["toolbar_sticky_position"])
+							}
+							resettable={!isFixedOption("toolbar_sticky_position")}
+						/>
 					</div>
 					<div className='mt-3 grid gap-2'>
 						<SwitchField
@@ -1355,11 +1367,11 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 					<div className='mt-3'>
-						<TextInput
+						<TextareaField
 							label='placeholder_line'
 							value={state.placeholder_line}
 							onChange={set("placeholder_line")}
-							placeholder="Notion-style per-line hint, e.g. Type '/' for commands"
+							placeholder={'Text, or per-type JSON: {"@list":"List item","pre":"// code"}'}
 							resettable={!isFixedOption("placeholder_line")}
 						/>
 					</div>
@@ -1439,6 +1451,12 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 					<div className='mt-3 grid gap-2'>
+						<SwitchField
+							label='lineBreakClearStyle'
+							checked={state.lineBreakClearStyle}
+							onChange={set("lineBreakClearStyle")}
+							resettable={!isFixedOption("lineBreakClearStyle")}
+						/>
 						<SwitchField
 							label='freeCodeViewMode'
 							checked={state.freeCodeViewMode}

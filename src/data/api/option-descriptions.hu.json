@@ -209,6 +209,10 @@
     "description": "Meghatározza az alapértelmezett sortörés formátumot.\n- [Ajánlott] `line` : A sortörés általános címkékre van osztva.\n- [Nem ajánlott] `br` ​​: A sortöréseket <br>-ként kezeli a rendszer ugyanazon a sorban. (mint a shift+enter)\n- A sortöréseket <br>-ként kezeli a rendszer a `line`-n belül.\n- Új `line`-t hozhat létre, ha kétszer egymás után beír egy sortörést.\n- A `line`-t tartalmazó formátumok, például az \"Idézet\", továbbra is `line` alapon működnek.\n- A suneditor folyamatok `line` egységekben működnek.\n- Ha `br`-ra van állítva, a teljesítmény csökkenhet sok adat szerkesztésekor.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Ha `true`, nyomja meg az Entert a sor **végén**",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Sortulajdonságok, amelyeket sorváltásakor vissza kell állítani. Elválasztó: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Az eszköztár tárolóeleme."
   },
   "toolbar_sticky": {
-    "description": "Engedélyezi a ragadós eszköztárat.\n\n- `number`: Beállítja a ragadós felső pozíciót (képpontban). A `-1` ​​letiltásával letilthatja a ragadós részt.\n\n- `{top, offset}`: A `top` a ragadós pozíció, amikor az oldal fejléce látható.\n\n- A `offset` a ragadós pozíció, amikor egy virtuális billentyűzet eltolja a nézetablakot (pl. táblagépeken, érintőképernyős eszközökön).\n\n- Amikor a virtuális billentyűzet aktív, a `offset` lecseréli a `top`-t, így az eszköztár nem hagy rést\n- egy olyan oldal fejléc esetén, amely kigörgetésre került a látómezőből. Az alapértelmezett `offset` a `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Engedélyezi a ragadós eszköztárat. \n- `number`: Beállítja a ragadós felső pozíciót (px). Használja a `-1`-t a ragadós letiltásához. \n- `{top, offset}`: `top` a ragadós pozíció, amikor az oldal fejléce látható. \n- A `offset` a ragadós pozíció, amikor a virtuális billentyűzet eltolja a nézetablakot (pl. táblagépeken, érintőképernyős eszközökön). \n- Ha a virtuális billentyűzet aktív, a `offset` helyettesíti a `top`-t, így az eszköztár nem hagy rést \n- a látómezőn kívül görgetett oldalfejléchez. Az alapértelmezett `offset` a `0`. \n- `position` (alapértelmezett `\"sticky\"`): a helymeghatározó motor. \n- A `\"sticky\"` natív CSS-t használ `position: sticky` (JS `position: fixed` tartalékkal, ahol nem támogatott).",
     "default": "0"
   },
   "toolbar_hide": {

@@ -135,6 +135,34 @@ describe("stateToEditorOptions", () => {
 		expect(opts.toolbar_hide).toBe(true);
 	});
 
+	it("toolbar_sticky position이 fixed면 객체 형태로 변환", () => {
+		const state = { ...DEFAULTS, toolbar_sticky: 92, toolbar_sticky_position: "fixed" as const };
+		const opts = stateToEditorOptions(state);
+		expect(opts.toolbar_sticky).toEqual({ top: 92, position: "fixed" });
+	});
+
+	it("lineBreakClearStyle: true일 때만 옵션 포함", () => {
+		expect(stateToEditorOptions(DEFAULTS).lineBreakClearStyle).toBeUndefined();
+		const opts = stateToEditorOptions({ ...DEFAULTS, lineBreakClearStyle: true });
+		expect(opts.lineBreakClearStyle).toBe(true);
+	});
+
+	it("placeholder_line 문자열 형태 전달", () => {
+		const state = { ...DEFAULTS, placeholder_line: "Type something…" };
+		expect(stateToEditorOptions(state).placeholder_line).toBe("Type something…");
+	});
+
+	it("placeholder_line 객체(per-type) 형태 JSON 파싱", () => {
+		const state = { ...DEFAULTS, placeholder_line: '{"@list":"List item","pre":"// code"}' };
+		const opts = stateToEditorOptions(state);
+		expect(opts.placeholder_line).toEqual({ "@list": "List item", pre: "// code" });
+	});
+
+	it("placeholder_line 잘못된 JSON 객체는 문자열로 폴백", () => {
+		const state = { ...DEFAULTS, placeholder_line: "{invalid" };
+		expect(stateToEditorOptions(state).placeholder_line).toBe("{invalid");
+	});
+
 	it("codeBlock 플러그인 옵션: langs 배열로 변환", () => {
 		const state = { ...DEFAULTS, codeBlock_langs: "javascript, python, html" };
 		const opts = stateToEditorOptions(state);

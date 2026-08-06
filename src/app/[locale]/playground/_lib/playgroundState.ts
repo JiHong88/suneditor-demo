@@ -36,6 +36,7 @@ export interface PlaygroundState {
 	toolbar_width: string;
 	toolbar_innerWidth: string;
 	toolbar_sticky: number;
+	toolbar_sticky_position: "sticky" | "fixed";
 	toolbar_hide: boolean;
 	toolbar_container_enabled: boolean;
 	shortcutsHint: boolean;
@@ -73,6 +74,7 @@ export interface PlaygroundState {
 	editableFrameAttributes: string;
 	defaultLine: string;
 	defaultLineBreakFormat: "line" | "br";
+	lineBreakClearStyle: boolean;
 	retainStyleMode: "repeat" | "always" | "none";
 	freeCodeViewMode: boolean;
 
@@ -450,6 +452,7 @@ export const DEFAULTS: PlaygroundState = {
 	toolbar_width: "auto",
 	toolbar_innerWidth: "",
 	toolbar_sticky: 0,
+	toolbar_sticky_position: "sticky",
 	toolbar_hide: false,
 	toolbar_container_enabled: false,
 	shortcutsHint: true,
@@ -484,6 +487,7 @@ export const DEFAULTS: PlaygroundState = {
 	editableFrameAttributes: "",
 	defaultLine: "p",
 	defaultLineBreakFormat: "line",
+	lineBreakClearStyle: false,
 	retainStyleMode: "repeat",
 	freeCodeViewMode: false,
 
@@ -1275,7 +1279,10 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		height: state.height || "auto",
 
 		// toolbar
-		toolbar_sticky: state.toolbar_sticky,
+		toolbar_sticky:
+			state.toolbar_sticky_position === "fixed"
+				? { top: state.toolbar_sticky, position: "fixed" }
+				: state.toolbar_sticky,
 		toolbar_hide: state.toolbar_hide,
 		shortcutsHint: state.shortcutsHint,
 		shortcutsDisable: state.shortcutsDisable,
@@ -1308,6 +1315,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 
 	// content
 	opts.defaultLineBreakFormat = state.defaultLineBreakFormat;
+	if (state.lineBreakClearStyle) opts.lineBreakClearStyle = true;
 	opts.retainStyleMode = state.retainStyleMode;
 	opts.freeCodeViewMode = state.freeCodeViewMode;
 	// codeBlock plugin
@@ -1365,7 +1373,19 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.toolbar_width !== "auto") opts.toolbar_width = state.toolbar_width;
 	if (state.toolbar_innerWidth) opts.toolbar_innerWidth = state.toolbar_innerWidth;
 	if (state.placeholder) opts.placeholder = state.placeholder;
-	if (state.placeholder_line) opts.placeholder_line = state.placeholder_line;
+	if (state.placeholder_line) {
+		// string, or per-type object keyed by tag/category sentinel (`{"@list":"…","pre":"…"}`)
+		const rawPL = state.placeholder_line.trim();
+		if (rawPL.startsWith("{")) {
+			try {
+				opts.placeholder_line = JSON.parse(rawPL);
+			} catch {
+				opts.placeholder_line = state.placeholder_line;
+			}
+		} else {
+			opts.placeholder_line = state.placeholder_line;
+		}
+	}
 	if (state.blockHandle_enabled) {
 		const menu = state.blockHandle_menu
 			.split(",")
@@ -1838,6 +1858,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tw: "toolbar_width",
 	tiw: "toolbar_innerWidth",
 	ts: "toolbar_sticky",
+	tsp: "toolbar_sticky_position",
 	th: "toolbar_hide",
 	tce: "toolbar_container_enabled",
 	sh: "shortcutsHint",
@@ -1919,6 +1940,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	efa: "editableFrameAttributes",
 	dl: "defaultLine",
 	dlb: "defaultLineBreakFormat",
+	lbcs: "lineBreakClearStyle",
 	rsm: "retainStyleMode",
 	fcv: "freeCodeViewMode",
 	"cb.l": "codeBlock_langs",

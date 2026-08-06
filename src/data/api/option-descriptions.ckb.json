@@ -209,6 +209,10 @@
     "description": "Formata şikandina rêzê ya xwerû diyar dike.\n- [Pêşniyarkirî] `line` : Şikandina rêzê li etîketên giştî tê dabeş kirin.\n- [Nayê pêşniyar kirin] `br` ​​: Şikandina rêzê wekî <br> li ser heman rêzê tê derman kirin. (wek shift+enter)\n- Şikandina rêzê wekî <br> di nav `line` de tê rêvebirin.\n- Hûn dikarin `line`-yek nû biafirînin bi du caran li pey hev têketina şikandina rêzê.\n- Formatên ku `line` dihewînin, wekî \"Goote\", hîn jî li ser bingeha `line` dixebitin.\n- pêvajoyên suneditor di yekîneyên `line` de dixebitin.\n- Dema ku li ser `br` were danîn, performans dibe ku dema ku gelek daneyan têne sererast kirin kêm bibe.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Dema `true`, Enter li **dawiya** rêzekê bitikîne",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Taybetmendiyên xêzan ku divê dema guhertina xêzan ji nû ve werin danîn. Cihêker: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Elementa konteynerê ji bo barika amûran."
   },
   "toolbar_sticky": {
-    "description": "Amûrên zeliqok çalak dike.\n- `number`: Cihê jorîn ê zeliqok (px) destnîşan dike. Ji bo neçalakkirina zeliqok `-1` ​​bikar bînin.\n- `{top, offset}`: `top` cihê zeliqok e dema ku sernivîsa rûpelê xuya ye.\n- `offset` cihê zeliqok e dema ku klavyeyek virtual dîmenderê diguhezîne (mînak, li ser tablet, cîhazên desta).\n- Dema ku klavyeya virtual çalak e, `offset` şûna `top` digire da ku amûr valahiyek nehêlin\n- ji bo sernivîsek rûpelê ku ji dîtinê derketiye. `offset` ya xwerû `0` e.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Darika amûrê ya asayî çalak dike. \n- `number`: Pozîsyona jorîn a asê (px) destnîşan dike. `-1` ​​bikar bînin da ku tîrêjê neçalak bikin. \n- `{top, offset}`: `top` dema ku sernavê rûpelê xuya dibe, pozîsyona asê ye. \n- `offset` dema ku klavyeyek virtual dîmenderê diguhezîne (mînak, li ser tabletan, cîhazên pêçandinê) pozîsyona asê ye. \n- Dema ku klavyeya virtual çalak be, `offset` li şûna `top` diguhere da ku darika amûran valahiyek nehêle \n- ji bo sernivîsa rûpela ku ji ber çavan derketiye. Default `offset` `0` ye. \n- `position` (xweser `\"sticky\"`): motora pozîsyonê. \n- `\"sticky\"` CSS-ya xwemalî `position: sticky` bikar tîne (bi JS `position: fixed` paşvekêşana ku nayê piştgirî kirin).",
     "default": "0"
   },
   "toolbar_hide": {

@@ -209,6 +209,10 @@
     "description": "Especifica el formato de salto de línea predeterminado.\n\n- [Recomendado] `line`: El salto de línea se divide en etiquetas generales.\n\n- [No recomendado] `br`: Los saltos de línea se tratan como <br> en la misma línea (como Mayús+Intro).\n- Los saltos de línea se manejan como <br> dentro de `line`.\n\n- Puede crear un nuevo `line` introduciendo un salto de línea dos veces seguidas.\n\n- Los formatos que incluyen `line`, como \"Cita\", siguen funcionando con `line`.\n\n- Los procesos de suneditor funcionan con unidades `line`.\n\n- Cuando se establece en `br`, el rendimiento puede disminuir al editar grandes cantidades de datos.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Cuando `true`, presionar Enter al **final** de una línea",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Propiedades de línea que deben restablecerse al cambiar de línea. Delimitador: `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Elemento contenedor para la barra de herramientas."
   },
   "toolbar_sticky": {
-    "description": "Habilita la barra de herramientas fija.\n\n- `number`: Establece la posición superior fija (px). Usa `-1` ​​para desactivarla.\n\n- `{top, offset}`: `top` es la posición fija cuando el encabezado de página está visible.\n\n- `offset` es la posición fija cuando un teclado virtual desplaza la ventana gráfica (p. ej., en tabletas o dispositivos táctiles).\n\n- Cuando el teclado virtual está activo, `offset` reemplaza a `top` para que la barra de herramientas no deje un espacio vacío.\n\n- para un encabezado de página que se ha desplazado fuera de la vista. El valor predeterminado de `offset` es `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Habilita la barra de herramientas fija. \n- `number`: establece la posición superior adhesiva (px). Utilice `-1` ​​para desactivar la adherencia. \n- `{top, offset}`: `top` es la posición fija cuando el encabezado de la página es visible. \n- `offset` es la posición fija cuando un teclado virtual cambia la ventana gráfica (por ejemplo, en tabletas, dispositivos táctiles). \n- Cuando el teclado virtual está activo, `offset` reemplaza a `top` para que la barra de herramientas no deje un espacio \n- para un encabezado de página que se ha desplazado fuera de la vista. El `offset` predeterminado es `0`. \n- `position` (por defecto `\"sticky\"`): el motor de posicionamiento. \n- `\"sticky\"` usa CSS nativo `position: sticky` (con un respaldo JS `position: fixed` cuando no es compatible).",
     "default": "0"
   },
   "toolbar_hide": {

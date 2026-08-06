@@ -209,6 +209,10 @@
     "description": "Specifies the default line break format.\n- [Recommended] `line` : Line break is divided into general tags.\n- [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n- Line breaks are handled as <br> within `line`.\n- You can create a new `line` by entering a line break twice in a row.\n- Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n- suneditor processes work in `line` units.\n- When set to `br`, performance may decrease when editing a lot of data.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "When `true`, pressing Enter at the **end** of a line",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Container element for the toolbar."
   },
   "toolbar_sticky": {
-    "description": "Enables sticky toolbar.\n- `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n- `{top, offset}`: `top` is the sticky position when the page header is visible.\n- `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n- When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n- for a page header that has scrolled out of view. Default `offset` is `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Enables sticky toolbar.\n- `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n- `{top, offset}`: `top` is the sticky position when the page header is visible.\n- `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n- When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n- for a page header that has scrolled out of view. Default `offset` is `0`.\n- `position` (default `\"sticky\"`): the positioning engine.\n- `\"sticky\"` uses native CSS `position: sticky` (with a JS `position: fixed` fallback where unsupported).",
     "default": "0"
   },
   "toolbar_hide": {

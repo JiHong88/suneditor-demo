@@ -209,6 +209,10 @@
     "description": "Specifică formatul implicit pentru sfârșitul de linie.\n- [Recomandat] `line` : Sfârșitul de linie este împărțit în etichete generale.\n- [Nerecomandat] `br` ​​: Sfârșiturile de linie sunt tratate ca <br> pe aceeași linie. (ca shift+enter)\n- Sfârșiturile de linie sunt tratate ca <br> în cadrul `line`.\n- Puteți crea un nou `line` introducând un sfârșit de linie de două ori la rând.\n- Formatele care includ `line`, cum ar fi „Citat”, funcționează în continuare pe baza `line`.\n- procesele suneditor funcționează în unități `line`.\n- Când este setat la `br`, performanța poate scădea la editarea multor date.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Când `true`, apăsând Enter la **sfârșitul** unei linii",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Proprietățile liniei care ar trebui resetate la schimbarea liniilor. Delimitator: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Element container pentru bara de instrumente."
   },
   "toolbar_sticky": {
-    "description": "Activează bara de instrumente fixată.\n- `number`: Setează poziția superioară a barei de instrumente fixate (px). Folosește `-1` ​​pentru a dezactiva bara de instrumente fixată.\n- `{top, offset}`: `top` este poziția fixată când antetul paginii este vizibil.\n- `offset` este poziția fixată când o tastatură virtuală deplasează viewport-ul (de exemplu, pe tablete, dispozitive tactile).\n- Când tastatura virtuală este activă, `offset` înlocuiește `top` astfel încât bara de instrumente să nu lase un spațiu liber\n- pentru un antet de pagină care a ieșit din vedere. Implicit `offset` este `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Activează bara de instrumente lipicioasă. \n- `number`: Setează poziția de sus (px). Folosiți `-1` ​​pentru a dezactiva sticky. \n- `{top, offset}`: `top` este poziția lipicioasă când antetul paginii este vizibil. \n- `offset` este poziția lipicioasă atunci când o tastatură virtuală schimbă fereastra de vizualizare (de exemplu, pe tablete, dispozitive tactile). \n- Când tastatura virtuală este activă, `offset` înlocuiește `top` astfel încât bara de instrumente să nu lase un spațiu liber \n- pentru un antet de pagină care a defilat din vedere. `offset` implicit este `0`. \n- `position` (implicit `\"sticky\"`): motorul de poziționare. \n- `\"sticky\"` folosește CSS nativ `position: sticky` (cu un JS `position: fixed` de rezervă acolo unde nu este acceptat).",
     "default": "0"
   },
   "toolbar_hide": {

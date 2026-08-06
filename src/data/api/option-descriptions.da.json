@@ -209,6 +209,10 @@
     "description": "Angiver standardformatet for linjeskift.\n- [Anbefales] `line`: Linjeskift er opdelt i generelle tags.\n- [Anbefales ikke] `br`: Linjeskift behandles som <br> på samme linje. (som shift+enter)\n- Linjeskift håndteres som <br> i `line`.\n- Du kan oprette et nyt `line` ved at indtaste et linjeskift to gange i træk.\n- Formater, der inkluderer `line`, såsom \"Citat\", fungerer stadig på en `line`-basis.\n- Suneditor-processer arbejder i `line`-enheder.\n- Når den er indstillet til `br`, kan ydeevnen falde, når der redigeres mange data.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Når `true`, skal du trykke på Enter ved **slutningen** af en linje",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Linjeegenskaber, der skal nulstilles, når der skiftes linjer. Afgrænsningstegn: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Containerelement til værktøjslinjen."
   },
   "toolbar_sticky": {
-    "description": "Aktiverer fastlåst værktøjslinje.\n- `number`: Angiver den fastlåste øverste position (px). Brug `-1` ​​til at deaktivere fastlåsning.\n- `{top, offset}`: `top` er den fastlåste position, når sidehovedet er synligt.\n- `offset` er den fastlåste position, når et virtuelt tastatur flytter visningsporten (f.eks. på tablets, touch-enheder).\n- Når det virtuelle tastatur er aktivt, erstatter `offset` `top`, så værktøjslinjen ikke efterlader et mellemrum\n- for en sidehoved, der er rullet ud af visning. Standard `offset` er `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Aktiverer klæbrig værktøjslinje. \n- `number`: Indstiller den klæbende topposition (px). Brug `-1` ​​til at deaktivere sticky. \n- `{top, offset}`: `top` er den klæbende position, når sidehovedet er synligt. \n- `offset` er den klæbende position, når et virtuelt tastatur flytter visningsporten (f.eks. på tablets, berøringsenheder). \n- Når det virtuelle tastatur er aktivt, erstatter `offset` `top`, så værktøjslinjen ikke efterlader et hul \n- for en sidehoved, der er rullet ud af syne. Standard `offset` er `0`. \n- `position` (standard `\"sticky\"`): positioneringsmotoren. \n- `\"sticky\"` bruger indbygget CSS `position: sticky` (med en JS `position: fixed` fallback, hvor det ikke understøttes).",
     "default": "0"
   },
   "toolbar_hide": {

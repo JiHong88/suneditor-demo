@@ -209,6 +209,10 @@
     "description": "Specifica il formato predefinito per le interruzioni di riga.\n\n- [Consigliato] `line`: le interruzioni di riga vengono suddivise in tag generici.\n\n- [Sconsigliato] `br`: le interruzioni di riga vengono trattate come <br> sulla stessa riga (ad esempio, Maiusc+Invio).\n- Le interruzioni di riga vengono gestite come <br> all'interno di `line`.\n\n- È possibile creare un nuovo `line` inserendo un'interruzione di riga due volte di seguito.\n\n- I formati che includono `line`, come \"Citazione\", continuano a funzionare in base a `line`.\n\n- I processi di suneditor funzionano in unità `line`.\n\n- Se impostato su `br`, le prestazioni potrebbero diminuire durante la modifica di grandi quantità di dati.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Quando `true`, premendo Invio alla **fine** di una riga",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Proprietà della riga che devono essere reimpostate quando si cambia riga. Delimitatore: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Elemento contenitore per la barra degli strumenti."
   },
   "toolbar_sticky": {
-    "description": "Abilita la barra degli strumenti fissa.\n\n- `number`: Imposta la posizione superiore fissa (px). Utilizzare `-1` ​​per disabilitarla.\n\n- `{top, offset}`: `top` è la posizione fissa quando l'intestazione della pagina è visibile.\n\n- `offset` è la posizione fissa quando una tastiera virtuale sposta l'area di visualizzazione (ad esempio, su tablet e dispositivi touch).\n\n- Quando la tastiera virtuale è attiva, `offset` sostituisce `top` in modo che la barra degli strumenti non lasci uno spazio vuoto\n- per l'intestazione di pagina che è uscita dalla visualizzazione. Il valore predefinito di `offset` è `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Abilita la barra degli strumenti fissa. \n- `number`: imposta la posizione superiore fissa (px). Usa `-1` ​​per disabilitare la persistenza. \n- `{top, offset}`: `top` è la posizione fissa quando l'intestazione della pagina è visibile. \n- `offset` è la posizione fissa quando una tastiera virtuale sposta l'area di visualizzazione (ad esempio, su tablet, dispositivi touch). \n- Quando la tastiera virtuale è attiva, `offset` sostituisce `top` in modo che la barra degli strumenti non lasci spazi vuoti \n- per un'intestazione di pagina che è scomparsa dalla visualizzazione. Il valore predefinito `offset` è `0`. \n- `position` (default `\"sticky\"`): il motore di posizionamento. \n- `\"sticky\"` utilizza CSS nativo `position: sticky` (con un fallback JS `position: fixed` dove non supportato).",
     "default": "0"
   },
   "toolbar_hide": {

@@ -209,6 +209,10 @@
     "description": "指定默认换行符格式。\n\n- [推荐] `line`：换行符被划分为通用标签。\n\n- [不推荐] `br`：同一行中的换行符被视为 <br>。（类似于 Shift+Enter）\n\n- `line` 中的换行符被视为 <br>。\n\n- 您可以通过连续输入两次换行符来创建一个新的 `line`。\n\n- 包含 `line` 的格式（例如“引用”）仍然基于 `line` 运行。\n\n- suneditor 进程以 `line` 为单位运行。\n\n- 设置为 `br` 时，编辑大量数据可能会降低性能。",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "当 `true` 时，在行的**末尾**按 Enter",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "换行时需要重置的行属性。分隔符：`\"|\"`。\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "工具栏的容器元素。"
   },
   "toolbar_sticky": {
-    "description": "启用固定工具栏。\n\n- `number`：设置固定顶部位置（像素）。使用 `-1` 禁用固定功能。\n\n- `{top, offset}`：`top` 是页面标题可见时的固定位置。\n\n- `offset` 是虚拟键盘移动视口时（例如，在平板电脑、触摸设备上）的固定位置。\n\n- 当虚拟键盘处于活动状态时，`offset` 会替换 `top`，以避免工具栏在页面标题滚动出视图后留下空白。\n\n默认值 `offset` 为 `0`。\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "启用粘性工具栏。 \n- `number`：设置粘性顶部位置（px）。 使用 `-1` 禁用粘性。 \n- `{top, offset}`: `top` 是页眉可见时的粘着位置。 \n- `offset` 是虚拟键盘移动视口时的粘滞位置（例如，在平板电脑、触摸设备上）。 \n- 当虚拟键盘处于活动状态时，`offset` 会替换 `top`，因此工具栏不会留下间隙\n - 对于已滚动到视图之外的页眉。 默认 `offset` 是 `0`。 \n- `position`（默认`\"sticky\"`）：定位引擎。 \n- `\"sticky\"` 使用原生 CSS `position: sticky` （在不受支持的情况下使用 JS `position: fixed` 回退）。",
     "default": "0"
   },
   "toolbar_hide": {

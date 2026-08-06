@@ -209,6 +209,10 @@
     "description": "מציין את פורמט ברירת המחדל של מעבר שורה.\n- [מומלץ] `line` : מעבר שורה מחולק לתגים כלליים.\n- [לא מומלץ] `br` ​​: מעברי שורה מטופלים כ-<br> באותה שורה. (כמו shift+enter)\n- מעברי שורה מטופלים כ-<br> בתוך `line`.\n- ניתן ליצור `line` חדש על ידי הזנת מעבר שורה פעמיים ברציפות.\n- פורמטים הכוללים `line`, כגון \"ציטוט\", עדיין פועלים על בסיס `line`.\n- עיבודי suneditor עובדים ביחידות `line`.\n- כאשר מוגדר ל-`br`, הביצועים עשויים לרדת בעת עריכת נתונים רבים.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "כאשר `true`, הקשה על Enter ב **סוף** של שורה",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "מאפייני שורה שיש לאפס בעת שינוי שורות. מפריד: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "רכיב מיכל עבור סרגל הכלים."
   },
   "toolbar_sticky": {
-    "description": "מאפשר סרגל כלים דביק.\n- `number`: מגדיר את המיקום העליון הדביק (px). השתמש ב-`-1` ​​כדי להשבית את המיקום הדביק.\n- `{top, offset}`: `top` הוא המיקום הדביק כאשר כותרת העמוד גלויה.\n- `offset` הוא המיקום הדביק כאשר מקלדת וירטואלית מזיזה את חלון התצוגה (למשל, בטאבלטים, מכשירי מגע).\n- כאשר המקלדת הווירטואלית פעילה, `offset` מחליף את `top` כך שסרגל הכלים לא ישאיר פער\n- עבור כותרת עמוד שנגללה מחוץ לתצוגה. ברירת המחדל `offset` היא `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "מאפשר סרגל כלים דביק. \n- `number`: מגדיר את המיקום העליון הדביק (px). השתמש ב-`-1` ​​כדי להשבית את Sticky. \n- `{top, offset}`: `top` הוא המיקום הדביק כאשר כותרת העמוד גלויה. \n- `offset` היא העמדה הדביקה כאשר מקלדת וירטואלית מסיטה את נקודת התצוגה (למשל, בטאבלטים, במכשירי מגע). \n- כאשר המקלדת הוירטואלית פעילה, `offset` מחליף את `top` כך שסרגל הכלים לא ישאיר פער \n- עבור כותרת עמוד שגללה מחוץ לתצוגה. ברירת המחדל `offset` היא `0`. \n- `position` (ברירת מחדל `\"sticky\"`): מנוע המיקום. \n- `\"sticky\"` משתמש ב-CSS מקורי `position: sticky` (עם JS `position: fixed` fallback כאשר לא נתמך).",
     "default": "0"
   },
   "toolbar_hide": {

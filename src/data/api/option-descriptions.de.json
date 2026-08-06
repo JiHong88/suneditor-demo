@@ -209,6 +209,10 @@
     "description": "Legt das Standardformat für Zeilenumbrüche fest.\n\n- [Empfohlen] `line`: Zeilenumbrüche werden in allgemeine Tags unterteilt.\n\n- [Nicht empfohlen] `br`: Zeilenumbrüche werden als <br> in derselben Zeile behandelt (wie Shift+Enter).\n\n- Zeilenumbrüche werden innerhalb von `line` als <br> behandelt.\n\nSie können ein neues `line` erstellen, indem Sie zweimal hintereinander einen Zeilenumbruch eingeben.\n\nFormate, die `line` enthalten, wie z. B. „Zitat“, funktionieren weiterhin auf `line`-Basis.\n\nsuneditor-Prozesse arbeiten in `line`-Einheiten.\n\nBei der Einstellung `br` kann die Leistung beim Bearbeiten großer Datenmengen beeinträchtigt sein.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Wenn `true`, drücken Sie die Eingabetaste am **Ende** einer Zeile",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Zeileneigenschaften, die beim Zeilenwechsel zurückgesetzt werden sollen. Trennzeichen: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Container-Element für die Symbolleiste."
   },
   "toolbar_sticky": {
-    "description": "Aktiviert die fixierte Symbolleiste.\n\n- `number`: Legt die Position der fixierten Symbolleiste oben fest (px). Verwenden Sie `-1`, um die Fixierung zu deaktivieren.\n\n- `{top, offset}`: `top` ist die Position der fixierten Symbolleiste, wenn die Seitenkopfzeile sichtbar ist.\n\n- `offset` ist die Position der fixierten Symbolleiste, wenn eine virtuelle Tastatur den Anzeigebereich verschiebt (z. B. auf Tablets und Touchscreens).\n\n- Wenn die virtuelle Tastatur aktiv ist, ersetzt `offset` `top`, damit die Symbolleiste keine Lücke hinterlässt\n- für eine Seitenkopfzeile, die aus dem sichtbaren Bereich gescrollt wurde. Standardmäßig ist `offset` gleich `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Aktiviert die Sticky-Symbolleiste. \n- `number`: Legt die Sticky-Top-Position (px) fest. Verwenden Sie `-1`, um Sticky zu deaktivieren. \n- `{top, offset}`: `top` ist die Sticky-Position, wenn der Seitenkopf sichtbar ist. \n- `offset` ist die Sticky-Position, wenn eine virtuelle Tastatur das Ansichtsfenster verschiebt (z. B. auf Tablets, Touch-Geräten). \n- Wenn die virtuelle Tastatur aktiv ist, ersetzt `offset` `top`, sodass die Symbolleiste keine Lücke hinterlässt \n– für einen Seitenkopf, der nicht mehr sichtbar ist. Der Standardwert `offset` ist `0`. \n- `position` (Standard `\"sticky\"`): die Positionierungs-Engine. \n- `\"sticky\"` verwendet natives CSS `position: sticky` (mit einem JS-Fallback `position: fixed`, sofern dies nicht unterstützt wird).",
     "default": "0"
   },
   "toolbar_hide": {

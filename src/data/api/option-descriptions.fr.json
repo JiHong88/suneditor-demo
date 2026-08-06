@@ -209,6 +209,10 @@
     "description": "Spécifie le format de saut de ligne par défaut.\n\n- [Recommandé] `line` : Les sauts de ligne sont divisés en balises générales.\n\n- [Non recommandé] `br` ​​: Les sauts de ligne sont traités comme des <br> sur la même ligne (équivalent à Maj+Entrée).\n\n- Les sauts de ligne sont traités comme des <br> à l'intérieur de `line`.\n\n- Vous pouvez créer un nouveau `line` en saisissant deux sauts de ligne consécutifs.\n\n- Les formats incluant `line`, tels que « Citation », fonctionnent toujours selon le principe `line`.\n\n- Les processus de suneditor fonctionnent en unités `line`.\n\n- Lorsque le paramètre est défini sur `br`, les performances peuvent diminuer lors de la modification d'un grand volume de données.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Lorsque `true`, appuyer sur Entrée à la **fin** d'une ligne",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Propriétés de ligne à réinitialiser lors du changement de ligne. Délimiteur : `\"|\"`.\n\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Élément conteneur pour la barre d'outils."
   },
   "toolbar_sticky": {
-    "description": "Active la barre d'outils fixe.\n\n- `number` : Définit la position haute fixe (px). Utilisez `-1` ​​pour désactiver la fixation.\n\n- `{top, offset}` : `top` est la position fixe lorsque l'en-tête de la page est visible.\n\n- `offset` est la position fixe lorsqu'un clavier virtuel modifie la zone d'affichage (par exemple, sur les tablettes et les appareils tactiles).\n\n- Lorsque le clavier virtuel est actif, `offset` remplace `top` afin que la barre d'outils ne laisse pas d'espace vide\n- pour un en-tête de page qui a défilé hors de l'écran. La valeur par défaut de `offset` est `0`.\n\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Active la barre d'outils collante. \n- `number` : Définit la position supérieure collante (px). Utilisez `-1` ​​pour désactiver le sticky. \n- `{top, offset}` : `top` est la position collante lorsque l'en-tête de la page est visible. \n- `offset` est la position collante lorsqu'un clavier virtuel déplace la fenêtre d'affichage (par exemple, sur les tablettes, les appareils tactiles). \n- Lorsque le clavier virtuel est actif, `offset` remplace `top` pour que la barre d'outils ne laisse pas d'espace \n- pour un en-tête de page qui a défilé hors de vue. `offset` par défaut est `0`. \n- `position` (`\"sticky\"` par défaut) : le moteur de positionnement. \n- `\"sticky\"` utilise CSS natif `position: sticky` (avec une solution de secours JS `position: fixed` lorsqu'elle n'est pas prise en charge).",
     "default": "0"
   },
   "toolbar_hide": {

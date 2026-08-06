@@ -209,6 +209,10 @@
     "description": "Specificeert de standaard regeleinde-indeling.\n\n- [Aanbevolen] `line`: Regeleinden worden verdeeld in algemene tags.\n\n- [Niet aanbevolen] `br`: Regeleinden worden behandeld als <br> op dezelfde regel (zoals Shift+Enter).\n- Regeleinden worden behandeld als <br> binnen `line`.\n\n- U kunt een nieuwe `line` maken door twee regeleinden achter elkaar in te voeren.\n\n- Opmaak die `line` bevat, zoals \"Quote\", werkt nog steeds op basis van `line`.\n\n- Suneditor-processen werken in `line`-eenheden.\n\n- Wanneer ingesteld op `br`, kan de prestatie afnemen bij het bewerken van veel gegevens.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Wanneer `true`, drukt u op Enter aan het **einde** van een regel",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Regeleigenschappen die gereset moeten worden bij het wisselen van regel. Scheidingsteken: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Containerelement voor de werkbalk."
   },
   "toolbar_sticky": {
-    "description": "Schakelt de plakkerige werkbalk in.\n\n- `number`: Stelt de bovenste plakpositie in (px). Gebruik `-1` ​​om de plakkerigheid uit te schakelen.\n\n- `{top, offset}`: `top` is de plakpositie wanneer de paginakop zichtbaar is.\n\n- `offset` is de plakpositie wanneer een virtueel toetsenbord de viewport verschuift (bijv. op tablets, touch-apparaten).\n\n- Wanneer het virtuele toetsenbord actief is, vervangt `offset` `top` zodat de werkbalk geen gat achterlaat\n- voor een paginakop die uit beeld is gescrold. Standaard is `offset` gelijk aan `0`.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Schakelt de vastgezette werkbalk in. \n- `number`: Stelt de sticky toppositie (px) in. Gebruik `-1` ​​om sticky uit te schakelen. \n- `{top, offset}`: `top` is de plakpositie wanneer de paginakop zichtbaar is. \n- `offset` is de plakpositie wanneer een virtueel toetsenbord de viewport verschuift (bijvoorbeeld op tablets, aanraakapparaten). \n- Wanneer het virtuele toetsenbord actief is, vervangt `offset` `top`, zodat de werkbalk geen opening laat \n- voor een paginakop die uit het zicht is gescrold. Standaard `offset` is `0`. \n- `position` (standaard `\"sticky\"`): de positioneringsengine. \n- `\"sticky\"` gebruikt native CSS `position: sticky` (met een JS `position: fixed` fallback indien niet ondersteund).",
     "default": "0"
   },
   "toolbar_hide": {

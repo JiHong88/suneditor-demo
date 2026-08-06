@@ -209,6 +209,10 @@
     "description": "Określa domyślny format podziału wiersza.\n- [Zalecane] `line`: Podział wiersza jest dzielony na znaczniki ogólne.\n- [Niezalecane] `br`: Podziały wiersza są traktowane jako <br> w tym samym wierszu. (jak shift+enter)\n- Podziały wiersza są traktowane jako <br> w `line`.\n- Możesz utworzyć nowy `line`, wpisując podział wiersza dwa razy z rzędu.\n- Formaty zawierające `line`, takie jak „Cytat”, nadal działają na podstawie `line`.\n- Procesy Suneditor działają w jednostkach `line`.\n- Po ustawieniu na `br` wydajność może spaść podczas edycji dużej ilości danych.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "Gdy `true`, naciśnięcie Enter na **końcu** linii",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Właściwości linii, które należy zresetować przy zmianie linii. Ogranicznik: `\"|\"`.\n```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Element kontenera dla paska narzędzi."
   },
   "toolbar_sticky": {
-    "description": "Włącza przyklejony pasek narzędzi.\n- `number`: Ustawia górną pozycję przyklejonego paska narzędzi (w pikselach). Użyj `-1`, aby wyłączyć przyklejenie.\n- `{top, offset}`: `top` to pozycja przyklejenia, gdy nagłówek strony jest widoczny.\n- `offset` to pozycja przyklejenia, gdy klawiatura wirtualna przesuwa obszar widoku (np. na tabletach, urządzeniach dotykowych).\n- Gdy klawiatura wirtualna jest aktywna, `offset` zastępuje `top`, dzięki czemu pasek narzędzi nie pozostawia luki\n- po nagłówku strony, który został przewinięty poza widok. Domyślnie `offset` to `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Włącza przyklejony pasek narzędzi. \n- `number`: Ustawia lepką górną pozycję (px). Użyj `-1`, aby wyłączyć przyklejenie. \n- `{top, offset}`: `top` to lepka pozycja, gdy widoczny jest nagłówek strony. \n- `offset` to lepka pozycja, gdy wirtualna klawiatura przesuwa obszar widoku (np. na tabletach, urządzeniach dotykowych). \n- Gdy klawiatura wirtualna jest aktywna, `offset` zastępuje `top`, więc pasek narzędzi nie pozostawia luki \n- dla nagłówka strony, który zniknął z widoku. Domyślny `offset` to `0`. \n- `position` (domyślnie `\"sticky\"`): silnik pozycjonowania. \n- `\"sticky\"` używa natywnego CSS `position: sticky` (z rezerwą JS `position: fixed` tam, gdzie nie jest obsługiwana).",
     "default": "0"
   },
   "toolbar_hide": {

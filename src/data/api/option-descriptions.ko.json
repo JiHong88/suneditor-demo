@@ -209,6 +209,10 @@
     "description": "기본 줄 바꿈 형식을 지정합니다.\n\n- [권장] `line`: 줄 바꿈이 일반 태그로 구분됩니다.\n\n- [권장하지 않음] `br`: 같은 줄에서 줄 바꿈이 <br>로 처리됩니다(Shift+Enter와 유사).\n- `line` 내에서는 줄 바꿈이 <br>로 처리됩니다.\n\n- 줄 바꿈을 두 번 연속으로 입력하여 새 `line`를 만들 수 있습니다.\n\n- \"인용\"과 같이 `line`를 포함하는 형식은 여전히 ​​`line` 단위로 작동합니다.\n\n- suneditor는 `line` 단위로 작업을 처리합니다.\n\n- `br`로 설정하면 많은 양의 데이터를 편집할 때 성능이 저하될 수 있습니다.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "`true`인 경우 줄의 **끝**에서 Enter 키를 누릅니다.",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "줄 변경 시 재설정해야 하는 줄 속성입니다. 구분자: `\"|\"`.\n\n``js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "툴바를 담는 컨테이너 요소입니다."
   },
   "toolbar_sticky": {
-    "description": "툴바를 고정합니다.\n\n- `number`: 고정 상단 위치(px)를 설정합니다. 고정 기능을 비활성화하려면 `-1`을 사용하십시오.\n\n- `{top, offset}`: `top`은 페이지 헤더가 표시될 때의 고정 위치입니다.\n\n- `offset`은 가상 키보드가 뷰포트를 이동할 때(예: 태블릿, 터치 기기)의 고정 위치입니다.\n\n- 가상 키보드가 활성화되면 `offset`이 `top`을 대체하여 툴바가 화면 밖으로 스크롤된 페이지 헤더와 빈 공간을 남기지 않도록 합니다. 기본값인 `offset`은 `0`입니다.\n\n``js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "고정 도구 모음을 활성화합니다. \n- `number`: 고정 상단 위치(px)를 설정합니다. 고정을 비활성화하려면 `-1`을 사용하세요. \n- `{top, offset}`: `top`은 페이지 헤더가 표시될 때 고정 위치입니다. \n- `offset`는 가상 키보드가 뷰포트를 이동할 때 고정 위치입니다(예: 태블릿, 터치 장치). \n- 가상 키보드가 활성화되면 도구 모음에 공백이 생기지 않도록 `offset`가 `top`을 대체합니다. \n- 스크롤되어 보이지 않는 페이지 헤더의 경우. 기본 `offset`은 `0`입니다. \n- `position`(기본값 `\"sticky\"`): 위치 지정 엔진. \n- `\"sticky\"`은 기본 CSS `position: sticky`를 사용합니다(지원되지 않는 경우 JS `position: fixed` 대체 사용).",
     "default": "0"
   },
   "toolbar_hide": {

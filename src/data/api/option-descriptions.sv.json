@@ -209,6 +209,10 @@
     "description": "Anger standardformatet för radbrytning.\n- [Rekommenderas] `line` : Radbrytning är uppdelad i allmänna taggar.\n- [Rekommenderas inte] `br` ​​: Radbrytningar behandlas som <br> på samma rad. (som shift+enter)\n- Radbrytningar hanteras som <br> inom `line`.\n- Du kan skapa en ny `line` genom att ange en radbrytning två gånger i rad.\n- Format som inkluderar `line`, till exempel \"Citat\", fungerar fortfarande på en `line`-basis.\n- suneditor-processer arbetar i `line`-enheter.\n- När den är inställd på `br` kan prestandan minska vid redigering av mycket data.",
     "default": "\"line\""
   },
+  "lineBreakClearStyle": {
+    "description": "När `true`, tryck på Enter vid **slutet** av en rad",
+    "default": "false"
+  },
   "lineAttrReset": {
     "description": "Linjeegenskaper som ska återställas vid radbyte. Avgränsare: `\"|\"`. ```js\n{ lineAttrReset: 'id|name' }\n```",
     "default": "\"\""
@@ -257,7 +261,7 @@
     "description": "Containerelement för verktygsfältet."
   },
   "toolbar_sticky": {
-    "description": "Aktiverar fast verktygsfält.\n- `number`: Ställer in den fasta översta positionen (px). Använd `-1` ​​för att inaktivera fast verktygsfält.\n- `{top, offset}`: `top` är den fasta positionen när sidhuvudet är synligt.\n- `offset` är den fasta positionen när ett virtuellt tangentbord flyttar visningsområdet (t.ex. på surfplattor, pekskärmar).\n- När det virtuella tangentbordet är aktivt ersätter `offset` `top` så att verktygsfältet inte lämnar ett mellanrum\n- för en sidhuvud som har rullats ur sikte. Standardinställningen `offset` är `0`.\n```js\n// Basic usage — sticky at top with 0px offset\ntoolbar_sticky: 0\n\n// Account for a 92px fixed/sticky site header\ntoolbar_sticky: 92\n\n// 92px header on desktop, but 0px when virtual keyboard pushes the viewport\ntoolbar_sticky: { top: 92, offset: 0 }\n```",
+    "description": "Aktiverar klibbigt verktygsfält. \n- `number`: Ställer in den klibbiga övre positionen (px). Använd `-1` ​​för att inaktivera sticky. \n- `{top, offset}`: `top` är den klibbiga positionen när sidhuvudet är synligt. \n- `offset` är den klibbiga positionen när ett virtuellt tangentbord flyttar visningsporten (t.ex. på surfplattor, pekenheter). \n- När det virtuella tangentbordet är aktivt ersätter `offset` `top` så att verktygsfältet inte lämnar ett tomrum \n- för en sidhuvud som har rullats utom synhåll. Standard `offset` är `0`. \n- `position` (standard `\"sticky\"`): positioneringsmotorn. \n- `\"sticky\"` använder inbyggd CSS `position: sticky` (med en JS `position: fixed` reserv där det inte stöds).",
     "default": "0"
   },
   "toolbar_hide": {
