@@ -36,6 +36,7 @@ export interface PlaygroundState {
 	toolbar_width: string;
 	toolbar_innerWidth: string;
 	toolbar_sticky: number;
+	toolbar_sticky_offset: number;
 	toolbar_sticky_position: "sticky" | "fixed";
 	toolbar_hide: boolean;
 	toolbar_container_enabled: boolean;
@@ -86,6 +87,9 @@ export interface PlaygroundState {
 	syncTabIndent: boolean;
 	componentInsertBehavior: "auto" | "select" | "line" | "none";
 	historyStackDelayTime: number;
+	historyStackSize: number;
+	finder_panel: boolean;
+	finder_liveSearch: boolean;
 	fullScreenOffset: number;
 	defaultUrlProtocol: string;
 	closeModalOutsideClick: boolean;
@@ -452,6 +456,7 @@ export const DEFAULTS: PlaygroundState = {
 	toolbar_width: "auto",
 	toolbar_innerWidth: "",
 	toolbar_sticky: 0,
+	toolbar_sticky_offset: 0,
 	toolbar_sticky_position: "sticky",
 	toolbar_hide: false,
 	toolbar_container_enabled: false,
@@ -498,6 +503,9 @@ export const DEFAULTS: PlaygroundState = {
 	syncTabIndent: true,
 	componentInsertBehavior: "auto",
 	historyStackDelayTime: 400,
+	historyStackSize: 100,
+	finder_panel: true,
+	finder_liveSearch: true,
 	fullScreenOffset: 0,
 	defaultUrlProtocol: "",
 	closeModalOutsideClick: false,
@@ -1279,10 +1287,15 @@ export function stateToEditorOptions(state: PlaygroundState) {
 		height: state.height || "auto",
 
 		// toolbar
-		toolbar_sticky:
-			state.toolbar_sticky_position === "fixed"
-				? { top: state.toolbar_sticky, position: "fixed" }
-				: state.toolbar_sticky,
+		toolbar_sticky: ((): number | { top: number; offset?: number; position?: "fixed" } => {
+			const isFixed = state.toolbar_sticky_position === "fixed";
+			const hasOffset = state.toolbar_sticky_offset !== 0;
+			if (!isFixed && !hasOffset) return state.toolbar_sticky;
+			const cfg: { top: number; offset?: number; position?: "fixed" } = { top: state.toolbar_sticky };
+			if (hasOffset) cfg.offset = state.toolbar_sticky_offset;
+			if (isFixed) cfg.position = "fixed";
+			return cfg;
+		})(),
 		toolbar_hide: state.toolbar_hide,
 		shortcutsHint: state.shortcutsHint,
 		shortcutsDisable: state.shortcutsDisable,
@@ -1331,6 +1344,9 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	opts.syncTabIndent = state.syncTabIndent;
 	opts.componentInsertBehavior = state.componentInsertBehavior;
 	opts.historyStackDelayTime = state.historyStackDelayTime;
+	opts.historyStackSize = state.historyStackSize;
+	opts.finder_panel = state.finder_panel;
+	opts.finder_liveSearch = state.finder_liveSearch;
 	opts.fullScreenOffset = state.fullScreenOffset;
 	opts.closeModalOutsideClick = state.closeModalOutsideClick;
 
@@ -1858,6 +1874,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tw: "toolbar_width",
 	tiw: "toolbar_innerWidth",
 	ts: "toolbar_sticky",
+	tso: "toolbar_sticky_offset",
 	tsp: "toolbar_sticky_position",
 	th: "toolbar_hide",
 	tce: "toolbar_container_enabled",
@@ -1952,6 +1969,9 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	sti: "syncTabIndent",
 	cib: "componentInsertBehavior",
 	hsd: "historyStackDelayTime",
+	hss: "historyStackSize",
+	fpn: "finder_panel",
+	fls: "finder_liveSearch",
 	fso: "fullScreenOffset",
 	dup: "defaultUrlProtocol",
 	cmo: "closeModalOutsideClick",

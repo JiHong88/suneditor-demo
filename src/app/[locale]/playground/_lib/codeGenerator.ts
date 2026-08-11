@@ -252,8 +252,13 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	// toolbar
 	if (state.toolbar_width !== "auto") add("toolbar_width", `"${state.toolbar_width}"`);
 	if (state.toolbar_innerWidth) add("toolbar_innerWidth", `"${state.toolbar_innerWidth}"`);
-	if (state.toolbar_sticky_position === "fixed") {
-		add("toolbar_sticky", `{ top: ${state.toolbar_sticky}, position: "fixed" }`);
+	const stickyFixed = state.toolbar_sticky_position === "fixed";
+	const stickyOffset = state.toolbar_sticky_offset !== 0;
+	if (stickyFixed || stickyOffset) {
+		const parts = [`top: ${state.toolbar_sticky}`];
+		if (stickyOffset) parts.push(`offset: ${state.toolbar_sticky_offset}`);
+		if (stickyFixed) parts.push(`position: "fixed"`);
+		add("toolbar_sticky", `{ ${parts.join(", ")} }`);
 	} else if (state.toolbar_sticky !== 0) {
 		add("toolbar_sticky", String(state.toolbar_sticky));
 	}
@@ -332,6 +337,9 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (!state.syncTabIndent) add("syncTabIndent", "false");
 	if (state.componentInsertBehavior !== "auto") add("componentInsertBehavior", `"${state.componentInsertBehavior}"`);
 	if (state.historyStackDelayTime !== 400) add("historyStackDelayTime", String(state.historyStackDelayTime));
+	if (state.historyStackSize !== 100) add("historyStackSize", String(state.historyStackSize));
+	if (!state.finder_panel) add("finder_panel", "false");
+	if (!state.finder_liveSearch) add("finder_liveSearch", "false");
 	if (state.fullScreenOffset !== 0) add("fullScreenOffset", String(state.fullScreenOffset));
 	if (state.defaultUrlProtocol) add("defaultUrlProtocol", `"${state.defaultUrlProtocol}"`);
 	if (state.closeModalOutsideClick) add("closeModalOutsideClick", "true");
