@@ -21,10 +21,35 @@ import {
 	CODE_COMPOSITE_FONTSIZE, CODE_COMPOSITE_LIST, CODE_JSDOC_PATTERNS,
 	HTML_MODAL, HTML_DROPDOWN, HTML_CONTROLLER, HTML_BROWSER, HTML_POPUP,
 } from "@/data/snippets/pluginGuideSnippets";
+import { API_GALLERY_IMAGE } from "@/data/snippets/apiEndpoints";
 
 /* ══════════════════════════════════════════════════════
    Plugin Type Data
    ══════════════════════════════════════════════════════ */
+
+/** Quick-try config for the built-in `autocomplete` field plugin — without `triggers` the plugin stays idle. */
+const AUTOCOMPLETE_DEMO_OPTIONS = {
+	autocomplete: {
+		triggers: {
+			"@": {
+				data: [
+					{ key: "alice.park", name: "Alice Park" },
+					{ key: "brian.lee", name: "Brian Lee" },
+					{ key: "casey.martin", name: "Casey Martin" },
+					{ key: "diana.taylor", name: "Diana Taylor" },
+					{ key: "ethan.walker", name: "Ethan Walker" },
+				],
+				renderItem: (item: { key: string; name: string }) =>
+					`<div class="se-autocomplete-item"><span>@${item.key}</span><span>${item.name}</span></div>`,
+			},
+		},
+	},
+};
+
+/** Quick-try config for the built-in `imageGallery` browser plugin — without `url`/`data` the gallery renders empty. */
+const IMAGE_GALLERY_DEMO_OPTIONS = {
+	imageGallery: { url: API_GALLERY_IMAGE },
+};
 
 type PluginTypeInfo = {
 	className: string;
@@ -97,6 +122,7 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		code: CODE_BROWSER,
 		demoButtons: ["imageGallery"],
 		demoHtml: "<p>Browser plugins open a gallery or file browser interface.</p>",
+		editorOptions: IMAGE_GALLERY_DEMO_OPTIONS,
 	},
 	{
 		className: "PluginField",
@@ -107,7 +133,10 @@ const PLUGIN_TYPES: PluginTypeInfo[] = [
 		examples: "autocomplete",
 		code: CODE_FIELD,
 		demoButtons: ["bold", "italic"],
-		demoHtml: "<p>Field plugins respond to editor input events. Type <strong>@</strong> to trigger autocomplete detection (autocomplete plugin example).</p>",
+		// The autocomplete trigger only fires when `@` follows whitespace or a line start,
+		// so the demo ends on an empty line rather than mid-sentence.
+		demoHtml: "<p>Field plugins respond to editor input events (autocomplete plugin example).</p><p>Type <strong>@</strong> on the empty line below to open the mention menu.</p><p><br></p>",
+		editorOptions: AUTOCOMPLETE_DEMO_OPTIONS,
 	},
 	{
 		className: "PluginInput",
