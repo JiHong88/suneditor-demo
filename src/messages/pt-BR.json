@@ -621,7 +621,23 @@
 			"focusTip": "Foco gerenciado versus foco nativo",
 			"focusTipDesc": "Use onFocus/onBlur na maioria dos casos — eles são disparados após as atualizações da barra de ferramentas e a definição dos sinalizadores de status. Use onNativeFocus/onNativeBlur somente quando precisar interceptar o evento bruto do navegador antes que o SunEditor o processe.",
 			"uiEvents": "Eventos da interface do usuário",
-			"uiEventsDesc": "Responde à visibilidade da barra de ferramentas, à alternância da visualização do código, ao modo de tela cheia e à redimensionamento do editor."
+			"uiEventsDesc": "Responde à visibilidade da barra de ferramentas, à alternância da visualização do código, ao modo de tela cheia e à redimensionamento do editor.",
+			"inspector": {
+				"title": "Live Event Inspector",
+				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
+				"editorLabel": "Live editor",
+				"logLabel": "Event log",
+				"attachedCount": "{count} events attached",
+				"empty": "No events yet — start typing or click a toolbar button.",
+				"noPayload": "No payload beyond editor internals.",
+				"clear": "Clear",
+				"pause": "Pause",
+				"resume": "Resume",
+				"autoScroll": "Auto-scroll",
+				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
+				"notAttachedTitle": "Not attached here",
+				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+			}
 		},
 		"upload": {
 			"overview": "Visão geral do upload",

@@ -70,12 +70,20 @@ const Editor: React.FC<SunEditorProps> = ({ value, theme, options = {}, onInstan
 			: plugins;
 		const { plugins: _omit, events: userEvents, ...restOptions } = options;
 
-		// 사용자 이벤트에 이미지 리사이즈 핸들러를 주입
+		// 사용자 이벤트에 이미지 리사이즈 핸들러를 주입.
+		// 사용자가 onImageUploadBefore를 직접 넘긴 경우 먼저 호출해서 관찰/취소 기회를 준 뒤 리사이즈를 적용한다.
+		// (그냥 덮어쓰면 사용자 핸들러가 조용히 무시됨)
+		type ImageUploadBeforeParams = { info: { files: FileList }; handler: (newInfo?: unknown) => void };
+		const userImageUploadBefore = (userEvents as Record<string, unknown> | undefined)?.onImageUploadBefore as
+			| ((params: ImageUploadBeforeParams) => unknown)
+			| undefined;
+
 		const mergedEvents = {
 			...(userEvents as Record<string, unknown>),
-			onImageUploadBefore: async ({ info, handler }: { info: { files: FileList }; handler: (newInfo?: unknown) => void }) => {
-				const resizedFiles = await resizeImageFiles(info.files);
-				handler({ ...info, files: resizedFiles });
+			onImageUploadBefore: async (params: ImageUploadBeforeParams) => {
+				if (userImageUploadBefore && (await userImageUploadBefore(params)) === false) return false;
+				const resizedFiles = await resizeImageFiles(params.info.files);
+				params.handler({ ...params.info, files: resizedFiles });
 			},
 		} as SunEditor.InitOptions["events"];
 

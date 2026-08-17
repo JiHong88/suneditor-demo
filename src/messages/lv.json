@@ -621,7 +621,23 @@
 			"focusTip": "Pārvaldīts vai vietējais fokuss",
 			"focusTipDesc": "Vairumā gadījumu izmantojiet onFocus/onBlur — tie tiek aktivizēti pēc rīkjoslas atjaunināšanas un statusa karodziņu iestatīšanas. Izmantojiet onNativeFocus/onNativeBlur tikai tad, ja jums ir jāpārtver neapstrādāts pārlūka notikums, pirms SunEditor to apstrādā.",
 			"uiEvents": "Lietotāja saskarnes notikumi",
-			"uiEventsDesc": "Reaģēt uz rīkjoslas redzamību, koda skata pārslēgšanu, pilnekrāna režīmu un redaktora izmēru maiņu."
+			"uiEventsDesc": "Reaģēt uz rīkjoslas redzamību, koda skata pārslēgšanu, pilnekrāna režīmu un redaktora izmēru maiņu.",
+			"inspector": {
+				"title": "Live Event Inspector",
+				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
+				"editorLabel": "Live editor",
+				"logLabel": "Event log",
+				"attachedCount": "{count} events attached",
+				"empty": "No events yet — start typing or click a toolbar button.",
+				"noPayload": "No payload beyond editor internals.",
+				"clear": "Clear",
+				"pause": "Pause",
+				"resume": "Resume",
+				"autoScroll": "Auto-scroll",
+				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
+				"notAttachedTitle": "Not attached here",
+				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+			}
 		},
 		"upload": {
 			"overview": "Augšupielādes pārskats",

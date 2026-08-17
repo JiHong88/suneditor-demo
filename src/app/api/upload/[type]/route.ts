@@ -11,6 +11,7 @@ import { uploadImage } from "@/../server/service/upload/image";
 import { uploadVideo } from "@/../server/service/upload/video";
 import { uploadAudio } from "@/../server/service/upload/audio";
 import { uploadFile } from "@/../server/service/upload/file";
+import { sweepUploads } from "@/../server/service/upload/cleanup";
 
 const VALID_TYPES: MediaType[] = ["image", "video", "audio", "file"];
 
@@ -48,6 +49,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 	if (files.length === 0) {
 		return NextResponse.json({ result: [], errorMessage: "No files uploaded" }, { status: 400 });
 	}
+
+	// 저장 전에 오래된 업로드를 먼저 정리해서 공간을 확보한다 (TTL 2시간 + 총량 상한).
+	// 실패해도 업로드는 계속 진행된다.
+	await sweepUploads();
 
 	const handler = uploadHandlers[mediaType];
 	const response = await handler(files);

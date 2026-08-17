@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import CodeBlock from "@/components/common/CodeBlock";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import EventInspector from "./EventInspector";
 import {
 	EVENTS_BASIC, EVENTS_INPUT, EVENTS_CLIPBOARD, EVENTS_IMAGE, EVENTS_UI, EVENTS_FOCUS,
 	EVENT_LIST, CATEGORY_COLORS,
@@ -18,7 +19,15 @@ export default function EventsContent() {
 
 	return (
 		<div className='space-y-6'>
-			<Accordion type='multiple' defaultValue={["event-overview", "basic-events"]} className='space-y-1'>
+			<Accordion type='multiple' defaultValue={["event-inspector", "event-overview"]} className='space-y-1'>
+				{/* 0. Live Event Inspector */}
+				<AccordionItem value='event-inspector'>
+					<AccordionTrigger className='text-base font-semibold'>{t("inspector.title")}</AccordionTrigger>
+					<AccordionContent>
+						<EventInspector />
+					</AccordionContent>
+				</AccordionItem>
+
 				{/* 1. Event Overview */}
 				<AccordionItem value='event-overview'>
 					<AccordionTrigger className='text-base font-semibold'>{t("overview")}</AccordionTrigger>

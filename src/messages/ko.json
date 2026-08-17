@@ -621,7 +621,23 @@
 			"focusTip": "관리형 vs 네이티브 포커스",
 			"focusTipDesc": "대부분의 경우 onFocus/onBlur 이벤트를 사용하세요. 이 이벤트들은 툴바 업데이트 및 상태 플래그 설정 후에 발생합니다. SunEditor가 이벤트를 처리하기 전에 브라우저의 원시 이벤트를 가로채야 할 때만 onNativeFocus/onNativeBlur 이벤트를 사용하세요.",
 			"uiEvents": "UI 이벤트",
-			"uiEventsDesc": "툴바 표시 ​​여부, 코드 보기 전환, 전체 화면 모드 및 편집기 크기 조정에 반응합니다."
+			"uiEventsDesc": "툴바 표시 ​​여부, 코드 보기 전환, 전체 화면 모드 및 편집기 크기 조정에 반응합니다.",
+			"inspector": {
+				"title": "라이브 이벤트 인스펙터",
+				"desc": "왼쪽 에디터를 조작하면 오른쪽에 발생하는 이벤트가 실시간으로 기록됩니다. 행을 클릭하면 payload가 펼쳐집니다.",
+				"editorLabel": "라이브 에디터",
+				"logLabel": "이벤트 로그",
+				"attachedCount": "이벤트 {count}개 연결됨",
+				"empty": "아직 기록된 이벤트가 없습니다 — 입력하거나 툴바 버튼을 눌러보세요.",
+				"noPayload": "에디터 내부 객체 외에 전달된 payload가 없습니다.",
+				"clear": "지우기",
+				"pause": "일시정지",
+				"resume": "재개",
+				"autoScroll": "자동 스크롤",
+				"returnTrueNote": "이 이벤트는 undefined를 \"핸들러가 처리함\"으로 보고 업로드를 중단합니다. 로깅만 하려면 반드시 true를 반환해야 합니다.",
+				"notAttachedTitle": "여기서는 연결하지 않는 이벤트",
+				"notAttachedDesc": "업로드 핸들러는 에디터의 업로드 파이프라인을 통째로 대체하므로 인스펙터에서 등록하지 않습니다:"
+			}
 		},
 		"upload": {
 			"overview": "업로드 개요",

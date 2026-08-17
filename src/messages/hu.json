@@ -621,7 +621,23 @@
 			"focusTip": "Felügyelt vs. natív fókusz",
 			"focusTipDesc": "A legtöbb esetben az onFocus/onBlur kapcsolót használd — ezek az eszköztár frissítései és az állapotjelzők beállítása után aktiválódnak. Az onNativeFocus/onNativeBlur kapcsolót csak akkor használd, ha el kell fognod a nyers böngészőeseményt, mielőtt a SunEditor feldolgozná azt.",
 			"uiEvents": "Felhasználói felület eseményei",
-			"uiEventsDesc": "Reagál az eszköztár láthatóságára, a kódnézet váltására, a teljes képernyős nézetre és a szerkesztő átméretezésére."
+			"uiEventsDesc": "Reagál az eszköztár láthatóságára, a kódnézet váltására, a teljes képernyős nézetre és a szerkesztő átméretezésére.",
+			"inspector": {
+				"title": "Live Event Inspector",
+				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
+				"editorLabel": "Live editor",
+				"logLabel": "Event log",
+				"attachedCount": "{count} events attached",
+				"empty": "No events yet — start typing or click a toolbar button.",
+				"noPayload": "No payload beyond editor internals.",
+				"clear": "Clear",
+				"pause": "Pause",
+				"resume": "Resume",
+				"autoScroll": "Auto-scroll",
+				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
+				"notAttachedTitle": "Not attached here",
+				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+			}
 		},
 		"upload": {
 			"overview": "Feltöltés áttekintése",

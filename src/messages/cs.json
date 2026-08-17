@@ -621,7 +621,23 @@
 			"focusTip": "Spravované vs. nativní zaměření",
 			"focusTipDesc": "Ve většině případů používejte onFocus/onBlur – spustí se po aktualizaci panelu nástrojů a nastavení stavových příznaků. onNativeFocus/onNativeBlur používejte pouze tehdy, když potřebujete zachytit událost nezpracovaného prohlížeče před jejím zpracováním v SunEditoru.",
 			"uiEvents": "Události uživatelského rozhraní",
-			"uiEventsDesc": "Reagovat na viditelnost panelu nástrojů, přepínání zobrazení kódu, celoobrazovkový režim a změnu velikosti editoru."
+			"uiEventsDesc": "Reagovat na viditelnost panelu nástrojů, přepínání zobrazení kódu, celoobrazovkový režim a změnu velikosti editoru.",
+			"inspector": {
+				"title": "Live Event Inspector",
+				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
+				"editorLabel": "Live editor",
+				"logLabel": "Event log",
+				"attachedCount": "{count} events attached",
+				"empty": "No events yet — start typing or click a toolbar button.",
+				"noPayload": "No payload beyond editor internals.",
+				"clear": "Clear",
+				"pause": "Pause",
+				"resume": "Resume",
+				"autoScroll": "Auto-scroll",
+				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
+				"notAttachedTitle": "Not attached here",
+				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+			}
 		},
 		"upload": {
 			"overview": "Přehled nahrávání",

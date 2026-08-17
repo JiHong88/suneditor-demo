@@ -200,6 +200,7 @@ export const EVENT_LIST: EventDef[] = [
 	{ name: "onShowController", category: "ui" },
 	{ name: "onBeforeShowController", returnType: "false | void", category: "ui" },
 	{ name: "onToggleCodeView", category: "ui" },
+	{ name: "onToggleMarkdownView", category: "ui" },
 	{ name: "onToggleFullScreen", category: "ui" },
 	{ name: "onResizeEditor", category: "ui" },
 	{ name: "onSetToolbarButtons", category: "ui" },
