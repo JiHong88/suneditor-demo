@@ -126,7 +126,10 @@
     "description": "블록 핸들 구성. 제공되면 줄당 블록 핸들 UI가 표시됩니다. `mode`과 독립적으로 작동합니다."
   },
   "menu": {
-    "description": "메뉴 항목. \n- **문자열 항목** — `ResolveButton`을 통해 해결됩니다. 도구 모음 `buttonList`과 동일한 값을 허용합니다. \n- **블록 형식 키**: `p`, `h1`-`h6`, `heading`(H1-H6 하위 메뉴), `ul`, `ol`, `list`(UL/OL 하위 메뉴), `blockquote`, `pre`. \n- **플러그인 이름**: 등록된 모든 플러그인 이름(예: `blockStyle`, `align`, `image`, `link`). 드롭다운 플러그인은 해당 항목을 하위 메뉴로 표시합니다. 모달 플러그인은 클릭 시 모달을 엽니다. \n- **내장 명령**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` 등 \n- **사용자 정의 항목 개체** — `{ title, icon?, action }`. `icon`는 `$.icons`의 아이콘 키 또는 원시 `<svg>` HTML 문자열입니다. `action`은 `($, { block })`으로 호출됩니다. \n- 기본값은 `['p', 'heading', 'list', 'blockquote', 'pre']`입니다. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "메뉴 항목. \n- **문자열 항목** — `ResolveButton`을 통해 해결됩니다. 도구 모음 `buttonList`과 동일한 값을 허용합니다. \n- **블록 형식 키**: `p`, `h1`-`h6`, `heading`(H1-H6 하위 메뉴), `ul`, `ol`, `list`(UL/OL 하위 메뉴), `blockquote`, `pre`. \n- **플러그인 이름**: 등록된 모든 플러그인 이름(예: `blockStyle`, `align`, `image`, `link`). 드롭다운 플러그인은 해당 항목을 하위 메뉴로 표시합니다. 모달 플러그인은 클릭 시 모달을 엽니다. \n- **내장 명령**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` 등 \n- **사용자 정의 항목 개체** — `{ title, icon?, action }`. `icon`는 `$.icons`의 아이콘 키 또는 원시 `<svg>` HTML 문자열입니다. `action`은 `($, { block })`으로 호출됩니다. \n- 기본값은 `['p', 'heading', 'list', 'blockquote', 'pre']`입니다. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'테이블'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "더하기 버튼이 새 줄을 삽입한 후에 실행됩니다. \n- 줄을 추가하는 것은 고정된 동작입니다. 이 후크는 다음에 일어날 일을 결정합니다. 기본적으로는 아무 것도 수행되지 않습니다. \n- `block`은 이미 초점이 맞춰진 새 줄입니다. `openMenu()`은 블록 핸들 자체의 `menu`을 엽니다. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "편집기 유형. 문서 스타일 레이아웃에는 `\"document\"`을 사용하고, `:` ​​뒤에 선택적으로 하위 유형을 추가할 수 있습니다.\n``js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "트리거에 대해 입력을 검사하기 전의 디바운스 지연(ms)입니다."
   },
   "slashCommand_limitSize": {
-    "description": "드롭다운에 표시되는 최대 항목 수입니다."
+    "description": "필터링 후 보관되는 최대 항목 수입니다. `0`(기본값)은 모든 일치 항목을 유지합니다. \n- 목록은 `maxHeight` 내에서 스크롤되므로 캡은 사용자가 더 이상 접근할 수 없는 일치 항목만 숨깁니다."
+  },
+  "slashCommand_maxHeight": {
+    "description": "메뉴 목록의 최대 높이입니다. 모든 CSS 길이; 목록이 스크롤되어 지나갑니다."
+  },
+  "slashCommand_minWidth": {
+    "description": "메뉴의 최소 너비."
   },
   "slashCommand_emptyMessage": {
     "description": "쿼리와 일치하는 항목이 없을 때 표시되는 메시지입니다. 설정하지 않으면 일치 항목이 없으면 메뉴가 닫힙니다."

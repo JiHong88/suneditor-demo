@@ -126,7 +126,10 @@
     "description": "پیکربندی دسته بلوک در صورت ارائه، یک رابط کاربری دسته بلوک در هر خط نشان داده می شود. مستقل از `mode` کار می کند."
   },
   "menu": {
-    "description": "ورودی های منو \n- ** ورودی های رشته ** - از طریق `ResolveButton` حل شد. مقادیر مشابه نوار ابزار `buttonList` را می پذیرد: \n- **کلیدهای قالب بلوک**: `p`، `h1`-`h6`، `heading` (زیر منوی H1-H6)، `ul`، `ol`، `list` (زیر منوی UL/OL)، `blockquote`، __BT10. \n- **نام افزونه**: هر نام افزونه ثبت شده (به عنوان مثال `blockStyle`، `align`، `image`، `link`). افزونه های کشویی آیتم های خود را به عنوان یک زیر منو نمایش می دهند. پلاگین های Modal با کلیک کردن، مودال را باز می کنند. \n- **دستورات داخلی**: `bold`، `italic`، `underline`، `strike`، `undo`، `redo`، و غیره. \n- **اشیاء مورد سفارشی** — `{ title, icon?, action }`. `icon` یک کلید نماد از `$.icons` یا یک رشته خام `<svg>` HTML است. `action` با `($, { block })` فراخوانی می شود. \n- پیش فرض روی `['p', 'heading', 'list', 'blockquote', 'pre']` است. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "ورودی های منو \n- ** ورودی های رشته ** - از طریق `ResolveButton` حل شد. مقادیر مشابه نوار ابزار `buttonList` را می پذیرد: \n- **کلیدهای قالب بلوک**: `p`، `h1`-`h6`، `heading` (زیر منوی H1-H6)، `ul`، `ol`، `list` (زیر منوی UL/OL)، `blockquote`، __BT10. \n- **نام افزونه**: هر نام افزونه ثبت شده (به عنوان مثال `blockStyle`، `align`، `image`، `link`). افزونه های کشویی آیتم های خود را به عنوان یک زیر منو نمایش می دهند. پلاگین های Modal با کلیک کردن، مودال را باز می کنند. \n- **دستورات داخلی**: `bold`، `italic`، `underline`، `strike`، `undo`، `redo`، و غیره. \n- **اشیاء مورد سفارشی** — `{ title, icon?, action }`. `icon` یک کلید نماد از `$.icons` یا یک رشته خام `<svg>` HTML است. `action` با `($, { block })` فراخوانی می شود. \n- پیش فرض روی `['p', 'heading', 'list', 'blockquote', 'pre']` است. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'جدول'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "بعد از اینکه دکمه پلاس یک خط جدید درج کرد اجرا می شود. \n- اضافه کردن خط رفتار ثابت است. این قلاب تصمیم می گیرد که چه اتفاقی بیفتد. هیچ چیز به طور پیش فرض انجام نمی شود. \n- `block` خط جدید است که از قبل متمرکز شده است. `openMenu()` ​​`menu` خود دسته بلوک را باز می کند. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "نوع ویرایشگر. برای طرح‌بندی به سبک سند از `\"document\"` استفاده کنید، و زیرنوع‌های اختیاری بعد از `:` ​​قرار می‌گیرند.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "تاخیر برگشت (ms) قبل از اینکه ورودی برای ماشه بررسی شود."
   },
   "slashCommand_limitSize": {
-    "description": "حداکثر تعداد موارد نشان داده شده در منوی کشویی."
+    "description": "حداکثر تعداد موارد نگهداری شده پس از فیلتر کردن. `0` (پیش‌فرض) هر مسابقه را نگه می‌دارد \n- لیست در داخل `maxHeight` اسکرول می شود، بنابراین یک کلاه فقط مسابقاتی را پنهان می کند که کاربر دیگر نمی تواند به آن دسترسی پیدا کند."
+  },
+  "slashCommand_maxHeight": {
+    "description": "حداکثر ارتفاع لیست منو هر طول CSS؛ لیست از کنار آن عبور می کند."
+  },
+  "slashCommand_minWidth": {
+    "description": "حداقل عرض منو"
   },
   "slashCommand_emptyMessage": {
     "description": "وقتی هیچ موردی با پرس و جو مطابقت نداشته باشد، پیام نشان داده می شود. در صورت تنظیم نشدن، منو در صورت عدم تطابق بسته می شود."

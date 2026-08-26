@@ -126,7 +126,10 @@
     "description": "Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`."
   },
   "menu": {
-    "description": "Menu entries.\n- **String entries** — resolved via `ResolveButton`. Accepts the same values as toolbar `buttonList`:\n- **Block format keys**: `p`, `h1`-`h6`, `heading` (H1-H6 submenu), `ul`, `ol`, `list` (UL/OL submenu), `blockquote`, `pre`.\n- **Plugin names**: Any registered plugin name (e.g. `blockStyle`, `align`, `image`, `link`). Dropdown plugins display their items as a submenu. Modal plugins open the modal on click.\n- **Built-in commands**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc.\n- **Custom item objects** — `{ title, icon?, action }`. `icon` is an icon key from `$.icons` or a raw `<svg>` HTML string; `action` is invoked with `($, { block })`.\n- Defaults to `['p', 'heading', 'list', 'blockquote', 'pre']`.\n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Menu entries.\n- **String entries** — resolved via `ResolveButton`. Accepts the same values as toolbar `buttonList`:\n- **Block format keys**: `p`, `h1`-`h6`, `heading` (H1-H6 submenu), `ul`, `ol`, `list` (UL/OL submenu), `blockquote`, `pre`.\n- **Plugin names**: Any registered plugin name (e.g. `blockStyle`, `align`, `image`, `link`). Dropdown plugins display their items as a submenu. Modal plugins open the modal on click.\n- **Built-in commands**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc.\n- **Custom item objects** — `{ title, icon?, action }`. `icon` is an icon key from `$.icons` or a raw `<svg>` HTML string; `action` is invoked with `($, { block })`.\n- Defaults to `['p', 'heading', 'list', 'blockquote', 'pre']`.\n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'table'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Runs after the plus button inserted a new line.\n- Adding the line is fixed behavior; this hook decides what happens next. Nothing does by default.\n- `block` is the new line, already focused. `openMenu()` opens the block handle's own `menu`.\n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Debounce delay (ms) before the input is inspected for the trigger."
   },
   "slashCommand_limitSize": {
-    "description": "Maximum number of items shown in the dropdown."
+    "description": "Maximum number of items kept after filtering. `0` (default) keeps every match\n- the list scrolls within `maxHeight`, so a cap only hides matches the user can no longer reach."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Max height of the menu list. Any CSS length; the list scrolls past it."
+  },
+  "slashCommand_minWidth": {
+    "description": "Min width of the menu."
   },
   "slashCommand_emptyMessage": {
     "description": "Message shown when no items match the query. If unset, the menu closes on no match."

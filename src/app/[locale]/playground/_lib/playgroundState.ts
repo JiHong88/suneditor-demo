@@ -67,6 +67,9 @@ export interface PlaygroundState {
 	placeholder_line: string;
 	blockHandle_enabled: boolean;
 	blockHandle_menu: string;
+	blockHandle_maxHeight: string;
+	blockHandle_minWidth: string;
+	blockHandle_onPlusClick: string;
 	value: string;
 	iframe: boolean;
 	iframe_fullPage: boolean;
@@ -217,6 +220,8 @@ export interface PlaygroundState {
 	slashCommand_items: string;
 	slashCommand_delayTime: number;
 	slashCommand_limitSize: number;
+	slashCommand_maxHeight: string;
+	slashCommand_minWidth: string;
 	slashCommand_emptyMessage: string;
 
 	// — Plugin: CodeBlock —
@@ -484,6 +489,9 @@ export const DEFAULTS: PlaygroundState = {
 	placeholder_line: "",
 	blockHandle_enabled: false,
 	blockHandle_menu: "",
+	blockHandle_maxHeight: "",
+	blockHandle_minWidth: "",
+	blockHandle_onPlusClick: "",
 	value: PLAYGROUND_VALUE,
 	iframe: false,
 	iframe_fullPage: false,
@@ -629,7 +637,9 @@ export const DEFAULTS: PlaygroundState = {
 	slashCommand_triggerChar: "/",
 	slashCommand_items: "",
 	slashCommand_delayTime: 120,
-	slashCommand_limitSize: 10,
+	slashCommand_limitSize: 0,
+	slashCommand_maxHeight: "",
+	slashCommand_minWidth: "",
 	slashCommand_emptyMessage: "",
 
 	// Plugin: Math
@@ -838,6 +848,7 @@ export const DEFAULTS: PlaygroundState = {
 export const ITEM_PRESETS: Record<string, string> = {
 	slashCommand_items: "heading, list, blockquote, pre, bold, italic, image, table, link",
 	blockHandle_menu: "p, heading, list, blockquote, pre",
+	blockHandle_onPlusClick: "($, { openMenu }) => openMenu()",
 	align_items: "left,center,right",
 	font_items: "Roboto,Open Sans,Lato,Montserrat,Playfair Display,Noto Sans KR",
 	blockStyle_items: "p,blockquote,h1,h2,h3",
@@ -976,6 +987,9 @@ const FIXED_BASE_KEYS: (keyof PlaygroundState)[] = [
 	// blockHandle (base option, no direct 1:1 suneditor state key — playground uses enable + menu)
 	"blockHandle_enabled",
 	"blockHandle_menu",
+	"blockHandle_maxHeight",
+	"blockHandle_minWidth",
+	"blockHandle_onPlusClick",
 	"toolbar_container_enabled",
 	"statusbar_container_enabled",
 	"subToolbar_enabled",
@@ -1407,7 +1421,14 @@ export function stateToEditorOptions(state: PlaygroundState) {
 			.split(",")
 			.map((s) => s.trim())
 			.filter(Boolean);
-		opts.blockHandle = menu.length ? { menu } : {};
+		const bh: Record<string, unknown> = menu.length ? { menu } : {};
+		if (state.blockHandle_maxHeight) bh.maxHeight = state.blockHandle_maxHeight;
+		if (state.blockHandle_minWidth) bh.minWidth = state.blockHandle_minWidth;
+		if (state.blockHandle_onPlusClick) {
+			const fn = parseFunction(state.blockHandle_onPlusClick);
+			if (fn) bh.onPlusClick = fn;
+		}
+		opts.blockHandle = bh;
 	}
 	if (state.value) opts.value = state.value;
 	if (state.defaultLine !== "p") opts.defaultLine = state.defaultLine;
@@ -1651,6 +1672,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 			if (state.slashCommand_triggerChar && state.slashCommand_triggerChar !== "/") sc.triggerChar = state.slashCommand_triggerChar;
 			if (state.slashCommand_delayTime !== DEFAULTS.slashCommand_delayTime) sc.delayTime = state.slashCommand_delayTime;
 			if (state.slashCommand_limitSize !== DEFAULTS.slashCommand_limitSize) sc.limitSize = state.slashCommand_limitSize;
+			if (state.slashCommand_maxHeight) sc.maxHeight = state.slashCommand_maxHeight;
+			if (state.slashCommand_minWidth) sc.minWidth = state.slashCommand_minWidth;
 			if (state.slashCommand_emptyMessage) sc.emptyMessage = state.slashCommand_emptyMessage;
 		}
 	}
@@ -1949,6 +1972,9 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	phl: "placeholder_line",
 	bhe: "blockHandle_enabled",
 	bhm: "blockHandle_menu",
+	bhmh: "blockHandle_maxHeight",
+	bhmw: "blockHandle_minWidth",
+	bhpc: "blockHandle_onPlusClick",
 	val: "value",
 	if: "iframe",
 	ifp: "iframe_fullPage",
@@ -2084,6 +2110,8 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"sc.it": "slashCommand_items",
 	"sc.d": "slashCommand_delayTime",
 	"sc.l": "slashCommand_limitSize",
+	"sc.mh": "slashCommand_maxHeight",
+	"sc.mw": "slashCommand_minWidth",
 	"sc.em": "slashCommand_emptyMessage",
 	// Plugin: Math
 	"mt.ml": "math_mathLib",

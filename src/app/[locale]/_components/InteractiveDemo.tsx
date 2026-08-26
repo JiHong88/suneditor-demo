@@ -149,7 +149,11 @@ const presetDefs: { id: string; tKey: string; tip?: string; value?: string; opti
 			buttonList: notionButtonList,
 			innerWidth: "720px",
 			placeholder_line: "Press '/' for commands",
-			blockHandle: { menu: notionBlockHandleMenu },
+			blockHandle: {
+				menu: notionBlockHandleMenu,
+				// v3.3.1: plus button inserts the line, then opens the slash command menu on it
+				onPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),
+			},
 			slashCommand: { triggerChar: "/", items: notionSlashItems, limitSize: 12 },
 			subToolbar: { mode: "balloon", buttonList: subButtonList },
 		},

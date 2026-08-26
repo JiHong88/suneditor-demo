@@ -126,7 +126,10 @@
     "description": "Конфигурация дескриптора блока. Если он предоставлен, отображается построчный пользовательский интерфейс дескриптора блока. Работает независимо от `mode`."
   },
   "menu": {
-    "description": "Записи меню. \n- **Строковые записи** — разрешено через `ResolveButton`. Принимает те же значения, что и панель инструментов `buttonList`: \n- **Клавиши формата блока**: `p`, `h1`-`h6`, `heading` (подменю H1-H6), `ul`, `ol`, `list` (подменю UL/OL), `blockquote`, `pre`. \n- **Имена плагинов**: любое зарегистрированное имя плагина (например, `blockStyle`, `align`, `image`, `link`). Плагины раскрывающегося списка отображают свои элементы в виде подменю. Модальные плагины открывают модальное окно по клику. \n- **Встроенные команды**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` и т. д. \n- **Пользовательские объекты** — `{ title, icon?, action }`. `icon` — это ключ значка из `$.icons` или необработанная HTML-строка `<svg>`; `action` вызывается с помощью `($, { block })`. \n- По умолчанию `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Записи меню. \n- **Строковые записи** — разрешено через `ResolveButton`. Принимает те же значения, что и панель инструментов `buttonList`: \n- **Кнопки формата блока**: `p`, `h1`-`h6`, `heading` (подменю H1-H6), `ul`, `ol`, `list` (подменю UL/OL), `blockquote`, `pre`. \n- **Имена плагинов**: любое зарегистрированное имя плагина (например, `blockStyle`, `align`, `image`, `link`). Плагины раскрывающегося списка отображают свои элементы в виде подменю. Модальные плагины открывают модальное окно по клику. \n- **Встроенные команды**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` и т. д. \n- **Пользовательские объекты** — `{ title, icon?, action }`. `icon` — это ключ значка из `$.icons` или необработанная HTML-строка `<svg>`; `action` вызывается с помощью `($, { block })`. \n- По умолчанию `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'таблица'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Запускается после того, как кнопка «плюс» вставила новую строку. \n- При добавлении строки исправлено поведение; этот крючок решает, что произойдет дальше. По умолчанию ничего не происходит. \n- `block` — новая линия, уже сфокусированная. `openMenu()` ​​открывает собственный `menu` дескриптора блока. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Тип редактора. Используйте `\"document\"` для макета в стиле документа, с необязательными подтипами после `:`.\n\n``js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Задержка устранения дребезга (мс) перед проверкой входа на предмет триггера."
   },
   "slashCommand_limitSize": {
-    "description": "Максимальное количество элементов, отображаемых в раскрывающемся списке."
+    "description": "Максимальное количество элементов, сохраняемых после фильтрации. `0` (по умолчанию) сохраняет все совпадения. \n- список прокручивается в пределах `maxHeight`, поэтому ограничение скрывает только те совпадения, к которым пользователь больше не может добраться."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Максимальная высота списка меню. Любая длина CSS; список прокручивается мимо него."
+  },
+  "slashCommand_minWidth": {
+    "description": "Минимальная ширина меню."
   },
   "slashCommand_emptyMessage": {
     "description": "Сообщение отображается, когда ни один элемент не соответствует запросу. Если не установлено, меню закрывается при отсутствии совпадений."

@@ -1662,6 +1662,20 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									optionKey='slashCommand_limitSize'
 								/>
 								<TextInput
+									label='maxHeight'
+									value={state.slashCommand_maxHeight}
+									onChange={set("slashCommand_maxHeight")}
+									placeholder='320px'
+									optionKey='slashCommand_maxHeight'
+								/>
+								<TextInput
+									label='minWidth'
+									value={state.slashCommand_minWidth}
+									onChange={set("slashCommand_minWidth")}
+									placeholder='200px'
+									optionKey='slashCommand_minWidth'
+								/>
+								<TextInput
 									label='emptyMessage'
 									value={state.slashCommand_emptyMessage}
 									onChange={set("slashCommand_emptyMessage")}

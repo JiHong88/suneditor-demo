@@ -311,8 +311,13 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			.split(",")
 			.map((s) => s.trim())
 			.filter(Boolean);
-		if (menu.length) {
-			lines.push(`blockHandle: {\n  menu: [${menu.map((m) => `"${m}"`).join(", ")}],\n},`);
+		const bhLines: string[] = [];
+		if (menu.length) bhLines.push(`  menu: [${menu.map((m) => `"${m}"`).join(", ")}],`);
+		if (state.blockHandle_maxHeight) bhLines.push(`  maxHeight: "${state.blockHandle_maxHeight}",`);
+		if (state.blockHandle_minWidth) bhLines.push(`  minWidth: "${state.blockHandle_minWidth}",`);
+		if (state.blockHandle_onPlusClick) bhLines.push(`  onPlusClick: ${state.blockHandle_onPlusClick},`);
+		if (bhLines.length) {
+			lines.push(`blockHandle: {\n${bhLines.join("\n")}\n},`);
 		} else {
 			add("blockHandle", "{}");
 		}
@@ -579,6 +584,8 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 				scLines.push(`  triggerChar: "${state.slashCommand_triggerChar}",`);
 			if (state.slashCommand_delayTime !== DEFAULTS.slashCommand_delayTime) scLines.push(`  delayTime: ${state.slashCommand_delayTime},`);
 			if (state.slashCommand_limitSize !== DEFAULTS.slashCommand_limitSize) scLines.push(`  limitSize: ${state.slashCommand_limitSize},`);
+			if (state.slashCommand_maxHeight) scLines.push(`  maxHeight: "${state.slashCommand_maxHeight}",`);
+			if (state.slashCommand_minWidth) scLines.push(`  minWidth: "${state.slashCommand_minWidth}",`);
 			if (state.slashCommand_emptyMessage) scLines.push(`  emptyMessage: "${state.slashCommand_emptyMessage}",`);
 			scLines.push(`},`);
 			pLines.push(scLines);

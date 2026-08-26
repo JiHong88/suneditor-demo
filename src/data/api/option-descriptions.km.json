@@ -126,7 +126,10 @@
     "description": "ការកំណត់រចនាសម្ព័ន្ធចំណុចទាញ។ នៅពេលផ្តល់ជូន ចំណុចទាញប្លុកក្នុងមួយជួរ UI ត្រូវបានបង្ហាញ។ ធ្វើការដោយឯករាជ្យពី `mode` ។"
   },
   "menu": {
-    "description": "ធាតុម៉ឺនុយ។ \n- ** ធាតុខ្សែអក្សរ ** — ដោះស្រាយតាមរយៈ `ResolveButton` ។ ទទួលយកតម្លៃដូចគ្នានឹងរបារឧបករណ៍ `buttonList`៖ \n- **គ្រាប់ចុចទម្រង់ប្លុក**៖ `p`, `h1`-`h6`, `heading` (ម៉ឺនុយរង H1-H6), `ul`, `ol`, `list` (ម៉ឺនុយរង UL/OL), `blockquote`, `pre`។ \n- **ឈ្មោះកម្មវិធីជំនួយ**៖ ឈ្មោះកម្មវិធីជំនួយដែលបានចុះឈ្មោះណាមួយ (ឧ. `blockStyle`, `align`, `image`, `link`)។ កម្មវិធីជំនួយទម្លាក់ចុះបង្ហាញធាតុរបស់ពួកគេជាម៉ឺនុយរង។ កម្មវិធីជំនួយម៉ូឌុលបើកម៉ូឌុលនៅពេលចុច។ \n- **ពាក្យបញ្ជាដែលភ្ជាប់មកជាមួយ**៖ `bold`, `italic`, `underline`, `strike`, `undo`, `redo` ជាដើម។ \n- ** វត្ថុធាតុផ្ទាល់ខ្លួន ** — `{ title, icon?, action }` ។ `icon` គឺជាកូនសោរូបតំណាងពី `$.icons` ឬខ្សែអក្សរ HTML `<svg>` ឆៅ។ `action` ត្រូវបានហៅដោយ `($, { block })`។ \n- លំនាំដើមទៅ `['p', 'heading', 'list', 'blockquote', 'pre']` ។ \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "ធាតុម៉ឺនុយ។ \n- ** ធាតុខ្សែអក្សរ ** — ដោះស្រាយតាមរយៈ `ResolveButton` ។ ទទួលយកតម្លៃដូចគ្នានឹងរបារឧបករណ៍ `buttonList`៖ \n- **គ្រាប់ចុចទម្រង់ប្លុក**៖ `p`, `h1`-`h6`, `heading` (ម៉ឺនុយរង H1-H6), `ul`, `ol`, `list` (ម៉ឺនុយរង UL/OL), `blockquote`, `pre`។ \n- **ឈ្មោះកម្មវិធីជំនួយ**៖ ឈ្មោះកម្មវិធីជំនួយដែលបានចុះឈ្មោះណាមួយ (ឧ. `blockStyle`, `align`, `image`, `link`)។ កម្មវិធីជំនួយទម្លាក់ចុះបង្ហាញធាតុរបស់ពួកគេជាម៉ឺនុយរង។ កម្មវិធីជំនួយម៉ូឌុលបើកម៉ូឌុលនៅពេលចុច។ \n- **ពាក្យបញ្ជាដែលភ្ជាប់មកជាមួយ**៖ `bold`, `italic`, `underline`, `strike`, `undo`, `redo` ជាដើម។ \n- ** វត្ថុធាតុផ្ទាល់ខ្លួន ** — `{ title, icon?, action }` ។ `icon` គឺជាកូនសោរូបតំណាងពី `$.icons` ឬខ្សែអក្សរ HTML `<svg>` ឆៅ។ `action` ត្រូវបានហៅដោយ `($, { block })`។ \n- លំនាំដើមទៅ `['p', 'heading', 'list', 'blockquote', 'pre']` ។ \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'តារាង'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "ដំណើរការបន្ទាប់ពីប៊ូតុងបូកបញ្ចូលបន្ទាត់ថ្មី។ \n- ការបន្ថែមបន្ទាត់គឺជាឥរិយាបថថេរ; ទំពក់នេះសម្រេចថានឹងមានអ្វីកើតឡើងបន្ទាប់ទៀត។ គ្មានអ្វីកើតឡើងតាមលំនាំដើមទេ។ \n- `block` គឺជាបន្ទាត់ថ្មី ដែលផ្តោតរួចហើយ។ `openMenu()` ​​បើកចំណុចទាញប្លុកផ្ទាល់ខ្លួនរបស់ `menu` ។ \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "ប្រភេទ​កម្មវិធី​និពន្ធ។ ប្រើ `\"document\"` សម្រាប់​ប្លង់​រចនាប័ទ្ម​ឯកសារ ជាមួយ​ប្រភេទ​រង​ជា​ជម្រើស​បន្ទាប់​ពី `:`។\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Debounce delay (ms) មុនពេលការបញ្ចូលត្រូវបានត្រួតពិនិត្យសម្រាប់គន្លឹះ។"
   },
   "slashCommand_limitSize": {
-    "description": "ចំនួនអតិបរមានៃធាតុដែលបង្ហាញនៅក្នុងបញ្ជីទម្លាក់ចុះ។"
+    "description": "ចំនួនអតិបរមានៃធាតុដែលបានរក្សាទុកបន្ទាប់ពីការត្រង។ `0` (លំនាំដើម) រក្សារាល់ការប្រកួត \n- បញ្ជីររមូរក្នុង `maxHeight` ដូច្នេះមួកមួយលាក់តែប៉ុណ្ណោះ ដែលអ្នកប្រើប្រាស់មិនអាចទៅដល់បានទៀតទេ។"
+  },
+  "slashCommand_maxHeight": {
+    "description": "កម្ពស់អតិបរមានៃបញ្ជីម៉ឺនុយ។ ប្រវែង CSS ណាមួយ; បញ្ជីររំកិលឆ្លងកាត់វា។"
+  },
+  "slashCommand_minWidth": {
+    "description": "ទទឹងអប្បបរមានៃម៉ឺនុយ។"
   },
   "slashCommand_emptyMessage": {
     "description": "សារត្រូវបានបង្ហាញនៅពេលដែលមិនមានធាតុដែលត្រូវគ្នានឹងសំណួរ។ ប្រសិនបើមិនបានកំណត់ នោះម៉ឺនុយនឹងបិទដោយគ្មានការប្រកួត។"

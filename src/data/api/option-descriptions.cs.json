@@ -126,7 +126,10 @@
     "description": "Konfigurace rukojeti bloku. Je-li k dispozici, zobrazí se uživatelské rozhraní úchytu bloku pro každý řádek. Funguje nezávisle na `mode`."
   },
   "menu": {
-    "description": "Položky nabídky. \n- **Položky řetězce** – vyřešeno pomocí `ResolveButton`. Přijímá stejné hodnoty jako panel nástrojů `buttonList`: \n- **Klíče formátu blokování**: `p`, `h1`-`h6`, `heading` (podnabídka H1-H6), `ul`, `ol`, `list` (podnabídka UL/OL), `blockquote`, `pre`. \n- **Názvy pluginů**: Jakýkoli registrovaný název pluginu (např. `blockStyle`, `align`, `image`, `link`). Rozbalovací pluginy zobrazují své položky jako podnabídku. Modální pluginy otevřou modal kliknutím. \n- **Vestavěné příkazy**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` atd. \n- **Vlastní objekty položek** — `{ title, icon?, action }`. `icon` je klíč ikony z `$.icons` nebo nezpracovaný řetězec HTML `<svg>`; `action` se vyvolá s `($, { block })`. \n- Výchozí nastavení je `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Položky nabídky. \n- **Položky řetězce** – vyřešeno pomocí `ResolveButton`. Přijímá stejné hodnoty jako panel nástrojů `buttonList`: \n- **Klíče formátu blokování**: `p`, `h1`-`h6`, `heading` (podnabídka H1-H6), `ul`, `ol`, `list` (podnabídka UL/OL), `blockquote`, `pre`. \n- **Názvy pluginů**: Jakýkoli registrovaný název pluginu (např. `blockStyle`, `align`, `image`, `link`). Rozbalovací pluginy zobrazují své položky jako podnabídku. Modální pluginy otevřou modal kliknutím. \n- **Vestavěné příkazy**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` atd. \n- **Vlastní objekty položek** — `{ title, icon?, action }`. `icon` je klíč ikony z `$.icons` nebo nezpracovaný řetězec HTML `<svg>`; `action` se vyvolá s `($, { block })`. \n- Výchozí nastavení je `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabulka'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Spustí se po vložení nového řádku tlačítkem plus. \n- Přidání řádku je pevné chování; tento háček rozhoduje o tom, co se stane dál. Ve výchozím nastavení nic nefunguje. \n- `block` je nový řádek, již zaměřený. `openMenu()` ​​otevře vlastní `menu` popisovače bloku. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Typ editoru. Pro rozvržení ve stylu dokumentu použijte `\"document\"` s volitelnými podtypy po `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Zpoždění odrazu (ms), než je vstup zkontrolován na spouštění."
   },
   "slashCommand_limitSize": {
-    "description": "Maximální počet položek zobrazených v rozbalovací nabídce."
+    "description": "Maximální počet položek uchovávaných po filtrování. `0` (výchozí) uchovává každý zápas \n- seznam se posouvá v rámci `maxHeight`, takže čepice skrývá pouze ty shody, na které se uživatel již nedostane."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Maximální výška seznamu menu. Jakákoli délka CSS; seznam se posune za něj."
+  },
+  "slashCommand_minWidth": {
+    "description": "Minimální šířka menu."
   },
   "slashCommand_emptyMessage": {
     "description": "Zpráva se zobrazí, když dotazu neodpovídají žádné položky. Pokud není nastaveno, nabídka se zavře, pokud se nenajde žádná shoda."

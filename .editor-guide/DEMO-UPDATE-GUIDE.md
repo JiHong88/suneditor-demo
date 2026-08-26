@@ -470,7 +470,7 @@ Table / Template / Layout / Galleries
 
 > **필드형(field) 플러그인** (`autocomplete`, `slashCommand`)은 툴바 버튼이 없다 — 입력 트리거 문자로 활성화된다.
 > 따라서 `editorPresets.ts`/`buttonCatalog.ts`에는 추가하지 않고, PluginSidebar 옵션 + `stateToEditorOptions()`에서 옵션 존재 시 활성화한다.
-> **`blockHandle`(Block handle)**은 플러그인이 아니라 에디터 base 옵션(`{ menu: [...] }`)이므로 Controls의 Content & Behavior 섹션에서 다룬다.
+> **`blockHandle`(Block handle)**은 플러그인이 아니라 에디터 base 옵션(`{ menu, maxHeight, minWidth, onPlusClick }`)이므로 Controls의 Content & Behavior 섹션에서 다룬다.
 
 **사용 가능한 필드 컴포넌트 (양쪽 공통):**
 - `SelectField` — enum/choice

@@ -126,7 +126,10 @@
     "description": "Configurazione dell'handle del blocco. Se fornita, viene visualizzata l'interfaccia utente dell'handle del blocco per riga. Funziona indipendentemente da `mode`."
   },
   "menu": {
-    "description": "Voci del menu. \n- **Voci stringa**: risolte tramite `ResolveButton`. Accetta gli stessi valori della barra degli strumenti `buttonList`: \n- **Tasti formato blocco**: `p`, `h1`-`h6`, `heading` (sottomenu H1-H6), `ul`, `ol`, `list` (sottomenu UL/OL), `blockquote`, `pre`. \n- **Nomi plugin**: qualsiasi nome plugin registrato (ad esempio `blockStyle`, `align`, `image`, `link`). I plugin a discesa mostrano i loro elementi come un sottomenu. I plugin modali aprono il modale al clic. \n- **Comandi integrati**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, ecc. \n- **Oggetti articolo personalizzato** — `{ title, icon?, action }`. `icon` è una chiave icona da `$.icons` o una stringa HTML `<svg>` non elaborata; `action` viene richiamato con `($, { block })`. \n- Il valore predefinito è `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Voci del menu. \n- **Voci stringa**: risolte tramite `ResolveButton`. Accetta gli stessi valori della barra degli strumenti `buttonList`: \n- **Tasti formato blocco**: `p`, `h1`-`h6`, `heading` (sottomenu H1-H6), `ul`, `ol`, `list` (sottomenu UL/OL), `blockquote`, `pre`. \n- **Nomi plugin**: qualsiasi nome plugin registrato (ad esempio `blockStyle`, `align`, `image`, `link`). I plugin a discesa mostrano i loro elementi come un sottomenu. I plugin modali aprono il modale al clic. \n- **Comandi integrati**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, ecc. \n- **Oggetti articolo personalizzato** — `{ title, icon?, action }`. `icon` è una chiave icona da `$.icons` o una stringa HTML `<svg>` non elaborata; `action` viene richiamato con `($, { block })`. \n- Il valore predefinito è `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tavolo'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Viene eseguito dopo che il pulsante più ha inserito una nuova riga. \n- L'aggiunta della linea è un comportamento fisso; questo gancio decide cosa succede dopo. Niente funziona per impostazione predefinita. \n- `block` è la nuova linea, già focalizzata. `openMenu()` ​​apre l'handle del blocco `menu`. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Tipo di editor. Utilizzare `\"document\"` per un layout in stile documento, con sottotipi opzionali dopo `:`.\n\n``js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Ritardo antirimbalzo (ms) prima che l'ingresso venga controllato per il trigger."
   },
   "slashCommand_limitSize": {
-    "description": "Numero massimo di elementi visualizzati nel menu a discesa."
+    "description": "Numero massimo di elementi conservati dopo il filtraggio. `0` (predefinito) mantiene ogni corrispondenza \n- l'elenco scorre all'interno di `maxHeight`, quindi un limite nasconde solo le corrispondenze che l'utente non può più raggiungere."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Altezza massima dell'elenco dei menu. Qualsiasi lunghezza CSS; l'elenco scorre oltre."
+  },
+  "slashCommand_minWidth": {
+    "description": "Larghezza minima del menu."
   },
   "slashCommand_emptyMessage": {
     "description": "Messaggio visualizzato quando nessun elemento corrisponde alla query. Se non impostato, il menu si chiude in assenza di corrispondenza."

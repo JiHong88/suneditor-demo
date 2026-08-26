@@ -126,7 +126,10 @@
     "description": "Configurarea mânerului bloc. Când este furnizat, este afișată o interfață de utilizare pentru blocuri pe linie. Funcționează independent de `mode`."
   },
   "menu": {
-    "description": "Intrări din meniu. \n- **Intrări șir** — rezolvate prin `ResolveButton`. Acceptă aceleași valori ca și bara de instrumente `buttonList`: \n- **Blocați tastele de format**: `p`, `h1`-`h6`, `heading` (submeniu H1-H6), `ul`, `ol`, `list` (submeniu UL/OL), `blockquote`, `pre`. \n- **Nume de plugin**: orice nume de plugin înregistrat (de exemplu, `blockStyle`, `align`, `image`, `link`). Pluginurile drop-down își afișează articolele ca submeniu. Pluginurile modale deschid modulul la clic. \n- **Comenzi încorporate**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` etc. \n- **Obiecte cu articole personalizate** — `{ title, icon?, action }`. `icon` este o cheie pictogramă de la `$.icons` sau un șir HTML brut `<svg>`; `action` este invocat cu `($, { block })`. \n- Implicit la `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Intrări din meniu. \n- **Intrări șir** — rezolvate prin `ResolveButton`. Acceptă aceleași valori ca și bara de instrumente `buttonList`: \n- **Blocați tastele de format**: `p`, `h1`-`h6`, `heading` (submeniu H1-H6), `ul`, `ol`, `list` (submeniu UL/OL), `blockquote`, `pre`. \n- **Nume de plugin**: orice nume de plugin înregistrat (de exemplu, `blockStyle`, `align`, `image`, `link`). Pluginurile drop-down își afișează articolele ca submeniu. Pluginurile modale deschid modulul la clic. \n- **Comenzi încorporate**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` etc. \n- **Obiecte cu articole personalizate** — `{ title, icon?, action }`. `icon` este o cheie pictogramă de la `$.icons` sau un șir HTML brut `<svg>`; `action` este invocat cu `($, { block })`. \n- Implicit la `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabel'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Se rulează după ce butonul plus a introdus o nouă linie. \n- Adăugarea liniei este un comportament fix; acest cârlig decide ce urmează. Nimic nu face implicit. \n- `block` este noua linie, deja concentrată. `openMenu()` ​​deschide `menu` propriul mâner al blocului. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Tip editor. Folosește `\"document\"` pentru un layout în stil document, cu subtipuri opționale după `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Întârziere de deblocare (ms) înainte ca intrarea să fie inspectată pentru declanșare."
   },
   "slashCommand_limitSize": {
-    "description": "Numărul maxim de articole afișate în meniul drop-down."
+    "description": "Numărul maxim de articole păstrate după filtrare. `0` (implicit) păstrează fiecare meci \n- lista se derulează în `maxHeight`, așa că un capac ascunde doar meciurile pe care utilizatorul nu le mai poate ajunge."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Înălțimea maximă a listei de meniu. Orice lungime CSS; lista trece peste ea."
+  },
+  "slashCommand_minWidth": {
+    "description": "Lățimea minimă a meniului."
   },
   "slashCommand_emptyMessage": {
     "description": "Mesaj afișat când niciun element nu corespunde interogării. Dacă nu este setat, meniul se închide fără potrivire."

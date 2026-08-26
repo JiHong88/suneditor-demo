@@ -874,7 +874,7 @@ const SECTION_LABELS: Record<string, string[]> = {
 	layout: ["width", "height", "minWidth", "maxWidth", "innerWidth", "minHeight", "maxHeight", "editorStyle"],
 	toolbar: ["toolbar_width", "toolbar_innerWidth", "toolbar_sticky", "toolbar_sticky_offset", "toolbar_sticky_position", "toolbar_hide", "shortcutsHint", "shortcutsDisable", "toolbar_container", "shortcuts"],
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
-	content: ["placeholder", "placeholder_line", "blockHandle", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "lineBreakClearStyle", "retainStyleMode", "freeCodeViewMode"],
+	content: ["placeholder", "placeholder_line", "blockHandle", "blockHandle.menu", "blockHandle.maxHeight", "blockHandle.minWidth", "blockHandle.onPlusClick", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "lineBreakClearStyle", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "historyStackSize", "finder_panel", "finder_liveSearch", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
 	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
@@ -1395,15 +1395,45 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 						/>
 					</div>
 					{state.blockHandle_enabled && (
-						<div className='mt-3'>
-							<TextInput
-								label='blockHandle.menu'
-								value={state.blockHandle_menu}
-								onChange={set("blockHandle_menu")}
-								placeholder='p, heading, list, blockquote, pre (empty = editor default)'
-								resettable={!isFixedOption("blockHandle_menu")}
-							/>
-						</div>
+						<>
+							<div className='mt-3'>
+								<TextInput
+									label='blockHandle.menu'
+									value={state.blockHandle_menu}
+									onChange={set("blockHandle_menu")}
+									placeholder='p, heading, list, blockquote, pre (empty = editor default)'
+									resettable={!isFixedOption("blockHandle_menu")}
+								/>
+							</div>
+							<div className='mt-3'>
+								<TextInput
+									label='blockHandle.maxHeight'
+									value={state.blockHandle_maxHeight}
+									onChange={set("blockHandle_maxHeight")}
+									placeholder='e.g. 320px (empty = grows with its items)'
+									resettable={!isFixedOption("blockHandle_maxHeight")}
+								/>
+							</div>
+							<div className='mt-3'>
+								<TextInput
+									label='blockHandle.minWidth'
+									value={state.blockHandle_minWidth}
+									onChange={set("blockHandle_minWidth")}
+									placeholder='200px'
+									resettable={!isFixedOption("blockHandle_minWidth")}
+								/>
+							</div>
+							<div className='mt-3'>
+								<TextareaField
+									label='blockHandle.onPlusClick (Function)'
+									value={state.blockHandle_onPlusClick}
+									onChange={set("blockHandle_onPlusClick")}
+									placeholder={ITEM_PRESETS.blockHandle_onPlusClick}
+									description='Runs after the plus button inserted a new line. Receives ($, { block, openMenu }).'
+									resettable={!isFixedOption("blockHandle_onPlusClick")}
+								/>
+							</div>
+						</>
 					)}
 					<div className='mt-3'>
 						<TextareaField

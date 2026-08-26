@@ -126,7 +126,10 @@
     "description": "ブロックハンドルの設定。 指定すると、行ごとのブロック ハンドル UI が表示されます。 `mode` とは独立して動作します。"
   },
   "menu": {
-    "description": "メニューエントリ。 \n- **文字列エントリ** — `ResolveButton` によって解決されます。 ツールバー `buttonList` と同じ値を受け入れます。 \n- **ブロック形式キー**: `p`、`h1`-`h6`、`heading` (H1-H6 サブメニュー)、`ul`、`ol`、`list` (UL/OL サブメニュー)、`blockquote`、`pre`。 \n- **プラグイン名**: 登録されているプラ​​グイン名 (例: `blockStyle`、`align`、`image`、`link`)。 ドロップダウン プラグインは項目をサブメニューとして表示します。 モーダル プラグインはクリックするとモーダルを開きます。 \n- **組み込みコマンド**: `bold`、`italic`、`underline`、`strike`、`undo`、`redo` など。 \n- **カスタム項目オブジェクト** — `{ title, icon?, action }`。 `icon` は、`$.icons` のアイコン キー、または生の `<svg>` HTML 文字列です。 `action` は `($, { block })` で呼び出されます。 \n- デフォルトは `['p', 'heading', 'list', 'blockquote', 'pre']` です。 \n「`js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n`」"
+    "description": "メニューエントリ。 \n- **文字列エントリ** — `ResolveButton` によって解決されます。 ツールバー `buttonList` と同じ値を受け入れます。 \n- **ブロック形式キー**: `p`、`h1`-`h6`、`heading` (H1-H6 サブメニュー)、`ul`、`ol`、`list` (UL/OL サブメニュー)、`blockquote`、`pre`。 \n- **プラグイン名**: 登録されているプラ​​グイン名 (例: `blockStyle`、`align`、`image`、`link`)。 ドロップダウン プラグインは項目をサブメニューとして表示します。 モーダル プラグインはクリックするとモーダルを開きます。 \n- **組み込みコマンド**: `bold`、`italic`、`underline`、`strike`、`undo`、`redo` など。 \n- **カスタム項目オブジェクト** — `{ title, icon?, action }`。 `icon` は、`$.icons` のアイコン キー、または生の `<svg>` HTML 文字列です。 `action` は `($, { block })` で呼び出されます。 \n- デフォルトは `['p', 'heading', 'list', 'blockquote', 'pre']` です。 \n「`js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'テーブル'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n`」"
+  },
+  "onPlusClick": {
+    "description": "プラスボタンで新しい行が挿入された後に実行されます。 \n- 行の追加は修正された動作です。 このフックが次に何が起こるかを決定します。 デフォルトでは何も行われません。 \n- `block` は新しい行で、すでにフォーカスされています。 `openMenu()` は、ブロック ハンドル自体の `menu` を開きます。 \n「`js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n`」"
   },
   "type": {
     "description": "エディタの種類。ドキュメントスタイルのレイアウトには `\"document\"` を使用し、`:` の後にオプションのサブタイプを指定できます。\n\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "トリガーの入力が検査される前のデバウンス遅延 (ミリ秒)。"
   },
   "slashCommand_limitSize": {
-    "description": "ドロップダウンに表示される項目の最大数。"
+    "description": "フィルタリング後に保持されるアイテムの最大数。 `0` (デフォルト) すべての一致を保持します\n - リストは `maxHeight` 内でスクロールするため、キャップはユーザーが到達できない一致のみを非表示にします。"
+  },
+  "slashCommand_maxHeight": {
+    "description": "メニューリストの最大高さ。 任意の CSS 長。 リストはスクロールして通過します。"
+  },
+  "slashCommand_minWidth": {
+    "description": "メニューの最小幅。"
   },
   "slashCommand_emptyMessage": {
     "description": "クエリに一致する項目がない場合に表示されるメッセージ。 設定しない場合、一致しない場合にメニューが閉じます。"

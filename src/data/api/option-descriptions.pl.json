@@ -126,7 +126,10 @@
     "description": "Konfiguracja uchwytu bloku. Jeśli jest podany, wyświetlany jest interfejs użytkownika uchwytu bloku dla poszczególnych linii. Działa niezależnie od `mode`."
   },
   "menu": {
-    "description": "Pozycje menu. \n- **Wpisy ciągu** — rozwiązane poprzez `ResolveButton`. Akceptuje te same wartości, co pasek narzędzi `buttonList`: \n- **Klawisze formatu blokowego**: `p`, `h1`-`h6`, `heading` (podmenu H1-H6), `ul`, `ol`, `list` (podmenu UL/OL), `blockquote`, `pre`. \n- **Nazwy wtyczek**: dowolna zarejestrowana nazwa wtyczki (np. `blockStyle`, `align`, `image`, `link`). Wtyczki rozwijane wyświetlają swoje elementy jako podmenu. Wtyczki modalne otwierają moduł po kliknięciu. \n- **Wbudowane polecenia**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` itd. \n- **Niestandardowe przedmioty** — `{ title, icon?, action }`. `icon` to klucz ikony z `$.icons` lub surowy ciąg HTML `<svg>`; `action` jest wywoływany z `($, { block })`. \n- Wartość domyślna to `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Pozycje menu. \n- **Wpisy ciągu** — rozwiązane poprzez `ResolveButton`. Akceptuje te same wartości co pasek narzędzi `buttonList`: \n- **Klawisze formatu blokowego**: `p`, `h1`-`h6`, `heading` (podmenu H1-H6), `ul`, `ol`, `list` (podmenu UL/OL), `blockquote`, `pre`. \n- **Nazwy wtyczek**: Dowolna zarejestrowana nazwa wtyczki (np. `blockStyle`, `align`, `image`, `link`). Wtyczki rozwijane wyświetlają swoje elementy jako podmenu. Wtyczki modalne otwierają moduł po kliknięciu. \n- **Wbudowane polecenia**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` itd. \n- **Niestandardowe przedmioty** — `{ title, icon?, action }`. `icon` to klucz ikony z `$.icons` lub surowy ciąg HTML `<svg>`; `action` jest wywoływany z `($, { block })`. \n- Wartość domyślna to `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabela'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Uruchamia się po wstawieniu nowej linii za pomocą przycisku plus. \n- Dodanie linii to poprawione zachowanie; ten hak decyduje, co stanie się dalej. Domyślnie nic się nie dzieje. \n- `block` to nowa linia, już skupiona. `openMenu()` ​​otwiera własny uchwyt bloku `menu`. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Typ edytora. Użyj `\"document\"` dla układu w stylu dokumentu, z opcjonalnymi podtypami po `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Opóźnienie odbicia (ms) przed sprawdzeniem wejścia pod kątem wyzwalania."
   },
   "slashCommand_limitSize": {
-    "description": "Maksymalna liczba elementów wyświetlana na liście rozwijanej."
+    "description": "Maksymalna liczba elementów przechowywanych po filtrowaniu. `0` (domyślnie) przechowuje każde dopasowanie \n- lista przewija się w ciągu `maxHeight`, więc ograniczenie ukrywa tylko te mecze, do których użytkownik nie może już dotrzeć."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Maksymalna wysokość listy menu. Dowolna długość CSS; lista przewija się obok niej."
+  },
+  "slashCommand_minWidth": {
+    "description": "Minimalna szerokość menu."
   },
   "slashCommand_emptyMessage": {
     "description": "Komunikat wyświetlany, gdy żaden element nie pasuje do zapytania. Jeśli nieustawione, menu zamyka się w przypadku braku dopasowania."

@@ -126,7 +126,10 @@
     "description": "Blok tanıtıcı yapılandırması. Sağlandığında, satır başına blok tanıtıcısı kullanıcı arayüzü gösterilir. `mode`'dan bağımsız olarak çalışır."
   },
   "menu": {
-    "description": "Menü girişleri. \n- **Dize girişleri** — `ResolveButton` aracılığıyla çözümlendi. `buttonList` araç çubuğuyla aynı değerleri kabul eder: \n- **Blok format tuşları**: `p`, `h1`-`h6`, `heading` (H1-H6 alt menüsü), `ul`, `ol`, `list` (UL/OL alt menüsü), `blockquote`, `pre`. \n- **Eklenti adları**: Herhangi bir kayıtlı eklenti adı (ör. `blockStyle`, `align`, `image`, `link`). Açılır eklentiler, öğelerini bir alt menü olarak görüntüler. Modal eklentileri tıklamayla modeli açar. \n- **Yerleşik komutlar**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, vb. \n- **Özel öğe nesneleri** — `{ title, icon?, action }`. `icon`, `$.icons`'den bir simge anahtarıdır veya ham bir `<svg>` HTML dizesidir; `action`, `($, { block })` ile çağrılır. \n- Varsayılan olarak `['p', 'heading', 'list', 'blockquote', 'pre']` şeklindedir. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Menü girişleri. \n- **Dize girişleri** — `ResolveButton` aracılığıyla çözümlendi. `buttonList` araç çubuğuyla aynı değerleri kabul eder: \n- **Blok format tuşları**: `p`, `h1`-`h6`, `heading` (H1-H6 alt menüsü), `ul`, `ol`, `list` (UL/OL alt menüsü), `blockquote`, `pre`. \n- **Eklenti adları**: Kayıtlı herhangi bir eklenti adı (ör. `blockStyle`, `align`, `image`, `link`). Açılır eklentiler, öğelerini bir alt menü olarak görüntüler. Modal eklentileri tıklamayla modeli açar. \n- **Yerleşik komutlar**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, vb. \n- **Özel öğe nesneleri** — `{ title, icon?, action }`. `icon`, `$.icons`'den bir simge anahtarıdır veya ham bir `<svg>` HTML dizesidir; `action`, `($, { block })` ile çağrılır. \n- Varsayılan olarak `['p', 'heading', 'list', 'blockquote', 'pre']` şeklindedir. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tablo'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Artı düğmesi yeni bir satır ekledikten sonra çalışır. \n- Satır eklemek sabit bir davranıştır; bu kanca bundan sonra ne olacağına karar verir. Varsayılan olarak hiçbir şey yapılmaz. \n- `block` zaten odaklanmış yeni çizgidir. `openMenu()` ​​blok tanıtıcısının kendi `menu`'sini açar. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Editör tipi. Belge stili düzeni için `\"document\"` kullanın, `:`'den sonra isteğe bağlı alt tipler ekleyin.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Giriş tetikleyici açısından incelenmeden önce geri dönme gecikmesi (ms)."
   },
   "slashCommand_limitSize": {
-    "description": "Açılır menüde gösterilen maksimum öğe sayısı."
+    "description": "Filtrelemeden sonra saklanan maksimum öğe sayısı. `0` (varsayılan) her eşleşmeyi korur \n- liste `maxHeight` içinde kayar, böylece büyük harf yalnızca kullanıcının artık ulaşamayacağı eşleşmeleri gizler."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Menü listesinin maksimum yüksekliği. Herhangi bir CSS uzunluğu; liste onun üzerinden kayar."
+  },
+  "slashCommand_minWidth": {
+    "description": "Menünün minimum genişliği."
   },
   "slashCommand_emptyMessage": {
     "description": "Sorguyla eşleşen hiçbir öğe olmadığında gösterilen mesaj. Ayarlanmadığı takdirde eşleşme olmadığında menü kapanır."

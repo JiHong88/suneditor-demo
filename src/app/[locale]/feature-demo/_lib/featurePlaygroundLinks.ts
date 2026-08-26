@@ -183,9 +183,23 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 			placeholder_line: "Type '/' for commands",
 		},
 	),
-	blockHandle: fl({ p: "standard", bhe: "1", bhm: "p,heading,list,blockquote,pre,align", val: DEMO_BLOCK_HANDLE }, [["undo", "redo"]], {
-		blockHandle: { menu: ["p", "heading", "list", "blockquote", "pre", "align"] },
-	}),
+	blockHandle: fl(
+		{
+			p: "standard",
+			bhe: "1",
+			bhm: "p,heading,list,blockquote,pre,align",
+			bhpc: "($, { openMenu }) => openMenu()",
+			val: DEMO_BLOCK_HANDLE,
+		},
+		[["undo", "redo"]],
+		{
+			blockHandle: {
+				menu: ["p", "heading", "list", "blockquote", "pre", "align"],
+				// v3.3.1: the plus button adds the line, this hook decides what opens next
+				onPlusClick: (_$: unknown, { openMenu }: { openMenu: () => void }) => openMenu(),
+			},
+		},
+	),
 	placeholderLine: fl({ p: "standard", phl: "This empty line has its own placeholder", val: DEMO_PLACEHOLDER_LINE }, [["bold", "italic", "underline"]], {
 		placeholder_line: "This empty line has its own placeholder",
 	}),

@@ -126,7 +126,10 @@
     "description": "Configuración del mango del bloque. Cuando se proporciona, se muestra una interfaz de usuario de identificador de bloque por línea. Funciona independientemente de `mode`."
   },
   "menu": {
-    "description": "Entradas de menú. \n- **Entradas de cadena**: resueltas mediante `ResolveButton`. Acepta los mismos valores que la barra de herramientas `buttonList`: \n- **Teclas de formato de bloque**: `p`, `h1`-`h6`, `heading` (submenú H1-H6), `ul`, `ol`, `list` (submenú UL/OL), `blockquote`, `pre`. \n- **Nombres de complementos**: cualquier nombre de complemento registrado (por ejemplo, `blockStyle`, `align`, `image`, `link`). Los complementos desplegables muestran sus elementos como un submenú. Los complementos modales abren el modal al hacer clic. \n- **Comandos incorporados**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objetos de artículos personalizados** — `{ title, icon?, action }`. `icon` es una clave de icono de `$.icons` o una cadena HTML sin formato `<svg>`; `action` se invoca con `($, { block })`. \n- El valor predeterminado es `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Entradas de menú. \n- **Entradas de cadena**: resueltas mediante `ResolveButton`. Acepta los mismos valores que la barra de herramientas `buttonList`: \n- **Teclas de formato de bloque**: `p`, `h1`-`h6`, `heading` (submenú H1-H6), `ul`, `ol`, `list` (submenú UL/OL), `blockquote`, `pre`. \n- **Nombres de complementos**: cualquier nombre de complemento registrado (por ejemplo, `blockStyle`, `align`, `image`, `link`). Los complementos desplegables muestran sus elementos como un submenú. Los complementos modales abren el modal al hacer clic. \n- **Comandos incorporados**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objetos de artículos personalizados** — `{ title, icon?, action }`. `icon` es una clave de icono de `$.icons` o una cadena HTML sin formato `<svg>`; `action` se invoca con `($, { block })`. \n- El valor predeterminado es `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabla'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "Se ejecuta después de que el botón más inserta una nueva línea. \n- Agregar la línea es un comportamiento fijo; este gancho decide lo que sucede a continuación. Nada lo hace por defecto. \n- `block` es la nueva línea, ya enfocada. `openMenu()` ​​abre el propio `menu` del identificador de bloque. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Tipo de editor. Use `\"document\"` para un diseño de estilo de documento, con subtipos opcionales después de `:`.\n\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Retraso de rebote (ms) antes de que se inspeccione la entrada para detectar el disparador."
   },
   "slashCommand_limitSize": {
-    "description": "Número máximo de elementos que se muestran en el menú desplegable."
+    "description": "Número máximo de elementos conservados después del filtrado. `0` (predeterminado) mantiene todas las coincidencias \n- la lista se desplaza dentro de `maxHeight`, por lo que un límite solo oculta las coincidencias que el usuario ya no puede alcanzar."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Altura máxima de la lista del menú. Cualquier longitud de CSS; la lista se desplaza más allá de él."
+  },
+  "slashCommand_minWidth": {
+    "description": "Ancho mínimo del menú."
   },
   "slashCommand_emptyMessage": {
     "description": "Mensaje que se muestra cuando ningún elemento coincide con la consulta. Si no está configurado, el menú se cierra si no hay coincidencias."

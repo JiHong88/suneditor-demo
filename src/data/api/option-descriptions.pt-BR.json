@@ -126,7 +126,10 @@
     "description": "Configuração do identificador de bloco. Quando fornecido, uma UI de identificador de bloco por linha é mostrada. Funciona independentemente de `mode`."
   },
   "menu": {
-    "description": "Entradas do menu. \n- **Entradas de string** — resolvidas via `ResolveButton`. Aceita os mesmos valores da barra de ferramentas `buttonList`: \n- **Chaves de formato de bloco**: `p`, `h1`-`h6`, `heading` (submenu H1-H6), `ul`, `ol`, `list` (submenu UL/OL), `blockquote`, `pre`. \n- **Nomes de plug-ins**: Qualquer nome de plug-in registrado (por exemplo, `blockStyle`, `align`, `image`, `link`). Os plug-ins suspensos exibem seus itens como um submenu. Plugins modais abrem o modal ao clicar. \n- **Comandos integrados**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objetos de itens personalizados** — `{ title, icon?, action }`. `icon` é uma chave de ícone de `$.icons` ou uma string HTML `<svg>` bruta; `action` é invocado com `($, { block })`. \n- O padrão é `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n],\n}\n```"
+    "description": "Entradas do menu. \n- **Entradas de string** — resolvidas via `ResolveButton`. Aceita os mesmos valores da barra de ferramentas `buttonList`: \n- **Chaves de formato de bloco**: `p`, `h1`-`h6`, `heading` (submenu H1-H6), `ul`, `ol`, `list` (submenu UL/OL), `blockquote`, `pre`. \n- **Nomes de plug-ins**: Qualquer nome de plug-in registrado (por exemplo, `blockStyle`, `align`, `image`, `link`). Os plug-ins suspensos exibem seus itens como um submenu. Plugins modais abrem o modal ao clicar. \n- **Comandos integrados**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, etc. \n- **Objetos de itens personalizados** — `{ title, icon?, action }`. `icon` é uma chave de ícone de `$.icons` ou uma string HTML `<svg>` bruta; `action` é invocado com `($, { block })`. \n- O padrão é `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabela'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+  },
+  "onPlusClick": {
+    "description": "É executado após o botão de adição inserir uma nova linha. \n- Adicionar a linha é um comportamento fixo; este gancho decide o que acontece a seguir. Nada acontece por padrão. \n- `block` é a nova linha, já focada. `openMenu()` ​​abre o próprio `menu` do identificador de bloco. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
   },
   "type": {
     "description": "Tipo de editor. Use `\"document\"` para um layout de estilo de documento, com subtipos opcionais após `:`.\n```js\n// type\n'document:header,page'\n```",
@@ -584,7 +587,13 @@
     "description": "Atraso de debounce (ms) antes que a entrada seja inspecionada para o gatilho."
   },
   "slashCommand_limitSize": {
-    "description": "Número máximo de itens mostrados no menu suspenso."
+    "description": "Número máximo de itens mantidos após a filtragem. `0` (padrão) mantém todas as partidas \n- a lista rola dentro de `maxHeight`, portanto, um limite apenas oculta as correspondências que o usuário não pode mais alcançar."
+  },
+  "slashCommand_maxHeight": {
+    "description": "Altura máxima da lista do menu. Qualquer comprimento CSS; a lista passa por ela."
+  },
+  "slashCommand_minWidth": {
+    "description": "Largura mínima do menu."
   },
   "slashCommand_emptyMessage": {
     "description": "Mensagem mostrada quando nenhum item corresponde à consulta. Se não for definido, o menu fecha sem correspondência."
