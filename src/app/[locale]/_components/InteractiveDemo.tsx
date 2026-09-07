@@ -104,7 +104,7 @@ const notionBlockHandleMenu: NonNullable<SunEditorType.InitOptions["blockHandle"
 	{ title: "Delete", icon: "delete", action: (_$, { block }) => block.remove() },
 ];
 
-const NOTION_DEMO_VALUE = `<h1>📝 Notion-style editing</h1><p>Hover the left gutter to grab the <strong>⠿ block handle</strong> — drag to reorder a block, or click <strong>+</strong> to add one below.</p><p>On an empty line, press <strong>/</strong> to open the slash command menu.</p><blockquote>Try <em>/heading</em>, <em>/quote</em>, <em>/code</em>, <em>/table</em> or <em>/image</em>.</blockquote><p></p>`;
+const NOTION_DEMO_VALUE = `<h1>📝 Notion-style editing</h1><p>Hover the left gutter to grab the <strong>⠿ block handle,</strong></p><p>— drag to reorder a block, or click <strong>+</strong> to add one below.</p><p>On an empty line, press <strong>/</strong> to open the slash command menu.</p><blockquote>Try <em>/heading</em>, <em>/quote</em>, <em>/code</em>, <em>/table</em> or <em>/image</em>.</blockquote><p></p>`;
 
 const presetDefs: { id: string; tKey: string; tip?: string; value?: string; options: SunEditorType.InitOptions }[] = [
 	{
