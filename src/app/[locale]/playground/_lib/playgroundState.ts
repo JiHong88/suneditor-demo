@@ -1,4 +1,5 @@
-import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, FULL_BUTTON_LIST, PLAYGROUND_VALUE } from "@/data/snippets/editorPresets";
+import { BASIC_BUTTON_LIST, STANDARD_BUTTON_LIST, PLAYGROUND_VALUE } from "@/data/snippets/editorPresets";
+import { FullButtonList, DocumentButtonList } from "@/components/editor/buttonList";
 import { HEADER_HEIGHT } from "@/lib/constants";
 import { API_DOWNLOAD_PDF, API_UPLOAD_IMAGE, API_UPLOAD_VIDEO, API_UPLOAD_AUDIO, API_UPLOAD_FILE, API_GALLERY_IMAGE, API_GALLERY_VIDEO, API_GALLERY_AUDIO, API_GALLERY_FILE, API_GALLERY_BROWSE } from "@/data/snippets/apiEndpoints";
 import { OPTION_FIXED_FLAG, OPTION_FRAME_FIXED_FLAG } from "suneditor/src/core/schema/options.js";
@@ -1214,13 +1215,14 @@ function filterPageButtons(list: unknown[]): unknown[] {
 }
 
 export function getButtonList(preset: ButtonListPreset, type?: string, customButtonList?: string): unknown[] {
+	const isDocumentMode = type ? type.toLowerCase().includes("document") : false;
 	let list: unknown[];
 	switch (preset) {
 		case "basic":
 			list = BASIC_BUTTON_LIST;
 			break;
 		case "full":
-			list = FULL_BUTTON_LIST;
+			list = isDocumentMode ? DocumentButtonList : FullButtonList;
 			break;
 		case "custom":
 			try {
@@ -1235,11 +1237,8 @@ export function getButtonList(preset: ButtonListPreset, type?: string, customBut
 	}
 
 	// Remove page buttons when not in document mode (only for presets, not custom)
-	if (preset !== "custom") {
-		const isDocumentMode = type ? type.toLowerCase().includes("document") : false;
-		if (!isDocumentMode) {
-			list = filterPageButtons(list);
-		}
+	if (preset !== "custom" && !isDocumentMode) {
+		list = filterPageButtons(list);
 	}
 
 	return list;

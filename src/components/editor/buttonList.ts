@@ -1,166 +1,180 @@
 import type { SunEditor } from "suneditor/types";
 
-export const FullButtonList: SunEditor.UI.ButtonList = [
-	// ═══ Default (full width, 2 rows) ═══
-	// Row 1: Core editing tools
-	["undo", "redo"],
-	"|",
-	["blockStyle", "font", "fontSize"],
-	"|",
-	["bold", "underline", "italic", "strike", "subscript", "superscript"],
-	"|",
-	["fontColor", "backgroundColor"],
-	"|",
-	["removeFormat", "copyFormat", "textStyle"],
-	"/",
-	// Row 2: Content & utilities (less-used items in more-buttons)
-	[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-	["table", "link", "image"],
-	[":Insert-default.more_plus", "hr", "anchor", "math", "|", "template", "layout"],
-	[":Media-default.more_media", "drawing", "video", "audio", "embed", "fileUpload"],
-	[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-	"|",
-	["fullScreen", "showBlocks", "codeView"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
+/*
+ * Full toolbar layout rules
+ * - Max 2 rows ("/") at every breakpoint. Row 1: text & paragraph formatting / Row 2: insert & view.
+ * - Core buttons are never hidden: undo, redo, bold, italic, underline, list, link, image.
+ *   (align, table, fontColor stay visible down to 768px)
+ * - More buttons keep a fixed meaning across breakpoints — only their contents grow or shrink:
+ *   Text(more_text) · Paragraph(more_paragraph) · Insert(more_plus) · More(more_horizontal, view & document)
+ * - Breakpoints are compared with the editor width, not the viewport
+ *   (main demo ≈ 1020px → default, playground on xl screens ≈ 950px → %992).
+ * - "-right" modules float right, so the first one listed is the rightmost.
+ */
 
-	// ═══ ≤1200px (1 row, collapsed groups) ═══
-	[
-		"%1200",
+const GALLERIES = ["imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"];
+const DOC_ACTIONS = ["newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"];
+
+function createFullButtonList(withPages: boolean): SunEditor.UI.ButtonList {
+	const pageBreak = withPages ? ["pageBreak"] : [];
+	const pageNav = withPages ? ["pageNavigator", "pageUp", "pageDown", "|"] : [];
+
+	return [
+		// ═══ Default (≥992px, 2 rows, 3 more buttons) ═══
+		// Row 1: Text & paragraph formatting
+		["undo", "redo"],
+		"|",
+		["blockStyle", "font", "fontSize"],
+		"|",
+		["bold", "underline", "italic", "strike"],
+		"|",
+		["fontColor", "backgroundColor"],
+		"|",
+		["removeFormat"],
+		[":Text-default.more_text", "subscript", "superscript", "|", "copyFormat", "textStyle"],
+		"|",
+		["align", "list_numbered", "list_bulleted", "lineHeight"],
+		"|",
+		["outdent", "indent"],
+		"/",
+		// Row 2: Insert & view
+		["blockquote", "paragraphStyle", "codeBlock", "hr"],
+		"|",
+		["link", "image", "video", "table"],
+		"|",
+		["math", "drawing", "template", "layout"],
+		[":Insert-default.more_plus", "anchor", "audio", "embed", "fileUpload", "|", ...GALLERIES],
+		...(withPages ? ["|", ["pageBreak", "pageNavigator", "pageUp", "pageDown"]] : []),
+		["-right", ":More-default.more_horizontal", ...DOC_ACTIONS],
+		["-right", "showBlocks", "codeView", "markdownView", "fullScreen"],
+
+		// ═══ ≤992px (2 rows, 4 more buttons) ═══
 		[
-			["undo", "redo"],
-			"|",
-			["blockStyle", "font", "fontSize"],
-			"|",
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
-			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			"|",
-			["fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			"%992",
+			[
+				["undo", "redo"],
+				"|",
+				["blockStyle", "font", "fontSize"],
+				"|",
+				["bold", "underline", "italic", "strike"],
+				"|",
+				["fontColor", "backgroundColor"],
+				"|",
+				["removeFormat"],
+				[":Text-default.more_text", "subscript", "superscript", "|", "copyFormat", "textStyle"],
+				"/",
+				["align", "list_numbered", "list_bulleted"],
+				"|",
+				["outdent", "indent"],
+				[":Paragraph-default.more_paragraph", "lineHeight", "|", "blockquote", "paragraphStyle"],
+				"|",
+				["link", "image", "video", "table"],
+				"|",
+				["codeBlock", "math", ...pageBreak],
+				[":Insert-default.more_plus", "hr", "anchor", "|", "drawing", "audio", "embed", "fileUpload", "|", "template", "layout", "|", ...GALLERIES],
+				["-right", ":More-default.more_horizontal", "showBlocks", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+				["-right", "codeView", "fullScreen"],
+			],
 		],
-	],
 
-	// ═══ ≤992px (1 row, aggressive collapse) ═══
-	[
-		"%992",
+		// ═══ ≤768px (tablet, 2 rows) ═══
 		[
-			["undo", "redo"],
-			"|",
-			["blockStyle", "font", "fontSize"],
-			"|",
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
-			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			"%768",
+			[
+				["undo", "redo"],
+				"|",
+				["blockStyle", "fontSize"],
+				"|",
+				["bold", "underline", "italic", "strike"],
+				"|",
+				["fontColor", "backgroundColor"],
+				[":Text-default.more_text", "font", "|", "subscript", "superscript", "|", "removeFormat", "copyFormat", "textStyle"],
+				"/",
+				["align", "list_numbered", "list_bulleted"],
+				[":Paragraph-default.more_paragraph", "outdent", "indent", "lineHeight", "|", "blockquote", "paragraphStyle"],
+				"|",
+				["link", "image", "table"],
+				[
+					":Insert-default.more_plus",
+					"video",
+					"hr",
+					"codeBlock",
+					"math",
+					"anchor",
+					...pageBreak,
+					"|",
+					"drawing",
+					"audio",
+					"embed",
+					"fileUpload",
+					"|",
+					"template",
+					"layout",
+					"|",
+					...GALLERIES,
+				],
+				["-right", ":More-default.more_horizontal", "showBlocks", "codeView", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+				["-right", "fullScreen"],
+			],
 		],
-	],
 
-	// ═══ ≤768px (tablet) ═══
-	[
-		"%768",
+		// ═══ ≤576px (mobile, 2 rows) ═══
 		[
-			["undo", "redo"],
-			"|",
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_list", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
+			"%576",
+			[
+				["undo", "redo"],
+				"|",
+				["bold", "underline", "italic"],
+				"|",
+				["link", "image"],
+				"/",
+				["list_bulleted"],
+				"|",
+				["fontColor"],
+				[
+					":Text-default.more_text",
+					"blockStyle",
+					"font",
+					"fontSize",
+					"|",
+					"strike",
+					"subscript",
+					"superscript",
+					"|",
+					"backgroundColor",
+					"removeFormat",
+					"copyFormat",
+					"textStyle",
+				],
+				[":Paragraph-default.more_paragraph", "list_numbered", "align", "|", "outdent", "indent", "lineHeight", "|", "blockquote", "paragraphStyle"],
+				[
+					":Insert-default.more_plus",
+					"table",
+					"video",
+					"|",
+					"hr",
+					"codeBlock",
+					"math",
+					"anchor",
+					...pageBreak,
+					"|",
+					"drawing",
+					"audio",
+					"embed",
+					"fileUpload",
+					"|",
+					"template",
+					"layout",
+					"|",
+					...GALLERIES,
+				],
+				["-right", ":More-default.more_horizontal", "fullScreen", "showBlocks", "codeView", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+			],
 		],
-	],
+	];
+}
 
-	// ═══ ≤576px (mobile) ═══
-	[
-		"%576",
-		[
-			["undo", "redo"],
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
-		],
-	],
-];
+export const FullButtonList: SunEditor.UI.ButtonList = createFullButtonList(false);
 
-/** Document mode — FullButtonList + page navigation buttons */
-export const DocumentButtonList: SunEditor.UI.ButtonList = [
-	// Row 1: same as Full
-	["undo", "redo"],
-	"|",
-	["blockStyle", "font", "fontSize"],
-	"|",
-	["bold", "underline", "italic", "strike", "subscript", "superscript"],
-	"|",
-	["fontColor", "backgroundColor"],
-	"|",
-	["removeFormat", "copyFormat", "textStyle"],
-	"/",
-	// Row 2: same as Full + page navigation
-	[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-	["table", "link", "image"],
-	[":Insert-default.more_plus", "hr", "anchor", "math", "|", "template", "layout"],
-	[":Media-default.more_media", "drawing", "video", "audio", "embed", "fileUpload"],
-	[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-	"|",
-	["fullScreen", "showBlocks", "codeView"],
-	["pageBreak", "pageNavigator", "pageUp", "pageDown"],
-	[":More-default.more_view", "codeBlock", "markdownView", "|", "newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"],
-
-	// ≤992px
-	[
-		"%992",
-		[
-			["undo", "redo"],
-			"|",
-			["blockStyle", "font", "fontSize"],
-			"|",
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_paragraph", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload"],
-			[":Gallery-default.more_gallery", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			"|",
-			["pageBreak", "pageNavigator", "pageUp", "pageDown"],
-			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
-		],
-	],
-
-	// ≤768px
-	[
-		"%768",
-		[
-			["undo", "redo"],
-			"|",
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Paragraph-default.more_list", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":Pages-default.more_page", "pageBreak", "pageNavigator", "pageUp", "pageDown"],
-			["-right", ":View-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView"],
-			["-right", ":Docs-default.more_horizontal", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
-		],
-	],
-
-	// ≤576px
-	[
-		"%576",
-		[
-			["undo", "redo"],
-			[":Format-default.more_paragraph", "blockStyle", "font", "fontSize", "|", "blockquote", "paragraphStyle", "|", "align", "list_numbered", "list_bulleted", "|", "outdent", "indent", "lineHeight"],
-			[":Text-default.more_text", "bold", "underline", "italic", "strike", "subscript", "superscript", "|", "fontColor", "backgroundColor", "|", "removeFormat", "copyFormat", "textStyle"],
-			[":Insert-default.more_plus", "table", "hr", "link", "anchor", "math", "|", "template", "layout"],
-			[":Media-default.more_media", "image", "drawing", "video", "audio", "embed", "fileUpload", "|", "imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"],
-			["-right", ":More-default.more_view", "fullScreen", "showBlocks", "codeBlock", "codeView", "markdownView", "|", "pageBreak", "pageNavigator", "pageUp", "pageDown", "|", "newDocument", "selectAll", "save", "copy", "preview", "print", "exportPDF"],
-		],
-	],
-];
+/** Document mode — FullButtonList + page buttons (pageBreak, pageNavigator, pageUp, pageDown) */
+export const DocumentButtonList: SunEditor.UI.ButtonList = createFullButtonList(true);
