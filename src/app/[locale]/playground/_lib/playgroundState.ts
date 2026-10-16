@@ -1804,8 +1804,29 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.fileBrowser_expand !== 1) fbr.expand = state.fileBrowser_expand;
 	if (Object.keys(fbr).length) opts.fileBrowser = fbr;
 
+	// SunEditor instantiates every registered plugin, so these warn at creation even when their
+	// button is not on the toolbar. Fill demo values only for off-toolbar plugins — a visible
+	// button with a missing option should still warn.
+	const onToolbar = collectButtonNames([
+		...(opts.buttonList as unknown[]),
+		...(((opts.subToolbar as Record<string, unknown> | undefined)?.buttonList as unknown[] | undefined) ?? []),
+	]);
+	for (const [plugin, [key, value]] of Object.entries(OFF_TOOLBAR_REQUIRED_OPTIONS)) {
+		if (onToolbar.has(plugin)) continue;
+		const current = (opts[plugin] as Record<string, unknown> | undefined) ?? {};
+		if (!current[key]) opts[plugin] = { ...current, [key]: value };
+	}
+
 	return opts;
 }
+
+/** Plugins that warn at creation without these options: plugin → [option key, demo value] */
+const OFF_TOOLBAR_REQUIRED_OPTIONS: Record<string, [string, unknown]> = {
+	exportPDF: ["apiUrl", API_DOWNLOAD_PDF],
+	fileUpload: ["uploadUrl", API_UPLOAD_FILE],
+	template: ["items", JSON.parse(ITEM_PRESETS.template_items)],
+	layout: ["items", JSON.parse(ITEM_PRESETS.layout_items)],
+};
 
 /* ── Per-root frame options for multiroot ──────────────── */
 

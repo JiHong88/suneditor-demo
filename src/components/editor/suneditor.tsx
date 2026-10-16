@@ -87,7 +87,8 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp,
 
 	if (!langReady) return <EditorPlaceholder />;
 
-	return <Editor value={value} options={finalOptions} theme={themeProp ?? autoTheme} onInstance={onInstance} toolbarContainerRef={toolbarContainerRef} statusbarContainerRef={statusbarContainerRef} />;
+	// `lang` is a fixed option in SunEditor (resetOptions ignores it), so a locale change remounts the editor
+	return <Editor key={autoLangCode} value={value} options={finalOptions} theme={themeProp ?? autoTheme} onInstance={onInstance} toolbarContainerRef={toolbarContainerRef} statusbarContainerRef={statusbarContainerRef} />;
 };
 
 export default SunEditor;

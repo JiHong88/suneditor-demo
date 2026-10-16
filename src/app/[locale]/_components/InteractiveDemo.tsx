@@ -14,12 +14,29 @@ import {
 	API_GALLERY_AUDIO,
 	API_GALLERY_FILE,
 	API_GALLERY_BROWSE,
+	API_UPLOAD_FILE,
 } from "@/data/snippets/apiEndpoints";
 
-// Demo backend wiring so the full-toolbar presets have working PDF export and
-// gallery/browser buttons (same endpoints the playground uses).
+// Demo backend wiring so the full-toolbar presets have working PDF export, file upload,
+// template/layout and gallery/browser buttons (same endpoints the playground uses).
+// SunEditor instantiates every plugin, so missing options warn even on presets without the button.
 const demoApiOptions: SunEditorType.InitOptions = {
 	exportPDF: { apiUrl: API_DOWNLOAD_PDF },
+	fileUpload: { uploadUrl: API_UPLOAD_FILE },
+	template: {
+		items: [
+			{ name: "Meeting notes", html: "<h3>Meeting notes</h3><p><strong>Date:</strong> </p><p><strong>Attendees:</strong> </p><h4>Action items</h4><ul><li></li></ul>" },
+			{ name: "Blog post", html: "<h2>Title</h2><p><em>Summary in one sentence.</em></p><p>Body…</p>" },
+		],
+	},
+	layout: {
+		items: [
+			{
+				name: "Two columns",
+				html: '<div style="display:flex;gap:1em"><div style="flex:1"><p>Left</p></div><div style="flex:1"><p>Right</p></div></div>',
+			},
+		],
+	},
 	imageGallery: { url: API_GALLERY_IMAGE },
 	videoGallery: { url: API_GALLERY_VIDEO },
 	audioGallery: { url: API_GALLERY_AUDIO },
@@ -28,7 +45,7 @@ const demoApiOptions: SunEditorType.InitOptions = {
 };
 
 const subButtonList = [
-	["bold", "underline", "italic", "strike", "subscript", "superscript"],
+	["bold", "italic", "underline", "strike", "subscript", "superscript"],
 	"|",
 	["fontColor", "backgroundColor"],
 ];
@@ -38,7 +55,7 @@ const inlineButtonList = [
 	"|",
 	["blockStyle", "font", "fontSize"],
 	"|",
-	["bold", "underline", "italic", "strike"],
+	["bold", "italic", "underline", "strike"],
 	"|",
 	["fontColor", "backgroundColor"],
 	"|",
@@ -52,7 +69,7 @@ const inlineButtonList = [
 ];
 
 const balloonButtonList = [
-	["bold", "underline", "italic", "strike"],
+	["bold", "italic", "underline", "strike"],
 	"|",
 	["fontColor", "backgroundColor"],
 	"|",
@@ -115,7 +132,7 @@ const presetDefs: { id: string; tKey: string; tip?: string; value?: string; opti
 	{
 		id: "bottom",
 		tKey: "bottom",
-		options: { mode: "classic:bottom", subToolbar: { mode: "balloon", buttonList: subButtonList } },
+		options: { mode: "classic:bottom", statusbar: false, subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "inline",
@@ -167,10 +184,12 @@ export default function InteractiveDemo() {
 	const t = useTranslations("Home.InteractiveDemo");
 	const [activePreset, setActivePreset] = useState("classic");
 	const [em, setEm] = useState<any>(null);
+	const [katex, setKatex] = useState<unknown>(null);
 	const preset = presetDefs.find((p) => p.id === activePreset)!;
 
 	useEffect(() => {
 		import("../plugin-guide/_examples/embed").then((mod) => setEm(() => mod.default));
+		Promise.all([import("katex"), import("katex/dist/katex.min.css")]).then(([mod]) => setKatex(() => mod.default));
 	}, []);
 
 	return (
@@ -207,7 +226,13 @@ export default function InteractiveDemo() {
 					))}
 				</div>
 				<div style={{ minHeight: 258 }}>
-					<SunEditor key={activePreset} value={preset.value ?? sampleValue} options={{ ...demoApiOptions, ...preset.options }} />
+					{katex ? (
+						<SunEditor
+							key={activePreset}
+							value={preset.value ?? sampleValue}
+							options={{ ...demoApiOptions, externalLibs: { katex: { src: katex } }, ...preset.options }}
+						/>
+					) : null}
 				</div>
 			</motion.div>
 		</section>
