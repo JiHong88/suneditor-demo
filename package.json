@@ -13,6 +13,7 @@
     "check": "npm run lint && npm run lint:type",
     "snippets:generate": "node scripts/generate-framework-snippets.cjs",
     "docs:generate": "node scripts/generate-api-docs.cjs",
+    "search:generate": "node --no-warnings scripts/generate-search-index.mjs",
     "docs:translate": "node scripts/translate-api-docs.cjs && node scripts/translate-option-desc.cjs",
     "docs:translate2": "cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-api-docs-v2.cjs && cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-option-desc-v2.cjs",
     "messages:translate": "cross-env GOOGLE_APPLICATION_CREDENTIALS=./.env/google-api-service-account.json node scripts/translate-messages-v2.cjs",

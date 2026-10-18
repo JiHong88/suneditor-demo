@@ -73,7 +73,8 @@ The generated documentation is consumed by the `/docs-api` page, which provides:
 When SunEditor is updated:
 1. Run `npm install suneditor@latest`
 2. Run `npm run docs:generate`
-3. The docs will automatically reflect the new version
+3. Run `npm run search:generate` (site search index — `__tests__/data/searchIndex.test.ts` fails if it is stale)
+4. The docs will automatically reflect the new version
 
 ## Example Output Structure
 

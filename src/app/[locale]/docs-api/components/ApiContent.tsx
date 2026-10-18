@@ -36,7 +36,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
     const text =
       type === "sig"
         ? `${prefix}${method.name}(${method.params})`
-        : `${window.location.origin}${window.location.pathname}#${methodId}`;
+        : `${window.location.origin}${window.location.pathname}${window.location.search}#${methodId}`;
     navigator.clipboard.writeText(text);
     setCopied(type);
     setTimeout(() => setCopied(null), 2000);

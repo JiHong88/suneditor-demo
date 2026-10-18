@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavA } from "@/components/nav/navA";
 import { NavDropdown, type NavDropdownLink } from "@/components/nav/navDropdown";
+import { SiteSearch } from "@/components/search/SiteSearch";
 import { useTranslations, useLocale } from "next-intl";
 import { getDir } from "@/i18n/lang";
 import { useOverflowNav } from "@/hooks/useOverflowNav";
@@ -209,6 +210,7 @@ export function SiteNav() {
 								)}
 							</div>
 						</nav>
+						<SiteSearch />
 					</div>
 
 					{/* Mobile nav */}
@@ -232,16 +234,19 @@ export function SiteNav() {
 							/>
 						</Link>
 
-						<Button
-							variant='outline'
-							size='icon'
-							aria-label='Toggle menu'
-							aria-expanded={openMobile}
-							aria-controls='mobile-nav'
-							onClick={() => setOpenMobile((v) => !v)}
-						>
-							<Menu className='size-4' />
-						</Button>
+						<div className='flex items-center gap-2'>
+							<SiteSearch variant='mobile' />
+							<Button
+								variant='outline'
+								size='icon'
+								aria-label='Toggle menu'
+								aria-expanded={openMobile}
+								aria-controls='mobile-nav'
+								onClick={() => setOpenMobile((v) => !v)}
+							>
+								<Menu className='size-4' />
+							</Button>
+						</div>
 					</div>
 				</div>
 

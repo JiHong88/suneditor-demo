@@ -236,7 +236,18 @@ export function buildSearchIndex(apiDocs: ApiDocs): SearchableItem[] {
     }
   }
 
+  // Anchor ids must match the DOM ids rendered by ApiContent (`${prefix}${name}`), otherwise
+  // search results and copied permalinks can't scroll to the item. Types use `type-<Name>` (TypesContent).
+  for (const item of items) {
+    if (item.kind !== "type") item.id = apiAnchorId(item.prefix, item.name);
+  }
+
   return items;
+}
+
+/** DOM id of a method/getter card — keep in sync with ApiContent. */
+export function apiAnchorId(prefix: string, name: string) {
+  return `${prefix}${name}`.replace(/\.$/, "");
 }
 
 export function searchApi(query: string, items: SearchableItem[]): SearchableItem[] {

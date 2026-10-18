@@ -22,7 +22,7 @@ function TypeCard({ type }: { type: TypeDefinition }) {
 
   const handlePermalink = () => {
     window.history.replaceState(null, "", `#${typeId}`);
-    const url = `${window.location.origin}${window.location.pathname}#${typeId}`;
+    const url = `${window.location.origin}${window.location.pathname}${window.location.search}#${typeId}`;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

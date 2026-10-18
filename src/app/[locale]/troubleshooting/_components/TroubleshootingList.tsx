@@ -81,6 +81,19 @@ export default function TroubleshootingList({ items, categories, labels, version
 	const [userAgent, setUserAgent] = useState("");
 	useEffect(() => setUserAgent(navigator.userAgent), []);
 
+	// Site search (⌘K) may jump to an item on this page — clear filters that would hide it.
+	useEffect(() => {
+		const onHash = () => {
+			const id = decodeURIComponent(window.location.hash.slice(1));
+			if (!items.some((it) => it.id === id)) return;
+			setQuery("");
+			setCategory("all");
+			requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+		};
+		window.addEventListener("hashchange", onHash);
+		return () => window.removeEventListener("hashchange", onHash);
+	}, [items]);
+
 	const visible = useMemo(() => {
 		const q = query.trim().toLowerCase();
 		return items.filter((it) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
-import { Search, X, Command } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import ApiSidebar from "./components/ApiSidebar";
@@ -35,6 +35,22 @@ async function loadApiDocs(locale: string): Promise<ApiDocs> {
 	}
 }
 const sidebarItems = buildSidebarItems(apiDocsEn);
+
+/** Scroll to an item once its section has rendered (large sections like Types can take a few frames). */
+function scrollToWhenReady(id: string, onDone?: () => void) {
+	let frames = 0;
+	const tick = () => {
+		const el = document.getElementById(id);
+		if (el) {
+			el.scrollIntoView({ behavior: "smooth", block: "start" });
+			onDone?.();
+		} else if (++frames < 120) {
+			requestAnimationFrame(tick);
+		}
+	};
+	// Let the section switch commit first
+	setTimeout(tick, 100);
+}
 const searchIndex = buildSearchIndex(apiDocsEn);
 
 export default function DocsApiPage() {
@@ -72,35 +88,36 @@ export default function DocsApiPage() {
 		}
 	}, [locale]);
 
-	// Restore selection from URL on mount
+	// Restore selection from URL — on mount, and on hashchange (site search ⌘K navigating within this page)
 	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		const sParam = params.get("s");
-		const hash = window.location.hash.slice(1);
+		const restore = () => {
+			const sParam = new URLSearchParams(window.location.search).get("s");
+			const hash = decodeURIComponent(window.location.hash.slice(1));
 
-		if (hash) {
-			// Find which section contains this item
-			const item = searchIndex.find((i) => i.id === hash);
-			if (item) {
-				setSelectedId(item.sectionId);
-				requestAnimationFrame(() => {
-					setTimeout(() => {
-						document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
-					}, 100);
-				});
-				return;
+			if (hash) {
+				// Find which section contains this item (prefer the section named in ?s=)
+				const matches = searchIndex.filter((i) => i.id === hash);
+				const item = matches.find((i) => i.sectionId === (sParam ?? "editor")) ?? matches[0];
+				if (item) {
+					setSelectedId(item.sectionId);
+					scrollToWhenReady(hash);
+					return;
+				}
 			}
-		}
 
-		if (sParam) {
-			setSelectedId(sParam);
-		}
+			setSelectedId(sParam ?? "editor");
+		};
+		restore();
+		window.addEventListener("hashchange", restore);
+		return () => window.removeEventListener("hashchange", restore);
 	}, []);
 
-	// Cmd+K shortcut
+	// "/" focuses this page's search (⌘K opens the site-wide search)
 	useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
-			if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+			const target = e.target as HTMLElement | null;
+			const typing = target?.isContentEditable || target?.tagName === "INPUT" || target?.tagName === "TEXTAREA";
+			if (e.key === "/" && !typing && !e.metaKey && !e.ctrlKey) {
 				e.preventDefault();
 				searchInputRef.current?.focus();
 			}
@@ -156,13 +173,10 @@ export default function DocsApiPage() {
 		setSelectedId(sectionId);
 		setSearchQuery("");
 		updateUrl(sectionId, itemId);
-		requestAnimationFrame(() => {
-			setTimeout(() => {
-				document.getElementById(itemId)?.scrollIntoView({ behavior: "smooth", block: "start" });
-				// Scroll sidebar to show the selected section
-				const sidebarEl = sidebarRef.current?.querySelector(`[data-sidebar-id="${sectionId}"]`);
-				sidebarEl?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-			}, 150);
+		scrollToWhenReady(itemId, () => {
+			// Scroll sidebar to show the selected section
+			const sidebarEl = sidebarRef.current?.querySelector(`[data-sidebar-id="${sectionId}"]`);
+			sidebarEl?.scrollIntoView({ behavior: "smooth", block: "nearest" });
 		});
 	}, [updateUrl]);
 
@@ -207,9 +221,7 @@ export default function DocsApiPage() {
 										<X className='h-4 w-4' />
 									</button>
 								) : (
-									<kbd className='hidden md:flex items-center gap-0.5 text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded border'>
-										<Command className='h-2.5 w-2.5' />K
-									</kbd>
+									<kbd className='hidden md:flex items-center text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded border'>/</kbd>
 								)}
 							</div>
 						</div>

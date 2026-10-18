@@ -554,11 +554,13 @@ playground URL은 단축키 기반. `playgroundState.ts`의 `PARAM_MAP`에서 �
 | `option-descriptions.{en,ko,ar}.json` | docs 스크립트 + 번역 | 옵션 설명 |
 | `.api-docs-hashes.json` | docs 스크립트 | 번역 변경 감지용 해시 |
 | `plugin-guide--examples/_generated.ts` | `scripts/generate-framework-snippets.cjs` | 플러그인 예제 코드 |
+| `src/data/search/search-index.<locale>.json` | `scripts/generate-search-index.mjs` | 사이트 검색(⌘K) 인덱스 — API·옵션. 위 두 파일이 바뀌면 재생성 (테스트가 낡은 인덱스를 잡음) |
 
 **실행 명령:**
 ```bash
 npm run docs:generate    # API 문서 재생성
 npm run docs:translate   # 번역 업데이트
+npm run search:generate  # ⌘K 검색 인덱스 재생성 (docs 생성·번역 후)
 npm run build:prod       # 전체 빌드 (docs + next build)
 ```
 
