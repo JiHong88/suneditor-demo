@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getCodeFramework, hexToRgba, type FrameworkKey } from "@/components/common/codeExampleFrameworks";
 import CodeBlock from "@/components/common/CodeBlock";
 import FrameworkBadge from "./FrameworkBadge";
+import TroubleshootingHint from "@/components/common/TroubleshootingHint";
 import SectionHeading from "./SectionHeading";
 import { getRenderSnippet } from "@/data/snippets/renderSnippets";
 
@@ -59,6 +60,7 @@ export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>{tc("copied")}</span>}
 				</div>
 			</div>
+			<TroubleshootingHint ids={["contents", "stripped"]} className='mt-6' />
 		</section>
 	);
 }

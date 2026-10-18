@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Search, Copy, Check, AlertTriangle, Trash2, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import TroubleshootingHint from "@/components/common/TroubleshootingHint";
 import { OPTION_MAP, BUTTON_MAP, EVENT_MAP } from "@/data/v2-to-v3-options";
 
 type ConvertedLine = {
@@ -171,6 +172,7 @@ export default function MigrationPage() {
 					<h1 className='text-4xl font-bold tracking-tight md:text-5xl'>{t("title")}</h1>
 					<p className='mt-4 text-lg text-muted-foreground'>{t("subtitle")}</p>
 				</motion.div>
+				<TroubleshootingHint ids={["v2", "contentApi"]} className='mx-auto mt-8 max-w-3xl' />
 			</section>
 
 			<div className='container mx-auto px-6 pb-20'>

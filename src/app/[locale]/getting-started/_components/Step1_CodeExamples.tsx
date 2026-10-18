@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import CodeExamples from "@/components/common/CodeExamples";
 import { type FrameworkKey } from "@/components/common/codeExampleFrameworks";
+import TroubleshootingHint from "@/components/common/TroubleshootingHint";
 import SectionHeading from "./SectionHeading";
 import FrameworkBadge from "./FrameworkBadge";
 
@@ -21,6 +22,7 @@ export default function StepOneCodeExamples({ framework, onFrameworkChange }: St
 			<div className='mt-6'>
 				<CodeExamples compact framework={framework} onFrameworkChange={onFrameworkChange} />
 			</div>
+			<TroubleshootingHint ids={["ssr", "css", "plugin", "strictMode"]} className='mt-6' />
 		</section>
 	);
 }

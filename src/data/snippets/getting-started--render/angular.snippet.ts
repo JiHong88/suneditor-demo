@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 // 1. CSS import (add to angular.json styles)
-// "styles": ["node_modules/suneditor/dist/css/suneditor.min.css",
-//             "node_modules/suneditor/dist/css/suneditor-contents.min.css"]
+// "styles": ["node_modules/suneditor/dist/suneditor.min.css",
+//             "node_modules/suneditor/dist/suneditor-contents.min.css"]
 
 // 2. sun-editor-editable Wrap with class
 @Component({

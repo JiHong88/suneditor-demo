@@ -19,13 +19,13 @@ const path = require("path");
 
 const CODE_EXAMPLES_DIR = path.join(__dirname, "../src/data/snippets");
 
-/* ── 동적 값 (editorPresets.ts와 동기화) ──────────── */
-const versionPath = path.join(__dirname, "../src/store/version.ts");
-const versionContent = fs.readFileSync(versionPath, "utf-8");
-const VERSION = versionContent.match(/SUNEDITOR_VERSION\s*=\s*["']([^"']+)["']/)?.[1] || "3.0.0";
+/* ── 동적 값 (src/store/version.ts와 동기화) ──────────── */
+// version.ts의 SUNEDITOR_VERSION은 api-docs.en.json의 version을 쓴다 → 같은 출처에서 읽는다
+const VERSION = require("../src/data/api/api-docs.en.json").version;
+if (!VERSION) throw new Error("api-docs.en.json has no version");
 const CDN_BASE = `https://cdn.jsdelivr.net/npm/suneditor@${VERSION}/dist`;
-const CDN_CSS = `${CDN_BASE}/css/suneditor.min.css`;
-const CDN_CONTENTS_CSS = `${CDN_BASE}/css/suneditor-contents.min.css`;
+const CDN_CSS = `${CDN_BASE}/suneditor.min.css`;
+const CDN_CONTENTS_CSS = `${CDN_BASE}/suneditor-contents.min.css`;
 const CDN_JS = `${CDN_BASE}/suneditor.min.js`;
 const DEFAULT_VALUE = "<p>Hello SunEditor</p>";
 

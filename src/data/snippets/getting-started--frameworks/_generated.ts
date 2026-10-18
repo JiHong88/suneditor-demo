@@ -38,9 +38,9 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
 }`;
 
 export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
-<link href="https://cdn.jsdelivr.net/npm/suneditor@3.0.0/dist/css/suneditor.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/suneditor@3.3.3/dist/suneditor.min.css" rel="stylesheet">
 <!-- 2. Include JS -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@3.0.0/dist/suneditor.min.js"><\\/script>
+<script src="https://cdn.jsdelivr.net/npm/suneditor@3.3.3/dist/suneditor.min.js"><\\/script>
 
 <!-- 3. Create Textarea -->
 <textarea id="my-editor"></textarea>
@@ -60,7 +60,7 @@ export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
   });
 <\\/script>`;
 
-export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.0.0
+export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.3.3
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";

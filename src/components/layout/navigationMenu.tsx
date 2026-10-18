@@ -3,17 +3,23 @@
 import * as React from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Menu, Ellipsis } from "lucide-react";
+import { Menu, Ellipsis, Layers, LifeBuoy, ArrowRightLeft, SlidersHorizontal, Braces } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavA } from "@/components/nav/navA";
+import { NavDropdown, type NavDropdownLink } from "@/components/nav/navDropdown";
 import { useTranslations, useLocale } from "next-intl";
 import { getDir } from "@/i18n/lang";
 import { useOverflowNav } from "@/hooks/useOverflowNav";
 
 const navLinkClass =
 	"relative block rounded-sm px-1.5 xl:px-3 py-2 text-xs xl:text-sm whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
+
+type NavGroup = { id: string; label: string; links: NavDropdownLink[] };
+type NavItem = { label: string; href: string } | NavGroup;
+
+const isGroup = (it: NavItem): it is NavGroup => "links" in it;
 
 function getLastPathSegment(url: string) {
 	const clean = url.split("?")[0].split("#")[0];
@@ -23,16 +29,33 @@ function getLastPathSegment(url: string) {
 
 export function SiteNav() {
 	const t = useTranslations("Main.Menus");
+	const t_groups = useTranslations("Main.MenuGroups");
+	const t_short = useTranslations("Main.MenuShort");
+	const t_desc = useTranslations("Main.MenuDesc");
 	const locale = useLocale();
 	const dir = getDir(locale);
-	const items = [
+	const items: NavItem[] = [
 		{ label: t("getting-started"), href: "/getting-started" },
 		{ label: t("feature-demo"), href: "/feature-demo" },
 		{ label: t("playground"), href: "/playground" },
-		{ label: t("plugin-guide"), href: "/plugin-guide" },
-		{ label: t("deep-dive"), href: "/deep-dive" },
-		{ label: t("options"), href: "/options" },
-		{ label: t("docs-api"), href: "/docs-api" },
+		{ label: t_short("plugin-guide"), href: "/plugin-guide" },
+		{
+			id: "guides",
+			label: t_groups("guides"),
+			links: [
+				{ label: t("deep-dive"), href: "/deep-dive", desc: t_desc("deep-dive"), icon: Layers },
+				{ label: t("troubleshooting"), href: "/troubleshooting", desc: t_desc("troubleshooting"), icon: LifeBuoy },
+				{ label: t("migration"), href: "/migration", desc: t_desc("migration"), icon: ArrowRightLeft },
+			],
+		},
+		{
+			id: "reference",
+			label: t_groups("reference"),
+			links: [
+				{ label: t("options"), href: "/options", desc: t_desc("options"), icon: SlidersHorizontal },
+				{ label: t("docs-api"), href: "/docs-api", desc: t_desc("docs-api"), icon: Braces },
+			],
+		},
 	];
 
 	const pathname = usePathname();
@@ -51,10 +74,13 @@ export function SiteNav() {
 
 	// 모바일 드롭다운 상태
 	const [openMobile, setOpenMobile] = React.useState(false);
+	// 그룹 드롭다운 (한 번에 하나만 열림)
+	const [openGroup, setOpenGroup] = React.useState<string | null>(null);
 
 	// 라우트 바뀌면 자동으로 닫기
 	React.useEffect(() => {
 		setOpenMobile(false);
+		setOpenGroup(null);
 	}, [pathname]);
 
 	// Priority+ overflow
@@ -108,14 +134,25 @@ export function SiteNav() {
 						>
 							{items.map((it, i) => (
 								<div
-									key={it.href}
+									key={isGroup(it) ? it.id : it.href}
 									ref={setItemRef(i)}
 									className={cn(i >= visibleCount && "invisible absolute")}
 									aria-hidden={i >= visibleCount || undefined}
 								>
-									<NavA href={it.href} active={isActive(it.href)}>
-										{it.label}
-									</NavA>
+									{isGroup(it) ? (
+										<NavDropdown
+											label={it.label}
+											links={it.links}
+											open={openGroup === it.id}
+											onOpenChange={(open) => setOpenGroup((cur) => (open ? it.id : cur === it.id ? null : cur))}
+											isActive={isActive}
+											dir={dir}
+										/>
+									) : (
+										<NavA href={it.href} active={isActive(it.href)}>
+											{it.label}
+										</NavA>
+									)}
 								</div>
 							))}
 
@@ -138,17 +175,22 @@ export function SiteNav() {
 											dir === "rtl" ? "left-0" : "right-0",
 										)}
 									>
-										{overflowItems.map((it) => (
-											<NavA
-												key={it.href}
-												href={it.href}
-												active={isActive(it.href)}
-												underlineOrigin='left'
-												className='py-2'
-											>
-												{it.label}
-											</NavA>
-										))}
+										{overflowItems.map((it) =>
+											isGroup(it) ? (
+												<div key={it.id} className='mt-1 border-t pt-1 first:mt-0 first:border-t-0 first:pt-0'>
+													<div className='px-3 pb-0.5 pt-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>{it.label}</div>
+													{it.links.map((l) => (
+														<NavA key={l.href} href={l.href} active={isActive(l.href)} underlineOrigin='left' className='py-2'>
+															{l.label}
+														</NavA>
+													))}
+												</div>
+											) : (
+												<NavA key={it.href} href={it.href} active={isActive(it.href)} underlineOrigin='left' className='py-2'>
+													{it.label}
+												</NavA>
+											),
+										)}
 									</div>
 								)}
 							</div>
@@ -198,11 +240,22 @@ export function SiteNav() {
 					)}
 				>
 					<nav className='px-4 py-2'>
-						{items.map((it) => (
-							<NavA key={it.label} href={it.href} active={isActive(it.href)} className='py-3'>
-								{it.label}
-							</NavA>
-						))}
+						{items.map((it) =>
+							isGroup(it) ? (
+								<div key={it.id} className='mt-2 border-t pt-2'>
+									<div className='px-3 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>{it.label}</div>
+									{it.links.map((l) => (
+										<NavA key={l.href} href={l.href} active={isActive(l.href)} className='py-3'>
+											{l.label}
+										</NavA>
+									))}
+								</div>
+							) : (
+								<NavA key={it.href} href={it.href} active={isActive(it.href)} className='py-3'>
+									{it.label}
+								</NavA>
+							),
+						)}
 					</nav>
 				</div>
 			</header>
