@@ -50,7 +50,7 @@ gh api repos/JiHong88/SunEditor/releases --jq '.[] | "\(.tag_name)\n\(.body)\n--
 
 | 유형                   | 키워드                                   | 데모 사이트 반영 방법                                            |
 | ---------------------- | ---------------------------------------- | ---------------------------------------------------------------- |
-| **Breaking Change**    | `⚠️ Breaking`, rename, removed, replaced | 최우선 처리. `.editor-guide/DEMO-UPDATE-GUIDE.md` 의 Step 3 참조 |
+| **Breaking Change**    | `⚠️ Breaking`, rename, removed, replaced | 최우선 처리. `docs/DEMO-UPDATE-GUIDE.md` 의 Step 3 참조 |
 | **New Option**         | new option, added                        | playground state/controls/codeGenerator에 추가                   |
 | **New Plugin**         | new plugin                               | 버튼 + 옵션 + 기능데모 전부 추가                                 |
 | **Default Change**     | default changed                          | DEFAULTS 값만 수정                                               |
@@ -109,7 +109,7 @@ Breaking changes가 있으면 **반드시 먼저 처리**한다.
 
 ### 5. 새 옵션/기능 추가
 
-`.editor-guide/DEMO-UPDATE-GUIDE.md`의 시나리오별 체크리스트를 따른다:
+`docs/DEMO-UPDATE-GUIDE.md`의 시나리오별 체크리스트를 따른다:
 
 - 시나리오 A: 새 기능 추가
 - 시나리오 B: 새 에디터 옵션 추가
@@ -122,36 +122,33 @@ Breaking changes가 있으면 **반드시 먼저 처리**한다.
 npm test                # integrity 테스트로 누락 감지
 ```
 
-### 7. 가이드 문서 업데이트
+### 7. 가이드 문서 / Deep Dive 링크 동기화
 
-변경사항이 가이드 문서에 영향을 주면 함께 수정:
+에디터 문서(`GUIDE.md`, `ARCHITECTURE.md`, `guide/*`, `prompts/*`)는 **이 저장소에 복사하지 않는다.** 원본은 에디터 저장소에만 있고,
+Deep Dive 페이지는 GitHub raw `master`에서 런타임에 받아 렌더링한다. 이 단계에서 할 일은 두 가지다:
 
-- `.editor-guide/GUIDE.md` — 플러그인 목록, 디렉토리 구조 등
-- `.editor-guide/DEMO-UPDATE-GUIDE.md` — 예시, 파일 목록 등
+- `docs/DEMO-UPDATE-GUIDE.md` — 이번 업데이트로 데모 쪽 파일 목록/예시가 바뀌었으면 갱신
+- 에디터 `GUIDE.md`가 링크하는 md 목록과 데모의 `GUIDE_FILES` 레지스트리 동기화 (아래)
 
-**⚠️ 링크된 하위 md 파일도 반드시 함께 점검한다.**
-
-`GUIDE.md` 및 `DEMO-UPDATE-GUIDE.md`는 다른 md 파일들을 링크로 참조한다 (예: `./ARCHITECTURE.md`, `./guide/custom-plugin.md`, `./guide/external-libraries.md`, `./guide/typedef-guide.md` 등). 이 파일들은 시간이 지나면서 **새로 생기거나, 이름이 바뀌거나, 삭제**될 수 있다. 단순히 GUIDE.md만 수정하면 링크된 파일 내용이 stale 해지는 일이 잦으니 다음을 반드시 수행:
-
-1. **링크 추출 및 존재 여부 검증** — GUIDE.md / DEMO-UPDATE-GUIDE.md 내 모든 상대경로 md 링크를 추출해 실제 파일 존재 여부를 확인한다:
+1. **링크 추출** — 로컬 에디터 저장소(`../suneditor`) 기준. 사이트도 `master`를 렌더링하므로 기준이 같다:
 
    ```bash
-   # GUIDE.md/DEMO-UPDATE-GUIDE.md가 참조하는 md 파일 목록 추출
-   grep -oE '\([^)]+\.md\)' .editor-guide/GUIDE.md .editor-guide/DEMO-UPDATE-GUIDE.md \
-     | sed -E 's/[():]//g' | sort -u
+   # 에디터 GUIDE.md가 링크하는 md 파일 (기준 목록)
+   grep -oE '\]\(\./[^)#]+\.md' ../suneditor/GUIDE.md | sed -E 's/\]\(\.\///' | sort -u
 
-   # 실제 존재하는 .editor-guide 내 md 파일 목록
-   find .editor-guide -name "*.md" -type f
+   # 데모가 렌더링하도록 등록한 파일
+   grep -oE '"[^"]+\.md"' src/lib/git/githubMarkdown.ts | tr -d '"' | sort -u
    ```
 
+   `../suneditor`가 없으면 GitHub raw로 받는다:
+   `curl -s https://raw.githubusercontent.com/JiHong88/SunEditor/master/GUIDE.md`
+
 2. **불일치 처리:**
-   - 링크는 있는데 **파일이 없으면** → 실제로 필요한 문서인지 판단하여 생성하거나, 링크를 제거한다.
-   - 파일은 있는데 **링크가 없으면** → GUIDE.md에 색인으로 추가한다.
-   - 이번 업데이트로 **삭제된 기능**의 가이드 파일이 있으면 함께 제거하고 링크도 정리한다.
+   - 링크는 있는데 **`GUIDE_FILES`에 없으면** → 공개 문서로 노출할 대상인지 판단해 등록한다. 에이전트 하네스 파일(`.agents/`, `.claude/` 등)은 등록하지 않는다.
+   - `GUIDE_FILES`에 있는데 **에디터 저장소에서 삭제/이름 변경**됐으면 → 갱신 또는 제거한다.
+   - 링크된 문서 본문 자체는 수정 대상이 아니다 (에디터 저장소에서 관리).
 
-3. **링크된 문서 본문 점검** — 새 옵션/플러그인이 추가됐거나 Breaking Change가 있었다면, 링크된 하위 md 파일(특히 custom-plugin.md, typedef-guide.md, external-libraries.md 등) 내부도 갱신 대상이다. 단순히 GUIDE.md만 보지 말고 **링크 타고 들어가서 내용까지 검토**한다.
-
-4. **⚠️ 데모 사이트 렌더링 레지스트리 동기화 (500 에러 방지)** — 데모의 Deep Dive 가이드 페이지(`/deep-dive/guide/*`)는 GitHub raw에서 md를 받아 렌더링한다. **GUIDE.md에서 링크로 참조되는 md 파일은 반드시 아래 두 곳에 등록**되어야 하며, 누락되면 링크 클릭 시 500/notFound가 발생한다:
+3. **⚠️ 데모 사이트 렌더링 레지스트리 동기화 (500 에러 방지)** — **GUIDE.md에서 링크로 참조되는 md 파일은 반드시 아래 두 곳에 등록**되어야 하며, 누락되면 링크 클릭 시 500/notFound가 발생한다:
 
    - `src/lib/git/githubMarkdown.ts` → `GUIDE_FILES` 맵에 `slug → GitHub 파일 경로` 추가 (예: `"coding-rules": "prompts/coding-rules.md"`). slug은 URL 세그먼트(`/deep-dive/guide/coding-rules`)가 된다.
    - `src/app/[locale]/deep-dive/guide/[...slug]/page.tsx` → `TITLES` 맵에 동일 slug의 표시용 제목 추가.
@@ -160,7 +157,7 @@ npm test                # integrity 테스트로 누락 감지
 
    검증 체크리스트:
 
-   - [ ] Step 7-1에서 추출한 링크 대상 md 파일이 전부 `GUIDE_FILES`에 있는가? (`grep -oE '\([^)]+\.md' .editor-guide/GUIDE.md` 결과와 `GUIDE_FILES` 값 비교)
+   - [ ] Step 7-1에서 추출한 링크 대상 md 파일이 전부 `GUIDE_FILES`에 있는가? (하네스 파일 제외)
    - [ ] 새로 등록한 slug이 `TITLES`에도 있는가?
    - [ ] 등록한 GitHub 경로가 실제로 존재하는가? (`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/JiHong88/SunEditor/master/<경로>` → 200)
    - [ ] 파일이 rename/삭제됐다면 `GUIDE_FILES`/`TITLES`에서도 함께 갱신/제거했는가?

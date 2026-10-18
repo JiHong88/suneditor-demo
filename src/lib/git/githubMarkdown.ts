@@ -11,6 +11,9 @@ export const GUIDE_FILES: Record<string, string> = {
 	"commit-types": "guide/commit-types.md",
 	"coding-rules": "prompts/coding-rules.md",
 	"editing-rules": "prompts/editing-rules.md",
+	testing: "guide/testing.md",
+	"changes-guide": "prompts/changes-guide.md",
+	"performance-guide": "prompts/performance-guide.md",
 };
 
 /** generateStaticParams 용 slug 배열 (빈 문자열 = index) */

@@ -17,6 +17,8 @@ const TITLES: Record<string, string> = {
 	"commit-types": "Commit Types",
 	"coding-rules": "Coding Rules",
 	"editing-rules": "Editing Rules",
+	testing: "Testing",
+	"performance-guide": "Performance Guide",
 };
 
 type Props = {
