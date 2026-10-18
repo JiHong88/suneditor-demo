@@ -36,13 +36,15 @@
 			"playground": "操场",
 			"about": "关于",
 			"license": "本作品采用 MIT 许可证。",
-			"copyright": "© 版权所有 {year} SunEditor 贡献者"
+			"copyright": "© 版权所有 {year} SunEditor 贡献者",
+			"troubleshooting": "故障排查"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "一个用原生 JavaScript 编写的轻量级且功能强大的所见即所得编辑器。",
-			"tagline": "一次安装，所有配件齐全。"
+			"title": "模块化、零运行时依赖的所见即所得 HTML 编辑器。",
+			"tagline": "一应俱全，按需启用。",
+			"trust": "MIT 许可证 · 无需云服务 · 无需注册账号"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "零依赖",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "立即尝试",
 			"desc": "免费开源。请参阅文档或在 GitHub 上贡献代码。"
+		},
+		"Faq": {
+			"title": "SunEditor 一览",
+			"desc": "开发者在选择编辑器前最常问的问题，这里给出简明解答。",
+			"items": {
+				"commercial": {
+					"q": "SunEditor 可以免费用于商业用途吗？",
+					"a": "可以。SunEditor 基于 MIT 许可证发布。您可以将其用于商业产品、SaaS 和内部工具，也可以修改和自行托管。只需在副本中保留版权声明和许可声明。无需许可证密钥、无需账号，也不按加载次数收费。"
+				},
+				"dependencies": {
+					"q": "SunEditor 有依赖项吗？",
+					"a": "没有。suneditor 包没有任何运行时依赖。KaTeX 或 MathJax（数学公式）、CodeMirror（代码视图）等可选集成仅在您启用时才会使用。"
+				},
+				"frameworks": {
+					"q": "它支持哪些框架？",
+					"a": "SunEditor 是纯 JavaScript 实现，只要有浏览器就能运行：通过 npm 或 CDN 使用原生 JS，以及 React、Vue、Angular、Svelte 和 Web Components。包中已内置 TypeScript 类型定义。"
+				},
+				"features": {
+					"q": "开箱即用包含哪些功能？",
+					"a": "支持单元格合并与拆分的表格，图片、视频、音频和文件上传，链接、数学公式、代码块、Markdown 视图、绘图、模板与布局、斜杠命令和块手柄——共 30 多个插件，另有 25 种以上语言包和 RTL 支持。所有插件都包含在同一个包中——通过 plugins 选项只启用你需要的插件。"
+				},
+				"cloud": {
+					"q": "需要云服务或账号吗？",
+					"a": "不需要。编辑器完全在浏览器中运行，不会将您的内容发送到任何外部服务。上传的文件会发送到您自己服务器上的接口，通过 uploadUrl 选项进行设置。"
+				},
+				"output": {
+					"q": "它输出什么格式？",
+					"a": "标准 HTML。如需以与编辑器相同的样式显示已保存的内容，请导入 suneditor/css/contents，并将 HTML 包裹在带有 sun-editor-editable 类的元素中。"
+				}
+			},
+			"licenseLink": "阅读许可证摘要",
+			"troubleshootingLink": "故障排查指南"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "上传处理函数会接管上传响应——挂上日志记录器会导致上传的媒体无法插入——因此检查器不会处理它们："
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "您的上传服务器必须返回此格式的 JSON。SunEditor 以 multipart/form-data 格式发送文件，字段名称为 'file-0'、'file-1' 等。",
 			"serverExample": "Express.js 示例",
 			"customUploadHandler": "自定义上传处理程序",
-			"customHandlerDesc": "使用您自己的逻辑覆盖内置的 XHR 上传功能。返回 true 以告知 SunEditor 您已处理响应。",
+			"customHandlerDesc": "当你的上传 API 返回不同的响应格式时，请使用 imageUploadHandler。请求仍由 SunEditor 发送；定义该处理函数后，它会接收已完成的请求并决定插入什么——内置的插入将被跳过。",
+			"customHandlerDirectLink": "改为直接上传到 S3 等存储",
 			"validation": "上传验证",
 			"validationDesc": "使用 *UploadBefore 事件可以在文件发送到服务器之前对其进行验证或修改。适用于所有媒体类型。",
 			"errors": "错误处理",
@@ -746,5 +781,139 @@
 		"pluginOptions": "插件选项",
 		"perFrame": "逐帧",
 		"perFrameHint": "在多根模式下，这些选项可以针对每个根单独配置。"
+	},
+	"License": {
+		"title": "MIT 许可证",
+		"subtitle": "SunEditor 免费且开源。可用于个人和商业项目，无需付费、无需许可证密钥、无需账号。",
+		"updated": "最后更新：{date}",
+		"allowedTitle": "您可以做什么",
+		"allowed": {
+			"commercial": "用于商业产品和 SaaS",
+			"internal": "用于内部和企业级应用",
+			"selfHost": "自行托管——无需云服务或账号",
+			"modify": "修改源代码并编写自己的插件",
+			"distribute": "随您的应用一起打包和再分发",
+			"noFee": "不按编辑器加载次数收费，无席位限制，无需许可证密钥"
+		},
+		"obligationsTitle": "您需要做什么",
+		"obligations": "在软件的所有副本或主要部分中包含版权声明和 MIT 许可证全文。",
+		"warrantyTitle": "无担保",
+		"warranty": "本软件按“原样”提供，不附带任何形式的担保。对于因使用本软件而产生的任何索赔或损害，作者概不负责。",
+		"thirdPartyTitle": "可选的第三方库",
+		"thirdParty": "SunEditor 本身没有运行时依赖。如果您启用了某项可选集成，该库将受其自身许可证的约束：",
+		"fullTextTitle": "许可证全文",
+		"disclaimer": "本页面是通俗易懂的摘要，不构成法律建议。以下许可证文本才具有法律效力。",
+		"viewOnGitHub": "在 GitHub 上查看 LICENSE",
+		"tryPlayground": "在 Playground 中试用 SunEditor"
+	},
+	"Troubleshooting": {
+		"title": "故障排查",
+		"subtitle": "在应用中集成 SunEditor 时，开发者最常遇到的问题及其解决方法。",
+		"verified": "已基于 SunEditor {version} 验证",
+		"contents": "本页内容",
+		"searchLabel": "搜索问题",
+		"searchPlaceholder": "按错误信息或症状搜索",
+		"all": "全部",
+		"categories": {
+			"setup": "安装配置",
+			"styling": "样式",
+			"content": "内容",
+			"upload": "上传",
+			"migration": "迁移"
+		},
+		"noResults": "没有匹配的问题。请尝试换个关键词，或在下方提交 issue。",
+		"symptom": "症状",
+		"cause": "原因",
+		"fix": "解决方法",
+		"helpful": "这解决了您的问题吗？",
+		"yes": "是",
+		"no": "否",
+		"thanks": "感谢您的反馈！",
+		"stillStuck": "很抱歉没能帮到您。",
+		"openPrefilledIssue": "提交已预填环境信息的 issue",
+		"notListed": "没有找到您遇到的问题？",
+		"notListedDesc": "请搜索现有的 issue，或新建一个 issue 并附上可复现问题的 Playground 链接。",
+		"openIssue": "在 GitHub 上提交 issue",
+		"tryPlayground": "在 Playground 中复现",
+		"items": {
+			"ssr": {
+				"title": "服务端渲染时出现“window is not defined”",
+				"symptom": "构建或服务端渲染失败，报错 ReferenceError: window is not defined（Next.js、Nuxt、SvelteKit、Remix）。",
+				"cause": "SunEditor 在模块被导入时就会访问 window、document 和 navigator，因此无法在服务端导入。",
+				"fix": "仅在浏览器中导入并创建编辑器。在 Next.js App Router 中，将编辑器放在客户端组件里，并通过 next/dynamic 配合 ssr: false 加载。在 Nuxt 中用 ClientOnly 包裹；在 SvelteKit 中在 onMount 内导入。"
+			},
+			"plugin": {
+				"title": "错误：“The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create 抛出 [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "buttonList 中的某个名称引用了未通过 plugins 选项传入的插件。",
+				"fix": "传入全部插件，或者只导入工具栏用到的插件并将其传入。"
+			},
+			"target": {
+				"title": "错误：“Cannot find target element”或“The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create 抛出 [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element，或 [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "创建编辑器时目标元素还不存在——选择器没有匹配到任何元素，或者 ref 仍为 null。",
+				"fix": "在组件挂载后（useEffect、onMounted、ngAfterViewInit、onMount）再创建编辑器，并直接传入元素本身而不是选择器。"
+			},
+			"strictMode": {
+				"title": "在 React 开发模式下编辑器被创建了两次",
+				"symptom": "开发环境中工具栏重复出现，或编辑器在挂载时闪烁。",
+				"cause": "React StrictMode 会将副作用运行两次（挂载、卸载、再挂载）。如果没有清理函数，第二次运行会再创建一个实例。",
+				"fix": "在副作用中返回一个调用 destroy() 的清理函数。入门示例中使用的就是这种模式。"
+			},
+			"css": {
+				"title": "编辑器显示时没有样式",
+				"symptom": "工具栏显示为无样式的列表，图标或下拉菜单位置错乱。",
+				"cause": "样式表与 JavaScript 是分开提供的，且尚未加载。",
+				"fix": "在应用中导入一次 suneditor/css/editor，并导入 suneditor/css/contents 作为内容样式。如果使用 CDN 构建，请添加样式表的 link 标签。"
+			},
+			"contents": {
+				"title": "保存的 HTML 在编辑器外显示效果不同",
+				"symptom": "编辑时内容显示正常，但在展示页面上丢失了间距、表格边框或对齐方式。",
+				"cause": "内容样式位于单独的样式表中，且作用范围限定在 sun-editor-editable 类下。",
+				"fix": "在展示页面导入 suneditor/css/contents，并将 HTML 包裹在带有 sun-editor-editable 类的元素中。渲染不可信的 HTML 之前，请先在服务端进行清理。"
+			},
+			"stripped": {
+				"title": "内容中的标签、属性或样式消失了",
+				"symptom": "通过 value 选项或 editor.$.html.set() 设置的 HTML，或粘贴进来的 HTML，丢失了部分标签（如 mark）、类名、data-* 属性或内联样式。",
+				"cause": "SunEditor 会根据元素、属性、类名和各标签样式的允许列表过滤所有传入的 HTML，并移除不在列表中的内容。没有任何样式的 span 会被解除包裹。",
+				"fix": "扩展所需的允许列表：标签用 elementWhitelist，属性用 attributeWhitelist，类名用 allowedClassName，内联样式用 tagStyles。也可以通过 strictMode 选项关闭单个过滤器。切勿允许 script 标签或 on* 事件属性。"
+			},
+			"paste": {
+				"title": "粘贴的内容丢失格式，或带入了不需要的样式",
+				"symptom": "从 Word、Google Docs 或网页粘贴的内容与原文显示不同——或者您只想接受纯文本。",
+				"cause": "粘贴的 HTML 与其他内容一样会经过相同的过滤。先清理 Word 和 Google Docs 的标记，再移除允许列表之外的标签、属性和样式。",
+				"fix": "用 tagStyles 允许需要保留的样式（参见上一节）。如需自行控制粘贴，请使用 onPaste 事件：它会收到清理后的 HTML（data）及其来源（from：MS、GOOGLE、SE 或空）。返回字符串可替换粘贴的内容，返回 false 则取消粘贴。"
+			},
+			"value": {
+				"title": "修改 value 属性后编辑器没有更新",
+				"symptom": "您在 state 中设置了新的 HTML，但编辑器仍显示旧内容。",
+				"cause": "value 选项只在创建编辑器时读取一次。",
+				"fix": "调用 editor.$.html.set(html) 替换内容，并监听 onChange 事件读取编辑结果。不要在 onChange 内部把内容写回编辑器——这会造成更新循环并导致光标跳动。"
+			},
+			"upload": {
+				"title": "图片被保存为巨大的 base64 字符串，或上传后图片未被插入",
+				"symptom": "保存的 HTML 中包含很长的 data:image/... 字符串，或者上传请求成功了却没有显示图片。",
+				"cause": "未设置 image.uploadUrl 时，图片会以 base64 形式嵌入。设置后，服务器响应必须符合 SunEditor 期望的格式。",
+				"fix": "设置 image.uploadUrl，并返回包含 result 数组（含 url、name 和 size）的 JSON。如需报告失败，请返回 errorMessage。如果您的 API 返回的结构不同，请在 imageUploadHandler 事件中进行转换。"
+			},
+			"customUpload": {
+				"title": "直接上传到 S3 或其他存储（预签名 URL）",
+				"symptom": "文件需要上传到 S3、Cloudinary 或其他存储服务，单一的 image.uploadUrl 端点无法满足需求。",
+				"cause": "image.uploadUrl 会将文件 POST 到同一个端点，并要求响应符合 SunEditor 的格式。",
+				"fix": "在 onImageUploadBefore 事件中处理上传：自行上传每个文件，用 $.plugins.image.submitURL(url) 插入，并返回 false 让 SunEditor 跳过自身的上传。submitURL 会在设置了 info.url 的情况下再次触发同一事件——请放行这次调用。"
+			},
+			"contentApi": {
+				"title": "“editor.getContents is not a function”",
+				"symptom": "为 v2 编写的代码抛出 TypeError: editor.getContents is not a function（setContents、appendContents、insertHTML 也同样如此）。",
+				"cause": "在 v3 中，内容相关方法移到了 $.html 模块，其他 v2 实例方法也移到了 $.ui 等模块中。",
+				"fix": "请使用下方对应的 v3 方法。选项和事件请使用迁移页面中的转换器。"
+			},
+			"v2": {
+				"title": "升级后 v2 的选项不再生效",
+				"symptom": "迁移到 v3 后，部分选项、按钮或事件不起作用。",
+				"cause": "v3 重命名或移动了许多选项——例如，上传相关选项现在嵌套在插件名称之下（image.uploadUrl）。",
+				"fix": "将您的 v2 选项粘贴到迁移页面的转换器中，即可获得对应的 v3 选项。"
+			}
+		}
 	}
 }

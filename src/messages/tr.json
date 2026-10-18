@@ -36,13 +36,15 @@
 			"playground": "Oyun alanı",
 			"about": "Hakkında",
 			"license": "MIT lisansı altındadır.",
-			"copyright": "© Telif Hakkı {year} SunEditor Katkıda Bulunanları"
+			"copyright": "© Telif Hakkı {year} SunEditor Katkıda Bulunanları",
+			"troubleshooting": "Sorun Giderme"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Saf JavaScript ile yazılmış, hafif ve güçlü bir WYSIWYG editörü.",
-			"tagline": "Tek kurulum. Her şey dahil."
+			"title": "Çalışma zamanı bağımlılığı olmayan, modüler bir WYSIWYG HTML editörü.",
+			"tagline": "Her şey dahil. Yalnızca ihtiyacınız olanı etkinleştirin.",
+			"trust": "MIT lisanslı · Bulut yok · Hesap gerekmez"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Sıfır Bağımlılık",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Şimdi deneyin",
 			"desc": "Ücretsiz ve açık kaynak kodlu. Belgeleri inceleyin veya GitHub üzerinden katkıda bulunun."
+		},
+		"Faq": {
+			"title": "Bir bakışta SunEditor",
+			"desc": "Geliştiricilerin bir editör seçmeden önce sorduğu sorulara kısa yanıtlar.",
+			"items": {
+				"commercial": {
+					"q": "SunEditor ticari kullanım için ücretsiz mi?",
+					"a": "Evet. SunEditor, MIT Lisansı altında yayımlanır. Ticari ürünlerde, SaaS hizmetlerinde ve dahili araçlarda kullanabilir, değiştirebilir ve kendi sunucunuzda barındırabilirsiniz. Kopyalarınızda telif hakkı ve lisans bildirimini koruyun. Lisans anahtarı, hesap veya yükleme başına ücret yoktur."
+				},
+				"dependencies": {
+					"q": "SunEditor'ın bağımlılıkları var mı?",
+					"a": "Hayır. suneditor paketinin hiçbir çalışma zamanı bağımlılığı yoktur. KaTeX veya MathJax (matematik) ve CodeMirror (kod görünümü) gibi isteğe bağlı entegrasyonlar yalnızca siz etkinleştirirseniz kullanılır."
+				},
+				"frameworks": {
+					"q": "Hangi framework'lerle çalışır?",
+					"a": "SunEditor saf JavaScript ile yazıldığından tarayıcının çalıştığı her yerde çalışır: npm veya CDN üzerinden vanilla JS, React, Vue, Angular, Svelte ve Web Components. TypeScript tür tanımları pakete dahildir."
+				},
+				"features": {
+					"q": "Hazır olarak neler sunuyor?",
+					"a": "Hücre birleştirme ve bölme destekli tablolar, görsel, video, ses ve dosya yükleme, bağlantılar, matematik, kod blokları, Markdown görünümü, çizim, şablonlar ve düzenler, eğik çizgi komutları ve blok tutamaçları — toplamda 30'dan fazla eklenti, ayrıca 25'ten fazla dil paketi ve RTL desteği. Tüm eklentiler tek bir pakette gelir — plugins seçeneğiyle yalnızca ihtiyacınız olanları etkinleştirin."
+				},
+				"cloud": {
+					"q": "Bulut hizmeti veya hesap gerektiriyor mu?",
+					"a": "Hayır. Editör tamamen tarayıcıda çalışır ve içeriğinizi hiçbir harici hizmete göndermez. Yüklemeler, uploadUrl seçeneğiyle belirlediğiniz kendi sunucunuzdaki bir uç noktaya gönderilir."
+				},
+				"output": {
+					"q": "Hangi formatta çıktı üretir?",
+					"a": "Standart HTML. Kaydedilen içeriği editördekiyle aynı stillerle görüntülemek için suneditor/css/contents dosyasını içe aktarın ve HTML'i sun-editor-editable sınıfına sahip bir öğeyle sarın."
+				}
+			},
+			"licenseLink": "Lisans özetini okuyun",
+			"troubleshootingLink": "Sorun giderme kılavuzu"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Yükleme işleyicileri yükleme yanıtını devralır — bir kaydedici eklemek yüklenen medyanın eklenmesini engeller — bu yüzden denetçi bunlara dokunmaz:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Yükleme sunucunuz bu formatta JSON döndürmelidir. SunEditor dosyaları 'file-0', 'file-1' vb. alan adlarıyla multipart/form-data olarak gönderir.",
 			"serverExample": "Express.js Örneği",
 			"customUploadHandler": "Özel Yükleme İşleyicisi",
-			"customHandlerDesc": "Yerleşik XHR yükleme işlemini kendi mantığınızla geçersiz kılın. Yanıtı işlediğinizi SunEditor'a bildirmek için true değerini döndürün.",
+			"customHandlerDesc": "Yükleme API'niz farklı bir yanıt biçimi döndürüyorsa imageUploadHandler kullanın. İsteği yine SunEditor gönderir; işleyici tanımlandığında tamamlanan isteği alır ve neyin ekleneceğine kendisi karar verir — yerleşik ekleme atlanır.",
+			"customHandlerDirectLink": "Bunun yerine doğrudan S3'e veya başka bir depolamaya yükleyin",
 			"validation": "Yükleme Doğrulama",
 			"validationDesc": "Dosyaların sunucuya gönderilmeden önce doğrulanması veya değiştirilmesi için *UploadBefore olaylarını kullanın. Tüm medya türleri için geçerlidir.",
 			"errors": "Hata Yönetimi",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Eklenti Seçenekleri",
 		"perFrame": "kare başına",
 		"perFrameHint": "Bu seçenekler, çoklu kök modunda her kök için ayrı ayrı yapılandırılabilir."
+	},
+	"License": {
+		"title": "MIT Lisansı",
+		"subtitle": "SunEditor ücretsiz ve açık kaynaklıdır. Kişisel ve ticari projelerinizde ücret, anahtar veya hesap olmadan kullanın.",
+		"updated": "Son güncelleme: {date}",
+		"allowedTitle": "Neler yapabilirsiniz",
+		"allowed": {
+			"commercial": "Ticari ürünlerde ve SaaS hizmetlerinde kullanın",
+			"internal": "Dahili ve kurumsal uygulamalarda kullanın",
+			"selfHost": "Kendi sunucunuzda barındırın — bulut hizmeti veya hesap gerekmez",
+			"modify": "Kaynak kodunu değiştirin ve kendi eklentilerinizi yazın",
+			"distribute": "Uygulamanızla birlikte paketleyip yeniden dağıtın",
+			"noFee": "Editör yükleme ücreti, kullanıcı sınırı veya lisans anahtarı yok"
+		},
+		"obligationsTitle": "Yapmanız gerekenler",
+		"obligations": "Yazılımın tüm kopyalarına veya önemli bölümlerine telif hakkı bildirimini ve MIT lisans metnini ekleyin.",
+		"warrantyTitle": "Garanti yok",
+		"warranty": "Yazılım, hiçbir türde garanti olmaksızın “olduğu gibi” sağlanır. Yazarlar, kullanımından doğan hiçbir talep veya zarardan sorumlu tutulamaz.",
+		"thirdPartyTitle": "İsteğe bağlı üçüncü taraf kütüphaneler",
+		"thirdParty": "SunEditor'ın kendisinin hiçbir çalışma zamanı bağımlılığı yoktur. İsteğe bağlı bir entegrasyonu etkinleştirirseniz, o kütüphane kendi lisansına tabidir:",
+		"fullTextTitle": "Lisansın tam metni",
+		"disclaimer": "Bu sayfa sade bir dille yazılmış bir özettir, hukuki tavsiye değildir. Geçerli olan, aşağıdaki lisans metnidir.",
+		"viewOnGitHub": "LICENSE dosyasını GitHub'da görüntüle",
+		"tryPlayground": "SunEditor'ı Oyun alanında deneyin"
+	},
+	"Troubleshooting": {
+		"title": "Sorun Giderme",
+		"subtitle": "SunEditor'ı bir uygulamaya eklerken geliştiricilerin en sık karşılaştığı sorunlar için çözümler.",
+		"verified": "SunEditor {version} ile doğrulandı",
+		"contents": "Bu sayfada",
+		"searchLabel": "Sorunlarda ara",
+		"searchPlaceholder": "Hata mesajına veya belirtiye göre arayın",
+		"all": "Tümü",
+		"categories": {
+			"setup": "Kurulum",
+			"styling": "Stiller",
+			"content": "İçerik",
+			"upload": "Yükleme",
+			"migration": "Geçiş"
+		},
+		"noResults": "Eşleşen sorun bulunamadı. Farklı kelimeler deneyin ya da aşağıdan bir sorun kaydı açın.",
+		"symptom": "Belirti",
+		"cause": "Neden",
+		"fix": "Çözüm",
+		"helpful": "Bu, sorununuzu çözdü mü?",
+		"yes": "Evet",
+		"no": "Hayır",
+		"thanks": "Geri bildiriminiz için teşekkürler!",
+		"stillStuck": "Bunun için üzgünüz.",
+		"openPrefilledIssue": "Ortam bilgileriniz önceden doldurulmuş bir sorun kaydı açın",
+		"notListed": "Sorununuz burada yok mu?",
+		"notListedDesc": "Mevcut sorun kayıtlarında arama yapın ya da sorunu yeniden oluşturan bir Oyun alanı bağlantısıyla yeni bir kayıt açın.",
+		"openIssue": "GitHub'da bir sorun bildirin",
+		"tryPlayground": "Oyun alanında yeniden oluşturun",
+		"items": {
+			"ssr": {
+				"title": "Sunucu tarafı işlemede “window is not defined” hatası",
+				"symptom": "Derleme veya sunucu tarafı işleme ReferenceError: window is not defined hatasıyla başarısız oluyor (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor, modül içe aktarılır aktarılmaz window, document ve navigator nesnelerini okur; bu yüzden sunucuda içe aktarılamaz.",
+				"fix": "Editörü yalnızca tarayıcıda içe aktarın ve oluşturun. Next.js App Router'da editörü bir istemci bileşenine koyun ve next/dynamic ile ssr: false kullanarak yükleyin. Nuxt'ta ClientOnly ile sarın; SvelteKit'te onMount içinde içe aktarın."
+			},
+			"plugin": {
+				"title": "Hata: “The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create şu hatayı fırlatıyor: [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "buttonList içindeki bir ad, plugins seçeneğine verilmemiş bir eklentiye işaret ediyor.",
+				"fix": "Tüm eklentileri verin ya da yalnızca araç çubuğunuzun kullandığı eklentileri içe aktarıp onları verin."
+			},
+			"target": {
+				"title": "Hata: “Cannot find target element” veya “The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create şu hatayı fırlatıyor: [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element ya da [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Editör oluşturulduğunda hedef öğe henüz mevcut değildi — seçici hiçbir öğeyle eşleşmedi ya da ref hâlâ null idi.",
+				"fix": "Editörü bileşen bağlandıktan sonra oluşturun (useEffect, onMounted, ngAfterViewInit, onMount) ve seçici yerine öğenin kendisini verin."
+			},
+			"strictMode": {
+				"title": "React geliştirme modunda editör iki kez oluşturuluyor",
+				"symptom": "Geliştirme ortamında araç çubuğu çift görünüyor veya editör bağlanırken titriyor.",
+				"cause": "React StrictMode efektleri iki kez çalıştırır (bağlama, ayırma, bağlama). Temizleme fonksiyonu olmadan ikinci çalıştırma yeni bir örnek oluşturur.",
+				"fix": "Efektten destroy() çağıran bir temizleme fonksiyonu döndürün. Başlarken bölümündeki örnekler bu kalıbı kullanır."
+			},
+			"css": {
+				"title": "Editör stiller olmadan görüntüleniyor",
+				"symptom": "Araç çubuğu stilsiz bir liste olarak görünüyor; simgeler veya açılır menüler yanlış yerde.",
+				"cause": "Stil dosyası JavaScript'ten ayrı olarak sunulur ve yüklenmemiştir.",
+				"fix": "Uygulamanızda suneditor/css/editor dosyasını bir kez içe aktarın; içerik stilleri için suneditor/css/contents dosyasını da ekleyin. CDN derlemesini kullanıyorsanız stil dosyası için link etiketlerini ekleyin."
+			},
+			"contents": {
+				"title": "Kaydedilen HTML editör dışında farklı görünüyor",
+				"symptom": "İçerik düzenlerken doğru görünüyor, ancak görüntülendiği sayfada boşlukları, tablo kenarlıklarını veya hizalamayı kaybediyor.",
+				"cause": "İçerik stilleri ayrı bir stil dosyasındadır ve sun-editor-editable sınıfıyla sınırlandırılmıştır.",
+				"fix": "Görüntüleme sayfasında suneditor/css/contents dosyasını içe aktarın ve HTML'i sun-editor-editable sınıfına sahip bir öğeyle sarın. Güvenilmeyen HTML'i görüntülemeden önce sunucuda temizleyin."
+			},
+			"stripped": {
+				"title": "Etiketler, öznitelikler veya stiller içerikten kayboluyor",
+				"symptom": "value seçeneğiyle veya editor.$.html.set() ile ayarlanan ya da yapıştırılan HTML, bazı etiketler (örneğin mark), sınıf adları, data-* öznitelikleri veya satır içi stiller olmadan geri geliyor.",
+				"cause": "SunEditor, gelen tüm HTML'i öğeler, öznitelikler, sınıf adları ve etiket bazında stiller için tanımlı izin listelerine göre filtreler ve bu listelerde olmayan her şeyi kaldırır. Hiç stili kalmayan bir span ise kaldırılır, içeriği korunur.",
+				"fix": "İhtiyacınız olan izin listesini genişletin: etiketler için elementWhitelist, öznitelikler için attributeWhitelist, sınıf adları için allowedClassName ve satır içi stiller için tagStyles. Filtreler tek tek strictMode seçeneğiyle de kapatılabilir. script etiketlerine veya on* olay özniteliklerine asla izin vermeyin."
+			},
+			"paste": {
+				"title": "Yapıştırılan içerik biçimlendirmesini kaybediyor veya istenmeyen stiller getiriyor",
+				"symptom": "Word, Google Docs veya bir web sayfasından yapıştırılan içerik kaynağından farklı görünüyor — ya da yalnızca düz metin kabul etmek istiyorsunuz.",
+				"cause": "Yapıştırılan HTML, diğer tüm içeriklerle aynı filtrelemeden geçer. Önce Word ve Google Docs işaretlemesi temizlenir, ardından izin listelerinin dışında kalan etiketler, öznitelikler ve stiller kaldırılır.",
+				"fix": "Korumak istediğiniz stillere tagStyles ile izin verin (önceki bölüme bakın). Yapıştırmayı kendiniz denetlemek için onPaste olayını kullanın: bu olay temizlenmiş HTML'i (data) ve kaynağını (from: MS, GOOGLE, SE veya boş) alır. Yapıştırılan içeriğin yerine geçecek bir dize ya da iptal etmek için false döndürün."
+			},
+			"value": {
+				"title": "value prop'unu değiştirmek editörü güncellemiyor",
+				"symptom": "State'e yeni HTML atıyorsunuz, ancak editör eski içeriği göstermeye devam ediyor.",
+				"cause": "value seçeneği yalnızca bir kez, editör oluşturulurken okunur.",
+				"fix": "İçeriği değiştirmek için editor.$.html.set(html) çağırın, düzenlemeleri okumak için onChange olayını dinleyin. İçeriği onChange içinden geri yazmayın — bu bir güncelleme döngüsü oluşturur ve imlecin yerini değiştirir."
+			},
+			"upload": {
+				"title": "Görseller devasa base64 dizeleri olarak kaydediliyor veya yüklenen görseller eklenmiyor",
+				"symptom": "Kaydedilen HTML uzun data:image/... dizeleri içeriyor ya da yükleme isteği başarılı olmasına rağmen görsel görünmüyor.",
+				"cause": "image.uploadUrl olmadan görseller base64 olarak gömülür. Ayarlandığında ise sunucu yanıtının SunEditor'ın beklediği formatla eşleşmesi gerekir.",
+				"fix": "image.uploadUrl ayarlayın ve url, name ve size alanlarından oluşan bir result dizisi içeren JSON döndürün. Hata bildirmek için errorMessage döndürün. API'niz farklı bir yapı döndürüyorsa, bunu imageUploadHandler olayında dönüştürün."
+			},
+			"customUpload": {
+				"title": "Doğrudan S3'e veya başka bir depolama alanına yükleme (önceden imzalanmış URL)",
+				"symptom": "Dosyaların S3, Cloudinary veya başka bir depolama hizmetine gitmesi gerekiyor; bu nedenle tek bir image.uploadUrl uç noktası işe yaramıyor.",
+				"cause": "image.uploadUrl dosyaları tek bir uç noktaya gönderir ve SunEditor'ın yanıt formatını bekler.",
+				"fix": "Yüklemeyi onImageUploadBefore olayında kendiniz yapın: her dosyayı kendiniz yükleyin, $.plugins.image.submitURL(url) ile ekleyin ve SunEditor'ın kendi yüklemesini atlaması için false döndürün. submitURL, info.url ayarlanmış olarak aynı olayı yeniden tetikler — bu çağrının geçmesine izin verin."
+			},
+			"contentApi": {
+				"title": "“editor.getContents is not a function”",
+				"symptom": "v2 için yazılmış kod TypeError: editor.getContents is not a function hatası fırlatıyor (veya setContents, appendContents, insertHTML için aynı hata).",
+				"cause": "v3'te içerik metotları $.html modülüne taşındı; diğer v2 örnek metotları da $.ui gibi modüllere taşındı.",
+				"fix": "Aşağıdaki v3 karşılıklarını kullanın. Seçenekler ve olaylar için Geçiş sayfasındaki dönüştürücüyü kullanın."
+			},
+			"v2": {
+				"title": "v2 seçenekleri yükseltmeden sonra çalışmıyor",
+				"symptom": "v3'e geçtikten sonra bazı seçenekler, düğmeler veya olaylar etkisiz kalıyor.",
+				"cause": "v3 birçok seçeneği yeniden adlandırdı veya taşıdı — örneğin yükleme seçenekleri artık eklenti adının altında yer alıyor (image.uploadUrl).",
+				"fix": "v3 karşılıklarını almak için v2 seçeneklerinizi Geçiş sayfasındaki dönüştürücüye yapıştırın."
+			}
+		}
 	}
 }

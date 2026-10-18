@@ -8,7 +8,7 @@
  *   UPLOAD_BASIC       → "업로드 옵션" 아코디언 > 4개 미디어 타입별 업로드 설정 코드
  *   SERVER_RESPONSE    → "서버 응답" 아코디언 > SunEditor가 기대하는 JSON 응답 포맷
  *   SERVER_EXPRESS     → "서버 응답" 아코디언 > Express.js 서버 예제 코드
- *   CUSTOM_HANDLER     → "커스텀 업로드 핸들러" 아코디언 > 내장 XHR 우회 직접 처리 코드
+ *   CUSTOM_HANDLER     → "커스텀 업로드 핸들러" 아코디언 > 내장 업로드 응답을 직접 처리 (응답 형식 매핑)
  *   UPLOAD_BEFORE      → "업로드 전 검증" 아코디언 > 파일 크기 검증/리사이즈 코드
  *   UPLOAD_ERROR       → "에러 처리" 아코디언 > 업로드 실패 시 커스텀 에러 메시지
  *   LIFECYCLE_TRACKING → "라이프사이클 추적" 아코디언 > 미디어 생성/수정/삭제 추적 코드
@@ -80,33 +80,29 @@ app.post('/api/upload/image', upload.array('file-0'), (req, res) => {
   res.json({ result: results });
 });`;
 
-/* ── 커스텀 핸들러: 내장 XHR 우회, fetch로 직접 업로드 ── */
-export const CUSTOM_HANDLER = `// Full custom upload handling (skip built-in XHR)
-editor.events.imageUploadHandler = async ({ $, xmlHttp, info }) => {
-  const formData = new FormData();
-  for (const file of info.files) {
-    formData.append('images', file);
+/* ── 커스텀 핸들러: 내장 업로드 응답을 직접 처리 (API 응답 형식이 다를 때) ── */
+export const CUSTOM_HANDLER = `// Your upload API returns a different shape, e.g. { files: [{ location: "https://..." }] }.
+// SunEditor still sends the files to image.uploadUrl (fields "file-0", "file-1", ...).
+// Once this handler is defined, it takes over the response — SunEditor no longer inserts the images itself.
+editor.$.eventManager.events.imageUploadHandler = async ({ $, xmlHttp, info }) => {
+  const data = JSON.parse(xmlHttp.responseText);
+
+  if (!data.files) {
+    $.ui.alertOpen(data.message || 'Upload failed', 'error');
+    return;
   }
 
-  const res = await fetch('/api/upload/image', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer xxx' },
-    body: formData,
-  });
-  const data = await res.json();
+  for (const file of data.files) {
+    await $.plugins.image.submitURL(file.location);
+  }
+};
 
-  // Insert images into editor
-  const result = {
-    result: data.urls.map(url => ({ url, name: '', size: 0 }))
-  };
-  $.image.register(result);
-
-  return true; // Tell SunEditor we handled it
-};`;
+// To skip the built-in request entirely (e.g. upload straight to S3),
+// upload in onImageUploadBefore instead — see Troubleshooting → "Uploading straight to S3".`;
 
 /* ── 업로드 전 검증: 파일 크기 체크, 리사이즈 후 계속 ── */
 export const UPLOAD_BEFORE = `// Validate & modify before upload
-editor.events.onImageUploadBefore = async ({ $, info, handler }) => {
+editor.$.eventManager.events.onImageUploadBefore = async ({ $, info, handler }) => {
   const file = info.files[0];
 
   // Size check
@@ -121,13 +117,13 @@ editor.events.onImageUploadBefore = async ({ $, info, handler }) => {
 };
 
 // Same pattern for video, audio, file:
-editor.events.onVideoUploadBefore = async ({ info }) => { /* ... */ };
-editor.events.onAudioUploadBefore = async ({ info }) => { /* ... */ };
-editor.events.onFileUploadBefore = async ({ info }) => { /* ... */ };`;
+editor.$.eventManager.events.onVideoUploadBefore = async ({ info }) => { /* ... */ };
+editor.$.eventManager.events.onAudioUploadBefore = async ({ info }) => { /* ... */ };
+editor.$.eventManager.events.onFileUploadBefore = async ({ info }) => { /* ... */ };`;
 
 /* ── 에러 처리: 업로드 실패 시 커스텀 에러 메시지 반환 ── */
 export const UPLOAD_ERROR = `// Custom error handling
-editor.events.onImageUploadError = async ({ error, limitSize, file }) => {
+editor.$.eventManager.events.onImageUploadError = async ({ error, limitSize, file }) => {
   if (limitSize) {
     return \`File is too large. Max: \${(limitSize / 1024 / 1024).toFixed(0)}MB\`;
   }
@@ -136,13 +132,13 @@ editor.events.onImageUploadError = async ({ error, limitSize, file }) => {
 };
 
 // Same for video, audio, file:
-editor.events.onVideoUploadError = async ({ error }) => { /* ... */ };
-editor.events.onAudioUploadError = async ({ error }) => { /* ... */ };
-editor.events.onFileUploadError = async ({ error }) => { /* ... */ };`;
+editor.$.eventManager.events.onVideoUploadError = async ({ error }) => { /* ... */ };
+editor.$.eventManager.events.onAudioUploadError = async ({ error }) => { /* ... */ };
+editor.$.eventManager.events.onFileUploadError = async ({ error }) => { /* ... */ };`;
 
 /* ── 라이프사이클: 미디어 생성/수정/삭제 추적 + 서버 정리 ── */
 export const LIFECYCLE_TRACKING = `// Track all media across the editor
-editor.events.onFileManagerAction = ({ info, element, state, pluginName }) => {
+editor.$.eventManager.events.onFileManagerAction = ({ info, element, state, pluginName }) => {
   switch (state) {
     case 'create':
       console.log(\`[\${pluginName}] Added: \${info.src}\`);
@@ -162,11 +158,11 @@ editor.events.onFileManagerAction = ({ info, element, state, pluginName }) => {
 };
 
 // Or track per media type:
-editor.events.onImageAction = ({ info, state }) => { /* image only */ };
-editor.events.onVideoAction = ({ info, state }) => { /* video only */ };
+editor.$.eventManager.events.onImageAction = ({ info, state }) => { /* image only */ };
+editor.$.eventManager.events.onVideoAction = ({ info, state }) => { /* video only */ };
 
 // Prevent deletion with confirmation
-editor.events.onImageDeleteBefore = async ({ url }) => {
+editor.$.eventManager.events.onImageDeleteBefore = async ({ url }) => {
   return confirm(\`Delete this image? \${url}\`);
 };`;
 

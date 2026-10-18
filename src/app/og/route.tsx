@@ -17,7 +17,7 @@ const LOGO_DATA_URI = (() => {
 export function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const title = (searchParams.get("title") ?? "SunEditor").slice(0, 90);
-	const desc = (searchParams.get("desc") ?? "Lightweight WYSIWYG Editor").slice(0, 160);
+	const desc = (searchParams.get("desc") ?? "Modular WYSIWYG HTML Editor").slice(0, 160);
 
 	return new ImageResponse(
 		(

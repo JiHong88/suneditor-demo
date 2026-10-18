@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import CodeBlock from "@/components/common/CodeBlock";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -138,6 +140,10 @@ export default function UploadGuideContent() {
 						<div className='rounded-lg border overflow-x-auto'>
 							<CodeBlock code={CUSTOM_HANDLER} lang='javascript' />
 						</div>
+						<Link href='/troubleshooting#customUpload' className='inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline'>
+							{t("customHandlerDirectLink")}
+							<ArrowRight className='h-3.5 w-3.5' />
+						</Link>
 					</AccordionContent>
 				</AccordionItem>
 

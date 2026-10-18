@@ -21,9 +21,9 @@ const SunEditorComponent = dynamic(() => import("@/components/editor/suneditor")
    ══════════════════════════════════════════════════════ */
 
 /**
- * Upload *handlers* replace the editor's own upload pipeline — the editor expects them to
- * perform the upload and report back. Attaching a passive logger would silently break uploads,
- * so the inspector never registers these (they stay in the reference table below).
+ * Upload *handlers* take over the upload response: once one is defined, the editor skips its own
+ * insertion of the uploaded media. Attaching a passive logger would silently stop uploads from
+ * being inserted, so the inspector never registers these (they stay in the reference table below).
  */
 const NEVER_ATTACH = new Set(["imageUploadHandler", "videoUploadHandler", "audioUploadHandler"]);
 

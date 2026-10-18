@@ -36,13 +36,15 @@
 			"playground": "Cihê lîstikê",
 			"about": "Ji dor",
 			"license": "Di bin MITê de lîsanskirî ye.",
-			"copyright": "© Mafên Kopîkirinê {year} Beşdarên SunEditor"
+			"copyright": "© Mafên Kopîkirinê {year} Beşdarên SunEditor",
+			"troubleshooting": "چارەسەرکردنی کێشەکان"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Edîtorek WYSIWYG-ê ya sivik û bihêz bi JavaScript-a vanilla.",
-			"tagline": "Yek sazkirin. Her tişt tê de ye."
+			"title": "ئێدیتۆرێکی WYSIWYG HTML ی مۆدیوولار، بێ هیچ پشتبەستنێک لە کاتی کارکردندا.",
+			"tagline": "هەموو شتێک تێدایە. تەنها ئەوەی پێویستتە چالاکی بکە.",
+			"trust": "مۆڵەتی MIT · بێ هەور · پێویستی بە هەژمار نییە"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Sifir Girêdayîbûn",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Niha biceribîne",
 			"desc": "Belaş û çavkaniya vekirî. Belgeyan bibînin an jî li ser GitHub beşdar bibin."
+		},
+		"Faq": {
+			"title": "SunEditor بە کورتی",
+			"desc": "وەڵامی کورت بۆ ئەو پرسیارانەی گەشەپێدەران پێش هەڵبژاردنی ئێدیتۆرێک دەیکەن.",
+			"items": {
+				"commercial": {
+					"q": "ئایا SunEditor بۆ بەکارهێنانی بازرگانی بەخۆڕاییە؟",
+					"a": "بەڵێ. SunEditor لەژێر مۆڵەتی MIT بڵاوکراوەتەوە. دەتوانیت لە بەرهەمە بازرگانییەکان، SaaS و ئامرازە ناوخۆییەکاندا بەکاری بهێنیت، دەستکاری بکەیت و لەسەر سێرڤەری خۆت دایبمەزرێنیت. ئاگادارنامەی مافی لەبەرگرتنەوە و مۆڵەتەکە لە کۆپییەکانتدا بهێڵەرەوە. هیچ کلیلی مۆڵەت، هەژمار یان کرێیەک بۆ هەر بارکردنێک نییە."
+				},
+				"dependencies": {
+					"q": "ئایا SunEditor پشتبەستنی (dependency) هەیە؟",
+					"a": "نەخێر. پاکێجی suneditor هیچ پشتبەستنێکی لە کاتی کارکردندا نییە. یەکخستنە ئارەزوومەندانەکانی وەک KaTeX یان MathJax (بیرکاری) و CodeMirror (پیشاندانی کۆد) تەنها ئەگەر چالاکیان بکەیت بەکاردێن."
+				},
+				"frameworks": {
+					"q": "لەگەڵ کام فرەیموۆرکەکاندا کار دەکات؟",
+					"a": "SunEditor بە JavaScript ی ڕووت نووسراوە، بۆیە لە هەر شوێنێک وێبگەڕ کار بکات ئەویش کار دەکات: vanilla JS لە ڕێگەی npm یان CDN، React، Vue، Angular، Svelte و Web Components. پێناسەکانی جۆری TypeScript لەناو پاکێجەکەدا هەن."
+				},
+				"features": {
+					"q": "چی بە شێوەی ئامادە لەگەڵیدایە؟",
+					"a": "خشتە لەگەڵ یەکخستن و دابەشکردنی خانەکان، بارکردنی وێنە، ڤیدیۆ، دەنگ و فایل، بەستەر، بیرکاری، بلۆکی کۆد، پیشاندانی Markdown، وێنەکێشان، قاڵب و ڕووبەندی، فەرمانەکانی سلاش و دەسکی بلۆک — بە گشتی زیاتر لە 30 پلەگین، لەگەڵ زیاتر لە 25 پاکێجی زمان و پشتگیری RTL. هەموو پلەگینەکان لە یەک پاکێجدان — بە بژاردەی plugins تەنها ئەوانەی پێویستتە چالاکیان بکە."
+				},
+				"cloud": {
+					"q": "ئایا پێویستی بە خزمەتگوزاری هەور یان هەژمار هەیە؟",
+					"a": "نەخێر. ئێدیتۆرەکە بە تەواوی لەناو وێبگەڕدا کار دەکات و ناوەڕۆکەکەت بۆ هیچ خزمەتگوزارییەکی دەرەکی نانێرێت. فایلە بارکراوەکان دەنێردرێن بۆ خاڵێکی کۆتایی (endpoint) لەسەر سێرڤەری خۆت، کە بە هەڵبژاردەی uploadUrl دیاری دەکرێت."
+				},
+				"output": {
+					"q": "چ فۆرماتێک بەرهەم دەهێنێت؟",
+					"a": "HTML ی ستاندارد. بۆ پیشاندانی ناوەڕۆکی پاشەکەوتکراو بە هەمان ستایلی ئێدیتۆرەکە، suneditor/css/contents هاوردە بکە و HTML ەکە لەناو توخمێکدا بپێچە کە کلاسی sun-editor-editable ی هەبێت."
+				}
+			},
+			"licenseLink": "پوختەی مۆڵەتەکە بخوێنەرەوە",
+			"troubleshootingLink": "ڕێبەری چارەسەرکردنی کێشەکان"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "هاندلەرەکانی بارکردن وەڵامی بارکردن وەردەگرن — لکاندنی لۆگەرێک ڕێگری دەکات لە دانانی میدیای بارکراو — بۆیە پشکنەرەکە دەستیان لێ نادات:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Pêdivî ye ku servera barkirina we JSON bi vê formatê vegerîne. SunEditor pelan wekî daneyên pirbeş/form bi navê zeviyê 'file-0', 'file-1', hwd. dişîne.",
 			"serverExample": "Mînaka Express.js",
 			"customUploadHandler": "Destgirê Barkirina Taybet",
-			"customHandlerDesc": "Barkirina XHR-a çêkirî bi mantiqa xwe veguhêze. Ji bo ku hûn ji SunEditor re bibêjin ku we bersiv bi rê ve biriye, \"true\" vegerîne.",
+			"customHandlerDesc": "کاتێک API بارکردنەکەت فۆرماتێکی وەڵامی جیاواز دەگەڕێنێتەوە، imageUploadHandler بەکاربهێنە. داواکارییەکە هێشتا SunEditor دەینێرێت؛ کاتێک هاندلەرەکە دیاری کرابێت، داواکارییە تەواوبووەکە وەردەگرێت و بڕیار دەدات چی دابنرێت — دانانی ناوخۆیی تێدەپەڕێنرێت.",
+			"customHandlerDirectLink": "لە جیاتی ئەوە، ڕاستەوخۆ بۆ S3 یان کۆگایەکی تر بار بکە",
 			"validation": "Pejirandina Barkirinê",
 			"validationDesc": "Ji bo pejirandin an guhertina pelan berî ku ew ji serverê re werin şandin, bûyerên *UploadBefore bikar bînin. Ji bo hemî celebên medyayê dixebite.",
 			"errors": "Birêvebirina Çewtiyan",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Vebijarkên Pêvekan",
 		"perFrame": "ji bo her çarçoveyekê",
 		"perFrameHint": "Ev vebijêrk dikarin di moda pir-root de ji bo her rootê bi awayekî ferdî werin mîheng kirin."
+	},
+	"License": {
+		"title": "مۆڵەتی MIT",
+		"subtitle": "SunEditor بەخۆڕایی و سەرچاوەکراوەیە. لە پڕۆژە کەسی و بازرگانییەکاندا بەبێ کرێ، کلیل یان هەژمار بەکاری بهێنە.",
+		"updated": "دوایین نوێکردنەوە: {date}",
+		"allowedTitle": "چی دەتوانیت بکەیت",
+		"allowed": {
+			"commercial": "لە بەرهەمە بازرگانییەکان و SaaS دا بەکاری بهێنە",
+			"internal": "لە ئەپڵیکەیشنە ناوخۆیی و دامەزراوەییەکاندا بەکاری بهێنە",
+			"selfHost": "لەسەر سێرڤەری خۆت دایبمەزرێنە — پێویست بە خزمەتگوزاری هەور یان هەژمار نییە",
+			"modify": "کۆدی سەرچاوە دەستکاری بکە و پلەگینی تایبەتی خۆت بنووسە",
+			"distribute": "لەگەڵ ئەپڵیکەیشنەکەتدا پاکێجی بکە و دووبارە بڵاوی بکەرەوە",
+			"noFee": "هیچ کرێیەک بۆ بارکردنی ئێدیتۆر، سنووری ژمارەی بەکارهێنەر یان کلیلی مۆڵەت نییە"
+		},
+		"obligationsTitle": "چی پێویستە بیکەیت",
+		"obligations": "ئاگادارنامەی مافی لەبەرگرتنەوە و دەقی مۆڵەتی MIT لە هەموو کۆپییەکان یان بەشە سەرەکییەکانی نەرمەکاڵاکەدا دابنێ.",
+		"warrantyTitle": "هیچ گەرەنتییەک نییە",
+		"warranty": "نەرمەکاڵاکە «وەک خۆی» پێشکەش دەکرێت، بەبێ هیچ جۆرە گەرەنتییەک. نووسەران بەرپرسیار نین لە هیچ داواکارییەک یان زیانێک کە لە بەکارهێنانییەوە سەرچاوە بگرێت.",
+		"thirdPartyTitle": "کتێبخانە ئارەزوومەندانەکانی لایەنی سێیەم",
+		"thirdParty": "SunEditor خۆی هیچ پشتبەستنێکی لە کاتی کارکردندا نییە. ئەگەر یەکخستنێکی ئارەزوومەندانە چالاک بکەیت، ئەو کتێبخانەیە لەژێر مۆڵەتی تایبەتی خۆیدایە:",
+		"fullTextTitle": "دەقی تەواوی مۆڵەت",
+		"disclaimer": "ئەم پەڕەیە پوختەیەکە بە زمانێکی سادە، نەک ڕاوێژی یاسایی. ئەوەی جێبەجێ دەبێت دەقی مۆڵەتەکەی خوارەوەیە.",
+		"viewOnGitHub": "LICENSE لە GitHub ببینە",
+		"tryPlayground": "SunEditor لە یاریگادا تاقی بکەرەوە"
+	},
+	"Troubleshooting": {
+		"title": "چارەسەرکردنی کێشەکان",
+		"subtitle": "چارەسەر بۆ ئەو کێشانەی گەشەپێدەران زۆرتر لە کاتی زیادکردنی SunEditor بۆ ئەپڵیکەیشنێک ڕووبەڕووی دەبنەوە.",
+		"verified": "لەگەڵ SunEditor {version} پشکنراوە",
+		"contents": "لەم پەڕەیەدا",
+		"searchLabel": "گەڕان لە کێشەکاندا",
+		"searchPlaceholder": "بە پەیامی هەڵە یان نیشانە بگەڕێ",
+		"all": "هەموو",
+		"categories": {
+			"setup": "دامەزراندن",
+			"styling": "ستایل",
+			"content": "ناوەڕۆک",
+			"upload": "بارکردن",
+			"migration": "گواستنەوە"
+		},
+		"noResults": "هیچ کێشەیەکی گونجاو نەدۆزرایەوە. وشەی تر تاقی بکەرەوە، یان لە خوارەوە کێشەیەک ڕاپۆرت بکە.",
+		"symptom": "نیشانە",
+		"cause": "هۆکار",
+		"fix": "چارەسەر",
+		"helpful": "ئایا ئەمە کێشەکەتی چارەسەر کرد؟",
+		"yes": "بەڵێ",
+		"no": "نەخێر",
+		"thanks": "سوپاس بۆ ڕاوبۆچوونەکەت!",
+		"stillStuck": "ببورە بۆ ئەمە.",
+		"openPrefilledIssue": "کێشەیەک ڕاپۆرت بکە کە زانیاری ژینگەکەتی پێشوەختە تێدا پڕکراوەتەوە",
+		"notListed": "کێشەکەت لێرە نییە؟",
+		"notListedDesc": "لە کێشە ڕاپۆرتکراوەکاندا بگەڕێ، یان ڕاپۆرتێکی نوێ بکەرەوە لەگەڵ بەستەرێکی یاریگا کە کێشەکە دووبارە دەکاتەوە.",
+		"openIssue": "کێشەیەک لە GitHub ڕاپۆرت بکە",
+		"tryPlayground": "لە یاریگادا دووبارەی بکەرەوە",
+		"items": {
+			"ssr": {
+				"title": "«window is not defined» لە کاتی ڕێندەرکردنی سێرڤەردا",
+				"symptom": "بیلد یان ڕێندەرکردنی سێرڤەر بە هەڵەی ReferenceError: window is not defined شکست دەهێنێت (Next.js، Nuxt، SvelteKit، Remix).",
+				"cause": "SunEditor هەر کە مۆدیوڵەکە هاوردە کرا window، document و navigator دەخوێنێتەوە، بۆیە ناتوانرێت لەسەر سێرڤەر هاوردە بکرێت.",
+				"fix": "ئێدیتۆرەکە تەنها لە وێبگەڕدا هاوردە بکە و دروستی بکە. لە Next.js App Router دا، ئێدیتۆرەکە لە client component ێکدا دابنێ و بە next/dynamic و ssr: false باری بکە. لە Nuxt دا لەناو ClientOnly دا بیپێچە؛ لە SvelteKit دا لەناو onMount دا هاوردەی بکە."
+			},
+			"plugin": {
+				"title": "هەڵە: «The button name of a plugin that does not exist»",
+				"symptom": "suneditor.create ئەم هەڵەیە فڕێ دەدات: [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "ناوێک لە buttonList ئاماژە بە پلەگینێک دەکات کە لە هەڵبژاردەی plugins دا نەدراوە.",
+				"fix": "هەموو پلەگینەکان بدە، یان تەنها ئەو پلەگینانە هاوردە بکە کە تووڵبارەکەت بەکاریان دەهێنێت و ئەوانە بدە."
+			},
+			"target": {
+				"title": "هەڵە: «Cannot find target element» یان «The first parameter \"target\" is missing»",
+				"symptom": "suneditor.create ئەم هەڵەیە فڕێ دەدات: [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element، یان [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "کاتێک ئێدیتۆرەکە دروست کرا، توخمی ئامانج هێشتا بوونی نەبوو — selector ەکە هیچ توخمێکی نەدۆزییەوە، یان ref هێشتا null بوو.",
+				"fix": "ئێدیتۆرەکە دوای mount بوونی کۆمپۆنێنتەکە دروست بکە (useEffect، onMounted، ngAfterViewInit، onMount) و لە جیاتی selector خودی توخمەکە بدە."
+			},
+			"strictMode": {
+				"title": "ئێدیتۆرەکە لە دۆخی گەشەپێدانی React دا دوو جار دروست دەکرێت",
+				"symptom": "لە کاتی گەشەپێداندا تووڵبارەکە دووبارە دەبێتەوە، یان ئێدیتۆرەکە لە کاتی mount دا دەلەرزێت.",
+				"cause": "React StrictMode ئیفێکتەکان دوو جار جێبەجێ دەکات (mount، unmount، mount). بەبێ cleanup، جێبەجێکردنی دووەم نموونەیەکی تر دروست دەکات.",
+				"fix": "لە ئیفێکتەکەوە فەنکشنێکی cleanup بگەڕێنەرەوە کە destroy() بانگ دەکات. نموونەکانی بەشی «دەستپێکردن» ئەم شێوازە بەکاردەهێنن."
+			},
+			"css": {
+				"title": "ئێدیتۆرەکە بەبێ ستایل پیشان دەدرێت",
+				"symptom": "تووڵبارەکە وەک لیستێکی بێ ستایل دەردەکەوێت و ئایکۆن یان لیستە دابەزێنراوەکان لە شوێنی هەڵەدان.",
+				"cause": "فایلی ستایل جیا لە JavaScript دابین دەکرێت و بار نەکراوە.",
+				"fix": "suneditor/css/editor یەک جار لە ئەپەکەتدا هاوردە بکە، لەگەڵ suneditor/css/contents بۆ ستایلی ناوەڕۆک. ئەگەر وەشانی CDN بەکاردەهێنیت، تاگەکانی link ی فایلی ستایل زیاد بکە."
+			},
+			"contents": {
+				"title": "HTML ی پاشەکەوتکراو لە دەرەوەی ئێدیتۆر جیاواز دەردەکەوێت",
+				"symptom": "ناوەڕۆک لە کاتی دەستکاریکردندا دروست دەردەکەوێت، بەڵام لەو پەڕەیەی پیشانی دەدات بۆشایی، سنووری خشتە یان ڕێکخستنی ڕیز لەدەست دەدات.",
+				"cause": "ستایلەکانی ناوەڕۆک لە فایلێکی ستایلی جیادان و تەنها بۆ کلاسی sun-editor-editable سنووردار کراون.",
+				"fix": "لە پەڕەی پیشاندان suneditor/css/contents هاوردە بکە و HTML ەکە لەناو توخمێکدا بپێچە کە کلاسی sun-editor-editable ی هەبێت. HTML ی نامتمانەپێکراو پێش ڕێندەرکردن لەسەر سێرڤەر پاک بکەرەوە."
+			},
+			"stripped": {
+				"title": "تاگ، تایبەتمەندی یان ستایلەکان لە ناوەڕۆکەکەدا ون دەبن",
+				"symptom": "ئەو HTML ەی بە هەڵبژاردەی value یان editor.$.html.set() دادەنرێت، یان پەیست دەکرێت، بەبێ هەندێک تاگ (وەک mark)، ناوی کلاس، تایبەتمەندییەکانی data-* یان ستایلی ناوهێڵ (inline) دەگەڕێتەوە.",
+				"cause": "SunEditor هەموو HTML ێکی هاتوو بەپێی لیستی ڕێگەپێدراو بۆ توخم، تایبەتمەندی، ناوی کلاس و ستایلی هەر تاگێک فلتەر دەکات، و هەر شتێک لەو لیستانەدا نەبێت لای دەبات. span ێک کە هیچ ستایلێکی بۆ نەمابێتەوە لادەبرێت و ناوەڕۆکەکەی دەمێنێتەوە.",
+				"fix": "ئەو لیستی ڕێگەپێدراوەی پێویستتە فراوان بکە: elementWhitelist بۆ تاگەکان، attributeWhitelist بۆ تایبەتمەندییەکان، allowedClassName بۆ ناوی کلاسەکان و tagStyles بۆ ستایلی ناوهێڵ. هەروەها دەتوانیت فلتەرەکان یەک بە یەک بە هەڵبژاردەی strictMode بکوژێنیتەوە. هەرگیز ڕێگە بە تاگی script یان تایبەتمەندییەکانی ڕووداوی on* مەدە."
+			},
+			"paste": {
+				"title": "ناوەڕۆکی پەیستکراو فۆرماتەکەی لەدەست دەدات، یان ستایلی نەخوازراو لەگەڵ خۆی دەهێنێت",
+				"symptom": "ناوەڕۆکی پەیستکراو لە Word، Google Docs یان پەڕەیەکی وێبەوە جیاواز لە سەرچاوەکە دەردەکەوێت — یان دەتەوێت تەنها دەقی سادە وەربگریت.",
+				"cause": "HTML ی پەیستکراو بە هەمان فلتەرکردنی هەر ناوەڕۆکێکی تردا تێدەپەڕێت. سەرەتا markup ی Word و Google Docs پاک دەکرێتەوە، پاشان ئەو تاگ، تایبەتمەندی و ستایلانەی لە دەرەوەی لیستە ڕێگەپێدراوەکانن لادەبرێن.",
+				"fix": "بە tagStyles ڕێگە بەو ستایلانە بدە کە دەتەوێت بیانپارێزیت (بڕوانە بەشی پێشوو). بۆ ئەوەی خۆت کۆنترۆڵی پەیستکردن بکەیت، ڕووداوی onPaste بەکاربهێنە: HTML ی پاککراوە (data) و سەرچاوەکەی (from: MS, GOOGLE, SE یان بەتاڵ) وەردەگرێت. دەقێک بگەڕێنەرەوە بۆ جێگرتنەوەی ناوەڕۆکی پەیستکراو، یان false بۆ هەڵوەشاندنەوە."
+			},
+			"value": {
+				"title": "گۆڕینی prop ی value ئێدیتۆرەکە نوێ ناکاتەوە",
+				"symptom": "HTML ی نوێ لە state دا دادەنێیت، بەڵام ئێدیتۆرەکە هێشتا ناوەڕۆکە کۆنەکە پیشان دەدات.",
+				"cause": "هەڵبژاردەی value تەنها یەک جار دەخوێندرێتەوە، کاتێک ئێدیتۆرەکە دروست دەکرێت.",
+				"fix": "بۆ گۆڕینی ناوەڕۆک editor.$.html.set(html) بانگ بکە و بۆ خوێندنەوەی دەستکارییەکان گوێ لە ڕووداوی onChange بگرە. ناوەڕۆکەکە لەناو onChange دا دووبارە مەنووسەرەوە — ئەمە خولێکی نوێکردنەوە دروست دەکات و نیشاندەری نووسین دەجوڵێنێت."
+			},
+			"upload": {
+				"title": "وێنەکان وەک دەقی base64 ی زۆر گەورە پاشەکەوت دەکرێن، یان وێنە بارکراوەکان دانانرێن",
+				"symptom": "HTML ی پاشەکەوتکراو دەقی درێژی data:image/... ی تێدایە، یان داواکاری بارکردن سەرکەوتوو دەبێت بەڵام هیچ وێنەیەک دەرناکەوێت.",
+				"cause": "بەبێ image.uploadUrl، وێنەکان وەک base64 تێدەخرێن. ئەگەر دیاری کرابێت، وەڵامی سێرڤەر دەبێت لەگەڵ ئەو فۆرماتەی SunEditor چاوەڕێی دەکات بگونجێت.",
+				"fix": "image.uploadUrl دیاری بکە و JSON بگەڕێنەرەوە کە ڕیزبەندی result ی تێدابێت لە url، name و size. بۆ ڕاپۆرتکردنی شکست errorMessage بگەڕێنەرەوە. ئەگەر API ەکەت شێوەیەکی جیاواز دەگەڕێنێتەوە، لە ڕووداوی imageUploadHandler دا بیگونجێنە."
+			},
+			"customUpload": {
+				"title": "بارکردنی ڕاستەوخۆ بۆ S3 یان شوێنێکی تری هەڵگرتن (presigned URL)",
+				"symptom": "فایلەکان دەبێت بچن بۆ S3، Cloudinary یان خزمەتگوزارییەکی تری هەڵگرتن، بۆیە یەک endpoint ی image.uploadUrl گونجاو نییە.",
+				"cause": "image.uploadUrl فایلەکان بۆ یەک endpoint دەنێرێت و چاوەڕێی فۆرماتی وەڵامی SunEditor دەکات.",
+				"fix": "بارکردنەکە لە ڕووداوی onImageUploadBefore دا بەڕێوە ببە: هەر فایلێک خۆت بار بکە، بە $.plugins.image.submitURL(url) دایبنێ، و false بگەڕێنەرەوە بۆ ئەوەی SunEditor خۆی بارکردن نەکات. submitURL هەمان ڕووداو دووبارە دەخاتەوە کار لەگەڵ info.url ی دیاریکراو — ڕێگە بدە ئەو بانگکردنە تێپەڕێت."
+			},
+			"contentApi": {
+				"title": "«editor.getContents is not a function»",
+				"symptom": "کۆدی نووسراو بۆ v2 هەڵەی TypeError: editor.getContents is not a function فڕێ دەدات (یان بۆ setContents، appendContents، insertHTML).",
+				"cause": "لە v3 دا میتۆدەکانی ناوەڕۆک گوازرانەوە بۆ مۆدیوڵی $.html، و میتۆدەکانی تری instance ی v2 گوازرانەوە بۆ مۆدیوڵی وەک $.ui.",
+				"fix": "هاوتاکانی v3 ی خوارەوە بەکاربهێنە. بۆ هەڵبژاردە و ڕووداوەکان، گۆڕەرەکەی پەڕەی v2 → v3 بەکاربهێنە."
+			},
+			"v2": {
+				"title": "هەڵبژاردەکانی v2 دوای نوێکردنەوەی وەشان کار ناکەن",
+				"symptom": "دوای گواستنەوە بۆ v3، هەندێک هەڵبژاردە، دوگمە یان ڕووداو هیچ کاریگەرییەکیان نییە.",
+				"cause": "v3 ناوی زۆر هەڵبژاردەی گۆڕیوە یان شوێنیانی گۆڕیوە — بۆ نموونە، هەڵبژاردەکانی بارکردن ئێستا لەژێر ناوی پلەگینەکەدان (image.uploadUrl).",
+				"fix": "هەڵبژاردەکانی v2 ی خۆت لە گۆڕەرەکەی پەڕەی v2 → v3 دا دابنێ بۆ ئەوەی هاوتاکانی v3 وەربگریت."
+			}
+		}
 	}
 }

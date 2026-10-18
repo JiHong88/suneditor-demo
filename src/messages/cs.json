@@ -36,13 +36,15 @@
 			"playground": "Dětské hřiště",
 			"about": "O",
 			"license": "Licencováno pod MIT.",
-			"copyright": "© Copyright {year} Přispěvatelé SunEditoru"
+			"copyright": "© Copyright {year} Přispěvatelé SunEditoru",
+			"troubleshooting": "Řešení problémů"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Lehký a výkonný WYSIWYG editor v jednoduchém JavaScriptu.",
-			"tagline": "Jedna instalace. Vše v ceně."
+			"title": "Modulární WYSIWYG HTML editor bez runtime závislostí.",
+			"tagline": "Vše v balení. Zapněte jen to, co potřebujete.",
+			"trust": "Licence MIT · Bez cloudu · Bez registrace"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Nulové závislosti",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Vyzkoušejte to hned",
 			"desc": "Zdarma a s otevřeným zdrojovým kódem. Prohlédněte si dokumentaci nebo přispějte na GitHubu."
+		},
+		"Faq": {
+			"title": "SunEditor v kostce",
+			"desc": "Stručné odpovědi na otázky, které si vývojáři kladou před výběrem editoru.",
+			"items": {
+				"commercial": {
+					"q": "Je SunEditor zdarma i pro komerční použití?",
+					"a": "Ano. SunEditor je vydán pod licencí MIT. Můžete ho používat v komerčních produktech, SaaS i interních nástrojích, upravovat ho a hostovat na vlastních serverech. Ve svých kopiích zachovejte upozornění na autorská práva a text licence. Žádný licenční klíč, účet ani poplatek za načtení."
+				},
+				"dependencies": {
+					"q": "Má SunEditor nějaké závislosti?",
+					"a": "Ne. Balíček suneditor nemá žádné runtime závislosti. Volitelné integrace, jako je KaTeX nebo MathJax (matematika) a CodeMirror (zobrazení kódu), se použijí jen tehdy, když je zapnete."
+				},
+				"frameworks": {
+					"q": "S jakými frameworky funguje?",
+					"a": "SunEditor je čistý JavaScript, takže funguje všude, kde běží prohlížeč: vanilla JS přes npm nebo CDN, React, Vue, Angular, Svelte a Web Components. Typové definice pro TypeScript jsou součástí balíčku."
+				},
+				"features": {
+					"q": "Co je k dispozici hned po instalaci?",
+					"a": "Tabulky se slučováním a rozdělováním buněk, nahrávání obrázků, videa, zvuku a souborů, odkazy, matematické vzorce, bloky kódu, zobrazení Markdown, kreslení, šablony a rozvržení, lomítkové příkazy a úchyty bloků — celkem přes 30 pluginů, k tomu přes 25 jazykových balíčků a podpora RTL. Všechny pluginy jsou v jednom balíčku — pomocí volby plugins zapnete jen ty, které potřebujete."
+				},
+				"cloud": {
+					"q": "Vyžaduje cloudovou službu nebo účet?",
+					"a": "Ne. Editor běží celý v prohlížeči a neodesílá váš obsah do žádné externí služby. Soubory se nahrávají na endpoint na vašem vlastním serveru, který nastavíte volbou uploadUrl."
+				},
+				"output": {
+					"q": "V jakém formátu vytváří výstup?",
+					"a": "Ve standardním HTML. Chcete-li uložený obsah zobrazit se stejnými styly jako v editoru, importujte suneditor/css/contents a obalte HTML do elementu s třídou sun-editor-editable."
+				}
+			},
+			"licenseLink": "Přečíst shrnutí licence",
+			"troubleshootingLink": "Průvodce řešením problémů"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Handlery nahrávání přebírají odpověď z nahrávání — připojený logger by zabránil vložení nahraných médií —, proto je inspektor nechává být:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Váš upload server musí vracet JSON v tomto formátu. SunEditor odesílá soubory jako multipart/form-data s názvem pole 'file-0', 'file-1' atd.",
 			"serverExample": "Příklad Express.js",
 			"customUploadHandler": "Vlastní obslužný program pro nahrávání",
-			"customHandlerDesc": "Přepište vestavěné nahrávání XHR vlastní logikou. Vraťte hodnotu true, abyste SunEditoru sdělili, že jste odpověď zpracovali.",
+			"customHandlerDesc": "imageUploadHandler použijte, když vaše API pro nahrávání vrací odpověď v jiném formátu. Požadavek dál odesílá SunEditor; jakmile je handler definován, dostane dokončený požadavek a sám rozhodne, co vložit — vestavěné vkládání se přeskočí.",
+			"customHandlerDirectLink": "Místo toho nahrávat přímo do S3 nebo jiného úložiště",
 			"validation": "Ověření nahrávání",
 			"validationDesc": "Události *UploadBefore použijte k ověření nebo úpravě souborů před jejich odesláním na server. Funguje pro všechny typy médií.",
 			"errors": "Zpracování chyb",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Možnosti pluginu",
 		"perFrame": "na snímek",
 		"perFrameHint": "Tyto možnosti lze konfigurovat jednotlivě pro každý kořenový server v režimu s více kořeny."
+	},
+	"License": {
+		"title": "Licence MIT",
+		"subtitle": "SunEditor je zdarma a open source. Používejte ho v osobních i komerčních projektech bez poplatků, klíčů a účtů.",
+		"updated": "Naposledy aktualizováno: {date}",
+		"allowedTitle": "Co můžete dělat",
+		"allowed": {
+			"commercial": "Používat ho v komerčních produktech a SaaS",
+			"internal": "Používat ho v interních a podnikových aplikacích",
+			"selfHost": "Hostovat ho na vlastních serverech — bez cloudové služby a účtu",
+			"modify": "Upravovat zdrojový kód a psát vlastní pluginy",
+			"distribute": "Přibalit ho ke své aplikaci a dále ho s ní šířit",
+			"noFee": "Žádné poplatky za načtení editoru, limity počtu uživatelů ani licenční klíče"
+		},
+		"obligationsTitle": "Co musíte dodržet",
+		"obligations": "Do všech kopií nebo podstatných částí softwaru zahrňte upozornění na autorská práva a text licence MIT.",
+		"warrantyTitle": "Bez záruky",
+		"warranty": "Software je poskytován „tak, jak je“, bez jakékoli záruky. Autoři neodpovídají za žádné nároky ani škody vzniklé v souvislosti s jeho používáním.",
+		"thirdPartyTitle": "Volitelné knihovny třetích stran",
+		"thirdParty": "Samotný SunEditor nemá žádné runtime závislosti. Pokud zapnete volitelnou integraci, vztahuje se na danou knihovnu její vlastní licence:",
+		"fullTextTitle": "Úplné znění licence",
+		"disclaimer": "Tato stránka je shrnutím v běžném jazyce, nikoli právní radou. Závazné je níže uvedené znění licence.",
+		"viewOnGitHub": "Zobrazit LICENSE na GitHubu",
+		"tryPlayground": "Vyzkoušejte SunEditor v Playgroundu"
+	},
+	"Troubleshooting": {
+		"title": "Řešení problémů",
+		"subtitle": "Řešení problémů, na které vývojáři nejčastěji narazí při přidávání SunEditoru do aplikace.",
+		"verified": "Ověřeno na verzi SunEditor {version}",
+		"contents": "Na této stránce",
+		"searchLabel": "Hledat problémy",
+		"searchPlaceholder": "Hledejte podle chybové hlášky nebo příznaku",
+		"all": "Vše",
+		"categories": {
+			"setup": "Nastavení",
+			"styling": "Styly",
+			"content": "Obsah",
+			"upload": "Nahrávání",
+			"migration": "Migrace"
+		},
+		"noResults": "Žádné odpovídající problémy. Zkuste jiná slova nebo níže založte issue.",
+		"symptom": "Příznak",
+		"cause": "Příčina",
+		"fix": "Řešení",
+		"helpful": "Vyřešilo to váš problém?",
+		"yes": "Ano",
+		"no": "Ne",
+		"thanks": "Děkujeme za zpětnou vazbu!",
+		"stillStuck": "To nás mrzí.",
+		"openPrefilledIssue": "Založit issue s předvyplněnými údaji o prostředí",
+		"notListed": "Váš problém tu není?",
+		"notListedDesc": "Prohledejte existující issues nebo založte nové s odkazem na Playground, kde se problém projeví.",
+		"openIssue": "Založit issue na GitHubu",
+		"tryPlayground": "Zreprodukujte problém v Playgroundu",
+		"items": {
+			"ssr": {
+				"title": "„window is not defined“ při vykreslování na serveru",
+				"symptom": "Build nebo vykreslování na serveru selže s chybou ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor přistupuje k window, document a navigator hned při importu modulu, takže ho nelze importovat na serveru.",
+				"fix": "Importujte a vytvářejte editor pouze v prohlížeči. V Next.js App Router umístěte editor do klientské komponenty a načtěte ho přes next/dynamic se ssr: false. V Nuxtu ho obalte do ClientOnly, ve SvelteKitu ho importujte uvnitř onMount."
+			},
+			"plugin": {
+				"title": "Chyba: „The button name of a plugin that does not exist“",
+				"symptom": "suneditor.create vyhodí [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "Název v buttonList odkazuje na plugin, který nebyl předán ve volbě plugins.",
+				"fix": "Předejte všechny pluginy, nebo importujte jen ty, které používá váš panel nástrojů, a předejte je."
+			},
+			"target": {
+				"title": "Chyba: „Cannot find target element“ nebo „The first parameter \"target\" is missing“",
+				"symptom": "suneditor.create vyhodí [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element nebo [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Cílový element v okamžiku vytvoření editoru ještě neexistoval — selektor nic nenašel nebo byl ref stále null.",
+				"fix": "Vytvořte editor až po připojení komponenty (useEffect, onMounted, ngAfterViewInit, onMount) a místo selektoru předejte přímo element."
+			},
+			"strictMode": {
+				"title": "Editor se v React vývojovém režimu vytvoří dvakrát",
+				"symptom": "Ve vývojovém režimu je panel nástrojů zdvojený nebo editor při připojení probliká.",
+				"cause": "React StrictMode spouští efekty dvakrát (připojení, odpojení, připojení). Bez úklidové funkce vytvoří druhé spuštění další instanci.",
+				"fix": "Vraťte z efektu úklidovou funkci, která volá destroy(). Příklady v sekci Začínáme používají právě tento vzor."
+			},
+			"css": {
+				"title": "Editor se vykresluje bez stylů",
+				"symptom": "Panel nástrojů vypadá jako nenastylovaný seznam a ikony nebo rozbalovací nabídky jsou posunuté.",
+				"cause": "Styly se dodávají odděleně od JavaScriptu a nebyly načteny.",
+				"fix": "Importujte suneditor/css/editor jednou ve své aplikaci a k tomu suneditor/css/contents pro styly obsahu. U buildu z CDN přidejte značky link se styly."
+			},
+			"contents": {
+				"title": "Uložené HTML vypadá mimo editor jinak",
+				"symptom": "Při úpravách obsah vypadá správně, ale na stránce, která ho zobrazuje, ztrácí mezery, okraje tabulek nebo zarovnání.",
+				"cause": "Styly obsahu jsou v samostatném souboru stylů a jsou omezeny na třídu sun-editor-editable.",
+				"fix": "Na stránce pro zobrazení importujte suneditor/css/contents a obalte HTML do elementu s třídou sun-editor-editable. Nedůvěryhodné HTML před vykreslením sanitizujte na serveru."
+			},
+			"stripped": {
+				"title": "Z obsahu mizí značky, atributy nebo styly",
+				"symptom": "HTML nastavené volbou value nebo přes editor.$.html.set(), případně vložené ze schránky, se vrátí bez některých značek (například mark), názvů tříd, atributů data-* nebo inline stylů.",
+				"cause": "SunEditor filtruje veškeré příchozí HTML podle seznamů povolených elementů, atributů, názvů tříd a stylů pro jednotlivé značky a vše, co na nich není, odstraní. Element span, kterému nezůstal žádný styl, se rozbalí (nahradí se svým obsahem).",
+				"fix": "Rozšiřte seznam povolených hodnot, který potřebujete: elementWhitelist pro značky, attributeWhitelist pro atributy, allowedClassName pro názvy tříd a tagStyles pro inline styly. Jednotlivé filtry lze také vypnout volbou strictMode. Nikdy nepovolujte značky script ani atributy událostí on*."
+			},
+			"paste": {
+				"title": "Vložený obsah ztrácí formátování nebo s sebou přináší nežádoucí styly",
+				"symptom": "Obsah vložený z Wordu, Google Docs nebo webové stránky vypadá jinak než ve zdroji — nebo chcete přijímat pouze prostý text.",
+				"cause": "Vložené HTML prochází stejným filtrováním jako jakýkoli jiný obsah. Nejprve se vyčistí markup z Wordu a Google Docs, poté se odstraní značky, atributy a styly, které nejsou na seznamech povolených.",
+				"fix": "Styly, které chcete zachovat, povolte pomocí tagStyles (viz předchozí sekce). Chcete-li vkládání řídit sami, použijte událost onPaste: dostane vyčištěné HTML (data) a jeho zdroj (from: MS, GOOGLE, SE nebo prázdná hodnota). Vraťte řetězec, kterým se vkládaný obsah nahradí, nebo false pro zrušení vložení."
+			},
+			"value": {
+				"title": "Změna propu value neaktualizuje editor",
+				"symptom": "Nastavíte nové HTML do stavu, ale editor dál zobrazuje starý obsah.",
+				"cause": "Volba value se čte jen jednou, při vytvoření editoru.",
+				"fix": "Obsah nahraďte voláním editor.$.html.set(html) a změny čtěte přes událost onChange. Nezapisujte obsah zpět uvnitř onChange — vznikne smyčka aktualizací a posouvá se kurzor."
+			},
+			"upload": {
+				"title": "Obrázky se ukládají jako obří řetězce base64 nebo se nahrané obrázky nevloží",
+				"symptom": "Uložené HTML obsahuje dlouhé řetězce data:image/..., nebo požadavek na nahrání proběhne úspěšně, ale obrázek se nezobrazí.",
+				"cause": "Bez image.uploadUrl se obrázky vkládají jako base64. Pokud je nastaveno, musí odpověď serveru odpovídat formátu, který SunEditor očekává.",
+				"fix": "Nastavte image.uploadUrl a vracejte JSON s polem result obsahujícím url, name a size. Chybu ohlásíte vrácením errorMessage. Pokud vaše API vrací data v jiné struktuře, převeďte je v události imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "Nahrávání přímo do S3 nebo jiného úložiště (presigned URL)",
+				"symptom": "Soubory mají putovat do S3, Cloudinary nebo jiné úložné služby, takže jediný endpoint image.uploadUrl nestačí.",
+				"cause": "image.uploadUrl odesílá soubory na jeden endpoint a očekává odpověď ve formátu SunEditoru.",
+				"fix": "Nahrávání obsluhujte v události onImageUploadBefore: každý soubor nahrajte sami, vložte ho přes $.plugins.image.submitURL(url) a vraťte false, aby SunEditor přeskočil vlastní nahrávání. submitURL znovu vyvolá stejnou událost, tentokrát s nastaveným info.url — toto volání nechte projít."
+			},
+			"contentApi": {
+				"title": "„editor.getContents is not a function“",
+				"symptom": "Kód napsaný pro v2 vyhodí TypeError: editor.getContents is not a function (nebo totéž pro setContents, appendContents, insertHTML).",
+				"cause": "Ve v3 se metody pro práci s obsahem přesunuly do modulu $.html a další metody instance z v2 do modulů jako $.ui.",
+				"fix": "Použijte níže uvedené ekvivalenty z v3. Pro volby a události použijte převodník na stránce Migrace."
+			},
+			"v2": {
+				"title": "Volby z v2 po upgradu přestaly fungovat",
+				"symptom": "Po přechodu na v3 nemají některé volby, tlačítka nebo události žádný účinek.",
+				"cause": "Ve v3 bylo mnoho voleb přejmenováno nebo přesunuto — například volby nahrávání jsou nyní vnořené pod názvem pluginu (image.uploadUrl).",
+				"fix": "Vložte své volby z v2 do převodníku na stránce Migrace a získáte jejich ekvivalenty pro v3."
+			}
+		}
 	}
 }

@@ -36,13 +36,15 @@
 			"playground": "Playground",
 			"about": "について",
 			"license": "MITライセンスに基づき使用。",
-			"copyright": "© Copyright {year} SunEditor寄稿者"
+			"copyright": "© Copyright {year} SunEditor寄稿者",
+			"troubleshooting": "トラブルシューティング"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "軽量かつ高機能な、プレーンなJavaScriptで書かれたWYSIWYGエディタ。",
-			"tagline": "インストールは1回のみ。必要なものはすべて含まれています。"
+			"title": "ランタイム依存ゼロの、モジュール型WYSIWYG HTMLエディタ。",
+			"tagline": "すべて入っています。必要なものだけ有効に。",
+			"trust": "MITライセンス · クラウド不要 · アカウント不要"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "依存関係ゼロ",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "今すぐ試してみよう",
 			"desc": "無料かつオープンソースです。ドキュメントを参照するか、GitHubで貢献してください。"
+		},
+		"Faq": {
+			"title": "ひと目でわかるSunEditor",
+			"desc": "エディタを選ぶ前に開発者がよく抱く疑問に、簡潔にお答えします。",
+			"items": {
+				"commercial": {
+					"q": "SunEditorは商用利用でも無料ですか？",
+					"a": "はい。SunEditorはMITライセンスで公開されています。商用製品、SaaS、社内ツールで使用でき、改変やセルフホストも自由です。複製物には著作権表示とライセンス表示を残してください。ライセンスキー、アカウント、ロードごとの料金は一切ありません。"
+				},
+				"dependencies": {
+					"q": "SunEditorに依存関係はありますか？",
+					"a": "いいえ。suneditorパッケージのランタイム依存関係はゼロです。KaTeXやMathJax（数式）、CodeMirror（コードビュー）などのオプション連携は、有効にした場合にのみ使用されます。"
+				},
+				"frameworks": {
+					"q": "どのフレームワークで使えますか？",
+					"a": "SunEditorは純粋なJavaScriptなので、ブラウザが動く環境ならどこでも動作します。npmまたはCDN経由のバニラJS、React、Vue、Angular、Svelte、Web Componentsに対応しています。TypeScriptの型定義もパッケージに同梱されています。"
+				},
+				"features": {
+					"q": "標準で何が含まれていますか？",
+					"a": "セルの結合・分割に対応した表、画像・動画・音声・ファイルのアップロード、リンク、数式、コードブロック、Markdownビュー、描画、テンプレートとレイアウト、スラッシュコマンド、ブロックハンドルなど、合計30以上のプラグインを搭載。さらに25以上の言語パックとRTLサポートも備えています。すべてのプラグインが1つのパッケージに含まれており、plugins オプションで必要なものだけを有効にできます。"
+				},
+				"cloud": {
+					"q": "クラウドサービスやアカウントは必要ですか？",
+					"a": "いいえ。エディタは完全にブラウザ内で動作し、コンテンツを外部サービスに送信することはありません。アップロード先は自社サーバー上のエンドポイントで、uploadUrlオプションで設定します。"
+				},
+				"output": {
+					"q": "どのような形式で出力されますか？",
+					"a": "標準的なHTMLです。保存したコンテンツをエディタと同じスタイルで表示するには、suneditor/css/contentsをインポートし、HTMLをsun-editor-editableクラスを持つ要素で囲んでください。"
+				}
+			},
+			"licenseLink": "ライセンスの概要を読む",
+			"troubleshootingLink": "トラブルシューティングガイド"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "アップロードハンドラーはアップロードのレスポンス処理を引き受けます。ロガーを付けるとアップロードしたメディアが挿入されなくなるため、インスペクターはこれらに触れません:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "アップロードサーバーは、この形式のJSONを返す必要があります。SunEditorは、'file-0'、'file-1'などのフィールド名を持つmultipart/form-data形式でファイルを送信します。",
 			"serverExample": "Express.js の例",
 			"customUploadHandler": "カスタムアップロードハンドラー",
-			"customHandlerDesc": "組み込みのXHRアップロードを独自のロジックでオーバーライドします。応答を処理したことをSunEditorに伝えるには、trueを返します。",
+			"customHandlerDesc": "アップロードAPIが異なるレスポンス形式を返す場合は imageUploadHandler を使います。リクエスト自体は SunEditor が送信し、ハンドラーが定義されていると完了したリクエストを受け取って何を挿入するかを決めます。組み込みの挿入はスキップされます。",
+			"customHandlerDirectLink": "代わりに S3 などのストレージへ直接アップロードする",
 			"validation": "アップロード検証",
 			"validationDesc": "*UploadBefore イベントを使用すると、ファイルをサーバーに送信する前に検証または変更できます。すべてのメディアタイプに対応しています。",
 			"errors": "エラー処理",
@@ -746,5 +781,139 @@
 		"pluginOptions": "プラグインオプション",
 		"perFrame": "フレームごと",
 		"perFrameHint": "これらのオプションは、マルチルートモードではルートごとに個別に設定できます。"
+	},
+	"License": {
+		"title": "MITライセンス",
+		"subtitle": "SunEditorは無料のオープンソースです。料金、ライセンスキー、アカウントなしで、個人・商用プロジェクトに利用できます。",
+		"updated": "最終更新日：{date}",
+		"allowedTitle": "できること",
+		"allowed": {
+			"commercial": "商用製品やSaaSでの使用",
+			"internal": "社内アプリケーションやエンタープライズアプリケーションでの使用",
+			"selfHost": "セルフホスト — クラウドサービスもアカウントも不要",
+			"modify": "ソースコードの改変や独自プラグインの作成",
+			"distribute": "アプリケーションへのバンドルと再配布",
+			"noFee": "エディタのロード課金、シート数制限、ライセンスキーは一切なし"
+		},
+		"obligationsTitle": "必要なこと",
+		"obligations": "ソフトウェアのすべての複製または重要な部分に、著作権表示とMITライセンスの本文を含めてください。",
+		"warrantyTitle": "無保証",
+		"warranty": "本ソフトウェアは「現状のまま」提供され、いかなる種類の保証もありません。作者は、本ソフトウェアの使用に起因するいかなる請求や損害についても責任を負いません。",
+		"thirdPartyTitle": "オプションのサードパーティライブラリ",
+		"thirdParty": "SunEditor自体にはランタイム依存関係がありません。オプションの連携機能を有効にした場合、そのライブラリにはそれぞれのライセンスが適用されます：",
+		"fullTextTitle": "ライセンス全文",
+		"disclaimer": "このページはわかりやすさを目的とした要約であり、法的助言ではありません。実際に適用されるのは以下のライセンス本文です。",
+		"viewOnGitHub": "GitHubでLICENSEを見る",
+		"tryPlayground": "PlaygroundでSunEditorを試す"
+	},
+	"Troubleshooting": {
+		"title": "トラブルシューティング",
+		"subtitle": "SunEditorをアプリに組み込む際に、開発者がよく遭遇する問題とその解決方法。",
+		"verified": "SunEditor {version} で動作確認済み",
+		"contents": "このページの内容",
+		"searchLabel": "問題を検索",
+		"searchPlaceholder": "エラーメッセージや症状で検索",
+		"all": "すべて",
+		"categories": {
+			"setup": "セットアップ",
+			"styling": "スタイル",
+			"content": "コンテンツ",
+			"upload": "アップロード",
+			"migration": "移行"
+		},
+		"noResults": "一致する問題が見つかりません。別のキーワードで検索するか、下からissueを作成してください。",
+		"symptom": "症状",
+		"cause": "原因",
+		"fix": "解決策",
+		"helpful": "問題は解決しましたか？",
+		"yes": "はい",
+		"no": "いいえ",
+		"thanks": "フィードバックありがとうございます！",
+		"stillStuck": "お役に立てず申し訳ありません。",
+		"openPrefilledIssue": "環境情報を入力済みのissueを作成",
+		"notListed": "お探しの問題が見つかりませんか？",
+		"notListedDesc": "既存のissueを検索するか、問題を再現できるPlaygroundのリンクを添えて新しいissueを作成してください。",
+		"openIssue": "GitHubでissueを作成",
+		"tryPlayground": "Playgroundで再現する",
+		"items": {
+			"ssr": {
+				"title": "サーバーレンダリング時に「window is not defined」が発生する",
+				"symptom": "ビルドまたはサーバーレンダリングが ReferenceError: window is not defined で失敗する（Next.js、Nuxt、SvelteKit、Remix）。",
+				"cause": "SunEditorはモジュールがインポートされた時点でwindow、document、navigatorを参照するため、サーバー側ではインポートできません。",
+				"fix": "エディタのインポートと生成はブラウザ上でのみ行ってください。Next.js App Routerでは、エディタをクライアントコンポーネントに配置し、next/dynamic と ssr: false で読み込みます。NuxtではClientOnlyで囲み、SvelteKitではonMount内でインポートします。"
+			},
+			"plugin": {
+				"title": "エラー：「The button name of a plugin that does not exist」",
+				"symptom": "suneditor.create が [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image] をスローする。",
+				"cause": "buttonList内の名前が、pluginsオプションに渡されていないプラグインを参照しています。",
+				"fix": "すべてのプラグインを渡すか、ツールバーで使うプラグインだけをインポートして渡してください。"
+			},
+			"target": {
+				"title": "エラー：「Cannot find target element」または「The first parameter \"target\" is missing」",
+				"symptom": "suneditor.create が [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element、または [SUNEDITOR.create.fail] The first parameter \"target\" is missing. をスローする。",
+				"cause": "エディタの生成時点で対象の要素がまだ存在していませんでした。セレクターに一致する要素がなかったか、refがまだnullのままでした。",
+				"fix": "コンポーネントのマウント後（useEffect、onMounted、ngAfterViewInit、onMount）にエディタを生成し、セレクターではなく要素そのものを渡してください。"
+			},
+			"strictMode": {
+				"title": "React開発モードでエディタが2回生成される",
+				"symptom": "開発環境でツールバーが重複したり、マウント時にエディタがちらついたりする。",
+				"cause": "React StrictModeはエフェクトを2回実行します（マウント、アンマウント、マウント）。クリーンアップがないと、2回目の実行で別のインスタンスが生成されます。",
+				"fix": "エフェクトから、destroy()を呼び出すクリーンアップ関数を返してください。「はじめる」のサンプルはこのパターンを使用しています。"
+			},
+			"css": {
+				"title": "エディタがスタイルなしで表示される",
+				"symptom": "ツールバーがスタイルの適用されていないリストとして表示され、アイコンやドロップダウンの位置がずれる。",
+				"cause": "スタイルシートはJavaScriptとは別に提供されており、読み込まれていません。",
+				"fix": "アプリ内でsuneditor/css/editorを一度インポートし、コンテンツのスタイル用にsuneditor/css/contentsもインポートしてください。CDNビルドを使う場合は、スタイルシートのlinkタグを追加します。"
+			},
+			"contents": {
+				"title": "保存したHTMLがエディタの外では違って見える",
+				"symptom": "編集中は正しく表示されるのに、表示用のページでは余白、表の罫線、配置が崩れる。",
+				"cause": "コンテンツのスタイルは別のスタイルシートにあり、sun-editor-editableクラスにスコープされています。",
+				"fix": "表示用のページでsuneditor/css/contentsをインポートし、HTMLをsun-editor-editableクラスを持つ要素で囲んでください。信頼できないHTMLは、レンダリング前にサーバー側でサニタイズしてください。"
+			},
+			"stripped": {
+				"title": "コンテンツからタグ、属性、スタイルが消える",
+				"symptom": "valueオプションやeditor.$.html.set()で設定した、または貼り付けたHTMLから、一部のタグ（markなど）、クラス名、data-*属性、インラインスタイルが失われる。",
+				"cause": "SunEditorは入力されるすべてのHTMLを、要素、属性、クラス名、タグごとのスタイルの許可リストと照合し、リストにないものを削除します。スタイルが残っていないspanはアンラップされます。",
+				"fix": "必要な許可リストを拡張してください。タグはelementWhitelist、属性はattributeWhitelist、クラス名はallowedClassName、インラインスタイルはtagStylesで指定します。個々のフィルターはstrictModeオプションで無効にすることもできます。scriptタグやon*イベント属性は決して許可しないでください。"
+			},
+			"paste": {
+				"title": "貼り付けたコンテンツの書式が失われる、または不要なスタイルが入り込む",
+				"symptom": "Word、Google Docs、Webページから貼り付けたコンテンツの見た目が元と異なる。あるいは、プレーンテキストだけを受け付けたい。",
+				"cause": "貼り付けられたHTMLも、他のコンテンツと同じフィルタリングを通ります。まずWordやGoogle Docsのマークアップがクリーンアップされ、その後、許可リストにないタグ、属性、スタイルが削除されます。",
+				"fix": "残したいスタイルはtagStylesで許可してください（前のセクションを参照）。貼り付けを自分で制御するには、onPasteイベントを使います。クリーンアップ済みのHTML（data）と貼り付け元（from：MS、GOOGLE、SE、または空）を受け取ります。文字列を返すと貼り付ける内容を置き換え、falseを返すと貼り付けをキャンセルします。"
+			},
+			"value": {
+				"title": "valueプロップを変更してもエディタが更新されない",
+				"symptom": "stateに新しいHTMLを設定しても、エディタには古いコンテンツが表示されたままになる。",
+				"cause": "valueオプションは、エディタの生成時に一度だけ読み込まれます。",
+				"fix": "コンテンツを置き換えるにはeditor.$.html.set(html)を呼び出し、編集内容はonChangeイベントで受け取ってください。onChangeの中からコンテンツを書き戻してはいけません。更新ループが発生し、キャレットが移動してしまいます。"
+			},
+			"upload": {
+				"title": "画像が巨大なbase64文字列として保存される、またはアップロードした画像が挿入されない",
+				"symptom": "保存したHTMLに長いdata:image/...文字列が含まれる、またはアップロードリクエストは成功するのに画像が表示されない。",
+				"cause": "image.uploadUrlを設定しないと、画像はbase64として埋め込まれます。設定した場合は、サーバーのレスポンスがSunEditorの想定する形式と一致している必要があります。",
+				"fix": "image.uploadUrlを設定し、url、name、sizeを持つresult配列を含むJSONを返してください。失敗を通知するにはerrorMessageを返します。APIのレスポンス形式が異なる場合は、imageUploadHandlerイベントで変換してください。"
+			},
+			"customUpload": {
+				"title": "S3などのストレージに直接アップロードする（署名付きURL）",
+				"symptom": "ファイルをS3、Cloudinary、その他のストレージサービスに送る必要があり、単一のimage.uploadUrlエンドポイントでは対応できない。",
+				"cause": "image.uploadUrlはファイルを1つのエンドポイントにPOSTし、SunEditorのレスポンス形式を想定しています。",
+				"fix": "onImageUploadBeforeイベントでアップロードを処理してください。各ファイルを自分でアップロードし、$.plugins.image.submitURL(url)で挿入して、falseを返すとSunEditor自身のアップロードはスキップされます。submitURLはinfo.urlを設定した状態で同じイベントを再度発火するので、その呼び出しはそのまま通してください。"
+			},
+			"contentApi": {
+				"title": "「editor.getContents is not a function」",
+				"symptom": "v2向けに書いたコードが TypeError: editor.getContents is not a function をスローする（setContents、appendContents、insertHTMLでも同様）。",
+				"cause": "v3ではコンテンツ関連のメソッドが$.htmlモジュールに移動し、その他のv2のインスタンスメソッドも$.uiなどのモジュールに移動しました。",
+				"fix": "以下のv3の対応メソッドを使用してください。オプションとイベントについては、移行ページのコンバーターを使用してください。"
+			},
+			"v2": {
+				"title": "アップグレード後にv2のオプションが効かなくなった",
+				"symptom": "v3に移行した後、一部のオプション、ボタン、イベントが機能しない。",
+				"cause": "v3では多くのオプションの名前や配置が変更されました。たとえば、アップロード関連のオプションはプラグイン名の下にネストされるようになりました（image.uploadUrl）。",
+				"fix": "移行ページのコンバーターにv2のオプションを貼り付けると、対応するv3のオプションを確認できます。"
+			}
+		}
 	}
 }

@@ -36,13 +36,15 @@
 			"playground": "Rotaļu laukums",
 			"about": "Par mums",
 			"license": "Licencēts saskaņā ar MIT.",
-			"copyright": "© Autortiesības {year} SunEditor līdzstrādnieki"
+			"copyright": "© Autortiesības {year} SunEditor līdzstrādnieki",
+			"troubleshooting": "Problēmu novēršana"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Viegls un jaudīgs WYSIWYG redaktors vaniļas JavaScript valodā.",
-			"tagline": "Viena instalēšana. Viss iekļauts."
+			"title": "Modulārs WYSIWYG HTML redaktors bez izpildlaika atkarībām.",
+			"tagline": "Viss iekļauts. Ieslēdziet tikai to, kas jums vajadzīgs.",
+			"trust": "MIT licence · Bez mākoņa · Konts nav nepieciešams"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Nulle atkarību",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Izmēģiniet to tūlīt",
 			"desc": "Bezmaksas un atvērtā pirmkoda programmatūra. Skatiet dokumentāciju vai piedalieties GitHub platformā."
+		},
+		"Faq": {
+			"title": "SunEditor īsumā",
+			"desc": "Īsas atbildes uz jautājumiem, ko izstrādātāji uzdod pirms redaktora izvēles.",
+			"items": {
+				"commercial": {
+					"q": "Vai SunEditor komerciālai lietošanai ir bezmaksas?",
+					"a": "Jā. SunEditor tiek izplatīts saskaņā ar MIT licenci. To var izmantot komerciālos produktos, SaaS risinājumos un iekšējos rīkos, kā arī modificēt un mitināt savā serverī. Saglabājiet savās kopijās autortiesību un licences paziņojumu. Nav licences atslēgas, konta vai maksas par katru ielādi."
+				},
+				"dependencies": {
+					"q": "Vai SunEditor ir atkarības?",
+					"a": "Nē. Pakotnei suneditor nav nevienas izpildlaika atkarības. Neobligātās integrācijas, piemēram, KaTeX vai MathJax (matemātika) un CodeMirror (koda skats), tiek izmantotas tikai tad, ja tās iespējojat."
+				},
+				"frameworks": {
+					"q": "Ar kādiem ietvariem tas darbojas?",
+					"a": "SunEditor ir tīrs JavaScript, tāpēc tas darbojas visur, kur darbojas pārlūks: vanilla JS caur npm vai CDN, React, Vue, Angular, Svelte un Web Components. Pakotnē ir iekļautas TypeScript tipu definīcijas."
+				},
+				"features": {
+					"q": "Kas ir iekļauts jau no sākuma?",
+					"a": "Tabulas ar šūnu apvienošanu un sadalīšanu, attēlu, video, audio un failu augšupielāde, saites, matemātika, koda bloki, Markdown skats, zīmēšana, veidnes un izkārtojumi, slīpsvītras komandas un bloku turi — kopā vairāk nekā 30 spraudņi, kā arī vairāk nekā 25 valodu pakotnes un RTL atbalsts. Visi spraudņi ir vienā pakotnē — ar opciju plugins ieslēdziet tikai tos, kas jums vajadzīgi."
+				},
+				"cloud": {
+					"q": "Vai tam ir nepieciešams mākoņpakalpojums vai konts?",
+					"a": "Nē. Redaktors darbojas tikai pārlūkā un nesūta jūsu saturu nevienam ārējam pakalpojumam. Augšupielādes tiek sūtītas uz galapunktu jūsu pašu serverī, ko norāda ar opciju uploadUrl."
+				},
+				"output": {
+					"q": "Kādā formātā tiek ģenerēts saturs?",
+					"a": "Standarta HTML. Lai saglabāto saturu attēlotu ar tādiem pašiem stiliem kā redaktorā, importējiet suneditor/css/contents un ietiniet HTML elementā ar klasi sun-editor-editable."
+				}
+			},
+			"licenseLink": "Lasīt licences kopsavilkumu",
+			"troubleshootingLink": "Problēmu novēršanas ceļvedis"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Augšupielādes apdarinātāji pārņem augšupielādes atbildi — pievienots reģistrētājs neļautu ievietot augšupielādētos multivides failus —, tāpēc inspektors tos neaiztiek:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Jūsu augšupielādes serverim ir jāatgriež JSON šajā formātā. SunEditor nosūta failus kā multipart/form-data ar lauka nosaukumu 'file-0', 'file-1' utt.",
 			"serverExample": "Express.js piemērs",
 			"customUploadHandler": "Pielāgots augšupielādes apstrādātājs",
-			"customHandlerDesc": "Pārrakstiet iebūvēto XHR augšupielādi ar savu loģiku. Atgrieziet vērtību “true”, lai norādītu SunEditor, ka apstrādājāt atbildi.",
+			"customHandlerDesc": "Izmantojiet imageUploadHandler, ja jūsu augšupielādes API atgriež citu atbildes formātu. Pieprasījumu joprojām nosūta SunEditor; kad apdarinātājs ir definēts, tas saņem pabeigto pieprasījumu un pats izlemj, ko ievietot, — iebūvētā ievietošana tiek izlaista.",
+			"customHandlerDirectLink": "Tā vietā augšupielādējiet tieši S3 vai citā krātuvē",
 			"validation": "Augšupielādes validācija",
 			"validationDesc": "Izmantojiet notikumus *UploadBefore, lai validētu vai modificētu failus pirms to nosūtīšanas uz serveri. Darbojas ar visiem multivides veidiem.",
 			"errors": "Kļūdu apstrāde",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Spraudņa opcijas",
 		"perFrame": "uz kadru",
 		"perFrameHint": "Šīs opcijas var konfigurēt atsevišķi katrai saknei vairāku sakņu režīmā."
+	},
+	"License": {
+		"title": "MIT licence",
+		"subtitle": "SunEditor ir bezmaksas un atvērtā koda. Izmantojiet to personīgos un komerciālos projektos bez maksas, atslēgām vai kontiem.",
+		"updated": "Pēdējoreiz atjaunināts: {date}",
+		"allowedTitle": "Ko jūs drīkstat darīt",
+		"allowed": {
+			"commercial": "Izmantot komerciālos produktos un SaaS",
+			"internal": "Izmantot iekšējās un uzņēmumu lietotnēs",
+			"selfHost": "Mitināt savā serverī — mākoņpakalpojums vai konts nav vajadzīgs",
+			"modify": "Modificēt pirmkodu un rakstīt savus spraudņus",
+			"distribute": "Iekļaut savas lietotnes pakotnē un izplatīt tālāk kopā ar to",
+			"noFee": "Nav maksas par redaktora ielādēm, lietotāju skaita ierobežojumu vai licences atslēgu"
+		},
+		"obligationsTitle": "Kas jums jādara",
+		"obligations": "Iekļaujiet autortiesību paziņojumu un MIT licences tekstu visās programmatūras kopijās vai tās būtiskās daļās.",
+		"warrantyTitle": "Bez garantijas",
+		"warranty": "Programmatūra tiek nodrošināta “tāda, kāda tā ir”, bez jebkāda veida garantijām. Autori nav atbildīgi par jebkādām prasībām vai zaudējumiem, kas izriet no tās lietošanas.",
+		"thirdPartyTitle": "Neobligātās trešo pušu bibliotēkas",
+		"thirdParty": "Pašam SunEditor nav izpildlaika atkarību. Ja iespējojat kādu neobligātu integrāciju, uz attiecīgo bibliotēku attiecas tās pašas licence:",
+		"fullTextTitle": "Pilns licences teksts",
+		"disclaimer": "Šī lapa ir kopsavilkums vienkāršā valodā, nevis juridiska konsultācija. Saistošs ir tālāk sniegtais licences teksts.",
+		"viewOnGitHub": "Skatīt LICENSE vietnē GitHub",
+		"tryPlayground": "Izmēģiniet SunEditor rotaļu laukumā"
+	},
+	"Troubleshooting": {
+		"title": "Problēmu novēršana",
+		"subtitle": "Risinājumi problēmām, ar kurām izstrādātāji visbiežāk saskaras, pievienojot SunEditor lietotnei.",
+		"verified": "Pārbaudīts ar SunEditor {version}",
+		"contents": "Šajā lapā",
+		"searchLabel": "Meklēt problēmas",
+		"searchPlaceholder": "Meklējiet pēc kļūdas ziņojuma vai simptoma",
+		"all": "Visas",
+		"categories": {
+			"setup": "Iestatīšana",
+			"styling": "Stili",
+			"content": "Saturs",
+			"upload": "Augšupielāde",
+			"migration": "Migrācija"
+		},
+		"noResults": "Atbilstošu problēmu nav. Mēģiniet citus vārdus vai izveidojiet pieteikumu zemāk.",
+		"symptom": "Simptoms",
+		"cause": "Cēlonis",
+		"fix": "Risinājums",
+		"helpful": "Vai tas atrisināja jūsu problēmu?",
+		"yes": "Jā",
+		"no": "Nē",
+		"thanks": "Paldies par atsauksmi!",
+		"stillStuck": "Atvainojiet par neērtībām.",
+		"openPrefilledIssue": "Izveidot pieteikumu ar iepriekš aizpildītu vides informāciju",
+		"notListed": "Jūsu problēma šeit nav minēta?",
+		"notListedDesc": "Pameklējiet esošajos pieteikumos vai izveidojiet jaunu, pievienojot rotaļu laukuma saiti, kurā problēma ir reproducēta.",
+		"openIssue": "Izveidot pieteikumu GitHub",
+		"tryPlayground": "Reproducējiet to rotaļu laukumā",
+		"items": {
+			"ssr": {
+				"title": "“window is not defined” servera renderēšanas laikā",
+				"symptom": "Būvēšana vai servera renderēšana neizdodas ar kļūdu ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor nolasa window, document un navigator, tiklīdz modulis tiek importēts, tāpēc to nevar importēt serverī.",
+				"fix": "Importējiet un izveidojiet redaktoru tikai pārlūkā. Next.js App Router ievietojiet redaktoru klienta komponentā un ielādējiet to ar next/dynamic un ssr: false. Nuxt ietiniet to ClientOnly; SvelteKit importējiet to onMount iekšpusē."
+			},
+			"plugin": {
+				"title": "Kļūda: “The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create izmet kļūdu [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "Kāds nosaukums sarakstā buttonList atsaucas uz spraudni, kas nav nodots opcijā plugins.",
+				"fix": "Nododiet visus spraudņus vai importējiet tikai tos spraudņus, ko izmanto jūsu rīkjosla, un nododiet tos."
+			},
+			"target": {
+				"title": "Kļūda: “Cannot find target element” vai “The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create izmet kļūdu [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element vai [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Redaktora izveides brīdī mērķa elements vēl neeksistēja — selektors neatrada nevienu elementu vai ref joprojām bija null.",
+				"fix": "Izveidojiet redaktoru pēc komponenta piemontēšanas (useEffect, onMounted, ngAfterViewInit, onMount) un selektora vietā nododiet pašu elementu."
+			},
+			"strictMode": {
+				"title": "React izstrādes režīmā redaktors tiek izveidots divreiz",
+				"symptom": "Izstrādes laikā rīkjosla dublējas vai redaktors piemontēšanas brīdī mirgo.",
+				"cause": "React StrictMode izpilda efektus divreiz (piemontēšana, nomontēšana, piemontēšana). Bez attīrīšanas funkcijas otrā izpilde izveido vēl vienu instanci.",
+				"fix": "Atgrieziet no efekta attīrīšanas funkciju, kas izsauc destroy(). Šo paņēmienu izmanto sadaļas “Darba sākšana” piemēri."
+			},
+			"css": {
+				"title": "Redaktors tiek attēlots bez stiliem",
+				"symptom": "Rīkjosla izskatās kā nenoformēts saraksts, un ikonas vai nolaižamās izvēlnes ir nepareizās vietās.",
+				"cause": "Stila lapa tiek piegādāta atsevišķi no JavaScript un nav ielādēta.",
+				"fix": "Vienreiz importējiet savā lietotnē suneditor/css/editor, kā arī suneditor/css/contents satura stiliem. Ja izmantojat CDN būvējumu, pievienojiet stila lapu link tagus."
+			},
+			"contents": {
+				"title": "Saglabātais HTML ārpus redaktora izskatās citādi",
+				"symptom": "Rediģējot saturs izskatās pareizi, bet lapā, kurā tas tiek attēlots, pazūd atstarpes, tabulu apmales vai līdzinājums.",
+				"cause": "Satura stili atrodas atsevišķā stila lapā un attiecas tikai uz klasi sun-editor-editable.",
+				"fix": "Attēlošanas lapā importējiet suneditor/css/contents un ietiniet HTML elementā ar klasi sun-editor-editable. Pirms neuzticama HTML renderēšanas attīriet to serverī."
+			},
+			"stripped": {
+				"title": "No satura pazūd tagi, atribūti vai stili",
+				"symptom": "HTML, kas iestatīts ar opciju value vai editor.$.html.set() vai ielīmēts, atgriežas bez dažiem tagiem (piemēram, mark), klašu nosaukumiem, data-* atribūtiem vai iekļautajiem stiliem.",
+				"cause": "SunEditor filtrē visu ienākošo HTML pēc atļauto sarakstiem elementiem, atribūtiem, klašu nosaukumiem un katra taga stiliem un noņem visu, kas tajos nav iekļauts. Elements span, kuram nav palicis neviena stila, tiek noņemts, saglabājot tā saturu.",
+				"fix": "Paplašiniet vajadzīgo atļauto sarakstu: elementWhitelist tagiem, attributeWhitelist atribūtiem, allowedClassName klašu nosaukumiem un tagStyles iekļautajiem stiliem. Atsevišķus filtrus var arī izslēgt ar opciju strictMode. Nekad neatļaujiet script tagus vai on* notikumu atribūtus."
+			},
+			"paste": {
+				"title": "Ielīmētais saturs zaudē formatējumu vai ienes nevēlamus stilus",
+				"symptom": "No Word, Google Docs vai tīmekļa lapas ielīmētais saturs izskatās citādi nekā avotā — vai arī vēlaties pieņemt tikai vienkāršu tekstu.",
+				"cause": "Ielīmētais HTML tiek filtrēts tāpat kā jebkurš cits saturs. Vispirms tiek attīrīts Word un Google Docs marķējums, pēc tam tiek noņemti tagi, atribūti un stili, kas nav atļauto sarakstos.",
+				"fix": "Atļaujiet stilus, kurus vēlaties saglabāt, ar tagStyles (skatiet iepriekšējo sadaļu). Lai paši kontrolētu ielīmēšanu, izmantojiet notikumu onPaste: tas saņem attīrīto HTML (data) un tā avotu (from: MS, GOOGLE, SE vai tukšs). Atgrieziet virkni, lai aizstātu ielīmēto saturu, vai false, lai to atceltu."
+			},
+			"value": {
+				"title": "Rekvizīta value maiņa neatjaunina redaktoru",
+				"symptom": "Jūs stāvoklī iestatāt jaunu HTML, bet redaktors joprojām rāda veco saturu.",
+				"cause": "Opcija value tiek nolasīta tikai vienreiz — kad redaktors tiek izveidots.",
+				"fix": "Lai aizstātu saturu, izsauciet editor.$.html.set(html), bet labojumus nolasiet, klausoties notikumu onChange. Nerakstiet saturu atpakaļ no onChange iekšienes — tas rada atjaunināšanas ciklu un pārvieto kursoru."
+			},
+			"upload": {
+				"title": "Attēli tiek saglabāti kā milzīgas base64 virknes, vai augšupielādētie attēli netiek ievietoti",
+				"symptom": "Saglabātajā HTML ir garas data:image/... virknes, vai arī augšupielādes pieprasījums izdodas, bet attēls neparādās.",
+				"cause": "Bez image.uploadUrl attēli tiek iegulti kā base64. Ja tas ir iestatīts, servera atbildei jāatbilst formātam, ko sagaida SunEditor.",
+				"fix": "Iestatiet image.uploadUrl un atgrieziet JSON ar masīvu result, kura elementos ir url, name un size. Lai ziņotu par kļūdu, atgrieziet errorMessage. Ja jūsu API atgriež citu struktūru, pārveidojiet to notikumā imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "Augšupielāde tieši S3 vai citā krātuvē (iepriekš parakstīts URL)",
+				"symptom": "Failiem jānonāk S3, Cloudinary vai citā krātuves pakalpojumā, tāpēc viens image.uploadUrl galapunkts neder.",
+				"cause": "image.uploadUrl nosūta failus uz vienu galapunktu un sagaida SunEditor atbildes formātu.",
+				"fix": "Apstrādājiet augšupielādi notikumā onImageUploadBefore: augšupielādējiet katru failu paši, ievietojiet to ar $.plugins.image.submitURL(url) un atgrieziet false, lai SunEditor izlaistu savu augšupielādi. submitURL vēlreiz izraisa to pašu notikumu ar iestatītu info.url — ļaujiet šim izsaukumam izpildīties."
+			},
+			"contentApi": {
+				"title": "“editor.getContents is not a function”",
+				"symptom": "Kods, kas rakstīts v2, izmet kļūdu TypeError: editor.getContents is not a function (vai to pašu ar setContents, appendContents, insertHTML).",
+				"cause": "v3 satura metodes ir pārvietotas uz moduli $.html, bet citas v2 instances metodes — uz tādiem moduļiem kā $.ui.",
+				"fix": "Izmantojiet tālāk norādītos v3 ekvivalentus. Opcijām un notikumiem izmantojiet pārveidotāju migrācijas lapā."
+			},
+			"v2": {
+				"title": "v2 opcijas pēc jaunināšanas vairs nedarbojas",
+				"symptom": "Pēc pārejas uz v3 dažām opcijām, pogām vai notikumiem vairs nav nekādas ietekmes.",
+				"cause": "v3 daudzas opcijas tika pārdēvētas vai pārvietotas — piemēram, augšupielādes opcijas tagad ir ligzdotas zem spraudņa nosaukuma (image.uploadUrl).",
+				"fix": "Ielīmējiet savas v2 opcijas pārveidotājā migrācijas lapā, lai iegūtu atbilstošās v3 opcijas."
+			}
+		}
 	}
 }

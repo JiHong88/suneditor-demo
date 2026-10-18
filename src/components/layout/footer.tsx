@@ -99,6 +99,14 @@ export default function Footer({ version = "" }: FooterProps) {
 								{t("docs")}
 							</Link>
 						</li>
+						<li className='my-4'>
+							<Link
+								href='/troubleshooting'
+								className='hover:underline hover:text-slate-900 dark:hover:text-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-slate-400/50 dark:focus-visible:ring-slate-500/50 rounded'
+							>
+								{t("troubleshooting")}
+							</Link>
+						</li>
 					</ul>
 				</nav>
 
@@ -113,7 +121,7 @@ export default function Footer({ version = "" }: FooterProps) {
 						{t("about")}
 					</h4>
 					<p className='my-4 mb-2'>
-						<Link href='https://github.com/JiHong88/suneditor?tab=MIT-1-ov-file' target='_blank'>{t("license")}</Link>
+						<Link href='/license'>{t("license")}</Link>
 					</p>
 					<p className='my-4 flex items-center gap-2'>
 						<Link href='https://github.com/JiHong88/suneditor/graphs/contributors' target='_blank'>

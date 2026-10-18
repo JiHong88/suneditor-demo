@@ -36,13 +36,15 @@
 			"playground": "Playground",
 			"about": "About",
 			"license": "Licensed under MIT.",
-			"copyright": "© Copyright {year} SunEditor Contributors"
+			"copyright": "© Copyright {year} SunEditor Contributors",
+			"troubleshooting": "Troubleshooting"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "A lightweight and powerful WYSIWYG editor in vanilla JavaScript.",
-			"tagline": "One install. Everything included."
+			"title": "A modular WYSIWYG HTML editor with zero runtime dependencies.",
+			"tagline": "Everything included. Enable only what you need.",
+			"trust": "MIT licensed · No cloud · No account required"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Zero Dependencies",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Try it now",
 			"desc": "Free and open source. See the docs or contribute on GitHub."
+		},
+		"Faq": {
+			"title": "SunEditor at a glance",
+			"desc": "Short answers to the questions developers ask before choosing an editor.",
+			"items": {
+				"commercial": {
+					"q": "Is SunEditor free for commercial use?",
+					"a": "Yes. SunEditor is released under the MIT License. You can use it in commercial products, SaaS and internal tools, modify it and self-host it. Keep the copyright and license notice in your copies. There is no license key, account or per-load fee."
+				},
+				"dependencies": {
+					"q": "Does SunEditor have dependencies?",
+					"a": "No. The suneditor package has zero runtime dependencies. Optional integrations such as KaTeX or MathJax (math) and CodeMirror (code view) are used only if you enable them."
+				},
+				"frameworks": {
+					"q": "Which frameworks does it work with?",
+					"a": "SunEditor is plain JavaScript, so it works anywhere a browser runs: vanilla JS via npm or CDN, React, Vue, Angular, Svelte and Web Components. TypeScript type definitions are included in the package."
+				},
+				"features": {
+					"q": "What is included out of the box?",
+					"a": "Tables with cell merge and split, image, video, audio and file upload, links, math, code blocks, Markdown view, drawing, templates and layouts, slash commands and block handles — 30+ plugins in total, plus 25+ language packs and RTL support. All plugins ship in one package — enable only the ones you need with the plugins option."
+				},
+				"cloud": {
+					"q": "Does it require a cloud service or an account?",
+					"a": "No. The editor runs entirely in the browser and does not send your content to any external service. Uploads go to an endpoint on your own server, set with the uploadUrl option."
+				},
+				"output": {
+					"q": "What format does it produce?",
+					"a": "Standard HTML. To display saved content with the same styles as the editor, import suneditor/css/contents and wrap the HTML in an element with the sun-editor-editable class."
+				}
+			},
+			"licenseLink": "Read the license summary",
+			"troubleshootingLink": "Troubleshooting guide"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Upload handlers take over the upload response — attaching a logger would stop uploaded media from being inserted — so the inspector leaves them alone:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Your upload server must return JSON in this format. SunEditor sends files as multipart/form-data with field name 'file-0', 'file-1', etc.",
 			"serverExample": "Express.js Example",
 			"customUploadHandler": "Custom Upload Handler",
-			"customHandlerDesc": "Override the built-in XHR upload with your own logic. Return true to tell SunEditor you handled the response.",
+			"customHandlerDesc": "Use imageUploadHandler when your upload API returns a different response format. SunEditor still sends the request; once the handler is defined, it receives the finished request and decides what to insert — the built-in insertion is skipped.",
+			"customHandlerDirectLink": "Upload straight to S3 or other storage instead",
 			"validation": "Upload Validation",
 			"validationDesc": "Use *UploadBefore events to validate or modify files before they're sent to the server. Works for all media types.",
 			"errors": "Error Handling",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Plugin Options",
 		"perFrame": "per-frame",
 		"perFrameHint": "These options can be configured individually per root in multi-root mode."
+	},
+	"License": {
+		"title": "MIT License",
+		"subtitle": "SunEditor is free and open source. Use it in personal and commercial projects without fees, keys or accounts.",
+		"updated": "Last updated: {date}",
+		"allowedTitle": "What you can do",
+		"allowed": {
+			"commercial": "Use it in commercial products and SaaS",
+			"internal": "Use it in internal and enterprise applications",
+			"selfHost": "Self-host it — no cloud service or account required",
+			"modify": "Modify the source and write your own plugins",
+			"distribute": "Bundle and redistribute it with your application",
+			"noFee": "No editor-load fees, seat limits or license keys"
+		},
+		"obligationsTitle": "What you need to do",
+		"obligations": "Include the copyright notice and the MIT license text in all copies or substantial portions of the software.",
+		"warrantyTitle": "No warranty",
+		"warranty": "The software is provided “as is”, without warranty of any kind. The authors are not liable for any claim or damages arising from its use.",
+		"thirdPartyTitle": "Optional third-party libraries",
+		"thirdParty": "SunEditor itself has no runtime dependencies. If you enable an optional integration, that library is covered by its own license:",
+		"fullTextTitle": "Full license text",
+		"disclaimer": "This page is a plain-language summary, not legal advice. The license text below is what applies.",
+		"viewOnGitHub": "View LICENSE on GitHub",
+		"tryPlayground": "Try SunEditor in the Playground"
+	},
+	"Troubleshooting": {
+		"title": "Troubleshooting",
+		"subtitle": "Fixes for the problems developers run into most often when adding SunEditor to an app.",
+		"verified": "Checked against SunEditor {version}",
+		"contents": "On this page",
+		"searchLabel": "Search problems",
+		"searchPlaceholder": "Search by error message or symptom",
+		"all": "All",
+		"categories": {
+			"setup": "Setup",
+			"styling": "Styles",
+			"content": "Content",
+			"upload": "Upload",
+			"migration": "Migration"
+		},
+		"noResults": "No matching problems. Try different words, or open an issue below.",
+		"symptom": "Symptom",
+		"cause": "Cause",
+		"fix": "Fix",
+		"helpful": "Did this solve your problem?",
+		"yes": "Yes",
+		"no": "No",
+		"thanks": "Thanks for the feedback!",
+		"stillStuck": "Sorry about that.",
+		"openPrefilledIssue": "Open an issue with your environment pre-filled",
+		"notListed": "Problem not listed here?",
+		"notListedDesc": "Search the existing issues or open a new one with a Playground link that reproduces it.",
+		"openIssue": "Open an issue on GitHub",
+		"tryPlayground": "Reproduce it in the Playground",
+		"items": {
+			"ssr": {
+				"title": "“window is not defined” during server rendering",
+				"symptom": "The build or the server render fails with ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor reads window, document and navigator as soon as the module is imported, so it cannot be imported on the server.",
+				"fix": "Import and create the editor only in the browser. In the Next.js App Router, put the editor in a client component and load it with next/dynamic and ssr: false. In Nuxt, wrap it in ClientOnly; in SvelteKit, import it inside onMount."
+			},
+			"plugin": {
+				"title": "Error: “The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create throws [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "A name in buttonList refers to a plugin that was not passed in the plugins option.",
+				"fix": "Pass every plugin, or import just the plugins your toolbar uses and pass those."
+			},
+			"target": {
+				"title": "Error: “Cannot find target element” or “The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create throws [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element, or [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "The target element did not exist yet when the editor was created — the selector matched nothing, or the ref was still null.",
+				"fix": "Create the editor after the component mounts (useEffect, onMounted, ngAfterViewInit, onMount) and pass the element itself instead of a selector."
+			},
+			"strictMode": {
+				"title": "The editor is created twice in React development mode",
+				"symptom": "In development the toolbar is duplicated, or the editor flickers on mount.",
+				"cause": "React StrictMode runs effects twice (mount, unmount, mount). Without a cleanup, the second run creates another instance.",
+				"fix": "Return a cleanup from the effect that calls destroy(). The Getting Started examples use this pattern."
+			},
+			"css": {
+				"title": "The editor renders without styles",
+				"symptom": "The toolbar appears as an unstyled list and icons or dropdowns are misplaced.",
+				"cause": "The stylesheet is shipped separately from the JavaScript and has not been loaded.",
+				"fix": "Import suneditor/css/editor once in your app, plus suneditor/css/contents for content styles. With the CDN build, add the stylesheet link tags."
+			},
+			"contents": {
+				"title": "Saved HTML looks different outside the editor",
+				"symptom": "Content looks right while editing, but loses spacing, table borders or alignment on the page that displays it.",
+				"cause": "Content styles live in a separate stylesheet and are scoped to the sun-editor-editable class.",
+				"fix": "Import suneditor/css/contents on the display page and wrap the HTML in an element with the sun-editor-editable class. Sanitize untrusted HTML on the server before rendering it."
+			},
+			"stripped": {
+				"title": "Tags, attributes or styles disappear from the content",
+				"symptom": "HTML set with the value option or editor.$.html.set(), or pasted in, comes back without some tags (such as mark), class names, data-* attributes or inline styles.",
+				"cause": "SunEditor filters all incoming HTML against allow lists for elements, attributes, class names and per-tag styles, and removes anything that is not on them. A span left without any style is unwrapped.",
+				"fix": "Extend the allow list you need: elementWhitelist for tags, attributeWhitelist for attributes, allowedClassName for class names and tagStyles for inline styles. Individual filters can also be switched off with the strictMode option. Never allow script tags or on* event attributes."
+			},
+			"paste": {
+				"title": "Pasted content loses its formatting, or brings in unwanted styles",
+				"symptom": "Content pasted from Word, Google Docs or a web page looks different from the source — or you want to accept plain text only.",
+				"cause": "Pasted HTML goes through the same filtering as any other content. Word and Google Docs markup is cleaned first, then tags, attributes and styles outside the allow lists are removed.",
+				"fix": "Allow the styles you want to keep with tagStyles (see the previous section). To control pasting yourself, use the onPaste event: it receives the cleaned HTML (data) and its source (from: MS, GOOGLE, SE or empty). Return a string to replace the pasted content, or false to cancel."
+			},
+			"value": {
+				"title": "Changing the value prop does not update the editor",
+				"symptom": "You set new HTML in state, but the editor keeps showing the old content.",
+				"cause": "The value option is read once, when the editor is created.",
+				"fix": "Call editor.$.html.set(html) to replace the content and listen to the onChange event to read edits. Do not write the content back from inside onChange — that creates an update loop and moves the caret."
+			},
+			"upload": {
+				"title": "Images are saved as huge base64 strings, or uploads are not inserted",
+				"symptom": "Saved HTML contains long data:image/... strings, or the upload request succeeds but no image appears.",
+				"cause": "Without image.uploadUrl, images are embedded as base64. With it, the server response must match the format SunEditor expects.",
+				"fix": "Set image.uploadUrl and return JSON with a result array of url, name and size. Return errorMessage to report a failure. If your API returns a different shape, map it in the imageUploadHandler event."
+			},
+			"customUpload": {
+				"title": "Uploading straight to S3 or other storage (presigned URL)",
+				"symptom": "Files should go to S3, Cloudinary or another storage service, so a single image.uploadUrl endpoint does not fit.",
+				"cause": "image.uploadUrl posts files to one endpoint and expects SunEditor's response format.",
+				"fix": "Handle the upload in the onImageUploadBefore event: upload each file yourself, insert it with $.plugins.image.submitURL(url), and return false so SunEditor skips its own upload. submitURL fires the same event again with info.url set — let that call through."
+			},
+			"contentApi": {
+				"title": "“editor.getContents is not a function”",
+				"symptom": "Code written for v2 throws TypeError: editor.getContents is not a function (or setContents, appendContents, insertHTML).",
+				"cause": "In v3 the content methods moved to the $.html module, and other v2 instance methods moved to modules such as $.ui.",
+				"fix": "Use the v3 equivalents below. For options and events, use the converter on the Migration page."
+			},
+			"v2": {
+				"title": "Options from v2 stopped working after upgrading",
+				"symptom": "After moving to v3, some options, buttons or events have no effect.",
+				"cause": "v3 renamed or moved many options — for example, upload options are now nested under the plugin name (image.uploadUrl).",
+				"fix": "Paste your v2 options into the converter on the Migration page to get the v3 equivalents."
+			}
+		}
 	}
 }

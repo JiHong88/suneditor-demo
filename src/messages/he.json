@@ -36,13 +36,15 @@
 			"playground": "מִגרָשׁ מִשְׂחָקִים",
 			"about": "אוֹדוֹת",
 			"license": "מורשה תחת MIT.",
-			"copyright": "© זכויות יוצרים {year} תורמים של SunEditor"
+			"copyright": "© זכויות יוצרים {year} תורמים של SunEditor",
+			"troubleshooting": "פתרון בעיות"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "עורך WYSIWYG קל משקל וחזק ב-JavaScript פשוט.",
-			"tagline": "התקנה אחת. הכל כלול."
+			"title": "עורך HTML מסוג WYSIWYG מודולרי, ללא תלויות זמן ריצה.",
+			"tagline": "הכול כלול. הפעילו רק את מה שאתם צריכים.",
+			"trust": "רישיון MIT · ללא ענן · ללא צורך בחשבון"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "אפס תלויות",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "נסה את זה עכשיו",
 			"desc": "קוד פתוח וחינמי. עיינו במסמכים או תורמו ב-GitHub."
+		},
+		"Faq": {
+			"title": "SunEditor במבט מהיר",
+			"desc": "תשובות קצרות לשאלות שמפתחים שואלים לפני שהם בוחרים עורך.",
+			"items": {
+				"commercial": {
+					"q": "האם SunEditor חינמי לשימוש מסחרי?",
+					"a": "כן. SunEditor מופץ תחת רישיון MIT. אפשר להשתמש בו במוצרים מסחריים, ב-SaaS ובכלים פנימיים, לשנות אותו ולארח אותו בעצמך. יש לשמור את הודעת זכויות היוצרים והרישיון בעותקים שלך. אין מפתח רישיון, אין חשבון ואין תשלום לפי טעינה."
+				},
+				"dependencies": {
+					"q": "האם ל-SunEditor יש תלויות?",
+					"a": "לא. לחבילה suneditor אין תלויות זמן ריצה כלל. שילובים אופציונליים כמו KaTeX או MathJax (מתמטיקה) ו-CodeMirror (תצוגת קוד) נטענים רק אם תפעיל אותם."
+				},
+				"frameworks": {
+					"q": "עם אילו פריימוורקים הוא עובד?",
+					"a": "SunEditor כתוב ב-JavaScript טהור, ולכן הוא עובד בכל מקום שבו רץ דפדפן: JS טהור (vanilla) דרך npm או CDN, React, Vue, Angular, Svelte ו-Web Components. הגדרות טיפוסים של TypeScript כלולות בחבילה."
+				},
+				"features": {
+					"q": "מה כלול כבר מהקופסה?",
+					"a": "טבלאות עם מיזוג ופיצול תאים, העלאת תמונות, וידאו, אודיו וקבצים, קישורים, נוסחאות מתמטיות, בלוקי קוד, תצוגת Markdown, ציור, תבניות ופריסות, פקודות לוכסן וידיות בלוקים — יותר מ-30 תוספים בסך הכול, ובנוסף יותר מ-25 חבילות שפה ותמיכה ב-RTL. כל התוספים מגיעים בחבילה אחת — הפעילו רק את מה שאתם צריכים באמצעות האפשרות plugins."
+				},
+				"cloud": {
+					"q": "האם נדרש שירות ענן או חשבון?",
+					"a": "לא. העורך פועל כולו בדפדפן ואינו שולח את התוכן שלך לשום שירות חיצוני. העלאות נשלחות לנקודת קצה בשרת שלך, שמוגדרת באמצעות האפשרות uploadUrl."
+				},
+				"output": {
+					"q": "באיזה פורמט הוא מפיק את התוכן?",
+					"a": "HTML סטנדרטי. כדי להציג תוכן שמור עם אותם סגנונות כמו בעורך, ייבא את suneditor/css/contents ועטוף את ה-HTML באלמנט עם המחלקה sun-editor-editable."
+				}
+			},
+			"licenseLink": "לסיכום הרישיון",
+			"troubleshootingLink": "מדריך לפתרון בעיות"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "מטפלי העלאה לוקחים לידיהם את תשובת ההעלאה — חיבור רושם יומן היה מונע את הוספת המדיה שהועלתה — ולכן המפקח לא נוגע בהם:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "שרת ההעלאה שלך חייב להחזיר JSON בפורמט זה. SunEditor שולח קבצים כ-multipart/form-data עם שם השדה 'file-0', 'file-1' וכו'.",
 			"serverExample": "דוגמה ל-Express.js",
 			"customUploadHandler": "מטפל העלאה מותאם אישית",
-			"customHandlerDesc": "עקפו את העלאת ה-XHR המובנית בעזרת הלוגיקה שלכם. החזירו את הערך true כדי להודיע ​​ל-SunEditor שטיפלת בתגובה.",
+			"customHandlerDesc": "השתמשו ב-imageUploadHandler כשממשק ה-API להעלאה שלכם מחזיר תשובה בפורמט אחר. את הבקשה עדיין שולח SunEditor; ברגע שהמטפל מוגדר, הוא מקבל את הבקשה שהסתיימה ומחליט מה להוסיף — ההוספה המובנית מדולגת.",
+			"customHandlerDirectLink": "במקום זאת, העלו ישירות ל-S3 או לאחסון אחר",
 			"validation": "אימות העלאה",
 			"validationDesc": "השתמש באירועי *UploadBefore כדי לאמת או לשנות קבצים לפני שהם נשלחים לשרת. עובד עבור כל סוגי המדיה.",
 			"errors": "טיפול בשגיאות",
@@ -746,5 +781,139 @@
 		"pluginOptions": "אפשרויות תוסף",
 		"perFrame": "לכל פריים",
 		"perFrameHint": "ניתן להגדיר אפשרויות אלו בנפרד לכל שורש במצב מרובה שורשים."
+	},
+	"License": {
+		"title": "רישיון MIT",
+		"subtitle": "SunEditor חינמי ובקוד פתוח. השתמש בו בפרויקטים אישיים ומסחריים ללא תשלום, מפתחות או חשבונות.",
+		"updated": "עודכן לאחרונה: {date}",
+		"allowedTitle": "מה מותר לך לעשות",
+		"allowed": {
+			"commercial": "להשתמש בו במוצרים מסחריים וב-SaaS",
+			"internal": "להשתמש בו ביישומים פנימיים וארגוניים",
+			"selfHost": "לארח אותו בעצמך — ללא צורך בשירות ענן או בחשבון",
+			"modify": "לשנות את קוד המקור ולכתוב תוספים משלך",
+			"distribute": "לארוז אותו ולהפיץ אותו מחדש יחד עם היישום שלך",
+			"noFee": "ללא תשלום על טעינות העורך, ללא הגבלת משתמשים וללא מפתחות רישיון"
+		},
+		"obligationsTitle": "מה עליך לעשות",
+		"obligations": "לכלול את הודעת זכויות היוצרים ואת נוסח רישיון MIT בכל העותקים או החלקים המהותיים של התוכנה.",
+		"warrantyTitle": "ללא אחריות",
+		"warranty": "התוכנה מסופקת \"כמות שהיא\" (AS IS), ללא אחריות מכל סוג שהוא. המחברים אינם אחראים לכל תביעה או נזק הנובעים מהשימוש בה.",
+		"thirdPartyTitle": "ספריות צד שלישי אופציונליות",
+		"thirdParty": "ל-SunEditor עצמו אין תלויות זמן ריצה. אם תפעיל שילוב אופציונלי, הספרייה הזו כפופה לרישיון שלה:",
+		"fullTextTitle": "נוסח הרישיון המלא",
+		"disclaimer": "דף זה הוא סיכום בשפה פשוטה ואינו ייעוץ משפטי. נוסח הרישיון שלהלן הוא הקובע.",
+		"viewOnGitHub": "הצג את LICENSE ב-GitHub",
+		"tryPlayground": "נסה את SunEditor במגרש המשחקים"
+	},
+	"Troubleshooting": {
+		"title": "פתרון בעיות",
+		"subtitle": "פתרונות לבעיות שמפתחים נתקלים בהן לרוב כשהם מוסיפים את SunEditor לאפליקציה.",
+		"verified": "נבדק מול SunEditor {version}",
+		"contents": "בדף זה",
+		"searchLabel": "חיפוש בעיות",
+		"searchPlaceholder": "חפש לפי הודעת שגיאה או תסמין",
+		"all": "הכול",
+		"categories": {
+			"setup": "הגדרה",
+			"styling": "סגנונות",
+			"content": "תוכן",
+			"upload": "העלאה",
+			"migration": "הגירה"
+		},
+		"noResults": "לא נמצאו בעיות תואמות. נסה מילים אחרות, או פתח issue למטה.",
+		"symptom": "תסמין",
+		"cause": "סיבה",
+		"fix": "פתרון",
+		"helpful": "האם זה פתר את הבעיה שלך?",
+		"yes": "כן",
+		"no": "לא",
+		"thanks": "תודה על המשוב!",
+		"stillStuck": "מצטערים על כך.",
+		"openPrefilledIssue": "פתח issue עם פרטי הסביבה שלך ממולאים מראש",
+		"notListed": "הבעיה שלך לא מופיעה כאן?",
+		"notListedDesc": "חפש ב-issues הקיימים או פתח issue חדש עם קישור ממגרש המשחקים שמשחזר את הבעיה.",
+		"openIssue": "פתח issue ב-GitHub",
+		"tryPlayground": "שחזר את הבעיה במגרש המשחקים",
+		"items": {
+			"ssr": {
+				"title": "\"window is not defined\" בזמן רינדור בצד השרת",
+				"symptom": "הבנייה או הרינדור בשרת נכשלים עם השגיאה ReferenceError: window is not defined (ב-Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor קורא את window, document ו-navigator מיד כשהמודול מיובא, ולכן אי אפשר לייבא אותו בשרת.",
+				"fix": "ייבא וצור את העורך רק בדפדפן. ב-Next.js App Router, שים את העורך ברכיב לקוח (client component) וטען אותו באמצעות next/dynamic עם ssr: false. ב-Nuxt, עטוף אותו ב-ClientOnly; ב-SvelteKit, ייבא אותו בתוך onMount."
+			},
+			"plugin": {
+				"title": "שגיאה: \"The button name of a plugin that does not exist\"",
+				"symptom": "suneditor.create זורק את השגיאה: [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "שם ב-buttonList מפנה לתוסף שלא הועבר באפשרות plugins.",
+				"fix": "העבר את כל התוספים, או ייבא רק את התוספים שסרגל הכלים שלך משתמש בהם והעבר אותם."
+			},
+			"target": {
+				"title": "שגיאה: “Cannot find target element” או “The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create זורק את השגיאה [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element, או [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "אלמנט היעד עדיין לא היה קיים כשהעורך נוצר — הסלקטור לא התאים לשום אלמנט, או שה-ref עדיין היה null.",
+				"fix": "צור את העורך אחרי שהרכיב עולה (useEffect, onMounted, ngAfterViewInit, onMount) והעבר את האלמנט עצמו במקום סלקטור."
+			},
+			"strictMode": {
+				"title": "העורך נוצר פעמיים במצב פיתוח של React",
+				"symptom": "במצב פיתוח סרגל הכלים מוכפל, או שהעורך מהבהב בזמן הטעינה (mount).",
+				"cause": "React StrictMode מריץ effects פעמיים (mount, unmount, mount). ללא פונקציית ניקוי, ההרצה השנייה יוצרת מופע נוסף.",
+				"fix": "החזר מה-effect פונקציית ניקוי שקוראת ל-destroy(). הדוגמאות ב\"תחילת העבודה\" משתמשות בדפוס הזה."
+			},
+			"css": {
+				"title": "העורך מוצג ללא עיצוב",
+				"symptom": "סרגל הכלים מופיע כרשימה ללא עיצוב, והסמלים או התפריטים הנפתחים אינם במקומם.",
+				"cause": "גיליון הסגנונות מסופק בנפרד מה-JavaScript ולא נטען.",
+				"fix": "ייבא את suneditor/css/editor פעם אחת באפליקציה, ובנוסף את suneditor/css/contents לסגנונות התוכן. בגרסת ה-CDN, הוסף את תגי ה-link של גיליון הסגנונות."
+			},
+			"contents": {
+				"title": "HTML שמור נראה אחרת מחוץ לעורך",
+				"symptom": "התוכן נראה תקין בזמן העריכה, אבל בדף שמציג אותו הוא מאבד ריווח, גבולות טבלה או יישור.",
+				"cause": "סגנונות התוכן נמצאים בגיליון סגנונות נפרד ותחומים למחלקה sun-editor-editable.",
+				"fix": "ייבא את suneditor/css/contents בדף התצוגה ועטוף את ה-HTML באלמנט עם המחלקה sun-editor-editable. בצע סניטציה (sanitize) ל-HTML לא מהימן בשרת לפני הצגתו."
+			},
+			"stripped": {
+				"title": "תגים, מאפיינים או סגנונות נעלמים מהתוכן",
+				"symptom": "HTML שהוגדר דרך האפשרות value או editor.$.html.set(), או שהודבק, חוזר בלי חלק מהתגים (כמו mark), שמות מחלקות, מאפייני data-* או סגנונות inline.",
+				"cause": "SunEditor מסנן את כל ה-HTML הנכנס מול רשימות היתרים (allow lists) של אלמנטים, מאפיינים, שמות מחלקות וסגנונות לכל תג, ומסיר כל מה שאינו מופיע בהן. span שלא נשאר לו אף סגנון מוסר, והתוכן שלו נשאר במקומו.",
+				"fix": "הרחב את רשימת ההיתרים שאתה צריך: elementWhitelist לתגים, attributeWhitelist למאפיינים, allowedClassName לשמות מחלקות ו-tagStyles לסגנונות inline. אפשר גם לכבות מסננים בודדים באמצעות האפשרות strictMode. לעולם אל תתיר תגי script או מאפייני אירועים on*."
+			},
+			"paste": {
+				"title": "תוכן מודבק מאבד את העיצוב שלו, או מביא איתו סגנונות לא רצויים",
+				"symptom": "תוכן שמודבק מ-Word, מ-Google Docs או מדף אינטרנט נראה שונה מהמקור — או שאתה רוצה לקבל טקסט פשוט בלבד.",
+				"cause": "HTML מודבק עובר את אותו סינון כמו כל תוכן אחר. קודם מנוקה ה-markup של Word ו-Google Docs, ואז מוסרים תגים, מאפיינים וסגנונות שאינם ברשימות ההיתרים.",
+				"fix": "התר את הסגנונות שברצונך לשמור באמצעות tagStyles (ראה את הסעיף הקודם). כדי לשלוט בהדבקה בעצמך, השתמש באירוע onPaste: הוא מקבל את ה-HTML המנוקה (data) ואת המקור שלו (from: MS, GOOGLE, SE או ריק). החזר מחרוזת כדי להחליף את התוכן המודבק, או false כדי לבטל."
+			},
+			"value": {
+				"title": "שינוי ה-prop בשם value לא מעדכן את העורך",
+				"symptom": "אתה מגדיר HTML חדש ב-state, אבל העורך ממשיך להציג את התוכן הישן.",
+				"cause": "האפשרות value נקראת פעם אחת בלבד, כשהעורך נוצר.",
+				"fix": "קרא ל-editor.$.html.set(html) כדי להחליף את התוכן, והאזן לאירוע onChange כדי לקרוא את העריכות. אל תכתוב את התוכן בחזרה מתוך onChange — זה יוצר לולאת עדכון ומזיז את הסמן."
+			},
+			"upload": {
+				"title": "תמונות נשמרות כמחרוזות base64 ענקיות, או שהקבצים שהועלו לא מוכנסים",
+				"symptom": "ה-HTML השמור מכיל מחרוזות data:image/... ארוכות, או שבקשת ההעלאה מצליחה אך שום תמונה לא מופיעה.",
+				"cause": "ללא image.uploadUrl, תמונות מוטמעות כ-base64. כשהוא מוגדר, תגובת השרת חייבת להתאים לפורמט ש-SunEditor מצפה לו.",
+				"fix": "הגדר את image.uploadUrl והחזר JSON עם מערך result של url, name ו-size. החזר errorMessage כדי לדווח על כישלון. אם ה-API שלך מחזיר מבנה שונה, מפה אותו באירוע imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "העלאה ישירה ל-S3 או לאחסון אחר (presigned URL)",
+				"symptom": "הקבצים צריכים להגיע ל-S3, ל-Cloudinary או לשירות אחסון אחר, ולכן endpoint יחיד ב-image.uploadUrl לא מתאים.",
+				"cause": "image.uploadUrl שולח את הקבצים ל-endpoint אחד ומצפה לפורמט התגובה של SunEditor.",
+				"fix": "טפל בהעלאה באירוע onImageUploadBefore: העלה כל קובץ בעצמך, הכנס אותו באמצעות $.plugins.image.submitURL(url), והחזר false כדי ש-SunEditor ידלג על ההעלאה שלו. submitURL מפעיל שוב את אותו אירוע כש-info.url מוגדר — תן לקריאה הזו לעבור."
+			},
+			"contentApi": {
+				"title": "“editor.getContents is not a function”",
+				"symptom": "קוד שנכתב לגרסה 2 זורק TypeError: editor.getContents is not a function (או setContents, appendContents, insertHTML).",
+				"cause": "בגרסה 3 מתודות התוכן עברו למודול $.html, ומתודות מופע אחרות מגרסה 2 עברו למודולים כמו $.ui.",
+				"fix": "השתמש במקבילות מגרסה 3 שלהלן. לאפשרויות ולאירועים, השתמש בממיר שבדף ההגירה."
+			},
+			"v2": {
+				"title": "אפשרויות מגרסה 2 הפסיקו לעבוד אחרי השדרוג",
+				"symptom": "אחרי המעבר לגרסה 3, לחלק מהאפשרויות, הכפתורים או האירועים אין שום השפעה.",
+				"cause": "בגרסה 3 אפשרויות רבות שינו את שמן או הועברו — לדוגמה, אפשרויות ההעלאה מקוננות כעת תחת שם התוסף (image.uploadUrl).",
+				"fix": "הדבק את אפשרויות גרסה 2 שלך בממיר שבדף ההגירה כדי לקבל את המקבילות בגרסה 3."
+			}
+		}
 	}
 }

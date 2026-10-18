@@ -36,13 +36,15 @@
 			"playground": "Plac gier i zabaw",
 			"about": "O",
 			"license": "Na licencji MIT.",
-			"copyright": "© Copyright {year} Współpracownicy SunEditor"
+			"copyright": "© Copyright {year} Współpracownicy SunEditor",
+			"troubleshooting": "Rozwiązywanie problemów"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Lekki i wydajny edytor WYSIWYG w czystym JavaScript.",
-			"tagline": "Jedna instalacja. Wszystko w cenie."
+			"title": "Modułowy edytor HTML WYSIWYG bez zależności w runtime.",
+			"tagline": "Wszystko w zestawie. Włącz tylko to, czego potrzebujesz.",
+			"trust": "Licencja MIT · Bez chmury · Bez zakładania konta"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Zero zależności",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Wypróbuj teraz",
 			"desc": "Darmowe i otwarte oprogramowanie. Zobacz dokumentację lub podziel się swoją wiedzą na GitHubie."
+		},
+		"Faq": {
+			"title": "SunEditor w skrócie",
+			"desc": "Krótkie odpowiedzi na pytania, które programiści zadają przed wyborem edytora.",
+			"items": {
+				"commercial": {
+					"q": "Czy SunEditor jest darmowy do użytku komercyjnego?",
+					"a": "Tak. SunEditor jest udostępniany na licencji MIT. Możesz używać go w produktach komercyjnych, SaaS i narzędziach wewnętrznych, modyfikować go i hostować samodzielnie. Zachowaj informację o prawach autorskich i treść licencji w swoich kopiach. Bez kluczy licencyjnych, kont i opłat za załadowania."
+				},
+				"dependencies": {
+					"q": "Czy SunEditor ma zależności?",
+					"a": "Nie. Pakiet suneditor nie ma żadnych zależności w runtime. Opcjonalne integracje, takie jak KaTeX lub MathJax (wzory matematyczne) i CodeMirror (widok kodu), są używane tylko wtedy, gdy je włączysz."
+				},
+				"frameworks": {
+					"q": "Z jakimi frameworkami współpracuje?",
+					"a": "SunEditor to czysty JavaScript, więc działa wszędzie tam, gdzie działa przeglądarka: vanilla JS przez npm lub CDN, React, Vue, Angular, Svelte i Web Components. Definicje typów TypeScript są dołączone do pakietu."
+				},
+				"features": {
+					"q": "Co jest dostępne od razu?",
+					"a": "Tabele ze scalaniem i dzieleniem komórek, przesyłanie obrazów, wideo, audio i plików, linki, wzory matematyczne, bloki kodu, widok Markdown, rysowanie, szablony i układy, polecenia ukośnikowe i uchwyty bloków — łącznie ponad 30 wtyczek, a do tego ponad 25 pakietów językowych i obsługa RTL. Wszystkie wtyczki są w jednym pakiecie — włącz tylko te, których potrzebujesz, za pomocą opcji plugins."
+				},
+				"cloud": {
+					"q": "Czy wymaga usługi w chmurze lub konta?",
+					"a": "Nie. Edytor działa w całości w przeglądarce i nie wysyła Twojej treści do żadnej zewnętrznej usługi. Pliki są przesyłane do endpointu na Twoim własnym serwerze, ustawianego opcją uploadUrl."
+				},
+				"output": {
+					"q": "W jakim formacie generuje wynik?",
+					"a": "W standardowym HTML. Aby wyświetlać zapisaną treść z tymi samymi stylami co w edytorze, zaimportuj suneditor/css/contents i umieść HTML w elemencie z klasą sun-editor-editable."
+				}
+			},
+			"licenseLink": "Przeczytaj podsumowanie licencji",
+			"troubleshootingLink": "Przewodnik rozwiązywania problemów"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Handlery przesyłania przejmują odpowiedź z przesyłania — podpięcie loggera sprawiłoby, że przesłane multimedia nie zostałyby wstawione — dlatego inspektor ich nie rusza:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Twój serwer przesyłania musi zwracać JSON w tym formacie. SunEditor wysyła pliki jako multipart/form-data z nazwą pola „file-0”, „file-1” itd.",
 			"serverExample": "Przykład Express.js",
 			"customUploadHandler": "Niestandardowy moduł obsługi przesyłania",
-			"customHandlerDesc": "Zastąp wbudowaną funkcję przesyłania XHR własną logiką. Zwróć wartość true, aby poinformować SunEditor, że obsłużyłeś odpowiedź.",
+			"customHandlerDesc": "Użyj imageUploadHandler, gdy Twoje API przesyłania zwraca odpowiedź w innym formacie. Żądanie nadal wysyła SunEditor; gdy handler jest zdefiniowany, otrzymuje zakończone żądanie i decyduje, co wstawić — wbudowane wstawianie jest pomijane.",
+			"customHandlerDirectLink": "Zamiast tego przesyłaj bezpośrednio do S3 lub innego magazynu",
 			"validation": "Walidacja przesyłania",
 			"validationDesc": "Użyj zdarzeń *UploadBefore, aby sprawdzić poprawność lub zmodyfikować pliki przed wysłaniem ich na serwer. Działa dla wszystkich typów multimediów.",
 			"errors": "Obsługa błędów",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Opcje wtyczki",
 		"perFrame": "na klatkę",
 		"perFrameHint": "W trybie wielorootowym opcje te można konfigurować indywidualnie dla każdego katalogu głównego."
+	},
+	"License": {
+		"title": "Licencja MIT",
+		"subtitle": "SunEditor jest darmowy i open source. Używaj go w projektach prywatnych i komercyjnych bez opłat, kluczy i kont.",
+		"updated": "Ostatnia aktualizacja: {date}",
+		"allowedTitle": "Co możesz robić",
+		"allowed": {
+			"commercial": "Używać w produktach komercyjnych i SaaS",
+			"internal": "Używać w aplikacjach wewnętrznych i korporacyjnych",
+			"selfHost": "Hostować samodzielnie — bez usługi w chmurze i bez konta",
+			"modify": "Modyfikować kod źródłowy i pisać własne wtyczki",
+			"distribute": "Dołączać do swojej aplikacji i redystrybuować razem z nią",
+			"noFee": "Bez opłat za załadowania edytora, limitów stanowisk i kluczy licencyjnych"
+		},
+		"obligationsTitle": "Co musisz zrobić",
+		"obligations": "Dołącz informację o prawach autorskich i treść licencji MIT do wszystkich kopii lub istotnych części oprogramowania.",
+		"warrantyTitle": "Brak gwarancji",
+		"warranty": "Oprogramowanie jest dostarczane „tak jak jest”, bez jakiejkolwiek gwarancji. Autorzy nie ponoszą odpowiedzialności za żadne roszczenia ani szkody wynikające z jego używania.",
+		"thirdPartyTitle": "Opcjonalne biblioteki zewnętrzne",
+		"thirdParty": "Sam SunEditor nie ma zależności w runtime. Jeśli włączysz opcjonalną integrację, dana biblioteka podlega własnej licencji:",
+		"fullTextTitle": "Pełna treść licencji",
+		"disclaimer": "Ta strona to podsumowanie prostym językiem, a nie porada prawna. Wiążąca jest treść licencji poniżej.",
+		"viewOnGitHub": "Zobacz LICENSE na GitHubie",
+		"tryPlayground": "Wypróbuj SunEditor na Placu zabaw"
+	},
+	"Troubleshooting": {
+		"title": "Rozwiązywanie problemów",
+		"subtitle": "Rozwiązania problemów, na które programiści najczęściej trafiają podczas dodawania SunEditor do aplikacji.",
+		"verified": "Sprawdzone z SunEditor {version}",
+		"contents": "Na tej stronie",
+		"searchLabel": "Szukaj problemów",
+		"searchPlaceholder": "Szukaj po komunikacie błędu lub objawie",
+		"all": "Wszystkie",
+		"categories": {
+			"setup": "Konfiguracja",
+			"styling": "Style",
+			"content": "Treść",
+			"upload": "Przesyłanie",
+			"migration": "Migracja"
+		},
+		"noResults": "Brak pasujących problemów. Spróbuj innych słów lub utwórz zgłoszenie poniżej.",
+		"symptom": "Objaw",
+		"cause": "Przyczyna",
+		"fix": "Rozwiązanie",
+		"helpful": "Czy to rozwiązało Twój problem?",
+		"yes": "Tak",
+		"no": "Nie",
+		"thanks": "Dziękujemy za opinię!",
+		"stillStuck": "Przykro nam.",
+		"openPrefilledIssue": "Utwórz zgłoszenie z automatycznie uzupełnionymi danymi o środowisku",
+		"notListed": "Nie ma tu Twojego problemu?",
+		"notListedDesc": "Przeszukaj istniejące zgłoszenia lub utwórz nowe z linkiem do Placu zabaw, który odtwarza problem.",
+		"openIssue": "Utwórz zgłoszenie na GitHubie",
+		"tryPlayground": "Odtwórz problem na Placu zabaw",
+		"items": {
+			"ssr": {
+				"title": "„window is not defined” podczas renderowania po stronie serwera",
+				"symptom": "Build lub renderowanie na serwerze kończy się błędem ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor odwołuje się do window, document i navigator już w momencie importu modułu, więc nie można go importować na serwerze.",
+				"fix": "Importuj i twórz edytor wyłącznie w przeglądarce. W Next.js App Router umieść edytor w komponencie klienckim i ładuj go przez next/dynamic z ssr: false. W Nuxt opakuj go w ClientOnly, a w SvelteKit zaimportuj go wewnątrz onMount."
+			},
+			"plugin": {
+				"title": "Błąd: „The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create zgłasza błąd [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "Nazwa w buttonList odnosi się do wtyczki, która nie została przekazana w opcji plugins.",
+				"fix": "Przekaż wszystkie wtyczki albo zaimportuj tylko te, których używa Twój pasek narzędzi, i przekaż je."
+			},
+			"target": {
+				"title": "Błąd: „Cannot find target element” lub „The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create zgłasza błąd [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element lub [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Element docelowy jeszcze nie istniał w chwili tworzenia edytora — selektor niczego nie dopasował albo ref nadal miał wartość null.",
+				"fix": "Twórz edytor po zamontowaniu komponentu (useEffect, onMounted, ngAfterViewInit, onMount) i przekazuj sam element zamiast selektora."
+			},
+			"strictMode": {
+				"title": "Edytor jest tworzony dwukrotnie w trybie deweloperskim React",
+				"symptom": "W trybie deweloperskim pasek narzędzi jest zdublowany lub edytor migocze podczas montowania.",
+				"cause": "React StrictMode uruchamia efekty dwukrotnie (montowanie, odmontowanie, montowanie). Bez funkcji czyszczącej drugie uruchomienie tworzy kolejną instancję.",
+				"fix": "Zwróć z efektu funkcję czyszczącą, która wywołuje destroy(). Przykłady w sekcji „Rozpoczęcie pracy” używają tego wzorca."
+			},
+			"css": {
+				"title": "Edytor wyświetla się bez stylów",
+				"symptom": "Pasek narzędzi wygląda jak nieostylowana lista, a ikony lub menu rozwijane są przesunięte.",
+				"cause": "Arkusz stylów jest dostarczany osobno od JavaScriptu i nie został załadowany.",
+				"fix": "Zaimportuj suneditor/css/editor raz w aplikacji, a także suneditor/css/contents dla stylów treści. W przypadku wersji z CDN dodaj tagi link z arkuszami stylów."
+			},
+			"contents": {
+				"title": "Zapisany HTML wygląda inaczej poza edytorem",
+				"symptom": "Podczas edycji treść wygląda poprawnie, ale na stronie, która ją wyświetla, traci odstępy, obramowania tabel lub wyrównanie.",
+				"cause": "Style treści znajdują się w osobnym arkuszu stylów i są ograniczone do klasy sun-editor-editable.",
+				"fix": "Zaimportuj suneditor/css/contents na stronie wyświetlającej i umieść HTML w elemencie z klasą sun-editor-editable. Przed renderowaniem oczyść niezaufany HTML na serwerze."
+			},
+			"stripped": {
+				"title": "Tagi, atrybuty lub style znikają z treści",
+				"symptom": "HTML ustawiony przez opcję value lub editor.$.html.set() albo wklejony wraca bez niektórych tagów (np. mark), nazw klas, atrybutów data-* lub stylów inline.",
+				"cause": "SunEditor filtruje cały przychodzący HTML według list dozwolonych elementów, atrybutów, nazw klas i stylów dla poszczególnych tagów, a wszystko, czego na nich nie ma, usuwa. Element span, któremu nie został żaden styl, jest rozpakowywany (zastępowany swoją zawartością).",
+				"fix": "Rozszerz potrzebną listę dozwolonych: elementWhitelist dla tagów, attributeWhitelist dla atrybutów, allowedClassName dla nazw klas i tagStyles dla stylów inline. Poszczególne filtry można też wyłączyć opcją strictMode. Nigdy nie zezwalaj na tagi script ani atrybuty zdarzeń on*."
+			},
+			"paste": {
+				"title": "Wklejona treść traci formatowanie lub wnosi niechciane style",
+				"symptom": "Treść wklejona z programu Word, Google Docs lub strony internetowej wygląda inaczej niż w źródle — albo chcesz przyjmować wyłącznie zwykły tekst.",
+				"cause": "Wklejony HTML przechodzi przez to samo filtrowanie co każda inna treść. Najpierw oczyszczany jest kod pochodzący z Word i Google Docs, a następnie usuwane są tagi, atrybuty i style spoza list dozwolonych.",
+				"fix": "Zezwól na style, które chcesz zachować, za pomocą tagStyles (zobacz poprzednią sekcję). Aby samodzielnie kontrolować wklejanie, użyj zdarzenia onPaste: otrzymuje ono oczyszczony HTML (data) i jego źródło (from: MS, GOOGLE, SE lub pusta wartość). Zwróć ciąg znaków, aby zastąpić wklejaną treść, albo false, aby anulować wklejanie."
+			},
+			"value": {
+				"title": "Zmiana propsa value nie aktualizuje edytora",
+				"symptom": "Ustawiasz nowy HTML w stanie, ale edytor nadal pokazuje starą treść.",
+				"cause": "Opcja value jest odczytywana tylko raz, podczas tworzenia edytora.",
+				"fix": "Wywołaj editor.$.html.set(html), aby zastąpić treść, i nasłuchuj zdarzenia onChange, aby odczytywać zmiany. Nie zapisuj treści z powrotem wewnątrz onChange — powoduje to pętlę aktualizacji i przesuwa kursor."
+			},
+			"upload": {
+				"title": "Obrazy są zapisywane jako ogromne ciągi base64 albo przesłane pliki nie są wstawiane",
+				"symptom": "Zapisany HTML zawiera długie ciągi data:image/..., albo żądanie przesłania kończy się sukcesem, ale obraz się nie pojawia.",
+				"cause": "Bez image.uploadUrl obrazy są osadzane jako base64. Gdy ta opcja jest ustawiona, odpowiedź serwera musi mieć format oczekiwany przez SunEditor.",
+				"fix": "Ustaw image.uploadUrl i zwracaj JSON z tablicą result zawierającą url, name i size. Aby zgłosić niepowodzenie, zwróć errorMessage. Jeśli Twoje API zwraca dane w innej strukturze, przekształć je w zdarzeniu imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "Przesyłanie bezpośrednio do S3 lub innego magazynu (presigned URL)",
+				"symptom": "Pliki mają trafiać do S3, Cloudinary lub innej usługi przechowywania, więc pojedynczy endpoint image.uploadUrl się nie sprawdza.",
+				"cause": "image.uploadUrl wysyła pliki do jednego endpointu i oczekuje odpowiedzi w formacie SunEditor.",
+				"fix": "Obsłuż przesyłanie w zdarzeniu onImageUploadBefore: prześlij każdy plik samodzielnie, wstaw go przez $.plugins.image.submitURL(url) i zwróć false, aby SunEditor pominął własne przesyłanie. submitURL ponownie wywołuje to samo zdarzenie, tym razem z ustawionym info.url — przepuść to wywołanie."
+			},
+			"contentApi": {
+				"title": "„editor.getContents is not a function”",
+				"symptom": "Kod napisany dla v2 zgłasza TypeError: editor.getContents is not a function (lub to samo dla setContents, appendContents, insertHTML).",
+				"cause": "W v3 metody do obsługi treści przeniesiono do modułu $.html, a inne metody instancji z v2 — do modułów takich jak $.ui.",
+				"fix": "Użyj poniższych odpowiedników z v3. W przypadku opcji i zdarzeń skorzystaj z konwertera na stronie Migracja."
+			},
+			"v2": {
+				"title": "Opcje z v2 przestały działać po aktualizacji",
+				"symptom": "Po przejściu na v3 niektóre opcje, przyciski lub zdarzenia nie działają.",
+				"cause": "W v3 wiele opcji zmieniło nazwę lub miejsce — na przykład opcje przesyłania są teraz zagnieżdżone pod nazwą wtyczki (image.uploadUrl).",
+				"fix": "Wklej swoje opcje z v2 do konwertera na stronie Migracja, aby otrzymać ich odpowiedniki w v3."
+			}
+		}
 	}
 }

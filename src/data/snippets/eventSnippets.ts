@@ -31,13 +31,13 @@ export const EVENTS_BASIC = `const editor = suneditor.create(textarea, {
   },
 });
 
-// 2. Or assign after creation via events namespace
-editor.events.onChange = ({ $, frameContext, data }) => {
+// 2. Or assign after creation (editor.$.eventManager.events)
+editor.$.eventManager.events.onChange = ({ $, frameContext, data }) => {
   console.log('Content changed:', data);
   // Sync with external state (React, Vue, etc.)
 };
 
-editor.events.onSave = async ({ $, data }) => {
+editor.$.eventManager.events.onSave = async ({ $, data }) => {
   await fetch('/api/save', {
     method: 'POST',
     body: JSON.stringify({ content: data }),
@@ -46,7 +46,7 @@ editor.events.onSave = async ({ $, data }) => {
 
 /* ── 인풋 & 키보드: onBeforeInput, onInput, onKeyDown ── */
 export const EVENTS_INPUT = `// Intercept before input (return false to block)
-editor.events.onBeforeInput = ({ event, data }) => {
+editor.$.eventManager.events.onBeforeInput = ({ event, data }) => {
   if (data === '@') {
     // Custom @ handler
     return false;
@@ -54,12 +54,12 @@ editor.events.onBeforeInput = ({ event, data }) => {
 };
 
 // After input processing
-editor.events.onInput = ({ $, event, data }) => {
+editor.$.eventManager.events.onInput = ({ $, event, data }) => {
   // Return false to prevent history push
 };
 
 // Keyboard events
-editor.events.onKeyDown = ({ $, event }) => {
+editor.$.eventManager.events.onKeyDown = ({ $, event }) => {
   if (event.key === 'Enter' && event.shiftKey) {
     // Custom Shift+Enter behavior
     return false; // Prevent default
@@ -68,7 +68,7 @@ editor.events.onKeyDown = ({ $, event }) => {
 
 /* ── 클립보드: onPaste, onDrop, onCopy 핸들러 ────── */
 export const EVENTS_CLIPBOARD = `// Custom paste handler
-editor.events.onPaste = async ({ $, event, data, maxCharCount }) => {
+editor.$.eventManager.events.onPaste = async ({ $, event, data, maxCharCount }) => {
   // Return false to cancel paste
   // Return string to replace paste content
   const cleaned = data.replace(/<script[^>]*>.*?<\\/script>/gi, '');
@@ -76,18 +76,18 @@ editor.events.onPaste = async ({ $, event, data, maxCharCount }) => {
 };
 
 // Custom drop handler
-editor.events.onDrop = async ({ $, event, data }) => {
+editor.$.eventManager.events.onDrop = async ({ $, event, data }) => {
   // Same as onPaste — return false or replacement string
 };
 
 // Copy/Cut events
-editor.events.onCopy = ({ $, event, clipboardData }) => {
+editor.$.eventManager.events.onCopy = ({ $, event, clipboardData }) => {
   // Return false to prevent copy
 };`;
 
 /* ── 이미지 업로드: 전/후/에러/상태 변경 이벤트 ──── */
 export const EVENTS_IMAGE = `// Before upload — validate or modify
-editor.events.onImageUploadBefore = async ({ $, info, handler }) => {
+editor.$.eventManager.events.onImageUploadBefore = async ({ $, info, handler }) => {
   const { files } = info;
   if (files[0].size > 5 * 1024 * 1024) {
     alert('Image too large!');
@@ -98,67 +98,67 @@ editor.events.onImageUploadBefore = async ({ $, info, handler }) => {
 };
 
 // After upload — track loaded images
-editor.events.onImageLoad = ({ $, infoList }) => {
+editor.$.eventManager.events.onImageLoad = ({ $, infoList }) => {
   infoList.forEach(img => {
     console.log('Loaded:', img.src, img.name, img.size);
   });
 };
 
 // Image state changes (create/update/delete)
-editor.events.onImageAction = ({ info, element, state, index }) => {
+editor.$.eventManager.events.onImageAction = ({ info, element, state, index }) => {
   console.log(\`Image \${state}:\`, info.src);
   // Sync with external media library
 };
 
 // Upload error handling
-editor.events.onImageUploadError = async ({ error, limitSize, file }) => {
+editor.$.eventManager.events.onImageUploadError = async ({ error, limitSize, file }) => {
   return \`Upload failed: \${error}\`; // Custom error message
 };`;
 
 /* ── UI 이벤트: 툴바, 컨트롤러, 코드뷰, 풀스크린, 리사이즈 ── */
 export const EVENTS_UI = `// Toolbar visibility (balloon/inline mode)
-editor.events.onShowToolbar = ({ toolbar, mode }) => {
+editor.$.eventManager.events.onShowToolbar = ({ toolbar, mode }) => {
   console.log(\`\${mode} toolbar shown\`);
 };
 
 // Component controller displayed (image/video/table selected)
-editor.events.onShowController = ({ caller, info }) => {
+editor.$.eventManager.events.onShowController = ({ caller, info }) => {
   console.log(\`Controller for: \${caller}\`);
 };
 
 // Code view toggled
-editor.events.onToggleCodeView = ({ is }) => {
+editor.$.eventManager.events.onToggleCodeView = ({ is }) => {
   console.log(is ? 'Code view' : 'WYSIWYG view');
 };
 
 // Fullscreen toggled
-editor.events.onToggleFullScreen = ({ is }) => {
+editor.$.eventManager.events.onToggleFullScreen = ({ is }) => {
   console.log(is ? 'Fullscreen ON' : 'Fullscreen OFF');
 };
 
 // Editor resize
-editor.events.onResizeEditor = ({ height, prevHeight }) => {
+editor.$.eventManager.events.onResizeEditor = ({ height, prevHeight }) => {
   console.log(\`Resized: \${prevHeight} → \${height}\`);
 };`;
 
 /* ── 포커스 관리: 관리형(onFocus/onBlur) vs 네이티브(onNativeFocus/onNativeBlur) ── */
 export const EVENTS_FOCUS = `// Managed focus (recommended)
-editor.events.onFocus = ({ $, frameContext }) => {
+editor.$.eventManager.events.onFocus = ({ $, frameContext }) => {
   // Triggered via editor.focusManager.focus()
   // Toolbar is visible, status flags are set
 };
 
-editor.events.onBlur = ({ $, frameContext }) => {
+editor.$.eventManager.events.onBlur = ({ $, frameContext }) => {
   // Triggered via editor.blur()
   // Balloon toolbar hidden, flags updated
 };
 
 // Native DOM focus (raw browser events)
-editor.events.onNativeFocus = ({ event }) => {
+editor.$.eventManager.events.onNativeFocus = ({ event }) => {
   // Raw browser focus — fires before managed focus
 };
 
-editor.events.onNativeBlur = ({ event }) => {
+editor.$.eventManager.events.onNativeBlur = ({ event }) => {
   // Raw browser blur — fires before managed blur
 };`;
 

@@ -36,13 +36,15 @@
 			"playground": "Loc de joacă",
 			"about": "Despre",
 			"license": "Licențiat sub MIT.",
-			"copyright": "© Drepturi de autor {year} Colaboratori SunEditor"
+			"copyright": "© Drepturi de autor {year} Colaboratori SunEditor",
+			"troubleshooting": "Depanare"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Un editor WYSIWYG ușor și puternic în JavaScript standard.",
-			"tagline": "O singură instalare. Totul inclus."
+			"title": "Un editor HTML WYSIWYG modular, fără dependențe la rulare.",
+			"tagline": "Totul inclus. Activați doar ce vă trebuie.",
+			"trust": "Licență MIT · Fără cloud · Fără cont"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Zero dependențe",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Încearcă acum",
 			"desc": "Gratuit și open source. Consultați documentația sau contribuiți pe GitHub."
+		},
+		"Faq": {
+			"title": "SunEditor pe scurt",
+			"desc": "Răspunsuri scurte la întrebările pe care și le pun dezvoltatorii înainte de a alege un editor.",
+			"items": {
+				"commercial": {
+					"q": "Este SunEditor gratuit pentru uz comercial?",
+					"a": "Da. SunEditor este publicat sub MIT License. Îl puteți folosi în produse comerciale, SaaS și instrumente interne, îl puteți modifica și găzdui pe propriile servere. Păstrați nota de drepturi de autor și textul licenței în copiile dumneavoastră. Nu există cheie de licență, cont sau taxă per încărcare."
+				},
+				"dependencies": {
+					"q": "Are SunEditor dependențe?",
+					"a": "Nu. Pachetul suneditor nu are nicio dependență la rulare. Integrările opționale, precum KaTeX sau MathJax (matematică) și CodeMirror (vizualizare cod), sunt folosite doar dacă le activați."
+				},
+				"frameworks": {
+					"q": "Cu ce framework-uri funcționează?",
+					"a": "SunEditor este JavaScript simplu, așa că funcționează oriunde rulează un browser: vanilla JS prin npm sau CDN, React, Vue, Angular, Svelte și Web Components. Definițiile de tip TypeScript sunt incluse în pachet."
+				},
+				"features": {
+					"q": "Ce este inclus din start?",
+					"a": "Tabele cu îmbinarea și divizarea celulelor, încărcare de imagini, video, audio și fișiere, linkuri, formule matematice, blocuri de cod, vizualizare Markdown, desen, șabloane și machete, comenzi slash și mânere de bloc — peste 30 de pluginuri în total, plus peste 25 de pachete de limbă și suport RTL. Toate pluginurile vin într-un singur pachet — activați doar pe cele de care aveți nevoie cu opțiunea plugins."
+				},
+				"cloud": {
+					"q": "Necesită un serviciu cloud sau un cont?",
+					"a": "Nu. Editorul rulează în întregime în browser și nu trimite conținutul dumneavoastră către niciun serviciu extern. Încărcările ajung la un endpoint de pe propriul server, setat prin opțiunea uploadUrl."
+				},
+				"output": {
+					"q": "Ce format produce?",
+					"a": "HTML standard. Pentru a afișa conținutul salvat cu aceleași stiluri ca în editor, importați suneditor/css/contents și încadrați HTML-ul într-un element cu clasa sun-editor-editable."
+				}
+			},
+			"licenseLink": "Citiți rezumatul licenței",
+			"troubleshootingLink": "Ghid de depanare"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Handlerele de încărcare preiau răspunsul încărcării — atașarea unui logger ar împiedica inserarea fișierelor media încărcate —, așa că inspectorul nu le atinge:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Serverul dvs. de încărcare trebuie să returneze JSON în acest format. SunEditor trimite fișiere ca multipart/form-data cu numele de câmp „file-0”, „file-1” etc.",
 			"serverExample": "Exemplu Express.js",
 			"customUploadHandler": "Gestionar de încărcare personalizat",
-			"customHandlerDesc": "Suprascrie încărcarea XHR încorporată cu propria logică. Returnează true pentru a-i spune lui SunEditor că ai gestionat răspunsul.",
+			"customHandlerDesc": "Folosiți imageUploadHandler atunci când API-ul dumneavoastră de încărcare returnează un alt format de răspuns. Cererea este trimisă în continuare de SunEditor; odată definit, handlerul primește cererea finalizată și decide ce se inserează — inserarea integrată este omisă.",
+			"customHandlerDirectLink": "Încărcați în schimb direct în S3 sau alt spațiu de stocare",
 			"validation": "Validarea încărcării",
 			"validationDesc": "Folosește evenimentele *UploadBefore pentru a valida sau modifica fișierele înainte de a fi trimise către server. Funcționează pentru toate tipurile de media.",
 			"errors": "Gestionarea erorilor",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Opțiuni plugin",
 		"perFrame": "per cadru",
 		"perFrameHint": "Aceste opțiuni pot fi configurate individual pentru fiecare rădăcină în modul multi-rădăcină."
+	},
+	"License": {
+		"title": "MIT License",
+		"subtitle": "SunEditor este gratuit și open source. Folosiți-l în proiecte personale și comerciale fără taxe, chei sau conturi.",
+		"updated": "Ultima actualizare: {date}",
+		"allowedTitle": "Ce aveți voie să faceți",
+		"allowed": {
+			"commercial": "Să-l folosiți în produse comerciale și SaaS",
+			"internal": "Să-l folosiți în aplicații interne și enterprise",
+			"selfHost": "Să-l găzduiți singuri — fără serviciu cloud sau cont",
+			"modify": "Să modificați codul sursă și să scrieți propriile pluginuri",
+			"distribute": "Să-l includeți și să-l redistribuiți împreună cu aplicația dumneavoastră",
+			"noFee": "Fără taxe per încărcare a editorului, limite de utilizatori sau chei de licență"
+		},
+		"obligationsTitle": "Ce trebuie să faceți",
+		"obligations": "Includeți nota de drepturi de autor și textul licenței MIT în toate copiile sau părțile substanțiale ale software-ului.",
+		"warrantyTitle": "Fără garanție",
+		"warranty": "Software-ul este furnizat „ca atare”, fără garanții de niciun fel. Autorii nu răspund pentru nicio pretenție sau daună care decurge din utilizarea lui.",
+		"thirdPartyTitle": "Biblioteci terțe opționale",
+		"thirdParty": "SunEditor în sine nu are dependențe la rulare. Dacă activați o integrare opțională, biblioteca respectivă se află sub propria licență:",
+		"fullTextTitle": "Textul complet al licenței",
+		"disclaimer": "Această pagină este un rezumat pe înțelesul tuturor, nu o consultanță juridică. Textul licenței de mai jos este cel care se aplică.",
+		"viewOnGitHub": "Vedeți LICENSE pe GitHub",
+		"tryPlayground": "Încercați SunEditor în Playground"
+	},
+	"Troubleshooting": {
+		"title": "Depanare",
+		"subtitle": "Soluții pentru problemele cele mai frecvente întâlnite de dezvoltatori atunci când adaugă SunEditor într-o aplicație.",
+		"verified": "Verificat cu SunEditor {version}",
+		"contents": "Pe această pagină",
+		"searchLabel": "Căutați probleme",
+		"searchPlaceholder": "Căutați după mesajul de eroare sau simptom",
+		"all": "Toate",
+		"categories": {
+			"setup": "Configurare",
+			"styling": "Stiluri",
+			"content": "Conținut",
+			"upload": "Încărcare",
+			"migration": "Migrare"
+		},
+		"noResults": "Nicio problemă găsită. Încercați alți termeni sau deschideți un issue mai jos.",
+		"symptom": "Simptom",
+		"cause": "Cauză",
+		"fix": "Soluție",
+		"helpful": "V-a rezolvat asta problema?",
+		"yes": "Da",
+		"no": "Nu",
+		"thanks": "Mulțumim pentru feedback!",
+		"stillStuck": "Ne pare rău.",
+		"openPrefilledIssue": "Deschideți un issue cu datele mediului precompletate",
+		"notListed": "Problema dumneavoastră nu apare aici?",
+		"notListedDesc": "Căutați printre issue-urile existente sau deschideți unul nou, cu un link din Playground care reproduce problema.",
+		"openIssue": "Deschideți un issue pe GitHub",
+		"tryPlayground": "Reproduceți-o în Playground",
+		"items": {
+			"ssr": {
+				"title": "„window is not defined” la randarea pe server",
+				"symptom": "Build-ul sau randarea pe server eșuează cu ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor accesează window, document și navigator imediat ce modulul este importat, deci nu poate fi importat pe server.",
+				"fix": "Importați și creați editorul doar în browser. În Next.js App Router, puneți editorul într-o componentă client și încărcați-l cu next/dynamic și ssr: false. În Nuxt, încadrați-l în ClientOnly; în SvelteKit, importați-l în interiorul onMount."
+			},
+			"plugin": {
+				"title": "Eroare: „The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create aruncă [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "Un nume din buttonList face referire la un plugin care nu a fost transmis în opțiunea plugins.",
+				"fix": "Transmiteți toate pluginurile sau importați doar pluginurile folosite de bara de instrumente și transmiteți-le pe acestea."
+			},
+			"target": {
+				"title": "Eroare: „Cannot find target element” sau „The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create aruncă [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element sau [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Elementul țintă nu exista încă atunci când a fost creat editorul — selectorul nu a găsit nimic sau ref-ul era încă null.",
+				"fix": "Creați editorul după montarea componentei (useEffect, onMounted, ngAfterViewInit, onMount) și transmiteți elementul însuși în loc de un selector."
+			},
+			"strictMode": {
+				"title": "Editorul este creat de două ori în modul de dezvoltare React",
+				"symptom": "În dezvoltare, bara de instrumente apare dublată sau editorul pâlpâie la montare.",
+				"cause": "React StrictMode rulează efectele de două ori (montare, demontare, montare). Fără o funcție de curățare, a doua rulare creează încă o instanță.",
+				"fix": "Returnați din efect o funcție de curățare care apelează destroy(). Exemplele din Noțiuni de bază folosesc acest model."
+			},
+			"css": {
+				"title": "Editorul se afișează fără stiluri",
+				"symptom": "Bara de instrumente apare ca o listă nestilizată, iar pictogramele sau meniurile derulante sunt poziționate greșit.",
+				"cause": "Foaia de stiluri este livrată separat de JavaScript și nu a fost încărcată.",
+				"fix": "Importați suneditor/css/editor o singură dată în aplicație, plus suneditor/css/contents pentru stilurile conținutului. Cu build-ul de pe CDN, adăugați tag-urile link pentru foile de stiluri."
+			},
+			"contents": {
+				"title": "HTML-ul salvat arată diferit în afara editorului",
+				"symptom": "Conținutul arată corect în timpul editării, dar pierde spațierea, bordurile tabelelor sau alinierea pe pagina care îl afișează.",
+				"cause": "Stilurile conținutului se află într-o foaie de stiluri separată și se aplică doar în cadrul clasei sun-editor-editable.",
+				"fix": "Importați suneditor/css/contents pe pagina de afișare și încadrați HTML-ul într-un element cu clasa sun-editor-editable. Sanitizați pe server HTML-ul care nu provine din surse de încredere înainte de a-l randa."
+			},
+			"stripped": {
+				"title": "Tag-uri, atribute sau stiluri dispar din conținut",
+				"symptom": "HTML-ul setat prin opțiunea value sau prin editor.$.html.set(), ori lipit, revine fără anumite tag-uri (precum mark), nume de clase, atribute data-* sau stiluri inline.",
+				"cause": "SunEditor filtrează tot HTML-ul primit pe baza unor liste de permisiuni pentru elemente, atribute, nume de clase și stiluri per tag și elimină tot ce nu se află pe ele. Un span rămas fără niciun stil este eliminat, iar conținutul său este păstrat.",
+				"fix": "Extindeți lista de permisiuni de care aveți nevoie: elementWhitelist pentru tag-uri, attributeWhitelist pentru atribute, allowedClassName pentru nume de clase și tagStyles pentru stiluri inline. Filtrele individuale pot fi și dezactivate cu opțiunea strictMode. Nu permiteți niciodată tag-uri script sau atribute de eveniment on*."
+			},
+			"paste": {
+				"title": "Conținutul lipit își pierde formatarea sau aduce stiluri nedorite",
+				"symptom": "Conținutul lipit din Word, Google Docs sau dintr-o pagină web arată diferit față de sursă — sau doriți să acceptați doar text simplu.",
+				"cause": "HTML-ul lipit trece prin aceeași filtrare ca orice alt conținut. Mai întâi este curățat markup-ul din Word și Google Docs, apoi sunt eliminate tag-urile, atributele și stilurile care nu se află în listele de permisiuni.",
+				"fix": "Permiteți stilurile pe care doriți să le păstrați cu tagStyles (vedeți secțiunea anterioară). Pentru a gestiona lipirea în propriul cod, folosiți evenimentul onPaste: acesta primește HTML-ul curățat (data) și sursa lui (from: MS, GOOGLE, SE sau gol). Returnați un șir pentru a înlocui conținutul lipit sau false pentru a anula."
+			},
+			"value": {
+				"title": "Modificarea prop-ului value nu actualizează editorul",
+				"symptom": "Setați HTML nou în state, dar editorul continuă să afișeze conținutul vechi.",
+				"cause": "Opțiunea value este citită o singură dată, la crearea editorului.",
+				"fix": "Apelați editor.$.html.set(html) pentru a înlocui conținutul și ascultați evenimentul onChange pentru a citi modificările. Nu scrieți conținutul înapoi din interiorul onChange — asta creează o buclă de actualizare și mută cursorul."
+			},
+			"upload": {
+				"title": "Imaginile sunt salvate ca șiruri base64 uriașe sau încărcările nu sunt inserate",
+				"symptom": "HTML-ul salvat conține șiruri lungi data:image/... sau cererea de încărcare reușește, dar nu apare nicio imagine.",
+				"cause": "Fără image.uploadUrl, imaginile sunt încorporate ca base64. Cu această opțiune, răspunsul serverului trebuie să respecte formatul așteptat de SunEditor.",
+				"fix": "Setați image.uploadUrl și returnați JSON cu un array result care conține url, name și size. Returnați errorMessage pentru a semnala un eșec. Dacă API-ul dumneavoastră returnează o altă structură, mapați-o în evenimentul imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "Încărcare directă în S3 sau în alt spațiu de stocare (URL presemnat)",
+				"symptom": "Fișierele trebuie să ajungă în S3, Cloudinary sau alt serviciu de stocare, așa că un singur endpoint image.uploadUrl nu este potrivit.",
+				"cause": "image.uploadUrl trimite fișierele prin POST către un singur endpoint și așteaptă formatul de răspuns al SunEditor.",
+				"fix": "Gestionați încărcarea în evenimentul onImageUploadBefore: încărcați fiecare fișier prin propriul cod, inserați-l cu $.plugins.image.submitURL(url) și returnați false pentru ca SunEditor să sară peste propria încărcare. submitURL declanșează din nou același eveniment, cu info.url setat — lăsați acel apel să treacă."
+			},
+			"contentApi": {
+				"title": "„editor.getContents is not a function”",
+				"symptom": "Codul scris pentru v2 aruncă TypeError: editor.getContents is not a function (sau setContents, appendContents, insertHTML).",
+				"cause": "În v3, metodele pentru conținut au fost mutate în modulul $.html, iar alte metode de instanță din v2 au fost mutate în module precum $.ui.",
+				"fix": "Folosiți echivalentele din v3 de mai jos. Pentru opțiuni și evenimente, folosiți convertorul de pe pagina Migrare."
+			},
+			"v2": {
+				"title": "Opțiunile din v2 nu mai funcționează după actualizare",
+				"symptom": "După trecerea la v3, unele opțiuni, butoane sau evenimente nu mai au niciun efect.",
+				"cause": "v3 a redenumit sau a mutat multe opțiuni — de exemplu, opțiunile de încărcare sunt acum grupate sub numele pluginului (image.uploadUrl).",
+				"fix": "Lipiți opțiunile v2 în convertorul de pe pagina Migrare pentru a obține echivalentele din v3."
+			}
+		}
 	}
 }

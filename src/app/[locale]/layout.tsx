@@ -12,37 +12,35 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { ogImageUrl } from "@/lib/seo/metadata";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_CARD_DESCRIPTION } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import { organizationSchema, webSiteSchema } from "@/lib/seo/jsonld";
 import "../globals.css";
 
-const DEFAULT_OG_IMAGE = ogImageUrl("SunEditor", "Lightweight WYSIWYG editor — zero dependencies, 30+ plugins, TypeScript support.");
+const DEFAULT_OG_IMAGE = ogImageUrl("SunEditor", SITE_CARD_DESCRIPTION);
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://suneditor.com"),
 	title: {
-		default: "SunEditor — Lightweight WYSIWYG Editor",
+		default: SITE_TITLE,
 		template: "%s | SunEditor",
 	},
-	description:
-		"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
-	keywords: ["wysiwyg", "editor", "javascript", "rich text editor", "suneditor", "text editor", "html editor"],
+	description: SITE_DESCRIPTION,
+	keywords: ["wysiwyg", "wysiwyg editor", "html editor", "rich text editor", "javascript editor", "free wysiwyg editor", "open source wysiwyg editor", "suneditor"],
 	authors: [{ name: "JiHong88" }],
 	creator: "JiHong88",
 	openGraph: {
 		type: "website",
 		siteName: "SunEditor",
-		title: "SunEditor — Lightweight WYSIWYG Editor",
-		description:
-			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
 		url: "https://suneditor.com",
 		images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "SunEditor" }],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "SunEditor — Lightweight WYSIWYG Editor",
-		description:
-			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
 		images: [DEFAULT_OG_IMAGE],
 	},
 	icons: {

@@ -36,13 +36,15 @@
 			"playground": "Lekplats",
 			"about": "Om",
 			"license": "Licensierad enligt MIT.",
-			"copyright": "© Upphovsrätt {year} SunEditor Medarbetare"
+			"copyright": "© Upphovsrätt {year} SunEditor Medarbetare",
+			"troubleshooting": "Felsökning"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "En lätt och kraftfull WYSIWYG-editor i vanligt JavaScript.",
-			"tagline": "En installation. Allt ingår."
+			"title": "En modulär WYSIWYG-HTML-editor utan beroenden vid körning.",
+			"tagline": "Allt ingår. Aktivera bara det du behöver.",
+			"trust": "MIT-licensierad · Inget moln · Inget konto krävs"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Noll beroenden",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Prova det nu",
 			"desc": "Gratis och öppen källkod. Se dokumentationen eller bidra på GitHub."
+		},
+		"Faq": {
+			"title": "SunEditor i korthet",
+			"desc": "Korta svar på frågorna utvecklare ställer innan de väljer en editor.",
+			"items": {
+				"commercial": {
+					"q": "Är SunEditor gratis för kommersiellt bruk?",
+					"a": "Ja. SunEditor släpps under MIT License. Du kan använda den i kommersiella produkter, SaaS och interna verktyg, ändra den och drifta den själv. Behåll upphovsrätts- och licensmeddelandet i dina kopior. Det finns ingen licensnyckel, inget konto och ingen avgift per laddning."
+				},
+				"dependencies": {
+					"q": "Har SunEditor några beroenden?",
+					"a": "Nej. Paketet suneditor har inga beroenden vid körning. Valfria integrationer som KaTeX eller MathJax (matematik) och CodeMirror (kodvy) används bara om du aktiverar dem."
+				},
+				"frameworks": {
+					"q": "Vilka ramverk fungerar den med?",
+					"a": "SunEditor är vanlig JavaScript, så den fungerar överallt där en webbläsare körs: vanilla JS via npm eller CDN, React, Vue, Angular, Svelte och Web Components. Typdefinitioner för TypeScript ingår i paketet."
+				},
+				"features": {
+					"q": "Vad ingår direkt från start?",
+					"a": "Tabeller med sammanslagning och delning av celler, uppladdning av bild, video, ljud och filer, länkar, matematik, kodblock, Markdown-vy, ritning, mallar och layouter, snedstreckskommandon och blockhandtag — över 30 plugins totalt, plus över 25 språkpaket och RTL-stöd. Alla plugins levereras i ett paket — aktivera bara de du behöver med alternativet plugins."
+				},
+				"cloud": {
+					"q": "Krävs en molntjänst eller ett konto?",
+					"a": "Nej. Editorn körs helt i webbläsaren och skickar inte ditt innehåll till någon extern tjänst. Uppladdningar går till en endpoint på din egen server, som du anger med alternativet uploadUrl."
+				},
+				"output": {
+					"q": "Vilket format producerar den?",
+					"a": "Standard-HTML. För att visa sparat innehåll med samma stilar som i editorn importerar du suneditor/css/contents och omsluter HTML-koden med ett element som har klassen sun-editor-editable."
+				}
+			},
+			"licenseLink": "Läs licenssammanfattningen",
+			"troubleshootingLink": "Felsökningsguide"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "Uppladdningshanterare tar över uppladdningssvaret – att koppla på en loggare skulle hindra uppladdade medier från att infogas – så inspektören lämnar dem ifred:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "Din uppladdningsserver måste returnera JSON i detta format. SunEditor skickar filer som multipart/form-data med fältnamnen 'file-0', 'file-1', etc.",
 			"serverExample": "Express.js-exempel",
 			"customUploadHandler": "Anpassad uppladdningshanterare",
-			"customHandlerDesc": "Åsidosätt den inbyggda XHR-uppladdningen med din egen logik. Returnera true för att tala om för SunEditor att du hanterade svaret.",
+			"customHandlerDesc": "Använd imageUploadHandler när ditt uppladdnings-API returnerar ett annat svarsformat. SunEditor skickar fortfarande begäran; när hanteraren är definierad tar den emot den slutförda begäran och bestämmer vad som ska infogas – den inbyggda infogningen hoppas över.",
+			"customHandlerDirectLink": "Ladda i stället upp direkt till S3 eller annan lagring",
 			"validation": "Validering av uppladdning",
 			"validationDesc": "Använd *UploadBefore-händelser för att validera eller modifiera filer innan de skickas till servern. Fungerar för alla medietyper.",
 			"errors": "Felhantering",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Plugin-alternativ",
 		"perFrame": "per bildruta",
 		"perFrameHint": "Dessa alternativ kan konfigureras individuellt per rot i flerrotsläge."
+	},
+	"License": {
+		"title": "MIT License",
+		"subtitle": "SunEditor är gratis och öppen källkod. Använd den i personliga och kommersiella projekt utan avgifter, nycklar eller konton.",
+		"updated": "Senast uppdaterad: {date}",
+		"allowedTitle": "Vad du får göra",
+		"allowed": {
+			"commercial": "Använda den i kommersiella produkter och SaaS",
+			"internal": "Använda den i interna applikationer och företagsapplikationer",
+			"selfHost": "Drifta den själv — ingen molntjänst eller konto krävs",
+			"modify": "Ändra källkoden och skriva egna plugins",
+			"distribute": "Paketera och vidaredistribuera den med din applikation",
+			"noFee": "Inga avgifter per editorladdning, inga platsbegränsningar och inga licensnycklar"
+		},
+		"obligationsTitle": "Vad du behöver göra",
+		"obligations": "Inkludera upphovsrättsmeddelandet och MIT-licenstexten i alla kopior eller väsentliga delar av programvaran.",
+		"warrantyTitle": "Ingen garanti",
+		"warranty": "Programvaran tillhandahålls ”i befintligt skick”, utan garantier av något slag. Upphovspersonerna ansvarar inte för några anspråk eller skador som uppstår till följd av dess användning.",
+		"thirdPartyTitle": "Valfria tredjepartsbibliotek",
+		"thirdParty": "SunEditor har i sig inga beroenden vid körning. Om du aktiverar en valfri integration omfattas det biblioteket av sin egen licens:",
+		"fullTextTitle": "Fullständig licenstext",
+		"disclaimer": "Den här sidan är en sammanfattning på vanlig svenska, inte juridisk rådgivning. Det är licenstexten nedan som gäller.",
+		"viewOnGitHub": "Visa LICENSE på GitHub",
+		"tryPlayground": "Prova SunEditor i Playground"
+	},
+	"Troubleshooting": {
+		"title": "Felsökning",
+		"subtitle": "Lösningar på de problem utvecklare oftast stöter på när de lägger till SunEditor i en app.",
+		"verified": "Kontrollerat mot SunEditor {version}",
+		"contents": "På den här sidan",
+		"searchLabel": "Sök efter problem",
+		"searchPlaceholder": "Sök på felmeddelande eller symptom",
+		"all": "Alla",
+		"categories": {
+			"setup": "Installation",
+			"styling": "Stilar",
+			"content": "Innehåll",
+			"upload": "Uppladdning",
+			"migration": "Migrering"
+		},
+		"noResults": "Inga matchande problem. Prova andra ord, eller skapa ett ärende nedan.",
+		"symptom": "Symptom",
+		"cause": "Orsak",
+		"fix": "Lösning",
+		"helpful": "Löste det här ditt problem?",
+		"yes": "Ja",
+		"no": "Nej",
+		"thanks": "Tack för din feedback!",
+		"stillStuck": "Det var tråkigt att höra.",
+		"openPrefilledIssue": "Skapa ett ärende med din miljö förifylld",
+		"notListed": "Finns ditt problem inte med här?",
+		"notListedDesc": "Sök bland befintliga ärenden eller skapa ett nytt med en Playground-länk som återskapar problemet.",
+		"openIssue": "Skapa ett ärende på GitHub",
+		"tryPlayground": "Återskapa det i Playground",
+		"items": {
+			"ssr": {
+				"title": "”window is not defined” vid serverrendering",
+				"symptom": "Bygget eller serverrenderingen misslyckas med ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "SunEditor läser window, document och navigator så fort modulen importeras, så den kan inte importeras på servern.",
+				"fix": "Importera och skapa editorn endast i webbläsaren. I Next.js App Router lägger du editorn i en klientkomponent och laddar den med next/dynamic och ssr: false. I Nuxt omsluter du den med ClientOnly; i SvelteKit importerar du den inuti onMount."
+			},
+			"plugin": {
+				"title": "Fel: ”The button name of a plugin that does not exist”",
+				"symptom": "suneditor.create kastar [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "Ett namn i buttonList pekar på ett plugin som inte skickades med i alternativet plugins.",
+				"fix": "Skicka med alla plugins, eller importera bara de plugins som ditt verktygsfält använder och skicka med dem."
+			},
+			"target": {
+				"title": "Fel: ”Cannot find target element” eller ”The first parameter \"target\" is missing”",
+				"symptom": "suneditor.create kastar [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element, eller [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "Målelementet fanns ännu inte när editorn skapades — selektorn matchade ingenting, eller så var ref fortfarande null.",
+				"fix": "Skapa editorn efter att komponenten har monterats (useEffect, onMounted, ngAfterViewInit, onMount) och skicka själva elementet i stället för en selektor."
+			},
+			"strictMode": {
+				"title": "Editorn skapas två gånger i Reacts utvecklingsläge",
+				"symptom": "Under utveckling dubbleras verktygsfältet, eller så flimrar editorn vid montering.",
+				"cause": "React StrictMode kör effekter två gånger (montera, avmontera, montera). Utan en städfunktion skapar den andra körningen ytterligare en instans.",
+				"fix": "Returnera en städfunktion från effekten som anropar destroy(). Exemplen i Kom igång använder det här mönstret."
+			},
+			"css": {
+				"title": "Editorn renderas utan stilar",
+				"symptom": "Verktygsfältet visas som en ostylad lista och ikoner eller rullgardinsmenyer hamnar fel.",
+				"cause": "Stilmallen levereras separat från JavaScript-koden och har inte laddats.",
+				"fix": "Importera suneditor/css/editor en gång i din app, plus suneditor/css/contents för innehållsstilar. Med CDN-versionen lägger du till link-taggarna för stilmallarna."
+			},
+			"contents": {
+				"title": "Sparad HTML ser annorlunda ut utanför editorn",
+				"symptom": "Innehållet ser rätt ut under redigering, men tappar avstånd, tabellramar eller justering på sidan som visar det.",
+				"cause": "Innehållsstilarna ligger i en separat stilmall och är avgränsade till klassen sun-editor-editable.",
+				"fix": "Importera suneditor/css/contents på visningssidan och omslut HTML-koden med ett element som har klassen sun-editor-editable. Sanera opålitlig HTML på servern innan du renderar den."
+			},
+			"stripped": {
+				"title": "Taggar, attribut eller stilar försvinner ur innehållet",
+				"symptom": "HTML som sätts med alternativet value eller editor.$.html.set(), eller som klistras in, kommer tillbaka utan vissa taggar (till exempel mark), klassnamn, data-*-attribut eller inline-stilar.",
+				"cause": "SunEditor filtrerar all inkommande HTML mot tillåtelselistor för element, attribut, klassnamn och stilar per tagg, och tar bort allt som inte finns med på dem. En span som blir kvar utan någon stil packas upp.",
+				"fix": "Utöka den tillåtelselista du behöver: elementWhitelist för taggar, attributeWhitelist för attribut, allowedClassName för klassnamn och tagStyles för inline-stilar. Enskilda filter kan också stängas av med alternativet strictMode. Tillåt aldrig script-taggar eller on*-händelseattribut."
+			},
+			"paste": {
+				"title": "Inklistrat innehåll tappar sin formatering, eller tar med oönskade stilar",
+				"symptom": "Innehåll som klistras in från Word, Google Docs eller en webbsida ser annorlunda ut än originalet — eller så vill du bara ta emot ren text.",
+				"cause": "Inklistrad HTML går igenom samma filtrering som allt annat innehåll. Markup från Word och Google Docs rensas först, och sedan tas taggar, attribut och stilar som inte finns i tillåtelselistorna bort.",
+				"fix": "Tillåt de stilar du vill behålla med tagStyles (se föregående avsnitt). Om du vill styra inklistringen själv använder du händelsen onPaste: den tar emot den rensade HTML-koden (data) och dess källa (from: MS, GOOGLE, SE eller tom). Returnera en sträng för att ersätta det inklistrade innehållet, eller false för att avbryta."
+			},
+			"value": {
+				"title": "Att ändra value-propen uppdaterar inte editorn",
+				"symptom": "Du sätter ny HTML i state, men editorn fortsätter att visa det gamla innehållet.",
+				"cause": "Alternativet value läses bara en gång, när editorn skapas.",
+				"fix": "Anropa editor.$.html.set(html) för att ersätta innehållet och lyssna på händelsen onChange för att läsa ändringar. Skriv inte tillbaka innehållet inifrån onChange — det skapar en uppdateringsloop och flyttar markören."
+			},
+			"upload": {
+				"title": "Bilder sparas som enorma base64-strängar, eller uppladdningar infogas inte",
+				"symptom": "Sparad HTML innehåller långa data:image/...-strängar, eller så lyckas uppladdningsbegäran men ingen bild visas.",
+				"cause": "Utan image.uploadUrl bäddas bilder in som base64. Med det måste serverns svar följa det format som SunEditor förväntar sig.",
+				"fix": "Ange image.uploadUrl och returnera JSON med en result-array med url, name och size. Returnera errorMessage för att rapportera ett fel. Om ditt API returnerar en annan struktur mappar du om den i händelsen imageUploadHandler."
+			},
+			"customUpload": {
+				"title": "Ladda upp direkt till S3 eller annan lagring (förhandssignerad URL)",
+				"symptom": "Filerna ska till S3, Cloudinary eller en annan lagringstjänst, så en enda image.uploadUrl-endpoint passar inte.",
+				"cause": "image.uploadUrl skickar filer med POST till en enda endpoint och förväntar sig SunEditors svarsformat.",
+				"fix": "Hantera uppladdningen i händelsen onImageUploadBefore: ladda upp varje fil själv, infoga den med $.plugins.image.submitURL(url) och returnera false så att SunEditor hoppar över sin egen uppladdning. submitURL utlöser samma händelse igen med info.url satt — släpp igenom det anropet."
+			},
+			"contentApi": {
+				"title": "”editor.getContents is not a function”",
+				"symptom": "Kod skriven för v2 kastar TypeError: editor.getContents is not a function (eller setContents, appendContents, insertHTML).",
+				"cause": "I v3 flyttades innehållsmetoderna till modulen $.html, och andra instansmetoder från v2 flyttades till moduler som $.ui.",
+				"fix": "Använd motsvarigheterna i v3 nedan. För alternativ och händelser använder du konverteraren på sidan Migrering."
+			},
+			"v2": {
+				"title": "Alternativ från v2 slutade fungera efter uppgraderingen",
+				"symptom": "Efter bytet till v3 har vissa alternativ, knappar eller händelser ingen effekt.",
+				"cause": "v3 har bytt namn på eller flyttat många alternativ — till exempel ligger uppladdningsalternativ nu under pluginets namn (image.uploadUrl).",
+				"fix": "Klistra in dina v2-alternativ i konverteraren på sidan Migrering för att få motsvarigheterna i v3."
+			}
+		}
 	}
 }

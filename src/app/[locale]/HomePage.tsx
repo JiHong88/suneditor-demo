@@ -4,6 +4,7 @@ import Hero from "./_components/Hero";
 import InteractiveDemo from "./_components/InteractiveDemo";
 import LiveStatsBadgesLoader from "./_components/LiveStatsBadgesLoader";
 import FeatureHighlights from "./_components/FeatureHighlights";
+import HomeFaq from "./_components/HomeFaq";
 import FinalCTA from "./_components/FinalCTA";
 import { HomeHeroBelowBanner } from "@/components/ad/AdBanner";
 
@@ -18,6 +19,7 @@ export default function HomePage() {
 			</Suspense>
 			<FeatureHighlights />
 			<CodeExamples />
+			<HomeFaq />
 			<FinalCTA />
 		</div>
 	);

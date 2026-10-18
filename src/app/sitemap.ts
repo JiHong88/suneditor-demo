@@ -15,6 +15,8 @@ const STATIC_PATHS = [
 	"/plugin-guide",
 	"/docs-api",
 	"/migration",
+	"/troubleshooting",
+	"/license",
 	"/deep-dive",
 	"/deep-dive/guide",
 	...GUIDE_SUB_SLUGS.map((slug) => `/deep-dive/guide/${slug}`),

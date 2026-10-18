@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { defaultLocale } from "@/i18n/routing";
 import { localeCodes } from "@/i18n/languages";
-
-const BASE_URL = "https://suneditor.com";
-const SITE_NAME = "SunEditor";
+import { SITE_URL as BASE_URL, SITE_NAME } from "@/lib/siteConfig";
 
 /** Fully-qualified page URL honoring the `as-needed` locale prefix (default locale has no prefix). */
 export function pageUrl(locale: string, path: string): string {

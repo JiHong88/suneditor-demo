@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_CARD_DESCRIPTION } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/jsonld";
 import HomePage from "./HomePage";
@@ -9,12 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	return buildPageMetadata({
 		locale,
 		path: "",
-		title: "SunEditor — Lightweight WYSIWYG Editor",
-		description:
-			"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.",
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
 		absoluteTitle: true,
 		cardTitle: "SunEditor",
-		cardDescription: "Lightweight WYSIWYG editor — zero dependencies, 30+ plugins, TypeScript support.",
+		cardDescription: SITE_CARD_DESCRIPTION,
 	});
 }
 

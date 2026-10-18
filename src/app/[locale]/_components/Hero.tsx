@@ -29,6 +29,11 @@ export default function Hero() {
 					</h1>
 					<p className='mx-auto mt-6 max-w-2xl text-base text-muted-foreground'>{t("title")}</p>
 					<p className='mt-2 text-base font-medium text-foreground/80'>{t("tagline")}</p>
+					<p className='mt-3 text-sm text-muted-foreground'>
+						<Link href='/license' className='underline-offset-4 hover:text-foreground hover:underline'>
+							{t("trust")}
+						</Link>
+					</p>
 					<div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
 						<Button
 							asChild

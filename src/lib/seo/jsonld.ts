@@ -1,13 +1,13 @@
 import { SUNEDITOR_VERSION } from "@/store/version";
 import { pageUrl } from "@/lib/seo/metadata";
+import { SITE_DESCRIPTION } from "@/lib/siteConfig";
 
 const BASE_URL = "https://suneditor.com";
 const GITHUB_URL = "https://github.com/JiHong88/SunEditor";
 const NPM_URL = "https://www.npmjs.com/package/suneditor";
 const AUTHOR = "Yi JiHong";
 
-const DESCRIPTION =
-	"A lightweight, plugin-based WYSIWYG editor built with vanilla JavaScript. Zero dependencies, 30+ plugins, TypeScript support.";
+const DESCRIPTION = SITE_DESCRIPTION;
 
 /** Stable @id anchors so the nodes can reference each other. */
 const ORG_ID = `${BASE_URL}/#organization`;
@@ -82,7 +82,20 @@ export function softwareApplicationSchema() {
 		publisher: { "@id": ORG_ID },
 		offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 		isAccessibleForFree: true,
-		keywords: "wysiwyg, editor, rich text editor, javascript, html editor, open source",
+		keywords: "wysiwyg, wysiwyg editor, html editor, rich text editor, javascript, open source, mit, zero dependencies",
 		sameAs: [GITHUB_URL, NPM_URL],
+	};
+}
+
+/** FAQ block (question/answer pairs rendered visibly on the same page). */
+export function faqPageSchema(items: { q: string; a: string }[]) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: items.map(({ q, a }) => ({
+			"@type": "Question",
+			name: q,
+			acceptedAnswer: { "@type": "Answer", text: a },
+		})),
 	};
 }

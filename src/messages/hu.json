@@ -36,13 +36,15 @@
 			"playground": "Játszótér",
 			"about": "Körülbelül",
 			"license": "MIT licenc alatt.",
-			"copyright": "© Szerzői jog {year} SunEditor közreműködők"
+			"copyright": "© Szerzői jog {year} SunEditor közreműködők",
+			"troubleshooting": "Hibaelhárítás"
 		}
 	},
 	"Home": {
 		"Hero": {
-			"title": "Egy könnyű és hatékony WYSIWYG szerkesztő vanilla JavaScriptben.",
-			"tagline": "Egy telepítés. Minden benne van."
+			"title": "Moduláris WYSIWYG HTML-szerkesztő, futásidejű függőségek nélkül.",
+			"tagline": "Minden benne van. Csak azt kapcsold be, amire szükséged van.",
+			"trust": "MIT licenc · Nincs felhő · Nem kell fiók"
 		},
 		"FeatureHighlights": {
 			"zeroDependencies": "Nulla függőség",
@@ -99,6 +101,38 @@
 		"FinalCTA": {
 			"title": "Próbáld ki most",
 			"desc": "Ingyenes és nyílt forráskódú. Tekintse meg a dokumentációt, vagy járuljon hozzá a GitHub-on."
+		},
+		"Faq": {
+			"title": "A SunEditor dióhéjban",
+			"desc": "Rövid válaszok azokra a kérdésekre, amelyeket a fejlesztők feltesznek, mielőtt szerkesztőt választanak.",
+			"items": {
+				"commercial": {
+					"q": "Ingyenesen használható a SunEditor kereskedelmi célra?",
+					"a": "Igen. A SunEditor az MIT License alatt jelenik meg. Használhatod kereskedelmi termékekben, SaaS-ben és belső eszközökben, módosíthatod, és saját magad is hosztolhatod. A másolatokban tartsd meg a szerzői jogi és licencnyilatkozatot. Nincs licenckulcs, fiók vagy betöltésenkénti díj."
+				},
+				"dependencies": {
+					"q": "Vannak a SunEditornak függőségei?",
+					"a": "Nincsenek. A suneditor csomagnak nincs futásidejű függősége. Az opcionális integrációk, például a KaTeX vagy a MathJax (matematika) és a CodeMirror (kódnézet), csak akkor kerülnek használatba, ha bekapcsolod őket."
+				},
+				"frameworks": {
+					"q": "Mely keretrendszerekkel működik?",
+					"a": "A SunEditor tiszta JavaScript, így mindenhol működik, ahol böngésző fut: vanilla JS-ben npm-en vagy CDN-en keresztül, valamint React, Vue, Angular, Svelte és Web Components alatt. A TypeScript-típusdefiníciókat a csomag tartalmazza."
+				},
+				"features": {
+					"q": "Mi érhető el alapból?",
+					"a": "Táblázatok cellaegyesítéssel és -felosztással, kép-, videó-, hang- és fájlfeltöltés, hivatkozások, matematika, kódblokkok, Markdown-nézet, rajzolás, sablonok és elrendezések, perjeles parancsok és blokkfogantyúk — összesen több mint 30 bővítmény, továbbá több mint 25 nyelvi csomag és RTL-támogatás. Minden bővítmény egyetlen csomagban érkezik — a plugins beállítással csak azokat kapcsold be, amelyekre szükséged van."
+				},
+				"cloud": {
+					"q": "Szükség van felhőszolgáltatásra vagy fiókra?",
+					"a": "Nem. A szerkesztő teljes egészében a böngészőben fut, és a tartalmadat nem küldi el semmilyen külső szolgáltatásnak. A feltöltések a saját szervered egy végpontjára mennek, amelyet az uploadUrl beállítással adhatsz meg."
+				},
+				"output": {
+					"q": "Milyen formátumot állít elő?",
+					"a": "Szabványos HTML-t. Ha a mentett tartalmat a szerkesztővel azonos stílusokkal szeretnéd megjeleníteni, importáld a suneditor/css/contents fájlt, és csomagold a HTML-t egy sun-editor-editable osztályú elembe."
+				}
+			},
+			"licenseLink": "A licenc összefoglalójának elolvasása",
+			"troubleshootingLink": "Hibaelhárítási útmutató"
 		}
 	},
 	"GettingStarted": {
@@ -636,7 +670,7 @@
 				"autoScroll": "Auto-scroll",
 				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
 				"notAttachedTitle": "Not attached here",
-				"notAttachedDesc": "Upload handlers replace the editor's upload pipeline entirely, so the inspector leaves them alone:"
+				"notAttachedDesc": "A feltöltési handlerek átveszik a feltöltés válaszát — egy logger csatolása megakadályozná a feltöltött média beszúrását —, ezért az inspector nem nyúl hozzájuk:"
 			}
 		},
 		"upload": {
@@ -652,7 +686,8 @@
 			"serverResponseDesc": "A feltöltési szervernek ebben a formátumban kell JSON-t visszaadnia. A SunEditor multipart/form-data formátumban küldi a fájlokat 'file-0', 'file-1' stb. mezőnévvel.",
 			"serverExample": "Express.js példa",
 			"customUploadHandler": "Egyéni feltöltéskezelő",
-			"customHandlerDesc": "Írd felül a beépített XHR feltöltést a saját logikáddal. Add vissza az igaz értéket, hogy tudd a SunEditornak, hogy kezelted a választ.",
+			"customHandlerDesc": "Használd az imageUploadHandler-t, ha a feltöltési API-d más válaszformátumot ad vissza. A kérést továbbra is a SunEditor küldi; ha a handler definiálva van, megkapja a befejezett kérést, és ő dönti el, mit szúr be — a beépített beszúrás kimarad.",
+			"customHandlerDirectLink": "Helyette tölts fel közvetlenül S3-ba vagy más tárhelyre",
 			"validation": "Feltöltés érvényesítése",
 			"validationDesc": "Az *UploadBefore események segítségével ellenőrizheti vagy módosíthatja a fájlokat, mielőtt azok a szerverre kerülnének. Minden médiatípusnál működik.",
 			"errors": "Hibakezelés",
@@ -746,5 +781,139 @@
 		"pluginOptions": "Bővítménybeállítások",
 		"perFrame": "képkockánként",
 		"perFrameHint": "Ezek a beállítások gyökerenként, többgyökérű módban külön-külön konfigurálhatók."
+	},
+	"License": {
+		"title": "MIT License",
+		"subtitle": "A SunEditor ingyenes és nyílt forráskódú. Használd személyes és kereskedelmi projektekben díjak, kulcsok és fiókok nélkül.",
+		"updated": "Utoljára frissítve: {date}",
+		"allowedTitle": "Amit megtehetsz",
+		"allowed": {
+			"commercial": "Használhatod kereskedelmi termékekben és SaaS-ben",
+			"internal": "Használhatod belső és vállalati alkalmazásokban",
+			"selfHost": "Saját magad hosztolhatod — nincs szükség felhőszolgáltatásra vagy fiókra",
+			"modify": "Módosíthatod a forráskódot, és saját bővítményeket írhatsz",
+			"distribute": "Becsomagolhatod és továbbterjesztheted az alkalmazásoddal együtt",
+			"noFee": "Nincs szerkesztőbetöltési díj, felhasználószám-korlát vagy licenckulcs"
+		},
+		"obligationsTitle": "Amit meg kell tenned",
+		"obligations": "A szerzői jogi nyilatkozatot és az MIT licenc szövegét a szoftver minden másolatában vagy jelentős részében fel kell tüntetni.",
+		"warrantyTitle": "Nincs garancia",
+		"warranty": "A szoftvert „ahogy van” állapotban, mindennemű garancia nélkül biztosítjuk. A szerzők nem felelősek semmilyen, a használatából eredő igényért vagy kárért.",
+		"thirdPartyTitle": "Opcionális külső könyvtárak",
+		"thirdParty": "Magának a SunEditornak nincs futásidejű függősége. Ha bekapcsolsz egy opcionális integrációt, az adott könyvtárra a saját licence vonatkozik:",
+		"fullTextTitle": "A licenc teljes szövege",
+		"disclaimer": "Ez az oldal közérthető összefoglaló, nem jogi tanácsadás. Az alábbi licencszöveg az irányadó.",
+		"viewOnGitHub": "A LICENSE megtekintése a GitHubon",
+		"tryPlayground": "Próbáld ki a SunEditort a Játszótéren"
+	},
+	"Troubleshooting": {
+		"title": "Hibaelhárítás",
+		"subtitle": "Megoldások azokra a problémákra, amelyekbe a fejlesztők a leggyakrabban belefutnak, amikor a SunEditort egy alkalmazásba építik.",
+		"verified": "Ellenőrizve a SunEditor {version} verziójával",
+		"contents": "Ezen az oldalon",
+		"searchLabel": "Problémák keresése",
+		"searchPlaceholder": "Keresés hibaüzenet vagy tünet alapján",
+		"all": "Összes",
+		"categories": {
+			"setup": "Beállítás",
+			"styling": "Stílusok",
+			"content": "Tartalom",
+			"upload": "Feltöltés",
+			"migration": "Migráció"
+		},
+		"noResults": "Nincs ilyen probléma. Próbálj más kifejezéseket, vagy nyiss egy issue-t lent.",
+		"symptom": "Tünet",
+		"cause": "Ok",
+		"fix": "Megoldás",
+		"helpful": "Megoldotta ez a problémádat?",
+		"yes": "Igen",
+		"no": "Nem",
+		"thanks": "Köszönjük a visszajelzést!",
+		"stillStuck": "Sajnáljuk.",
+		"openPrefilledIssue": "Issue nyitása előre kitöltött környezeti adatokkal",
+		"notListed": "Nem találod itt a problémádat?",
+		"notListedDesc": "Keress a meglévő issue-k között, vagy nyiss egy újat egy Játszótér-hivatkozással, amely reprodukálja a hibát.",
+		"openIssue": "Issue nyitása a GitHubon",
+		"tryPlayground": "Reprodukáld a Játszótéren",
+		"items": {
+			"ssr": {
+				"title": "„window is not defined” szerveroldali renderelés közben",
+				"symptom": "A build vagy a szerveroldali renderelés ezzel a hibával áll le: ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
+				"cause": "A SunEditor a modul importálásakor azonnal hozzáfér a window, document és navigator objektumokhoz, ezért nem importálható a szerveren.",
+				"fix": "A szerkesztőt csak a böngészőben importáld és hozd létre. A Next.js App Router esetén tedd a szerkesztőt egy kliensoldali komponensbe, és töltsd be next/dynamic segítségével, ssr: false beállítással. Nuxtban csomagold ClientOnly-ba; SvelteKitben az onMount-on belül importáld."
+			},
+			"plugin": {
+				"title": "Hiba: „The button name of a plugin that does not exist”",
+				"symptom": "A suneditor.create ezt a hibát dobja: [SUNEDITOR.create.toolbar.fail] The button name of a plugin that does not exist. [image]",
+				"cause": "A buttonList egyik neve olyan bővítményre hivatkozik, amelyet nem adtál át a plugins beállításban.",
+				"fix": "Adj át minden bővítményt, vagy importáld csak az eszköztárad által használt bővítményeket, és azokat add át."
+			},
+			"target": {
+				"title": "Hiba: „Cannot find target element” vagy „The first parameter \"target\" is missing”",
+				"symptom": "A suneditor.create ezt a hibát dobja: [SUNEDITOR.create.fail]-[document.querySelector(#editor)] Cannot find target element, vagy ezt: [SUNEDITOR.create.fail] The first parameter \"target\" is missing.",
+				"cause": "A célelem még nem létezett, amikor a szerkesztő létrejött — a szelektor semmire sem illeszkedett, vagy a ref értéke még null volt.",
+				"fix": "A szerkesztőt a komponens csatolása után hozd létre (useEffect, onMounted, ngAfterViewInit, onMount), és szelektor helyett magát az elemet add át."
+			},
+			"strictMode": {
+				"title": "A szerkesztő kétszer jön létre React fejlesztői módban",
+				"symptom": "Fejlesztés közben az eszköztár megduplázódik, vagy a szerkesztő villog csatoláskor.",
+				"cause": "A React StrictMode kétszer futtatja az effekteket (csatolás, leválasztás, csatolás). Takarítófüggvény nélkül a második futás újabb példányt hoz létre.",
+				"fix": "Az effektből adj vissza egy takarítófüggvényt, amely meghívja a destroy() metódust. Az Első lépések példái ezt a mintát követik."
+			},
+			"css": {
+				"title": "A szerkesztő stílusok nélkül jelenik meg",
+				"symptom": "Az eszköztár formázatlan listaként jelenik meg, az ikonok vagy a legördülő menük rossz helyen vannak.",
+				"cause": "A stíluslap a JavaScripttől külön érkezik, és nem lett betöltve.",
+				"fix": "Importáld egyszer a suneditor/css/editor fájlt az alkalmazásodban, a tartalomstílusokhoz pedig a suneditor/css/contents fájlt is. CDN-es build esetén add hozzá a stíluslapok link tagjeit."
+			},
+			"contents": {
+				"title": "A mentett HTML a szerkesztőn kívül másképp néz ki",
+				"symptom": "Szerkesztés közben a tartalom jól néz ki, de a megjelenítő oldalon elvesznek a térközök, a táblázatszegélyek vagy az igazítás.",
+				"cause": "A tartalomstílusok egy külön stíluslapban vannak, és a sun-editor-editable osztályra korlátozódnak.",
+				"fix": "Importáld a suneditor/css/contents fájlt a megjelenítő oldalon, és csomagold a HTML-t egy sun-editor-editable osztályú elembe. A nem megbízható HTML-t renderelés előtt a szerveren tisztítsd meg."
+			},
+			"stripped": {
+				"title": "Tagek, attribútumok vagy stílusok tűnnek el a tartalomból",
+				"symptom": "A value beállítással vagy az editor.$.html.set() metódussal megadott, illetve beillesztett HTML-ből eltűnik néhány tag (például a mark), osztálynév, data-* attribútum vagy inline stílus.",
+				"cause": "A SunEditor minden bejövő HTML-t engedélyezési listák alapján szűr – elemekre, attribútumokra, osztálynevekre és tagenkénti stílusokra –, és mindent eltávolít, ami nem szerepel rajtuk. A stílus nélkül maradt span elemet kibontja.",
+				"fix": "Bővítsd a szükséges engedélyezési listát: elementWhitelist a tagekhez, attributeWhitelist az attribútumokhoz, allowedClassName az osztálynevekhez és tagStyles az inline stílusokhoz. Az egyes szűrők a strictMode beállítással ki is kapcsolhatók. Soha ne engedélyezd a script tageket vagy az on* eseményattribútumokat."
+			},
+			"paste": {
+				"title": "A beillesztett tartalom elveszíti a formázását, vagy nem kívánt stílusokat hoz magával",
+				"symptom": "A Word, a Google Docs vagy egy weboldal felől beillesztett tartalom másképp néz ki, mint az eredeti — vagy csak egyszerű szöveget szeretnél elfogadni.",
+				"cause": "A beillesztett HTML ugyanazon a szűrésen megy át, mint bármely más tartalom. Először a Word és a Google Docs jelölőkódja tisztul meg, majd az engedélyezési listákon kívüli tagek, attribútumok és stílusok törlődnek.",
+				"fix": "A megtartani kívánt stílusokat engedélyezd a tagStyles segítségével (lásd az előző szakaszt). Ha magad szeretnéd kezelni a beillesztést, használd az onPaste eseményt: megkapja a megtisztított HTML-t (data) és a forrását (from: MS, GOOGLE, SE vagy üres). Adj vissza egy karakterláncot a beillesztett tartalom lecseréléséhez, vagy false értéket a megszakításhoz."
+			},
+			"value": {
+				"title": "A value prop módosítása nem frissíti a szerkesztőt",
+				"symptom": "Új HTML-t állítasz be a state-ben, de a szerkesztő továbbra is a régi tartalmat mutatja.",
+				"cause": "A value beállítást a szerkesztő csak egyszer, a létrehozásakor olvassa be.",
+				"fix": "A tartalom cseréjéhez hívd meg az editor.$.html.set(html) metódust, a módosítások kiolvasásához pedig figyeld az onChange eseményt. Ne írd vissza a tartalmat az onChange-en belülről — ez frissítési ciklust okoz, és elmozdítja a kurzort."
+			},
+			"upload": {
+				"title": "A képek hatalmas base64-karakterláncként mentődnek, vagy a feltöltések nem kerülnek beszúrásra",
+				"symptom": "A mentett HTML hosszú data:image/... karakterláncokat tartalmaz, vagy a feltöltési kérés sikeres, de nem jelenik meg kép.",
+				"cause": "image.uploadUrl nélkül a képek base64-ként ágyazódnak be. Ha be van állítva, a szerver válaszának a SunEditor által elvárt formátumot kell követnie.",
+				"fix": "Állítsd be az image.uploadUrl értékét, és olyan JSON-t adj vissza, amelyben egy result tömb url, name és size mezőket tartalmaz. Hiba jelzéséhez adj vissza errorMessage mezőt. Ha az API-d más szerkezetet ad vissza, az imageUploadHandler eseményben alakítsd át."
+			},
+			"customUpload": {
+				"title": "Közvetlen feltöltés S3-ba vagy más tárhelyre (előre aláírt URL)",
+				"symptom": "A fájloknak S3-ba, Cloudinaryba vagy más tárhelyszolgáltatásba kell kerülniük, ezért egyetlen image.uploadUrl végpont nem elég.",
+				"cause": "Az image.uploadUrl egyetlen végpontra küldi POST-tal a fájlokat, és a SunEditor saját válaszformátumát várja.",
+				"fix": "Kezeld a feltöltést az onImageUploadBefore eseményben: töltsd fel magad az egyes fájlokat, szúrd be őket a $.plugins.image.submitURL(url) hívással, és adj vissza false értéket, hogy a SunEditor kihagyja a saját feltöltését. A submitURL beállított info.url értékkel újra kiváltja ugyanezt az eseményt — ezt a hívást engedd át."
+			},
+			"contentApi": {
+				"title": "„editor.getContents is not a function”",
+				"symptom": "A v2-höz írt kód ezt a hibát dobja: TypeError: editor.getContents is not a function (vagy setContents, appendContents, insertHTML).",
+				"cause": "A v3-ban a tartalomkezelő metódusok a $.html modulba kerültek, a többi v2-es példánymetódus pedig olyan modulokba, mint a $.ui.",
+				"fix": "Használd az alábbi v3-as megfelelőket. A beállításokhoz és eseményekhez a Migráció oldalon található konvertert használd."
+			},
+			"v2": {
+				"title": "A v2-es beállítások a frissítés után nem működnek",
+				"symptom": "A v3-ra váltás után egyes beállításoknak, gomboknak vagy eseményeknek nincs hatásuk.",
+				"cause": "A v3 számos beállítást átnevezett vagy áthelyezett — például a feltöltési beállítások most a bővítmény neve alatt találhatók (image.uploadUrl).",
+				"fix": "Illeszd be a v2-es beállításaidat a Migráció oldalon található konverterbe, és megkapod a v3-as megfelelőiket."
+			}
+		}
 	}
 }
