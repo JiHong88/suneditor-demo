@@ -43,8 +43,8 @@ export function SiteNav() {
 			id: "guides",
 			label: t_groups("guides"),
 			links: [
-				{ label: t("deep-dive"), href: "/deep-dive", desc: t_desc("deep-dive"), icon: Layers },
 				{ label: t("troubleshooting"), href: "/troubleshooting", desc: t_desc("troubleshooting"), icon: LifeBuoy },
+				{ label: t("deep-dive"), href: "/deep-dive", desc: t_desc("deep-dive"), icon: Layers },
 				{ label: t("migration"), href: "/migration", desc: t_desc("migration"), icon: ArrowRightLeft },
 			],
 		},
@@ -178,15 +178,29 @@ export function SiteNav() {
 										{overflowItems.map((it) =>
 											isGroup(it) ? (
 												<div key={it.id} className='mt-1 border-t pt-1 first:mt-0 first:border-t-0 first:pt-0'>
-													<div className='px-3 pb-0.5 pt-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>{it.label}</div>
+													<div className='px-3 pb-0.5 pt-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>
+														{it.label}
+													</div>
 													{it.links.map((l) => (
-														<NavA key={l.href} href={l.href} active={isActive(l.href)} underlineOrigin='left' className='py-2'>
+														<NavA
+															key={l.href}
+															href={l.href}
+															active={isActive(l.href)}
+															underlineOrigin='left'
+															className='py-2'
+														>
 															{l.label}
 														</NavA>
 													))}
 												</div>
 											) : (
-												<NavA key={it.href} href={it.href} active={isActive(it.href)} underlineOrigin='left' className='py-2'>
+												<NavA
+													key={it.href}
+													href={it.href}
+													active={isActive(it.href)}
+													underlineOrigin='left'
+													className='py-2'
+												>
 													{it.label}
 												</NavA>
 											),
@@ -243,7 +257,9 @@ export function SiteNav() {
 						{items.map((it) =>
 							isGroup(it) ? (
 								<div key={it.id} className='mt-2 border-t pt-2'>
-									<div className='px-3 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>{it.label}</div>
+									<div className='px-3 pt-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
+										{it.label}
+									</div>
 									{it.links.map((l) => (
 										<NavA key={l.href} href={l.href} active={isActive(l.href)} className='py-3'>
 											{l.label}
