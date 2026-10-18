@@ -61,7 +61,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { FEATURE_PLAYGROUND_LINKS } from "./_lib/featurePlaygroundLinks";
 import QuickTryModal from "@/components/common/QuickTryModal";
-import { FEATURE_CATEGORIES } from "@/data/snippets/featureDemoCategories";
+import { FEATURE_CATEGORIES, FEATURE_CATEGORY_KEYS, featureAnchorId, featureCategoryOf } from "@/data/snippets/featureDemoCategories";
+import { useHashTab } from "@/hooks/useHashTab";
 
 /* ── 아이콘 매핑 (JSX는 컴포넌트에서 관리) ──────────── */
 
@@ -130,7 +131,8 @@ const statIcons: Record<string, React.ReactNode> = {
 
 export default function FeatureDemoPage() {
 	const t = useTranslations("FeatureDemo");
-	const [activeTab, setActiveTab] = useState(FEATURE_CATEGORIES[0].key);
+	// `#media` selects a tab, `#feature-imageUpload` selects its tab and highlights the card
+	const [activeTab, setActiveTab] = useHashTab(FEATURE_CATEGORY_KEYS, FEATURE_CATEGORIES[0].key, { tabOf: featureCategoryOf });
 
 	// Quick Try modal state
 	const [modalOpen, setModalOpen] = useState(false);
@@ -186,9 +188,10 @@ export default function FeatureDemoPage() {
 									{cat.features.map((featureKey) => (
 										<button
 											key={featureKey}
+											id={featureAnchorId(featureKey)}
 											type='button'
 											onClick={() => openQuickTry(featureKey, cat.color, featureIcons[featureKey])}
-											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start cursor-pointer'
+											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors group text-start cursor-pointer scroll-mt-24'
 										>
 											<span className={`mt-0.5 ${cat.color}`}>{featureIcons[featureKey]}</span>
 											<div className='min-w-0 flex-1'>

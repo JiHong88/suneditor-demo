@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Upload, Palette, Zap, ArrowRight, ExternalLink, Github } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
@@ -14,11 +13,15 @@ import { BookOpen } from "lucide-react";
 import ThemeGuideContent from "./_components/ThemeGuideContent";
 import EventsContent from "./_components/EventsContent";
 import UploadGuideContent from "./_components/UploadGuideContent";
+import { useHashTab } from "@/hooks/useHashTab";
+
+/** Tab ids double as URL hashes (`/deep-dive#upload`) — site search links to them. */
+const DEEP_DIVE_TABS = ["theme", "upload", "events"] as const;
 
 export default function DeepDivePage() {
 	const t = useTranslations("DeepDive");
 	const locale = useLocale();
-	const [activeTab, setActiveTab] = useState("theme");
+	const [activeTab, setActiveTab] = useHashTab(DEEP_DIVE_TABS, "theme", { anchorId: "deep-dive-tabs" });
 
 	return (
 		<div className='min-h-screen'>
@@ -33,7 +36,7 @@ export default function DeepDivePage() {
 
 			<div className='container mx-auto px-6 pb-20 space-y-20'>
 				{/* Main content tabs */}
-				<motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+				<motion.section id='deep-dive-tabs' className='scroll-mt-20' initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
 					<Tabs value={activeTab} onValueChange={setActiveTab}>
 						<TabsList className='mb-2'>
 							<TabsTrigger value='theme' className='gap-2'>

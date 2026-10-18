@@ -55,3 +55,15 @@ export type StatDef = {
 	key: StatKey;
 	className: string;
 };
+
+/** Feature card anchor on the Feature Demo page (`/feature-demo#feature-imageUpload`) — used by site search. */
+export const featureAnchorId = (key: string) => `feature-${key}`;
+
+export const FEATURE_CATEGORY_KEYS = FEATURE_CATEGORIES.map((c) => c.key);
+
+/** `feature-imageUpload` → "media" (the tab that shows it). */
+export function featureCategoryOf(anchor: string): string | undefined {
+	const key = anchor.replace(/^feature-/, "");
+	if (key === anchor) return undefined;
+	return FEATURE_CATEGORIES.find((c) => c.features.includes(key))?.key;
+}

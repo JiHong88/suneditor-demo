@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
 	Image,
@@ -34,76 +33,53 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "@/i18n/navigation";
 import { GettingStartedMidBanner } from "@/components/ad/AdBanner";
+import { useHashTab } from "@/hooks/useHashTab";
+import { PLUGIN_DISPLAY_GROUPS, PLUGIN_DISPLAY_TYPES, pluginAnchorId, pluginDisplayTypeOf, type PluginDisplayType } from "@/data/pluginGuideGroups";
 
-/* ── Plugin icon/config data (non-translatable) ──────── */
-
-type PluginDef = {
-	name: string;
-	icon: React.ReactNode;
-	configurable?: boolean;
-};
-
-type DisplayGroupDef = {
-	color: string;
-	plugins: PluginDef[];
-};
+/* ── Plugin icons / colors (data: src/data/pluginGuideGroups.ts) ──────── */
 
 const ICON = "size-4 shrink-0";
 
-const displayGroupDefs: Record<string, DisplayGroupDef> = {
-	modal: {
-		color: "text-violet-600 dark:text-violet-400",
-		plugins: [
-			{ name: "image", icon: <Image className={ICON} />, configurable: true },
-			{ name: "video", icon: <Video className={ICON} />, configurable: true },
-			{ name: "audio", icon: <Music className={ICON} />, configurable: true },
-			{ name: "link", icon: <Link2 className={ICON} /> },
-			{ name: "embed", icon: <Code2 className={ICON} />, configurable: true },
-			{ name: "drawing", icon: <PenTool className={ICON} />, configurable: true },
-			{ name: "math", icon: <Calculator className={ICON} />, configurable: true },
-		],
-	},
-	dropdown: {
-		color: "text-sky-600 dark:text-sky-400",
-		plugins: [
-			{ name: "font", icon: <Type className={ICON} /> },
-			{ name: "blockStyle", icon: <Hash className={ICON} /> },
-			{ name: "align", icon: <AlignLeft className={ICON} /> },
-			{ name: "fontColor", icon: <Palette className={ICON} />, configurable: true },
-			{ name: "backgroundColor", icon: <Palette className={ICON} />, configurable: true },
-			{ name: "lineHeight", icon: <List className={ICON} /> },
-			{ name: "table", icon: <Table2 className={ICON} />, configurable: true },
-			{ name: "hr", icon: <Minus className={ICON} /> },
-			{ name: "list", icon: <ListOrdered className={ICON} /> },
-		],
-	},
-	command: {
-		color: "text-amber-600 dark:text-amber-400",
-		plugins: [
-			{ name: "blockquote", icon: <Code2 className={ICON} /> },
-			{ name: "list_bulleted", icon: <List className={ICON} /> },
-			{ name: "list_numbered", icon: <ListOrdered className={ICON} /> },
-			{ name: "fileUpload", icon: <FileUp className={ICON} /> },
-		],
-	},
-	input: {
-		color: "text-teal-600 dark:text-teal-400",
-		plugins: [
-			{ name: "fontSize", icon: <Type className={ICON} />, configurable: true },
-			{ name: "pageNavigator", icon: <Navigation className={ICON} /> },
-		],
-	},
-	field: {
-		color: "text-rose-600 dark:text-rose-400",
-		plugins: [{ name: "autocomplete", icon: <AtSign className={ICON} />, configurable: true }],
-	},
+const GROUP_COLORS: Record<PluginDisplayType, string> = {
+	modal: "text-violet-600 dark:text-violet-400",
+	dropdown: "text-sky-600 dark:text-sky-400",
+	command: "text-amber-600 dark:text-amber-400",
+	input: "text-teal-600 dark:text-teal-400",
+	field: "text-rose-600 dark:text-rose-400",
+};
+
+const PLUGIN_ICONS: Record<string, React.ReactNode> = {
+	image: <Image className={ICON} />,
+	video: <Video className={ICON} />,
+	audio: <Music className={ICON} />,
+	link: <Link2 className={ICON} />,
+	embed: <Code2 className={ICON} />,
+	drawing: <PenTool className={ICON} />,
+	math: <Calculator className={ICON} />,
+	font: <Type className={ICON} />,
+	blockStyle: <Hash className={ICON} />,
+	align: <AlignLeft className={ICON} />,
+	fontColor: <Palette className={ICON} />,
+	backgroundColor: <Palette className={ICON} />,
+	lineHeight: <List className={ICON} />,
+	table: <Table2 className={ICON} />,
+	hr: <Minus className={ICON} />,
+	list: <ListOrdered className={ICON} />,
+	blockquote: <Code2 className={ICON} />,
+	list_bulleted: <List className={ICON} />,
+	list_numbered: <ListOrdered className={ICON} />,
+	fileUpload: <FileUp className={ICON} />,
+	fontSize: <Type className={ICON} />,
+	pageNavigator: <Navigation className={ICON} />,
+	autocomplete: <AtSign className={ICON} />,
 };
 
 /* ── Page component ───────────────────────────────────── */
 
 export default function PluginGuidePage() {
 	const t = useTranslations("PluginGuide");
-	const [displayTab, setDisplayTab] = useState("modal");
+	// `#modal` selects a tab, `#plugin-image` selects its tab and highlights the card
+	const [displayTab, setDisplayTab] = useHashTab(PLUGIN_DISPLAY_TYPES, "modal", { tabOf: pluginDisplayTypeOf });
 
 	return (
 		<div className='min-h-screen'>
@@ -141,21 +117,21 @@ export default function PluginGuidePage() {
 
 					<Tabs value={displayTab} onValueChange={setDisplayTab}>
 						<TabsList className='flex flex-wrap h-auto gap-1 mb-6'>
-							{Object.entries(displayGroupDefs).map(([key, group]) => (
+							{PLUGIN_DISPLAY_TYPES.map((key) => (
 								<TabsTrigger key={key} value={key} className='text-xs'>
-									<span className={group.color}>{t(`displayTypes.${key}`)}</span>
+									<span className={GROUP_COLORS[key]}>{t(`displayTypes.${key}`)}</span>
 									<Badge variant='outline' className='ms-1.5 text-[10px] px-1.5 py-0'>
-										{group.plugins.length}
+										{PLUGIN_DISPLAY_GROUPS[key].length}
 									</Badge>
 								</TabsTrigger>
 							))}
 						</TabsList>
 
-						{Object.entries(displayGroupDefs).map(([key, group]) => (
+						{PLUGIN_DISPLAY_TYPES.map((key) => (
 							<TabsContent key={key} value={key}>
 								<Card className='mb-6'>
 									<CardHeader className='pb-3'>
-										<CardTitle className={`text-lg ${group.color}`}>
+										<CardTitle className={`text-lg ${GROUP_COLORS[key]}`}>
 											{t(`displayTypes.${key}`)}
 										</CardTitle>
 										<CardDescription>{t(`displayTypes.${key}Desc`)}</CardDescription>
@@ -163,12 +139,13 @@ export default function PluginGuidePage() {
 								</Card>
 
 								<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
-									{group.plugins.map((plugin) => (
+									{PLUGIN_DISPLAY_GROUPS[key].map((plugin: { name: string; configurable?: boolean }) => (
 										<div
 											key={plugin.name}
-											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors'
+											id={pluginAnchorId(plugin.name)}
+											className='flex items-start gap-3 rounded-lg border p-3 bg-card/60 hover:bg-card transition-colors scroll-mt-24'
 										>
-											<span className={`mt-0.5 ${group.color}`}>{plugin.icon}</span>
+											<span className={`mt-0.5 ${GROUP_COLORS[key]}`}>{PLUGIN_ICONS[plugin.name]}</span>
 											<div className='min-w-0 flex-1'>
 												<div className='flex items-center gap-2'>
 													<code className='text-sm font-medium'>{plugin.name}</code>

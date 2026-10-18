@@ -3,18 +3,19 @@
 import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, Braces, CornerDownLeft, FileText, LifeBuoy, Loader2, Search, SlidersHorizontal, Sparkles } from "lucide-react";
+import { ArrowRight, Braces, CornerDownLeft, FileText, LifeBuoy, Loader2, Puzzle, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { groupResults, queryWords, searchSite, type SearchSource, type SourcedEntry, type StaticSearchIndex } from "@/lib/search/siteSearch";
 import { TROUBLESHOOTING_ITEMS } from "@/data/troubleshooting";
-import { FEATURE_CATEGORIES } from "@/data/snippets/featureDemoCategories";
-import { FEATURE_PLAYGROUND_LINKS } from "@/app/[locale]/feature-demo/_lib/featurePlaygroundLinks";
+import { FEATURE_CATEGORIES, featureAnchorId } from "@/data/snippets/featureDemoCategories";
+import { PLUGIN_DISPLAY_GROUPS, PLUGIN_DISPLAY_TYPES, pluginAnchorId } from "@/data/pluginGuideGroups";
 
 const SOURCE_ICONS: Record<SearchSource, LucideIcon> = {
 	pages: FileText,
 	troubleshooting: LifeBuoy,
+	plugins: Puzzle,
 	features: Sparkles,
 	options: SlidersHorizontal,
 	api: Braces,
@@ -37,7 +38,7 @@ async function loadIndex(locale: string): Promise<StaticSearchIndex> {
 	return data;
 }
 
-/** Pages, troubleshooting and features — built from messages so they follow the current locale. */
+/** Pages, troubleshooting, plugins and features — built from messages so they follow the current locale. */
 function useMessageEntries(): SourcedEntry[] {
 	const t = useTranslations();
 	return React.useMemo(() => {
@@ -53,7 +54,23 @@ function useMessageEntries(): SourcedEntry[] {
 				u: `/${key}`,
 			})),
 			{ t: t("License.title"), d: t("License.subtitle"), u: "/license" },
+			// Sections inside pages (tabs synced with the URL hash)
+			{ t: t("DeepDive.tabs.theme"), d: t("DeepDive.theme.builtInThemesDesc"), g: menu("deep-dive"), u: "/deep-dive#theme" },
+			{ t: t("DeepDive.tabs.upload"), d: t("DeepDive.upload.overviewDesc"), g: menu("deep-dive"), u: "/deep-dive#upload" },
+			{ t: t("DeepDive.tabs.events"), d: t("DeepDive.events.overviewDesc"), g: menu("deep-dive"), u: "/deep-dive#events" },
+			{ t: t("DeepDive.architectureGuide"), d: t("DeepDive.architectureGuideDesc"), g: menu("deep-dive"), u: "/deep-dive/guide" },
+			{ t: t("PluginGuide.custom.title"), d: t("PluginGuide.custom.desc"), g: menu("plugin-guide"), u: "/plugin-guide#custom-plugin" },
 		].map((e) => ({ ...e, source: "pages" as const }));
+
+		const plugins: SourcedEntry[] = PLUGIN_DISPLAY_TYPES.flatMap((type) =>
+			PLUGIN_DISPLAY_GROUPS[type].map(({ name }) => ({
+				source: "plugins" as const,
+				t: name,
+				d: t(`PluginGuide.plugins.${name}`),
+				g: t(`PluginGuide.displayTypes.${type}`),
+				u: `/plugin-guide#${pluginAnchorId(name)}`,
+			})),
+		);
 
 		const troubleshooting: SourcedEntry[] = TROUBLESHOOTING_ITEMS.map(({ id }) => ({
 			source: "troubleshooting",
@@ -64,19 +81,16 @@ function useMessageEntries(): SourcedEntry[] {
 		}));
 
 		const features: SourcedEntry[] = FEATURE_CATEGORIES.flatMap((cat) =>
-			cat.features.map((key) => {
-				const link = FEATURE_PLAYGROUND_LINKS[key];
-				return {
-					source: "features" as const,
-					t: t(`FeatureDemo.features.${key}`),
-					d: t(`FeatureDemo.features.${key}Desc`),
-					g: t(`FeatureDemo.categories.${cat.key}`),
-					u: link ? `/playground?${link.query}#editor` : "/feature-demo",
-				};
-			}),
+			cat.features.map((key) => ({
+				source: "features" as const,
+				t: t(`FeatureDemo.features.${key}`),
+				d: t(`FeatureDemo.features.${key}Desc`),
+				g: t(`FeatureDemo.categories.${cat.key}`),
+				u: `/feature-demo#${featureAnchorId(key)}`,
+			})),
 		);
 
-		return [...pages, ...troubleshooting, ...features];
+		return [...pages, ...troubleshooting, ...plugins, ...features];
 	}, [t]);
 }
 
@@ -106,10 +120,23 @@ function Highlight({ text, words }: { text: string; words: string[] }) {
 	return <>{parts}</>;
 }
 
+/**
+ * GA4 recommended `search` event — what people look for and whether they found it.
+ * `selected` is the chosen link, or "(none)" when the palette was closed without picking a result.
+ */
+function trackSearch(query: string, resultCount: number, selected: string | null) {
+	const term = query.trim();
+	if (!term) return;
+	const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+	gtag?.("event", "search", { search_term: term, result_count: resultCount, selected: selected ?? "(none)" });
+}
+
 type Props = { open: boolean; onOpenChange: (open: boolean) => void };
 
 export default function SearchPalette({ open, onOpenChange }: Props) {
 	const t = useTranslations("Search");
+	const tRoot = useTranslations();
+	const groupLabel = (source: SearchSource) => (source === "plugins" ? tRoot("Main.MenuShort.plugin-guide") : t(`groups.${source}`));
 	const locale = useLocale();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -140,8 +167,8 @@ export default function SearchPalette({ open, onOpenChange }: Props) {
 
 	const words = React.useMemo(() => queryWords(query), [query]);
 	const groups = React.useMemo(() => {
-		// Empty query: quick links to every page
-		if (words.length === 0) return [{ source: "pages" as const, entries: messageEntries.filter((e) => e.source === "pages") }];
+		// Empty query: quick links to every page (not the sections inside them)
+		if (words.length === 0) return [{ source: "pages" as const, entries: messageEntries.filter((e) => e.source === "pages" && !e.g) }];
 		return groupResults(searchSite(allEntries, query));
 	}, [allEntries, messageEntries, query, words]);
 	const flat = React.useMemo(() => groups.flatMap((g) => g.entries), [groups]);
@@ -158,7 +185,18 @@ export default function SearchPalette({ open, onOpenChange }: Props) {
 		listRef.current?.querySelector(`[data-index="${active}"]`)?.scrollIntoView({ block: "nearest" });
 	}, [active]);
 
+	// Closed without picking a result (Esc, outside click, ⌘K again) → still record the search. Runs on open/close only.
+	const picked = React.useRef(false);
+	const wasOpen = React.useRef(open);
+	React.useEffect(() => {
+		if (wasOpen.current && !open && !picked.current) trackSearch(query, flat.length, null);
+		if (open) picked.current = false;
+		wasOpen.current = open;
+	}, [open]);
+
 	const go = (entry: SourcedEntry) => {
+		picked.current = true;
+		trackSearch(query, flat.length, entry.u);
 		onOpenChange(false);
 		const target = new URL(entry.u, window.location.origin);
 		if (target.pathname === pathname) {
@@ -221,8 +259,8 @@ export default function SearchPalette({ open, onOpenChange }: Props) {
 							groups.map(({ source, entries }) => {
 								const Icon = SOURCE_ICONS[source];
 								return (
-									<div key={source} role='group' aria-label={t(`groups.${source}`)} className='mb-2 last:mb-0'>
-										<div className='px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>{t(`groups.${source}`)}</div>
+									<div key={source} role='group' aria-label={groupLabel(source)} className='mb-2 last:mb-0'>
+										<div className='px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>{groupLabel(source)}</div>
 										{entries.map((entry) => {
 											rowIndex++;
 											const i = rowIndex;

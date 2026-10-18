@@ -47,3 +47,14 @@ describe("searchSite", () => {
 		expect(groups[0].source).toBe("api");
 	});
 });
+
+describe("groupResults", () => {
+	it("caps each group so one large source can't bury the others", () => {
+		const extra: SourcedEntry[] = [{ source: "features", t: "Insert Table", d: "Create tables", u: "/feature-demo#feature-tableInsert" }];
+		const groups = groupResults(searchSite([...entries, ...extra], "table"));
+		const api = groups.find((g) => g.source === "api");
+		expect(api!.entries.length).toBeLessThanOrEqual(8);
+		expect(groups.some((g) => g.source === "features")).toBe(true);
+		expect(groups.some((g) => g.source === "options")).toBe(true);
+	});
+});

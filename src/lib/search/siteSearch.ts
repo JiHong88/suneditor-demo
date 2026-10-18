@@ -7,14 +7,14 @@
 /** t: title · u: href (locale-less) · g: group label · d: short description · k: extra keyword (e.g. raw option key) */
 export type SearchEntry = { t: string; u: string; g?: string; d?: string; k?: string };
 
-export type SearchSource = "pages" | "troubleshooting" | "features" | "options" | "api";
+export type SearchSource = "pages" | "troubleshooting" | "plugins" | "features" | "options" | "api";
 
 export type SourcedEntry = SearchEntry & { source: SearchSource };
 
 export type StaticSearchIndex = { version: string; api: SearchEntry[]; options: SearchEntry[] };
 
 /** Small tie-breaker so a guide page outranks one of 1,000 API members with an equally good match. */
-const SOURCE_BOOST: Record<SearchSource, number> = { pages: 12, troubleshooting: 8, features: 6, options: 4, api: 0 };
+const SOURCE_BOOST: Record<SearchSource, number> = { pages: 12, troubleshooting: 8, plugins: 7, features: 6, options: 4, api: 0 };
 
 export function queryWords(query: string): string[] {
 	return query.toLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -46,7 +46,7 @@ export function scoreEntry(entry: SourcedEntry, words: string[]): number {
 }
 
 /** Ranked matches (best first), shorter titles first on ties. */
-export function searchSite(entries: SourcedEntry[], query: string, limit = 40): SourcedEntry[] {
+export function searchSite(entries: SourcedEntry[], query: string, limit = Infinity): SourcedEntry[] {
 	const words = queryWords(query);
 	if (words.length === 0) return [];
 	const scored: { entry: SourcedEntry; score: number }[] = [];
@@ -58,13 +58,16 @@ export function searchSite(entries: SourcedEntry[], query: string, limit = 40): 
 	return scored.slice(0, limit).map((s) => s.entry);
 }
 
+/** Max rows per group, so 1,000 API members can't push every other kind of result off screen. */
+const GROUP_LIMIT: Record<SearchSource, number> = { pages: 5, troubleshooting: 5, plugins: 5, features: 5, options: 6, api: 8 };
+
 /** Group ranked results for display — groups ordered by their best hit, entries keep their rank. */
 export function groupResults(results: SourcedEntry[]): { source: SearchSource; entries: SourcedEntry[] }[] {
 	const groups = new Map<SearchSource, SourcedEntry[]>();
 	for (const r of results) {
 		const list = groups.get(r.source);
-		if (list) list.push(r);
-		else groups.set(r.source, [r]);
+		if (!list) groups.set(r.source, [r]);
+		else if (list.length < GROUP_LIMIT[r.source]) list.push(r);
 	}
 	return [...groups].map(([source, entries]) => ({ source, entries }));
 }
