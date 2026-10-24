@@ -59,6 +59,10 @@
     "description": "`iframe` 的属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "要在 iframe 内应用的 CSS 文件。 \n- 字符串：要在文档 `<link>` 标签中搜索的文件名模式。 \n- `\"*\"`：包含页面中所有样式表的通配符。 \n- 还支持绝对 URL 和数据 URL (`data:text/css,`)。 \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "启用状态栏。",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "插件配置。传递一个插件类数组或一个以插件名称为键的对象。\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "要排除的插件名称列表。 \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "工具栏按钮列表，按子数组分组。\n\n- 默认值遵循 {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "文本方向：`ltr` 或 `rtl`。",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "一组命令对，其快捷方式图标应彼此相对。 \n- 取决于 `textDirection` 模式。",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "启用对标签、属性和样式的严格过滤。 \n- 使用 `true` 启用所有过滤器（默认），或使用对象来控制单个过滤器。 \n- 不支持设置`false`； 使用对象形式来禁用特定过滤器。 \n- ：过滤器描述\n - `tagFilter`：过滤不允许的 HTML 标签 (`elementWhitelist`/`elementBlacklist`)\n - `formatFilter`：过滤格式元素 (`formatLine`/`formatBlock`)\n - `classFilter`：过滤不允许的 CSS 类名 (`allowedClassName`)\n - `textStyleTagFilter`：过滤文本样式标签（b、i、u、span 等）\n - `attrFilter`：过滤不允许的 HTML 属性 (`attributeWhitelist`/`attributeBlacklist`)\n - `styleFilter`：过滤器不允许内联样式（来自 `tagStyles` 的每个标签）\n ```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "指定要按标签禁止的属性。`\"*\"` 适用于所有标签。\n\n- 即使其他设置允许，此处指定的属性最终也会被移除。\n\n- 始终包含必需元素列表 {@link DEFAULTS.REQUIRED_FORMAT_LINE}。\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "HTML 清理程序允许的其他 URL 方案，不带尾随冒号（不区分大小写）。 \n- 扩展内置协议允许列表而不禁用属性过滤。 \n- 内置协议：`http`、`https`、`ftp`、`ftps`、`mailto`、`tel`、`blob`、`sms`、`geo`、`webcal`、`callto`。 \n- 默认情况下还允许相对 URL、片段链接 (`#...`) 和图像数据 URL (`data:image/...`)。 \n- `javascript`、`vbscript` 和 `data` 条目被忽略； 仅允许使用图像数据 URL。 \n- 修复了编辑器创建时的问题； 无法使用 `resetOptions` 进行更改。 \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "其他文本样式标签。\n\n- 默认遵循 {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "自动将 URL 转换为超链接。（需要 `Link` 插件）\n\n- 默认值：`Boolean(plugins.link)` — 由 `link` 插件是否启用决定。"
+  },
+  "autoStyleify": {
+    "description": "样式自动应用于文本输入。",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "历史堆栈更新的延迟时间（毫秒）。",
@@ -548,7 +568,10 @@
     "description": "标题位置（`top`，`bottom`）"
   },
   "table_cellControllerPosition": {
-    "description": "单元控制器位置（`cell`，`table`）"
+    "description": "单元控制器位置（`cell`、`table`、`dot`）\n - `dot`：选择一个单元格时，该单元格的右边缘（RTL 中的左侧）会显示一个点，而不是控制器； 单击该点可打开单元控制器，再次单击可将其隐藏。 \n- `cell`：控制器在选择时打开，位于所选单元格下方。 \n- `table`：控制器在选择时打开，与桌面控制器一起堆叠在桌面人物上。"
+  },
+  "table_tableControllerPosition": {
+    "description": "工作台控制器位置（`table`、`dot`）\n - `dot`：选择表格会在表格的左上角（RTL 中的右上角）显示一个点，而不是控制器； 单击该点可打开表控制器，再次单击可将其隐藏。 \n- `table`：控制器在选择时打开，位于表格图的顶部。"
   },
   "table_colorList": {
     "description": "单元格背景颜色选择器的十六进制颜色列表。"

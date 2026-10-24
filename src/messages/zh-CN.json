@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "内容中的标签、属性或样式消失了",
-				"symptom": "通过 value 选项或 editor.$.html.set() 设置的 HTML，或粘贴进来的 HTML，丢失了部分标签（如 mark）、类名、data-* 属性或内联样式。",
+				"symptom": "使用 value 选项或 editor.$.html.set() 设置 HTML，或粘贴到 HTML 中，会缺少一些标签（例如 mark）、类名、data-* 属性、内联样式或指向自定义应用程序方案的链接（例如 zoommtg: 或 vscode:）。",
 				"cause": "SunEditor 会根据元素、属性、类名和各标签样式的允许列表过滤所有传入的 HTML，并移除不在列表中的内容。没有任何样式的 span 会被解除包裹。",
-				"fix": "扩展所需的允许列表：标签用 elementWhitelist，属性用 attributeWhitelist，类名用 allowedClassName，内联样式用 tagStyles。也可以通过 strictMode 选项关闭单个过滤器。切勿允许 script 标签或 on* 事件属性。"
+				"fix": "根据需要扩展允许列表：elementWhitelist 用于标签，attributeWhitelist 用于属性，allowedClassName 用于类名，tagStyles 用于内联样式，allowedURLProtocols 用于自定义 URL 方案。也可以使用 strictMode 选项关闭单个过滤器。切勿允许 script 标签或 on* 事件属性。"
 			},
 			"paste": {
 				"title": "粘贴的内容丢失格式，或带入了不需要的样式",

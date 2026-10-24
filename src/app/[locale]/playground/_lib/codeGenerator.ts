@@ -394,6 +394,10 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 	if (state.textStyleTags) add("textStyleTags", `"${state.textStyleTags}"`);
 	if (state.allowedEmptyTags) add("allowedEmptyTags", `"${state.allowedEmptyTags}"`);
 	if (state.allowedClassName) add("allowedClassName", `"${state.allowedClassName}"`);
+	if (state.allowedURLProtocols) {
+		const protocols = state.allowedURLProtocols.split(",").map((s) => s.trim()).filter(Boolean).map((s) => `"${s}"`);
+		if (protocols.length) add("allowedURLProtocols", `[${protocols.join(", ")}]`);
+	}
 	if (state.allUsedStyles) add("allUsedStyles", `"${state.allUsedStyles}"`);
 	if (state.scopeSelectionTags) {
 		const tags = state.scopeSelectionTags.split(",").map((s) => `"${s.trim()}"`);
@@ -480,6 +484,7 @@ function buildOptionsBody(state: PlaygroundState, indentBase: number, isCDN = fa
 			["scrollType", state.table_scrollType, DEFAULTS.table_scrollType],
 			["captionPosition", state.table_captionPosition, DEFAULTS.table_captionPosition],
 			["cellControllerPosition", state.table_cellControllerPosition, DEFAULTS.table_cellControllerPosition],
+			["tableControllerPosition", state.table_tableControllerPosition, DEFAULTS.table_tableControllerPosition],
 		]),
 	);
 	if (state.table_colorList) {

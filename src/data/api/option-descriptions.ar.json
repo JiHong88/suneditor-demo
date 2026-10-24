@@ -59,6 +59,10 @@
     "description": "خصائص `iframe`.\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "ملفات CSS لتطبيقها داخل iframe. \n- السلسلة: نمط اسم الملف للبحث في علامات المستند `<link>`. \n- `\"*\"`: حرف البدل لتضمين جميع أوراق الأنماط من الصفحة. \n- يتم أيضًا دعم عناوين URL المطلقة وعناوين URL للبيانات (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "يُفعّل شريط الحالة.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "إعدادات الإضافة. مرر مصفوفة من فئات الإضافات أو كائنًا مفهرسًا باسم الإضافة.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "قائمة بأسماء المكونات الإضافية المطلوب استبعادها. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "قائمة أزرار شريط الأدوات، مُجمّعة حسب المصفوفات الفرعية.\n\n- الإعداد الافتراضي يتبع {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "اتجاه النص: `ltr` أو `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "مصفوفة من أزواج الأوامر التي يجب أن تكون أيقونات الاختصارات الخاصة بها متقابلة. \n- يعتمد على وضع `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "تمكين التصفية الصارمة للعلامات والسمات والأنماط. \n- استخدم `true` لتمكين جميع المرشحات (افتراضي)، أو استخدم كائنًا للتحكم في المرشحات الفردية. \n- الإعداد `false` ​​غير مدعوم؛ استخدم نموذج الكائن لتعطيل عوامل تصفية معينة بدلاً من ذلك. \n-: وصف الفلتر \n- `tagFilter`: علامات HTML غير المسموح بها للمرشحات (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر تنسيق المرشحات (`formatLine`/`formatBlock`) \n- `classFilter`: عوامل التصفية غير مسموح بها لأسماء فئات CSS (`allowedClassName`) \n- `textStyleTagFilter`: يقوم بتصفية علامات نمط النص (b، i، u، SPAN، إلخ.) \n- `attrFilter`: عوامل التصفية غير مسموح بها لسمات HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: عوامل التصفية غير مسموح بها للأنماط المضمنة (لكل علامة من `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "يُحدد هذا الخيار السمات التي يجب حظرها لكل وسم. ينطبق `\"*\"` على جميع الوسوم.\n\n- ستُحذف السمات المُحددة هنا في النهاية حتى لو كانت مسموحة في إعدادات أخرى.\n\n- تُضمّن دائمًا قائمة بالعناصر المطلوبة، {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "مخططات URL الإضافية المسموح بها بواسطة أداة تحسين HTML، بدون نقطتين زائدتين (حساسة لحالة الأحرف). \n- يقوم بتوسيع قائمة السماح للبروتوكول المضمن دون تعطيل تصفية السمات. \n- البروتوكولات المدمجة: `http`، `https`، `ftp`، `ftps`، `mailto`، `tel`، `blob`، `sms`، `geo`، `webcal`، `callto`. \n- يُسمح أيضًا بعناوين URL النسبية وروابط الأجزاء (`#...`) وعناوين URL لبيانات الصور (`data:image/...`) بشكل افتراضي. \n- يتم تجاهل الإدخالات `javascript` و`vbscript` و`data`؛ تبقى عناوين URL لبيانات الصور فقط هي المسموح بها. \n- تم إصلاحه عند إنشاء المحرر؛ لا يمكن تغييره باستخدام `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "علامات تنسيق نص إضافية.\n\n- يتبع التنسيق الافتراضي {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "يحوّل عناوين URL تلقائيًا إلى روابط تشعبية. (يتطلب إضافة `Link`)\n\n- القيمة الافتراضية: `Boolean(plugins.link)` ​​— يتم تحديدها بناءً على تفعيل إضافة `link`."
+  },
+  "autoStyleify": {
+    "description": "يتم تطبيق الأنماط تلقائيًا على إدخال النص.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "وقت التأخير لتحديثات سجل الأحداث (بالمللي ثانية).",
@@ -548,7 +568,10 @@
     "description": "موضع التسمية التوضيحية (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "موضع وحدة التحكم الخلوية (`cell`, `table`)"
+    "description": "موضع وحدة التحكم بالخلية (`cell`، `table`، `dot`) \n- `dot`: يؤدي تحديد خلية إلى إظهار نقطة على الحافة اليمنى للخلية (اليسار في RTL) بدلاً من وحدة التحكم؛ يؤدي النقر فوق النقطة إلى فتح وحدة تحكم الخلية، والنقر فوقها مرة أخرى يؤدي إلى إخفائها. \n- `cell`: يتم فتح وحدة التحكم عند التحديد، أسفل الخلية المحددة. \n- `table`: يتم فتح وحدة التحكم عند التحديد، ومكدسة على شكل الطاولة مع وحدة تحكم الطاولة."
+  },
+  "table_tableControllerPosition": {
+    "description": "موضع وحدة التحكم بالطاولة (`table`، `dot`) \n- `dot`: يؤدي تحديد الجدول إلى إظهار نقطة في الزاوية العلوية اليسرى للجدول (أعلى اليمين في RTL) بدلاً من وحدة التحكم؛ يؤدي النقر فوق النقطة إلى فتح وحدة تحكم الجدول، والنقر فوقها مرة أخرى يؤدي إلى إخفائها. \n- `table`: تفتح وحدة التحكم عند التحديد، أعلى شكل الجدول."
   },
   "table_colorList": {
     "description": "قائمة ألوان HEX لمنتقي ألوان خلفية الخلية."

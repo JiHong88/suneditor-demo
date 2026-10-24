@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tag, attributi o stili scompaiono dal contenuto",
-				"symptom": "L'HTML impostato con l'opzione value o con editor.$.html.set(), oppure incollato, torna privo di alcuni tag (come mark), nomi di classe, attributi data-* o stili inline.",
+				"symptom": "Il codice HTML impostato con l'opzione value o editor.$.html.set(), oppure incollato, viene restituito senza alcuni tag (come mark), nomi di classi, attributi data-*, stili in linea o collegamenti a schemi di app personalizzati (come zoommtg: o vscode:).",
 				"cause": "SunEditor filtra tutto l'HTML in ingresso in base a liste di elementi consentiti per elementi, attributi, nomi di classe e stili per tag, e rimuove tutto ciò che non vi compare. Uno span rimasto senza alcuno stile viene rimosso, mantenendone il contenuto.",
-				"fix": "Estendi la lista di elementi consentiti che ti serve: elementWhitelist per i tag, attributeWhitelist per gli attributi, allowedClassName per i nomi di classe e tagStyles per gli stili inline. I singoli filtri si possono anche disattivare con l'opzione strictMode. Non consentire mai i tag script né gli attributi di evento on*."
+				"fix": "Estendi l'elenco di elementi consentiti in base alle tue esigenze: elementWhitelist per i tag, attributeWhitelist per gli attributi, allowedClassName per i nomi delle classi, tagStyles per gli stili in linea e allowedURLProtocols per gli schemi URL personalizzati. I singoli filtri possono anche essere disattivati ​​con l'opzione strictMode. Non consentire mai i tag script o gli attributi degli eventi on*."
 			},
 			"paste": {
 				"title": "Il contenuto incollato perde la formattazione o porta con sé stili indesiderati",

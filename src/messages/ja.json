@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "コンテンツからタグ、属性、スタイルが消える",
-				"symptom": "valueオプションやeditor.$.html.set()で設定した、または貼り付けたHTMLから、一部のタグ（markなど）、クラス名、data-*属性、インラインスタイルが失われる。",
+				"symptom": "value オプションまたは editor.$.html.set() を使用して設定された HTML、または貼り付けられた HTML は、一部のタグ (mark など)、クラス名、data-* 属性、インラインスタイル、またはカスタムアプリスキームへのリンク (zoommtg: や vscode: など) が欠落した状態で返されます。",
 				"cause": "SunEditorは入力されるすべてのHTMLを、要素、属性、クラス名、タグごとのスタイルの許可リストと照合し、リストにないものを削除します。スタイルが残っていないspanはアンラップされます。",
-				"fix": "必要な許可リストを拡張してください。タグはelementWhitelist、属性はattributeWhitelist、クラス名はallowedClassName、インラインスタイルはtagStylesで指定します。個々のフィルターはstrictModeオプションで無効にすることもできます。scriptタグやon*イベント属性は決して許可しないでください。"
+				"fix": "必要な許可リストを拡張してください。elementWhitelist はタグ、attributeWhitelist は属性、allowedClassName はクラス名、tagStyles はインラインスタイル、allowedURLProtocols はカスタム URL スキーム用です。strictMode オプションを使用すると、個々のフィルタを無効にすることもできます。script タグや on* イベント属性は絶対に許可しないでください。"
 			},
 			"paste": {
 				"title": "貼り付けたコンテンツの書式が失われる、または不要なスタイルが入り込む",

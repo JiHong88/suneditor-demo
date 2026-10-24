@@ -59,6 +59,10 @@
     "description": "Kenmerken van de `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS-bestanden die binnen het iframe moeten worden toegepast. \n- String: bestandsnaampatroon om te zoeken in document-`<link>`-tags. \n- `\"*\"`: Wildcard om ALLE stylesheets van de pagina op te nemen. \n- Absolute URL's en gegevens-URL's (`data:text/css,`) worden ook ondersteund. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Schakelt de statusbalk in.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Pluginconfiguratie. Geef een array met pluginklassen of een object met de pluginnaam als sleutel door.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Lijst met namen van plug-ins die moeten worden uitgesloten. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lijst met knoppen in de werkbalk, gegroepeerd per subcategorie.\n\n- De standaardinstelling volgt {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Tekstrichting: `ltr` of `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Een reeks opdrachtparen waarvan de snelkoppelingspictogrammen tegenover elkaar moeten staan. \n- Afhankelijk van de `textDirection`-modus.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Maakt strikte filtering van tags, attributen en stijlen mogelijk. \n- Gebruik `true` om alle filters in te schakelen (standaard), of een object om individuele filters te besturen. \n- Instelling `false` ​​wordt niet ondersteund; gebruik in plaats daarvan het objectformulier om specifieke filters uit te schakelen. \n- :filterbeschrijving \n- `tagFilter`: filtert niet-toegestane HTML-tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtert formaatelementen (`formatLine`/`formatBlock`) \n- `classFilter`: Filtert niet-toegestane CSS-klassenamen (`allowedClassName`) \n- `textStyleTagFilter`: Filtert tekststijltags (b, i, u, span, etc.) \n- `attrFilter`: Filtert niet-toegestane HTML-kenmerken (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtert niet-toegestane inlinestijlen (per tag vanaf `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Specificeert attributen die per tag niet zijn toegestaan. `\"*\"` is van toepassing op alle tags.\n\n- Attributen die hier worden gespecificeerd, worden uiteindelijk verwijderd, zelfs als ze door andere instellingen zijn toegestaan.\n\n- Een lijst met verplichte elementen, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, wordt altijd meegeleverd.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Aanvullende URL-schema's toegestaan ​​door de HTML-sanitizer, zonder een dubbele punt (niet hoofdlettergevoelig). \n- Breidt de ingebouwde lijst met toegestane protocollen uit zonder attribuutfiltering uit te schakelen. \n- Ingebouwde protocollen: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Relatieve URL's, fragmentlinks (`#...`) en afbeeldingsgegevens-URL's (`data:image/...`) zijn standaard ook toegestaan. \n- `javascript`, `vbscript` en `data` vermeldingen worden genegeerd; alleen afbeeldingsgegevens-URL's blijven toegestaan. \n- Opgelost bij het maken van een editor; kan niet worden gewijzigd met `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Aanvullende tekststijltags.\n\n- De standaardinstelling volgt {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Converteert URL's automatisch naar hyperlinks. (`Link` plugin vereist)\n- Standaard: `Boolean(plugins.link)` ​​— bepaald door of de `link` plugin is ingeschakeld."
+  },
+  "autoStyleify": {
+    "description": "Stijlen die automatisch worden toegepast bij tekstinvoer.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Vertragingstijd voor updates van de geschiedenisstapel (ms).",
@@ -548,7 +568,10 @@
     "description": "Bijschriftpositie (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Positie van de celcontroller (`cell`, `table`)"
+    "description": "Positie celcontroller (`cell`, `table`, `dot`) \n- `dot`: Als u een cel selecteert, wordt er een punt weergegeven aan de rechterrand van de cel (links in RTL) in plaats van de controller; Als u op de stip klikt, wordt de celcontroller geopend. Als u er nogmaals op klikt, wordt deze verborgen. \n- `cell`: De controller wordt geopend bij selectie, onder de geselecteerde cel. \n- `table`: De controller wordt geopend bij selectie, gestapeld op de tafelfiguur met de tafelcontroller."
+  },
+  "table_tableControllerPosition": {
+    "description": "Positie tafelcontroller (`table`, `dot`) \n- `dot`: Als u de tafel selecteert, wordt er een stip in de linkerbovenhoek van de tafel weergegeven (rechtsboven in RTL) in plaats van de controller; Als u op de stip klikt, wordt de tafelcontroller geopend. Als u er nogmaals op klikt, wordt deze verborgen. \n- `table`: De controller wordt geopend bij selectie, bovenaan de tabelfiguur."
   },
   "table_colorList": {
     "description": "Lijst met HEX-kleuren voor de achtergrondkleurkiezer van de cel."

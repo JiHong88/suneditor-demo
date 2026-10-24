@@ -124,6 +124,7 @@ export interface PlaygroundState {
 	textStyleTags: string;
 	allowedEmptyTags: string;
 	allowedClassName: string;
+	allowedURLProtocols: string;
 	allUsedStyles: string;
 	scopeSelectionTags: string;
 	convertTextTags: string;
@@ -173,7 +174,8 @@ export interface PlaygroundState {
 	// — Plugin: Table —
 	table_scrollType: "x" | "y" | "xy";
 	table_captionPosition: "top" | "bottom";
-	table_cellControllerPosition: "cell" | "table";
+	table_cellControllerPosition: "cell" | "table" | "dot";
+	table_tableControllerPosition: "table" | "dot";
 	table_colorList: string;
 
 	// — Plugin: FontSize —
@@ -544,6 +546,7 @@ export const DEFAULTS: PlaygroundState = {
 	textStyleTags: "",
 	allowedEmptyTags: "",
 	allowedClassName: "",
+	allowedURLProtocols: "",
 	allUsedStyles: "",
 	scopeSelectionTags: "",
 	convertTextTags: "",
@@ -593,7 +596,8 @@ export const DEFAULTS: PlaygroundState = {
 	// Plugin: Table
 	table_scrollType: "x",
 	table_captionPosition: "bottom",
-	table_cellControllerPosition: "cell",
+	table_cellControllerPosition: "dot",
+	table_tableControllerPosition: "dot",
 	table_colorList: "",
 
 	// Plugin: FontSize
@@ -1479,6 +1483,7 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	if (state.textStyleTags) opts.textStyleTags = state.textStyleTags;
 	if (state.allowedEmptyTags) opts.allowedEmptyTags = state.allowedEmptyTags;
 	if (state.allowedClassName) opts.allowedClassName = state.allowedClassName;
+	if (state.allowedURLProtocols) opts.allowedURLProtocols = state.allowedURLProtocols.split(",").map((s) => s.trim()).filter(Boolean);
 	if (state.allUsedStyles) opts.allUsedStyles = state.allUsedStyles;
 	if (state.scopeSelectionTags) opts.scopeSelectionTags = state.scopeSelectionTags.split(",").map((s) => s.trim());
 
@@ -1583,7 +1588,8 @@ export function stateToEditorOptions(state: PlaygroundState) {
 	const tbl: Record<string, unknown> = {};
 	if (state.table_scrollType !== "x") tbl.scrollType = state.table_scrollType;
 	if (state.table_captionPosition !== "bottom") tbl.captionPosition = state.table_captionPosition;
-	if (state.table_cellControllerPosition !== "cell") tbl.cellControllerPosition = state.table_cellControllerPosition;
+	if (state.table_cellControllerPosition !== "dot") tbl.cellControllerPosition = state.table_cellControllerPosition;
+	if (state.table_tableControllerPosition !== "dot") tbl.tableControllerPosition = state.table_tableControllerPosition;
 	if (state.table_colorList) tbl.colorList = state.table_colorList.split(",").map((s) => s.trim());
 	if (Object.keys(tbl).length) opts.table = tbl;
 
@@ -2047,6 +2053,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	tst: "textStyleTags",
 	aet: "allowedEmptyTags",
 	acn: "allowedClassName",
+	aup: "allowedURLProtocols",
 	aus: "allUsedStyles",
 	sst: "scopeSelectionTags",
 	ctt: "convertTextTags",
@@ -2092,6 +2099,7 @@ const PARAM_MAP: Record<string, keyof PlaygroundState> = {
 	"tb.s": "table_scrollType",
 	"tb.cp": "table_captionPosition",
 	"tb.cc": "table_cellControllerPosition",
+	"tb.tc": "table_tableControllerPosition",
 	"tb.cl": "table_colorList",
 	// Plugin: FontSize
 	"fs.u": "fontSize_sizeUnit",

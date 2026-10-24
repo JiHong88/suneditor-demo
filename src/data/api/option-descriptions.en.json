@@ -59,6 +59,10 @@
     "description": "Attributes of the `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- `\"*\"`: Wildcard to include ALL stylesheets from the page.\n- Absolute URLs and data URLs (`data:text/css,`) are also supported.\n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Enables the status bar.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "List of plugin names to exclude.\n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "List of toolbar buttons, grouped by sub-arrays.\n- The default follows {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Text direction: `ltr` or `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "An array of command pairs whose shortcut icons should be opposite each other.\n- Depends on the `textDirection` mode.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Enables strict filtering of tags, attributes, and styles.\n- Use `true` to enable all filters (default), or an object to control individual filters.\n- Setting `false` is not supported; use the object form to disable specific filters instead.\n- :filter description\n- `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n- `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n- `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n- `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n- `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n- `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Additional URL schemes allowed by the HTML sanitizer, without a trailing colon (case-insensitive).\n- Extends the built-in protocol allow list without disabling attribute filtering.\n- Built-in protocols: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`.\n- Relative URLs, fragment links (`#...`) and image data URLs (`data:image/...`) are also allowed by default.\n- `javascript`, `vbscript` and `data` entries are ignored; only image data URLs remain allowed.\n- Fixed at editor creation; cannot be changed with `resetOptions`.\n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Additional text style tags.\n- The default follows {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Automatically converts URLs into hyperlinks. (`Link` plugin required)\n- Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled."
+  },
+  "autoStyleify": {
+    "description": "Styles applied automatically on text input.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Delay time for history stack updates (ms).",
@@ -548,7 +568,10 @@
     "description": "Caption position (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Cell controller position (`cell`, `table`)"
+    "description": "Cell controller position (`cell`, `table`, `dot`)\n- `dot`: Selecting a cell shows a dot on the cell's right edge (left in RTL) instead of the controller; clicking the dot opens the cell controller, clicking it again hides it.\n- `cell`: The controller opens on selection, below the selected cell.\n- `table`: The controller opens on selection, stacked on the table figure with the table controller."
+  },
+  "table_tableControllerPosition": {
+    "description": "Table controller position (`table`, `dot`)\n- `dot`: Selecting the table shows a dot on the table's top-left corner (top-right in RTL) instead of the controller; clicking the dot opens the table controller, clicking it again hides it.\n- `table`: The controller opens on selection, on top of the table figure."
   },
   "table_colorList": {
     "description": "HEX color list for the cell background color picker."

@@ -1,6 +1,6 @@
 {
-	"version": "3.3.3",
-	"generatedAt": "2026-09-08T14:49:49.131Z",
+	"version": "3.4.0",
+	"generatedAt": "2026-10-23T19:15:26.069Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -67,16 +67,27 @@
 					"description": "شێوازەکانی جێبەجێکار",
 					"methods": [
 						{
+							"name": "applyEventControl",
+							"params": "actions: EventActions, e: Event",
+							"returns": "void",
+							"description": "Çalakiyên kontrolkirina bûyerê (`prevent` / `stop` ​​/ `preventStop`) li ser bûyerê bi carekê re sepandin. - Beriya `await`-ya yekem a handlerê bi hevdemî bang bikin: `preventDefault()`-ya ku ji `await`-ya hatî paşvexistin dikare piştî çalakiya xwerû ya gerokê bikeve (çengek `onKeyDown` a hevdemî, an şandinek bêyî xala kontrolê ya mîkrotask di navbera guhdaran de), û dûv re guhertoya xwemalî û ya kêmkirî hem tê sepandin. - `actionExecutor` hîn jî van çalakiyan bi rêz dimeşîne - du caran gazîkirina wan bêzar e.",
+							"example": "",
+							"paramDescriptions": {
+								"actions": "Lîsteya çalakiyê kêm kirin",
+								"e": "Bûyera DOM'ê çalakî ji kêm bûn"
+							}
+						},
+						{
 							"name": "actionExecutor",
 							"params": "actions: EventActions, effContext: any",
 							"returns": "Promise<false | undefined>",
-							"description": "کردارەکان بە ڕێککەوت جێبەجێ بکە بە ناردنی هەر کردارێک بۆ مامەڵەکاری کاریگەرییە هاوبەشەکەی. زوو جێبەجێکردن دەواسێت ئەگەر کردارێکی HALT ڕووبەڕوو بووەوە یان ئەگەر هەر کاریگەرییەک `false` بگەڕێنێتەوە.",
+							"description": "Bi şandina her kiryarê li ser kargêrê bandora wê ya têkildar, çalakiyan bi rêkûpêk pêk bînin. Ger çalakiyek HALT were rûbirû kirin an heke bandorek `false` vegere, darvekirinê zû rawestîne.",
 							"example": "",
 							"paramDescriptions": {
-								"actions": "ڕیزبەندی کردارەکان بۆ جێبەجێکردن",
-								"effContext": "کۆنتێکستی کاریگەری کە دەروازەکان، ctx و ڕووداوی تێدایە"
+								"actions": "Array ji çalakiyên ji bo bicihanîna",
+								"effContext": "Têkiliya bandorê ya ku port, ctx, û bûyerê heye"
 							},
-							"returnsDescription": "`false` دەگەڕێنێتەوە ئەگەر جێبەجێکردن ڕاگیرا، `undefined` ​​ئەگەر هەموو کردارەکان تەواو بوون."
+							"returnsDescription": "Ger darvekirin hate sekinandin `false` vedigerîne, ger hemî kiryar biqede `undefined` ​​vedigerîne."
 						}
 					]
 				},
@@ -1776,114 +1787,122 @@
 					"description": "شێوازەکانی پێکهاتە",
 					"methods": [
 						{
+							"name": "isHoverSelected",
+							"params": "",
+							"returns": "boolean",
+							"description": "Ma bijartina heyî tenê hilbijarkek hover e (li ser mişkê hatî çêkirin, li ser mişkê hatî paqij kirin) - hîn bi klîkek an kontrolek vekirî nehatiye nûve kirin.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "insert",
 							"params": "element: Node, {\n\t\t\tskipCharCount,\n\t\t\tskipHistory,\n\t\t\tscrollTo,\n\t\t\tinsertBehavior,\n\t\t}?: {\n\t\t\tskipCharCount?: boolean;\n\t\t\tskipHistory?: boolean;\n\t\t\tscrollTo?: boolean;\n\t\t\tinsertBehavior?: SunEditor.ComponentInsertType;\n\t\t}",
 							"returns": "HTMLElement",
-							"description": "توخمێک دەخاتە ناوەوە و دەیگەڕێنێتەوە. (بۆ توخمەکان بەکاردێت: خشتە، کاتژمێر، وێنە، ڤیدیۆ) - ئەگەر `element` `HR` ​​بێت، هێڵی نوێ دەخاتە ناوەوە و دەیگەڕێنێتەوە.",
+							"description": "Hêmanekê dixe û vedigerîne. (Ji bo hêmanan tê bikar anîn: tablo, hr, wêne, vîdyo) - Ger `element` `HR` ​​be, rêza nû têxe û vedigerîne.",
 							"example": "",
 							"paramDescriptions": {
-								"element": "توخمێک کە دەبێ بخرێتە ناوەوە",
-								"options?": "بژاردەکان",
-								"options.skipCharCount?=false": "ئەگەر `true` بێت ئەوا دەخرێتە ناوەوە تەنانەت ئەگەر `frameOptions.get('charCounter_max')` ​​تێپەڕیش بێت.",
-								"options.skipHistory?=false": "ئەگەر `true`، پاڵ بە مێژووەوە مەدە.",
-								"options.scrollTo?=true": "`true` : سکڕۆڵ بکە بۆ توخمە دانراوەکە، `false` ​​: سکڕۆڵ مەکە.",
-								"options.insertBehavior?": "ئەگەر `true` بوو، بە شێوەیەکی ئۆتۆماتیکی پێکهاتەی دانراو هەڵمەبژێرە. [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`]."
+								"element": "Elementa ku tê xistin",
+								"options?": "Vebijêrk",
+								"options.skipCharCount?=false": "Ger `true`, ew ê têxe nav ger `frameOptions.get('charCounter_max')` ​​were zêdekirin.",
+								"options.skipHistory?=false": "Ger `true`, ber bi dîrokê ve neçe.",
+								"options.scrollTo?=true": "`true` : Bigerin ser hêmana ku hatiye danîn, `false` ​​: Negerin.",
+								"options.insertBehavior?": "Ger `true`, bixweber pêkhateya têxistî hilbijêrin. [pêşveçû: `options.get('componentInsertBehavior')`]"
 							},
-							"returnsDescription": "توخمە دانراوەکە یان هێڵی نوێ (بۆ HR)"
+							"returnsDescription": "Elementa lêvekirî an rêzika nû (ji bo HR)"
 						},
 						{
 							"name": "applyInsertBehavior",
 							"params": "container: Node, oNode?: Node | null, insertBehavior?: SunEditor.ComponentInsertType",
 							"returns": "void",
-							"description": "مامەڵە لەگەڵ هەڵسوکەوتی دوای جێگیرکردن دەکات بۆ پێکهاتەیەکی تازە دروستکراو لەسەر بنەمای دۆخی دیاریکراو.",
+							"description": "Ji bo pêkhateyek ku nû hatî afirandin li ser bingeha moda diyarkirî tevgeriya piştî ketina navberê digire.",
 							"example": "",
 							"paramDescriptions": {
-								"container": "توخمە پێکهاتەییەکەی جێگیرکراو.",
-								"oNode?": "گرێی ئیختیاری بۆ بەکارهێنان بۆ هەڵبژاردن ئەگەر پێکهاتەکە نەتوانرێت هەڵبژێردرێت.",
-								"insertBehavior?": "دۆخی هەڵسوکەوت دوای دانانی پێکهاتەکان."
+								"container": "Elementa pêkhateya têxe.",
+								"oNode?": "Girêk vebijarkî ku ji bo hilbijartinê bikar bîne heke pêkhatek neyê hilbijartin.",
+								"insertBehavior?": "Moda tevgerê piştî têketina pêkhateyê."
 							}
 						},
 						{
 							"name": "get",
 							"params": "element: Node",
 							"returns": "SunEditor.ComponentInfo | null",
-							"description": "پێکهاتەی پەڕگە و ئەو ناوی پێوەکراوە بەدەست دەهێنێت - گەڕانەوەی: {target, component, pluginName} | `null` .",
+							"description": "Parçeya pelê û navê pêvekê distîne - vegere: {target, component, pluginName} | `null`",
 							"example": "",
 							"paramDescriptions": {
-								"element": "توخمە ئامانجدارەکان (تاگی وێنە، div پێکهاتە، تاگی پەڕگە)"
+								"element": "Hêmana armancê (nîşana fîgurê, parçeyek div, etîketa pelê)"
 							}
 						},
 						{
 							"name": "select",
 							"params": "element: Node, pluginName: string, {\n\t\t\tisInput,\n\t\t}?: {\n\t\t\tisInput?: boolean;\n\t\t}",
 							"returns": "boolean",
-							"description": "پێکهاتەکە(میدیا، پێکهاتەی فایل، خشتە و هتد) هەڵدەبژێردرێت و مۆدیۆلی گۆڕینی قەبارە بانگ دەکرێت.",
+							"description": "Parçeyek (medya, pêkhateya pelê, tablo, hwd) tê hilbijartin û modula veguhertina pîvanê tê gotin.",
 							"example": "",
 							"paramDescriptions": {
-								"element": "توخمە ئامانجدارەکان",
-								"pluginName": "ناوی پێوەکراو بۆ ئامانجی هەڵبژێردراو.",
-								"options?": "بژاردەکان",
-								"options.isInput?=false": "ئایا ئامانجەکە پێکهاتەیەکی هاتنەژوورەوەیە (خشتەی)."
+								"element": "Hêmana armancê",
+								"pluginName": "Navê pêvekê ji bo armanca hilbijartî.",
+								"options?": "Vebijêrk",
+								"options.isInput?=false": "Ma armanc pêkhateyek têketinê ye (tablo)."
 							}
 						},
 						{
 							"name": "deselect",
 							"params": "",
 							"returns": "void",
-							"description": "پێکهاتەی هەڵبژێردراو هەڵدەبژێرێت.",
+							"description": "Beşa hilbijartî jê hildibijêre.",
 							"example": ""
 						},
 						{
 							"name": "is",
 							"params": "element: Node",
 							"returns": "boolean",
-							"description": "دیاری دەکات کە ئایا گرێی دیاریکراو پێکهاتەیەکی بلۆک بێت (بۆ نموونە، img، iframe، ڤیدیۆ، دەنگ، خشتەی) لەگەڵ پۆلی `se-component` - یان گرێیەکی ڕاستەوخۆی `FIGURE`. ئەم فەنکشنە پشکنین دەکات کە ئایا گرێکە خۆی پێکهاتەیەک بێت - یان سەر بە هەر پێکهاتەیەک بێت کە لەلایەن بەڕێوەبەری پێکهاتەکەوە دەستنیشان کراوە.",
+							"description": "Diyar dike ka girêka diyarkirî pêkhateyek blokê ye (mînak, img, iframe, vîdyo, deng, tablo) bi çîna `se-component` - an girêkek `FIGURE` ​​rasterast. Vê fonksiyonê kontrol dike ka girêk bixwe pêkhateyek e - an ew aîdî pêkhateyên ku ji hêla rêveberê pêkhateyê ve hatine nas kirin e.",
 							"example": "",
 							"paramDescriptions": {
 								"element": "گرێی DOM بۆ پشکنین."
 							},
-							"returnsDescription": "`true` ئەگەر گرێکە پێکهاتەی بلۆک بێت یان بەشێک بێت لێی، ئەگەرنا `false`."
+							"returnsDescription": "`true` heke nod pêkhateyek blokê an beşek jê be, wekî din `false`."
 						},
 						{
 							"name": "isInline",
 							"params": "element: Node",
 							"returns": "boolean",
-							"description": "پشکنین دەکات کە ئایا گرێی پێدراو پێکهاتەیەکی ناوهێڵە (پۆلی `se-inline-component`). - ئەگەر گرێکە `FIGURE` ​​بێت، ئەوا لەبری ئەوە توخمە باوکەکە دەپشکنێت. - هەروەها پشتڕاستی دەکاتەوە کە ئایا گرێکە بەشێکە لە پێکهاتەیەکی ناو هێڵ کە لەلایەن بەڕێوەبەری پێکهاتەکەوە ناسراوە.",
+							"description": "Kontrol dike ka girêka hatî dayîn hêmanek hundurîn e (class `se-inline-component`). - Ger girêk `FIGURE` ​​be, li şûna wê hêmana dêûbavê kontrol dike. - Di heman demê de verast dike ka girêk beşek e ji pêkhateyek hundurîn e ku ji hêla rêveberê pêkhateyê ve hatî nas kirin.",
 							"example": "",
 							"paramDescriptions": {
 								"element": "گرێی DOM بۆ پشکنین."
 							},
-							"returnsDescription": "`true` ئەگەر گرێکە پێکهاتەیەکی ناو هێڵ بێت یان بەشێک بێت لێی، ئەگەرنا `false`."
+							"returnsDescription": "`true` heke girêk pêkhateyek hundurîn an beşek jê be, wekî din `false`."
 						},
 						{
 							"name": "isBasic",
 							"params": "element: Node",
 							"returns": "boolean",
-							"description": "پشکنین دەکات کە ئایا گرێی دیاریکراو وەک پێکهاتەیەکی بنەڕەتی لە ناو دەستکاریکەرەکەدا شایستەی دەبێت یان نا. - ئەم فەنکشنە پشتڕاستی دەکاتەوە کە ئایا گرێکە وەک پێکهاتەیەک لەلایەن فەنکشنی `is` دەناسرێتەوە، لە هەمان کاتدا دڵنیا دەبێتەوە لەوەی کە پێکهاتەیەکی ناو هێڵ نییە وەک لەلایەن فەنکشنی `isInline` ​​دیاری کراوە. - ئەمە بەکاردێت بۆ ناسینەوەی توخمەکانی ئاستی بلۆک یان پێکهاتە سەربەخۆکان کە بەشێک نین لە پۆلێنکردنی پێکهاتەکانی ناو هێڵ.",
+							"description": "Kontrol dike ka girêka diyarkirî di nav edîtorê de wekî hêmanek bingehîn tê hesibandin. - Ev fonksiyon verast dike ka girêk ji hêla fonksiyona `is` ve wekî pêkhatek tête nas kirin, di heman demê de piştrast dike ku ew ne pêkhateyek hundurîn e ku ji hêla fonksiyona `isInline` ​​ve hatî destnîşankirin. - Ev ji bo destnîşankirina hêmanên di asta blokê an pêkhateyên serbixwe yên ku ne beşek ji dabeşkirina pêkhateya hundurîn in tê bikar anîn.",
 							"example": "",
 							"paramDescriptions": {
-								"element": "گرێی DOM بۆ پشکنین."
+								"element": "Nodeya DOM-ê ku were kontrol kirin."
 							},
-							"returnsDescription": "`true` ئەگەر گرێکە پێکهاتەیەکی بنەڕەتی (نا-هێڵ) بێت، ئەگەرنا `false`."
+							"returnsDescription": "`true` heke girêk hêmanek bingehîn (ne-navxweyî) be, wekî din `false`."
 						},
 						{
 							"name": "copy",
 							"params": "container: Node",
 							"returns": "Promise<void>",
-							"description": "گرێی پێکهاتەی دیاریکراو کۆپی دەکات بۆ کلیپبۆرد. - ئەم فەنکشنە جیاوازە لەوەی کە بانگ دەکرێت کاتێک بەکارهێنەر تێکەڵەی کلیلی `Ctrl + C` دەکات.",
+							"description": "Girêka pêkhateya diyarkirî li klîpboardê kopî dike. - Ev fonksiyon ji ya ku jê re tê gotin cûda ye dema ku bikarhêner kombînasyona bişkojka `Ctrl + C` pêdixe.",
 							"example": "",
 							"paramDescriptions": {
-								"container": "گرێی DOM بۆ پشکنین."
+								"container": "Nodeya DOM-ê ku were kontrol kirin."
 							}
 						},
 						{
 							"name": "hoverSelect",
 							"params": "target: Element",
 							"returns": "void",
-							"description": "پێکهاتەیەک بە شێوەیەکی کاتی هەڵدەبژێرێت بەبێ ئەوەی کۆنترۆڵکەرەکەی پیشان بدات. ئەمە دۆخێکی هەڵبژاردنی سووکە کە بەکاردێت بۆ: - ماوس هۆڤەر: هەڵبژاردنی بینراو پیشان دەدات لەکاتی هێڵکاریدا، بە شێوەیەکی ئۆتۆماتیکی هەڵدەبژێرێت لەسەر ماوس دەرەوە - قەبارەی ستوونی خشتە/ڕیز: هەڵبژاردن دەپارێزێت دوای گۆڕینی قەبارە بەبێ نیشاندانی کۆنترۆڵکەر جیاوازییەکانی کلیل لە `select()`: - کۆنترۆڵکەری پێکهاتەکە نیشان نادات (قەبارەی دەستە دەستەکان، توولبار و هتد) - ئاڵای `__overInfo` ​​ڕێکدەخات بۆیە هەڵبژاردنەکە بە شێوەیەکی ئۆتۆماتیکی پاک دەکرێتەوە mouse out - بانگکردنی `select()` دوای ئەوە بەرز دەبێتەوە بۆ هەڵبژاردنی تەواو لەگەڵ کۆنترۆڵکەر",
+							"description": "Bêyî ku kontrolkerê xwe nîşan bide, bi demkî pêkhateyek hildibijêre. Ev moda hilbijartinê ya sivik e ku ji bo tê bikar anîn: - Hilbijartina mişkê: Dema ku li ser mişkê hildiweşe hilbijartina dîtbarî nîşan dide, li ser mişkê bixweber hilbijartiye - Mezinahiya stûn/rêza tabloyê: Hilbijartinê piştî mezinbûnê bêyî nîşandana kontrolkerê diparêze. mişk derdixe - Dûv re bangkirina `select()`-ê dê bi kontrolkerê ve berbi bijartina tevahî ve were nûve kirin",
 							"example": "",
 							"paramDescriptions": {
-								"target": "ئەو توخمەی کە دەبێت hover-select"
+								"target": "Hêmana ku hilbijêrî-hilbijêre"
 							}
 						}
 					]
@@ -2355,17 +2374,37 @@
 							"returnsDescription": "Rewşa heyî ya kontrolkerê li ser bişkokên neçalak."
 						},
 						{
-							"name": "onControllerContext",
+							"name": "isInsideController",
+							"params": "target: Node | null",
+							"returns": "boolean",
+							"description": "Ma `target` di hundurê kontrolkerek vekirî de ye - diherike an di edîtorê de.",
+							"example": "",
+							"paramDescriptions": {
+								"target": "Node ji bo ceribandinê"
+							}
+						},
+						{
+							"name": "getControllerAt",
+							"params": "target: Node | null",
+							"returns": "SunEditor.Module.Controller.Info | null",
+							"description": "Kontrolkera vekirî ya ku forma wê `target` heye.",
+							"example": "",
+							"paramDescriptions": {
+								"target": "Node ji bo ceribandinê"
+							}
+						},
+						{
+							"name": "hasFloatingController",
 							"params": "",
-							"returns": "void",
-							"description": "Têkiliya armanca kontrolker li qada jorîn a heyî bicîh bikin.",
+							"returns": "boolean",
+							"description": "Ma kontrolkerek herikîn (yek di `carrierWrapper` de) vekirî ye. - Navnîşanên edîtorê (kontrolkerên `wrapper`, çarçoveya guherîna mezinahiya jimarê) nayên jimartin.",
 							"example": ""
 						},
 						{
-							"name": "offControllerContext",
+							"name": "closeAllControllers",
 							"params": "",
 							"returns": "void",
-							"description": "Çarçoveya hedefa kontrolker ji nû ve saz bikin.",
+							"description": "Her kontrolkerek vekirî bi yekcarî digire - zarok li ber dêûbavên xwe derdikevin - û hilbijartina pêkhateyê bi dawî dike. Alternatîfa yek-gavekî ya Esc-asta-asta (vebijarka `escape` ​​ya `Controller` binêre).",
 							"example": ""
 						},
 						{
@@ -3233,7 +3272,13 @@
 							"name": "attributeBlacklist",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: string | undefined;\n\t}",
-							"description": "- Taybetmendiyên ku ji hêla etîketê ve nepejirînin diyar dike. `\"*\"` ji bo hemî nîşanan derbas dibe. \n- Taybetmendiyên ku li vir hatine destnîşan kirin dê di dawiyê de werin rakirin jî heke ew ji hêla mîhengên din ve werin destûr kirin. \n- Lîsteya hêmanên pêwîst, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, her gav tê de ye. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) Kontrola Şêweya Nivîsê & Têkilî"
+							"description": "- Taybetmendiyên ku ji hêla etîketê ve nepejirînin diyar dike. `\"*\"` ji bo hemî nîşanan derbas dibe. \n- Taybetmendiyên ku li vir hatine destnîşan kirin dê di dawiyê de werin rakirin jî heke ew ji hêla mîhengên din ve werin destûr kirin. \n- Lîsteya hêmanên pêwîst, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, her gav tê de ye. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` ///"
+						},
+						{
+							"name": "allowedURLProtocols",
+							"params": "",
+							"returns": "Array<string>",
+							"description": "- Pîvanên URL yên zêde yên ku ji hêla paqijkerê HTML-ê ve têne destûr kirin, bêyî kolonek paşverû (nehesas-doze). \n- Navnîşa destûrê ya protokola çêkirî bêyî ku fîlterkirina taybetmendiyê neçalak bike dirêj dike. \n- Protokolên çêkirî: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, __BT10. \n- URLên têkildar, girêdanên perçeyê (`#...`) û URLên daneya wêneyê (`data:image/...`) jî ji hêla xwerû ve têne destûr kirin. \n- Nivîsên `javascript`, `vbscript` û `data` têne paşguh kirin; tenê URLên daneya wêneyê destûr dimînin. \n- Di afirandina edîtorê de rast kirin; bi `resetOptions` nayê guhertin. ```js { allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] } ``` /// #### 3) Kontrola Şêweya Nivîsê & Têkilî"
 						},
 						{
 							"name": "textStyleTags",
@@ -3257,7 +3302,7 @@
 							"name": "tagStyles",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- Li ser etîketa HTML-ê şêwazên destûr ên CSS-ê diyar dike. \n- Key navek etîketê ye, gelek etîketên ku bi `|` ve hatine girêdan, an parêzek kategoriyê ye (`@text`, `@line`, `@component`). \n- Nirx navnîşek bi boriyek veqetandî ya navên şêwazê destûr e. \n- Rêza çareseriyê dema fîlterkirina hêmanekê: `@component` (ji bo konteynerên `.se-component`) → ketina tagê ya eşkere → `@line` (ji bo hêmanên rêzê yên formatê) → `@text` (ji bo textStyleTags). \n- `@component` mezinahiya navrû diparêze (`width`/`height`/`min-width`) edîtor ji bo mezinahiyên li gorî ji sedî li ser konteynerê hêmanek medyayê dinivîse; vana bihêlin da ku rêwîtiyek dor-paqij () pêvekê bi firehiya tevahî vegerîne. \n- Danûstandinek etîketek eşkere ** bi kategoriya xweya xwerû re ** tê hevgirtin** dema ku etîket ji yekê re be (`@line` ji bo hêmanên formatLine, yên din `@text` ji bo textStyleTags) - têketin şêwazên li ser kategoriyê zêde dike. \n- Bi {@link DEFAULTS.TAG_STYLES} re hat girêdan; keys-bikarhêner dabînkirî win. ```js { tagStyles: { '@text': 'color|font-size|background-color',  // default for span, b, i, em, ... '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ... 'table|td': 'border|color|background-color',  // per-tag whitelist div: 'color',                                 // merged with the `@line` default (div is a line element) hr: 'border-top', } } ```"
+							"description": "- Li ser etîketa HTML-ê şêwazên destûr ên CSS-ê diyar dike. \n- Key navek etîketê ye, gelek etîketên ku bi `|` ve hatine girêdan, an parêzek kategoriyê ye (`@text`, `@line`, `@component`). \n- Nirx navnîşek bi boriyek veqetandî ya navên şêwazê destûr e. \n- Rêza çareseriyê dema fîlterkirina hêmanekê: `@component` (ji bo konteynerên `.se-component`) → ketina tagê ya eşkere → `@line` (ji bo hêmanên rêzê yên formatê) → `@text` (ji bo textStyleTags). \n- `@component` mezinahiya navrû diparêze (`width`/`height`/`min-width`) edîtor ji bo mezinahiyên li gorî ji sedî li ser konteynerê hêmanek medyayê dinivîse; vana bihêlin da ku rêwîtiyek dor-paqij () pêvekê li firehiya tevahî vegerîne. \n- Danûstandinek etîketek eşkere ** bi kategoriya xweya xwerû re ** tê hevgirtin** dema ku etîket ji yekê re be (`@line` ji bo hêmanên formatLine, yên din `@text` ji bo textStyleTags) - têketin şêwazên li ser kategoriyê zêde dike. \n- Bi {@link DEFAULTS.TAG_STYLES} re hat girêdan; keys-bikarhêner dabînkirî win. ```js { tagStyles: { '@text': 'color|font-size|background-color',  // default for span, b, i, em, ... '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ... 'table|td': 'border|color|background-color',  // per-tag whitelist div: 'color',                                 // merged with the `@line` default (div is a line element) hr: 'border-top', } } ```"
 						},
 						{
 							"name": "fontSizeUnits",
@@ -3269,7 +3314,7 @@
 							"name": "retainStyleMode",
 							"params": "",
 							"returns": "'repeat' | 'always' | 'none'",
-							"description": "- Diyar dike ka hêmanên hundurîn (mînak `<span>`, `<strong>`) di dema jêbirina nivîsê de çawa têne xebitandin. \n- `repeat`: Şêwe têne parastin heya ku paşverû çend caran neyê pêl kirin. \n- Zexta domdar dê di dawiyê de şêwazan derxîne. \n- `none`: Şêwe nayên parastin. Hêmanên xêzkirî tavilê bi nivîsê re têne rakirin. \n- `always`: Şêwe bêdawî dom dikin heya ku bi eşkereyî jêbirin. \n- Tewra ku hemî nivîsa di hundurê hêmanek hundurîn de were jêbirin jî, hêman bixwe dimîne. /// #### 4) Rêz & Block Formatting"
+							"description": "- Diyar dike ka hêmanên hundurîn (mînak `<span>`, `<strong>`) di dema jêbirina nivîsê de çawa têne xebitandin. \n- `repeat`: Şêwe têne parastin heya ku paşnav çend caran neyê pêl kirin. \n- Zexta domdar dê di dawiyê de şêwazan derxîne. \n- `none`: Şêwe nayên parastin. Hêmanên xêzkirî tavilê bi nivîsê re têne rakirin. \n- `always`: Şêwe bêdawî dom dikin heya ku bi eşkereyî jêbirin. \n- Tewra nivîsa ku di hundurê hêmanek hundurîn de were jêbirin jî, hêman bixwe dimîne. /// #### 4) Rêz & Block Formatting"
 						},
 						{
 							"name": "defaultLine",
@@ -3281,13 +3326,13 @@
 							"name": "defaultLineBreakFormat",
 							"params": "",
 							"returns": "'line' | 'br'",
-							"description": "- Forma veqetandina rêza xwerû diyar dike. \n- [Pêşniyar kirin] `line` : Veqetîna rêzê li ser etîketên giştî tê dabeş kirin. \n- [Tê pêşniyar kirin] `br` ​​: Veqetandinên rêzê di heman xetê de wekî <br> têne hesibandin. (wek shift+enter) \n- Veqetandinên rêzê wekî <br> di nav `line` de têne rêve kirin. \n- Hûn dikarin `line`_ya nû bi ketina rêzek du caran li pey hev biafirînin. \n- Formatên ku `line` tê de hene, wek \"Quote\", hîn jî li ser bingeha `line` dixebitin. \n- pêvajoyên suneditor di yekîneyên `line` de dixebitin. \n- Dema ku li `br` were danîn, dema ku gelek daneyan biguherîne dibe ku performans kêm bibe."
+							"description": "- Forma veqetandina rêza xwerû diyar dike. \n- [Pêşniyar kirin] `line` : Veqetîna rêzê li ser nîşaneyên gelemperî tê dabeş kirin. \n- [Tê pêşniyar kirin] `br` ​​: Veqetandinên rêzê di heman xetê de wekî <br> têne hesibandin. (wek shift+enter) \n- Veqetandinên rêzê wekî <br> di nav `line` de têne rêve kirin. \n- Hûn dikarin `line`_ya nû bi ketina rêzek du caran li pey hev biafirînin. \n- Formatên ku `line` tê de hene, wek \"Quote\", hîn jî li ser bingeha `line` dixebitin. \n- pêvajoyên suneditor di yekîneyên `line` de dixebitin. \n- Dema ku li `br` were danîn, dema ku gelek daneyan biguherîne dibe ku performans kêm bibe."
 						},
 						{
 							"name": "lineBreakClearStyle",
 							"params": "",
 							"returns": "boolean",
-							"description": "- Dema `true`, pêlkirina Enter li **dawiya** xêzekê xêzek nû dest pê dike ku girêkên şêwaza hundurîn a xêzikê nagire (mînak. hêmana asta rêzê û taybetmendiyên wê têne parastin. Tenê bandorê li doza dawiya rêzê dike - parçebûna rêza navîn, şikestinên destpêka rêzê, û Shift+Enter nayên guhertin. ```js { lineBreakClearStyle: true } ```"
+							"description": "- Dema `true`, pêlkirina Enter li **dawiya** rêzekê xêzek nû dest pê dike ku girêkên şêwaza hundurîn a xêzikê nagire (mînak. hêmana asta rêzê û taybetmendiyên wê têne parastin. Tenê bandorê li doza dawiya rêzê dike - parçebûna rêza navîn, şikestinên destpêka rêzê, û Shift+Enter nayên guhertin. ```js { lineBreakClearStyle: true } ```"
 						},
 						{
 							"name": "lineAttrReset",
@@ -3353,7 +3398,7 @@
 							"name": "toolbar_innerWidth",
 							"params": "",
 							"returns": "string",
-							"description": "- Rêzika bişkojka toolbarê (`.se-btn-tray`) bi awayekî horizontî navendî bikin. \n- ** Dirêjahiya CSS** (mînak. `\"500px\"`, `\"740px\"`, `\"60ch\"`): paşxaneya barika amûran bi tevahî firehiya xwe digire dema ku rêza bişkojkê li wê firehiyê tê girtin û navendê ye. Ger bişkok bikevin, rêz li ser yek rêzek dimîne; heke ji qapaxê derbas bibin, di hundurê wê de dipêçin. \n- **`\"auto\"`**: bê kap - rêz li gorî naveroka xwe mezin dibe û bi tenê navend e. \n- **Rêza vala ** (pêşniyaz): bê astengî. \n- **Têbînî li ser `responsiveButtonList`**: tixûb li hember firehiya tam a toolbarê, ne bandê, didin ber hev. Dema ku ev vebijark were danîn, bişkokên `responsiveButtonList` li dora mezinahiya darikê amûrê ku hûn bi rastî dixwazin ku her bişkokek tê de were danîn, kalibr bikin. ```js { toolbar_innerWidth: '740px' } { toolbar_innerWidth: 'auto' } ```"
+							"description": "- Rêzika bişkojka toolbarê (`.se-btn-tray`) bi awayekî horizontî navendî bikin. \n- ** Dirêjahiya CSS** (mînak. `\"500px\"`, `\"740px\"`, `\"60ch\"`): paşxaneya toolbarê tev firehiya xwe digire dema ku rêza bişkojkê bi wê firehiyê tê girtin û navendê ye. Ger bişkok bikevin, rêz li ser yek rêzek dimîne; heke ji qapaxê derbas bibin, di hundurê wê de dipêçin. \n- **`\"auto\"`**: bê kap - rêz li gorî naveroka xwe mezin dibe û bi tenê navend e. \n- **Rêza vala ** (pêşniyaz): bê astengî. \n- **Têbînî li ser `responsiveButtonList`**: tixûb li hember firehiya tam a toolbarê, ne bandê, didin ber hev. Dema ku ev vebijark were danîn, bişkokên `responsiveButtonList` li dora mezinahiya darikê amûrê ku hûn bi rastî dixwazin ku her bişkokek tê de were danîn, kalibr bikin. ```js { toolbar_innerWidth: '740px' } { toolbar_innerWidth: 'auto' } ```"
 						},
 						{
 							"name": "toolbar_container",
@@ -3401,7 +3446,7 @@
 							"name": "shortcuts",
 							"params": "",
 							"returns": "{\n\t\t[key: string]: Array<string> | undefined;\n\t}",
-							"description": "- Kurteyên klavyeyê yên xweser. \n- Bişkojkên ku bi `_` dest pê dikin kurtebirên xwerû yên ku ji hêla bikarhêner ve hatine diyar kirin in. Her nirx rêzek `[keyCombo, hintLabel]` ​​cotan e. \n- Comboyên sereke `c` (Ctrl/Cmd), `s` (Shift), û `KeyEvent.code` nirxên ku bi `+` ve hatine girêdan bikar tînin. \n- `$~pluginName.method` bikar bînin da ku hûn rêbazek pêvekek taybetî bang bikin. ```js { shortcuts: { bold: ['c+KeyB', 'B'], _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', ''] } } ``` /// === Taybetmendiyên Pêşketî ==="
+							"description": "- Kurteyên klavyeyê yên xweser. \n- Bişkojkên ku bi `_` dest pê dikin kurtebirên xwerû yên ku ji hêla bikarhêner ve hatine destnîşankirin in. Her nirx rêzek `[keyCombo, hintLabel]` ​​cotan e. \n- Comboyên sereke `c` (Ctrl/Cmd), `s` (Shift), û `KeyEvent.code` bi `+` ve girêdayî bikar tînin. \n- `$~pluginName.method` bikar bînin da ku hûn rêbazek pêvekek taybetî bang bikin. ```js { shortcuts: { bold: ['c+KeyB', 'B'], _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', ''] } } ``` /// === Taybetmendiyên Pêşketî ==="
 						},
 						{
 							"name": "copyFormatKeepOn",
@@ -3509,7 +3554,7 @@
 							"name": "events",
 							"params": "",
 							"returns": "SunEditor.Event.Handlers",
-							"description": "- Veavakirina rêveberên bûyera bikarhêner. ```js { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } } ``` /// === [ Vebijêrkên Plugin-Taybetî ] === ---[ Xweber ji hêla skrîptan ve hatî çêkirin/check/inject-plugin-jsdoc.cjs - BI DÊŞAN NEBE ]---"
+							"description": "- Veavakirina rêveberên bûyera bikarhêner. ```js { events: { onChange: (content) => console.log(content), onImageUploadBefore: (files, info) => true } } ``` /// === [ Vebijêrkên Plugin-Taybetî ] === ---[ Xweber ji hêla skrîptan/check/inject-plugin-jsdoc.cjs ve hatî çêkirin - BI DÊŞAN NEBE ]---"
 						},
 						{
 							"name": "align",
@@ -3689,7 +3734,7 @@
 							"name": "videoGallery",
 							"params": "",
 							"returns": "import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions",
-							"description": "/// ---[ Dawiya vebijarkên pêvekê yên xweser-çêkirî ]--- ============================================================== =============================================================="
+							"description": "/// ---[ Dawiya vebijarkên pêveka-çêkirî yên xweser ]--- ============================================================== =============================================================="
 						}
 					]
 				},
@@ -5532,34 +5577,42 @@
 							}
 						},
 						{
+							"name": "isSelectionUI",
+							"params": "",
+							"returns": "boolean",
+							"description": "Ma ev kontrolker UI-ya pêkhateya hilbijartî ye - ji hêla `selection` ve hatî destnîşan kirin an ji `parents` ​​ve hatî mîras kirin.",
+							"example": "",
+							"memberKind": "getter"
+						},
+						{
 							"name": "hide",
 							"params": "",
 							"returns": "void",
-							"description": "کۆنتڕۆڵکەری شاردنەوە",
+							"description": "Kontrolker veşêre",
 							"example": ""
 						},
 						{
 							"name": "show",
 							"params": "",
 							"returns": "void",
-							"description": "کۆنتڕۆڵکەر پیشان بدە",
+							"description": "Kontrolker nîşan bide",
 							"example": ""
 						},
 						{
 							"name": "bringToTop",
 							"params": "value: boolean",
 							"returns": "void",
-							"description": "ڕێکدەخات کە ئایا توخمەکە (فۆڕم) بهێنرێتە سەرەوە یان نا بە پشتبەستن بە `z-index`.",
+							"description": "Saz dike ka element (form) divê li ser bingeha `z-index` were jor kirin.",
 							"example": "// Bring controller to the highest z-index layer (2147483646)\nthis.controller_cell.bringToTop(true);\n// Restore to the default top z-index (2147483645)\nthis.controller_cell.bringToTop(false);",
 							"paramDescriptions": {
-								"value": "`true`: `'2147483646'`، `false`: `'2147483645'`."
+								"value": "`true`: `'2147483646'`, `false`: `'2147483645'`."
 							}
 						},
 						{
 							"name": "resetPosition",
 							"params": "target?: Node",
 							"returns": "void",
-							"description": "شوێنی کۆنترۆڵکەر ڕێست بکەرەوە",
+							"description": "Positiona kontrolkerê vegerîne",
 							"example": "// Reposition using a new target element\nthis.controller_cell.resetPosition(tdElement);\n// Reposition using the previously set target\nthis.controller.resetPosition();"
 						}
 					]
@@ -5664,7 +5717,7 @@
 						},
 						{
 							"name": "open",
-							"params": "targetNode: Node, {\n\t\t\tnonResizing,\n\t\t\tnonSizeInfo,\n\t\t\tnonBorder,\n\t\t\tfigureTarget,\n\t\t\tinfoOnly,\n\t\t}: {\n\t\t\tnonResizing?: boolean;\n\t\t\tnonSizeInfo?: boolean;\n\t\t\tnonBorder?: boolean;\n\t\t\tfigureTarget?: boolean;\n\t\t\tinfoOnly?: boolean;\n\t\t}",
+							"params": "targetNode: Node, {\n\t\t\tnonResizing,\n\t\t\tnonSizeInfo,\n\t\t\tnonBorder,\n\t\t\tfigureTarget,\n\t\t\tinfoOnly,\n\t\t\tnonDragHandle,\n\t\t}: {\n\t\t\tnonResizing?: boolean;\n\t\t\tnonSizeInfo?: boolean;\n\t\t\tnonBorder?: boolean;\n\t\t\tfigureTarget?: boolean;\n\t\t\tinfoOnly?: boolean;\n\t\t\tnonDragHandle?: boolean;\n\t\t}",
 							"returns": "FigureTargetInfo | undefined",
 							"description": "کۆنتڕۆڵکەری فیگەرەکە بکەرەوە",
 							"example": "// Open controller with full UI (resize handles, size info, border)\nconst info = this.figure.open(imgElement, {\nnonResizing: false, nonSizeInfo: false, nonBorder: false,\nfigureTarget: false, infoOnly: false\n});\n// Get figure info without opening the controller UI\nconst info = this.figure.open(oFrame, {\nnonResizing: false, nonSizeInfo: false, nonBorder: false,\nfigureTarget: false, infoOnly: true\n});\n// info.width, info.height, info.ratio are available",
@@ -5675,7 +5728,8 @@
 								"params.nonSizeInfo?=false": "زانیاری قەبارە پیشان مەدە",
 								"params.nonBorder?=false": "هێڵی ستایلە هەڵبژێردراوەکە پیشان مەدە",
 								"params.figureTarget?=false": "ئەگەر `true` بێت، ئامانجەکە توخمێکی فیگەرە",
-								"params.infoOnly?=false": "ئەگەر `true`، تەنها زانیاری ئامانجی ژمارەکە دەگەڕێنێتەوە بەبێ ئەوەی کۆنترۆڵکەرەکە بکاتەوە"
+								"params.infoOnly?=false": "ئەگەر `true`، تەنها زانیاری ئامانجی ژمارەکە دەگەڕێنێتەوە بەبێ ئەوەی کۆنترۆڵکەرەکە بکاتەوە",
+								"params.nonDragHandle?=false": "Destê kişandina pêkhateyê pêve nekin."
 							},
 							"returnsDescription": "زانیاری ئامانجی ژمارە"
 						},
@@ -5772,7 +5826,7 @@
 						},
 						{
 							"name": "retainFigureFormat",
-							"params": "container: Node, originEl: Node, anchorCover: Node, fileManagerInst?: import('../manager/FileManager').default",
+							"params": "container: Node, originEl: Node, anchorCover: Node, fileManagerInst?: SunEditor.Module.FileManager.Instance",
 							"returns": "void",
 							"description": "فۆرماتەکەی پێکهاتەی فیگەرەکە بپشکنە و بیگۆڕە بۆ فۆرماتێکی دروست.",
 							"example": "// Insert a new image figure, replacing the original element in the DOM\nconst figureInfo = Figure.CreateContainer(imgElement, 'se-image-container');\nthis.figure.retainFigureFormat(figureInfo.container, this.#element, null, this.fileManager);\n// Replace with anchor cover (e.g., image wrapped in a link)\nthis.figure.retainFigureFormat(container, this.#element, anchorEl, this.fileManager);",
@@ -7147,6 +7201,16 @@
 							"example": "",
 							"paramDescriptions": {
 								"node": "توخمێک بۆ پشکنین"
+							}
+						},
+						{
+							"name": "isPopoverOpen",
+							"params": "element: Element | null",
+							"returns": "boolean",
+							"description": "Kontrol dike ka hêman niha wekî popover tê nîşandan. - Li cihê ku hilbijêra `:popover-open` ​​nayê bicihanîn, `false` vedigere (`matches` `SyntaxError` diavêje wir).",
+							"example": "",
+							"paramDescriptions": {
+								"element": "Hêmana ku were kontrol kirin"
 							}
 						}
 					]
@@ -9095,6 +9159,12 @@
 					"source": "typedef.d.ts"
 				},
 				{
+					"name": "File",
+					"definition": "import('./modules/contract/Browser').BrowserFile",
+					"kind": "type",
+					"source": "typedef.d.ts"
+				},
+				{
 					"name": "Info",
 					"definition": "import('./modules/contract/Controller').ControllerInfo",
 					"kind": "type",
@@ -9127,12 +9197,6 @@
 				{
 					"name": "Controls",
 					"definition": "import('./modules/contract/Figure').FigureControls",
-					"kind": "type",
-					"source": "typedef.d.ts"
-				},
-				{
-					"name": "File",
-					"definition": "import('./modules/contract/Browser').BrowserFile",
 					"kind": "type",
 					"source": "typedef.d.ts"
 				},
@@ -9675,7 +9739,7 @@
 				},
 				{
 					"name": "EditorBaseOptions",
-					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom';\n\t/**\n\t * - Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`.\n\t */\n\tblockHandle?: {\n\t\tmenu?: Array<\n\t\t\t| string\n\t\t\t| {\n\t\t\t\t\ttitle: string;\n\t\t\t\t\ticon?: string;\n\t\t\t\t\taction: (\n\t\t\t\t\t\tdeps: SunEditor.Deps,\n\t\t\t\t\t\tctx: {\n\t\t\t\t\t\t\tblock: HTMLElement;\n\t\t\t\t\t\t},\n\t\t\t\t\t) => void;\n\t\t\t  }\n\t\t>;\n\t\tmaxHeight?: string;\n\t\tminWidth?: string;\n\t\tonPlusClick?: (\n\t\t\targ0: SunEditor.Deps,\n\t\t\targ1: {\n\t\t\t\tblock: HTMLElement;\n\t\t\t\topenMenu: () => void;\n\t\t\t},\n\t\t) => void;\n\t};\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-[^\\s]+'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed CSS styles per HTML tag.\n\t * - Key is a tag name, multiple tags joined with `|`, or a category sentinel (`@text`, `@line`, `@component`).\n\t * - Value is a pipe-delimited list of allowed style names.\n\t * - Resolution order when filtering an element: `@component` (for `.se-component` containers) → explicit tag entry → `@line` (for formatLine elements) → `@text` (for textStyleTags).\n\t * - `@component` guards the inline sizing (`width`/`height`/`min-width`) the editor writes on a media component's container for percentage-based sizes; keep these so a clean() round-trip does not reset the component to full width.\n\t * - An explicit tag entry is **merged** with its category default when the tag belongs to one (`@line` for formatLine elements, else `@text` for textStyleTags) — the entry adds styles on top of the category's.\n\t * - Merged with {@link DEFAULTS.TAG_STYLES}; user-supplied keys win.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * '@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n\t * '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n\t * 'table|td': 'border|color|background-color',  // per-tag whitelist\n\t * div: 'color',                                 // merged with the `@line` default (div is a line element)\n\t * hr: 'border-top',\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - When `true`, pressing Enter at the **end** of a line\n\t * starts a fresh line that does not carry the caret's inline style nodes (e.g. bold/italic/color spans, links);\n\t * the line-level element and its attributes are preserved.\n\t * Only affects the end-of-line case — mid-line splits, start-of-line breaks, and Shift+Enter are unchanged.\n\t * ```js\n\t * { lineBreakClearStyle: true }\n\t * ```\n\t */\n\tlineBreakClearStyle?: boolean;\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Center the toolbar's button row (`.se-btn-tray`) horizontally.\n\t * - **CSS length** (e.g. `\"500px\"`, `\"740px\"`, `\"60ch\"`): toolbar background spans full width while the button row is capped at that width and centered. If buttons fit, the row stays on a single line; if they exceed the cap, they wrap inside it.\n\t * - **`\"auto\"`**: no cap — the row is sized to its content and simply centered.\n\t * - **Empty string** (default): no constraint.\n\t * - **Note on `responsiveButtonList`**: thresholds compare against the toolbar's full width, not the band. When this option is set, calibrate `responsiveButtonList` keys around the toolbar size you actually want each button set to kick in at.\n\t * ```js\n\t * { toolbar_innerWidth: '740px' }\n\t * { toolbar_innerWidth: 'auto' }\n\t * ```\n\t */\n\ttoolbar_innerWidth?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar.\n\t * - `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n\t * - `{top, offset}`: `top` is the sticky position when the page header is visible.\n\t * - `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n\t * - When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n\t * - for a page header that has scrolled out of view. Default `offset` is `0`.\n\t * - `position` (default `\"sticky\"`): the positioning engine.\n\t * - `\"sticky\"` uses native CSS `position: sticky` (with a JS `position: fixed` fallback where unsupported).\n\t * `\"fixed\"` forces the JS `position: fixed` engine\n\t * - even when CSS sticky is supported — for environments where CSS sticky silently misbehaves and can't be\n\t * ```js\n\t * // Basic usage — sticky at top with 0px offset\n\t * toolbar_sticky: 0\n\t *\n\t * // Account for a 92px fixed/sticky site header\n\t * toolbar_sticky: 92\n\t *\n\t * // 92px header on desktop, but 0px when virtual keyboard pushes the viewport\n\t * toolbar_sticky: { top: 92, offset: 0 }\n\t *\n\t * // Force the JS position:fixed engine (CSS sticky unreliable in this environment)\n\t * toolbar_sticky: { top: 0, position: 'fixed' }\n\t * ```\n\t */\n\ttoolbar_sticky?:\n\t\t| number\n\t\t| {\n\t\t\t\ttop: number;\n\t\t\t\toffset?: number;\n\t\t\t\tposition?: 'sticky' | 'fixed';\n\t\t  };\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.\n\t */\n\thistoryStackSize?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - Shows the built-in Find/Replace panel UI.\n\t * - The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).\n\t */\n\tfinder_panel?: boolean;\n\t/**\n\t * - Searches instantly as you type (debounced). When false, search runs only on Enter.\n\t *\n\t * ///\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfinder_liveSearch?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tautocomplete?: import('../../plugins/field/autocomplete.js').AutocompletePluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tcodeBlock?: import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\tslashCommand?: import('../../plugins/field/slashCommand.js').SlashCommandPluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
+					"definition": "{\n\t/**\n\t * - Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name.\n\t * ```js\n\t * import plugins, { image, link, table } from 'suneditor/src/plugins';\n\t * { plugins: plugins,\n\t * plugins: [image, link, table],\n\t * plugins: { image, link, table }\n\t * }\n\t * ```\n\t */\n\tplugins?:\n\t\t| {\n\t\t\t\t[x: string]: any;\n\t\t  }\n\t\t| Array<{\n\t\t\t\t[x: string]: any;\n\t\t  }>;\n\t/**\n\t * - List of plugin names to exclude.\n\t * ```js\n\t * { excludedPlugins: ['image', 'video'] }\n\t * ```\n\t */\n\texcludedPlugins?: Array<string>;\n\t/**\n\t * - List of toolbar buttons, grouped by sub-arrays.\n\t * - The default follows {@link DEFAULTS.BUTTON_LIST}///\n\t *\n\t * === Modes & Themes ===\n\t */\n\tbuttonList?: SunEditor.UI.ButtonList;\n\t/**\n\t * - Enables migration mode for SunEditor v2.\n\t */\n\tv2Migration?: boolean;\n\t/**\n\t * - Toolbar mode: `classic`, `inline`, `balloon`, `balloon-always`. Append `:bottom` to place toolbar at the bottom (e.g. `classic:bottom`, `inline:bottom`).\n\t */\n\tmode?: 'classic' | 'inline' | 'balloon' | 'balloon-always' | 'classic:bottom' | 'inline:bottom';\n\t/**\n\t * - Block handle configuration. When provided, a per-line block handle UI is shown. Works independently of `mode`.\n\t */\n\tblockHandle?: {\n\t\tmenu?: Array<\n\t\t\t| string\n\t\t\t| {\n\t\t\t\t\ttitle: string;\n\t\t\t\t\ticon?: string;\n\t\t\t\t\taction: (\n\t\t\t\t\t\tdeps: SunEditor.Deps,\n\t\t\t\t\t\tctx: {\n\t\t\t\t\t\t\tblock: HTMLElement;\n\t\t\t\t\t\t},\n\t\t\t\t\t) => void;\n\t\t\t  }\n\t\t>;\n\t\tmaxHeight?: string;\n\t\tminWidth?: string;\n\t\tonPlusClick?: (\n\t\t\targ0: SunEditor.Deps,\n\t\t\targ1: {\n\t\t\t\tblock: HTMLElement;\n\t\t\t\topenMenu: () => void;\n\t\t\t},\n\t\t) => void;\n\t};\n\t/**\n\t * - Editor type. Use `\"document\"` for a document-style layout, with optional sub-types after `:`.\n\t * ```js\n\t * // type\n\t * 'document:header,page'\n\t * ```\n\t */\n\ttype?: string;\n\t/**\n\t * - Editor theme.\n\t */\n\ttheme?: string;\n\t/**\n\t * - Language configuration. default : EN\n\t */\n\tlang?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Overrides the default icons.\n\t */\n\ticons?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Text direction: `ltr` or `rtl`.\n\t */\n\ttextDirection?: 'ltr' | 'rtl';\n\t/**\n\t * - An array of command pairs whose shortcut icons should be opposite each other.\n\t * - Depends on the `textDirection` mode.\n\t * ///\n\t *\n\t * === Strict & Advanced Filtering ===\n\t */\n\treverseButtons?: Array<string>;\n\t/**\n\t * - Enables strict filtering of tags, attributes, and styles.\n\t * - Use `true` to enable all filters (default), or an object to control individual filters.\n\t * - Setting `false` is not supported; use the object form to disable specific filters instead.\n\t * - :filter description\n\t * - `tagFilter`: Filters disallowed HTML tags (`elementWhitelist`/`elementBlacklist`)\n\t * - `formatFilter`: Filters format elements (`formatLine`/`formatBlock`)\n\t * - `classFilter`: Filters disallowed CSS class names (`allowedClassName`)\n\t * - `textStyleTagFilter`: Filters text style tags (b, i, u, span, etc.)\n\t * - `attrFilter`: Filters disallowed HTML attributes (`attributeWhitelist`/`attributeBlacklist`)\n\t * - `styleFilter`: Filters disallowed inline styles (per-tag from `tagStyles`)\n\t * ```js\n\t * // disable only attribute and style filters\n\t * {\n\t * strictMode: {\n\t * tagFilter: true,\n\t * formatFilter: true,\n\t * classFilter: true,\n\t * textStyleTagFilter: true,\n\t * attrFilter: false,\n\t * styleFilter: false\n\t * }\n\t * }\n\t * ```\n\t */\n\tstrictMode?:\n\t\t| true\n\t\t| {\n\t\t\t\ttagFilter: boolean;\n\t\t\t\tformatFilter: boolean;\n\t\t\t\tclassFilter: boolean;\n\t\t\t\ttextStyleTagFilter: boolean;\n\t\t\t\tattrFilter: boolean;\n\t\t\t\tstyleFilter: boolean;\n\t\t  };\n\t/**\n\t * - Tags treated as whole units when selecting all content.\n\t * - The default follows {@link DEFAULTS.SCOPE_SELECTION_TAGS}///\n\t *\n\t * === Content Filtering & Formatting ===\n\t * ==\n\t * #### 1) Tag & Element Control\n\t */\n\tscopeSelectionTags?: Array<string>;\n\t/**\n\t * - Specifies HTML elements to additionally allow beyond the default allow list. Delimiter: `\"|\"`.\n\t * - Added to the default list determined by {@link PrivateBaseOptions.__defaultElementWhitelist}.\n\t * ```js\n\t * { elementWhitelist: 'mark|details|summary' }\n\t * ```\n\t */\n\telementWhitelist?: string;\n\t/**\n\t * - Specifies HTML elements that should not be used. Delimiter: `\"|\"`.\n\t * - Tags specified here will eventually be removed, even if they are included in other whitelists.\n\t * ```js\n\t * { elementBlacklist: 'script|style|iframe' }\n\t * ```\n\t */\n\telementBlacklist?: string;\n\t/**\n\t * - A list of tags that are allowed to be kept even if their values are empty.\n\t * - The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.\n\t */\n\tallowedEmptyTags?: string;\n\t/**\n\t * - Allowed class names.\n\t * - Added the default value {@link DEFAULTS.CLASS_NAME}///\n\t *\n\t * #### 2) Attribute Control\n\t */\n\tallowedClassName?: string;\n\t/**\n\t * - Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n\t * - Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}.\n\t * ```js\n\t * {\n\t * attributeWhitelist: {\n\t * a: 'href|target',\n\t * img: 'src|alt',\n\t * '*': 'id|data-[^\\s]+'\n\t * }\n\t * }\n\t * ```\n\t */\n\tattributeWhitelist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n\t * - Attributes specified here will eventually be removed even if they are allowed by other settings.\n\t * - A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included.\n\t * ```js\n\t * { attributeBlacklist: { '*': 'onclick|onerror' } }\n\t * ```\n\t * ///\n\t */\n\tattributeBlacklist?: {\n\t\t[key: string]: string | undefined;\n\t};\n\t/**\n\t * - Additional URL schemes allowed by the HTML sanitizer, without a trailing colon (case-insensitive).\n\t * - Extends the built-in protocol allow list without disabling attribute filtering.\n\t * - Built-in protocols: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`.\n\t * - Relative URLs, fragment links (`#...`) and image data URLs (`data:image/...`) are also allowed by default.\n\t * - `javascript`, `vbscript` and `data` entries are ignored; only image data URLs remain allowed.\n\t * - Fixed at editor creation; cannot be changed with `resetOptions`.\n\t * ```js\n\t * { allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n\t * ```\n\t * ///\n\t *\n\t * #### 3) Text & Inline Style Control\n\t */\n\tallowedURLProtocols?: Array<string>;\n\t/**\n\t * - Additional text style tags.\n\t * - The default follows {@link PrivateBaseOptions.__textStyleTags}\n\t */\n\ttextStyleTags?: string;\n\t/**\n\t * - Maps text styles to specific HTML tags.\n\t * ```js\n\t * {\n\t * convertTextTags: {\n\t * bold: 'b',\n\t * italic: 'i',\n\t * underline: 'u',\n\t * strike: 's'\n\t * }\n\t * }\n\t * ```\n\t */\n\tconvertTextTags?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`.\n\t * ```js\n\t * { allUsedStyles: 'color|background-color|text-shadow' }\n\t * ```\n\t */\n\tallUsedStyles?: string;\n\t/**\n\t * - Specifies allowed CSS styles per HTML tag.\n\t * - Key is a tag name, multiple tags joined with `|`, or a category sentinel (`@text`, `@line`, `@component`).\n\t * - Value is a pipe-delimited list of allowed style names.\n\t * - Resolution order when filtering an element: `@component` (for `.se-component` containers) → explicit tag entry → `@line` (for formatLine elements) → `@text` (for textStyleTags).\n\t * - `@component` guards the inline sizing (`width`/`height`/`min-width`) the editor writes on a media component's container for percentage-based sizes; keep these so a clean() round-trip does not reset the component to full width.\n\t * - An explicit tag entry is **merged** with its category default when the tag belongs to one (`@line` for formatLine elements, else `@text` for textStyleTags) — the entry adds styles on top of the category's.\n\t * - Merged with {@link DEFAULTS.TAG_STYLES}; user-supplied keys win.\n\t * ```js\n\t * {\n\t * tagStyles: {\n\t * '@text': 'color|font-size|background-color',  // default for span, b, i, em, ...\n\t * '@line': 'text-align|margin|line-height',     // default for p, h1-h6, div, li, ...\n\t * 'table|td': 'border|color|background-color',  // per-tag whitelist\n\t * div: 'color',                                 // merged with the `@line` default (div is a line element)\n\t * hr: 'border-top',\n\t * }\n\t * }\n\t * ```\n\t */\n\ttagStyles?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Allowed font size units.\n\t * - The default follows {@link DEFAULTS.SIZE_UNITS}\n\t */\n\tfontSizeUnits?: Array<string>;\n\t/**\n\t * - Determines how inline elements (e.g. `<span>`, `<strong>`) are handled when deleting text.\n\t * - `repeat`: Styles are retained unless backspace is repeatedly pressed.\n\t * - Continuous pressing will eventually remove the styles.\n\t * - `none`: Styles are not retained. Inline elements are immediately removed with the text.\n\t * - `always`: Styles persist indefinitely unless explicitly removed.\n\t * - Even if all text inside an inline element is deleted, the element itself remains.\n\t * ///\n\t *\n\t * #### 4) Line & Block Formatting\n\t */\n\tretainStyleMode?: 'repeat' | 'always' | 'none';\n\t/**\n\t * - Default `line` element when inserting new lines.\n\t */\n\tdefaultLine?: string;\n\t/**\n\t * - Specifies the default line break format.\n\t * - [Recommended] `line` : Line break is divided into general tags.\n\t * - [Not recommended] `br` : Line breaks are treated as <br> on the same line. (like shift+enter)\n\t * - Line breaks are handled as <br> within `line`.\n\t * - You can create a new `line` by entering a line break twice in a row.\n\t * - Formats that include `line`, such as \"Quote\", still operate on a `line` basis.\n\t * - suneditor processes work in `line` units.\n\t * - When set to `br`, performance may decrease when editing a lot of data.\n\t */\n\tdefaultLineBreakFormat?: 'line' | 'br';\n\t/**\n\t * - When `true`, pressing Enter at the **end** of a line\n\t * starts a fresh line that does not carry the caret's inline style nodes (e.g. bold/italic/color spans, links);\n\t * the line-level element and its attributes are preserved.\n\t * Only affects the end-of-line case — mid-line splits, start-of-line breaks, and Shift+Enter are unchanged.\n\t * ```js\n\t * { lineBreakClearStyle: true }\n\t * ```\n\t */\n\tlineBreakClearStyle?: boolean;\n\t/**\n\t * - Line properties that should be reset when changing lines. Delimiter: `\"|\"`.\n\t * ```js\n\t * { lineAttrReset: 'id|name' }\n\t * ```\n\t */\n\tlineAttrReset?: string;\n\t/**\n\t * - Additionally allowed `line` elements beyond the default. Delimiter: `\"|\"`.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatLine} to form the final `line` list.\n\t * - `line` element also contains `brLine` element.\n\t * ```js\n\t * { formatLine: 'ARTICLE|SECTION' }\n\t * ```\n\t */\n\tformatLine?: string;\n\t/**\n\t * - Additionally allowed `brLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBrLine} to form the final `brLine` list.\n\t * - `brLine` elements are included in the `line` element.\n\t * - `brLine` elements' line break is `BR` tag.\n\t * ```js\n\t * { formatBrLine: 'CODE' }\n\t * ```\n\t * - ※ Entering the Enter key on the last line ends `brLine` and appends `line`.\n\t */\n\tformatBrLine?: string;\n\t/**\n\t * - Additionally allowed `closureBrLine` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBrLine} for the final `closureBrLine` list.\n\t * - `closureBrLine` elements are included in the `brLine`.\n\t * - `closureBrLine` elements' line break is `BR` tag.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. ([ex] format of table cells)\n\t */\n\tformatClosureBrLine?: string;\n\t/**\n\t * - Additionally allowed `block` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatBlock} to form the final `block` list.\n\t * - `block` wraps the `line` and `component`.\n\t */\n\tformatBlock?: string;\n\t/**\n\t * - Additionally allowed `closureBlock` elements beyond the default.\n\t * - Concatenated with {@link PrivateBaseOptions.__defaultFormatClosureBlock} for the final `closureBlock` list.\n\t * - `closureBlock` elements are included in the `block`.\n\t * - `closureBlock` element wraps the `line` and `component`.\n\t * - ※ You cannot exit this format with the Enter key or Backspace key.\n\t * - ※ Use it only in special cases. (e.g. format of table cells)\n\t * ///\n\t *\n\t * === UI & Interaction ===\n\t */\n\tformatClosureBlock?: string;\n\t/**\n\t * - Closes modals when clicking outside.\n\t */\n\tcloseModalOutsideClick?: boolean;\n\t/**\n\t * - Synchronizes tab indent with spaces.\n\t */\n\tsyncTabIndent?: boolean;\n\t/**\n\t * - Disables tab key input.\n\t */\n\ttabDisable?: boolean;\n\t/**\n\t * - Toolbar width.\n\t */\n\ttoolbar_width?: string;\n\t/**\n\t * - Center the toolbar's button row (`.se-btn-tray`) horizontally.\n\t * - **CSS length** (e.g. `\"500px\"`, `\"740px\"`, `\"60ch\"`): toolbar background spans full width while the button row is capped at that width and centered. If buttons fit, the row stays on a single line; if they exceed the cap, they wrap inside it.\n\t * - **`\"auto\"`**: no cap — the row is sized to its content and simply centered.\n\t * - **Empty string** (default): no constraint.\n\t * - **Note on `responsiveButtonList`**: thresholds compare against the toolbar's full width, not the band. When this option is set, calibrate `responsiveButtonList` keys around the toolbar size you actually want each button set to kick in at.\n\t * ```js\n\t * { toolbar_innerWidth: '740px' }\n\t * { toolbar_innerWidth: 'auto' }\n\t * ```\n\t */\n\ttoolbar_innerWidth?: string;\n\t/**\n\t * - Container element for the toolbar.\n\t */\n\ttoolbar_container?: HTMLElement | null;\n\t/**\n\t * - Enables sticky toolbar.\n\t * - `number`: Sets the sticky top position (px). Use `-1` to disable sticky.\n\t * - `{top, offset}`: `top` is the sticky position when the page header is visible.\n\t * - `offset` is the sticky position when a virtual keyboard shifts the viewport (e.g., on tablets, touch devices).\n\t * - When the virtual keyboard is active, `offset` replaces `top` so the toolbar doesn't leave a gap\n\t * - for a page header that has scrolled out of view. Default `offset` is `0`.\n\t * - `position` (default `\"sticky\"`): the positioning engine.\n\t * - `\"sticky\"` uses native CSS `position: sticky` (with a JS `position: fixed` fallback where unsupported).\n\t * `\"fixed\"` forces the JS `position: fixed` engine\n\t * - even when CSS sticky is supported — for environments where CSS sticky silently misbehaves and can't be\n\t * ```js\n\t * // Basic usage — sticky at top with 0px offset\n\t * toolbar_sticky: 0\n\t *\n\t * // Account for a 92px fixed/sticky site header\n\t * toolbar_sticky: 92\n\t *\n\t * // 92px header on desktop, but 0px when virtual keyboard pushes the viewport\n\t * toolbar_sticky: { top: 92, offset: 0 }\n\t *\n\t * // Force the JS position:fixed engine (CSS sticky unreliable in this environment)\n\t * toolbar_sticky: { top: 0, position: 'fixed' }\n\t * ```\n\t */\n\ttoolbar_sticky?:\n\t\t| number\n\t\t| {\n\t\t\t\ttop: number;\n\t\t\t\toffset?: number;\n\t\t\t\tposition?: 'sticky' | 'fixed';\n\t\t  };\n\t/**\n\t * - Hides toolbar initially.\n\t */\n\ttoolbar_hide?: boolean;\n\t/**\n\t * - Sub-toolbar configuration. A secondary toolbar that appears on text selection.\n\t */\n\tsubToolbar?: {\n\t\tbuttonList?: SunEditor.UI.ButtonList;\n\t\tmode?: 'balloon' | 'balloon-always';\n\t\twidth?: string;\n\t};\n\t/**\n\t * - Container element for the status bar.\n\t */\n\tstatusbar_container?: HTMLElement | null;\n\t/**\n\t * - Displays shortcut hints in tooltips.\n\t */\n\tshortcutsHint?: boolean;\n\t/**\n\t * - Disables keyboard shortcuts.\n\t */\n\tshortcutsDisable?: boolean;\n\t/**\n\t * - Custom keyboard shortcuts.\n\t * - Keys starting with `_` are user-defined custom shortcuts. Each value is an array of `[keyCombo, hintLabel]` pairs.\n\t * - Key combos use `c` (Ctrl/Cmd), `s` (Shift), and `KeyEvent.code` values joined by `+`.\n\t * - Use `$~pluginName.method` to call a specific plugin method.\n\t * ```js\n\t * {\n\t * shortcuts: {\n\t * bold: ['c+KeyB', 'B'],\n\t * _h1: ['c+s+Digit1+$~blockStyle.applyHeaderByShortcut', '']\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === Advanced Features ===\n\t */\n\tshortcuts?: {\n\t\t[key: string]: Array<string> | undefined;\n\t};\n\t/**\n\t * - Keeps the format of the copied content.\n\t */\n\tcopyFormatKeepOn?: boolean;\n\t/**\n\t * - Automatically converts URLs into hyperlinks. (`Link` plugin required)\n\t * - Default: `Boolean(plugins.link)` — determined by whether the `link` plugin is enabled.\n\t */\n\tautoLinkify?: boolean;\n\t/**\n\t * - Styles applied automatically on text input.\n\t */\n\tautoStyleify?: Array<string>;\n\t/**\n\t * - Delay time for history stack updates (ms).\n\t */\n\thistoryStackDelayTime?: number;\n\t/**\n\t * - Maximum number of history entries per root frame. Oldest entries are discarded when exceeded.\n\t */\n\thistoryStackSize?: number;\n\t/**\n\t * - Class name for printing.\n\t */\n\tprintClass?: string;\n\t/**\n\t * - Offset applied when entering fullscreen mode.\n\t */\n\tfullScreenOffset?: number;\n\t/**\n\t * - Custom HTML template for preview mode. Use `{{ contents }}` as a placeholder for editor content.\n\t */\n\tpreviewTemplate?: string | null;\n\t/**\n\t * - Custom HTML template for print mode. Use `{{ contents }}` as a placeholder for editor content.\n\t * ```js\n\t * { previewTemplate: '<div class=\"my-preview\"><h1>Preview</h1>{{ contents }}</div>' }\n\t * ```\n\t */\n\tprintTemplate?: string | null;\n\t/**\n\t * - Enables automatic selection of inserted components.\n\t * - For inline components: places cursor near the component, or selects if no nearby range.\n\t * - For block components: executes behavior based on `selectMode`:\n\t * - `auto`: Move cursor to the next line if possible, otherwise select the component.\n\t * - `select`: Always select the inserted component.\n\t * - `line`: Move cursor to the next line if possible, or create a new line and move there.\n\t * - `none`: Do nothing.\n\t */\n\tcomponentInsertBehavior?: SunEditor.ComponentInsertType;\n\t/**\n\t * - Default URL protocol for links.\n\t */\n\tdefaultUrlProtocol?: string | null;\n\t/**\n\t * - Duration for displaying toast messages (ms).\n\t */\n\ttoastMessageTime?: any;\n\t/**\n\t * - Enables free code view mode.\n\t */\n\tfreeCodeViewMode?: boolean;\n\t/**\n\t * - Shows the built-in Find/Replace panel UI.\n\t * - The finder is always created internally; this option controls whether the panel is visible to users (Ctrl+F / Ctrl+H).\n\t */\n\tfinder_panel?: boolean;\n\t/**\n\t * - Searches instantly as you type (debounced). When false, search runs only on Enter.\n\t *\n\t * ///\n\t *\n\t * === Dynamic Options ===\n\t */\n\tfinder_liveSearch?: boolean;\n\t/**\n\t * - External libraries like CodeMirror, KaTeX, or MathJax.\n\t * - See {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}```js\n\t * {\n\t * externalLibs: {\n\t * katex: window.katex,\n\t * codeMirror: { src: CodeMirror }\n\t * }\n\t * }\n\t * ```\n\t */\n\texternalLibs?: {\n\t\t[x: string]: any;\n\t};\n\t/**\n\t * - Specifies extra allowed or disallowed tags. `true` to allow, `false` to disallow.\n\t * - The default follows {@link DEFAULTS.EXTRA_TAG_MAP}```js\n\t * {\n\t * allowedExtraTags: {\n\t * script: false,\n\t * style: false,\n\t * mark: true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === User Events ===\n\t */\n\tallowedExtraTags?: {\n\t\t[x: string]: boolean;\n\t};\n\t/**\n\t * - User event handlers configuration.\n\t * ```js\n\t * {\n\t * events: {\n\t * onChange: (content) => console.log(content),\n\t * onImageUploadBefore: (files, info) => true\n\t * }\n\t * }\n\t * ```\n\t * ///\n\t *\n\t * === [ Plugin-Specific Options ] ===\n\t * ---[ Auto-generated by scripts/check/inject-plugin-jsdoc.cjs - DO NOT EDIT MANUALLY ]---\n\t */\n\tevents?: SunEditor.Event.Handlers;\n\talign?: import('../../plugins/dropdown/align.js').AlignPluginOptions;\n\taudio?: import('../../plugins/modal/audio.js').AudioPluginOptions;\n\taudioGallery?: import('../../plugins/browser/audioGallery.js').AudioGalleryPluginOptions;\n\tautocomplete?: import('../../plugins/field/autocomplete.js').AutocompletePluginOptions;\n\tbackgroundColor?: import('../../plugins/dropdown/backgroundColor.js').BackgroundColorPluginOptions;\n\tblockStyle?: import('../../plugins/dropdown/blockStyle.js').BlockStylePluginOptions;\n\tcodeBlock?: import('../../plugins/command/codeBlock.js').CodeBlockPluginOptions;\n\tdrawing?: import('../../plugins/modal/drawing.js').DrawingPluginOptions;\n\tembed?: import('../../plugins/modal/embed.js').EmbedPluginOptions;\n\texportPDF?: import('../../plugins/command/exportPDF.js').ExportPDFPluginOptions;\n\tfileBrowser?: import('../../plugins/browser/fileBrowser.js').FileBrowserPluginOptions;\n\tfileGallery?: import('../../plugins/browser/fileGallery.js').FileGalleryPluginOptions;\n\tfileUpload?: import('../../plugins/command/fileUpload.js').FileUploadPluginOptions;\n\tfont?: import('../../plugins/dropdown/font.js').FontPluginOptions;\n\tfontColor?: import('../../plugins/dropdown/fontColor.js').FontColorPluginOptions;\n\tfontSize?: import('../../plugins/input/fontSize.js').FontSizePluginOptions;\n\thr?: import('../../plugins/dropdown/hr.js').HRPluginOptions;\n\timage?: import('../../plugins/modal/image/index.js').ImagePluginOptions;\n\timageGallery?: import('../../plugins/browser/imageGallery.js').ImageGalleryPluginOptions;\n\tlayout?: import('../../plugins/dropdown/layout.js').LayoutPluginOptions;\n\tlineHeight?: import('../../plugins/dropdown/lineHeight.js').LineHeightPluginOptions;\n\tlink?: import('../../plugins/modal/link.js').LinkPluginOptions;\n\tmath?: import('../../plugins/modal/math.js').MathPluginOptions;\n\tparagraphStyle?: import('../../plugins/dropdown/paragraphStyle.js').ParagraphStylePluginOptions;\n\tslashCommand?: import('../../plugins/field/slashCommand.js').SlashCommandPluginOptions;\n\ttable?: import('../../plugins/dropdown/table/index.js').TablePluginOptions;\n\ttemplate?: import('../../plugins/dropdown/template.js').TemplatePluginOptions;\n\ttextStyle?: import('../../plugins/dropdown/textStyle.js').TextStylePluginOptions;\n\tvideo?: import('../../plugins/modal/video/index.js').VideoPluginOptions;\n\t/**\n\t * ///\n\t * ---[ End of auto-generated plugin options ]---\n\t * ================================================================================================================================\n\t */\n\tvideoGallery?: import('../../plugins/browser/videoGallery.js').VideoGalleryPluginOptions;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"plugins": "- Plugin configuration. Pass an array of plugin classes or an object keyed by plugin name. ```js import plugins, { image, link, table } from 'suneditor/src/plugins'; { plugins: plugins, plugins: [image, link, table], plugins: { image, link, table } } ```",
@@ -9697,7 +9761,8 @@
 						"allowedEmptyTags": "- A list of tags that are allowed to be kept even if their values are empty.\n- The default follows {@link DEFAULTS.ALLOWED_EMPTY_NODE_LIST}- Concatenated with `ALLOWED_EMPTY_NODE_LIST` to form the final `allowedEmptyTags` list.",
 						"allowedClassName": "- Allowed class names.\n- Added the default value {@link DEFAULTS.CLASS_NAME}/// #### 2) Attribute Control",
 						"attributeWhitelist": "- Specifies additional attributes to allow for each tag. `\"*\"` applies to all tags.\n- Rules specified here will be merged into {@link PrivateBaseOptions.__defaultAttributeWhitelist}. ```js { attributeWhitelist: { a: 'href|target', img: 'src|alt', '*': 'id|data-[^\\s]+' } } ```",
-						"attributeBlacklist": "- Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` /// #### 3) Text & Inline Style Control",
+						"attributeBlacklist": "- Specifies attributes to disallow by tag. `\"*\"` applies to all tags.\n- Attributes specified here will eventually be removed even if they are allowed by other settings.\n- A list of required elements, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, is always included. ```js { attributeBlacklist: { '*': 'onclick|onerror' } } ``` ///",
+						"allowedURLProtocols": "- Additional URL schemes allowed by the HTML sanitizer, without a trailing colon (case-insensitive).\n- Extends the built-in protocol allow list without disabling attribute filtering.\n- Built-in protocols: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`.\n- Relative URLs, fragment links (`#...`) and image data URLs (`data:image/...`) are also allowed by default.\n- `javascript`, `vbscript` and `data` entries are ignored; only image data URLs remain allowed.\n- Fixed at editor creation; cannot be changed with `resetOptions`. ```js { allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] } ``` /// #### 3) Text & Inline Style Control",
 						"textStyleTags": "- Additional text style tags.\n- The default follows {@link PrivateBaseOptions.__textStyleTags}",
 						"convertTextTags": "- Maps text styles to specific HTML tags. ```js { convertTextTags: { bold: 'b', italic: 'i', underline: 'u', strike: 's' } } ```",
 						"allUsedStyles": "- Specifies additional styles to the list of allowed styles. Delimiter: `\"|\"`. ```js { allUsedStyles: 'color|background-color|text-shadow' } ```",
@@ -10113,12 +10178,13 @@
 				},
 				{
 					"name": "TablePluginOptions",
-					"definition": "{\n\t/**\n\t * - Scroll type (`x`, `y`, `xy`)\n\t */\n\tscrollType?: 'x' | 'y' | 'xy';\n\t/**\n\t * - Caption position (`top`, `bottom`)\n\t */\n\tcaptionPosition?: 'top' | 'bottom';\n\t/**\n\t * - Cell controller position (`cell`, `table`)\n\t */\n\tcellControllerPosition?: 'cell' | 'table';\n\t/**\n\t * - HEX color list for the cell background color picker.\n\t * ```js\n\t * { colorList: ['#bbf7d0', '#fde68a', '#fecaca', '#e9d5ff'] }\n\t * ```\n\t */\n\tcolorList?: Array<string>;\n}",
+					"definition": "{\n\t/**\n\t * - Scroll type (`x`, `y`, `xy`)\n\t */\n\tscrollType?: 'x' | 'y' | 'xy';\n\t/**\n\t * - Caption position (`top`, `bottom`)\n\t */\n\tcaptionPosition?: 'top' | 'bottom';\n\t/**\n\t * - Cell controller position (`cell`, `table`, `dot`)\n\t * - `dot`: Selecting a cell shows a dot on the cell's right edge (left in RTL) instead of the controller; clicking the dot opens the cell controller, clicking it again hides it.\n\t * - `cell`: The controller opens on selection, below the selected cell.\n\t * - `table`: The controller opens on selection, stacked on the table figure with the table controller.\n\t */\n\tcellControllerPosition?: 'cell' | 'table' | 'dot';\n\t/**\n\t * - Table controller position (`table`, `dot`)\n\t * - `dot`: Selecting the table shows a dot on the table's top-left corner (top-right in RTL) instead of the controller; clicking the dot opens the table controller, clicking it again hides it.\n\t * - `table`: The controller opens on selection, on top of the table figure.\n\t */\n\ttableControllerPosition?: 'table' | 'dot';\n\t/**\n\t * - HEX color list for the cell background color picker.\n\t * ```js\n\t * { colorList: ['#bbf7d0', '#fde68a', '#fecaca', '#e9d5ff'] }\n\t * ```\n\t */\n\tcolorList?: Array<string>;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"scrollType": "- Scroll type (`x`, `y`, `xy`)",
 						"captionPosition": "- Caption position (`top`, `bottom`)",
-						"cellControllerPosition": "- Cell controller position (`cell`, `table`)",
+						"cellControllerPosition": "- Cell controller position (`cell`, `table`, `dot`)\n- `dot`: Selecting a cell shows a dot on the cell's right edge (left in RTL) instead of the controller; clicking the dot opens the cell controller, clicking it again hides it.\n- `cell`: The controller opens on selection, below the selected cell.\n- `table`: The controller opens on selection, stacked on the table figure with the table controller.",
+						"tableControllerPosition": "- Table controller position (`table`, `dot`)\n- `dot`: Selecting the table shows a dot on the table's top-left corner (top-right in RTL) instead of the controller; clicking the dot opens the table controller, clicking it again hides it.\n- `table`: The controller opens on selection, on top of the table figure.",
 						"colorList": "- HEX color list for the cell background color picker. ```js { colorList: ['#bbf7d0', '#fde68a', '#fecaca', '#e9d5ff'] } ```"
 					},
 					"source": "plugins/dropdown/table/index.d.ts"

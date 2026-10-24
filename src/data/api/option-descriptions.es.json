@@ -59,6 +59,10 @@
     "description": "Atributos del `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Archivos CSS para aplicar dentro del iframe. \n- Cadena: Patrón de nombre de archivo para buscar en las etiquetas `<link>` del documento. \n- `\"*\"`: comodín para incluir TODAS las hojas de estilo de la página. \n- También se admiten URL absolutas y URL de datos (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Habilita la barra de estado.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Configuración del plugin. Pase una matriz de clases de plugins o un objeto indexado por el nombre del plugin.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Lista de nombres de complementos para excluir. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lista de botones de la barra de herramientas, agrupados por submatrices.\n\n- El valor predeterminado sigue {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Dirección del texto: `ltr` o `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Una serie de pares de comandos cuyos íconos de acceso directo deben estar uno frente al otro. \n- Depende del modo `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Permite un filtrado estricto de etiquetas, atributos y estilos. \n- Utilice `true` para habilitar todos los filtros (predeterminado) o un objeto para controlar filtros individuales. \n- No se admite la configuración `false`; utilice el formulario de objeto para deshabilitar filtros específicos. \n- : descripción del filtro \n- `tagFilter`: Filtra etiquetas HTML no permitidas (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtros de elementos de formato (`formatLine`/`formatBlock`) \n- `classFilter`: Filtra nombres de clases CSS no permitidos (`allowedClassName`) \n- `textStyleTagFilter`: Filtra etiquetas de estilo de texto (b, i, u, span, etc.) \n- `attrFilter`: Filtra atributos HTML no permitidos (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtros de estilos en línea no permitidos (por etiqueta de `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Especifica los atributos que se deben prohibir por etiqueta. `\"*\"` se aplica a todas las etiquetas.\n\n- Los atributos especificados aquí se eliminarán eventualmente, incluso si están permitidos por otras configuraciones.\n\n- Siempre se incluye una lista de elementos obligatorios, {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Esquemas de URL adicionales permitidos por el desinfectante HTML, sin dos puntos al final (no distingue entre mayúsculas y minúsculas). \n- Amplía la lista de permitidos de protocolos integrados sin deshabilitar el filtrado de atributos. \n- Protocolos incorporados: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Las URL relativas, los enlaces de fragmentos (`#...`) y las URL de datos de imágenes (`data:image/...`) también se permiten de forma predeterminada. \n- Se ignoran las entradas `javascript`, `vbscript` y `data`; solo se permiten URL de datos de imágenes. \n- Corregido en la creación del editor; no se puede cambiar con `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Etiquetas de estilo de texto adicionales.\n\n- El valor predeterminado sigue {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Convierte automáticamente las URL en hipervínculos. (Se requiere el complemento `Link`).\n- Predeterminado: `Boolean(plugins.link)` ​​— depende de si el complemento `link` está habilitado."
+  },
+  "autoStyleify": {
+    "description": "Los estilos se aplican automáticamente al ingresar texto.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Tiempo de retardo para las actualizaciones de la pila de historial (ms).",
@@ -548,7 +568,10 @@
     "description": "Posición del título (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Posición del controlador de celda (`cell`, `table`)"
+    "description": "Posición del controlador de celda (`cell`, `table`, `dot`) \n- `dot`: Al seleccionar una celda se muestra un punto en el borde derecho de la celda (izquierdo en RTL) en lugar del controlador; Al hacer clic en el punto se abre el controlador de la celda, al hacer clic nuevamente se oculta. \n- `cell`: El controlador se abre al seleccionar, debajo de la celda seleccionada. \n- `table`: El controlador se abre al seleccionarlo, apilado en la figura de la mesa con el controlador de la mesa."
+  },
+  "table_tableControllerPosition": {
+    "description": "Posición del controlador de mesa (`table`, `dot`) \n- `dot`: Al seleccionar la tabla se muestra un punto en la esquina superior izquierda de la tabla (arriba a la derecha en RTL) en lugar del controlador; Al hacer clic en el punto se abre el controlador de la tabla, al hacer clic nuevamente se oculta. \n- `table`: El controlador se abre al seleccionarlo, encima de la figura de la tabla."
   },
   "table_colorList": {
     "description": "Lista de colores HEX para el selector de color de fondo de la celda."

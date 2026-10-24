@@ -59,6 +59,10 @@
     "description": "`iframe`의 속성.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "iframe 내부에 적용할 CSS 파일입니다. \n- 문자열: 문서 `<link>` 태그에서 검색할 파일 이름 패턴입니다. \n- `\"*\"`: 페이지의 모든 스타일시트를 포함하는 와일드카드입니다. \n- 절대 URL과 데이터 URL(`data:text/css,`)도 지원됩니다. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "상태 표시줄을 활성화합니다.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "플러그인 구성입니다. 플러그인 클래스 배열 또는 플러그인 이름을 키로 하는 객체를 전달하세요.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "제외할 플러그인 이름 목록입니다. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "툴바 버튼 목록이며, 하위 배열별로 그룹화되어 있습니다.\n\n- 기본값은 {@link DEFAULTS.BUTTON_LIST}를 따릅니다.",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "텍스트 방향: `ltr` 또는 `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "바로가기 아이콘이 서로 반대편에 있어야 하는 명령 쌍의 배열입니다. \n- `textDirection` 모드에 따라 다릅니다.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "태그, 속성 및 스타일을 엄격하게 필터링할 수 있습니다. \n- `true`을 사용하여 모든 필터(기본값)를 활성화하거나 개체를 사용하여 개별 필터를 제어합니다. \n- `false` ​​설정은 지원되지 않습니다. 대신 특정 필터를 비활성화하려면 개체 양식을 사용하십시오. \n- :필터 설명 \n- `tagFilter`: 허용되지 않는 HTML 태그를 필터링합니다(`elementWhitelist`/`elementBlacklist`). \n- `formatFilter`: 형식 요소를 필터링합니다(`formatLine`/`formatBlock`). \n- `classFilter`: 허용되지 않는 CSS 클래스 이름을 필터링합니다(`allowedClassName`). \n- `textStyleTagFilter`: 텍스트 스타일 태그(b, i, u,span 등)를 필터링합니다. \n- `attrFilter`: 허용되지 않는 HTML 속성을 필터링합니다(`attributeWhitelist`/`attributeBlacklist`). \n- `styleFilter`: 인라인 스타일을 허용하지 않는 필터(`tagStyles`의 태그별) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "태그별로 허용하지 않을 속성을 지정합니다. ``\"*\"``은 모든 태그에 적용됩니다.\n\n- 여기에 지정된 속성은 다른 설정에서 허용되더라도 결국 제거됩니다.\n\n- 필수 요소 목록인 `{@link DEFAULTS.REQUIRED_FORMAT_LINE}`이 항상 포함됩니다.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "후행 콜론 없이 HTML 새니타이저에서 허용되는 추가 URL 구성표(대소문자 구분 안 함). \n- 특성 필터링을 비활성화하지 않고 기본 제공 프로토콜 허용 목록을 확장합니다. \n- 내장 프로토콜: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- 상대 URL, 조각 링크(`#...`) 및 이미지 데이터 URL(`data:image/...`)도 기본적으로 허용됩니다. \n- `javascript`, `vbscript` 및 `data` 항목은 무시됩니다. 이미지 데이터 URL만 허용됩니다. \n- 편집기 생성 시 수정되었습니다. `resetOptions`으로 변경할 수 없습니다. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "추가 텍스트 스타일 태그입니다.\n\n- 기본값은 {@link PrivateBaseOptions.__textStyleTags}를 따릅니다.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "URL을 자동으로 하이퍼링크로 변환합니다. (`Link` 플러그인 필요)\n- 기본값: `Boolean(plugins.link)` ​​— `link` 플러그인 활성화 여부에 따라 결정됩니다."
+  },
+  "autoStyleify": {
+    "description": "텍스트 입력 시 스타일이 자동으로 적용됩니다.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "히스토리 스택 업데이트 지연 시간(밀리초).",
@@ -548,7 +568,10 @@
     "description": "캡션 위치(`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "셀 컨트롤러 위치(`cell`, `table`)"
+    "description": "셀 컨트롤러 위치(`cell`, `table`, `dot`) \n- `dot`: 셀을 선택하면 컨트롤러 대신 셀의 오른쪽 가장자리(RTL의 왼쪽)에 점이 표시됩니다. 점을 클릭하면 셀 컨트롤러가 열리고 다시 클릭하면 숨겨집니다. \n- `cell`: 컨트롤러는 선택 시 선택한 셀 아래에서 열립니다. \n- `table`: 선택 시 컨트롤러가 열리고 테이블 컨트롤러와 함께 테이블 그림에 쌓입니다."
+  },
+  "table_tableControllerPosition": {
+    "description": "테이블 컨트롤러 위치(`table`, `dot`) \n- `dot`: 테이블을 선택하면 컨트롤러 대신 테이블의 왼쪽 상단(RTL의 오른쪽 상단)에 점이 표시됩니다. 점을 클릭하면 테이블 컨트롤러가 열리고 다시 클릭하면 숨겨집니다. \n- `table`: 컨트롤러는 선택 시 테이블 그림 상단에 열립니다."
   },
   "table_colorList": {
     "description": "셀 배경색 선택기에 사용할 HEX 색상 목록입니다."

@@ -59,6 +59,10 @@
     "description": "Atributos do `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Arquivos CSS para aplicar dentro do iframe. \n- String: Padrão de nome de arquivo para busca nas tags `<link>` do documento. \n- `\"*\"`: Curinga para incluir TODAS as folhas de estilo da página. \n- URLs absolutos e URLs de dados (`data:text/css,`) também são suportados. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Ativa a barra de status.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Configuração do plugin. Passe um array de classes de plugin ou um objeto indexado pelo nome do plugin.\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Lista de nomes de plugins a serem excluídos. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lista de botões da barra de ferramentas, agrupados por submatrizes.\n- O padrão segue {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Direção do texto: `ltr` ou `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Uma matriz de pares de comandos cujos ícones de atalho devem estar opostos um ao outro. \n- Depende do modo `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Permite filtragem rigorosa de tags, atributos e estilos. \n- Use `true` para ativar todos os filtros (padrão) ou um objeto para controlar filtros individuais. \n- A configuração `false` ​​não é suportada; use o formulário de objeto para desabilitar filtros específicos. \n-: descrição do filtro \n- `tagFilter`: Filtra tags HTML não permitidas (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtra elementos de formato (`formatLine`/`formatBlock`) \n- `classFilter`: Filtra nomes de classes CSS não permitidos (`allowedClassName`) \n- `textStyleTagFilter`: Filtra tags de estilo de texto (b, i, u, span, etc.) \n- `attrFilter`: Filtra atributos HTML não permitidos (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtra estilos inline não permitidos (por tag de `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Especifica os atributos a serem proibidos por tag. `\"*\"` aplica-se a todas as tags.\n- Os atributos especificados aqui serão eventualmente removidos, mesmo que sejam permitidos por outras configurações.\n- Uma lista de elementos obrigatórios, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, é sempre incluída.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Esquemas de URL adicionais permitidos pelo sanitizador de HTML, sem dois pontos finais (sem distinção entre maiúsculas e minúsculas). \n- Estende a lista de permissões de protocolo integrada sem desabilitar a filtragem de atributos. \n- Protocolos integrados: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- URLs relativos, links de fragmentos (`#...`) e URLs de dados de imagem (`data:image/...`) também são permitidos por padrão. \n- As entradas `javascript`, `vbscript` e `data` são ignoradas; apenas URLs de dados de imagem permanecem permitidos. \n- Corrigido na criação do editor; não pode ser alterado com `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Tags de estilo de texto adicionais.\n- O padrão segue {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Converte URLs em hiperlinks automaticamente. (Plugin `Link` necessário)\n- Padrão: `Boolean(plugins.link)` ​​— determinado se o plugin `link` estiver ativado."
+  },
+  "autoStyleify": {
+    "description": "Estilos aplicados automaticamente na entrada de texto.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Tempo de atraso para atualizações da pilha de histórico (ms).",
@@ -548,7 +568,10 @@
     "description": "Posição da legenda (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Posição do controlador de célula (`cell`, `table`)"
+    "description": "Posição do controlador de célula (`cell`, `table`, `dot`) \n- `dot`: Selecionar uma célula mostra um ponto na borda direita da célula (esquerda em RTL) em vez do controlador; clicar no ponto abre o controlador de célula, clicar novamente o oculta. \n- `cell`: O controlador abre na seleção, abaixo da célula selecionada. \n- `table`: O controlador abre na seleção, empilhado na figura da mesa com o controlador de mesa."
+  },
+  "table_tableControllerPosition": {
+    "description": "Posição do controlador de mesa (`table`, `dot`) \n- `dot`: Selecionar a tabela mostra um ponto no canto superior esquerdo da tabela (canto superior direito em RTL) em vez do controlador; clicar no ponto abre o controlador de tabela, clicar novamente o oculta. \n- `table`: O controlador abre na seleção, em cima da figura da tabela."
   },
   "table_colorList": {
     "description": "Lista de cores HEX para o seletor de cores de fundo da célula."

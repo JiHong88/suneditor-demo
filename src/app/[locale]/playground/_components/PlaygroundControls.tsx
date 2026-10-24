@@ -876,7 +876,7 @@ const SECTION_LABELS: Record<string, string[]> = {
 	statusbar: ["statusbar", "statusbar_showPathLabel", "statusbar_resizeEnable", "charCounter", "charCounter_max", "charCounter_label", "charCounter_type", "wordCounter", "wordCounter_label", "statusbar_container"],
 	content: ["placeholder", "placeholder_line", "blockHandle", "blockHandle.menu", "blockHandle.maxHeight", "blockHandle.minWidth", "blockHandle.onPlusClick", "value", "editableFrameAttributes", "defaultLine", "defaultLineBreakFormat", "lineBreakClearStyle", "retainStyleMode", "freeCodeViewMode"],
 	features: ["autoLinkify", "copyFormatKeepOn", "tabDisable", "syncTabIndent", "closeModalOutsideClick", "componentInsertBehavior", "historyStackDelayTime", "historyStackSize", "finder_panel", "finder_liveSearch", "fullScreenOffset", "defaultUrlProtocol", "autoStyleify", "toastMessageTime", "previewTemplate", "printTemplate"],
-	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
+	filtering: ["strictMode", "tagFilter", "formatFilter", "classFilter", "textStyleTagFilter", "attrFilter", "styleFilter", "fontSizeUnits", "lineAttrReset", "printClass", "allowedClassName", "allowedURLProtocols", "allowedEmptyTags", "allUsedStyles", "scopeSelectionTags", "textStyleTags", "elementWhitelist", "elementBlacklist", "attributeWhitelist", "attributeBlacklist", "convertTextTags", "tagStyles", "plugins", "excludedPlugins", "events", "externalLibs", "allowedExtraTags"],
 	"format-extensions": ["formatLine", "formatBrLine", "formatClosureBrLine", "formatBlock", "formatClosureBlock"],
 };
 
@@ -1737,6 +1737,15 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 							onChange={set("allowedClassName")}
 							resettable={!isFixedOption("allowedClassName")}
 							placeholder='e.g. ^my-class'
+						/>
+					</div>
+					<div className='mt-3'>
+						<TextInput
+							label='allowedURLProtocols'
+							value={state.allowedURLProtocols}
+							onChange={set("allowedURLProtocols")}
+							resettable={!isFixedOption("allowedURLProtocols")}
+							placeholder='e.g. zoommtg,slack,vscode'
 						/>
 					</div>
 					<div className='mt-3'>

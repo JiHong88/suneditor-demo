@@ -1136,6 +1136,7 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 									label='cellControllerPosition'
 									value={state.table_cellControllerPosition}
 									options={[
+										{ value: "dot", label: "dot" },
 										{ value: "cell", label: "cell" },
 										{ value: "table", label: "table" },
 									]}
@@ -1143,6 +1144,18 @@ export default function PlaygroundPluginSidebar({ state, dispatch }: Props) {
 										set("table_cellControllerPosition")(v as PlaygroundState["table_cellControllerPosition"])
 									}
 									optionKey='table_cellControllerPosition'
+								/>
+								<SelectField
+									label='tableControllerPosition'
+									value={state.table_tableControllerPosition}
+									options={[
+										{ value: "dot", label: "dot" },
+										{ value: "table", label: "table" },
+									]}
+									onChange={(v) =>
+										set("table_tableControllerPosition")(v as PlaygroundState["table_tableControllerPosition"])
+									}
+									optionKey='table_tableControllerPosition'
 								/>
 								<ToggleableTextInput
 									label='colorList'

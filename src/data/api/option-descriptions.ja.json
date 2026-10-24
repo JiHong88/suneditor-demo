@@ -59,6 +59,10 @@
     "description": "`iframe` の属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "iframe 内に適用する CSS ファイル。 \n- 文字列: ドキュメント `<link>` タグ内で検索するファイル名パターン。 \n- `\"*\"`: ページのすべてのスタイルシートを含めるワイルドカード。 \n- 絶対 URL とデータ URL (`data:text/css,`) もサポートされています。 \n「`js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n`」",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "ステータスバーを有効にします。",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "プラグイン設定。プラグインクラスの配列、またはプラグイン名をキーとするオブジェクトを渡してください。\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "除外するプラグイン名のリスト。 \n「`js\n{ excludedPlugins: ['image', 'video'] }\n`」",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "ツールバーボタンの一覧。サブ配列ごとにグループ化されています。\n\n- デフォルトは {@link DEFAULTS.BUTTON_LIST} に従います。",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "テキストの方向：`ltr` または `rtl`。",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "ショートカット アイコンが互いに反対側にあるコマンド ペアの配列。 \n- `textDirection` モードに依存します。",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "タグ、属性、スタイルの厳密なフィルタリングを有効にします。 \n- `true` を使用してすべてのフィルター (デフォルト) を有効にするか、オブジェクトを使用して個々のフィルターを制御します。 \n- `false` の設定はサポートされていません。 代わりにオブジェクト フォームを使用して、特定のフィルターを無効にします。 \n- :フィルターの説明\n - `tagFilter`: 許可されていない HTML タグをフィルターします (`elementWhitelist`/`elementBlacklist`)\n - `formatFilter`: フィルター形式要素 (`formatLine`/`formatBlock`)\n - `classFilter`: 許可されていない CSS クラス名をフィルターします (`allowedClassName`)\n - `textStyleTagFilter`: テキスト スタイル タグ (b、i、u、span など) をフィルターします。 \n- `attrFilter`: 許可されていない HTML 属性をフィルターします (`attributeWhitelist`/`attributeBlacklist`)\n - `styleFilter`: 許可されていないインライン スタイルをフィルターします (`tagStyles` のタグごと)\n 「`js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n`」",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "タグごとに禁止する属性を指定します。`\"*\"` はすべてのタグに適用されます。\n\n- ここで指定された属性は、他の設定で許可されている場合でも、最終的には削除されます。\n\n- 必須要素のリスト {@link DEFAULTS.REQUIRED_FORMAT_LINE} は常に含まれます。\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "HTML サニタイザーによって許可される追加の URL スキーム (末尾のコロンなし) (大文字と小文字は区別されません)。 \n- 属性フィルタリングを無効にすることなく、組み込みプロトコル許可リストを拡張します。 \n- 組み込みプロトコル: `http`、`https`、`ftp`、`ftps`、`mailto`、`tel`、`blob`、`sms`、`geo`、`webcal`、`callto`。 \n- 相対 URL、フラグメント リンク (`#...`)、および画像データ URL (`data:image/...`) もデフォルトで許可されます。 \n- `javascript`、`vbscript`、および `data` エントリは無視されます。 画像データの URL のみが引き続き許可されます。 \n- エディタ作成時に修正されました。 `resetOptions` では変更できません。 \n「`js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n`」",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "追加のテキストスタイルタグ。\n\n- デフォルトでは {@link PrivateBaseOptions.__textStyleTags} に従います。",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "URLを自動的にハイパーリンクに変換します。（`Link`プラグインが必要です）\n- デフォルト：`Boolean(plugins.link)` — `link`プラグインが有効になっているかどうかによって決まります。"
+  },
+  "autoStyleify": {
+    "description": "テキスト入力時に自動的に適用されるスタイル。",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "履歴スタックの更新にかかる遅延時間（ミリ秒）。",
@@ -548,7 +568,10 @@
     "description": "キャプションの位置（`top`、`bottom`）"
   },
   "table_cellControllerPosition": {
-    "description": "セルコントローラの位置（`cell`、`table`）"
+    "description": "セルコントローラーの位置 (`cell`、`table`、`dot`)\n - `dot`: セルを選択すると、コントローラーではなくセルの右端 (RTL では左端) にドットが表示されます。 ドットをクリックするとセル コントローラーが開き、もう一度クリックするとセル コントローラーが非表示になります。 \n- `cell`: 選択すると、選択したセルの下にコントローラーが開きます。 \n- `table`: コントローラは選択時に開き、テーブル コントローラを使用してテーブル フィギュアに積み重ねられます。"
+  },
+  "table_tableControllerPosition": {
+    "description": "テーブルコントローラーの位置 (`table`、`dot`)\n - `dot`: テーブルを選択すると、コントローラーの代わりにテーブルの左上隅 (RTL では右上) にドットが表示されます。 ドットをクリックするとテーブル コントローラーが開き、もう一度クリックすると非表示になります。 \n- `table`: 選択すると、テーブル Figure の上にコントローラーが開きます。"
   },
   "table_colorList": {
     "description": "セル背景色選択ツール用のHEXカラーリスト。"

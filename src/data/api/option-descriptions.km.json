@@ -59,6 +59,10 @@
     "description": "គុណលក្ខណៈនៃ `iframe`។\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "ឯកសារ CSS ដើម្បីអនុវត្តនៅខាងក្នុង iframe ។ \n- ខ្សែអក្សរ៖ គំរូឈ្មោះឯកសារដើម្បីស្វែងរកក្នុងឯកសារ `<link>` ស្លាក។ \n- `\"*\"`៖ អក្សរជំនួសដើម្បីរួមបញ្ចូលសន្លឹករចនាប័ទ្មទាំងអស់ពីទំព័រ។ \n- URLs ដាច់ខាត និង URLs ទិន្នន័យ (`data:text/css,`) ក៏ត្រូវបានគាំទ្រផងដែរ។ \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "បើកដំណើរការរបារស្ថានភាព។",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "ការកំណត់រចនាសម្ព័ន្ធកម្មវិធីជំនួយ។ បញ្ជូនអារេនៃថ្នាក់កម្មវិធីជំនួយ ឬវត្ថុដែលមានឈ្មោះកម្មវិធីជំនួយ។\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "បញ្ជីឈ្មោះកម្មវិធីជំនួយដែលត្រូវដកចេញ។ \n``js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "បញ្ជីប៊ូតុងរបារឧបករណ៍ ដែលត្រូវបានដាក់ជាក្រុមតាមអារេរង។\n- លំនាំដើមធ្វើតាម {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "ទិសដៅអត្ថបទ៖ `ltr` ឬ `rtl`។",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "អារេនៃពាក្យបញ្ជាគូដែលរូបតំណាងផ្លូវកាត់គួរតែនៅទល់មុខគ្នា។ \n- អាស្រ័យលើរបៀប `textDirection` ។",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "បើកការត្រងតឹងរឹងនៃស្លាក គុណលក្ខណៈ និងរចនាប័ទ្ម។ \n- ប្រើ `true` ដើម្បីបើកតម្រងទាំងអស់ (លំនាំដើម) ឬវត្ថុដើម្បីគ្រប់គ្រងតម្រងនីមួយៗ។ \n- ការកំណត់ `false` ​​មិនត្រូវបានគាំទ្រទេ។ ប្រើទម្រង់វត្ថុដើម្បីបិទតម្រងជាក់លាក់ជំនួសវិញ។ \n-: ការពិពណ៌នាតម្រង \n- `tagFilter`៖ តម្រងមិនអនុញ្ញាតស្លាក HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`៖ ធាតុទម្រង់តម្រង (`formatLine`/`formatBlock`) \n- `classFilter`៖ តម្រង​មិន​អនុញ្ញាត​ឈ្មោះ​ថ្នាក់ CSS (`allowedClassName`) \n- `textStyleTagFilter`៖ ត្រងស្លាករចនាប័ទ្មអត្ថបទ (b, i, u, span ។ល។) \n- `attrFilter`៖ តម្រង​មិន​អនុញ្ញាត​លក្ខណៈ HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`៖ តម្រងមិនអនុញ្ញាតរចនាប័ទ្មក្នុងជួរ (ក្នុងមួយស្លាកពី `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "បញ្ជាក់គុណលក្ខណៈដែលមិនអនុញ្ញាតដោយស្លាក។ `\"*\"` អនុវត្តចំពោះស្លាកទាំងអស់។\n- គុណលក្ខណៈដែលបានបញ្ជាក់នៅទីនេះនឹងត្រូវបានដកចេញនៅទីបំផុត ទោះបីជាពួកវាត្រូវបានអនុញ្ញាតដោយការកំណត់ផ្សេងទៀតក៏ដោយ។\n- បញ្ជីនៃធាតុដែលត្រូវការ {@link DEFAULTS.REQUIRED_FORMAT_LINE} តែងតែត្រូវបានរួមបញ្ចូល។\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "គ្រោងការណ៍ URL បន្ថែម​ដែល​អនុញ្ញាត​ដោយ​អ្នក​សម្អាត HTML ដោយ​មិន​មាន​សញ្ញា​នៅ​ខាង​ក្រោយ (មិន​ប្រកាន់​អក្សរតូចធំ)។ \n- ពង្រីកពិធីការដែលភ្ជាប់មកជាមួយនូវបញ្ជីអនុញ្ញាតដោយមិនបិទដំណើរការតម្រងគុណលក្ខណៈ។ \n- ពិធីការដែលភ្ជាប់មកជាមួយ៖ `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`, `callto` \n- URLs ដែលទាក់ទង តំណភ្ជាប់បំណែក (`#...`) និង URLs ទិន្នន័យរូបភាព (`data:image/...`) ក៏ត្រូវបានអនុញ្ញាតតាមលំនាំដើមផងដែរ។ \n- `javascript`, `vbscript` និង `data` ធាតុមិនត្រូវបានអើពើ។ មានតែ URL ទិន្នន័យរូបភាពប៉ុណ្ណោះដែលនៅតែអនុញ្ញាត។ \n- ជួសជុលនៅការបង្កើតកម្មវិធីនិពន្ធ; មិនអាចផ្លាស់ប្តូរជាមួយ `resetOptions` បានទេ។ \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "ស្លាករចនាប័ទ្មអត្ថបទបន្ថែម។\n- លំនាំដើមធ្វើតាម {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "បម្លែង URL ទៅជាតំណភ្ជាប់ដោយស្វ័យប្រវត្តិ។ (តម្រូវឲ្យមានកម្មវិធីជំនួយ `Link`)\n- លំនាំដើម៖ `Boolean(plugins.link)` ​​— កំណត់ដោយថាតើកម្មវិធីជំនួយ `link` ត្រូវបានបើកដំណើរការឬអត់។"
+  },
+  "autoStyleify": {
+    "description": "រចនាប័ទ្មបានអនុវត្តដោយស្វ័យប្រវត្តិនៅលើការបញ្ចូលអត្ថបទ។",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "ពេលវេលាពន្យារពេលសម្រាប់ការអាប់ដេតជង់ប្រវត្តិ (មីលីវិនាទី)។",
@@ -548,7 +568,10 @@
     "description": "ទីតាំង​ចំណងជើង (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "ទីតាំងឧបករណ៍បញ្ជាក្រឡា (`cell`, `table`)"
+    "description": "ទីតាំងឧបករណ៍បញ្ជាក្រឡា (`cell`, `table`, `dot`) \n- `dot`៖ ការជ្រើសរើសក្រឡាបង្ហាញចំណុចនៅលើគែមខាងស្តាំរបស់ក្រឡា (ខាងឆ្វេងក្នុង RTL) ជំនួសឱ្យឧបករណ៍បញ្ជា។ ការ​ចុច​ចំនុច​បើក​ឧបករណ៍​បញ្ជា​ក្រឡា ដោយ​ចុច​វា​ម្តង​ទៀត​លាក់​វា។ \n- `cell`៖ ឧបករណ៍បញ្ជាបើកនៅពេលជ្រើសរើស ខាងក្រោមក្រឡាដែលបានជ្រើសរើស។ \n- `table`៖ ឧបករណ៍បញ្ជាបើកនៅពេលជ្រើសរើស ជង់លើតួលេខតារាងជាមួយនឹងឧបករណ៍បញ្ជាតារាង។"
+  },
+  "table_tableControllerPosition": {
+    "description": "ទីតាំងឧបករណ៍បញ្ជាតារាង (`table`, `dot`) \n- `dot`៖ ការជ្រើសរើសតារាងបង្ហាញចំណុចមួយនៅលើជ្រុងកំពូលឆ្វេងរបស់តារាង (កំពូលស្តាំក្នុង RTL) ជំនួសឱ្យឧបករណ៍បញ្ជា។ ការ​ចុច​ចំនុច​បើក​ឧបករណ៍​បញ្ជា​តារាង ដោយ​ចុច​វា​ម្តង​ទៀត​លាក់​វា។ \n- `table`៖ ឧបករណ៍បញ្ជាបើកនៅពេលជ្រើសរើស នៅផ្នែកខាងលើនៃតារាង។"
   },
   "table_colorList": {
     "description": "បញ្ជីពណ៌ HEX សម្រាប់ឧបករណ៍ជ្រើសរើសពណ៌ផ្ទៃខាងក្រោយក្រឡា។"

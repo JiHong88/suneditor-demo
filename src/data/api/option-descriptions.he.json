@@ -59,6 +59,10 @@
     "description": "תכונות של `iframe`. ```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "קבצי CSS ליישום בתוך iframe. \n- מחרוזת: דפוס שם קובץ לחיפוש בתגיות `<link>` של המסמך. \n- `\"*\"`: תו כללי לכלול את כל גיליונות הסגנונות מהעמוד. \n- כתובות URL מוחלטות וכתובות URL של נתונים (`data:text/css,`) נתמכות גם כן. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "מפעיל את סרגל המצב.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "הגדרת תוסף. העברת מערך של מחלקות תוסף או אובייקט עם מפתח לפי שם תוסף. ```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "רשימה של שמות תוספים שיש לא לכלול. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "רשימת כפתורי סרגל הכלים, מקובצים לפי מערכי משנה.\n- ברירת המחדל היא {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "כיוון טקסט: `ltr` או `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "מערך של זוגות פקודות שסמל הקיצור שלהם צריך להיות זה מול זה. \n- תלוי במצב `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "מאפשר סינון קפדני של תגים, תכונות וסגנונות. \n- השתמש ב-`true` כדי להפעיל את כל המסננים (ברירת מחדל), או באובייקט כדי לשלוט במסננים בודדים. \n- הגדרה `false` ​​אינה נתמכת; השתמש בטופס האובייקט כדי להשבית מסננים ספציפיים במקום זאת. \n- :תיאור מסנן \n- `tagFilter`: מסננים תגי HTML אסורים (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: מסנן רכיבי פורמט (`formatLine`/`formatBlock`) \n- `classFilter`: מסנן שמות מחלקות CSS אסורות (`allowedClassName`) \n- `textStyleTagFilter`: מסנן תגיות בסגנון טקסט (b, i, u, span וכו') \n- `attrFilter`: מסנן תכונות HTML אסורות (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: מסננים סגנונות מוטבעים אסורים (לכל תג מ-`tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "מציין מאפיינים שלא יורשו לפי תג. `\"*\"` חל על כל התגים.\n- מאפיינים שצוינו כאן יוסרו בסופו של דבר גם אם הם מותרים על ידי הגדרות אחרות.\n- רשימה של אלמנטים נדרשים, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, תמיד כלולה.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "סכימות כתובות נוספות המותרות על ידי חיטוי HTML, ללא נקודתיים נגררת (לא תלוי רישיות). \n- מרחיב את רשימת ההיתרים בפרוטוקול המובנה מבלי לנטרל את סינון התכונות. \n- פרוטוקולים מובנים: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- כתובות URL יחסיות, קישורי פרגמנט (`#...`) וכתובות אתרים של נתוני תמונה (`data:image/...`) מותרים גם הם כברירת מחדל. \n- מתעלמים מערכי `javascript`, `vbscript` ו`data`; רק כתובות אתרים של נתוני תמונות נשארות מותרות. \n- תוקן בעת ​​יצירת העורך; לא ניתן לשנות עם `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "תגי סגנון טקסט נוספים.\n- ברירת המחדל היא {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "ממיר אוטומטית כתובות URL להיפר-קישורים. (נדרש תוסף `Link`)\n- ברירת מחדל: `Boolean(plugins.link)` ​​— נקבע על ידי האם התוסף `link` מופעל."
+  },
+  "autoStyleify": {
+    "description": "סגנונות מיושמים אוטומטית בהזנת טקסט.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "זמן השהייה לעדכוני מחסנית היסטוריה (מילישניות).",
@@ -548,7 +568,10 @@
     "description": "מיקום הכיתוב (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "מיקום בקר התא (`cell`, `table`)"
+    "description": "מיקום בקר תא (`cell`, `table`, `dot`) \n- `dot`: בחירת תא מציגה נקודה בקצה הימני של התא (משמאל ב-RTL) במקום הבקר; לחיצה על הנקודה פותחת את בקר התא, לחיצה עליו שוב מסתירה אותו. \n- `cell`: הבקר נפתח בבחירה, מתחת לתא שנבחר. \n- `table`: הבקר נפתח בבחירה, מוערם על דמות השולחן עם בקר השולחן."
+  },
+  "table_tableControllerPosition": {
+    "description": "מיקום בקר שולחן (`table`, `dot`) \n- `dot`: בחירת הטבלה מציגה נקודה בפינה השמאלית העליונה של הטבלה (מימין למעלה ב-RTL) במקום הבקר; לחיצה על הנקודה פותחת את בקר הטבלה, לחיצה עליו שוב מסתירה אותו. \n- `table`: הבקר נפתח בבחירה, על גבי דמות הטבלה."
   },
   "table_colorList": {
     "description": "רשימת צבעים הקסדצימליים עבור בורר צבעי הרקע של התא."

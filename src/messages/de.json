@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, Attribute oder Stile verschwinden aus dem Inhalt",
-				"symptom": "HTML, das über die Option value oder editor.$.html.set() gesetzt oder eingefügt wurde, kommt ohne bestimmte Tags (etwa mark), Klassennamen, data-*-Attribute oder Inline-Stile zurück.",
+				"symptom": "Mit der Option value oder editor.$.html.set() festgelegter oder eingefügter HTML-Code wird ohne bestimmte Tags (wie z. B. mark), Klassennamen, data-*-Attribute, Inline-Styles oder Verknüpfungen zu benutzerdefinierten App-Schemata (wie z. B. zoommtg: oder vscode:) zurückgegeben.",
 				"cause": "SunEditor filtert jedes eingehende HTML anhand von Allow-Listen für Elemente, Attribute, Klassennamen und tagspezifische Stile und entfernt alles, was nicht darauf steht. Ein span ohne verbleibenden Stil wird entpackt.",
-				"fix": "Erweitern Sie die benötigte Allow-Liste: elementWhitelist für Tags, attributeWhitelist für Attribute, allowedClassName für Klassennamen und tagStyles für Inline-Stile. Einzelne Filter lassen sich außerdem mit der Option strictMode abschalten. Erlauben Sie niemals script-Tags oder on*-Event-Attribute."
+				"fix": "Erweitern Sie die Zulassungsliste nach Bedarf: elementWhitelist für Tags, attributeWhitelist für Attribute, allowedClassName für Klassennamen, tagStyles für Inline-Styles und allowedURLProtocols für benutzerdefinierte URL-Schemas. Einzelne Filter lassen sich mit der Option strictMode deaktivieren. Tags (script) und Ereignisattribute (on*) sind grundsätzlich nicht zulässig."
 			},
 			"paste": {
 				"title": "Eingefügte Inhalte verlieren ihre Formatierung oder bringen unerwünschte Stile mit",

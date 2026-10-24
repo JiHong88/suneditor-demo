@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "콘텐츠에서 태그, 속성, 스타일이 사라짐",
-				"symptom": "value 옵션이나 editor.$.html.set()으로 넣거나 붙여 넣은 HTML에서 일부 태그(mark 등), 클래스 이름, data-* 속성, 인라인 스타일이 빠집니다.",
+				"symptom": "value 옵션이나 editor.$.html.set()으로 넣거나 붙여 넣은 HTML에서 일부 태그(mark 등), 클래스 이름, data-* 속성, 인라인 스타일, 사용자 지정 앱 스킴 링크(zoommtg:, vscode: 등)가 빠집니다.",
 				"cause": "SunEditor는 들어오는 모든 HTML을 요소, 속성, 클래스 이름, 태그별 스타일 허용 목록으로 필터링하고, 목록에 없는 것은 제거합니다. 스타일이 하나도 남지 않은 span은 벗겨집니다.",
-				"fix": "필요한 허용 목록을 확장하세요. 태그는 elementWhitelist, 속성은 attributeWhitelist, 클래스 이름은 allowedClassName, 인라인 스타일은 tagStyles로 추가합니다. 개별 필터는 strictMode 옵션으로 끌 수도 있습니다. script 태그나 on* 이벤트 속성은 절대 허용하지 마세요."
+				"fix": "필요한 허용 목록을 확장하세요. 태그는 elementWhitelist, 속성은 attributeWhitelist, 클래스 이름은 allowedClassName, 인라인 스타일은 tagStyles, 사용자 지정 URL 스킴은 allowedURLProtocols로 추가합니다. 개별 필터는 strictMode 옵션으로 끌 수도 있습니다. script 태그나 on* 이벤트 속성은 절대 허용하지 마세요."
 			},
 			"paste": {
 				"title": "붙여 넣은 내용의 서식이 사라지거나, 원치 않는 스타일이 따라 들어옴",

@@ -59,6 +59,10 @@
     "description": "`iframe`'ın özellikleri.\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "iframe'in içine uygulanacak CSS dosyaları. \n- Dize: Belgedeki `<link>` etiketlerinde aranacak dosya adı modeli. \n- `\"*\"`: Sayfadaki TÜM stil sayfalarını dahil etmek için joker karakter. \n- Mutlak URL'ler ve veri URL'leri (`data:text/css,`) de desteklenir. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Durum çubuğunu etkinleştirir.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Eklenti yapılandırması. Eklenti sınıflarının bir dizisini veya eklenti adına göre anahtarlanmış bir nesneyi iletin.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Hariç tutulacak eklenti adlarının listesi. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Alt dizilere göre gruplandırılmış araç çubuğu düğmelerinin listesi.\n\n- Varsayılan değer {@link DEFAULTS.BUTTON_LIST}'i takip eder.",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Metin yönü: `ltr` veya `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Kısayol simgelerinin birbirinin karşısında olması gereken komut çiftleri dizisi. \n- `textDirection` moduna bağlıdır.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Etiketlerin, niteliklerin ve stillerin sıkı bir şekilde filtrelenmesini sağlar. \n- Tüm filtreleri (varsayılan) etkinleştirmek için `true` kullanın veya tek tek filtreleri kontrol etmek için bir nesne kullanın. \n- `false` ​​ayarı desteklenmez; bunun yerine belirli filtreleri devre dışı bırakmak için nesne formunu kullanın. \n- :filtre açıklaması \n- `tagFilter`: İzin verilmeyen HTML etiketlerini filtreler (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Biçim öğelerini filtreler (`formatLine`/`formatBlock`) \n- `classFilter`: İzin verilmeyen CSS sınıfı adlarını filtreler (`allowedClassName`) \n- `textStyleTagFilter`: Metin stili etiketlerini filtreler (b, i, u, span vb.) \n- `attrFilter`: İzin verilmeyen HTML niteliklerini filtreler (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: İzin verilmeyen satır içi stilleri filtreler (`tagStyles`'den etiket başına) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Etikete göre izin verilmeyen öznitelikleri belirtir. `\"*\"` tüm etiketler için geçerlidir.\n\n- Burada belirtilen öznitelikler, diğer ayarlar tarafından izin verilmiş olsalar bile, sonunda kaldırılacaktır.\n\n- Gerekli öğelerin listesi, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, her zaman dahil edilir.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "HTML temizleyici tarafından, sonunda iki nokta üst üste olmadan (büyük/küçük harfe duyarlı olmayan) ek URL şemalarına izin verilir. \n- Özellik filtrelemeyi devre dışı bırakmadan yerleşik protokol izin verilenler listesini genişletir. \n- Yerleşik protokoller: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Göreli URL'lere, parça bağlantılarına (`#...`) ve resim verisi URL'lerine (`data:image/...`) de varsayılan olarak izin verilir. \n- `javascript`, `vbscript` ve `data` girişleri dikkate alınmaz; yalnızca resim verileri URL'lerine izin verilir. \n- Editör oluşturma sırasında düzeltildi; `resetOptions` ile değiştirilemez. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Ek metin stili etiketleri.\n\n- Varsayılan olarak {@link PrivateBaseOptions.__textStyleTags} kullanılır.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "URL'leri otomatik olarak köprüye dönüştürür. (`Link` eklentisi gereklidir)\n- Varsayılan: `Boolean(plugins.link)` ​​— `link` eklentisinin etkin olup olmamasına bağlı olarak belirlenir."
+  },
+  "autoStyleify": {
+    "description": "Metin girişinde otomatik olarak uygulanan stiller.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Geçmiş yığını güncellemeleri için gecikme süresi (ms).",
@@ -548,7 +568,10 @@
     "description": "Altyazı konumu (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Hücre kontrol cihazı konumu (`cell`, `table`)"
+    "description": "Hücre denetleyici konumu (`cell`, `table`, `dot`) \n- `dot`: Bir hücre seçildiğinde, denetleyici yerine hücrenin sağ kenarında (RTL'nin solunda) bir nokta gösterilir; noktaya tıklamak hücre denetleyicisini açar, tekrar tıklamak onu gizler. \n- `cell`: Denetleyici, seçim sırasında seçilen hücrenin altında açılır. \n- `table`: Kontrol ünitesi seçim üzerine açılır, masa kontrol ünitesi ile birlikte tablo şekli üzerine istiflenir."
+  },
+  "table_tableControllerPosition": {
+    "description": "Tablo denetleyici konumu (`table`, `dot`) \n- `dot`: Tablo seçildiğinde, denetleyici yerine tablonun sol üst köşesinde (RTL'de sağ üst) bir nokta gösterilir; noktaya tıklamak tablo denetleyicisini açar, tekrar tıklamak onu gizler. \n- `table`: Tablo şeklinin üstünde seçim yapıldığında kontrol cihazı açılır."
   },
   "table_colorList": {
     "description": "Hücre arka plan rengi seçici için HEX renk listesi."

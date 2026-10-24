@@ -59,6 +59,10 @@
     "description": "ویژگی‌های `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "فایل های CSS برای اعمال در داخل iframe. \n- رشته: الگوی نام فایل برای جستجو در تگ های سند `<link>`. \n- `\"*\"`: حروف عامیانه برای گنجاندن همه شیوه نامه ها از صفحه. \n- URL های مطلق و URL های داده (`data:text/css,`) نیز پشتیبانی می شوند. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "نوار وضعیت را فعال می‌کند.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "پیکربندی افزونه. آرایه‌ای از کلاس‌های افزونه یا یک شیء که با نام افزونه کلیدگذاری شده است را ارسال کنید.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "لیست نام افزونه ها برای حذف \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "فهرست دکمه‌های نوار ابزار، گروه‌بندی شده بر اساس زیرآرایه‌ها.\n- پیش‌فرض از {@link DEFAULTS.BUTTON_LIST} پیروی می‌کند.",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "جهت متن: `ltr` یا `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "آرایه‌ای از جفت‌های فرمان که نمادهای میانبر آن‌ها باید در مقابل یکدیگر قرار گیرند. \n- بستگی به حالت `textDirection` دارد.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "فیلتر کردن دقیق برچسب ها، ویژگی ها و سبک ها را فعال می کند. \n- از `true` برای فعال کردن همه فیلترها (پیش‌فرض)، یا یک شی برای کنترل فیلترهای جداگانه استفاده کنید. \n- تنظیم `false` ​​پشتیبانی نمی شود. به جای آن از فرم شی برای غیرفعال کردن فیلترهای خاص استفاده کنید. \n- :شرح فیلتر \n- `tagFilter`: برچسب‌های HTML غیرمجاز را فیلتر می‌کند (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: عناصر قالب را فیلتر می کند (`formatLine`/`formatBlock`) \n- `classFilter`: نام‌های کلاس CSS مجاز را فیلتر می‌کند (`allowedClassName`) \n- `textStyleTagFilter`: برچسب های سبک متن را فیلتر می کند (b، i، u، span، و غیره) \n- `attrFilter`: ویژگی های HTML غیر مجاز را فیلتر می کند (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: سبک های درون خطی غیرمجاز را فیلتر می کند (به ازای هر برچسب از `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "ویژگی‌هایی را مشخص می‌کند که باید بر اساس برچسب غیرفعال شوند. `\"*\"` برای همه برچسب‌ها اعمال می‌شود.\n- ویژگی‌هایی که در اینجا مشخص شده‌اند، حتی اگر توسط تنظیمات دیگر مجاز باشند، در نهایت حذف خواهند شد.\n- لیستی از عناصر مورد نیاز، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، همیشه شامل می‌شود.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "طرح‌های URL اضافی که توسط ضدعفونی‌کننده HTML مجاز است، بدون کولون انتهایی (بدون حساسیت به حروف بزرگ). \n- لیست مجاز پروتکل داخلی را بدون غیرفعال کردن فیلتر کردن ویژگی گسترش می دهد. \n- پروتکل های داخلی: `http`، `https`، `ftp`، `ftps`، `mailto`، `tel`، `blob`، `sms`، `geo`، `webcal`، __BT10. \n- URL های نسبی، پیوندهای قطعه (`#...`) و آدرس های اینترنتی داده های تصویر (`data:image/...`) نیز به طور پیش فرض مجاز هستند. \n- ورودی های `javascript`، `vbscript` و `data` نادیده گرفته می شوند. فقط نشانی‌های اینترنتی داده تصویر مجاز باقی می‌مانند. \n- در ایجاد ویرایشگر ثابت شد. با `resetOptions` قابل تغییر نیست. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "تگ‌های استایل متن اضافی.\n- پیش‌فرض از {@link PrivateBaseOptions.__textStyleTags} پیروی می‌کند.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "به طور خودکار URL ها را به هایپرلینک تبدیل می‌کند. (به افزونه `Link` نیاز است)\n- پیش‌فرض: `Boolean(plugins.link)` ​​— با توجه به فعال بودن افزونه `link` تعیین می‌شود."
+  },
+  "autoStyleify": {
+    "description": "سبک ها به طور خودکار در ورودی متن اعمال می شوند.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "زمان تأخیر برای به‌روزرسانی‌های پشته تاریخچه (میلی‌ثانیه).",
@@ -548,7 +568,10 @@
     "description": "موقعیت عنوان (`top`، `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "موقعیت کنترل‌کننده سلول (`cell`، `table`)"
+    "description": "موقعیت کنترل کننده سلول (`cell`، `table`، `dot`) \n- `dot`: انتخاب یک سلول به جای کنترلر، یک نقطه را در لبه سمت راست سلول (سمت چپ در RTL) نشان می دهد. با کلیک روی نقطه، کنترلر سلول باز می شود، با کلیک مجدد روی آن، آن را پنهان می کند. \n- `cell`: کنترلر در هنگام انتخاب، در زیر سلول انتخاب شده باز می شود. \n- `table`: کنترلر در هنگام انتخاب باز می شود، روی شکل جدول با کنترل کننده جدول انباشته می شود."
+  },
+  "table_tableControllerPosition": {
+    "description": "موقعیت کنترل‌کننده میز (`table`، `dot`) \n- `dot`: انتخاب جدول یک نقطه در گوشه سمت چپ بالای جدول (بالا سمت راست در RTL) به جای کنترلر نشان می دهد. با کلیک بر روی نقطه، کنترلگر جدول باز می شود، با کلیک مجدد روی آن، آن را پنهان می کند. \n- `table`: کنترلر در هنگام انتخاب، بالای شکل جدول باز می شود."
   },
   "table_colorList": {
     "description": "لیست رنگ HEX برای انتخابگر رنگ پس‌زمینه سلول."

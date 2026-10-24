@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "No satura pazūd tagi, atribūti vai stili",
-				"symptom": "HTML, kas iestatīts ar opciju value vai editor.$.html.set() vai ielīmēts, atgriežas bez dažiem tagiem (piemēram, mark), klašu nosaukumiem, data-* atribūtiem vai iekļautajiem stiliem.",
+				"symptom": "HTML, kas iestatīts ar opciju value vai editor.$.html.set(), vai ielīmēts, atgriežas bez dažām birkām (piemēram, mark), klašu nosaukumiem, data-* atribūtiem, iekļautajiem stiliem vai saitēm uz pielāgotām lietotņu shēmām (piemēram, zoommtg: vai vscode:).",
 				"cause": "SunEditor filtrē visu ienākošo HTML pēc atļauto sarakstiem elementiem, atribūtiem, klašu nosaukumiem un katra taga stiliem un noņem visu, kas tajos nav iekļauts. Elements span, kuram nav palicis neviena stila, tiek noņemts, saglabājot tā saturu.",
-				"fix": "Paplašiniet vajadzīgo atļauto sarakstu: elementWhitelist tagiem, attributeWhitelist atribūtiem, allowedClassName klašu nosaukumiem un tagStyles iekļautajiem stiliem. Atsevišķus filtrus var arī izslēgt ar opciju strictMode. Nekad neatļaujiet script tagus vai on* notikumu atribūtus."
+				"fix": "Paplašiniet nepieciešamo atļauto sarakstu: elementWhitelist tagiem, attributeWhitelist atribūtiem, allowedClassName klašu nosaukumiem, tagStyles iekļautajiem stiliem un allowedURLProtocols pielāgotām URL shēmām. Atsevišķus filtrus var arī izslēgt ar opciju strictMode. Nekad neatļaujiet script tagus vai on* notikumu atribūtus."
 			},
 			"paste": {
 				"title": "Ielīmētais saturs zaudē formatējumu vai ienes nevēlamus stilus",

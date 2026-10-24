@@ -59,6 +59,10 @@
     "description": "`iframe` کی خصوصیات۔\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "iframe کے اندر لاگو کرنے کے لیے CSS فائلیں۔ \n- سٹرنگ: دستاویز `<link>` ٹیگز میں تلاش کرنے کے لیے فائل نام کا پیٹرن۔ \n- `\"*\"`: صفحہ سے تمام اسٹائل شیٹس کو شامل کرنے کے لیے وائلڈ کارڈ۔ \n- مطلق URLs اور ڈیٹا URLs (`data:text/css,`) بھی تعاون یافتہ ہیں۔ \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "اسٹیٹس بار کو فعال کرتا ہے۔",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "پلگ ان کنفیگریشن۔ پلگ ان کلاسز کی ایک صف یا پلگ ان کے نام سے کلید کردہ آبجیکٹ کو پاس کریں۔\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "خارج کرنے کے لیے پلگ ان کے ناموں کی فہرست۔ \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "ٹول بار کے بٹنوں کی فہرست، ذیلی صفوں کے لحاظ سے گروپ کردہ۔\n- ڈیفالٹ {@link DEFAULTS.BUTTON_LIST} کی پیروی کرتا ہے",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "متن کی سمت: `ltr` یا `rtl`۔",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "کمانڈ جوڑوں کی ایک صف جس کے شارٹ کٹ آئیکنز ایک دوسرے کے مخالف ہونے چاہئیں۔ \n- `textDirection` موڈ پر منحصر ہے۔",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "ٹیگز، اوصاف، اور طرزوں کی سخت فلٹرنگ کو فعال کرتا ہے۔ \n- تمام فلٹرز (پہلے سے طے شدہ) کو فعال کرنے کے لیے `true` کا استعمال کریں، یا انفرادی فلٹرز کو کنٹرول کرنے کے لیے کوئی چیز استعمال کریں۔ \n- سیٹنگ `false` ​​تعاون یافتہ نہیں ہے۔ اس کے بجائے مخصوص فلٹرز کو غیر فعال کرنے کے لیے آبجیکٹ فارم کا استعمال کریں۔ \n- : فلٹر کی تفصیل \n- `tagFilter`: فلٹرز نامنظور HTML ٹیگز (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: فلٹرز فارمیٹ عناصر (`formatLine`/`formatBlock`) \n- `classFilter`: فلٹرز نامنظور CSS کلاس کے نام (`allowedClassName`) \n- `textStyleTagFilter`: ٹیکسٹ اسٹائل ٹیگز کو فلٹر کرتا ہے (b، i، u، span، وغیرہ) \n- `attrFilter`: فلٹرز نامنظور HTML صفات (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: فلٹرز کی اجازت نہیں دی گئی ان لائن طرزیں (`tagStyles` سے فی ٹیگ) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "ٹیگ کے ذریعے نامنظور کرنے کے لیے اوصاف کی وضاحت کرتا ہے۔ `\"*\"` تمام ٹیگز پر لاگو ہوتا ہے۔\n- یہاں بیان کردہ اوصاف آخرکار ہٹا دیے جائیں گے چاہے انہیں دوسری ترتیبات کے ذریعے اجازت دی جائے۔\n- مطلوبہ عناصر کی ایک فہرست، {@link DEFAULTS.REQUIRED_FORMAT_LINE}، ہمیشہ شامل ہوتی ہے۔\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "HTML سینیٹائزر کے ذریعہ اجازت دی گئی اضافی یو آر ایل اسکیمیں، بغیر کسی بڑی آنت کے (کیس غیر حساس)۔ \n- انتساب فلٹرنگ کو غیر فعال کیے بغیر بلٹ ان پروٹوکول کی اجازت کی فہرست میں توسیع کرتا ہے۔ \n- بلٹ ان پروٹوکولز: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`۔ \n- متعلقہ یو آر ایل، فریگمنٹ لنکس (`#...`) اور تصویری ڈیٹا URLs (`data:image/...`) کو بھی بطور ڈیفالٹ اجازت ہے۔ \n- `javascript`، `vbscript` اور `data` اندراجات کو نظر انداز کر دیا گیا ہے۔ صرف تصویری ڈیٹا URLs کی اجازت ہے۔ \n- ایڈیٹر کی تخلیق پر فکسڈ؛ `resetOptions` کے ساتھ تبدیل نہیں کیا جا سکتا۔ \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "اضافی ٹیکسٹ اسٹائل ٹیگز۔\n- ڈیفالٹ {@link PrivateBaseOptions.__textStyleTags} کی پیروی کرتا ہے",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "یو آر ایل کو خودکار طور پر ہائپر لنکس میں تبدیل کرتا ہے۔ (`Link` پلگ ان درکار ہے)\n- ڈیفالٹ: `Boolean(plugins.link)` ​​— اس بات سے طے ہوتا ہے کہ آیا `link` پلگ ان فعال ہے۔"
+  },
+  "autoStyleify": {
+    "description": "طرزیں ٹیکسٹ ان پٹ پر خود بخود لاگو ہوتی ہیں۔",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "ہسٹری اسٹیک اپ ڈیٹس (ms) کے لیے تاخیر کا وقت۔",
@@ -548,7 +568,10 @@
     "description": "کیپشن پوزیشن (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "سیل کنٹرولر پوزیشن (`cell`, `table`)"
+    "description": "سیل کنٹرولر پوزیشن (`cell`, `table`, `dot`) \n- `dot`: سیل کا انتخاب کنٹرولر کی بجائے سیل کے دائیں کنارے پر ایک ڈاٹ دکھاتا ہے (RTL میں بائیں)؛ ڈاٹ پر کلک کرنے سے سیل کنٹرولر کھل جاتا ہے، اس پر دوبارہ کلک کرنے سے وہ چھپ جاتا ہے۔ \n- `cell`: کنٹرولر منتخب سیل کے نیچے، انتخاب پر کھلتا ہے۔ \n- `table`: کنٹرولر سلیکشن پر کھلتا ہے، ٹیبل کنٹرولر کے ساتھ ٹیبل فگر پر اسٹیک کیا جاتا ہے۔"
+  },
+  "table_tableControllerPosition": {
+    "description": "ٹیبل کنٹرولر پوزیشن (`table`, `dot`) \n- `dot`: ٹیبل کا انتخاب کنٹرولر کی بجائے ٹیبل کے اوپری بائیں کونے (RTL میں اوپر دائیں) پر ایک ڈاٹ دکھاتا ہے۔ ڈاٹ پر کلک کرنے سے ٹیبل کنٹرولر کھل جاتا ہے، اس پر دوبارہ کلک کرنے سے وہ چھپ جاتا ہے۔ \n- `table`: کنٹرولر انتخاب پر کھلتا ہے، میز کے اعداد و شمار کے اوپر۔"
   },
   "table_colorList": {
     "description": "سیل کے پس منظر کے رنگ چننے والے کے لیے HEX رنگ کی فہرست۔"

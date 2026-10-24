@@ -59,6 +59,10 @@
     "description": "`iframe` atribūti.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS faili, ko lietot iframe. \n- Virkne: faila nosaukuma modelis, lai meklētu dokumenta `<link>` tagos. \n- `\"*\"`: aizstājējzīme, lai iekļautu VISAS lapas stilu lapas. \n- Tiek atbalstīti arī absolūtie URL un datu URL (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Iespējo statusa joslu.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Spraudņa konfigurācija. Nodot spraudņa klašu masīvu vai objektu, kura atslēga ir spraudņa nosaukums.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Izslēdzamo spraudņu nosaukumu saraksts. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Rīkjoslas pogu saraksts, grupēts pa apakšmasīviem.\n\n- Noklusējuma vērtība seko {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Teksta virziens: `ltr` vai `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Komandu pāru masīvs, kuru īsinājumtaustiņu ikonām jāatrodas pretī. \n- Atkarīgs no `textDirection` režīma.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Iespējo stingru tagu, atribūtu un stilu filtrēšanu. \n- Izmantojiet `true`, lai iespējotu visus filtrus (noklusējums), vai objektu, lai kontrolētu atsevišķus filtrus. \n- Iestatījums `false` ​​netiek atbalstīts; tā vietā izmantojiet objekta formu, lai atspējotu konkrētus filtrus. \n- :filtra apraksts \n- `tagFilter`: filtrē neatļautos HTML tagus (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: filtrē formāta elementus (`formatLine`/`formatBlock`) \n- `classFilter`: filtrē neatļautos CSS klašu nosaukumus (`allowedClassName`) \n- `textStyleTagFilter`: filtrē teksta stila tagus (b, i, u, span utt.) \n- `attrFilter`: filtrē neatļautos HTML atribūtus (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: filtrē neatļautos iekļautos stilus (par katru tagu no `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Norāda atribūtus, ko aizliegt pēc taga. `\"*\"` attiecas uz visiem tagiem.\n\n- Šeit norādītie atribūti galu galā tiks noņemti, pat ja tos atļauj citi iestatījumi.\n\n- Vienmēr ir iekļauts obligāto elementu saraksts {@link DEFAULTS.REQUIRED_FORMAT_LINE}.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Papildu URL shēmas, ko pieļauj HTML attīrīšanas līdzeklis, bez beigu kola (nejutīga). \n- Paplašina iebūvēto protokolu atļauju sarakstu, neatspējojot atribūtu filtrēšanu. \n- Iebūvētie protokoli: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Pēc noklusējuma ir atļauti arī relatīvie URL, fragmentu saites (`#...`) un attēlu datu vietrāži URL (`data:image/...`). \n- `javascript`, `vbscript` un `data` ieraksti tiek ignorēti; ir atļauti tikai attēlu datu vietrāži URL. \n- Fiksēts redaktora izveides laikā; nevar mainīt ar `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Papildu teksta stila tagi.\n- Noklusējuma iestatījums atbilst {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Automātiski konvertē URL hipersaitēs. (Nepieciešams spraudnis `Link`)\n- Noklusējums: `Boolean(plugins.link)` ​​— nosaka, vai ir iespējots spraudnis `link`."
+  },
+  "autoStyleify": {
+    "description": "Stili tiek automātiski lietoti teksta ievadē.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Vēstures steka atjauninājumu aizkaves laiks (ms).",
@@ -548,7 +568,10 @@
     "description": "Paraksta pozīcija (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Šūnas kontrollera pozīcija (`cell`, `table`)"
+    "description": "Šūnas kontrollera pozīcija (`cell`, `table`, `dot`) \n- `dot`: atlasot šūnu, kontrollera vietā tiek rādīts punkts šūnas labajā malā (pa kreisi RTL); noklikšķinot uz punkta, tiek atvērts šūnu kontrolleris, noklikšķinot uz tā vēlreiz, tas tiek paslēpts. \n- `cell`: kontrolleris tiek atvērts pēc atlases zem atlasītās šūnas. \n- `table`: kontrolleris tiek atvērts pēc atlases, kas ir sakrauts uz tabulas attēla ar galda kontrolleri."
+  },
+  "table_tableControllerPosition": {
+    "description": "Galda kontrollera pozīcija (`table`, `dot`) \n- `dot`: atlasot tabulu, tiek rādīts punkts tabulas augšējā kreisajā stūrī (RTL augšējā labajā stūrī), nevis kontrollera; noklikšķinot uz punkta, tiek atvērts tabulas kontrolleris, noklikšķinot uz tā vēlreiz, tas tiek paslēpts. \n- `table`: kontrolleris tiek atvērts pēc atlases tabulas attēla augšpusē."
   },
   "table_colorList": {
     "description": "Šūnas fona krāsas atlasītāja heksadecimālais krāsu saraksts."

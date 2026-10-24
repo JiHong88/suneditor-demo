@@ -754,7 +754,7 @@ function extractOptionDescriptions(filePath) {
 
 		// Extract name, default value, and description after the type
 		const afterType = fullLine.replace(/^.*?@property\s+\{[^]*?\}\s*/, "");
-		const nameMatch = afterType.match(/\[?(\w+)(?:=([^\]]*))?\]?\s+-\s+(.+)/);
+		const nameMatch = afterType.match(/\[?(\w+)(?:=(.*?))?\]?\s+-\s+(.+)/);
 		if (!nameMatch) continue;
 
 		const name = nameMatch[1];

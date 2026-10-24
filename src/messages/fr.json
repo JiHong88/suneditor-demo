@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Des balises, attributs ou styles disparaissent du contenu",
-				"symptom": "Le HTML défini via l'option value ou editor.$.html.set(), ou collé, revient privé de certaines balises (comme mark), de noms de classe, d'attributs data-* ou de styles inline.",
+				"symptom": "Le code HTML défini avec l'option value ou editor.$.html.set(), ou collé, revient sans certaines balises (telles que mark), noms de classe, attributs data-*, styles en ligne ou liens vers des schémas d'application personnalisés (tels que zoommtg: ou vscode:).",
 				"cause": "SunEditor filtre tout le HTML entrant à l'aide de listes d'autorisation pour les éléments, les attributs, les noms de classe et les styles par balise, et supprime tout ce qui n'y figure pas. Un span qui se retrouve sans aucun style est retiré (son contenu est conservé).",
-				"fix": "Étendez la liste d'autorisation dont vous avez besoin : elementWhitelist pour les balises, attributeWhitelist pour les attributs, allowedClassName pour les noms de classe et tagStyles pour les styles inline. Chaque filtre peut aussi être désactivé individuellement avec l'option strictMode. N'autorisez jamais les balises script ni les attributs d'événement on*."
+				"fix": "Étendez la liste d'autorisation selon vos besoins : elementWhitelist pour les balises, attributeWhitelist pour les attributs, allowedClassName pour les noms de classes, tagStyles pour les styles en ligne et allowedURLProtocols pour les schémas d'URL personnalisés. Vous pouvez désactiver des filtres individuels avec l'option strictMode. N'autorisez jamais les balises script ni les attributs d'événement on*."
 			},
 			"paste": {
 				"title": "Le contenu collé perd sa mise en forme, ou apporte des styles indésirables",

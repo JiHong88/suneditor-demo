@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Desaparecen etiquetas, atributos o estilos del contenido",
-				"symptom": "El HTML establecido con la opción value o con editor.$.html.set(), o pegado, vuelve sin algunas etiquetas (como mark), nombres de clase, atributos data-* o estilos en línea.",
+				"symptom": "El código HTML configurado con la opción value o editor.$.html.set(), o pegado, aparece sin algunas etiquetas (como mark), nombres de clase, atributos data-*, estilos en línea o enlaces a esquemas de aplicaciones personalizadas (como zoommtg: o vscode:).",
 				"cause": "SunEditor filtra todo el HTML entrante con listas de permitidos para elementos, atributos, nombres de clase y estilos por etiqueta, y elimina todo lo que no figure en ellas. Un span que se queda sin ningún estilo se desenvuelve.",
-				"fix": "Amplía la lista de permitidos que necesites: elementWhitelist para etiquetas, attributeWhitelist para atributos, allowedClassName para nombres de clase y tagStyles para estilos en línea. También puedes desactivar filtros concretos con la opción strictMode. Nunca permitas etiquetas script ni atributos de evento on*."
+				"fix": "Amplíe la lista de permisos según sus necesidades: elementWhitelist para etiquetas, attributeWhitelist para atributos, allowedClassName para nombres de clase, tagStyles para estilos en línea y allowedURLProtocols para esquemas de URL personalizados. También puede desactivar filtros individuales con la opción strictMode. No permita nunca etiquetas script ni atributos de evento on*."
 			},
 			"paste": {
 				"title": "El contenido pegado pierde su formato o trae estilos no deseados",

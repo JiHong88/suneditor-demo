@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tagi, atrybuty lub style znikają z treści",
-				"symptom": "HTML ustawiony przez opcję value lub editor.$.html.set() albo wklejony wraca bez niektórych tagów (np. mark), nazw klas, atrybutów data-* lub stylów inline.",
+				"symptom": "Kod HTML ustawiony z opcją value lub editor.$.html.set() albo wklejony, zwracany jest bez niektórych tagów (takich jak mark), nazw klas, atrybutów data-*, stylów wbudowanych lub linków do niestandardowych schematów aplikacji (takich jak zoommtg: lub vscode:).",
 				"cause": "SunEditor filtruje cały przychodzący HTML według list dozwolonych elementów, atrybutów, nazw klas i stylów dla poszczególnych tagów, a wszystko, czego na nich nie ma, usuwa. Element span, któremu nie został żaden styl, jest rozpakowywany (zastępowany swoją zawartością).",
-				"fix": "Rozszerz potrzebną listę dozwolonych: elementWhitelist dla tagów, attributeWhitelist dla atrybutów, allowedClassName dla nazw klas i tagStyles dla stylów inline. Poszczególne filtry można też wyłączyć opcją strictMode. Nigdy nie zezwalaj na tagi script ani atrybuty zdarzeń on*."
+				"fix": "Rozszerz potrzebną listę dozwolonych: elementWhitelist dla tagów, attributeWhitelist dla atrybutów, allowedClassName dla nazw klas, tagStyles dla stylów inline i allowedURLProtocols dla niestandardowych schematów URL. Poszczególne filtry można również wyłączyć za pomocą opcji strictMode. Nigdy nie zezwalaj na tagi script ani atrybuty zdarzeń on*."
 			},
 			"paste": {
 				"title": "Wklejona treść traci formatowanie lub wnosi niechciane style",

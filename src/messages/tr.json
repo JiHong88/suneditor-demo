@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Etiketler, öznitelikler veya stiller içerikten kayboluyor",
-				"symptom": "value seçeneğiyle veya editor.$.html.set() ile ayarlanan ya da yapıştırılan HTML, bazı etiketler (örneğin mark), sınıf adları, data-* öznitelikleri veya satır içi stiller olmadan geri geliyor.",
+				"symptom": "value veya editor.$.html.set() seçeneğiyle ayarlanan veya yapıştırılan HTML kodu, bazı etiketler (örneğin mark), sınıf adları, data-* öznitelikleri, satır içi stiller veya özel uygulama şemalarına bağlantılar (örneğin zoommtg: veya vscode:) olmadan geri döner.",
 				"cause": "SunEditor, gelen tüm HTML'i öğeler, öznitelikler, sınıf adları ve etiket bazında stiller için tanımlı izin listelerine göre filtreler ve bu listelerde olmayan her şeyi kaldırır. Hiç stili kalmayan bir span ise kaldırılır, içeriği korunur.",
-				"fix": "İhtiyacınız olan izin listesini genişletin: etiketler için elementWhitelist, öznitelikler için attributeWhitelist, sınıf adları için allowedClassName ve satır içi stiller için tagStyles. Filtreler tek tek strictMode seçeneğiyle de kapatılabilir. script etiketlerine veya on* olay özniteliklerine asla izin vermeyin."
+				"fix": "İhtiyacınız olan izin listesini genişletin: Etiketler için elementWhitelist, öznitelikler için attributeWhitelist, sınıf adları için allowedClassName, satır içi stiller için tagStyles ve özel URL şemaları için allowedURLProtocols. Bireysel filtreler strictMode seçeneğiyle de kapatılabilir. script etiketlerine veya on* olay özniteliklerine asla izin vermeyin."
 			},
 			"paste": {
 				"title": "Yapıştırılan içerik biçimlendirmesini kaybediyor veya istenmeyen stiller getiriyor",

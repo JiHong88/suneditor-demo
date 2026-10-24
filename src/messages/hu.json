@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tagek, attribútumok vagy stílusok tűnnek el a tartalomból",
-				"symptom": "A value beállítással vagy az editor.$.html.set() metódussal megadott, illetve beillesztett HTML-ből eltűnik néhány tag (például a mark), osztálynév, data-* attribútum vagy inline stílus.",
+				"symptom": "A value opcióval vagy editor.$.html.set() paraméterrel beállított, illetve beillesztett HTML bizonyos címkék (például mark), osztálynevek, data-* attribútumok, beágyazott stílusok vagy egyéni alkalmazássémákra mutató hivatkozások (például zoommtg: vagy vscode:) nélkül tér vissza.",
 				"cause": "A SunEditor minden bejövő HTML-t engedélyezési listák alapján szűr – elemekre, attribútumokra, osztálynevekre és tagenkénti stílusokra –, és mindent eltávolít, ami nem szerepel rajtuk. A stílus nélkül maradt span elemet kibontja.",
-				"fix": "Bővítsd a szükséges engedélyezési listát: elementWhitelist a tagekhez, attributeWhitelist az attribútumokhoz, allowedClassName az osztálynevekhez és tagStyles az inline stílusokhoz. Az egyes szűrők a strictMode beállítással ki is kapcsolhatók. Soha ne engedélyezd a script tageket vagy az on* eseményattribútumokat."
+				"fix": "Bővítsd ki a szükséges engedélyezési listát: elementWhitelist címkékhez, attributeWhitelist attribútumokhoz, allowedClassName osztálynevekhez, tagStyles beágyazott stílusokhoz és allowedURLProtocols egyéni URL-sémákhoz. Az egyes szűrők a strictMode opcióval kikapcsolhatók. Soha ne engedélyezd a script címkéket vagy a on* eseményattribútumokat."
 			},
 			"paste": {
 				"title": "A beillesztett tartalom elveszíti a formázását, vagy nem kívánt stílusokat hoz magával",

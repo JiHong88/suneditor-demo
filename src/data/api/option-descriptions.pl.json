@@ -59,6 +59,10 @@
     "description": "Atrybuty `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Pliki CSS do zastosowania wewnątrz elementu iframe. \n- String: Wzorzec nazwy pliku do przeszukania w znacznikach dokumentu `<link>`. \n- `\"*\"`: Symbol wieloznaczny zawierający WSZYSTKIE arkusze stylów ze strony. \n- Obsługiwane są także bezwzględne adresy URL i adresy danych (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Włącza pasek stanu.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Konfiguracja wtyczki. Przekaż tablicę klas wtyczki lub obiekt o kluczu określonym przez nazwę wtyczki.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Lista nazw wtyczek do wykluczenia. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lista przycisków paska narzędzi, pogrupowanych według podtablic.\n- Domyślnie jest to {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Kierunek tekstu: `ltr` lub `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Tablica par poleceń, których ikony skrótów powinny znajdować się naprzeciw siebie. \n- Zależy od trybu `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Umożliwia ścisłe filtrowanie tagów, atrybutów i stylów. \n- Użyj `true`, aby włączyć wszystkie filtry (domyślnie) lub obiektu do kontrolowania poszczególnych filtrów. \n- Ustawienie `false` ​​nie jest obsługiwane; zamiast tego użyj formularza obiektu, aby wyłączyć określone filtry. \n- :opis filtra \n- `tagFilter`: Filtruje niedozwolone tagi HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtruje elementy formatu (`formatLine`/`formatBlock`) \n- `classFilter`: Filtruje niedozwolone nazwy klas CSS (`allowedClassName`) \n- `textStyleTagFilter`: Filtruje znaczniki stylu tekstu (b, i, u, span itp.) \n- `attrFilter`: Filtruje niedozwolone atrybuty HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtruje niedozwolone style wbudowane (na tag od `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Określa atrybuty, które mają być niedozwolone dla danego tagu. `\"*\"` dotyczy wszystkich tagów.\n- Atrybuty określone w tym miejscu zostaną ostatecznie usunięte, nawet jeśli są dozwolone w innych ustawieniach.\n- Lista wymaganych elementów, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, jest zawsze dołączona.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Dodatkowe schematy adresów URL dozwolone przez narzędzie do czyszczenia HTML, bez końcowego dwukropka (wielkość liter nie ma znaczenia). \n— Rozszerza wbudowaną listę dozwolonych protokołów bez wyłączania filtrowania atrybutów. \n- Wbudowane protokoły: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Względne adresy URL, łącza fragmentacyjne (`#...`) i adresy URL danych obrazów (`data:image/...`) są również domyślnie dozwolone. \n- wpisy `javascript`, `vbscript` i `data` są ignorowane; dozwolone pozostają tylko adresy URL danych obrazów. \n- Naprawiono podczas tworzenia edytora; nie można zmienić za pomocą `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Dodatkowe znaczniki stylu tekstu.\n- Domyślnie stosuje się {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Automatycznie konwertuje adresy URL na hiperłącza. (Wymagana jest wtyczka `Link`)\n- Domyślnie: `Boolean(plugins.link)` ​​— określane przez to, czy wtyczka `link` jest włączona."
+  },
+  "autoStyleify": {
+    "description": "Style stosowane automatycznie przy wprowadzaniu tekstu.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Czas opóźnienia aktualizacji stosu historii (ms).",
@@ -548,7 +568,10 @@
     "description": "Pozycja podpisu (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Pozycja kontrolera komórki (`cell`, `table`)"
+    "description": "Pozycja kontrolera komórki (`cell`, `table`, `dot`) \n- `dot`: Wybranie komórki powoduje wyświetlenie kropki na prawej krawędzi komórki (po lewej w RTL) zamiast kontrolera; kliknięcie kropki otwiera kontroler komórki, ponowne kliknięcie ukrywa ją. \n- `cell`: Kontroler otwiera się po dokonaniu wyboru, poniżej wybranej komórki. \n- `table`: Kontroler otwiera się po wybraniu, ułożony na stole razem ze sterownikiem stołu."
+  },
+  "table_tableControllerPosition": {
+    "description": "Pozycja kontrolera tabeli (`table`, `dot`) \n- `dot`: Wybranie tabeli powoduje wyświetlenie kropki w lewym górnym rogu tabeli (w prawym górnym rogu w RTL) zamiast kontrolera; kliknięcie kropki otwiera kontroler tabeli, ponowne kliknięcie ukrywa ją. \n- `table`: Sterownik otwiera się po wybraniu, na górze tabeli."
   },
   "table_colorList": {
     "description": "Lista kolorów HEX dla selektora kolorów tła komórki."

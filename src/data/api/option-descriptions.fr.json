@@ -59,6 +59,10 @@
     "description": "Attributs du `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Fichiers CSS à appliquer dans l'iframe. \n- String : modèle de nom de fichier à rechercher dans les balises `<link>` du document. \n- `\"*\"` ​​: Caractère générique pour inclure TOUTES les feuilles de style de la page. \n- Les URL absolues et les URL de données (`data:text/css,`) sont également prises en charge. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Active la barre d'état.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Configuration du plugin. Transmettez un tableau de classes de plugins ou un objet indexé par le nom du plugin.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Liste des noms de plugins à exclure. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Liste des boutons de la barre d'outils, regroupés par sous-tableaux.\n\n- La valeur par défaut est définie par {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Sens du texte : `ltr` ou `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Un tableau de paires de commandes dont les icônes de raccourci doivent être opposées. \n- Dépend du mode `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Permet un filtrage strict des balises, des attributs et des styles. \n- Utilisez `true` pour activer tous les filtres (par défaut) ou un objet pour contrôler les filtres individuels. \n- Le paramètre `false` ​​n'est pas pris en charge ; utilisez plutôt le formulaire d’objet pour désactiver des filtres spécifiques. \n- :description du filtre \n- `tagFilter` : filtre les balises HTML interdites (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter` : Filtre les éléments de format (`formatLine`/`formatBlock`) \n- `classFilter` : filtre les noms de classes CSS interdits (`allowedClassName`) \n- `textStyleTagFilter` : filtre les balises de style de texte (b, i, u, span, etc.) \n- `attrFilter` : filtre les attributs HTML non autorisés (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter` : filtres non autorisés pour les styles en ligne (par balise à partir de `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Spécifie les attributs à interdire par balise. `\"*\"` s'applique à toutes les balises.\n\n- Les attributs spécifiés ici seront supprimés même s'ils sont autorisés par d'autres paramètres.\n\n- La liste des éléments obligatoires, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, est toujours incluse.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Schémas d'URL supplémentaires autorisés par le désinfectant HTML, sans deux-points à la fin (insensible à la casse). \n- Étend la liste autorisée du protocole intégré sans désactiver le filtrage des attributs. \n- Protocoles intégrés : `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Les URL relatives, les liens de fragments (`#...`) et les URL de données d'image (`data:image/...`) sont également autorisés par défaut. \n- Les entrées `javascript`, `vbscript` et `data` sont ignorées ; seules les URL de données d'image restent autorisées. \n- Corrigé lors de la création de l'éditeur ; ne peut pas être modifié avec `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Balises de style de texte supplémentaires.\n\n- Par défaut, {@link PrivateBaseOptions.__textStyleTags} est appliqué.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Convertit automatiquement les URL en liens hypertextes. (Plugin `Link` requis)\n\n- Par défaut : `Boolean(plugins.link)` ​​— déterminé par l’activation ou non du plugin `link`."
+  },
+  "autoStyleify": {
+    "description": "Styles appliqués automatiquement lors de la saisie de texte.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Délai de mise à jour de la pile d'historique (ms).",
@@ -548,7 +568,10 @@
     "description": "Position de la légende (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Position du contrôleur de cellule (`cell`, `table`)"
+    "description": "Position du contrôleur de cellule (`cell`, `table`, `dot`) \n- `dot` : La sélection d'une cellule affiche un point sur le bord droit de la cellule (gauche en RTL) à la place du contrôleur ; cliquer sur le point ouvre le contrôleur de cellule, cliquer à nouveau dessus pour le masquer. \n- `cell` : Le contrôleur s'ouvre sur sélection, en dessous de la cellule sélectionnée. \n- `table` : Le contrôleur s'ouvre sur sélection, empilé sur la figure de table avec le contrôleur de table."
+  },
+  "table_tableControllerPosition": {
+    "description": "Position du contrôleur de table (`table`, `dot`) \n- `dot` : La sélection du tableau affiche un point dans le coin supérieur gauche du tableau (en haut à droite en RTL) à la place du contrôleur ; cliquer sur le point ouvre le contrôleur de table, cliquer à nouveau dessus pour le masquer. \n- `table` : Le contrôleur s'ouvre sur sélection, en haut du tableau figure."
   },
   "table_colorList": {
     "description": "Liste de couleurs HEX pour le sélecteur de couleur d'arrière-plan des cellules."

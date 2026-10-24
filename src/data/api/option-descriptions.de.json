@@ -59,6 +59,10 @@
     "description": "Attribute von `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS-Dateien, die innerhalb des Iframes angewendet werden sollen. \n- Zeichenfolge: Dateinamenmuster zur Suche in Dokument-`<link>`-Tags. \n- `\"*\"`: Platzhalter zum Einschließen ALLER Stylesheets der Seite. \n- Absolute URLs und Daten-URLs (`data:text/css,`) werden ebenfalls unterstützt. \n„`js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n`“.",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Aktiviert die Statusleiste.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Plugin-Konfiguration. Übergeben Sie ein Array von Plugin-Klassen oder ein Objekt, dessen Schlüssel der Plugin-Name ist.\n\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Liste der auszuschließenden Plugin-Namen. \n„`js\n{ excludedPlugins: ['image', 'video'] }\n`“.",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Liste der Symbolleistenschaltflächen, gruppiert nach Unterarrays.\n\n– Standardmäßig gilt: {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Textrichtung: `ltr` oder `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Ein Array von Befehlspaaren, deren Verknüpfungssymbole einander gegenüber liegen sollten. \n- Hängt vom `textDirection`-Modus ab.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Ermöglicht eine strikte Filterung von Tags, Attributen und Stilen. \n- Verwenden Sie `true`, um alle Filter zu aktivieren (Standard), oder ein Objekt, um einzelne Filter zu steuern. \n- Die Einstellung `false` ​​wird nicht unterstützt; Verwenden Sie stattdessen das Objektformular, um bestimmte Filter zu deaktivieren. \n- :Filterbeschreibung \n- `tagFilter`: Filtert unzulässige HTML-Tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtert Formatelemente (`formatLine`/`formatBlock`) \n- `classFilter`: Filtert unzulässige CSS-Klassennamen (`allowedClassName`) \n- `textStyleTagFilter`: Filtert Textstil-Tags (b, i, u, span usw.) \n- `attrFilter`: Filtert unzulässige HTML-Attribute (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtert unzulässige Inline-Stile (pro Tag aus `tagStyles`) \n„`js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n`“.",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Legt Attribute fest, die pro Tag verboten werden sollen. `\"*\"` gilt für alle Tags.\n\n– Die hier angegebenen Attribute werden entfernt, selbst wenn sie durch andere Einstellungen erlaubt sind.\n\n– Eine Liste der erforderlichen Elemente, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, ist immer enthalten.\n\n``js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Zusätzliche URL-Schemata, die vom HTML-Sanitizer zugelassen werden, ohne abschließenden Doppelpunkt (ohne Berücksichtigung der Groß-/Kleinschreibung). \n– Erweitert die integrierte Protokoll-Zulassungsliste, ohne die Attributfilterung zu deaktivieren. \n- Integrierte Protokolle: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Relative URLs, Fragment-Links (`#...`) und Bilddaten-URLs (`data:image/...`) sind ebenfalls standardmäßig zulässig. \n- Einträge `javascript`, `vbscript` und `data` werden ignoriert; Es bleiben nur Bilddaten-URLs zulässig. \n- Beim Erstellen des Editors behoben; kann nicht mit `resetOptions` geändert werden. \n„`js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n`“.",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Zusätzliche Textstil-Tags.\n\n- Standardmäßig werden die Tags {@link PrivateBaseOptions.__textStyleTags} verwendet.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Wandelt URLs automatisch in Hyperlinks um. (`Link`-Plugin erforderlich)\n\n- Standard: `Boolean(plugins.link)` ​​– abhängig davon, ob das `link`-Plugin aktiviert ist."
+  },
+  "autoStyleify": {
+    "description": "Stile werden automatisch auf die Texteingabe angewendet.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Verzögerungszeit für Aktualisierungen des Verlaufsstapels (ms).",
@@ -548,7 +568,10 @@
     "description": "Position der Bildunterschrift (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Position des Zellencontrollers (`cell`, `table`)"
+    "description": "Position des Zellcontrollers (`cell`, `table`, `dot`) \n- `dot`: Beim Auswählen einer Zelle wird anstelle des Controllers ein Punkt am rechten Rand der Zelle (links in RTL) angezeigt. Durch Klicken auf den Punkt wird der Zellencontroller geöffnet. Durch erneutes Klicken wird er wieder ausgeblendet. \n- `cell`: Der Controller öffnet sich bei Auswahl unterhalb der ausgewählten Zelle. \n- `table`: Der Controller öffnet sich bei Auswahl, gestapelt auf der Tischfigur mit dem Tischcontroller."
+  },
+  "table_tableControllerPosition": {
+    "description": "Tisch-Controller-Position (`table`, `dot`) \n- `dot`: Beim Auswählen der Tabelle wird anstelle des Controllers ein Punkt in der oberen linken Ecke der Tabelle (oben rechts in RTL) angezeigt. Durch Klicken auf den Punkt wird der Tabellencontroller geöffnet, durch erneutes Klicken wird er ausgeblendet. \n- `table`: Der Controller öffnet sich bei Auswahl oben in der Tabellenabbildung."
   },
   "table_colorList": {
     "description": "HEX-Farbliste für die Hintergrundfarbauswahl der Zelle."

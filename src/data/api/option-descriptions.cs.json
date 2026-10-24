@@ -59,6 +59,10 @@
     "description": "Atributy `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Soubory CSS, které se mají použít uvnitř prvku iframe. \n- Řetězec: Vzor názvu souboru pro vyhledávání ve značkách `<link>` dokumentu. \n- `\"*\"`: Zástupný znak pro zahrnutí VŠECH šablon stylů ze stránky. \n- Podporovány jsou také absolutní adresy URL a datové adresy URL (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Povolí stavový řádek.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Konfigurace pluginu. Předejte pole tříd pluginů nebo objekt s klíčem podle názvu pluginu.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Seznam názvů pluginů, které mají být vyloučeny. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Seznam tlačítek panelu nástrojů seskupených podle podpolí.\n- Výchozí nastavení následuje {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Směr textu: `ltr` nebo `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Pole dvojic příkazů, jejichž ikony zkratek by měly být naproti sobě. \n- Závisí na režimu `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Umožňuje přísné filtrování značek, atributů a stylů. \n- Použijte `true` k povolení všech filtrů (výchozí) nebo objektu k ovládání jednotlivých filtrů. \n- Nastavení `false` ​​není podporováno; místo toho použijte formulář objektu k deaktivaci konkrétních filtrů. \n- :popis filtru \n- `tagFilter`: Filtruje nepovolené značky HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtruje prvky formátu (`formatLine`/`formatBlock`) \n- `classFilter`: Filtruje nepovolené názvy tříd CSS (`allowedClassName`) \n- `textStyleTagFilter`: Filtruje značky stylu textu (b, i, u, span atd.) \n- `attrFilter`: Filtruje nepovolené atributy HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtry nepovolené vložené styly (na značku z `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Určuje atributy, které mají být tagy zakázány. `\"*\"` platí pro všechny tagy.\n- Atributy zde uvedené budou nakonec odebrány, i když jsou povoleny jinými nastaveními.\n- Seznam povinných prvků {@link DEFAULTS.REQUIRED_FORMAT_LINE} je vždy zahrnut.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Další schémata adres URL povolená dezinfekčním nástrojem HTML bez dvojtečky na konci (nerozlišují se malá a velká písmena). \n- Rozšiřuje seznam povolených protokolů bez deaktivace filtrování atributů. \n- Vestavěné protokoly: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n– Ve výchozím nastavení jsou povoleny také relativní adresy URL, odkazy na fragmenty (`#...`) a adresy URL obrazových dat (`data:image/...`). \n- Položky `javascript`, `vbscript` a `data` jsou ignorovány; povoleny zůstávají pouze adresy URL obrazových dat. \n- Opraveno při vytváření editoru; nelze změnit pomocí `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Další tagy stylu textu.\n- Výchozí hodnota je {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Automaticky převádí adresy URL na hypertextové odkazy. (Vyžaduje plugin `Link`)\n- Výchozí: `Boolean(plugins.link)` ​​– určuje, zda je povolen plugin `link`."
+  },
+  "autoStyleify": {
+    "description": "Styly použité automaticky při zadávání textu.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Doba zpoždění pro aktualizace zásobníku historie (ms).",
@@ -548,7 +568,10 @@
     "description": "Pozice titulků (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Pozice regulátoru buněk (`cell`, `table`)"
+    "description": "Poloha ovladače buňky (`cell`, `table`, `dot`) \n- `dot`: Výběr buňky zobrazí tečku na pravém okraji buňky (vlevo v RTL) místo ovladače; kliknutím na tečku otevřete buňkový ovladač, dalším kliknutím jej skryjete. \n- `cell`: Ovladač se otevře při výběru pod vybranou buňkou. \n- `table`: Ovladač se otevře při výběru, naskládaný na postavě stolu s ovladačem stolu."
+  },
+  "table_tableControllerPosition": {
+    "description": "Pozice ovladače stolu (`table`, `dot`) \n- `dot`: Výběr tabulky zobrazí tečku v levém horním rohu tabulky (vpravo nahoře v RTL) místo ovladače; kliknutím na tečku otevřete ovladač stolu, dalším kliknutím jej skryjete. \n- `table`: Ovladač se otevře při výběru v horní části obrázku tabulky."
   },
   "table_colorList": {
     "description": "HEX seznam barev pro výběr barvy pozadí buňky."

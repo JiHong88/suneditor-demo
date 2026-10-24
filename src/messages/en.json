@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, attributes or styles disappear from the content",
-				"symptom": "HTML set with the value option or editor.$.html.set(), or pasted in, comes back without some tags (such as mark), class names, data-* attributes or inline styles.",
+				"symptom": "HTML set with the value option or editor.$.html.set(), or pasted in, comes back without some tags (such as mark), class names, data-* attributes, inline styles or links to custom app schemes (such as zoommtg: or vscode:).",
 				"cause": "SunEditor filters all incoming HTML against allow lists for elements, attributes, class names and per-tag styles, and removes anything that is not on them. A span left without any style is unwrapped.",
-				"fix": "Extend the allow list you need: elementWhitelist for tags, attributeWhitelist for attributes, allowedClassName for class names and tagStyles for inline styles. Individual filters can also be switched off with the strictMode option. Never allow script tags or on* event attributes."
+				"fix": "Extend the allow list you need: elementWhitelist for tags, attributeWhitelist for attributes, allowedClassName for class names, tagStyles for inline styles and allowedURLProtocols for custom URL schemes. Individual filters can also be switched off with the strictMode option. Never allow script tags or on* event attributes."
 			},
 			"paste": {
 				"title": "Pasted content loses its formatting, or brings in unwanted styles",

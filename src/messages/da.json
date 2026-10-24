@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, attributter eller styles forsvinder fra indholdet",
-				"symptom": "HTML, der sættes med indstillingen value eller editor.$.html.set() eller indsættes, kommer tilbage uden visse tags (f.eks. mark), klassenavne, data-*-attributter eller inline-styles.",
+				"symptom": "HTML, der er angivet med value-indstillingen eller editor.$.html.set(), eller indsat, returneres uden nogle tags (f.eks. mark), klassenavne, data-*-attributter, indlejrede stilarter eller links til brugerdefinerede app-skemaer (f.eks. zoommtg: eller vscode:).",
 				"cause": "SunEditor filtrerer al indkommende HTML mod tilladelseslister for elementer, attributter, klassenavne og styles pr. tag og fjerner alt, der ikke står på dem. Et span, der står tilbage uden nogen style, pakkes ud.",
-				"fix": "Udvid den tilladelsesliste, du har brug for: elementWhitelist til tags, attributeWhitelist til attributter, allowedClassName til klassenavne og tagStyles til inline-styles. Enkelte filtre kan også slås fra med indstillingen strictMode. Tillad aldrig script-tags eller on*-event-attributter."
+				"fix": "Udvid den nødvendige tilladelsesliste: elementWhitelist for tags, attributeWhitelist for attributter, allowedClassName for klassenavne, tagStyles for inline-stilarter og allowedURLProtocols for brugerdefinerede URL-skemaer. Individuelle filtre kan også slås fra med strictMode-indstillingen. Tillad aldrig script-tags eller on*-hændelsesattributter."
 			},
 			"paste": {
 				"title": "Indsat indhold mister sin formatering eller får uønskede styles med",

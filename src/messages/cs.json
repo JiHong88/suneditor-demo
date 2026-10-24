@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Z obsahu mizí značky, atributy nebo styly",
-				"symptom": "HTML nastavené volbou value nebo přes editor.$.html.set(), případně vložené ze schránky, se vrátí bez některých značek (například mark), názvů tříd, atributů data-* nebo inline stylů.",
+				"symptom": "HTML kód nastavený s volbou value nebo editor.$.html.set(), případně vložený, se vrátí bez některých tagů (například mark), názvů tříd, atributů data-*, vložených stylů nebo odkazů na vlastní schémata aplikací (například zoommtg: nebo vscode:).",
 				"cause": "SunEditor filtruje veškeré příchozí HTML podle seznamů povolených elementů, atributů, názvů tříd a stylů pro jednotlivé značky a vše, co na nich není, odstraní. Element span, kterému nezůstal žádný styl, se rozbalí (nahradí se svým obsahem).",
-				"fix": "Rozšiřte seznam povolených hodnot, který potřebujete: elementWhitelist pro značky, attributeWhitelist pro atributy, allowedClassName pro názvy tříd a tagStyles pro inline styly. Jednotlivé filtry lze také vypnout volbou strictMode. Nikdy nepovolujte značky script ani atributy událostí on*."
+				"fix": "Rozšiřte potřebný seznam povolených položek: elementWhitelist pro tagy, attributeWhitelist pro atributy, allowedClassName pro názvy tříd, tagStyles pro vložené styly a allowedURLProtocols pro vlastní schémata URL. Jednotlivé filtry lze také vypnout pomocí možnosti strictMode. Nikdy nepovolujte tagy script ani atributy událostí on*."
 			},
 			"paste": {
 				"title": "Vložený obsah ztrácí formátování nebo s sebou přináší nežádoucí styly",

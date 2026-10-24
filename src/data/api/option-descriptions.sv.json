@@ -59,6 +59,10 @@
     "description": "Attribut för `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS-filer att tillämpa i iframe. \n- Sträng: Filnamnsmönster för att söka i dokument `<link>`-taggar. \n- `\"*\"`: Jokertecken för att inkludera ALLA stilmallar från sidan. \n- Absoluta webbadresser och data-URL:er (`data:text/css,`) stöds också. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Aktiverar statusfältet.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Plugin-konfiguration. Skicka en array av plugin-klasser eller ett objekt som är nyckelat efter plugin-namn."
   },
+  "excludedPlugins": {
+    "description": "Lista över pluginnamn som ska uteslutas. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lista över verktygsfältsknappar, grupperade efter undermatriser.\n- Standardinställningen följer {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Textriktning: `ltr` eller `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "En uppsättning kommandopar vars genvägsikoner ska stå mitt emot varandra. \n- Beror på läget `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Möjliggör strikt filtrering av taggar, attribut och stilar. \n- Använd `true` för att aktivera alla filter (standard), eller ett objekt för att styra enskilda filter. \n- Inställning `false` ​​stöds inte; använd objektformuläret för att inaktivera specifika filter istället. \n- :filterbeskrivning \n- `tagFilter`: Filtrerar otillåtna HTML-taggar (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtrerar formatelement (`formatLine`/`formatBlock`) \n- `classFilter`: Filtrerar otillåtna CSS-klassnamn (`allowedClassName`) \n- `textStyleTagFilter`: Filtrerar textstiltaggar (b, i, u, span, etc.) \n- `attrFilter`: Filtrerar otillåtna HTML-attribut (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtrerar otillåtna inline-stilar (per-tagg från `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Anger attribut som inte ska tillåtas per tagg. `\"*\"` gäller för alla taggar.\n- Attribut som anges här kommer så småningom att tas bort även om de är tillåtna enligt andra inställningar.\n- En lista över obligatoriska element, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, ingår alltid.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Ytterligare URL-scheman som tillåts av HTML-desinfektionsmedlet, utan ett avslutande kolon (skiftlägeskänsligt). \n- Utökar den inbyggda protokollets tillåtelselista utan att inaktivera attributfiltrering. \n- Inbyggda protokoll: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Relativa webbadresser, fragmentlänkar (`#...`) och bilddata-URL:er (`data:image/...`) är också tillåtna som standard. \n- `javascript`, `vbscript` och `data` poster ignoreras; endast bilddataadresser är tillåtna. \n- Fast vid skapande av redaktör; kan inte ändras med `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Ytterligare textstiltaggar.\n- Standardinställningen följer {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Konverterar automatiskt URL:er till hyperlänkar. (`Link`-plugin krävs)\n- Standard: `Boolean(plugins.link)` ​​— bestäms av om `link`-pluginet är aktiverat."
+  },
+  "autoStyleify": {
+    "description": "Stilar tillämpas automatiskt på textinmatning.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Fördröjningstid för historikuppdateringar (ms).",
@@ -548,7 +568,10 @@
     "description": "Bildtextens position (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Cellkontrollens position (`cell`, `table`)"
+    "description": "Cellkontrollerposition (`cell`, `table`, `dot`) \n- `dot`: Att välja en cell visar en prick på cellens högra kant (vänster i RTL) istället för kontrollenheten; genom att klicka på punkten öppnas cellkontrollern, genom att klicka på den igen döljs den. \n- `cell`: Styrenheten öppnar vid val, under den valda cellen. \n- `table`: Styrenheten öppnar vid val, staplad på bordsfiguren med bordsstyrenheten."
+  },
+  "table_tableControllerPosition": {
+    "description": "Bordskontrollerposition (`table`, `dot`) \n- `dot`: När du väljer tabellen visas en prick i bordets övre vänstra hörn (överst till höger i RTL) istället för kontrollenheten; genom att klicka på punkten öppnas bordskontrollern, genom att klicka på den igen döljs den. \n- `table`: Regulatorn öppnar vid val, ovanpå tabellbilden."
   },
   "table_colorList": {
     "description": "HEX-färglista för väljaren av cellbakgrundsfärg."

@@ -59,6 +59,10 @@
     "description": "Attributter for `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "CSS-filer til at anvende inde i iframen. \n- String: Filnavnmønster til at søge i dokument `<link>` tags. \n- `\"*\"`: Jokertegn for at inkludere ALLE stylesheets fra siden. \n- Absolutte URL'er og data-URL'er (`data:text/css,`) understøttes også. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Aktiverer statuslinjen.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Plugin-konfiguration. Send et array af plugin-klasser eller et objekt, der er nøglebaseret på plugin-navnet.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Liste over plugin-navne, der skal udelukkes. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Liste over værktøjslinjeknapper, grupperet efter underarrays.\n- Standardindstillingen følger {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Tekstretning: `ltr` eller `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "En række kommandopar, hvis genvejsikoner skal være over for hinanden. \n- Afhænger af `textDirection`-tilstanden.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Aktiverer streng filtrering af tags, attributter og typografier. \n- Brug `true` til at aktivere alle filtre (standard), eller et objekt til at styre individuelle filtre. \n- Indstilling `false` ​​er ikke understøttet; brug objektformularen til at deaktivere specifikke filtre i stedet. \n- :filterbeskrivelse \n- `tagFilter`: Filtrerer ikke-tilladte HTML-tags (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Filtrerer formatelementer (`formatLine`/`formatBlock`) \n- `classFilter`: Filtrerer ikke-tilladte CSS-klassenavne (`allowedClassName`) \n- `textStyleTagFilter`: Filtrerer tekststiltags (b, i, u, span osv.) \n- `attrFilter`: Filtrerer ikke-tilladte HTML-attributter (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Filtrerer ikke-tilladte inline-stile (pr. tag fra `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Angiver attributter, der ikke skal tillades via tag. `\"*\"` gælder for alle tags.\n- Attributter, der er angivet her, vil med tiden blive fjernet, selvom de er tilladt af andre indstillinger.\n- En liste over obligatoriske elementer, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, er altid inkluderet.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Yderligere URL-skemaer tilladt af HTML-desinfektionsmidlet uden et afsluttende kolon (der skelnes mellem store og små bogstaver). \n- Udvider den indbyggede protokoltilladelsesliste uden at deaktivere attributfiltrering. \n- Indbyggede protokoller: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Relative URL'er, fragmentlinks (`#...`) og billeddata-URL'er (`data:image/...`) er også tilladt som standard. \n- `javascript`, `vbscript` og `data` indgange ignoreres; kun billeddata-URL'er forbliver tilladt. \n- Rettet ved oprettelse af redaktør; kan ikke ændres med `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Yderligere tekststiltag.\n- Standardindstillingen følger {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Konverterer automatisk URL'er til hyperlinks. (`Link` plugin kræves)\n- Standard: `Boolean(plugins.link)` ​​— bestemmes af, om `link` plugin'et er aktiveret."
+  },
+  "autoStyleify": {
+    "description": "Typografier anvendes automatisk på tekstinput.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Forsinkelsestid for opdateringer af historikstak (ms).",
@@ -548,7 +568,10 @@
     "description": "Billedtekstens placering (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Cellecontrollerens position (`cell`, `table`)"
+    "description": "Cellecontrollerposition (`cell`, `table`, `dot`) \n- `dot`: Valg af en celle viser en prik på cellens højre kant (venstre i RTL) i stedet for controlleren; Hvis du klikker på prikken, åbnes cellecontrolleren, hvis du klikker på den igen, skjules den. \n- `cell`: Controlleren åbner ved valg, under den valgte celle. \n- `table`: Controlleren åbner ved valg, stablet på bordfiguren med bordcontrolleren."
+  },
+  "table_tableControllerPosition": {
+    "description": "Bordcontrollerposition (`table`, `dot`) \n- `dot`: Valg af tabellen viser en prik i bordets øverste venstre hjørne (øverst til højre i RTL) i stedet for controlleren; Hvis du klikker på prikken, åbnes bordcontrolleren, hvis du klikker på den igen, skjules den. \n- `table`: Controlleren åbner ved valg, oven på tabelfiguren."
   },
   "table_colorList": {
     "description": "HEX-farveliste til vælgeren af ​​cellebaggrundsfarve."

@@ -59,6 +59,10 @@
     "description": "A `iframe` attribútumai.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Az iframe-en belüli CSS-fájlok. \n- Karakterlánc: Fájlnév-minta a `<link>` dokumentum címkéiben történő kereséshez. \n- `\"*\"`: Helyettesítő karakter az oldal ÖSSZES stíluslapjának felvételéhez. \n- Az abszolút URL-ek és az adat URL-ek (`data:text/css,`) is támogatottak. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Engedélyezi az állapotsort.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Bővítmény konfiguráció. Adjon át egy plugin osztályokból álló tömböt vagy egy, a plugin nevével kulcsolt objektumot.\n\n``js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "A kizárandó pluginnevek listája. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Eszköztár gombjainak listája, altömbök szerint csoportosítva.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Szövegirány: `ltr` vagy `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Parancspárok tömbje, amelyek parancsikonjainak egymással szemben kell lenniük. \n- A `textDirection` módtól függ.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Lehetővé teszi a címkék, attribútumok és stílusok szigorú szűrését. \n- A `true` használatával engedélyezheti az összes szűrőt (alapértelmezett), vagy egy objektumot az egyes szűrők vezérléséhez. \n- A `false` ​​beállítás nem támogatott; használja az objektum űrlapot bizonyos szűrők letiltásához. \n- :szűrő leírása \n- `tagFilter`: Szűri a nem engedélyezett HTML-címkéket (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Szűri a formátumelemeket (`formatLine`/`formatBlock`) \n- `classFilter`: Szűri a nem engedélyezett CSS-osztályneveket (`allowedClassName`) \n- `textStyleTagFilter`: Szűri a szövegstílus-címkéket (b, i, u, span stb.) \n- `attrFilter`: Szűri a nem engedélyezett HTML-attribútumokat (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Szűri a nem engedélyezett beépített stílusokat (címkénként a `tagStyles`-ból) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Meghatározza a címkénként letiltandó attribútumokat. A `\"*\"` minden címkére vonatkozik.\n\n- Az itt megadott attribútumok végül eltávolításra kerülnek, még akkor is, ha más beállítások engedélyezik őket.\n\n- A kötelező elemek listája, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, mindig szerepel.\n\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "A HTML-fertőtlenítő által engedélyezett további URL-sémák, kettőspont nélkül (a kis- és nagybetűk megkülönböztetése nélkül). \n- Kibővíti a beépített protokoll engedélyezési listáját az attribútumszűrés letiltása nélkül. \n- Beépített protokollok: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- A relatív URL-ek, a töredékhivatkozások (`#...`) és a képadatok URL-jei (`data:image/...`) szintén engedélyezettek alapértelmezés szerint. \n- a `javascript`, `vbscript` és `data` bejegyzéseket figyelmen kívül hagyja; csak a képadatok URL-jei engedélyezettek. \n- Javítva a szerkesztő létrehozásánál; nem módosítható a `resetOptions`-val. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "További szövegstílus-címkék.\n- Az alapértelmezett érték a következő: {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Automatikusan hiperhivatkozásokká alakítja az URL-eket. (`Link` bővítmény szükséges)\n- Alapértelmezett: `Boolean(plugins.link)` ​​— a `link` bővítmény engedélyezése határozza meg."
+  },
+  "autoStyleify": {
+    "description": "Stílusok automatikusan alkalmazva a szövegbevitelre.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "A történeti verem frissítéseinek késleltetési ideje (ms).",
@@ -548,7 +568,10 @@
     "description": "Felirat pozíciója (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Cellavezérlő pozíciója (`cell`, `table`)"
+    "description": "Cellavezérlő pozíciója (`cell`, `table`, `dot`) \n- `dot`: Egy cella kiválasztásakor a cella jobb szélén (RTL-ben balra) egy pont jelenik meg a vezérlő helyett; a pontra kattintva megnyílik a cellavezérlő, ha ismét rákattint, elrejti azt. \n- `cell`: A vezérlő megnyílik a kijelöléskor, a kijelölt cella alatt. \n- `table`: A vezérlő kiválasztáskor megnyílik, az asztali vezérlővel együtt az asztali ábrán halmozottan."
+  },
+  "table_tableControllerPosition": {
+    "description": "Az asztalvezérlő pozíciója (`table`, `dot`) \n- `dot`: A táblázatot kiválasztva egy pont jelenik meg a táblázat bal felső sarkában (RTL-ben jobb felső sarokban) a vezérlő helyett; a pontra kattintva megnyílik a táblázatvezérlő, ha ismét rákattint, elrejti azt. \n- `table`: A vezérlő kiválasztáskor megnyílik, a táblázat ábra tetején."
   },
   "table_colorList": {
     "description": "HEX színlista a cella háttérszín-választójához."

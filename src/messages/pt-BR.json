@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, atributos ou estilos desaparecem do conteúdo",
-				"symptom": "O HTML definido com a opção value ou editor.$.html.set(), ou colado, volta sem algumas tags (como mark), nomes de classe, atributos data-* ou estilos inline.",
+				"symptom": "O HTML definido com a opção value ou editor.$.html.set(), ou colado, retorna sem algumas tags (como mark), nomes de classe, atributos data-*, estilos embutidos ou links para esquemas de aplicativos personalizados (como zoommtg: ou vscode:).",
 				"cause": "O SunEditor filtra todo HTML recebido usando listas de permissões de elementos, atributos, nomes de classe e estilos por tag, e remove tudo o que não estiver nelas. Um span que fica sem nenhum estilo é desembrulhado.",
-				"fix": "Amplie a lista de permissões de que você precisa: elementWhitelist para tags, attributeWhitelist para atributos, allowedClassName para nomes de classe e tagStyles para estilos inline. Filtros individuais também podem ser desativados com a opção strictMode. Nunca permita tags script nem atributos de evento on*."
+				"fix": "Amplie a lista de permissões conforme necessário: elementWhitelist para tags, attributeWhitelist para atributos, allowedClassName para nomes de classe, tagStyles para estilos embutidos e allowedURLProtocols para esquemas de URL personalizados. Filtros individuais também podem ser desativados com a opção strictMode. Nunca permita tags script ou atributos de evento on*."
 			},
 			"paste": {
 				"title": "O conteúdo colado perde a formatação ou traz estilos indesejados",

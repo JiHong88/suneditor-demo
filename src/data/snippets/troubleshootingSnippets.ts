@@ -91,6 +91,7 @@ export const TS_STRIPPED = `suneditor.create(el, {
   attributeWhitelist: { "*": "data-[a-z-]+" },  // extra attributes ("*" = every tag)
   allowedClassName: "^callout",                 // extra class names (regex)
   tagStyles: { span: "text-shadow" },           // extra inline styles, per tag
+  allowedURLProtocols: ["zoommtg", "vscode"],   // extra URL schemes (href, src, ...)
 });
 
 // Input:   <mark>m</mark> <span class="callout" data-id="7" style="color: red; text-shadow: 1px 1px #000">x</span>

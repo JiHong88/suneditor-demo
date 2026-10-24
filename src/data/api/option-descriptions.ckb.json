@@ -59,6 +59,10 @@
     "description": "Taybetmendiyên `iframe`. ```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Pelên CSS ku di hundurê iframe de bicîh bikin. \n- String: Nimûneya navê pelê ku di etîketên `<link>` belgeyê de bigerin. \n- `\"*\"`: Wildcard ku HEMÛ şêwazên ji rûpelê vehewîne. \n- URLên bêkêmasî û URLên daneyê (`data:text/css,`) jî têne piştgirî kirin. \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Barika rewşê çalak dike.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Mîhengkirina pêvekê. Rêzek ji çînên pêvekan an jî tiştek ku bi navê pêvekê ve hatî miftekirin derbas bike.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Lîsteya navên pêvekê yên ku têne derxistin. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Lîsteya bişkokên toolbarê, li gorî bin-arrayan hatine komkirin.\n- Bingeha xwerû li pey {@link DEFAULTS.BUTTON_LIST} tê.",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Rêza nivîsê: `ltr` an `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Komek cotên fermanan ku divê îkonên kurtebirê li hember hev bin. \n- Bi moda `textDirection` ve girêdayî ye.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Parzûnkirina hişk a tag, taybetmendî û şêwazan çalak dike. \n- `true` bikar bînin da ku hemî fîlteran çalak bikin (xweserî), an jî tiştek ku fîlterên kesane kontrol bikin. \n- Sazkirina `false` ​​nayê piştgirî kirin; forma objektê bikar bînin da ku li şûna fîlterên taybetî neçalak bikin. \n- : şirovekirina parzûnê \n- `tagFilter`: Parzûnên etîketên HTML-ê yên qedexekirî (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Hêmanên formatê parzûn dike (`formatLine`/`formatBlock`) \n- `classFilter`: Parzûnên navên pola CSS-ê qedexe nekirin (`allowedClassName`) \n- `textStyleTagFilter`: Etîketên şêwaza nivîsê parzûn dike (b, i, u, span, hwd.) \n- `attrFilter`: Parzûnên taybetiyên HTML-ê nepejirandin (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: Parzûnên şêwazên xêzkirî yên destûr nedane (per-tag ji `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Taybetmendiyên ku ji hêla etîketê ve werin qedexekirin diyar dike. `\"*\"` ji bo hemî etîketan derbas dibe.\n- Taybetmendiyên ku li vir hatine destnîşankirin dê di dawiyê de werin rakirin her çend ji hêla mîhengên din ve werin destûr kirin jî.\n- Lîsteyek hêmanên pêwîst, {@link DEFAULTS.REQUIRED_FORMAT_LINE}, her gav tê de ye.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Pîlanên URL yên zêde ku ji hêla paqijkerê HTML-ê ve têne destûr kirin, bêyî kolonek paşverû (nehesas-doze). \n- Navnîşa destûrê ya protokola çêkirî bêyî ku fîlterkirina taybetmendiyê neçalak bike dirêj dike. \n- Protokolên çêkirî: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, __BT10. \n- URLên têkildar, girêdanên perçeyê (`#...`) û URLên daneya wêneyê (`data:image/...`) jî ji hêla xwerû ve têne destûr kirin. \n- Nivîsên `javascript`, `vbscript` û `data` têne paşguh kirin; tenê URLên daneya wêneyê destûr dimînin. \n- Di afirandina edîtorê de rast kirin; bi `resetOptions` nayê guhertin. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Etîketên şêwaza nivîsê yên zêde.\n- Bi xwerû li pey {@link PrivateBaseOptions.__textStyleTags} tê.",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "URL-an bi awayekî otomatîk vediguherîne lînkên hîperlînkê. (Pêveka `Link` pêdivî ye)\n- Xwerû: `Boolean(plugins.link)` ​​— bi çalakbûna pêveka `link` ve tê destnîşankirin."
+  },
+  "autoStyleify": {
+    "description": "Şêwaz li ser têketina nivîsê bixweber têne sepandin.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Dema derengmayînê ji bo nûvekirinên stûna dîrokê (ms).",
@@ -548,7 +568,10 @@
     "description": "Cihê sernivîsê (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Cihê kontrolkera şaneyê (`cell`, `table`)"
+    "description": "Helwesta kontrolkera hucreyê (`cell`, `table`, `dot`) \n- `dot`: Hilbijartina şaneyek li şûna kontrolkerê li kêleka rastê ya hucreyê (li çepê di RTL de) xalek nîşan dide; tikandina xalê kontrolkera hucreyê vedike, dîsa tikandina wê vedişêre. \n- `cell`: Kontrolker di hilbijartinê de, li binê şaneya hilbijartî vedibe. \n- `table`: Kontrolker di hilbijartinê de vedibe, bi kontrolkera sifrê re li ser jimareya sifrê tê danîn."
+  },
+  "table_tableControllerPosition": {
+    "description": "Helwesta kontrolkera maseyê (`table`, `dot`) \n- `dot`: Hilbijartina tabloyê li şûna kontrolkerê li goşeya çepê ya jor a maseyê (li RTL-a rast-jor) xalek nîşan dide; tikandina xalê kontrolkera sifrê vedike, dîsa tikandina wê vedişêre. \n- `table`: Kontrolker di hilbijartinê de, li ser jimareya sifrê vedibe."
   },
   "table_colorList": {
     "description": "Lîsteya rengên HEX ji bo hilbijêrê rengê paşxaneya şaneyê."

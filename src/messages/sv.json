@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Taggar, attribut eller stilar försvinner ur innehållet",
-				"symptom": "HTML som sätts med alternativet value eller editor.$.html.set(), eller som klistras in, kommer tillbaka utan vissa taggar (till exempel mark), klassnamn, data-*-attribut eller inline-stilar.",
+				"symptom": "HTML som anges med alternativet value eller editor.$.html.set(), eller klistras in, visas utan vissa taggar (som mark), klassnamn, data-*-attribut, inline-stilar eller länkar till anpassade appscheman (som zoommtg: eller vscode:).",
 				"cause": "SunEditor filtrerar all inkommande HTML mot tillåtelselistor för element, attribut, klassnamn och stilar per tagg, och tar bort allt som inte finns med på dem. En span som blir kvar utan någon stil packas upp.",
-				"fix": "Utöka den tillåtelselista du behöver: elementWhitelist för taggar, attributeWhitelist för attribut, allowedClassName för klassnamn och tagStyles för inline-stilar. Enskilda filter kan också stängas av med alternativet strictMode. Tillåt aldrig script-taggar eller on*-händelseattribut."
+				"fix": "Utöka den tillåtna listan du behöver: elementWhitelist för taggar, attributeWhitelist för attribut, allowedClassName för klassnamn, tagStyles för inline-stilar och allowedURLProtocols för anpassade URL-scheman. Enskilda filter kan också stängas av med alternativet strictMode. Tillåt aldrig script-taggar eller on*-händelseattribut."
 			},
 			"paste": {
 				"title": "Inklistrat innehåll tappar sin formatering, eller tar med oönskade stilar",

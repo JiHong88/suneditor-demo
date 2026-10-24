@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, attributen of stijlen verdwijnen uit de content",
-				"symptom": "HTML die is ingesteld met de optie value of editor.$.html.set(), of die is geplakt, komt terug zonder bepaalde tags (zoals mark), klassenamen, data-*-attributen of inline stijlen.",
+				"symptom": "HTML die is ingesteld met de optie value of editor.$.html.set(), of die is geplakt, wordt geretourneerd zonder bepaalde tags (zoals mark), klassenamen, data-* attributen, inline stijlen of links naar aangepaste app-schema's (zoals zoommtg: of vscode:).",
 				"cause": "SunEditor filtert alle binnenkomende HTML aan de hand van allowlists voor elementen, attributen, klassenamen en stijlen per tag, en verwijdert alles wat daar niet op staat. Een span zonder enige stijl wordt uitgepakt.",
-				"fix": "Breid de allowlist uit die je nodig hebt: elementWhitelist voor tags, attributeWhitelist voor attributen, allowedClassName voor klassenamen en tagStyles voor inline stijlen. Afzonderlijke filters kun je ook uitschakelen met de optie strictMode. Sta nooit script-tags of on*-eventattributen toe."
+				"fix": "Breid de lijst met toegestane items naar wens uit: elementWhitelist voor tags, attributeWhitelist voor attributen, allowedClassName voor klassenamen, tagStyles voor inline stijlen en allowedURLProtocols voor aangepaste URL-schema's. Individuele filters kunnen ook worden uitgeschakeld met de optie strictMode. Sta nooit tags met de aanduiding script of gebeurtenisattributen met de aanduiding on* toe."
 			},
 			"paste": {
 				"title": "Geplakte content verliest zijn opmaak of brengt ongewenste stijlen mee",

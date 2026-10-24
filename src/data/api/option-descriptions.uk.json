@@ -59,6 +59,10 @@
     "description": "Атрибути `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
     "default": "{}"
   },
+  "iframe_cssFileName": {
+    "description": "Файли CSS для застосування всередині iframe. \n- Рядок: шаблон імені файлу для пошуку в тегах документа `<link>`. \n- `\"*\"`: символ підстановки для включення ВСІХ таблиць стилів зі сторінки. \n- Також підтримуються абсолютні URL-адреси та URL-адреси даних (`data:text/css,`). \n```js\n{ iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n```",
+    "default": "[\"suneditor\"]"
+  },
   "statusbar": {
     "description": "Вмикає рядок стану.",
     "default": "true"
@@ -110,6 +114,10 @@
   "plugins": {
     "description": "Конфігурація плагіна. Передайте масив класів плагінів або об'єкт, ключ якого дається за назвою плагіна.\n```js\nimport plugins, { image, link, table } from 'suneditor/src/plugins';\n{ plugins: plugins,\nplugins: [image, link, table],\nplugins: { image, link, table }\n}\n```"
   },
+  "excludedPlugins": {
+    "description": "Список імен плагінів для виключення. \n```js\n{ excludedPlugins: ['image', 'video'] }\n```",
+    "default": "[]"
+  },
   "buttonList": {
     "description": "Список кнопок панелі інструментів, згрупованих за підмасивами.\n- Значення за замовчуванням відповідає {@link DEFAULTS.BUTTON_LIST}",
     "default": "CONSTANTS.BUTTON_LIST"
@@ -149,6 +157,10 @@
     "description": "Напрямок тексту: `ltr` або `rtl`.",
     "default": "\"ltr\""
   },
+  "reverseButtons": {
+    "description": "Масив пар команд, піктограми швидкого доступу яких мають бути один навпроти одного. \n- Залежить від режиму `textDirection`.",
+    "default": "['indent-outdent']"
+  },
   "strictMode": {
     "description": "Вмикає сувору фільтрацію тегів, атрибутів і стилів. \n- Використовуйте `true`, щоб увімкнути всі фільтри (за замовчуванням), або об’єкт для керування окремими фільтрами. \n- Налаштування `false` ​​не підтримується; замість цього використовуйте форму об’єкта, щоб вимкнути певні фільтри. \n- :опис фільтра \n- `tagFilter`: фільтри заборонили теги HTML (`elementWhitelist`/`elementBlacklist`) \n- `formatFilter`: Фільтри елементів формату (`formatLine`/`formatBlock`) \n- `classFilter`: фільтри заборонили імена класів CSS (`allowedClassName`) \n- `textStyleTagFilter`: фільтрує теги стилю тексту (b, i, u, span тощо) \n- `attrFilter`: фільтри заборонили атрибути HTML (`attributeWhitelist`/`attributeBlacklist`) \n- `styleFilter`: фільтри заборонені вбудовані стилі (на тег з `tagStyles`) \n```js\n// disable only attribute and style filters\n{\nstrictMode: {\ntagFilter: true,\nformatFilter: true,\nclassFilter: true,\ntextStyleTagFilter: true,\nattrFilter: false,\nstyleFilter: false\n}\n}\n```",
     "default": "true"
@@ -180,6 +192,10 @@
   "attributeBlacklist": {
     "description": "Визначає атрибути, які тег забороняє. `\"*\"` застосовується до всіх тегів.\n- Атрибути, зазначені тут, зрештою будуть видалені, навіть якщо вони дозволені іншими налаштуваннями.\n- Список обов'язкових елементів {@link DEFAULTS.REQUIRED_FORMAT_LINE} завжди включено.\n```js\n{ attributeBlacklist: { '*': 'onclick|onerror' } }\n```",
     "default": "null"
+  },
+  "allowedURLProtocols": {
+    "description": "Додаткові схеми URL-адрес, дозволені засобом дезінфекції HTML, без двокрапки (незалежно від регістру). \n— Розширює список дозволених вбудованих протоколів без вимкнення фільтрації атрибутів. \n- Вбудовані протоколи: `http`, `https`, `ftp`, `ftps`, `mailto`, `tel`, `blob`, `sms`, `geo`, `webcal`, `callto`. \n- Відносні URL-адреси, посилання на фрагменти (`#...`) і URL-адреси даних зображень (`data:image/...`) також дозволені за умовчанням. \n- записи `javascript`, `vbscript` та `data` ігноруються; залишаються дозволеними лише URL-адреси даних зображень. \n- Виправлено при створенні редактора; не можна змінити за допомогою `resetOptions`. \n```js\n{ allowedURLProtocols: ['zoommtg', 'slack', 'vscode'] }\n```",
+    "default": "[]"
   },
   "textStyleTags": {
     "description": "Додаткові теги стилю тексту.\n- Значення за замовчуванням використовується як {@link PrivateBaseOptions.__textStyleTags}",
@@ -296,6 +312,10 @@
   },
   "autoLinkify": {
     "description": "Автоматично перетворює URL-адреси на гіперпосилання. (Потрібен плагін `Link`)\n- За замовчуванням: `Boolean(plugins.link)` ​​— визначається тим, чи ввімкнено плагін `link`."
+  },
+  "autoStyleify": {
+    "description": "Стилі застосовуються автоматично під час введення тексту.",
+    "default": "[\"bold\", \"underline\", \"italic\", \"strike\"]"
   },
   "historyStackDelayTime": {
     "description": "Час затримки для оновлення стеку історії (мс).",
@@ -548,7 +568,10 @@
     "description": "Позиція підпису (`top`, `bottom`)"
   },
   "table_cellControllerPosition": {
-    "description": "Положення контролера комірок (`cell`, `table`)"
+    "description": "Позиція контролера клітинки (`cell`, `table`, `dot`) \n- `dot`: вибір комірки показує крапку на правому краю комірки (зліва в RTL) замість контролера; клацання крапки відкриває контролер комірки, повторне клацання приховує його. \n- `cell`: Контролер відкривається після виділення під вибраною клітинкою. \n- `table`: Контролер відкривається після вибору, складений на фігуру таблиці разом із контролером таблиці."
+  },
+  "table_tableControllerPosition": {
+    "description": "Положення контролера таблиці (`table`, `dot`) \n- `dot`: вибір таблиці показує крапку у верхньому лівому куті таблиці (у верхньому правому куті в правому куті) замість контролера; клацання крапки відкриває контролер таблиці, повторне клацання приховує його. \n- `table`: Контролер відкривається після вибору, у верхній частині таблиці."
   },
   "table_colorList": {
     "description": "Шістнадцятковий список кольорів для вибору кольору фону комірки."

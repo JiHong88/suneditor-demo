@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tag-uri, atribute sau stiluri dispar din conținut",
-				"symptom": "HTML-ul setat prin opțiunea value sau prin editor.$.html.set(), ori lipit, revine fără anumite tag-uri (precum mark), nume de clase, atribute data-* sau stiluri inline.",
+				"symptom": "Codul HTML setat cu opțiunea value sau editor.$.html.set(), sau lipit, revine fără anumite etichete (cum ar fi mark), nume de clase, atribute data-*, stiluri inline sau linkuri către scheme de aplicații personalizate (cum ar fi zoommtg: sau vscode:).",
 				"cause": "SunEditor filtrează tot HTML-ul primit pe baza unor liste de permisiuni pentru elemente, atribute, nume de clase și stiluri per tag și elimină tot ce nu se află pe ele. Un span rămas fără niciun stil este eliminat, iar conținutul său este păstrat.",
-				"fix": "Extindeți lista de permisiuni de care aveți nevoie: elementWhitelist pentru tag-uri, attributeWhitelist pentru atribute, allowedClassName pentru nume de clase și tagStyles pentru stiluri inline. Filtrele individuale pot fi și dezactivate cu opțiunea strictMode. Nu permiteți niciodată tag-uri script sau atribute de eveniment on*."
+				"fix": "Extindeți lista de permisiuni de care aveți nevoie: elementWhitelist pentru etichete, attributeWhitelist pentru atribute, allowedClassName pentru nume de clase, tagStyles pentru stiluri inline și allowedURLProtocols pentru scheme URL personalizate. Filtrele individuale pot fi, de asemenea, dezactivate cu opțiunea strictMode. Nu permiteți niciodată etichete script sau atribute de eveniment on*."
 			},
 			"paste": {
 				"title": "Conținutul lipit își pierde formatarea sau aduce stiluri nedorite",
