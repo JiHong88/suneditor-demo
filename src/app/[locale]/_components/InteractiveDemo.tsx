@@ -81,7 +81,21 @@ const balloonButtonList = [
 /* ── Notion-like preset (Block handle + Slash command) ───── */
 
 // Minimal top toolbar: history on the left, print/preview pushed to the right.
+// Formatting lives in the selection toolbar, slash menu and block handle — duplicating it here would hide the Notion-style UX.
 const notionButtonList = [["undo", "redo"], ["-right", "preview", "print"]];
+
+// Floating toolbar on text selection: Turn into | marks | colors | link, clear | align.
+const notionSubButtonList = [
+	["blockStyle"],
+	"|",
+	["bold", "italic", "underline", "strike"],
+	"|",
+	["fontColor", "backgroundColor"],
+	"|",
+	["link", "removeFormat"],
+	"|",
+	["align"],
+];
 
 // Tiny inline SVG so the slash menu shows H1/H2/H3 chips like Notion.
 const hIcon = (n: number) =>
@@ -103,22 +117,48 @@ const notionSlashItems: NonNullable<SunEditorType.InitOptions["slashCommand"]>["
 	"list_numbered",
 	{ key: "quote", title: "Quote", icon: "blockquote", keywords: ["blockquote", "cite"], action: ($) => $.format.applyBlock(document.createElement("BLOCKQUOTE")) },
 	{ key: "code", title: "Code", icon: "code_block", keywords: ["pre", "snippet"], action: ($) => $.format.setBrLine(document.createElement("PRE")) },
+	"hr",
 	"table",
 	"image",
 	"link",
-	"hr",
+	// Inline marks — toggled at the caret, so the text typed next gets the format
+	"bold",
+	"italic",
+	"underline",
+	"strike",
+	"fontColor",
+	"backgroundColor",
 ];
 
-// Block handle action menu — resolvable block formats + custom Duplicate / Delete actions.
+// Block handle action menu (Tiptap Notion-like order): Turn into / List / Color / Align / Reset formatting / Duplicate / Copy / Delete.
+// Plugin names only — the engine does not resolve "p"/"heading"/"pre" yet. The menu selects the whole block, so marks and copy apply to it.
+// Custom actions are not recorded in history by the engine, so push it here to keep them undoable.
 const notionBlockHandleMenu: NonNullable<SunEditorType.InitOptions["blockHandle"]>["menu"] = [
-	"p",
-	"heading",
+	"blockStyle",
 	"list",
 	"blockquote",
-	"pre",
+	"codeBlock",
+	"fontColor",
+	"backgroundColor",
 	"align",
-	{ title: "Duplicate", icon: "copy", action: (_$, { block }) => block.after(block.cloneNode(true)) },
-	{ title: "Delete", icon: "delete", action: (_$, { block }) => block.remove() },
+	"removeFormat",
+	{
+		title: "Duplicate",
+		icon: "copy",
+		action: ($, { block }) => {
+			block.after(block.cloneNode(true));
+			$.history.push(false);
+		},
+	},
+	"copy",
+	{
+		title: "Delete",
+		icon: "delete",
+		action: ($, { block }) => {
+			block.remove();
+			$.history.push(false);
+		},
+	},
 ];
 
 const NOTION_DEMO_VALUE = `<h1>📝 Notion-style editing</h1><p>Hover the left gutter to grab the <strong>⠿ block handle,</strong></p><p>— drag to reorder a block, or click <strong>+</strong> to add one below.</p><p>On an empty line, press <strong>/</strong> to open the slash command menu.</p><blockquote>Try <em>/heading</em>, <em>/quote</em>, <em>/code</em>, <em>/table</em> or <em>/image</em>.</blockquote><p></p>`;
@@ -171,8 +211,8 @@ const presetDefs: { id: string; tKey: string; tip?: string; value?: string; opti
 				// v3.3.1: plus button inserts the line, then opens the slash command menu on it
 				onPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),
 			},
-			slashCommand: { triggerChar: "/", items: notionSlashItems, limitSize: 12 },
-			subToolbar: { mode: "balloon", buttonList: subButtonList },
+			slashCommand: { triggerChar: "/", items: notionSlashItems },
+			subToolbar: { mode: "balloon", buttonList: notionSubButtonList },
 		},
 	},
 ];

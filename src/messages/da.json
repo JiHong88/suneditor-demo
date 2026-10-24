@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Kom godt i gang",
 			"feature-demo": "Funktionsdemo",
-			"playground": "Legeplads",
+			"playground": "Playground",
 			"plugin-guide": "Plugin-guide",
 			"deep-dive": "Dybdegående",
 			"docs-api": "Dokumenter/API",
@@ -48,7 +48,7 @@
 			"resources": "Ressourcer",
 			"docs": "Dokumenter",
 			"featureDemo": "Funktionsdemo",
-			"playground": "Legeplads",
+			"playground": "Playground",
 			"about": "Om",
 			"license": "Licenseret under MIT.",
 			"copyright": "© Copyright {year} SunEditor Bidragydere",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "SunEditor Legeplads",
+		"title": "SunEditor Playground",
 		"desc": "Konfigurer indstillinger, test editoren, og del din opsætning via URL.",
 		"reset": "Nulstil",
 		"shareURL": "Del URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Prøv plugin-indstillinger",
 		"tryOptionsDesc": "Plugins markeret med <badge>configurable</badge> har muligheder, du kan justere i Playground.",
-		"playgroundSidebarTitle": "Legeplads — Sidebjælke for plugin-indstillinger",
+		"playgroundSidebarTitle": "Playground — sidepanel med plugin-indstillinger",
 		"playgroundSidebarDesc": "Juster grænser for billedupload, skriftstørrelsesenheder, typer af tabelrulning, omtaleudløsere og meget mere. Ændringer anvendes øjeblikkeligt i en live editor.",
-		"openPlayground": "Åben legeplads",
+		"openPlayground": "Åbn Playground",
 		"custom": {
 			"title": "Opret dit eget plugin",
 			"desc": "Teknisk reference til at bygge brugerdefinerede plugins — fra simple kommandoknapper til komplette dialogbaserede funktioner.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Prøv det live",
 		"ctaDesc": "Konfigurer indstillinger, test plugins og se resultater med det samme i Playground.",
-		"ctaButton": "Åben legeplads",
+		"ctaButton": "Åbn Playground",
 		"resourcesTitle": "Lær mere",
 		"gettingStarted": "Kom godt i gang",
 		"gettingStartedDesc": "Installer, konfigurer og opret din første editor",
@@ -590,7 +590,7 @@
 		"quickTry": "Hurtigt forsøg",
 		"preview": "Forhåndsvisning",
 		"close": "Tæt",
-		"openInPlayground": "Åben på legepladsen"
+		"openInPlayground": "Åbn i Playground"
 	},
 	"DeepDive": {
 		"title": "Dybdegående",
@@ -672,19 +672,19 @@
 			"uiEvents": "UI-begivenheder",
 			"uiEventsDesc": "Reager på værktøjslinjesynlighed, kodevisningsskift, fuldskærmsvisning og størrelsesændring af editor.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Live-hændelsesinspektør",
+				"desc": "Brug editoren til venstre, og se hver hændelse, der udløses, i realtid til højre. Klik på en række for at folde dens payload ud.",
+				"editorLabel": "Live-editor",
+				"logLabel": "Hændelseslog",
+				"attachedCount": "{count} hændelser tilknyttet",
+				"empty": "Ingen hændelser endnu — begynd at skrive, eller klik på en knap i værktøjslinjen.",
+				"noPayload": "Ingen payload ud over editorens interne objekter.",
+				"clear": "Ryd",
+				"pause": "Sæt på pause",
+				"resume": "Genoptag",
+				"autoScroll": "Autorul",
+				"returnTrueNote": "Denne hændelse opfatter undefined som \"håndteret\" og stopper uploaden. En passiv lytter skal returnere true.",
+				"notAttachedTitle": "Ikke tilknyttet her",
 				"notAttachedDesc": "Upload-handlere overtager upload-svaret – at tilknytte en logger ville forhindre uploadede medier i at blive indsat – så inspektøren lader dem være:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "UI-præsentationslag. værktøjslinjen gengiver hovedværktøjslinjen, subToolbar er en valgfri sekundær værktøjslinjeinstans, menuen håndterer rullemenuer og markeringseffekter, og fremviseren styrer visningstilstande (kodevisning, fuldskærm, forhåndsvisning)."
 	},
 	"Migration": {
-		"title": "v2 → v3 Migrering",
+		"title": "Migrering fra v2 til v3",
 		"subtitle": "Indsæt dine SunEditor v2-indstillinger, og få den tilsvarende version af v3.",
 		"converterTab": "Konverter",
 		"tableTab": "Referencetabel",
@@ -819,7 +819,7 @@
 		"fullTextTitle": "Fuld licenstekst",
 		"disclaimer": "Denne side er et resumé i almindeligt sprog, ikke juridisk rådgivning. Det er licensteksten nedenfor, der gælder.",
 		"viewOnGitHub": "Se LICENSE på GitHub",
-		"tryPlayground": "Prøv SunEditor på Legepladsen"
+		"tryPlayground": "Prøv SunEditor i Playground"
 	},
 	"Troubleshooting": {
 		"title": "Fejlfinding",
@@ -849,7 +849,7 @@
 		"notListed": "Er dit problem ikke nævnt her?",
 		"notListedDesc": "Søg i de eksisterende issues, eller opret et nyt med et Legeplads-link, der genskaber problemet.",
 		"openIssue": "Opret et issue på GitHub",
-		"tryPlayground": "Genskab det på Legepladsen",
+		"tryPlayground": "Genskab det i Playground",
 		"items": {
 			"ssr": {
 				"title": "»window is not defined« under server-rendering",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, attributter eller styles forsvinder fra indholdet",
-				"symptom": "HTML, der er angivet med value-indstillingen eller editor.$.html.set(), eller indsat, returneres uden nogle tags (f.eks. mark), klassenavne, data-*-attributter, indlejrede stilarter eller links til brugerdefinerede app-skemaer (f.eks. zoommtg: eller vscode:).",
+				"symptom": "HTML, der sættes med indstillingen value eller editor.$.html.set() eller indsættes, kommer tilbage uden visse tags (f.eks. mark), klassenavne, data-*-attributter, inline-styles eller links med egne app-skemaer (f.eks. zoommtg: eller vscode:).",
 				"cause": "SunEditor filtrerer al indkommende HTML mod tilladelseslister for elementer, attributter, klassenavne og styles pr. tag og fjerner alt, der ikke står på dem. Et span, der står tilbage uden nogen style, pakkes ud.",
-				"fix": "Udvid den nødvendige tilladelsesliste: elementWhitelist for tags, attributeWhitelist for attributter, allowedClassName for klassenavne, tagStyles for inline-stilarter og allowedURLProtocols for brugerdefinerede URL-skemaer. Individuelle filtre kan også slås fra med strictMode-indstillingen. Tillad aldrig script-tags eller on*-hændelsesattributter."
+				"fix": "Udvid den tilladelsesliste, du har brug for: elementWhitelist til tags, attributeWhitelist til attributter, allowedClassName til klassenavne, tagStyles til inline-styles og allowedURLProtocols til egne URL-skemaer. Enkelte filtre kan også slås fra med indstillingen strictMode. Tillad aldrig script-tags eller on*-event-attributter."
 			},
 			"paste": {
 				"title": "Indsat indhold mister sin formatering eller får uønskede styles med",

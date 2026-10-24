@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "Gwiazdka na GitHubie",
 		"Menus": {
-			"getting-started": "Rozpoczęcie pracy",
+			"getting-started": "Pierwsze kroki",
 			"feature-demo": "Demo funkcji",
-			"playground": "Plac gier i zabaw",
+			"playground": "Playground",
 			"plugin-guide": "Przewodnik po wtyczkach",
 			"deep-dive": "Głębokie nurkowanie",
 			"docs-api": "Dokumentacja/API",
@@ -48,7 +48,7 @@
 			"resources": "Zasoby",
 			"docs": "Dokumenty",
 			"featureDemo": "Prezentacja funkcji",
-			"playground": "Plac gier i zabaw",
+			"playground": "Playground",
 			"about": "O",
 			"license": "Na licencji MIT.",
 			"copyright": "© Copyright {year} Współpracownicy SunEditor",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "Rozpoczęcie pracy",
+		"title": "Pierwsze kroki",
 		"desc": "Zainstaluj, utwórz edytor i wyświetl zapisaną zawartość.",
 		"step1": {
 			"eyebrow": "Krok 1",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "Plac zabaw SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "Skonfiguruj opcje, przetestuj edytor i udostępnij swoją konfigurację za pomocą adresu URL.",
 		"reset": "Nastawić",
 		"shareURL": "Udostępnij adres URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Wypróbuj opcje wtyczki",
 		"tryOptionsDesc": "Wtyczki oznaczone jako <badge>configured</badge> mają opcje, które można dostosować w Playground.",
-		"playgroundSidebarTitle": "Plac zabaw — pasek boczny opcji wtyczki",
+		"playgroundSidebarTitle": "Playground — pasek boczny opcji wtyczek",
 		"playgroundSidebarDesc": "Dostosuj limity przesyłania obrazów, jednostki rozmiaru czcionki, typy przewijania tabeli, wyzwalacze wzmianek i wiele więcej. Zmiany zostaną natychmiast zastosowane w edytorze na żywo.",
-		"openPlayground": "Otwarty plac zabaw",
+		"openPlayground": "Otwórz Playground",
 		"custom": {
 			"title": "Utwórz własną wtyczkę",
 			"desc": "Informacje techniczne na temat tworzenia niestandardowych wtyczek — od prostych przycisków poleceń po pełne funkcje oparte na oknach dialogowych.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "Wypróbuj na żywo",
 		"ctaDesc": "Konfiguruj opcje, testuj wtyczki i natychmiast oglądaj wyniki w Playground.",
-		"ctaButton": "Otwarty plac zabaw",
+		"ctaButton": "Otwórz Playground",
 		"resourcesTitle": "Dowiedz się więcej",
-		"gettingStarted": "Rozpoczęcie pracy",
+		"gettingStarted": "Pierwsze kroki",
 		"gettingStartedDesc": "Zainstaluj, skonfiguruj i utwórz swój pierwszy edytor",
 		"pluginGuide": "Przewodnik po wtyczkach",
 		"pluginGuideDesc": "Ponad 24 wbudowanych wtyczek i przewodnik po niestandardowych wtyczkach",
@@ -590,7 +590,7 @@
 		"quickTry": "Szybka próba",
 		"preview": "Zapowiedź",
 		"close": "Zamknąć",
-		"openInPlayground": "Otwarte na placu zabaw"
+		"openInPlayground": "Otwórz w Playground"
 	},
 	"DeepDive": {
 		"title": "Głębokie nurkowanie",
@@ -672,19 +672,19 @@
 			"uiEvents": "Wydarzenia interfejsu użytkownika",
 			"uiEventsDesc": "Reaguj na widoczność paska narzędzi, przełączanie widoku kodu, tryb pełnoekranowy i zmianę rozmiaru edytora.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Inspektor zdarzeń na żywo",
+				"desc": "Pracuj w edytorze po lewej i obserwuj po prawej każde wywołane zdarzenie w czasie rzeczywistym. Kliknij wiersz, aby rozwinąć jego payload.",
+				"editorLabel": "Edytor na żywo",
+				"logLabel": "Dziennik zdarzeń",
+				"attachedCount": "Podłączone zdarzenia: {count}",
+				"empty": "Brak zdarzeń — zacznij pisać lub kliknij przycisk na pasku narzędzi.",
+				"noPayload": "Brak payloadu poza wewnętrznymi obiektami edytora.",
+				"clear": "Wyczyść",
+				"pause": "Wstrzymaj",
+				"resume": "Wznów",
+				"autoScroll": "Autoprzewijanie",
+				"returnTrueNote": "To zdarzenie traktuje undefined jako „obsłużone” i przerywa przesyłanie. Pasywny listener musi zwrócić true.",
+				"notAttachedTitle": "Tu niepodłączone",
 				"notAttachedDesc": "Handlery przesyłania przejmują odpowiedź z przesyłania — podpięcie loggera sprawiłoby, że przesłane multimedia nie zostałyby wstawione — dlatego inspektor ich nie rusza:"
 			}
 		},
@@ -819,7 +819,7 @@
 		"fullTextTitle": "Pełna treść licencji",
 		"disclaimer": "Ta strona to podsumowanie prostym językiem, a nie porada prawna. Wiążąca jest treść licencji poniżej.",
 		"viewOnGitHub": "Zobacz LICENSE na GitHubie",
-		"tryPlayground": "Wypróbuj SunEditor na Placu zabaw"
+		"tryPlayground": "Wypróbuj SunEditor w Playground"
 	},
 	"Troubleshooting": {
 		"title": "Rozwiązywanie problemów",
@@ -849,7 +849,7 @@
 		"notListed": "Nie ma tu Twojego problemu?",
 		"notListedDesc": "Przeszukaj istniejące zgłoszenia lub utwórz nowe z linkiem do Placu zabaw, który odtwarza problem.",
 		"openIssue": "Utwórz zgłoszenie na GitHubie",
-		"tryPlayground": "Odtwórz problem na Placu zabaw",
+		"tryPlayground": "Odtwórz problem w Playground",
 		"items": {
 			"ssr": {
 				"title": "„window is not defined” podczas renderowania po stronie serwera",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tagi, atrybuty lub style znikają z treści",
-				"symptom": "Kod HTML ustawiony z opcją value lub editor.$.html.set() albo wklejony, zwracany jest bez niektórych tagów (takich jak mark), nazw klas, atrybutów data-*, stylów wbudowanych lub linków do niestandardowych schematów aplikacji (takich jak zoommtg: lub vscode:).",
+				"symptom": "HTML ustawiony przez opcję value lub editor.$.html.set() albo wklejony wraca bez niektórych tagów (np. mark), nazw klas, atrybutów data-*, stylów inline lub linków z własnymi schematami aplikacji (np. zoommtg: lub vscode:).",
 				"cause": "SunEditor filtruje cały przychodzący HTML według list dozwolonych elementów, atrybutów, nazw klas i stylów dla poszczególnych tagów, a wszystko, czego na nich nie ma, usuwa. Element span, któremu nie został żaden styl, jest rozpakowywany (zastępowany swoją zawartością).",
-				"fix": "Rozszerz potrzebną listę dozwolonych: elementWhitelist dla tagów, attributeWhitelist dla atrybutów, allowedClassName dla nazw klas, tagStyles dla stylów inline i allowedURLProtocols dla niestandardowych schematów URL. Poszczególne filtry można również wyłączyć za pomocą opcji strictMode. Nigdy nie zezwalaj na tagi script ani atrybuty zdarzeń on*."
+				"fix": "Rozszerz potrzebną listę dozwolonych: elementWhitelist dla tagów, attributeWhitelist dla atrybutów, allowedClassName dla nazw klas, tagStyles dla stylów inline i allowedURLProtocols dla własnych schematów URL. Poszczególne filtry można też wyłączyć opcją strictMode. Nigdy nie zezwalaj na tagi script ani atrybuty zdarzeń on*."
 			},
 			"paste": {
 				"title": "Wklejona treść traci formatowanie lub wnosi niechciane style",

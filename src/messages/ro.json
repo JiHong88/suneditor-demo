@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Noțiuni de bază",
 			"feature-demo": "Demonstrație de funcții",
-			"playground": "Loc de joacă",
+			"playground": "Playground",
 			"plugin-guide": "Ghid de pluginuri",
 			"deep-dive": "Scufundare profundă",
 			"docs-api": "Documente/API",
@@ -48,7 +48,7 @@
 			"resources": "Resurse",
 			"docs": "Documente",
 			"featureDemo": "Demonstrație de funcții",
-			"playground": "Loc de joacă",
+			"playground": "Playground",
 			"about": "Despre",
 			"license": "Licențiat sub MIT.",
 			"copyright": "© Drepturi de autor {year} Colaboratori SunEditor",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "Locul de joacă SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "Configurați opțiunile, testați editorul și partajați configurația prin URL.",
 		"reset": "Resetare",
 		"shareURL": "Partajați adresa URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Încercați opțiunile pluginului",
 		"tryOptionsDesc": "Pluginurile marcate <badge>configurabil</badge> au opțiuni pe care le puteți modifica în Playground.",
-		"playgroundSidebarTitle": "Loc de joacă — Bara laterală cu opțiuni pentru pluginuri",
+		"playgroundSidebarTitle": "Playground — bara laterală cu opțiuni pentru pluginuri",
 		"playgroundSidebarDesc": "Ajustați limitele de încărcare a imaginilor, unitățile de măsură pentru dimensiunea fontului, tipurile de derulare a tabelului, declanșatoarele de mențiuni și multe altele. Modificările se aplică instantaneu unui editor live.",
-		"openPlayground": "Loc de joacă deschis",
+		"openPlayground": "Deschide Playground",
 		"custom": {
 			"title": "Creează-ți propriul plugin",
 			"desc": "Referință tehnică pentru construirea de pluginuri personalizate — de la simple butoane de comandă până la funcții complete bazate pe dialoguri.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Încearcă-l live",
 		"ctaDesc": "Configurați opțiuni, testați pluginuri și vedeți rezultatele instantaneu în Playground.",
-		"ctaButton": "Loc de joacă deschis",
+		"ctaButton": "Deschide Playground",
 		"resourcesTitle": "Află mai multe",
 		"gettingStarted": "Noțiuni de bază",
 		"gettingStartedDesc": "Instalați, configurați și creați primul editor",
@@ -590,7 +590,7 @@
 		"quickTry": "Încercare rapidă",
 		"preview": "Previzualizare",
 		"close": "Aproape",
-		"openInPlayground": "Deschis în Locul de joacă"
+		"openInPlayground": "Deschide în Playground"
 	},
 	"DeepDive": {
 		"title": "Scufundare profundă",
@@ -672,19 +672,19 @@
 			"uiEvents": "Evenimente UI",
 			"uiEventsDesc": "Răspunde la vizibilitatea barei de instrumente, comutarea vizualizării codului, ecranul complet și redimensionarea editorului.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Inspector de evenimente live",
+				"desc": "Folosește editorul din stânga și urmărește în timp real, în dreapta, fiecare eveniment declanșat. Fă clic pe un rând pentru a-i extinde payload-ul.",
+				"editorLabel": "Editor live",
+				"logLabel": "Jurnal de evenimente",
+				"attachedCount": "{count} evenimente conectate",
+				"empty": "Niciun eveniment încă — începe să scrii sau fă clic pe un buton din bara de instrumente.",
+				"noPayload": "Niciun payload în afară de obiectele interne ale editorului.",
+				"clear": "Golește",
+				"pause": "Pauză",
+				"resume": "Reia",
+				"autoScroll": "Derulare automată",
+				"returnTrueNote": "Acest eveniment tratează undefined ca „gestionat” și oprește încărcarea. Un listener pasiv trebuie să returneze true.",
+				"notAttachedTitle": "Neconectate aici",
 				"notAttachedDesc": "Handlerele de încărcare preiau răspunsul încărcării — atașarea unui logger ar împiedica inserarea fișierelor media încărcate —, așa că inspectorul nu le atinge:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tag-uri, atribute sau stiluri dispar din conținut",
-				"symptom": "Codul HTML setat cu opțiunea value sau editor.$.html.set(), sau lipit, revine fără anumite etichete (cum ar fi mark), nume de clase, atribute data-*, stiluri inline sau linkuri către scheme de aplicații personalizate (cum ar fi zoommtg: sau vscode:).",
+				"symptom": "HTML-ul setat prin opțiunea value sau prin editor.$.html.set(), ori lipit, revine fără anumite tag-uri (precum mark), nume de clase, atribute data-*, stiluri inline sau linkuri cu scheme de aplicații proprii (precum zoommtg: sau vscode:).",
 				"cause": "SunEditor filtrează tot HTML-ul primit pe baza unor liste de permisiuni pentru elemente, atribute, nume de clase și stiluri per tag și elimină tot ce nu se află pe ele. Un span rămas fără niciun stil este eliminat, iar conținutul său este păstrat.",
-				"fix": "Extindeți lista de permisiuni de care aveți nevoie: elementWhitelist pentru etichete, attributeWhitelist pentru atribute, allowedClassName pentru nume de clase, tagStyles pentru stiluri inline și allowedURLProtocols pentru scheme URL personalizate. Filtrele individuale pot fi, de asemenea, dezactivate cu opțiunea strictMode. Nu permiteți niciodată etichete script sau atribute de eveniment on*."
+				"fix": "Extindeți lista de permisiuni de care aveți nevoie: elementWhitelist pentru tag-uri, attributeWhitelist pentru atribute, allowedClassName pentru nume de clase, tagStyles pentru stiluri inline și allowedURLProtocols pentru scheme URL proprii. Filtrele individuale pot fi și dezactivate cu opțiunea strictMode. Nu permiteți niciodată tag-uri script sau atribute de eveniment on*."
 			},
 			"paste": {
 				"title": "Conținutul lipit își pierde formatarea sau aduce stiluri nedorite",

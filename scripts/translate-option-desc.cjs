@@ -33,7 +33,7 @@ function getSiteLocales() {
 }
 
 // Google Translate language code mapping
-const LANG_MAP = { "zh-CN": "zh-CN", "pt-BR": "pt", ckb: "ku" };
+const LANG_MAP = { "zh-CN": "zh-CN", "pt-BR": "pt" }; // ckb = Sorani (Arabic script); "ku" is Kurmanji (Latin)
 
 const API_DIR = path.join(__dirname, "..", "src", "data", "api");
 const SRC = path.join(API_DIR, "option-descriptions.en.json");

@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "Dê uma estrela no GitHub",
 		"Menus": {
-			"getting-started": "Começando",
+			"getting-started": "Primeiros passos",
 			"feature-demo": "Demonstração do recurso",
-			"playground": "Parque infantil",
+			"playground": "Playground",
 			"plugin-guide": "Guia de Plugins",
 			"deep-dive": "Análise Detalhada",
 			"docs-api": "Documentação/API",
@@ -48,7 +48,7 @@
 			"resources": "Recursos",
 			"docs": "Documentos",
 			"featureDemo": "Demonstração do recurso",
-			"playground": "Parque infantil",
+			"playground": "Playground",
 			"about": "Sobre",
 			"license": "Licenciado sob a licença MIT.",
 			"copyright": "© Copyright {year} Colaboradores do SunEditor",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "Começando",
+		"title": "Primeiros passos",
 		"desc": "Instale, crie o editor e exiba o conteúdo salvo.",
 		"step1": {
 			"eyebrow": "Passo 1",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "Playground do SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "Configure as opções, teste o editor e compartilhe sua configuração via URL.",
 		"reset": "Reiniciar",
 		"shareURL": "Compartilhar URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Experimente as opções do plugin",
 		"tryOptionsDesc": "Os plugins marcados como <badge>configurable</badge> possuem opções que você pode ajustar no Playground.",
-		"playgroundSidebarTitle": "Playground — Barra lateral de opções de plugins",
+		"playgroundSidebarTitle": "Playground — barra lateral de opções de plugins",
 		"playgroundSidebarDesc": "Ajuste os limites de upload de imagens, unidades de tamanho de fonte, tipos de rolagem de tabelas, gatilhos de menção e muito mais. As alterações são aplicadas instantaneamente ao editor em tempo real.",
-		"openPlayground": "Parque infantil aberto",
+		"openPlayground": "Abrir o Playground",
 		"custom": {
 			"title": "Crie seu próprio plugin",
 			"desc": "Guia técnico para a criação de plugins personalizados — desde botões de comando simples até funcionalidades completas baseadas em diálogos.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "Experimente ao vivo",
 		"ctaDesc": "Configure opções, teste plugins e veja os resultados instantaneamente no Playground.",
-		"ctaButton": "Parque infantil aberto",
+		"ctaButton": "Abrir o Playground",
 		"resourcesTitle": "Saber mais",
-		"gettingStarted": "Começando",
+		"gettingStarted": "Primeiros passos",
 		"gettingStartedDesc": "Instale, configure e crie seu primeiro editor.",
 		"pluginGuide": "Guia de Plugins",
 		"pluginGuideDesc": "Mais de 24 plugins integrados e guia de plugins personalizados.",
@@ -590,7 +590,7 @@
 		"quickTry": "Teste rápido",
 		"preview": "Pré-visualização",
 		"close": "Fechar",
-		"openInPlayground": "Abrir no Parque Infantil"
+		"openInPlayground": "Abrir no Playground"
 	},
 	"DeepDive": {
 		"title": "Análise Detalhada",
@@ -672,19 +672,19 @@
 			"uiEvents": "Eventos da interface do usuário",
 			"uiEventsDesc": "Responde à visibilidade da barra de ferramentas, à alternância da visualização do código, ao modo de tela cheia e à redimensionamento do editor.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Inspetor de eventos ao vivo",
+				"desc": "Use o editor à esquerda e acompanhe em tempo real, à direita, cada evento disparado. Clique em uma linha para expandir o payload.",
+				"editorLabel": "Editor ao vivo",
+				"logLabel": "Log de eventos",
+				"attachedCount": "{count} eventos conectados",
+				"empty": "Nenhum evento ainda — comece a digitar ou clique em um botão da barra de ferramentas.",
+				"noPayload": "Nenhum payload além dos objetos internos do editor.",
+				"clear": "Limpar",
+				"pause": "Pausar",
+				"resume": "Retomar",
+				"autoScroll": "Rolagem automática",
+				"returnTrueNote": "Este evento trata undefined como \"tratado\" e interrompe o upload. Um listener passivo deve retornar true.",
+				"notAttachedTitle": "Não conectados aqui",
 				"notAttachedDesc": "Os handlers de upload assumem a resposta do upload — anexar um logger impediria que a mídia enviada fosse inserida —, por isso o inspetor não mexe neles:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "Camada de apresentação da interface do usuário. A barra de ferramentas renderiza a barra de ferramentas principal, a subToolbar é uma segunda instância opcional da barra de ferramentas, o menu lida com menus suspensos e efeitos de seleção, e o visualizador controla os modos de visualização (visualização de código, tela cheia, pré-visualização)."
 	},
 	"Migration": {
-		"title": "Migração da versão 2 para a versão 3",
+		"title": "Migração da v2 para a v3",
 		"subtitle": "Cole as opções do seu SunEditor v2 e obtenha o equivalente para a versão 3.",
 		"converterTab": "Conversor",
 		"tableTab": "Tabela de referência",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, atributos ou estilos desaparecem do conteúdo",
-				"symptom": "O HTML definido com a opção value ou editor.$.html.set(), ou colado, retorna sem algumas tags (como mark), nomes de classe, atributos data-*, estilos embutidos ou links para esquemas de aplicativos personalizados (como zoommtg: ou vscode:).",
+				"symptom": "O HTML definido com a opção value ou editor.$.html.set(), ou colado, volta sem algumas tags (como mark), nomes de classe, atributos data-*, estilos inline ou links com esquemas de aplicativo próprios (como zoommtg: ou vscode:).",
 				"cause": "O SunEditor filtra todo HTML recebido usando listas de permissões de elementos, atributos, nomes de classe e estilos por tag, e remove tudo o que não estiver nelas. Um span que fica sem nenhum estilo é desembrulhado.",
-				"fix": "Amplie a lista de permissões conforme necessário: elementWhitelist para tags, attributeWhitelist para atributos, allowedClassName para nomes de classe, tagStyles para estilos embutidos e allowedURLProtocols para esquemas de URL personalizados. Filtros individuais também podem ser desativados com a opção strictMode. Nunca permita tags script ou atributos de evento on*."
+				"fix": "Amplie a lista de permissões de que você precisa: elementWhitelist para tags, attributeWhitelist para atributos, allowedClassName para nomes de classe, tagStyles para estilos inline e allowedURLProtocols para esquemas de URL próprios. Filtros individuais também podem ser desativados com a opção strictMode. Nunca permita tags script nem atributos de evento on*."
 			},
 			"paste": {
 				"title": "O conteúdo colado perde a formatação ou traz estilos indesejados",

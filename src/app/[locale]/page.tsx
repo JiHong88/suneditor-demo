@@ -1,4 +1,6 @@
+import { use } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_CARD_DESCRIPTION } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
@@ -18,7 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	});
 }
 
-export default function Page() {
+export default function Page({ params }: { params: Promise<{ locale: string }> }) {
+	setRequestLocale(use(params).locale);
 	return (
 		<>
 			<JsonLd data={softwareApplicationSchema()} />

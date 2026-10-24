@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Első lépések",
 			"feature-demo": "Funkcióbemutató",
-			"playground": "Játszótér",
+			"playground": "Playground",
 			"plugin-guide": "Bővítmény útmutató",
 			"deep-dive": "Mélymerülés",
 			"docs-api": "Dokumentációk/API",
@@ -48,7 +48,7 @@
 			"resources": "Erőforrás",
 			"docs": "Dokumentumok",
 			"featureDemo": "Funkcióbemutató",
-			"playground": "Játszótér",
+			"playground": "Playground",
 			"about": "Körülbelül",
 			"license": "MIT licenc alatt.",
 			"copyright": "© Szerzői jog {year} SunEditor közreműködők",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "SunEditor Játszótér",
+		"title": "SunEditor Playground",
 		"desc": "Konfiguráld a beállításokat, teszteld a szerkesztőt, és oszd meg a beállításaidat URL-címen keresztül.",
 		"reset": "Visszaállítás",
 		"shareURL": "URL megosztása",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Próbálja ki a bővítmény beállításait",
 		"tryOptionsDesc": "A <badge>configurable</badge> jelölésű bővítményekhez olyan beállítások tartoznak, amelyeket a Játszótéren módosíthatsz.",
-		"playgroundSidebarTitle": "Játszótér — Bővítménybeállítások oldalsáv",
+		"playgroundSidebarTitle": "Playground — bővítménybeállítások oldalsáv",
 		"playgroundSidebarDesc": "Módosíthatod a képfeltöltési korlátokat, a betűméret mértékegységeit, a táblázat görgetési típusait, az említéseket aktiváló eseményeket és egyebeket. A változtatások azonnal érvénybe lépnek egy élő szerkesztőben.",
-		"openPlayground": "Nyílt játszótér",
+		"openPlayground": "Playground megnyitása",
 		"custom": {
 			"title": "Hozz létre saját bővítményt",
 			"desc": "Technikai útmutató egyéni bővítmények készítéséhez – az egyszerű parancsgomboktól a teljes párbeszédpanelen alapuló funkciókig.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Próbáld ki élőben",
 		"ctaDesc": "Konfiguráld a beállításokat, teszteld a bővítményeket, és lásd az eredményeket azonnal a Playgroundban.",
-		"ctaButton": "Nyílt játszótér",
+		"ctaButton": "Playground megnyitása",
 		"resourcesTitle": "Tudj meg többet",
 		"gettingStarted": "Első lépések",
 		"gettingStartedDesc": "Telepítsd, konfiguráld és hozd létre az első szerkesztődet",
@@ -590,7 +590,7 @@
 		"quickTry": "Gyors próba",
 		"preview": "Előnézet",
 		"close": "Közeli",
-		"openInPlayground": "Megnyitás a játszótéren"
+		"openInPlayground": "Megnyitás a Playgroundban"
 	},
 	"DeepDive": {
 		"title": "Mélymerülés",
@@ -672,19 +672,19 @@
 			"uiEvents": "Felhasználói felület eseményei",
 			"uiEventsDesc": "Reagál az eszköztár láthatóságára, a kódnézet váltására, a teljes képernyős nézetre és a szerkesztő átméretezésére.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Élő eseményfigyelő",
+				"desc": "Használd a bal oldali szerkesztőt, és jobb oldalon valós időben láthatod az összes kiváltott eseményt. Kattints egy sorra a payload kibontásához.",
+				"editorLabel": "Élő szerkesztő",
+				"logLabel": "Eseménynapló",
+				"attachedCount": "{count} esemény csatolva",
+				"empty": "Még nincs esemény — kezdj el gépelni, vagy kattints egy eszköztárgombra.",
+				"noPayload": "A szerkesztő belső objektumain kívül nincs payload.",
+				"clear": "Törlés",
+				"pause": "Szüneteltetés",
+				"resume": "Folytatás",
+				"autoScroll": "Automatikus görgetés",
+				"returnTrueNote": "Ez az esemény az undefined értéket „kezeltnek” tekinti, és leállítja a feltöltést. A passzív figyelőnek true értéket kell visszaadnia.",
+				"notAttachedTitle": "Itt nincs csatolva",
 				"notAttachedDesc": "A feltöltési handlerek átveszik a feltöltés válaszát — egy logger csatolása megakadályozná a feltöltött média beszúrását —, ezért az inspector nem nyúl hozzájuk:"
 			}
 		},
@@ -819,7 +819,7 @@
 		"fullTextTitle": "A licenc teljes szövege",
 		"disclaimer": "Ez az oldal közérthető összefoglaló, nem jogi tanácsadás. Az alábbi licencszöveg az irányadó.",
 		"viewOnGitHub": "A LICENSE megtekintése a GitHubon",
-		"tryPlayground": "Próbáld ki a SunEditort a Játszótéren"
+		"tryPlayground": "Próbáld ki a SunEditort a Playgroundban"
 	},
 	"Troubleshooting": {
 		"title": "Hibaelhárítás",
@@ -849,7 +849,7 @@
 		"notListed": "Nem találod itt a problémádat?",
 		"notListedDesc": "Keress a meglévő issue-k között, vagy nyiss egy újat egy Játszótér-hivatkozással, amely reprodukálja a hibát.",
 		"openIssue": "Issue nyitása a GitHubon",
-		"tryPlayground": "Reprodukáld a Játszótéren",
+		"tryPlayground": "Reprodukáld a Playgroundban",
 		"items": {
 			"ssr": {
 				"title": "„window is not defined” szerveroldali renderelés közben",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tagek, attribútumok vagy stílusok tűnnek el a tartalomból",
-				"symptom": "A value opcióval vagy editor.$.html.set() paraméterrel beállított, illetve beillesztett HTML bizonyos címkék (például mark), osztálynevek, data-* attribútumok, beágyazott stílusok vagy egyéni alkalmazássémákra mutató hivatkozások (például zoommtg: vagy vscode:) nélkül tér vissza.",
+				"symptom": "A value beállítással vagy az editor.$.html.set() metódussal megadott, illetve beillesztett HTML-ből eltűnik néhány tag (például a mark), osztálynév, data-* attribútum, inline stílus vagy egyéni alkalmazássémát használó hivatkozás (például zoommtg: vagy vscode:).",
 				"cause": "A SunEditor minden bejövő HTML-t engedélyezési listák alapján szűr – elemekre, attribútumokra, osztálynevekre és tagenkénti stílusokra –, és mindent eltávolít, ami nem szerepel rajtuk. A stílus nélkül maradt span elemet kibontja.",
-				"fix": "Bővítsd ki a szükséges engedélyezési listát: elementWhitelist címkékhez, attributeWhitelist attribútumokhoz, allowedClassName osztálynevekhez, tagStyles beágyazott stílusokhoz és allowedURLProtocols egyéni URL-sémákhoz. Az egyes szűrők a strictMode opcióval kikapcsolhatók. Soha ne engedélyezd a script címkéket vagy a on* eseményattribútumokat."
+				"fix": "Bővítsd a szükséges engedélyezési listát: elementWhitelist a tagekhez, attributeWhitelist az attribútumokhoz, allowedClassName az osztálynevekhez, tagStyles az inline stílusokhoz és allowedURLProtocols az egyéni URL-sémákhoz. Az egyes szűrők a strictMode beállítással ki is kapcsolhatók. Soha ne engedélyezd a script tageket vagy az on* eseményattribútumokat."
 			},
 			"paste": {
 				"title": "A beillesztett tartalom elveszíti a formázását, vagy nem kívánt stílusokat hoz magával",

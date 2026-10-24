@@ -128,6 +128,12 @@ Breaking changes가 있으면 **반드시 먼저 처리**한다.
 npm test                # integrity 테스트로 누락 감지
 ```
 
+**Troubleshooting 재확인 (버전이 바뀌면 `troubleshooting.test.ts`가 의도적으로 실패한다):**
+
+1. `src/data/troubleshooting.ts`의 각 항목이 새 엔진에서도 맞는지 확인한다 — 인용한 에러 문자열(`errors`), 본문·스니펫(`src/data/snippets/troubleshootingSnippets.ts`)이 쓰는 API/옵션/이벤트.
+2. 릴리즈 노트에 해결 방법을 바꾸는 항목(새 옵션, 기본값 변경, sanitize 동작 변경 등)이 있으면 해당 항목의 `messages/*.json`(`Troubleshooting.items.<id>`)과 스니펫에 반영한다.
+3. 확인이 끝나면 `TROUBLESHOOTING_VERIFIED_VERSION`을 설치 버전으로 올린다. 확인 없이 버전만 올리지 않는다.
+
 ### 7. 가이드 문서 / Deep Dive 링크 동기화
 
 에디터 문서(`GUIDE.md`, `ARCHITECTURE.md`, `guide/*`, `prompts/*`)는 **이 저장소에 복사하지 않는다.** 원본은 에디터 저장소에만 있고,
@@ -198,3 +204,10 @@ npm run messages:translate
 - 기존 키의 영문 텍스트를 변경한 경우
 - 키 이름을 변경(rename)한 경우
 - 단순 키 삭제만 한 경우는 실행 불필요 (다른 언어에서도 수동 삭제)
+
+> ⚠️ `messages/*.json`은 25개 언어를 **직접 번역**해 관리한다. `messages:translate`는 `.messages-hashes.json`에 없는 키를 모두 Google 번역으로 덮어쓰므로, 실행 후 `git diff src/messages`에서 **의도한 키만 바뀌었는지** 확인하고 나머지는 되돌린다. 번역 결과에서 옵션/API 이름(`value`, `editor.$.html.set()` 등)이 번역되거나 짧은 버튼 문구가 형용사로 번역되는 경우가 많으므로 반드시 검토·수정한다.
+
+```bash
+# 4) docs:generate / docs:translate 이후 — ⌘K 검색 인덱스 재생성 (searchIndex 테스트가 낡은 인덱스를 잡는다)
+npm run search:generate
+```

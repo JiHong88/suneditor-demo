@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "Поставьте звездочку на GitHub",
 		"Menus": {
-			"getting-started": "Начиная",
+			"getting-started": "Начало работы",
 			"feature-demo": "Демонстрация функций",
-			"playground": "Детская площадка",
+			"playground": "Playground",
 			"plugin-guide": "Руководство по плагинам",
 			"deep-dive": "Глубокое погружение",
 			"docs-api": "Документация/API",
@@ -48,7 +48,7 @@
 			"resources": "Ресурсы",
 			"docs": "Документы",
 			"featureDemo": "Демонстрация функций",
-			"playground": "Детская площадка",
+			"playground": "Playground",
 			"about": "О",
 			"license": "Лицензия MIT.",
 			"copyright": "© Авторские права принадлежат {year} SunEditor Contributors",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "Начиная",
+		"title": "Начало работы",
 		"desc": "Установите, создайте редактор и отобразите сохраненный контент.",
 		"step1": {
 			"eyebrow": "Шаг 1",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Попробуйте параметры плагина",
 		"tryOptionsDesc": "Плагины, помеченные как <badge>configurable</badge>, имеют параметры, которые можно настроить в Playground.",
-		"playgroundSidebarTitle": "Игровая площадка — Боковая панель параметров плагина",
+		"playgroundSidebarTitle": "Playground — боковая панель параметров плагинов",
 		"playgroundSidebarDesc": "Настройте ограничения на загрузку изображений, единицы измерения размера шрифта, типы прокрутки таблиц, триггеры для упоминаний и многое другое. Изменения мгновенно применяются в редакторе в режиме реального времени.",
-		"openPlayground": "Открытая игровая площадка",
+		"openPlayground": "Открыть Playground",
 		"custom": {
 			"title": "Создайте свой собственный плагин",
 			"desc": "Технический справочник по созданию пользовательских плагинов — от простых кнопок управления до полноценных диалоговых окон.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "Попробуйте вживую",
 		"ctaDesc": "Настраивайте параметры, тестируйте плагины и мгновенно просматривайте результаты в Playground.",
-		"ctaButton": "Открытая игровая площадка",
+		"ctaButton": "Открыть Playground",
 		"resourcesTitle": "Узнать больше",
-		"gettingStarted": "Начиная",
+		"gettingStarted": "Начало работы",
 		"gettingStartedDesc": "Установите, настройте и создайте свой первый редактор.",
 		"pluginGuide": "Руководство по плагинам",
 		"pluginGuideDesc": "Более 24 встроенных плагинов и руководство по настройке пользовательских плагинов.",
@@ -590,7 +590,7 @@
 		"quickTry": "Быстрая попытка",
 		"preview": "Предварительный просмотр",
 		"close": "Закрывать",
-		"openInPlayground": "Открыть на детской площадке"
+		"openInPlayground": "Открыть в Playground"
 	},
 	"DeepDive": {
 		"title": "Глубокое погружение",
@@ -672,19 +672,19 @@
 			"uiEvents": "События пользовательского интерфейса",
 			"uiEventsDesc": "Реагировать на отображение панели инструментов, переключение режима просмотра кода, полноэкранный режим и изменение размера редактора.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Инспектор событий в реальном времени",
+				"desc": "Работайте в редакторе слева и наблюдайте справа за каждым срабатывающим событием в реальном времени. Нажмите на строку, чтобы раскрыть её payload.",
+				"editorLabel": "Живой редактор",
+				"logLabel": "Журнал событий",
+				"attachedCount": "Подключено событий: {count}",
+				"empty": "Событий пока нет — начните печатать или нажмите кнопку на панели инструментов.",
+				"noPayload": "Нет payload, кроме внутренних объектов редактора.",
+				"clear": "Очистить",
+				"pause": "Пауза",
+				"resume": "Продолжить",
+				"autoScroll": "Автопрокрутка",
+				"returnTrueNote": "Это событие считает undefined признаком «обработано» и останавливает загрузку. Пассивный слушатель должен возвращать true.",
+				"notAttachedTitle": "Здесь не подключены",
 				"notAttachedDesc": "Обработчики загрузки берут на себя ответ загрузки — подключённый логгер помешал бы вставке загруженных медиа, — поэтому инспектор их не трогает:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Теги, атрибуты или стили исчезают из контента",
-				"symptom": "HTML-код, заданный с помощью опции value или editor.$.html.set(), или вставленный, возвращается без некоторых тегов (например, mark), имен классов, атрибутов data-*, встроенных стилей или ссылок на пользовательские схемы приложений (например, zoommtg: или vscode:).",
+				"symptom": "HTML, заданный через параметр value или editor.$.html.set() либо вставленный из буфера обмена, возвращается без некоторых тегов (например, mark), имён классов, атрибутов data-*, встроенных стилей или ссылок со своими схемами приложений (например, zoommtg: или vscode:).",
 				"cause": "SunEditor фильтрует весь входящий HTML по спискам разрешённых элементов, атрибутов, имён классов и стилей для каждого тега и удаляет всё, чего в них нет. Элемент span, у которого не осталось ни одного стиля, разворачивается (заменяется своим содержимым).",
-				"fix": "Расширьте список разрешенных элементов по своему усмотрению: elementWhitelist для тегов, attributeWhitelist для атрибутов, allowedClassName для имен классов, tagStyles для встроенных стилей и allowedURLProtocols для пользовательских схем URL. Отдельные фильтры также можно отключить с помощью параметра strictMode. Никогда не разрешайте теги script или атрибуты событий on*."
+				"fix": "Расширьте нужный список разрешённых значений: elementWhitelist — для тегов, attributeWhitelist — для атрибутов, allowedClassName — для имён классов, tagStyles — для встроенных стилей и allowedURLProtocols — для своих схем URL. Отдельные фильтры также можно отключить с помощью параметра strictMode. Никогда не разрешайте теги script и атрибуты событий on*."
 			},
 			"paste": {
 				"title": "Вставленный контент теряет форматирование или приносит нежелательные стили",

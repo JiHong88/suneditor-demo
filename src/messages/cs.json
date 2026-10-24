@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Začínáme",
 			"feature-demo": "Ukázka funkcí",
-			"playground": "Dětské hřiště",
+			"playground": "Playground",
 			"plugin-guide": "Průvodce pluginy",
 			"deep-dive": "Hluboký ponor",
 			"docs-api": "Dokumentace/API",
@@ -48,7 +48,7 @@
 			"resources": "Zdroje",
 			"docs": "Dokumenty",
 			"featureDemo": "Ukázka funkcí",
-			"playground": "Dětské hřiště",
+			"playground": "Playground",
 			"about": "O",
 			"license": "Licencováno pod MIT.",
 			"copyright": "© Copyright {year} Přispěvatelé SunEditoru",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Vyzkoušejte možnosti pluginu",
 		"tryOptionsDesc": "Pluginy označené <badge>configurable</badge> mají možnosti, které můžete upravit v Hřišti.",
-		"playgroundSidebarTitle": "Hřiště — Postranní panel možností pluginu",
+		"playgroundSidebarTitle": "Playground — postranní panel s možnostmi pluginů",
 		"playgroundSidebarDesc": "Upravte limity pro nahrávání obrázků, jednotky velikosti písma, typy posouvání tabulky, spouštěče zmínek a další. Změny se okamžitě projeví v živém editoru.",
-		"openPlayground": "Otevřené hřiště",
+		"openPlayground": "Otevřít Playground",
 		"custom": {
 			"title": "Vytvořte si vlastní plugin",
 			"desc": "Technická reference pro tvorbu vlastních pluginů – od jednoduchých příkazových tlačítek až po plnohodnotné funkce založené na dialogových oknech.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Vyzkoušejte to naživo",
 		"ctaDesc": "Konfigurujte možnosti, testujte pluginy a okamžitě si prohlédněte výsledky v Playgroundu.",
-		"ctaButton": "Otevřené hřiště",
+		"ctaButton": "Otevřít Playground",
 		"resourcesTitle": "Zjistěte více",
 		"gettingStarted": "Začínáme",
 		"gettingStartedDesc": "Nainstalujte, nakonfigurujte a vytvořte svůj první editor",
@@ -590,7 +590,7 @@
 		"quickTry": "Rychlý pokus",
 		"preview": "Náhled",
 		"close": "Blízko",
-		"openInPlayground": "Otevřít na hřišti"
+		"openInPlayground": "Otevřít v Playgroundu"
 	},
 	"DeepDive": {
 		"title": "Hluboký ponor",
@@ -672,19 +672,19 @@
 			"uiEvents": "Události uživatelského rozhraní",
 			"uiEventsDesc": "Reagovat na viditelnost panelu nástrojů, přepínání zobrazení kódu, celoobrazovkový režim a změnu velikosti editoru.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Živý inspektor událostí",
+				"desc": "Pracujte v editoru vlevo a sledujte vpravo v reálném čase každou vyvolanou událost. Kliknutím na řádek rozbalíte jeho payload.",
+				"editorLabel": "Živý editor",
+				"logLabel": "Protokol událostí",
+				"attachedCount": "Připojené události: {count}",
+				"empty": "Zatím žádné události — začněte psát nebo klikněte na tlačítko na panelu nástrojů.",
+				"noPayload": "Žádný payload kromě interních objektů editoru.",
+				"clear": "Vymazat",
+				"pause": "Pozastavit",
+				"resume": "Pokračovat",
+				"autoScroll": "Automatické posouvání",
+				"returnTrueNote": "Tato událost považuje undefined za „obslouženo“ a zastaví nahrávání. Pasivní listener musí vrátit true.",
+				"notAttachedTitle": "Zde nepřipojené",
 				"notAttachedDesc": "Handlery nahrávání přebírají odpověď z nahrávání — připojený logger by zabránil vložení nahraných médií —, proto je inspektor nechává být:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Z obsahu mizí značky, atributy nebo styly",
-				"symptom": "HTML kód nastavený s volbou value nebo editor.$.html.set(), případně vložený, se vrátí bez některých tagů (například mark), názvů tříd, atributů data-*, vložených stylů nebo odkazů na vlastní schémata aplikací (například zoommtg: nebo vscode:).",
+				"symptom": "HTML nastavené volbou value nebo přes editor.$.html.set(), případně vložené ze schránky, se vrátí bez některých značek (například mark), názvů tříd, atributů data-*, inline stylů nebo odkazů s vlastními schématy aplikací (například zoommtg: nebo vscode:).",
 				"cause": "SunEditor filtruje veškeré příchozí HTML podle seznamů povolených elementů, atributů, názvů tříd a stylů pro jednotlivé značky a vše, co na nich není, odstraní. Element span, kterému nezůstal žádný styl, se rozbalí (nahradí se svým obsahem).",
-				"fix": "Rozšiřte potřebný seznam povolených položek: elementWhitelist pro tagy, attributeWhitelist pro atributy, allowedClassName pro názvy tříd, tagStyles pro vložené styly a allowedURLProtocols pro vlastní schémata URL. Jednotlivé filtry lze také vypnout pomocí možnosti strictMode. Nikdy nepovolujte tagy script ani atributy událostí on*."
+				"fix": "Rozšiřte seznam povolených hodnot, který potřebujete: elementWhitelist pro značky, attributeWhitelist pro atributy, allowedClassName pro názvy tříd, tagStyles pro inline styly a allowedURLProtocols pro vlastní schémata URL. Jednotlivé filtry lze také vypnout volbou strictMode. Nikdy nepovolujte značky script ani atributy událostí on*."
 			},
 			"paste": {
 				"title": "Vložený obsah ztrácí formátování nebo s sebou přináší nežádoucí styly",

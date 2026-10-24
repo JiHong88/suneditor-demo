@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "ضع نجمة على GitHub",
 		"Menus": {
-			"getting-started": "ابدء",
+			"getting-started": "البدء",
 			"feature-demo": "عرض توضيحي للميزة",
-			"playground": "ملعب",
+			"playground": "Playground",
 			"plugin-guide": "دليل الإضافات",
 			"deep-dive": "غوص عميق",
 			"docs-api": "المستندات/واجهة برمجة التطبيقات",
@@ -48,7 +48,7 @@
 			"resources": "موارد",
 			"docs": "المستندات",
 			"featureDemo": "عرض توضيحي للميزة",
-			"playground": "ملعب",
+			"playground": "Playground",
 			"about": "عن",
 			"license": "مرخص بموجب ترخيص MIT.",
 			"copyright": "جميع الحقوق محفوظة © لمساهمي صحيفة ذا صن إيديتور",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "ابدء",
+		"title": "البدء",
 		"desc": "قم بتثبيت البرنامج، وإنشاء المحرر، وعرض المحتوى المحفوظ.",
 		"step1": {
 			"eyebrow": "الخطوة 1",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "ملعب محرر صحيفة ذا صن",
+		"title": "SunEditor Playground",
 		"desc": "قم بضبط الخيارات، واختبر المحرر، وشارك إعداداتك عبر عنوان URL.",
 		"reset": "إعادة ضبط",
 		"shareURL": "رابط المشاركة",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "جرّب خيارات الإضافة",
 		"tryOptionsDesc": "المكونات الإضافية التي تحمل علامة <badge>configurable</badge> تحتوي على خيارات يمكنك تعديلها في Playground.",
-		"playgroundSidebarTitle": "ساحة اللعب - الشريط الجانبي لخيارات الإضافة",
+		"playgroundSidebarTitle": "Playground — الشريط الجانبي لخيارات الإضافات",
 		"playgroundSidebarDesc": "يمكنك تعديل حدود تحميل الصور، ووحدات حجم الخط، وأنواع تمرير الجداول، ومحفزات الإشارات، وغير ذلك. تُطبّق التغييرات فورًا على المحرر المباشر.",
-		"openPlayground": "ملعب مفتوح",
+		"openPlayground": "افتح Playground",
 		"custom": {
 			"title": "أنشئ إضافتك الخاصة",
 			"desc": "مرجع تقني لبناء إضافات مخصصة - من أزرار الأوامر البسيطة إلى الميزات الكاملة القائمة على الحوار.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "جربها مباشرة",
 		"ctaDesc": "قم بضبط الخيارات، واختبر الإضافات، وشاهد النتائج على الفور في بيئة الاختبار.",
-		"ctaButton": "ملعب مفتوح",
+		"ctaButton": "افتح Playground",
 		"resourcesTitle": "يتعلم أكثر",
-		"gettingStarted": "ابدء",
+		"gettingStarted": "البدء",
 		"gettingStartedDesc": "قم بتثبيت وتكوين وإنشاء محرر النصوص الأول الخاص بك",
 		"pluginGuide": "دليل الإضافات",
 		"pluginGuideDesc": "أكثر من 24 إضافة مدمجة ودليل إضافات مخصص",
@@ -590,7 +590,7 @@
 		"quickTry": "تجربة سريعة",
 		"preview": "معاينة",
 		"close": "يغلق",
-		"openInPlayground": "افتح في الملعب"
+		"openInPlayground": "افتح في Playground"
 	},
 	"DeepDive": {
 		"title": "غوص عميق",
@@ -672,19 +672,19 @@
 			"uiEvents": "أحداث واجهة المستخدم",
 			"uiEventsDesc": "الاستجابة لظهور شريط الأدوات، وتبديل عرض التعليمات البرمجية، ووضع ملء الشاشة، وتغيير حجم المحرر.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "مُفتِّش الأحداث المباشر",
+				"desc": "استخدم المحرر على اليسار وتابع على اليمين كل حدث يُطلَق في الوقت الفعلي. انقر على أي صف لعرض الـ payload الخاص به.",
+				"editorLabel": "المحرر المباشر",
+				"logLabel": "سجل الأحداث",
+				"attachedCount": "عدد الأحداث المُرفقة: {count}",
+				"empty": "لا توجد أحداث بعد — ابدأ الكتابة أو انقر على زر في شريط الأدوات.",
+				"noPayload": "لا توجد payload سوى الكائنات الداخلية للمحرر.",
+				"clear": "مسح",
+				"pause": "إيقاف مؤقت",
+				"resume": "استئناف",
+				"autoScroll": "تمرير تلقائي",
+				"returnTrueNote": "يعدّ هذا الحدث القيمة undefined بمعنى \"تمت المعالجة\" فيوقف الرفع. يجب أن يُرجع المستمع السلبي القيمة true.",
+				"notAttachedTitle": "غير مُرفقة هنا",
 				"notAttachedDesc": "تتولّى معالجات الرفع استجابة الرفع — وإرفاق أداة تسجيل سيمنع إدراج الوسائط المرفوعة — لذلك لا يقترب منها المُفتِّش:"
 			}
 		},
@@ -819,7 +819,7 @@
 		"fullTextTitle": "النص الكامل للترخيص",
 		"disclaimer": "هذه الصفحة ملخص بلغة مبسطة، وليست استشارة قانونية. نص الترخيص أدناه هو المُلزِم.",
 		"viewOnGitHub": "عرض ملف LICENSE على GitHub",
-		"tryPlayground": "جرّب SunEditor في الملعب"
+		"tryPlayground": "جرّب SunEditor في Playground"
 	},
 	"Troubleshooting": {
 		"title": "استكشاف الأخطاء وإصلاحها",
@@ -849,7 +849,7 @@
 		"notListed": "مشكلتك غير مذكورة هنا؟",
 		"notListedDesc": "ابحث في المشكلات المفتوحة سابقًا أو افتح مشكلة جديدة مع رابط من الملعب يعيد إنتاجها.",
 		"openIssue": "افتح مشكلة على GitHub",
-		"tryPlayground": "أعد إنتاجها في الملعب",
+		"tryPlayground": "أعد إنتاجها في Playground",
 		"items": {
 			"ssr": {
 				"title": "الخطأ «window is not defined» أثناء العرض على الخادم",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "اختفاء وسوم أو سمات أو أنماط من المحتوى",
-				"symptom": "يتم إرجاع HTML المعين باستخدام الخيار value أو editor.$.html.set()، أو الملصق، بدون بعض العلامات (مثل mark)، أو أسماء الفئات، أو سمات data-*، أو الأنماط المضمنة أو الروابط إلى مخططات التطبيقات المخصصة (مثل zoommtg: أو vscode:).",
+				"symptom": "يعود HTML الذي عُيِّن عبر الخيار value أو editor.$.html.set()، أو الذي أُلصق، ناقصًا بعض الوسوم (مثل mark) أو أسماء الأصناف (class) أو سمات data-* أو الأنماط المضمّنة (inline) أو روابط مخططات التطبيقات المخصّصة (مثل zoommtg: أو vscode:).",
 				"cause": "يرشّح SunEditor كل HTML وارد وفق قوائم سماح للعناصر والسمات وأسماء الأصناف والأنماط الخاصة بكل وسم، ويزيل كل ما ليس مدرجًا فيها. أما عنصر span الذي لا يتبقى له أي نمط فيُزال غلافه ويبقى محتواه.",
-				"fix": "قم بتوسيع قائمة السماح حسب حاجتك: elementWhitelist للوسوم، attributeWhitelist للسمات، allowedClassName لأسماء الفئات، tagStyles للأنماط المضمنة، وallowedURLProtocols لأنظمة عناوين URL المخصصة. يمكنك أيضًا تعطيل عوامل التصفية الفردية باستخدام الخيار strictMode. لا تسمح أبدًا بوسوم script أو سمات أحداث on*."
+				"fix": "وسّع قائمة السماح التي تحتاجها: elementWhitelist للوسوم، و attributeWhitelist للسمات، و allowedClassName لأسماء الأصناف، و tagStyles للأنماط المضمّنة، و allowedURLProtocols لمخططات URL المخصّصة. ويمكن أيضًا تعطيل مرشّحات بعينها باستخدام الخيار strictMode. لا تسمح أبدًا بوسوم script أو بسمات الأحداث on*."
 			},
 			"paste": {
 				"title": "المحتوى الملصق يفقد تنسيقه، أو يجلب أنماطًا غير مرغوب فيها",

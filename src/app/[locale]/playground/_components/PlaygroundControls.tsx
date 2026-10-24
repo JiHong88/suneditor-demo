@@ -1401,7 +1401,7 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 									label='blockHandle.menu'
 									value={state.blockHandle_menu}
 									onChange={set("blockHandle_menu")}
-									placeholder='p, heading, list, blockquote, pre (empty = editor default)'
+									placeholder='e.g. blockStyle, list, blockquote, codeBlock, align (empty = no menu)'
 									resettable={!isFixedOption("blockHandle_menu")}
 								/>
 							</div>

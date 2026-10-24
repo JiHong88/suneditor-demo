@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Darba sākšana",
 			"feature-demo": "Funkciju demonstrācija",
-			"playground": "Rotaļu laukums",
+			"playground": "Playground",
 			"plugin-guide": "Spraudņa ceļvedis",
 			"deep-dive": "Padziļināta izpēte",
 			"docs-api": "Dokumenti/API",
@@ -48,7 +48,7 @@
 			"resources": "Resursi",
 			"docs": "Dokumenti",
 			"featureDemo": "Funkciju demonstrācija",
-			"playground": "Rotaļu laukums",
+			"playground": "Playground",
 			"about": "Par mums",
 			"license": "Licencēts saskaņā ar MIT.",
 			"copyright": "© Autortiesības {year} SunEditor līdzstrādnieki",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "SunEditor rotaļu laukums",
+		"title": "SunEditor Playground",
 		"desc": "Konfigurējiet opcijas, pārbaudiet redaktoru un kopīgojiet iestatījumus, izmantojot URL.",
 		"reset": "Atiestatīt",
 		"shareURL": "Kopīgot URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Izmēģiniet spraudņa opcijas",
 		"tryOptionsDesc": "Spraudņiem, kas atzīmēti ar <badge>configurable</badge>, ir opcijas, kuras varat pielāgot rotaļu laukumā.",
-		"playgroundSidebarTitle": "Rotaļu laukums — Spraudņa opciju sānu josla",
+		"playgroundSidebarTitle": "Playground — spraudņu opciju sānjosla",
 		"playgroundSidebarDesc": "Pielāgojiet attēlu augšupielādes ierobežojumus, fonta lieluma vienības, tabulas ritināšanas veidus, pieminēšanas aktivizētājus un citus parametrus. Izmaiņas tiek piemērotas nekavējoties tiešsaistes redaktorā.",
-		"openPlayground": "Atvērts rotaļu laukums",
+		"openPlayground": "Atvērt Playground",
 		"custom": {
 			"title": "Izveidojiet savu spraudni",
 			"desc": "Tehniska atsauce pielāgotu spraudņu veidošanai — sākot no vienkāršām komandu pogām līdz pilnām dialoglodziņu funkcijām.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Izmēģiniet to tiešraidē",
 		"ctaDesc": "Konfigurējiet opcijas, pārbaudiet spraudņus un skatiet rezultātus uzreiz Playground platformā.",
-		"ctaButton": "Atvērts rotaļu laukums",
+		"ctaButton": "Atvērt Playground",
 		"resourcesTitle": "Uzziniet vairāk",
 		"gettingStarted": "Darba sākšana",
 		"gettingStartedDesc": "Instalējiet, konfigurējiet un izveidojiet savu pirmo redaktoru",
@@ -590,7 +590,7 @@
 		"quickTry": "Ātrais mēģinājums",
 		"preview": "Priekšskatījums",
 		"close": "Aizvērt",
-		"openInPlayground": "Atvērt rotaļu laukumā"
+		"openInPlayground": "Atvērt Playground vidē"
 	},
 	"DeepDive": {
 		"title": "Padziļināta izpēte",
@@ -672,19 +672,19 @@
 			"uiEvents": "Lietotāja saskarnes notikumi",
 			"uiEventsDesc": "Reaģēt uz rīkjoslas redzamību, koda skata pārslēgšanu, pilnekrāna režīmu un redaktora izmēru maiņu.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Tiešraides notikumu inspektors",
+				"desc": "Strādājiet redaktorā kreisajā pusē un labajā pusē reāllaikā vērojiet katru izraisīto notikumu. Noklikšķiniet uz rindas, lai izvērstu tās payload.",
+				"editorLabel": "Tiešraides redaktors",
+				"logLabel": "Notikumu žurnāls",
+				"attachedCount": "Pievienoti notikumi: {count}",
+				"empty": "Vēl nav notikumu — sāciet rakstīt vai noklikšķiniet uz rīkjoslas pogas.",
+				"noPayload": "Nav payload, izņemot redaktora iekšējos objektus.",
+				"clear": "Notīrīt",
+				"pause": "Pauzēt",
+				"resume": "Atsākt",
+				"autoScroll": "Automātiskā ritināšana",
+				"returnTrueNote": "Šis notikums uzskata undefined par “apstrādātu” un aptur augšupielādi. Pasīvam klausītājam jāatgriež true.",
+				"notAttachedTitle": "Šeit nav pievienoti",
 				"notAttachedDesc": "Augšupielādes apdarinātāji pārņem augšupielādes atbildi — pievienots reģistrētājs neļautu ievietot augšupielādētos multivides failus —, tāpēc inspektors tos neaiztiek:"
 			}
 		},
@@ -819,7 +819,7 @@
 		"fullTextTitle": "Pilns licences teksts",
 		"disclaimer": "Šī lapa ir kopsavilkums vienkāršā valodā, nevis juridiska konsultācija. Saistošs ir tālāk sniegtais licences teksts.",
 		"viewOnGitHub": "Skatīt LICENSE vietnē GitHub",
-		"tryPlayground": "Izmēģiniet SunEditor rotaļu laukumā"
+		"tryPlayground": "Izmēģiniet SunEditor Playground vidē"
 	},
 	"Troubleshooting": {
 		"title": "Problēmu novēršana",
@@ -849,7 +849,7 @@
 		"notListed": "Jūsu problēma šeit nav minēta?",
 		"notListedDesc": "Pameklējiet esošajos pieteikumos vai izveidojiet jaunu, pievienojot rotaļu laukuma saiti, kurā problēma ir reproducēta.",
 		"openIssue": "Izveidot pieteikumu GitHub",
-		"tryPlayground": "Reproducējiet to rotaļu laukumā",
+		"tryPlayground": "Reproducējiet to Playground vidē",
 		"items": {
 			"ssr": {
 				"title": "“window is not defined” servera renderēšanas laikā",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "No satura pazūd tagi, atribūti vai stili",
-				"symptom": "HTML, kas iestatīts ar opciju value vai editor.$.html.set(), vai ielīmēts, atgriežas bez dažām birkām (piemēram, mark), klašu nosaukumiem, data-* atribūtiem, iekļautajiem stiliem vai saitēm uz pielāgotām lietotņu shēmām (piemēram, zoommtg: vai vscode:).",
+				"symptom": "HTML, kas iestatīts ar opciju value vai editor.$.html.set() vai ielīmēts, atgriežas bez dažiem tagiem (piemēram, mark), klašu nosaukumiem, data-* atribūtiem, iekļautajiem stiliem vai saitēm ar pielāgotām lietotņu shēmām (piemēram, zoommtg: vai vscode:).",
 				"cause": "SunEditor filtrē visu ienākošo HTML pēc atļauto sarakstiem elementiem, atribūtiem, klašu nosaukumiem un katra taga stiliem un noņem visu, kas tajos nav iekļauts. Elements span, kuram nav palicis neviena stila, tiek noņemts, saglabājot tā saturu.",
-				"fix": "Paplašiniet nepieciešamo atļauto sarakstu: elementWhitelist tagiem, attributeWhitelist atribūtiem, allowedClassName klašu nosaukumiem, tagStyles iekļautajiem stiliem un allowedURLProtocols pielāgotām URL shēmām. Atsevišķus filtrus var arī izslēgt ar opciju strictMode. Nekad neatļaujiet script tagus vai on* notikumu atribūtus."
+				"fix": "Paplašiniet vajadzīgo atļauto sarakstu: elementWhitelist tagiem, attributeWhitelist atribūtiem, allowedClassName klašu nosaukumiem, tagStyles iekļautajiem stiliem un allowedURLProtocols pielāgotām URL shēmām. Atsevišķus filtrus var arī izslēgt ar opciju strictMode. Nekad neatļaujiet script tagus vai on* notikumu atribūtus."
 			},
 			"paste": {
 				"title": "Ielīmētais saturs zaudē formatējumu vai ienes nevēlamus stilus",

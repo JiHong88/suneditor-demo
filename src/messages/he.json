@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "תחילת העבודה",
 			"feature-demo": "הדגמת תכונות",
-			"playground": "מִגרָשׁ מִשְׂחָקִים",
+			"playground": "Playground",
 			"plugin-guide": "מדריך לתוספים",
 			"deep-dive": "צלילה עמוקה",
 			"docs-api": "מסמכים/API",
@@ -48,7 +48,7 @@
 			"resources": "אֶמְצָעִי",
 			"docs": "מסמכים",
 			"featureDemo": "הדגמת תכונות",
-			"playground": "מִגרָשׁ מִשְׂחָקִים",
+			"playground": "Playground",
 			"about": "אוֹדוֹת",
 			"license": "מורשה תחת MIT.",
 			"copyright": "© זכויות יוצרים {year} תורמים של SunEditor",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "מגרש המשחקים של SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "הגדר אפשרויות, בדוק את העורך ושתף את ההגדרות שלך באמצעות כתובת URL.",
 		"reset": "אִתחוּל",
 		"shareURL": "שתף כתובת URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "נסה אפשרויות תוסף",
 		"tryOptionsDesc": "לתוספים המסומנים כ-<badge>ניתן להגדרה</badge> יש אפשרויות שניתן לכוונן במגרש המשחקים.",
-		"playgroundSidebarTitle": "סרגל צד של אפשרויות תוסף - מגרש משחקים",
+		"playgroundSidebarTitle": "Playground — סרגל צד של אפשרויות תוספים",
 		"playgroundSidebarDesc": "התאם מגבלות העלאת תמונות, יחידות גודל גופן, סוגי גלילה בטבלאות, טריגרים לאזכור ועוד. שינויים חלים באופן מיידי על עורך חי.",
-		"openPlayground": "מגרש משחקים פתוח",
+		"openPlayground": "פתח את ה-Playground",
 		"custom": {
 			"title": "צור תוסף משלך",
 			"desc": "מקור טכני לבניית תוספים מותאמים אישית - מכפתורי פקודה פשוטים ועד לתכונות מלאות מבוססות דיאלוגים.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "נסה את זה בשידור חי",
 		"ctaDesc": "הגדר אפשרויות, בדוק תוספים וראה תוצאות באופן מיידי ב-Playground.",
-		"ctaButton": "מגרש משחקים פתוח",
+		"ctaButton": "פתח את ה-Playground",
 		"resourcesTitle": "למידע נוסף",
 		"gettingStarted": "תחילת העבודה",
 		"gettingStartedDesc": "התקנה, הגדרה ויצירת העורך הראשון שלך",
@@ -590,7 +590,7 @@
 		"quickTry": "ניסיון מהיר",
 		"preview": "תצוגה מקדימה",
 		"close": "לִסְגוֹר",
-		"openInPlayground": "פתוח בגן שעשועים"
+		"openInPlayground": "פתח ב-Playground"
 	},
 	"DeepDive": {
 		"title": "צלילה עמוקה",
@@ -672,19 +672,19 @@
 			"uiEvents": "אירועי ממשק משתמש",
 			"uiEventsDesc": "תגובה לנראות סרגל הכלים, החלפת תצוגת קוד, מסך מלא ושינוי גודל העורך.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "מפקח אירועים בזמן אמת",
+				"desc": "עבדו בעורך שמשמאל וצפו מימין בכל אירוע שמופעל בזמן אמת. לחצו על שורה כדי להרחיב את ה-payload שלה.",
+				"editorLabel": "עורך חי",
+				"logLabel": "יומן אירועים",
+				"attachedCount": "{count} אירועים מחוברים",
+				"empty": "אין עדיין אירועים — התחילו להקליד או לחצו על כפתור בסרגל הכלים.",
+				"noPayload": "אין payload מלבד אובייקטים פנימיים של העורך.",
+				"clear": "ניקוי",
+				"pause": "השהיה",
+				"resume": "המשך",
+				"autoScroll": "גלילה אוטומטית",
+				"returnTrueNote": "אירוע זה מתייחס ל-undefined כ\"טופל\" ועוצר את ההעלאה. מאזין פסיבי חייב להחזיר true.",
+				"notAttachedTitle": "לא מחוברים כאן",
 				"notAttachedDesc": "מטפלי העלאה לוקחים לידיהם את תשובת ההעלאה — חיבור רושם יומן היה מונע את הוספת המדיה שהועלתה — ולכן המפקח לא נוגע בהם:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "שכבת הצגת ממשק משתמש. סרגל הכלים מעבד את סרגל הכלים הראשי, סרגל הכלים המשנה הוא מופע סרגל כלים שני אופציונלי, התפריט מטפל בתפריטים נפתחים ואפקטים של בחירה, והמציג שולט במצבי תצוגה (תצוגת קוד, מסך מלא, תצוגה מקדימה)."
 	},
 	"Migration": {
-		"title": "גרסה 2 → גרסה 3 הגירה",
+		"title": "מעבר מגרסה 2 לגרסה 3",
 		"subtitle": "הדבק את אפשרויות גרסה 2 של SunEditor וקבל את המקבילה בגרסה 3.",
 		"converterTab": "מֵמִיר",
 		"tableTab": "טבלת ייחוס",
@@ -819,7 +819,7 @@
 		"fullTextTitle": "נוסח הרישיון המלא",
 		"disclaimer": "דף זה הוא סיכום בשפה פשוטה ואינו ייעוץ משפטי. נוסח הרישיון שלהלן הוא הקובע.",
 		"viewOnGitHub": "הצג את LICENSE ב-GitHub",
-		"tryPlayground": "נסה את SunEditor במגרש המשחקים"
+		"tryPlayground": "נסה את SunEditor ב-Playground"
 	},
 	"Troubleshooting": {
 		"title": "פתרון בעיות",
@@ -834,7 +834,7 @@
 			"styling": "סגנונות",
 			"content": "תוכן",
 			"upload": "העלאה",
-			"migration": "הגירה"
+			"migration": "מעבר גרסה"
 		},
 		"noResults": "לא נמצאו בעיות תואמות. נסה מילים אחרות, או פתח issue למטה.",
 		"symptom": "תסמין",
@@ -849,7 +849,7 @@
 		"notListed": "הבעיה שלך לא מופיעה כאן?",
 		"notListedDesc": "חפש ב-issues הקיימים או פתח issue חדש עם קישור ממגרש המשחקים שמשחזר את הבעיה.",
 		"openIssue": "פתח issue ב-GitHub",
-		"tryPlayground": "שחזר את הבעיה במגרש המשחקים",
+		"tryPlayground": "שחזר את הבעיה ב-Playground",
 		"items": {
 			"ssr": {
 				"title": "\"window is not defined\" בזמן רינדור בצד השרת",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "תגים, מאפיינים או סגנונות נעלמים מהתוכן",
-				"symptom": "קוד HTML שמוגדר עם האפשרות value או editor.$.html.set(), או מודבק, חוזר ללא תגיות (כגון mark), שמות מחלקות, תכונות data-*, סגנונות מוטבעים או קישורים לסכמות אפליקציות מותאמות אישית (כגון zoommtg: או vscode:).",
+				"symptom": "HTML שהוגדר דרך האפשרות value או editor.$.html.set(), או שהודבק, חוזר בלי חלק מהתגים (כמו mark), שמות מחלקות, מאפייני data-*, סגנונות inline או קישורים עם סכמות אפליקציה מותאמות (כמו zoommtg: או vscode:).",
 				"cause": "SunEditor מסנן את כל ה-HTML הנכנס מול רשימות היתרים (allow lists) של אלמנטים, מאפיינים, שמות מחלקות וסגנונות לכל תג, ומסיר כל מה שאינו מופיע בהן. span שלא נשאר לו אף סגנון מוסר, והתוכן שלו נשאר במקומו.",
-				"fix": "הרחב את רשימת ההיתרים הדרושה: elementWhitelist עבור תגים, attributeWhitelist עבור מאפיינים, allowedClassName עבור שמות מחלקות, tagStyles עבור סגנונות מוטבעים ו-allowedURLProtocols עבור סכמות URL מותאמות אישית. ניתן גם לכבות מסננים בודדים באמצעות האפשרות strictMode. לעולם אל תאפשר תגים script או מאפייני אירועים on*."
+				"fix": "הרחב את רשימת ההיתרים שאתה צריך: elementWhitelist לתגים, attributeWhitelist למאפיינים, allowedClassName לשמות מחלקות, tagStyles לסגנונות inline ו-allowedURLProtocols לסכמות URL מותאמות. אפשר גם לכבות מסננים בודדים באמצעות האפשרות strictMode. לעולם אל תתיר תגי script או מאפייני אירועים on*."
 			},
 			"paste": {
 				"title": "תוכן מודבק מאבד את העיצוב שלו, או מביא איתו סגנונות לא רצויים",

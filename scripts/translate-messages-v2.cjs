@@ -32,7 +32,7 @@ function getSiteLocales() {
 }
 
 // Google Cloud Translate language code mapping
-const LANG_MAP = { "zh-CN": "zh-CN", "pt-BR": "pt", ckb: "ku" };
+const LANG_MAP = { "zh-CN": "zh-CN", "pt-BR": "pt" }; // ckb = Sorani (Arabic script); "ku" is Kurmanji (Latin)
 
 const MSG_DIR = path.join(__dirname, "..", "src", "messages");
 const SRC = path.join(MSG_DIR, "en.json");
@@ -102,7 +102,7 @@ function setBySegments(obj, segments, value) {
 // ── Protect placeholders from translation ─────────────────
 // next-intl uses {variable} and <tag>...</tag> syntax.
 // Brand / product names must never be translated (e.g. "Notion", "SunEditor").
-const BRAND_TERMS = /\b(?:SunEditor|Notion)\b/g;
+const BRAND_TERMS = /\b(?:SunEditor|Notion|Playground)\b/g;
 function protectPlaceholders(text) {
 	const tokens = [];
 	const p = text

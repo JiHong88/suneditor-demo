@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "Aggiungi ai preferiti su GitHub",
 		"Menus": {
-			"getting-started": "Iniziare",
+			"getting-started": "Per iniziare",
 			"feature-demo": "Dimostrazione delle funzionalità",
-			"playground": "Parco giochi",
+			"playground": "Playground",
 			"plugin-guide": "Guida ai plugin",
 			"deep-dive": "Immersioni approfondite",
 			"docs-api": "Documentazione/API",
@@ -48,7 +48,7 @@
 			"resources": "Risorse",
 			"docs": "Documenti",
 			"featureDemo": "Dimostrazione delle funzionalità",
-			"playground": "Parco giochi",
+			"playground": "Playground",
 			"about": "Di",
 			"license": "Distribuito con licenza MIT.",
 			"copyright": "© Copyright {year} Collaboratori di SunEditor",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "Iniziare",
+		"title": "Per iniziare",
 		"desc": "Installa, crea l'editor e visualizza i contenuti salvati.",
 		"step1": {
 			"eyebrow": "Passo 1",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "Area di gioco SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "Configura le opzioni, testa l'editor e condividi la tua configurazione tramite URL.",
 		"reset": "Reset",
 		"shareURL": "Condividi URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Prova le opzioni del plugin",
 		"tryOptionsDesc": "I plugin contrassegnati con <badge>configurable</badge> hanno opzioni che puoi modificare nel Playground.",
-		"playgroundSidebarTitle": "Area giochi — Barra laterale delle opzioni dei plugin",
+		"playgroundSidebarTitle": "Playground — barra laterale delle opzioni dei plugin",
 		"playgroundSidebarDesc": "Regola i limiti di caricamento delle immagini, le unità di misura delle dimensioni dei caratteri, i tipi di scorrimento delle tabelle, i trigger di menzione e altro ancora. Le modifiche vengono applicate istantaneamente all'editor in tempo reale.",
-		"openPlayground": "Area giochi all'aperto",
+		"openPlayground": "Apri il Playground",
 		"custom": {
 			"title": "Crea il tuo plugin",
 			"desc": "Manuale tecnico di riferimento per la creazione di plugin personalizzati, dai semplici pulsanti di comando alle funzionalità complete basate su finestre di dialogo.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "Provalo dal vivo",
 		"ctaDesc": "Configura le opzioni, testa i plugin e visualizza i risultati immediatamente nel Playground.",
-		"ctaButton": "Area giochi all'aperto",
+		"ctaButton": "Apri il Playground",
 		"resourcesTitle": "Saperne di più",
-		"gettingStarted": "Iniziare",
+		"gettingStarted": "Per iniziare",
 		"gettingStartedDesc": "Installa, configura e crea il tuo primo editor",
 		"pluginGuide": "Guida ai plugin",
 		"pluginGuideDesc": "Oltre 24 plugin integrati e guida ai plugin personalizzati",
@@ -590,7 +590,7 @@
 		"quickTry": "Prova rapida",
 		"preview": "Anteprima",
 		"close": "Vicino",
-		"openInPlayground": "Apri in Playground"
+		"openInPlayground": "Apri nel Playground"
 	},
 	"DeepDive": {
 		"title": "Immersioni approfondite",
@@ -672,19 +672,19 @@
 			"uiEvents": "Eventi dell'interfaccia utente",
 			"uiEventsDesc": "Reagisce alla visibilità della barra degli strumenti, all'attivazione/disattivazione della visualizzazione del codice, alla modalità a schermo intero e al ridimensionamento dell'editor.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Ispettore eventi dal vivo",
+				"desc": "Usa l'editor a sinistra e osserva in tempo reale, a destra, ogni evento che viene emesso. Fai clic su una riga per espandere il payload.",
+				"editorLabel": "Editor dal vivo",
+				"logLabel": "Log eventi",
+				"attachedCount": "{count} eventi collegati",
+				"empty": "Ancora nessun evento — inizia a scrivere o fai clic su un pulsante della barra degli strumenti.",
+				"noPayload": "Nessun payload oltre agli oggetti interni dell'editor.",
+				"clear": "Svuota",
+				"pause": "Pausa",
+				"resume": "Riprendi",
+				"autoScroll": "Scorrimento automatico",
+				"returnTrueNote": "Questo evento considera undefined come \"gestito\" e interrompe il caricamento. Un listener passivo deve restituire true.",
+				"notAttachedTitle": "Non collegati qui",
 				"notAttachedDesc": "Gli handler di upload prendono in carico la risposta dell'upload (collegare un logger impedirebbe l'inserimento dei media caricati), quindi l'inspector li lascia stare:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tag, attributi o stili scompaiono dal contenuto",
-				"symptom": "Il codice HTML impostato con l'opzione value o editor.$.html.set(), oppure incollato, viene restituito senza alcuni tag (come mark), nomi di classi, attributi data-*, stili in linea o collegamenti a schemi di app personalizzati (come zoommtg: o vscode:).",
+				"symptom": "L'HTML impostato con l'opzione value o con editor.$.html.set(), oppure incollato, torna privo di alcuni tag (come mark), nomi di classe, attributi data-*, stili inline o link con schemi di app personalizzati (come zoommtg: o vscode:).",
 				"cause": "SunEditor filtra tutto l'HTML in ingresso in base a liste di elementi consentiti per elementi, attributi, nomi di classe e stili per tag, e rimuove tutto ciò che non vi compare. Uno span rimasto senza alcuno stile viene rimosso, mantenendone il contenuto.",
-				"fix": "Estendi l'elenco di elementi consentiti in base alle tue esigenze: elementWhitelist per i tag, attributeWhitelist per gli attributi, allowedClassName per i nomi delle classi, tagStyles per gli stili in linea e allowedURLProtocols per gli schemi URL personalizzati. I singoli filtri possono anche essere disattivati ​​con l'opzione strictMode. Non consentire mai i tag script o gli attributi degli eventi on*."
+				"fix": "Estendi la lista di elementi consentiti che ti serve: elementWhitelist per i tag, attributeWhitelist per gli attributi, allowedClassName per i nomi di classe, tagStyles per gli stili inline e allowedURLProtocols per gli schemi URL personalizzati. I singoli filtri si possono anche disattivare con l'opzione strictMode. Non consentire mai i tag script né gli attributi di evento on*."
 			},
 			"paste": {
 				"title": "Il contenuto incollato perde la formattazione o porta con sé stili indesiderati",

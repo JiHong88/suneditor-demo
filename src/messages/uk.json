@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Початок роботи",
 			"feature-demo": "Демо-версія функції",
-			"playground": "Дитячий майданчик",
+			"playground": "Playground",
 			"plugin-guide": "Посібник з плагінів",
 			"deep-dive": "Глибоке занурення",
 			"docs-api": "Документація/API",
@@ -48,7 +48,7 @@
 			"resources": "Ресурси",
 			"docs": "Документи",
 			"featureDemo": "Демонстрація функцій",
-			"playground": "Дитячий майданчик",
+			"playground": "Playground",
 			"about": "Про нас",
 			"license": "Ліцензовано MIT.",
 			"copyright": "© Авторське право {year} Автори SunEditor",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "Дитячий майданчик SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "Налаштуйте параметри, протестуйте редактор і поділіться своїми налаштуваннями через URL-адресу.",
 		"reset": "Скинути",
 		"shareURL": "Поділитися URL-адресою",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Спробуйте параметри плагіна",
 		"tryOptionsDesc": "Плагіни з позначкою <badge>configurable</badge> мають опції, які можна налаштувати на ігровому майданчику.",
-		"playgroundSidebarTitle": "Дитячий майданчик — бічна панель параметрів плагіна",
+		"playgroundSidebarTitle": "Playground — бічна панель параметрів плагінів",
 		"playgroundSidebarDesc": "Налаштуйте обмеження завантаження зображень, одиниці розміру шрифту, типи прокручування таблиці, тригери згадок тощо. Зміни миттєво застосовуються до активного редактора.",
-		"openPlayground": "Відкритий дитячий майданчик",
+		"openPlayground": "Відкрити Playground",
 		"custom": {
 			"title": "Створіть свій власний плагін",
 			"desc": "Технічний довідник зі створення власних плагінів — від простих командних кнопок до повноцінних функцій на основі діалогових вікон.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Спробуйте наживо",
 		"ctaDesc": "Налаштуйте параметри, тестуйте плагіни та миттєво переглядайте результати на ігровому майданчику.",
-		"ctaButton": "Відкритий дитячий майданчик",
+		"ctaButton": "Відкрити Playground",
 		"resourcesTitle": "Дізнатися більше",
 		"gettingStarted": "Початок роботи",
 		"gettingStartedDesc": "Встановлення, налаштування та створення вашого першого редактора",
@@ -590,7 +590,7 @@
 		"quickTry": "Швидка спроба",
 		"preview": "Попередній перегляд",
 		"close": "Закрити",
-		"openInPlayground": "Відкрито на дитячому майданчику"
+		"openInPlayground": "Відкрити в Playground"
 	},
 	"DeepDive": {
 		"title": "Глибоке занурення",
@@ -672,19 +672,19 @@
 			"uiEvents": "Події інтерфейсу користувача",
 			"uiEventsDesc": "Реагувати на видимість панелі інструментів, перемикач перегляду коду, повноекранний режим та зміну розміру редактора.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Інспектор подій у реальному часі",
+				"desc": "Працюйте в редакторі ліворуч і стежте праворуч за кожною подією в реальному часі. Натисніть рядок, щоб розгорнути його payload.",
+				"editorLabel": "Живий редактор",
+				"logLabel": "Журнал подій",
+				"attachedCount": "Підключено подій: {count}",
+				"empty": "Подій ще немає — почніть друкувати або натисніть кнопку на панелі інструментів.",
+				"noPayload": "Немає payload, крім внутрішніх об'єктів редактора.",
+				"clear": "Очистити",
+				"pause": "Пауза",
+				"resume": "Продовжити",
+				"autoScroll": "Автопрокручування",
+				"returnTrueNote": "Ця подія вважає undefined ознакою «оброблено» і зупиняє завантаження. Пасивний слухач має повертати true.",
+				"notAttachedTitle": "Тут не підключені",
 				"notAttachedDesc": "Обробники завантаження беруть на себе відповідь завантаження — підключений логер завадив би вставленню завантажених медіа, — тому інспектор їх не чіпає:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Теги, атрибути або стилі зникають із контенту",
-				"symptom": "HTML-код, встановлений з опцією value або editor.$.html.set(), або вставлений, повертається без деяких тегів (таких як mark), назв класів, атрибутів data-*, вбудованих стилів або посилань на користувацькі схеми програм (таких як zoommtg: або vscode:).",
+				"symptom": "HTML, заданий через параметр value або editor.$.html.set() чи вставлений із буфера обміну, повертається без деяких тегів (наприклад, mark), імен класів, атрибутів data-*, вбудованих стилів або посилань із власними схемами застосунків (наприклад, zoommtg: або vscode:).",
 				"cause": "SunEditor фільтрує весь вхідний HTML за списками дозволених елементів, атрибутів, імен класів і стилів для кожного тегу та видаляє все, чого в них немає. Елемент span, у якого не лишилося жодного стилю, розгортається (замінюється своїм вмістом).",
-				"fix": "Розширте потрібний список дозволених адрес: elementWhitelist для тегів, attributeWhitelist для атрибутів, allowedClassName для назв класів, tagStyles для вбудованих стилів та allowedURLProtocols для користувацьких схем URL-адрес. Окремі фільтри також можна вимкнути за допомогою опції strictMode. Ніколи не дозволяйте теги script або атрибути подій on*."
+				"fix": "Розширте потрібний список дозволених значень: elementWhitelist — для тегів, attributeWhitelist — для атрибутів, allowedClassName — для імен класів, tagStyles — для вбудованих стилів і allowedURLProtocols — для власних схем URL. Окремі фільтри також можна вимкнути за допомогою параметра strictMode. Ніколи не дозволяйте теги script і атрибути подій on*."
 			},
 			"paste": {
 				"title": "Вставлений контент втрачає форматування або приносить небажані стилі",

@@ -187,14 +187,14 @@ export const FEATURE_PLAYGROUND_LINKS: Record<string, FeatureLink> = {
 		{
 			p: "standard",
 			bhe: "1",
-			bhm: "p,heading,list,blockquote,pre,align",
+			bhm: "blockStyle,list,blockquote,codeBlock,align",
 			bhpc: "($, { openMenu }) => openMenu()",
 			val: DEMO_BLOCK_HANDLE,
 		},
 		[["undo", "redo"]],
 		{
 			blockHandle: {
-				menu: ["p", "heading", "list", "blockquote", "pre", "align"],
+				menu: ["blockStyle", "list", "blockquote", "codeBlock", "align"],
 				// v3.3.1: the plus button adds the line, this hook decides what opens next
 				onPlusClick: (_$: unknown, { openMenu }: { openMenu: () => void }) => openMenu(),
 			},

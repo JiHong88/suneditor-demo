@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Başlarken",
 			"feature-demo": "Özellik Tanıtımı",
-			"playground": "Oyun alanı",
+			"playground": "Playground",
 			"plugin-guide": "Eklenti Kılavuzu",
 			"deep-dive": "Derinlemesine İnceleme",
 			"docs-api": "Belgeler/API",
@@ -48,7 +48,7 @@
 			"resources": "Kaynaklar",
 			"docs": "Belgeler",
 			"featureDemo": "Özellik tanıtımı",
-			"playground": "Oyun alanı",
+			"playground": "Playground",
 			"about": "Hakkında",
 			"license": "MIT lisansı altındadır.",
 			"copyright": "© Telif Hakkı {year} SunEditor Katkıda Bulunanları",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "GüneşEditör Oyun Alanı",
+		"title": "SunEditor Playground",
 		"desc": "Seçenekleri yapılandırın, düzenleyiciyi test edin ve kurulumunuzu URL üzerinden paylaşın.",
 		"reset": "Sıfırla",
 		"shareURL": "URL'yi paylaş",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Eklenti Seçeneklerini Deneyin",
 		"tryOptionsDesc": "<badge>configurable</badge> olarak işaretlenmiş eklentilerin Playground'da ince ayar yapabileceğiniz seçenekleri vardır.",
-		"playgroundSidebarTitle": "Oyun Alanı — Eklenti Seçenekleri Kenar Çubuğu",
+		"playgroundSidebarTitle": "Playground — Eklenti Seçenekleri Kenar Çubuğu",
 		"playgroundSidebarDesc": "Görüntü yükleme sınırlarını, yazı tipi boyutu birimlerini, tablo kaydırma türlerini, bahsetme tetikleyicilerini ve daha fazlasını ayarlayın. Değişiklikler canlı düzenleyiciye anında uygulanır.",
-		"openPlayground": "Açık Oyun Alanı",
+		"openPlayground": "Playground'u aç",
 		"custom": {
 			"title": "Kendi Eklentinizi Oluşturun",
 			"desc": "Basit komut düğmelerinden tam diyalog tabanlı özelliklere kadar özel eklentiler oluşturmaya yönelik teknik referans.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Canlı olarak deneyin",
 		"ctaDesc": "Playground'da seçenekleri yapılandırın, eklentileri test edin ve sonuçları anında görün.",
-		"ctaButton": "Açık Oyun Alanı",
+		"ctaButton": "Playground'u aç",
 		"resourcesTitle": "Daha fazla bilgi edin",
 		"gettingStarted": "Başlarken",
 		"gettingStartedDesc": "İlk editörünüzü kurun, yapılandırın ve oluşturun.",
@@ -590,7 +590,7 @@
 		"quickTry": "Hızlı Deneme",
 		"preview": "Önizleme",
 		"close": "Kapalı",
-		"openInPlayground": "Oyun alanında açık"
+		"openInPlayground": "Playground'da aç"
 	},
 	"DeepDive": {
 		"title": "Derinlemesine İnceleme",
@@ -672,19 +672,19 @@
 			"uiEvents": "Kullanıcı Arayüzü Olayları",
 			"uiEventsDesc": "Araç çubuğunun görünürlüğüne, kod görünümünün değiştirilmesine, tam ekrana ve düzenleyici boyutunun değiştirilmesine yanıt verin.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Canlı Olay Denetçisi",
+				"desc": "Soldaki editörü kullanın, tetiklenen her olayı sağda gerçek zamanlı izleyin. Payload'unu açmak için bir satıra tıklayın.",
+				"editorLabel": "Canlı editör",
+				"logLabel": "Olay günlüğü",
+				"attachedCount": "{count} olay bağlı",
+				"empty": "Henüz olay yok — yazmaya başlayın veya bir araç çubuğu düğmesine tıklayın.",
+				"noPayload": "Editör iç nesneleri dışında payload yok.",
+				"clear": "Temizle",
+				"pause": "Duraklat",
+				"resume": "Devam et",
+				"autoScroll": "Otomatik kaydırma",
+				"returnTrueNote": "Bu olay undefined değerini \"işlendi\" olarak kabul eder ve yüklemeyi durdurur. Pasif bir dinleyici true döndürmelidir.",
+				"notAttachedTitle": "Burada bağlı değil",
 				"notAttachedDesc": "Yükleme işleyicileri yükleme yanıtını devralır — bir kaydedici eklemek yüklenen medyanın eklenmesini engeller — bu yüzden denetçi bunlara dokunmaz:"
 			}
 		},
@@ -819,7 +819,7 @@
 		"fullTextTitle": "Lisansın tam metni",
 		"disclaimer": "Bu sayfa sade bir dille yazılmış bir özettir, hukuki tavsiye değildir. Geçerli olan, aşağıdaki lisans metnidir.",
 		"viewOnGitHub": "LICENSE dosyasını GitHub'da görüntüle",
-		"tryPlayground": "SunEditor'ı Oyun alanında deneyin"
+		"tryPlayground": "SunEditor'ı Playground'da deneyin"
 	},
 	"Troubleshooting": {
 		"title": "Sorun Giderme",
@@ -849,7 +849,7 @@
 		"notListed": "Sorununuz burada yok mu?",
 		"notListedDesc": "Mevcut sorun kayıtlarında arama yapın ya da sorunu yeniden oluşturan bir Oyun alanı bağlantısıyla yeni bir kayıt açın.",
 		"openIssue": "GitHub'da bir sorun bildirin",
-		"tryPlayground": "Oyun alanında yeniden oluşturun",
+		"tryPlayground": "Playground'da yeniden oluşturun",
 		"items": {
 			"ssr": {
 				"title": "Sunucu tarafı işlemede “window is not defined” hatası",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Etiketler, öznitelikler veya stiller içerikten kayboluyor",
-				"symptom": "value veya editor.$.html.set() seçeneğiyle ayarlanan veya yapıştırılan HTML kodu, bazı etiketler (örneğin mark), sınıf adları, data-* öznitelikleri, satır içi stiller veya özel uygulama şemalarına bağlantılar (örneğin zoommtg: veya vscode:) olmadan geri döner.",
+				"symptom": "value seçeneğiyle veya editor.$.html.set() ile ayarlanan ya da yapıştırılan HTML, bazı etiketler (örneğin mark), sınıf adları, data-* öznitelikleri, satır içi stiller veya özel uygulama şemalı bağlantılar (örneğin zoommtg: veya vscode:) olmadan geri geliyor.",
 				"cause": "SunEditor, gelen tüm HTML'i öğeler, öznitelikler, sınıf adları ve etiket bazında stiller için tanımlı izin listelerine göre filtreler ve bu listelerde olmayan her şeyi kaldırır. Hiç stili kalmayan bir span ise kaldırılır, içeriği korunur.",
-				"fix": "İhtiyacınız olan izin listesini genişletin: Etiketler için elementWhitelist, öznitelikler için attributeWhitelist, sınıf adları için allowedClassName, satır içi stiller için tagStyles ve özel URL şemaları için allowedURLProtocols. Bireysel filtreler strictMode seçeneğiyle de kapatılabilir. script etiketlerine veya on* olay özniteliklerine asla izin vermeyin."
+				"fix": "İhtiyacınız olan izin listesini genişletin: etiketler için elementWhitelist, öznitelikler için attributeWhitelist, sınıf adları için allowedClassName, satır içi stiller için tagStyles ve özel URL şemaları için allowedURLProtocols. Filtreler tek tek strictMode seçeneğiyle de kapatılabilir. script etiketlerine veya on* olay özniteliklerine asla izin vermeyin."
 			},
 			"paste": {
 				"title": "Yapıştırılan içerik biçimlendirmesini kaybediyor veya istenmeyen stiller getiriyor",

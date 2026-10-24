@@ -852,7 +852,7 @@ export const DEFAULTS: PlaygroundState = {
 
 export const ITEM_PRESETS: Record<string, string> = {
 	slashCommand_items: "heading, list, blockquote, pre, bold, italic, image, table, link",
-	blockHandle_menu: "p, heading, list, blockquote, pre",
+	blockHandle_menu: "blockStyle, list, blockquote, codeBlock, align",
 	blockHandle_onPlusClick: "($, { openMenu }) => openMenu()",
 	align_items: "left,center,right",
 	font_items: "Roboto,Open Sans,Lato,Montserrat,Playfair Display,Noto Sans KR",

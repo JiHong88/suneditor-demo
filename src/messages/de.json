@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Erste Schritte",
 			"feature-demo": "Funktionsdemo",
-			"playground": "Spielplatz",
+			"playground": "Playground",
 			"plugin-guide": "Plugin-Leitfaden",
 			"deep-dive": "Tiefer Einblick",
 			"docs-api": "Dokumentation/API",
@@ -48,7 +48,7 @@
 			"resources": "Ressourcen",
 			"docs": "Dokumente",
 			"featureDemo": "Funktionsdemo",
-			"playground": "Spielplatz",
+			"playground": "Playground",
 			"about": "Um",
 			"license": "Lizenziert unter MIT.",
 			"copyright": "© Copyright {year} SunEditor-Mitwirkende",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "SunEditor-Spielplatz",
+		"title": "SunEditor Playground",
 		"desc": "Konfigurieren Sie Optionen, testen Sie den Editor und teilen Sie Ihre Konfiguration per URL.",
 		"reset": "Zurücksetzen",
 		"shareURL": "URL teilen",
@@ -328,7 +328,7 @@
 		"tryOptionsDesc": "Plugins mit der Kennzeichnung <badge>configurable</badge> bieten Optionen, die Sie im Playground anpassen können.",
 		"playgroundSidebarTitle": "Playground – Seitenleiste mit Plugin-Optionen",
 		"playgroundSidebarDesc": "Passen Sie die Upload-Beschränkungen für Bilder, die Schriftgrößeneinheiten, die Tabellen-Scrolltypen, die Auslöser für Erwähnungen und vieles mehr an. Änderungen werden sofort im Live-Editor übernommen.",
-		"openPlayground": "Freier Spielplatz",
+		"openPlayground": "Playground öffnen",
 		"custom": {
 			"title": "Erstellen Sie Ihr eigenes Plugin",
 			"desc": "Technisches Nachschlagewerk für die Entwicklung benutzerdefinierter Plugins – von einfachen Befehlsschaltflächen bis hin zu vollständigen dialogbasierten Funktionen.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Probieren Sie es live aus.",
 		"ctaDesc": "Im Playground können Sie Optionen konfigurieren, Plugins testen und sofort Ergebnisse sehen.",
-		"ctaButton": "Freier Spielplatz",
+		"ctaButton": "Playground öffnen",
 		"resourcesTitle": "Mehr erfahren",
 		"gettingStarted": "Erste Schritte",
 		"gettingStartedDesc": "Installieren, konfigurieren und erstellen Sie Ihren ersten Editor",
@@ -590,7 +590,7 @@
 		"quickTry": "Schnell ausprobieren",
 		"preview": "Vorschau",
 		"close": "Schließen",
-		"openInPlayground": "Im Spielplatz öffnen"
+		"openInPlayground": "Im Playground öffnen"
 	},
 	"DeepDive": {
 		"title": "Tiefer Einblick",
@@ -672,19 +672,19 @@
 			"uiEvents": "UI-Ereignisse",
 			"uiEventsDesc": "Reagiere auf die Sichtbarkeit der Symbolleiste, das Umschalten der Codeansicht, den Vollbildmodus und die Größenänderung des Editors.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Live-Event-Inspector",
+				"desc": "Arbeite links im Editor und sieh rechts in Echtzeit, welche Events ausgelöst werden. Klicke auf eine Zeile, um ihre Payload aufzuklappen.",
+				"editorLabel": "Live-Editor",
+				"logLabel": "Event-Log",
+				"attachedCount": "{count} Events verbunden",
+				"empty": "Noch keine Events — fang an zu tippen oder klicke auf eine Schaltfläche in der Toolbar.",
+				"noPayload": "Keine Payload außer Editor-Interna.",
+				"clear": "Leeren",
+				"pause": "Pausieren",
+				"resume": "Fortsetzen",
+				"autoScroll": "Auto-Scroll",
+				"returnTrueNote": "Dieses Event wertet undefined als „behandelt“ und bricht den Upload ab. Ein reiner Listener muss true zurückgeben.",
+				"notAttachedTitle": "Hier nicht verbunden",
 				"notAttachedDesc": "Upload-Handler übernehmen die Upload-Antwort – ein angehängter Logger würde verhindern, dass hochgeladene Medien eingefügt werden –, daher lässt der Inspector sie unangetastet:"
 			}
 		},
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, Attribute oder Stile verschwinden aus dem Inhalt",
-				"symptom": "Mit der Option value oder editor.$.html.set() festgelegter oder eingefügter HTML-Code wird ohne bestimmte Tags (wie z. B. mark), Klassennamen, data-*-Attribute, Inline-Styles oder Verknüpfungen zu benutzerdefinierten App-Schemata (wie z. B. zoommtg: oder vscode:) zurückgegeben.",
+				"symptom": "HTML, das über die Option value oder editor.$.html.set() gesetzt oder eingefügt wurde, kommt ohne bestimmte Tags (etwa mark), Klassennamen, data-*-Attribute, Inline-Stile oder Links mit eigenen App-Schemata (etwa zoommtg: oder vscode:) zurück.",
 				"cause": "SunEditor filtert jedes eingehende HTML anhand von Allow-Listen für Elemente, Attribute, Klassennamen und tagspezifische Stile und entfernt alles, was nicht darauf steht. Ein span ohne verbleibenden Stil wird entpackt.",
-				"fix": "Erweitern Sie die Zulassungsliste nach Bedarf: elementWhitelist für Tags, attributeWhitelist für Attribute, allowedClassName für Klassennamen, tagStyles für Inline-Styles und allowedURLProtocols für benutzerdefinierte URL-Schemas. Einzelne Filter lassen sich mit der Option strictMode deaktivieren. Tags (script) und Ereignisattribute (on*) sind grundsätzlich nicht zulässig."
+				"fix": "Erweitern Sie die benötigte Allow-Liste: elementWhitelist für Tags, attributeWhitelist für Attribute, allowedClassName für Klassennamen, tagStyles für Inline-Stile und allowedURLProtocols für eigene URL-Schemata. Einzelne Filter lassen sich außerdem mit der Option strictMode abschalten. Erlauben Sie niemals script-Tags oder on*-Event-Attribute."
 			},
 			"paste": {
 				"title": "Eingefügte Inhalte verlieren ihre Formatierung oder bringen unerwünschte Stile mit",

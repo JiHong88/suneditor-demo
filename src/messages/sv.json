@@ -10,9 +10,9 @@
 	"Main": {
 		"starOnGitHub": "Stjärnmärk på GitHub",
 		"Menus": {
-			"getting-started": "Komma igång",
+			"getting-started": "Kom igång",
 			"feature-demo": "Funktionsdemo",
-			"playground": "Lekplats",
+			"playground": "Playground",
 			"plugin-guide": "Plugin-guide",
 			"deep-dive": "Djupdykning",
 			"docs-api": "Dokument/API",
@@ -48,7 +48,7 @@
 			"resources": "Resurser",
 			"docs": "Dokument",
 			"featureDemo": "Funktionsdemo",
-			"playground": "Lekplats",
+			"playground": "Playground",
 			"about": "Om",
 			"license": "Licensierad enligt MIT.",
 			"copyright": "© Upphovsrätt {year} SunEditor Medarbetare",
@@ -151,7 +151,7 @@
 		}
 	},
 	"GettingStarted": {
-		"title": "Komma igång",
+		"title": "Kom igång",
 		"desc": "Installera, skapa redigeraren och visa sparat innehåll.",
 		"step1": {
 			"eyebrow": "Steg 1",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Testa plugin-alternativ",
 		"tryOptionsDesc": "Insticksprogram markerade <badge>konfigurerbara</badge> har alternativ som du kan justera i Playground.",
-		"playgroundSidebarTitle": "Lekplats — Sidofält för plugin-alternativ",
+		"playgroundSidebarTitle": "Playground — sidofält med plugin-alternativ",
 		"playgroundSidebarDesc": "Justera gränser för bilduppladdning, teckenstorlekar, tabellskrollningstyper, omnämnandeutlösare och mer. Ändringarna tillämpas direkt i en live-redigerare.",
-		"openPlayground": "Öppen lekplats",
+		"openPlayground": "Öppna Playground",
 		"custom": {
 			"title": "Skapa ditt eget plugin",
 			"desc": "Teknisk referens för att bygga anpassade plugins — från enkla kommandoknappar till fullständiga dialogbaserade funktioner.",
@@ -579,9 +579,9 @@
 		},
 		"ctaTitle": "Prova det live",
 		"ctaDesc": "Konfigurera alternativ, testa plugin-program och se resultat direkt i Playground.",
-		"ctaButton": "Öppen lekplats",
+		"ctaButton": "Öppna Playground",
 		"resourcesTitle": "Läs mer",
-		"gettingStarted": "Komma igång",
+		"gettingStarted": "Kom igång",
 		"gettingStartedDesc": "Installera, konfigurera och skapa din första redigerare",
 		"pluginGuide": "Plugin-guide",
 		"pluginGuideDesc": "24+ inbyggda plugins och guide till anpassade plugins",
@@ -590,7 +590,7 @@
 		"quickTry": "Snabbt försök",
 		"preview": "Förhandsvisning",
 		"close": "Nära",
-		"openInPlayground": "Öppet i lekplatsen"
+		"openInPlayground": "Öppna i Playground"
 	},
 	"DeepDive": {
 		"title": "Djupdykning",
@@ -672,19 +672,19 @@
 			"uiEvents": "UI-händelser",
 			"uiEventsDesc": "Svara på verktygsfältets synlighet, kodvyväxling, helskärm och storleksändring av redigeraren.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "Live-händelseinspektör",
+				"desc": "Använd editorn till vänster och se varje händelse som utlöses i realtid till höger. Klicka på en rad för att visa dess payload.",
+				"editorLabel": "Live-editor",
+				"logLabel": "Händelselogg",
+				"attachedCount": "{count} händelser kopplade",
+				"empty": "Inga händelser ännu — börja skriva eller klicka på en knapp i verktygsfältet.",
+				"noPayload": "Ingen payload utöver editorns interna objekt.",
+				"clear": "Rensa",
+				"pause": "Pausa",
+				"resume": "Återuppta",
+				"autoScroll": "Autoskroll",
+				"returnTrueNote": "Den här händelsen tolkar undefined som ”hanterad” och stoppar uppladdningen. En passiv lyssnare måste returnera true.",
+				"notAttachedTitle": "Inte kopplade här",
 				"notAttachedDesc": "Uppladdningshanterare tar över uppladdningssvaret – att koppla på en loggare skulle hindra uppladdade medier från att infogas – så inspektören lämnar dem ifred:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "UI-presentationslager. Verktygsfältet renderar huvudverktygsfältet, subToolbar är en valfri andra verktygsfältsinstans, menyn hanterar rullgardinsmenyer och markeringseffekter, och visningsprogrammet styr visningslägen (kodvy, helskärm, förhandsgranskning)."
 	},
 	"Migration": {
-		"title": "v2 → v3 Migrering",
+		"title": "Migrering från v2 till v3",
 		"subtitle": "Klistra in dina SunEditor v2-alternativ och få motsvarigheten till v3.",
 		"converterTab": "Omvandlare",
 		"tableTab": "Referenstabell",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Taggar, attribut eller stilar försvinner ur innehållet",
-				"symptom": "HTML som anges med alternativet value eller editor.$.html.set(), eller klistras in, visas utan vissa taggar (som mark), klassnamn, data-*-attribut, inline-stilar eller länkar till anpassade appscheman (som zoommtg: eller vscode:).",
+				"symptom": "HTML som sätts med alternativet value eller editor.$.html.set(), eller som klistras in, kommer tillbaka utan vissa taggar (till exempel mark), klassnamn, data-*-attribut, inline-stilar eller länkar med egna appscheman (till exempel zoommtg: eller vscode:).",
 				"cause": "SunEditor filtrerar all inkommande HTML mot tillåtelselistor för element, attribut, klassnamn och stilar per tagg, och tar bort allt som inte finns med på dem. En span som blir kvar utan någon stil packas upp.",
-				"fix": "Utöka den tillåtna listan du behöver: elementWhitelist för taggar, attributeWhitelist för attribut, allowedClassName för klassnamn, tagStyles för inline-stilar och allowedURLProtocols för anpassade URL-scheman. Enskilda filter kan också stängas av med alternativet strictMode. Tillåt aldrig script-taggar eller on*-händelseattribut."
+				"fix": "Utöka den tillåtelselista du behöver: elementWhitelist för taggar, attributeWhitelist för attribut, allowedClassName för klassnamn, tagStyles för inline-stilar och allowedURLProtocols för egna URL-scheman. Enskilda filter kan också stängas av med alternativet strictMode. Tillåt aldrig script-taggar eller on*-händelseattribut."
 			},
 			"paste": {
 				"title": "Inklistrat innehåll tappar sin formatering, eller tar med oönskade stilar",

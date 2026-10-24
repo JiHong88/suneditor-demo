@@ -1,11 +1,14 @@
+import { use } from "react";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SUNEDITOR_VERSION } from "@/store/version";
 import { TROUBLESHOOTING_CATEGORIES, TROUBLESHOOTING_ITEMS, TROUBLESHOOTING_VERIFIED_VERSION } from "@/data/troubleshooting";
 import TroubleshootingList, { PrefilledIssueLink, type ResolvedItem } from "./_components/TroubleshootingList";
 
-export default function TroubleshootingPage() {
+export default function TroubleshootingPage({ params }: { params: Promise<{ locale: string }> }) {
+	setRequestLocale(use(params).locale);
 	const t = useTranslations("Troubleshooting");
 	const t_menus = useTranslations("Main.Menus");
 	const t_common = useTranslations("Common");

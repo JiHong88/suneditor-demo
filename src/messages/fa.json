@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "شروع به کار",
 			"feature-demo": "نسخه نمایشی ویژه",
-			"playground": "زمین بازی",
+			"playground": "Playground",
 			"plugin-guide": "راهنمای افزونه",
 			"deep-dive": "شیرجه عمیق",
 			"docs-api": "اسناد/API",
@@ -48,7 +48,7 @@
 			"resources": "منابع",
 			"docs": "اسناد",
 			"featureDemo": "نسخه نمایشی ویژه",
-			"playground": "زمین بازی",
+			"playground": "Playground",
 			"about": "درباره",
 			"license": "تحت لیسانس MIT.",
 			"copyright": "© حق نشر {year} SunEditor همکاران",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "زمین بازی SunEditor",
+		"title": "SunEditor Playground",
 		"desc": "گزینه‌ها را پیکربندی کنید، ویرایشگر را آزمایش کنید و تنظیمات خود را از طریق URL به اشتراک بگذارید.",
 		"reset": "تنظیم مجدد",
 		"shareURL": "اشتراک‌گذاری آدرس اینترنتی",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "گزینه‌های افزونه را امتحان کنید",
 		"tryOptionsDesc": "افزونه‌هایی که با <badge>configurable</badge> مشخص شده‌اند، گزینه‌هایی دارند که می‌توانید در Playground آنها را تغییر دهید.",
-		"playgroundSidebarTitle": "زمین بازی — نوار کناری گزینه‌های افزونه",
+		"playgroundSidebarTitle": "Playground — نوار کناری گزینه‌های افزونه",
 		"playgroundSidebarDesc": "محدودیت‌های آپلود تصویر، واحدهای اندازه فونت، انواع اسکرول جدول، تریگرهای منشن و موارد دیگر را تنظیم کنید. تغییرات فوراً در یک ویرایشگر زنده اعمال می‌شوند.",
-		"openPlayground": "زمین بازی روباز",
+		"openPlayground": "باز کردن Playground",
 		"custom": {
 			"title": "افزونه خودتان را بسازید",
 			"desc": "مرجع فنی برای ساخت افزونه‌های سفارشی - از دکمه‌های فرمان ساده گرفته تا ویژگی‌های کامل مبتنی بر دیالوگ.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "زنده امتحان کنید",
 		"ctaDesc": "گزینه‌ها را پیکربندی کنید، افزونه‌ها را آزمایش کنید و نتایج را فوراً در Playground مشاهده کنید.",
-		"ctaButton": "زمین بازی روباز",
+		"ctaButton": "باز کردن Playground",
 		"resourcesTitle": "اطلاعات بیشتر",
 		"gettingStarted": "شروع به کار",
 		"gettingStartedDesc": "نصب، پیکربندی و ایجاد اولین ویرایشگر خود",
@@ -590,7 +590,7 @@
 		"quickTry": "امتحان سریع",
 		"preview": "پیش‌نمایش",
 		"close": "بستن",
-		"openInPlayground": "باز در زمین بازی"
+		"openInPlayground": "باز کردن در Playground"
 	},
 	"DeepDive": {
 		"title": "شیرجه عمیق",
@@ -672,19 +672,19 @@
 			"uiEvents": "رویدادهای رابط کاربری",
 			"uiEventsDesc": "به قابلیت مشاهده نوار ابزار، تغییر وضعیت نمایش کد، نمایش تمام صفحه و تغییر اندازه ویرایشگر پاسخ دهید.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
-				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"title": "بازرس زنده رویدادها",
+				"desc": "با ویرایشگر سمت چپ کار کنید و هر رویدادی را که رخ می‌دهد به‌صورت زنده در سمت راست ببینید. برای باز کردن payload روی هر ردیف کلیک کنید.",
+				"editorLabel": "ویرایشگر زنده",
+				"logLabel": "گزارش رویدادها",
+				"attachedCount": "{count} رویداد متصل",
+				"empty": "هنوز رویدادی نیست — شروع به تایپ کنید یا روی یکی از دکمه‌های نوار ابزار کلیک کنید.",
+				"noPayload": "به‌جز اشیای داخلی ویرایشگر، payload دیگری وجود ندارد.",
+				"clear": "پاک کردن",
+				"pause": "توقف",
+				"resume": "ادامه",
+				"autoScroll": "پیمایش خودکار",
+				"returnTrueNote": "این رویداد مقدار undefined را «پردازش‌شده» در نظر می‌گیرد و آپلود را متوقف می‌کند. شنونده‌ای که فقط ثبت می‌کند باید true برگرداند.",
+				"notAttachedTitle": "اینجا متصل نیستند",
 				"notAttachedDesc": "هندلرهای آپلود پاسخ آپلود را بر عهده می‌گیرند — وصل کردن یک لاگر باعث می‌شود رسانه‌های آپلودشده درج نشوند — برای همین بازرس به آن‌ها دست نمی‌زند:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "لایه ارائه رابط کاربری. نوار ابزار، نوار ابزار اصلی را رندر می‌کند، زیر نوار ابزار یک نمونه نوار ابزار دوم اختیاری است، منو، منوی کشویی و جلوه‌های انتخاب را مدیریت می‌کند و نمایشگر، حالت‌های نمایش (نمایش کد، تمام صفحه، پیش‌نمایش) را کنترل می‌کند."
 	},
 	"Migration": {
-		"title": "مهاجرت نسخه ۲ به نسخه ۳",
+		"title": "ارتقا از نسخه ۲ به نسخه ۳",
 		"subtitle": "گزینه‌های SunEditor نسخه ۲ خود را جای‌گذاری کنید و معادل نسخه ۳ را دریافت کنید.",
 		"converterTab": "مبدل",
 		"tableTab": "جدول مرجع",
@@ -819,7 +819,7 @@
 		"fullTextTitle": "متن کامل مجوز",
 		"disclaimer": "این صفحه خلاصه‌ای به زبان ساده است و مشاوره حقوقی محسوب نمی‌شود. آنچه معتبر است، متن مجوز زیر است.",
 		"viewOnGitHub": "مشاهده LICENSE در GitHub",
-		"tryPlayground": "SunEditor را در زمین بازی امتحان کنید"
+		"tryPlayground": "SunEditor را در Playground امتحان کنید"
 	},
 	"Troubleshooting": {
 		"title": "عیب‌یابی",
@@ -834,7 +834,7 @@
 			"styling": "استایل‌ها",
 			"content": "محتوا",
 			"upload": "آپلود",
-			"migration": "مهاجرت"
+			"migration": "ارتقا"
 		},
 		"noResults": "مشکل منطبقی پیدا نشد. واژه‌های دیگری را امتحان کنید یا در پایین یک issue ثبت کنید.",
 		"symptom": "نشانه",
@@ -849,7 +849,7 @@
 		"notListed": "مشکل شما در این فهرست نیست؟",
 		"notListedDesc": "در issueهای موجود جست‌وجو کنید یا یک issue جدید همراه با پیوندی از زمین بازی که مشکل را بازتولید می‌کند ثبت کنید.",
 		"openIssue": "ثبت issue در GitHub",
-		"tryPlayground": "مشکل را در زمین بازی بازتولید کنید",
+		"tryPlayground": "مشکل را در Playground بازتولید کنید",
 		"items": {
 			"ssr": {
 				"title": "خطای «window is not defined» هنگام رندر سمت سرور",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "تگ‌ها، ویژگی‌ها (attribute) یا استایل‌ها از محتوا حذف می‌شوند",
-				"symptom": "مجموعه HTML با گزینه value یا editor.$.html.set()، یا پیست شده، بدون برخی از تگ‌ها (مانند mark)، نام کلاس‌ها، ویژگی‌های data-*، استایل‌های درون‌خطی یا لینک‌هایی به طرح‌های برنامه سفارشی (مانند zoommtg: یا vscode:) برمی‌گردد.",
+				"symptom": "HTMLای که با گزینه value یا editor.$.html.set() تنظیم شده یا چسبانده شده است، بدون برخی تگ‌ها (مانند mark)، نام کلاس‌ها، ویژگی‌های data-*، استایل‌های درون‌خطی یا لینک‌هایی با طرح‌واره‌های سفارشی برنامه (مانند zoommtg: یا vscode:) برمی‌گردد.",
 				"cause": "SunEditor تمام HTML ورودی را بر اساس فهرست‌های مجاز (allow list) برای عناصر، ویژگی‌ها، نام کلاس‌ها و استایل‌های هر تگ فیلتر می‌کند و هر چیزی را که در آن‌ها نباشد حذف می‌کند. هر span که هیچ استایلی برایش باقی نماند، باز می‌شود و فقط محتوایش باقی می‌ماند.",
-				"fix": "لیست مجوزهای مورد نیاز خود را گسترش دهید: elementWhitelist برای برچسب‌ها، attributeWhitelist برای ویژگی‌ها، allowedClassName برای نام کلاس‌ها، tagStyles برای سبک‌های درون‌خطی و allowedURLProtocols برای طرح‌های URL سفارشی. فیلترهای جداگانه را نیز می‌توان با گزینه strictMode غیرفعال کرد. هرگز برچسب‌های script یا ویژگی‌های رویداد on* را مجاز نکنید."
+				"fix": "فهرست مجاز مورد نیازتان را گسترش دهید: elementWhitelist برای تگ‌ها، attributeWhitelist برای ویژگی‌ها، allowedClassName برای نام کلاس‌ها، tagStyles برای استایل‌های درون‌خطی و allowedURLProtocols برای طرح‌واره‌های سفارشی URL. همچنین می‌توانید فیلترهای جداگانه را با گزینه strictMode غیرفعال کنید. هرگز تگ‌های script یا ویژگی‌های رویداد on* را مجاز نکنید."
 			},
 			"paste": {
 				"title": "محتوای چسبانده‌شده قالب‌بندی خود را از دست می‌دهد یا استایل‌های ناخواسته با خود می‌آورد",

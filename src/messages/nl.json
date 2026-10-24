@@ -12,7 +12,7 @@
 		"Menus": {
 			"getting-started": "Aan de slag",
 			"feature-demo": "Functiedemonstratie",
-			"playground": "Speeltuin",
+			"playground": "Playground",
 			"plugin-guide": "Pluginhandleiding",
 			"deep-dive": "Diepgaande analyse",
 			"docs-api": "Documentatie/API",
@@ -48,7 +48,7 @@
 			"resources": "Bronnen",
 			"docs": "Dokters",
 			"featureDemo": "Functiedemonstratie",
-			"playground": "Speeltuin",
+			"playground": "Playground",
 			"about": "Over",
 			"license": "Gelicenseerd onder MIT.",
 			"copyright": "© Copyright {year} SunEditor-medewerkers",
@@ -175,7 +175,7 @@
 		}
 	},
 	"Playground": {
-		"title": "SunEditor Speeltuin",
+		"title": "SunEditor Playground",
 		"desc": "Configureer de opties, test de editor en deel je instellingen via een URL.",
 		"reset": "Reset",
 		"shareURL": "Deel-URL",
@@ -326,9 +326,9 @@
 		},
 		"tryOptionsTitle": "Probeer de plug-inopties",
 		"tryOptionsDesc": "Plugins met de aanduiding <badge>configurable</badge> hebben opties die je in de Playground kunt aanpassen.",
-		"playgroundSidebarTitle": "Speeltuin — Zijbalk met plug-inopties",
+		"playgroundSidebarTitle": "Playground — zijbalk met plug-inopties",
 		"playgroundSidebarDesc": "Pas de limieten voor het uploaden van afbeeldingen, de eenheden voor lettergroottes, het scrolltype van tabellen, de triggers voor vermeldingen en meer aan. Wijzigingen worden direct toegepast in de live editor.",
-		"openPlayground": "Open speelplaats",
+		"openPlayground": "Playground openen",
 		"custom": {
 			"title": "Maak je eigen plugin",
 			"desc": "Technische handleiding voor het bouwen van aangepaste plug-ins — van eenvoudige opdrachtknoppen tot complete dialoogvensters.",
@@ -579,7 +579,7 @@
 		},
 		"ctaTitle": "Probeer het live",
 		"ctaDesc": "Configureer opties, test plug-ins en zie de resultaten direct in de Playground.",
-		"ctaButton": "Open speelplaats",
+		"ctaButton": "Playground openen",
 		"resourcesTitle": "Meer informatie",
 		"gettingStarted": "Aan de slag",
 		"gettingStartedDesc": "Installeer, configureer en maak je eerste editor.",
@@ -590,7 +590,7 @@
 		"quickTry": "Snelle proefversie",
 		"preview": "Voorbeeld",
 		"close": "Dichtbij",
-		"openInPlayground": "Openen in de speeltuin"
+		"openInPlayground": "Openen in Playground"
 	},
 	"DeepDive": {
 		"title": "Diepgaande analyse",
@@ -672,19 +672,19 @@
 			"uiEvents": "UI-gebeurtenissen",
 			"uiEventsDesc": "Reageer op wijzigingen in de zichtbaarheid van de werkbalk, het wisselen van de codeweergave, de volledige schermmodus en het wijzigen van de editorgrootte.",
 			"inspector": {
-				"title": "Live Event Inspector",
-				"desc": "Interact with the editor on the left and watch every event fire in real time on the right. Click a row to expand its payload.",
+				"title": "Live event-inspector",
+				"desc": "Werk links in de editor en zie rechts in realtime elk event dat wordt afgevuurd. Klik op een regel om de payload uit te klappen.",
 				"editorLabel": "Live editor",
-				"logLabel": "Event log",
-				"attachedCount": "{count} events attached",
-				"empty": "No events yet — start typing or click a toolbar button.",
-				"noPayload": "No payload beyond editor internals.",
-				"clear": "Clear",
-				"pause": "Pause",
-				"resume": "Resume",
-				"autoScroll": "Auto-scroll",
-				"returnTrueNote": "This event treats undefined as \"handled\" and stops the upload. A passive listener must return true.",
-				"notAttachedTitle": "Not attached here",
+				"logLabel": "Eventlog",
+				"attachedCount": "{count} events gekoppeld",
+				"empty": "Nog geen events — begin met typen of klik op een knop in de werkbalk.",
+				"noPayload": "Geen payload behalve interne editorobjecten.",
+				"clear": "Wissen",
+				"pause": "Pauzeren",
+				"resume": "Hervatten",
+				"autoScroll": "Automatisch scrollen",
+				"returnTrueNote": "Dit event ziet undefined als ‘afgehandeld’ en stopt de upload. Een passieve listener moet true teruggeven.",
+				"notAttachedTitle": "Hier niet gekoppeld",
 				"notAttachedDesc": "Upload-handlers nemen het upload-antwoord over — een logger koppelen zou voorkomen dat geüploade media worden ingevoegd — dus de inspector laat ze met rust:"
 			}
 		},
@@ -758,7 +758,7 @@
 		"layerL3PanelDesc": "UI-presentatielaag. toolbar geeft de hoofdwerkbalk weer, subToolbar is een optionele tweede werkbalkinstantie, menu beheert dropdownmenu's en selectie-effecten, en viewer regelt de weergavemodi (codeweergave, volledig scherm, voorbeeldweergave)."
 	},
 	"Migration": {
-		"title": "v2 → v3 Migratie",
+		"title": "Migratie van v2 naar v3",
 		"subtitle": "Plak hier je SunEditor v2-opties en krijg het equivalent in v3.",
 		"converterTab": "Converter",
 		"tableTab": "Referentietabel",
@@ -819,7 +819,7 @@
 		"fullTextTitle": "Volledige licentietekst",
 		"disclaimer": "Deze pagina is een samenvatting in begrijpelijke taal, geen juridisch advies. De onderstaande licentietekst is wat geldt.",
 		"viewOnGitHub": "LICENSE bekijken op GitHub",
-		"tryPlayground": "Probeer SunEditor in de Speeltuin"
+		"tryPlayground": "Probeer SunEditor in de Playground"
 	},
 	"Troubleshooting": {
 		"title": "Probleemoplossing",
@@ -849,7 +849,7 @@
 		"notListed": "Staat je probleem er niet bij?",
 		"notListedDesc": "Doorzoek de bestaande issues of open een nieuwe met een Speeltuin-link waarin het probleem te reproduceren is.",
 		"openIssue": "Open een issue op GitHub",
-		"tryPlayground": "Reproduceer het in de Speeltuin",
+		"tryPlayground": "Reproduceer het in de Playground",
 		"items": {
 			"ssr": {
 				"title": "„window is not defined” tijdens server-rendering",
@@ -889,9 +889,9 @@
 			},
 			"stripped": {
 				"title": "Tags, attributen of stijlen verdwijnen uit de content",
-				"symptom": "HTML die is ingesteld met de optie value of editor.$.html.set(), of die is geplakt, wordt geretourneerd zonder bepaalde tags (zoals mark), klassenamen, data-* attributen, inline stijlen of links naar aangepaste app-schema's (zoals zoommtg: of vscode:).",
+				"symptom": "HTML die is ingesteld met de optie value of editor.$.html.set(), of die is geplakt, komt terug zonder bepaalde tags (zoals mark), klassenamen, data-*-attributen, inline stijlen of links met eigen app-schema's (zoals zoommtg: of vscode:).",
 				"cause": "SunEditor filtert alle binnenkomende HTML aan de hand van allowlists voor elementen, attributen, klassenamen en stijlen per tag, en verwijdert alles wat daar niet op staat. Een span zonder enige stijl wordt uitgepakt.",
-				"fix": "Breid de lijst met toegestane items naar wens uit: elementWhitelist voor tags, attributeWhitelist voor attributen, allowedClassName voor klassenamen, tagStyles voor inline stijlen en allowedURLProtocols voor aangepaste URL-schema's. Individuele filters kunnen ook worden uitgeschakeld met de optie strictMode. Sta nooit tags met de aanduiding script of gebeurtenisattributen met de aanduiding on* toe."
+				"fix": "Breid de allowlist uit die je nodig hebt: elementWhitelist voor tags, attributeWhitelist voor attributen, allowedClassName voor klassenamen, tagStyles voor inline stijlen en allowedURLProtocols voor eigen URL-schema's. Afzonderlijke filters kun je ook uitschakelen met de optie strictMode. Sta nooit script-tags of on*-eventattributen toe."
 			},
 			"paste": {
 				"title": "Geplakte content verliest zijn opmaak of brengt ongewenste stijlen mee",

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { fetchGitHubMarkdown, resolveGuideSlug, GUIDE_FILES } from "@/lib/git/githubMarkdown";
+import { fetchGitHubMarkdown, resolveGuideSlug, GUIDE_FILES, GUIDE_SUB_SLUGS } from "@/lib/git/githubMarkdown";
 import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import type { Metadata } from "next";
@@ -24,6 +24,10 @@ const TITLES: Record<string, string> = {
 type Props = {
 	params: Promise<{ locale: string; slug: string[] }>;
 };
+
+export function generateStaticParams() {
+	return GUIDE_SUB_SLUGS.map((key) => ({ slug: key.split("/") }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { locale, slug } = await params;

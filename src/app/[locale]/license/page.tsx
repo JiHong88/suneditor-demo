@@ -1,5 +1,7 @@
+import { use } from "react";
 import { ArrowRight, Check, ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 
@@ -39,7 +41,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
 
-export default function LicensePage() {
+export default function LicensePage({ params }: { params: Promise<{ locale: string }> }) {
+	setRequestLocale(use(params).locale);
 	const t = useTranslations("License");
 
 	return (

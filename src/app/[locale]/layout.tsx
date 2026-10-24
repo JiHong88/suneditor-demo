@@ -6,7 +6,8 @@ import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
 import { SUNEDITOR_VERSION } from "@/store/version";
 import { getDir } from "@/i18n/lang";
-import { getLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import { FooterBanner } from "@/components/ad/AdBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -49,13 +50,18 @@ export const metadata: Metadata = {
 	manifest: "/site.webmanifest",
 };
 
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
 	children,
 	params,
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
 	const version = SUNEDITOR_VERSION;
-	const { locale } = await params;
-	const resolvedLocale = locale || (await getLocale());
+	const { locale: resolvedLocale } = await params;
+	// Static rendering: without this next-intl reads the locale from request headers and every page becomes dynamic.
+	setRequestLocale(resolvedLocale);
 
 	return (
 		<html suppressHydrationWarning lang={resolvedLocale} dir={getDir(resolvedLocale)} data-lang={resolvedLocale}>
