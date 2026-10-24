@@ -36,13 +36,19 @@ node -e "console.log(require('./node_modules/suneditor/package.json').version)"
 
 ### 2. 릴리즈 노트 확인
 
-GitHub releases API로 현재 버전 이후의 모든 릴리즈 노트를 확인한다:
+**가장 먼저 설치된 패키지의 릴리즈 노트를 읽는다:**
+
+```bash
+cat node_modules/suneditor/release-note.md
+```
+
+이 파일은 패키지에 포함되어 배포되며, **설치된 버전의 변경사항만** 담는다.
+
+여러 버전을 건너뛰어 업데이트한 경우(예: 3.3.3 → 3.5.0)에만 중간 버전 노트를 GitHub releases API로 보충한다:
 
 ```bash
 gh api repos/JiHong88/SunEditor/releases --jq '.[] | "\(.tag_name)\n\(.body)\n---"'
 ```
-
-**node_modules에 릴리즈 노트 파일이 없으므로** 반드시 GitHub API로 확인한다.
 
 ### 3. 변경사항 분류
 

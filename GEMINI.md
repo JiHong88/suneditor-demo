@@ -11,7 +11,7 @@ Never copy the editor's docs into this repository — copies go stale on every r
 | Need | Source (always current) |
 | --- | --- |
 | API, options, plugin types of the installed version | `node_modules/suneditor/types/`, `node_modules/suneditor/src/` |
-| What changed between versions | GitHub releases: `gh api repos/JiHong88/SunEditor/releases` |
+| What changed between versions | `node_modules/suneditor/release-note.md` first (installed version only); GitHub releases (`gh api repos/JiHong88/SunEditor/releases`) only for skipped intermediate versions |
 | Editor guides (plugin guide, architecture, typedefs) | `../suneditor/` (local checkout) or GitHub raw `master` |
 | Deep Dive pages (`/deep-dive/guide/*`) | Rendered at runtime from GitHub raw `master` via `GUIDE_FILES` in `src/lib/git/githubMarkdown.ts` |
 

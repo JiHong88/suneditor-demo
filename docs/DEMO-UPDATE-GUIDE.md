@@ -29,11 +29,14 @@ suneditor를 업데이트할 때는 **릴리즈 노트를 먼저 확인**하고,
 # npm에서 최신 버전 확인
 npm view suneditor version
 
-# 설치 후 GitHub releases에서 릴리즈 노트 확인
+# 설치 후 패키지에 포함된 릴리즈 노트 확인 (가장 먼저)
+cat node_modules/suneditor/release-note.md
+
+# 여러 버전을 건너뛴 경우에만: 중간 버전 노트를 GitHub releases에서 보충
 gh api repos/JiHong88/SunEditor/releases --jq '.[] | "\(.tag_name)\n\(.body)\n---"' | head -100
 ```
 
-node_modules에 릴리즈 노트 파일이 없으므로 **반드시 GitHub releases API**로 확인한다.
+**`node_modules/suneditor/release-note.md`를 가장 먼저 참고한다.** 이 파일은 설치된 버전의 변경사항만 담으므로, 중간 버전이 있을 때만 GitHub releases API로 보충한다.
 
 ### Step 2: 변경 유형 분류
 
