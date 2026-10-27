@@ -23,7 +23,7 @@ import {
  */
 
 /** 이 페이지 내용을 마지막으로 검증한 suneditor 버전. 엔진 업데이트 후 항목을 재확인하고 올린다 (테스트가 설치 버전과 비교). */
-export const TROUBLESHOOTING_VERIFIED_VERSION = "3.4.0";
+export const TROUBLESHOOTING_VERIFIED_VERSION = "3.4.1";
 
 export type TroubleshootingCategory = "setup" | "styling" | "content" | "upload" | "migration";
 

@@ -134,7 +134,7 @@
     "description": "Configurazione dell'handle del blocco. Se fornita, viene visualizzata l'interfaccia utente dell'handle del blocco per riga. Funziona indipendentemente da `mode`."
   },
   "menu": {
-    "description": "Voci del menu. \n- **Voci stringa**: risolte tramite `ResolveButton`. Accetta gli stessi valori della barra degli strumenti `buttonList`: \n- **Tasti formato blocco**: `p`, `h1`-`h6`, `heading` (sottomenu H1-H6), `ul`, `ol`, `list` (sottomenu UL/OL), `blockquote`, `pre`. \n- **Nomi plugin**: qualsiasi nome plugin registrato (ad esempio `blockStyle`, `align`, `image`, `link`). I plugin a discesa mostrano i loro elementi come un sottomenu. I plugin modali aprono il modale al clic. \n- **Comandi integrati**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, ecc. \n- **Oggetti articolo personalizzato** — `{ title, icon?, action }`. `icon` è una chiave icona da `$.icons` o una stringa HTML `<svg>` non elaborata; `action` viene richiamato con `($, { block })`. \n- Il valore predefinito è `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tavolo'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "Voci del menu. \n- **Voci stringa**: \n- **Articoli personalizzati integrati**: `p`, `h1`-`h6`, `heading` (sottomenu H1-H6), `ul`, `ol`, `list` (sottomenu UL/OL), `blockquote`, `pre`."
   },
   "onPlusClick": {
     "description": "Viene eseguito dopo che il pulsante più ha inserito una nuova riga. \n- L'aggiunta della linea è un comportamento fisso; questo gancio decide cosa succede dopo. Niente funziona per impostazione predefinita. \n- `block` è la nuova linea, già focalizzata. `openMenu()` ​​apre l'handle del blocco `menu`. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "Librerie esterne come CodeMirror, KaTeX o MathJax.\n\nVedi {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Guida alle librerie esterne}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "Librerie esterne come CodeMirror, KaTeX o MathJax. \n- Vedi la {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md Guida alle librerie esterne} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "Specifica i tag aggiuntivi consentiti o non consentiti. `true` per consentire, `false` ​​per non consentire.\n\n- Il valore predefinito segue {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

@@ -134,7 +134,7 @@
     "description": "ブロックハンドルの設定。 指定すると、行ごとのブロック ハンドル UI が表示されます。 `mode` とは独立して動作します。"
   },
   "menu": {
-    "description": "メニューエントリ。 \n- **文字列エントリ** — `ResolveButton` によって解決されます。 ツールバー `buttonList` と同じ値を受け入れます。 \n- **ブロック形式キー**: `p`、`h1`-`h6`、`heading` (H1-H6 サブメニュー)、`ul`、`ol`、`list` (UL/OL サブメニュー)、`blockquote`、`pre`。 \n- **プラグイン名**: 登録されているプラ​​グイン名 (例: `blockStyle`、`align`、`image`、`link`)。 ドロップダウン プラグインは項目をサブメニューとして表示します。 モーダル プラグインはクリックするとモーダルを開きます。 \n- **組み込みコマンド**: `bold`、`italic`、`underline`、`strike`、`undo`、`redo` など。 \n- **カスタム項目オブジェクト** — `{ title, icon?, action }`。 `icon` は、`$.icons` のアイコン キー、または生の `<svg>` HTML 文字列です。 `action` は `($, { block })` で呼び出されます。 \n- デフォルトは `['p', 'heading', 'list', 'blockquote', 'pre']` です。 \n「`js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'テーブル'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n`」"
+    "description": "メニューエントリ。 \n- **文字列エントリ**:\n - **組み込みカスタム項目**: `p`、`h1`-`h6`、`heading` (H1-H6 サブメニュー)、`ul`、`ol`、`list` (UL/OL サブメニュー)、`blockquote`、`pre`。"
   },
   "onPlusClick": {
     "description": "プラスボタンで新しい行が挿入された後に実行されます。 \n- 行の追加は修正された動作です。 このフックが次に何が起こるかを決定します。 デフォルトでは何も行われません。 \n- `block` は新しい行で、すでにフォーカスされています。 `openMenu()` は、ブロック ハンドル自体の `menu` を開きます。 \n「`js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n`」"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "CodeMirror、KaTeX、MathJaxなどの外部ライブラリ。\n\n- {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md 外部ライブラリガイド} を参照してください。\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "CodeMirror、KaTeX、MathJax などの外部ライブラリ。 \n- {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md 外部ライブラリ ガイド}を参照してください。 \n「`js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n`」"
   },
   "allowedExtraTags": {
     "description": "許可または禁止する追加タグを指定します。`true` は許可、`false` は禁止です。\n\n- デフォルトは {@link DEFAULTS.EXTRA_TAG_MAP} に従います。\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

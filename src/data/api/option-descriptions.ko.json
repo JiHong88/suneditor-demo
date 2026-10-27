@@ -134,7 +134,7 @@
     "description": "블록 핸들 구성. 제공되면 줄당 블록 핸들 UI가 표시됩니다. `mode`과 독립적으로 작동합니다."
   },
   "menu": {
-    "description": "메뉴 항목. \n- **문자열 항목** — `ResolveButton`을 통해 해결됩니다. 도구 모음 `buttonList`과 동일한 값을 허용합니다. \n- **블록 형식 키**: `p`, `h1`-`h6`, `heading`(H1-H6 하위 메뉴), `ul`, `ol`, `list`(UL/OL 하위 메뉴), `blockquote`, `pre`. \n- **플러그인 이름**: 등록된 모든 플러그인 이름(예: `blockStyle`, `align`, `image`, `link`). 드롭다운 플러그인은 해당 항목을 하위 메뉴로 표시합니다. 모달 플러그인은 클릭 시 모달을 엽니다. \n- **내장 명령**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` 등 \n- **사용자 정의 항목 개체** — `{ title, icon?, action }`. `icon`는 `$.icons`의 아이콘 키 또는 원시 `<svg>` HTML 문자열입니다. `action`은 `($, { block })`으로 호출됩니다. \n- 기본값은 `['p', 'heading', 'list', 'blockquote', 'pre']`입니다. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'테이블'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "메뉴 항목. \n- **문자열 항목**: \n- **내장 사용자 정의 항목**: `p`, `h1`-`h6`, `heading`(H1-H6 하위 메뉴), `ul`, `ol`, `list`(UL/OL 하위 메뉴), `blockquote`, `pre`."
   },
   "onPlusClick": {
     "description": "더하기 버튼이 새 줄을 삽입한 후에 실행됩니다. \n- 줄을 추가하는 것은 고정된 동작입니다. 이 후크는 다음에 일어날 일을 결정합니다. 기본적으로는 아무 것도 수행되지 않습니다. \n- `block`은 이미 초점이 맞춰진 새 줄입니다. `openMenu()`은 블록 핸들 자체의 `menu`을 엽니다. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "CodeMirror, KaTeX, MathJax와 같은 외부 라이브러리.\n- {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md 외부 라이브러리 가이드} 참조\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "CodeMirror, KaTeX 또는 MathJax와 같은 외부 라이브러리. \n- {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md 외부 라이브러리 가이드}를 참조하세요. \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "추가 허용 또는 금지 태그를 지정합니다. `true`은 허용, `false`은 금지입니다.\n\n- 기본값은 {@link DEFAULTS.EXTRA_TAG_MAP}을 따릅니다.\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

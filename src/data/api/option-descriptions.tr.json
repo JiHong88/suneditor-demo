@@ -134,7 +134,7 @@
     "description": "Blok tanıtıcı yapılandırması. Sağlandığında, satır başına blok tanıtıcısı kullanıcı arayüzü gösterilir. `mode`'dan bağımsız olarak çalışır."
   },
   "menu": {
-    "description": "Menü girişleri. \n- **Dize girişleri** — `ResolveButton` aracılığıyla çözümlendi. `buttonList` araç çubuğuyla aynı değerleri kabul eder: \n- **Blok format tuşları**: `p`, `h1`-`h6`, `heading` (H1-H6 alt menüsü), `ul`, `ol`, `list` (UL/OL alt menüsü), `blockquote`, `pre`. \n- **Eklenti adları**: Kayıtlı herhangi bir eklenti adı (ör. `blockStyle`, `align`, `image`, `link`). Açılır eklentiler, öğelerini bir alt menü olarak görüntüler. Modal eklentileri tıklamayla modeli açar. \n- **Yerleşik komutlar**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, vb. \n- **Özel öğe nesneleri** — `{ title, icon?, action }`. `icon`, `$.icons`'den bir simge anahtarıdır veya ham bir `<svg>` HTML dizesidir; `action`, `($, { block })` ile çağrılır. \n- Varsayılan olarak `['p', 'heading', 'list', 'blockquote', 'pre']` şeklindedir. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tablo'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "Menü girişleri. \n- **Dize girişleri**: \n- **Yerleşik özel öğeler**: `p`, `h1`-`h6`, `heading` (H1-H6 alt menüsü), `ul`, `ol`, `list` (UL/OL alt menüsü), `blockquote`, `pre`."
   },
   "onPlusClick": {
     "description": "Artı düğmesi yeni bir satır ekledikten sonra çalışır. \n- Satır eklemek sabit bir davranıştır; bu kanca bundan sonra ne olacağına karar verir. Varsayılan olarak hiçbir şey yapılmaz. \n- `block` zaten odaklanmış yeni çizgidir. `openMenu()` ​​blok tanıtıcısının kendi `menu`'sini açar. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "CodeMirror, KaTeX veya MathJax gibi harici kütüphaneler.\n\n- Bkz. {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md External Libraries Guide}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "CodeMirror, KaTeX veya MathJax gibi harici kütüphaneler. \n- Bkz. {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md Harici Kütüphaneler Kılavuzu} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "İzin verilen veya verilmeyen ek etiketleri belirtir. `true` izin vermek için, `false` ​​izin vermemek için kullanılır.\n\n- Varsayılan değer {@link DEFAULTS.EXTRA_TAG_MAP}'i takip eder.\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

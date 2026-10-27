@@ -134,7 +134,7 @@
     "description": "Blokk fogantyú konfigurációja. Ha rendelkezésre áll, soronkénti blokkleíró felhasználói felület jelenik meg. `mode`-tól függetlenül működik."
   },
   "menu": {
-    "description": "Menübejegyzések. \n- **String bejegyzések** – a `ResolveButton` segítségével megoldva. Ugyanazokat az értékeket fogadja el, mint a `buttonList` eszköztár: \n- **Blokkformátumú kulcsok**: `p`, `h1`-`h6`, `heading` (H1-H6 almenü), `ul`, `ol`, `list` (UL/OL almenü), `blockquote`, `pre`. \n- **Bővítmények neve**: Bármely regisztrált beépülő modul neve (pl. `blockStyle`, `align`, `image`, `link`). A legördülő bővítmények almenüként jelenítik meg elemeiket. A modális bővítmények kattintásra megnyitják a modált. \n- **Beépített parancsok**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` stb. \n- **Egyéni tételobjektumok** — `{ title, icon?, action }`. A `icon` a `$.icons` ikon kulcsa vagy egy nyers `<svg>` HTML karakterlánc; A `action` a `($, { block })`-val van meghívva. \n- Alapértelmezés szerint `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tábla'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "Menübejegyzések. \n- **String bejegyzések**: \n- **Beépített egyedi elemek**: `p`, `h1`-`h6`, `heading` (H1-H6 almenü), `ul`, `ol`, `list` (UL/OL almenü), `blockquote`, __BT8_."
   },
   "onPlusClick": {
     "description": "A plusz gomb új sor beszúrása után fut. \n- A vonal hozzáadása rögzített viselkedés; ez a horog dönti el, mi történik ezután. Alapértelmezés szerint semmi sem működik. \n- `block` az új sor, már fókuszálva. `openMenu()` ​​megnyitja a blokkfogantyú saját `menu`-ját. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "Külső könyvtárak, mint például a CodeMirror, a KaTeX vagy a MathJax.\n\n- Lásd: {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Külső könyvtárak útmutatója}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "Külső könyvtárak, például CodeMirror, KaTeX vagy MathJax. \n- Lásd: {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md Külső könyvtárak útmutató} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "Meghatározza a további engedélyezett vagy tiltott címkéket. `true` az engedélyezéshez, `false` ​​a tiltáshoz.\n\n- Az alapértelmezett érték a következő: {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

@@ -134,7 +134,7 @@
     "description": "ڕێکخستنی دەستەی بلۆک. کاتێک دابین دەکرێت، UI ی دەستە بلۆکی هەر هێڵێک پیشان دەدرێت. سەربەخۆ لە `mode` کاردەکات."
   },
   "menu": {
-    "description": "هاتنە ژوورەوەی مینیو. \n- **هاتنە ژوورەوەی ڕیز** — لە ڕێگەی `ResolveButton` چارەسەر دەکرێت. هەمان بەهاکانی توولبار `buttonList` قبوڵ دەکات: \n- **کلیلەکانی فۆرمات بلۆک**: `p`، `h1`-`h6`، `heading` (ژێر مێنۆی H1-H6)، `ul`، `ol`، `list` (ژێر مێنۆی UL/OL)، `blockquote`، `pre`. \n- **ناوی پلاگینەکان**: هەر ناوێکی پلاگین تۆمارکراو (بۆ نموونە `blockStyle`، `align`، `image`، `link`). پلاگینەکانی دابەزین بابەتەکانیان وەکو ژێر مینیویەک پیشان دەدەن. پلاگینەکانی مۆداڵ مۆداڵەکە دەکەنەوە لە کاتی کلیککردندا. \n- **فرمانەکانی ناوەوە**: `bold`، `italic`، `underline`، `strike`، `undo`، `redo`، هتد. \n- **ئۆبجێکتی بابەتی تایبەت** — `{ title, icon?, action }`. `icon` کلیلی ئایکۆنە لە `$.icons` یان ڕستەیەکی خام `<svg>` HTML؛ `action` بە `($, { block })` بانگ دەکرێت. \n- بە شێوازی پێشوەختە بۆ `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'خشتەی'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "هاتنە ژوورەوەی مینیو. \n- **هاتنە ژوورەوەی ڕیز**: \n- **بابەتە تایبەتمەندەکانی ناوەوە**: `p`، `h1`-`h6`، `heading` (ژێر مێنۆی H1-H6)، `ul`، `ol`، `list` (ژێر مێنۆی UL/OL)، `blockquote`، `pre`."
   },
   "onPlusClick": {
     "description": "دوای ئەوەی دوگمەی پڵەس هێڵێکی نوێی خستۆتە ناوەوە کاردەکات. \n- زیادکردنی هێڵەکە ڕەفتارێکی جێگیرە؛ ئەم قەڵغانە بڕیار دەدات کە چی ڕوودەدات لە داهاتوودا. هیچ شتێک بە شێوازی پێشوەختە نایکات. \n- `block` هێڵی نوێیە، پێشتر تەرکیز کراوە. `openMenu()` ​​دەستە بلۆکەکە خۆی دەکاتەوە `menu`. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "کتێبخانە دەرەکییەکانی وەک CodeMirror، KaTeX، یان MathJax. \n- سەیری {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md ڕێبەری کتێبخانە دەرەکییەکان بکە} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "کتێبخانە دەرەکییەکانی وەک CodeMirror، KaTeX، یان MathJax. \n- سەیری {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md ڕێبەری کتێبخانە دەرەکییەکان بکە} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "تاگی زیادەی ڕێگەپێدراو یان ڕێگەپێنەدراو دیاری دەکات. `true` بۆ ڕێگەدان، `false` ​​بۆ ڕێگەنەدان. \n- پێشوەختە بەم شێوەیە دەبێت {@link DEFAULTS.EXTRA_TAG_MAP} \n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

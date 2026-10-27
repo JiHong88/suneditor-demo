@@ -134,7 +134,7 @@
     "description": "بلاک ہینڈل کنفیگریشن۔ فراہم کیے جانے پر، ایک فی لائن بلاک ہینڈل UI دکھایا جاتا ہے۔ `mode` سے آزادانہ طور پر کام کرتا ہے۔"
   },
   "menu": {
-    "description": "مینو اندراجات۔ \n- **سٹرنگ اندراجات** — `ResolveButton` کے ذریعے حل کیا گیا۔ ٹول بار `buttonList` جیسی اقدار کو قبول کرتا ہے: \n- **بلاک فارمیٹ کیز**: `p`, `h1`-`h6`, `heading` (H1-H6 ذیلی مینیو), `ul`, `ol`, `list` (UL/OL ذیلی مینیو), `blockquote`, `pre`۔ \n- **پلگ ان کے نام**: کوئی بھی رجسٹرڈ پلگ ان کا نام (جیسے `blockStyle`, `align`, `image`, `link`)۔ ڈراپ ڈاؤن پلگ ان اپنی اشیاء کو ذیلی مینیو کے طور پر دکھاتے ہیں۔ موڈل پلگ ان کلک پر موڈل کو کھولتے ہیں۔ \n- **بلٹ ان کمانڈز**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo`, وغیرہ۔ \n- **اپنی مرضی کے مطابق اشیاء** — `{ title, icon?, action }`۔ `icon` `$.icons` یا خام `<svg>` HTML سٹرنگ سے آئیکن کلید ہے۔ `action` کو `($, { block })` کے ساتھ پکارا جاتا ہے۔ \n- پہلے سے طے شدہ `['p', 'heading', 'list', 'blockquote', 'pre']` پر۔ \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'ٹیبل'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "مینو اندراجات۔ \n- **سٹرنگ اندراجات**: \n- **بلٹ ان حسب ضرورت آئٹمز**: `p`, `h1`-`h6`, `heading` (H1-H6 ذیلی مینیو), `ul`, `ol`, `list` (UL/OL ذیلی مینیو), `blockquote`, `pre`۔"
   },
   "onPlusClick": {
     "description": "پلس بٹن کے ایک نئی لائن داخل کرنے کے بعد چلتا ہے۔ \n- لائن کو شامل کرنا فکسڈ رویہ ہے؛ یہ ہک فیصلہ کرتا ہے کہ آگے کیا ہوتا ہے۔ ڈیفالٹ کے ذریعے کچھ نہیں کرتا۔ \n- `block` نئی لائن ہے، جو پہلے سے مرکوز ہے۔ `openMenu()` ​​بلاک ہینڈل کا اپنا `menu` کھولتا ہے۔ \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "بیرونی لائبریریاں جیسے CodeMirror، KaTeX، یا MathJax۔\n- دیکھیں {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md بیرونی لائبریری گائیڈ}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "بیرونی لائبریریاں جیسے CodeMirror، KaTeX، یا MathJax۔ \n- دیکھیں {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md بیرونی لائبریری گائیڈ} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "اضافی اجازت یافتہ یا غیر اجازت شدہ ٹیگز کی وضاحت کرتا ہے۔ `true` اجازت دینے کے لئے، `false` ​​اجازت دینے کے لئے۔\n- ڈیفالٹ {@link DEFAULTS.EXTRA_TAG_MAP} کی پیروی کرتا ہے\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",

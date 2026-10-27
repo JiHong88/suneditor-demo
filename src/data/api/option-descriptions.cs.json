@@ -134,7 +134,7 @@
     "description": "Konfigurace rukojeti bloku. Je-li k dispozici, zobrazí se uživatelské rozhraní úchytu bloku pro každý řádek. Funguje nezávisle na `mode`."
   },
   "menu": {
-    "description": "Položky nabídky. \n- **Položky řetězce** – vyřešeno pomocí `ResolveButton`. Přijímá stejné hodnoty jako panel nástrojů `buttonList`: \n- **Klíče formátu blokování**: `p`, `h1`-`h6`, `heading` (podnabídka H1-H6), `ul`, `ol`, `list` (podnabídka UL/OL), `blockquote`, `pre`. \n- **Názvy pluginů**: Jakýkoli registrovaný název pluginu (např. `blockStyle`, `align`, `image`, `link`). Rozbalovací pluginy zobrazují své položky jako podnabídku. Modální pluginy otevřou modal kliknutím. \n- **Vestavěné příkazy**: `bold`, `italic`, `underline`, `strike`, `undo`, `redo` atd. \n- **Vlastní objekty položek** — `{ title, icon?, action }`. `icon` je klíč ikony z `$.icons` nebo nezpracovaný řetězec HTML `<svg>`; `action` se vyvolá s `($, { block })`. \n- Výchozí nastavení je `['p', 'heading', 'list', 'blockquote', 'pre']`. \n```js\nblockHandle: {\nmenu: [\n'p', 'heading', 'blockStyle',\n{ title: 'Duplicate', icon: 'copy', action: ($, { block }) => block.after(block.cloneNode(true)) },\n// `'tabulka'` as a string opens the size picker; a custom item inserts a default table directly\n{ title: 'Table', icon: 'table', action: ($) => $.plugins.table.insert(3, 3) },\n],\n}\n```"
+    "description": "Položky nabídky. \n- **Položky řetězce**: \n- **Vestavěné vlastní položky**: `p`, `h1`-`h6`, `heading` (podnabídka H1-H6), `ul`, `ol`, `list` (podnabídka UL/OL), `blockquote`, `pre`."
   },
   "onPlusClick": {
     "description": "Spustí se po vložení nového řádku tlačítkem plus. \n- Přidání řádku je pevné chování; tento háček rozhoduje o tom, co se stane dál. Ve výchozím nastavení nic nefunguje. \n- `block` je nový řádek, již zaměřený. `openMenu()` ​​otevře vlastní `menu` popisovače bloku. \n```js\nblockHandle: {\n// open the block handle menu\nonPlusClick: ($, { openMenu }) => openMenu(),\n// ...or the slash command menu\nonPlusClick: ($, { block }) => $.plugins.slashCommand.open(block),\n}\n```"
@@ -366,7 +366,7 @@
     "default": "true"
   },
   "externalLibs": {
-    "description": "Externí knihovny jako CodeMirror, KaTeX nebo MathJax.\n- Viz {@link https://github.com/ARA-developer/suneditor/blob/develop/guide/external-libraries.md Průvodce externími knihovnami}\n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
+    "description": "Externí knihovny jako CodeMirror, KaTeX nebo MathJax. \n– Viz {@link https://github.com/JiHong88/suneditor/blob/master/guide/external-libraries.md Průvodce externími knihovnami} \n```js\n{\nexternalLibs: {\nkatex: window.katex,\ncodeMirror: { src: CodeMirror }\n}\n}\n```"
   },
   "allowedExtraTags": {
     "description": "Určuje další povolené nebo zakázané tagy. `true` pro povolení, `false` ​​pro zakázání.\n- Výchozí hodnota je {@link DEFAULTS.EXTRA_TAG_MAP}\n```js\n{\nallowedExtraTags: {\nscript: false,\nstyle: false,\nmark: true\n}\n}\n```",
