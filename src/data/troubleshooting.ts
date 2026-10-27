@@ -85,4 +85,12 @@ export const TROUBLESHOOTING_ITEMS: TroubleshootingItem[] = [
 	{ id: "v2", category: "migration", code: [{ code: TS_V2, lang: "javascript" }], related: "migration" },
 ];
 
+/**
+ * 엔진 에러 메시지가 직접 링크하는 항목 — suneditor `src/helper/env.js`의 `TROUBLESHOOTING_URLS`와 1:1.
+ * URL 형식은 `https://suneditor.com/troubleshooting#<id>`. 라우트(`/troubleshooting`)와 이 id는 공개 엔드포인트이므로 바꾸지 말 것.
+ * 엔진에 링크를 추가할 때 여기에도 id를 추가한다 (`__tests__/data/troubleshooting.test.ts`가 양쪽을 대조).
+ */
+export const TROUBLESHOOTING_ROUTE = "/troubleshooting";
+export const ENGINE_LINKED_TROUBLESHOOTING_IDS = ["plugin", "target"] as const;
+
 export const TROUBLESHOOTING_CATEGORIES: TroubleshootingCategory[] = ["setup", "styling", "content", "upload", "migration"];

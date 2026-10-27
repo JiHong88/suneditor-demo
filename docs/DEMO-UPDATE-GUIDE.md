@@ -596,3 +596,13 @@ __tests__/
 - 카테고리 키 중복
 
 > 기능 추가 후 `npm test` 실행하면 누락된 곳을 바로 알 수 있다.
+
+**`troubleshooting.test.ts` — 엔진이 링크하는 공개 엔드포인트 고정:**
+
+suneditor 엔진은 에러 메시지에서 `https://suneditor.com/troubleshooting#<id>`로 직접 링크한다
+(`src/helper/env.js`의 `TROUBLESHOOTING_URLS`). 이 URL은 배포된 모든 엔진 버전에 박혀 있으므로 **바꿀 수 없다.**
+
+- 라우트 `/troubleshooting`과 `TROUBLESHOOTING_ITEMS[].id`(= DOM 앵커)는 공개 계약 — 이름 변경/삭제 금지
+- 엔진이 링크하는 id 목록은 `src/data/troubleshooting.ts`의 `ENGINE_LINKED_TROUBLESHOOTING_IDS`에 고정
+- 테스트는 설치된 엔진(및 `../suneditor` 로컬 체크아웃이 있으면 그것도)의 `TROUBLESHOOTING_URLS`를 파싱해 형식·id 존재·목록 일치를 대조
+- 엔진에 새 링크를 추가하면: 항목(`TROUBLESHOOTING_ITEMS`) + 모든 locale 문구 + `ENGINE_LINKED_TROUBLESHOOTING_IDS` 세 곳을 함께 추가
