@@ -1,54 +1,76 @@
 import type { SunEditor } from "suneditor/types";
 
-/*
- * Full toolbar layout rules
- * - Max 2 rows ("/") at every breakpoint. Row 1: text & paragraph formatting / Row 2: insert & view.
- * - Core buttons are never hidden: undo, redo, bold, italic, underline, list, link, image.
- *   (align, table, fontColor stay visible down to 768px)
- * - More buttons keep a fixed meaning across breakpoints — only their contents grow or shrink:
- *   Text(more_text) · Paragraph(more_paragraph) · Insert(more_plus) · More(more_horizontal, view & document)
- * - Breakpoints are compared with the editor width, not the viewport
- *   (main demo ≈ 1020px → default, playground on xl screens ≈ 950px → %992).
- * - "-right" modules float right, so the first one listed is the rightmost.
- */
+/** Home: one quiet row on desktop, two deliberate rows below 640px. */
+export const HomeButtonList: SunEditor.UI.ButtonList = [
+	["undo", "redo"],
+	"|",
+	["blockStyle"],
+	"|",
+	["bold", "italic", "underline"],
+	"|",
+	["list"],
+	"|",
+	["link", "image", "table"],
+	[":Insert-default.more_plus", "video", "hr"],
+	"|",
+	["fullScreen"],
+	[
+		"%640",
+		[
+			["undo", "redo"],
+			"|",
+			["blockStyle"],
+			"|",
+			["fullScreen"],
+			"/",
+			["bold", "italic", "underline"],
+			"|",
+			["list"],
+			"|",
+			["link", "image"],
+			[":Insert-default.more_plus", "table", "video", "hr"],
+		],
+	],
+];
 
+/*
+ * Full toolbar: text on row 1; paragraph, insert, view and file on row 2.
+ * More categories keep their meaning at every size. Desktop labels are native
+ * text buttons; compact layouts use icons. No plugin disappears on resize.
+ * Breakpoints use editor width (strictly <), not viewport width.
+ * Right-floating groups are declared rightmost first.
+ */
 const GALLERIES = ["imageGallery", "videoGallery", "audioGallery", "fileGallery", "fileBrowser"];
-const DOC_ACTIONS = ["newDocument", "selectAll", "save", "copy", "|", "preview", "print", "exportPDF"];
+const TEXT_TOOLS = ["subscript", "superscript", "|", "textStyle", "copyFormat", "removeFormat"];
+const PARAGRAPH_TOOLS = ["outdent", "indent", "lineHeight", "|", "blockquote", "paragraphStyle"];
+const INSERT_TOOLS = ["hr", "codeBlock", "math", "anchor", "|", "audio", "drawing", "embed", "fileUpload", "|", "template", "layout", "|", ...GALLERIES];
+const FILE_TOOLS = ["newDocument", "save", "|", "selectAll", "copy", "|", "print", "exportPDF"];
+const VIEW_TOOLS = ["showBlocks", "markdownView", "preview"];
 
 function createFullButtonList(withPages: boolean): SunEditor.UI.ButtonList {
-	const pageBreak = withPages ? ["pageBreak"] : [];
-	const pageNav = withPages ? ["pageNavigator", "pageUp", "pageDown", "|"] : [];
+	const pages = withPages ? ["pageBreak", "pageNavigator", "pageUp", "pageDown", "|"] : [];
+	const fileTools = [...pages, ...FILE_TOOLS];
 
 	return [
-		// ═══ Default (≥992px, 2 rows, 3 more buttons) ═══
-		// Row 1: Text & paragraph formatting
+		// ≥992px: labeled More groups, with room for document page controls.
 		["undo", "redo"],
 		"|",
 		["blockStyle", "font", "fontSize"],
 		"|",
 		["bold", "italic", "underline", "strike"],
-		[":Text-default.more_text", "subscript", "superscript", "|", "copyFormat", "textStyle"],
 		"|",
 		["fontColor", "backgroundColor"],
-		"|",
-		["removeFormat"],
-		"|",
-		["align", "list_bulleted", "list_numbered", "lineHeight"],
-		"|",
-		["outdent", "indent"],
+		[":Text-text.Text ▾", ...TEXT_TOOLS],
 		"/",
-		// Row 2: Insert & view
-		["blockquote", "paragraphStyle", "codeBlock", "hr"],
+		["align", "list_bulleted", "list_numbered"],
+		[":Paragraph-text.Paragraph ▾", ...PARAGRAPH_TOOLS],
 		"|",
-		["link", "image", "video", "table"],
-		"|",
-		["math", "drawing", "template", "layout"],
-		[":Insert-default.more_plus", "anchor", "audio", "embed", "fileUpload", "|", ...GALLERIES],
+		["link", "image", "table", "video"],
+		[":Insert-text.Insert ▾", ...INSERT_TOOLS],
 		...(withPages ? ["|", ["pageBreak", "pageNavigator", "pageUp", "pageDown"]] : []),
-		["-right", ":More-default.more_horizontal", ...DOC_ACTIONS],
-		["-right", "showBlocks", "codeView", "markdownView", "fullScreen"],
-
-		// ═══ ≤992px (2 rows, 4 more buttons) ═══
+		["-right", ":File-text.File ▾", ...FILE_TOOLS],
+		["-right", ":View-text.View ▾", ...VIEW_TOOLS],
+		["-right", "codeView", "fullScreen"],
 		[
 			"%992",
 			[
@@ -57,68 +79,42 @@ function createFullButtonList(withPages: boolean): SunEditor.UI.ButtonList {
 				["blockStyle", "font", "fontSize"],
 				"|",
 				["bold", "italic", "underline", "strike"],
-				[":Text-default.more_text", "subscript", "superscript", "|", "copyFormat", "textStyle"],
 				"|",
 				["fontColor", "backgroundColor"],
-				"|",
-				["removeFormat"],
+				[":Text-text.Text ▾", ...TEXT_TOOLS],
 				"/",
 				["align", "list_bulleted", "list_numbered"],
+				[":Paragraph-text.Paragraph ▾", ...PARAGRAPH_TOOLS],
 				"|",
-				["outdent", "indent"],
-				[":Paragraph-default.more_paragraph", "lineHeight", "|", "blockquote", "paragraphStyle"],
-				"|",
-				["link", "image", "video", "table"],
-				"|",
-				["codeBlock", "math", ...pageBreak],
-				[":Insert-default.more_plus", "hr", "anchor", "|", "drawing", "audio", "embed", "fileUpload", "|", "template", "layout", "|", ...GALLERIES],
-				["-right", ":More-default.more_horizontal", "showBlocks", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+				["link", "image", "table", "video"],
+				[":Insert-text.Insert ▾", ...INSERT_TOOLS],
+				["-right", ":File-text.File ▾", ...fileTools],
+				["-right", ":View-text.View ▾", ...VIEW_TOOLS],
 				["-right", "codeView", "fullScreen"],
 			],
 		],
-
-		// ═══ ≤768px (tablet, 2 rows) ═══
 		[
 			"%768",
 			[
 				["undo", "redo"],
 				"|",
-				["blockStyle", "fontSize"],
+				["blockStyle"],
 				"|",
-				["bold", "italic", "underline", "strike"],
-				[":Text-default.more_text", "font", "|", "subscript", "superscript", "|", "removeFormat", "copyFormat", "textStyle"],
+				["bold", "italic", "underline"],
 				"|",
 				["fontColor", "backgroundColor"],
+				[":Text-default.more_text", "font", "fontSize", "|", "strike", ...TEXT_TOOLS],
 				"/",
 				["align", "list_bulleted", "list_numbered"],
-				[":Paragraph-default.more_paragraph", "outdent", "indent", "lineHeight", "|", "blockquote", "paragraphStyle"],
+				[":Paragraph-default.more_paragraph", ...PARAGRAPH_TOOLS],
 				"|",
 				["link", "image", "table"],
-				[
-					":Insert-default.more_plus",
-					"video",
-					"hr",
-					"codeBlock",
-					"math",
-					"anchor",
-					...pageBreak,
-					"|",
-					"drawing",
-					"audio",
-					"embed",
-					"fileUpload",
-					"|",
-					"template",
-					"layout",
-					"|",
-					...GALLERIES,
-				],
-				["-right", ":More-default.more_horizontal", "showBlocks", "codeView", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+				[":Insert-default.more_plus", "video", ...INSERT_TOOLS],
+				["-right", ":File-default.more_horizontal", ...fileTools],
+				["-right", ":View-default.preview", "codeView", ...VIEW_TOOLS],
 				["-right", "fullScreen"],
 			],
 		],
-
-		// ═══ ≤576px (mobile, 2 rows) ═══
 		[
 			"%576",
 			[
@@ -126,49 +122,15 @@ function createFullButtonList(withPages: boolean): SunEditor.UI.ButtonList {
 				"|",
 				["bold", "italic", "underline"],
 				"|",
-				["link", "image"],
+				[":Text-default.more_text", "blockStyle", "font", "fontSize", "|", "strike", "fontColor", "backgroundColor", ...TEXT_TOOLS],
+				["-right", ":View-default.preview", "codeView", "fullScreen", ...VIEW_TOOLS],
 				"/",
 				["list_bulleted"],
+				[":Paragraph-default.more_paragraph", "list_numbered", "align", "|", ...PARAGRAPH_TOOLS],
 				"|",
-				["fontColor"],
-				[
-					":Text-default.more_text",
-					"blockStyle",
-					"font",
-					"fontSize",
-					"|",
-					"strike",
-					"subscript",
-					"superscript",
-					"|",
-					"backgroundColor",
-					"removeFormat",
-					"copyFormat",
-					"textStyle",
-				],
-				[":Paragraph-default.more_paragraph", "list_numbered", "align", "|", "outdent", "indent", "lineHeight", "|", "blockquote", "paragraphStyle"],
-				[
-					":Insert-default.more_plus",
-					"table",
-					"video",
-					"|",
-					"hr",
-					"codeBlock",
-					"math",
-					"anchor",
-					...pageBreak,
-					"|",
-					"drawing",
-					"audio",
-					"embed",
-					"fileUpload",
-					"|",
-					"template",
-					"layout",
-					"|",
-					...GALLERIES,
-				],
-				["-right", ":More-default.more_horizontal", "fullScreen", "showBlocks", "codeView", "markdownView", "|", ...pageNav, ...DOC_ACTIONS],
+				["link", "image"],
+				[":Insert-default.more_plus", "table", "video", ...INSERT_TOOLS],
+				["-right", ":File-default.more_horizontal", ...fileTools],
 			],
 		],
 	];
@@ -176,5 +138,5 @@ function createFullButtonList(withPages: boolean): SunEditor.UI.ButtonList {
 
 export const FullButtonList: SunEditor.UI.ButtonList = createFullButtonList(false);
 
-/** Document mode — FullButtonList + page buttons (pageBreak, pageNavigator, pageUp, pageDown) */
+/** Full toolbar with page controls, kept under File on compact layouts. */
 export const DocumentButtonList: SunEditor.UI.ButtonList = createFullButtonList(true);

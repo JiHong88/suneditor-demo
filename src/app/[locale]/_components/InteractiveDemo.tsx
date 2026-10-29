@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import SunEditor from "@/components/editor/suneditor";
 import type { SunEditor as SunEditorType } from "suneditor/types";
-import { DocumentButtonList } from "@/components/editor/buttonList";
+import { HomeButtonList, DocumentButtonList } from "@/components/editor/buttonList";
+import { Link } from "@/i18n/navigation";
+import { ArrowRight } from "lucide-react";
 import { HEADER_HEIGHT } from "@/lib/constants";
 import {
 	API_DOWNLOAD_PDF,
@@ -48,24 +50,6 @@ const subButtonList = [
 	["bold", "italic", "underline", "strike", "subscript", "superscript"],
 	"|",
 	["fontColor", "backgroundColor"],
-];
-
-const inlineButtonList = [
-	["undo", "redo"],
-	"|",
-	["blockStyle", "font", "fontSize"],
-	"|",
-	["bold", "italic", "underline", "strike"],
-	"|",
-	["fontColor", "backgroundColor"],
-	"|",
-	["removeFormat"],
-	"|",
-	["align", "list", "outdent", "indent"],
-	"|",
-	["table", "link", "image"],
-	"|",
-	["fullScreen", "codeView"],
 ];
 
 const balloonButtonList = [
@@ -167,17 +151,17 @@ const presetDefs: { id: string; tKey: string; tip?: string; value?: string; opti
 	{
 		id: "classic",
 		tKey: "classic",
-		options: { toolbar_sticky: HEADER_HEIGHT, subToolbar: { mode: "balloon", buttonList: subButtonList } },
+		options: { toolbar_sticky: HEADER_HEIGHT, buttonList: HomeButtonList, subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "bottom",
 		tKey: "bottom",
-		options: { mode: "classic:bottom", statusbar: false, subToolbar: { mode: "balloon", buttonList: subButtonList } },
+		options: { mode: "classic:bottom", statusbar: false, buttonList: HomeButtonList, subToolbar: { mode: "balloon", buttonList: subButtonList } },
 	},
 	{
 		id: "inline",
 		tKey: "inline",
-		options: { mode: "inline", toolbar_sticky: HEADER_HEIGHT, buttonList: inlineButtonList },
+		options: { mode: "inline", toolbar_sticky: HEADER_HEIGHT, buttonList: HomeButtonList },
 	},
 	{
 		id: "balloon",
@@ -222,6 +206,7 @@ const sampleValue = INTERACTIVE_DEMO_VALUE;
 
 export default function InteractiveDemo() {
 	const t = useTranslations("Home.InteractiveDemo");
+	const tMenus = useTranslations("Main.Menus");
 	const [activePreset, setActivePreset] = useState("classic");
 	const [em, setEm] = useState<any>(null);
 	const [katex, setKatex] = useState<unknown>(null);
@@ -241,29 +226,36 @@ export default function InteractiveDemo() {
 				transition={{ duration: 0.6 }}
 				className='mx-auto max-w-5xl'
 			>
-				<div className='mb-4 flex items-center gap-1 rounded-lg bg-muted/60 p-1 w-fit'>
-					{presetDefs.map((p) => (
-						<button
-							key={p.id}
-							onClick={() => setActivePreset(p.id)}
-							className={`group relative rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
-								activePreset === p.id
-									? "bg-background text-foreground shadow-sm"
-									: "text-muted-foreground hover:text-foreground"
-							}`}
-						>
-							{t(p.tKey)}
-							{p.tip && (
-								<span
-									role='tooltip'
-									className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1.5 text-xs font-normal text-background opacity-0 shadow-md transition-opacity duration-150 group-hover:opacity-100'
-								>
-									{t(p.tip)}
-									<span className='absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-foreground' />
-								</span>
-							)}
-						</button>
-					))}
+				<div className='mb-4 flex flex-wrap items-center justify-between gap-3'>
+					<div className='flex max-w-full flex-wrap items-center gap-1 rounded-lg bg-muted/60 p-1'>
+						{presetDefs.map((p) => (
+							<button
+								key={p.id}
+								aria-pressed={activePreset === p.id}
+								onClick={() => setActivePreset(p.id)}
+								className={`group relative min-h-10 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+									activePreset === p.id
+										? "bg-background text-foreground shadow-sm"
+										: "text-muted-foreground hover:text-foreground"
+								}`}
+							>
+								{t(p.tKey)}
+								{p.tip && (
+									<span
+										role='tooltip'
+										className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1.5 text-xs font-normal text-background opacity-0 shadow-md transition-opacity duration-150 group-hover:opacity-100'
+									>
+										{t(p.tip)}
+										<span className='absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-foreground' />
+									</span>
+								)}
+							</button>
+						))}
+					</div>
+					<Link href='/playground?p=full' className='inline-flex min-h-10 items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring'>
+						{tMenus("playground")}
+						<ArrowRight className='h-4 w-4 rtl:rotate-180' aria-hidden='true' />
+					</Link>
 				</div>
 				<div style={{ minHeight: 258 }}>
 					{katex ? (

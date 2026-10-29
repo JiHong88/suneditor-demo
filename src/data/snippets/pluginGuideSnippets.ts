@@ -474,4 +474,4 @@ editor.$.history    // Undo/Redo stack
 // ... and more`;
 
 /* ── 홈 페이지 > InteractiveDemo: 에디터 샘플 콘텐츠 ── */
-export const INTERACTIVE_DEMO_VALUE = `<h2>SunEditor v3</h2><p>A lightweight, flexible WYSIWYG editor with zero dependencies.</p><p>Try switching between the <strong>presets</strong> above to see different toolbar modes.</p>`;
+export const INTERACTIVE_DEMO_VALUE = `<h2>Make it your own.</h2><p>This is your space to try <strong>SunEditor v3</strong>. Select a few words, change their style, or start writing.</p><ul><li>Turn a line into a heading or a list.</li><li>Add a link, drop in an image, or build a table.</li></ul>`;
