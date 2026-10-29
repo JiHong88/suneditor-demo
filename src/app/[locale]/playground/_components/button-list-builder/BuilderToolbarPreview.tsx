@@ -163,6 +163,7 @@ function PreviewSeparator({ highlighted }: { highlighted?: boolean }) {
 
 function MoreButtonGroup({
 	label,
+	iconType,
 	iconClassName,
 	icons,
 	moreId,
@@ -170,6 +171,7 @@ function MoreButtonGroup({
 	onToggle,
 }: {
 	label: string;
+	iconType: string;
 	iconClassName: string;
 	icons: Record<string, string>;
 	moreId: string;
@@ -177,16 +179,18 @@ function MoreButtonGroup({
 	onToggle: (id: string) => void;
 }) {
 	const btnRef = useRef<HTMLButtonElement>(null);
+	const isText = iconType === "text";
 	const moreIconSvg = icons[iconClassName] ?? icons["more_plus"];
 	const isOpen = openMoreId === moreId;
 
 	// Inject SVG as direct child so `button > svg` CSS selector works
 	useEffect(() => {
-		if (btnRef.current && moreIconSvg) {
+		if (btnRef.current) {
 			const tooltip = btnRef.current.querySelector(".se-tooltip-inner");
 			// Remove previous SVG if any
 			const oldSvg = btnRef.current.querySelector(":scope > svg");
 			if (oldSvg) oldSvg.remove();
+			if (isText || !moreIconSvg) return;
 			// Insert SVG before tooltip
 			const temp = document.createElement("div");
 			temp.innerHTML = moreIconSvg;
@@ -195,19 +199,21 @@ function MoreButtonGroup({
 				btnRef.current.insertBefore(svgEl, tooltip);
 			}
 		}
-	}, [moreIconSvg]);
+	}, [moreIconSvg, isText]);
 
 	return (
 		<li>
 			<button
 				ref={btnRef}
 				type='button'
-				className={`se-toolbar-btn se-btn se-btn-more se-tooltip${isOpen ? " on" : ""}`}
+				className={`se-toolbar-btn se-btn se-btn-more se-tooltip${isText ? " se-btn-more-text" : ""}${isOpen ? " on" : ""}`}
 				aria-label={label}
+				aria-expanded={isOpen}
 				tabIndex={-1}
 				onClick={() => onToggle(moreId)}
 				style={{ cursor: "pointer" }}
 			>
+				{isText && iconClassName}
 				<span className='se-tooltip-inner'>
 					<span className='se-tooltip-text'>{label}</span>
 				</span>
@@ -449,6 +455,7 @@ export default function BuilderToolbarPreview({
 												<MoreButtonGroup
 													key={`more-${group.id}`}
 													label={group.moreButton.label}
+													iconType={group.moreButton.icon}
 													iconClassName={group.moreButton.className}
 													icons={icons}
 													moreId={group.id}
