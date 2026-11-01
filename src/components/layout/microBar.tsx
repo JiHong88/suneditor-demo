@@ -16,9 +16,10 @@ type Props = {
 
 const ThemeToggle = dynamic(() => import("./theme-toggle").then((m) => m.ThemeToggle), { ssr: false });
 
-export default function MicroBar({ className }: Props) {
+export default function MicroBar({ stars, className }: Props) {
 	const t = useTranslations("Main");
 	const tc = useTranslations("Common");
+	const starsLabel = stars ? new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(stars) : null;
 	const [v2Open, setV2Open] = useState(false);
 	const v2Ref = useRef<HTMLDivElement>(null);
 
@@ -108,10 +109,15 @@ export default function MicroBar({ className }: Props) {
 						href='https://github.com/JiHong88/SunEditor'
 						target='_blank'
 						rel='noreferrer'
-						title='GitHub'
-						className='inline-flex items-center h-6 rounded px-1.5 py-1 hover:bg-accent hover:text-accent-foreground transition-colors'
+						title={t("starOnGitHub")}
+						aria-label={t("starOnGitHub")}
+						className='inline-flex items-center h-6 rounded sm:border overflow-hidden text-muted-foreground transition-colors hover:text-accent-foreground'
 					>
-						<Github className='size-3.5' aria-hidden style={{ color: "#6e40c9" }} />
+						<span className='inline-flex items-center gap-1 h-full px-1.5 sm:px-2 hover:bg-accent transition-colors'>
+							<Github className='size-3.5' aria-hidden style={{ color: "#6e40c9" }} />
+							<span className='hidden sm:inline'>Star</span>
+						</span>
+						{starsLabel && <span className='hidden sm:inline-flex items-center h-full px-2 border-s bg-background/60 font-medium tabular-nums'>{starsLabel}</span>}
 					</a>
 				</div>
 			</div>

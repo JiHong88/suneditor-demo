@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { SiteNav } from "@/components/layout/navigationMenu";
 import Footer from "@/components/layout/footer";
 import MicroBar from "@/components/layout/microBar";
+import { fetchGithubStats } from "@/lib/git/githubStats";
 import { SUNEDITOR_VERSION } from "@/store/version";
 import { getDir } from "@/i18n/lang";
 import { setRequestLocale } from "next-intl/server";
@@ -59,6 +60,9 @@ export default async function RootLayout({
 	params,
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
 	const version = SUNEDITOR_VERSION;
+	const stars = await fetchGithubStats()
+		.then((s) => Number(s?.stars) || 0)
+		.catch(() => 0);
 	const { locale: resolvedLocale } = await params;
 	// Static rendering: without this next-intl reads the locale from request headers and every page becomes dynamic.
 	setRequestLocale(resolvedLocale);
@@ -85,7 +89,7 @@ export default async function RootLayout({
 					<SiteNav />
 
 					{/* Info bar */}
-					<MicroBar className='sticky top-14' />
+					<MicroBar stars={stars} className='sticky top-14' />
 
 					{/* 메인 */}
 					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>
