@@ -42,8 +42,8 @@ export function ThemeToggle() {
 	}, [ready, theme]);
 
 	return (
-		<div className='flex items-center gap-1 rounded-full bg-muted text-xs border-0'>
-			<button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className='relative w-12 h-6 bg-muted rounded-full transition' aria-label='Toggle theme'>
+		<div className='flex items-center gap-1 rounded-full border border-border/70 bg-background/50 text-xs dark:border-white/10 dark:bg-white/[0.04]'>
+			<button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className='relative w-12 h-6 rounded-full transition' aria-label='Toggle theme'>
 				<span className={`absolute top-1 left-1 w-4 h-4 rounded-full transition-transform leading-4 ${theme === "dark" ? "translate-x-6" : ""}`}>{theme === "dark" ? "🌙" : "☀️"}</span>
 			</button>
 		</div>

@@ -41,7 +41,7 @@ export default function MicroBar({ stars, className }: Props) {
 		<div
 			className={cn(
 				"microbar fixed md:sticky left-0 right-0 z-30 py-4",
-				"h-9 border-b backdrop-blur-md bg-amber-50/40 dark:bg-zinc-900/50",
+				"h-9 border-b backdrop-blur-md bg-amber-50/40 dark:bg-zinc-950/60 dark:border-white/10",
 				"text-xs",
 				className,
 			)}
@@ -62,7 +62,7 @@ export default function MicroBar({ stars, className }: Props) {
 							type='button'
 							onClick={() => setV2Open((p) => !p)}
 							title='SunEditor v2'
-							className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-colors'
+							className='inline-flex items-center gap-1 px-2 h-6 rounded-md border border-border/70 bg-background/50 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/10'
 						>
 							<History className='size-3' aria-hidden />
 							<span>v2</span>
@@ -99,9 +99,9 @@ export default function MicroBar({ stars, className }: Props) {
 						target='_blank'
 						rel='noreferrer'
 						title={tc("sponsor")}
-						className='inline-flex items-center gap-1 h-6 rounded px-2 py-1 border hover:bg-accent hover:text-accent-foreground'
+						className='inline-flex items-center gap-1 px-2 h-6 rounded-md border border-border/70 bg-background/50 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/10'
 					>
-						<Heart className='size-3.5' aria-hidden style={{ stroke: "#c96198" }} />
+						<Heart className='size-3.5 text-pink-500 dark:text-pink-400' aria-hidden />
 						<span>{tc("sponsor")}</span>
 					</Link>
 
@@ -111,13 +111,13 @@ export default function MicroBar({ stars, className }: Props) {
 						rel='noreferrer'
 						title={t("starOnGitHub")}
 						aria-label={t("starOnGitHub")}
-						className='inline-flex items-center h-6 rounded sm:border overflow-hidden text-muted-foreground transition-colors hover:text-accent-foreground'
+						className='inline-flex items-center h-6 rounded-md overflow-hidden text-muted-foreground transition-colors hover:text-foreground sm:border sm:border-border/70 sm:bg-background/50 dark:sm:border-white/10 dark:sm:bg-white/[0.04]'
 					>
-						<span className='inline-flex items-center gap-1 h-full px-1.5 sm:px-2 hover:bg-accent transition-colors'>
-							<Github className='size-3.5' aria-hidden style={{ color: "#6e40c9" }} />
+						<span className='inline-flex items-center gap-1 h-full px-1.5 sm:px-2 transition-colors hover:bg-accent dark:hover:bg-white/10'>
+							<Github className='size-3.5 text-violet-600 dark:text-violet-400' aria-hidden />
 							<span className='hidden sm:inline'>Star</span>
 						</span>
-						{starsLabel && <span className='hidden sm:inline-flex items-center h-full px-2 border-s bg-background/60 font-medium tabular-nums'>{starsLabel}</span>}
+						{starsLabel && <span className='hidden sm:inline-flex items-center h-full px-2 border-s border-border/70 bg-muted/60 font-medium tabular-nums text-foreground/80 dark:border-white/10 dark:bg-white/[0.06]'>{starsLabel}</span>}
 					</a>
 				</div>
 			</div>

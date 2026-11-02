@@ -52,7 +52,7 @@ export function LangSelect() {
 			trigger={
 				<button
 					disabled={isPending}
-					className='flex items-center gap-1.5 bg-muted rounded-xl px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer'
+					className='flex items-center gap-1.5 px-2 text-xs cursor-pointer h-6 rounded-md border border-border/70 bg-background/50 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/10'
 				>
 					{isPending ? (
 						<Loader2 className='h-3 w-3 animate-spin' />
