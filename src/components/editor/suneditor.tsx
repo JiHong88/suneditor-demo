@@ -68,17 +68,17 @@ const SunEditor: React.FC<SunEditorProps> = ({ value, options, theme: themeProp,
 
 	// Theme — auto-detect from page dark/light or use explicit prop
 	const [autoTheme, setAutoTheme] = useState<SunEditorProps["theme"]>(() =>
-		typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "midnight" : "default",
+		typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "dark" : "default",
 	);
 
 	useEffect(() => {
 		if (themeProp !== undefined) return;
 
-		setAutoTheme(document.documentElement.classList.contains("dark") ? "midnight" : "default");
+		setAutoTheme(document.documentElement.classList.contains("dark") ? "dark" : "default");
 
 		const handler = (e: Event) => {
 			const detail = (e as CustomEvent).detail;
-			setAutoTheme(detail === "dark" ? "midnight" : "default");
+			setAutoTheme(detail === "dark" ? "dark" : "default");
 		};
 
 		window.addEventListener("themechange", handler);

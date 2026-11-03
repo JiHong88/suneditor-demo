@@ -84,7 +84,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		}
 
 		// Classic mode in multiroot requires toolbar_container
-		const resolvedTheme = state.theme || (document.documentElement.classList.contains("dark") ? "midnight" : "default");
+		const resolvedTheme = state.theme || (document.documentElement.classList.contains("dark") ? "dark" : "default");
 		const initOptions: Record<string, unknown> = {
 			plugins,
 			buttonList: FullButtonList,
@@ -160,7 +160,7 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		}
 
 		// Auto theme: sync with page theme
-		const getPageTheme = () => (document.documentElement.classList.contains("dark") ? "midnight" : "default");
+		const getPageTheme = () => (document.documentElement.classList.contains("dark") ? "dark" : "default");
 
 		applyTheme(getPageTheme());
 
