@@ -62,7 +62,7 @@ export default function LangDropdown({ value, options, onChange, trigger, align 
 								{opt.locale}
 							</span>
 							{isRtl && (
-								<span className='shrink-0 text-[9px] font-medium px-1 py-0.5 rounded bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400'>
+								<span className='shrink-0 text-[9px] font-medium px-1 py-0.5 rounded bg-orange-100 text-orange-600 dark:bg-orange-400/15 dark:text-orange-400'>
 									RTL
 								</span>
 							)}

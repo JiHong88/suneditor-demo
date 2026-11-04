@@ -52,14 +52,14 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 	if (isSeparator) {
 		const hoverClasses = suppressHover
 			? ""
-			: "has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-950/40 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 has-[.delete-zone:hover]:text-inherit dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-950/30";
+			: "has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-400/15 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 has-[.delete-zone:hover]:text-inherit dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-400/15";
 
 		return (
 			<div
 				ref={!isDragOverlay ? setNodeRef : undefined}
 				style={!isDragOverlay ? style : undefined}
 				className={`inline-flex items-center gap-0.5 rounded select-none transition-all text-amber-700 dark:text-amber-300
-					${isDragOverlay ? "shadow-lg border border-amber-400 bg-amber-50 ring-2 ring-amber-400/20 dark:border-amber-500/60 dark:bg-amber-900/40 dark:ring-amber-500/20" : `border border-dashed border-amber-400/50 bg-amber-50/40 dark:border-amber-500/40 dark:bg-amber-900/30 ${hoverClasses}`}
+					${isDragOverlay ? "shadow-lg border border-amber-400 bg-amber-50 ring-2 ring-amber-400/20 dark:border-amber-500/60 dark:bg-amber-400/15 dark:ring-amber-500/20" : `border border-dashed border-amber-400/50 bg-amber-50/40 dark:border-amber-500/40 dark:bg-amber-400/10 ${hoverClasses}`}
 					${isDragging ? "z-50 opacity-30" : ""}
 					${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
 				onMouseEnter={() => onHover?.(hoverInfo)}
@@ -77,7 +77,7 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 					<button
 						type='button'
 						onClick={onRemove}
-						className={`delete-zone p-0.5 rounded-e transition-colors ${suppressHover ? "" : "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950/50 dark:hover:text-red-400 cursor-pointer"}`}
+						className={`delete-zone p-0.5 rounded-e transition-colors ${suppressHover ? "" : "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-400/10 dark:hover:text-red-400 cursor-pointer"}`}
 					>
 						<X className='h-2.5 w-2.5' />
 					</button>
@@ -88,14 +88,14 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 
 	const hoverClasses = suppressHover
 		? ""
-		: "has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-900/40 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-900/40";
+		: "has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-400/15 has-[.delete-zone:hover]:border-red-400 has-[.delete-zone:hover]:bg-red-50 dark:has-[.delete-zone:hover]:border-red-500/60 dark:has-[.delete-zone:hover]:bg-red-400/15";
 
 	return (
 		<div
 			ref={!isDragOverlay ? setNodeRef : undefined}
 			style={!isDragOverlay ? style : undefined}
 			className={`inline-flex items-center rounded text-[11px] font-medium border select-none transition-all
-				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-900/40 dark:text-blue-300 dark:ring-blue-500/20" : isHighlighted ? "border-amber-400 bg-amber-50 text-amber-700 ring-1 ring-amber-400/30 dark:border-amber-500/60 dark:bg-amber-900/30 dark:text-amber-300 dark:ring-amber-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/20 ${hoverClasses}`}
+				${isDragOverlay ? "shadow-lg border-blue-400 bg-blue-50 text-blue-600 ring-2 ring-blue-400/20 dark:border-blue-500/60 dark:bg-blue-400/15 dark:text-blue-300 dark:ring-blue-500/20" : isHighlighted ? "border-amber-400 bg-amber-50 text-amber-700 ring-1 ring-amber-400/30 dark:border-amber-500/60 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-500/20" : `border-border bg-muted/60 group-hover/grp:border-foreground/25 group-hover/grp:bg-muted dark:group-hover/grp:border-foreground/20 ${hoverClasses}`}
 				${isDragging ? "z-50" : ""}
 				${isNew && !isDragOverlay ? "animate-[buttonPop_0.25s_ease-out]" : ""}`}
 			onMouseEnter={() => onHover?.(hoverInfo)}
@@ -118,7 +118,7 @@ export default function BuilderButton({ id, buttonName, onRemove, isDragOverlay,
 				<button
 					type='button'
 					onClick={onRemove}
-					className={`delete-zone px-1 py-0.5 rounded-e transition-colors ${suppressHover ? "" : "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950/50 dark:hover:text-red-400 cursor-pointer"}`}
+					className={`delete-zone px-1 py-0.5 rounded-e transition-colors ${suppressHover ? "" : "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-400/10 dark:hover:text-red-400 cursor-pointer"}`}
 				>
 					<X className='h-2.5 w-2.5' />
 				</button>

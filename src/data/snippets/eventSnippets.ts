@@ -244,12 +244,12 @@ export const EVENT_LIST: EventDef[] = [
 
 /* ── 카테고리별 Badge 색상 매핑 (8개 카테고리) ──── */
 export const CATEGORY_COLORS: Record<string, string> = {
-	lifecycle: "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400",
-	input: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400",
-	focus: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-400",
-	mouse: "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-400",
-	clipboard: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
-	ui: "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-400",
-	media: "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400",
-	plugin: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-400",
+	lifecycle: "bg-green-100 text-green-700 dark:bg-green-400/15 dark:text-green-400",
+	input: "bg-blue-100 text-blue-700 dark:bg-blue-400/15 dark:text-blue-400",
+	focus: "bg-cyan-100 text-cyan-700 dark:bg-cyan-400/15 dark:text-cyan-400",
+	mouse: "bg-purple-100 text-purple-700 dark:bg-purple-400/15 dark:text-purple-400",
+	clipboard: "bg-amber-100 text-amber-700 dark:bg-amber-400/15 dark:text-amber-400",
+	ui: "bg-teal-100 text-teal-700 dark:bg-teal-400/15 dark:text-teal-400",
+	media: "bg-rose-100 text-rose-700 dark:bg-rose-400/15 dark:text-rose-400",
+	plugin: "bg-violet-100 text-violet-700 dark:bg-violet-400/15 dark:text-violet-400",
 };

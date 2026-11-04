@@ -88,23 +88,23 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 				${isOver ? "border-primary !border-solid bg-primary/5 shadow-sm" : "border-transparent bg-background"}
 				${isGroupDragging ? "!border-emerald-400 !bg-emerald-50/50 opacity-40 dark:!border-emerald-500/60 dark:!bg-emerald-900/25" : ""}
 				${groupHoverClasses}
-				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-900/25
-				has-[.group-float-zone:hover]:border-orange-400 has-[.group-float-zone:hover]:bg-orange-50/30 dark:has-[.group-float-zone:hover]:border-orange-500/60 dark:has-[.group-float-zone:hover]:bg-orange-900/25
-				has-[.group-more-zone:hover]:border-violet-400 has-[.group-more-zone:hover]:bg-violet-50/30 dark:has-[.group-more-zone:hover]:border-violet-500/60 dark:has-[.group-more-zone:hover]:bg-violet-900/25
-				has-[.group-delete-zone:hover]:border-red-400 has-[.group-delete-zone:hover]:bg-red-50/30 dark:has-[.group-delete-zone:hover]:border-red-500/60 dark:has-[.group-delete-zone:hover]:bg-red-900/25`}
+				has-[.group-drag-zone:hover]:border-emerald-400 has-[.group-drag-zone:hover]:bg-emerald-50/30 dark:has-[.group-drag-zone:hover]:border-emerald-500/60 dark:has-[.group-drag-zone:hover]:bg-emerald-400/15
+				has-[.group-float-zone:hover]:border-orange-400 has-[.group-float-zone:hover]:bg-orange-50/30 dark:has-[.group-float-zone:hover]:border-orange-500/60 dark:has-[.group-float-zone:hover]:bg-orange-400/15
+				has-[.group-more-zone:hover]:border-violet-400 has-[.group-more-zone:hover]:bg-violet-50/30 dark:has-[.group-more-zone:hover]:border-violet-500/60 dark:has-[.group-more-zone:hover]:bg-violet-400/15
+				has-[.group-delete-zone:hover]:border-red-400 has-[.group-delete-zone:hover]:bg-red-50/30 dark:has-[.group-delete-zone:hover]:border-red-500/60 dark:has-[.group-delete-zone:hover]:bg-red-400/15`}
 			onMouseEnter={group.moreButton ? () => onMoreGroupHover?.(group.id) : undefined}
 			onMouseLeave={group.moreButton ? () => onMoreGroupHover?.(null) : undefined}
 		>
 			{/* MoreButton label */}
 			{group.moreButton && (
-				<span className='text-[10px] font-semibold text-violet-700 dark:text-violet-200 bg-violet-100 dark:bg-violet-800/50 px-2 py-0.5 rounded me-1'>
+				<span className='text-[10px] font-semibold text-violet-700 dark:text-violet-200 bg-violet-100 dark:bg-violet-400/15 px-2 py-0.5 rounded me-1'>
 					:{group.moreButton.label}
 				</span>
 			)}
 
 			{/* Float right indicator */}
 			{group.floatRight && (
-				<span className='text-[10px] font-semibold text-orange-700 dark:text-orange-200 bg-orange-100 dark:bg-orange-800/50 px-1.5 py-0.5 rounded me-1'>
+				<span className='text-[10px] font-semibold text-orange-700 dark:text-orange-200 bg-orange-100 dark:bg-orange-400/15 px-1.5 py-0.5 rounded me-1'>
 					-right
 				</span>
 			)}
@@ -139,7 +139,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 					ref={setDragRef}
 					{...groupDragAttrs}
 					{...groupDragListeners}
-					className='group-drag-zone p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors cursor-grab text-muted-foreground/50 hover:text-emerald-600 dark:hover:text-emerald-400'
+					className='group-drag-zone p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-400/15 transition-colors cursor-grab text-muted-foreground/50 hover:text-emerald-600 dark:hover:text-emerald-400'
 					title={t("dragGroup")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "drag" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
@@ -149,7 +149,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 				<button
 					type='button'
 					onClick={() => dispatch({ type: "SET_FLOAT_RIGHT", groupId: group.id, value: !group.floatRight, breakpointId })}
-					className={`group-float-zone p-1 rounded hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors cursor-pointer ${group.floatRight ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground/50 hover:text-orange-600 dark:hover:text-orange-400"}`}
+					className={`group-float-zone p-1 rounded hover:bg-orange-100 dark:hover:bg-orange-400/15 transition-colors cursor-pointer ${group.floatRight ? "text-orange-600 dark:text-orange-400" : "text-muted-foreground/50 hover:text-orange-600 dark:hover:text-orange-400"}`}
 					title={t("floatRight")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "float" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
@@ -166,7 +166,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 							breakpointId,
 						})
 					}
-					className={`group-more-zone p-1 rounded hover:bg-violet-100 dark:hover:bg-violet-900/40 transition-colors cursor-pointer ${group.moreButton ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground/50 hover:text-violet-600 dark:hover:text-violet-400"}`}
+					className={`group-more-zone p-1 rounded hover:bg-violet-100 dark:hover:bg-violet-400/15 transition-colors cursor-pointer ${group.moreButton ? "text-violet-600 dark:text-violet-400" : "text-muted-foreground/50 hover:text-violet-600 dark:hover:text-violet-400"}`}
 					title={t("toggleMore")}
 					onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "more" })}
 					onMouseLeave={() => onGroupActionHover?.(null)}
@@ -177,7 +177,7 @@ export default function BuilderGroup({ group, dispatch, breakpointId, isOnly, dr
 					<button
 						type='button'
 						onClick={() => dispatch({ type: "REMOVE_GROUP", groupId: group.id, breakpointId })}
-						className='group-delete-zone p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/40 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer text-muted-foreground/50'
+						className='group-delete-zone p-1 rounded hover:bg-red-100 dark:hover:bg-red-400/15 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer text-muted-foreground/50'
 						title={t("removeGroup")}
 						onMouseEnter={() => onGroupActionHover?.({ groupId: group.id, action: "delete" })}
 						onMouseLeave={() => onGroupActionHover?.(null)}

@@ -6,11 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
 
 import FileListPanel, { useFileList } from "@/components/editor/FileListPanel";
 
-const SunEditorComponent = dynamic(() => import("@/components/editor/suneditor"), { ssr: false });
+import SunEditorComponent from "@/components/editor/suneditor";
 
 /** Buttons that indicate upload-related features */
 const UPLOAD_BUTTONS = new Set(["image", "video", "audio", "fileUpload", "embed"]);

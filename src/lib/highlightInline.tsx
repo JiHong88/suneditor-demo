@@ -2,10 +2,10 @@ import React from "react";
 import CodeBlock from "@/components/common/CodeBlock";
 
 const CODE_STYLE =
-	"px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-xs font-mono";
+	"px-1.5 py-0.5 bg-blue-100 dark:bg-blue-400/10 text-blue-700 dark:text-blue-300 rounded text-xs font-mono";
 
 const TYPE_LINK_STYLE =
-	"px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded text-xs font-mono cursor-pointer hover:underline";
+	"px-1.5 py-0.5 bg-purple-100 dark:bg-purple-400/10 text-purple-700 dark:text-purple-300 rounded text-xs font-mono cursor-pointer hover:underline";
 
 /** Check if backtick content is a TypeName.property reference (e.g. EmbedPluginOptions.embedQuery) */
 const TYPE_REF_RE = /^([A-Z]\w+)\.(\w+)$/;

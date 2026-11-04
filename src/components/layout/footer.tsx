@@ -19,12 +19,12 @@ export default function Footer({ version = "" }: FooterProps) {
 	if (HIDDEN_ROUTES.some((route) => pathname.includes(route))) return null;
 
 	return (
-		<footer role='contentinfo' className='pb-20 border-t border-slate-200/60 dark:border-slate-700/50 bg-slate-50/60 dark:bg-slate-900/30'>
+		<footer role='contentinfo' className='pb-20 border-t border-slate-200/60 dark:border-white/10 bg-slate-50/60 dark:bg-[#151b23]'>
 			<div className='max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600 dark:text-slate-300'>
 				<div>
 					<div className='mb-3 flex items-center gap-2'>
 						<Image src='/se3_logo_title.svg' alt='SunEditor' width={88} height={24} className='dir-img' />
-						<span className='rounded-md border border-slate-300/60 dark:border-slate-600/60 px-2 py-0.5 text-xs'>{version}</span>
+						<span className='rounded-md border border-slate-300/60 dark:border-white/15 px-2 py-0.5 text-xs'>{version}</span>
 					</div>
 					<ul className='space-y-1'>
 						<li className='my-4'>

@@ -189,7 +189,7 @@ export default function MigrationPage() {
 				{activeTab === "converter" && (
 					<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className='max-w-5xl mx-auto space-y-6'>
 						{/* Info */}
-						<div className='flex items-start gap-3 rounded-lg border bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 px-4 py-3'>
+						<div className='flex items-start gap-3 rounded-lg border bg-blue-50/50 dark:bg-blue-400/10 border-blue-200 dark:border-blue-400/30 px-4 py-3'>
 							<Info className='size-4 text-blue-500 mt-0.5 shrink-0' />
 							<p className='text-sm text-muted-foreground'>{t.raw("converterDesc")}</p>
 						</div>
@@ -242,19 +242,19 @@ export default function MigrationPage() {
 						{stats && (stats.converted > 0 || stats.removed > 0 || stats.unknown > 0) && (
 							<div className='flex flex-wrap gap-3 text-xs'>
 								{stats.converted > 0 && (
-									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'>
+									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-400/10 dark:text-green-400'>
 										<ArrowRight className='size-3' />
 										{stats.converted} {t("converted")}
 									</span>
 								)}
 								{stats.removed > 0 && (
-									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'>
+									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-100 text-red-700 dark:bg-red-400/10 dark:text-red-400'>
 										<Trash2 className='size-3' />
 										{stats.removed} {t("removed")}
 									</span>
 								)}
 								{stats.unknown > 0 && (
-									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'>
+									<span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-400/10 dark:text-yellow-400'>
 										<AlertTriangle className='size-3' />
 										{stats.unknown} {t("unknown")}
 									</span>
@@ -276,10 +276,10 @@ export default function MigrationPage() {
 												<span
 													className={`shrink-0 w-16 text-center rounded-sm px-1.5 py-0.5 font-medium ${
 														l.status === "converted"
-															? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+															? "bg-green-100 text-green-700 dark:bg-green-400/10 dark:text-green-400"
 															: l.status === "removed"
-																? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-																: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+																? "bg-red-100 text-red-700 dark:bg-red-400/10 dark:text-red-400"
+																: "bg-yellow-100 text-yellow-700 dark:bg-yellow-400/10 dark:text-yellow-400"
 													}`}
 												>
 													{l.status}

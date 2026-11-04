@@ -136,16 +136,16 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
           {method.memberKind && (
             <Badge variant="outline" className={`text-[9px] px-1.5 py-0 ${
               method.memberKind === "static"
-                ? "text-sky-600 dark:text-sky-400 border-sky-300 dark:border-sky-800"
+                ? "text-sky-600 dark:text-sky-400 border-sky-300 dark:border-sky-400/30"
                 : method.memberKind === "getter"
-                ? "text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-800"
-                : "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-800"
+                ? "text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-400/30"
+                : "text-amber-600 dark:text-amber-400 border-amber-300 dark:border-amber-400/30"
             }`}>
               {method.memberKind}
             </Badge>
           )}
           {method.deprecated && (
-            <Badge variant="outline" className="text-[9px] px-1.5 py-0 text-red-600 dark:text-red-400 border-red-300 dark:border-red-800">
+            <Badge variant="outline" className="text-[9px] px-1.5 py-0 text-red-600 dark:text-red-400 border-red-300 dark:border-red-400/30">
               Deprecated
             </Badge>
           )}
@@ -197,11 +197,11 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
               return (
                 <div key={rawName} className="flex gap-2 ps-2 items-start">
                   <span className="shrink-0 flex items-center gap-1">
-                    <code className="text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
+                    <code className="text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-400/10 px-1.5 py-0.5 rounded">
                       {displayName}
                     </code>
                     {isOptional && (
-                      <span className="text-[10px] px-1 py-px rounded bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 leading-tight">
+                      <span className="text-[10px] px-1 py-px rounded bg-amber-100 dark:bg-amber-400/15 text-amber-700 dark:text-amber-400 leading-tight">
                         {defaultVal !== undefined ? `=${defaultVal}` : "optional"}
                       </span>
                     )}
@@ -218,7 +218,7 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
       <div className="flex items-start gap-2 mb-3">
         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide shrink-0 mt-0.5">{t("returns")}</span>
         <div>
-          <code className="text-sm font-mono px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
+          <code className="text-sm font-mono px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-400/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-400/30">
             {method.returns || "void"}
           </code>
           {method.returnsDescription && (
@@ -282,7 +282,7 @@ export default function ApiContent({ title, description, methods, getters, prefi
               {methods.length} {methods.length === 1 ? t("method") : t("methods")}
             </Badge>
             {getters && getters.length > 0 && (
-              <Badge variant="outline" className="text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-700">
+              <Badge variant="outline" className="text-violet-600 dark:text-violet-400 border-violet-300 dark:border-violet-400/40">
                 {getters.length} getter{getters.length > 1 ? "s" : ""}
               </Badge>
             )}
@@ -310,7 +310,7 @@ export default function ApiContent({ title, description, methods, getters, prefi
                     .{g.name}
                   </code>
                   <div className="flex-1 min-w-0 space-y-1">
-                    <code className="text-xs font-mono px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800">
+                    <code className="text-xs font-mono px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-400/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-400/30">
                       {g.returns}
                     </code>
                     {g.description && (

@@ -215,55 +215,55 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; dot:
 	amber: {
 		bg: "bg-amber-500/10",
 		text: "text-amber-600 dark:text-amber-400",
-		border: "border-amber-300 dark:border-amber-700",
+		border: "border-amber-300 dark:border-amber-400/40",
 		dot: "bg-amber-500",
 	},
 	sky: {
 		bg: "bg-sky-500/10",
 		text: "text-sky-600 dark:text-sky-400",
-		border: "border-sky-300 dark:border-sky-700",
+		border: "border-sky-300 dark:border-sky-400/40",
 		dot: "bg-sky-500",
 	},
 	indigo: {
 		bg: "bg-indigo-500/10",
 		text: "text-indigo-600 dark:text-indigo-400",
-		border: "border-indigo-300 dark:border-indigo-700",
+		border: "border-indigo-300 dark:border-indigo-400/40",
 		dot: "bg-indigo-500",
 	},
 	violet: {
 		bg: "bg-violet-500/10",
 		text: "text-violet-600 dark:text-violet-400",
-		border: "border-violet-300 dark:border-violet-700",
+		border: "border-violet-300 dark:border-violet-400/40",
 		dot: "bg-violet-500",
 	},
 	purple: {
 		bg: "bg-purple-500/10",
 		text: "text-purple-600 dark:text-purple-400",
-		border: "border-purple-300 dark:border-purple-700",
+		border: "border-purple-300 dark:border-purple-400/40",
 		dot: "bg-purple-500",
 	},
 	rose: {
 		bg: "bg-rose-500/10",
 		text: "text-rose-600 dark:text-rose-400",
-		border: "border-rose-300 dark:border-rose-700",
+		border: "border-rose-300 dark:border-rose-400/40",
 		dot: "bg-rose-500",
 	},
 	teal: {
 		bg: "bg-teal-500/10",
 		text: "text-teal-600 dark:text-teal-400",
-		border: "border-teal-300 dark:border-teal-700",
+		border: "border-teal-300 dark:border-teal-400/40",
 		dot: "bg-teal-500",
 	},
 	orange: {
 		bg: "bg-orange-500/10",
 		text: "text-orange-600 dark:text-orange-400",
-		border: "border-orange-300 dark:border-orange-700",
+		border: "border-orange-300 dark:border-orange-400/40",
 		dot: "bg-orange-500",
 	},
 	emerald: {
 		bg: "bg-emerald-500/10",
 		text: "text-emerald-600 dark:text-emerald-400",
-		border: "border-emerald-300 dark:border-emerald-700",
+		border: "border-emerald-300 dark:border-emerald-400/40",
 		dot: "bg-emerald-500",
 	},
 };
@@ -1371,7 +1371,7 @@ function ModulesTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 				<SectionLabel>{t("extendsVsImplements")}</SectionLabel>
 				<p className='text-xs text-muted-foreground mb-3'>{t("extendsVsImplementsDesc")}</p>
 				<div className='grid sm:grid-cols-2 gap-3 mb-5'>
-					<div className='p-3 rounded-lg border bg-blue-50/50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800'>
+					<div className='p-3 rounded-lg border bg-blue-50/50 dark:bg-blue-400/10 border-blue-200 dark:border-blue-400/30'>
 						<div className='flex items-center gap-2 mb-2'>
 							<code className='text-xs font-bold text-blue-700 dark:text-blue-400'>extends</code>
 							<Badge variant='outline' className='text-[9px] px-1.5 py-0'>
@@ -1384,7 +1384,7 @@ function ModulesTab({ t }: { t: ReturnType<typeof useTranslations> }) {
 							<div>PluginDropdown, PluginField, ...</div>
 						</div>
 					</div>
-					<div className='p-3 rounded-lg border bg-violet-50/50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800'>
+					<div className='p-3 rounded-lg border bg-violet-50/50 dark:bg-violet-400/10 border-violet-200 dark:border-violet-400/30'>
 						<div className='flex items-center gap-2 mb-2'>
 							<code className='text-xs font-bold text-violet-700 dark:text-violet-400'>implements</code>
 							<Badge variant='outline' className='text-[9px] px-1.5 py-0'>
@@ -2033,11 +2033,11 @@ export default function CustomPluginGuide() {
 						{t("inheritanceChain")}
 					</h4>
 					<div className='flex items-center gap-2 flex-wrap font-mono text-sm'>
-						<span className='px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'>
+						<span className='px-2.5 py-1 rounded-md bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'>
 							KernelInjector
 						</span>
 						<span className='text-muted-foreground'>→</span>
-						<span className='px-2.5 py-1 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'>
+						<span className='px-2.5 py-1 rounded-md bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300'>
 							Base
 						</span>
 						<span className='text-muted-foreground'>→</span>

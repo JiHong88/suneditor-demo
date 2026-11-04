@@ -1,15 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { SunEditor } from "suneditor/types";
-import SunEditorComponent from "@/components/editor/suneditor";
+import SunEditor, { type SunEditorInstance, type SunEditorModule, type SunEditorOptions } from "@suneditor/suneditor-react";
+import { FullButtonList } from "@/components/editor/buttonList";
+import { useSiteTheme, withImageResize } from "@/components/editor/suneditor";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import { stateToEditorOptions } from "../_lib/playgroundState";
 import { type AllLibs, type ExternalLibs, getActiveLibs } from "./externalLibsLoader";
 
 interface Props {
 	state: PlaygroundState;
-	editorRef: React.RefObject<SunEditor.Instance | null>;
+	editorRef: React.RefObject<SunEditorInstance | null>;
 	contentRef: React.RefObject<string>;
 	allLibs: AllLibs;
 	onFileManagerAction?: (params: {
@@ -35,6 +36,7 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 	const statusbarContainerRef = useRef<HTMLDivElement>(null);
 	const [langPack, setLangPack] = useState<Record<string, unknown> | undefined>(undefined);
 	const [langLoaded, setLangLoaded] = useState(!state.lang);
+	const siteTheme = useSiteTheme();
 
 	useEffect(() => {
 		if (!state.lang) {
@@ -49,108 +51,84 @@ export default function PlaygroundEditor({ state, editorRef, contentRef, allLibs
 		});
 	}, [state.lang]);
 
-	const extLibs: ExternalLibs = useMemo(
-		() => getActiveLibs(allLibs, state.math_mathLib),
-		[allLibs, state.math_mathLib],
-	);
+	const extLibs: ExternalLibs = useMemo(() => getActiveLibs(allLibs, state.math_mathLib), [allLibs, state.math_mathLib]);
 
-	const options = useMemo(() => {
-		const opts = stateToEditorOptions(state);
-		// Always set lang — prevents auto-detection in base SunEditor component.
-		// null sentinel = explicit English; lang pack object = selected language.
-		opts.lang = langPack ?? null;
-		// icons — parse JSON and merge
-		if (state.icons) {
-			try {
-				opts.icons = JSON.parse(state.icons);
-			} catch { /* skip invalid JSON */ }
-		}
-		// external libraries
-		if (extLibs && Object.keys(extLibs).length > 0) {
-			opts.externalLibs = extLibs;
-		}
-		// Wire up onFileManagerAction event
-		if (onFileManagerAction) {
-			opts.events = { ...(opts.events as Record<string, unknown> || {}), onFileManagerAction };
-		}
+	// Content bookkeeping for key-based remounts:
+	// - `initialHtmlRef`: what this mount was created with (= contentRef at creation)
+	// - `liveHtmlRef`: latest editor HTML from onChange
+	// On unmount the live HTML is written back to contentRef unless the parent overwrote contentRef
+	// in the meantime (value option changed), in which case the parent's value wins.
+	const initialHtmlRef = useRef<string | null>(null);
+	const liveHtmlRef = useRef<string | null>(null);
 
-		return { ...opts } as SunEditor.InitOptions;
-	}, [state, langPack, extLibs, onFileManagerAction]);
-
-	const handleInstance = useCallback(
-		(instance: SunEditor.Instance) => {
-			// Save content from outgoing instance so it survives key-based remount,
-			// but only if the parent hasn't externally synced contentRef (e.g. value-option change).
-			let oldContent = "";
-			if (editorRef.current) {
-				try { oldContent = editorRef.current.$.html.get() as string; } catch { /* ignore */ }
-				if (oldContent === contentRef.current || contentRef.current === "") {
-					// No external sync → preserve current editor content across remount
-					contentRef.current = oldContent;
+	// `options` is a function: the wrapper calls it after mount (container refs are set) and on every
+	// render to re-sync `events` and `theme`. Everything else is applied once at creation.
+	const buildOptions = useCallback(
+		(se: SunEditorModule): SunEditorOptions => {
+			const opts = stateToEditorOptions(state) as Record<string, unknown>;
+			// Always set lang — null sentinel = explicit English; lang pack object = selected language.
+			opts.lang = langPack ?? null;
+			if (state.icons) {
+				try {
+					opts.icons = JSON.parse(state.icons);
+				} catch {
+					/* skip invalid JSON */
 				}
-				// else: parent overwrote contentRef (value option changed) → keep parent's value
 			}
-			editorRef.current = instance;
-			// Restore saved content — guard against rootStack not yet initialized (e.g. document type)
-			try {
-				instance.$.html.set(contentRef.current);
-			} catch {
-				// Retry after initialization completes
-				requestAnimationFrame(() => {
-					try {
-						instance.$.html.set(contentRef.current);
-					} catch {
-						/* still not ready — content was already set via options.value */
-					}
-				});
+			if (extLibs && Object.keys(extLibs).length > 0) {
+				opts.externalLibs = extLibs;
 			}
+
+			const events = withImageResize(opts.events as SunEditorOptions["events"]) as Record<string, unknown>;
+			if (onFileManagerAction) events.onFileManagerAction = onFileManagerAction;
+
+			if (initialHtmlRef.current === null) initialHtmlRef.current = contentRef.current;
+
+			return {
+				plugins: se.plugins,
+				buttonList: FullButtonList,
+				theme: state.theme || siteTheme,
+				...(state.toolbar_container_enabled && toolbarContainerRef.current && { toolbar_container: toolbarContainerRef.current }),
+				...(state.statusbar_container_enabled && statusbarContainerRef.current && { statusbar_container: statusbarContainerRef.current }),
+				...opts,
+				// After `opts`: stateToEditorOptions sets `value` from state, but a remount must replay the
+				// content saved in contentRef (typed content, URL `val`), which the parent keeps in sync.
+				value: initialHtmlRef.current,
+				events,
+			} as SunEditorOptions;
 		},
-		[editorRef, contentRef],
+		[state, langPack, extLibs, onFileManagerAction, siteTheme, contentRef],
 	);
 
-	// Save content on unmount so it survives remount — but only if contentRef hasn't been
-	// externally synced by the parent (e.g. value-option change).
+	// The wrapper assigns the instance after creation and null after destroy.
+	const handleRef = useCallback(
+		(instance: SunEditorInstance | null) => {
+			editorRef.current = instance;
+		},
+		[editorRef],
+	);
+
+	const handleChange = useCallback((html: string) => {
+		liveHtmlRef.current = html;
+	}, []);
+
+	// Save content on unmount so it survives remount (runs before the wrapper destroys the engine).
 	useEffect(() => {
 		return () => {
-			const instance = editorRef.current;
-			if (!instance) return;
-			try {
-				const current = instance.$.html.get() as string;
-				if (current === contentRef.current || contentRef.current === "") {
-					contentRef.current = current;
-				}
-			} catch {
-				/* ignore */
-			}
+			const live = liveHtmlRef.current;
+			if (live === null) return; // nothing typed in this mount
+			if (initialHtmlRef.current !== contentRef.current) return; // parent overwrote contentRef (value option changed)
+			contentRef.current = live;
 		};
-	}, [editorRef, contentRef]);
+	}, [contentRef]);
 
 	if (!langLoaded) return null;
 
 	return (
 		<>
-			{state.toolbar_container_enabled && (
-				<div
-					id='se-toolbar-container'
-					ref={toolbarContainerRef}
-					className='mb-2.5 border border-b-0 border-border bg-background overflow-hidden'
-				/>
-			)}
-			<SunEditorComponent
-				key={state.toolbar_container_enabled ? "tc" : "no-tc"}
-				options={options}
-				theme={(state.theme || undefined) as "default" | "dark" | "midnight" | "cobalt" | "cream" | undefined}
-				onInstance={handleInstance}
-				toolbarContainerRef={state.toolbar_container_enabled ? toolbarContainerRef : undefined}
-				statusbarContainerRef={state.statusbar_container_enabled ? statusbarContainerRef : undefined}
-			/>
-			{state.statusbar_container_enabled && (
-				<div
-					id='se-statusbar-container'
-					ref={statusbarContainerRef}
-					className='mt-2.5 border border-border bg-background overflow-hidden'
-				/>
-			)}
+			{state.toolbar_container_enabled && <div id='se-toolbar-container' ref={toolbarContainerRef} className='mb-2.5 border border-b-0 border-border bg-background overflow-hidden' />}
+			<SunEditor key={state.toolbar_container_enabled ? "tc" : "no-tc"} ref={handleRef} options={buildOptions} onChange={handleChange} />
+			{state.statusbar_container_enabled && <div id='se-statusbar-container' ref={statusbarContainerRef} className='mt-2.5 border border-border bg-background overflow-hidden' />}
 		</>
 	);
 }

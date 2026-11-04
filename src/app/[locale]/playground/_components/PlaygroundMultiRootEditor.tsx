@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { SunEditor } from "suneditor/types";
-import suneditor, { plugins } from "suneditor";
-import "suneditor/css/editor";
-import "suneditor/css/contents";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { SunEditorGroup, SunEditorRoot, type SunEditorFrameOptions, type SunEditorInstance, type SunEditorModule, type SunEditorOptions } from "@suneditor/suneditor-react";
 import { FullButtonList } from "@/components/editor/buttonList";
+import { useSiteTheme, withImageResize } from "@/components/editor/suneditor";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import { stateToEditorOptions, getRootConfigs } from "../_lib/playgroundState";
 import { type AllLibs, getActiveLibs } from "./externalLibsLoader";
@@ -23,15 +21,15 @@ async function loadLangPack(code: string): Promise<Record<string, unknown> | und
 
 interface Props {
 	state: PlaygroundState;
-	editorRef: React.RefObject<SunEditor.Instance | null>;
+	editorRef: React.RefObject<SunEditorInstance | null>;
 	contentRef: React.RefObject<Record<string, string>>;
 	allLibs: AllLibs;
 }
 
 export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef, allLibs }: Props) {
-	const containerRef = useRef<HTMLDivElement>(null);
 	const toolbarRef = useRef<HTMLDivElement>(null);
 	const statusbarRef = useRef<HTMLDivElement>(null);
+	const siteTheme = useSiteTheme();
 
 	const isClassic = state.mode === "classic" || !state.mode;
 
@@ -54,143 +52,88 @@ export default function PlaygroundMultiRootEditor({ state, editorRef, contentRef
 		});
 	}, [state.lang]);
 
-	const options = useMemo(() => {
-		const opts = stateToEditorOptions(state);
-		opts.lang = langPack ?? null;
-		// Remove per-frame options that will be set per-root
-		delete (opts as Record<string, unknown>).height;
-		delete (opts as Record<string, unknown>).width;
-		return opts;
-	}, [state, langPack]);
-
 	const extLibs = useMemo(() => getActiveLibs(allLibs, state.math_mathLib), [allLibs, state.math_mathLib]);
 
-	useEffect(() => {
-		if (!containerRef.current || extLibs === null || !langLoaded) return;
+	// Shared instance options. The group calls this after the roots and container refs are mounted,
+	// and on every render to re-sync `events` and `theme`.
+	const buildOptions = useCallback(
+		(se: SunEditorModule): SunEditorOptions => {
+			const opts = stateToEditorOptions(state) as Record<string, unknown>;
+			opts.lang = langPack ?? null;
+			// Per-frame options are set on each root
+			delete opts.height;
+			delete opts.width;
+			if (extLibs && Object.keys(extLibs).length > 0) opts.externalLibs = extLibs;
 
-		// Create textarea elements for each root
-		// Clear previous DOM to handle React Strict Mode double-mount
-		const targets: Record<string, { target: HTMLTextAreaElement; options: SunEditor.InitFrameOptions }> = {};
+			return {
+				plugins: se.plugins,
+				buttonList: FullButtonList,
+				theme: state.theme || siteTheme,
+				// Classic mode in multiroot requires toolbar_container
+				...(isClassic && toolbarRef.current && { toolbar_container: toolbarRef.current }),
+				...(state.statusbar_container_enabled && statusbarRef.current && { statusbar_container: statusbarRef.current }),
+				...opts,
+				events: withImageResize(opts.events as SunEditorOptions["events"]),
+			} as SunEditorOptions;
+		},
+		[state, langPack, extLibs, siteTheme, isClassic],
+	);
+
+	const handleRef = useCallback(
+		(instance: SunEditorInstance | null) => {
+			editorRef.current = instance;
+		},
+		[editorRef],
+	);
+
+	// Initial HTML of each root: content saved by the previous mount (or from the URL), else the root's
+	// value option. Root frame options are read at render time, so the previous mount keeps contentRef
+	// current on every change (see onChange below) instead of writing it back on unmount — the new
+	// component renders before the old one's cleanup runs. When the parent changes a root's value option
+	// it overwrites contentRef during its own render, so that value wins on the remount that follows.
+	const rootFrameOptions = useMemo(() => {
+		const result: Record<string, SunEditorFrameOptions> = {};
 		for (const root of roots) {
-			const wrapper = containerRef.current.querySelector(`[data-root="${root.key}"]`);
-			if (!wrapper) continue;
-			wrapper.innerHTML = "";
-			const textarea = document.createElement("textarea");
-			wrapper.appendChild(textarea);
-			targets[root.key] = {
-				target: textarea,
-				options: root.options as SunEditor.InitFrameOptions,
-			};
+			const frame = root.options as SunEditorFrameOptions;
+			result[root.key] = { ...frame, value: contentRef.current[root.key] || (frame.value as string | undefined) || "" };
 		}
+		return result;
+		// contentRef is read once per mount on purpose (remounts get a new component instance)
+	}, [roots, contentRef]);
 
-		// Classic mode in multiroot requires toolbar_container
-		const resolvedTheme = state.theme || (document.documentElement.classList.contains("dark") ? "dark" : "default");
-		const initOptions: Record<string, unknown> = {
-			plugins,
-			buttonList: FullButtonList,
-			...options,
-			theme: resolvedTheme,
-		};
-		if (isClassic && toolbarRef.current) {
-			toolbarRef.current.innerHTML = "";
-			initOptions.toolbar_container = toolbarRef.current;
-		}
-		if (state.statusbar_container_enabled && statusbarRef.current) {
-			statusbarRef.current.innerHTML = "";
-			initOptions.statusbar_container = statusbarRef.current;
-		}
-		// External libraries
-		if (Object.keys(extLibs).length > 0) {
-			initOptions.externalLibs = extLibs;
-		}
-
-		const instance = suneditor.create(targets, initOptions as SunEditor.InitOptions);
-
-		editorRef.current = instance;
-
-		// Restore saved content for each root
-		const saved = contentRef.current;
-		for (const root of roots) {
-			if (saved[root.key]) {
-				try {
-					instance.$.html.set(saved[root.key], { rootKey: root.key as unknown as number });
-				} catch {
-					/* ignore */
-				}
-			}
-		}
-
-		return () => {
-			// Save content before destroy — skip roots whose contentRef was externally synced
-			// by the parent (e.g. value-option change), so the new mount picks up the new value.
-			for (const root of roots) {
-				try {
-					const html = instance.$.html.get({ rootKey: root.key as unknown as number });
-					if (typeof html !== "string") continue;
-					const saved = contentRef.current[root.key];
-					if (html === saved || !saved) {
-						contentRef.current[root.key] = html;
-					}
-				} catch {
-					/* ignore */
-				}
-			}
-			try {
-				instance.destroy();
-			} catch {
-				/* ignore — may throw if DOM was already cleaned up (e.g. Strict Mode) */
-			}
-			editorRef.current = null;
-		};
-	}, [extLibs, langLoaded]);
-
-	// Theme sync
-	useEffect(() => {
-		const instance = editorRef.current;
-		if (!instance) return;
-
-		const applyTheme = (theme: string) => {
-			instance.$.ui.setTheme(theme);
-		};
-
-		if (state.theme) {
-			// Explicit theme selected
-			applyTheme(state.theme);
-			return;
-		}
-
-		// Auto theme: sync with page theme
-		const getPageTheme = () => (document.documentElement.classList.contains("dark") ? "dark" : "default");
-
-		applyTheme(getPageTheme());
-
-		const onThemeChange = () => applyTheme(getPageTheme());
-		window.addEventListener("themechange", onThemeChange);
-		return () => window.removeEventListener("themechange", onThemeChange);
-	}, [state.theme, editorRef]);
+	if (!langLoaded || extLibs === null) return null;
 
 	return (
-		<div ref={containerRef} className='space-y-0'>
-			{isClassic && <div ref={toolbarRef} />}
-			{state.statusbar_container_enabled && <div className='mt-3' ref={statusbarRef} />}
-			{roots.map((root) => {
-				const isHeader = root.key === "header";
-				const dotColor = isHeader ? "bg-violet-500" : "bg-emerald-500";
-				const bgColor = isHeader ? "bg-violet-50 dark:bg-violet-900/20" : "bg-emerald-50 dark:bg-emerald-900/20";
-				const borderColor = isHeader ? "border-violet-200 dark:border-violet-800/50" : "border-emerald-200 dark:border-emerald-800/50";
-				const textColor = isHeader ? "text-violet-700 dark:text-violet-300" : "text-emerald-700 dark:text-emerald-300";
-				const subTextColor = isHeader ? "text-violet-500/60 dark:text-violet-400/50" : "text-emerald-500/60 dark:text-emerald-400/50";
-				return (
-					<div key={root.key} className='mt-5'>
-						<div className={`flex items-center gap-2 px-3 py-1.5 ${bgColor} border ${borderColor} border-b-0 rounded-t-md`}>
-							<span className={`inline-block w-2 h-2 rounded-full ${dotColor}`} />
-							<span className={`text-xs font-semibold ${textColor} uppercase tracking-wider`}>{root.label}</span>
-							<code className={`text-[10px] ${subTextColor}`}>root: &quot;{root.key}&quot;</code>
+		<SunEditorGroup ref={handleRef} options={buildOptions}>
+			<div className='space-y-0'>
+				{isClassic && <div ref={toolbarRef} />}
+				{state.statusbar_container_enabled && <div className='mt-3' ref={statusbarRef} />}
+				{roots.map((root) => {
+					const isHeader = root.key === "header";
+					const dotColor = isHeader ? "bg-violet-500" : "bg-emerald-500";
+					const bgColor = isHeader ? "bg-violet-50 dark:bg-violet-400/10" : "bg-emerald-50 dark:bg-emerald-400/10";
+					const borderColor = isHeader ? "border-violet-200 dark:border-violet-400/30" : "border-emerald-200 dark:border-emerald-400/30";
+					const textColor = isHeader ? "text-violet-700 dark:text-violet-300" : "text-emerald-700 dark:text-emerald-300";
+					const subTextColor = isHeader ? "text-violet-500/60 dark:text-violet-400/50" : "text-emerald-500/60 dark:text-emerald-400/50";
+					return (
+						<div key={root.key} className='mt-5'>
+							<div className={`flex items-center gap-2 px-3 py-1.5 ${bgColor} border ${borderColor} border-b-0 rounded-t-md`}>
+								<span className={`inline-block w-2 h-2 rounded-full ${dotColor}`} />
+								<span className={`text-xs font-semibold ${textColor} uppercase tracking-wider`}>{root.label}</span>
+								<code className={`text-[10px] ${subTextColor}`}>root: &quot;{root.key}&quot;</code>
+							</div>
+							<SunEditorRoot
+								name={root.key}
+								data-root={root.key}
+								options={rootFrameOptions[root.key]}
+								onChange={(html) => {
+									contentRef.current[root.key] = html;
+								}}
+							/>
 						</div>
-						<div data-root={root.key} />
-					</div>
-				);
-			})}
-		</div>
+					);
+				})}
+			</div>
+		</SunEditorGroup>
 	);
 }

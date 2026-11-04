@@ -188,7 +188,7 @@ export default function UploadGuideContent() {
 						<div className='rounded-lg border overflow-x-auto'>
 							<CodeBlock code={IMAGE_RESIZE_BEFORE_UPLOAD} lang='javascript' />
 						</div>
-						<div className='rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 px-4 py-3'>
+						<div className='rounded-lg border border-amber-200 dark:border-amber-400/30 bg-amber-50/50 dark:bg-amber-400/10 px-4 py-3'>
 							<p className='text-xs text-muted-foreground'>{t("imageResizeNote")}</p>
 						</div>
 					</AccordionContent>
@@ -209,7 +209,7 @@ export default function UploadGuideContent() {
 						<div className='rounded-lg border overflow-x-auto'>
 							<CodeBlock code={FILE_MANAGEMENT_UI} lang='javascript' />
 						</div>
-						<div className='rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20 px-4 py-3'>
+						<div className='rounded-lg border border-blue-200 dark:border-blue-400/30 bg-blue-50/50 dark:bg-blue-400/10 px-4 py-3'>
 							<p className='text-xs text-muted-foreground'>{t("fileManagementUINote")}</p>
 						</div>
 					</AccordionContent>

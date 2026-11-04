@@ -114,7 +114,7 @@ export default function ThemeGuideContent() {
 							<CodeBlock code={THEME_APPLY} lang='javascript' />
 						</div>
 
-						<div className='rounded-lg border border-amber-200 dark:border-amber-900/50 bg-amber-50/50 dark:bg-amber-950/20 p-4'>
+						<div className='rounded-lg border border-amber-200 dark:border-amber-400/30 bg-amber-50/50 dark:bg-amber-400/10 p-4'>
 							<h4 className='text-sm font-semibold text-amber-700 dark:text-amber-400 mb-2'>{t("tips")}</h4>
 							<ul className='text-xs text-muted-foreground space-y-1.5 list-disc list-inside'>
 								<li>{t("tip1")}</li>

@@ -92,7 +92,7 @@ export default async function RootLayout({
 					<MicroBar stars={stars} className='sticky top-14' />
 
 					{/* 메인 */}
-					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-900'>
+					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-[#1d242c] dark:via-[#212830] dark:to-[#232c3a]'>
 						{children}
 					</main>
 

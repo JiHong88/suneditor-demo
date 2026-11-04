@@ -45,8 +45,8 @@ function TypeCard({ type }: { type: TypeDefinition }) {
             variant="outline"
             className={
               type.kind === "type"
-                ? "text-xs bg-green-500/10 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800"
-                : "text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800"
+                ? "text-xs bg-green-500/10 text-green-600 dark:text-green-400 border-green-200 dark:border-green-400/30"
+                : "text-xs bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-400/30"
             }
           >
             {type.kind}
@@ -73,7 +73,7 @@ function TypeCard({ type }: { type: TypeDefinition }) {
           <div className="mt-1.5 space-y-1">
             {Object.entries(type.memberDescriptions).map(([name, desc]) => (
               <div key={name} className="flex gap-2 ps-2">
-                <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 px-1.5 py-0.5 rounded">
+                <code className="shrink-0 text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-400/10 px-1.5 py-0.5 rounded">
                   {name}
                 </code>
                 <div className="text-xs"><DocDescription desc={desc} textClass="text-xs" /></div>

@@ -19,7 +19,7 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
   return (
     <>
       {text.slice(0, idx)}
-      <mark className="bg-yellow-200 dark:bg-yellow-800/60 rounded px-0.5">{text.slice(idx, idx + query.length)}</mark>
+      <mark className="bg-yellow-200 dark:bg-yellow-400/15 rounded px-0.5">{text.slice(idx, idx + query.length)}</mark>
       {text.slice(idx + query.length)}
     </>
   );
@@ -33,10 +33,10 @@ const kindIcons = {
 };
 
 const kindColors = {
-  method: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800",
-  type: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800",
-  event: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
-  getter: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-200 dark:border-violet-800",
+  method: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-400/30",
+  type: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-400/30",
+  event: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-400/30",
+  getter: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-200 dark:border-violet-400/30",
 };
 
 export default function GlobalSearchResults({ results, query, onSelect }: GlobalSearchResultsProps) {

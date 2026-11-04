@@ -105,7 +105,7 @@ export default function BuilderMoreButtonDialog({ groupId, config, dispatch, bre
 				{/* Preview */}
 				<div className='mt-3 pt-3 border-t'>
 					<p className='text-[9px] text-muted-foreground/60 uppercase tracking-wider mb-1'>{t("outputFormat")}</p>
-					<code className='text-[10px] text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40 px-2 py-1 rounded block'>
+					<code className='text-[10px] text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-400/10 px-2 py-1 rounded block'>
 						:{label}-{icon}.{className}
 					</code>
 				</div>

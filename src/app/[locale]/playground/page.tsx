@@ -234,7 +234,7 @@ export default function PlaygroundPage() {
 	}, [state]);
 
 	return (
-		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-[oklch(0.175_0_0)]'>
+		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-[#1c2128]'>
 			{/* Header */}
 			<section className='container mx-auto px-6 py-6 border-b'>
 				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className='flex items-center justify-between'>
@@ -318,7 +318,7 @@ export default function PlaygroundPage() {
 									<SheetTrigger asChild>
 										<Button
 											variant='outline'
-											className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-900/50 dark:text-blue-300 dark:hover:bg-blue-800/50'
+											className='w-full border-2 border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-400/40 dark:bg-blue-400/15 dark:text-blue-300 dark:hover:bg-blue-400/15'
 										>
 											<Settings2 className='me-2 h-4 w-4' />
 											{t("editorOptions")}
@@ -341,7 +341,7 @@ export default function PlaygroundPage() {
 									<SheetTrigger asChild>
 										<Button
 											variant='outline'
-											className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-700 dark:bg-orange-900/50 dark:text-orange-300 dark:hover:bg-orange-800/50'
+											className='w-full border-2 border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 dark:border-orange-400/40 dark:bg-orange-400/15 dark:text-orange-300 dark:hover:bg-orange-400/15'
 										>
 											<Puzzle className='me-2 h-4 w-4' />
 											{t("pluginOptions")}
@@ -375,7 +375,7 @@ export default function PlaygroundPage() {
 								variant='outline'
 								size='sm'
 								onClick={() => handleBuilderOpen(true)}
-								className='border-violet-300 text-violet-600 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/40'
+								className='border-violet-300 text-violet-600 hover:bg-violet-50 dark:border-violet-400/50 dark:text-violet-300 dark:hover:bg-violet-400/15'
 							>
 								<SlidersHorizontal className='me-1.5 h-3.5 w-3.5' />
 								{t("customizeButtonList")}

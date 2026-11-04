@@ -179,12 +179,12 @@ function SidebarItemComponent({
 						)}
 					</span>
 					{item.id === "interfaces-sub" && (
-						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
+						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-white/10 text-slate-500 dark:text-slate-400'>
 							extends
 						</span>
 					)}
 					{item.id === "hooks-sub" && (
-						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'>
+						<span className='ms-1 text-[9px] font-mono font-medium not-italic px-1 py-px rounded bg-slate-200/80 dark:bg-white/10 text-slate-500 dark:text-slate-400'>
 							implements
 						</span>
 					)}

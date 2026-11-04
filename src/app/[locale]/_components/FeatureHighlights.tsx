@@ -4,11 +4,11 @@ import { Package, Puzzle, Languages, Blocks, FileCode } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const highlightMeta = [
-	{ key: "zeroDependencies" as const, icon: <Package className='h-5 w-5' />, className: "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400" },
-	{ key: "plugins" as const, icon: <Puzzle className='h-5 w-5' />, className: "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400" },
-	{ key: "languages" as const, icon: <Languages className='h-5 w-5' />, className: "bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400" },
-	{ key: "pluginAPI" as const, icon: <Blocks className='h-5 w-5' />, className: "bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400" },
-	{ key: "typescript" as const, icon: <FileCode className='h-5 w-5' />, className: "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400" },
+	{ key: "zeroDependencies" as const, icon: <Package className='h-5 w-5' />, className: "bg-emerald-100 text-emerald-600 dark:bg-emerald-400/15 dark:text-emerald-400" },
+	{ key: "plugins" as const, icon: <Puzzle className='h-5 w-5' />, className: "bg-blue-100 text-blue-600 dark:bg-blue-400/15 dark:text-blue-400" },
+	{ key: "languages" as const, icon: <Languages className='h-5 w-5' />, className: "bg-violet-100 text-violet-600 dark:bg-violet-400/15 dark:text-violet-400" },
+	{ key: "pluginAPI" as const, icon: <Blocks className='h-5 w-5' />, className: "bg-amber-100 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400" },
+	{ key: "typescript" as const, icon: <FileCode className='h-5 w-5' />, className: "bg-sky-100 text-sky-600 dark:bg-sky-400/15 dark:text-sky-400" },
 ];
 
 export default function FeatureHighlights() {

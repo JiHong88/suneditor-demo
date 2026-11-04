@@ -425,7 +425,7 @@ export default function BuilderToolbarPreview({
 	return (
 		<div
 			ref={containerRef}
-			className='shrink-0 border-t-2 border-indigo-200 dark:border-indigo-700/50 bg-indigo-50/50 dark:bg-indigo-900/25 min-h-[140px] max-h-[220px] flex flex-col'
+			className='shrink-0 border-t-2 border-indigo-200 dark:border-indigo-400/30 bg-indigo-50/50 dark:bg-indigo-400/15 min-h-[140px] max-h-[220px] flex flex-col'
 		>
 			<div className='px-4 py-1.5 flex items-center justify-between'>
 				<span className='text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider'>

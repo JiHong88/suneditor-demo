@@ -950,7 +950,7 @@ export default function PlaygroundControls({ state, dispatch, onOpenBuilder }: P
 									<button
 										type='button'
 										onClick={onOpenBuilder}
-										className='shrink-0 h-8 w-8 inline-flex items-center justify-center rounded-md border border-violet-300 bg-violet-50 text-violet-600 hover:bg-violet-100 dark:border-violet-600 dark:bg-violet-900/40 dark:text-violet-300 dark:hover:bg-violet-800/40 transition-colors cursor-pointer'
+										className='shrink-0 h-8 w-8 inline-flex items-center justify-center rounded-md border border-violet-300 bg-violet-50 text-violet-600 hover:bg-violet-100 dark:border-violet-400/50 dark:bg-violet-400/15 dark:text-violet-300 dark:hover:bg-violet-400/15 transition-colors cursor-pointer'
 										title='Customize ButtonList'
 									>
 										<SlidersHorizontal className='h-3.5 w-3.5' />
@@ -1917,8 +1917,8 @@ export function PlaygroundPerRootPanel({ state, dispatch }: Props) {
 			</div>
 			<div className='p-4 space-y-4'>
 				{/* Header root */}
-				<details className='group/h rounded-lg border border-violet-200 dark:border-violet-800/50 overflow-hidden'>
-					<summary className='flex items-center gap-2 px-3 py-1.5 bg-violet-50 dark:bg-violet-900/20 border-b border-violet-200 dark:border-violet-800/50 cursor-pointer select-none'>
+				<details className='group/h rounded-lg border border-violet-200 dark:border-violet-400/30 overflow-hidden'>
+					<summary className='flex items-center gap-2 px-3 py-1.5 bg-violet-50 dark:bg-violet-400/10 border-b border-violet-200 dark:border-violet-400/30 cursor-pointer select-none'>
 						<ChevronRight className='h-3.5 w-3.5 text-violet-400 transition-transform group-open/h:rotate-90' />
 						<span className='inline-block w-2 h-2 rounded-full bg-violet-500' />
 						<code className='text-xs font-semibold text-violet-700 dark:text-violet-300'>
@@ -1930,8 +1930,8 @@ export function PlaygroundPerRootPanel({ state, dispatch }: Props) {
 					</div>
 				</details>
 				{/* Body root */}
-				<details className='group/b rounded-lg border border-emerald-200 dark:border-emerald-800/50 overflow-hidden'>
-					<summary className='flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 border-b border-emerald-200 dark:border-emerald-800/50 cursor-pointer select-none'>
+				<details className='group/b rounded-lg border border-emerald-200 dark:border-emerald-400/30 overflow-hidden'>
+					<summary className='flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-400/10 border-b border-emerald-200 dark:border-emerald-400/30 cursor-pointer select-none'>
 						<ChevronRight className='h-3.5 w-3.5 text-emerald-400 transition-transform group-open/b:rotate-90' />
 						<span className='inline-block w-2 h-2 rounded-full bg-emerald-500' />
 						<code className='text-xs font-semibold text-emerald-700 dark:text-emerald-300'>

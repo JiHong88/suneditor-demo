@@ -269,7 +269,7 @@ function OptionCard({ item, pluginName }: { item: OptionItem; pluginName?: strin
 			</div>
 			{typeStr && (
 				<div className="mb-3">
-					<code className="text-xs font-mono px-2 py-1 rounded-md bg-purple-50 dark:bg-purple-950/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800 inline-block max-w-full overflow-x-auto">
+					<code className="text-xs font-mono px-2 py-1 rounded-md bg-purple-50 dark:bg-purple-400/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-400/30 inline-block max-w-full overflow-x-auto">
 						{typeStr}
 					</code>
 				</div>
@@ -300,7 +300,7 @@ function OptionCard({ item, pluginName }: { item: OptionItem; pluginName?: strin
 function EditorCategoryContent({ category }: { category: SidebarCategory }) {
 	return (
 		<section id={`cat-${category.id}`} className={SCROLL_MT}>
-			<h3 className={cn("text-lg font-bold pb-2 mb-4 border-b-2 border-blue-200 dark:border-blue-800/60 sticky z-10 bg-background/95 backdrop-blur-sm", CAT_TOP)}>
+			<h3 className={cn("text-lg font-bold pb-2 mb-4 border-b-2 border-blue-200 dark:border-blue-400/30 sticky z-10 bg-background/95 backdrop-blur-sm", CAT_TOP)}>
 				{category.label}
 				<span className="text-xs font-normal text-muted-foreground ml-2">({category.options.length})</span>
 			</h3>
@@ -314,7 +314,7 @@ function EditorCategoryContent({ category }: { category: SidebarCategory }) {
 function FrameCategoryContent({ category }: { category: SidebarCategory }) {
 	return (
 		<section id={`cat-${category.id}`} className={FRAME_SCROLL_MT}>
-			<h3 className={cn("text-lg font-bold pb-2 mb-4 border-b-2 border-emerald-200 dark:border-emerald-800/60 sticky z-10 bg-background/95 backdrop-blur-sm", FRAME_CAT_TOP)}>
+			<h3 className={cn("text-lg font-bold pb-2 mb-4 border-b-2 border-emerald-200 dark:border-emerald-400/30 sticky z-10 bg-background/95 backdrop-blur-sm", FRAME_CAT_TOP)}>
 				{category.label}
 				<span className="text-xs font-normal text-muted-foreground ml-2">({category.options.length})</span>
 			</h3>
@@ -338,7 +338,7 @@ function PluginCategoryContent({ category }: { category: SidebarCategory }) {
 				</div>
 			</div>
 			{/* Cards with left accent bar */}
-			<div className="relative ps-5 ms-2 border-s-2 border-amber-200/60 dark:border-amber-800/40">
+			<div className="relative ps-5 ms-2 border-s-2 border-amber-200/60 dark:border-amber-400/30">
 				<div className="space-y-3">
 					{category.options.map((opt) => <OptionCard key={opt.name} item={opt} pluginName={pluginName} />)}
 				</div>
@@ -435,7 +435,7 @@ function Sidebar({
 												{section.frameChildren.reduce((s, c) => s + c.options.length, 0)}
 											</span>
 										</div>
-										<div className="ms-3 border-s-2 border-emerald-200/60 dark:border-emerald-800/40 mt-0.5">
+										<div className="ms-3 border-s-2 border-emerald-200/60 dark:border-emerald-400/30 mt-0.5">
 											<SidebarCatList categories={section.frameChildren} activeId={activeId} onSelect={onSelect} config={frameConfig} />
 										</div>
 									</div>
@@ -717,7 +717,7 @@ export default function OptionsPage() {
 												<p className="text-xs text-emerald-700 dark:text-emerald-400 leading-relaxed mb-6">
 													{t("perFrameHint")}
 												</p>
-												<div className="space-y-10 ps-1 border-s-[3px] border-emerald-200/40 dark:border-emerald-800/30">
+												<div className="space-y-10 ps-1 border-s-[3px] border-emerald-200/40 dark:border-emerald-400/30">
 													{section.frameChildren.map((cat) => (
 														<FrameCategoryContent key={cat.id} category={cat} />
 													))}

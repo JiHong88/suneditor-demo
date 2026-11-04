@@ -18,7 +18,7 @@ function BetweenGroupDrop({ rowId, groupIndex, wide }: { rowId: string; groupInd
 		<div
 			ref={setNodeRef}
 			className={`self-stretch flex items-center justify-center shrink-0 transition-all duration-150 rounded
-				${isOver ? "w-8 bg-emerald-100/60 dark:bg-emerald-900/30" : wide ? "w-4" : "w-2"}`}
+				${isOver ? "w-8 bg-emerald-100/60 dark:bg-emerald-400/10" : wide ? "w-4" : "w-2"}`}
 		>
 			{isOver ? (
 				<div className='w-0.5 h-6 bg-emerald-500 rounded-full' />

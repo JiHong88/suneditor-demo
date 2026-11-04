@@ -135,7 +135,7 @@ export default function EventsContent() {
 						<div className='rounded-lg border overflow-x-auto'>
 							<CodeBlock code={EVENTS_FOCUS} lang='javascript' />
 						</div>
-						<div className='rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-950/20 p-4'>
+						<div className='rounded-lg border border-blue-200 dark:border-blue-400/30 bg-blue-50/50 dark:bg-blue-400/10 p-4'>
 							<h4 className='text-sm font-semibold text-blue-700 dark:text-blue-400 mb-2'>{t("focusTip")}</h4>
 							<p className='text-xs text-muted-foreground'>{t("focusTipDesc")}</p>
 						</div>

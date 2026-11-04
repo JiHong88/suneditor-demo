@@ -20,9 +20,9 @@ function SeparatorPaletteItem({ onAdd }: { onAdd: (name: string) => void }) {
 		<div
 			ref={setNodeRef}
 			className={`flex items-center gap-0.5 rounded-md border border-dashed border-amber-400/50 bg-amber-50/40 text-amber-700 select-none transition-all
-				dark:border-amber-500/40 dark:bg-amber-900/30 dark:text-amber-300
-				has-[.add-zone:hover]:border-amber-400 has-[.add-zone:hover]:bg-amber-50 dark:has-[.add-zone:hover]:border-amber-500/60 dark:has-[.add-zone:hover]:bg-amber-900/40
-				has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-900/50
+				dark:border-amber-500/40 dark:bg-amber-400/10 dark:text-amber-300
+				has-[.add-zone:hover]:border-amber-400 has-[.add-zone:hover]:bg-amber-50 dark:has-[.add-zone:hover]:border-amber-500/60 dark:has-[.add-zone:hover]:bg-amber-400/15
+				has-[.drag-zone:hover]:border-amber-500 has-[.drag-zone:hover]:bg-amber-50 dark:has-[.drag-zone:hover]:border-amber-500/70 dark:has-[.drag-zone:hover]:bg-amber-400/15
 				${isDragging ? "opacity-40" : ""}`}
 		>
 			<button
@@ -58,8 +58,8 @@ function PaletteButton({ meta, onAdd }: { meta: ButtonMeta; onAdd: (name: string
 		<div
 			ref={setNodeRef}
 			className={`flex items-center gap-0.5 rounded text-[11px] border border-border bg-muted/40 select-none transition-all
-				has-[.add-zone:hover]:border-blue-300 has-[.add-zone:hover]:bg-blue-50/50 dark:has-[.add-zone:hover]:border-blue-500/40 dark:has-[.add-zone:hover]:bg-blue-900/30
-				has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-900/40
+				has-[.add-zone:hover]:border-blue-300 has-[.add-zone:hover]:bg-blue-50/50 dark:has-[.add-zone:hover]:border-blue-500/40 dark:has-[.add-zone:hover]:bg-blue-400/15
+				has-[.drag-zone:hover]:border-blue-400 has-[.drag-zone:hover]:bg-blue-50 dark:has-[.drag-zone:hover]:border-blue-500/60 dark:has-[.drag-zone:hover]:bg-blue-400/15
 				${isDragging ? "opacity-40" : ""}`}
 		>
 			{/* Click-to-add button */}
@@ -135,9 +135,9 @@ function CategoryHeader({
 			ref={setNodeRef}
 			className={`flex items-center gap-0.5 rounded-md border select-none transition-all mb-1
 				border-emerald-300/60 bg-emerald-50/40 text-emerald-700
-				dark:border-emerald-600/40 dark:bg-emerald-900/30 dark:text-emerald-300
-				has-[.add-zone:hover]:border-emerald-400 has-[.add-zone:hover]:bg-emerald-50 dark:has-[.add-zone:hover]:border-emerald-500/60 dark:has-[.add-zone:hover]:bg-emerald-900/40
-				has-[.drag-zone:hover]:border-emerald-500 has-[.drag-zone:hover]:bg-emerald-50 dark:has-[.drag-zone:hover]:border-emerald-500/70 dark:has-[.drag-zone:hover]:bg-emerald-900/50
+				dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300
+				has-[.add-zone:hover]:border-emerald-400 has-[.add-zone:hover]:bg-emerald-50 dark:has-[.add-zone:hover]:border-emerald-500/60 dark:has-[.add-zone:hover]:bg-emerald-400/15
+				has-[.drag-zone:hover]:border-emerald-500 has-[.drag-zone:hover]:bg-emerald-50 dark:has-[.drag-zone:hover]:border-emerald-500/70 dark:has-[.drag-zone:hover]:bg-emerald-400/15
 				${isDragging ? "opacity-40" : ""}`}
 		>
 			{/* Click-to-add group */}

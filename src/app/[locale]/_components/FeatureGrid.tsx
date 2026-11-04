@@ -11,37 +11,37 @@ export default function FeatureGrid() {
 			icon: <Rocket className='h-6 w-6' />,
 			title: t("Architecture.title"),
 			desc: t("Architecture.desc"),
-			className: "bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400",
+			className: "bg-sky-100 text-sky-600 dark:bg-sky-400/15 dark:text-sky-400",
 		},
 		{
 			icon: <Table className='h-6 w-6' />,
 			title: t("Table.title"),
 			desc: t("Table.desc"),
-			className: "bg-green-100 text-green-600 dark:bg-green-900/50 dark:text-green-400",
+			className: "bg-green-100 text-green-600 dark:bg-green-400/15 dark:text-green-400",
 		},
 		{
 			icon: <Layout className='h-6 w-6' />,
 			title: t("DocumentLayout.title"),
 			desc: t("DocumentLayout.desc"),
-			className: "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400",
+			className: "bg-indigo-100 text-indigo-600 dark:bg-indigo-400/15 dark:text-indigo-400",
 		},
 		{
 			icon: <FileText className='h-6 w-6' />,
 			title: t("PDF.title"),
 			desc: t("PDF.desc"),
-			className: "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/50 dark:text-yellow-400",
+			className: "bg-yellow-100 text-yellow-600 dark:bg-yellow-400/15 dark:text-yellow-400",
 		},
 		{
 			icon: <Languages className='h-6 w-6' />,
 			title: t("RTL.title"),
 			desc: t("RTL.desc"),
-			className: "bg-pink-100 text-pink-600 dark:bg-pink-900/50 dark:text-pink-400",
+			className: "bg-pink-100 text-pink-600 dark:bg-pink-400/15 dark:text-pink-400",
 		},
 		{
 			icon: <FunctionSquare className='h-6 w-6' />,
 			title: t("Math.title"),
 			desc: t("Math.desc"),
-			className: "bg-purple-100 text-purple-600 dark:bg-purple-900/50 dark:text-purple-400",
+			className: "bg-purple-100 text-purple-600 dark:bg-purple-400/15 dark:text-purple-400",
 		},
 	];
 

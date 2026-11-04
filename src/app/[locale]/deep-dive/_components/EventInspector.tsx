@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
 import { Eraser, Pause, Play, ArrowDownToLine, AlertTriangle } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +13,7 @@ import {
 	API_DOWNLOAD_PDF,
 } from "@/data/snippets/apiEndpoints";
 
-const SunEditorComponent = dynamic(() => import("@/components/editor/suneditor"), { ssr: false });
+import SunEditorComponent from "@/components/editor/suneditor";
 
 /* ══════════════════════════════════════════════════════
    Event attach rules
@@ -332,7 +331,7 @@ export default function EventInspector() {
 			</div>
 
 			{/* Events the inspector deliberately does not attach */}
-			<div className='rounded-lg border border-amber-200 dark:border-amber-900/50 bg-amber-50/50 dark:bg-amber-950/20 p-4'>
+			<div className='rounded-lg border border-amber-200 dark:border-amber-400/30 bg-amber-50/50 dark:bg-amber-400/10 p-4'>
 				<h4 className='mb-1 flex items-center gap-1.5 text-sm font-semibold text-amber-700 dark:text-amber-400'>
 					<AlertTriangle className='size-4' />
 					{t("notAttachedTitle")}
