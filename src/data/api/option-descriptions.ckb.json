@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "سیفاتەکانی `iframe`. \n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "سیفاتەکانی `iframe`.\n- `sandbox`: بە پێشوەختە بۆ `\"allow-same-origin allow-scripts\"`. بەهایەکی تایبەتمەند وەک خۆی دەهێڵرێتەوە، لەگەڵ `allow-same-origin` زیاد دەکرێت ئەگەر نەمابێت.\n- نەهێشتنی `allow-scripts` سکریپتەکان لە ناوەڕۆکەکەدا بلۆک دەکات، بەڵام دەستکاریکەرەکە لە وێبگەڕەکانی سەفاری یان iOS کارناکات.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "هەڵسوکەوتی جێگیرکردنی پێکهاتەکان بۆ هەڵبژاردن و دانانی ئاماژەدەر. \n- [بەپێی پێشوەختە: `options.get('componentInsertBehavior')`]. \n- بۆ پێکهاتەکانی ناو هێڵ: ئاماژەدەر لە نزیک پێکهاتەکە دادەنێت، یان هەڵدەبژێرێت ئەگەر مەودای نزیک نەبێت. \n- بۆ پێکهاتەکانی بلۆک: ڕەفتارەکان جێبەجێ دەکات لەسەر بنەمای `selectMode`: \n- `auto`: ئەگەر دەتوانیت ئاماژەدەرەکە بگوازەرەوە بۆ دێڕی داهاتوو، ئەگەرنا پێکهاتەکە هەڵبژێرە. \n- `select`: هەمیشە پێکهاتەی دانراو هەڵبژێرە. \n- `line`: ئەگەر دەکرێت ئاماژەکە بگوازەرەوە بۆ دێڕی داهاتوو، یان دێڕێکی نوێ دروست بکە و لەوێ بگوازەرەوە. \n- `none`: هیچ مەکە."
   },
+  "link_title": {
+    "description": "لە مۆداڵی بەستەردا هاتنە ژوورەوەی \"Title\" پیشان بدە."
+  },
+  "link_textToDisplay": {
+    "description": "لە مۆداڵی بەستەردا هاتنە ژوورەوەی \"دەق بۆ پیشاندانی\" پیشان بدە."
+  },
+  "link_openNewWindow": {
+    "description": "بەهای هەڵبژاردنی پێشوەختەی بۆکسی هەڵبژاردنی \"لە پەنجەرەیەکی نوێدا بکەرەوە\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "ئەگەر `true`، پێشگرکردنی ئۆتۆماتیکی URLی هۆستەکە بۆ بەهای بەستەرەکە لەکاردەخات."
+  },
+  "link_relList": {
+    "description": "بەهاکانی تایبەتمەندی `rel` بەردەست کە وەک سندوقی هەڵبژاردن لە مۆداڵی بەستەردا نیشان دراون."
+  },
+  "link_defaultRel": {
+    "description": "بەهاکانی `rel` پێشوەختە بە شێوەیەکی ئۆتۆماتیکی بەپێی مەرج جێبەجێ دەکرێن."
+  },
   "link_uploadUrl": {
     "description": "خاڵی کۆتایی URL بۆ بارکردنی پەڕگە. \n- پێویستە سێرڤەرەکە بگەڕێنێتەوە:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "فۆرماتەکانی فایل وەرگیراو بۆ بارکردنی بەستەر."
-  },
-  "link_title": {
-    "description": "پیشاندانی ناونیشانی مۆداڵی."
-  },
-  "link_textToDisplay": {
-    "description": "دروستکردنی Text بۆ پیشاندانی زانیاری."
-  },
-  "link_openNewWindow": {
-    "description": "بەهای هەڵبژاردنی پێشوەختەی بۆکسی هەڵبژاردنی \"لە پەنجەرەیەکی نوێدا بکەرەوە\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "ئەگەر `true`، پێشگرکردنی ئۆتۆماتیکی URLی هۆستەکە بۆ بەهای بەستەرەکە لەکاردەخات."
-  },
-  "link_relList": {
-    "description": "بەهاکانی تایبەتمەندی `rel` بەردەست کە وەک سندوقی هەڵبژاردن لە مۆداڵی بەستەردا نیشان دراون."
-  },
-  "link_defaultRel": {
-    "description": "بەهاکانی `rel` پێشوەختە بە شێوەیەکی ئۆتۆماتیکی بەپێی مەرج جێبەجێ دەکرێن."
   },
   "link_enableFileUpload": {
     "description": "ئەگەر `true`، بارکردنی پەڕگە چالاک دەکات."

@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "A `iframe` attribútumai.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "A `iframe` attribútumai.\n- `sandbox`: alapértelmezett értéke `\"allow-same-origin allow-scripts\"`. Egy egyéni érték megmarad a megadott értéken, hiányzó `allow-same-origin` hozzáadásával.\n- A `allow-scripts` elhagyása blokkolja a tartalomban lévő szkripteket, de a szerkesztő nem működik Safari vagy iOS böngészőkben.\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Komponens beszúrási viselkedése kijelöléshez és kurzor elhelyezéshez.\n- [alapértelmezett: `options.get('componentInsertBehavior')`]\n- Beágyazott komponensek esetén: a kurzort a komponens közelébe helyezi, vagy kiválaszt, ha nincs közeli tartomány.\n- Blokk komponensek esetén: a `selectMode` ​​alapján végrehajtja a viselkedést:\n- `auto`: Ha lehetséges, a kurzort a következő sorba mozgatja, egyébként a komponenst jelöli ki.\n- `select`: Mindig a beszúrt komponenst jelöli ki.\n- `line`: Ha lehetséges, a kurzort a következő sorba mozgatja, vagy új sort hoz létre és oda helyezi.\n- `none`: Semmit sem tesz."
   },
+  "link_title": {
+    "description": "A „Cím” bemenet megjelenítése a hivatkozás modális ablakában."
+  },
+  "link_textToDisplay": {
+    "description": "A „Megjelenítendő szöveg” bemenet megjelenítése a hivatkozás modális ablakában."
+  },
+  "link_openNewWindow": {
+    "description": "Az „Új ablakban megnyitás” jelölőnégyzet alapértelmezett bejelölt értéke."
+  },
+  "link_noAutoPrefix": {
+    "description": "Ha `true`, akkor letiltja a gazda URL-címének automatikus előtaggal való kiegészítését a hivatkozás értékéhez."
+  },
+  "link_relList": {
+    "description": "Az elérhető `rel` attribútumértékek jelölőnégyzetekként jelennek meg a hivatkozás modális ablakában."
+  },
+  "link_defaultRel": {
+    "description": "Az alapértelmezett `rel` értékek feltétel szerint automatikusan alkalmazva."
+  },
   "link_uploadUrl": {
     "description": "A fájlfeltöltések URL-végpontja.\n- A szervernek a következőt kell visszaadnia:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Elfogadott fájlformátumok linkek feltöltéséhez."
-  },
-  "link_title": {
-    "description": "Modális cím megjelenítése."
-  },
-  "link_textToDisplay": {
-    "description": "Szöveg létrehozása a bemenet megjelenítéséhez."
-  },
-  "link_openNewWindow": {
-    "description": "Az „Új ablakban megnyitás” jelölőnégyzet alapértelmezett bejelölt értéke."
-  },
-  "link_noAutoPrefix": {
-    "description": "Ha `true`, akkor letiltja a gazda URL-címének automatikus előtaggal való kiegészítését a hivatkozás értékéhez."
-  },
-  "link_relList": {
-    "description": "Az elérhető `rel` attribútumértékek jelölőnégyzetekként jelennek meg a hivatkozás modális ablakában."
-  },
-  "link_defaultRel": {
-    "description": "Az alapértelmezett `rel` értékek feltétel szerint automatikusan alkalmazva."
   },
   "link_enableFileUpload": {
     "description": "Ha `true`, akkor engedélyezi a fájl feltöltését."

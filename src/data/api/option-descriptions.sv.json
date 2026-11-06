@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attribut för `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attribut för `iframe`.\n- `sandbox`: standardvärdet är `\"allow-same-origin allow-scripts\"`. Ett anpassat värde behålls som angivet, med `allow-same-origin` tillagt om det saknas.\n- Att utelämna `allow-scripts` blockerar skript i innehållet, men redigeraren fungerar inte i Safari eller iOS-webbläsare.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Beteende vid komponentinsättning för val och markörplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- För inline-komponenter: placerar markören nära komponenten, eller väljer om inget närliggande område finns.\n- För blockkomponenter: utför beteende baserat på `selectMode`:\n- `auto`: Flytta markören till nästa rad om möjligt, annars välj komponenten.\n- `select`: Välj alltid den infogade komponenten.\n- `line`: Flytta markören till nästa rad om möjligt, eller skapa en ny rad och flytta dit.\n- `none`: Gör ingenting."
   },
+  "link_title": {
+    "description": "Visa inmatningen \"Titel\" i länkmodalen."
+  },
+  "link_textToDisplay": {
+    "description": "Visa inmatningen \"Text att visa\" i länkmodalen."
+  },
+  "link_openNewWindow": {
+    "description": "Standardvärde för kryssrutan \"Öppna i nytt fönster\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Om `true` inaktiveras det automatiska prefixet för värd-URL:en till länkens värde."
+  },
+  "link_relList": {
+    "description": "Tillgängliga `rel`-attributvärden visas som kryssrutor i länkmodalen."
+  },
+  "link_defaultRel": {
+    "description": "Standardvärden `rel` tillämpas automatiskt efter villkor."
+  },
   "link_uploadUrl": {
     "description": "URL-slutpunkten för filuppladdningar.\n- Servern måste returnera:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Godkända filformat för länkuppladdningar."
-  },
-  "link_title": {
-    "description": "Modal titelvisning."
-  },
-  "link_textToDisplay": {
-    "description": "Skapa text för att visa inmatning."
-  },
-  "link_openNewWindow": {
-    "description": "Standardvärde för kryssrutan \"Öppna i nytt fönster\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "Om `true` inaktiveras det automatiska prefixet för värd-URL:en till länkens värde."
-  },
-  "link_relList": {
-    "description": "Tillgängliga `rel`-attributvärden visas som kryssrutor i länkmodalen."
-  },
-  "link_defaultRel": {
-    "description": "Standardvärden `rel` tillämpas automatiskt efter villkor."
   },
   "link_enableFileUpload": {
     "description": "Om `true` aktiveras filuppladdning."

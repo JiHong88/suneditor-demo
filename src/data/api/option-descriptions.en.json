@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributes of the `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attributes of the `iframe`.\n- `sandbox`: defaults to `\"allow-same-origin allow-scripts\"`. A custom value is kept as given, with `allow-same-origin` added if missing.\n- Omitting `allow-scripts` blocks scripts in the content, but the editor does not work in Safari or iOS browsers.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Component insertion behavior for selection and cursor placement.\n- [default: `options.get('componentInsertBehavior')`]\n- For inline components: places cursor near the component, or selects if no nearby range.\n- For block components: executes behavior based on `selectMode`:\n- `auto`: Move cursor to the next line if possible, otherwise select the component.\n- `select`: Always select the inserted component.\n- `line`: Move cursor to the next line if possible, or create a new line and move there.\n- `none`: Do nothing."
   },
+  "link_title": {
+    "description": "Show the \"Title\" input in the link modal."
+  },
+  "link_textToDisplay": {
+    "description": "Show the \"Text to display\" input in the link modal."
+  },
+  "link_openNewWindow": {
+    "description": "Default checked value of the \"Open in new window\" checkbox."
+  },
+  "link_noAutoPrefix": {
+    "description": "If `true`, disables the automatic prefixing of the host URL to the value of the link."
+  },
+  "link_relList": {
+    "description": "Available `rel` attribute values shown as checkboxes in the link modal."
+  },
+  "link_defaultRel": {
+    "description": "Default `rel` values auto-applied by condition."
+  },
   "link_uploadUrl": {
     "description": "The URL endpoint for file uploads.\n- The server must return:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Accepted file formats for link uploads."
-  },
-  "link_title": {
-    "description": "Modal title display."
-  },
-  "link_textToDisplay": {
-    "description": "Create Text to display input."
-  },
-  "link_openNewWindow": {
-    "description": "Default checked value of the \"Open in new window\" checkbox."
-  },
-  "link_noAutoPrefix": {
-    "description": "If `true`, disables the automatic prefixing of the host URL to the value of the link."
-  },
-  "link_relList": {
-    "description": "Available `rel` attribute values shown as checkboxes in the link modal."
-  },
-  "link_defaultRel": {
-    "description": "Default `rel` values auto-applied by condition."
   },
   "link_enableFileUpload": {
     "description": "If `true`, enables file upload."

@@ -1,6 +1,6 @@
 {
-	"version": "3.4.1",
-	"generatedAt": "2026-10-27T14:32:22.189Z",
+	"version": "3.4.2",
+	"generatedAt": "2026-11-06T17:00:27.791Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -3838,7 +3838,7 @@
 							"name": "iframe_attributes",
 							"params": "",
 							"returns": "{\n\t\t[x: string]: string;\n\t}",
-							"description": "- Atrybuty `iframe`. ```js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```"
+							"description": "- Atrybuty `iframe`.\n- `sandbox`: domyślnie `\"allow-same-origin allow-scripts\"`. Wartość niestandardowa jest zachowywana bez zmian, z dodanym `allow-same-origin` w przypadku braku.\n- Pominięcie `allow-scripts` blokuje skrypty w treści, ale edytor nie działa w przeglądarkach Safari ani iOS. ```js { iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } } ```"
 						},
 						{
 							"name": "iframe_cssFileName",
@@ -4038,6 +4038,13 @@
 							"name": "active",
 							"params": "element: HTMLElement | null, target: HTMLElement | null",
 							"returns": "boolean | void",
+							"description": "",
+							"example": ""
+						},
+						{
+							"name": "shortcut",
+							"params": "params: SunEditor.HookParams.Shortcut",
+							"returns": "void",
 							"description": "",
 							"example": ""
 						}
@@ -6847,10 +6854,20 @@
 					"description": "Funkcje narzędziowe MS Office",
 					"methods": [
 						{
+							"name": "isMSOffice",
+							"params": "html: string",
+							"returns": "boolean",
+							"description": "Sprawdza, czy zawartość HTML pochodzi z pakietu Microsoft Office (Word, Excel, OneNote, Word Online).",
+							"example": "",
+							"paramDescriptions": {
+								"html": "Ciąg HTML"
+							}
+						},
+						{
 							"name": "cleanHTML",
 							"params": "html: string",
 							"returns": "string",
-							"description": "Konwertuje dane HTML ze schowka MS Word/Excel/OneNote na czysty, zgodny ze standardami kod HTML.",
+							"description": "Konwertuje dane ze schowka HTML programów MS Word/Excel/OneNote na czysty, zgodny ze standardami kod HTML.",
 							"example": "",
 							"paramDescriptions": {
 								"html": "Surowy ciąg HTML ze schowka MS Office"
@@ -9657,7 +9674,7 @@
 				},
 				{
 					"name": "EditorFrameOptions",
-					"definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text shown when the whole editor is empty.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - per-line placeholder shown on the focused\n\t * line when that line is empty. Takes priority over `placeholder` while a line is focused.\n\t * - **string**: one hint for every empty line (list cells and table cells excluded).\n\t * - **object**: per-type hints keyed by tag name (`p`, `pre`, `blockquote`, ...) or a category sentinel\n\t * matching the editor's format classification: `@line`, `@normalLine`, `@list`, `@brLine`, `@closureBrLine`,\n\t * `@block`, `@closureBlock`. Resolved most-specific → least, like `tagStyles`:\n\t * `<tag>` → `@list` → `@closureBrLine` → `@brLine` → block container (`<blockTag>` → `@closureBlock` → `@block`)\n\t * → `@normalLine` → `@line`. A missing key = no placeholder for that type; an explicit `''` suppresses it.\n\t * ```js\n\t * // one hint everywhere\n\t * placeholder_line: 'Type something…'\n\t * // per-type\n\t * placeholder_line: {\n\t * '@normalLine': 'Type…', '@list': 'List item', '@block': 'Quote…', '@closureBlock': 'Cell', pre: '// code'\n\t * }\n\t * ```\n\t */\n\tplaceholder_line?:\n\t\t| string\n\t\t| {\n\t\t\t\t[x: string]: string;\n\t\t  };\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable].\n\t * ```js\n\t * { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n\t * ```\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Optional max-width for the editor body (`.se-wrapper`).\n\t * - **CSS length** (`\"740px\"`, `\"60ch\"`): editor body's content is clamped to this width and centered horizontally; scroll container stays full width (scrollbar at the outer edge, wheel/touch active over the whole area).\n\t * - **`\"auto\"`** or **empty string** (default): no constraint — natural full-width layout with default content padding.\n\t * - In `blockHandle` mode, the gutter handle tracks the centered text band.\n\t * ```js\n\t * { innerWidth: '740px' }\n\t * ```\n\t */\n\tinnerWidth?: string;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor.\n\t * ```js\n\t * { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n\t * ```\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`.\n\t * ```js\n\t * { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n\t * ```\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - `\"*\"`: Wildcard to include ALL stylesheets from the page.\n\t * - Absolute URLs and data URLs (`data:text/css,`) are also supported.\n\t * ```js\n\t * { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n\t * ```\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar.\n\t * ```js\n\t * { charCounter_label: 'Characters :' }\n\t * ```\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t *\n\t * === Word Counter ===\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n\t/**\n\t * - Shows the number of words in the editor.\n\t */\n\twordCounter?: boolean;\n\t/**\n\t * - Text to be displayed in the `wordCounter` area of the bottom bar.\n\t * ```js\n\t * { wordCounter_label: 'Words :' }\n\t * ```\n\t */\n\twordCounter_label?: string | null;\n}",
+					"definition": "{\n\t/**\n\t * - Initial value for the editor.\n\t */\n\tvalue?: string;\n\t/**\n\t * - Placeholder text shown when the whole editor is empty.\n\t */\n\tplaceholder?: string;\n\t/**\n\t * - per-line placeholder shown on the focused\n\t * line when that line is empty. Takes priority over `placeholder` while a line is focused.\n\t * - **string**: one hint for every empty line (list cells and table cells excluded).\n\t * - **object**: per-type hints keyed by tag name (`p`, `pre`, `blockquote`, ...) or a category sentinel\n\t * matching the editor's format classification: `@line`, `@normalLine`, `@list`, `@brLine`, `@closureBrLine`,\n\t * `@block`, `@closureBlock`. Resolved most-specific → least, like `tagStyles`:\n\t * `<tag>` → `@list` → `@closureBrLine` → `@brLine` → block container (`<blockTag>` → `@closureBlock` → `@block`)\n\t * → `@normalLine` → `@line`. A missing key = no placeholder for that type; an explicit `''` suppresses it.\n\t * ```js\n\t * // one hint everywhere\n\t * placeholder_line: 'Type something…'\n\t * // per-type\n\t * placeholder_line: {\n\t * '@normalLine': 'Type…', '@list': 'List item', '@block': 'Quote…', '@closureBlock': 'Cell', pre: '// code'\n\t * }\n\t * ```\n\t */\n\tplaceholder_line?:\n\t\t| string\n\t\t| {\n\t\t\t\t[x: string]: string;\n\t\t  };\n\t/**\n\t * - Attributes for the editable frame[.sun-editor-editable].\n\t * ```js\n\t * { editableFrameAttributes: { spellcheck: 'true', autocomplete: 'on' } }\n\t * ```\n\t * ///\n\t *\n\t * === Layout & Sizing ===\n\t */\n\teditableFrameAttributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - Width for the editor.\n\t */\n\twidth?: string | number;\n\t/**\n\t * - Min width for the editor.\n\t */\n\tminWidth?: string | number;\n\t/**\n\t * - Max width for the editor.\n\t */\n\tmaxWidth?: string | number;\n\t/**\n\t * - Optional max-width for the editor body (`.se-wrapper`).\n\t * - **CSS length** (`\"740px\"`, `\"60ch\"`): editor body's content is clamped to this width and centered horizontally; scroll container stays full width (scrollbar at the outer edge, wheel/touch active over the whole area).\n\t * - **`\"auto\"`** or **empty string** (default): no constraint — natural full-width layout with default content padding.\n\t * - In `blockHandle` mode, the gutter handle tracks the centered text band.\n\t * ```js\n\t * { innerWidth: '740px' }\n\t * ```\n\t */\n\tinnerWidth?: string;\n\t/**\n\t * - Height for the editor.\n\t */\n\theight?: string | number;\n\t/**\n\t * - Min height for the editor.\n\t */\n\tminHeight?: string | number;\n\t/**\n\t * - Max height for the editor.\n\t */\n\tmaxHeight?: string | number;\n\t/**\n\t * - Style string of the top frame of the editor.\n\t * ```js\n\t * { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' }\n\t * ```\n\t * ///\n\t *\n\t * === Iframe Mode ===\n\t */\n\teditorStyle?: string;\n\t/**\n\t * - Content will be placed in an iframe and isolated from the rest of the page.\n\t */\n\tiframe?: boolean;\n\t/**\n\t * - Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.\n\t */\n\tiframe_fullPage?: boolean;\n\t/**\n\t * - Attributes of the `iframe`.\n\t * - `sandbox`: defaults to `\"allow-same-origin allow-scripts\"`. A custom value is kept as given, with `allow-same-origin` added if missing.\n\t * - Omitting `allow-scripts` blocks scripts in the content, but the editor does not work in Safari or iOS browsers.\n\t * ```js\n\t * { iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n\t * ```\n\t */\n\tiframe_attributes?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - CSS files to apply inside the iframe.\n\t * - String: Filename pattern to search in document `<link>` tags.\n\t * - `\"*\"`: Wildcard to include ALL stylesheets from the page.\n\t * - Absolute URLs and data URLs (`data:text/css,`) are also supported.\n\t * ```js\n\t * { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] }\n\t * ```\n\t * ///\n\t *\n\t * === Statusbar & Character Counter ===\n\t */\n\tiframe_cssFileName?: Array<string>;\n\t/**\n\t * - Enables the status bar.\n\t */\n\tstatusbar?: boolean;\n\t/**\n\t * - Displays the current node structure in the status bar.\n\t */\n\tstatusbar_showPathLabel?: boolean;\n\t/**\n\t * - Enables resize function of the bottom status bar.\n\t */\n\tstatusbar_resizeEnable?: boolean;\n\t/**\n\t * - Shows the number of characters in the editor.\n\t * - If the `maxCharCount` option has a value, it becomes `true`.\n\t */\n\tcharCounter?: boolean;\n\t/**\n\t * - The maximum number of characters allowed to be inserted into the editor.\n\t */\n\tcharCounter_max?: number | null;\n\t/**\n\t * - Text to be displayed in the `charCounter` area of the bottom bar.\n\t * ```js\n\t * { charCounter_label: 'Characters :' }\n\t * ```\n\t */\n\tcharCounter_label?: string | null;\n\t/**\n\t * - Defines the calculation method of the `charCounter` option.\n\t * - `char`: Characters length.\n\t * - `byte`: Binary data size of characters.\n\t * - `byte-html`: Binary data size of the full HTML string.\n\t *\n\t * === Word Counter ===\n\t */\n\tcharCounter_type?: 'char' | 'byte' | 'byte-html';\n\t/**\n\t * - Shows the number of words in the editor.\n\t */\n\twordCounter?: boolean;\n\t/**\n\t * - Text to be displayed in the `wordCounter` area of the bottom bar.\n\t * ```js\n\t * { wordCounter_label: 'Words :' }\n\t * ```\n\t */\n\twordCounter_label?: string | null;\n}",
 					"kind": "type",
 					"memberDescriptions": {
 						"value": "- Initial value for the editor.",
@@ -9674,7 +9691,7 @@
 						"editorStyle": "- Style string of the top frame of the editor. ```js { editorStyle: 'border: 1px solid #ccc; border-radius: 4px;' } ``` /// === Iframe Mode ===",
 						"iframe": "- Content will be placed in an iframe and isolated from the rest of the page.",
 						"iframe_fullPage": "- Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration on the `iframe`.",
-						"iframe_attributes": "- Attributes of the `iframe`. ```js { iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } } ```",
+						"iframe_attributes": "- Attributes of the `iframe`.\n- `sandbox`: defaults to `\"allow-same-origin allow-scripts\"`. A custom value is kept as given, with `allow-same-origin` added if missing.\n- Omitting `allow-scripts` blocks scripts in the content, but the editor does not work in Safari or iOS browsers. ```js { iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } } ```",
 						"iframe_cssFileName": "- CSS files to apply inside the iframe.\n- String: Filename pattern to search in document `<link>` tags.\n- `\"*\"`: Wildcard to include ALL stylesheets from the page.\n- Absolute URLs and data URLs (`data:text/css,`) are also supported. ```js { iframe_cssFileName: ['suneditor', 'custom', 'https://example.com/style.css'] } ``` /// === Statusbar & Character Counter ===",
 						"statusbar": "- Enables the status bar.",
 						"statusbar_showPathLabel": "- Displays the current node structure in the status bar.",
@@ -10420,9 +10437,11 @@
 				},
 				{
 					"name": "LinkOptions",
-					"definition": "{\n\t/**\n\t * - The URL endpoint for file uploads.\n\t * - The server must return:\n\t * ```js\n\t * {\n\t * \"result\": [\n\t * {\n\t * \"url\": \"https://example.com/file.pdf\",\n\t * \"name\": \"file.pdf\",\n\t * \"size\": 1048576\n\t * }\n\t * ]\n\t * }\n\t * ```\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers for file upload requests.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total file upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Accepted file formats for link uploads.\n\t */\n\tacceptedFormats?: string;\n}",
+					"definition": "{\n\t/**\n\t * - Show the \"Title\" input in the link modal.\n\t */\n\ttitle?: boolean;\n\t/**\n\t * - Show the \"Text to display\" input in the link modal.\n\t */\n\ttextToDisplay?: boolean;\n\t/**\n\t * - The URL endpoint for file uploads.\n\t * - The server must return:\n\t * ```js\n\t * {\n\t * \"result\": [\n\t * {\n\t * \"url\": \"https://example.com/file.pdf\",\n\t * \"name\": \"file.pdf\",\n\t * \"size\": 1048576\n\t * }\n\t * ]\n\t * }\n\t * ```\n\t */\n\tuploadUrl?: string;\n\t/**\n\t * - Additional headers for file upload requests.\n\t */\n\tuploadHeaders?: {\n\t\t[x: string]: string;\n\t};\n\t/**\n\t * - The total file upload size limit in bytes.\n\t */\n\tuploadSizeLimit?: number;\n\t/**\n\t * - The single file upload size limit in bytes.\n\t */\n\tuploadSingleSizeLimit?: number;\n\t/**\n\t * - Accepted file formats for link uploads.\n\t */\n\tacceptedFormats?: string;\n}",
 					"kind": "type",
 					"memberDescriptions": {
+						"title": "- Show the \"Title\" input in the link modal.",
+						"textToDisplay": "- Show the \"Text to display\" input in the link modal.",
 						"uploadUrl": "- The URL endpoint for file uploads.\n- The server must return: ```js { \"result\": [ { \"url\": \"https://example.com/file.pdf\", \"name\": \"file.pdf\", \"size\": 1048576 } ] } ```",
 						"uploadHeaders": "- Additional headers for file upload requests.",
 						"uploadSizeLimit": "- The total file upload size limit in bytes.",
@@ -10433,7 +10452,7 @@
 				},
 				{
 					"name": "LinkPluginOptions",
-					"definition": "Omit<\n\tLinkOptions & import('../../modules/ui/ModalAnchorEditor').ModalAnchorEditorParams,\n\t''\n>",
+					"definition": "Omit<\n\tLinkOptions & Omit<import('../../modules/ui/ModalAnchorEditor').ModalAnchorEditorParams, 'title' | 'textToDisplay'>,\n\t''\n>",
 					"kind": "type",
 					"source": "plugins/modal/link.d.ts"
 				},

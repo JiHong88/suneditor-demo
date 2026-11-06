@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe` کی خصوصیات۔\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "`iframe` کی خصوصیات۔\n- `sandbox`: پہلے سے طے شدہ `\"allow-same-origin allow-scripts\"` پر۔ ایک حسب ضرورت قدر رکھی جاتی ہے جیسا کہ دیا گیا ہے، اگر غائب ہو تو `allow-same-origin` شامل کر دیا جائے۔\n- `allow-scripts` کو چھوڑنا مواد میں سکرپٹ کو روکتا ہے، لیکن ایڈیٹر سفاری یا iOS براؤزرز میں کام نہیں کرتا ہے۔\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "انتخاب اور کرسر کی جگہ کے لیے اجزاء کے اندراج کا برتاؤ۔\n- [ڈیفالٹ: `options.get('componentInsertBehavior')`]\n- ان لائن اجزاء کے لیے: جزو کے قریب کرسر رکھتا ہے، یا اگر کوئی قریبی رینج نہیں ہے تو منتخب کرتا ہے۔\n- بلاک اجزاء کے لیے: `selectMode` ​​کی بنیاد پر رویے کو انجام دیتا ہے:\n- `auto`: اگر ممکن ہو تو کرسر کو اگلی لائن پر لے جائیں، بصورت دیگر جز کو منتخب کریں۔\n- `select`: ہمیشہ داخل کردہ جزو کو منتخب کریں۔\n- `line`: اگر ممکن ہو تو کرسر کو اگلی لائن میں لے جائیں، یا ایک نئی لائن بنائیں اور وہاں منتقل کریں۔\n- `none`: کچھ نہ کرو۔"
   },
+  "link_title": {
+    "description": "لنک موڈل میں \"ٹائٹل\" ان پٹ دکھائیں۔"
+  },
+  "link_textToDisplay": {
+    "description": "لنک موڈل میں \"ڈسپلے کے لیے متن\" ان پٹ دکھائیں۔"
+  },
+  "link_openNewWindow": {
+    "description": "\"نئی ونڈو میں کھولیں\" چیک باکس کی ڈیفالٹ چیک شدہ قدر۔"
+  },
+  "link_noAutoPrefix": {
+    "description": "اگر `true`، میزبان یو آر ایل کے خودکار سابقہ ​​کو لنک کی قدر سے غیر فعال کر دیتا ہے۔"
+  },
+  "link_relList": {
+    "description": "دستیاب `rel` انتساب کی قدریں لنک موڈل میں چیک باکس کے طور پر دکھائی دیتی ہیں۔"
+  },
+  "link_defaultRel": {
+    "description": "پہلے سے طے شدہ `rel` قدریں شرط کے لحاظ سے خودکار طور پر لاگو ہوتی ہیں۔"
+  },
   "link_uploadUrl": {
     "description": "فائل اپ لوڈز کے لیے URL اختتامی نقطہ۔\n- سرور کو واپس آنا چاہیے:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "لنک اپ لوڈز کے لیے قبول شدہ فائل فارمیٹس۔"
-  },
-  "link_title": {
-    "description": "ماڈل ٹائٹل ڈسپلے۔"
-  },
-  "link_textToDisplay": {
-    "description": "ان پٹ کو ظاہر کرنے کے لیے متن بنائیں۔"
-  },
-  "link_openNewWindow": {
-    "description": "\"نئی ونڈو میں کھولیں\" چیک باکس کی ڈیفالٹ چیک شدہ قدر۔"
-  },
-  "link_noAutoPrefix": {
-    "description": "اگر `true`، میزبان یو آر ایل کے خودکار سابقہ ​​کو لنک کی قدر سے غیر فعال کر دیتا ہے۔"
-  },
-  "link_relList": {
-    "description": "دستیاب `rel` انتساب کی قدریں لنک موڈل میں چیک باکس کے طور پر دکھائی دیتی ہیں۔"
-  },
-  "link_defaultRel": {
-    "description": "پہلے سے طے شدہ `rel` قدریں شرط کے لحاظ سے خودکار طور پر لاگو ہوتی ہیں۔"
   },
   "link_enableFileUpload": {
     "description": "اگر `true`، فائل اپ لوڈ کو قابل بناتا ہے۔"

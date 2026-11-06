@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attribute von `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attribute von `iframe`.\n\n- `sandbox`: Standardwert ist `\"allow-same-origin allow-scripts\"`. Ein benutzerdefinierter Wert wird beibehalten; `allow-same-origin` wird hinzugefügt, falls er fehlt.\n\n- Wird `allow-scripts` weggelassen, werden Skripte im Inhalt blockiert, der Editor funktioniert jedoch nicht in Safari oder iOS-Browsern.\n\n``js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Verhalten beim Einfügen von Komponenten für die Auswahl und Cursorpositionierung.\n\n- [Standard: `options.get('componentInsertBehavior')`]\n- Bei Inline-Komponenten: Der Cursor wird in der Nähe der Komponente platziert oder, falls kein Bereich in der Nähe vorhanden ist, ausgewählt.\n\n- Bei Blockkomponenten: Das Verhalten richtet sich nach `selectMode`:\n\n- `auto`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird die Komponente ausgewählt.\n\n- `select`: Die eingefügte Komponente wird immer ausgewählt.\n\n- `line`: Der Cursor wird, falls möglich, in die nächste Zeile bewegt, andernfalls wird eine neue Zeile erstellt und dorthin bewegt.\n\n- `none`: Es passiert nichts."
   },
+  "link_title": {
+    "description": "Das Eingabefeld „Titel“ soll im Link-Modal angezeigt werden."
+  },
+  "link_textToDisplay": {
+    "description": "Zeigen Sie das Eingabefeld \"Anzuzeigender Text\" im Link-Modal an."
+  },
+  "link_openNewWindow": {
+    "description": "Standardmäßig ist das Kontrollkästchen „In neuem Fenster öffnen“ aktiviert."
+  },
+  "link_noAutoPrefix": {
+    "description": "Wenn `true`, wird die automatische Voranstellung eines Präfixes an den Wert der Link-URL deaktiviert."
+  },
+  "link_relList": {
+    "description": "Die verfügbaren Attributwerte `rel` werden im Link-Modal als Kontrollkästchen angezeigt."
+  },
+  "link_defaultRel": {
+    "description": "Standardwerte für `rel` werden automatisch durch die Bedingung angewendet."
+  },
   "link_uploadUrl": {
     "description": "Die URL-Endpunktadresse für Datei-Uploads.\n\n– Der Server muss Folgendes zurückgeben:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Akzeptierte Dateiformate für Link-Uploads."
-  },
-  "link_title": {
-    "description": "Modale Titelanzeige."
-  },
-  "link_textToDisplay": {
-    "description": "Eingabetext zur Anzeige erstellen."
-  },
-  "link_openNewWindow": {
-    "description": "Standardmäßig ist das Kontrollkästchen „In neuem Fenster öffnen“ aktiviert."
-  },
-  "link_noAutoPrefix": {
-    "description": "Wenn `true`, wird die automatische Voranstellung eines Präfixes an den Wert der Link-URL deaktiviert."
-  },
-  "link_relList": {
-    "description": "Die verfügbaren Attributwerte `rel` werden im Link-Modal als Kontrollkästchen angezeigt."
-  },
-  "link_defaultRel": {
-    "description": "Standardwerte für `rel` werden automatisch durch die Bedingung angewendet."
   },
   "link_enableFileUpload": {
     "description": "Wenn `true`, wird der Dateiupload aktiviert."

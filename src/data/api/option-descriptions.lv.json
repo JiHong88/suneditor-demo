@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe` atribūti.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "`iframe` atribūti.\n- `sandbox`: pēc noklusējuma ir `\"allow-same-origin allow-scripts\"`. Pielāgota vērtība tiek saglabāta, kā norādīts, pievienojot `allow-same-origin`, ja ​​tā trūkst.\n- `allow-scripts` izlaišana bloķē skriptus saturā, bet redaktors nedarbojas Safari vai iOS pārlūkprogrammās.\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Komponentu ievietošanas darbība atlasei un kursora novietošanai.\n- [pēc noklusējuma: `options.get('componentInsertBehavior')`]\n- Iekļautiem komponentiem: novieto kursoru komponenta tuvumā vai atlasa, ja tuvumā nav diapazona.\n- Bloku komponentiem: izpilda darbību, pamatojoties uz `selectMode`:\n- `auto`: Pārvieto kursoru uz nākamo rindu, ja iespējams, pretējā gadījumā atlasa komponentu.\n- `select`: Vienmēr atlasa ievietoto komponentu.\n- `line`: Pārvieto kursoru uz nākamo rindu, ja iespējams, vai izveido jaunu rindu un pārvietojas uz turieni.\n- `none`: Neko nedarīt."
   },
+  "link_title": {
+    "description": "Rādīt saites modālajā logā ievades lauku “Nosaukums”."
+  },
+  "link_textToDisplay": {
+    "description": "Saites modālajā logā rādīt ievades lauku “Parādāmais teksts”."
+  },
+  "link_openNewWindow": {
+    "description": "Izvēles rūtiņas \"Atvērt jaunā logā\" noklusējuma atzīmētā vērtība."
+  },
+  "link_noAutoPrefix": {
+    "description": "Ja `true`, tiek atspējota automātiska resursdatora URL prefiksa pievienošana saites vērtībai."
+  },
+  "link_relList": {
+    "description": "Pieejamās `rel` atribūtu vērtības saites modālajā logā tiek parādītas kā izvēles rūtiņas."
+  },
+  "link_defaultRel": {
+    "description": "Noklusējuma `rel` vērtības tiek automātiski piemērotas pēc nosacījuma."
+  },
   "link_uploadUrl": {
     "description": "Failu augšupielādes URL galapunkts.\n- Serverim ir jāatgriež:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Pieņemtie failu formāti saišu augšupielādei."
-  },
-  "link_title": {
-    "description": "Modālā nosaukuma attēlošana."
-  },
-  "link_textToDisplay": {
-    "description": "Izveidojiet tekstu ievades attēlošanai."
-  },
-  "link_openNewWindow": {
-    "description": "Izvēles rūtiņas \"Atvērt jaunā logā\" noklusējuma atzīmētā vērtība."
-  },
-  "link_noAutoPrefix": {
-    "description": "Ja `true`, tiek atspējota automātiska resursdatora URL prefiksa pievienošana saites vērtībai."
-  },
-  "link_relList": {
-    "description": "Pieejamās `rel` atribūtu vērtības saites modālajā logā tiek parādītas kā izvēles rūtiņas."
-  },
-  "link_defaultRel": {
-    "description": "Noklusējuma `rel` vērtības tiek automātiski piemērotas pēc nosacījuma."
   },
   "link_enableFileUpload": {
     "description": "Ja `true`, iespējo failu augšupielādi."

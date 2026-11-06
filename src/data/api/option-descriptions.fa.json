@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "ویژگی‌های `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "ویژگی‌های `iframe`.\n- `sandbox`: مقدار پیش‌فرض `\"allow-same-origin allow-scripts\"` است. یک مقدار سفارشی به صورت پیش‌فرض نگه داشته می‌شود و در صورت وجود نداشتن، `allow-same-origin` اضافه می‌شود.\n- حذف `allow-scripts` اسکریپت‌ها را در محتوا مسدود می‌کند، اما ویرایشگر در مرورگرهای Safari یا iOS کار نمی‌کند.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "رفتار درج کامپوننت برای انتخاب و قرار دادن مکان‌نما.\n- [پیش‌فرض: `options.get('componentInsertBehavior')`]\n- برای کامپوننت‌های درون‌خطی: مکان‌نما را نزدیک کامپوننت قرار می‌دهد، یا اگر محدوده‌ای در نزدیکی وجود ندارد، انتخاب می‌کند.\n- برای کامپوننت‌های بلوکی: رفتاری را بر اساس `selectMode` ​​اجرا می‌کند:\n- `auto`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، در غیر این صورت کامپوننت را انتخاب می‌کند.\n- `select`: همیشه کامپوننت درج‌شده را انتخاب می‌کند.\n- `line`: در صورت امکان مکان‌نما را به خط بعدی منتقل می‌کند، یا یک خط جدید ایجاد می‌کند و به آنجا می‌رود.\n- `none`: هیچ کاری انجام نمی‌دهد."
   },
+  "link_title": {
+    "description": "ورودی \"عنوان\" را در پنجره‌ی پیوند نمایش بده."
+  },
+  "link_textToDisplay": {
+    "description": "ورودی \"متن برای نمایش\" را در ماژول لینک نمایش بده."
+  },
+  "link_openNewWindow": {
+    "description": "مقدار پیش‌فرض علامت‌گذاری‌شده‌ی کادر انتخاب «باز کردن در پنجره‌ی جدید»"
+  },
+  "link_noAutoPrefix": {
+    "description": "اگر `true` باشد، پیشوند خودکار URL میزبان را به مقدار لینک غیرفعال می‌کند."
+  },
+  "link_relList": {
+    "description": "مقادیر ویژگی `rel` موجود که به صورت کادرهای انتخاب در پنجره‌ی پیوند نشان داده می‌شوند."
+  },
+  "link_defaultRel": {
+    "description": "مقادیر پیش‌فرض `rel` به صورت خودکار بر اساس شرایط اعمال می‌شوند."
+  },
   "link_uploadUrl": {
     "description": "نقطه پایانی URL برای آپلود فایل.\n- سرور باید مقدار زیر را برگرداند:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "فرمت‌های فایل پذیرفته شده برای آپلود لینک."
-  },
-  "link_title": {
-    "description": "نمایش عنوان مودال."
-  },
-  "link_textToDisplay": {
-    "description": "ایجاد متن برای نمایش ورودی"
-  },
-  "link_openNewWindow": {
-    "description": "مقدار پیش‌فرض علامت‌گذاری‌شده‌ی کادر انتخاب «باز کردن در پنجره‌ی جدید»"
-  },
-  "link_noAutoPrefix": {
-    "description": "اگر `true` باشد، پیشوند خودکار URL میزبان را به مقدار لینک غیرفعال می‌کند."
-  },
-  "link_relList": {
-    "description": "مقادیر ویژگی `rel` موجود که به صورت کادرهای انتخاب در پنجره‌ی پیوند نشان داده می‌شوند."
-  },
-  "link_defaultRel": {
-    "description": "مقادیر پیش‌فرض `rel` به صورت خودکار بر اساس شرایط اعمال می‌شوند."
   },
   "link_enableFileUpload": {
     "description": "اگر `true` باشد، آپلود فایل را فعال می‌کند."

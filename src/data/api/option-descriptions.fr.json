@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributs du `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attributs de `iframe`.\n\n- `sandbox` : par défaut, `\"allow-same-origin allow-scripts\"`. Une valeur personnalisée est conservée telle quelle, `allow-same-origin` étant ajouté si elle est manquante.\n\n- Omettre `allow-scripts` bloque les scripts dans le contenu, mais l'éditeur ne fonctionne pas dans Safari ni sur les navigateurs iOS.\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Comportement d'insertion des composants : sélection et positionnement du curseur.\n\n- [par défaut : `options.get('componentInsertBehavior')`]\n\n- Pour les composants en ligne : place le curseur près du composant, ou le sélectionne s'il n'y a pas de zone adjacente.\n\n- Pour les composants de type bloc : le comportement dépend de `selectMode` :\n\n- `auto` : déplace le curseur à la ligne suivante si possible, sinon sélectionne le composant.\n\n- `select` : sélectionne systématiquement le composant inséré.\n\n- `line` : déplace le curseur à la ligne suivante si possible, ou crée une nouvelle ligne et s'y déplace.\n\n- `none` : ne fait rien."
   },
+  "link_title": {
+    "description": "Afficher le champ « Titre » dans la fenêtre modale du lien."
+  },
+  "link_textToDisplay": {
+    "description": "Afficher le champ « Texte à afficher » dans la fenêtre modale du lien."
+  },
+  "link_openNewWindow": {
+    "description": "Valeur par défaut de la case à cocher « Ouvrir dans une nouvelle fenêtre »."
+  },
+  "link_noAutoPrefix": {
+    "description": "Si `true`, désactive le préfixage automatique de l'URL hôte à la valeur du lien."
+  },
+  "link_relList": {
+    "description": "Les valeurs disponibles de l'attribut `rel` sont affichées sous forme de cases à cocher dans la fenêtre modale du lien."
+  },
+  "link_defaultRel": {
+    "description": "Valeurs par défaut `rel` appliquées automatiquement selon la condition."
+  },
   "link_uploadUrl": {
     "description": "URL du point de terminaison pour le téléchargement de fichiers.\n\n- Le serveur doit renvoyer :"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Formats de fichiers acceptés pour les liens de téléchargement."
-  },
-  "link_title": {
-    "description": "Affichage du titre modal."
-  },
-  "link_textToDisplay": {
-    "description": "Créez un texte pour afficher les données saisies."
-  },
-  "link_openNewWindow": {
-    "description": "Valeur par défaut de la case à cocher « Ouvrir dans une nouvelle fenêtre »."
-  },
-  "link_noAutoPrefix": {
-    "description": "Si `true`, désactive le préfixage automatique de l'URL hôte à la valeur du lien."
-  },
-  "link_relList": {
-    "description": "Les valeurs disponibles de l'attribut `rel` sont affichées sous forme de cases à cocher dans la fenêtre modale du lien."
-  },
-  "link_defaultRel": {
-    "description": "Valeurs par défaut `rel` appliquées automatiquement selon la condition."
   },
   "link_enableFileUpload": {
     "description": "Si `true`, active le téléchargement de fichiers."

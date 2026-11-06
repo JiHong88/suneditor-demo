@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Kenmerken van de `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Kenmerken van de `iframe`.\n\n- `sandbox`: standaardwaarde is `\"allow-same-origin allow-scripts\"`. Een aangepaste waarde wordt behouden zoals opgegeven, met `allow-same-origin` toegevoegd indien deze ontbreekt.\n\n- Het weglaten van `allow-scripts` blokkeert scripts in de inhoud, maar de editor werkt niet in Safari of iOS-browsers.\n\n``js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Invoeggedrag van componenten voor selectie en cursorplaatsing.\n\n- [standaard: `options.get('componentInsertBehavior')`]\n- Voor inline componenten: plaatst de cursor in de buurt van de component, of selecteert deze als er geen nabijgelegen bereik is.\n\n- Voor blokcomponenten: voert gedrag uit op basis van `selectMode`:\n- `auto`: Verplaats de cursor naar de volgende regel indien mogelijk, anders selecteer de component.\n\n- `select`: Selecteer altijd de ingevoegde component.\n\n- `line`: Verplaats de cursor naar de volgende regel indien mogelijk, of maak een nieuwe regel aan en verplaats de cursor daarheen.\n\n- `none`: Doe niets."
   },
+  "link_title": {
+    "description": "Toon het invoerveld \"Titel\" in het linkvenster."
+  },
+  "link_textToDisplay": {
+    "description": "Toon het invoerveld \"Tekst om weer te geven\" in het linkvenster."
+  },
+  "link_openNewWindow": {
+    "description": "Standaard aangevinkte waarde van het selectievakje \"Openen in nieuw venster\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Als `true` is ingesteld, wordt het automatisch toevoegen van het voorvoegsel van de host-URL aan de waarde van de link uitgeschakeld."
+  },
+  "link_relList": {
+    "description": "Beschikbare `rel` attribuutwaarden worden weergegeven als selectievakjes in het linkvenster."
+  },
+  "link_defaultRel": {
+    "description": "Standaardwaarden voor `rel` worden automatisch toegepast op basis van de voorwaarde."
+  },
   "link_uploadUrl": {
     "description": "Het URL-eindpunt voor het uploaden van bestanden.\n\n- De server moet het volgende retourneren:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Geaccepteerde bestandsformaten voor het uploaden via links."
-  },
-  "link_title": {
-    "description": "Modale titelweergave."
-  },
-  "link_textToDisplay": {
-    "description": "Maak een tekstveld aan om de invoer weer te geven."
-  },
-  "link_openNewWindow": {
-    "description": "Standaard aangevinkte waarde van het selectievakje \"Openen in nieuw venster\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "Als `true` is ingesteld, wordt het automatisch toevoegen van het voorvoegsel van de host-URL aan de waarde van de link uitgeschakeld."
-  },
-  "link_relList": {
-    "description": "Beschikbare `rel` attribuutwaarden worden weergegeven als selectievakjes in het linkvenster."
-  },
-  "link_defaultRel": {
-    "description": "Standaardwaarden voor `rel` worden automatisch toegepast op basis van de voorwaarde."
   },
   "link_enableFileUpload": {
     "description": "Als `true` is ingeschakeld, wordt het uploaden van bestanden mogelijk gemaakt."

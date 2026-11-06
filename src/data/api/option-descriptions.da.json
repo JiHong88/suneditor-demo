@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributter for `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attributter for `iframe`.\n- `sandbox`: standardværdien er `\"allow-same-origin allow-scripts\"`. En brugerdefineret værdi bevares som angivet, med `allow-same-origin` tilføjet, hvis den mangler.\n- Udeladelse af `allow-scripts` blokerer scripts i indholdet, men editoren fungerer ikke i Safari eller iOS-browsere.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Komponentindsættelsesadfærd for valg og markørplacering.\n- [standard: `options.get('componentInsertBehavior')`]\n- For inline-komponenter: Placerer markøren i nærheden af ​​komponenten, eller vælger hvis der ikke er et nærliggende område.\n- For blokkomponenter: Udfører adfærd baseret på `selectMode`:\n- `auto`: Flyt markøren til den næste linje hvis muligt, ellers vælg komponenten.\n- `select`: Vælg altid den indsatte komponent.\n- `line`: Flyt markøren til den næste linje hvis muligt, eller opret en ny linje og flyt dertil.\n- `none`: Gør ingenting."
   },
+  "link_title": {
+    "description": "Vis inputtet \"Titel\" i linkmodalen."
+  },
+  "link_textToDisplay": {
+    "description": "Vis inputtet \"Tekst, der skal vises\" i linkmodalen."
+  },
+  "link_openNewWindow": {
+    "description": "Standardværdien for afkrydsningsfeltet \"Åbn i nyt vindue\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Hvis `true`, deaktiveres den automatiske præfiksering af værts-URL'en til linkets værdi."
+  },
+  "link_relList": {
+    "description": "Tilgængelige `rel`-attributværdier vist som afkrydsningsfelter i linkmodalen."
+  },
+  "link_defaultRel": {
+    "description": "Standard `rel`-værdier anvendes automatisk efter betingelse."
+  },
   "link_uploadUrl": {
     "description": "URL-slutpunktet for filuploads.\n- Serveren skal returnere:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Accepterede filformater til linkuploads."
-  },
-  "link_title": {
-    "description": "Modal titelvisning."
-  },
-  "link_textToDisplay": {
-    "description": "Opret tekst for at vise input."
-  },
-  "link_openNewWindow": {
-    "description": "Standardværdien for afkrydsningsfeltet \"Åbn i nyt vindue\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "Hvis `true`, deaktiveres den automatiske præfiksering af værts-URL'en til linkets værdi."
-  },
-  "link_relList": {
-    "description": "Tilgængelige `rel`-attributværdier vist som afkrydsningsfelter i linkmodalen."
-  },
-  "link_defaultRel": {
-    "description": "Standard `rel`-værdier anvendes automatisk efter betingelse."
   },
   "link_enableFileUpload": {
     "description": "Hvis `true`, aktiveres filupload."

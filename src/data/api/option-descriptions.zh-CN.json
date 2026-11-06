@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe` 的属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "`iframe` 的属性。\n\n- `sandbox`：默认为 `\"allow-same-origin allow-scripts\"`。自定义值将保持不变，如果缺失则添加 `allow-same-origin`。\n\n- 省略 `allow-scripts` 会阻止内容中的脚本，但编辑器在 Safari 或 iOS 浏览器中无法正常工作。\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "组件插入行为（选择和光标放置）。\n\n- [默认值：`options.get('componentInsertBehavior')`]\n\n- 对于行内组件：将光标放置在组件附近，如果没有附近范围则选中组件。\n\n- 对于块组件：根据 `selectMode` 执行相应的行为：\n\n- `auto`：如果可能，将光标移动到下一行；否则，选中组件。\n\n- `select`：始终选中插入的组件。\n\n- `line`：如果可能，将光标移动到下一行；否则，创建新行并将光标移动到该行。\n\n- `none`：不执行任何操作。"
   },
+  "link_title": {
+    "description": "在链接模态框中显示“标题”输入框。"
+  },
+  "link_textToDisplay": {
+    "description": "在链接模态框中显示“要显示的文本”输入框。"
+  },
+  "link_openNewWindow": {
+    "description": "“在新窗口中打开”复选框的默认选中状态。"
+  },
+  "link_noAutoPrefix": {
+    "description": "如果为 `true`，则禁用将主机 URL 自动添加到链接值的功能。"
+  },
+  "link_relList": {
+    "description": "链接模态框中以复选框形式显示的可用 `rel` 属性值。"
+  },
+  "link_defaultRel": {
+    "description": "默认值 `rel` 根据条件自动应用。"
+  },
   "link_uploadUrl": {
     "description": "文件上传的 URL 端点。\n\n- 服务器必须返回："
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "链接上传可接受的文件格式。"
-  },
-  "link_title": {
-    "description": "显示模态标题。"
-  },
-  "link_textToDisplay": {
-    "description": "创建用于显示输入内容的文本框。"
-  },
-  "link_openNewWindow": {
-    "description": "“在新窗口中打开”复选框的默认选中状态。"
-  },
-  "link_noAutoPrefix": {
-    "description": "如果为 `true`，则禁用将主机 URL 自动添加到链接值的功能。"
-  },
-  "link_relList": {
-    "description": "链接模态框中以复选框形式显示的可用 `rel` 属性值。"
-  },
-  "link_defaultRel": {
-    "description": "默认值 `rel` 根据条件自动应用。"
   },
   "link_enableFileUpload": {
     "description": "如果 `true`，则启用文件上传。"

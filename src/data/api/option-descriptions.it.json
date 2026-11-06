@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Attributi del `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Attributi di `iframe`.\n\n- `sandbox`: il valore predefinito è `\"allow-same-origin allow-scripts\"`. Un valore personalizzato viene mantenuto così com'è, con `allow-same-origin` aggiunto se mancante.\n\n- Omettendo `allow-scripts` si bloccano gli script nel contenuto, ma l'editor non funziona nei browser Safari o iOS.\n\n``js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Comportamento di inserimento dei componenti per la selezione e il posizionamento del cursore.\n\n- [predefinito: `options.get('componentInsertBehavior')`]\n- Per i componenti in linea: posiziona il cursore vicino al componente, oppure lo seleziona se non c'è un intervallo nelle vicinanze.\n\n- Per i componenti a blocco: esegue il comportamento in base a `selectMode`:\n- `auto`: sposta il cursore alla riga successiva, se possibile, altrimenti seleziona il componente.\n\n- `select`: seleziona sempre il componente inserito.\n\n- `line`: sposta il cursore alla riga successiva, se possibile, oppure crea una nuova riga e spostati lì.\n\n- `none`: non fa nulla."
   },
+  "link_title": {
+    "description": "Mostra il campo \"Titolo\" nella finestra modale del collegamento."
+  },
+  "link_textToDisplay": {
+    "description": "Mostra il campo di input \"Testo da visualizzare\" nella finestra modale del collegamento."
+  },
+  "link_openNewWindow": {
+    "description": "Valore predefinito selezionato della casella di controllo \"Apri in una nuova finestra\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Se `true`, disabilita l'aggiunta automatica del prefisso all'URL dell'host nel valore del collegamento."
+  },
+  "link_relList": {
+    "description": "I valori dell'attributo `rel` disponibili vengono visualizzati come caselle di controllo nella finestra modale del collegamento."
+  },
+  "link_defaultRel": {
+    "description": "Valori predefiniti `rel` applicati automaticamente in base alla condizione."
+  },
   "link_uploadUrl": {
     "description": "L'URL di fine per il caricamento dei file.\n\n- Il server deve restituire:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Formati di file accettati per il caricamento dei link."
-  },
-  "link_title": {
-    "description": "Visualizzazione del titolo modale."
-  },
-  "link_textToDisplay": {
-    "description": "Crea del testo da visualizzare."
-  },
-  "link_openNewWindow": {
-    "description": "Valore predefinito selezionato della casella di controllo \"Apri in una nuova finestra\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "Se `true`, disabilita l'aggiunta automatica del prefisso all'URL dell'host nel valore del collegamento."
-  },
-  "link_relList": {
-    "description": "I valori dell'attributo `rel` disponibili vengono visualizzati come caselle di controllo nella finestra modale del collegamento."
-  },
-  "link_defaultRel": {
-    "description": "Valori predefiniti `rel` applicati automaticamente in base alla condizione."
   },
   "link_enableFileUpload": {
     "description": "Se `true`, abilita il caricamento dei file."

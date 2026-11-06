@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe` の属性。\n\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "`iframe` の属性。\n\n- `sandbox`: デフォルト値は `\"allow-same-origin allow-scripts\"` です。カスタム値が指定された場合はそのまま保持され、指定がない場合は `allow-same-origin` が追加されます。\n\n- `allow-scripts` を省略すると、コンテンツ内のスクリプトはブロックされますが、Safari または iOS ブラウザではエディタが動作しません。\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "コンポーネント挿入時の選択およびカーソル配置動作。\n\n- [デフォルト: `options.get('componentInsertBehavior')`]\n- インラインコンポーネントの場合: コンポーネントの近くにカーソルを配置します。近くに範囲がない場合は選択します。\n\n- ブロックコンポーネントの場合: `selectMode` に基づいて動作を実行します。\n- `auto`: 可能であればカーソルを次の行に移動します。そうでない場合はコンポーネントを選択します。\n\n- `select`: 挿入されたコンポーネントを常に選択します。\n\n- `line`: 可能であればカーソルを次の行に移動します。そうでない場合は新しい行を作成してそこに移動します。\n\n- `none`: 何もしません。"
   },
+  "link_title": {
+    "description": "リンクモーダルに「タイトル」入力欄を表示します。"
+  },
+  "link_textToDisplay": {
+    "description": "リンクモーダルに「表示するテキスト」入力欄を表示します。"
+  },
+  "link_openNewWindow": {
+    "description": "「新しいウィンドウで開く」チェックボックスのデフォルトのチェック値。"
+  },
+  "link_noAutoPrefix": {
+    "description": "`true` の場合、ホスト URL をリンクの値に自動的にプレフィックスとして追加する機能を無効にします。"
+  },
+  "link_relList": {
+    "description": "利用可能な`rel`属性値は、リンクモーダルにチェックボックスとして表示されます。"
+  },
+  "link_defaultRel": {
+    "description": "デフォルトの`rel`値は、条件によって自動的に適用されます。"
+  },
   "link_uploadUrl": {
     "description": "ファイルアップロード用のURLエンドポイント。\n\n- サーバーは以下を返す必要があります。"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "リンクアップロードに使用できるファイル形式。"
-  },
-  "link_title": {
-    "description": "モーダルタイトルの表示。"
-  },
-  "link_textToDisplay": {
-    "description": "入力内容を表示するテキストを作成します。"
-  },
-  "link_openNewWindow": {
-    "description": "「新しいウィンドウで開く」チェックボックスのデフォルトのチェック値。"
-  },
-  "link_noAutoPrefix": {
-    "description": "`true` の場合、ホスト URL をリンクの値に自動的にプレフィックスとして追加する機能を無効にします。"
-  },
-  "link_relList": {
-    "description": "利用可能な`rel`属性値は、リンクモーダルにチェックボックスとして表示されます。"
-  },
-  "link_defaultRel": {
-    "description": "デフォルトの`rel`値は、条件によって自動的に適用されます。"
   },
   "link_enableFileUpload": {
     "description": "`true`の場合、ファイルアップロードが有効になります。"

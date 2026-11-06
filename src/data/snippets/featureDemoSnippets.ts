@@ -166,5 +166,5 @@ export const DEMO_STRICT_MODE = `<p>Strict mode filters and sanitizes pasted con
 export const DEMO_EXPORT_PDF = `<p><strong>Export PDF</strong> — click the export PDF button in the toolbar to download the editor content as a PDF file.</p><p>This feature requires a PDF API endpoint.</p>`;
 
 /** 키보드 단축키 안내 데모 */
-export const DEMO_KEYBOARD = `<p><strong>Keyboard shortcuts:</strong></p><ul><li><code>Ctrl+B</code> — Bold</li><li><code>Ctrl+I</code> — Italic</li><li><code>Ctrl+U</code> — Underline</li><li><code>Ctrl+Z</code> — Undo</li><li><code>Ctrl+Y</code> — Redo</li><li><code>Ctrl+A</code> — Select All</li></ul><p>Try using these shortcuts!</p>`;
+export const DEMO_KEYBOARD = `<p><strong>Keyboard shortcuts:</strong></p><ul><li><code>Ctrl+B</code> — Bold</li><li><code>Ctrl+I</code> — Italic</li><li><code>Ctrl+U</code> — Underline</li><li><code>Ctrl+Z</code> — Undo</li><li><code>Ctrl+Y</code> — Redo</li><li><code>Ctrl+A</code> — Select All</li></ul><p><strong>Typing shortcuts</strong> (at the start of a line, then Space):</p><ul><li><code>&gt;</code> — Blockquote</li><li><code>1.</code> — Numbered list</li><li><code>*</code> — Bulleted list</li><li><code>---</code> — Horizontal rule</li></ul><p>Try using these shortcuts!</p>`;
 

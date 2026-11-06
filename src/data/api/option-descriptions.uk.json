@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Атрибути `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Атрибути `iframe`.\n- `sandbox`: за замовчуванням `\"allow-same-origin allow-scripts\"`. Власне значення зберігається як задане, а `allow-same-origin` додається, якщо його немає.\n- Пропуск `allow-scripts` блокує скрипти у вмісті, але редактор не працює в браузерах Safari або iOS.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Поведінка вставки компонентів для вибору та розміщення курсора.\n- [за замовчуванням: `options.get('componentInsertBehavior')`]\n- Для рядкових компонентів: розміщує курсор поруч із компонентом або вибирає, якщо поблизу немає діапазону.\n- Для блокових компонентів: виконує поведінку на основі `selectMode`:\n- `auto`: Перемістити курсор на наступний рядок, якщо можливо, інакше вибрати компонент.\n- `select`: Завжди вибирати вставлений компонент.\n- `line`: Перемістити курсор на наступний рядок, якщо можливо, або створити новий рядок і перемістити туди.\n- `none`: Нічого не робити."
   },
+  "link_title": {
+    "description": "Показувати поле \"Назва\" у модальному вікні посилання."
+  },
+  "link_textToDisplay": {
+    "description": "Відображати поле «Текст для відображення» у модальному вікні посилання."
+  },
+  "link_openNewWindow": {
+    "description": "Значення за замовчуванням для прапорця «Відкрити в новому вікні»."
+  },
+  "link_noAutoPrefix": {
+    "description": "Якщо `true`, вимикає автоматичне додавання префікса URL-адреси хоста до значення посилання."
+  },
+  "link_relList": {
+    "description": "Доступні значення атрибута `rel` відображаються як прапорці у модальному вікні посилання."
+  },
+  "link_defaultRel": {
+    "description": "Значення за замовчуванням `rel` застосовуються автоматично за умовою."
+  },
   "link_uploadUrl": {
     "description": "Кінцева точка URL для завантаження файлів.\n- Сервер повинен повернути:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Прийнятні формати файлів для завантаження посилань."
-  },
-  "link_title": {
-    "description": "Відображення модального заголовка."
-  },
-  "link_textToDisplay": {
-    "description": "Створити текст для відображення введених даних."
-  },
-  "link_openNewWindow": {
-    "description": "Значення за замовчуванням для прапорця «Відкрити в новому вікні»."
-  },
-  "link_noAutoPrefix": {
-    "description": "Якщо `true`, вимикає автоматичне додавання префікса URL-адреси хоста до значення посилання."
-  },
-  "link_relList": {
-    "description": "Доступні значення атрибута `rel` відображаються як прапорці у модальному вікні посилання."
-  },
-  "link_defaultRel": {
-    "description": "Значення за замовчуванням `rel` застосовуються автоматично за умовою."
   },
   "link_enableFileUpload": {
     "description": "Якщо `true`, дозволяє завантаження файлу."

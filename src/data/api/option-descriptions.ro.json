@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Atributele lui `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Atributele lui `iframe`.\n- `sandbox`: implicit este `\"allow-same-origin allow-scripts\"`. O valoare personalizată este păstrată așa cum este dată, cu `allow-same-origin` adăugat dacă lipsește.\n- Omiterea `allow-scripts` blochează scripturile din conținut, dar editorul nu funcționează în browserele Safari sau iOS.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Comportamentul de inserare a componentelor pentru selecție și plasarea cursorului.\n- [implicit: `options.get('componentInsertBehavior')`]\n- Pentru componentele inline: plasează cursorul lângă componentă sau selectează dacă nu există un interval în apropiere.\n- Pentru componentele bloc: execută comportamentul bazat pe `selectMode`:\n- `auto`: Mută ​​cursorul la linia următoare, dacă este posibil, altfel selectează componenta.\n- `select`: Selectează întotdeauna componenta inserată.\n- `line`: Mută ​​cursorul la linia următoare, dacă este posibil, sau creează o linie nouă și mută-te acolo.\n- `none`: Nu face nimic."
   },
+  "link_title": {
+    "description": "Afișează intrarea „Titlu” în fereastra modală a linkului."
+  },
+  "link_textToDisplay": {
+    "description": "Afișează intrarea „Text de afișat” în fereastra modală a linkului."
+  },
+  "link_openNewWindow": {
+    "description": "Valoare implicită bifată a casetei de selectare „Deschide într-o fereastră nouă”."
+  },
+  "link_noAutoPrefix": {
+    "description": "Dacă este `true`, dezactivează prefixarea automată a adresei URL a gazdei la valoarea linkului."
+  },
+  "link_relList": {
+    "description": "Valorile atributului `rel` disponibile sunt afișate ca și casete de selectare în fereastra modală a linkului."
+  },
+  "link_defaultRel": {
+    "description": "Valorile implicite `rel` sunt aplicate automat în funcție de condiție."
+  },
   "link_uploadUrl": {
     "description": "Punctul final URL pentru încărcarea fișierelor.\n- Serverul trebuie să returneze:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Formate de fișier acceptate pentru încărcarea linkurilor."
-  },
-  "link_title": {
-    "description": "Afișarea titlului modal."
-  },
-  "link_textToDisplay": {
-    "description": "Creați text pentru a afișa intrarea."
-  },
-  "link_openNewWindow": {
-    "description": "Valoare implicită bifată a casetei de selectare „Deschide într-o fereastră nouă”."
-  },
-  "link_noAutoPrefix": {
-    "description": "Dacă este `true`, dezactivează prefixarea automată a adresei URL a gazdei la valoarea linkului."
-  },
-  "link_relList": {
-    "description": "Valorile atributului `rel` disponibile sunt afișate ca și casete de selectare în fereastra modală a linkului."
-  },
-  "link_defaultRel": {
-    "description": "Valorile implicite `rel` sunt aplicate automat în funcție de condiție."
   },
   "link_enableFileUpload": {
     "description": "Dacă este `true`, activează încărcarea fișierelor."

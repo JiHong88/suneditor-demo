@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Atrybuty `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Atrybuty `iframe`.\n- `sandbox`: domyślnie `\"allow-same-origin allow-scripts\"`. Wartość niestandardowa jest zachowywana bez zmian, z dodanym `allow-same-origin` w przypadku braku.\n- Pominięcie `allow-scripts` blokuje skrypty w treści, ale edytor nie działa w przeglądarkach Safari ani iOS.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Zachowanie podczas wstawiania komponentów w celu zaznaczania i umieszczania kursora.\n- [domyślnie: `options.get('componentInsertBehavior')`]\n- Dla komponentów inline: umieszcza kursor w pobliżu komponentu lub zaznacza, jeśli nie ma pobliskiego zakresu.\n- Dla komponentów blokowych: wykonuje zachowanie na podstawie `selectMode`:\n- `auto`: Przenieś kursor do następnego wiersza, jeśli to możliwe, w przeciwnym razie zaznacz komponent.\n- `select`: Zawsze zaznaczaj wstawiany komponent.\n- `line`: Przenieś kursor do następnego wiersza, jeśli to możliwe, lub utwórz nowy wiersz i przenieś się tam.\n- `none`: Nic nie rób."
   },
+  "link_title": {
+    "description": "Pokaż pole „Tytuł” ​​w oknie dialogowym łącza."
+  },
+  "link_textToDisplay": {
+    "description": "Pokaż pole „Tekst do wyświetlenia” w oknie modalnym łącza."
+  },
+  "link_openNewWindow": {
+    "description": "Domyślnie zaznaczona wartość pola wyboru „Otwórz w nowym oknie”."
+  },
+  "link_noAutoPrefix": {
+    "description": "Jeśli `true`, wyłącza automatyczne dodawanie prefiksu adresu URL hosta do wartości łącza."
+  },
+  "link_relList": {
+    "description": "Dostępne wartości atrybutu `rel` wyświetlane jako pola wyboru w oknie modalnym łącza."
+  },
+  "link_defaultRel": {
+    "description": "Domyślne wartości `rel` są automatycznie stosowane na podstawie warunku."
+  },
   "link_uploadUrl": {
     "description": "Punkt końcowy adresu URL do przesyłania plików.\n- Serwer musi zwrócić:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Akceptowane formaty plików do przesyłania za pośrednictwem linków."
-  },
-  "link_title": {
-    "description": "Wyświetlanie tytułu modalu."
-  },
-  "link_textToDisplay": {
-    "description": "Utwórz tekst do wyświetlania danych wejściowych."
-  },
-  "link_openNewWindow": {
-    "description": "Domyślnie zaznaczona wartość pola wyboru „Otwórz w nowym oknie”."
-  },
-  "link_noAutoPrefix": {
-    "description": "Jeśli `true`, wyłącza automatyczne dodawanie prefiksu adresu URL hosta do wartości łącza."
-  },
-  "link_relList": {
-    "description": "Dostępne wartości atrybutu `rel` wyświetlane jako pola wyboru w oknie modalnym łącza."
-  },
-  "link_defaultRel": {
-    "description": "Domyślne wartości `rel` są automatycznie stosowane na podstawie warunku."
   },
   "link_enableFileUpload": {
     "description": "Jeśli `true`, włącza przesyłanie plików."

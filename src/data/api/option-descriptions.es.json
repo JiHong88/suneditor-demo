@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Atributos del `iframe`.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Atributos de `iframe`.\n\n- `sandbox`: por defecto es `\"allow-same-origin allow-scripts\"`. Un valor personalizado se mantiene tal cual, y se añade `allow-same-origin` si no está presente.\n\n- Omitir `allow-scripts` bloquea los scripts en el contenido, pero el editor no funciona en Safari ni en navegadores iOS.\n\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Comportamiento de inserción de componentes para la selección y la posición del cursor.\n\n- [predeterminado: `options.get('componentInsertBehavior')`]\n- Para componentes en línea: coloca el cursor cerca del componente o lo selecciona si no hay un rango cercano.\n\n- Para componentes de bloque: ejecuta el comportamiento según `selectMode`:\n- `auto`: Mueve el cursor a la siguiente línea si es posible; de ​​lo contrario, selecciona el componente.\n\n- `select`: Selecciona siempre el componente insertado.\n\n- `line`: Mueve el cursor a la siguiente línea si es posible; o crea una nueva línea y muévelo allí.\n\n- `none`: No hace nada."
   },
+  "link_title": {
+    "description": "Mostrar el campo \"Título\" en la ventana modal del enlace."
+  },
+  "link_textToDisplay": {
+    "description": "Muestra el texto que se mostrará en la ventana modal del enlace."
+  },
+  "link_openNewWindow": {
+    "description": "Valor predeterminado de la casilla de verificación \"Abrir en una ventana nueva\"."
+  },
+  "link_noAutoPrefix": {
+    "description": "Si es `true`, desactiva el prefijo automático de la URL del host al valor del enlace."
+  },
+  "link_relList": {
+    "description": "Los valores disponibles del atributo `rel` se muestran como casillas de verificación en la ventana modal del enlace."
+  },
+  "link_defaultRel": {
+    "description": "Valores predeterminados de `rel` aplicados automáticamente por condición."
+  },
   "link_uploadUrl": {
     "description": "El punto final URL para la carga de archivos.\n\n- El servidor debe devolver:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Formatos de archivo aceptados para la carga de enlaces."
-  },
-  "link_title": {
-    "description": "Visualización de título modal."
-  },
-  "link_textToDisplay": {
-    "description": "Crear texto para mostrar la entrada."
-  },
-  "link_openNewWindow": {
-    "description": "Valor predeterminado de la casilla de verificación \"Abrir en una ventana nueva\"."
-  },
-  "link_noAutoPrefix": {
-    "description": "Si es `true`, desactiva el prefijo automático de la URL del host al valor del enlace."
-  },
-  "link_relList": {
-    "description": "Los valores disponibles del atributo `rel` se muestran como casillas de verificación en la ventana modal del enlace."
-  },
-  "link_defaultRel": {
-    "description": "Valores predeterminados de `rel` aplicados automáticamente por condición."
   },
   "link_enableFileUpload": {
     "description": "Si es `true`, habilita la carga de archivos."

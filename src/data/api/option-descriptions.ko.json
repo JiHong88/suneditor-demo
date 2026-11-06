@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "`iframe`의 속성.\n\n``js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "`iframe`의 속성\n\n- `sandbox`: 기본값은 `\"allow-same-origin allow-scripts\"`입니다. 사용자 지정 값은 입력된 그대로 유지되며, 값이 없을 경우 `allow-same-origin`이 추가됩니다.\n\n- `allow-scripts`을 생략하면 콘텐츠 내 스크립트가 차단되지만, Safari 또는 iOS 브라우저에서는 편집기가 작동하지 않습니다.\n\n``js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "구성요소 삽입 시 선택 및 커서 배치 동작.\n\n- [기본값: `options.get('componentInsertBehavior')`]\n- 인라인 구성요소의 경우: 구성요소 근처에 커서를 배치하거나, ​​근처에 선택 영역이 없으면 구성요소를 선택합니다.\n\n- 블록 구성요소의 경우: `selectMode`에 따라 다음 동작을 수행합니다.\n- `auto`: 가능하면 커서를 다음 줄로 이동하고, 그렇지 않으면 구성요소를 선택합니다.\n\n- `select`: 삽입된 구성요소를 항상 선택합니다.\n\n- `line`: 가능하면 커서를 다음 줄로 이동하고, 그렇지 않으면 새 줄을 만들고 해당 줄로 이동합니다.\n\n- `none`: 아무 작업도 수행하지 않습니다."
   },
+  "link_title": {
+    "description": "링크 모달에 \"제목\" 입력란을 표시합니다."
+  },
+  "link_textToDisplay": {
+    "description": "링크 모달에 \"표시할 텍스트\" 입력란을 표시합니다."
+  },
+  "link_openNewWindow": {
+    "description": "\"새 창에서 열기\" 확인란의 기본 선택 값입니다."
+  },
+  "link_noAutoPrefix": {
+    "description": "`true`인 경우, 호스트 URL에 링크 값 접두사가 자동으로 추가되는 기능을 비활성화합니다."
+  },
+  "link_relList": {
+    "description": "링크 모달에 체크박스로 표시되는 사용 가능한 `rel` 속성 ​​값입니다."
+  },
+  "link_defaultRel": {
+    "description": "조건에 따라 기본값인 `rel` 값이 자동으로 적용됩니다."
+  },
   "link_uploadUrl": {
     "description": "파일 업로드용 URL 엔드포인트입니다.\n\n- 서버는 다음을 반환해야 합니다."
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "링크 업로드에 허용되는 파일 형식입니다."
-  },
-  "link_title": {
-    "description": "모달 제목 표시."
-  },
-  "link_textToDisplay": {
-    "description": "입력값을 표시할 텍스트를 생성합니다."
-  },
-  "link_openNewWindow": {
-    "description": "\"새 창에서 열기\" 확인란의 기본 선택 값입니다."
-  },
-  "link_noAutoPrefix": {
-    "description": "`true`인 경우, 호스트 URL에 링크 값 접두사가 자동으로 추가되는 기능을 비활성화합니다."
-  },
-  "link_relList": {
-    "description": "링크 모달에 체크박스로 표시되는 사용 가능한 `rel` 속성 ​​값입니다."
-  },
-  "link_defaultRel": {
-    "description": "조건에 따라 기본값인 `rel` 값이 자동으로 적용됩니다."
   },
   "link_enableFileUpload": {
     "description": "`true`인 경우 파일 업로드가 활성화됩니다."

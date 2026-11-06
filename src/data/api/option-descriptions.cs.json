@@ -56,7 +56,7 @@
     "default": "false"
   },
   "iframe_attributes": {
-    "description": "Atributy `iframe`.\n```js\n{ iframe_attributes: { 'allow-scripts': 'true', sandbox: 'allow-same-origin' } }\n```",
+    "description": "Atributy `iframe`.\n- `sandbox`: výchozí hodnota je `\"allow-same-origin allow-scripts\"`. Vlastní hodnota je ponechána tak, jak je zadána, a pokud chybí, je přidána hodnota `allow-same-origin`.\n- Vynechání `allow-scripts` blokuje skripty v obsahu, ale editor nefunguje v prohlížečích Safari ani iOS.\n```js\n{ iframe_attributes: { sandbox: 'allow-same-origin allow-scripts allow-downloads' } }\n```",
     "default": "{}"
   },
   "iframe_cssFileName": {
@@ -816,6 +816,24 @@
   "image_insertBehavior": {
     "description": "Chování vkládání komponenty pro výběr a umístění kurzoru.\n- [výchozí: `options.get('componentInsertBehavior')`]\n- Pro vložené komponenty: umístí kurzor blízko komponenty nebo vybere, pokud není v blízkosti žádný rozsah.\n- Pro blokové komponenty: provede chování na základě `selectMode`:\n- `auto`: Přesune kurzor na další řádek, pokud je to možné, jinak komponentu vybere.\n- `select`: Vždy vybere vloženou komponentu.\n- `line`: Přesune kurzor na další řádek, pokud je to možné, nebo vytvoří nový řádek a přesune ho tam.\n- `none`: Nedělat nic."
   },
+  "link_title": {
+    "description": "Zobrazit pole „Název“ v modálním okně odkazu."
+  },
+  "link_textToDisplay": {
+    "description": "Zobrazit v modálním okně odkazu vstup „Text k zobrazení“."
+  },
+  "link_openNewWindow": {
+    "description": "Výchozí zaškrtávací políčko „Otevřít v novém okně“ je zaškrtnuto."
+  },
+  "link_noAutoPrefix": {
+    "description": "Pokud je `true`, zakáže automatické přidávání předpony URL hostitele k hodnotě odkazu."
+  },
+  "link_relList": {
+    "description": "Dostupné hodnoty atributu `rel` zobrazené jako zaškrtávací políčka v modálním okně odkazu."
+  },
+  "link_defaultRel": {
+    "description": "Výchozí hodnoty `rel` se automaticky aplikují podle podmínky."
+  },
   "link_uploadUrl": {
     "description": "Koncový bod URL pro nahrávání souborů.\n- Server musí vrátit:"
   },
@@ -830,24 +848,6 @@
   },
   "link_acceptedFormats": {
     "description": "Akceptované formáty souborů pro nahrávání odkazů."
-  },
-  "link_title": {
-    "description": "Zobrazení modálního titulku."
-  },
-  "link_textToDisplay": {
-    "description": "Vytvořit text pro zobrazení vstupu."
-  },
-  "link_openNewWindow": {
-    "description": "Výchozí zaškrtávací políčko „Otevřít v novém okně“ je zaškrtnuto."
-  },
-  "link_noAutoPrefix": {
-    "description": "Pokud je `true`, zakáže automatické přidávání předpony URL hostitele k hodnotě odkazu."
-  },
-  "link_relList": {
-    "description": "Dostupné hodnoty atributu `rel` zobrazené jako zaškrtávací políčka v modálním okně odkazu."
-  },
-  "link_defaultRel": {
-    "description": "Výchozí hodnoty `rel` se automaticky aplikují podle podmínky."
   },
   "link_enableFileUpload": {
     "description": "Pokud `true`, povolí nahrávání souboru."
