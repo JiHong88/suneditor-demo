@@ -30,6 +30,9 @@ describe("react guide data", () => {
 		const md = read(locale);
 		expect(fenceCount(md)).toBe(fenceCount(en));
 		expect(headingCount(md)).toBe(headingCount(en));
-		expect(md).not.toMatch(/__\s*PH\s*\d+\s*__/i); // leftover protection token
+		expect(md).not.toMatch(/⟦|__\s*PH/i); // leftover protection token
+		// hard line breaks and link targets survive translation
+		expect((md.match(/\\$/gm) ?? []).length).toBe((en.match(/\\$/gm) ?? []).length);
+		expect((md.match(/\]\(https?:\/\/[^)]+\)/g) ?? []).sort()).toEqual((en.match(/\]\(https?:\/\/[^)]+\)/g) ?? []).sort());
 	});
 });

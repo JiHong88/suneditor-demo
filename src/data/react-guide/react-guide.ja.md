@@ -1,12 +1,12 @@
-<!-- Generated from @suneditor/suneditor-react@0.0.1 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
+<!-- Generated from @suneditor/suneditor-react@1.0.0 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
 
 ## Install
 
-```bash
-npm install @suneditor/suneditor-react suneditor
-```
+このコンポーネントには[SunEditor](https://www.npmjs.com/package/suneditor)エンジンも必要です（ピア依存関係、バージョン3.4.1以降）。
 
-`suneditor` 3.4.1以降が必要です（`editor.events`はReact propsを配線するために使用されます）。
+```bash
+npm install suneditor @suneditor/suneditor-react
+```
 
 ## Usage
 
@@ -16,25 +16,28 @@ import 'suneditor/css/editor';
 import 'suneditor/css/contents';
 
 export default function App() {
-	return (
-		<SunEditor
-			options={(se) => ({
-				plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
-				buttonList: [
-					['undo', 'redo'],
-					['bold', 'italic', 'underline'],
-					['table', 'link', 'image'],
-				],
-				height: '400px',
-			})}
-		/>
-	);
+  return (
+    <SunEditor
+      options={(se) => ({
+        plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
+        buttonList: [
+          ['undo', 'redo'],
+          ['bold', 'italic', 'underline'],
+          ['table', 'link', 'image'],
+        ],
+        height: '400px',
+      })}
+    />
+  );
 }
 ```
 
-`options` は遅延ロードされた `suneditor` モジュール (`se.plugins`、`se.langs`、`se.interfaces`、...) を受け取ります。
-Next.js ではこの形式を推奨します。クライアント コンポーネントで `suneditor` を静的にインポートすると、エンジンがインポート時に `window` にアクセスするため、サーバー レンダリングが壊れます。
-サーバーレンダリングを行わない場合や、エンジンのインポートを必要としないオプションの場合は、プレーンオブジェクトでも問題ありません。
+`options` はそのまま `suneditor.create()` に渡されるため、すべてのオプション、プラグイン、ボタン、イベント、言語はエンジン独自のものになります。\
+このREADMEでは、Reactコンポーネントが追加する機能のみを説明しています。オプション自体については、[SunEditor ドキュメント](https://suneditor.com)または[`suneditor`](https://www.npmjs.com/package/suneditor)パッケージを参照してください。
+
+`options` は遅延ロードされた `suneditor` モジュール (`se.plugins`、`se.langs`、`se.interfaces`、...) を受け取ります。\
+Next.js ではこの形式を推奨します。クライアント コンポーネントで `suneditor` を静的にインポートすると、エンジンがインポート時に `window` にアクセスするため、サーバー レンダリングが壊れます。\
+サーバーレンダリングを行わない場合や、エンジンのインポートを必要としないオプションの場合は、プレーンオブジェクトでも問題ありません。\
 言語パックはプレーンオブジェクトであり、常に静的にインポートできます: `import ko from 'suneditor/langs/ko'`。
 
 ### 制御値
@@ -46,7 +49,7 @@ const [html, setHtml] = useState('<p>Hello</p>');
 ```
 
 `value` を最後の `onChange` の結果以外のものに変更すると、エディタの内容が置き換えられます。
-制御されていないエディタの場合は `value` を省略し、必要に応じてインスタンスからコンテンツを読み取ってください。
+非制御エディタの場合は`value`を省略し、必要なときにインスタンスからコンテンツを読み取ってください。
 
 ### インスタンスアクセス
 
@@ -64,7 +67,7 @@ ref.current?.resetOptions({ height: '600px' });
 
 ### Events
 
-ハンドラは`options.events`を介して渡されます。レンダリングのたびに再同期されるため、Reactの状態を安全に閉じることができます。
+ハンドラを`options.events`に渡します。レンダリングのたびに再同期されるため、React状態を安全に閉じることができます。
 
 ```tsx
 <SunEditor
@@ -80,7 +83,7 @@ ref.current?.resetOptions({ height: '600px' });
 
 ### 別の要素内のツールバーまたはステータスバー
 
-DOM要素を受け取るエンジンオプションは、マウント後に`options`関数が実行されるため、refsでも機能します。
+DOM要素を受け取るエンジンオプションは、`options`関数がマウント後に実行されるため、refsでも機能します。
 
 ```tsx
 const toolbarRef = useRef<HTMLDivElement>(null);
@@ -91,58 +94,58 @@ const toolbarRef = useRef<HTMLDivElement>(null);
 
 ### Multi-root
 
-1つのエンジンインスタンス（ツールバー、プラグイン、イベント、テーマ）に、複数の編集可能な領域があります。各領域ごとに`<SunEditorRoot>`を`<SunEditorGroup>`内に配置します。その他のJSXは、これらの間に配置できます。このグループは、独自の要素をレンダリングしません。
+1つのエンジンインスタンス（ツールバー、プラグイン、イベント、テーマ）に、複数の編集可能な領域があります。各領域ごとに`<SunEditorGroup>`の中に`<SunEditorRoot>`を配置し、その間に他のJSXを配置します。このグループは独自の要素をレンダリングしません。
 
 ```tsx
 const toolbarRef = useRef<HTMLDivElement>(null);
 
 <SunEditorGroup options={(se) => ({ plugins: [se.plugins.link], toolbar_container: toolbarRef.current })}>
-	<div ref={toolbarRef} />
-	<h2>Title</h2>
-	<SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
-	<SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
+  <div ref={toolbarRef} />
+  <h2>Title</h2>
+  <SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
+  <SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
 </SunEditorGroup>;
 ```
 
-- `name` はエンジン `rootKey` (`ref.current.changeFrameContext('body')`、`html.get({ rootKey: 'body' })`) です。
+- `name`はエンジン`rootKey`（`ref.current.changeFrameContext('body')`、`html.get({ rootKey: 'body' })`）です。
 - 各ルートには、独自の `value` / `onChange`、`readOnly`、`disabled` とフレーム `options` (`height`、`placeholder`、`iframe`、...) があります。
 - `mode`が`inline`または`balloon`でない限り、エンジンは共有ツールバーに`toolbar_container`を必要とします。
-- ルートはグループがマウントされる際に収集されます。エンジンは後からルートを追加または削除できないため、グループの`key`を変更して、異なるルートでグループを再作成してください。
+- ルートはグループがマウントされるときに収集されます。エンジンは後からルートを追加または削除できないため、グループの`key`を変更して、異なるルートでグループを再作成してください。
 
 ## Props
 
 | Prop | タイプ | 説明 |
-| -------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| -------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value` | `string` | エディタのHTML（制御可能）。 |
-| `onChange` | `(html: string) => void` | コンテンツが変更されるたびに呼び出されます。`options.events.onChange` の省略形です。 |
-| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | SunEditor の初期化オプション。`events` と `theme` はリアルタイムで適用されます。その他のオプションは作成時に一度だけ適用されます。 |
+| `onChange` | `(html: string) => void` | コンテンツが変更されるたびに呼び出されます。`options.events.onChange` の略記です。 |
+| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | [SunEditor オプション](https://suneditor.com)は変更されずにそのまま渡されます。`events`と`theme`はリアルタイムで適用されます。その他はすべて作成時に一度だけ適用されます。 |
 | `readOnly` | `boolean` | 読み取り専用モードを切り替えます。 |
 | `disabled` | `boolean` | エディターを無効にします。 |
 | `className`, `style` |  | ラッピング`<div>`に適用されます。 |
-| `...divProps` | `HTMLAttributes<HTMLDivElement>` | その他の prop (`id`、`data-*`、`aria-*`、...) は、ラップする `<div>` に適用されます。`children` は無視されます。 |
+| `...divProps` | `HTMLAttributes<HTMLDivElement>` | その他のprop（`id`、`data-*`、`aria-*`、…）は、ラッピング`<div>`に適用されます。`children`は無視されます。 |
 | `ref` | `SunEditorInstance \| null` | エディタインスタンス。 |
 
-`events` および `theme` 以外のオプションは、エディタの作成時に適用されます。
-後で変更するには、別の `key` を使用して再マウントするか、`ref.current.resetOptions()` を呼び出してください。
+`events`と`theme`以外のオプションは、エディタの作成時に適用されます。
+後で変更するには、別の`key`で再マウントするか、`ref.current.resetOptions()`を呼び出します。
 
 ## Types
 
 ```ts
 import type {
-	SunEditorProps,
-	SunEditorGroupProps,
-	SunEditorRootProps,
-	SunEditorInstance,
-	SunEditorOptions,
-	SunEditorFrameOptions,
-	SunEditorEvents,
+  SunEditorProps,
+  SunEditorGroupProps,
+  SunEditorRootProps,
+  SunEditorInstance,
+  SunEditorOptions,
+  SunEditorFrameOptions,
+  SunEditorEvents,
 } from '@suneditor/suneditor-react';
 ```
 
-全てのエンジンタイプは`suneditor/types`からも入手可能です。
+すべてのエンジンタイプは`suneditor/types`から利用可能です。
 
-## Next.js 注記
+## Next.js ノート
 
 - このコンポーネントはクライアントモジュール（ビルド出力には`"use client"`が含まれます）であり、ブラウザでのみエンジンをロードするため、サーバーコンポーネントから直接レンダリングできます。
-- クライアントコンポーネントの静的インポートには`suneditor`を含めないでください。`se.plugins`にアクセスするには`options={(se) => ...}`フォームを使用してください。
+- クライアントコンポーネントの静的インポートには`suneditor`を含めないでください。`se.plugins`にアクセスするには`options={(se) => ...}`形式を使用してください。
 - CSS インポート (`suneditor/css/editor`、`suneditor/css/contents`、`suneditor/src/themes/*.css`) は、App Router と Pages Router の両方で機能します。

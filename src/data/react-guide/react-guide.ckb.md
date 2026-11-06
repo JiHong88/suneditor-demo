@@ -1,12 +1,12 @@
-<!-- Generated from @suneditor/suneditor-react@0.0.1 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
+<!-- Generated from @suneditor/suneditor-react@1.0.0 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
 
 ## Install
 
-```bash
-npm install @suneditor/suneditor-react suneditor
-```
+پێکهاتەکە پێویستی بە بزوێنەری [SunEditor](https://www.npmjs.com/package/suneditor) هەیە هەروەها (وابەستەیی هاوتا، 3.4.1 یان دواتر)
 
-پێویستی بە `suneditor` 3.4.1 یان دواتر هەیە (`editor.events` بەکاردێت بۆ وایەرکردنی React props).
+```bash
+npm install suneditor @suneditor/suneditor-react
+```
 
 ## Usage
 
@@ -16,25 +16,28 @@ import 'suneditor/css/editor';
 import 'suneditor/css/contents';
 
 export default function App() {
-	return (
-		<SunEditor
-			options={(se) => ({
-				plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
-				buttonList: [
-					['undo', 'redo'],
-					['bold', 'italic', 'underline'],
-					['table', 'link', 'image'],
-				],
-				height: '400px',
-			})}
-		/>
-	);
+  return (
+    <SunEditor
+      options={(se) => ({
+        plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
+        buttonList: [
+          ['undo', 'redo'],
+          ['bold', 'italic', 'underline'],
+          ['table', 'link', 'image'],
+        ],
+        height: '400px',
+      })}
+    />
+  );
 }
 ```
 
-`options` مۆدیۆلی `suneditor` کە بە تەمبەڵی بارکراوە وەردەگرێت (`se.plugins`، `se.langs`، `se.interfaces`، ...).
-ئەم فۆڕمە لە Next.js پێ باشترە: هاوردەکردنی `suneditor` بە شێوەیەکی ئیستاتیک لە پێکهاتەی کرێدەردا ڕەندەری سێرڤەر دەشکێنێت چونکە بزوێنەرەکە دەست لە `window` دەدات لە کاتی هاوردەکردندا.
-هەروەها شتێکی سادە کاردەکات کاتێک تۆ ڕەندەری سێرڤەر نیت، یان بۆ ئەو هەڵبژاردنانەی کە پێویستیان بە هاوردەکردنی بزوێنەر نییە.
+`options` وەک خۆی ڕادەستی `suneditor.create()` دەکرێت، بۆیە هەموو بژاردەیەک و پێوەکراوێک و دوگمەیەک و ڕووداو و زمانێک هی بزوێنەرەکەیە.\
+ئەم README تەنها ئەو شتانە دەگرێتەوە کە پێکهاتەی React زیاد دەکات؛ بۆ خودی بژاردەکان سەیری پاکێجی [SunEditor بەڵگەنامە](https://suneditor.com) یان [`suneditor`](https://www.npmjs.com/package/suneditor) بکە.
+
+`options` مۆدیۆلی `suneditor` کە بە تەمبەڵی بارگاوی کراوە (`se.plugins`، `se.langs`، `se.interfaces`، ...) وەردەگرێت.\
+ئەم فۆڕمە لە Next.jsدا پێ باشترە: هاوردەکردنی `suneditor` بە شێوەیەکی ئیستاتیک لە پێکهاتەی کرێدەردا ڕەندەری سێرڤەر دەشکێنێت چونکە بزوێنەرەکە دەست لە `window` دەدات لە کاتی هاوردەکردندا.\
+هەروەها شتێکی سادە کاردەکات کاتێک تۆ ڕەندەری سێرڤەر نیت، یان بۆ ئەو هەڵبژاردنانەی کە پێویستیان بە هاوردەکردنی بزوێنەر نییە.\
 پاکەتەکانی زمان شتگەلێکی سادەن و هەمیشە دەتوانرێت بە شێوەیەکی ئیستاتیک هاوردە بکرێن: `import ko from 'suneditor/langs/ko'`.
 
 ### بەهای کۆنترۆڵکراو
@@ -45,8 +48,8 @@ const [html, setHtml] = useState('<p>Hello</p>');
 <SunEditor value={html} onChange={setHtml} options={...} />
 ```
 
-گۆڕینی `value` بۆ شتێکی تر جگە لە دوا ئەنجامی `onChange` جێگەی ناوەڕۆکی دەستکاریکەر دەگرێتەوە.
-`value` بۆ دەستکاریکەرێکی کۆنترۆڵنەکراو لاببە و ناوەڕۆکەکە لە نموونەکە بخوێنەرەوە کاتێک پێویستت پێیەتی.
+گۆڕینی `value` بۆ شتێکی تر جگە لە ئەنجامی کۆتایی `onChange` جێگەی ناوەڕۆکی دەستکاریکەر دەگرێتەوە.
+`value` بۆ دەستکاریکەرێکی کۆنترۆڵنەکراو لاببە و ناوەڕۆکەکە لە نموونەکە بخوێنەرەوە کاتێک پێویستت پێی دەبێت.
 
 ### دەستڕاگەیشتن بە نموونە
 
@@ -60,11 +63,11 @@ ref.current?.$.html.set('<p>new</p>');
 ref.current?.resetOptions({ height: '600px' });
 ```
 
-`ref` ئەو شتەیە کە لەلایەن `suneditor.create()` دەگەڕێتەوە، بۆیە تەواوی API بزوێنەرەکە بەردەستە.
+`ref` ئەو شتەیە کە لەلایەن `suneditor.create()` دەگەڕێتەوە، بۆیە تەواوی APIی بزوێنەر بەردەستە.
 
 ### Events
 
-تێپەڕاندنی مامەڵەکاران لە ڕێگەی `options.events`. لە هەموو ڕەندەرێکدا هاوکات دەکرێنەوە، بۆیە دەتوانن بە سەلامەتی لەسەر دۆخی React دابخەن.
+تێپەڕاندنی مامەڵەکاران لە ڕێگەی `options.events`. لە هەموو ڕێندەرێکدا دووبارە هاوکات دەکرێنەوە، بۆیە دەتوانن بە سەلامەتی لە سەر دۆخی React دابخەن.
 
 ```tsx
 <SunEditor
@@ -80,7 +83,7 @@ ref.current?.resetOptions({ height: '600px' });
 
 ### Toolbar یان status bar لە توخمێکی تردا
 
-هەڵبژاردەکانی بزوێنەر کە توخمێکی DOM وەردەگرن لەگەڵ refs کاردەکەن چونکە فەنکشنی `options` دوای mount کاردەکات:
+هەڵبژاردەکانی بزوێنەر کە توخمێکی DOM وەردەگرن لەگەڵ refs کاردەکەن چونکە فەنکشنی `options` دوای جێگیرکردن کاردەکات:
 
 ```tsx
 const toolbarRef = useRef<HTMLDivElement>(null);
@@ -91,51 +94,51 @@ const toolbarRef = useRef<HTMLDivElement>(null);
 
 ### Multi-root
 
-یەک نموونەی بزوێنەر (تۆلبار، پێوەکراوەکان، ڕووداوەکان، تەوەر) لەگەڵ چەندین ناوچەی دەستکاریکراو. `<SunEditorRoot>` بۆ هەر ڕووبەرێک لە ناو `<SunEditorGroup>` دابنێ؛ هەر JSX ێکی تر دەتوانێت لە نێوانیاندا دابنیشێت. گروپەکە هیچ توخمێکی تایبەت بە خۆی نادات.
+یەک نموونەی بزوێنەر (تۆلبار، پێوەکراوەکان، ڕووداوەکان، تەوەر) لەگەڵ چەندین ناوچەی دەستکاریکراو. `<SunEditorRoot>` بۆ هەر ڕووبەرێک لە ناوەوە `<SunEditorGroup>` دابنێ؛ هەر JSX ێکی تر دەتوانێت لە نێوانیاندا دابنیشێت. گروپەکە هیچ توخمێکی تایبەت بە خۆی نادات.
 
 ```tsx
 const toolbarRef = useRef<HTMLDivElement>(null);
 
 <SunEditorGroup options={(se) => ({ plugins: [se.plugins.link], toolbar_container: toolbarRef.current })}>
-	<div ref={toolbarRef} />
-	<h2>Title</h2>
-	<SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
-	<SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
+  <div ref={toolbarRef} />
+  <h2>Title</h2>
+  <SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
+  <SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
 </SunEditorGroup>;
 ```
 
-- `name` بزوێنەرە `rootKey` (`ref.current.changeFrameContext('body')`, `html.get({ rootKey: 'body' })`).
-- هەر ڕەگێک `value` / `onChange`، `readOnly`، `disabled` و چوارچێوەی `options` (`height`، `placeholder`، `iframe`، ...)ی تایبەت بە خۆی هەیە.
+- `name` بریتیە لە بزوێنەر `rootKey` (`ref.current.changeFrameContext('body')`, `html.get({ rootKey: 'body' })`).
+- هەر ڕەگێک `value` / `onChange`، `readOnly`، `disabled` و چوارچێوەی `options` (`height`، `placeholder`، `iframe`، ...)ی خۆی هەیە.
 - بزوێنەر پێویستی بە `toolbar_container` هەیە بۆ توولباری هاوبەش مەگەر `mode` `inline` یان `balloon` بێت.
-- ڕەگەکان کۆدەکرێنەوە کاتێک گروپەکە جێگیر دەبێت. بزوێنەرەکە ناتوانێت دواتر ڕەگەکان زیاد بکات یان لاببات، بۆیە `key` ی گروپەکە بگۆڕە بۆ ئەوەی بە ڕەگی جیاواز دروستی بکەیتەوە.
+- ڕەگەکان کۆدەکرێنەوە کاتێک گروپەکە جێگیر دەبێت. بزوێنەرەکە ناتوانێت دواتر ڕەگ زیاد بکات یان لاببات، بۆیە `key` ی گروپەکە بگۆڕە بۆ ئەوەی بە ڕەگی جیاواز دروستی بکەیتەوە.
 
 ## Props
 
 | Prop | جۆر | وەسف |
-| -------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| -------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value` | `string` | دەستکاریکەر HTML (کۆنتڕۆڵ دەکرێت). |
 | `onChange` | `(html: string) => void` | بانگەوازی بۆ هەموو گۆڕانکارییەکی ناوەڕۆک. کورتەنووسی بۆ `options.events.onChange`. |
-| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | SunEditor هەڵبژاردەکانی دەستپێکردن. `events` و `theme` بە شێوەیەکی ڕاستەوخۆ جێبەجێ دەکرێن. هەموو شتێکی تر جارێک لە کاتی دروستکردندا جێبەجێ دەکرێت. |
+| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | [SunEditor بژاردەکان](https://suneditor.com)، بەبێ گۆڕانکاری بەسەردا تێپەڕیوە. `events` و `theme` بە شێوەیەکی ڕاستەوخۆ جێبەجێ دەکرێن. هەموو شتێکی تر جارێک لە کاتی دروستکردندا جێبەجێ دەکرێت. |
 | `readOnly` | `boolean` | دۆخی تەنها خوێندنەوە بگۆڕە. |
 | `disabled` | `boolean` | دەستکاریکەرەکە لەکاربخە. |
-| `className`, `style` |  | بەکاردێت بۆ پێچانەکە `<div>`. |
-| `...divProps` | `HTMLAttributes<HTMLDivElement>` | هەر prop ێکی تر (`id`، `data-*`، `aria-*`، ...) دەخرێتە سەر پێچانی `<div>`. `children` پشتگوێ خراوە. |
+| `className`, `style` |  | لە پێچانەکەدا دەدرێت `<div>`. |
+| `...divProps` | `HTMLAttributes<HTMLDivElement>` | هەر prop (`id`، `data-*`، `aria-*`، ...) ی تر دەخرێتە سەر پێچانی `<div>`. `children` پشتگوێ دەخرێت. |
 | `ref` | `SunEditorInstance \| null` | نموونەی سەرنوسەر. |
 
-هەڵبژاردەکانی تر جگە لە `events` و `theme` جێبەجێ دەکرێن کاتێک دەستکاریکەرەکە دروست دەکرێت.
-بۆ گۆڕینی دواتر، بە `key` ێکی جیاواز دووبارە دایبمەزرێنەرەوە یان پەیوەندی بە `ref.current.resetOptions()` بکە.
+هەڵبژاردەکانی تر جگە لە `events` و `theme` کاتێک دەستکاریکەرەکە دروست دەکرێت جێبەجێ دەکرێن.
+بۆ گۆڕینی دواتر، بە `key` جیاواز دووبارە دایبگرە یان پەیوەندی بە `ref.current.resetOptions()` بکە.
 
 ## Types
 
 ```ts
 import type {
-	SunEditorProps,
-	SunEditorGroupProps,
-	SunEditorRootProps,
-	SunEditorInstance,
-	SunEditorOptions,
-	SunEditorFrameOptions,
-	SunEditorEvents,
+  SunEditorProps,
+  SunEditorGroupProps,
+  SunEditorRootProps,
+  SunEditorInstance,
+  SunEditorOptions,
+  SunEditorFrameOptions,
+  SunEditorEvents,
 } from '@suneditor/suneditor-react';
 ```
 
@@ -144,5 +147,5 @@ import type {
 ## Next.js تێبینی
 
 - پێکهاتەکە مۆدیولێکی کرێدەرە (`"use client"` لە دەرچوونی دروستکردندایە) و بزوێنەرەکە تەنها لە وێبگەڕەکەدا باردەکات، بۆیە دەتوانرێت ڕاستەوخۆ لە پێکهاتەیەکی سێرڤەرەوە ڕەندەر بکرێت.
-- `suneditor` لە هاوردەکردنی ئیستاتیک لە پێکهاتەکانی مشتەریدا دوور بخەرەوە. بۆ گەیشتن بە `se.plugins` فۆڕمی `options={(se) => ...}` بەکاربهێنە.
+- `suneditor` لە هاوردەکردنی ئیستاتیک لە پێکهاتەکانی کرێدەردا بهێڵەرەوە. بۆ گەیشتن بە `se.plugins` فۆڕمی `options={(se) => ...}` بەکاربهێنە.
 - هاوردەکردنی CSS (`suneditor/css/editor`، `suneditor/css/contents`، `suneditor/src/themes/*.css`) لە هەردوو App Router و Pages Router کاردەکات.

@@ -1,12 +1,12 @@
-<!-- Generated from @suneditor/suneditor-react@0.0.1 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
+<!-- Generated from @suneditor/suneditor-react@1.0.0 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
 
 ## Install
 
-```bash
-npm install @suneditor/suneditor-react suneditor
-```
+Komponenta také potřebuje engine [SunEditor](https://www.npmjs.com/package/suneditor) (závislost na peerech, 3.4.1 nebo novější)
 
-Vyžaduje `suneditor` 3.4.1 nebo novější (`editor.events` se používá k zapojení React props).
+```bash
+npm install suneditor @suneditor/suneditor-react
+```
 
 ## Usage
 
@@ -16,25 +16,28 @@ import 'suneditor/css/editor';
 import 'suneditor/css/contents';
 
 export default function App() {
-	return (
-		<SunEditor
-			options={(se) => ({
-				plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
-				buttonList: [
-					['undo', 'redo'],
-					['bold', 'italic', 'underline'],
-					['table', 'link', 'image'],
-				],
-				height: '400px',
-			})}
-		/>
-	);
+  return (
+    <SunEditor
+      options={(se) => ({
+        plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
+        buttonList: [
+          ['undo', 'redo'],
+          ['bold', 'italic', 'underline'],
+          ['table', 'link', 'image'],
+        ],
+        height: '400px',
+      })}
+    />
+  );
 }
 ```
 
-`options` přijímá líně načtený modul `suneditor` (`se.plugins`, `se.langs`, `se.interfaces`, ...).
-Preferujte tento formulář v Next.js: statický import `suneditor` do klientské komponenty přeruší vykreslování na serveru, protože engine se v době importu dotkne `window`.
-Prostý objekt funguje i v případě, že se nejedná o vykreslování na serveru, nebo pro možnosti, které nevyžadují import z enginu.
+`options` je předáváno `suneditor.create()` tak, jak je, takže každá možnost, plugin, tlačítko, událost a jazyk jsou vlastní enginu.\
+Tento soubor README se zabývá pouze tím, co přidává komponenta React; samotné možnosti naleznete v balíčku [SunEditor dokumentace](https://suneditor.com) nebo [`suneditor`](https://www.npmjs.com/package/suneditor).
+
+`options` obdrží líně načtený modul `suneditor` (`se.plugins`, `se.langs`, `se.interfaces`, ...).\
+V Next.js preferujte tento tvar: statický import `suneditor` do klientské komponenty přeruší vykreslování na serveru, protože engine se v době importu dotkne `window`.\
+Prostý objekt funguje i v případě, že se nejedná o vykreslování na serveru, nebo pro možnosti, které nevyžadují import z enginu.\
 Jazykové balíčky jsou prosté objekty a lze je vždy importovat staticky: `import ko from 'suneditor/langs/ko'`.
 
 ### Řízená hodnota
@@ -97,52 +100,52 @@ Jedna instance enginu (panel nástrojů, pluginy, události, téma) s několika 
 const toolbarRef = useRef<HTMLDivElement>(null);
 
 <SunEditorGroup options={(se) => ({ plugins: [se.plugins.link], toolbar_container: toolbarRef.current })}>
-	<div ref={toolbarRef} />
-	<h2>Title</h2>
-	<SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
-	<SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
+  <div ref={toolbarRef} />
+  <h2>Title</h2>
+  <SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
+  <SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
 </SunEditorGroup>;
 ```
 
 - `name` je motor `rootKey` (`ref.current.changeFrameContext('body')`, `html.get({ rootKey: 'body' })`).
-- Každý kořen má svůj vlastní `value` / `onChange`, `readOnly`, `disabled` a rámec `options` (`height`, `placeholder`, `iframe`, ...).
-- Engine potřebuje pro sdílený panel nástrojů `toolbar_container`, pokud `mode` není `inline` nebo `balloon`.
-- Kořeny se shromažďují při připojení skupiny. Engine již nemůže kořeny později přidávat ani odebírat, proto změňte `key` skupiny a vytvořte ji s jinými kořeny.
+- Každý kořen má svůj vlastní `value` / `onChange`, `readOnly`, `disabled` a frame `options` (`height`, `placeholder`, `iframe`, ...).
+- Engine potřebuje pro sdílený panel nástrojů hodnotu `toolbar_container`, pokud `mode` není `inline` nebo `balloon`.
+- Kořeny se shromažďují při připojení skupiny. Engine již nemůže kořeny později přidávat ani odebírat, proto změňte hodnotu `key` skupiny a vytvořte ji s jinými kořeny.
 
 ## Props
 
 | Prop | Typ | Popis |
-| -------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| -------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value` | `string` | HTML editor (řízený). |
 | `onChange` | `(html: string) => void` | Voláno při každé změně obsahu. Zkratka pro `options.events.onChange`. |
-| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | Volby inicializace SunEditor. Volby `events` a `theme` se aplikují živě. Všechno ostatní se aplikuje jednou při vytvoření. |
+| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | [SunEditor možností](https://suneditor.com), prochází beze změny. `events` a `theme` se aplikují živě. Všechno ostatní se aplikuje jednou při vytvoření. |
 | `readOnly` | `boolean` | Přepnout režim pouze pro čtení. |
 | `disabled` | `boolean` | Zakažte editor. |
 | `className`, `style` |  | Aplikováno na obal `<div>`. |
-| `...divProps` | `HTMLAttributes<HTMLDivElement>` | Jakýkoli jiný prop (`id`, `data-*`, `aria-*`, ...) se použije na obalující `<div>`. `children` se ignoruje. |
+| `...divProps` | `HTMLAttributes<HTMLDivElement>` | Jakékoli jiné prop (`id`, `data-*`, `aria-*`, ...) se použije na obalení `<div>`. `children` se ignoruje. |
 | `ref` | `SunEditorInstance \| null` | Instance editoru. |
 
-Jiné možnosti než `events` a `theme` se použijí při vytvoření editoru.
-Chcete-li je později změnit, znovu je připojte s jiným `key` nebo zavolejte `ref.current.resetOptions()`.
+Jiné možnosti než `events` a `theme` se použijí při vytváření editoru.
+Chcete-li je později změnit, znovu připojte s jiným `key` nebo zavolejte `ref.current.resetOptions()`.
 
 ## Types
 
 ```ts
 import type {
-	SunEditorProps,
-	SunEditorGroupProps,
-	SunEditorRootProps,
-	SunEditorInstance,
-	SunEditorOptions,
-	SunEditorFrameOptions,
-	SunEditorEvents,
+  SunEditorProps,
+  SunEditorGroupProps,
+  SunEditorRootProps,
+  SunEditorInstance,
+  SunEditorOptions,
+  SunEditorFrameOptions,
+  SunEditorEvents,
 } from '@suneditor/suneditor-react';
 ```
 
 Všechny typy motorů jsou k dispozici také od `suneditor/types`.
 
-## Next.js poznámky
+## Next.js noty
 
 - Komponenta je klientský modul (`"use client"` je ve výstupu sestavení) a načítá engine pouze v prohlížeči, takže jej lze vykreslit přímo ze serverové komponenty.
-- Vyhněte se `suneditor` ze statických importů v klientských komponentách. Pro dosažení `se.plugins` použijte formulář `options={(se) => ...}`.
-- Importy CSS (`suneditor/css/editor`, `suneditor/css/contents`, `suneditor/src/themes/*.css`) fungují v App Router i Pages Router.
+- V klientských komponentách vynechejte `suneditor` ze statických importů. Pro dosažení `se.plugins` použijte tvar `options={(se) => ...}`.
+- Importy CSS (`suneditor/css/editor`, `suneditor/css/contents`, `suneditor/src/themes/*.css`) fungují jak v App Router, tak v Pages Router.

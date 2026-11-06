@@ -1,12 +1,12 @@
-<!-- Generated from @suneditor/suneditor-react@0.0.1 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
+<!-- Generated from @suneditor/suneditor-react@1.0.0 README.md by scripts/generate-react-guide.cjs. Do not edit; run `npm run docs:generate`. -->
 
 ## Install
 
-```bash
-npm install @suneditor/suneditor-react suneditor
-```
+El componente también necesita el motor [SunEditor](https://www.npmjs.com/package/suneditor) (dependencia de pares, 3.4.1 o posterior).
 
-Requiere `suneditor` 3.4.1 o posterior (`editor.events` se utiliza para cablear React props).
+```bash
+npm install suneditor @suneditor/suneditor-react
+```
 
 ## Usage
 
@@ -16,25 +16,28 @@ import 'suneditor/css/editor';
 import 'suneditor/css/contents';
 
 export default function App() {
-	return (
-		<SunEditor
-			options={(se) => ({
-				plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
-				buttonList: [
-					['undo', 'redo'],
-					['bold', 'italic', 'underline'],
-					['table', 'link', 'image'],
-				],
-				height: '400px',
-			})}
-		/>
-	);
+  return (
+    <SunEditor
+      options={(se) => ({
+        plugins: [se.plugins.link, se.plugins.image, se.plugins.table],
+        buttonList: [
+          ['undo', 'redo'],
+          ['bold', 'italic', 'underline'],
+          ['table', 'link', 'image'],
+        ],
+        height: '400px',
+      })}
+    />
+  );
 }
 ```
 
-`options` recibe el módulo `suneditor` cargado de forma diferida (`se.plugins`, `se.langs`, `se.interfaces`, ...).
-Prefiera esta forma en Next.js: importar `suneditor` estáticamente en un componente cliente rompe la representación del servidor porque el motor toca `window` en el momento de la importación.
-Un objeto simple también funciona cuando no se utiliza renderizado del servidor, o para opciones que no requieren importación del motor.
+`options` se le pasa a `suneditor.create()` tal cual, por lo que cada opción, complemento, botón, evento e idioma es propio del motor.\
+Este archivo README cubre únicamente lo que agrega el componente React; para conocer las opciones en sí, consulte el paquete [SunEditor documentación](https://suneditor.com) o el paquete [`suneditor`](https://www.npmjs.com/package/suneditor).
+
+`options` recibe el módulo `suneditor` cargado de forma diferida (`se.plugins`, `se.langs`, `se.interfaces`, ...).\
+Prefiera esta forma en Next.js: importar `suneditor` estáticamente en un componente de cliente rompe la representación del servidor porque el motor toca `window` en el momento de la importación.\
+Un objeto simple también funciona cuando no se utiliza renderizado del servidor, o para opciones que no requieren importación del motor.\
 Los paquetes de idioma son objetos simples y siempre se pueden importar de forma estática: `import ko from 'suneditor/langs/ko'`.
 
 ### Valor controlado
@@ -45,7 +48,7 @@ const [html, setHtml] = useState('<p>Hello</p>');
 <SunEditor value={html} onChange={setHtml} options={...} />
 ```
 
-Si se cambia `value` por algo distinto al último resultado de `onChange`, se reemplaza el contenido del editor.
+Cambiar `value` por algo distinto del último resultado `onChange` reemplaza el contenido del editor.
 Omita `value` para un editor no controlado y lea el contenido de la instancia cuando lo necesite.
 
 ### Acceso a la instancia
@@ -64,7 +67,7 @@ ref.current?.resetOptions({ height: '600px' });
 
 ### Events
 
-Los manejadores se pasan a través de `options.events`. Se resincronizan en cada renderizado, por lo que pueden cerrarse de forma segura sobre el estado React.
+Pasa los manejadores a través de `options.events`. Se resincronizan en cada renderizado, por lo que pueden cerrarse de forma segura sobre el estado React.
 
 ```tsx
 <SunEditor
@@ -91,31 +94,31 @@ const toolbarRef = useRef<HTMLDivElement>(null);
 
 ### Multi-root
 
-Una instancia del motor (barra de herramientas, complementos, eventos, tema) con varias áreas editables. Coloque un `<SunEditorRoot>` por área dentro de `<SunEditorGroup>`; cualquier otro JSX puede ubicarse entre ellos. El grupo no renderiza ningún elemento propio.
+Una instancia del motor (barra de herramientas, complementos, eventos, tema) con varias áreas editables. Coloque un `<SunEditorRoot>` por área dentro de un `<SunEditorGroup>`; cualquier otro código JSX puede ubicarse entre ellos. El grupo no renderiza ningún elemento propio.
 
 ```tsx
 const toolbarRef = useRef<HTMLDivElement>(null);
 
 <SunEditorGroup options={(se) => ({ plugins: [se.plugins.link], toolbar_container: toolbarRef.current })}>
-	<div ref={toolbarRef} />
-	<h2>Title</h2>
-	<SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
-	<SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
+  <div ref={toolbarRef} />
+  <h2>Title</h2>
+  <SunEditorRoot name='header' value={header} onChange={setHeader} options={{ height: '80px' }} />
+  <SunEditorRoot name='body' value={body} onChange={setBody} readOnly={locked} />
 </SunEditorGroup>;
 ```
 
 - `name` es el motor `rootKey` (`ref.current.changeFrameContext('body')`, `html.get({ rootKey: 'body' })`).
 - Cada raíz tiene su propio `value` / `onChange`, `readOnly`, `disabled` y marco `options` (`height`, `placeholder`, `iframe`, ...).
 - El motor necesita `toolbar_container` para la barra de herramientas compartida a menos que `mode` sea `inline` o `balloon`.
-- Las raíces se recopilan cuando se monta el grupo. El motor no puede agregar ni eliminar raíces posteriormente, por lo que debe cambiar el valor de `key` del grupo para recrearlo con raíces diferentes.
+- Las raíces se recopilan cuando se monta el grupo. El motor no puede agregar ni eliminar raíces posteriormente, así que cambie el `key` del grupo para recrearlo con raíces diferentes.
 
 ## Props
 
 | Prop | Tipo | Descripción |
-| -------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| -------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value` | `string` | Editor HTML (controlado). |
-| `onChange` | `(html: string) => void` | Se llama con cada cambio de contenido. Abreviatura de `options.events.onChange`. |
-| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | Opciones de inicialización de SunEditor. `events` y `theme` se aplican en tiempo real. Todo lo demás se aplica una sola vez al crear la aplicación. |
+| `onChange` | `(html: string) => void` | Se llama en cada cambio de contenido. Abreviatura de `options.events.onChange`. |
+| `options` | `SunEditorOptions \| (se) => SunEditorOptions` | [SunEditor opciones](https://suneditor.com), se transmite sin cambios. `events` y `theme` se aplican en tiempo real. Todo lo demás se aplica una sola vez en el momento de la creación. |
 | `readOnly` | `boolean` | Activar/desactivar el modo de solo lectura. |
 | `disabled` | `boolean` | Deshabilitar el editor. |
 | `className`, `style` |  | Aplicado al envoltorio `<div>`. |
@@ -129,19 +132,19 @@ Para cambiarlos más tarde, vuelva a montar con un `key` diferente o llame a `re
 
 ```ts
 import type {
-	SunEditorProps,
-	SunEditorGroupProps,
-	SunEditorRootProps,
-	SunEditorInstance,
-	SunEditorOptions,
-	SunEditorFrameOptions,
-	SunEditorEvents,
+  SunEditorProps,
+  SunEditorGroupProps,
+  SunEditorRootProps,
+  SunEditorInstance,
+  SunEditorOptions,
+  SunEditorFrameOptions,
+  SunEditorEvents,
 } from '@suneditor/suneditor-react';
 ```
 
 Todos los tipos de motor también están disponibles desde `suneditor/types`.
 
-## Notas Next.js
+## Next.js notas
 
 - El componente es un módulo de cliente (`"use client"` aparece en la salida de la compilación) y carga el motor solo en el navegador, por lo que puede renderizarse directamente desde un componente de servidor.
 - Mantén `suneditor` fuera de las importaciones estáticas en los componentes del cliente. Usa la forma `options={(se) => ...}` para llegar a `se.plugins`.
