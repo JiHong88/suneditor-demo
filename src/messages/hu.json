@@ -32,7 +32,8 @@
 			"troubleshooting": "Megoldások gyakori hibákra és beállítási problémákra",
 			"migration": "Frissítés v2-ről: opcióátalakító és visszafelé nem kompatibilis változások",
 			"options": "A szerkesztő és a bővítmények összes opciója",
-			"docs-api": "Metódusok, események és típusok"
+			"docs-api": "Metódusok, események és típusok",
+			"react": "Hivatalos React komponens: install, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Próbáld ki élőben",
 			"desc": "Valódi npm importálások, teljes csomagoló — szerkessz kódot, és azonnal lásd az eredményt."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor a Reacthez",
+		"subtitle": "A @suneditor/suneditor-react a hivatalos React komponens. Minden szerkesztőbeállítás változatlanul átmegy, és a motor csak a kliensen töltődik be, így a Next.js-ben next/dynamic nélkül is működik.",
+		"readmeNote": "Ez az oldal a telepített verzió README csomagjának lefordított változata. A Playground és a Getting Started csomagok ugyanahhoz a verzióhoz tartozó kódot bocsátanak ki.",
+		"playgroundCta": "React kód generálása a Playground-ban",
+		"unavailable": "A README fájl jelenleg nem tölthető be. Olvasd el a GitHubon vagy az npm-en."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "„window is not defined” szerveroldali renderelés közben",
 				"symptom": "A build vagy a szerveroldali renderelés ezzel a hibával áll le: ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "A SunEditor a modul importálásakor azonnal hozzáfér a window, document és navigator objektumokhoz, ezért nem importálható a szerveren.",
-				"fix": "A szerkesztőt csak a böngészőben importáld és hozd létre. A Next.js App Router esetén tedd a szerkesztőt egy kliensoldali komponensbe, és töltsd be next/dynamic segítségével, ssr: false beállítással. Nuxtban csomagold ClientOnly-ba; SvelteKitben az onMount-on belül importáld."
+				"fix": "Importáld és hozd létre a szerkesztőt csak a böngészőben. A Next.js App Routerben helyezd el a szerkesztőt egy kliens komponensben, és töltsd be a next/dynamic és az ssr: false paraméterekkel. A Nuxtban csomagold be ClientOnly-ba; a SvelteKitben importáld az onMount-on belülre. A @suneditor/suneditor-react használatával erre nincs szükség: a komponens csak a böngészőben tölti be a motort."
 			},
 			"plugin": {
 				"title": "Hiba: „The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "A szerkesztő kétszer jön létre React fejlesztői módban",
 				"symptom": "Fejlesztés közben az eszköztár megduplázódik, vagy a szerkesztő villog csatoláskor.",
 				"cause": "A React StrictMode kétszer futtatja az effekteket (csatolás, leválasztás, csatolás). Takarítófüggvény nélkül a második futás újabb példányt hoz létre.",
-				"fix": "Az effektből adj vissza egy takarítófüggvényt, amely meghívja a destroy() metódust. Az Első lépések példái ezt a mintát követik."
+				"fix": "A destroy() függvényt meghívó effektusból ad vissza egy cleanup függvényt. Az Első lépések példái ezt a mintát használják. A @suneditor/suneditor-react komponens maga kezeli ezt a cleanup függvényt."
 			},
 			"css": {
 				"title": "A szerkesztő stílusok nélkül jelenik meg",

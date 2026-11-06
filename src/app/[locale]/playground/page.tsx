@@ -234,7 +234,7 @@ export default function PlaygroundPage() {
 	}, [state]);
 
 	return (
-		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-[#1c2128]'>
+		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-surface-inset'>
 			{/* Header */}
 			<section className='container mx-auto px-6 py-6 border-b'>
 				<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className='flex items-center justify-between'>

@@ -1,4 +1,4 @@
-import { SUNEDITOR_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/snippets/editorPresets";
+import { SUNEDITOR_VERSION, SUNEDITOR_REACT_VERSION, CDN_CSS, CDN_JS, fmtButtonList } from "@/data/snippets/editorPresets";
 import {
 	type PlaygroundState,
 	type CodeFramework,
@@ -982,6 +982,112 @@ ${reactReturn}
 }`;
 }
 
+/** `<SunEditorRoot>` elements for the multiroot wrapper output, one per root with its frame options. */
+function buildWrapperRoots(state: PlaygroundState, pad: number): string {
+	const roots = getRootConfigs(state);
+	const p = " ".repeat(pad);
+	const lines: string[] = [];
+	for (const root of roots) {
+		const optEntries = Object.entries(root.options).filter(([, v]) => v !== undefined && v !== "");
+		if (optEntries.length === 0) {
+			lines.push(`${p}<SunEditorRoot name="${root.key}" />`);
+		} else if (optEntries.length <= 3) {
+			const optStr = optEntries.map(([k, v]) => `${k}: ${fmtVal(v)}`).join(", ");
+			lines.push(`${p}<SunEditorRoot name="${root.key}" options={{ ${optStr} }} />`);
+		} else {
+			lines.push(`${p}<SunEditorRoot`);
+			lines.push(`${p}  name="${root.key}"`);
+			lines.push(`${p}  options={{`);
+			for (const [k, v] of optEntries) {
+				lines.push(`${p}    ${k}: ${fmtVal(v)},`);
+			}
+			lines.push(`${p}  }}`);
+			lines.push(`${p}/>`);
+		}
+	}
+	return lines.join("\n");
+}
+
+/**
+ * React output on top of `@suneditor/suneditor-react`.
+ * `options` is a function so the engine module (`se.plugins`) is only loaded in the browser
+ * and container refs are already mounted when it runs.
+ */
+function generateReactWrapper(state: PlaygroundState): string {
+	const install = `// npm i suneditor@${SUNEDITOR_VERSION} @suneditor/suneditor-react@${SUNEDITOR_REACT_VERSION}`;
+	const imports = `import "suneditor/css/editor";
+import "suneditor/css/contents";${themeImport(state.theme)}${langImport(state.lang)}${extLibsNpmImports(state)}`;
+
+	if (state.multiroot) {
+		const isClassic = state.mode === "classic";
+		const hasStatusbar = state.statusbar_container_enabled;
+		const body = indent(buildOptionsBody(state, 8), 8);
+		const refImport = isClassic || hasStatusbar ? `import { useRef } from "react";\n` : "";
+		const toolbarRef = isClassic ? "\n  const toolbarRef = useRef(null);" : "";
+		const statusbarRef = hasStatusbar ? "\n  const statusbarRef = useRef(null);" : "";
+		const toolbarOpt = isClassic ? "\n        toolbar_container: toolbarRef.current," : "";
+		const statusbarOpt = hasStatusbar ? "\n        statusbar_container: statusbarRef.current," : "";
+		const toolbarJsx = isClassic ? "\n      <div ref={toolbarRef} />" : "";
+		const statusbarJsx = hasStatusbar ? "\n      <div ref={statusbarRef} />" : "";
+		return `${install}
+${refImport}import { SunEditorGroup, SunEditorRoot } from "@suneditor/suneditor-react";
+${imports}
+
+export default function Editor() {${toolbarRef}${statusbarRef}
+
+  return (
+    <SunEditorGroup
+      options={(se) => ({
+        plugins: se.plugins,${toolbarOpt}${statusbarOpt}
+${body}
+      })}
+    >${toolbarJsx}
+${buildWrapperRoots(state, 6)}${statusbarJsx}
+    </SunEditorGroup>
+  );
+}`;
+	}
+
+	const hasToolbar = state.toolbar_container_enabled && state.mode === "classic";
+	const hasStatusbar = state.statusbar_container_enabled;
+	const needWrapper = hasToolbar || hasStatusbar;
+	const optPad = needWrapper ? 10 : 8;
+	const body = indent(buildOptionsBody(state, optPad), optPad);
+	const refImport = needWrapper ? `import { useRef } from "react";\n` : "";
+	const toolbarRef = hasToolbar ? "\n  const toolbarRef = useRef(null);" : "";
+	const statusbarRef = hasStatusbar ? "\n  const statusbarRef = useRef(null);" : "";
+	const toolbarOpt = hasToolbar ? `\n${" ".repeat(optPad)}toolbar_container: toolbarRef.current,` : "";
+	const statusbarOpt = hasStatusbar ? `\n${" ".repeat(optPad)}statusbar_container: statusbarRef.current,` : "";
+
+	const editorJsx = (pad: number) => {
+		const p = " ".repeat(pad);
+		return `${p}<SunEditor
+${p}  options={(se) => ({
+${p}    plugins: se.plugins,${toolbarOpt}${statusbarOpt}
+${body}
+${p}  })}
+${p}/>`;
+	};
+
+	const returnJsx = needWrapper
+		? `  return (
+    <div>${hasToolbar ? "\n      <div ref={toolbarRef} />" : ""}
+${editorJsx(6)}${hasStatusbar ? "\n      <div ref={statusbarRef} />" : ""}
+    </div>
+  );`
+		: `  return (
+${editorJsx(4)}
+  );`;
+
+	return `${install}
+${refImport}import SunEditor from "@suneditor/suneditor-react";
+${imports}
+
+export default function Editor() {${toolbarRef}${statusbarRef}${needWrapper ? "\n" : ""}
+${returnJsx}
+}`;
+}
+
 function generateVue(state: PlaygroundState): string {
 	const body = buildOptionsBody(state, 4);
 	const bodyIndented = indent(body, 6);
@@ -1285,12 +1391,15 @@ const LANG_MAP: Record<CodeFramework, string> = {
 	webcomponents: "javascript",
 };
 
-export function generateCode(state: PlaygroundState, framework: CodeFramework): string {
+/** React output flavor: the official `@suneditor/suneditor-react` component or `suneditor.create()` in an effect. */
+export type ReactApi = "wrapper" | "direct";
+
+export function generateCode(state: PlaygroundState, framework: CodeFramework, reactApi: ReactApi = "wrapper"): string {
 	switch (framework) {
 		case "javascript-cdn":
 			return generateCDN(state);
 		case "react":
-			return generateReact(state);
+			return reactApi === "wrapper" ? generateReactWrapper(state) : generateReact(state);
 		case "vue":
 			return generateVue(state);
 		case "angular":

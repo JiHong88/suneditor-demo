@@ -32,7 +32,8 @@
 			"troubleshooting": "Lösningar på vanliga fel och konfigurationsproblem",
 			"migration": "Uppgradera från v2: alternativkonverterare och inkompatibla ändringar",
 			"options": "Alla alternativ för editorn och plugins",
-			"docs-api": "Metoder, händelser och typer"
+			"docs-api": "Metoder, händelser och typer",
+			"react": "Officiell React-komponent: installation, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Prova det live",
 			"desc": "Riktiga npm-importer, fullständig bundler — redigera kod och se resultatet direkt."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor för React",
+		"subtitle": "@suneditor/suneditor-react är den officiella React-komponenten. Alla editoralternativ passerar oförändrade, och motorn laddas endast på klienten, så den fungerar i Next.js utan next/dynamic.",
+		"readmeNote": "Den här sidan är paketets README-fil för den installerade versionen, översatt. Playground och Komma igång genererar kod för samma version.",
+		"playgroundCta": "Generera React-kod i Playground",
+		"unavailable": "README-filen kunde inte laddas just nu. Läs den på GitHub eller npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "”window is not defined” vid serverrendering",
 				"symptom": "Bygget eller serverrenderingen misslyckas med ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor läser window, document och navigator så fort modulen importeras, så den kan inte importeras på servern.",
-				"fix": "Importera och skapa editorn endast i webbläsaren. I Next.js App Router lägger du editorn i en klientkomponent och laddar den med next/dynamic och ssr: false. I Nuxt omsluter du den med ClientOnly; i SvelteKit importerar du den inuti onMount."
+				"fix": "Importera och skapa editorn endast i webbläsaren. I Next.js App Router, placera editorn i en klientkomponent och ladda den med next/dynamic och ssr: false. I Nuxt, packa in den i ClientOnly; i SvelteKit, importera den till onMount. Med @suneditor/suneditor-react behövs inget av detta: komponenten laddar motorn endast i webbläsaren."
 			},
 			"plugin": {
 				"title": "Fel: ”The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "Editorn skapas två gånger i Reacts utvecklingsläge",
 				"symptom": "Under utveckling dubbleras verktygsfältet, eller så flimrar editorn vid montering.",
 				"cause": "React StrictMode kör effekter två gånger (montera, avmontera, montera). Utan en städfunktion skapar den andra körningen ytterligare en instans.",
-				"fix": "Returnera en städfunktion från effekten som anropar destroy(). Exemplen i Kom igång använder det här mönstret."
+				"fix": "Returnera en rensning från effekten som anropar destroy(). Getting Started-exemplen använder detta mönster. Komponenten @suneditor/suneditor-react hanterar denna rensning själv."
 			},
 			"css": {
 				"title": "Editorn renderas utan stilar",

@@ -32,7 +32,8 @@
 			"troubleshooting": "Fixes for common errors and setup issues",
 			"migration": "Upgrade from v2: option converter and breaking changes",
 			"options": "Every editor and plugin option",
-			"docs-api": "Methods, events and types"
+			"docs-api": "Methods, events and types",
+			"react": "Official React component: install, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Try it live",
 			"desc": "Real npm imports, full bundler — edit code and see the result instantly."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor for React",
+		"subtitle": "@suneditor/suneditor-react is the official React component. Every editor option passes through unchanged, and the engine loads on the client only, so it works in Next.js without next/dynamic.",
+		"readmeNote": "This page is the package README of the installed version, translated. The Playground and Getting Started emit code for the same version.",
+		"playgroundCta": "Generate React code in the Playground",
+		"unavailable": "The README could not be loaded right now. Read it on GitHub or npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "“window is not defined” during server rendering",
 				"symptom": "The build or the server render fails with ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor reads window, document and navigator as soon as the module is imported, so it cannot be imported on the server.",
-				"fix": "Import and create the editor only in the browser. In the Next.js App Router, put the editor in a client component and load it with next/dynamic and ssr: false. In Nuxt, wrap it in ClientOnly; in SvelteKit, import it inside onMount."
+				"fix": "Import and create the editor only in the browser. In the Next.js App Router, put the editor in a client component and load it with next/dynamic and ssr: false. In Nuxt, wrap it in ClientOnly; in SvelteKit, import it inside onMount. With @suneditor/suneditor-react none of this is needed: the component loads the engine in the browser only."
 			},
 			"plugin": {
 				"title": "Error: “The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "The editor is created twice in React development mode",
 				"symptom": "In development the toolbar is duplicated, or the editor flickers on mount.",
 				"cause": "React StrictMode runs effects twice (mount, unmount, mount). Without a cleanup, the second run creates another instance.",
-				"fix": "Return a cleanup from the effect that calls destroy(). The Getting Started examples use this pattern."
+				"fix": "Return a cleanup from the effect that calls destroy(). The Getting Started examples use this pattern. The @suneditor/suneditor-react component handles this cleanup itself."
 			},
 			"css": {
 				"title": "The editor renders without styles",

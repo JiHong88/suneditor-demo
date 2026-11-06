@@ -10,7 +10,7 @@ function getHighlighter() {
 		highlighterPromise = import("shiki").then((mod) =>
 			mod.createHighlighter({
 				themes: ["github-light", "github-dark"],
-				langs: ["javascript", "html", "jsx", "vue", "typescript", "bash", "css", "svelte", "json", "diff", "markdown", "yaml", "scss"],
+				langs: ["javascript", "html", "jsx", "tsx", "vue", "typescript", "bash", "css", "svelte", "json", "diff", "markdown", "yaml", "scss"],
 			}),
 		);
 	}
@@ -39,6 +39,9 @@ export default function CodeBlock({ code, lang = "javascript", className }: Code
 				defaultColor: false,
 			});
 			setHtml(result);
+		}).catch((e) => {
+			console.error("[CodeBlock] shiki failed", e);
+			highlighterPromise = null; // allow a retry on the next mount
 		});
 		return () => {
 			cancelled = true;

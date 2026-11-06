@@ -33,8 +33,13 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 
 	const [internalFramework, setInternalFramework] = useState<FrameworkKey>(DEFAULT_FRAMEWORK_KEY);
 	const [copied, setCopied] = useState(false);
+	// Selected variant per framework (e.g. React: official component vs. engine API)
+	const [variantKeys, setVariantKeys] = useState<Partial<Record<FrameworkKey, string>>>({});
 	const selectedFrameworkKey = framework ?? internalFramework;
 	const selectedFramework = getCodeFramework(selectedFrameworkKey);
+	const variants = selectedFramework.variants;
+	const selectedVariant = variants?.find((v) => v.key === variantKeys[selectedFrameworkKey]) ?? variants?.[0];
+	const snippet = selectedVariant?.snippet ?? selectedFramework.snippet;
 
 	const selectFramework = (nextFramework: FrameworkKey) => {
 		if (framework === undefined) {
@@ -44,8 +49,7 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 	};
 
 	const handleCopy = () => {
-		const currentSnippet = getCodeFramework(selectedFrameworkKey).snippet;
-		navigator.clipboard.writeText(currentSnippet);
+		navigator.clipboard.writeText(snippet);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 1500);
 	};
@@ -89,19 +93,34 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 						<span className='font-medium'>{selectedFramework.name}</span>
 						<span className='rounded border px-1.5 py-0.5 text-[10px] uppercase'>{selectedFramework.kind}</span>
 					</div>
+					{variants && variants.length > 1 && (
+						<div className='mb-3 inline-flex self-start rounded-md border bg-background/80 p-0.5' role='radiogroup' aria-label={`${selectedFramework.name} API`}>
+							{variants.map((v) => (
+								<button
+									key={v.key}
+									type='button'
+									role='radio'
+									aria-checked={selectedVariant?.key === v.key}
+									onClick={() => setVariantKeys((prev) => ({ ...prev, [selectedFrameworkKey]: v.key }))}
+									className={`rounded px-2 py-1 font-mono text-[11px] transition-colors ${
+										selectedVariant?.key === v.key ? "bg-muted text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+									}`}
+								>
+									{v.label}
+								</button>
+							))}
+						</div>
+					)}
 					<AnimatePresence mode='wait'>
 						<motion.div
-							key={selectedFrameworkKey}
+							key={`${selectedFrameworkKey}:${selectedVariant?.key ?? ""}`}
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -10 }}
 							transition={{ duration: 0.2 }}
 							className='overflow-hidden rounded-md border border-border/60 bg-muted/10'
 						>
-							<CodeBlock
-								code={selectedFramework.snippet}
-								lang={FRAMEWORK_LANG[selectedFrameworkKey]}
-							/>
+							<CodeBlock code={snippet} lang={FRAMEWORK_LANG[selectedFrameworkKey]} />
 						</motion.div>
 					</AnimatePresence>
 					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>Copied!</span>}

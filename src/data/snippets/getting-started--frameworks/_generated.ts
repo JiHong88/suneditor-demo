@@ -38,9 +38,9 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
 }`;
 
 export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
-<link href="https://cdn.jsdelivr.net/npm/suneditor@3.3.3/dist/suneditor.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/suneditor@3.4.1/dist/suneditor.min.css" rel="stylesheet">
 <!-- 2. Include JS -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@3.3.3/dist/suneditor.min.js"><\\/script>
+<script src="https://cdn.jsdelivr.net/npm/suneditor@3.4.1/dist/suneditor.min.js"><\\/script>
 
 <!-- 3. Create Textarea -->
 <textarea id="my-editor"></textarea>
@@ -60,7 +60,7 @@ export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
   });
 <\\/script>`;
 
-export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.3.3
+export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.4.1
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";
@@ -77,7 +77,7 @@ const editor = suneditor.create("my-editor", {
     ]
 });`;
 
-export const FRAMEWORK_REACT = `import { useEffect, useRef } from "react";
+export const FRAMEWORK_REACT_DIRECT = `import { useEffect, useRef } from "react";
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";
@@ -102,6 +102,29 @@ export default function Editor() {
   }, []);
 
   return <textarea ref={ref} />;
+}`;
+
+export const FRAMEWORK_REACT = `// npm i suneditor @suneditor/suneditor-react
+import SunEditor from "@suneditor/suneditor-react";
+import "suneditor/css/editor";
+import "suneditor/css/contents";
+
+export default function Editor() {
+  return (
+    <SunEditor
+      options={(se) => ({
+        plugins: se.plugins,
+        value: "<p>Hello SunEditor</p>",
+        buttonList: [
+          ["undo", "redo"],
+          "|",
+          ["bold", "italic", "underline"],
+          "|",
+          ["list", "link", "image"]
+        ]
+      })}
+    />
+  );
 }`;
 
 export const FRAMEWORK_SVELTE = `<script>

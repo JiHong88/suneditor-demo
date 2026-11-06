@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Menu, Ellipsis, Layers, LifeBuoy, ArrowRightLeft, SlidersHorizontal, Braces } from "lucide-react";
+import { Menu, Ellipsis, Layers, LifeBuoy, ArrowRightLeft, SlidersHorizontal, Braces, Atom } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -44,6 +44,8 @@ export function SiteNav() {
 			id: "guides",
 			label: t_groups("guides"),
 			links: [
+				// "React" is the same in every language; the description falls back to English until the locale is translated.
+				{ label: "React", href: "/react", desc: t_desc.has("react") ? t_desc("react") : "Official React component: install, props, Next.js", icon: Atom },
 				{ label: t("troubleshooting"), href: "/troubleshooting", desc: t_desc("troubleshooting"), icon: LifeBuoy },
 				{ label: t("deep-dive"), href: "/deep-dive", desc: t_desc("deep-dive"), icon: Layers },
 				{ label: t("migration"), href: "/migration", desc: t_desc("migration"), icon: ArrowRightLeft },
@@ -111,7 +113,7 @@ export function SiteNav() {
 
 	return (
 		<>
-			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-[#151b23]/85 dark:border-white/10'>
+			<header className='fixed md:sticky top-0 inset-x-0 z-50 w-full border-b backdrop-blur-md bg-amber-50/50 dark:bg-surface-header/85 dark:border-white/10'>
 				<div className='mx-auto flex h-14 items-center justify-center px-4 max-w-screen-2xl'>
 					{/* Desktop nav */}
 					<div className='hidden items-center gap-1 md:flex flex-1 min-w-0 max-w-fit mx-auto'>
@@ -253,7 +255,7 @@ export function SiteNav() {
 				<div
 					id='mobile-nav'
 					className={cn(
-						"md:hidden overflow-hidden border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 dark:border-white/10 dark:bg-[#151b23]/95 dark:supports-[backdrop-filter]:bg-[#151b23]/85",
+						"md:hidden overflow-hidden border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70 dark:border-white/10 dark:bg-surface-header/95 dark:supports-[backdrop-filter]:bg-surface-header/85",
 						"transition-[max-height,opacity] duration-300 ease-out will-change-[max-height]",
 						openMobile ? "max-h-[calc(100dvh-56px)] opacity-100" : "max-h-0 opacity-0",
 					)}

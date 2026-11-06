@@ -32,7 +32,8 @@
 			"troubleshooting": "Risinājumi biežām kļūdām un iestatīšanas problēmām",
 			"migration": "Pāreja no v2: iespēju pārveidotājs un nesaderīgas izmaiņas",
 			"options": "Visas redaktora un spraudņu iespējas",
-			"docs-api": "Metodes, notikumi un tipi"
+			"docs-api": "Metodes, notikumi un tipi",
+			"react": "Oficiālā React komponente: install, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Izmēģiniet to tiešraidē",
 			"desc": "Īsts npm imports, pilns pakotņu veidotājs — rediģējiet kodu un uzreiz redziet rezultātu."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor pakalpojumam React",
+		"subtitle": "@suneditor/suneditor-react ir oficiālā React komponente. Katra redaktora opcija tiek saglabāta nemainīta, un dzinējs tiek ielādēts tikai klienta pusē, tāpēc tas darbojas Next.js bez next/dynamic.",
+		"readmeNote": "Šī lapa ir instalētās versijas README pakotnes tulkojums. Playground un Darba sākšana izstaro kodu vienai un tai pašai versijai.",
+		"playgroundCta": "Ģenerējiet React kodu Playground",
+		"unavailable": "README failu šobrīd nevarēja ielādēt. Izlasiet to vietnē GitHub vai npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "“window is not defined” servera renderēšanas laikā",
 				"symptom": "Būvēšana vai servera renderēšana neizdodas ar kļūdu ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor nolasa window, document un navigator, tiklīdz modulis tiek importēts, tāpēc to nevar importēt serverī.",
-				"fix": "Importējiet un izveidojiet redaktoru tikai pārlūkā. Next.js App Router ievietojiet redaktoru klienta komponentā un ielādējiet to ar next/dynamic un ssr: false. Nuxt ietiniet to ClientOnly; SvelteKit importējiet to onMount iekšpusē."
+				"fix": "Importējiet un izveidojiet redaktoru tikai pārlūkprogrammā. Next.js lietotņu maršrutētājā ievietojiet redaktoru klienta komponentē un ielādējiet to ar next/dynamic un ssr: false. Nuxt ietiniet to ClientOnly; SvelteKit importējiet to onMount iekšpusē. Izmantojot @suneditor/suneditor-react, nekas no tā nav nepieciešams: komponents ielādē dzinēju tikai pārlūkprogrammā."
 			},
 			"plugin": {
 				"title": "Kļūda: “The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "React izstrādes režīmā redaktors tiek izveidots divreiz",
 				"symptom": "Izstrādes laikā rīkjosla dublējas vai redaktors piemontēšanas brīdī mirgo.",
 				"cause": "React StrictMode izpilda efektus divreiz (piemontēšana, nomontēšana, piemontēšana). Bez attīrīšanas funkcijas otrā izpilde izveido vēl vienu instanci.",
-				"fix": "Atgrieziet no efekta attīrīšanas funkciju, kas izsauc destroy(). Šo paņēmienu izmanto sadaļas “Darba sākšana” piemēri."
+				"fix": "Atgriež tīrīšanu no efekta, kas izsauc destroy(). Darba sākšanas piemēros tiek izmantots šis modelis. Komponents @suneditor/suneditor-react pats apstrādā šo tīrīšanu."
 			},
 			"css": {
 				"title": "Redaktors tiek attēlots bez stiliem",

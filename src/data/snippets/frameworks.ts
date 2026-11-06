@@ -15,6 +15,7 @@ import {
 	FRAMEWORK_HTML_CDN,
 	FRAMEWORK_JAVASCRIPT_NPM,
 	FRAMEWORK_REACT,
+	FRAMEWORK_REACT_DIRECT,
 	FRAMEWORK_VUE,
 	FRAMEWORK_ANGULAR,
 	FRAMEWORK_SVELTE,
@@ -27,7 +28,10 @@ export type FrameworkEntry = {
 	icon: string;
 	accent: string;
 	kind: "language" | "framework";
+	/** Code shown by default (the first variant when `variants` is set). */
 	snippet: string;
+	/** Alternative snippets selectable in the code panel. Labels are code identifiers and stay untranslated. */
+	variants?: { key: string; label: string; snippet: string }[];
 };
 
 const frameworks: FrameworkEntry[] = [
@@ -54,6 +58,10 @@ const frameworks: FrameworkEntry[] = [
 		accent: "#61dafb",
 		kind: "framework",
 		snippet: FRAMEWORK_REACT,
+		variants: [
+			{ key: "wrapper", label: "@suneditor/suneditor-react", snippet: FRAMEWORK_REACT },
+			{ key: "direct", label: "suneditor.create()", snippet: FRAMEWORK_REACT_DIRECT },
+		],
 	},
 	{
 		key: "vue",

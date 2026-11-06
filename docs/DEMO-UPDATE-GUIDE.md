@@ -95,6 +95,19 @@ npm run build:prod      # 빌드 확인 (docs 자동 생성 포함)
 
 ---
 
+### Step 7: React 래퍼(`@suneditor/suneditor-react`) 업데이트
+
+래퍼는 별도 패키지다. 올릴 때는 아래 순서로 `/react` 가이드를 다시 만든다.
+
+```bash
+npm i @suneditor/suneditor-react@latest
+npm run docs:generate            # src/data/react-guide/react-guide.en.md (설치본 README에서 생성)
+npm run react-guide:translate    # 나머지 로케일 (바뀐 문장만 번역, 캐시 사용)
+npm test                         # reactGuide.test.ts가 버전/구조를 검사
+```
+
+플레이그라운드와 시작하기의 React 코드는 `SUNEDITOR_REACT_VERSION`(설치본)을 그대로 읽으므로 별도 수정이 없다.
+
 ## 1. 수정 대상 파일 요약
 
 ### 기능 데모 (Feature Demo)

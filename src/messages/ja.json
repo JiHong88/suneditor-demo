@@ -32,7 +32,8 @@
 			"troubleshooting": "よくあるエラーと設定の問題の解決方法",
 			"migration": "v2からの移行：オプション変換ツールと破壊的変更",
 			"options": "エディターとプラグインの全オプション",
-			"docs-api": "メソッド・イベント・型"
+			"docs-api": "メソッド・イベント・型",
+			"react": "公式Reactコンポーネント：インストール、プロパティ、Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "実際に体験してみてください",
 			"desc": "本格的なnpmインポート、フル機能のバンドラー ― コードを編集して結果を即座に確認できます。"
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor for React",
+		"subtitle": "@suneditor/suneditor-react は公式の React コンポーネントです。エディタのオプションはすべて変更されずに渡され、エンジンはクライアント側でのみロードされるため、next/dynamic を使用せずに Next.js で動作します。",
+		"readmeNote": "このページは、インストール済みのバージョンのパッケージREADMEを翻訳したものです。PlaygroundとGetting Startedは、同じバージョンのコードを出力します。",
+		"playgroundCta": "Playground に React コードを生成します",
+		"unavailable": "READMEファイルを現在読み込むことができません。GitHubまたはnpmでご確認ください。"
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "サーバーレンダリング時に「window is not defined」が発生する",
 				"symptom": "ビルドまたはサーバーレンダリングが ReferenceError: window is not defined で失敗する（Next.js、Nuxt、SvelteKit、Remix）。",
 				"cause": "SunEditorはモジュールがインポートされた時点でwindow、document、navigatorを参照するため、サーバー側ではインポートできません。",
-				"fix": "エディタのインポートと生成はブラウザ上でのみ行ってください。Next.js App Routerでは、エディタをクライアントコンポーネントに配置し、next/dynamic と ssr: false で読み込みます。NuxtではClientOnlyで囲み、SvelteKitではonMount内でインポートします。"
+				"fix": "エディタはブラウザ内でのみインポートおよび作成します。Next.js App Router では、エディタをクライアントコンポーネントに配置し、next/dynamic と ssr: false を指定してロードします。Nuxt では ClientOnly でラップし、SvelteKit では onMount 内でインポートします。@suneditor/suneditor-react では、これらの手順は一切不要です。コンポーネントがブラウザ内でのみエンジンをロードします。"
 			},
 			"plugin": {
 				"title": "エラー：「The button name of a plugin that does not exist」",
@@ -873,7 +881,7 @@
 				"title": "React開発モードでエディタが2回生成される",
 				"symptom": "開発環境でツールバーが重複したり、マウント時にエディタがちらついたりする。",
 				"cause": "React StrictModeはエフェクトを2回実行します（マウント、アンマウント、マウント）。クリーンアップがないと、2回目の実行で別のインスタンスが生成されます。",
-				"fix": "エフェクトから、destroy()を呼び出すクリーンアップ関数を返してください。「はじめる」のサンプルはこのパターンを使用しています。"
+				"fix": "destroy() を呼び出すエフェクトからクリーンアップ処理を返します。入門サンプルではこのパターンを使用しています。@suneditor/suneditor-react コンポーネントは、このクリーンアップ処理を自身で行います。"
 			},
 			"css": {
 				"title": "エディタがスタイルなしで表示される",

@@ -55,6 +55,7 @@ const PLACEHOLDERS = {
 	"{{DEFAULT_VALUE}}": DEFAULT_VALUE,
 	"{{BUTTON_LIST_4}}": fmtButtonList(BASIC_BUTTON_LIST, 4),
 	"{{BUTTON_LIST_6}}": fmtButtonList(BASIC_BUTTON_LIST, 6),
+	"{{BUTTON_LIST_8}}": fmtButtonList(BASIC_BUTTON_LIST, 8),
 };
 
 function replacePlaceholders(content) {

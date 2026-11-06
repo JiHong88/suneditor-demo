@@ -1,6 +1,7 @@
 "use client";
 
 import "github-markdown-css/github-markdown-light.css";
+import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -51,6 +52,16 @@ export default function MarkdownRenderer({ content, className }: Props) {
 				remarkPlugins={[remarkGfm]}
 				rehypePlugins={[rehypeRaw, rehypeSlug]}
 				components={{
+					// Fenced code: render CodeBlock in place of the `<pre>` so shiki's own `<pre>` is not nested in a second one
+					pre({ children }) {
+						const child = Children.toArray(children)[0];
+						if (isValidElement<{ className?: string; children?: ReactNode }>(child)) {
+							const match = /language-(\w+)/.exec(child.props.className || "");
+							const codeStr = Children.toArray(child.props.children).join("").replace(/\n$/, "");
+							return <CodeBlock code={codeStr} lang={match?.[1] ?? "text"} className='rounded-md border my-4' />;
+						}
+						return <pre>{children}</pre>;
+					},
 					a({ href, children }) {
 						if (!href) return <span>{children}</span>;
 
@@ -72,21 +83,9 @@ export default function MarkdownRenderer({ content, className }: Props) {
 							</a>
 						);
 					},
-					code({ className: codeClassName, children, ...props }) {
-						const match = /language-(\w+)/.exec(codeClassName || "");
-						const codeStr = String(children).replace(/\n$/, "");
-
-						// Inline code
-						if (!match) {
-							return (
-								<code {...props}>
-									{children}
-								</code>
-							);
-						}
-
-						// Fenced code block
-						return <CodeBlock code={codeStr} lang={match[1]} className='rounded-md border my-4' />;
+					// Inline code only — fenced blocks are consumed by `pre` above
+					code({ children, ...props }) {
+						return <code {...props}>{children}</code>;
 					},
 					table({ children }) {
 						return (

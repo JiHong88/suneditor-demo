@@ -7,6 +7,12 @@
 
 @theme inline {
 	--color-background: var(--background);
+	/* Site surfaces (header/footer, inset panels, page gradient) — see .dark / .dark.midnight */
+	--color-surface-header: var(--surface-header);
+	--color-surface-inset: var(--surface-inset);
+	--color-page-from: var(--page-from);
+	--color-page-via: var(--page-via);
+	--color-page-to: var(--page-to);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
@@ -50,6 +56,11 @@
 }
 
 :root {
+	--surface-header: #fffbeb;
+	--surface-inset: #fef3c7;
+	--page-from: #fffbeb;
+	--page-via: #fff7ed;
+	--page-to: #eff6ff;
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.145 0 0);
@@ -86,6 +97,11 @@
 
 .dark {
 	/* Soft dark palette (GitHub dark-dimmed tones) */
+	--surface-header: #151b23;
+	--surface-inset: #1c2128;
+	--page-from: #1d242c;
+	--page-via: #212830;
+	--page-to: #232c3a;
 	--background: #212830;
 	--foreground: #d1d7e0;
 	--card: #262c36;
@@ -117,6 +133,37 @@
 	--sidebar-accent-foreground: #d1d7e0;
 	--sidebar-border: oklch(1 0 0 / 12%);
 	--sidebar-ring: oklch(0.556 0 0);
+}
+
+.dark.midnight {
+	/* Midnight: neutral near-black (pairs with the editor's "midnight" theme, #212121) */
+	--surface-header: #0a0a0a;
+	--surface-inset: #0e0e0e;
+	--page-from: #0f0f0f;
+	--page-via: #121212;
+	--page-to: #141414;
+	--background: #121212;
+	--foreground: #ededed;
+	--card: #1b1b1b;
+	--card-foreground: #ededed;
+	--popover: #1b1b1b;
+	--popover-foreground: #ededed;
+	--primary: #ededed;
+	--primary-foreground: #121212;
+	--secondary: #262626;
+	--secondary-foreground: #ededed;
+	--muted: #262626;
+	--muted-foreground: #9a9a9a;
+	--accent: #262626;
+	--accent-foreground: #ededed;
+	--border: oklch(1 0 0 / 10%);
+	--input: oklch(1 0 0 / 15%);
+	--sidebar: #1b1b1b;
+	--sidebar-foreground: #ededed;
+	--sidebar-primary-foreground: #ededed;
+	--sidebar-accent: #262626;
+	--sidebar-accent-foreground: #ededed;
+	--sidebar-border: oklch(1 0 0 / 10%);
 }
 
 @layer base {
@@ -163,15 +210,15 @@ html[dir="rtl"] img.dir-img {
 	color: #58a6ff;
 }
 .dark .markdown-body hr {
-	border-color: #3d444d;
+	border-color: var(--border);
 }
 .dark .markdown-body blockquote {
 	color: #848d97;
-	border-color: #3d444d;
+	border-color: var(--border);
 }
 .dark .markdown-body h1,
 .dark .markdown-body h2 {
-	border-color: #3d444d;
+	border-color: var(--border);
 }
 .dark .markdown-body h1,
 .dark .markdown-body h2,
@@ -188,18 +235,22 @@ html[dir="rtl"] img.dir-img {
 	color: #e6edf3;
 }
 .dark .markdown-body pre {
-	background-color: #151b23;
+	background-color: var(--surface-inset);
+}
+/* Fenced code: the inline-code background above must not tint the whole block */
+.dark .markdown-body pre code {
+	background-color: transparent;
 }
 .dark .markdown-body table tr {
 	background-color: transparent;
-	border-color: #3d444d;
+	border-color: var(--border);
 }
 .dark .markdown-body table tr:nth-child(2n) {
 	background-color: rgba(110, 118, 129, 0.1);
 }
 .dark .markdown-body table td,
 .dark .markdown-body table th {
-	border-color: #3d444d;
+	border-color: var(--border);
 }
 .dark .markdown-body img {
 	background-color: transparent;
@@ -218,7 +269,7 @@ html[dir="rtl"] img.dir-img {
 }
 /* Soft dark: sink code blocks one step below the page (GitHub dark-dimmed inset) */
 .dark .shiki {
-	background-color: #151b23;
+	background-color: var(--surface-inset);
 }
 .dark .shiki span {
 	background-color: transparent;

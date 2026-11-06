@@ -32,7 +32,8 @@
 			"troubleshooting": "Řešení častých chyb a problémů s nastavením",
 			"migration": "Přechod z v2: převodník možností a zpětně nekompatibilní změny",
 			"options": "Všechny možnosti editoru a pluginů",
-			"docs-api": "Metody, události a typy"
+			"docs-api": "Metody, události a typy",
+			"react": "Oficiální komponenta Reactu: instalace, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Vyzkoušejte to naživo",
 			"desc": "Skutečné importy z npm, kompletní bundler – upravte kód a okamžitě uvidíte výsledek."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor pro React",
+		"subtitle": "@suneditor/suneditor-react je oficiální komponenta Reactu. Každá volba editoru prochází beze změny a engine se načítá pouze na straně klienta, takže funguje v Next.js bez next/dynamic.",
+		"readmeNote": "Tato stránka je soubor README balíčku nainstalované verze, přeložený. Soubory Playground a Getting Started vygenerují kód pro stejnou verzi.",
+		"playgroundCta": "Generování kódu React v Playground",
+		"unavailable": "Soubor README se momentálně nepodařilo načíst. Přečtěte si ho na GitHubu nebo npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "„window is not defined“ při vykreslování na serveru",
 				"symptom": "Build nebo vykreslování na serveru selže s chybou ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor přistupuje k window, document a navigator hned při importu modulu, takže ho nelze importovat na serveru.",
-				"fix": "Importujte a vytvářejte editor pouze v prohlížeči. V Next.js App Router umístěte editor do klientské komponenty a načtěte ho přes next/dynamic se ssr: false. V Nuxtu ho obalte do ClientOnly, ve SvelteKitu ho importujte uvnitř onMount."
+				"fix": "Importujte a vytvořte editor pouze v prohlížeči. V Next.js App Routeru vložte editor do klientské komponenty a načtěte jej s next/dynamic a ssr: false. V Nuxtu jej zabalte do ClientOnly; ve SvelteKitu jej importujte do onMount. S @suneditor/suneditor-react nic z toho není potřeba: komponenta načte engine pouze v prohlížeči."
 			},
 			"plugin": {
 				"title": "Chyba: „The button name of a plugin that does not exist“",
@@ -873,7 +881,7 @@
 				"title": "Editor se v React vývojovém režimu vytvoří dvakrát",
 				"symptom": "Ve vývojovém režimu je panel nástrojů zdvojený nebo editor při připojení probliká.",
 				"cause": "React StrictMode spouští efekty dvakrát (připojení, odpojení, připojení). Bez úklidové funkce vytvoří druhé spuštění další instanci.",
-				"fix": "Vraťte z efektu úklidovou funkci, která volá destroy(). Příklady v sekci Začínáme používají právě tento vzor."
+				"fix": "Vrátí vyčištění z efektu, který volá destroy(). Příklady Začínáme používají tento vzor. Komponenta @suneditor/suneditor-react se o toto vyčištění postará sama."
 			},
 			"css": {
 				"title": "Editor se vykresluje bez stylů",

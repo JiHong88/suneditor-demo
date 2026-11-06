@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
-import { generateCode, getCodeLang } from "../_lib/codeGenerator";
+import { generateCode, getCodeLang, type ReactApi } from "../_lib/codeGenerator";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import type { CodeFramework } from "../_lib/playgroundState";
 import { OpenInStackBlitzButton } from "./PlaygroundStackBlitz";
@@ -22,6 +22,13 @@ const FRAMEWORKS: { key: CodeFramework; name: string; title?: string; icon: stri
 	{ key: "webcomponents", name: "WC", title: "Web Components", icon: "/logos/web-components.svg" },
 ];
 
+/** React tab flavor: the official component (default) or `suneditor.create()` in an effect. Labels are code identifiers, so they are not translated. */
+const REACT_APIS: { key: ReactApi; label: string; title: string }[] = [
+	{ key: "wrapper", label: "@suneditor/suneditor-react", title: "Official React component" },
+	{ key: "direct", label: "suneditor.create()", title: "Engine API without the React component" },
+];
+const REACT_API_STORAGE_KEY = "playground.reactApi";
+
 type Props = {
 	state: PlaygroundState;
 };
@@ -30,10 +37,29 @@ export default function PlaygroundCodePanel({ state }: Props) {
 	const t = useTranslations("Playground");
 	const tc = useTranslations("Common");
 	const [framework, setFramework] = useState<CodeFramework>("javascript-npm");
+	const [reactApi, setReactApi] = useState<ReactApi>("wrapper");
 	const [open, setOpen] = useState(true);
 	const [copied, setCopied] = useState(false);
 
-	const code = useMemo(() => generateCode(state, framework), [state, framework]);
+	// Remember the React flavor across visits (per browser)
+	useEffect(() => {
+		try {
+			const saved = localStorage.getItem(REACT_API_STORAGE_KEY);
+			if (saved === "wrapper" || saved === "direct") setReactApi(saved);
+		} catch {
+			/* ignore */
+		}
+	}, []);
+	const selectReactApi = (api: ReactApi) => {
+		setReactApi(api);
+		try {
+			localStorage.setItem(REACT_API_STORAGE_KEY, api);
+		} catch {
+			/* ignore */
+		}
+	};
+
+	const code = useMemo(() => generateCode(state, framework, reactApi), [state, framework, reactApi]);
 	const lang = getCodeLang(framework);
 
 	const handleCopy = () => {
@@ -55,7 +81,7 @@ export default function PlaygroundCodePanel({ state }: Props) {
 
 						<div className='flex items-center gap-1'>
 							{/* StackBlitz */}
-							<OpenInStackBlitzButton state={state} framework={framework} />
+							<OpenInStackBlitzButton state={state} framework={framework} reactApi={reactApi} />
 
 							<div className='mx-1 h-4 w-px bg-border' />
 
@@ -83,6 +109,29 @@ export default function PlaygroundCodePanel({ state }: Props) {
 							</button>
 						))}
 					</div>
+
+					{/* React flavor — component vs. engine API */}
+					{framework === "react" && (
+						<div className='flex items-center gap-1 mt-1 pb-1'>
+							<div className='inline-flex rounded-md border bg-muted/40 p-0.5' role='radiogroup' aria-label='React API'>
+								{REACT_APIS.map((api) => (
+									<button
+										key={api.key}
+										type='button'
+										role='radio'
+										aria-checked={reactApi === api.key}
+										title={api.title}
+										onClick={() => selectReactApi(api.key)}
+										className={`rounded px-2 py-1 font-mono text-[11px] transition-colors ${
+											reactApi === api.key ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+										}`}
+									>
+										{api.label}
+									</button>
+								))}
+							</div>
+						</div>
+					)}
 				</div>
 
 				{/* Code block */}

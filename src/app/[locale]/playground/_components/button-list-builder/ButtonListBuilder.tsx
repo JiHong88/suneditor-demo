@@ -553,7 +553,7 @@ export default function ButtonListBuilder({
 				>
 					<div className='flex-1 flex min-h-0'>
 						{/* Palette */}
-						<div className='w-56 shrink-0 border-e bg-muted/30 dark:bg-[#1c2128] p-3 overflow-y-auto'>
+						<div className='w-56 shrink-0 border-e bg-muted/30 dark:bg-surface-inset p-3 overflow-y-auto'>
 							<BuilderPalette
 								usedButtons={usedButtons}
 								onAdd={handlePaletteAdd}

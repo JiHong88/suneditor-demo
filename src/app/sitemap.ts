@@ -9,6 +9,7 @@ const BASE_URL = "https://suneditor.com";
 const STATIC_PATHS = [
 	"",
 	"/getting-started",
+	"/react",
 	"/options",
 	"/feature-demo",
 	"/playground",

@@ -32,7 +32,8 @@
 			"troubleshooting": "Yaygın hatalar ve kurulum sorunları için çözümler",
 			"migration": "v2'den yükseltme: seçenek dönüştürücü ve uyumsuz değişiklikler",
 			"options": "Tüm editör ve eklenti seçenekleri",
-			"docs-api": "Metotlar, olaylar ve tipler"
+			"docs-api": "Metotlar, olaylar ve tipler",
+			"react": "Resmi React bileşeni: kurulum, özellikler, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Canlı olarak deneyin",
 			"desc": "Gerçek npm içe aktarmaları, tam paketleyici — kodu düzenleyin ve sonucu anında görün."
 		}
+	},
+	"ReactGuide": {
+		"title": "React için SunEditor",
+		"subtitle": "@suneditor/suneditor-react resmi React bileşenidir. Her editör seçeneği değiştirilmeden geçer ve motor yalnızca istemci tarafında yüklenir, bu nedenle Next.js'de next/dynamic olmadan çalışır.",
+		"readmeNote": "Bu sayfa, kurulu sürümün README dosyasının çevrilmiş halidir. Playground ve Başlangıç ​​kılavuzu aynı sürüm için kod üretir.",
+		"playgroundCta": "Playground içinde React kodu oluşturun",
+		"unavailable": "README dosyası şu anda yüklenemedi. Lütfen GitHub veya npm üzerinden okuyun."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "Sunucu tarafı işlemede “window is not defined” hatası",
 				"symptom": "Derleme veya sunucu tarafı işleme ReferenceError: window is not defined hatasıyla başarısız oluyor (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor, modül içe aktarılır aktarılmaz window, document ve navigator nesnelerini okur; bu yüzden sunucuda içe aktarılamaz.",
-				"fix": "Editörü yalnızca tarayıcıda içe aktarın ve oluşturun. Next.js App Router'da editörü bir istemci bileşenine koyun ve next/dynamic ile ssr: false kullanarak yükleyin. Nuxt'ta ClientOnly ile sarın; SvelteKit'te onMount içinde içe aktarın."
+				"fix": "Editörü yalnızca tarayıcıda içe aktarın ve oluşturun. Next.js Uygulama Yönlendiricisinde, editörü bir istemci bileşenine yerleştirin ve next/dynamic ve ssr: false ile yükleyin. Nuxt'ta, ClientOnly içine sarın; SvelteKit'te, onMount içinde içe aktarın. @suneditor/suneditor-react ile bunların hiçbiri gerekli değildir: bileşen motoru yalnızca tarayıcıda yükler."
 			},
 			"plugin": {
 				"title": "Hata: “The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "React geliştirme modunda editör iki kez oluşturuluyor",
 				"symptom": "Geliştirme ortamında araç çubuğu çift görünüyor veya editör bağlanırken titriyor.",
 				"cause": "React StrictMode efektleri iki kez çalıştırır (bağlama, ayırma, bağlama). Temizleme fonksiyonu olmadan ikinci çalıştırma yeni bir örnek oluşturur.",
-				"fix": "Efektten destroy() çağıran bir temizleme fonksiyonu döndürün. Başlarken bölümündeki örnekler bu kalıbı kullanır."
+				"fix": "`destroy()` yöntemini çağıran efektten bir temizleme işlemi döndürün. Başlangıç ​​örnekleri bu kalıbı kullanır. `@suneditor/suneditor-react` bileşeni bu temizleme işlemini kendi başına halleder."
 			},
 			"css": {
 				"title": "Editör stiller olmadan görüntüleniyor",

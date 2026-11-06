@@ -293,7 +293,10 @@ export default function BuilderToolbarPreview({
 			return;
 		}
 		// Auto: follow page dark/light
-		const detect = () => (document.documentElement.classList.contains("dark") ? "dark" : "");
+		const detect = () => {
+			const cl = document.documentElement.classList;
+			return cl.contains("midnight") ? "midnight" : cl.contains("dark") ? "dark" : "";
+		};
 		setResolvedTheme(detect());
 		const onTheme = () => setResolvedTheme(detect());
 		window.addEventListener("themechange", onTheme);

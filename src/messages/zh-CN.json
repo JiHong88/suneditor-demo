@@ -32,7 +32,8 @@
 			"troubleshooting": "常见错误与配置问题的解决方法",
 			"migration": "从 v2 升级：选项转换器与不兼容变更",
 			"options": "编辑器与插件的全部选项",
-			"docs-api": "方法、事件与类型"
+			"docs-api": "方法、事件与类型",
+			"react": "官方 React 组件：安装、属性、Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "试试现场体验",
 			"desc": "真正的 npm 导入，完整的打包器——编辑代码并立即查看结果。"
 		}
+	},
+	"ReactGuide": {
+		"title": "React 的 SunEditor",
+		"subtitle": "@suneditor/suneditor-react 是官方的 React 组件。所有编辑器选项都原封不动地传递过来，引擎仅在客户端加载，因此无需使用 next/dynamic 即可在 Next.js 中正常工作。",
+		"readmeNote": "本页面是已安装版本的软件包 README 文件（已翻译）。Playground 和“入门指南”生成的代码也适用于同一版本。",
+		"playgroundCta": "在 Playground 中生成 React 代码",
+		"unavailable": "README 文件目前无法加载。请在 GitHub 或 npm 上查看。"
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "服务端渲染时出现“window is not defined”",
 				"symptom": "构建或服务端渲染失败，报错 ReferenceError: window is not defined（Next.js、Nuxt、SvelteKit、Remix）。",
 				"cause": "SunEditor 在模块被导入时就会访问 window、document 和 navigator，因此无法在服务端导入。",
-				"fix": "仅在浏览器中导入并创建编辑器。在 Next.js App Router 中，将编辑器放在客户端组件里，并通过 next/dynamic 配合 ssr: false 加载。在 Nuxt 中用 ClientOnly 包裹；在 SvelteKit 中在 onMount 内导入。"
+				"fix": "仅在浏览器中导入并创建编辑器。在 Next.js 应用路由中，将编辑器放在客户端组件中，并使用 `next/dynamic` 和 `ssr: false` 加载它。在 Nuxt 中，将其包装在 `ClientOnly` 中；在 SvelteKit 中，在 `onMount` 中导入它。使用 `@suneditor/suneditor-react` 则无需这些操作：该组件仅在浏览器中加载引擎。"
 			},
 			"plugin": {
 				"title": "错误：“The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "在 React 开发模式下编辑器被创建了两次",
 				"symptom": "开发环境中工具栏重复出现，或编辑器在挂载时闪烁。",
 				"cause": "React StrictMode 会将副作用运行两次（挂载、卸载、再挂载）。如果没有清理函数，第二次运行会再创建一个实例。",
-				"fix": "在副作用中返回一个调用 destroy() 的清理函数。入门示例中使用的就是这种模式。"
+				"fix": "返回调用 destroy() 的 effect 的清理结果。“入门示例”使用了这种模式。@suneditor/suneditor-react 组件会自行处理此清理工作。"
 			},
 			"css": {
 				"title": "编辑器显示时没有样式",

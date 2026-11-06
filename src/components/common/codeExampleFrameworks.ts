@@ -9,6 +9,7 @@ export type CodeFramework = {
 	accent: string;
 	kind: "language" | "framework";
 	snippet: string;
+	variants?: { key: string; label: string; snippet: string }[];
 };
 
 export const DEFAULT_FRAMEWORK_KEY: FrameworkKey = "javascript-cdn";

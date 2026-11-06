@@ -29,4 +29,5 @@ The `update-editor` skill runs the whole flow.
 - `npm run dev` — dev server
 - `npm run check` — lint + type check
 - `npm test` — vitest (integrity tests catch missing option/plugin wiring)
-- `npm run docs:generate` — regenerate `src/data/api/` from the installed suneditor (never edit those files by hand)
+- `npm run docs:generate` — regenerate `src/data/api/` from the installed suneditor and `src/data/react-guide/react-guide.en.md` from the installed `@suneditor/suneditor-react` README (never edit those files by hand)
+- `npm run react-guide:translate` — translate the React guide into the other locales (incremental, cached)

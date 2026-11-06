@@ -28,16 +28,25 @@ async function loadLangPack(locale: string): Promise<Record<string, string> | un
 	}
 }
 
-/** Site dark/light mode → editor theme name ("" = default). Follows the header toggle's `themechange` event. */
-export function useSiteTheme(): "dark" | "" {
-	const [dark, setDark] = useState(() => typeof document !== "undefined" && document.documentElement.classList.contains("dark"));
+export type SiteTheme = "light" | "dark" | "midnight";
+
+/** Current site theme from the `<html>` classes set by the theme toggle. */
+export function readSiteTheme(): SiteTheme {
+	if (typeof document === "undefined") return "light";
+	const cl = document.documentElement.classList;
+	return cl.contains("midnight") ? "midnight" : cl.contains("dark") ? "dark" : "light";
+}
+
+/** Site theme → editor theme name ("" = default). Follows the header toggle's `themechange` event. */
+export function useSiteTheme(): "dark" | "midnight" | "" {
+	const [theme, setTheme] = useState<SiteTheme>(readSiteTheme);
 	useEffect(() => {
-		setDark(document.documentElement.classList.contains("dark"));
-		const handler = (e: Event) => setDark((e as CustomEvent).detail === "dark");
+		setTheme(readSiteTheme());
+		const handler = () => setTheme(readSiteTheme());
 		window.addEventListener("themechange", handler);
 		return () => window.removeEventListener("themechange", handler);
 	}, []);
-	return dark ? "dark" : "";
+	return theme === "light" ? "" : theme;
 }
 
 type ImageUploadBeforeParams = { info: { files: FileList }; handler: (newInfo?: unknown) => void };

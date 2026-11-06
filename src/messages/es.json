@@ -32,7 +32,8 @@
 			"troubleshooting": "Soluciones a errores comunes y problemas de configuración",
 			"migration": "Actualizar desde v2: conversor de opciones y cambios incompatibles",
 			"options": "Todas las opciones del editor y de los plugins",
-			"docs-api": "Métodos, eventos y tipos"
+			"docs-api": "Métodos, eventos y tipos",
+			"react": "Componente oficial de React: instalación, propiedades, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Pruébalo en vivo",
 			"desc": "Importaciones reales de npm, empaquetador completo: edita el código y ve el resultado al instante."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor para React",
+		"subtitle": "@suneditor/suneditor-react es el componente oficial de React. Todas las opciones del editor se conservan sin cambios, y el motor se carga solo en el cliente, por lo que funciona en Next.js sin next/dynamic.",
+		"readmeNote": "Esta página es el archivo README del paquete de la versión instalada, traducido. Los archivos Playground y Getting Started generan código para la misma versión.",
+		"playgroundCta": "Generar código React en el Playground",
+		"unavailable": "El archivo README no se pudo cargar en este momento. Léalo en GitHub o npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "«window is not defined» durante el renderizado en el servidor",
 				"symptom": "La compilación o el renderizado en el servidor falla con ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor accede a window, document y navigator en cuanto se importa el módulo, por lo que no se puede importar en el servidor.",
-				"fix": "Importa y crea el editor solo en el navegador. En el Next.js App Router, coloca el editor en un componente de cliente y cárgalo con next/dynamic y ssr: false. En Nuxt, envuélvelo en ClientOnly; en SvelteKit, impórtalo dentro de onMount."
+				"fix": "Importa y crea el editor solo en el navegador. En el enrutador de aplicaciones de Next.js, coloca el editor en un componente cliente y cárgalo con next/dynamic y ssr: false. En Nuxt, envuélvelo en ClientOnly; en SvelteKit, impórtalo dentro de onMount. Con @suneditor/suneditor-react no es necesario nada de esto: el componente carga el motor solo en el navegador."
 			},
 			"plugin": {
 				"title": "Error: «The button name of a plugin that does not exist»",
@@ -873,7 +881,7 @@
 				"title": "El editor se crea dos veces en el modo de desarrollo de React",
 				"symptom": "En desarrollo, la barra de herramientas aparece duplicada o el editor parpadea al montarse.",
 				"cause": "React StrictMode ejecuta los efectos dos veces (montar, desmontar, montar). Sin una función de limpieza, la segunda ejecución crea otra instancia.",
-				"fix": "Devuelve desde el efecto una función de limpieza que llame a destroy(). Los ejemplos de la guía «Empezando» siguen este patrón."
+				"fix": "Devuelve una limpieza desde el efecto que llama a destroy(). Los ejemplos de la Guía de inicio utilizan este patrón. El componente @suneditor/suneditor-react se encarga de esta limpieza por sí mismo."
 			},
 			"css": {
 				"title": "El editor se muestra sin estilos",

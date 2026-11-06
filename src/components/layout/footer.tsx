@@ -19,7 +19,7 @@ export default function Footer({ version = "" }: FooterProps) {
 	if (HIDDEN_ROUTES.some((route) => pathname.includes(route))) return null;
 
 	return (
-		<footer role='contentinfo' className='pb-20 border-t border-slate-200/60 dark:border-white/10 bg-slate-50/60 dark:bg-[#151b23]'>
+		<footer role='contentinfo' className='pb-20 border-t border-slate-200/60 dark:border-white/10 bg-slate-50/60 dark:bg-surface-header'>
 			<div className='max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600 dark:text-slate-300'>
 				<div>
 					<div className='mb-3 flex items-center gap-2'>

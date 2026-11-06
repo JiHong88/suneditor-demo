@@ -25,24 +25,32 @@ export function resolveGuideSlug(segments: string[]): string | undefined {
 	return undefined;
 }
 
-export async function fetchGitHubMarkdown(slugKey: string): Promise<string | null> {
-	const filePath = GUIDE_FILES[slugKey];
-	if (filePath === undefined) return null;
-
+async function fetchRaw(url: string): Promise<string | null> {
 	const token = process.env.GITHUB_TOKEN;
 	const headers: Record<string, string> = {
 		"User-Agent": "suneditor-demo",
 	};
 	if (token) headers.Authorization = `Bearer ${token}`;
 
-	const res = await fetch(`${BASE_URL}/${filePath}`, {
+	const res = await fetch(url, {
 		headers,
 		next: { revalidate: REVALIDATE },
 	});
 
 	if (!res.ok) {
-		console.error(`[githubMarkdown] Failed to fetch ${filePath}: ${res.status}`);
+		console.error(`[githubMarkdown] Failed to fetch ${url}: ${res.status}`);
 		return null;
 	}
 	return res.text();
 }
+
+export async function fetchGitHubMarkdown(slugKey: string): Promise<string | null> {
+	const filePath = GUIDE_FILES[slugKey];
+	if (filePath === undefined) return null;
+	return fetchRaw(`${BASE_URL}/${filePath}`);
+}
+
+/** `@suneditor/suneditor-react` repository — the `/react` page renders its README. */
+export const REACT_WRAPPER_REPO = "https://github.com/suneditor/suneditor-react";
+export const REACT_WRAPPER_NPM = "https://www.npmjs.com/package/@suneditor/suneditor-react";
+

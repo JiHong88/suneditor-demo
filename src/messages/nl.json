@@ -32,7 +32,8 @@
 			"troubleshooting": "Oplossingen voor veelvoorkomende fouten en installatieproblemen",
 			"migration": "Upgraden vanaf v2: optieconverter en brekende wijzigingen",
 			"options": "Alle editor- en pluginopties",
-			"docs-api": "Methoden, events en types"
+			"docs-api": "Methoden, events en types",
+			"react": "Officiële React-component: installeren, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Probeer het live",
 			"desc": "Echte npm-imports, volledige bundler — bewerk de code en zie het resultaat direct."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor voor React",
+		"subtitle": "@suneditor/suneditor-react is de officiële React-component. Alle editoropties worden ongewijzigd doorgegeven en de engine wordt alleen aan de clientzijde geladen, waardoor deze werkt in Next.js zonder next/dynamic.",
+		"readmeNote": "Deze pagina bevat de README van het geïnstalleerde pakket, vertaald. De pagina's Playground en Getting Started geven code voor dezelfde versie.",
+		"playgroundCta": "Genereer React-code in de Playground",
+		"unavailable": "Het README-bestand kon momenteel niet worden geladen. Lees het op GitHub of via npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "„window is not defined” tijdens server-rendering",
 				"symptom": "De build of de server-render mislukt met ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor leest window, document en navigator zodra de module wordt geïmporteerd, dus het kan niet op de server worden geïmporteerd.",
-				"fix": "Importeer en maak de editor alleen in de browser. Plaats de editor in de Next.js App Router in een clientcomponent en laad hem met next/dynamic en ssr: false. Wikkel hem in Nuxt in ClientOnly; importeer hem in SvelteKit binnen onMount."
+				"fix": "Importeer en maak de editor alleen in de browser aan. Plaats de editor in de Next.js App Router in een clientcomponent en laad deze met `next/dynamic` en `ssr: false`. In Nuxt wikkel je de editor in `ClientOnly`; in SvelteKit importeer je hem in `onMount`. Met `@suneditor/suneditor-react` is dit allemaal niet nodig: de component laadt de engine alleen in de browser."
 			},
 			"plugin": {
 				"title": "Fout: “The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "De editor wordt twee keer aangemaakt in de React-ontwikkelmodus",
 				"symptom": "Tijdens de ontwikkeling is de werkbalk dubbel, of de editor flikkert bij het mounten.",
 				"cause": "React StrictMode voert effects twee keer uit (mount, unmount, mount). Zonder cleanup maakt de tweede uitvoering nog een instantie aan.",
-				"fix": "Retourneer vanuit het effect een cleanup-functie die destroy() aanroept. De voorbeelden in Aan de slag gebruiken dit patroon."
+				"fix": "Retourneer een opruimactie vanuit het effect dat `destroy()` aanroept. De voorbeelden in de handleiding 'Aan de slag' gebruiken dit patroon. De component `@suneditor/suneditor-react` handelt deze opruimactie zelf af."
 			},
 			"css": {
 				"title": "De editor wordt zonder stijlen weergegeven",

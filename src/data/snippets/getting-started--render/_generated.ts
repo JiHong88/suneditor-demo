@@ -21,7 +21,7 @@ export class ContentViewerComponent {
 }`;
 
 export const RENDER_HTML_CDN = `<!-- 1. SunEditor contents CSS required -->
-<link href="https://cdn.jsdelivr.net/npm/suneditor@3.3.3/dist/suneditor-contents.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/suneditor@3.4.1/dist/suneditor-contents.min.css" rel="stylesheet">
 
 <!-- 2. sun-editor-editable Wrap with class -->
 <div class="sun-editor-editable">

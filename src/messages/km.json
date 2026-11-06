@@ -32,7 +32,8 @@
 			"troubleshooting": "ដំណោះស្រាយសម្រាប់កំហុសទូទៅ និងបញ្ហាការកំណត់",
 			"migration": "ដំឡើងពី v2៖ កម្មវិធីបម្លែងជម្រើស និងការផ្លាស់ប្ដូរដែលមិនត្រូវគ្នា",
 			"options": "ជម្រើសទាំងអស់របស់កម្មវិធីកែសម្រួល និងកម្មវិធីជំនួយ",
-			"docs-api": "មេធូដ ព្រឹត្តិការណ៍ និងប្រភេទ"
+			"docs-api": "មេធូដ ព្រឹត្តិការណ៍ និងប្រភេទ",
+			"react": "សមាសភាគ React ផ្លូវការ៖ ដំឡើង, ឧបករណ៍, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "សាកល្បងវាផ្ទាល់",
 			"desc": "ការនាំចូល npm ពិតប្រាកដ កម្មវិធីចងក្រងពេញលេញ — កែសម្រួលកូដ ហើយមើលលទ្ធផលភ្លាមៗ។"
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor សម្រាប់ប្រតិកម្ម",
+		"subtitle": "@suneditor/suneditor-react គឺជាសមាសភាគ React ផ្លូវការ។ ជម្រើសកម្មវិធីនិពន្ធនីមួយៗឆ្លងកាត់ដោយមិនមានការផ្លាស់ប្តូរ ហើយម៉ាស៊ីននឹងផ្ទុកតែលើម៉ាស៊ីនភ្ញៀវប៉ុណ្ណោះ ដូច្នេះវាដំណើរការនៅក្នុង Next.js ដោយមិនចាំបាច់ប្រើ next/dynamic។",
+		"readmeNote": "ទំព័រនេះគឺជាកញ្ចប់ README នៃកំណែដែលបានដំឡើង ដែលបានបកប្រែ។ Playground និង Getting Started បញ្ចេញកូដសម្រាប់កំណែដូចគ្នា។",
+		"playgroundCta": "បង្កើតកូដ React នៅក្នុង Playground",
+		"unavailable": "មិនអាចផ្ទុក README នៅពេលនេះបានទេ។ សូមអានវានៅលើ GitHub ឬ npm។"
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "“window is not defined” ក្នុងពេលបង្ហាញលើម៉ាស៊ីនមេ",
 				"symptom": "ការចងក្រង ឬការបង្ហាញលើម៉ាស៊ីនមេបរាជ័យដោយកំហុស ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix)។",
 				"cause": "SunEditor អាន window, document និង navigator ភ្លាមៗនៅពេលម៉ូឌុលត្រូវបាននាំចូល ដូច្នេះមិនអាចនាំចូលវានៅលើម៉ាស៊ីនមេបានទេ។",
-				"fix": "នាំចូល និងបង្កើតកម្មវិធីនិពន្ធតែនៅក្នុងកម្មវិធីរុករកប៉ុណ្ណោះ។ នៅក្នុង Next.js App Router សូមដាក់កម្មវិធីនិពន្ធក្នុង client component ហើយផ្ទុកវាដោយប្រើ next/dynamic ជាមួយ ssr: false។ នៅក្នុង Nuxt សូមរុំវាដោយ ClientOnly ហើយនៅក្នុង SvelteKit សូមនាំចូលវានៅខាងក្នុង onMount។"
+				"fix": "នាំចូល និងបង្កើតកម្មវិធីនិពន្ធតែនៅក្នុងកម្មវិធីរុករកតាមអ៊ីនធឺណិតប៉ុណ្ណោះ។ នៅក្នុង Next.js App Router ដាក់កម្មវិធីនិពន្ធនៅក្នុងសមាសភាគអតិថិជន ហើយផ្ទុកវាជាមួយ next/dynamic និង ssr: false។ នៅក្នុង Nuxt រុំវានៅក្នុង ClientOnly; នៅក្នុង SvelteKit នាំចូលវានៅខាងក្នុង onMount។ ជាមួយ @suneditor/suneditor-react គ្មានអ្វីមួយក្នុងចំណោមនេះទេ៖ សមាសភាគផ្ទុកម៉ាស៊ីននៅក្នុងកម្មវិធីរុករកតាមអ៊ីនធឺណិតតែប៉ុណ្ណោះ។"
 			},
 			"plugin": {
 				"title": "កំហុស៖ “The button name of a plugin that does not exist”",
@@ -873,7 +881,7 @@
 				"title": "កម្មវិធីនិពន្ធត្រូវបានបង្កើតពីរដងក្នុងរបៀបអភិវឌ្ឍរបស់ React",
 				"symptom": "ក្នុងពេលអភិវឌ្ឍ របារឧបករណ៍ត្រូវបានស្ទួន ឬកម្មវិធីនិពន្ធភ្លឹបភ្លែតនៅពេល mount។",
 				"cause": "React StrictMode ដំណើរការ effect ពីរដង (mount, unmount, mount)។ បើគ្មាន cleanup ទេ ការដំណើរការលើកទីពីរនឹងបង្កើត instance មួយទៀត។",
-				"fix": "ត្រឡប់ cleanup function ពី effect ដែលហៅ destroy()។ ឧទាហរណ៍ក្នុងផ្នែក «ការចាប់ផ្តើម» ប្រើលំនាំនេះ។"
+				"fix": "ត្រឡប់​ការសម្អាត​ពី​បែបផែន​ដែល​ហៅ destroy()។ ឧទាហរណ៍ Getting Started ប្រើ​លំនាំ​នេះ។ @suneditor/suneditor-react component ដោះស្រាយ​ការសម្អាត​នេះ​ដោយ​ខ្លួនឯង។"
 			},
 			"css": {
 				"title": "កម្មវិធីនិពន្ធបង្ហាញដោយគ្មានរចនាប័ទ្ម",

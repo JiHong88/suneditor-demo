@@ -32,7 +32,8 @@
 			"troubleshooting": "Løsninger på almindelige fejl og opsætningsproblemer",
 			"migration": "Opgradering fra v2: konverter til indstillinger og bagudinkompatible ændringer",
 			"options": "Alle editor- og plugin-indstillinger",
-			"docs-api": "Metoder, hændelser og typer"
+			"docs-api": "Metoder, hændelser og typer",
+			"react": "Officiel React-komponent: installation, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "Prøv det live",
 			"desc": "Ægte npm-importer, fuld bundler — rediger kode og se resultatet med det samme."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor til React",
+		"subtitle": "@suneditor/suneditor-react er den officielle React-komponent. Alle editor-indstillinger passerer uændrede, og enginen indlæses kun på klienten, så den fungerer i Next.js uden next/dynamic.",
+		"readmeNote": "Denne side er pakken README for den installerede version, oversat. Playground og Introduktion udsender kode for den samme version.",
+		"playgroundCta": "Generer React-kode i Playground",
+		"unavailable": "README-filen kunne ikke indlæses lige nu. Læs den på GitHub eller npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "»window is not defined« under server-rendering",
 				"symptom": "Buildet eller server-renderingen fejler med ReferenceError: window is not defined (Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor læser window, document og navigator, så snart modulet importeres, så det kan ikke importeres på serveren.",
-				"fix": "Importér og opret kun editoren i browseren. I Next.js App Router skal du placere editoren i en klientkomponent og indlæse den med next/dynamic og ssr: false. I Nuxt skal du omslutte den med ClientOnly; i SvelteKit skal du importere den inde i onMount."
+				"fix": "Importer og opret editoren kun i browseren. I Next.js App Router skal du placere editoren i en klientkomponent og indlæse den med next/dynamic og ssr: false. I Nuxt skal du pakke den ind i ClientOnly; i SvelteKit skal du importere den ind i onMount. Med @suneditor/suneditor-react er intet af dette nødvendigt: komponenten indlæser kun engine'en i browseren."
 			},
 			"plugin": {
 				"title": "Fejl: »The button name of a plugin that does not exist«",
@@ -873,7 +881,7 @@
 				"title": "Editoren oprettes to gange i Reacts udviklingstilstand",
 				"symptom": "Under udvikling bliver værktøjslinjen dubleret, eller editoren flimrer ved mount.",
 				"cause": "React StrictMode kører effects to gange (mount, unmount, mount). Uden en oprydningsfunktion opretter den anden kørsel endnu en instans.",
-				"fix": "Returnér en oprydningsfunktion fra effecten, der kalder destroy(). Eksemplerne i Kom godt i gang bruger dette mønster."
+				"fix": "Returner en oprydning fra den effekt, der kalder destroy(). Eksemplerne i \"Kom godt i gang\" bruger dette mønster. Komponenten @suneditor/suneditor-react håndterer selv denne oprydning."
 			},
 			"css": {
 				"title": "Editoren vises uden styles",

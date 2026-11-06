@@ -32,7 +32,8 @@
 			"troubleshooting": "פתרונות לשגיאות נפוצות ולבעיות הגדרה",
 			"migration": "שדרוג מ-v2: ממיר אפשרויות ושינויים שוברי תאימות",
 			"options": "כל האפשרויות של העורך והתוספים",
-			"docs-api": "מתודות, אירועים וטיפוסים"
+			"docs-api": "מתודות, אירועים וטיפוסים",
+			"react": "רכיב רשמי של React: install, props, Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "נסה את זה בשידור חי",
 			"desc": "ייבוא ​​npm אמיתי, bundler מלא - ערוך קוד וראה את התוצאה באופן מיידי."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor עבור ריאקט",
+		"subtitle": "@suneditor/suneditor-react הוא הרכיב הרשמי של React. כל אפשרות עריכה עוברת ללא שינוי, והמנוע נטען רק על הלקוח, כך שהוא עובד ב-Next.js ללא next/dynamic.",
+		"readmeNote": "דף זה הוא קובץ README של הגרסה המותקנת, מתורגם. ה-Playground וה-Getting Started פולטים קוד עבור אותה גרסה.",
+		"playgroundCta": "צור קוד React ב-Playground",
+		"unavailable": "לא ניתן היה לטעון את קובץ ה-README כרגע. קרא אותו ב-GitHub או ב-npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "\"window is not defined\" בזמן רינדור בצד השרת",
 				"symptom": "הבנייה או הרינדור בשרת נכשלים עם השגיאה ReferenceError: window is not defined (ב-Next.js, Nuxt, SvelteKit, Remix).",
 				"cause": "SunEditor קורא את window, document ו-navigator מיד כשהמודול מיובא, ולכן אי אפשר לייבא אותו בשרת.",
-				"fix": "ייבא וצור את העורך רק בדפדפן. ב-Next.js App Router, שים את העורך ברכיב לקוח (client component) וטען אותו באמצעות next/dynamic עם ssr: false. ב-Nuxt, עטוף אותו ב-ClientOnly; ב-SvelteKit, ייבא אותו בתוך onMount."
+				"fix": "ייבא וצור את העורך רק בדפדפן. בנתב האפליקציות Next.js, הכנס את העורך לרכיב client וטען אותו עם next/dynamic ו-ssr: false. ב-Nuxt, עטוף אותו ב-ClientOnly; ב-SvelteKit, ייבא אותו לתוך onMount. עם @suneditor/suneditor-react אין צורך בכך: הרכיב טוען את המנוע רק בדפדפן."
 			},
 			"plugin": {
 				"title": "שגיאה: \"The button name of a plugin that does not exist\"",
@@ -873,7 +881,7 @@
 				"title": "העורך נוצר פעמיים במצב פיתוח של React",
 				"symptom": "במצב פיתוח סרגל הכלים מוכפל, או שהעורך מהבהב בזמן הטעינה (mount).",
 				"cause": "React StrictMode מריץ effects פעמיים (mount, unmount, mount). ללא פונקציית ניקוי, ההרצה השנייה יוצרת מופע נוסף.",
-				"fix": "החזר מה-effect פונקציית ניקוי שקוראת ל-destroy(). הדוגמאות ב\"תחילת העבודה\" משתמשות בדפוס הזה."
+				"fix": "החזרת ניקוי מהאפקט שקורא ל-destroy(). הדוגמאות של Getting Started משתמשות בתבנית זו. הרכיב @suneditor/suneditor-react מטפל בניקוי זה בעצמו."
 			},
 			"css": {
 				"title": "העורך מוצג ללא עיצוב",

@@ -11,7 +11,7 @@
  */
 
 /** SunEditor 버전 및 CDN URL — @/store/version에서 관리 */
-export { SUNEDITOR_VERSION, CDN_CSS, CDN_CONTENTS_CSS, CDN_JS } from "@/store/version";
+export { SUNEDITOR_VERSION, SUNEDITOR_REACT_VERSION, CDN_CSS, CDN_CONTENTS_CSS, CDN_JS } from "@/store/version";
 
 /** getting-started 및 frameworks.ts에서 기본 에디터 콘텐츠로 사용 */
 export const DEFAULT_VALUE = "<p>Hello SunEditor</p>";

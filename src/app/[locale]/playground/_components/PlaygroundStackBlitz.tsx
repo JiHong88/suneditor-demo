@@ -3,8 +3,8 @@
 import sdk from "@stackblitz/sdk";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SUNEDITOR_VERSION } from "@/data/snippets/editorPresets";
-import { generateCode, getNpmDeps } from "../_lib/codeGenerator";
+import { SUNEDITOR_VERSION, SUNEDITOR_REACT_VERSION } from "@/data/snippets/editorPresets";
+import { generateCode, getNpmDeps, type ReactApi } from "../_lib/codeGenerator";
 import type { PlaygroundState, CodeFramework } from "../_lib/playgroundState";
 
 // mathjax-full/js/components/version.js uses eval('require') to read its package.json.
@@ -44,7 +44,7 @@ function getVanillaProject(code: string, state: PlaygroundState) {
 	};
 }
 
-function getReactProject(code: string, state: PlaygroundState) {
+function getReactProject(code: string, state: PlaygroundState, reactApi: ReactApi) {
 	return {
 		title: "SunEditor - React",
 		template: "node" as const,
@@ -78,6 +78,7 @@ export default defineConfig({ plugins: [react()], ${MATHJAX_VITE_DEFINE} });`,
 					scripts: { dev: "vite", build: "vite build" },
 					dependencies: {
 						suneditor: SUNEDITOR_VERSION,
+						...(reactApi === "wrapper" && { "@suneditor/suneditor-react": `^${SUNEDITOR_REACT_VERSION}` }),
 						...getNpmDeps(state),
 						react: "^18",
 						"react-dom": "^18",
@@ -279,10 +280,10 @@ function getWebComponentsProject(code: string, state: PlaygroundState) {
 	};
 }
 
-function getProject(framework: CodeFramework, code: string, state: PlaygroundState) {
+function getProject(framework: CodeFramework, code: string, state: PlaygroundState, reactApi: ReactApi) {
 	switch (framework) {
 		case "react":
-			return getReactProject(code, state);
+			return getReactProject(code, state, reactApi);
 		case "vue":
 			return getVueProject(code, state);
 		case "angular":
@@ -298,7 +299,7 @@ function getProject(framework: CodeFramework, code: string, state: PlaygroundSta
 
 /* ── Public: "Open in StackBlitz" button ──────────────── */
 
-export function OpenInStackBlitzButton({ state, framework }: { state: PlaygroundState; framework: CodeFramework }) {
+export function OpenInStackBlitzButton({ state, framework, reactApi = "wrapper" }: { state: PlaygroundState; framework: CodeFramework; reactApi?: ReactApi }) {
 	return (
 		<Button
 			size='sm'
@@ -308,8 +309,8 @@ export function OpenInStackBlitzButton({ state, framework }: { state: Playground
 			onClick={() => {
 				// CDN scripts can't load in StackBlitz WebContainers — use npm version instead
 				const sbFramework = framework === "javascript-cdn" ? "javascript-npm" : framework;
-				const code = generateCode(state, sbFramework);
-				const project = getProject(sbFramework, code, state);
+				const code = generateCode(state, sbFramework, reactApi);
+				const project = getProject(sbFramework, code, state, reactApi);
 				sdk.openProject(project);
 			}}
 		>

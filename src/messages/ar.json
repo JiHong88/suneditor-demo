@@ -32,7 +32,8 @@
 			"troubleshooting": "حلول للأخطاء الشائعة ومشكلات الإعداد",
 			"migration": "الترقية من v2: محوّل الخيارات والتغييرات الجذرية",
 			"options": "جميع خيارات المحرر والإضافات",
-			"docs-api": "الدوال والأحداث والأنواع"
+			"docs-api": "الدوال والأحداث والأنواع",
+			"react": "مكون React الرسمي: التثبيت، الخصائص، Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "جربها مباشرة",
 			"desc": "استيراد حقيقي لـ npm، أداة تجميع كاملة - قم بتحرير الكود وشاهد النتيجة على الفور."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor لـ React",
+		"subtitle": "@suneditor/suneditor-react هو المكون الرسمي لـ React. يتم تمرير جميع خيارات المحرر دون تغيير، ويتم تحميل المحرك على جانب العميل فقط، لذا فهو يعمل في Next.js بدون next/dynamic.",
+		"readmeNote": "هذه الصفحة هي ملف README الخاص بالحزمة للإصدار المُثبّت، مترجمًا. يُصدر كل من Playground وGetting Started رمزًا برمجيًا لنفس الإصدار.",
+		"playgroundCta": "قم بإنشاء كود React في Playground",
+		"unavailable": "لم يتم تحميل ملف README الآن. يمكنك قراءته على GitHub أو npm."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "الخطأ «window is not defined» أثناء العرض على الخادم",
 				"symptom": "يفشل البناء أو العرض على الخادم مع الخطأ ReferenceError: window is not defined (في Next.js و Nuxt و SvelteKit و Remix).",
 				"cause": "يقرأ SunEditor الكائنات window و document و navigator فور استيراد الوحدة، لذا لا يمكن استيراده على الخادم.",
-				"fix": "استورد المحرر وأنشئه في المتصفح فقط. في Next.js App Router، ضع المحرر في مكوّن عميل (client component) وحمّله باستخدام next/dynamic مع ssr: false. وفي Nuxt، غلّفه بـ ClientOnly؛ وفي SvelteKit، استورده داخل onMount."
+				"fix": "استورد وأنشئ المحرر في المتصفح فقط. في Next.js App Router، ضع المحرر في مكون العميل وقم بتحميله باستخدام next/dynamic و ssr: false. في Nuxt، قم بتغليفه باستخدام ClientOnly؛ في SvelteKit، استورده داخل onMount. مع @suneditor/suneditor-react، لا حاجة لكل هذا: يقوم المكون بتحميل المحرك في المتصفح فقط."
 			},
 			"plugin": {
 				"title": "خطأ: «The button name of a plugin that does not exist»",
@@ -873,7 +881,7 @@
 				"title": "يُنشأ المحرر مرتين في وضع التطوير في React",
 				"symptom": "في وضع التطوير يتكرر شريط الأدوات، أو يومض المحرر عند التركيب.",
 				"cause": "يشغّل React StrictMode التأثيرات (effects) مرتين (تركيب، ثم إلغاء تركيب، ثم تركيب). ومن دون دالة تنظيف، يُنشئ التشغيل الثاني نسخة أخرى.",
-				"fix": "أعِد من التأثير دالة تنظيف تستدعي destroy(). تستخدم أمثلة صفحة «البدء» هذا النمط."
+				"fix": "يُعيد هذا الإجراء عملية تنظيف من التأثير الذي يستدعي الدالة destroy(). تستخدم أمثلة \"البدء\" هذا النمط. ويتولى مكون @suneditor/suneditor-react عملية التنظيف هذه بنفسه."
 			},
 			"css": {
 				"title": "يظهر المحرر بلا أنماط",

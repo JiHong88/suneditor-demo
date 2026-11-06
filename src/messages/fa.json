@@ -32,7 +32,8 @@
 			"troubleshooting": "راه‌حل خطاهای رایج و مشکلات راه‌اندازی",
 			"migration": "ارتقا از v2: مبدل گزینه‌ها و تغییرات ناسازگار",
 			"options": "همهٔ گزینه‌های ویرایشگر و افزونه‌ها",
-			"docs-api": "متدها، رویدادها و نوع‌ها"
+			"docs-api": "متدها، رویدادها و نوع‌ها",
+			"react": "کامپوننت رسمی React: نصب، props، Next.js"
 		},
 		"Common": {
 			"CodeExamples": {
@@ -173,6 +174,13 @@
 			"title": "زنده امتحان کنید",
 			"desc": "ایمپورت‌های npm واقعی، bundler کامل - کد را ویرایش کنید و نتیجه را فوراً مشاهده کنید."
 		}
+	},
+	"ReactGuide": {
+		"title": "SunEditor برای ری‌اکت",
+		"subtitle": "‎@suneditor/suneditor-react کامپوننت رسمی React است. هر گزینه ویرایشگر بدون تغییر از آن عبور می‌کند و موتور فقط روی کلاینت بارگذاری می‌شود، بنابراین در Next.js بدون next/dynamic کار می‌کند.",
+		"readmeNote": "این صفحه، فایل README بسته‌ی نسخه نصب‌شده است که ترجمه شده است. Playground و Getting Started کد مربوط به همان نسخه را منتشر می‌کنند.",
+		"playgroundCta": "کد React را در Playground تولید کنید",
+		"unavailable": "فایل README در حال حاضر قابل بارگیری نیست. آن را در GitHub یا npm بخوانید."
 	},
 	"Playground": {
 		"title": "SunEditor Playground",
@@ -855,7 +863,7 @@
 				"title": "خطای «window is not defined» هنگام رندر سمت سرور",
 				"symptom": "بیلد یا رندر سمت سرور با خطای ReferenceError: window is not defined شکست می‌خورد (Next.js، Nuxt، SvelteKit، Remix).",
 				"cause": "SunEditor به محض ایمپورت شدن ماژول، window، document و navigator را می‌خواند، بنابراین نمی‌توان آن را در سمت سرور ایمپورت کرد.",
-				"fix": "ویرایشگر را فقط در مرورگر ایمپورت و ایجاد کنید. در Next.js App Router، ویرایشگر را در یک کامپوننت کلاینت قرار دهید و آن را با next/dynamic و ssr: false بارگذاری کنید. در Nuxt آن را درون ClientOnly قرار دهید؛ در SvelteKit آن را داخل onMount ایمپورت کنید."
+				"fix": "ویرایشگر را فقط در مرورگر وارد و ایجاد کنید. در Next.js App Router، ویرایشگر را در یک کامپوننت کلاینت قرار دهید و آن را با next/dynamic و ssr: false بارگذاری کنید. در Nuxt، آن را در ClientOnly قرار دهید؛ در SvelteKit، آن را داخل onMount وارد کنید. با @suneditor/suneditor-react هیچ یک از این کارها لازم نیست: کامپوننت موتور را فقط در مرورگر بارگذاری می‌کند."
 			},
 			"plugin": {
 				"title": "خطا: «The button name of a plugin that does not exist»",
@@ -873,7 +881,7 @@
 				"title": "ویرایشگر در حالت توسعه React دو بار ایجاد می‌شود",
 				"symptom": "در حالت توسعه، نوار ابزار تکراری می‌شود یا ویرایشگر هنگام mount چشمک می‌زند.",
 				"cause": "React StrictMode افکت‌ها را دو بار اجرا می‌کند (mount، unmount، mount). بدون تابع پاک‌سازی (cleanup)، اجرای دوم یک نمونه دیگر ایجاد می‌کند.",
-				"fix": "از افکت یک تابع پاک‌سازی برگردانید که destroy() را فراخوانی کند. مثال‌های «شروع به کار» از همین الگو استفاده می‌کنند."
+				"fix": "یک پاکسازی از افکتی که destroy() را فراخوانی می‌کند، برمی‌گرداند. مثال‌های شروع به کار از این الگو استفاده می‌کنند. کامپوننت @suneditor/suneditor-react خودش این پاکسازی را مدیریت می‌کند."
 			},
 			"css": {
 				"title": "ویرایشگر بدون استایل نمایش داده می‌شود",

@@ -77,7 +77,7 @@ export default async function RootLayout({
 					id='theme-init'
 					suppressHydrationWarning
 					dangerouslySetInnerHTML={{
-						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.classList.toggle('dark',t==='dark')}catch(_){}})()`,
+						__html: `(function(){try{var t=localStorage.getItem('theme');if(!t||t==='system'){t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}var c=document.documentElement.classList;c.toggle('dark',t==='dark'||t==='midnight');c.toggle('midnight',t==='midnight')}catch(_){}})()`,
 					}}
 				/>
 					<JsonLd data={[organizationSchema(), webSiteSchema()]} />
@@ -92,7 +92,7 @@ export default async function RootLayout({
 					<MicroBar stars={stars} className='sticky top-14' />
 
 					{/* 메인 */}
-					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-[#1d242c] dark:via-[#212830] dark:to-[#232c3a]'>
+					<main className='min-h-[60vh] bg-gradient-to-br from-amber-50/50 via-orange-50/20 to-blue-50/80 dark:from-page-from dark:via-page-via dark:to-page-to'>
 						{children}
 					</main>
 
