@@ -22,7 +22,7 @@ for Deep Dive link checks use `../suneditor` (the site renders `master`).
 
 When updating the demo site to reflect suneditor library changes (new features, option changes, plugin additions/removals, renames), refer to **[docs/DEMO-UPDATE-GUIDE.md](docs/DEMO-UPDATE-GUIDE.md)**.
 This guide covers which files to modify, in what order, with examples for each scenario.
-The `update-editor` skill runs the whole flow.
+The `update-editor` skill runs the whole flow; `update-react` does the same for the `@suneditor/suneditor-react` wrapper (installs, regenerates and translates the `/react` guide).
 
 ## Commands
 

@@ -97,7 +97,7 @@ npm run build:prod      # 빌드 확인 (docs 자동 생성 포함)
 
 ### Step 7: React 래퍼(`@suneditor/suneditor-react`) 업데이트
 
-래퍼는 별도 패키지다. 올릴 때는 아래 순서로 `/react` 가이드를 다시 만든다.
+래퍼는 별도 패키지다. `update-react` 스킬이 아래 순서를 실행한다.
 
 ```bash
 npm i @suneditor/suneditor-react@latest

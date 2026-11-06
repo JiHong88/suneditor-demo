@@ -34,6 +34,15 @@ node -e "console.log(require('./node_modules/suneditor/package.json').version)"
 - 두 버전이 **같으면**: 이미 docs:generate까지 완료된 상태. 릴리즈 노트 분석부터 진행.
 - 두 버전이 **다르면**: npm 업데이트는 됐지만 문서 반영이 안 된 상태. Step 8(docs:generate)을 반드시 실행해야 한다.
 
+**React 래퍼 버전업 확인:**
+엔진을 올리면 `@suneditor/suneditor-react`도 새 버전이 나왔을 수 있다. 설치본·npm 최신·peer 범위를 확인하고, 올릴 게 있으면 이 스킬을 마친 뒤 `update-react` 스킬을 돌린다.
+
+```bash
+node -e "console.log(require('./node_modules/@suneditor/suneditor-react/package.json').version)"
+npm view @suneditor/suneditor-react version peerDependencies.suneditor
+npm ls suneditor   # peer 경고가 나오면 래퍼도 올려야 한다
+```
+
 ### 2. 릴리즈 노트 확인
 
 **가장 먼저 설치된 패키지의 릴리즈 노트를 읽는다:**
