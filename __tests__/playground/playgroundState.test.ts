@@ -209,9 +209,14 @@ describe("getButtonList", () => {
 	});
 
 	it("full 프리셋이 가장 많은 버튼 포함", () => {
-		const full = getButtonList("full");
-		const standard = getButtonList("standard");
-		expect(full.length).toBeGreaterThanOrEqual(standard.length);
+		// Count plugin buttons (not groups): More buttons may absorb neighbouring groups.
+		const countButtons = (list: unknown[]): number =>
+			list.reduce<number>((n, item) => {
+				if (Array.isArray(item)) return n + countButtons(item);
+				if (typeof item !== "string" || /^[|/:%-]/.test(item)) return n;
+				return n + 1;
+			}, 0);
+		expect(countButtons(getButtonList("full"))).toBeGreaterThanOrEqual(countButtons(getButtonList("standard")));
 	});
 
 	it("custom 프리셋: JSON 문자열 파싱", () => {
