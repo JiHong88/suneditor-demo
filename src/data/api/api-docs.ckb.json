@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "پێکهاتەیەکی ڤیدیۆ جێگیرکردن دروست دەکات یان نوێ دەکاتەوە. - لە کاتی نوێکردنەوەدا، ئەگەر پێویست بوو توخمە هەبووەکە دەگۆڕێت - و سەرچاوە و قەبارە و ڕێکخستنی نوێ جێبەجێ دەکات. - لە کاتی دروستکردندا توخمە دابینکراوەکە لەناو دەفرێکی فیگەردا دەپێچێتەوە.",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "بەرزی خوازراو بۆ توخمە ڤیدیۆکە.",
 								"align": "ئەو ڕێکخستنەی کە دەبێت بۆ توخمە ڤیدیۆکە جێبەجێ بکرێت (بۆ نموونە، 'چەپ'، 'ناوەند'، 'ڕاست').",
 								"isUpdate": "ئاماژە بەوە دەکات کە ئایا ئەمە نوێکارییە بۆ پێکهاتەیەکی هەبوو (`true`) یان دروستکردنێکی نوێیە (`false`).",
-								"file": "میتاداتای فایل کە پەیوەندی بە ڤیدیۆکەوە هەیە",
+								"file": "مێتاداتای فایلەکانی پەیوەست بە ڤیدیۆکە (`null` داتاکانی فایلەکانی ئێستا لە کاتی نوێکردنەوەدا دەهێڵێتەوە)",
 								"isLast": "ئاماژە بەوە دەکات کە ئایا ئەمە دوا پەڕگەیە لە وەجبەدا (بۆ کردارەکانی سکڕۆڵ و ئینسەرت بەکاردێت)."
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

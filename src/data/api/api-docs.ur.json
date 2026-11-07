@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "ویڈیو ایمبیڈ جزو بناتا یا اپ ڈیٹ کرتا ہے۔ - اپ ڈیٹ کرتے وقت، اگر ضروری ہو تو یہ موجودہ عنصر کی جگہ لے لیتا ہے - اور نئے ماخذ، سائز، اور صف بندی کا اطلاق کرتا ہے۔ - تخلیق کرتے وقت، یہ فراہم کردہ عنصر کو فگر کنٹینر میں لپیٹ دیتا ہے۔",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "ویڈیو عنصر کے لیے مطلوبہ اونچائی۔",
 								"align": "ویڈیو عنصر پر لاگو ہونے والی سیدھ (جیسے، 'بائیں'، 'مرکز'، 'دائیں')۔",
 								"isUpdate": "اشارہ کرتا ہے کہ آیا یہ کسی موجودہ جزو (`true`) کی اپ ڈیٹ ہے یا نئی تخلیق (`false`)۔",
-								"file": "ویڈیو سے وابستہ فائل میٹا ڈیٹا",
+								"file": "ویڈیو سے وابستہ فائل میٹا ڈیٹا (`null` موجودہ فائل ڈیٹا کو اپ ڈیٹ پر رکھتا ہے)",
 								"isLast": "اس بات کی نشاندہی کرتا ہے کہ آیا یہ بیچ کی آخری فائل ہے (اسکرول اور انسرٹ ایکشنز کے لیے استعمال کیا جاتا ہے)۔"
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "创建或更新视频嵌入组件。- 更新时，如有必要，它会替换现有元素，并应用新的源、大小和对齐方式。- 创建时，它会将提供的元素包裹在图形容器中。",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "视频元素所需的高度。",
 								"align": "要应用于视频元素的对齐方式（例如，“左对齐”、“居中对齐”、“右对齐”）。",
 								"isUpdate": "指示这是对现有组件的更新（`true`）还是新创建（`false`）。",
-								"file": "与视频关联的文件元数据",
+								"file": "与视频关联的文件元数据（`null` 保持当前文件数据更新）",
 								"isLast": "指示这是否是批处理中的最后一个文件（用于滚动和插入操作）。"
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

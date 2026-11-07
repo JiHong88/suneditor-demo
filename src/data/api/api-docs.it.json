@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "Crea o aggiorna un componente di incorporamento video. - In caso di aggiornamento, sostituisce l'elemento esistente, se necessario, e applica la nuova origine, dimensione e allineamento. - In caso di creazione, racchiude l'elemento fornito in un contenitore di tipo figura.",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "L'altezza desiderata per l'elemento video.",
 								"align": "L'allineamento da applicare all'elemento video (ad esempio, 'sinistra', 'centro', 'destra').",
 								"isUpdate": "Indica se si tratta di un aggiornamento di un componente esistente (`true`) o di una nuova creazione (`false`).",
-								"file": "Metadati del file associati al video",
+								"file": "Metadati del file associati al video (`null` mantiene i dati del file corrente durante l'aggiornamento)",
 								"isLast": "Indica se questo è l'ultimo file del batch (utilizzato per le azioni di scorrimento e inserimento)."
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

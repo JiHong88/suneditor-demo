@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "비디오 포함 구성 요소를 생성하거나 업데이트합니다. - 업데이트 시 필요한 경우 기존 요소를 교체하고 새로운 소스, 크기 및 정렬을 적용합니다. - 생성 시 제공된 요소를 Figure 컨테이너에 래핑합니다.",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "비디오 요소에 원하는 높이입니다.",
 								"align": "비디오 요소에 적용할 정렬입니다(예: '왼쪽', '가운데', '오른쪽').",
 								"isUpdate": "기존 구성 요소(`true`)에 대한 업데이트인지 아니면 새로운 생성(`false`)인지 여부를 나타냅니다.",
-								"file": "비디오와 관련된 파일 메타데이터",
+								"file": "비디오와 연결된 파일 메타데이터(`null`은 업데이트 시 현재 파일 데이터를 유지합니다)",
 								"isLast": "이것이 배치의 마지막 파일인지 여부를 나타냅니다(스크롤 및 삽입 작업에 사용됨)."
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

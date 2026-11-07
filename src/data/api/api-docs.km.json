@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "បង្កើត ឬធ្វើបច្ចុប្បន្នភាពសមាសធាតុបង្កប់វីដេអូ។ - នៅពេលធ្វើបច្ចុប្បន្នភាព វាជំនួសធាតុដែលមានស្រាប់ប្រសិនបើចាំបាច់ - ហើយអនុវត្តប្រភព ទំហំ និងការតម្រឹមថ្មី។ - នៅពេលបង្កើត វារុំធាតុដែលបានផ្តល់ឱ្យនៅក្នុងកុងតឺន័ររូបភាព។",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "កម្ពស់ដែលចង់បានសម្រាប់ធាតុវីដេអូ។",
 								"align": "ការតម្រឹមដែលត្រូវអនុវត្តចំពោះធាតុវីដេអូ (ឧទាហរណ៍ 'ឆ្វេង', 'កណ្តាល', 'ស្តាំ')។",
 								"isUpdate": "បង្ហាញថាតើនេះជាការអាប់ដេតចំពោះសមាសធាតុដែលមានស្រាប់ (`true`) ឬការបង្កើតថ្មី (`false`)។",
-								"file": "ទិន្នន័យមេតាឯកសារដែលភ្ជាប់ជាមួយវីដេអូ",
+								"file": "ទិន្នន័យមេតាឯកសារដែលភ្ជាប់ជាមួយវីដេអូ (`null` រក្សាទិន្នន័យឯកសារបច្ចុប្បន្ននៅលើការធ្វើបច្ចុប្បន្នភាព)",
 								"isLast": "បង្ហាញថាតើនេះជាឯកសារចុងក្រោយនៅក្នុងបាច់ (ប្រើសម្រាប់សកម្មភាពរមូរ និងបញ្ចូល)។"
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

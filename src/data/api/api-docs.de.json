@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "Erstellt oder aktualisiert eine Video-Einbettungskomponente. – Bei der Aktualisierung wird das vorhandene Element gegebenenfalls ersetzt und die neue Quelle, Größe und Ausrichtung angewendet. – Bei der Erstellung wird das angegebene Element in einen Figure-Container eingebettet.",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "Die gewünschte Höhe für das Videoelement.",
 								"align": "Die Ausrichtung, die auf das Videoelement angewendet werden soll (z. B. 'links', 'zentriert', 'rechts').",
 								"isUpdate": "Gibt an, ob es sich um eine Aktualisierung einer bestehenden Komponente (`true`) oder um eine Neuentwicklung (`false`) handelt.",
-								"file": "Dateimetadaten, die dem Video zugeordnet sind",
+								"file": "Mit dem Video verknüpfte Dateimetadaten (`null` behält die aktuellen Dateidaten bei der Aktualisierung bei)",
 								"isLast": "Gibt an, ob es sich um die letzte Datei im Stapel handelt (wird für Scroll- und Einfügeaktionen verwendet)."
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",

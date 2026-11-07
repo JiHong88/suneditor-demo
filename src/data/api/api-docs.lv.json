@@ -1,6 +1,6 @@
 {
-	"version": "3.4.2",
-	"generatedAt": "2026-11-06T17:00:27.791Z",
+	"version": "3.4.3",
+	"generatedAt": "2026-11-07T17:55:37.747Z",
 	"structure": {
 		"editor": {
 			"title": "Editor Instance",
@@ -5347,7 +5347,7 @@
 						},
 						{
 							"name": "create",
-							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t}, isLast: boolean",
+							"params": "oFrame: HTMLIFrameElement | HTMLVideoElement, src: string, width: string, height: string, align: string, isUpdate: boolean, file: {\n\t\t\tname: string;\n\t\t\tsize: number;\n\t\t} | null, isLast: boolean",
 							"returns": "void",
 							"description": "Izveido vai atjaunina video iegulšanas komponentu. — Atjauninot, ja nepieciešams, tas aizstāj esošo elementu un lieto jauno avotu, izmēru un izlīdzinājumu. — Izveidojot, tas ietver norādīto elementu attēla konteinerā.",
 							"example": "",
@@ -5358,7 +5358,7 @@
 								"height": "Vēlamais video elementa augstums.",
 								"align": "Izlīdzinājums, kas jāpiemēro video elementam (piemēram, “pa kreisi”, “centrā”, “pa labi”).",
 								"isUpdate": "Norāda, vai šis ir esoša komponenta atjauninājums (`true`) vai jauns izveides process (`false`).",
-								"file": "Ar video saistītie faila metadati",
+								"file": "Ar videoklipu saistītie faila metadati (`null` atjaunina pašreizējos faila datus)",
 								"isLast": "Norāda, vai šis ir pēdējais fails partijā (tiek izmantots ritināšanas un ievietošanas darbībām)."
 							}
 						},
@@ -10583,7 +10583,7 @@
 						"BUTTON_LIST": "Default value: `[ ['undo', 'redo'], '|', ['bold', 'underline', 'italic', 'strike', '|', 'subscript', 'superscript'], '|', ['removeFormat'], '|', ['outdent', 'indent'], '|', ['fullScreen', 'showBlocks', 'codeView'], '|', ['preview', 'print'], ]`",
 						"SCOPE_SELECTION_TAGS": "Default value: `['td', 'table', 'li', 'ol', 'ul', 'pre', 'figcaption', 'blockquote', 'dl', 'dt', 'dd']`",
 						"ALLOWED_EMPTY_NODE_LIST": "Default value: `'.se-component, pre, blockquote, hr, li, table, img, iframe, video, audio, canvas, details'`",
-						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-'`",
+						"CLASS_NAME": "Default value: `'^__se__|^se-|^katex|^MathJax|^language-[\\\\w+#.-]+$'`",
 						"REQUIRED_FORMAT_LINE": "Default value: `'div'`",
 						"SPAN_STYLES": "",
 						"LINE_STYLES": "",
