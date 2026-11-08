@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, Braces, CornerDownLeft, FileText, LifeBuoy, Loader2, Puzzle, Search, SlidersHorizontal, Sparkles } from "lucide-react";
+import { ArrowRight, Atom, Braces, CornerDownLeft, FileText, LifeBuoy, Loader2, Puzzle, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -17,6 +17,7 @@ const SOURCE_ICONS: Record<SearchSource, LucideIcon> = {
 	troubleshooting: LifeBuoy,
 	plugins: Puzzle,
 	features: Sparkles,
+	react: Atom,
 	options: SlidersHorizontal,
 	api: Braces,
 };
@@ -45,6 +46,8 @@ function useMessageEntries(): SourcedEntry[] {
 		const menu = (key: string) => t(`Main.Menus.${key}`);
 		const pages: SourcedEntry[] = [
 			{ t: menu("getting-started"), d: t("GettingStarted.desc"), u: "/getting-started" },
+			// "React" is the same in every language (see navigationMenu); the description falls back to English until translated.
+			{ t: "React", d: t.has("Main.MenuDesc.react") ? t("Main.MenuDesc.react") : "Official React component: install, props, Next.js", k: "suneditor-react", u: "/react" },
 			{ t: menu("feature-demo"), d: t("FeatureDemo.subtitle"), u: "/feature-demo" },
 			{ t: menu("playground"), d: t("Playground.desc"), u: "/playground" },
 			{ t: menu("plugin-guide"), d: t("PluginGuide.subtitle1"), u: "/plugin-guide" },
@@ -136,7 +139,11 @@ type Props = { open: boolean; onOpenChange: (open: boolean) => void };
 export default function SearchPalette({ open, onOpenChange }: Props) {
 	const t = useTranslations("Search");
 	const tRoot = useTranslations();
-	const groupLabel = (source: SearchSource) => (source === "plugins" ? tRoot("Main.MenuShort.plugin-guide") : t(`groups.${source}`));
+	const groupLabel = (source: SearchSource) => {
+		if (source === "plugins") return tRoot("Main.MenuShort.plugin-guide");
+		if (source === "react") return "React"; // same in every language
+		return t(`groups.${source}`);
+	};
 	const locale = useLocale();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -160,6 +167,7 @@ export default function SearchPalette({ open, onOpenChange }: Props) {
 		if (!index) return messageEntries;
 		return [
 			...messageEntries,
+			...(index.react ?? []).map((e) => ({ ...e, source: "react" as const })),
 			...index.options.map((e) => ({ ...e, source: "options" as const })),
 			...index.api.map((e) => ({ ...e, source: "api" as const })),
 		];

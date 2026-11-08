@@ -4,6 +4,8 @@ import { ArrowRight, ExternalLink, Github, Package } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
+import { reactPackageSchema } from "@/lib/seo/jsonld";
 import MarkdownRenderer from "@/components/common/MarkdownRenderer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import { REACT_WRAPPER_NPM, REACT_WRAPPER_REPO } from "@/lib/git/githubMarkdown";
@@ -17,8 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	return buildPageMetadata({
 		locale,
 		path: "/react",
-		title: "React",
-		description: "Use SunEditor in React and Next.js with @suneditor/suneditor-react: install, props, controlled value, events, multi-root and instance access.",
+		title: "React WYSIWYG Editor — @suneditor/suneditor-react",
+		description:
+			"React WYSIWYG editor component for SunEditor. Install @suneditor/suneditor-react, pass editor options as props, use a controlled value, events, multi-root and instance access — works in Next.js.",
+		cardTitle: "SunEditor for React",
+		cardDescription: "@suneditor/suneditor-react — the official React component. Props, controlled value, events, multi-root, Next.js.",
 	});
 }
 
@@ -36,6 +41,7 @@ export default async function ReactGuidePage({ params }: Props) {
 	return (
 		<div className='min-h-screen'>
 			<Breadcrumbs locale={locale} trail={[{ name: "React", path: "/react" }]} />
+			<JsonLd data={reactPackageSchema(locale)} />
 
 			<section className='container mx-auto max-w-4xl px-6 pt-12 pb-8'>
 				<div className='flex flex-wrap items-center gap-3'>

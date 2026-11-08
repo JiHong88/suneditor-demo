@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Copy } from "lucide-react";
+import { ArrowRight, Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 // shadcn/ui
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -123,6 +124,12 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 							<CodeBlock code={snippet} lang={FRAMEWORK_LANG[selectedFrameworkKey]} />
 						</motion.div>
 					</AnimatePresence>
+					{selectedFrameworkKey === "react" && (
+						<Link href='/react' className='mt-3 inline-flex items-center gap-1.5 self-start text-xs font-medium text-primary hover:underline'>
+							{t("reactGuideLink")}
+							<ArrowRight className='size-3.5 rtl:rotate-180' />
+						</Link>
+					)}
 					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>Copied!</span>}
 				</div>
 			</CardContent>

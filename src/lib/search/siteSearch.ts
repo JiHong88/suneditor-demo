@@ -1,20 +1,20 @@
 /**
  * Site search (⌘K) — entry shape and ranking.
- * Static entries (API, options) come from src/data/search/search-index.<locale>.json (npm run search:generate);
+ * Static entries (API, options, React guide sections) come from src/data/search/search-index.<locale>.json (npm run search:generate);
  * pages, troubleshooting and features are built from messages in the palette.
  */
 
 /** t: title · u: href (locale-less) · g: group label · d: short description · k: extra keyword (e.g. raw option key) */
 export type SearchEntry = { t: string; u: string; g?: string; d?: string; k?: string };
 
-export type SearchSource = "pages" | "troubleshooting" | "plugins" | "features" | "options" | "api";
+export type SearchSource = "pages" | "troubleshooting" | "plugins" | "features" | "react" | "options" | "api";
 
 export type SourcedEntry = SearchEntry & { source: SearchSource };
 
-export type StaticSearchIndex = { version: string; api: SearchEntry[]; options: SearchEntry[] };
+export type StaticSearchIndex = { version: string; api: SearchEntry[]; options: SearchEntry[]; react: SearchEntry[] };
 
 /** Small tie-breaker so a guide page outranks one of 1,000 API members with an equally good match. */
-const SOURCE_BOOST: Record<SearchSource, number> = { pages: 12, troubleshooting: 8, plugins: 7, features: 6, options: 4, api: 0 };
+const SOURCE_BOOST: Record<SearchSource, number> = { pages: 12, troubleshooting: 8, plugins: 7, features: 6, react: 6, options: 4, api: 0 };
 
 export function queryWords(query: string): string[] {
 	return query.toLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -59,7 +59,7 @@ export function searchSite(entries: SourcedEntry[], query: string, limit = Infin
 }
 
 /** Max rows per group, so 1,000 API members can't push every other kind of result off screen. */
-const GROUP_LIMIT: Record<SearchSource, number> = { pages: 5, troubleshooting: 5, plugins: 5, features: 5, options: 6, api: 8 };
+const GROUP_LIMIT: Record<SearchSource, number> = { pages: 5, troubleshooting: 5, plugins: 5, features: 5, react: 5, options: 6, api: 8 };
 
 /** Group ranked results for display — groups ordered by their best hit, entries keep their rank. */
 export function groupResults(results: SourcedEntry[]): { source: SearchSource; entries: SourcedEntry[] }[] {

@@ -56,7 +56,8 @@ gh api repos/suneditor/suneditor-react/releases --jq '.[] | "\(.tag_name)\n\(.bo
 ```bash
 npm run docs:generate          # react-guide.en.md를 설치본 README에서 생성 (api-docs도 같이)
 npm run react-guide:translate  # 바뀐 문장만 Google 번역, 나머지는 캐시
-git diff --stat src/data/react-guide/
+npm run search:generate        # ⌘K 검색 인덱스에 가이드 섹션(/react#…) 반영 — 빠뜨리면 searchIndex.test.ts 실패
+git diff --stat src/data/react-guide/ src/data/search/
 ```
 
 본문에 변경이 있었으면 ko 등 읽을 수 있는 로케일의 diff를 검토한다. 한 단어 제목, `props`, 브랜드명은 스크립트가 영어로 유지한다.

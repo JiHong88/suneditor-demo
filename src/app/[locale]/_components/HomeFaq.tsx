@@ -36,6 +36,10 @@ export default function HomeFaq() {
 						{t("troubleshootingLink")}
 						<ArrowRight className='h-3.5 w-3.5' />
 					</Link>
+					<Link href='/react' className='inline-flex items-center gap-1.5 font-medium text-primary hover:underline'>
+						{t("reactLink")}
+						<ArrowRight className='h-3.5 w-3.5' />
+					</Link>
 				</div>
 			</div>
 		</section>

@@ -107,6 +107,14 @@ export default function Footer({ version = "" }: FooterProps) {
 								{t("troubleshooting")}
 							</Link>
 						</li>
+						<li className='my-4'>
+							<Link
+								href='/react'
+								className='hover:underline hover:text-slate-900 dark:hover:text-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-slate-400/50 dark:focus-visible:ring-slate-500/50 rounded'
+							>
+								{t("react")}
+							</Link>
+						</li>
 					</ul>
 				</nav>
 

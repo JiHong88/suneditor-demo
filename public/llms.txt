@@ -8,6 +8,7 @@ Key facts:
 - Dependencies: none at runtime. KaTeX/MathJax (math) and CodeMirror (code view) are optional integrations.
 - Package: `npm install suneditor` (or load from the jsDelivr CDN). TypeScript type definitions are included.
 - Frameworks: works with vanilla JS, React, Vue, Angular, Svelte and Web Components through the core package.
+- React: `npm install suneditor @suneditor/suneditor-react` — the official React component (`@suneditor/suneditor-react`). Every editor option passes through unchanged; the engine loads on the client only, so it works in Next.js without next/dynamic.
 - Output: standard HTML. Display saved content with `suneditor/css/contents` and the `sun-editor-editable` class.
 - Included: tables (merge/split), image/video/audio/file upload, links, math, code blocks, Markdown view, drawing, templates, layouts, slash commands, block handles — 30+ plugins, 25+ language packs, RTL support.
 - Uploads go to your own server endpoint (`image.uploadUrl` etc.); SunEditor does not send content to external services.
@@ -15,6 +16,7 @@ Key facts:
 ## Docs
 
 - [Getting Started](https://suneditor.com/getting-started): install, framework examples (React, Vue, Angular, Svelte, Web Components, CDN), rendering saved HTML
+- [React](https://suneditor.com/react): `@suneditor/suneditor-react` guide — install, props, controlled value, instance access (ref), events, multi-root, types, Next.js notes
 - [Options](https://suneditor.com/options): reference for 200+ editor and plugin options
 - [Docs/API](https://suneditor.com/docs-api): instance API, events and plugin interfaces
 - [Plugin Guide](https://suneditor.com/plugin-guide): built-in plugins, plugin types and writing custom plugins
@@ -33,3 +35,4 @@ Key facts:
 - [License](https://suneditor.com/license): plain-language MIT summary and full text
 - [GitHub](https://github.com/JiHong88/SunEditor): source, issues, releases
 - [npm](https://www.npmjs.com/package/suneditor)
+- [React component on npm](https://www.npmjs.com/package/@suneditor/suneditor-react) · [GitHub](https://github.com/suneditor/suneditor-react)

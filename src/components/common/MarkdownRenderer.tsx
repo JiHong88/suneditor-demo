@@ -1,13 +1,14 @@
 "use client";
 
 import "github-markdown-css/github-markdown-light.css";
-import { Children, isValidElement, type ReactNode } from "react";
+import { Children, isValidElement, useEffect, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import { Link } from "@/i18n/navigation";
 import { GUIDE_FILES } from "@/lib/git/githubMarkdown";
+import { scrollToAnchor } from "@/hooks/useHashTab";
 import CodeBlock from "./CodeBlock";
 
 type Props = {
@@ -46,6 +47,18 @@ function resolveHref(href: string): { internal: boolean; resolved: string } {
 }
 
 export default function MarkdownRenderer({ content, className }: Props) {
+	// Scroll to `#<heading slug>` (rehype-slug ids) on mount and on hashchange — client-side navigation from the
+	// site search (⌘K) lands on this page with a hash the router does not scroll to by itself.
+	useEffect(() => {
+		const sync = () => {
+			const hash = decodeURIComponent(window.location.hash.slice(1));
+			if (hash) scrollToAnchor(hash, { highlight: false });
+		};
+		sync();
+		window.addEventListener("hashchange", sync);
+		return () => window.removeEventListener("hashchange", sync);
+	}, [content]);
+
 	return (
 		<div className={`markdown-body !bg-transparent ${className ?? ""}`}>
 			<ReactMarkdown

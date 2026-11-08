@@ -201,6 +201,10 @@ html[dir="rtl"] img.dir-img {
 .markdown-body {
 	background-color: transparent !important;
 }
+/* 해시 링크(#heading-slug)로 이동 시 sticky 헤더(57px)에 제목이 가려지지 않도록 */
+.markdown-body :is(h1, h2, h3, h4, h5, h6)[id] {
+	scroll-margin-top: 5rem;
+}
 .dark .markdown-body {
 	color-scheme: dark;
 	color: #e6edf3;

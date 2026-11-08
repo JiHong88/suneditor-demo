@@ -1,10 +1,12 @@
-import { SUNEDITOR_VERSION } from "@/store/version";
+import { SUNEDITOR_REACT_VERSION, SUNEDITOR_VERSION } from "@/store/version";
 import { pageUrl } from "@/lib/seo/metadata";
 import { SITE_DESCRIPTION } from "@/lib/siteConfig";
 
 const BASE_URL = "https://suneditor.com";
 const GITHUB_URL = "https://github.com/JiHong88/SunEditor";
 const NPM_URL = "https://www.npmjs.com/package/suneditor";
+const REACT_NPM_URL = "https://www.npmjs.com/package/@suneditor/suneditor-react";
+const REACT_GITHUB_URL = "https://github.com/suneditor/suneditor-react";
 const AUTHOR = "Yi JiHong";
 
 const DESCRIPTION = SITE_DESCRIPTION;
@@ -84,6 +86,31 @@ export function softwareApplicationSchema() {
 		isAccessibleForFree: true,
 		keywords: "wysiwyg, wysiwyg editor, html editor, rich text editor, javascript, open source, mit, zero dependencies",
 		sameAs: [GITHUB_URL, NPM_URL],
+	};
+}
+
+/** The official React component package (`/react` page). */
+export function reactPackageSchema(locale: string) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "SoftwareSourceCode",
+		"@id": `${BASE_URL}/#suneditor-react`,
+		name: "@suneditor/suneditor-react",
+		alternateName: "SunEditor for React",
+		description: "Official React component for SunEditor, the modular WYSIWYG HTML editor. Every editor option passes through unchanged; the engine loads on the client only, so it works in Next.js.",
+		url: pageUrl(locale, "/react"),
+		codeRepository: REACT_GITHUB_URL,
+		downloadUrl: REACT_NPM_URL,
+		version: SUNEDITOR_REACT_VERSION,
+		programmingLanguage: "TypeScript",
+		runtimePlatform: "React",
+		license: "https://opensource.org/licenses/MIT",
+		isAccessibleForFree: true,
+		targetProduct: { "@id": SOFTWARE_ID },
+		author: { "@type": "Person", name: AUTHOR },
+		publisher: { "@id": ORG_ID },
+		keywords: "react wysiwyg editor, react rich text editor, suneditor react, next.js editor",
+		sameAs: [REACT_GITHUB_URL, REACT_NPM_URL],
 	};
 }
 
