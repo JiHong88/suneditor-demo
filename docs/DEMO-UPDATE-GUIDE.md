@@ -575,6 +575,7 @@ playground URL은 단축키 기반. `playgroundState.ts`의 `PARAM_MAP`에서 �
 **실행 명령:**
 ```bash
 npm run docs:generate    # API 문서 재생성
+npm run snippets:generate # 예제 재생성 (API 메타데이터의 버전 반영)
 npm run docs:translate   # 번역 업데이트
 npm run search:generate  # ⌘K 검색 인덱스 재생성 (docs 생성·번역, react-guide 번역 후)
 npm run build:prod       # 전체 빌드 (docs + next build)

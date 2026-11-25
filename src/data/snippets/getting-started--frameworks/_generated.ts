@@ -38,16 +38,16 @@ export class EditorComponent implements AfterViewInit, OnDestroy {
 }`;
 
 export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
-<link href="https://cdn.jsdelivr.net/npm/suneditor@3.4.1/dist/suneditor.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/suneditor@3.4.3/dist/suneditor.min.css" rel="stylesheet">
 <!-- 2. Include JS -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@3.4.1/dist/suneditor.min.js"><\\/script>
+<script src="https://cdn.jsdelivr.net/npm/suneditor@3.4.3/dist/suneditor.min.js"></script>
 
 <!-- 3. Create Textarea -->
 <textarea id="my-editor"></textarea>
 
 <!-- 4. Create Editor -->
 <script>
-  const editor = SUNEDITOR.create("my-editor", {
+  const editor = SUNEDITOR.create("#my-editor", {
     plugins: SUNEDITOR.plugins,
     value: "<p>Hello SunEditor</p>",
     buttonList: [
@@ -58,14 +58,15 @@ export const FRAMEWORK_HTML_CDN = `<!-- 1. Include CSS -->
       ["list", "link", "image"]
     ]
   });
-<\\/script>`;
+</script>`;
 
-export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.4.1
+export const FRAMEWORK_JAVASCRIPT_NPM = `// npm i suneditor@3.4.3
 import suneditor, { plugins } from "suneditor";
 import "suneditor/css/editor";
 import "suneditor/css/contents";
 
-const editor = suneditor.create("my-editor", {
+// In index.html: <textarea id="my-editor"></textarea>
+const editor = suneditor.create("#my-editor", {
   plugins,
   value: "<p>Hello SunEditor</p>",
   buttonList: [
