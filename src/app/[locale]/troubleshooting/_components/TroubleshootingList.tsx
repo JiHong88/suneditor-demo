@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Check, ExternalLink, Link2, Search } from "lucide-react";
+import { ArrowRight, ExternalLink, Search } from "lucide-react";
+import CopyButton from "@/components/common/CopyButton";
 import { Link } from "@/i18n/navigation";
 import CodeBlock from "@/components/common/CodeBlock";
 import type { TroubleshootingCategory } from "@/data/troubleshooting";
@@ -75,7 +76,6 @@ function track(id: string, helpful: boolean) {
 export default function TroubleshootingList({ items, categories, labels, version }: Props) {
 	const [query, setQuery] = useState("");
 	const [category, setCategory] = useState<TroubleshootingCategory | "all">("all");
-	const [copiedId, setCopiedId] = useState<string | null>(null);
 	const [feedback, setFeedback] = useState<Record<string, "yes" | "no">>({});
 	// navigator is browser-only — fill it in after mount so SSR markup stays stable.
 	const [userAgent, setUserAgent] = useState("");
@@ -105,12 +105,6 @@ export default function TroubleshootingList({ items, categories, labels, version
 	}, [items, query, category]);
 
 	const groups = categories.map((cat) => ({ cat, items: visible.filter((it) => it.category === cat) })).filter((g) => g.items.length > 0);
-
-	const copyLink = (id: string) => {
-		navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${id}`);
-		setCopiedId(id);
-		setTimeout(() => setCopiedId((cur) => (cur === id ? null : cur)), 1500);
-	};
 
 	const answer = (id: string, helpful: boolean) => {
 		setFeedback((prev) => ({ ...prev, [id]: helpful ? "yes" : "no" }));
@@ -186,15 +180,13 @@ export default function TroubleshootingList({ items, categories, labels, version
 													{it.title}
 												</a>
 											</h3>
-											<button
-												type='button'
-												onClick={() => copyLink(it.id)}
-												title={copiedId === it.id ? labels.copied : labels.copyPermalink}
-												aria-label={labels.copyPermalink}
-												className='mt-1 rounded-md p-1.5 text-muted-foreground opacity-60 transition hover:bg-muted hover:opacity-100 group-hover/title:opacity-100'
-											>
-												{copiedId === it.id ? <Check className='size-4 text-green-600' /> : <Link2 className='size-4' />}
-											</button>
+											<CopyButton
+												kind='link'
+												text={() => `${window.location.origin}${window.location.pathname}#${it.id}`}
+												label={labels.copyPermalink}
+												copiedLabel={labels.copied}
+												className='mt-1 p-1.5 text-muted-foreground opacity-60 hover:opacity-100 group-hover/title:opacity-100'
+											/>
 										</div>
 										<dl className='mt-4 space-y-3 text-sm leading-relaxed'>
 											<div>

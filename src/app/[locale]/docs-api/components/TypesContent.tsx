@@ -2,9 +2,10 @@
 
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
-import { Search, Link2, Check } from "lucide-react";
+import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import CodeBlock from "@/components/common/CodeBlock";
+import CopyButton from "@/components/common/CopyButton";
 import { DocDescription } from "@/lib/docDescription";
 import type { TypeDefinition } from "../_lib/types";
 
@@ -16,17 +17,7 @@ type TypesContentProps = {
 
 function TypeCard({ type }: { type: TypeDefinition }) {
   const t = useTranslations("DocsApi");
-  const tc = useTranslations("Common");
-  const [copied, setCopied] = useState(false);
   const typeId = `type-${type.name}`;
-
-  const handlePermalink = () => {
-    window.history.replaceState(null, "", `#${typeId}`);
-    const url = `${window.location.origin}${window.location.pathname}${window.location.search}#${typeId}`;
-    navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const code =
     type.kind === "type"
@@ -52,17 +43,13 @@ function TypeCard({ type }: { type: TypeDefinition }) {
             {type.kind}
           </Badge>
         </div>
-        <button
-          onClick={handlePermalink}
-          className="p-1.5 rounded-md hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
-          title={tc("copyPermalink")}
-        >
-          {copied ? (
-            <Check className="h-3.5 w-3.5 text-green-600" />
-          ) : (
-            <Link2 className="h-3.5 w-3.5 text-muted-foreground" />
-          )}
-        </button>
+        <CopyButton
+          kind="link"
+          text={() => `${window.location.origin}${window.location.pathname}${window.location.search}#${typeId}`}
+          onCopied={() => window.history.replaceState(null, "", `#${typeId}`)}
+          className="p-1.5 text-muted-foreground opacity-0 group-hover:opacity-100"
+          iconClassName="size-3.5"
+        />
       </div>
       <div className="text-xs [&_pre]:!p-3">
         <CodeBlock code={code} lang="typescript" />

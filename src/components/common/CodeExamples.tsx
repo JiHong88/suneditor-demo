@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Copy } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CODE_FRAMEWORKS, DEFAULT_FRAMEWORK_KEY, getCodeFramework, hexToRgba, type FrameworkKey } from "./codeExampleFrameworks";
 import CodeBlock from "./CodeBlock";
+import CopyButton from "./CopyButton";
 
 const FRAMEWORK_LANG: Record<FrameworkKey, string> = {
 	"javascript-cdn": "html",
@@ -33,7 +34,6 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 	const desc = t("desc").split("||");
 
 	const [internalFramework, setInternalFramework] = useState<FrameworkKey>(DEFAULT_FRAMEWORK_KEY);
-	const [copied, setCopied] = useState(false);
 	// Selected variant per framework (e.g. React: official component vs. engine API)
 	const [variantKeys, setVariantKeys] = useState<Partial<Record<FrameworkKey, string>>>({});
 	const selectedFrameworkKey = framework ?? internalFramework;
@@ -47,12 +47,6 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 			setInternalFramework(nextFramework);
 		}
 		onFrameworkChange?.(nextFramework);
-	};
-
-	const handleCopy = () => {
-		navigator.clipboard.writeText(snippet);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 1500);
 	};
 
 	const content = (
@@ -86,9 +80,7 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 						boxShadow: `inset 0 0 0 1px ${hexToRgba(selectedFramework.accent, 0.2)}`,
 					}}
 				>
-					<Button size='icon' variant='ghost' className='absolute top-4 right-4 h-8 w-8 z-10' onClick={handleCopy}>
-						<Copy className='h-4 w-4' />
-					</Button>
+					<CopyButton text={snippet} className='absolute top-4 right-4 z-10 size-8 hover:bg-accent' />
 					<div className='mb-3 inline-flex items-center gap-2 rounded-md border bg-background/80 px-2.5 py-1.5 text-xs text-muted-foreground'>
 						<Image src={selectedFramework.icon} alt={`${selectedFramework.name} logo`} className='h-3.5 w-3.5' width={14} height={14} />
 						<span className='font-medium'>{selectedFramework.name}</span>
@@ -130,7 +122,6 @@ export default function CodeExamples({ compact = false, framework, onFrameworkCh
 							<ArrowRight className='size-3.5 rtl:rotate-180' />
 						</Link>
 					)}
-					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>Copied!</span>}
 				</div>
 			</CardContent>
 		</Card>

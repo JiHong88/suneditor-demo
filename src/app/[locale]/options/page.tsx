@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { Search, Copy, Check, ChevronRight, Link2, Settings2, Puzzle, Layers, Menu } from "lucide-react";
+import { Search, ChevronRight, Settings2, Puzzle, Layers, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useOptDesc } from "@/hooks/useOptDesc";
@@ -12,6 +12,7 @@ import ScrollToTop from "@/components/common/ScrollToTop";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
+import CopyButton from "@/components/common/CopyButton";
 import { DocsSidebarAd, DocsTocAd } from "@/components/ad/AdBanner";
 import { OPTION_PLUGIN_PREFIXES as PLUGIN_PREFIXES } from "@/data/optionPluginPrefixes";
 
@@ -224,31 +225,6 @@ function buildSections(optDesc: OptDesc): SidebarSection[] {
 	];
 }
 
-/* ── Shared components ─────────────────────────────────── */
-
-function CopyButton({ text }: { text: string }) {
-	const [copied, setCopied] = useState(false);
-	return (
-		<button type="button" onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-			className="inline-flex items-center p-1 rounded-md hover:bg-muted transition-colors" title="Copy">
-			{copied ? <Check className="size-3.5 text-green-600" /> : <Copy className="size-3.5 text-muted-foreground" />}
-		</button>
-	);
-}
-
-function PermalinkButton({ id }: { id: string }) {
-	const [copied, setCopied] = useState(false);
-	return (
-		<button type="button" onClick={() => {
-			navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}#${id}`);
-			window.history.replaceState(null, "", `#${id}`);
-			setCopied(true); setTimeout(() => setCopied(false), 2000);
-		}} className="inline-flex items-center p-1 rounded-md hover:bg-muted transition-colors" title="Copy permalink">
-			{copied ? <Check className="size-3.5 text-green-600" /> : <Link2 className="size-3.5 text-muted-foreground" />}
-		</button>
-	);
-}
-
 /* ── Option card ───────────────────────────────────────── */
 
 function OptionCard({ item, pluginName }: { item: OptionItem; pluginName?: string }) {
@@ -263,8 +239,14 @@ function OptionCard({ item, pluginName }: { item: OptionItem; pluginName?: strin
 			<div className="flex items-center justify-between mb-3">
 				<code className="text-base font-bold font-mono text-green-600 dark:text-green-400 break-all">{item.displayName}</code>
 				<div className="flex items-center gap-0.5 opacity-0 group-hover/card:opacity-100 transition-opacity shrink-0">
-					<PermalinkButton id={cardId} />
-					<CopyButton text={pluginName ? `${pluginName}: { ${item.displayName}: ... }` : item.name} />
+					<CopyButton
+						kind='link'
+						text={() => `${window.location.origin}${window.location.pathname}#${cardId}`}
+						onCopied={() => window.history.replaceState(null, "", `#${cardId}`)}
+						className='p-1 text-muted-foreground'
+						iconClassName='size-3.5'
+					/>
+					<CopyButton text={pluginName ? `${pluginName}: { ${item.displayName}: ... }` : item.name} className='p-1 text-muted-foreground' iconClassName='size-3.5' />
 				</div>
 			</div>
 			{typeStr && (

@@ -2,11 +2,11 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Copy, Check } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import CodeBlock from "@/components/common/CodeBlock";
+import CopyButton from "@/components/common/CopyButton";
 import { generateCode, getCodeLang, type ReactApi } from "../_lib/codeGenerator";
 import type { PlaygroundState } from "../_lib/playgroundState";
 import type { CodeFramework } from "../_lib/playgroundState";
@@ -35,11 +35,9 @@ type Props = {
 
 export default function PlaygroundCodePanel({ state }: Props) {
 	const t = useTranslations("Playground");
-	const tc = useTranslations("Common");
 	const [framework, setFramework] = useState<CodeFramework>("javascript-npm");
 	const [reactApi, setReactApi] = useState<ReactApi>("wrapper");
 	const [open, setOpen] = useState(true);
-	const [copied, setCopied] = useState(false);
 
 	// Remember the React flavor across visits (per browser)
 	useEffect(() => {
@@ -62,12 +60,6 @@ export default function PlaygroundCodePanel({ state }: Props) {
 	const code = useMemo(() => generateCode(state, framework, reactApi), [state, framework, reactApi]);
 	const lang = getCodeLang(framework);
 
-	const handleCopy = () => {
-		navigator.clipboard.writeText(code);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 1500);
-	};
-
 	return (
 		<>
 			<div className='rounded-lg border bg-card overflow-hidden'>
@@ -86,9 +78,7 @@ export default function PlaygroundCodePanel({ state }: Props) {
 							<div className='mx-1 h-4 w-px bg-border' />
 
 							{/* Copy */}
-							<Button size='icon' variant='ghost' className='h-7 w-7' onClick={handleCopy} title={tc("copyCode")}>
-								{copied ? <Check className='h-3.5 w-3.5 text-green-500' /> : <Copy className='h-3.5 w-3.5 text-blue-500' />}
-							</Button>
+							<CopyButton text={code} toast className='size-7 text-blue-500 hover:bg-accent' iconClassName='size-3.5' />
 						</div>
 					</div>
 
@@ -145,21 +135,6 @@ export default function PlaygroundCodePanel({ state }: Props) {
 					)}
 				</AnimatePresence>
 			</div>
-
-			{/* Copy toast */}
-			<AnimatePresence>
-				{copied && (
-					<motion.div
-						initial={{ opacity: 0, y: 8 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: 8 }}
-						className='fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-lg bg-foreground text-background px-4 py-2.5 text-sm font-medium shadow-lg'
-					>
-						<Check className='h-4 w-4 text-green-400' />
-						{tc("copiedToClipboard")}
-					</motion.div>
-				)}
-			</AnimatePresence>
 		</>
 	);
 }

@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { getCodeFramework, hexToRgba, type FrameworkKey } from "@/components/common/codeExampleFrameworks";
 import CodeBlock from "@/components/common/CodeBlock";
+import CopyButton from "@/components/common/CopyButton";
 import FrameworkBadge from "./FrameworkBadge";
 import TroubleshootingHint from "@/components/common/TroubleshootingHint";
 import SectionHeading from "./SectionHeading";
@@ -18,16 +16,8 @@ type StepTwoProps = {
 
 export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 	const t = useTranslations("GettingStarted.step2");
-	const tc = useTranslations("Common");
-	const [copied, setCopied] = useState(false);
 	const item = getCodeFramework(framework);
 	const snippet = getRenderSnippet(framework);
-
-	const handleCopy = () => {
-		navigator.clipboard.writeText(snippet.code);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 1500);
-	};
 
 	return (
 		<section className='mx-auto w-full max-w-6xl px-6 pb-8'>
@@ -43,9 +33,7 @@ export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 						boxShadow: `inset 0 0 0 1px ${hexToRgba(item.accent, 0.15)}`,
 					}}
 				>
-					<Button size='icon' variant='ghost' className='absolute top-4 right-4 h-8 w-8 z-10' onClick={handleCopy}>
-						<Copy className='h-4 w-4' />
-					</Button>
+					<CopyButton text={snippet.code} className='absolute top-4 right-4 z-10 size-8 hover:bg-accent' />
 					<AnimatePresence mode='wait'>
 						<motion.div
 							key={framework}
@@ -57,7 +45,6 @@ export default function StepTwoContentRendering({ framework }: StepTwoProps) {
 							<CodeBlock code={snippet.code} lang={snippet.lang} />
 						</motion.div>
 					</AnimatePresence>
-					{copied && <span className='absolute bottom-3 right-3 text-xs text-green-500'>{tc("copied")}</span>}
 				</div>
 			</div>
 			<TroubleshootingHint ids={["contents", "stripped"]} className='mt-6' />

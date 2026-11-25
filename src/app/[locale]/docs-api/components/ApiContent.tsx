@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Check, Link2 } from "lucide-react";
+import CopyButton from "@/components/common/CopyButton";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import CodeBlock from "@/components/common/CodeBlock";
@@ -28,24 +27,8 @@ type ApiContentProps = {
 function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: string; onNavigate?: (id: string) => void }) {
   const t = useTranslations("DocsApi");
   const tc = useTranslations("Common");
-  const [copied, setCopied] = useState<"sig" | "link" | null>(null);
-
   const methodId = `${prefix}${method.name}`.replace(/\.$/, "");
 
-  const handleCopy = (type: "sig" | "link") => {
-    const text =
-      type === "sig"
-        ? `${prefix}${method.name}(${method.params})`
-        : `${window.location.origin}${window.location.pathname}${window.location.search}#${methodId}`;
-    navigator.clipboard.writeText(text);
-    setCopied(type);
-    setTimeout(() => setCopied(null), 2000);
-  };
-
-  const handlePermalink = () => {
-    window.history.replaceState(null, "", `#${methodId}`);
-    handleCopy("link");
-  };
 
   // Syntax highlight for TypeScript parameters
   const highlightParams = (params: string) => {
@@ -151,28 +134,19 @@ function MethodCard({ method, prefix, onNavigate }: { method: Method; prefix: st
           )}
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover/row:opacity-100 transition-opacity">
-          <button
-            onClick={handlePermalink}
-            className="p-1.5 rounded-md hover:bg-muted transition-colors"
-            title={tc("copyPermalink")}
-          >
-            {copied === "link" ? (
-              <Check className="h-3.5 w-3.5 text-green-600" />
-            ) : (
-              <Link2 className="h-3.5 w-3.5 text-muted-foreground" />
-            )}
-          </button>
-          <button
-            onClick={() => handleCopy("sig")}
-            className="p-1.5 rounded-md hover:bg-muted transition-colors"
-            title={tc("copySignature")}
-          >
-            {copied === "sig" ? (
-              <Check className="h-3.5 w-3.5 text-green-600" />
-            ) : (
-              <Copy className="h-3.5 w-3.5 text-muted-foreground" />
-            )}
-          </button>
+          <CopyButton
+            kind="link"
+            text={() => `${window.location.origin}${window.location.pathname}${window.location.search}#${methodId}`}
+            onCopied={() => window.history.replaceState(null, "", `#${methodId}`)}
+            className="p-1.5 text-muted-foreground"
+            iconClassName="size-3.5"
+          />
+          <CopyButton
+            text={`${prefix}${method.name}(${method.params})`}
+            label={tc("copySignature")}
+            className="p-1.5 text-muted-foreground"
+            iconClassName="size-3.5"
+          />
         </div>
       </div>
 

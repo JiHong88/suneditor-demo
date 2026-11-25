@@ -2,7 +2,8 @@
 
 import { useState, useReducer, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Share2, Check, Settings2, Puzzle, SlidersHorizontal } from "lucide-react";
+import { RotateCcw, Share2, Settings2, Puzzle, SlidersHorizontal } from "lucide-react";
+import { CopyStatusIcon, useCopyToClipboard } from "@/components/common/CopyButton";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -110,7 +111,7 @@ export default function PlaygroundPage() {
 		dispatch({ type: "SET", key: "textDirection", value: isRtlLocale(locale) ? "rtl" : "ltr" });
 	}, [locale]);
 	const [allLibs, setAllLibs] = useState<AllLibs | null>(null);
-	const [urlCopied, setUrlCopied] = useState(false);
+	const { copied: urlCopied, copy: copyUrl } = useCopyToClipboard();
 	const [ready, setReady] = useState(false);
 	const [builderOpen, setBuilderOpen] = useState(false);
 	const [editorRenderedWidth, setEditorRenderedWidth] = useState(0);
@@ -228,10 +229,8 @@ export default function PlaygroundPage() {
 	const handleShare = useCallback(() => {
 		const qs = stateToUrl(state);
 		const url = `${window.location.origin}${window.location.pathname}${qs ? "?" + qs : ""}`;
-		navigator.clipboard.writeText(url);
-		setUrlCopied(true);
-		setTimeout(() => setUrlCopied(false), 1500);
-	}, [state]);
+		copyUrl(url);
+	}, [state, copyUrl]);
 
 	return (
 		<div className='min-h-[calc(100vh-5.75rem)] flex flex-col bg-muted/30 dark:bg-surface-inset'>
@@ -248,11 +247,7 @@ export default function PlaygroundPage() {
 							{t("reset")}
 						</Button>
 						<Button variant='outline' size='sm' onClick={handleShare}>
-							{urlCopied ? (
-								<Check className='me-1.5 h-3.5 w-3.5 text-green-500' />
-							) : (
-								<Share2 className='me-1.5 h-3.5 w-3.5' />
-							)}
+							<CopyStatusIcon copied={urlCopied} icon={Share2} className='me-1.5 size-3.5' />
 							{urlCopied ? tc("copied") : t("shareURL")}
 						</Button>
 					</div>
